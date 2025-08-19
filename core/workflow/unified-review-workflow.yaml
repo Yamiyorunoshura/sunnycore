@@ -76,10 +76,8 @@ stages:
           purpose: "Find implementation plan"
         - tool: "read_file"
           file: "located implementation plan"
-          purpose: "Extract notes for cross-reference based on mode"
-          mode_condition: "initial -> dev_notes only; follow-up (brownfield) -> re_dev_notes only; never mix"
-          focus_initial: ["dev_notes"]
-          focus_brownfield: ["re_dev_notes"]
+          purpose: "Extract dev_notes for cross-reference"
+          focus: ["dev_notes"]
           
       implementation_analysis:
         - tool: "codebase_search"
@@ -103,40 +101,6 @@ stages:
         - "Read previous review document"
         - "Extract previous findings for tracking"
         - "Identify remediation scope and focus areas"
-      
-      brownfield_specific:
-        - tool: "read_file"
-          file: "implementation plan with re_dev_notes"
-          purpose: "Check for re-development notes"
-          action: "Read re_dev_notes section if present"
-        - policy_enforcement:
-          - "In brownfield mode, IGNORE dev_notes completely"
-          - "Use only re_dev_notes and all .kiro/specs/** documents as sources"
-        
-        - re_dev_notes_verification:
-          critical_validations:
-            - action: "Verify root cause analysis accuracy"
-              method: "Cross-reference identified root causes with actual code/architecture issues"
-              evidence_required: "Technical analysis, code review findings, performance data"
-            
-            - action: "Validate re-development strategy execution"
-              method: "Compare planned re-dev strategy with actual implementation approach"
-              evidence_required: "Implementation approach documentation, architectural decisions"
-            
-            - action: "Confirm quality improvement measures"
-              method: "Verify documented quality improvements are actually implemented and effective"
-              evidence_required: "Before/after metrics, test coverage reports, security scan results"
-            
-            - action: "Assess iteration context understanding"
-              method: "Validate re-dev trigger causes against review history and failure points"
-              evidence_required: "Previous review reports, failure analysis, stakeholder feedback"
-          
-          iteration_tracking:
-            - "Verify iteration_number matches actual re-development cycle"
-            - "Confirm trigger_reason aligns with documented failure/feedback"
-            - "Validate learning capture from previous iterations"
-        
-        - focus_adjustment: "Adjust review focus based on re-dev iteration and previous failures"
     
     validation_checkpoint:
       - "Review mode determined (initial/follow-up)"
@@ -144,8 +108,7 @@ stages:
       - "Implementation plan located"
       - "Implementation evidence gathered"
       - "Quality artifacts collected"
-      - "Re-dev notes reviewed (if present in brownfield scenarios)"
-      - "Dev_notes ignored in brownfield (no references used)"
+      - "Dev_notes read for cross-reference"
 
   stage_2:
     id: 2
@@ -167,40 +130,22 @@ stages:
           query: "How do the implemented changes meet the stated requirements?"
           purpose: "Verify requirements satisfaction"
         - cross_reference_analysis:
-          initial_mode:
-            dev_notes_verification:
-              - action: "Compare dev_notes.detailed_changes against actual code changes"
-                method: "Line-by-line diff analysis between documented and implemented changes"
-                evidence_required: "File paths, line numbers, commit hashes"
-              
-              - action: "Verify F-IDs and N-IDs mapping accuracy"
-                method: "Cross-reference functional/non-functional requirement IDs in dev_notes with actual implementation"
-                evidence_required: "Requirement traceability matrix"
-              
-              - action: "Validate dev_notes quality metrics against measured results"
-                method: "Compare documented performance/security/test metrics with actual measurements"
-                evidence_required: "Test reports, performance benchmarks, security scan results"
-              
-              - action: "Check dev_notes deviations against observed implementation"
-                method: "Verify documented scope deviations match actual implementation scope"
-                evidence_required: "Scope comparison analysis with justification"
-          brownfield_mode:
-            re_dev_notes_verification:
-              - action: "Compare re_dev_notes planned/remediation changes against actual code changes"
-                method: "Line-by-line diff analysis between documented remediation plan and implemented changes"
-                evidence_required: "File paths, line numbers, commit hashes"
-              
-              - action: "Verify F-IDs and N-IDs mapping accuracy (based on re_dev_notes and specs)"
-                method: "Cross-reference functional/non-functional requirement IDs in re_dev_notes with implementation and .kiro/specs/**"
-                evidence_required: "Requirement traceability matrix"
-              
-              - action: "Validate re_dev_notes quality metrics against measured results"
-                method: "Compare documented performance/security/test metrics in re_dev_notes with actual measurements"
-                evidence_required: "Test reports, performance benchmarks, security scan results"
-              
-              - action: "Enforce policy to IGNORE dev_notes in brownfield"
-                method: "Ensure no dev_notes references are used as evidence or inputs"
-                evidence_required: "Review reasoning trace and cited sources"
+          dev_notes_verification:
+            - action: "Compare dev_notes.detailed_changes against actual code changes"
+              method: "Line-by-line diff analysis between documented and implemented changes"
+              evidence_required: "File paths, line numbers, commit hashes"
+            
+            - action: "Verify F-IDs and N-IDs mapping accuracy"
+              method: "Cross-reference functional/non-functional requirement IDs in dev_notes with actual implementation"
+              evidence_required: "Requirement traceability matrix"
+            
+            - action: "Validate dev_notes quality metrics against measured results"
+              method: "Compare documented performance/security/test metrics with actual measurements"
+              evidence_required: "Test reports, performance benchmarks, security scan results"
+            
+            - action: "Check dev_notes deviations against observed implementation"
+              method: "Verify documented scope deviations match actual implementation scope"
+              evidence_required: "Scope comparison analysis with justification"
           
           consistency_validation:
             critical_checks:
@@ -224,17 +169,10 @@ stages:
     validation_checkpoint:
       - "Scope analysis completed"
       - "Requirements conformance checked"
-      initial_mode:
-        - "Dev_notes detailed_changes verified against actual code"
-        - "F-IDs and N-IDs mapping accuracy confirmed"
-        - "Quality metrics cross-validated (documented vs measured)"
-        - "Developer claims consistency checked"
-      brownfield_mode:
-        - "Re_dev_notes remediation/changes verified against actual code"
-        - "Iteration context validated"
-        - "Root cause analysis accuracy verified"
-        - ".kiro/specs/** cross-referenced against implementation"
-        - "Dev_notes ignored (no references used)"
+      - "Dev_notes detailed_changes verified against actual code"
+      - "F-IDs and N-IDs mapping accuracy confirmed"
+      - "Quality metrics cross-validated (documented vs measured)"
+      - "Developer claims consistency checked"
       - "Deviations documented with evidence"
       - "Impact assessment done"
 

@@ -101,12 +101,6 @@ stages:
           - understand_historical_changes: true
           - identify_related_patterns_and_decisions: true
           - note_potential_conflicts_with_current_scope: true
-      - check_re_dev_context:
-          - review_existing_re_dev_notes: true
-          - understand_previous_re_dev_attempts: true
-          - analyze_root_causes_from_previous_iterations: true
-          - determine_if_this_is_continuation_or_new_re_dev: true
-          - adjust_scope_understanding_based_on_re_dev_history: true
 
   - id: "objectives_and_acceptance"
     title: "目標與驗收"
@@ -219,6 +213,7 @@ stages:
             - developer_type: "determined_from_agent"
             - timestamp: "current_datetime"
             - task_phase: "determined_from_task_state"
+            - re_dev_iteration: "current_re_dev_iteration_number_or_1"
             - changes_summary: "overall_development_work_summary"
             - detailed_changes_mapped_to: "F-IDs_and_N-IDs"
             - challenges_and_deviations: "documented_issues_and_plan_changes"
@@ -226,24 +221,6 @@ stages:
             - implementation_decisions: "technical_choices_and_rationale"
             - risk_considerations: "identified_risks_and_mitigation"
             - maintenance_notes: "future_maintenance_requirements_and_considerations"
-      - handle_re_dev_scenario:
-          detect_re_dev_context:
-            - check_for_previous_qa_failures: true
-            - check_for_trigger_reasons: ["qa_review_failed", "bug_found", "requirement_change", "performance_issue"]
-            - determine_re_dev_iteration: "increment_from_previous_or_start_at_1"
-          update_re_dev_notes:
-            mode: "overwrite_previous_re_dev_notes"
-            populate_fields:
-              - iteration: "current_re_dev_iteration_number"
-              - developer_type: "determined_from_agent"
-              - timestamp: "current_datetime"
-              - trigger_reason: "identified_trigger_reason"
-              - previous_attempt_summary: "analysis_of_previous_implementation_failure"
-              - identified_root_causes: "categorized_failure_analysis"
-              - re_dev_strategy: "strategic_approach_for_this_iteration"
-              - implementation_changes: "detailed_changes_mapped_to_F-IDs_and_N-IDs"
-              - quality_improvements: "enhanced_quality_measures"
-              - success_criteria: "specific_acceptance_criteria_for_re_dev"
 
   - id: "definition_of_done"
     title: "完成定義"

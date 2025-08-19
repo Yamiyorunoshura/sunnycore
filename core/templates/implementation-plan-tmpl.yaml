@@ -126,6 +126,7 @@ dev_notes:
     - developer: "<開發者類型: frontend|backend|fullstack>"
       timestamp: "<YYYY-MM-DD HH:MM:SS>"
       task_phase: "<開發階段: 初始實施|迭代開發|修復|重構>"
+      re_dev_iteration: "<1|2|3|...>"
       changes_summary: "<本次開發工作的整體摘要>"
       detailed_changes:
         - requirement_id: "<對應的需求ID或F-ID/N-ID>"
@@ -150,34 +151,4 @@ dev_notes:
         - metric: "<品質指標名稱>"
           target: "<目標值>"
           achieved: "<實際達成值>"
-
-re_dev_notes:
-  description: "重新開發筆記：當任務需要重新開發時填寫。每次 re-dev 會覆蓋此欄位以避免舊資訊干擾"
-  iteration: "<第幾次 re-dev：1|2|3|...>"
-  developer_type: "<執行 re-dev 的開發者類型: frontend|backend|fullstack|refactor>"
-  timestamp: "<YYYY-MM-DD HH:MM:SS>"
-  trigger_reason: "<重新開發觸發原因: qa_review_failed|bug_found|requirement_change|performance_issue|other>"
-  previous_attempt_summary: "<前次開發嘗試的簡要總結和失敗原因>"
-  identified_root_causes:
-    - category: "<問題分類: design|implementation|testing|requirements|technical_debt>"
-      description: "<具體問題描述>"
-      evidence: "<證據檔案路徑或參考資料>"
-  re_dev_strategy:
-    approach: "<重新開發策略: complete_rewrite|targeted_fix|architecture_change|incremental_improvement>"
-    scope_changes: "<範圍變更說明或'無變更'>"
-    architecture_changes: "<架構變更說明或'無變更'>"
-    risk_mitigation: "<風險緩解措施>"
-  implementation_changes:
-    - target_id: "<對應的 F-ID 或 N-ID>"
-      old_approach: "<舊的實施方法>"
-      new_approach: "<新的實施方法>"
-      rationale: "<變更理由>"
-      impact_assessment: "<變更影響評估>"
-  quality_improvements:
-    testing_enhancements: "<測試改善措施>"
-    code_quality_fixes: "<代碼品質修復項目>"
-    performance_optimizations: "<效能優化措施>"
-    security_hardening: "<安全強化措施>"
-  success_criteria:
-    - "<重新開發成功的驗收標準>"
 

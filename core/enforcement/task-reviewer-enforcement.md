@@ -27,18 +27,12 @@
 - **偏離記錄**：任何偏離都必須有明確記錄和理由
 
 #### 流程階段：交叉比對與一致性驗證（強制執行）
-- **初始場景（greenfield）- dev_notes 驗證**：
+- **所有場景（greenfield/brownfield）
   - detailed_changes 與實際代碼變更的逐行差異分析
   - F-IDs 和 N-IDs 映射準確性確認（使用需求追溯矩陣）
   - 品質指標交叉驗證（文件記錄 vs 實際測量）
   - 開發者聲稱一致性檢查
-- **後續場景（brownfield）- 僅 re_dev_notes 與規範文件**：
-  - 明確禁止在 brownfield 使用 dev_notes；僅以 re_dev_notes 作為 notes 類資料來源
-  - 以 `.kiro/specs/**` 下所有規範文件作為交叉參考依據（requirements/design/task/其他擴充規範）
-  - 根本原因分析準確性驗證（re_dev_notes 與實際證據交叉比對）
-  - 重新開發策略執行確認（re_dev_notes vs 實際實作）
-  - 品質改善措施評估（前後指標對比、測試/效能/安全掃描）
-  - 迭代上下文理解驗證（iteration_number、trigger_reason 與歷史審查/失敗點對齊）
+  - 如屬重開發，核對 dev_notes 的 re_dev_iteration 與歷史審查/失敗點
 - **一致性檢查**：
   - 開發者聲稱 vs 實際實施
   - 文件記錄的挑戰 vs 代碼中的解決方案
@@ -144,16 +138,11 @@
 - [ ] 計劃變更已適當記錄
 
 ### 交叉比對檢查
-- 初始（greenfield）：
-  - [ ] dev_notes 與實際代碼一致
-  - [ ] F-IDs 和 N-IDs 映射準確（以 dev_notes 與規範文件為依據）
-  - [ ] 品質指標已交叉驗證
-  - [ ] 開發者聲稱已驗證
-- 後續（brownfield）：
-  - [ ] 僅使用 re_dev_notes（不得引用 dev_notes）
-  - [ ] 以 `.kiro/specs/**` 規範文件交叉參考
-  - [ ] re_dev_notes 所述 remediation 與實際實作一致
-  - [ ] 迭代上下文（iteration/trigger）與歷史審查/失敗點一致
+- [ ] dev_notes 與實際代碼一致
+- [ ] F-IDs 和 N-IDs 映射準確（以 dev_notes 與規範文件為依據）
+- [ ] 品質指標已交叉驗證
+- [ ] 開發者聲稱已驗證
+- [ ] 如屬重開發：re_dev_iteration 與歷史審查/失敗點一致
 
 ### 品質評估檢查
 - [ ] 技術品質符合標準
