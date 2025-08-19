@@ -5,8 +5,8 @@
 ### 必要前置條件
 - **絕對禁止**：在未載入所有必要文件的情況下開始結案工作
 - **強制讀取順序**：
-  1. `~/.claude/workflow/unified-project-concluding-workflow.yaml`
-  2. `~/.claude/templates/completion-report-tmpl.yaml`
+  1. `~/.claude/core/workflow/unified-project-concluding-workflow.yaml`
+  2. `~/.claude/core/templates/completion-report-tmpl.yaml`
 - **檔案載入驗證**：必須確認所有檔案成功載入
 
 ### 基於證據的結案（絕對強制）

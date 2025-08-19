@@ -4,8 +4,8 @@
 
 ### 必要前置條件
 - **絕對禁止**：在未載入統一工作流程和範本的情況下開始規劃
-- **強制讀取**：必須完整讀取 `~/.claude/workflow/unified-task-planning-workflow.yaml`
-- **強制讀取**：必須完整讀取 `~/.claude/templates/implementation-plan-tmpl.yaml`
+- **強制讀取**：必須完整讀取 `~/.claude/core/workflow/unified-task-planning-workflow.yaml`
+- **強制讀取**：必須完整讀取 `~/.claude/core/templates/implementation-plan-tmpl.yaml`    
 - **驗證要求**：確認所有檔案載入成功且 project_root 解析完成
 
 ### 工作流程合規性

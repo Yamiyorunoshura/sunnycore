@@ -5,9 +5,9 @@
 ### 必要前置條件
 - **絕對禁止**：在未載入所有必要文件的情況下開始驗證
 - **強制讀取順序**：
-  1. `~/.claude/workflow/unified-plan-validation-workflow.yaml`
-  2. `~/.claude/templates/implementation-plan-tmpl.yaml`
-  3. `~/.claude/templates/plan-validation-report-tmpl.yaml`
+  1. `~/.claude/core/workflow/unified-plan-validation-workflow.yaml`
+  2. `~/.claude/core/templates/implementation-plan-tmpl.yaml`
+  3. `~/.claude/core/templates/plan-validation-report-tmpl.yaml`
 - **檔案載入驗證**：必須確認所有檔案成功載入
 
 ### 基於證據的驗證（絕對強制）

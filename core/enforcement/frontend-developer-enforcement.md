@@ -4,7 +4,7 @@
 
 ### 必要前置條件
 - **絕對禁止**：在未載入統一工作流程和計劃的情況下開始開發
-- **強制讀取**：必須完整讀取 `~/.claude/workflow/unified-developer-workflow.yaml`
+- **強制讀取**：必須完整讀取 `~/.claude/core/workflow/unified-developer-workflow.yaml`
 - **計劃檢查**：必須定位並讀取task_id的實施計劃，無計劃時立即停止
 
 ### 範圍合規性（絕對強制）

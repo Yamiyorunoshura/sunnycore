@@ -17,8 +17,8 @@
 - 呼叫代理 `project-concluder`
 
 ## 工作流程
-- 計劃驗證：遵循統一計劃驗證工作流程：`~/.claude/workflow/unified-plan-validation-workflow.yaml`
-- 結案：遵循統一結案工作流程：`~/.claude/workflow/unified-project-concluding-workflow.yaml`
+- 計劃驗證：遵循統一計劃驗證工作流程：`~/.claude/core/workflow/unified-plan-validation-workflow.yaml`
+- 結案：遵循統一結案工作流程：`~/.claude/core/workflow/unified-project-concluding-workflow.yaml`
 
 ## 規範
 

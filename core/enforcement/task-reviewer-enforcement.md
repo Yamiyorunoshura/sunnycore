@@ -4,7 +4,7 @@
 
 ### 必要前置條件
 - **絕對禁止**：在未載入統一審查工作流程的情況下開始審查
-- **強制讀取**：必須完整讀取 `~/.claude/workflow/unified-review-workflow.yaml`
+- **強制讀取**：必須完整讀取 `~/.claude/core/workflow/unified-review-workflow.yaml`
 - **檔案載入驗證**：必須確認工作流程檔案成功載入並內化
 
 ### 基於證據的審查（絕對強制）

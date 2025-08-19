@@ -20,7 +20,7 @@
   - 從最終審查文件中移除驗證檢查清單
 
 ## 工作流程
-- 審查：遵循存儲在 `~/.claude/workflow/unified-review-workflow.yaml` 的工作流程
+- 審查：遵循存儲在 `~/.claude/core/workflow/unified-review-workflow.yaml` 的工作流程
 
 ## 規範
 
