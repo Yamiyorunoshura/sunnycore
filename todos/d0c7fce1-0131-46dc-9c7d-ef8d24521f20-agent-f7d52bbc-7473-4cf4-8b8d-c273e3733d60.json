@@ -1,0 +1,32 @@
+[
+  {
+    "content": "執行第一階段：初始化和證據收集",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "執行第二階段：範圍和合規性分析",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "執行第三階段：品質評估",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "執行第四階段：問題發現和建議",
+    "status": "completed",
+    "id": "4"
+  },
+  {
+    "content": "執行第五階段：報告生成和驗證",
+    "status": "completed",
+    "id": "5"
+  },
+  {
+    "content": "執行第六階段：更新任務文件 - 任務維持失敗狀態",
+    "status": "completed",
+    "id": "6"
+  }
+]

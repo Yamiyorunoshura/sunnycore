@@ -1,0 +1,42 @@
+[
+  {
+    "content": "執行工作流程初始化 - 已載入工作流程、模板和驗證規則",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "執行文件檢查 - 確認為初次審查，無現有審查文件",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "執行證據收集階段 - 讀取規格文件、實作計劃和搜尋實作證據",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "執行範圍和符合性檢查 - 比較實作與計劃範圍",
+    "status": "completed",
+    "id": "4"
+  },
+  {
+    "content": "執行品質評估 - 評估代碼品質、安全性、性能、測試等7個維度",
+    "status": "completed",
+    "id": "5"
+  },
+  {
+    "content": "編制發現和建議 - 識別問題並提供可執行的建議",
+    "status": "completed",
+    "id": "6"
+  },
+  {
+    "content": "生成審查報告 - 使用模板生成完整的實作審查報告",
+    "status": "completed",
+    "id": "7"
+  },
+  {
+    "content": "輸出最終文件並處理任務完成狀態",
+    "status": "completed",
+    "id": "8"
+  }
+]

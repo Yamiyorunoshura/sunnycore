@@ -1,0 +1,37 @@
+[
+  {
+    "content": "檢查任務狀態和設計規範符合性",
+    "status": "completed",
+    "id": "qa_8_3_1"
+  },
+  {
+    "content": "驗證功能完整性和代碼結構",
+    "status": "completed",
+    "id": "qa_8_3_2"
+  },
+  {
+    "content": "執行完整的測試套件驗證",
+    "status": "completed",
+    "id": "qa_8_3_3"
+  },
+  {
+    "content": "評估代碼質量和安全性",
+    "status": "completed",
+    "id": "qa_8_3_4"
+  },
+  {
+    "content": "檢查錯誤處理和邊界條件",
+    "status": "completed",
+    "id": "qa_8_3_5"
+  },
+  {
+    "content": "驗證文檔完整性",
+    "status": "completed",
+    "id": "qa_8_3_6"
+  },
+  {
+    "content": "生成最終 QA 報告並更新進度",
+    "status": "completed",
+    "id": "qa_8_3_7"
+  }
+]

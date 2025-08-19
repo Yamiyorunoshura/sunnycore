@@ -1,0 +1,42 @@
+[
+  {
+    "content": "分析任務 6.2 (OKX 適配器實現) 的當前狀態和需求",
+    "status": "completed",
+    "id": "task_62_analysis"
+  },
+  {
+    "content": "完善 OKX REST API 認證和簽名機制",
+    "status": "pending",
+    "id": "okx_auth_implementation"
+  },
+  {
+    "content": "實作 OKX WebSocket 私有頻道訂閱",
+    "status": "pending",
+    "id": "okx_websocket_private"
+  },
+  {
+    "content": "完善訂單管理和狀態追蹤功能",
+    "status": "pending",
+    "id": "okx_order_management"
+  },
+  {
+    "content": "實作餘額和持倉管理功能",
+    "status": "pending",
+    "id": "okx_account_management"
+  },
+  {
+    "content": "實作錯誤處理和重連機制",
+    "status": "pending",
+    "id": "okx_error_handling"
+  },
+  {
+    "content": "編寫完整的單元測試和集成測試",
+    "status": "pending",
+    "id": "okx_testing"
+  },
+  {
+    "content": "創建詳細的實施計劃文檔",
+    "status": "completed",
+    "id": "create_implementation_plan"
+  }
+]

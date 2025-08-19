@@ -1,0 +1,32 @@
+[
+  {
+    "content": "檢查 OKX 交易所適配器現有實作狀況",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "檢查 Bybit 交易所適配器現有實作狀況",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "完善 OKX 適配器的核心功能實作",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "完善 Bybit 適配器的核心功能實作",
+    "status": "completed",
+    "id": "4"
+  },
+  {
+    "content": "測試所有交易所適配器功能",
+    "status": "completed",
+    "id": "5"
+  },
+  {
+    "content": "更新任務狀態為等待 QA 審查",
+    "status": "completed",
+    "id": "6"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "content": "分析現有技術指標實現結構",
+    "status": "completed",
+    "id": "rsi_1"
+  },
+  {
+    "content": "建立 RelativeStrengthIndex 結構",
+    "status": "completed",
+    "id": "rsi_2"
+  },
+  {
+    "content": "實作 RSI 計算邏輯和數據更新",
+    "status": "completed",
+    "id": "rsi_3"
+  },
+  {
+    "content": "整合到策略引擎指標工廠",
+    "status": "completed",
+    "id": "rsi_4"
+  },
+  {
+    "content": "編寫單元測試",
+    "status": "completed",
+    "id": "rsi_5"
+  },
+  {
+    "content": "驗證與策略配置的整合",
+    "status": "completed",
+    "id": "rsi_6"
+  }
+]

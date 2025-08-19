@@ -1,0 +1,27 @@
+[
+  {
+    "content": "建立政府面板基礎結構（GovernmentPanel 類別、權限檢查、基礎嵌入訊息）",
+    "status": "pending",
+    "id": "plan-5-1"
+  },
+  {
+    "content": "實作部門管理介面（建立、編輯、刪除部門的模態對話框和互動）",
+    "status": "pending",
+    "id": "plan-5-2"
+  },
+  {
+    "content": "實作註冊表查看功能（部門列表顯示、搜尋、詳情查看）",
+    "status": "pending",
+    "id": "plan-5-3"
+  },
+  {
+    "content": "建立政府面板 Cog 整合（斜線指令、事件處理、服務整合）",
+    "status": "pending",
+    "id": "plan-5-4"
+  },
+  {
+    "content": "撰寫政府面板整合測試和用戶流程驗證",
+    "status": "pending",
+    "id": "plan-test"
+  }
+]

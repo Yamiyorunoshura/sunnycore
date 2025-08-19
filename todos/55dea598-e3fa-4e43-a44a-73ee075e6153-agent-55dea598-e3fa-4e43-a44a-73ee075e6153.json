@@ -1,0 +1,22 @@
+[
+  {
+    "content": "分析任務 2.2 的性質和所需的開發類型",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "檢查任務 2.2 是否已有實施計劃",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "確定任務類型並調用適當的代理人",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "調用 backend-developer 代理人執行任務 2.2",
+    "status": "completed",
+    "id": "4"
+  }
+]

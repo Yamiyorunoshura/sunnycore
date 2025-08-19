@@ -1,0 +1,32 @@
+[
+  {
+    "content": "完成工作流程初始化和Template讀取",
+    "status": "completed",
+    "id": "stage-1"
+  },
+  {
+    "content": "完成輸入收集階段 - 讀取規格文件和Context7研究",
+    "status": "completed",
+    "id": "stage-2"
+  },
+  {
+    "content": "使用Sequential Thinking進行詳細的計劃分析",
+    "status": "completed",
+    "id": "stage-3"
+  },
+  {
+    "content": "填充實作計劃模板",
+    "status": "completed",
+    "id": "stage-4"
+  },
+  {
+    "content": "生成和保存實作計劃文件",
+    "status": "completed",
+    "id": "stage-5"
+  },
+  {
+    "content": "最終驗證和完成",
+    "status": "completed",
+    "id": "stage-6"
+  }
+]

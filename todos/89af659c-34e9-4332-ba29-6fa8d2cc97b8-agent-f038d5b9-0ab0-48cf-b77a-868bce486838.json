@@ -1,0 +1,32 @@
+[
+  {
+    "content": "分析任務3需求和現有基礎設施：理解經濟系統UI實作的具體要求",
+    "status": "completed",
+    "id": "task-3-analysis"
+  },
+  {
+    "content": "子任務3.1：建立經濟面板基礎結構 - 實作EconomyPanel類別和基礎模板",
+    "status": "pending",
+    "id": "task-3-1-base-structure"
+  },
+  {
+    "content": "子任務3.2：實作使用者經濟面板功能 - 餘額查詢、交易記錄查看等功能",
+    "status": "pending",
+    "id": "task-3-2-user-panel"
+  },
+  {
+    "content": "子任務3.3：實作管理員經濟面板功能 - 餘額管理、貨幣設定等管理功能",
+    "status": "pending",
+    "id": "task-3-3-admin-panel"
+  },
+  {
+    "content": "子任務3.4：建立經濟面板Cog整合 - 斜線指令整合和測試",
+    "status": "pending",
+    "id": "task-3-4-cog-integration"
+  },
+  {
+    "content": "撰寫完整的任務3實作計劃文件，包含技術細節和測試策略",
+    "status": "completed",
+    "id": "documentation-plan"
+  }
+]

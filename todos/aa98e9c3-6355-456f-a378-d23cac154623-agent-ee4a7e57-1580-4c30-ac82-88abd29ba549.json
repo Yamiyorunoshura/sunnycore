@@ -1,0 +1,42 @@
+[
+  {
+    "content": "階段一：整合 REST API 到統一的 RestClient - 修改現有方法使用 self.rest_client",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "階段一：實現 OKX 特定的請求簽名中間件和統一錯誤處理",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "階段二：實現 WebSocket 私有頻道認證機制",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "階段二：實現完整的訂單更新 WebSocket 訂閱功能",
+    "status": "completed",
+    "id": "4"
+  },
+  {
+    "content": "階段三：擴展訂單類型支持（條件單、批量訂單）",
+    "status": "completed",
+    "id": "5"
+  },
+  {
+    "content": "階段三：實現合約持倉查詢功能（目前返回空陣列）",
+    "status": "completed",
+    "id": "6"
+  },
+  {
+    "content": "階段四：實現強健的錯誤處理和自動重連機制",
+    "status": "completed",
+    "id": "7"
+  },
+  {
+    "content": "階段五：完善單元測試和集成測試覆蓋率",
+    "status": "completed",
+    "id": "8"
+  }
+]

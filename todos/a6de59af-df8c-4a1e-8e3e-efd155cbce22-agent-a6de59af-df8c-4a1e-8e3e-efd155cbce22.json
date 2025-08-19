@@ -1,0 +1,27 @@
+[
+  {
+    "content": "確認進度報告狀態為 In Review",
+    "status": "completed",
+    "id": "qa3_1"
+  },
+  {
+    "content": "第三次執行測試驗證 - 確認所有測試通過",
+    "status": "completed",
+    "id": "qa3_2"
+  },
+  {
+    "content": "驗證P0問題已解決",
+    "status": "completed",
+    "id": "qa3_3"
+  },
+  {
+    "content": "更新QA審查結果為通過",
+    "status": "completed",
+    "id": "qa3_4"
+  },
+  {
+    "content": "最終確認任務狀態",
+    "status": "completed",
+    "id": "qa3_5"
+  }
+]

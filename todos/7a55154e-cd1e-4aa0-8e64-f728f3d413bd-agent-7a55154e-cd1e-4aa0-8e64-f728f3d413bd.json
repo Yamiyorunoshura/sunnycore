@@ -1,0 +1,17 @@
+[
+  {
+    "content": "分析任務5的現有狀態和依賴關係",
+    "status": "completed",
+    "id": "plan-task-5-analysis"
+  },
+  {
+    "content": "委派給task-planner代理進行詳細規劃",
+    "status": "completed",
+    "id": "plan-task-5-delegation"
+  },
+  {
+    "content": "等待並整理任務規劃代理的輸出結果",
+    "status": "in_progress",
+    "id": "plan-task-5-output"
+  }
+]

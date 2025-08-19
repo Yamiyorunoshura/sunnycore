@@ -1,0 +1,47 @@
+[
+  {
+    "content": "修復所有編譯錯誤 - ISS-1 (blocker)",
+    "status": "completed",
+    "id": "fix-compilation-errors"
+  },
+  {
+    "content": "修復 lib.rs 中 ProcessingStats 重複匯入問題",
+    "status": "completed",
+    "id": "fix-duplicate-processingstats"
+  },
+  {
+    "content": "統一所有 ExchangeError 匯入路徑為 crate::exchange::ExchangeError",
+    "status": "completed",
+    "id": "fix-exchangeerror-imports"
+  },
+  {
+    "content": "實作缺失的 ConnectionManager 類型定義",
+    "status": "completed",
+    "id": "fix-connectionmanager-missing"
+  },
+  {
+    "content": "修復 MarketDataCache 匯入問題",
+    "status": "completed",
+    "id": "fix-marketdatacache-imports"
+  },
+  {
+    "content": "修復 MarketData 結構體缺失字段問題",
+    "status": "completed",
+    "id": "fix-marketdata-missing-fields"
+  },
+  {
+    "content": "運行部分測試套件驗證核心功能 - ISS-3",
+    "status": "in_progress",
+    "id": "run-core-tests"
+  },
+  {
+    "content": "實施性能基準測試驗證延遲和吞吐量 - ISS-2",
+    "status": "pending",
+    "id": "implement-performance-tests"
+  },
+  {
+    "content": "評估並移除範圍外的 Discord 依賴 - ISS-4",
+    "status": "pending",
+    "id": "remove-discord-dependency"
+  }
+]

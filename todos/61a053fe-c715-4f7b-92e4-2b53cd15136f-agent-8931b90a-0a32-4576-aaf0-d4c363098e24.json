@@ -1,0 +1,42 @@
+[
+  {
+    "content": "讀取工作流程和模板文件完成",
+    "status": "completed",
+    "id": "review-1"
+  },
+  {
+    "content": "分析任務 1 的規格和實現計劃",
+    "status": "completed",
+    "id": "review-2"
+  },
+  {
+    "content": "檢查核心模組實現代碼（BaseService, BasePanel, 錯誤處理, DatabaseManager）",
+    "status": "completed",
+    "id": "review-3"
+  },
+  {
+    "content": "評估代碼品質和架構合規性",
+    "status": "completed",
+    "id": "review-4"
+  },
+  {
+    "content": "檢查測試覆蓋和測試品質",
+    "status": "completed",
+    "id": "review-5"
+  },
+  {
+    "content": "驗證功能完整性和需求符合性",
+    "status": "completed",
+    "id": "review-6"
+  },
+  {
+    "content": "識別問題和改進建議",
+    "status": "completed",
+    "id": "review-7"
+  },
+  {
+    "content": "生成完整的審查報告",
+    "status": "completed",
+    "id": "review-8"
+  }
+]

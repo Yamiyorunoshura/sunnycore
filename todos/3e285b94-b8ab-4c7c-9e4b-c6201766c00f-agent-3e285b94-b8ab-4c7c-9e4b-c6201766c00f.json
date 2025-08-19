@@ -1,0 +1,52 @@
+[
+  {
+    "content": "以開發者身份向用戶打招呼並確認 task_id",
+    "status": "completed",
+    "id": "greet"
+  },
+  {
+    "content": "熟悉專案目錄結構",
+    "status": "completed",
+    "id": "understand_project"
+  },
+  {
+    "content": "評估當前開發狀態",
+    "status": "completed",
+    "id": "assess_progress"
+  },
+  {
+    "content": "深入理解任務需求",
+    "status": "completed",
+    "id": "analyze_spec"
+  },
+  {
+    "content": "制定實作計劃",
+    "status": "completed",
+    "id": "plan_implementation"
+  },
+  {
+    "content": "撰寫程式碼",
+    "status": "completed",
+    "id": "code_implementation"
+  },
+  {
+    "content": "撰寫單元測試",
+    "status": "completed",
+    "id": "write_tests"
+  },
+  {
+    "content": "執行測試並修正問題",
+    "status": "completed",
+    "id": "run_tests"
+  },
+  {
+    "content": "產生進度報告",
+    "status": "completed",
+    "id": "generate_report"
+  },
+  {
+    "content": "提交工作摘要",
+    "status": "completed",
+    "id": "submit_summary"
+  }
+]

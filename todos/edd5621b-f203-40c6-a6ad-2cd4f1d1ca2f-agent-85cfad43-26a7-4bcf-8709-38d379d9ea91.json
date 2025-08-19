@@ -1,0 +1,62 @@
+[
+  {
+    "content": "執行順序思考分析驗證範圍和策略",
+    "status": "completed",
+    "id": "val-1"
+  },
+  {
+    "content": "讀取所有必要的工作流程文件（workflow, template, validation, enforcement）",
+    "status": "completed",
+    "id": "val-2"
+  },
+  {
+    "content": "讀取任務 3 實施計劃文件並分析內容",
+    "status": "completed",
+    "id": "val-3"
+  },
+  {
+    "content": "讀取相關規格文件（requirements.md, tasks.md, design.md）進行交叉參照",
+    "status": "completed",
+    "id": "val-4"
+  },
+  {
+    "content": "檢查任務 1 和 2 的實施計劃以驗證依賴關係",
+    "status": "completed",
+    "id": "val-5"
+  },
+  {
+    "content": "執行模板一致性驗證 - 檢查計劃是否符合實施計劃模板",
+    "status": "completed",
+    "id": "val-6"
+  },
+  {
+    "content": "執行需求交叉參照驗證 - 將計劃元素追溯到規格文件",
+    "status": "completed",
+    "id": "val-7"
+  },
+  {
+    "content": "執行架構和設計一致性檢查",
+    "status": "completed",
+    "id": "val-8"
+  },
+  {
+    "content": "檢查依賴關係完整性（與任務 1、2 的關係）",
+    "status": "completed",
+    "id": "val-9"
+  },
+  {
+    "content": "評估測試覆蓋率和質量門檻",
+    "status": "completed",
+    "id": "val-10"
+  },
+  {
+    "content": "識別缺失項目和風險",
+    "status": "completed",
+    "id": "val-11"
+  },
+  {
+    "content": "生成驗證報告（使用模板）",
+    "status": "completed",
+    "id": "val-12"
+  }
+]

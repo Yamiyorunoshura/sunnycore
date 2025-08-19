@@ -1,0 +1,42 @@
+[
+  {
+    "content": "分析任務 3.1 規格和設計要求",
+    "status": "pending",
+    "id": "task-3.1-analysis"
+  },
+  {
+    "content": "制定 RiskManager 實施計劃",
+    "status": "pending",
+    "id": "task-3.1-plan"
+  },
+  {
+    "content": "實作 RiskManager 結構和驗證邏輯",
+    "status": "pending",
+    "id": "task-3.1-risk-core"
+  },
+  {
+    "content": "創建持倉限制和槓桿控制機制",
+    "status": "pending",
+    "id": "task-3.1-position-limits"
+  },
+  {
+    "content": "實作止損和風險告警功能",
+    "status": "pending",
+    "id": "task-3.1-stop-loss"
+  },
+  {
+    "content": "編寫單元測試驗證風險管理功能",
+    "status": "pending",
+    "id": "task-3.1-tests"
+  },
+  {
+    "content": "整合風險管理器到交易系統",
+    "status": "pending",
+    "id": "task-3.1-integration"
+  },
+  {
+    "content": "生成標準化進度報告",
+    "status": "pending",
+    "id": "task-3.1-docs"
+  }
+]

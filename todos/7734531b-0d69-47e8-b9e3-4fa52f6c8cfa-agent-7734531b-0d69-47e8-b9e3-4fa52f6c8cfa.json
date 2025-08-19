@@ -1,0 +1,17 @@
+[
+  {
+    "content": "分析任務 1 的類型以決定調用哪個代理商",
+    "status": "completed",
+    "id": "analyze-task-1-type"
+  },
+  {
+    "content": "調用適當的代理商執行任務 1 開發",
+    "status": "completed",
+    "id": "call-appropriate-agent"
+  },
+  {
+    "content": "等待 fullstack-developer 代理商執行結果",
+    "status": "in_progress",
+    "id": "wait-for-agent-result"
+  }
+]

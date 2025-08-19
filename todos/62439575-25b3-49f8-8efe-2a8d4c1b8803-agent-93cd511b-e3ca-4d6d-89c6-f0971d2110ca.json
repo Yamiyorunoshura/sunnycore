@@ -1,0 +1,27 @@
+[
+  {
+    "content": "階段1：證據收集 - 收集實施證據和先前審查結果",
+    "status": "completed",
+    "id": "review-1"
+  },
+  {
+    "content": "階段2：範圍和合規性分析 - 驗證實施與計劃的一致性",
+    "status": "completed",
+    "id": "review-2"
+  },
+  {
+    "content": "階段3：品質評估 - 基於7維度框架評估代碼品質",
+    "status": "completed",
+    "id": "review-3"
+  },
+  {
+    "content": "階段4：問題發現和建議 - 識別問題並提供可行建議",
+    "status": "completed",
+    "id": "review-4"
+  },
+  {
+    "content": "階段5：報告生成和驗證 - 更新審查報告並處理任務完成狀態",
+    "status": "completed",
+    "id": "review-5"
+  }
+]

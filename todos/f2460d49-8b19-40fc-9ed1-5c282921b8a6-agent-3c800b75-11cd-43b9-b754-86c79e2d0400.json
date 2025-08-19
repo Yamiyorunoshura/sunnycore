@@ -1,0 +1,52 @@
+[
+  {
+    "content": "驗證範圍理解：確認F1-F4和N1-N3目標，檢查in_scope/out_of_scope邊界",
+    "status": "completed",
+    "id": "scope_validation"
+  },
+  {
+    "content": "建立核心目錄結構：core/和panels/目錄",
+    "status": "completed",
+    "id": "create_directory_structure"
+  },
+  {
+    "content": "F3: 實作錯誤處理系統（core/exceptions.py）",
+    "status": "in_progress",
+    "id": "implement_exceptions"
+  },
+  {
+    "content": "F1: 實作BaseService抽象類別（core/base_service.py）",
+    "status": "pending",
+    "id": "implement_base_service"
+  },
+  {
+    "content": "F2: 實作BasePanel抽象類別（panels/base_panel.py）",
+    "status": "pending",
+    "id": "implement_base_panel"
+  },
+  {
+    "content": "F4: 重構DatabaseManager（core/database_manager.py）",
+    "status": "pending",
+    "id": "implement_database_manager"
+  },
+  {
+    "content": "建立完整的單元測試（覆蓋率≥90%）",
+    "status": "pending",
+    "id": "create_unit_tests"
+  },
+  {
+    "content": "建立整合測試和端到端測試",
+    "status": "pending",
+    "id": "create_integration_tests"
+  },
+  {
+    "content": "N1: 驗證效能要求（回應時間和記憶體使用）",
+    "status": "pending",
+    "id": "validate_performance"
+  },
+  {
+    "content": "驗證品質檢查標準（覆蓋率、靜態分析、文檔）",
+    "status": "pending",
+    "id": "validate_quality_gates"
+  }
+]

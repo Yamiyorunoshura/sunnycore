@@ -1,0 +1,32 @@
+[
+  {
+    "content": "檢查現有的GovernmentPanel實作狀況和功能完整性",
+    "status": "completed",
+    "id": "analyze-existing-government-panel"
+  },
+  {
+    "content": "檢查GovernmentCog的Discord整合實作和服務依賶",
+    "status": "completed",
+    "id": "analyze-existing-government-cog"
+  },
+  {
+    "content": "識別任務5子任務中缺失的功能或未完成部分",
+    "status": "completed",
+    "id": "identify-missing-features"
+  },
+  {
+    "content": "修復GovernmentCog中被註解掉的服務依賶問題",
+    "status": "completed",
+    "id": "fix-service-dependencies"
+  },
+  {
+    "content": "測試政府系統UI的完整功能和Discord斜線指令",
+    "status": "completed",
+    "id": "test-integration"
+  },
+  {
+    "content": "填寫詳細的dev_notes記錄所有變更和分析結果",
+    "status": "completed",
+    "id": "update-dev-notes"
+  }
+]

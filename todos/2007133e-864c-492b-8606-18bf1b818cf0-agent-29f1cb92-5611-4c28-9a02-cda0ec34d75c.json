@@ -1,0 +1,32 @@
+[
+  {
+    "content": "讀取工作流程和模板文件",
+    "status": "completed",
+    "id": "review-1"
+  },
+  {
+    "content": "收集規格文件和實施計劃",
+    "status": "completed",
+    "id": "review-2"
+  },
+  {
+    "content": "檢查代碼實作狀況 - ExchangeAdapter trait和三個適配器",
+    "status": "completed",
+    "id": "review-3"
+  },
+  {
+    "content": "檢查編譯錯誤和技術問題",
+    "status": "completed",
+    "id": "review-4"
+  },
+  {
+    "content": "分析測試覆蓋率和品質問題",
+    "status": "completed",
+    "id": "review-5"
+  },
+  {
+    "content": "生成完整的審查報告",
+    "status": "completed",
+    "id": "review-6"
+  }
+]

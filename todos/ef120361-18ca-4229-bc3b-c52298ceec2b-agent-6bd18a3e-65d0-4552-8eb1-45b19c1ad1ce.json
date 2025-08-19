@@ -1,0 +1,32 @@
+[
+  {
+    "content": "收集 task-6.2 相關的計劃、需求和實施文件",
+    "status": "completed",
+    "id": "review-1"
+  },
+  {
+    "content": "分析 OKX 適配器的當前實施狀況",
+    "status": "completed",
+    "id": "review-2"
+  },
+  {
+    "content": "運行測試以檢查代碼品質和功能完整性",
+    "status": "completed",
+    "id": "review-3"
+  },
+  {
+    "content": "評估與計劃的合規性差距",
+    "status": "completed",
+    "id": "review-4"
+  },
+  {
+    "content": "識別關鍵問題和改進建議",
+    "status": "completed",
+    "id": "review-5"
+  },
+  {
+    "content": "撰寫詳細的實施審查報告",
+    "status": "completed",
+    "id": "review-6"
+  }
+]

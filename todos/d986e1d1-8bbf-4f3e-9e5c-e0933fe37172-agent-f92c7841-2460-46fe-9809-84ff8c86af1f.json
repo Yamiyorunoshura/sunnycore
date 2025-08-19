@@ -1,0 +1,32 @@
+[
+  {
+    "content": "完成階段1：初始化和證據收集 - 確認棕地模式，讀取re_dev_notes和規範",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "完成階段2：範圍和合規性分析 - 交叉比對re_dev_notes聲稱vs實際實施",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "完成階段3：品質評估 - 7維度品質框架評估",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "完成階段4：問題發現和建議 - 識別新問題和追蹤先前問題狀態",
+    "status": "completed",
+    "id": "4"
+  },
+  {
+    "content": "執行階段5：報告生成和驗證 - 更新現有審查文件",
+    "status": "in_progress",
+    "id": "5"
+  },
+  {
+    "content": "執行階段6：更新任務文件狀態",
+    "status": "pending",
+    "id": "6"
+  }
+]

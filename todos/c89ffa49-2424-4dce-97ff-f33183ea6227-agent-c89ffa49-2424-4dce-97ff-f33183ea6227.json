@@ -1,0 +1,22 @@
+[
+  {
+    "content": "修復 MarketData 結構不一致問題 - 4個編譯錯誤",
+    "status": "completed",
+    "id": "fix-marketdata-structure"
+  },
+  {
+    "content": "修正方法參數不匹配和匯入路徑錯誤",
+    "status": "completed",
+    "id": "fix-method-parameters"
+  },
+  {
+    "content": "執行性能基準測試驗證 P95 < 10ms 要求",
+    "status": "completed",
+    "id": "run-performance-tests"
+  },
+  {
+    "content": "執行測試套件並評估覆蓋率",
+    "status": "completed",
+    "id": "verify-test-coverage"
+  }
+]

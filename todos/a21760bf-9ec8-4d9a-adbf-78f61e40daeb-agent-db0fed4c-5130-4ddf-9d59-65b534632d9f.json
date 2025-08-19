@@ -1,0 +1,42 @@
+[
+  {
+    "content": "分析現有架構和依賴關係，識別所需的政府面板組件",
+    "status": "completed",
+    "id": "analyze_architecture"
+  },
+  {
+    "content": "設計政府面板結構和互動流程",
+    "status": "completed",
+    "id": "design_panel_structure"
+  },
+  {
+    "content": "實作政府面板基礎結構（GovernmentPanel類別）",
+    "status": "pending",
+    "id": "implement_base_panel"
+  },
+  {
+    "content": "實作部門管理介面（建立、編輯、刪除部門）",
+    "status": "pending",
+    "id": "implement_department_management"
+  },
+  {
+    "content": "實作註冊表查看功能",
+    "status": "pending",
+    "id": "implement_registry_view"
+  },
+  {
+    "content": "建立政府面板Cog整合（Discord指令介面）",
+    "status": "pending",
+    "id": "implement_cog_integration"
+  },
+  {
+    "content": "撰寫完整的測試套件",
+    "status": "pending",
+    "id": "write_tests"
+  },
+  {
+    "content": "生成詳細的實施計劃文件",
+    "status": "completed",
+    "id": "create_implementation_plan"
+  }
+]

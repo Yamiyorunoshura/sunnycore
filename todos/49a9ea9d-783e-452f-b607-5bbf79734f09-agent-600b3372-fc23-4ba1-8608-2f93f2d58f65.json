@@ -1,0 +1,52 @@
+[
+  {
+    "content": "讀取和分析實施計劃 3.1-plan.md",
+    "status": "completed",
+    "id": "review-01"
+  },
+  {
+    "content": "讀取規格文件 (requirements.md, tasks.md, design.md)",
+    "status": "completed",
+    "id": "review-02"
+  },
+  {
+    "content": "檢查 RiskManager 核心實作代碼",
+    "status": "completed",
+    "id": "review-03"
+  },
+  {
+    "content": "檢查風險相關類型定義和資料結構",
+    "status": "completed",
+    "id": "review-04"
+  },
+  {
+    "content": "執行單元測試驗證功能正確性",
+    "status": "completed",
+    "id": "review-05"
+  },
+  {
+    "content": "執行性能測試驗證非功能性要求",
+    "status": "completed",
+    "id": "review-06"
+  },
+  {
+    "content": "分析代碼品質和架構設計",
+    "status": "completed",
+    "id": "review-07"
+  },
+  {
+    "content": "評估測試覆蓋率和品質",
+    "status": "completed",
+    "id": "review-08"
+  },
+  {
+    "content": "檢查文檔完整性",
+    "status": "completed",
+    "id": "review-09"
+  },
+  {
+    "content": "生成詳細審查報告",
+    "status": "completed",
+    "id": "review-10"
+  }
+]

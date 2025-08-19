@@ -1,0 +1,375 @@
+---
+template: unified-plan-validation-workflow
+version: 1
+
+workflow:
+  name: "統一實施計劃驗證工作流程"
+  description: "驗證實施計劃的完整性、正確性、範本符合性，並與專案規格交叉引用的統一工作流程。"
+  template_reference: "~/.claude/templates/implementation-plan-tmpl.yaml"
+  report_template: "~/.claude/templates/plan-validation-report-tmpl.yaml"
+  enforcement_level: "strict"
+  halt_on_validation_failure: true
+
+inputs:
+  task_id: "<required>"
+  plan_path: "<auto>"
+
+plan_resolution:
+  find_by_task_id: true
+  search_paths:
+    - "{{project_root}}/docs/implementation-plan"
+  supported_extensions: ["yaml", "yml", "md"]
+  expectations:
+    template: "implementation-plan"
+    version: 1
+
+guardrails:
+  cross_reference_is_blocking: true
+  on_untraceable_items: "document_as_finding"
+
+preconditions:
+  - "計劃文件存在且可訪問"
+  - "所有引用的規格文件存在"
+  - "計劃符合預期範本結構"
+
+# 整合的執行協議
+enforcement_protocol:
+  enforcement_compliance:
+    mandatory_enforcement_file: "~/.claude/core/implementation-plan-validator-enforcement.md"
+    compliance_verification: "Verify all enforcement rules are understood and will be strictly followed"
+    halt_on_non_compliance: true
+  
+  mandatory_file_loading:
+    description: "在開始任何驗證工作之前必須載入的檔案"
+    requirements:
+      - "READ ~/.claude/core/implementation-plan-validator-enforcement.md COMPLETELY - This file contains all mandatory rules and constraints"
+      - "READ 統一實施計劃驗證工作流程 YAML 檔案完整內容"
+      - "READ 實施計劃範本 YAML 檔案完整內容"
+      - "READ 計劃驗證報告範本 YAML 檔案完整內容"
+      - "確認理解所有工作流程階段"
+      - "確認理解範本結構"
+      - "確認理解驗證需求"
+      - "如果任何檔案無法載入或理解則停止"
+
+  plan_location_and_loading:
+    plan_resolution_process:
+      - "根據 task_id 在 {{project_root}}/docs/implementation-plan/ 中定位計劃"
+      - "支援的副檔名：.yaml, .yml, .md"
+      - "驗證計劃存在且可讀取"
+      - "完整讀取計劃文件"
+      - "載入所有規格檔案：.kiro/specs/task.md、requirements.md、design.md"
+
+  stage_execution_checkpoints:
+    before_stage:
+      - "說明正在開始的階段"
+      - "參考工作流程檔案中的特定階段需求"
+    
+    during_stage:
+      - "執行該階段列出的所有動作"
+      - "進行系統性分析和驗證"
+      - "執行所有交叉參考檢查"
+    
+    after_stage:
+      - "對照驗證規則驗證階段完成"
+      - "確認所有必需的輸出已生成"
+      - "用證據記錄發現"
+
+  cross_reference_validation_requirements:
+    schema_validation:
+      - "驗證計劃中所有必需章節存在"
+      - "檢查每個章節的範本符合性"
+      - "識別任何缺失或空白的必需章節"
+      - "用證據記錄架構違規"
+    
+    cross_reference_checks:
+      functional_objectives: "將每個目標追溯到 requirements.md、task.md 或 design.md"
+      non_functional_targets: "驗證規格中存在可測量標準"
+      scope_boundaries: "驗證 in_scope/out_of_scope 與任務定義對照"
+      architecture_modules: "檢查方法元素與 design.md 的追溯性"
+      data_changes: "驗證設計文件中的架構變更和遷移"
+      test_strategy: "驗證測試方法與專案標準對照"
+      dependencies: "檢查依賴關係與時間線的一致性"
+    
+    evidence_requirements:
+      - "每個發現都必須包含具體證據"
+      - "所有聲明的檔案路徑和章節參考"
+      - "儘可能提供行號以精確引用"
+      - "引用相關文本以支持發現"
+
+  template_population_enforcement:
+    mandatory_steps:
+      - "總是先讀取範本檔案再寫入"
+      - "按範本需求逐章節填充"
+      - "絕不留下佔位符文本如 <task_id> 或 INSERT VALUE"
+      - "每個發現都必須包含具體證據"
+      - "提供具體的改進步驟"
+      - "完整性檢查：每個範本章節都必須填充"
+
+  findings_and_recommendations:
+    finding_documentation:
+      - "具體：識別缺失或無法驗證的確切項目"
+      - "證據：為每個發現提供檔案路徑和引用"
+      - "嚴重性：按對計劃品質的影響排等級發現"
+      - "可追溯性：顯示能否追溯到規格"
+    
+    recommendation_requirements:
+      - "可行：提供具體的改進步驟"
+      - "優先級：按重要性和影響排序"
+      - "可測量：儘可能包含成功標準"
+      - "現實：確保建議可行"
+
+  validation_checkpoints:
+    after_document_generation:
+      - "重新讀取生成的文件"
+      - "逐章節與範本結構比較"
+      - "驗證沒有佔位符值殘留"
+      - "確認所有發現都有證據支持"
+      - "驗證markdown格式和結構"
+    
+    completion_criteria:
+      - "所有工作流程階段已完成"
+      - "所有範本章節用實際內容填充"
+      - "所有驗證規則已滿足"
+      - "所有發現有證據支持"
+      - "建議可行且具體"
+      - "文件準備好供利害關係人審查"
+
+  error_handling:
+    validation_failures:
+      - "如果驗證失敗立即停止"
+      - "識別具體驗證失敗"
+      - "返回適當的工作流程階段"
+      - "修正後重新執行"
+      - "繼續前重新驗證"
+    
+    cross_reference_failures:
+      - "如果計劃項目無法追溯到規格，記錄為發現"
+      - "如果規格缺少資訊，記錄為約束"
+      - "如果計劃偏離規格，記錄為風險"
+
+  critical_success_factors:
+    - "先讀取工作流程和範本檔案 - 絕不在沒有它們的情況下開始"
+    - "定位和載入計劃文件 - 確保存在且完整"
+    - "載入所有規格檔案 - 需求、任務、設計"
+    - "系統性分析 - 先定義驗證策略"
+    - "執行徹底的交叉參考 - 將所有計劃元素追溯到規格"
+    - "用證據記錄發現 - 每個聲明都需要證明"
+    - "產生可行建議 - 具體的改進步驟"
+    - "在檢查點驗證 - 確保每階段品質"
+
+  workflow_violation_responses:
+    missing_stage_execution: "返回並完成跳過的階段"
+    incomplete_cross_reference: "完成所有可追溯性檢查"
+    unsupported_findings: "為所有聲明提供證據"
+    incomplete_template: "識別缺失章節並填充它們"
+    generic_recommendations: "使建議具體且可行"
+    invalid_format: "修正格式以完全符合範本"
+
+# 統一階段執行流程
+stages:
+  - id: "workflow_initialization"
+    title: "工作流程初始化"
+    description: "載入必要文件並設置驗證環境"
+    completion_requirements:
+      - workflow_file_parsed: true
+      - template_structure_understood: true
+      - validation_rules_loaded: true
+    actions:
+      - load_workflow_file: "~/.claude/workflow/unified-plan-validation-workflow.yaml"
+      - load_template_from: "~/.claude/templates/implementation-plan-tmpl.yaml"
+      - load_report_template: "~/.claude/templates/plan-validation-report-tmpl.yaml"
+      - verify_file_accessibility
+
+  - id: "validation_strategy"
+    title: "驗證策略設置"
+    description: "建立驗證策略和追溯計劃"
+    completion_requirements:
+      - validation_strategy_defined: true
+      - validation_focus_areas_defined: true
+      - cross_reference_strategy_established: true
+    actions:
+      - analyze_validation_requirements: ["schema", "objectives", "scope", "approach", "data", "testing", "timeline", "risks"]
+      - define_validation_focus_areas
+      - establish_cross_reference_strategy
+
+  - id: "plan_and_spec_loading"
+    title: "計劃和規格載入"
+    description: "載入計劃文件和所有相關規格文件"
+    completion_requirements:
+      - plan_document_located_and_read: true
+      - all_required_specs_read: true
+      - cross_reference_sources_identified: true
+    actions:
+      - resolve_plan_by_task_id: "{{task_id}}"
+      - read_specification_files: [".kiro/specs/task.md", ".kiro/specs/requirements.md", ".kiro/specs/design.md"]
+      - identify_cross_reference_sources
+      - validate_plan_document_completeness
+
+  - id: "schema_validation"
+    title: "架構和範本符合性驗證"
+    description: "驗證計劃符合實施計劃範本架構"
+    completion_requirements:
+      - template_compliance_checked: true
+      - missing_required_sections_identified: true
+      - schema_violations_documented: true
+    actions:
+      - validate_against_plan_template: "implementation-plan"
+      - check_required_sections_presence
+      - identify_missing_or_empty_sections
+      - document_schema_violations_with_evidence
+
+  - id: "cross_reference_validation"
+    title: "交叉參考和可追溯性驗證"
+    description: "驗證計劃元素與規格文件的可追溯性"
+    completion_requirements:
+      - functional_objectives_traced: true
+      - non_functional_targets_verified: true
+      - scope_boundaries_validated: true
+      - approach_elements_cross_referenced: true
+      - data_changes_verified: true
+      - test_strategy_validated: true
+      - dependencies_consistency_checked: true
+    actions:
+      - trace_functional_objectives_to_specs
+      - verify_non_functional_targets_in_specs
+      - validate_scope_boundaries_against_task_definition
+      - cross_reference_approach_with_design
+      - verify_data_changes_in_design_docs
+      - validate_test_strategy_against_standards
+      - check_dependencies_timeline_consistency
+      - document_untraceable_items_as_findings
+
+  - id: "gap_analysis"
+    title: "差距分析和風險評估"
+    description: "識別計劃中的差距、不一致和風險"
+    completion_requirements:
+      - gaps_identified_and_categorized: true
+      - risks_assessed_and_documented: true
+      - severity_levels_assigned: true
+      - evidence_linked_to_all_findings: true
+    actions:
+      - identify_planning_gaps_and_omissions
+      - analyze_inconsistencies_between_plan_and_specs
+      - assess_risks_and_assumptions
+      - categorize_findings_by_severity
+      - link_evidence_to_all_findings
+      - prioritize_findings_by_impact
+
+  - id: "recommendation_formulation"
+    title: "建議制定"
+    description: "為識別的問題制定具體且可行的改進建議"
+    completion_requirements:
+      - actionable_recommendations_developed: true
+      - recommendations_prioritized: true
+      - success_criteria_defined: true
+      - realistic_implementation_steps_provided: true
+    actions:
+      - develop_specific_improvement_recommendations
+      - prioritize_recommendations_by_impact_and_effort
+      - define_success_criteria_for_recommendations
+      - provide_realistic_implementation_steps
+      - estimate_effort_and_timeline_for_improvements
+
+  - id: "report_generation"
+    title: "驗證報告生成"
+    description: "生成結構化的計劃驗證報告"
+    completion_requirements:
+      - template_structure_followed: true
+      - no_placeholder_values: true
+      - all_findings_supported_by_evidence: true
+      - recommendations_actionable_and_specific: true
+    actions:
+      - load_validation_report_template: "~/.claude/templates/plan-validation-report-tmpl.yaml"
+      - populate_metadata_with_actual_values
+      - populate_sections: [
+          "metadata",
+          "summary",
+          "compliance_analysis",
+          "cross_reference_findings",
+          "gap_analysis",
+          "recommendations",
+          "appendix"
+        ]
+      - ensure_all_findings_have_evidence
+      - provide_specific_actionable_recommendations
+      - verify_no_placeholder_content_remains
+
+  - id: "finalization"
+    title: "完成與品質確認"
+    description: "最終驗證和品質檢查"
+    completion_requirements:
+      - final_document_read_back: true
+      - completeness_verified: true
+      - template_compliance_confirmed: true
+      - validation_report_ready_for_stakeholders: true
+    actions:
+      - self_check_against_workflow
+      - read_generated_document_back
+      - compare_against_template_structure
+      - verify_no_placeholder_values_remain
+      - confirm_all_findings_supported_by_evidence
+      - validate_recommendations_are_actionable
+      - validate_markdown_formatting_and_structure
+      - request_feedback_if_needed
+
+# 整合的驗證規則
+validation_rules:
+  template_validation:
+    required_metadata_fields:
+      - task_id: "actual_value_not_placeholder"
+      - project_name: "actual_value_not_placeholder"
+      - owner: "actual_owner_name"
+      - date: "yyyy_mm_dd_format"
+      - sources: "all_spec_and_plan_paths_documented"
+
+    required_content_sections:
+      - overall_assessment: "feasibility_and_completeness_summary"
+      - architecture_alignment: "design_consistency_analysis"
+      - requirements_alignment: "functional_non_functional_traceability"
+      - gaps_and_risks: "missing_items_and_severity_assessment"
+      - recommendations: "specific_actionable_improvement_steps"
+      - next_steps: "priority_items_and_follow_up_actions"
+
+    evidence_requirements:
+      - findings_supported: "file_paths_line_numbers_section_references"
+      - cross_references_documented: "specific_spec_locations_quoted_text"
+      - gaps_specific: "exact_missing_items_and_locations"
+      - recommendations_actionable: "concrete_steps_with_success_criteria"
+
+    forbidden_content:
+      - placeholder_brackets: ["<", ">"]
+      - placeholder_text: ["INSERT", "TODO", "TBD"]
+      - generic_placeholders: ["<task_id>", "<project_name>", "<owner>"]
+      - unsupported_findings: "all_findings_must_have_evidence"
+      - vague_recommendations: ["should improve", "consider enhancing", "might benefit"]
+
+  error_handling:
+    missing_stage:
+      severity: "blocker"
+      message: "Mandatory validation stage not completed"
+      action: "halt_and_request_completion"
+
+    incomplete_cross_reference:
+      severity: "blocker"
+      message: "Required cross-reference validation not completed"
+      action: "halt_and_request_traceability_completion"
+
+    unsupported_findings:
+      severity: "high"
+      message: "Findings made without supporting evidence"
+      action: "flag_and_request_evidence"
+
+    incomplete_template:
+      severity: "high"
+      message: "Template section incomplete or contains placeholders"
+      action: "request_template_completion"
+
+    generic_recommendations:
+      severity: "medium"
+      message: "Recommendations too generic to be actionable"
+      action: "request_specific_recommendations"
+
+output:
+  path: "{{project_root}}/docs/validation-reports/"
+  filename: "{{task_id}}-plan-validation.md"
+  format: markdown

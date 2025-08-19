@@ -1,0 +1,27 @@
+[
+  {
+    "content": "修正EconomyService整合API定義 - 在計劃中添加詳細的API接口定義，定義與政府財政系統的整合規範",
+    "status": "in_progress",
+    "id": "1"
+  },
+  {
+    "content": "加強Discord權限驗證機制 - 詳細定義權限檢查流程，添加安全驗證步驟",
+    "status": "pending",
+    "id": "2"
+  },
+  {
+    "content": "解決時間線重疊問題 - 重新安排M3和M4的時程，識別和解決資源衝突",
+    "status": "pending",
+    "id": "3"
+  },
+  {
+    "content": "改善JSON併發訪問機制 - 定義資料一致性保護機制，添加併發控制策略",
+    "status": "pending",
+    "id": "4"
+  },
+  {
+    "content": "實施其他驗證報告中的改進建議 - 按優先級處理所有改進點",
+    "status": "pending",
+    "id": "5"
+  }
+]

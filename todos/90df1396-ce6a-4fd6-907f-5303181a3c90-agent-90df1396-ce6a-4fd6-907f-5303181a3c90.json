@@ -1,0 +1,47 @@
+[
+  {
+    "content": "確認任務狀態為 In Review",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "複查需求 5 - 多交易所數據管理系統設計規範",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "確定代碼審查範圍和建立審查清單",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "驗證功能完整性 - 檢查所有需求是否已實現",
+    "status": "completed",
+    "id": "4"
+  },
+  {
+    "content": "評估代碼結構、可讀性、可維護性",
+    "status": "completed",
+    "id": "5"
+  },
+  {
+    "content": "執行單元測試和集成測試驗證",
+    "status": "completed",
+    "id": "6"
+  },
+  {
+    "content": "記錄發現的問題並分類優先級",
+    "status": "completed",
+    "id": "7"
+  },
+  {
+    "content": "更新開發進度報告的 QA 審查結果",
+    "status": "completed",
+    "id": "8"
+  },
+  {
+    "content": "提交最終審查結果和任務狀態",
+    "status": "completed",
+    "id": "9"
+  }
+]

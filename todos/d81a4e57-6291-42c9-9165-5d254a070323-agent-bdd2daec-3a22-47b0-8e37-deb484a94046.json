@@ -1,0 +1,37 @@
+[
+  {
+    "content": "讀取並分析工作流程和模板文件",
+    "status": "completed",
+    "id": "task_2_review_1"
+  },
+  {
+    "content": "收集任務 2 的計畫文件和規格文件",
+    "status": "completed",
+    "id": "task_2_review_2"
+  },
+  {
+    "content": "分析實作證據和代碼結構",
+    "status": "completed",
+    "id": "task_2_review_3"
+  },
+  {
+    "content": "檢查測試覆蓋率和品質",
+    "status": "completed",
+    "id": "task_2_review_4"
+  },
+  {
+    "content": "評估 7 個品質維度",
+    "status": "completed",
+    "id": "task_2_review_5"
+  },
+  {
+    "content": "生成完整的審查報告",
+    "status": "completed",
+    "id": "task_2_review_6"
+  },
+  {
+    "content": "根據審查結果決定任務狀態更新",
+    "status": "completed",
+    "id": "task_2_review_7"
+  }
+]

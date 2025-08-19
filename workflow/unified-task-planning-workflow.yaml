@@ -1,0 +1,263 @@
+---
+# 統一任務規劃工作流程
+# 整合了enforcement、validation和workflow為單一文件
+template: unified-task-planning-workflow  
+version: 2.0
+
+workflow:
+  name: "統一任務規劃證據驅動工作流程"
+  description: "嚴格遵循範本結構創建實施計劃並進行全面驗證，整合所有執行和驗證邏輯"
+  agent: task-planner
+  enforcement_level: "strict"
+  halt_on_validation_failure: true
+
+# === 輸入定義 ===
+inputs:
+  task_id: "<required>"
+  project_root: "<auto>"
+
+# === 專案根目錄解析 ===
+project_root_resolution:
+  prefer:
+    - env: "CLAUDE_PROJECT_ROOT"
+    - detect_git_root: true
+    - find_upwards_for:
+      - ".kiro/specs/task.md"
+      - ".git"
+  on_failure: "use_cwd"
+
+# === 範圍管控 ===
+guardrails:
+  must_write_inside_project_root: true
+  on_violation: "pause_and_open_question"
+
+# === 執行協議 ===
+execution_protocol:
+  
+  enforcement_compliance:
+    mandatory_enforcement_file: "~/.claude/core/task-planner-enforcement.md"
+    note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the enforcement file"
+    
+
+
+# === 階段定義 ===
+# 詳細的驗證規則和品質標準在 ~/.claude/core/task-planner-enforcement.md 中定義
+validation_rules:
+  note: "Detailed validation rules and quality standards are defined in the enforcement file"
+  
+  stage_sequence:
+    - workflow_initialization
+    - input_collection  
+    - analysis_and_strategy
+    - template_population
+    - document_output
+    - finalization
+
+  error_handling:
+    validation_errors:
+      missing_stage:
+        severity: "blocker"
+        message: "Mandatory stage not completed"
+        action: "halt_and_request_completion"
+
+      incomplete_template:
+        severity: "blocker"
+        message: "Template section incomplete or contains placeholders"
+        action: "halt_and_request_completion"
+
+      missing_context:
+        severity: "high"
+        message: "Valuable context not preserved in document"
+        action: "flag_and_request_context_addition"
+
+      invalid_format:
+        severity: "medium"
+        message: "Document format does not match template"
+        action: "request_format_correction"
+
+# === 工作流程階段 ===
+stages:
+  - id: "workflow_initialization"
+    title: "Initialize workflow and load template"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - tool_call: "read_file"
+        target: "~/.claude/workflow/unified-task-planning-workflow.yaml"
+        purpose: "Load and internalize complete workflow"
+        validation: "workflow_file_parsed"
+      - tool_call: "read_file"
+        target: "~/.claude/templates/implementation-plan-tmpl.yaml"
+        purpose: "Load and internalize template structure"
+        validation: "template_structure_understood"
+      - resolve_project_root:
+        - check_env_variable: "CLAUDE_PROJECT_ROOT"
+        - detect_git_root: true
+        - find_kiro_specs_directory: true
+        - fallback_to_cwd: true
+      - checkpoint_validation:
+        - verify_files_loaded: ["workflow", "template"]
+        - confirm_project_root_resolved: true
+        - halt_if_failed: true
+
+  - id: "input_collection"
+    title: "Collect and validate planning inputs"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - tool_call: "read_file"
+        target: ".kiro/specs/task.md"
+        purpose: "Load task specification"
+        validation: "task_spec_loaded"
+      - tool_call: "read_file"
+        target: ".kiro/specs/requirements.md"
+        purpose: "Load requirements specification"
+        validation: "requirements_loaded"
+      - tool_call: "read_file"
+        target: ".kiro/specs/design.md"
+        purpose: "Load design specification"
+        validation: "design_loaded"
+      - checkpoint_validation:
+        - verify_all_specs_read: true
+        - document_missing_inputs: true
+
+  - id: "analysis_and_strategy"
+    title: "Plan analysis and strategy"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - analyze_requirements:
+        - extract_functional_requirements: true
+        - identify_non_functional_requirements: true
+        - understand_constraints_and_assumptions: true
+      - define_planning_strategy:
+        - determine_architecture_approach: true
+        - identify_key_risks_and_dependencies: true
+        - establish_testing_strategy: true
+      - checkpoint_validation:
+        - verify_requirements_analysis_completed: true
+        - confirm_strategy_defined: true
+
+  - id: "template_population"
+    title: "Populate implementation plan template"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - populate_metadata:
+        - task_id: "from_input"
+        - project_name: "from_specs"
+        - owner: "from_context"
+        - date: "current_date"
+        - project_root: "resolved_path"
+        - sources: "all_spec_file_paths"
+        - assumptions: "identified_assumptions"
+        - constraints: "identified_constraints"
+      - populate_context:
+        - summary: "1_to_3_sentences"
+        - background: "from_specs"
+        - goals: "extracted_from_requirements"
+      - populate_objectives:
+        - functional: "with_acceptance_criteria"
+        - non_functional: "with_measurements"
+      - populate_scope:
+        - in_scope: "clearly_defined"
+        - out_of_scope: "explicitly_stated"
+      - populate_approach:
+        - architecture_overview: "from_design"
+        - modules: "with_interfaces_and_reuse"
+        - data: "schema_changes_and_migrations"
+        - test_strategy: "unit_integration_acceptance"
+        - quality_gates: "measurable_criteria"
+      - populate_milestones:
+        - deliverables: "concrete_outputs"
+        - done_definition: "clear_criteria"
+      - populate_timeline:
+        - realistic_schedule: true
+        - milestone_mapping: true
+      - populate_dependencies:
+        - external: "with_versions"
+        - internal: "with_owners"
+      - populate_estimation:
+        - method_and_breakdown: true
+        - confidence_level: true
+      - populate_risks:
+        - probability_impact_mitigation: true
+        - contingency_plans: true
+      - populate_open_questions:
+        - document_or_mark_none: true
+      - checkpoint_validation:
+        - verify_all_sections_populated: true
+        - confirm_no_placeholders: true
+        - validate_template_compliance: true
+
+  - id: "document_output"
+    title: "Generate and save implementation plan"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - tool_call: "create_directory"
+        target: "{{project_root}}/docs/implementation-plan/"
+        purpose: "Ensure output directory exists"
+      - tool_call: "write_file"
+        target: "{{project_root}}/docs/implementation-plan/{{task_id}}-plan.md"
+        purpose: "Write implementation plan document"
+        content: "populated_template_as_markdown"
+      - tool_call: "write_file"
+        target: "{{project_root}}/.kiro/index/plan-index.jsonl"
+        purpose: "Update plan index"
+        mode: "append"
+        content: "index_record_json"
+      - checkpoint_validation:
+        - verify_file_written: true
+        - confirm_path_under_project_root: true
+        - validate_index_updated: true
+
+  - id: "finalization"
+    title: "Validate and finalize plan"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - tool_call: "read_file"
+        target: "{{project_root}}/docs/implementation-plan/{{task_id}}-plan.md"
+        purpose: "Final validation read"
+      - final_validation:
+        - compare_against_template_structure: true
+        - verify_all_sections_populated: true
+        - confirm_no_placeholders_remain: true
+        - validate_context_preservation: true
+      - template_compliance_validation:
+        - check_metadata_fields_populated: true
+        - verify_no_placeholder_brackets: true
+        - confirm_valuable_context_preserved: true
+        - validate_markdown_structure: true
+      - completion_certification:
+        - all_validations_passed: true
+        - document_ready_for_development: true
+      - report_completion_status: true
+
+# === 關鍵成功因素 ===
+critical_success_factors:
+  - "Read workflow and template files FIRST - never start without them"
+  - "Resolve project root correctly - ensure output path is valid"
+  - "Collect ALL required inputs - specifications and thorough research"
+  - "Analyze requirements thoroughly - understand before planning"
+  - "Populate template completely - no placeholders allowed"
+  - "Preserve valuable context - include all specific technical details"
+  - "Validate at checkpoints - ensure quality at each stage"
+  - "Generate actionable plans - ready for development team use"
+
+# === 工作流程違規回應 ===
+workflow_violation_responses:
+  - "Missing stage execution: Return and complete the skipped stage"
+  - "Incomplete template: Identify missing sections and populate them"
+  - "Placeholder values: Replace all placeholders with actual content"
+  - "Generic content: Add specific technical details and context"
+  - "Invalid format: Correct format to match template exactly"
+  - "Missing context: Extract and include valuable information from specs"
+
+# === 輸出配置 ===
+output:
+  path: "{{project_root}}/docs/implementation-plan/"
+  filename: "{{task_id}}-plan.md"
+  format: "markdown"
+  index_path: "{{project_root}}/.kiro/index/plan-index.jsonl"

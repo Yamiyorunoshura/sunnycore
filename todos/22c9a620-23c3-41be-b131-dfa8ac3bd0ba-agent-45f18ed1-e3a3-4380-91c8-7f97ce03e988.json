@@ -1,0 +1,47 @@
+[
+  {
+    "content": "階段一：完善 REST API 認證機制 - 優化簽名錯誤處理",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "階段一：增強 RequestBuilder 的錯誤處理和時間戳驗證",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "階段二：實現 WebSocket 私有頻道認證機制",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "階段二：完善訂單更新 WebSocket 訂閱和重連機制",
+    "status": "completed",
+    "id": "4"
+  },
+  {
+    "content": "階段三：擴展訂單類型支持（條件單、批量訂單）",
+    "status": "completed",
+    "id": "5"
+  },
+  {
+    "content": "階段三：完善持倉查詢和交易歷史功能",
+    "status": "completed",
+    "id": "6"
+  },
+  {
+    "content": "階段四：實現強健的錯誤處理和自動重連機制",
+    "status": "completed",
+    "id": "7"
+  },
+  {
+    "content": "階段五：完善單元測試和集成測試覆蓋率",
+    "status": "completed",
+    "id": "8"
+  },
+  {
+    "content": "最終驗證：執行完整功能測試確保所有功能正常",
+    "status": "completed",
+    "id": "9"
+  }
+]

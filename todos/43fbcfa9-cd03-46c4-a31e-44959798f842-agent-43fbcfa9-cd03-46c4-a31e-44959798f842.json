@@ -1,0 +1,37 @@
+[
+  {
+    "content": "分析任務 3.2 規格文件 (.kiro/specs/design.md)",
+    "status": "completed",
+    "id": "3.2.1"
+  },
+  {
+    "content": "建立風險指標計算和監控功能",
+    "status": "completed",
+    "id": "3.2.2"
+  },
+  {
+    "content": "實作緊急停止和強制平倉機制",
+    "status": "completed",
+    "id": "3.2.3"
+  },
+  {
+    "content": "創建風險報告和日誌記錄功能",
+    "status": "completed",
+    "id": "3.2.4"
+  },
+  {
+    "content": "修復編譯錯誤和重複定義",
+    "status": "completed",
+    "id": "3.2.5a"
+  },
+  {
+    "content": "運行單元測試驗證功能",
+    "status": "completed",
+    "id": "3.2.5b"
+  },
+  {
+    "content": "生成任務 3.2 開發進度報告",
+    "status": "completed",
+    "id": "3.2.6"
+  }
+]

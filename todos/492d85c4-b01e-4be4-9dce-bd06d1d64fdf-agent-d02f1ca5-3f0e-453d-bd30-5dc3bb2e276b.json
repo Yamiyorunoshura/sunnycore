@@ -1,0 +1,32 @@
+[
+  {
+    "content": "分析專案狀態和回滾影響 - 檢查任務2實施的存續狀況",
+    "status": "completed",
+    "id": "review-1"
+  },
+  {
+    "content": "執行Stage 1: 初始化和證據收集 - 收集所有實施證據",
+    "status": "completed",
+    "id": "review-2"
+  },
+  {
+    "content": "執行Stage 2: 範圍和合規性分析 - 驗證實施與計劃一致性",
+    "status": "completed",
+    "id": "review-3"
+  },
+  {
+    "content": "執行Stage 3: 品質評估 - 7維度品質框架重新評估",
+    "status": "completed",
+    "id": "review-4"
+  },
+  {
+    "content": "執行Stage 4: 問題發現和建議 - 識別新問題和更新先前建議",
+    "status": "completed",
+    "id": "review-5"
+  },
+  {
+    "content": "執行Stage 5: 報告生成和驗證 - 更新審查報告並處理任務完成",
+    "status": "completed",
+    "id": "review-6"
+  }
+]

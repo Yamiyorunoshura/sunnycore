@@ -1,0 +1,52 @@
+[
+  {
+    "content": "讀取所有工作流程文件（已完成）",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "解析項目根目錄並驗證結構（已完成）",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "尋找並讀取任務規格文件（.kiro/specs/）",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "讀取requirements.md和design.md文件",
+    "status": "completed",
+    "id": "4"
+  },
+  {
+    "content": "檢查之前的任務完成報告",
+    "status": "completed",
+    "id": "5"
+  },
+  {
+    "content": "使用Context7進行技術研究",
+    "status": "completed",
+    "id": "6"
+  },
+  {
+    "content": "使用sequential thinking進行計劃分析",
+    "status": "completed",
+    "id": "7"
+  },
+  {
+    "content": "按照模板填充實施計劃",
+    "status": "completed",
+    "id": "8"
+  },
+  {
+    "content": "輸出計劃文件到指定路徑",
+    "status": "completed",
+    "id": "9"
+  },
+  {
+    "content": "最終驗證和完成",
+    "status": "in_progress",
+    "id": "10"
+  }
+]

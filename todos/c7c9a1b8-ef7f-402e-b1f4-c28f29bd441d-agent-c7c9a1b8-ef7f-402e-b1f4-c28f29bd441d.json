@@ -1,0 +1,52 @@
+[
+  {
+    "content": "檢查任務需求完整性和符合度",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "驗證 SMA、EMA、RSI 指標功能實作",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "執行單元測試並驗證覆蓋率 ≥80%",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "驗證代碼結構、規範和可維護性",
+    "status": "completed",
+    "id": "4"
+  },
+  {
+    "content": "測試與 Python 回測核心的整合",
+    "status": "completed",
+    "id": "5"
+  },
+  {
+    "content": "驗證計算準確性和與 Rust 版本一致性",
+    "status": "completed",
+    "id": "6"
+  },
+  {
+    "content": "檢查錯誤處理和邊界條件",
+    "status": "completed",
+    "id": "7"
+  },
+  {
+    "content": "評估性能和內存管理",
+    "status": "completed",
+    "id": "8"
+  },
+  {
+    "content": "審查文檔完整性和準確性",
+    "status": "completed",
+    "id": "9"
+  },
+  {
+    "content": "生成 QA 測試報告",
+    "status": "completed",
+    "id": "10"
+  }
+]

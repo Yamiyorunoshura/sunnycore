@@ -1,0 +1,17 @@
+[
+  {
+    "content": "分析任務 1：建立核心架構基礎",
+    "status": "completed",
+    "id": "task_1_analysis"
+  },
+  {
+    "content": "判斷任務類型（前端/後端/重構/全端）",
+    "status": "completed",
+    "id": "determine_task_type"
+  },
+  {
+    "content": "調用合適的專門代理",
+    "status": "completed",
+    "id": "call_appropriate_agent"
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "content": "檢查 Rust 交易核心中的交易所適配器實作狀況",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "分析任務 2.1 是否需要進一步開發或優化",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "根據分析結果調用相應的代理進行開發",
+    "status": "completed",
+    "id": "3"
+  }
+]

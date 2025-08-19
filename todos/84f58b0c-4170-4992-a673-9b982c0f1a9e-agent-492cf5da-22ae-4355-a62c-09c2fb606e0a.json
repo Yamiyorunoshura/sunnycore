@@ -1,0 +1,22 @@
+[
+  {
+    "content": "創建實施計劃輸出目錄",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "填充實施計劃模板 - 所有必要部分",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "將計劃寫入文件並更新索引",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "進行最終驗證和完成確認",
+    "status": "completed",
+    "id": "4"
+  }
+]

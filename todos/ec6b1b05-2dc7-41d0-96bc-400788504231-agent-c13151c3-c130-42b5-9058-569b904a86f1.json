@@ -1,0 +1,52 @@
+[
+  {
+    "content": "修正 core/exceptions.py 中的 asyncio 導入問題",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "實作 core/base_service.py - BaseService 拽象類別",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "實作 panels/base_panel.py - BasePanel 拽象類別",
+    "status": "completed",
+    "id": "3"
+  },
+  {
+    "content": "重構 cogs/database.py 為 core/database_manager.py",
+    "status": "completed",
+    "id": "4"
+  },
+  {
+    "content": "建立服務註冊和依賴注入機制",
+    "status": "completed",
+    "id": "5"
+  },
+  {
+    "content": "撰寫 BaseService 的單元測試",
+    "status": "completed",
+    "id": "6"
+  },
+  {
+    "content": "撰寫 BasePanel 的單元測試",
+    "status": "completed",
+    "id": "7"
+  },
+  {
+    "content": "撰寫 DatabaseManager 的整合測試",
+    "status": "completed",
+    "id": "8"
+  },
+  {
+    "content": "建立 API 文檔和使用範例",
+    "status": "completed",
+    "id": "9"
+  },
+  {
+    "content": "系統整合測試和驗證",
+    "status": "completed",
+    "id": "10"
+  }
+]
