@@ -1,33 +1,33 @@
 ---
 # QA執行流程 - AI處理的結構化工作流程
-# 版本：2.0（YAML格式）
-# 目的：具有5個核心階段的證據驅動實施審查
+# 版本：2.1（YAML格式）
+# 目的：具有6個核心階段的證據驅動實施審查
 
 metadata:
   name: "QA執行流程"
-  version: "2.0"
+  version: "2.1"
   format: "yaml"
   target_audience: "AI代理"
   description: "全面實施審查的結構化工作流程"
   
 overview:
-  description: "Evidence-driven implementation review with 5 core stages"
+  description: "Evidence-driven implementation review with 6 core stages"
   report_template: "~/.claude/templates/review-tmpl.yaml"
   stages:
     - id: 1
-      name: "初始化和证据收集"
+      name: "初始化與證據收集"
       description: "Load workflow, gather all implementation evidence"
     - id: 2
-      name: "范围和合规性分析"
+      name: "範圍與合規性分析"
       description: "Verify scope alignment and requirements conformance"
     - id: 3
-      name: "质量评估"
+      name: "品質評估"
       description: "Assess implementation against 7-dimension quality framework"
     - id: 4
-      name: "问题发现和建议"
+      name: "問題發現與建議"
       description: "Identify issues, rank by severity, propose actionable fixes"
     - id: 5
-      name: "报告生成/更新+验证"
+      name: "報告生成與驗證"
       description: "Generate/update template-compliant report and handle task completion"
     - id: 6
       name: "更新任務文件"
@@ -41,7 +41,7 @@ execution_protocol:
 stages:
   stage_1:
     id: 1
-    name: "初始化和证据收集"
+    name: "初始化與證據收集"
     name_en: "Initialize & Collect Evidence"
     objectives:
       - "Determine review mode (initial vs follow-up)"
@@ -149,7 +149,7 @@ stages:
 
   stage_2:
     id: 2
-    name: "范围和合规性分析"
+    name: "範圍與合規性分析"
     name_en: "Scope & Conformance Analysis"
     objectives:
       - "Verify implementation matches planned scope"
@@ -240,7 +240,7 @@ stages:
 
   stage_3:
     id: 3
-    name: "质量评估"
+    name: "品質評估"
     name_en: "Quality Assessment"
     objectives:
       - "Evaluate implementation against 7-dimension quality framework"
@@ -285,9 +285,9 @@ stages:
         name: "Documentation Review"
         actions:
           - tool: "glob_file_search"
-            patterns:
-              - "README*"
-              - "*doc*"
+            pattern: "README*"
+          - tool: "glob_file_search"
+            pattern: "*doc*"
               
       maintainability:
         name: "Maintainability"
@@ -317,7 +317,7 @@ stages:
 
   stage_4:
     id: 4
-    name: "问题发现和建议"
+    name: "問題發現與建議"
     name_en: "Findings & Recommendations"
     objectives:
       - "Compile all identified issues"
@@ -367,7 +367,7 @@ stages:
 
   stage_5:
     id: 5
-    name: "报告生成和验证"
+    name: "報告生成與驗證"
     name_en: "Report Generation & Validation"
     objectives:
       - "Generate template-compliant review report"
@@ -388,6 +388,16 @@ stages:
           - "Add trend analysis and remediation tracking"
           
       output_location: "{project_root}/docs/implementation-review/{task_id}-review.md"
+
+    document_cleanup:
+      actions:
+        - tool: "edit_file"
+          target: "{project_root}/docs/implementation-review/{task_id}-review.md"
+          purpose: "移除驗證檢查清單段落（最終交付不包含內部檢查清單）"
+          action_type: "remove_section_by_heading"
+          headings:
+            - "驗證檢查清單"
+            - "審查檢查清單"
     
     qa_decision_handling:
       analysis_steps:
@@ -418,6 +428,7 @@ stages:
       - "Template compliance verified"
       - "QA decision extracted and status variable set"
       - "Final validation passed"
+      - "Only after final validation passes may final_review_status be used by Stage 6"
 
   stage_6:
     id: 6
@@ -447,6 +458,57 @@ stages:
             action_type: "search_and_replace"
             search_pattern: "- [ ] {task_title}"
             replace_pattern: "- [-] {task_title}"
+
+      - tool: "edit_file"
+        target: ".kiro/specs/task.md"
+        purpose: "更新任務中繼資料（狀態/文件/時間/審查者）"
+        condition: "on_variable_value"
+        variable_name: "final_review_status"
+        on_value:
+          pass:
+            actions:
+              - action_type: "search_and_replace"
+                search_pattern: "QA狀態: .*"
+                replace_pattern: "QA狀態: 通過"
+              - action_type: "search_and_replace"
+                search_pattern: "審查文件: .*"
+                replace_pattern: "審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
+              - action_type: "search_and_replace"
+                search_pattern: "審查時間: .*"
+                replace_pattern: "審查時間: {now_iso}"
+              - action_type: "search_and_replace"
+                search_pattern: "審查者: .*"
+                replace_pattern: "審查者: task-reviewer"
+              - action_type: "append_if_missing"
+                anchor_heading: "## Metadata"
+                content_lines:
+                  - "## Metadata"
+                  - "- QA狀態: 通過"
+                  - "- 審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
+                  - "- 審查時間: {now_iso}"
+                  - "- 審查者: task-reviewer"
+          fail:
+            actions:
+              - action_type: "search_and_replace"
+                search_pattern: "QA狀態: .*"
+                replace_pattern: "QA狀態: 失敗"
+              - action_type: "search_and_replace"
+                search_pattern: "審查文件: .*"
+                replace_pattern: "審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
+              - action_type: "search_and_replace"
+                search_pattern: "審查時間: .*"
+                replace_pattern: "審查時間: {now_iso}"
+              - action_type: "search_and_replace"
+                search_pattern: "審查者: .*"
+                replace_pattern: "審查者: task-reviewer"
+              - action_type: "append_if_missing"
+                anchor_heading: "## Metadata"
+                content_lines:
+                  - "## Metadata"
+                  - "- QA狀態: 失敗"
+                  - "- 審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
+                  - "- 審查時間: {now_iso}"
+                  - "- 審查者: task-reviewer"
 
     validation_checkpoint:
       - "task.md 文件已根據審查結果更新"
