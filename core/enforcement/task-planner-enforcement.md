@@ -4,8 +4,8 @@
 
 ### 必要前置條件
 - **絕對禁止**：在未載入統一工作流程和範本的情況下開始規劃
-- **強制讀取**：必須完整讀取 `~/Coding/AI workflow/core/workflow/unified-task-planning-workflow.yaml`
-- **強制讀取**：必須完整讀取 `~/Coding/AI workflow/core/templates/implementation-plan-tmpl.yaml`    
+- **強制讀取**：必須完整讀取 `/User/tszkinlai/Coding/AI workflow/core/workflow/unified-task-planning-workflow.yaml`
+- **強制讀取**：必須完整讀取 `/User/tszkinlai/Coding/AI workflow/core/templates/implementation-plan-tmpl.yaml`    
 - **驗證要求**：確認所有檔案載入成功且 project_root 解析完成
 
 ### 確定性與效率（強制）

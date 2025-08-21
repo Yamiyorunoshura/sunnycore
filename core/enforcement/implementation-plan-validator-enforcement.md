@@ -5,10 +5,10 @@
 ### 必要前置條件
 - **絕對禁止**：在未載入所有必要文件的情況下開始驗證
 - **強制讀取順序**：
-  1. `~/Coding/AI workflow/core/enforcement/implementation-plan-validator-enforcement.md`
-  2. `~/Coding/AI workflow/core/workflow/unified-plan-validation-workflow.yaml`
-  3. `~/Coding/AI workflow/core/templates/implementation-plan-tmpl.yaml`
-  4. `~/Coding/AI workflow/core/templates/plan-validation-report-tmpl.yaml`
+  1. `/User/tszkinlai/Coding/AI workflow/core/enforcement/implementation-plan-validator-enforcement.md`
+  2. `/User/tszkinlai/Coding/AI workflow/core/workflow/unified-plan-validation-workflow.yaml`
+  3. `/User/tszkinlai/Coding/AI workflow/core/templates/implementation-plan-tmpl.yaml`
+  4. `/User/tszkinlai/Coding/AI workflow/core/templates/plan-validation-report-tmpl.yaml`
 - **檔案載入驗證**：必須確認所有檔案成功載入
 
 ### 基於證據的驗證（絕對強制）

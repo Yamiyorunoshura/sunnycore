@@ -26,7 +26,7 @@
   - 時間盒：單次工具呼叫≤25秒，超時則降低並行度並收斂搜尋範圍
 
 ## 工作流程
-- 審查：遵循存儲在 `~/Coding/AI workflow/core/workflow/unified-review-workflow.yaml` 的工作流程
+- 審查：遵循存儲在 `/User/tszkinlai/Coding/AI workflow/core/workflow/unified-review-workflow.yaml` 的工作流程
  - 若無法存取，回退使用本倉庫 `core/workflow/unified-review-workflow.yaml`
 
 ## 規範
