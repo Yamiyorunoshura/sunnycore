@@ -1,7 +1,7 @@
 ---
 name: backend-developer
 description: 當需要開發、審查或排除後端系統、API、資料庫、伺服器邏輯或基礎設施組件問題時使用此代理
-model: sonnet
+model: opus
 color: red
 ---
 

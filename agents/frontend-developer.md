@@ -1,7 +1,7 @@
 ---
 name: frontend-developer
 description: 當需要開發、除錯或增強前端應用程式和使用者介面時使用此代理
-model: sonnet
+model: opus
 color: red
 ---
 
