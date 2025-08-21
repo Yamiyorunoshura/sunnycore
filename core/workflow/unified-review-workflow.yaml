@@ -437,11 +437,18 @@ stages:
         
         on_value:
           pass:
-            action_type: "search_and_replace"
-            search_pattern: "- [ ] {task_title}"
-            replace_pattern: "- [x] {task_title}"
-            search_pattern_alt: "- [-] {task_title}"
-            replace_pattern_alt: "- [x] {task_title}"
+            actions:
+              - action_type: "search_and_replace"
+                search_pattern: "- [ ] {task_title}"
+                replace_pattern: "- [x] {task_title}"
+                search_pattern_alt: "- [-] {task_title}"
+                replace_pattern_alt: "- [x] {task_title}"
+              - action_type: "search_and_replace"
+                search_pattern: "- [ ] {task_id}."
+                replace_pattern: "- [x] {task_id}."
+              - action_type: "search_and_replace"
+                search_pattern: "- [-] {task_id}."
+                replace_pattern: "- [x] {task_id}."
 
           fail:
             action_type: "search_and_replace"
@@ -502,6 +509,7 @@ stages:
     validation_checkpoint:
       - "task.md 文件已根據審查結果更新"
       - "最終任務狀態已正確標記"
+      - "通過時已同步勾選所有以 {task_id}. 開頭的子任務"
 
 critical_success_factors:
   mandatory_requirements:
