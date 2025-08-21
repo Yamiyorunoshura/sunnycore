@@ -34,6 +34,11 @@ execution_hints:
         - "analyze_acceptance_criteria_achievement"
         - "document_completion_deferred_outofscope_items"
         - "cross_reference_with_test_evidence"
+      documentation_update:
+        - "load_readme_template"
+        - "load_changelog_template"
+        - "update_readme_from_template"
+        - "append_changelog_entry"
   caching:
     enabled: true
     strategy: "content_hash"
