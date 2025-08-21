@@ -83,7 +83,7 @@
 - **整合文檔**：前後端整合點的詳細文檔
 
 ### DEV_NOTES填寫要求（🚨 絕對強制 🚨）
-- **handover_docs階段執行**：開發完成後必須執行完整的handover_docs階段
+- **handover_.kiro階段執行**：開發完成後必須執行完整的handover_.kiro階段
 - **detailed_changes記錄**：必須在dev_notes中詳細記錄所有前端、後端和整合變更
 - **F-IDs/UI-IDs映射**：必須填寫detailed_changes_mapped_to字段，將每個變更對應到相關F-IDs/UI-IDs
 - **全端整合記錄**：必須詳細記錄前後端整合實施、資料流設計和API契約實現

@@ -4,9 +4,9 @@
 
 # 任務
 
-你的任務是根據提供的兩個文件：`docs/specs/requirement.md`（需求規格）和 `docs/specs/design.md`（系統設計），生成一份詳細的開發實作計畫。
+你的任務是根據提供的兩個文件：`.kiro/specs/requirement.md`（需求規格）和 `.kiro/specs/design.md`（系統設計），生成一份詳細的開發實作計畫。
 
-最終的輸出應儲存於 `docs/specs/task.md` 檔案中。
+最終的輸出應儲存於 `.kiro/specs/task.md` 檔案中。
 
 # 核心要求
 
@@ -35,6 +35,6 @@
 
 # 輸出指令
 
-請立即開始分析 `docs/specs/requirement.md` 和 `docs/specs/design.md`，並按照上述所有要求，生成 `docs/specs/task.md` 的完整內容。你的輸出應該只有 `docs/specs/task.md` 的 Markdown 內容。
+請立即開始分析 `.kiro/specs/requirement.md` 和 `.kiro/specs/design.md`，並按照上述所有要求，生成 `.kiro/specs/task.md` 的完整內容。你的輸出應該只有 `.kiro/specs/task.md` 的 Markdown 內容。
 
 在成功生成檔案後，你必須接著在對話框中回覆一句：「實作計畫已生成，您可以開始進行開發了。」

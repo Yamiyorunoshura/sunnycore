@@ -66,8 +66,8 @@ execution_context:
         - "~/.claude/core/templates/review-tmpl.yaml"
         - "core/templates/review-tmpl.yaml"
       specs_root:
-        - "docs/specs/"
-        - "docs/specs/"
+        - ".kiro/specs/"
+        - ".kiro/specs/"
         - "specs/"
   timeboxes:
     per_tool_call_seconds: 25
@@ -95,31 +95,31 @@ stages:
       file_checks:
         - tool: "glob_file_search"
           pattern: "{task_id}-review.*"
-          location: "docs/implementation-review/"
+          location: ".kiro/implementation-review/"
           purpose: "Check existing review documents"
           
       spec_gathering:
         - tool: "glob_file_search"
-          pattern: "docs/specs/**"
+          pattern: ".kiro/specs/**"
           pattern_alt:
-            - "docs/specs/**"
+            - ".kiro/specs/**"
             - "specs/**"
-          purpose: "Discover all specification files under docs/specs/"
+          purpose: "Discover all specification files under .kiro/specs/"
         - tool: "read_file"
           files: "<from previous glob_file_search>"
-          purpose: "Gather specification sources (all docs/specs/**)"
+          purpose: "Gather specification sources (all .kiro/specs/**)"
         - tool: "read_file"
           files:
-            - "docs/specs/task.md"
-            - "docs/specs/requirements.md"
-            - "docs/specs/design.md"
+            - ".kiro/specs/task.md"
+            - ".kiro/specs/requirements.md"
+            - ".kiro/specs/design.md"
           purpose: "Ensure core specs explicitly loaded"
-          note: "If docs/specs/ is absent, resolve using execution_context.path_resolution.specs_root"
+          note: "If .kiro/specs/ is absent, resolve using execution_context.path_resolution.specs_root"
           
       plan_discovery:
         - tool: "glob_file_search"
           pattern: "{task_id}-plan.*"
-          location: "docs/implementation-plan/"
+          location: ".kiro/implementation-plan/"
           purpose: "Find implementation plan"
         - tool: "read_file"
           file: "located implementation plan"
@@ -376,12 +376,12 @@ stages:
           - "Preserve metadata/context/appendix"
           - "Add trend analysis and remediation tracking"
           
-      output_location: "{project_root}/docs/implementation-review/{task_id}-review.md"
+      output_location: "{project_root}/.kiro/implementation-review/{task_id}-review.md"
 
     document_cleanup:
       actions:
         - tool: "edit_file"
-          target: "{project_root}/docs/implementation-review/{task_id}-review.md"
+          target: "{project_root}/.kiro/implementation-review/{task_id}-review.md"
           purpose: "移除驗證檢查清單段落（最終交付不包含內部檢查清單）"
           action_type: "remove_section_by_heading"
           headings:
@@ -430,7 +430,7 @@ stages:
     
     actions:
       - tool: "edit_file"
-        target: "docs/specs/task.md"
+        target: ".kiro/specs/task.md"
         purpose: "根據審查結果更新任務狀態"
         condition: "on_variable_value"
         variable_name: "final_review_status"
@@ -449,7 +449,7 @@ stages:
             replace_pattern: "- [-] {task_title}"
 
       - tool: "edit_file"
-        target: "docs/specs/task.md"
+        target: ".kiro/specs/task.md"
         purpose: "更新任務中繼資料（狀態/文件/時間/審查者）"
         condition: "on_variable_value"
         variable_name: "final_review_status"
@@ -461,7 +461,7 @@ stages:
                 replace_pattern: "QA狀態: 通過"
               - action_type: "search_and_replace"
                 search_pattern: "審查文件: .*"
-                replace_pattern: "審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
+                replace_pattern: "審查文件: {project_root}/.kiro/implementation-review/{task_id}-review.md"
               - action_type: "search_and_replace"
                 search_pattern: "審查時間: .*"
                 replace_pattern: "審查時間: {now_iso}"
@@ -473,7 +473,7 @@ stages:
                 content_lines:
                   - "## Metadata"
                   - "- QA狀態: 通過"
-                  - "- 審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
+                  - "- 審查文件: {project_root}/.kiro/implementation-review/{task_id}-review.md"
                   - "- 審查時間: {now_iso}"
                   - "- 審查者: task-reviewer"
           fail:
@@ -483,7 +483,7 @@ stages:
                 replace_pattern: "QA狀態: 失敗"
               - action_type: "search_and_replace"
                 search_pattern: "審查文件: .*"
-                replace_pattern: "審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
+                replace_pattern: "審查文件: {project_root}/.kiro/implementation-review/{task_id}-review.md"
               - action_type: "search_and_replace"
                 search_pattern: "審查時間: .*"
                 replace_pattern: "審查時間: {now_iso}"
@@ -495,7 +495,7 @@ stages:
                 content_lines:
                   - "## Metadata"
                   - "- QA狀態: 失敗"
-                  - "- 審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
+                  - "- 審查文件: {project_root}/.kiro/implementation-review/{task_id}-review.md"
                   - "- 審查時間: {now_iso}"
                   - "- 審查者: task-reviewer"
 

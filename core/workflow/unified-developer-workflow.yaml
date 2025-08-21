@@ -22,7 +22,7 @@ inputs:
 plan_resolution:
   find_by_task_id: true
   search_paths:
-    - "{{project_root}}/docs/implementation-plan"
+    - "{{project_root}}/.kiro/implementation-plan"
   supported_extensions:
     - "yaml"
     - "yml" 
@@ -39,7 +39,7 @@ guardrails:
 
 # === 前置條件 ===
 preconditions:
-  - "計劃文件存在於docs/implementation-plan/*並匹配task_id"
+  - "計劃文件存在於.kiro/implementation-plan/*並匹配task_id"
   - "計劃範本版本 == 1"
   - "metadata包含task_id、project_name、owner、date"
   - "sources路徑解析"
@@ -230,7 +230,7 @@ validation_rules:
     - dependencies
     - estimation_tracking
     - risks_changes
-    - handover_docs
+    - handover_.kiro
     - definition_of_done
 
   error_handling:
@@ -257,9 +257,9 @@ validation_rules:
     - stage: "architecture_and_modules"
       must_validate_against: "modules"
       on_failure: "halt_and_request_completion"
-    - stage: "handover_docs"
+    - stage: "handover_.kiro"
       must_validate_against: "dev_notes"
-      on_failure: "HALT_TASK_AND_RETURN_TO_HANDOVER_DOCS"
+      on_failure: "HALT_TASK_AND_RETURN_TO_HANDOVER_.kiro"
 
 # === 工作流程階段 ===
 stages:
@@ -370,7 +370,7 @@ stages:
       - on_realized_risk: ["execute_mitigation", "then_contingency"]
       - on_scope_creep: "open_question_and_pause"
 
-  - id: "handover_docs"
+  - id: "handover_.kiro"
     title: "交接與文件"
     mandatory: true
     validation_checkpoint: true
@@ -419,7 +419,7 @@ stages:
           "PRs_merged_CI_green",
           "🚨_dev_notes_completely_filled_and_verified",
           "🚨_detailed_changes_mapped_to_all_relevant_F-IDs_N-IDs_UI-IDs",
-          "🚨_handover_docs_stage_fully_completed"
+          "🚨_handover_.kiro_stage_fully_completed"
         ]
       - 🚨_FINAL_DEV_NOTES_VERIFICATION:
           critical_checks:
@@ -430,7 +430,7 @@ stages:
             - implementation_decisions_documented: "MANDATORY"
             - risk_considerations_documented: "MANDATORY"
             - maintenance_notes_provided: "MANDATORY"
-          validation_failure_action: "HALT_TASK_COMPLETION_AND_RETURN_TO_HANDOVER_DOCS"
+          validation_failure_action: "HALT_TASK_COMPLETION_AND_RETURN_TO_HANDOVER_.kiro"
 
 # === 開發者類型特化配置 ===
 developer_specializations:
@@ -452,7 +452,7 @@ developer_specializations:
         - implement_proper_logging_monitoring
     
     documentation_requirements:
-      - update_api_docs_per_interfaces
+      - update_api_.kiro_per_interfaces
       - document_migrations_and_rollback
 
   frontend:
@@ -477,7 +477,7 @@ developer_specializations:
         - ensure_accessibility_basics: ["color_contrast", "focus", "aria_labels"]
     
     documentation_requirements:
-      - update_storybook_or_docs_for_components
+      - update_storybook_or_.kiro_for_components
 
   fullstack:
     specialized_actions:
@@ -486,8 +486,8 @@ developer_specializations:
       - wire_frontend_to_backend_flows: true
     
     documentation_requirements:
-      - update_api_docs_per_interfaces
-      - update_storybook_or_docs_for_components
+      - update_api_.kiro_per_interfaces
+      - update_storybook_or_.kiro_for_components
 
   refactor:
     specialized_actions:
@@ -532,7 +532,7 @@ workflow_violation_responses:
   - "Quality gate failure: Address issues before marking done"
   - "Incomplete documentation: Update all required documentation"
   - "Missing traceability: Add task_id references to PRs/commits"
-  - "🚨 DEV_NOTES_INCOMPLETE: Immediately halt and return to handover_docs stage"
+  - "🚨 DEV_NOTES_INCOMPLETE: Immediately halt and return to handover_.kiro stage"
   - "🚨 DEV_NOTES_MISSING_F-IDs_MAPPING: Stop task completion and require complete mapping"
   - "🚨 DEV_NOTES_INSUFFICIENT_DETAIL: Reject completion and require detailed documentation"
-  - "🚨 HANDOVER_DOCS_STAGE_SKIPPED: Block definition_of_done until handover_docs completed"
+  - "🚨 HANDOVER_.kiro_STAGE_SKIPPED: Block definition_of_done until handover_.kiro completed"

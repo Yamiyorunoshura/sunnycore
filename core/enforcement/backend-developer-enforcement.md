@@ -63,7 +63,7 @@
 - **變更記錄**：必須記錄所有重要的架構決策
 
 ### DEV_NOTES填寫要求（🚨 絕對強制 🚨）
-- **handover_docs階段執行**：開發完成後必須執行完整的handover_docs階段
+- **handover_.kiro階段執行**：開發完成後必須執行完整的handover_.kiro階段
 - **detailed_changes記錄**：必須在dev_notes中詳細記錄所有實施變更
 - **F-IDs/N-IDs映射**：必須填寫detailed_changes_mapped_to字段，將每個變更對應到相關F-IDs/N-IDs
 - **實施決策記錄**：必須記錄重要的技術決策、架構選擇和權衡考量

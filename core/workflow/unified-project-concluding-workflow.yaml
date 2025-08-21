@@ -38,8 +38,8 @@ execution_hints:
     enabled: true
     strategy: "content_hash"
     key_paths:
-      - "{{project_root}}/docs/specs/**/*"
-      - "{{project_root}}/docs/implementation-plan/**/*"
+      - "{{project_root}}/.kiro/specs/**/*"
+      - "{{project_root}}/.kiro/implementation-plan/**/*"
     expire_on_changes: true
   ordering:
     list_sorting: "stable_lexicographic"
@@ -53,7 +53,7 @@ path_aliases:
 plan_resolution:
   find_by_task_id: true
   search_paths:
-    - "{{project_root}}/docs/implementation-plan"
+    - "{{project_root}}/.kiro/implementation-plan"
   supported_extensions: ["yaml", "yml", "md"]
   expectations:
     template: "implementation-plan"
@@ -89,12 +89,12 @@ enforcement_protocol:
 
   evidence_collection_requirements:
     specification_files:
-      - "docs/specs/task.md - 任務規格"
-      - "docs/specs/requirements.md - 需求規格"
-      - "docs/specs/design.md - 設計規格"
+      - ".kiro/specs/task.md - 任務規格"
+      - ".kiro/specs/requirements.md - 需求規格"
+      - ".kiro/specs/design.md - 設計規格"
     
     implementation_plan:
-      - "根據 task_id 在 docs/implementation-plan/ 中定位計劃"
+      - "根據 task_id 在 .kiro/implementation-plan/ 中定位計劃"
       - "完整讀取計劃文件"
       - "驗證計劃存在且符合預期範本"
     
@@ -266,7 +266,7 @@ stages:
       - quality_evidence_collected: true
       - qa_feedback_gathered_or_noted_absent: true
     actions:
-      - read_specification_files: ["docs/specs/task.md", "docs/specs/requirements.md", "docs/specs/design.md"]
+      - read_specification_files: [".kiro/specs/task.md", ".kiro/specs/requirements.md", ".kiro/specs/design.md"]
       - resolve_plan_by_task_id: "{{task_id}}"
       - gather_implementation_evidence: ["PRs", "commits", "changed_files", "migrations", "configs"]
       - gather_quality_artifacts: ["test_reports", "coverage", "CI_status", "performance", "security_scans"]
@@ -422,6 +422,6 @@ validation_rules:
       action: "request_template_completion"
 
 output:
-  path: "{{project_root}}/docs/completion-reports/"
+  path: "{{project_root}}/.kiro/completion-reports/"
   filename: "{{task_id}}-completion.md"
   format: markdown

@@ -30,7 +30,7 @@ color: blue
 - **確定性控制**：temperature=0、top_p=1、seed=42、回應變異性最小化
 - **並行化策略**：在允許的階段對子步驟並行，最大並發度 5
 - **快停機制**：前置檢查與必備檔案缺失即停止並回報
-- **快取策略**：對 `docs/implementation-plan/**` 與 `docs/specs/**` 採內容雜湊快取
+- **快取策略**：對 `.kiro/implementation-plan/**` 與 `.kiro/specs/**` 採內容雜湊快取
 - **路徑別名**：可使用 `WORKFLOW_FILE`、`REPORT_TEMPLATE`、`ENFORCEMENT_FILE`
 
 ## Richard的商業價值哲學

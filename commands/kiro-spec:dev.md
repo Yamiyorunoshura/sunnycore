@@ -31,7 +31,7 @@
 - **委派給子代理**：以確定的狀態上下文呼叫代理 `task-planner`
 - 遵循統一任務規劃工作流程：`~/.claude/core/workflow/unified-task-planning-workflow.yaml`
 - 可選標誌：`--project-root <path>` 明確指定目標專案根目錄。
-- 未提供時的專案根目錄解析順序：env `CLAUDE_PROJECT_ROOT` → 活動專案的Git根目錄 → 包含 `docs/specs/` 的最近目錄 → 當前工作目錄。
+- 未提供時的專案根目錄解析順序：env `CLAUDE_PROJECT_ROOT` → 活動專案的Git根目錄 → 包含 `.kiro/specs/` 的最近目錄 → 當前工作目錄。
 - 將解析的 `project_root` 傳遞給代理/工作流程。確保所有輸出都寫在 `<project_root>` 下。
 
 ## 工作流程

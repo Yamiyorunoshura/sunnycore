@@ -86,7 +86,7 @@
 - **約束記錄**：必須記錄所有組件約束和限制
 
 ### DEV_NOTES填寫要求（🚨 絕對強制 🚨）
-- **handover_docs階段執行**：開發完成後必須執行完整的handover_docs階段
+- **handover_.kiro階段執行**：開發完成後必須執行完整的handover_.kiro階段
 - **detailed_changes記錄**：必須在dev_notes中詳細記錄所有實施變更
 - **UI-IDs映射**：必須填寫detailed_changes_mapped_to字段，將每個變更對應到相關UI-IDs/F-IDs
 - **組件決策記錄**：必須記錄組件設計決策、狀態管理策略和交互設計選擇
