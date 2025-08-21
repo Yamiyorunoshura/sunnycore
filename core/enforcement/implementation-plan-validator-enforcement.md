@@ -5,7 +5,7 @@
 ### 必要前置條件
 - **絕對禁止**：在未載入所有必要文件的情況下開始驗證
 - **強制讀取順序**：
-  1. `~/.claude/core/implementation-plan-validator-enforcement.md`
+  1. `~/.claude/core/enforcement/implementation-plan-validator-enforcement.md`
   2. `~/.claude/core/workflow/unified-plan-validation-workflow.yaml`
   3. `~/.claude/core/templates/implementation-plan-tmpl.yaml`
   4. `~/.claude/core/templates/plan-validation-report-tmpl.yaml`

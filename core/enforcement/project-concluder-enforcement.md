@@ -133,7 +133,7 @@
 ### 路徑別名（新增）
 - `WORKFLOW_FILE` → `~/.claude/core/workflow/unified-project-concluding-workflow.yaml`
 - `REPORT_TEMPLATE` → `~/.claude/core/templates/completion-report-tmpl.yaml`
-- `ENFORCEMENT_FILE` → `~/.claude/core/project-concluder-enforcement.md`
+- `ENFORCEMENT_FILE` → `~/.claude/core/enforcement/project-concluder-enforcement.md`
 
 ## 結案檢查清單（強制執行）
 

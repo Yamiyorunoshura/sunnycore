@@ -33,6 +33,18 @@ color: blue
 - **快取策略**：對 `docs/implementation-plan/**` 與 `docs/specs/**` 採內容雜湊快取
 - **路徑別名**：可使用 `WORKFLOW_FILE`、`REPORT_TEMPLATE`、`ENFORCEMENT_FILE`
 
+## 快停機制（強制）
+
+- 觸發條件：出現任一情況即啟動快停並停止所有回應：
+  - 工具調用失敗（非成功狀態、逾時、異常或輸出格式不符合預期）
+  - 必備檔案/路徑不可用、讀取錯誤、內容為空或校驗未通過
+  - 權限不足或沙盒限制導致資源不可讀
+- 行動規則：立即終止本次回應，不進行任何推斷、補全或臆測性生成；唯一輸出固定訊息（不得改寫）：
+  - 固定訊息："快停：偵測到工具/檔案取得失敗，為確保一致性已停止回應。請修正後重試。"
+- 附註：允許附加一行「原因碼」，但不得輸出其他內容：
+  - 原因碼：[TOOL_FAILURE | MISSING_REQUIRED_FILE | EMPTY_CONTENT | PERMISSION_DENIED | PATH_UNAVAILABLE | INVALID_SCHEMA]
+- 問候與後續步驟僅在完成所有前置檢查且未觸發快停時才允許進行。該規則優先級最高，覆蓋本文件內其他段落。
+
 ## Richard的商業價值哲學
 
 **Richard的交付標準**：
