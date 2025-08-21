@@ -17,7 +17,7 @@ inputs:
 plan_resolution:
   find_by_task_id: true
   search_paths:
-    - "{{project_root}}/.kiro/implementation-plan"
+    - "{{project_root}}/docs/implementation-plan"
   supported_extensions: ["yaml", "yml", "md"]
   expectations:
     template: "implementation-plan"
@@ -79,11 +79,11 @@ enforcement_protocol:
 
   plan_location_and_loading:
     plan_resolution_process:
-      - "根據 task_id 在 {{project_root}}/.kiro/implementation-plan/ 中定位計劃"
+      - "根據 task_id 在 {{project_root}}/docs/implementation-plan/ 中定位計劃"
       - "支援的副檔名：.yaml, .yml, .md"
       - "驗證計劃存在且可讀取"
       - "完整讀取計劃文件"
-      - "載入所有規格檔案：.kiro/specs/task.md、requirements.md、design.md"
+      - "載入所有規格檔案：docs/specs/task.md、requirements.md、design.md"
 
   stage_execution_checkpoints:
     before_stage:
@@ -227,7 +227,7 @@ stages:
       - cross_reference_sources_identified: true
     actions:
       - resolve_plan_by_task_id: "{{task_id}}"
-      - read_specification_files: [".kiro/specs/task.md", ".kiro/specs/requirements.md", ".kiro/specs/design.md"]
+      - read_specification_files: ["docs/specs/task.md", "docs/specs/requirements.md", "docs/specs/design.md"]
       - identify_cross_reference_sources
       - validate_plan_document_completeness
 
@@ -260,7 +260,7 @@ stages:
       - verify_non_functional_targets_in_specs
       - validate_scope_boundaries_against_task_definition
       - cross_reference_approach_with_design
-      - verify_data_changes_in_design_.kiro
+      - verify_data_changes_in_design_docs
       - validate_test_strategy_against_standards
       - check_dependencies_timeline_consistency
       - document_untraceable_items_as_findings
@@ -396,7 +396,7 @@ validation_rules:
       action: "request_specific_recommendations"
 
 output:
-  path: "{{project_root}}/.kiro/validation-reports/"
+  path: "{{project_root}}/docs/validation-reports/"
   filename: "{{task_id}}-plan-validation.md"
   format: markdown
 

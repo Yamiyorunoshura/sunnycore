@@ -91,7 +91,7 @@
 - **影響文檔**：重構對系統的影響必須記錄
 
 ### DEV_NOTES填寫要求（🚨 絕對強制 🚨）
-- **handover_.kiro階段執行**：重構完成後必須執行完整的handover_.kiro階段
+- **handover_docs階段執行**：重構完成後必須執行完整的handover_docs階段
 - **detailed_changes記錄**：必須在dev_notes中詳細記錄所有重構變更
 - **F-IDs/N-IDs映射**：必須填寫detailed_changes_mapped_to字段，將每個變更對應到相關F-IDs/N-IDs
 - **重構策略記錄**：必須記錄採用的重構策略、漸進式步驟和決策理由

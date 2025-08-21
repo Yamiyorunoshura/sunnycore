@@ -17,7 +17,7 @@
 - **工作流程檔**：優先 `~/.claude/core/workflow/unified-review-workflow.yaml`，否則使用 `core/workflow/unified-review-workflow.yaml`
 - **執行規範檔**：優先 `~/.claude/core/task-reviewer-enforcement.md`，否則使用 `core/enforcement/task-reviewer-enforcement.md`
 - **報告範本檔**：優先 `~/.claude/core/templates/review-tmpl.yaml`，否則使用 `core/templates/review-tmpl.yaml`
-- **規格根目錄**：優先 `.kiro/specs/`，其次 `.kiro/specs/`，再次 `specs/`
+- **規格根目錄**：優先 `docs/specs/`，其次 `docs/specs/`，再次 `specs/`
 
 ### 基於證據的審查（絕對強制）
 - **客觀評估**：所有評估都必須基於具體證據，不允許主觀猜測

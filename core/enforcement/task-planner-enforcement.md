@@ -26,8 +26,8 @@
   - finalization：最終驗證和認證
 
 ### 只讀與邊界
-- **只讀保護**：`.kiro/specs/**` 目錄嚴禁寫入
-- **路徑白名單**：僅允許在 `<project_root>/.kiro/implementation-plan/` 與 `<project_root>/.kiro/index/` 下寫入
+- **只讀保護**：`docs/specs/**` 目錄嚴禁寫入
+- **路徑白名單**：僅允許在 `<project_root>/docs/implementation-plan/` 與 `<project_root>/docs/index/` 下寫入
 
 ### 範本合規性
 - **完整填充**：絕不留空範本部分，用實際內容填充或標記為"N/A - [原因]"
@@ -36,7 +36,7 @@
  - **黑名單詞彙**：禁止出現：`TBD`、`待定`、`視需要`、`as needed`、任意形如`<...>` 佔位
 
 ### 核心規劃原則（強制執行）
-1. **安全第一**：絕不修改 `.kiro/specs/` 中的任何檔案
+1. **安全第一**：絕不修改 `docs/specs/` 中的任何檔案
 2. **RCSD合規**：必須定義功能性和非功能性需求；明確範圍界定
 3. **MD原則**：必須將工作分解為小型、可重用的模組
 4. **KISS原則**：必須偏好最簡單可行的方法
@@ -61,9 +61,9 @@
 - **審計欄位**：記錄 `workflow_template_version`、`document_path`、`timestamp`
 
 ### 輸出和驗證要求
-11. **專案根目錄解析**：按順序解析 `project_root`：env `CLAUDE_PROJECT_ROOT` → Git root → 最近的 `.kiro/specs/` → cwd
-12. **輸出路徑合規**：必須儲存到 `<project_root>/.kiro/implementation-plan/<task_id>-plan.md`
-13. **索引更新**：必須將JSONL記錄附加到 `<project_root>/.kiro/index/plan-index.jsonl`
+11. **專案根目錄解析**：按順序解析 `project_root`：env `CLAUDE_PROJECT_ROOT` → Git root → 最近的 `docs/specs/` → cwd
+12. **輸出路徑合規**：必須儲存到 `<project_root>/docs/implementation-plan/<task_id>-plan.md`
+13. **索引更新**：必須將JSONL記錄附加到 `<project_root>/docs/index/plan-index.jsonl`
 14. **路徑驗證**：必須確保輸出路徑在 `project_root` 下
 15. **成功驗證**：必須確認檔案成功寫入並回顧絕對路徑
 16. **終檢擴展**：必須運行黑名單掃描與交叉一致性校驗並全部通過

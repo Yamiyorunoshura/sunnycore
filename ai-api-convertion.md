@@ -175,7 +175,7 @@ Refer to [this article](/llm-txt.md#usage).
 And use this prompt with the mention of the Midscene documents:
 
 ```txt
-According to the tips and APIs mentioned in @Use JavaScript to Optimize the Midscene Al Automation Code and @@Midscene API .kiro,
+According to the tips and APIs mentioned in @Use JavaScript to Optimize the Midscene Al Automation Code and @@Midscene API docs,
 
 please help me convert the following instructions into structured javascript code:
 

@@ -18,11 +18,11 @@ metadata:
   owner: "必填 - 實際負責人姓名"
   date: "必填 - YYYY-MM-DD 格式"
   sources:
-    plan: "<project_root>/.kiro/implementation-plan/<task_id>-plan.(md|yaml|yml)"
+    plan: "<project_root>/docs/implementation-plan/<task_id>-plan.(md|yaml|yml)"
     specs:
-      requirements: "<project_root>/.kiro/specs/requirements.md"
-      task: "<project_root>/.kiro/specs/task.md"
-      design: "<project_root>/.kiro/specs/design.md"
+      requirements: "<project_root>/docs/specs/requirements.md"
+      task: "<project_root>/docs/specs/task.md"
+      design: "<project_root>/docs/specs/design.md"
     qa_reviews:
       - "<連結或路徑>"
     evidence:
