@@ -6,14 +6,14 @@
 
 - `*help`：顯示自定義命令。
 - `*validate-plan <task_id>`：驗證實施計劃是否完整且與需求對齊。
-- `*conclude <task_id>`：結束給定task_id的專案開發完成
+- `*conclude`：結束專案開發完成
 
 ## 命令行為
 
 ### `*validate-plan <task_id>`
 - 呼叫代理 `implementation-plan-validator`
 
-### `*conclude <task_id>`
+### `*conclude`
 - 呼叫代理 `project-concluder`
 
 ## 工作流程
