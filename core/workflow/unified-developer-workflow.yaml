@@ -9,6 +9,7 @@ workflow:
   description: "一個通用的開發者工作流程，通過agent prompt實現領域特化"
   enforcement_level: "strict"
   halt_on_validation_failure: true
+  default_profile: "fast_strict"
 
 # === 輸入定義 ===
 inputs:
@@ -55,7 +56,162 @@ execution_protocol:
       refactor: "~/.claude/core/refactor-developer-enforcement.md"
     note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the respective enforcement files"
 
+profiles:
+  fast_strict:
+    sampling_policy:
+      temperature: 0.1
+      top_p: 0.2
+      json_mode: true
+      max_output_tokens: 4096
+    response_format:
+      default: "json"
+      canonical_key_order: true
+      forbid_extra_keys: true
+      wrap_in_code_fence: false
+    caching:
+      plan_cache_key: ["task_id", "plan_hash"]
+      cache_context_summary: true
+      restore_on_same_key: true
+    generation_style:
+      no_prose: true
+      bullet_only: true
+      allowed_terms_enum: ["F-ID", "N-ID", "UI-ID", "acceptance_criteria", "risk", "decision"]
+    parallelizable_actions:
+      - stage: "tests_first"
+        actions: ["unit_tests_skeletons", "integration_tests_skeletons", "acceptance_tests_skeletons"]
+      - stage: "quality_gates"
+        actions: ["static_analysis", "dependency_security_scan"]
+    differential_mode:
+      enabled_when: "brownfield"
+      only_generate_changed_sections: true
 
+output_contracts:
+  dev_notes: { $ref: "#/schemas/dev_notes_v1" }
+  objectives: { $ref: "#/schemas/objectives_v1" }
+  modules: { $ref: "#/schemas/modules_v1" }
+
+schemas:
+  dev_notes_v1:
+    $id: "schemas/dev_notes_v1"
+    type: object
+    required: [developer_type, timestamp, changes_summary, detailed_changes_mapped_to, implementation_decisions, risk_considerations, maintenance_notes]
+    properties:
+      developer_type:
+        enum: ["backend", "frontend", "fullstack", "refactor"]
+      timestamp:
+        type: string
+        format: date-time
+      task_phase:
+        type: string
+      re_dev_iteration:
+        type: integer
+        minimum: 1
+      changes_summary:
+        type: string
+        minLength: 50
+      detailed_changes_mapped_to:
+        type: object
+        required: ["F-IDs", "N-IDs"]
+        properties:
+          F-IDs:
+            type: array
+            items:
+              type: string
+              pattern: "^F-[0-9]+$"
+            minItems: 1
+          N-IDs:
+            type: array
+            items:
+              type: string
+              pattern: "^N-[0-9]+$"
+          UI-IDs:
+            type: array
+            items:
+              type: string
+              pattern: "^UI-[0-9]+$"
+        additionalProperties: false
+      implementation_decisions:
+        type: string
+        minLength: 50
+      risk_considerations:
+        type: string
+        minLength: 30
+      maintenance_notes:
+        type: string
+        minLength: 30
+    additionalProperties: false
+
+  objectives_v1:
+    $id: "schemas/objectives_v1"
+    type: object
+    required: ["F-IDs", "N-IDs", "acceptance_criteria"]
+    properties:
+      F-IDs:
+        type: array
+        items:
+          type: string
+          pattern: "^F-[0-9]+$"
+        minItems: 1
+      N-IDs:
+        type: array
+        items:
+          type: string
+          pattern: "^N-[0-9]+$"
+      acceptance_criteria:
+        type: array
+        items:
+          type: object
+          required: ["F-ID", "criteria"]
+          properties:
+            F-ID:
+              type: string
+              pattern: "^F-[0-9]+$"
+            criteria:
+              type: array
+              items:
+                type: string
+        minItems: 1
+    additionalProperties: false
+
+  modules_v1:
+    $id: "schemas/modules_v1"
+    type: object
+    required: ["modules"]
+    properties:
+      modules:
+        type: array
+        items:
+          type: object
+          required: ["name", "interfaces"]
+          properties:
+            name:
+              type: string
+            interfaces:
+              type: array
+              items:
+                type: object
+                required: ["name", "methods"]
+                properties:
+                  name:
+                    type: string
+                  methods:
+                    type: array
+                    items:
+                      type: object
+                      required: ["name", "inputs", "outputs"]
+                      properties:
+                        name: { type: string }
+                        inputs:
+                          type: array
+                          items:
+                            type: object
+                        outputs:
+                          type: object
+            reuse:
+              type: array
+              items:
+                type: string
+    additionalProperties: false
 
 # === 階段定義 ===
 # 詳細的驗證規則和品質標準在對應的 enforcement 文件中定義
@@ -66,8 +222,16 @@ validation_rules:
     - workflow_initialization
     - scope_comprehension
     - objectives_and_acceptance
+    - architecture_and_modules
+    - tests_first
     - implementation
     - quality_gates
+    - milestones_timeline
+    - dependencies
+    - estimation_tracking
+    - risks_changes
+    - handover_docs
+    - definition_of_done
 
   error_handling:
     validation_errors:
@@ -82,12 +246,32 @@ validation_rules:
         action: "pause_and_open_question"
       
       missing_tests:
-        severity: "high"
+        severity: "blocker"
         message: "Tests not written before implementation"
         action: "request_test_creation_first"
 
+  format_contracts:
+    - stage: "objectives_and_acceptance"
+      must_validate_against: "objectives"
+      on_failure: "halt_and_request_completion"
+    - stage: "architecture_and_modules"
+      must_validate_against: "modules"
+      on_failure: "halt_and_request_completion"
+    - stage: "handover_docs"
+      must_validate_against: "dev_notes"
+      on_failure: "HALT_TASK_AND_RETURN_TO_HANDOVER_DOCS"
+
 # === 工作流程階段 ===
 stages:
+  - id: "workflow_initialization"
+    title: "工作流程初始化"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - load: ["~/.claude/core/workflow/unified-developer-workflow.yaml"]
+      - detect_developer_type_from_agent: true
+      - resolve_plan_by_task_id: true
+      - verify_preconditions: true
   - id: "scope_comprehension"
     title: "範圍理解"
     mandatory: true
@@ -199,6 +383,7 @@ stages:
             - verify_dev_notes_section_exists: "HALT_IF_MISSING"
             - verify_detailed_changes_not_empty: "HALT_IF_EMPTY"
             - verify_f_ids_n_ids_mapping_complete: "HALT_IF_INCOMPLETE"
+            - verify_ui_ids_mapping_complete_for_frontend_fullstack: "HALT_IF_INCOMPLETE"
           quality_requirements:
             - detailed_changes_minimum_length: "300_characters"
             - must_include_implementation_decisions: true
@@ -233,7 +418,7 @@ stages:
           "no_unresolved_open_questions",
           "PRs_merged_CI_green",
           "🚨_dev_notes_completely_filled_and_verified",
-          "🚨_detailed_changes_mapped_to_all_relevant_F-IDs_N-IDs",
+          "🚨_detailed_changes_mapped_to_all_relevant_F-IDs_N-IDs_UI-IDs",
           "🚨_handover_docs_stage_fully_completed"
         ]
       - 🚨_FINAL_DEV_NOTES_VERIFICATION:
@@ -241,6 +426,7 @@ stages:
             - dev_notes_section_exists: "MANDATORY"
             - detailed_changes_field_populated: "MANDATORY" 
             - f_ids_n_ids_mapping_complete: "MANDATORY"
+            - ui_ids_mapping_complete_for_frontend_fullstack: "MANDATORY"
             - implementation_decisions_documented: "MANDATORY"
             - risk_considerations_documented: "MANDATORY"
             - maintenance_notes_provided: "MANDATORY"
