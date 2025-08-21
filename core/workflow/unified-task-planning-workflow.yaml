@@ -11,6 +11,25 @@ workflow:
   enforcement_level: "strict"
   halt_on_validation_failure: true
 
+  # 確定性與效率提示（執行層可選擇採納）
+  determinism:
+    generation:
+      temperature: 0.1
+      top_p: 0.2
+      presence_penalty: 0
+      frequency_penalty: 0
+    retry_policy:
+      io_retries: 2
+      generation_retries: 0
+    idempotency:
+      run_key: "task_id + sources_content_hash"
+      expectation: "identical_output_when_inputs_unchanged"
+
+  execution_hints:
+    parallelize_tool_calls: true
+    content_hash_cache: true
+    max_parallelism: 4
+
 # === 輸入定義 ===
 inputs:
   task_id: "<required>"
@@ -29,6 +48,8 @@ project_root_resolution:
 # === 範圍管控 ===
 guardrails:
   must_write_inside_project_root: true
+  readonly_paths:
+    - ".kiro/specs/**"
   on_violation: "pause_and_open_question"
 
 # === 執行協議 ===
@@ -44,6 +65,31 @@ execution_protocol:
 # 詳細的驗證規則和品質標準在 ~/.claude/core/task-planner-enforcement.md 中定義
 validation_rules:
   note: "Detailed validation rules and quality standards are defined in the enforcement file"
+  linters:
+    banned_terms:
+      - "TBD"
+      - "待定"
+      - "視需要"
+      - "to be decided"
+      - "as needed"
+    banned_patterns:
+      - "\\<.*\\>"  # 任何形如 <...> 的佔位符
+    allow_na_with_reason: true  # 僅允許 "N/A - <原因>"
+  consistency_checks:
+    functional_requirements_have_acceptance_criteria: true
+    non_functional_requirements_have_measurements: true
+    modules_mapped_to_milestones: true
+    data_changes_have_migrations_or_reason: true
+    dependencies_have_owner_or_version: true
+  checklists:
+    definition_of_ready:
+      - "workflow and template files loaded"
+      - "project_root resolved"
+    definition_of_done:
+      - "all sections populated"
+      - "no placeholders"
+      - "index updated"
+      - "final validation passed"
   
   stage_sequence:
     - workflow_initialization
@@ -99,12 +145,20 @@ stages:
         - verify_files_loaded: ["workflow", "template"]
         - confirm_project_root_resolved: true
         - halt_if_failed: true
+    definition_of_ready: []
+    definition_of_done:
+      - "workflow_file_parsed"
+      - "template_structure_understood"
+      - "project_root_resolved"
 
   - id: "input_collection"
     title: "Collect and validate planning inputs"
     mandatory: true
     validation_checkpoint: true
     actions:
+      - execution_hints:
+          parallelize_tool_calls: true
+          content_hash_cache: true
       - tool_call: "read_file"
         target: ".kiro/specs/task.md"
         purpose: "Load task specification"
@@ -120,6 +174,10 @@ stages:
       - checkpoint_validation:
         - verify_all_specs_read: true
         - document_missing_inputs: true
+    definition_of_done:
+      - "task_spec_loaded"
+      - "requirements_loaded"
+      - "design_loaded"
 
   - id: "analysis_and_strategy"
     title: "Plan analysis and strategy"
@@ -137,6 +195,9 @@ stages:
       - checkpoint_validation:
         - verify_requirements_analysis_completed: true
         - confirm_strategy_defined: true
+    definition_of_done:
+      - "requirements_analyzed"
+      - "strategy_defined"
 
   - id: "template_population"
     title: "Populate implementation plan template"
@@ -189,6 +250,9 @@ stages:
         - verify_all_sections_populated: true
         - confirm_no_placeholders: true
         - validate_template_compliance: true
+        - run_linters: true  # 依據 validation_rules.linters
+        - run_consistency_checks: true  # 依據 validation_rules.consistency_checks
+        - apply_definition_of_done: true
 
   - id: "document_output"
     title: "Generate and save implementation plan"
@@ -207,6 +271,15 @@ stages:
         purpose: "Update plan index"
         mode: "append"
         content: "index_record_json"
+      - indexing_policy:
+          record_key: "task_id + sources_content_hash"
+          mode: "append_dedup_by_key"
+          record_fields:
+            - task_id
+            - document_path
+            - sources_content_hash
+            - workflow_template_version
+            - timestamp
       - checkpoint_validation:
         - verify_file_written: true
         - confirm_path_under_project_root: true
@@ -230,6 +303,8 @@ stages:
         - verify_no_placeholder_brackets: true
         - confirm_valuable_context_preserved: true
         - validate_markdown_structure: true
+        - run_linters: true
+        - run_consistency_checks: true
       - completion_certification:
         - all_validations_passed: true
         - document_ready_for_development: true
