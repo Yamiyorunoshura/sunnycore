@@ -5,13 +5,50 @@ version: 1
 workflow:
   name: "統一專案結案證據驅動工作流程"
   description: "收集交付證據、QA潛在問題和未來增強的統一結案工作流程，生成完整的完成報告。"
-  report_template: "~/.claude/templates/completion-report-tmpl.yaml"
+  report_template: "~/.claude/core/templates/completion-report-tmpl.yaml"
   enforcement_level: "strict"
   halt_on_validation_failure: true
 
 inputs:
   task_id: "<required>"
   project_root: "<auto>"
+
+execution_hints:
+  determinism:
+    temperature: 0
+    top_p: 1
+    seed: 42
+    response_variability: "minimal"
+  parallelization:
+    enabled: true
+    max_concurrency: 5
+    in_stages:
+      evidence_collection:
+        - "read_specification_files"
+        - "resolve_plan_by_task_id"
+        - "gather_implementation_evidence"
+        - "gather_quality_artifacts"
+        - "gather_qa_reviews_and_feedback"
+      delivery_synthesis:
+        - "map_delivery_to_original_scope"
+        - "analyze_acceptance_criteria_achievement"
+        - "document_completion_deferred_outofscope_items"
+        - "cross_reference_with_test_evidence"
+  caching:
+    enabled: true
+    strategy: "content_hash"
+    key_paths:
+      - "{{project_root}}/docs/specs/**/*"
+      - "{{project_root}}/docs/implementation-plan/**/*"
+    expire_on_changes: true
+  ordering:
+    list_sorting: "stable_lexicographic"
+    normalize_paths: true
+
+path_aliases:
+  WORKFLOW_FILE: "~/.claude/core/workflow/unified-project-concluding-workflow.yaml"
+  REPORT_TEMPLATE: "~/.claude/core/templates/completion-report-tmpl.yaml"
+  ENFORCEMENT_FILE: "~/.claude/core/project-concluder-enforcement.md"
 
 plan_resolution:
   find_by_task_id: true
@@ -25,6 +62,7 @@ plan_resolution:
 guardrails:
   evidence_is_blocking: true
   on_missing_evidence: "document_as_limitation"
+  halt_on_preconditions_failure: true
 
 preconditions:
   - "專案開發已完成或達到里程碑"
@@ -51,9 +89,9 @@ enforcement_protocol:
 
   evidence_collection_requirements:
     specification_files:
-      - ".kiro/specs/task.md - 任務規格"
-      - ".kiro/specs/requirements.md - 需求規格"
-      - ".kiro/specs/design.md - 設計規格"
+      - "docs/specs/task.md - 任務規格"
+      - "docs/specs/requirements.md - 需求規格"
+      - "docs/specs/design.md - 設計規格"
     
     implementation_plan:
       - "根據 task_id 在 docs/implementation-plan/ 中定位計劃"
@@ -202,8 +240,8 @@ stages:
       - template_structure_understood: true
       - validation_rules_loaded: true
     actions:
-      - load_workflow_file: "~/.claude/workflow/unified-project-concluding-workflow.yaml"
-      - load_template_from: "~/.claude/templates/completion-report-tmpl.yaml"
+      - load_workflow_file: "~/.claude/core/workflow/unified-project-concluding-workflow.yaml"
+      - load_template_from: "~/.claude/core/templates/completion-report-tmpl.yaml"
       - verify_file_accessibility
 
   - id: "conclusion_strategy"
@@ -228,7 +266,7 @@ stages:
       - quality_evidence_collected: true
       - qa_feedback_gathered_or_noted_absent: true
     actions:
-      - read_specification_files: [".kiro/specs/task.md", ".kiro/specs/requirements.md", ".kiro/specs/design.md"]
+      - read_specification_files: ["docs/specs/task.md", "docs/specs/requirements.md", "docs/specs/design.md"]
       - resolve_plan_by_task_id: "{{task_id}}"
       - gather_implementation_evidence: ["PRs", "commits", "changed_files", "migrations", "configs"]
       - gather_quality_artifacts: ["test_reports", "coverage", "CI_status", "performance", "security_scans"]
@@ -290,7 +328,7 @@ stages:
       - all_evidence_linked: true
       - completion_status_clearly_documented: true
     actions:
-      - load_report_template: "~/.claude/templates/completion-report-tmpl.yaml"
+      - load_report_template: "~/.claude/core/templates/completion-report-tmpl.yaml"
       - populate_metadata_with_actual_values
       - populate_sections: [
           "metadata",

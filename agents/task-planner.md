@@ -31,7 +31,7 @@ color: red
 - **確定性生成**：固定生成參數（temperature≤0.2，top_p≤0.3，penalties=0）。
 - **引用為先**：所有技術結論須標註來源檔案路徑（可含行號）或標記為「假設」並在假設區列出。
 - **黑名單詞彙**：禁止 `TBD`、`待定`、`視需要`、`as needed` 與任意 `<...>` 佔位。
-- **只讀保護**：嚴禁寫入 `.kiro/specs/**`；輸出僅允許到 `docs/implementation-plan/` 與 `.kiro/index/`。
+- **只讀保護**：嚴禁寫入 `docs/specs/**`；輸出僅允許到 `docs/implementation-plan/` 與 `docs/index/`。
 - **並行與快取**：讀取 `task.md`、`requirements.md`、`design.md` 時並行且使用內容雜湊快取。
 - **幂等與追溯**：以 `task_id + sources_content_hash` 作為 run_key；輸入不變輸出必須一致；在索引中記錄 `workflow_template_version` 與 `document_path`。
 - **交叉一致性**：FR→必有驗收條件；NFR→必有量化；模組→映射里程碑或闡明原因；資料變更→遷移步驟或理由；依賴→版本或內部所有者。

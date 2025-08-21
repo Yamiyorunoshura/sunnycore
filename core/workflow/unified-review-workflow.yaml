@@ -12,7 +12,7 @@ metadata:
   
 overview:
   description: "Evidence-driven implementation review with 6 core stages"
-  report_template: "~/.claude/templates/review-tmpl.yaml"
+  report_template: "~/.claude/core/templates/review-tmpl.yaml"
   stages:
     - id: 1
       name: "初始化與證據收集"
@@ -38,6 +38,49 @@ execution_protocol:
     mandatory_enforcement_file: "~/.claude/core/task-reviewer-enforcement.md"
     note: "All detailed enforcement rules, validation criteria, and quality standards are defined in the enforcement file"
 
+execution_context:
+  determinism:
+    temperature: 0
+    top_p: 0.1
+    frequency_penalty: 0
+    presence_penalty: 0
+    reproducible_seed: "{task_id}"
+  parallelization:
+    guidance: "Run read-only discovery actions in parallel where independent"
+    batch_rules:
+      - "Combine file reads, globs and grep/codebase searches via parallel tool calls"
+      - "Cap to 3-5 concurrent calls to avoid timeouts"
+      - "Prefer parallel for Stage 1 and quality dimension discovery in Stage 3"
+  caching:
+    policy: "Cache file contents by absolute path and mtime; avoid re-reading unchanged files"
+  path_resolution:
+    project_root: "{project_root}"
+    fallback_order:
+      enforcement_file:
+        - "~/.claude/core/task-reviewer-enforcement.md"
+        - "core/enforcement/task-reviewer-enforcement.md"
+      workflow_file:
+        - "~/.claude/core/workflow/unified-review-workflow.yaml"
+        - "core/workflow/unified-review-workflow.yaml"
+      report_template:
+        - "~/.claude/core/templates/review-tmpl.yaml"
+        - "core/templates/review-tmpl.yaml"
+      specs_root:
+        - "docs/specs/"
+        - "docs/specs/"
+        - "specs/"
+  timeboxes:
+    per_tool_call_seconds: 25
+    overall_stage_budget_minutes:
+      stage_1: 4
+      stage_2: 6
+      stage_3: 6
+      stage_4: 4
+      stage_5: 5
+      stage_6: 2
+  failure_policy:
+    on_missing_primary_path: "Use fallback order; if none available, STOP per error_handling.validation_failure_protocol"
+
 stages:
   stage_1:
     id: 1
@@ -57,17 +100,21 @@ stages:
           
       spec_gathering:
         - tool: "glob_file_search"
-          pattern: ".kiro/specs/**"
-          purpose: "Discover all specification files under .kiro/specs/"
+          pattern: "docs/specs/**"
+          pattern_alt:
+            - "docs/specs/**"
+            - "specs/**"
+          purpose: "Discover all specification files under docs/specs/"
         - tool: "read_file"
           files: "<from previous glob_file_search>"
-          purpose: "Gather specification sources (all .kiro/specs/**)"
+          purpose: "Gather specification sources (all docs/specs/**)"
         - tool: "read_file"
           files:
-            - ".kiro/specs/task.md"
-            - ".kiro/specs/requirements.md"
-            - ".kiro/specs/design.md"
+            - "docs/specs/task.md"
+            - "docs/specs/requirements.md"
+            - "docs/specs/design.md"
           purpose: "Ensure core specs explicitly loaded"
+          note: "If docs/specs/ is absent, resolve using execution_context.path_resolution.specs_root"
           
       plan_discovery:
         - tool: "glob_file_search"
@@ -83,18 +130,22 @@ stages:
         - tool: "codebase_search"
           query: "Where are the main implementation changes for this task?"
           purpose: "Identify implementation changes"
+          parallelizable: true
         - tool: "grep"
           pattern: "{task_id}"
           output_mode: "files_with_matches"
           purpose: "Find task-related files"
+          parallelizable: true
           
       quality_artifacts:
         - tool: "glob_file_search"
           pattern: "*test*"
           purpose: "Find test files and reports"
+          parallelizable: true
         - tool: "grep"
           pattern: "coverage|CI|build"
           purpose: "Find quality metrics"
+          parallelizable: true
     
     follow_up_mode:
       additional_actions:
@@ -379,7 +430,7 @@ stages:
     
     actions:
       - tool: "edit_file"
-        target: ".kiro/specs/task.md"
+        target: "docs/specs/task.md"
         purpose: "根據審查結果更新任務狀態"
         condition: "on_variable_value"
         variable_name: "final_review_status"
@@ -398,7 +449,7 @@ stages:
             replace_pattern: "- [-] {task_title}"
 
       - tool: "edit_file"
-        target: ".kiro/specs/task.md"
+        target: "docs/specs/task.md"
         purpose: "更新任務中繼資料（狀態/文件/時間/審查者）"
         condition: "on_variable_value"
         variable_name: "final_review_status"
@@ -473,6 +524,11 @@ critical_success_factors:
     no_placeholders:
       description: "Replace all placeholder values with actual content"
       validation_required: true
+    deterministic_operation:
+      description: "Operate with low-randomness settings for reproducibility"
+      parameters:
+        temperature: 0
+        top_p: 0.1
       
     task_authority:
       description: "QA has final authority on task completion"
@@ -519,3 +575,5 @@ ai_optimization:
   tool_integration: "Explicit tool calls reduce AI confusion"
   validation_points: "Checkpoints enable early error detection"
   follow_up_support: "Separate handling for iterative reviews"
+  deterministic_settings: "Use temperature=0, top_p=0.1 unless explicitly overridden by user"
+  parallel_guidance: "Default to parallel tool execution for independent read-only steps"

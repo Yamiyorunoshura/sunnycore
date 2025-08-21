@@ -41,7 +41,7 @@ project_root_resolution:
     - env: "CLAUDE_PROJECT_ROOT"
     - detect_git_root: true
     - find_upwards_for:
-      - ".kiro/specs/task.md"
+      - "docs/specs/task.md"
       - ".git"
   on_failure: "use_cwd"
 
@@ -49,7 +49,7 @@ project_root_resolution:
 guardrails:
   must_write_inside_project_root: true
   readonly_paths:
-    - ".kiro/specs/**"
+    - "docs/specs/**"
   on_violation: "pause_and_open_question"
 
 # === 執行協議 ===
@@ -160,15 +160,15 @@ stages:
           parallelize_tool_calls: true
           content_hash_cache: true
       - tool_call: "read_file"
-        target: ".kiro/specs/task.md"
+        target: "docs/specs/task.md"
         purpose: "Load task specification"
         validation: "task_spec_loaded"
       - tool_call: "read_file"
-        target: ".kiro/specs/requirements.md"
+        target: "docs/specs/requirements.md"
         purpose: "Load requirements specification"
         validation: "requirements_loaded"
       - tool_call: "read_file"
-        target: ".kiro/specs/design.md"
+        target: "docs/specs/design.md"
         purpose: "Load design specification"
         validation: "design_loaded"
       - checkpoint_validation:
@@ -267,7 +267,7 @@ stages:
         purpose: "Write implementation plan document"
         content: "populated_template_as_markdown"
       - tool_call: "write_file"
-        target: "{{project_root}}/.kiro/index/plan-index.jsonl"
+        target: "{{project_root}}/docs/index/plan-index.jsonl"
         purpose: "Update plan index"
         mode: "append"
         content: "index_record_json"
@@ -335,4 +335,4 @@ output:
   path: "{{project_root}}/docs/implementation-plan/"
   filename: "{{task_id}}-plan.md"
   format: "markdown"
-  index_path: "{{project_root}}/.kiro/index/plan-index.jsonl"
+  index_path: "{{project_root}}/docs/index/plan-index.jsonl"

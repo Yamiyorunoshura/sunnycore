@@ -9,6 +9,13 @@
   2. `~/.claude/core/templates/completion-report-tmpl.yaml`
 - **檔案載入驗證**：必須確認所有檔案成功載入
 
+### 確定性與並行化（新增強制）
+- **確定性**：所有自動化步驟必須在溫度 0、top_p 1、seed 42 下執行
+- **一致性**：列表輸出採用穩定字典序，並將所有路徑正規化為絕對路徑
+- **並行化**：允許在 `evidence_collection` 與 `delivery_synthesis` 階段的子步驟並行執行，需確保資料相依性不被破壞
+- **快停策略**：若前置條件或必備檔案缺失，必須立即停止並回報，不得繼續後續階段
+- **快取要求**：採用內容雜湊快取；當 `docs/specs/**` 與 `docs/implementation-plan/**` 無變更時重用結果
+
 ### 基於證據的結案（絕對強制）
 - **證據要求**：所有結論都必須有具體證據支持
 - **證據類型**：檔案路徑、PR連結、測試報告、測量結果、QA評論
@@ -36,7 +43,7 @@
 
 #### 規劃文件收集
 - **實施計劃**：必須收集 `docs/implementation-plan/` 中對應的檔案
-- **規範文件**：必須收集 `.kiro/specs/task.md`、`requirements.md`、`design.md`
+- **規範文件**：必須收集 `docs/specs/task.md`、`requirements.md`、`design.md`
 - **計劃對齊**：必須驗證實施與計劃的一致性
 
 #### 實施證據收集
@@ -113,7 +120,7 @@
 - **成功定義**：必須基於實際價值而非技術完成度定義成功
 
 ### 安全要求（強制遵守）
-- **文件保護**：絕不修改 `.kiro/specs/` 中的任何檔案
+- **文件保護**：絕不修改 `docs/specs/` 中的任何檔案
 - **數據完整性**：確保所有收集的證據的完整性和準確性
 - **訪問控制**：確保只訪問授權的檔案和資源
 
@@ -122,6 +129,11 @@
 - **清晰表達**：使用清晰、專業的語言表達
 - **結構化**：按照範本結構組織內容
 - **可追溯性**：確保所有陳述都可以追溯到源證據
+
+### 路徑別名（新增）
+- `WORKFLOW_FILE` → `~/.claude/core/workflow/unified-project-concluding-workflow.yaml`
+- `REPORT_TEMPLATE` → `~/.claude/core/templates/completion-report-tmpl.yaml`
+- `ENFORCEMENT_FILE` → `~/.claude/core/project-concluder-enforcement.md`
 
 ## 結案檢查清單（強制執行）
 

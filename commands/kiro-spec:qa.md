@@ -18,9 +18,17 @@
 - **審查後行動**（當QA審查通過時）：
   - 更新task.md中繼資料欄位
   - 從最終審查文件中移除驗證檢查清單
+  - 寫入輸出位置：`{project_root}/docs/implementation-review/{task_id}-review.md`
+
+- **執行優化（自動套用）**：
+  - 決定性：temperature=0、top_p=0.1、以 `{task_id}` 作為種子
+  - 並行化：對唯讀發現步驟（多檔讀、glob、grep、semantic search）預設並行（單批3-5項）
+  - 路徑回退：若 `~/.claude/**` 缺失則回退至倉庫 `core/**` 與 `docs/specs/|docs/specs/|specs/`
+  - 時間盒：單次工具呼叫≤25秒，超時則降低並行度並收斂搜尋範圍
 
 ## 工作流程
 - 審查：遵循存儲在 `~/.claude/core/workflow/unified-review-workflow.yaml` 的工作流程
+ - 若無法存取，回退使用本倉庫 `core/workflow/unified-review-workflow.yaml`
 
 ## 規範
 

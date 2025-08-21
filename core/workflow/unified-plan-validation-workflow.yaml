@@ -27,6 +27,32 @@ guardrails:
   cross_reference_is_blocking: true
   on_untraceable_items: "document_as_finding"
 
+execution_hints:
+  determinism:
+    preferred: true
+    llm:
+      temperature: 0
+      top_p: 0
+      frequency_penalty: 0
+      presence_penalty: 0
+    sorting:
+      evidence: ["area", "path", "start_line"]
+      findings: ["severity(desc)", "area", "path", "start_line"]
+  caching:
+    enabled: true
+    cache_key_components: ["task_id", "plan_path", "specs_sha256"]
+    invalidate_on: ["file_hash_change", "mtime_change"]
+    cacheable_items:
+      - plan_document_content
+      - spec_documents_content
+      - cross_reference_index
+  concurrency:
+    allow_intra_stage_parallelism: true
+    max_parallelism: 4
+    notes:
+      - "跨階段不可並行；必須保持階段順序與檢查點。"
+      - "同一階段內互不相依的讀檔/檢查可並行。"
+
 preconditions:
   - "計劃文件存在且可訪問"
   - "所有引用的規格文件存在"
@@ -57,7 +83,7 @@ enforcement_protocol:
       - "支援的副檔名：.yaml, .yml, .md"
       - "驗證計劃存在且可讀取"
       - "完整讀取計劃文件"
-      - "載入所有規格檔案：.kiro/specs/task.md、requirements.md、design.md"
+      - "載入所有規格檔案：docs/specs/task.md、requirements.md、design.md"
 
   stage_execution_checkpoints:
     before_stage:
@@ -201,7 +227,7 @@ stages:
       - cross_reference_sources_identified: true
     actions:
       - resolve_plan_by_task_id: "{{task_id}}"
-      - read_specification_files: [".kiro/specs/task.md", ".kiro/specs/requirements.md", ".kiro/specs/design.md"]
+      - read_specification_files: ["docs/specs/task.md", "docs/specs/requirements.md", "docs/specs/design.md"]
       - identify_cross_reference_sources
       - validate_plan_document_completeness
 
@@ -373,3 +399,7 @@ output:
   path: "{{project_root}}/docs/validation-reports/"
   filename: "{{task_id}}-plan-validation.md"
   format: markdown
+
+reporting:
+  include_execution_metadata: true
+  execution_metadata_fields: ["run_id", "start_time", "end_time", "stage_timings", "parallelism", "cache_stats"]
