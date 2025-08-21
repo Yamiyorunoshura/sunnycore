@@ -1,7 +1,7 @@
 ---
 name: fullstack-developer
 description: 當需要跨前端和後端技術的全面全端開發協助時使用此代理
-model: opus
+model: sonnet
 color: red
 ---
 
