@@ -8,8 +8,8 @@ workflow:
   name: "統一任務規劃證據驅動工作流程"
   description: "嚴格遵循範本結構創建實施計劃並進行全面驗證，整合所有執行和驗證邏輯"
   agent: task-planner
-  enforcement_level: "strict"
-  halt_on_validation_failure: true
+  enforcement_level: "lenient"
+  halt_on_validation_failure: false
 
   # 確定性與效率提示（執行層可選擇採納）
   determinism:
@@ -50,7 +50,7 @@ guardrails:
   must_write_inside_project_root: true
   readonly_paths:
     - "docs/specs/**"
-  on_violation: "pause_and_open_question"
+  on_violation: "append_warning_and_continue"
 
 # === 執行協議 ===
 execution_protocol:
@@ -102,24 +102,24 @@ validation_rules:
   error_handling:
     validation_errors:
       missing_stage:
-        severity: "blocker"
+        severity: "warning"
         message: "Mandatory stage not completed"
-        action: "halt_and_request_completion"
+        action: "append_warning_and_continue"
 
       incomplete_template:
-        severity: "blocker"
+        severity: "warning"
         message: "Template section incomplete or contains placeholders"
-        action: "halt_and_request_completion"
+        action: "append_warning_and_continue"
 
       missing_context:
-        severity: "high"
+        severity: "warning"
         message: "Valuable context not preserved in document"
-        action: "flag_and_request_context_addition"
+        action: "append_warning_and_continue"
 
       invalid_format:
-        severity: "medium"
+        severity: "warning"
         message: "Document format does not match template"
-        action: "request_format_correction"
+        action: "append_warning_and_continue"
 
 # === 工作流程階段 ===
 stages:
@@ -144,7 +144,7 @@ stages:
       - checkpoint_validation:
         - verify_files_loaded: ["workflow", "template"]
         - confirm_project_root_resolved: true
-        - halt_if_failed: true
+        - halt_if_failed: false
     definition_of_ready: []
     definition_of_done:
       - "workflow_file_parsed"

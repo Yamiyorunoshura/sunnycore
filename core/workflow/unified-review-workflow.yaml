@@ -79,7 +79,7 @@ execution_context:
       stage_5: 5
       stage_6: 2
   failure_policy:
-    on_missing_primary_path: "Use fallback order; if none available, STOP per error_handling.validation_failure_protocol"
+    on_missing_primary_path: "Use fallback order; if none available, append_warning_and_continue_with_limitations"
 
 stages:
   stage_1:

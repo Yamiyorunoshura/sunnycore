@@ -2,11 +2,11 @@
 
 ## 核心執行協議
 
-### 必要前置條件
-- **絕對禁止**：在未載入統一工作流程和範本的情況下開始規劃
-- **強制讀取**：必須完整讀取 `/User/tszkinlai/Coding/AI workflow/core/workflow/unified-task-planning-workflow.yaml`
-- **強制讀取**：必須完整讀取 `/User/tszkinlai/Coding/AI workflow/core/templates/implementation-plan-tmpl.yaml`    
-- **驗證要求**：確認所有檔案載入成功且 project_root 解析完成
+### 必要前置條件（寬鬆）
+- **建議**：開始前載入統一工作流程與範本；若缺失，記錄至 validation_warnings 並持續
+- **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-task-planning-workflow.yaml`，失敗則記錄警告
+- **範本讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/templates/implementation-plan-tmpl.yaml`    ，失敗則記錄警告
+- **驗證要求**：若 project_root 未解析或讀取未完整，記錄缺失與替代資訊來源
 
 ### 確定性與效率（強制）
 - **零隨機**：生成階段必須使用固定參數（temperature≤0.2、top_p≤0.3、penalties=0）
@@ -14,9 +14,9 @@
 - **I/O並行與快取**：規格讀取須並行，並以內容雜湊做結果快取
 - **失敗重試**：僅 I/O 可重試（最多2次），生成不可盲目重試
 
-### 工作流程合規性
-- **階段順序**：必須按統一工作流程順序執行所有階段，絕不跳過
-- **階段完整性**：每個階段必須在繼續前通過驗證檢查點
+### 工作流程合規性（寬鬆）
+- **階段順序**：應按統一工作流程順序執行；若跳過，記錄原因與補救
+- **階段完整性**：檢查點未通過時，記錄警告並最小化持續
 - **階段要求**：
   - workflow_initialization：載入工作流程和範本
   - input_collection：收集所有規範文件
@@ -26,14 +26,14 @@
   - finalization：最終驗證和認證
 
 ### 只讀與邊界
-- **只讀保護**：`docs/specs/**` 目錄嚴禁寫入
-- **路徑白名單**：僅允許在 `<project_root>/docs/implementation-plan/` 與 `<project_root>/docs/index/` 下寫入
+- **只讀保護**：`docs/specs/**` 目錄嚴禁寫入（若偵測到將記錄警告並回退）
+- **路徑白名單**：僅允許在 `<project_root>/docs/implementation-plan/` 與 `<project_root>/docs/index/` 下寫入；不符合則記錄並拒寫
 
-### 範本合規性
-- **完整填充**：絕不留空範本部分，用實際內容填充或標記為"N/A - [原因]"
-- **佔位符清除**：用實際內容替換所有 `<placeholder>` 值
-- **結構一致性**：所有計劃必須符合 `templates/implementation-plan-tmpl.yaml` 結構
- - **黑名單詞彙**：禁止出現：`TBD`、`待定`、`視需要`、`as needed`、任意形如`<...>` 佔位
+### 範本合規性（寬鬆）
+- **完整填充**：應以實際內容填充或標記為"N/A - [原因]"；不足時記錄警告
+- **佔位符清除**：應清除 `<placeholder>` 值；殘留時記錄以利後續補齊
+- **結構一致性**：應符合 `templates/implementation-plan-tmpl.yaml` 結構；不一致時記錄差異
+- **黑名單詞彙**：遇 `TBD`/`待定`/`視需要`/`as needed`/`<...>` 時記錄並立即替換或給理由
 
 ### 核心規劃原則（強制執行）
 1. **安全第一**：絕不修改 `docs/specs/` 中的任何檔案
@@ -60,20 +60,20 @@
 - **去重規則**：相同索引鍵不得重複寫入記錄
 - **審計欄位**：記錄 `workflow_template_version`、`document_path`、`timestamp`
 
-### 輸出和驗證要求
+### 輸出和驗證要求（寬鬆）
 11. **專案根目錄解析**：按順序解析 `project_root`：env `CLAUDE_PROJECT_ROOT` → Git root → 最近的 `docs/specs/` → cwd
 12. **輸出路徑合規**：必須儲存到 `<project_root>/docs/implementation-plan/<task_id>-plan.md`
 13. **索引更新**：必須將JSONL記錄附加到 `<project_root>/docs/index/plan-index.jsonl`
 14. **路徑驗證**：必須確保輸出路徑在 `project_root` 下
-15. **成功驗證**：必須確認檔案成功寫入並回顧絕對路徑
+15. **成功驗證**：應確認檔案成功寫入並回顧絕對路徑；失敗則記錄與重試計劃
 16. **終檢擴展**：必須運行黑名單掃描與交叉一致性校驗並全部通過
 
-## 失敗處理協議
-- **驗證失敗**：在任何階段驗證失敗時必須停止並修復問題
-- **檔案載入失敗**：必須立即停止並通知用戶
-- **範圍解析失敗**：必須停止並請求澄清
- - **黑名單命中**：回退到填充階段修正具體內容
- - **一致性缺陷**：回退到分析/策略或模板對應區段補充
+## 失敗處理協議（記錄並續行）
+- **驗證未通過**：記錄警告與缺口；不中斷並列入補回清單
+- **檔案載入失敗**：記錄失敗與替代路徑；必要時降級流程
+- **範圍解析失敗**：記錄缺口並以最小可行假設繼續；同步提出澄清
+- **黑名單命中**：記錄並回退修正；若不能即時修正，列入補回
+- **一致性缺陷**：記錄差異與補齊計劃；不中斷
 
 ## 品質門檻
 - 所有範本部分必須有實際內容

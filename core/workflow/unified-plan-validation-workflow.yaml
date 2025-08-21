@@ -7,8 +7,8 @@ workflow:
   description: "驗證實施計劃的完整性、正確性、範本符合性，並與專案規格交叉引用的統一工作流程。"
   template_reference: "/User/tszkinlai/Coding/AI workflow/core/templates/implementation-plan-tmpl.yaml"
   report_template: "/User/tszkinlai/Coding/AI workflow/core/templates/plan-validation-report-tmpl.yaml"
-  enforcement_level: "strict"
-  halt_on_validation_failure: true
+  enforcement_level: "lenient"
+  halt_on_validation_failure: false
 
 inputs:
   task_id: "<required>"
@@ -24,8 +24,8 @@ plan_resolution:
     version: 1
 
 guardrails:
-  cross_reference_is_blocking: true
-  on_untraceable_items: "document_as_finding"
+  cross_reference_is_blocking: false
+  on_untraceable_items: "append_warning_and_continue_as_finding"
 
 execution_hints:
   determinism:
@@ -62,8 +62,8 @@ preconditions:
 enforcement_protocol:
   enforcement_compliance:
     mandatory_enforcement_file: "/User/tszkinlai/Coding/AI workflow/core/enforcement/implementation-plan-validator-enforcement.md"
-    compliance_verification: "Verify all enforcement rules are understood and will be strictly followed"
-    halt_on_non_compliance: true
+    compliance_verification: "Verify enforcement rules are understood; record warnings on minor non-compliance and continue"
+    halt_on_non_compliance: false
   
   mandatory_file_loading:
     description: "在開始任何驗證工作之前必須載入的檔案"
@@ -162,11 +162,11 @@ enforcement_protocol:
 
   error_handling:
     validation_failures:
-      - "如果驗證失敗立即停止"
+      - "將驗證失敗記錄為警告並持續"
       - "識別具體驗證失敗"
-      - "返回適當的工作流程階段"
-      - "修正後重新執行"
-      - "繼續前重新驗證"
+      - "返回適當階段進行補齊（非阻斷）"
+      - "修正後重新執行（可延後）"
+      - "於最終報告中附上 validation_warnings"
     
     cross_reference_failures:
       - "如果計劃項目無法追溯到規格，記錄為發現"

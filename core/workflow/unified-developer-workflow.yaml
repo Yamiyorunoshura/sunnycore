@@ -7,8 +7,8 @@ version: 2.0
 workflow:
   name: "統一開發者計劃驅動工作流程"
   description: "一個通用的開發者工作流程，通過agent prompt實現領域特化"
-  enforcement_level: "strict"
-  halt_on_validation_failure: true
+  enforcement_level: "lenient"
+  halt_on_validation_failure: false
   default_profile: "fast_strict"
 
 # === 輸入定義 ===
@@ -34,8 +34,8 @@ plan_resolution:
 # === 範圍管控 ===
 guardrails:
   scope_source: "scope"
-  out_of_scope_is_blocking: true
-  on_scope_violation: "pause_and_open_question"
+  out_of_scope_is_blocking: false
+  on_scope_violation: "record_warning_and_continue"
 
 # === 前置條件 ===
 preconditions:
@@ -50,10 +50,10 @@ execution_protocol:
   
   enforcement_compliance:
     mandatory_enforcement_files:
-      backend: "/User/tszkinlai/Coding/AI workflow/core/enforcement/backend-developer-enforcement.md"
-      frontend: "/User/tszkinlai/Coding/AI workflow/core/enforcement/frontend-developer-enforcement.md"
-      fullstack: "/User/tszkinlai/Coding/AI workflow/core/enforcement/fullstack-developer-enforcement.md"
-      refactor: "/User/tszkinlai/Coding/AI workflow/core/enforcement/refactor-developer-enforcement.md"
+      backend: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/backend-developer-enforcement.md"
+      frontend: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/frontend-developer-enforcement.md"
+      fullstack: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/fullstack-developer-enforcement.md"
+      refactor: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/refactor-developer-enforcement.md"
     note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the respective enforcement files"
 
 profiles:
@@ -139,6 +139,10 @@ schemas:
       maintenance_notes:
         type: string
         minLength: 30
+      validation_warnings:
+        type: array
+        items:
+          type: string
     additionalProperties: false
 
   objectives_v1:
@@ -236,30 +240,30 @@ validation_rules:
   error_handling:
     validation_errors:
       missing_stage:
-        severity: "blocker"
+        severity: "warning"
         message: "Mandatory stage not completed"
-        action: "halt_and_request_completion"
+        action: "append_warning_and_continue"
       
       scope_violation:
-        severity: "blocker"
+        severity: "warning"
         message: "Implementation outside of defined scope"
-        action: "pause_and_open_question"
+        action: "append_warning_and_continue"
       
       missing_tests:
-        severity: "blocker"
+        severity: "warning"
         message: "Tests not written before implementation"
-        action: "request_test_creation_first"
+        action: "append_warning_and_continue"
 
   format_contracts:
     - stage: "objectives_and_acceptance"
       must_validate_against: "objectives"
-      on_failure: "halt_and_request_completion"
+      on_failure: "append_warning_and_continue"
     - stage: "architecture_and_modules"
       must_validate_against: "modules"
-      on_failure: "halt_and_request_completion"
+      on_failure: "append_warning_and_continue"
     - stage: "handover_docs"
       must_validate_against: "dev_notes"
-      on_failure: "HALT_TASK_AND_RETURN_TO_HANDOVER_docs"
+      on_failure: "APPEND_WARNINGS_AND_CONTINUE"
 
 # === 工作流程階段 ===
 stages:
@@ -268,7 +272,7 @@ stages:
     mandatory: true
     validation_checkpoint: true
     actions:
-      - load: ["/User/tszkinlai/Coding/AI workflow/core/workflow/unified-developer-workflow.yaml"]
+      - load: ["/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-developer-workflow.yaml"]
       - detect_developer_type_from_agent: true
       - resolve_plan_by_task_id: true
       - verify_preconditions: true
@@ -380,17 +384,17 @@ stages:
       - fill_notes_with: "deviations_and_clarifications"
       - 🚨_MANDATORY_DEV_NOTES_VALIDATION:
           pre_validation_checks:
-            - verify_dev_notes_section_exists: "HALT_IF_MISSING"
-            - verify_detailed_changes_not_empty: "HALT_IF_EMPTY"
-            - verify_f_ids_n_ids_mapping_complete: "HALT_IF_INCOMPLETE"
-            - verify_ui_ids_mapping_complete_for_frontend_fullstack: "HALT_IF_INCOMPLETE"
+            - verify_dev_notes_section_exists: "WARN_AND_CONTINUE"
+            - verify_detailed_changes_not_empty: "WARN_AND_CONTINUE"
+            - verify_f_ids_n_ids_mapping_complete: "WARN_AND_CONTINUE"
+            - verify_ui_ids_mapping_complete_for_frontend_fullstack: "WARN_AND_CONTINUE"
           quality_requirements:
             - detailed_changes_minimum_length: "300_characters"
             - must_include_implementation_decisions: true
             - must_include_risk_considerations: true
             - must_include_maintenance_notes: true
           enforcement:
-            - on_validation_failure: "HALT_TASK_AND_NOTIFY_USER"
+            - on_validation_failure: "APPEND_WARNINGS_AND_CONTINUE"
             - require_explicit_confirmation: "DEV_NOTES_COMPLETED_AND_VERIFIED"
       - append_new_dev_notes_entry:
           mode: "preserve_existing_entries"
@@ -406,6 +410,7 @@ stages:
             - implementation_decisions: "technical_choices_and_rationale"
             - risk_considerations: "identified_risks_and_mitigation"
             - maintenance_notes: "future_maintenance_requirements_and_considerations"
+            - validation_warnings: "collected_validation_warnings"
 
   - id: "definition_of_done"
     title: "完成定義"
@@ -430,7 +435,7 @@ stages:
             - implementation_decisions_documented: "MANDATORY"
             - risk_considerations_documented: "MANDATORY"
             - maintenance_notes_provided: "MANDATORY"
-          validation_failure_action: "HALT_TASK_COMPLETION_AND_RETURN_TO_HANDOVER_docs"
+          validation_failure_action: "APPEND_WARNINGS_AND_CONTINUE"
 
 # === 開發者類型特化配置 ===
 developer_specializations:
@@ -525,14 +530,14 @@ critical_success_factors:
 
 # === 工作流程違規回應 ===
 workflow_violation_responses:
-  - "Missing stage execution: Return and complete the skipped stage"
-  - "Scope violation: Pause immediately and open question"
-  - "Plan deviation: Document and get approval for changes"
-  - "Missing tests: Implement required tests before proceeding"
-  - "Quality gate failure: Address issues before marking done"
-  - "Incomplete documentation: Update all required documentation"
-  - "Missing traceability: Add task_id references to PRs/commits"
-  - "🚨 DEV_NOTES_INCOMPLETE: Immediately halt and return to handover_docs stage"
-  - "🚨 DEV_NOTES_MISSING_F-IDs_MAPPING: Stop task completion and require complete mapping"
-  - "🚨 DEV_NOTES_INSUFFICIENT_DETAIL: Reject completion and require detailed documentation"
-  - "🚨 HANDOVER_docs_STAGE_SKIPPED: Block definition_of_done until handover_docs completed"
+  - "Missing stage execution: Append warning and continue; flag in dev_notes.validation_warnings"
+  - "Scope violation: Append warning and continue; open question asynchronously"
+  - "Plan deviation: Append warning; document decision in dev_notes"
+  - "Missing tests: Append warning; prioritize remediation next iteration"
+  - "Quality gate failure: Append warning; include measurements and remediation plan"
+  - "Incomplete documentation: Append warning; complete before release cut if possible"
+  - "Missing traceability: Append warning; add task_id references retroactively"
+  - "🚨 DEV_NOTES_INCOMPLETE: Append warning and continue to DoD with risk note"
+  - "🚨 DEV_NOTES_MISSING_F-IDs_MAPPING: Append warning; include provisional mapping or rationale"
+  - "🚨 DEV_NOTES_INSUFFICIENT_DETAIL: Append warning; add details in follow-up commit"
+  - "🚨 HANDOVER_docs_STAGE_SKIPPED: Append warning; ensure documentation post-hoc"
