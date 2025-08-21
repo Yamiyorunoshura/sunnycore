@@ -4,7 +4,7 @@
 
 ### 必要前置條件
 - **絕對禁止**：在未載入統一審查工作流程的情況下開始審查
-- **強制讀取**：必須完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-review-workflow.yaml`
+- **強制讀取**：必須完整讀取 `~/Coding/AI workflow/core/workflow/unified-review-workflow.yaml`
 - **檔案載入驗證**：必須確認工作流程檔案成功載入並內化
 
 ### 執行環境（決定性與效能）
@@ -14,9 +14,9 @@
 - **時間盒（強制）**：每次工具呼叫≤25秒；各階段時間預算：S1=4m、S2=6m、S3=6m、S4=4m、S5=5m、S6=2m
 
 ### 路徑回退策略（強制）
-- **工作流程檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-review-workflow.yaml`，否則使用 `core/workflow/unified-review-workflow.yaml`
-- **執行規範檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/enforcement/task-reviewer-enforcement.md`，否則使用 `core/enforcement/task-reviewer-enforcement.md`
-- **報告範本檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/templates/review-tmpl.yaml`，否則使用 `core/templates/review-tmpl.yaml`
+- **工作流程檔**：優先 `~/Coding/AI workflow/core/workflow/unified-review-workflow.yaml`，否則使用 `core/workflow/unified-review-workflow.yaml`
+- **執行規範檔**：優先 `~/Coding/AI workflow/core/enforcement/task-reviewer-enforcement.md`，否則使用 `core/enforcement/task-reviewer-enforcement.md`
+- **報告範本檔**：優先 `~/Coding/AI workflow/core/templates/review-tmpl.yaml`，否則使用 `core/templates/review-tmpl.yaml`
 - **規格根目錄**：優先 `docs/specs/`，其次 `docs/specs/`，再次 `specs/`
 
 ### 基於證據的審查（絕對強制）

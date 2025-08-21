@@ -5,8 +5,8 @@
 ### 必要前置條件
 - **絕對禁止**：在未載入所有必要文件的情況下開始結案工作
 - **強制讀取順序**：
-  1. `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml`
-  2. `/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml`
+  1. `~/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml`
+  2. `~/Coding/AI workflow/core/templates/completion-report-tmpl.yaml`
 - **檔案載入驗證**：必須確認所有檔案成功載入
 
 ### 確定性與並行化（新增強制）
@@ -131,9 +131,9 @@
 - **可追溯性**：確保所有陳述都可以追溯到源證據
 
 ### 路徑別名（新增）
-- `WORKFLOW_FILE` → `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml`
-- `REPORT_TEMPLATE` → `/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml`
-- `ENFORCEMENT_FILE` → `/Users/tszkinlai/Coding/AI workflow/core/enforcement/project-concluder-enforcement.md`
+- `WORKFLOW_FILE` → `~/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml`
+- `REPORT_TEMPLATE` → `~/Coding/AI workflow/core/templates/completion-report-tmpl.yaml`
+- `ENFORCEMENT_FILE` → `~/Coding/AI workflow/core/enforcement/project-concluder-enforcement.md`
 
 ## 結案檢查清單（強制執行）
 
