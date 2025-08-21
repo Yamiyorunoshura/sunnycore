@@ -50,10 +50,10 @@ execution_protocol:
   
   enforcement_compliance:
     mandatory_enforcement_files:
-      backend: "~/.claude/core/backend-developer-enforcement.md"
-      frontend: "~/.claude/core/frontend-developer-enforcement.md"
-      fullstack: "~/.claude/core/fullstack-developer-enforcement.md"
-      refactor: "~/.claude/core/refactor-developer-enforcement.md"
+      backend: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/backend-developer-enforcement.md"
+      frontend: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/frontend-developer-enforcement.md"
+      fullstack: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/fullstack-developer-enforcement.md"
+      refactor: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/refactor-developer-enforcement.md"
     note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the respective enforcement files"
 
 profiles:
@@ -268,7 +268,7 @@ stages:
     mandatory: true
     validation_checkpoint: true
     actions:
-      - load: ["~/.claude/core/workflow/unified-developer-workflow.yaml"]
+      - load: ["/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-developer-workflow.yaml"]
       - detect_developer_type_from_agent: true
       - resolve_plan_by_task_id: true
       - verify_preconditions: true
