@@ -172,6 +172,8 @@
 - [ ] 改進建議具體可行
 - [ ] 報告結構清晰完整
 - [ ] 無任何未替換占位符或未解釋之 N/A
+ - [ ] 已填寫 implementation_maturity（bronze|silver|gold|platinum）
+ - [ ] 已生成 error_log 摘要與條目（若存在 findings）
 
 ## 失敗處理協議（記錄並續行）
 - **工作流程載入失敗**：依回退策略；若仍失敗，記錄缺失與替代資訊來源

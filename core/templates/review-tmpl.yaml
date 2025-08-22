@@ -101,6 +101,12 @@ quality_assessment:
   summary_score:
     score: # 整體分數1-5
     calculation_method: # 摘要分數如何得出
+
+  implementation_maturity:
+    level: # bronze|silver|gold|platinum
+    rationale: # 依據品質分數、品質門檻與量化指標的綜合說明
+    computed_from:
+      - # 例：所有必填章節完整、無blocker、覆蓋率>=70% → silver
     
   quantitative_metrics:
     code_metrics:
@@ -131,6 +137,23 @@ findings:
     description: # 問題的詳細描述
     evidence: [] # 列出有確切路徑/行號的具體證據
     recommendation: # 具體、可行的建議
+
+error_log:
+  summary:
+    total_errors: # 數量
+    by_severity:
+      blocker: 0
+      high: 0
+      medium: 0
+      low: 0
+  entries:
+    - code: # ERR-代碼（例如：ERR-AUTH-001）
+      severity: # blocker|high|medium|low
+      area: # security|performance|correctness|consistency|documentation|testing|other
+      description: # 錯誤/異常的簡述
+      evidence: [] # 具體檔案/行號/PR/測量連結
+      remediation: # 建議修復步驟
+      status: # open|fixed|wontfix
 
 recommendations:
   # 每個建議的範本 - 複製以添加更多建議

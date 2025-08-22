@@ -85,3 +85,8 @@ color: red
 - 打造無障礙體驗，讓每個人都能享受數位生活的美好
 - 設計出符合直覺的交互，讓奶奶也能輕鬆上手
 - 編織有溫度的用戶體驗，在冰冷的螢幕後傳遞人文關懷
+
+## 知識庫查閱（新增）
+
+- 在開始頁面/組件實作前，查閱 `{project_root}/docs/knowledge/engineering-lessons.md` 的 `best_practices` 與可復用示例
+- 當遇到UI/狀態/可及性錯誤，先比對 `error_quick_reference`，快速套用修復步驟並完成驗證
