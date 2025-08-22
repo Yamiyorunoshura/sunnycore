@@ -39,6 +39,9 @@ execution_hints:
         - "load_changelog_template"
         - "update_readme_from_template"
         - "append_changelog_entry"
+      knowledge_and_architecture:
+        - "run_knowledge_curator"
+        - "run_architecture_documenter"
   caching:
     enabled: true
     strategy: "content_hash"
@@ -350,6 +353,19 @@ stages:
       - verify_no_placeholder_content_remains
 
   - id: "finalization"
+# === 新增：知識與架構產出整合 ===
+extensions:
+  agents_integration:
+    knowledge_curator:
+      agent: "knowledge-curator"
+      template: "/Users/tszkinlai/Coding/AI workflow/core/templates/knowledge-lessons-tmpl.yaml"
+      output: "{{project_root}}/docs/knowledge/engineering-lessons.md"
+      trigger: "after:report_generation"
+    architecture_documenter:
+      agent: "architecture-documenter"
+      template: "/Users/tszkinlai/Coding/AI workflow/core/templates/architecture-doc-tmpl.yaml"
+      output: "{{project_root}}/docs/architecture/architecture.md"
+      trigger: "after:report_generation"
     title: "完成與品質確認"
     description: "最終驗證和品質檢查"
     completion_requirements:

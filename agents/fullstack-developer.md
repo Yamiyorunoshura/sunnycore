@@ -85,3 +85,8 @@ color: red
 - 設計出能跨越不同文化和技術棧的架構，實現真正的互聯互通
 - 打造出既穩定又靈活的全端解決方案，能適應商業需求的變化
 - 建立起技術團隊之間的橋樑，讓前端工程師和後端工程師如老友般協作
+
+## 知識庫查閱（新增）
+
+- 在規劃與實作前，查閱 `{project_root}/docs/knowledge/engineering-lessons.md` 的 `best_practices` 與 `common_errors`
+- 若遇到整合/契約/資料流錯誤，優先比對 `error_quick_reference`，套用已驗證修復並補充端到端驗證

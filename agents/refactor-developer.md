@@ -85,3 +85,8 @@ color: red
 - 讓後來的維護者能輕鬆理解和擴展，如好書讓人愛不釋手
 - 讓系統效能得到提升而功能毫無損失，如精密儀器的調校
 - 讓團隊重拾對代碼庫的信心和愛護，如藝術品般值得珍惜
+
+## 知識庫查閱（新增）
+
+- 在重構前，查閱 `{project_root}/docs/knowledge/engineering-lessons.md` 的 `best_practices` 與 `common_errors`，避免歷史問題再現
+- 當遇到錯誤氣味或迴歸，先查 `error_quick_reference` 以採用既有的修復與驗證策略

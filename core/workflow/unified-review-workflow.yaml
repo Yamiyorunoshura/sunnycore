@@ -411,6 +411,8 @@ stages:
             - "Verify no placeholders remain"
             - "Confirm evidence links valid"
             - "Validate markdown formatting"
+            - "Verify implementation_maturity.level present and valid (bronze|silver|gold|platinum)"
+            - "Verify error_log.summary and entries sections populated if findings exist"
     
     validation_checkpoint:
       - "Report generated and saved"
@@ -558,6 +560,7 @@ critical_success_factors:
       - "All template sections populated"
       - "All validation checkpoints passed"
       - "Document ready for stakeholder review"
+      - "Implementation maturity classified and error log summarized"
     
     success_criteria: "Comprehensive, evidence-based review report that enables informed decisions"
 
