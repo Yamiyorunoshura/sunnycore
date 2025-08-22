@@ -5,10 +5,10 @@
 -### 必要前置條件（寬鬆）
 - **建議**：在開始驗證前載入所有必要文件；若缺失，記錄為 validation_warnings 並持續
 - **建議讀取順序**：
-  1. `/User/tszkinlai/Coding/AI workflow/core/enforcement/implementation-plan-validator-enforcement.md`
-  2. `/User/tszkinlai/Coding/AI workflow/core/workflow/unified-plan-validation-workflow.yaml`
-  3. `/User/tszkinlai/Coding/AI workflow/core/templates/implementation-plan-tmpl.yaml`
-  4. `/User/tszkinlai/Coding/AI workflow/core/templates/plan-validation-report-tmpl.yaml`
+  1. `/Users/tszkinlai/Coding/AI workflow/core/enforcement/implementation-plan-validator-enforcement.md`
+  2. `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-plan-validation-workflow.yaml`
+  3. `/Users/tszkinlai/Coding/AI workflow/core/templates/implementation-plan-tmpl.yaml`
+  4. `/Users/tszkinlai/Coding/AI workflow/core/templates/plan-validation-report-tmpl.yaml`
 - **檔案載入驗證**：未能完全載入時，記錄缺口與替代資訊來源
 
 ### 基於證據的驗證（絕對強制）
