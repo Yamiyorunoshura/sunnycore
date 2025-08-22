@@ -5,7 +5,7 @@ version: 1
 workflow:
   name: "統一專案結案證據驅動工作流程"
   description: "收集交付證據、QA潛在問題和未來增強的統一結案工作流程，生成完整的完成報告。"
-  report_template: "/User/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml"
+  report_template: "/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml"
   enforcement_level: "lenient"
   halt_on_validation_failure: false
 
@@ -51,9 +51,9 @@ execution_hints:
     normalize_paths: true
 
 path_aliases:
-  WORKFLOW_FILE: "/User/tszkinlai/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml"
-  REPORT_TEMPLATE: "/User/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml"
-  ENFORCEMENT_FILE: "/User/tszkinlai/Coding/AI workflow/core/enforcement/project-concluder-enforcement.md"
+  WORKFLOW_FILE: "/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml"
+  REPORT_TEMPLATE: "/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml"
+  ENFORCEMENT_FILE: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/project-concluder-enforcement.md"
 
 plan_resolution:
   find_by_task_id: true
@@ -77,14 +77,14 @@ preconditions:
 # 整合的執行協議
 enforcement_protocol:
   enforcement_compliance:
-    mandatory_enforcement_file: "/User/tszkinlai/Coding/AI workflow/core/enforcement/project-concluder-enforcement.md"
+    mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/project-concluder-enforcement.md"
     compliance_verification: "Verify enforcement rules are understood; record warnings on minor non-compliance and continue"
     halt_on_non_compliance: false
   
   mandatory_file_loading:
     description: "在開始任何結案工作之前必須載入的檔案"
     requirements:
-      - "READ /User/tszkinlai/Coding/AI workflow/core/enforcement/project-concluder-enforcement.md COMPLETELY - This file contains all mandatory rules and constraints"
+      - "READ /Users/tszkinlai/Coding/AI workflow/core/enforcement/project-concluder-enforcement.md COMPLETELY - This file contains all mandatory rules and constraints"
       - "READ 統一專案結案工作流程 YAML 檔案完整內容"
       - "READ 完成報告範本 YAML 檔案完整內容"
       - "確認理解所有工作流程階段"
@@ -245,8 +245,8 @@ stages:
       - template_structure_understood: true
       - validation_rules_loaded: true
     actions:
-      - load_workflow_file: "/User/tszkinlai/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml"
-      - load_template_from: "/User/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml"
+      - load_workflow_file: "/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml"
+      - load_template_from: "/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml"
       - verify_file_accessibility
 
   - id: "conclusion_strategy"
@@ -333,7 +333,7 @@ stages:
       - all_evidence_linked: true
       - completion_status_clearly_documented: true
     actions:
-      - load_report_template: "/User/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml"
+      - load_report_template: "/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml"
       - populate_metadata_with_actual_values
       - populate_sections: [
           "metadata",

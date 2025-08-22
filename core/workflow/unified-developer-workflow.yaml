@@ -139,6 +139,12 @@ schemas:
       maintenance_notes:
         type: string
         minLength: 30
+      challenges_and_deviations:
+        type: string
+        minLength: 30
+      quality_metrics_achieved:
+        type: string
+        minLength: 20
       validation_warnings:
         type: array
         items:

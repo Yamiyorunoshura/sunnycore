@@ -5,8 +5,8 @@
 ### 必要前置條件（寬鬆）
 - **建議**：開始結案前載入必要文件；若缺失，記錄為 validation_warnings 並持續
 - **建議讀取順序**：
-  1. `/User/tszkinlai/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml`
-  2. `/User/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml`
+  1. `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml`
+  2. `/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml`
 - **檔案載入驗證**：未能完全載入時，記錄缺口與替代資訊來源
 
 ### 確定性與並行化（新增強制）
@@ -131,9 +131,9 @@
 - **可追溯性**：確保所有陳述都可以追溯到源證據
 
 ### 路徑別名（新增）
-- `WORKFLOW_FILE` → `/User/tszkinlai/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml`
-- `REPORT_TEMPLATE` → `/User/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml`
-- `ENFORCEMENT_FILE` → `/User/tszkinlai/Coding/AI workflow/core/enforcement/project-concluder-enforcement.md`
+- `WORKFLOW_FILE` → `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml`
+- `REPORT_TEMPLATE` → `/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml`
+- `ENFORCEMENT_FILE` → `/Users/tszkinlai/Coding/AI workflow/core/enforcement/project-concluder-enforcement.md`
 
 ## 結案檢查清單（強制執行）
 

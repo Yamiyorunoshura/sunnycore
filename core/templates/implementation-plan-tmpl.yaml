@@ -37,12 +37,12 @@ context:
 
 objectives:
   functional:
-    - id: "F1"
+    - id: "F-1"
       description: "必填 - 來自規範的具體功能需求"
       acceptance_criteria:
         - "必填 - 具體、可測試的驗收條件"
   non_functional:
-    - id: "N1"
+    - id: "N-1"
       description: "必填 - 具體非功能需求"
       measurement: "必填 - 可測量目標（例如：p95 < 200ms，99.9%正常運行時間）"
 
@@ -121,34 +121,28 @@ notes:
   - "<備註>"
 
 dev_notes:
-  description: "開發者在實施過程中填寫的詳細記錄，包含所有修改內容與需求的對應關係"
-  entries:
-    - developer: "<開發者類型: frontend|backend|fullstack>"
-      timestamp: "<YYYY-MM-DD HH:MM:SS>"
-      task_phase: "<開發階段: 初始實施|迭代開發|修復|重構>"
-      re_dev_iteration: "<1|2|3|...>"
-      changes_summary: "<本次開發工作的整體摘要>"
-      detailed_changes:
-        - requirement_id: "<對應的需求ID或F-ID/N-ID>"
-          change_description: "<具體修改內容>"
-          files_modified:
-            - "<修改的檔案路徑>"
-          rationale: "<修改原因和設計考量>"
-          testing_approach: "<針對此修改的測試方法>"
-        - requirement_id: "<下一個需求ID>"
-          change_description: "<下一個具體修改內容>"
-          files_modified:
-            - "<修改的檔案路徑>"
-          rationale: "<修改原因和設計考量>"
-          testing_approach: "<針對此修改的測試方法>"
-      challenges_faced:
-        - "<遭遇的技術挑戰或問題>"
-      deviations_from_plan:
-        - original_plan: "<原計劃內容>"
-          actual_implementation: "<實際實施內容>"
-          reason: "<偏離原因>"
-      quality_metrics:
-        - metric: "<品質指標名稱>"
-          target: "<目標值>"
-          achieved: "<實際達成值>"
+  description: "開發者在實施過程中填寫的詳細記錄，符合 dev_notes_v1 結構"
+  developer_type: "<frontend|backend|fullstack|refactor>"
+  timestamp: "<YYYY-MM-DDTHH:MM:SSZ>"
+  task_phase: "<初始實施|迭代開發|修復|重構>"
+  re_dev_iteration: 1
+  changes_summary: "<至少50字：本次開發工作的整體摘要>"
+  detailed_changes_mapped_to:
+    F-IDs:
+      - "F-1"
+    N-IDs:
+      - "N-1"
+    UI-IDs:
+      - "UI-1"
+  implementation_decisions: |
+    <至少50字：技術選型、架構決策與理由>
+  risk_considerations: |
+    <至少30字：已識別風險與緩解/應急措施>
+  maintenance_notes: |
+    <至少30字：後續維護要點、監控建議與配置注意事項>
+  challenges_and_deviations: |
+    <至少30字：主要挑戰與與計劃偏離及其原因>
+  quality_metrics_achieved: |
+    <至少20字：實際指標達成情況>
+  validation_warnings: []
 
