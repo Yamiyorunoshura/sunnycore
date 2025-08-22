@@ -1,0 +1,22 @@
+[
+  {
+    "content": "分析任務10的詳細需求和依賴關係",
+    "status": "completed",
+    "id": "1"
+  },
+  {
+    "content": "檢查專案當前狀態和相關檔案",
+    "status": "completed",
+    "id": "2"
+  },
+  {
+    "content": "制定任務10的實施計劃藍圖",
+    "status": "in_progress",
+    "id": "3"
+  },
+  {
+    "content": "撰寫詳細的實施計劃文檔",
+    "status": "pending",
+    "id": "4"
+  }
+]

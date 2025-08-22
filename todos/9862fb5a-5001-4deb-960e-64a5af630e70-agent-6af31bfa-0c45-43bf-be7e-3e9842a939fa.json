@@ -1,0 +1,32 @@
+[
+  {
+    "content": "第1階段：初始化與證據收集 - 載入規格文件、計劃文件和實施證據",
+    "status": "completed",
+    "id": "stage-1"
+  },
+  {
+    "content": "第2階段：範圍與合規性分析 - 驗證實施與計劃的一致性",
+    "status": "completed",
+    "id": "stage-2"
+  },
+  {
+    "content": "第3階段：品質評估 - 評估7維度品質框架",
+    "status": "completed",
+    "id": "stage-3"
+  },
+  {
+    "content": "第4階段：問題發現與建議 - 識別問題並提出改善建議",
+    "status": "completed",
+    "id": "stage-4"
+  },
+  {
+    "content": "第5階段：報告生成與驗證 - 生成完整審查報告",
+    "status": "completed",
+    "id": "stage-5"
+  },
+  {
+    "content": "第6階段：更新任務文件 - 根據審查結果更新task.md",
+    "status": "completed",
+    "id": "stage-6"
+  }
+]

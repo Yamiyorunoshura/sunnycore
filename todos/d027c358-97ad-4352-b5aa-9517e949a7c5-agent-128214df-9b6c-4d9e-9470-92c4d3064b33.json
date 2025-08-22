@@ -1,0 +1,52 @@
+[
+  {
+    "content": "修復測試套件模組匯入錯誤 - 診斷pytest執行失敗的根本原因",
+    "status": "completed",
+    "id": "TSK001"
+  },
+  {
+    "content": "建立正確的測試環境配置 - 修復ModuleNotFoundError問題",
+    "status": "completed",
+    "id": "TSK002"
+  },
+  {
+    "content": "驗證測試套件可執行性 - 確保所有pytest測試正常遍行",
+    "status": "completed",
+    "id": "TSK003"
+  },
+  {
+    "content": "修復測試中的邏輯錯誤 - 解決AsyncMock和異常處理問題",
+    "status": "completed",
+    "id": "TSK004"
+  },
+  {
+    "content": "驗證權限檢查實作 - 確認安全控制功能正常",
+    "status": "completed",
+    "id": "TSK005"
+  },
+  {
+    "content": "修復數據庫 Mock 結構問題 - 解決 KeyError 和異常構造問題",
+    "status": "completed",
+    "id": "TSK006"
+  },
+  {
+    "content": "修復ValidationError的構造參數問題",
+    "status": "completed",
+    "id": "TSK007"
+  },
+  {
+    "content": "修復資料庫行結構問題 - 為測試提供正確的模擬數據",
+    "status": "completed",
+    "id": "TSK008"
+  },
+  {
+    "content": "執行完整測試套件 - 驗證修復後的系統品質",
+    "status": "completed",
+    "id": "TSK009"
+  },
+  {
+    "content": "生成測試覆蓋率報告 - 提供可驗證的品質指標",
+    "status": "completed",
+    "id": "TSK010"
+  }
+]

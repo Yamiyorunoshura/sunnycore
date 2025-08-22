@@ -1,0 +1,42 @@
+[
+  {
+    "content": "F1: 重構歡迎系統模組 - 分離為 WelcomeService + WelcomePanel 架構",
+    "status": "completed",
+    "id": "9.1"
+  },
+  {
+    "content": "F2: 重構訊息監聽器系統 - 分離為 MessageService + MessagePanel 架構",
+    "status": "completed",
+    "id": "9.2"
+  },
+  {
+    "content": "F3: 重構活躍度系統模組 - 分離為 ActivityService + ActivityPanel 架構",
+    "status": "in_progress",
+    "id": "9.3"
+  },
+  {
+    "content": "F4: 重構保護系統模組 - 建立 ProtectionService + ProtectionPanel 架構",
+    "status": "pending",
+    "id": "9.4"
+  },
+  {
+    "content": "F5: 重構資料同步系統 - 建立 SyncService + SyncPanel 架構",
+    "status": "pending",
+    "id": "9.5"
+  },
+  {
+    "content": "更新主程式配置以支援新的服務註冊機制",
+    "status": "pending",
+    "id": "9.6"
+  },
+  {
+    "content": "建立完整的單元測試和整合測試套件",
+    "status": "pending",
+    "id": "9.7"
+  },
+  {
+    "content": "進行資料遷移和兼容性驗證",
+    "status": "pending",
+    "id": "9.8"
+  }
+]

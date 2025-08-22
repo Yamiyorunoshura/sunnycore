@@ -1,0 +1,57 @@
+[
+  {
+    "content": "分析現有活躍度系統架構和功能",
+    "status": "completed",
+    "id": "task_9_3_1"
+  },
+  {
+    "content": "檢查已重構的歡迎系統和訊息監聽器作為參考",
+    "status": "completed",
+    "id": "task_9_3_2"
+  },
+  {
+    "content": "創建 ActivityService 服務層實作",
+    "status": "completed",
+    "id": "task_9_3_3"
+  },
+  {
+    "content": "創建 ActivityPanel 面板層實作",
+    "status": "completed",
+    "id": "task_9_3_4"
+  },
+  {
+    "content": "重構 ActivityMeter Cog 以使用新架構",
+    "status": "completed",
+    "id": "task_9_3_5"
+  },
+  {
+    "content": "整合成就系統以支援活躍度相關成就",
+    "status": "completed",
+    "id": "task_9_3_6"
+  },
+  {
+    "content": "撰寫活躍度系統的整合測試",
+    "status": "completed",
+    "id": "task_9_3_7"
+  },
+  {
+    "content": "更新 main.py 支援新的服務註冊機制",
+    "status": "completed",
+    "id": "task_9_4_1"
+  },
+  {
+    "content": "更新 config.py 包含新系統的配置選項",
+    "status": "completed",
+    "id": "task_9_4_2"
+  },
+  {
+    "content": "建立服務依賴注入和初始化流程",
+    "status": "completed",
+    "id": "task_9_4_3"
+  },
+  {
+    "content": "確保所有模組的正確載入和初始化",
+    "status": "completed",
+    "id": "task_9_4_4"
+  }
+]

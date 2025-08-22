@@ -1,7 +1,7 @@
 ---
 name: refactor-developer
 description: 使用此代理重構現有程式碼以改善結構、可讀性、可維護性和效能，而不改變外部行為
-model: opus 
+model: sonnet
 color: red
 ---
 

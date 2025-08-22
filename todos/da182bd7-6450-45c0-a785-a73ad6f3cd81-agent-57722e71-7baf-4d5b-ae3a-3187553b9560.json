@@ -1,0 +1,42 @@
+[
+  {
+    "content": "分析並審查現有遷移腳本的完整性和品質（001、003、004）",
+    "status": "completed",
+    "id": "T1"
+  },
+  {
+    "content": "建立缺失的 002_create_core_system_tables.sql 遷移腳本",
+    "status": "completed",
+    "id": "T2"
+  },
+  {
+    "content": "檢查並完善 003_create_government_tables.sql 遷移腳本",
+    "status": "completed",
+    "id": "T3"
+  },
+  {
+    "content": "建立資料庫遷移驗證腳本和完整性檢查工具",
+    "status": "completed",
+    "id": "T4"
+  },
+  {
+    "content": "建立遷移執行狀態監控和管理工具",
+    "status": "completed",
+    "id": "T5"
+  },
+  {
+    "content": "建立資料庫備份和恢復腳本",
+    "status": "completed",
+    "id": "T6"
+  },
+  {
+    "content": "測試完整遷移流程並驗證資料完整性",
+    "status": "completed",
+    "id": "T7"
+  },
+  {
+    "content": "更新開發記錄並建立操作文檔",
+    "status": "completed",
+    "id": "T8"
+  }
+]

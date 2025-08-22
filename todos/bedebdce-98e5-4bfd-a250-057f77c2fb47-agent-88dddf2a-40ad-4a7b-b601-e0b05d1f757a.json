@@ -1,0 +1,27 @@
+[
+  {
+    "content": "分析任務8需求 - 建立資料庫遷移腳本（初始狀態）",
+    "status": "completed",
+    "id": "t8-analysis"
+  },
+  {
+    "content": "檢查現有遷移腳本和資料庫架構",
+    "status": "completed",
+    "id": "t8-context-review"
+  },
+  {
+    "content": "識別缺失的遷移腳本 - 002遷移及命名不一致問題",
+    "status": "completed",
+    "id": "t8-gap-analysis"
+  },
+  {
+    "content": "填充實施計劃範本",
+    "status": "completed",
+    "id": "t8-template-population"
+  },
+  {
+    "content": "產生最終實施計劃文件",
+    "status": "completed",
+    "id": "t8-plan-creation"
+  }
+]

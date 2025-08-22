@@ -1,0 +1,52 @@
+[
+  {
+    "content": "完成範圍理解 - 讀取上下文、目標和範圍定義",
+    "status": "completed",
+    "id": "scope_comprehension"
+  },
+  {
+    "content": "提取功能目標(F-IDs)和非功能目標(N-IDs)及驗收標準",
+    "status": "completed",
+    "id": "objectives_extraction"
+  },
+  {
+    "content": "審查架構概述和模組設計，定義介面",
+    "status": "completed",
+    "id": "architecture_review"
+  },
+  {
+    "content": "設計並實作測試優先 - 單元測試、整合測試和驗收測試",
+    "status": "completed",
+    "id": "tests_first_design"
+  },
+  {
+    "content": "里程碑M1: 建立基礎資料模型 - Achievement, AchievementProgress等資料類別",
+    "status": "completed",
+    "id": "m1_data_models"
+  },
+  {
+    "content": "里程碑M2: 實作AchievementService核心邏輯 - CRUD操作和進度追蹤",
+    "status": "completed",
+    "id": "m2_core_service"
+  },
+  {
+    "content": "里程碑M3: 建立觸發系統架構 - TriggerEngine和獎勵整合",
+    "status": "completed",
+    "id": "m3_trigger_system"
+  },
+  {
+    "content": "里程碑M4: 最佳化和測試完善 - 效能調優和完整測試套件",
+    "status": "completed",
+    "id": "m4_optimization_testing"
+  },
+  {
+    "content": "品質門檻驗證 - 覆蓋率≥95%、效能要求達標",
+    "status": "completed",
+    "id": "quality_gates"
+  },
+  {
+    "content": "交接與文件 - 更新開發筆記和詳細變更記錄",
+    "status": "completed",
+    "id": "handover_docs"
+  }
+]

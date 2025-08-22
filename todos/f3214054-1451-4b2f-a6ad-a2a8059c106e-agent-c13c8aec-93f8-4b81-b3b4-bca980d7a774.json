@@ -1,0 +1,27 @@
+[
+  {
+    "content": "分析任務 11 需求與現有系統狀態",
+    "status": "completed",
+    "id": "task-11-1"
+  },
+  {
+    "content": "深度分析專案結構和技術架構需求",
+    "status": "completed",
+    "id": "task-11-2"
+  },
+  {
+    "content": "設計文件與部署準備的實施策略",
+    "status": "completed",
+    "id": "task-11-3"
+  },
+  {
+    "content": "填充實施計劃範本，確保所有章節完整",
+    "status": "completed",
+    "id": "task-11-4"
+  },
+  {
+    "content": "建立輸出文件並更新計劃索引",
+    "status": "completed",
+    "id": "task-11-5"
+  }
+]
