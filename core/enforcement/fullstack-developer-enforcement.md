@@ -94,6 +94,17 @@
 - **整合測試記錄**：必須記錄端到端測試、契約測試和整合驗證結果
 - **填寫品質要求**：dev_notes不可省略、不可敷衍，必須提供足夠的細節供後續維護參考
 
+### Markdown格式轉換（絕對強制）
+- **YAML到Markdown**：必須將 `dev-notes-tmpl.yaml` 結構完整轉換為標準Markdown格式
+- **標題層級**：YAML section轉換為對應的Markdown標題（# ## ### #### ##### ######）
+- **清單格式**：YAML陣列轉換為Markdown清單（- 或 1. 格式）
+- **代碼區塊**：代碼片段使用標準Markdown代碼塊（```language）
+- **表格格式**：結構化資料使用Markdown表格格式 | 欄位 | 值 |
+- **鏈結格式**：使用標準Markdown鏈結格式 [文字](URL)
+- **區塊引用**：重要備註使用 > 引用格式
+- **強調標記**：使用 **粗體** 和 *斜體* 適當強調關鍵內容
+- **全端規範**：API契約、資料流程圖、架構圖使用適當的代碼區塊和Mermaid圖表標記
+
 ### 輸出位置（固定）
 - **開發記錄**：`{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md`
 - **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml`
