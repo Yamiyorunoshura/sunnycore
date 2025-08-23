@@ -115,6 +115,7 @@ enforcement_protocol:
       data_changes: "驗證設計文件中的架構變更和遷移"
       test_strategy: "驗證測試方法與專案標準對照"
       dependencies: "檢查依賴關係與時間線的一致性"
+      dev_notes_structure: "驗證 dev_notes_location 指向正確路徑結構"
     
     evidence_requirements:
       - "每個發現都必須包含具體證據"

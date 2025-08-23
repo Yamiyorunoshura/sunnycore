@@ -73,9 +73,20 @@ guardrails:
   halt_on_preconditions_failure: false
 
 preconditions:
-  - "專案開發已完成或達到里程碑"
+  - "所有任務已通過QA審查（檢查task.md中所有項目標記為[x]）"
   - "實施計劃文件存在且可追蹤"
   - "QA 回饋已收集或確認不可獲得"
+  
+task_completion_check:
+  description: "在開始結案前驗證所有任務已完成"
+  check_method:
+    - "讀取 docs/specs/task.md"
+    - "掃描所有任務項目的狀態標記"
+    - "確認沒有 [ ] 或 [-] 狀態的項目"
+    - "只有所有項目都是 [x] 狀態才允許繼續"
+  on_incomplete_tasks:
+    action: "halt_and_report_incomplete_tasks"
+    message: "發現未完成任務，無法執行結案。請先完成所有任務的開發和審查。"
 
 # 整合的執行協議
 enforcement_protocol:
@@ -276,9 +287,10 @@ stages:
     actions:
       - read_specification_files: ["docs/specs/task.md", "docs/specs/requirements.md", "docs/specs/design.md"]
       - resolve_plan_by_task_id: "{{task_id}}"
+      - read_dev_notes: "docs/dev-notes/{{task_id}}-dev-notes.md"
       - gather_implementation_evidence: ["PRs", "commits", "changed_files", "migrations", "configs"]
       - gather_quality_artifacts: ["test_reports", "coverage", "CI_status", "performance", "security_scans"]
-      - gather_qa_reviews_and_feedback
+      - gather_qa_reviews_and_feedback: "docs/implementation-review/{{task_id}}-review.md"
       - document_evidence_gaps_as_limitations
 
   - id: "delivery_synthesis"

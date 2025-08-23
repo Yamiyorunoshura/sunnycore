@@ -1,0 +1,82 @@
+---
+template: dev-notes
+version: 1
+
+# 開發者實施記錄模板
+# 此檔案由開發者在實施過程中創建和維護
+# 位置：docs/dev-notes/{task_id}-dev-notes.md
+
+metadata:
+  task_id: "必填 - 實際任務識別碼"
+  plan_reference: "必填 - 對應的實施計劃路徑"
+  project_root: "必填 - 專案根目錄路徑"
+
+# 開發記錄條目 - 每次開發階段添加一個條目
+dev_entries:
+  - entry_id: "必填 - 唯一識別碼 (如：entry-1)"
+    developer_type: "必填 - frontend|backend|fullstack|refactor"
+    timestamp: "必填 - YYYY-MM-DDTHH:MM:SSZ 格式"
+    task_phase: "必填 - 初始實施|迭代開發|修復|重構"
+    re_dev_iteration: "必填 - 開發迭代次數（數字）"
+    
+    changes_summary: "必填 - 至少50字：本次開發工作的整體摘要"
+    
+    detailed_changes_mapped_to:
+      F-IDs:
+        - "必填 - 功能需求ID清單（如：F-1, F-2）"
+      N-IDs: 
+        - "必填 - 非功能需求ID清單（如：N-1）"
+      UI-IDs:
+        - "前端/全端開發必填 - UI元件ID清單（如：UI-1）"
+    
+    implementation_decisions: |
+      必填 - 至少50字：
+      - 技術選型決策與理由
+      - 架構決策說明
+      - 重要的設計模式選擇
+      - 第三方庫/框架的選擇原因
+    
+    risk_considerations: |
+      必填 - 至少30字：
+      - 已識別的技術風險
+      - 緩解措施
+      - 應急計劃
+      - 潛在影響評估
+    
+    maintenance_notes: |
+      必填 - 至少30字：
+      - 後續維護要點
+      - 監控建議
+      - 配置注意事項
+      - 升級/遷移考量
+    
+    challenges_and_deviations: |
+      必填 - 至少30字：
+      - 主要技術挑戰
+      - 與原始計劃的偏離
+      - 偏離原因
+      - 解決方案
+    
+    quality_metrics_achieved: |
+      必填 - 至少20字：
+      - 測試覆蓋率（實際數字）
+      - 效能指標達成情況
+      - 安全檢查結果
+      - 其他品質指標
+    
+    validation_warnings:
+      - "記錄所有驗證警告或空陣列"
+
+# 整合總結 - 由最後一次開發更新
+integration_summary:
+  total_entries: "必填 - 開發條目總數"
+  overall_completion_status: "必填 - completed|partial|deferred"
+  key_achievements:
+    - "必填 - 主要完成項目清單"
+  remaining_work:
+    - "列出未完成工作或標記'無'"
+  handover_notes: |
+    必填 - 交接說明：
+    - 下一步驟
+    - 注意事項
+    - 聯絡資訊

@@ -120,29 +120,7 @@ open_questions:
 notes:
   - "<備註>"
 
-dev_notes:
-  description: "開發者在實施過程中填寫的詳細記錄，符合 dev_notes_v1 結構"
-  developer_type: "<frontend|backend|fullstack|refactor>"
-  timestamp: "<YYYY-MM-DDTHH:MM:SSZ>"
-  task_phase: "<初始實施|迭代開發|修復|重構>"
-  re_dev_iteration: 1
-  changes_summary: "<至少50字：本次開發工作的整體摘要>"
-  detailed_changes_mapped_to:
-    F-IDs:
-      - "F-1"
-    N-IDs:
-      - "N-1"
-    UI-IDs:
-      - "UI-1"
-  implementation_decisions: |
-    <至少50字：技術選型、架構決策與理由>
-  risk_considerations: |
-    <至少30字：已識別風險與緩解/應急措施>
-  maintenance_notes: |
-    <至少30字：後續維護要點、監控建議與配置注意事項>
-  challenges_and_deviations: |
-    <至少30字：主要挑戰與與計劃偏離及其原因>
-  quality_metrics_achieved: |
-    <至少20字：實際指標達成情況>
-  validation_warnings: []
+dev_notes_location: "docs/dev-notes/{task_id}-dev-notes.md"
+dev_notes_schema: "參考 unified-developer-workflow.yaml 中的 dev_notes_v1 結構"
+dev_notes_note: "開發者在實施過程中將在獨立檔案中填寫詳細記錄，不在計劃檔案中維護"
 

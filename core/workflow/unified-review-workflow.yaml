@@ -123,8 +123,16 @@ stages:
           purpose: "Find implementation plan"
         - tool: "read_file"
           file: "located implementation plan"
-          purpose: "Extract dev_notes for cross-reference"
-          focus: ["dev_notes"]
+          purpose: "Extract plan details for cross-reference"
+          
+      dev_notes_discovery:
+        - tool: "glob_file_search"
+          pattern: "{task_id}-dev-notes.*"
+          location: "docs/dev-notes/"
+          purpose: "Find developer implementation notes"
+        - tool: "read_file"
+          file: "located dev-notes file"
+          purpose: "Extract actual implementation details for cross-reference"
           
       implementation_analysis:
         - tool: "codebase_search"
@@ -182,21 +190,25 @@ stages:
           purpose: "Verify requirements satisfaction"
         - cross_reference_analysis:
           dev_notes_verification:
-            - action: "Compare dev_notes.detailed_changes against actual code changes"
-              method: "Line-by-line diff analysis between documented and implemented changes"
+            - action: "Compare dev_notes detailed_changes against actual code changes"
+              method: "Cross-reference documented changes in dev-notes file with actual git commits and file modifications"
               evidence_required: "File paths, line numbers, commit hashes"
+              source: "docs/dev-notes/{task_id}-dev-notes.md"
             
-            - action: "Verify F-IDs and N-IDs mapping accuracy"
-              method: "Cross-reference functional/non-functional requirement IDs in dev_notes with actual implementation"
+            - action: "Verify F-IDs and N-IDs mapping accuracy in dev_notes"
+              method: "Cross-reference requirement IDs in dev-notes with plan objectives and actual implementation"
               evidence_required: "Requirement traceability matrix"
+              source: "docs/dev-notes/{task_id}-dev-notes.md vs docs/implementation-plan/{task_id}-plan.*"
             
             - action: "Validate dev_notes quality metrics against measured results"
-              method: "Compare documented performance/security/test metrics with actual measurements"
+              method: "Compare documented performance/security/test metrics in dev-notes with actual test outputs"
               evidence_required: "Test reports, performance benchmarks, security scan results"
+              source: "docs/dev-notes/{task_id}-dev-notes.md"
             
-            - action: "Check dev_notes deviations against observed implementation"
-              method: "Verify documented scope deviations match actual implementation scope"
+            - action: "Check dev_notes scope deviations against observed implementation"
+              method: "Verify documented scope deviations in dev-notes match actual implementation scope"
               evidence_required: "Scope comparison analysis with justification"
+              source: "docs/dev-notes/{task_id}-dev-notes.md"
           
           consistency_validation:
             critical_checks:

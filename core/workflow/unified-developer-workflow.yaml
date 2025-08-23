@@ -290,10 +290,10 @@ stages:
       - read: ["context.summary", "context.background", "context.goals"]
       - copy_to_notes: ["context.goals"]
       - review: ["scope.in_scope", "scope.out_of_scope"]
-      - review_existing_dev_notes:
-          - read_previous_dev_entries: true
-          - understand_historical_changes: true
-          - identify_related_patterns_and_decisions: true
+      - check_for_existing_implementation:
+          - scan_codebase_for_related_changes: true
+          - identify_existing_patterns_and_dependencies: true
+          - understand_current_implementation_state: true
           - note_potential_conflicts_with_current_scope: true
 
   - id: "objectives_and_acceptance"
@@ -402,9 +402,10 @@ stages:
           enforcement:
             - on_validation_failure: "APPEND_WARNINGS_AND_CONTINUE"
             - require_explicit_confirmation: "DEV_NOTES_COMPLETED_AND_VERIFIED"
-      - append_new_dev_notes_entry:
-          mode: "preserve_existing_entries"
-          new_entry:
+      - write_dev_notes_file:
+          location: "{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md"
+          mode: "append_or_create"
+          content_structure:
             - developer_type: "determined_from_agent"
             - timestamp: "current_datetime"
             - task_phase: "determined_from_task_state"
