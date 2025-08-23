@@ -1,0 +1,402 @@
+# 統一知識策展工作流程
+# 用於 knowledge-curator agent 的完整執行流程
+# 特別強調 platinum 級別實踐的篩選與記錄
+
+workflow_name: "unified-knowledge-curation-workflow"
+version: "2.2.0"
+description: "從審查報告與完成報告中策展優秀實踐與錯誤模式，僅記錄platinum級別實踐"
+
+# 工作流程執行設定
+execution_settings:
+  deterministic: true
+  parallel_enabled: true
+  max_parallel_tasks: 10
+  batch_size: 7
+  cache_enabled: true
+  fail_fast: false  # 記錄錯誤但不中斷
+  
+# 前置條件檢查
+prerequisites:
+  required_files:
+    # 核心配置檔案
+    - path: "/Users/tszkinlai/Coding/AI workflow/core/config/deterministic-settings.yaml"
+      type: "config"
+      critical: true
+    - path: "/Users/tszkinlai/Coding/AI workflow/core/templates/knowledge-lessons-tmpl.yaml"
+      type: "template"
+      critical: false  # 缺失時記錄警告並持續
+    - path: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/knowledge-curator-enforcement.md"
+      type: "enforcement"
+      critical: false
+      
+  optional_directories:
+    # 來源資料目錄（可能不存在）
+    - path: "{{project_root}}/docs/implementation-review/"
+      type: "source"
+      pattern: "*.md"
+    - path: "{{project_root}}/docs/completion-reports/"
+      type: "source" 
+      pattern: "*-completion.md"
+      
+  validation_rules:
+    - rule: "project_root_resolved"
+      description: "project_root 必須解析為有效路徑"
+    - rule: "output_directory_writable"
+      description: "{{project_root}}/docs/knowledge/ 必須可寫"
+
+# 主要執行階段
+stages:
+
+  # 階段 1：環境準備與確定性設定
+  - name: "preparation"
+    description: "載入設定並準備執行環境"
+    parallel: false
+    steps:
+      - name: "load_deterministic_settings"
+        action: "read_file"
+        target: "/Users/tszkinlai/Coding/AI workflow/core/config/deterministic-settings.yaml"
+        required: true
+        
+      - name: "load_template"
+        action: "read_file"
+        target: "/Users/tszkinlai/Coding/AI workflow/core/templates/knowledge-lessons-tmpl.yaml"
+        required: false
+        on_failure: "log_warning"
+        
+      - name: "load_enforcement"
+        action: "read_file"
+        target: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/knowledge-curator-enforcement.md"
+        required: false
+        on_failure: "log_warning"
+        
+      - name: "verify_output_path"
+        action: "ensure_directory"
+        target: "{{project_root}}/docs/knowledge/"
+        permissions: "write"
+
+  # 階段 2：來源資料掃描與收集
+  - name: "source_discovery"
+    description: "並行掃描來源文件並收集原始資料"
+    parallel: true
+    depends_on: ["preparation"]
+    steps:
+      - name: "scan_review_reports"
+        action: "glob_search"
+        target: "{{project_root}}/docs/implementation-review/*.md"
+        extract_patterns:
+          - "error_log"
+          - "findings"
+          - "quality_assessment"
+        on_empty: "log_info"  # 沒有檔案不是錯誤
+        
+      - name: "scan_completion_reports"
+        action: "glob_search"
+        target: "{{project_root}}/docs/completion-reports/*-completion.md"
+        extract_patterns:
+          - "implementation_maturity"
+          - "quality_assessment"
+          - "summary_score"
+        on_empty: "log_info"
+        
+      - name: "load_existing_knowledge"
+        action: "read_file"
+        target: "{{project_root}}/docs/knowledge/engineering-lessons.md"
+        required: false
+        on_failure: "create_new"
+
+  # 階段 3：品質篩選與資料預處理
+  - name: "quality_filtering"
+    description: "根據品質標準篩選資料，強調platinum級別"
+    parallel: false
+    depends_on: ["source_discovery"]
+    steps:
+      - name: "extract_platinum_practices"
+        action: "filter_practices"
+        criteria:
+          - "implementation_maturity >= 'platinum'"
+          - "quality_assessment.summary_score >= 4"
+          - "qa_positive_feedback = true"
+        output: "platinum_practices_list"
+        minimum_threshold: 0  # 允許空結果
+        
+      - name: "categorize_error_patterns"
+        action: "analyze_errors"
+        source: "error_log"
+        severity_order: ["blocker", "high", "medium", "low"]
+        grouping: "pattern_similarity"
+        output: "categorized_errors"
+        
+      - name: "validate_evidence_links"
+        action: "verify_links"
+        targets: ["file_paths", "pr_links", "commit_hashes"]
+        on_broken_link: "log_warning"
+
+  # 階段 4：模式識別與分析
+  - name: "pattern_analysis"
+    description: "識別錯誤模式與成功實踐的深層模式"
+    parallel: true
+    depends_on: ["quality_filtering"]
+    steps:
+      - name: "identify_error_patterns"
+        action: "pattern_recognition"
+        source: "categorized_errors"
+        techniques:
+          - "frequency_analysis"
+          - "co_occurrence_analysis"
+          - "root_cause_clustering"
+        output: "error_patterns"
+        
+      - name: "analyze_success_patterns"
+        action: "pattern_recognition"
+        source: "platinum_practices_list"
+        techniques:
+          - "context_analysis"
+          - "outcome_correlation"
+          - "replicability_assessment"
+        output: "success_patterns"
+        
+      - name: "cross_reference_patterns"
+        action: "cross_analysis"
+        sources: ["error_patterns", "success_patterns"]
+        identify: "prevention_opportunities"
+        output: "prevention_matrix"
+
+  # 階段 5：知識結構化與組織
+  - name: "knowledge_structuring"
+    description: "將分析結果組織成三層知識結構"
+    parallel: false
+    depends_on: ["pattern_analysis"]
+    steps:
+      - name: "create_quick_reference"
+        action: "generate_structure"
+        template: "emergency_lookup_table"
+        source: "error_patterns"
+        criteria: "frequency_and_severity"
+        max_entries: 20
+        format: "symptoms_to_solutions"
+        
+      - name: "build_detailed_analysis"
+        action: "generate_structure"
+        template: "comprehensive_analysis"
+        sources: ["error_patterns", "success_patterns", "prevention_matrix"]
+        include_evidence: true
+        include_case_studies: true
+        
+      - name: "design_prevention_guides"
+        action: "generate_structure"
+        template: "prevention_framework"
+        source: "prevention_matrix"
+        focus: "proactive_measures"
+        include_tools: true
+        include_checklists: true
+
+  # 階段 6：輸出生成與格式化
+  - name: "output_generation"
+    description: "根據模板生成最終知識文檔"
+    parallel: false
+    depends_on: ["knowledge_structuring"]
+    steps:
+      - name: "populate_template"
+        action: "template_fill"
+        template_source: "knowledge-lessons-tmpl.yaml"
+        data_sources:
+          - "quick_reference"
+          - "detailed_analysis"
+          - "prevention_guides"
+        placeholder_handling: "mark_as_na_with_reason"
+        
+      - name: "add_metadata"
+        action: "add_metadata"
+        fields:
+          - "generation_timestamp"
+          - "source_file_count"
+          - "platinum_practices_count"
+          - "error_patterns_count"
+          - "evidence_quality_score"
+          
+      - name: "apply_formatting"
+        action: "format_document"
+        standards:
+          - "consistent_headers"
+          - "unified_code_blocks"
+          - "standardized_links"
+          - "sorted_lists"
+
+  # 階段 7：品質驗證與輸出
+  - name: "quality_validation"
+    description: "驗證輸出品質並寫入檔案"
+    parallel: false
+    depends_on: ["output_generation"]
+    steps:
+      - name: "validate_content"
+        action: "content_validation"
+        checks:
+          - "no_placeholders_remaining"
+          - "evidence_links_valid"
+          - "structure_compliance"
+          - "minimum_content_length"
+        failure_action: "log_and_continue"
+        
+      - name: "validate_platinum_threshold"
+        action: "threshold_validation"
+        criteria:
+          - rule: "platinum_practices_only"
+            description: "確保只有platinum級別實踐被記錄"
+            validation: "implementation_maturity >= 'platinum'"
+          - rule: "evidence_supported"
+            description: "確保100%的條目有證據支持"
+            validation: "evidence_links_present = true"
+        
+      - name: "write_output"
+        action: "write_file"
+        target: "{{project_root}}/docs/knowledge/engineering-lessons.md"
+        backup: true
+        backup_path: "{{project_root}}/docs/knowledge/engineering-lessons-{{timestamp}}.md"
+        
+      - name: "update_index"
+        action: "update_index"
+        target: "{{project_root}}/docs/knowledge/index.md"
+        add_entry: "engineering-lessons.md"
+        include_metadata: true
+
+# 資料品質標準
+quality_standards:
+  platinum_practices:
+    minimum_score: 4.0
+    required_maturity: "platinum"
+    evidence_requirement: "mandatory"
+    success_rate_threshold: 0.8
+    
+  error_patterns:
+    minimum_frequency: 2
+    severity_threshold: "medium"
+    reproducibility_requirement: true
+    
+  evidence_links:
+    validity_check: true
+    accessibility_check: true
+    freshness_threshold_days: 180
+
+# 錯誤處理策略
+error_handling:
+  source_file_missing:
+    action: "log_warning"
+    continue: true
+    message: "來源文件缺失，將以現有資料繼續處理"
+    
+  template_load_failure:
+    action: "use_fallback"
+    fallback: "minimal_template"
+    continue: true
+    
+  evidence_link_broken:
+    action: "mark_as_questionable"
+    continue: true
+    include_in_validation_warnings: true
+    
+  platinum_threshold_unmet:
+    action: "filter_out"
+    continue: true
+    log_filtered_items: true
+
+# 並行處理策略
+parallelization:
+  source_discovery:
+    max_concurrent: 5
+    timeout_per_task: 30
+    
+  pattern_analysis:
+    max_concurrent: 3
+    shared_cache: true
+    
+  validation:
+    sequential_required: true
+    reason: "確保資料一致性"
+
+# 快取策略
+caching:
+  source_files:
+    strategy: "content_hash"
+    ttl_hours: 24
+    invalidation_triggers: ["file_modification", "size_change"]
+    
+  analysis_results:
+    strategy: "dependency_hash"
+    ttl_hours: 12
+    cache_key_components: ["source_hash", "template_version", "config_hash"]
+
+# 輸出驗證規則
+validation_rules:
+  content_quality:
+    - rule: "no_empty_sections"
+      severity: "warning"
+    - rule: "evidence_links_present"
+      severity: "error"
+      threshold: 100  # 100% 的條目必須有證據
+    - rule: "platinum_only"
+      severity: "error" 
+      description: "只允許 platinum 級別實踐"
+      
+  format_compliance:
+    - rule: "template_structure_followed"
+      severity: "error"
+    - rule: "consistent_formatting"
+      severity: "warning"
+    - rule: "sorted_lists"
+      severity: "info"
+
+# 成功指標
+success_metrics:
+  process_metrics:
+    - "source_files_processed"
+    - "patterns_identified"
+    - "platinum_practices_collected"
+    - "error_patterns_categorized"
+    
+  quality_metrics:
+    - "evidence_link_validity_rate"
+    - "platinum_practice_ratio"
+    - "knowledge_freshness_score"
+    - "cross_reference_accuracy"
+    
+  impact_metrics:
+    - "knowledge_base_growth"
+    - "pattern_coverage_improvement"
+    - "prevention_opportunity_identification"
+
+# 後處理行動
+post_processing:
+  knowledge_base_maintenance:
+    - action: "remove_outdated_entries"
+      criteria: "last_updated > 1_year AND no_recent_validation"
+    - action: "merge_similar_patterns"
+      threshold: "similarity_score > 0.8"
+    - action: "update_cross_references"
+      scope: "all_related_entries"
+      
+  continuous_improvement:
+    - action: "analyze_usage_patterns"
+      source: "access_logs"
+    - action: "identify_gaps"
+      method: "frequency_vs_coverage_analysis"
+    - action: "suggest_collection_priorities"
+      based_on: "gap_analysis_results"
+
+# 執行報告模板
+execution_report:
+  summary:
+    - "total_sources_processed"
+    - "platinum_practices_identified"
+    - "error_patterns_discovered"
+    - "prevention_opportunities_created"
+    
+  details:
+    - "source_file_breakdown"
+    - "quality_filtering_results"
+    - "pattern_analysis_insights"
+    - "evidence_validation_report"
+    
+  recommendations:
+    - "knowledge_collection_priorities"
+    - "process_improvement_suggestions"
+    - "tool_enhancement_opportunities"

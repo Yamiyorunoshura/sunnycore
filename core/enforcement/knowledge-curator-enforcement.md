@@ -3,9 +3,18 @@
 ## 核心執行協議
 
 ### 必要前置條件（寬鬆）
-- **建議**：開始前載入模板與來源文件；若缺失，記錄至 validation_warnings 並持續
+- **建議**：開始前載入統一工作流程、模板與來源文件；若缺失，記錄至 validation_warnings 並持續
+- **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-knowledge-curation-workflow.yaml`，失敗則記錄警告
 - **模板讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/templates/knowledge-lessons-tmpl.yaml`，失敗則記錄警告
 - **來源掃描**：應掃描指定路徑的審查報告和完成報告；缺失則記錄警告並以現有資訊繼續
+
+### 工作流程合規性（強制執行）
+- **階段完整性**：必須按照 unified-knowledge-curation-workflow.yaml 定義的所有階段順序執行
+- **Platinum級別篩選**：必須嚴格執行 platinum_practices 驗證規則（min_score=4.0, required_maturity="platinum"）
+- **三層知識架構**：必須建立急診清單、詳細分析、預防指南的完整架構
+- **並行執行**：在來源發現階段必須並行掃描審查報告和完成報告
+- **模式分析**：必須執行錯誤模式識別與成功實踐關聯分析
+- **品質驗證**：必須執行證據完整性和platinum標準的最終驗證
 
 ### 來源資料品質（強制驗證）
 - **審查報告**：必須從 `{{project_root}}/docs/implementation-review/*.md` 提取 `error_log` 與 `findings`
@@ -130,8 +139,11 @@
 - [ ] 工具推薦實用
 
 ## 品質門檻（強制通過）
-- **證據支持率**：100%的知識條目都必須有具體證據
+- **Platinum級別篩選**：只記錄 implementation_maturity >= 'platinum' 或 quality_assessment.summary_score >= 4 的實踐
+- **證據支持率**：100%的知識條目都必須有具體證據（檔案路徑、PR連結、測試報告）
 - **實證比例**：至少70%的修復方案必須是已驗證的
+- **三層架構完整性**：急診清單、詳細分析、預防指南三層必須完整建立
+- **成功率門檻**：納入的實踐必須有 >= 0.8 的成功率
 - **更新頻率**：知識庫必須每季度更新一次
 - **使用效果**：必須能證明對錯誤減少的實際效果
 
