@@ -1,12 +1,12 @@
 ---
-# 統一開發者工作流程
-# 整合了enforcement、validation和workflow為單一文件
-template: unified-developer-workflow
+# Refactor Developer 工作流程
+# 專為重構開發者設計的計劃驅動工作流程
+template: refactor-developer-workflow
 version: 2.0
 
 workflow:
-  name: "統一開發者計劃驅動工作流程"
-  description: "一個通用的開發者工作流程，通過agent prompt實現領域特化"
+  name: "Refactor Developer 計劃驅動工作流程"
+  description: "專為重構開發者設計的工作流程，專注於程式碼重構、架構改善和保持行為不變"
   enforcement_level: "lenient"
   halt_on_validation_failure: false
   default_profile: "fast_strict"
@@ -16,7 +16,7 @@ inputs:
   task_id: "<required>"
   plan_path: "<auto>"
   project_root: "<auto>"
-  developer_type: "<auto_detected_from_agent>"
+  developer_type: "refactor"
 
 # === 計劃解析配置 ===
 plan_resolution:
@@ -49,12 +49,8 @@ preconditions:
 execution_protocol:
   
   enforcement_compliance:
-    mandatory_enforcement_files:
-      backend: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/backend-developer-enforcement.md"
-      frontend: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/frontend-developer-enforcement.md"
-      fullstack: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/fullstack-developer-enforcement.md"
-      refactor: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/refactor-developer-enforcement.md"
-    note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the respective enforcement files"
+    mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/refactor-developer-enforcement.md"
+    note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the refactor enforcement file"
 
 profiles:
   fast_strict:
@@ -75,7 +71,7 @@ profiles:
     generation_style:
       no_prose: true
       bullet_only: true
-      allowed_terms_enum: ["F-ID", "N-ID", "UI-ID", "acceptance_criteria", "risk", "decision"]
+      allowed_terms_enum: ["F-ID", "N-ID", "acceptance_criteria", "risk", "decision"]
     parallelizable_actions:
       - stage: "tests_first"
         actions: ["unit_tests_skeletons", "integration_tests_skeletons", "acceptance_tests_skeletons"]
@@ -97,7 +93,7 @@ schemas:
     required: [developer_type, timestamp, changes_summary, detailed_changes_mapped_to, implementation_decisions, risk_considerations, maintenance_notes]
     properties:
       developer_type:
-        enum: ["backend", "frontend", "fullstack", "refactor"]
+        enum: ["refactor"]
       timestamp:
         type: string
         format: date-time
@@ -124,11 +120,6 @@ schemas:
             items:
               type: string
               pattern: "^N-[0-9]+$"
-          UI-IDs:
-            type: array
-            items:
-              type: string
-              pattern: "^UI-[0-9]+$"
         additionalProperties: false
       implementation_decisions:
         type: string
@@ -224,9 +215,9 @@ schemas:
     additionalProperties: false
 
 # === 階段定義 ===
-# 詳細的驗證規則和品質標準在對應的 enforcement 文件中定義
+# 詳細的驗證規則和品質標準在refactor enforcement文件中定義
 validation_rules:
-  note: "Detailed validation rules and quality standards are defined in the respective enforcement files"
+  note: "Detailed validation rules and quality standards are defined in the refactor enforcement file"
   
   stage_sequence:
     - workflow_initialization
@@ -278,10 +269,11 @@ stages:
     mandatory: true
     validation_checkpoint: true
     actions:
-      - load: ["/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-developer-workflow.yaml"]
-      - detect_developer_type_from_agent: true
+      - load: ["/Users/tszkinlai/Coding/AI workflow/core/workflow/refactor-developer-workflow.yaml"]
+      - detect_developer_type: "refactor"
       - resolve_plan_by_task_id: true
       - verify_preconditions: true
+
   - id: "scope_comprehension"
     title: "範圍理解"
     mandatory: true
@@ -304,6 +296,7 @@ stages:
       - extract_functional_objectives_as: "F-IDs"
       - extract_non_functional_objectives_as: "N-IDs"
       - attach_acceptance_criteria: true
+      - establish_baseline_behavior: true
 
   - id: "architecture_and_modules"
     title: "架構與模組"
@@ -311,6 +304,10 @@ stages:
     validation_checkpoint: true
     actions:
       - read: ["approach.architecture_overview"]
+      - run_full_test_suite_and_record_results: true
+      - capture_public_APIs_and_contracts: true
+      - trace_critical_paths_and_side_effects: true
+      - measure_non_functional_baselines: true
       - for_each: "approach.modules"
         do:
           - define_first: "interfaces"
@@ -322,6 +319,8 @@ stages:
     mandatory: true
     validation_checkpoint: true
     actions:
+      - create_tests_for_existing_behavior: true
+      - assert_invariants_and_contracts: true
       - unit_tests_per_module_aligned_to: "F-IDs"
       - integration_tests_for: ["interfaces", "routing", "api_flows", "failure_paths"]
       - acceptance_tests_mirroring: "acceptance_criteria_per_F-ID"
@@ -331,6 +330,9 @@ stages:
     mandatory: true
     validation_checkpoint: true
     actions:
+      - small_steps_atomic_commits: true
+      - keep_green_throughout: true
+      - migrate_APIs_or_components_with_adapters: true
       - implement_handlers_and_components_per: ["interfaces", "F-IDs"]
       - enforce_constraints: true
       - traceability:
@@ -345,6 +347,8 @@ stages:
       - ensure: "coverage_and_static_analysis_thresholds >= quality_gates"
       - validate_non_functional: "N-IDs_measurements"
       - security_checks: ["dependencies", "SAST"]
+      - compare_non_functional_to_baseline: true
+      - ensure_no_api_breaks: true
 
   - id: "milestones_timeline"
     title: "里程碑與時程"
@@ -386,14 +390,13 @@ stages:
     validation_checkpoint: true
     🚨_CRITICAL_STAGE: "DEV_NOTES_MUST_BE_COMPLETED"
     actions:
-      - update_documentation_per_developer_type: true
+      - update_documentation_per_developer_type: "refactor"
       - fill_notes_with: "deviations_and_clarifications"
       - 🚨_MANDATORY_DEV_NOTES_VALIDATION:
           pre_validation_checks:
             - verify_dev_notes_section_exists: "WARN_AND_CONTINUE"
             - verify_detailed_changes_not_empty: "WARN_AND_CONTINUE"
             - verify_f_ids_n_ids_mapping_complete: "WARN_AND_CONTINUE"
-            - verify_ui_ids_mapping_complete_for_frontend_fullstack: "WARN_AND_CONTINUE"
           quality_requirements:
             - detailed_changes_minimum_length: "300_characters"
             - must_include_implementation_decisions: true
@@ -406,7 +409,7 @@ stages:
           location: "{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md"
           mode: "append_or_create"
           content_structure:
-            - developer_type: "determined_from_agent"
+            - developer_type: "refactor"
             - timestamp: "current_datetime"
             - task_phase: "determined_from_task_state"
             - re_dev_iteration: "current_re_dev_iteration_number_or_1"
@@ -427,10 +430,13 @@ stages:
       - require: [
           "all_F-IDs_pass_acceptance_tests",
           "all_N-IDs_verified_by_measurement",
+          "behavior_exactly_preserved",
+          "no_api_breaking_changes",
+          "baseline_performance_maintained_or_improved",
           "no_unresolved_open_questions",
           "PRs_merged_CI_green",
           "🚨_dev_notes_completely_filled_and_verified",
-          "🚨_detailed_changes_mapped_to_all_relevant_F-IDs_N-IDs_UI-IDs",
+          "🚨_detailed_changes_mapped_to_all_relevant_F-IDs_N-IDs",
           "🚨_handover_docs_stage_fully_completed"
         ]
       - 🚨_FINAL_DEV_NOTES_VERIFICATION:
@@ -438,101 +444,43 @@ stages:
             - dev_notes_section_exists: "MANDATORY"
             - detailed_changes_field_populated: "MANDATORY" 
             - f_ids_n_ids_mapping_complete: "MANDATORY"
-            - ui_ids_mapping_complete_for_frontend_fullstack: "MANDATORY"
             - implementation_decisions_documented: "MANDATORY"
             - risk_considerations_documented: "MANDATORY"
             - maintenance_notes_provided: "MANDATORY"
           validation_failure_action: "APPEND_WARNINGS_AND_CONTINUE"
 
-# === 開發者類型特化配置 ===
-developer_specializations:
+# === Refactor開發者特化配置 ===
+refactor_specializations:
+  baseline_capture:
+    - run_full_test_suite_and_record_results
+    - capture_public_APIs_and_contracts
+    - trace_critical_paths_and_side_effects
+    - measure_non_functional_baselines
   
-  backend:
-    specialized_actions:
-      data_changes:
-        - draft_idempotent_reversible_migrations
-        - define_ordered_steps_and_backout
-        - run_in_non_prod_first
-      
-      api_security:
-        - implement_authentication_authorization
-        - validate_input_sanitization
-        - ensure_proper_error_handling
-      
-      performance:
-        - meet_latency_throughput_memory_targets
-        - implement_proper_logging_monitoring
-    
-    documentation_requirements:
-      - update_api_docs_per_interfaces
-      - document_migrations_and_rollback
-
-  frontend:
-    specialized_actions:
-      ux_requirements:
-        - extract_ui_objectives_as: "UI-IDs"
-        - map_acceptance_criteria_to: "UI-IDs"
-        - check_design_assets_from: "metadata.sources.design"
-      
-      routing_and_states:
-        - define_routes_from_modules
-        - enumerate_app_states_per_page
-        - identify_global_state_and_providers
-      
-      components_and_contracts:
-        - create_component_skeletons_with_props
-        - define_types_and_interfaces_first
-        - identify_reused_components
-      
-      styling_and_theming:
-        - apply_design_tokens_if_available
-        - ensure_accessibility_basics: ["color_contrast", "focus", "aria_labels"]
-    
-    documentation_requirements:
-      - update_storybook_or_docs_for_components
-
-  fullstack:
-    specialized_actions:
-      - includes_backend_specializations: true
-      - includes_frontend_specializations: true
-      - wire_frontend_to_backend_flows: true
-    
-    documentation_requirements:
-      - update_api_docs_per_interfaces
-      - update_storybook_or_docs_for_components
-
-  refactor:
-    specialized_actions:
-      baseline_capture:
-        - run_full_test_suite_and_record_results
-        - capture_public_APIs_and_contracts
-        - trace_critical_paths_and_side_effects
-        - measure_non_functional_baselines
-      
-      characterization_tests:
-        - create_tests_for_existing_behavior
-        - assert_invariants_and_contracts
-      
-      incremental_refactor:
-        - small_steps_atomic_commits
-        - keep_green_throughout
-        - migrate_APIs_or_components_with_adapters
-      
-      verification:
-        - compare_non_functional_to_baseline
-        - ensure_no_api_breaks
+  characterization_tests:
+    - create_tests_for_existing_behavior
+    - assert_invariants_and_contracts
+  
+  incremental_refactor:
+    - small_steps_atomic_commits
+    - keep_green_throughout
+    - migrate_APIs_or_components_with_adapters
+  
+  verification:
+    - compare_non_functional_to_baseline
+    - ensure_no_api_breaks
 
 # === 關鍵成功因素 ===
 critical_success_factors:
   - "Read workflow and plan files FIRST - never start without them"
   - "Stay within scope boundaries - pause on any scope questions"
   - "Extract objectives as F-IDs and N-IDs - maintain traceability"
-  - "Define interfaces and architecture first - follow plan structure"
-  - "Write tests before implementation - aligned to acceptance criteria"
+  - "Capture baseline behavior before starting any changes"
+  - "Write characterization tests before implementation"
+  - "Make small, atomic changes that keep tests green"
   - "Maintain traceability - task_id in PRs, commits, code"
   - "Meet quality gates - coverage, static analysis, performance"
-  - "Follow milestones and timeline - track progress accurately"
-  - "Manage risks and dependencies - coordinate with owners"
+  - "Verify no behavior changes and no API breaks"
   - "Complete definition of done - all criteria must be satisfied"
 
 # === 工作流程違規回應 ===
@@ -542,7 +490,9 @@ workflow_violation_responses:
   - "Plan deviation: Append warning; document decision in dev_notes"
   - "Missing tests: Append warning; prioritize remediation next iteration"
   - "Quality gate failure: Append warning; include measurements and remediation plan"
-  - "Incomplete documentation: Append warning; complete before release cut if possible"
+  - "Behavior change detected: CRITICAL WARNING - verify if intentional"
+  - "API break detected: CRITICAL WARNING - coordinate with stakeholders"
+  - "Performance regression: Append warning; include optimization plan"
   - "Missing traceability: Append warning; add task_id references retroactively"
   - "🚨 DEV_NOTES_INCOMPLETE: Append warning and continue to DoD with risk note"
   - "🚨 DEV_NOTES_MISSING_F-IDs_MAPPING: Append warning; include provisional mapping or rationale"

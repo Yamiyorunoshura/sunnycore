@@ -1,0 +1,551 @@
+---
+# Fullstack Developer 工作流程
+# 專為全端開發者設計的計劃驅動工作流程
+template: fullstack-developer-workflow
+version: 2.0
+
+workflow:
+  name: "Fullstack Developer 計劃驅動工作流程"
+  description: "專為全端開發者設計的工作流程，專注於端到端應用程式、前後端整合和架構設計"
+  enforcement_level: "lenient"
+  halt_on_validation_failure: false
+  default_profile: "fast_strict"
+
+# === 輸入定義 ===
+inputs:
+  task_id: "<required>"
+  plan_path: "<auto>"
+  project_root: "<auto>"
+  developer_type: "fullstack"
+
+# === 計劃解析配置 ===
+plan_resolution:
+  find_by_task_id: true
+  search_paths:
+    - "{{project_root}}/docs/implementation-plan"
+  supported_extensions:
+    - "yaml"
+    - "yml" 
+    - "md"
+  expectations:
+    template: "implementation-plan"
+    version: 1
+
+# === 範圍管控 ===
+guardrails:
+  scope_source: "scope"
+  out_of_scope_is_blocking: false
+  on_scope_violation: "record_warning_and_continue"
+
+# === 前置條件 ===
+preconditions:
+  - "計劃文件存在於docs/implementation-plan/*並匹配task_id"
+  - "計劃範本版本 == 1"
+  - "metadata包含task_id、project_name、owner、date"
+  - "sources路徑解析"
+  - "assumptions和constraints已確認"
+
+# === 執行協議 ===
+execution_protocol:
+  
+  enforcement_compliance:
+    mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/fullstack-developer-enforcement.md"
+    note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the fullstack enforcement file"
+
+profiles:
+  fast_strict:
+    sampling_policy:
+      temperature: 0.1
+      top_p: 0.2
+      json_mode: true
+      max_output_tokens: 4096
+    response_format:
+      default: "json"
+      canonical_key_order: true
+      forbid_extra_keys: true
+      wrap_in_code_fence: false
+    caching:
+      plan_cache_key: ["task_id", "plan_hash"]
+      cache_context_summary: true
+      restore_on_same_key: true
+    generation_style:
+      no_prose: true
+      bullet_only: true
+      allowed_terms_enum: ["F-ID", "N-ID", "UI-ID", "acceptance_criteria", "risk", "decision"]
+    parallelizable_actions:
+      - stage: "tests_first"
+        actions: ["unit_tests_skeletons", "integration_tests_skeletons", "acceptance_tests_skeletons"]
+      - stage: "quality_gates"
+        actions: ["static_analysis", "dependency_security_scan"]
+    differential_mode:
+      enabled_when: "brownfield"
+      only_generate_changed_sections: true
+
+output_contracts:
+  dev_notes: { $ref: "#/schemas/dev_notes_v1" }
+  objectives: { $ref: "#/schemas/objectives_v1" }
+  modules: { $ref: "#/schemas/modules_v1" }
+
+schemas:
+  dev_notes_v1:
+    $id: "schemas/dev_notes_v1"
+    type: object
+    required: [developer_type, timestamp, changes_summary, detailed_changes_mapped_to, implementation_decisions, risk_considerations, maintenance_notes]
+    properties:
+      developer_type:
+        enum: ["fullstack"]
+      timestamp:
+        type: string
+        format: date-time
+      task_phase:
+        type: string
+      re_dev_iteration:
+        type: integer
+        minimum: 1
+      changes_summary:
+        type: string
+        minLength: 50
+      detailed_changes_mapped_to:
+        type: object
+        required: ["F-IDs", "N-IDs", "UI-IDs"]
+        properties:
+          F-IDs:
+            type: array
+            items:
+              type: string
+              pattern: "^F-[0-9]+$"
+            minItems: 1
+          N-IDs:
+            type: array
+            items:
+              type: string
+              pattern: "^N-[0-9]+$"
+          UI-IDs:
+            type: array
+            items:
+              type: string
+              pattern: "^UI-[0-9]+$"
+        additionalProperties: false
+      implementation_decisions:
+        type: string
+        minLength: 50
+      risk_considerations:
+        type: string
+        minLength: 30
+      maintenance_notes:
+        type: string
+        minLength: 30
+      challenges_and_deviations:
+        type: string
+        minLength: 30
+      quality_metrics_achieved:
+        type: string
+        minLength: 20
+      validation_warnings:
+        type: array
+        items:
+          type: string
+    additionalProperties: false
+
+  objectives_v1:
+    $id: "schemas/objectives_v1"
+    type: object
+    required: ["F-IDs", "N-IDs", "UI-IDs", "acceptance_criteria"]
+    properties:
+      F-IDs:
+        type: array
+        items:
+          type: string
+          pattern: "^F-[0-9]+$"
+        minItems: 1
+      N-IDs:
+        type: array
+        items:
+          type: string
+          pattern: "^N-[0-9]+$"
+      UI-IDs:
+        type: array
+        items:
+          type: string
+          pattern: "^UI-[0-9]+$"
+      acceptance_criteria:
+        type: array
+        items:
+          type: object
+          required: ["F-ID", "criteria"]
+          properties:
+            F-ID:
+              type: string
+              pattern: "^F-[0-9]+$"
+            criteria:
+              type: array
+              items:
+                type: string
+        minItems: 1
+    additionalProperties: false
+
+  modules_v1:
+    $id: "schemas/modules_v1"
+    type: object
+    required: ["modules"]
+    properties:
+      modules:
+        type: array
+        items:
+          type: object
+          required: ["name", "interfaces"]
+          properties:
+            name:
+              type: string
+            interfaces:
+              type: array
+              items:
+                type: object
+                required: ["name", "methods"]
+                properties:
+                  name:
+                    type: string
+                  methods:
+                    type: array
+                    items:
+                      type: object
+                      required: ["name", "inputs", "outputs"]
+                      properties:
+                        name: { type: string }
+                        inputs:
+                          type: array
+                          items:
+                            type: object
+                        outputs:
+                          type: object
+            reuse:
+              type: array
+              items:
+                type: string
+    additionalProperties: false
+
+# === 階段定義 ===
+# 詳細的驗證規則和品質標準在fullstack enforcement文件中定義
+validation_rules:
+  note: "Detailed validation rules and quality standards are defined in the fullstack enforcement file"
+  
+  stage_sequence:
+    - workflow_initialization
+    - scope_comprehension
+    - objectives_and_acceptance
+    - architecture_and_modules
+    - tests_first
+    - implementation
+    - quality_gates
+    - milestones_timeline
+    - dependencies
+    - estimation_tracking
+    - risks_changes
+    - handover_docs
+    - definition_of_done
+
+  error_handling:
+    validation_errors:
+      missing_stage:
+        severity: "warning"
+        message: "Mandatory stage not completed"
+        action: "append_warning_and_continue"
+      
+      scope_violation:
+        severity: "warning"
+        message: "Implementation outside of defined scope"
+        action: "append_warning_and_continue"
+      
+      missing_tests:
+        severity: "warning"
+        message: "Tests not written before implementation"
+        action: "append_warning_and_continue"
+
+  format_contracts:
+    - stage: "objectives_and_acceptance"
+      must_validate_against: "objectives"
+      on_failure: "append_warning_and_continue"
+    - stage: "architecture_and_modules"
+      must_validate_against: "modules"
+      on_failure: "append_warning_and_continue"
+    - stage: "handover_docs"
+      must_validate_against: "dev_notes"
+      on_failure: "APPEND_WARNINGS_AND_CONTINUE"
+
+# === 工作流程階段 ===
+stages:
+  - id: "workflow_initialization"
+    title: "工作流程初始化"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - load: ["/Users/tszkinlai/Coding/AI workflow/core/workflow/fullstack-developer-workflow.yaml"]
+      - detect_developer_type: "fullstack"
+      - resolve_plan_by_task_id: true
+      - verify_preconditions: true
+
+  - id: "scope_comprehension"
+    title: "範圍理解"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - read: ["context.summary", "context.background", "context.goals"]
+      - copy_to_notes: ["context.goals"]
+      - review: ["scope.in_scope", "scope.out_of_scope"]
+      - check_for_existing_implementation:
+          - scan_codebase_for_related_changes: true
+          - identify_existing_patterns_and_dependencies: true
+          - understand_current_implementation_state: true
+          - note_potential_conflicts_with_current_scope: true
+
+  - id: "objectives_and_acceptance"
+    title: "目標與驗收"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - extract_functional_objectives_as: "F-IDs"
+      - extract_non_functional_objectives_as: "N-IDs"
+      - extract_ui_objectives_as: "UI-IDs"
+      - map_acceptance_criteria_to: ["F-IDs", "UI-IDs"]
+      - check_design_assets_from: "metadata.sources.design"
+
+  - id: "architecture_and_modules"
+    title: "架構與模組"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - read: ["approach.architecture_overview"]
+      - for_each: "approach.modules"
+        do:
+          - define_first: "interfaces"
+          - identify: "reuse"
+          - create: "module_skeletons_with_feature_flags"
+      # Frontend specific
+      - define_routes_from_modules: true
+      - enumerate_app_states_per_page: true
+      - identify_global_state_and_providers: true
+      - create_component_skeletons_with_props: true
+      - define_types_and_interfaces_first: true
+      - identify_reused_components: true
+
+  - id: "tests_first"
+    title: "測試優先"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - unit_tests_per_module_aligned_to: "F-IDs"
+      - integration_tests_for: ["interfaces", "routing", "api_flows", "failure_paths"]
+      - acceptance_tests_mirroring: "acceptance_criteria_per_F-ID"
+      - contract_tests_for: ["api_contracts", "frontend_backend_integration"]
+      - e2e_tests_for: ["complete_user_flows", "cross_browser_compatibility"]
+
+  - id: "implementation"
+    title: "實作"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - implement_handlers_and_components_per: ["interfaces", "F-IDs", "UI-IDs"]
+      # Backend specific
+      - draft_idempotent_reversible_migrations: true
+      - implement_authentication_authorization: true
+      - validate_input_sanitization: true
+      - ensure_proper_error_handling: true
+      - meet_latency_throughput_memory_targets: true
+      - implement_proper_logging_monitoring: true
+      # Frontend specific
+      - apply_design_tokens_if_available: true
+      - ensure_accessibility_basics: ["color_contrast", "focus", "aria_labels"]
+      # Fullstack specific
+      - wire_frontend_to_backend_flows: true
+      - ensure_contract_alignment: true
+      - implement_end_to_end_data_flow: true
+      - enforce_constraints: true
+      - traceability:
+          reference_task_id: "metadata.task_id"
+          in: ["PR_titles", "commits", "code_annotations"]
+
+  - id: "quality_gates"
+    title: "品質門檻"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - ensure: "coverage_and_static_analysis_thresholds >= quality_gates"
+      - validate_non_functional: "N-IDs_measurements"
+      - security_checks: ["dependencies", "SAST", "api_security_audit"]
+      - accessibility_audit: ["WCAG_compliance", "screen_reader_testing"]
+      - performance_audit: ["LCP", "INP", "TTI", "bundle_size", "api_latency"]
+      - integration_testing: ["frontend_backend_integration", "end_to_end_flows"]
+
+  - id: "milestones_timeline"
+    title: "里程碑與時程"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - map_dev_tasks_to: "milestones.schedule"
+      - mark_done_when: "milestones.done_definition_satisfied"
+
+  - id: "dependencies"
+    title: "依賴項"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - verify_versions_and_SLAs: "dependencies.external"
+      - coordinate_internal_owners: "dependencies.internal"
+
+  - id: "estimation_tracking"
+    title: "估算與追蹤"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - report_progress_using: "estimation.method"
+      - keep_remaining_effort_per_work_item: true
+      - update_confidence_against: "estimation.summary.confidence"
+
+  - id: "risks_changes"
+    title: "風險與變更"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - review_weekly: "risks"
+      - on_realized_risk: ["execute_mitigation", "then_contingency"]
+      - on_scope_creep: "open_question_and_pause"
+
+  - id: "handover_docs"
+    title: "交接與文件"
+    mandatory: true
+    validation_checkpoint: true
+    🚨_CRITICAL_STAGE: "DEV_NOTES_MUST_BE_COMPLETED"
+    actions:
+      - update_documentation_per_developer_type: "fullstack"
+      - update_api_docs_per_interfaces: true
+      - update_storybook_or_docs_for_components: true
+      - document_migrations_and_rollback: true
+      - fill_notes_with: "deviations_and_clarifications"
+      - 🚨_MANDATORY_DEV_NOTES_VALIDATION:
+          pre_validation_checks:
+            - verify_dev_notes_section_exists: "WARN_AND_CONTINUE"
+            - verify_detailed_changes_not_empty: "WARN_AND_CONTINUE"
+            - verify_f_ids_n_ids_ui_ids_mapping_complete: "WARN_AND_CONTINUE"
+          quality_requirements:
+            - detailed_changes_minimum_length: "300_characters"
+            - must_include_implementation_decisions: true
+            - must_include_risk_considerations: true
+            - must_include_maintenance_notes: true
+          enforcement:
+            - on_validation_failure: "APPEND_WARNINGS_AND_CONTINUE"
+            - require_explicit_confirmation: "DEV_NOTES_COMPLETED_AND_VERIFIED"
+      - write_dev_notes_file:
+          location: "{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md"
+          mode: "append_or_create"
+          content_structure:
+            - developer_type: "fullstack"
+            - timestamp: "current_datetime"
+            - task_phase: "determined_from_task_state"
+            - re_dev_iteration: "current_re_dev_iteration_number_or_1"
+            - changes_summary: "overall_development_work_summary"
+            - detailed_changes_mapped_to: "F-IDs_N-IDs_and_UI-IDs"
+            - challenges_and_deviations: "documented_issues_and_plan_changes"
+            - quality_metrics_achieved: "actual_vs_target_measurements"
+            - implementation_decisions: "technical_choices_and_rationale"
+            - risk_considerations: "identified_risks_and_mitigation"
+            - maintenance_notes: "future_maintenance_requirements_and_considerations"
+            - validation_warnings: "collected_validation_warnings"
+
+  - id: "definition_of_done"
+    title: "完成定義"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - require: [
+          "all_F-IDs_pass_acceptance_tests",
+          "all_N-IDs_verified_by_measurement",
+          "all_UI-IDs_verified_by_user_testing",
+          "frontend_backend_integration_verified",
+          "no_unresolved_open_questions",
+          "PRs_merged_CI_green",
+          "🚨_dev_notes_completely_filled_and_verified",
+          "🚨_detailed_changes_mapped_to_all_relevant_F-IDs_N-IDs_UI-IDs",
+          "🚨_handover_docs_stage_fully_completed"
+        ]
+      - 🚨_FINAL_DEV_NOTES_VERIFICATION:
+          critical_checks:
+            - dev_notes_section_exists: "MANDATORY"
+            - detailed_changes_field_populated: "MANDATORY" 
+            - f_ids_n_ids_ui_ids_mapping_complete: "MANDATORY"
+            - implementation_decisions_documented: "MANDATORY"
+            - risk_considerations_documented: "MANDATORY"
+            - maintenance_notes_provided: "MANDATORY"
+          validation_failure_action: "APPEND_WARNINGS_AND_CONTINUE"
+
+# === Fullstack開發者特化配置 ===
+fullstack_specializations:
+  backend_specializations:
+    data_changes:
+      - draft_idempotent_reversible_migrations
+      - define_ordered_steps_and_backout
+      - run_in_non_prod_first
+    
+    api_security:
+      - implement_authentication_authorization
+      - validate_input_sanitization
+      - ensure_proper_error_handling
+    
+    performance:
+      - meet_latency_throughput_memory_targets
+      - implement_proper_logging_monitoring
+
+  frontend_specializations:
+    ux_requirements:
+      - extract_ui_objectives_as: "UI-IDs"
+      - map_acceptance_criteria_to: "UI-IDs"
+      - check_design_assets_from: "metadata.sources.design"
+    
+    routing_and_states:
+      - define_routes_from_modules
+      - enumerate_app_states_per_page
+      - identify_global_state_and_providers
+    
+    components_and_contracts:
+      - create_component_skeletons_with_props
+      - define_types_and_interfaces_first
+      - identify_reused_components
+    
+    styling_and_theming:
+      - apply_design_tokens_if_available
+      - ensure_accessibility_basics: ["color_contrast", "focus", "aria_labels"]
+
+  fullstack_specific:
+    - wire_frontend_to_backend_flows: true
+    - ensure_contract_alignment: true
+    - implement_end_to_end_data_flow: true
+
+  documentation_requirements:
+    - update_api_docs_per_interfaces
+    - update_storybook_or_docs_for_components
+
+# === 關鍵成功因素 ===
+critical_success_factors:
+  - "Read workflow and plan files FIRST - never start without them"
+  - "Stay within scope boundaries - pause on any scope questions"
+  - "Extract objectives as F-IDs, N-IDs, and UI-IDs - maintain traceability"
+  - "Define interfaces and architecture first - follow plan structure"
+  - "Write tests before implementation - aligned to acceptance criteria"
+  - "Maintain traceability - task_id in PRs, commits, code"
+  - "Meet quality gates - coverage, static analysis, performance, accessibility, security"
+  - "Follow milestones and timeline - track progress accurately"
+  - "Manage risks and dependencies - coordinate with owners"
+  - "Complete definition of done - all criteria must be satisfied"
+
+# === 工作流程違規回應 ===
+workflow_violation_responses:
+  - "Missing stage execution: Append warning and continue; flag in dev_notes.validation_warnings"
+  - "Scope violation: Append warning and continue; open question asynchronously"
+  - "Plan deviation: Append warning; document decision in dev_notes"
+  - "Missing tests: Append warning; prioritize remediation next iteration"
+  - "Quality gate failure: Append warning; include measurements and remediation plan"
+  - "Incomplete documentation: Append warning; complete before release cut if possible"
+  - "Missing traceability: Append warning; add task_id references retroactively"
+  - "🚨 DEV_NOTES_INCOMPLETE: Append warning and continue to DoD with risk note"
+  - "🚨 DEV_NOTES_MISSING_F-IDs_N-IDs_UI-IDs_MAPPING: Append warning; include provisional mapping or rationale"
+  - "🚨 DEV_NOTES_INSUFFICIENT_DETAIL: Append warning; add details in follow-up commit"
+  - "🚨 HANDOVER_docs_STAGE_SKIPPED: Append warning; ensure documentation post-hoc"

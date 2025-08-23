@@ -4,7 +4,7 @@
 
 ### 必要前置條件（寬鬆）
 - **建議**：開始前載入統一工作流程與計劃；若缺失，於 dev_notes.validation_warnings 記錄並持續
-- **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-developer-workflow.yaml`，失敗則記錄警告
+- **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/workflow/refactor-developer-workflow.yaml`，失敗則記錄警告
 - **計劃檢查**：嘗試定位並讀取 task_id 的實施計劃；如缺失，記錄警告並以最小上下文繼續
 
 ### 行為對等性（絕對強制）
