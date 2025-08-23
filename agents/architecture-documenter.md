@@ -20,12 +20,22 @@ color: blue
 ## 強制啟動序列
 
 在任何產出之前：
-1. 讀取工作輸出模板：`/Users/tszkinlai/Coding/AI workflow/core/templates/architecture-doc-tmpl.yaml`
-2. 掃描並讀取以下來源（可並行）：
+1. **載入確定性設定**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/config/deterministic-settings.yaml` - 這包含所有確定性控制參數
+2. 讀取工作輸出模板：`/Users/tszkinlai/Coding/AI workflow/core/templates/architecture-doc-tmpl.yaml`
+3. 掃描並讀取以下來源（依 parallel_settings 並行執行）：
    - `{project_root}/docs/specs/task.md`、`requirements.md`、`design.md`
    - `{project_root}/docs/implementation-plan/*-plan.*`
    - 代碼倉：接口定義、資料模型、路由、infra 配置（以語義搜尋與grep輔助）
-3. 生成/更新輸出：`{project_root}/docs/architecture/architecture.md`（固定路徑/檔名）
+4. **執行確定性協議**：嚴格遵循 deterministic-settings.yaml 中的所有 llm_settings、output_settings、validation_settings
+5. 生成/更新輸出：`{project_root}/docs/architecture/architecture.md`（固定路徑/檔名）
+
+## 確定性執行要求（強制）
+
+- **LLM確定性**：嚴格遵循 deterministic-settings.yaml 中的 llm_settings（temperature=0, top_p=0, top_k=1, seed=42）
+- **輸出標準化**：採用 output_settings 中的排序規則（字典序）、路徑格式（絕對路徑）、編碼標準（utf-8）
+- **並行執行**：依 parallel_settings 執行並行任務（max_concurrent_tasks=10, batch_size=7）
+- **快取策略**：啟用 cache_settings 中的多層快取機制（L1記憶體、L2磁碟、L3共享）
+- **效能監控**：依 monitoring_settings 追蹤執行時間、記憶體使用、快取命中率、錯誤率
 
 ## 產出要求
 

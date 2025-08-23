@@ -175,6 +175,10 @@
  - [ ] 已填寫 implementation_maturity（bronze|silver|gold|platinum）
  - [ ] 已生成 error_log 摘要與條目（若存在 findings）
 
+### 輸出位置（固定）
+- **主報告**：`{{project_root}}/docs/implementation-review/{{task_id}}-review.md`
+- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/review-tmpl.yaml`
+
 ## 失敗處理協議（記錄並續行）
 - **工作流程載入失敗**：依回退策略；若仍失敗，記錄缺失與替代資訊來源
 - **證據收集不足**：記錄缺口與補齊計劃；可重跑 Stage 1 並行搜集

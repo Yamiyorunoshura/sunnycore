@@ -124,6 +124,10 @@
 - **數據完整性**：確保所有收集的證據的完整性和準確性
 - **訪問控制**：確保只訪問授權的檔案和資源
 
+### 輸出位置（固定）
+- **主報告**：`{{project_root}}/docs/completion-reports/{{task_id}}-completion.md`
+- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml`
+
 ### 文檔和交接要求
 - **完整記錄**：所有重要決策和發現都必須記錄
 - **清晰表達**：使用清晰、專業的語言表達

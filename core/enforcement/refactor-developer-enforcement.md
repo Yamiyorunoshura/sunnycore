@@ -112,6 +112,10 @@
 - [ ] 編碼標準得到遵循
 - [ ] 文檔得到適當更新
 
+### 輸出位置（固定）
+- **開發記錄**：`{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md`
+- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml`
+
 ### 品質門檻（強制通過）
 - **靜態分析**：重構後的代碼必須通過所有靜態分析檢查
 - **安全掃描**：必須確保重構沒有引入安全問題

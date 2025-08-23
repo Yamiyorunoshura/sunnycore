@@ -80,9 +80,9 @@
 - **訪問記錄**：記錄所有文檔訪問和修改操作
 
 ### 輸出位置（固定）
-- **主文檔**：`{project_root}/docs/architecture/architecture.md`
-- **圖表目錄**：`{project_root}/docs/architecture/diagrams/`
-- **ADR目錄**：`{project_root}/docs/architecture/decisions/`
+- **主文檔**：`{{project_root}}/docs/architecture/architecture.md`
+- **圖表目錄**：`{{project_root}}/docs/architecture/diagrams/`
+- **ADR目錄**：`{{project_root}}/docs/architecture/decisions/`
 - **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/architecture-doc-tmpl.yaml`
 
 ## 架構文檔檢查清單（強制執行）

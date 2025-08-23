@@ -8,8 +8,8 @@
 - **來源掃描**：應掃描指定路徑的審查報告和完成報告；缺失則記錄警告並以現有資訊繼續
 
 ### 來源資料品質（強制驗證）
-- **審查報告**：必須從 `{project_root}/docs/implementation-review/*.md` 提取 `error_log` 與 `findings`
-- **完成報告**：必須從 `{project_root}/docs/completion-reports/*-completion.md` 提取品質評估資料
+- **審查報告**：必須從 `{{project_root}}/docs/implementation-review/*.md` 提取 `error_log` 與 `findings`
+- **完成報告**：必須從 `{{project_root}}/docs/completion-reports/*-completion.md` 提取品質評估資料
 - **證據鏈結**：每個知識條目都必須有具體的證據支持（檔案路徑、行號、PR鏈結）
 - **來源可追溯**：必須能追溯每個最佳實踐和錯誤模式的原始來源
 
@@ -86,10 +86,10 @@
 - **資料隱私**：保護個人和專案敏感資訊
 
 ### 輸出位置（固定）
-- **主文檔**：`{project_root}/docs/knowledge/engineering-lessons.md`
+- **主文檔**：`{{project_root}}/docs/knowledge/engineering-lessons.md`
 - **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/knowledge-lessons-tmpl.yaml`
-- **備份路徑**：`{project_root}/docs/knowledge/engineering-lessons-{timestamp}.md`
-- **索引文件**：`{project_root}/docs/knowledge/index.md`
+- **備份路徑**：`{{project_root}}/docs/knowledge/engineering-lessons-{{timestamp}}.md`
+- **索引文件**：`{{project_root}}/docs/knowledge/index.md`
 
 ## 知識策展檢查清單（強制執行）
 

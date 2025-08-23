@@ -20,14 +20,25 @@ color: blue
 ## 強制啟動序列
 
 在任何策展工作之前：
-1. 讀取工作輸出模板：`/Users/tszkinlai/Coding/AI workflow/core/templates/knowledge-lessons-tmpl.yaml`
-2. 掃描並讀取以下來源（可並行）：
+1. **載入確定性設定**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/config/deterministic-settings.yaml` - 這包含所有確定性控制參數
+2. 讀取工作輸出模板：`/Users/tszkinlai/Coding/AI workflow/core/templates/knowledge-lessons-tmpl.yaml`
+3. 掃描並讀取以下來源（依 parallel_settings 並行執行）：
    - `{project_root}/docs/implementation-review/*.md`（以 `error_log` 與 `findings` 為主）
    - `{project_root}/docs/completion-reports/*-completion.md`
-3. 匯總來源中的：
+4. **執行確定性協議**：嚴格遵循 deterministic-settings.yaml 中的所有 llm_settings、output_settings、validation_settings
+5. 匯總來源中的：
    - 優秀工程實踐（implementation_maturity level ≥ platinum 或被QA正面評價者）
    - 常見錯誤（依 error_log 與 findings.severity 排序）
-4. 生成/更新輸出：`{project_root}/docs/knowledge/engineering-lessons.md`（固定路徑/檔名）
+6. 生成/更新輸出：`{project_root}/docs/knowledge/engineering-lessons.md`（固定路徑/檔名）
+
+## 確定性執行要求（強制）
+
+- **LLM確定性**：嚴格遵循 deterministic-settings.yaml 中的 llm_settings（temperature=0, top_p=0, top_k=1, seed=42）
+- **輸出標準化**：採用 output_settings 中的排序規則（字典序）、路徑格式（絕對路徑）、編碼標準（utf-8）
+- **並行執行**：依 parallel_settings 執行並行任務（max_concurrent_tasks=10, batch_size=7），特別適用於多源資料收集和模式識別
+- **快取策略**：啟用 cache_settings 中的多層快取機制（L1記憶體、L2磁碟、L3共享），優化知識挖掘和分析過程
+- **效能監控**：依 monitoring_settings 追蹤執行時間、記憶體使用、快取命中率、錯誤率，確保知識策展效率
+- **自驗證**：執行 validation_settings 中的自檢參數（min_content_length=100, required_sections_completion=100%）
 
 ## 產出要求
 

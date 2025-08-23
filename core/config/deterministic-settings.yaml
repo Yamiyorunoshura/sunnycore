@@ -1,0 +1,76 @@
+# 統一確定性配置
+# 用於所有AI代理以減少隨機性並確保可重現性
+
+llm_settings:
+  # 完全確定性的LLM參數
+  temperature: 0
+  top_p: 0
+  top_k: 1
+  seed: 42
+  max_tokens: 4000
+  frequency_penalty: 0
+  presence_penalty: 0
+  
+  # 重試設定
+  max_retries: 2
+  retry_delay: 1
+
+output_settings:
+  # 輸出標準化
+  sort_order: "lexicographic"  # 所有列表都按字典序排序
+  timestamp_format: "ISO8601_UTC"  # 統一時間格式
+  path_format: "absolute"  # 統一使用絕對路徑
+  encoding: "utf-8"
+  line_endings: "LF"  # 統一行結束符
+  
+  # 數值格式化
+  decimal_places: 2
+  number_format: "en_US"
+
+validation_settings:
+  # 自檢參數
+  enable_self_validation: true
+  validation_timeout: 30  # 秒
+  
+  # 品質門檻
+  min_content_length: 100
+  max_placeholder_count: 0
+  required_sections_completion: 100  # 百分比
+
+parallel_settings:
+  # 並行執行配置
+  max_concurrent_tasks: 10  # 從3-5提升到10
+  batch_size: 7
+  timeout_per_task: 60  # 秒
+  dependency_check_enabled: true
+  
+  # 資源管理
+  memory_limit_mb: 1024
+  cpu_cores_limit: 4
+
+cache_settings:
+  # 快取配置
+  enable_caching: true
+  cache_ttl_hours: 24
+  max_cache_size_mb: 512
+  
+  # 快取層級
+  l1_memory_cache: true
+  l2_disk_cache: true
+  l3_shared_cache: true
+  
+  # 失效策略
+  invalidation_strategy: "dependency_based"
+  hash_algorithm: "sha256"
+
+monitoring_settings:
+  # 效能監控
+  enable_performance_tracking: true
+  log_level: "INFO"
+  metrics_collection: true
+  
+  # 追蹤指標
+  track_execution_time: true
+  track_memory_usage: true
+  track_cache_hit_rate: true
+  track_error_rate: true

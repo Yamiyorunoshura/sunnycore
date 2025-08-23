@@ -27,7 +27,7 @@
 
 ### 只讀與邊界
 - **只讀保護**：`docs/specs/**` 目錄嚴禁寫入（若偵測到將記錄警告並回退）
-- **路徑白名單**：僅允許在 `<project_root>/docs/implementation-plan/` 與 `<project_root>/docs/index/` 下寫入；不符合則記錄並拒寫
+- **路徑白名單**：僅允許在 `{{project_root}}/docs/implementation-plan/` 與 `{{project_root}}/docs/index/` 下寫入；不符合則記錄並拒寫
 
 ### 範本合規性（寬鬆）
 - **完整填充**：應以實際內容填充或標記為"N/A - [原因]"；不足時記錄警告
@@ -62,8 +62,8 @@
 
 ### 輸出和驗證要求（寬鬆）
 11. **專案根目錄解析**：按順序解析 `project_root`：env `CLAUDE_PROJECT_ROOT` → Git root → 最近的 `docs/specs/` → cwd
-12. **輸出路徑合規**：必須儲存到 `<project_root>/docs/implementation-plan/<task_id>-plan.md`
-13. **索引更新**：必須將JSONL記錄附加到 `<project_root>/docs/index/plan-index.jsonl`
+12. **輸出路徑合規**：必須儲存到 `{{project_root}}/docs/implementation-plan/{{task_id}}-plan.md`
+13. **索引更新**：必須將JSONL記錄附加到 `{{project_root}}/docs/index/plan-index.jsonl`
 14. **路徑驗證**：必須確保輸出路徑在 `project_root` 下
 15. **成功驗證**：應確認檔案成功寫入並回顧絕對路徑；失敗則記錄與重試計劃
 16. **終檢擴展**：必須運行黑名單掃描與交叉一致性校驗並全部通過

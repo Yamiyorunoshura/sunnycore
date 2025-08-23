@@ -70,6 +70,10 @@
 - **風險與限制**、**品質指標**、**依賴關係**：缺漏時記錄警告與補齊時點
 - **填寫品質**：不足以支撐維護時，標註為重要警告
 
+### 輸出位置（固定）
+- **開發記錄**：`{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md`
+- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml`
+
 ### 品質門檻（強制通過）
 - **靜態分析**：代碼必須通過靜態分析檢查
 - **安全掃描**：必須通過安全漏洞掃描

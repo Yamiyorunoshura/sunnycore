@@ -94,6 +94,10 @@
 - **整合測試記錄**：必須記錄端到端測試、契約測試和整合驗證結果
 - **填寫品質要求**：dev_notes不可省略、不可敷衍，必須提供足夠的細節供後續維護參考
 
+### 輸出位置（固定）
+- **開發記錄**：`{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md`
+- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml`
+
 ### 品質門檻（強制通過）
 - **靜態分析**：前端和後端都必須通過靜態分析
 - **安全掃描**：全端安全漏洞掃描

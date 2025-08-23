@@ -96,6 +96,10 @@
 - **瀏覽器相容性**：必須記錄測試的瀏覽器版本和發現的相容性問題
 - **填寫品質要求**：dev_notes不可省略、不可敷衍，必須提供足夠的細節供後續維護參考
 
+### 輸出位置（固定）
+- **開發記錄**：`{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md`
+- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml`
+
 ### 品質門檻（強制通過）
 - **靜態分析**：代碼必須通過ESLint和其他靜態分析
 - **型別檢查**：必須通過TypeScript型別檢查

@@ -107,7 +107,11 @@
 - **內容完整**：所有範本部分都必須有實際內容
 - **證據支持**：所有發現都必須有具體證據
 - **建議具體**：改進建議必須具體且可操作
- - **執行中繼資料**：建議在附錄中包含 run_id、開始/結束時間、各階段耗時、並行度、快取命中率
+- **執行中繼資料**：建議在附錄中包含 run_id、開始/結束時間、各階段耗時、並行度、快取命中率
+
+### 輸出位置（固定）
+- **主報告**：`{{project_root}}/docs/validation-reports/{{task_id}}-plan-validation.md`
+- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/plan-validation-report-tmpl.yaml`
 
 ### 品質標準（強制達到）
 - **客觀性**：驗證必須客觀，基於可驗證的事實
