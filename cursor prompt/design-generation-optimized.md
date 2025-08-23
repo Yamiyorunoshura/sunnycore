@@ -151,7 +151,18 @@ has_tbd: true|false
 1. **讀取需求**: 分析 `docs/specs/requirement.md` 的所有使用者故事和驗收標準
 2. **生成設計**: 根據需求創建完整的設計文件內容
 3. **儲存文件**: 寫入 `docs/specs/design.md`，必要時創建目錄
-4. **確認完成**: 回應「設計文件已生成，請問內容是否有需要調整的地方？」
+4. **使用者確認**: 完成後必須立即使用 `ask_followup_question` 工具詢問使用者，提供具體選項：
+   ```xml
+   <ask_followup_question>
+   <question>設計文件已生成，請問內容是否有需要調整的地方？</question>
+   <follow_up>
+   <suggest>確認無誤，繼續任務規劃階段</suggest>
+   <suggest>需要修改設計文件</suggest>
+   <suggest>重新生成設計文件</suggest>
+   </follow_up>
+   </ask_followup_question>
+   ```
+5. **強制等待**: 必須等待使用者回應確認後才能完成流程。如果使用者選擇修改，必須協助調整直到確認無誤
 
 # 範例輸出
 基於購物車需求範例，設計文件會包含：

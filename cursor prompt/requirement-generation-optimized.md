@@ -67,6 +67,18 @@ has_tbd: true|false
 1. **分析輸入**: 仔細閱讀提供的功能描述
 2. **生成內容**: 根據規範生成完整的 Markdown 需求文件
 3. **儲存文件**: 將內容寫入 `docs/specs/requirement.md`，必要時創建目錄
+4. **使用者確認**: 完成後必須立即使用 `ask_followup_question` 工具詢問使用者，提供具體選項：
+   ```xml
+   <ask_followup_question>
+   <question>需求文件已生成，請問內容是否有需要調整的地方？</question>
+   <follow_up>
+   <suggest>確認無誤，繼續設計階段</suggest>
+   <suggest>需要修改需求文件</suggest>
+   <suggest>重新生成需求文件</suggest>
+   </follow_up>
+   </ask_followup_question>
+   ```
+5. **強制等待**: 必須等待使用者回應確認後才能完成流程。如果使用者選擇修改，必須協助調整直到確認無誤
 
 # 範例輸入
 ```

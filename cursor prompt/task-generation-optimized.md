@@ -69,7 +69,19 @@
 
 立即分析 `docs/specs/requirement.md` 和 `docs/specs/design.md`，生成 `docs/specs/task.md` 的完整內容。
 
-成功後回應：「實作計畫已生成，您可以開始進行開發了。」
+**使用者確認**: 完成後必須立即使用 `ask_followup_question` 工具詢問使用者，提供具體選項：
+```xml
+<ask_followup_question>
+<question>實作計畫已生成，請問內容是否有需要調整的地方？</question>
+<follow_up>
+<suggest>確認無誤，完成規格生成流程</suggest>
+<suggest>需要修改任務計劃</suggest>
+<suggest>重新生成任務計劃</suggest>
+</follow_up>
+</ask_followup_question>
+```
+
+**強制等待**: 必須等待使用者回應確認後才能完成流程。如果使用者選擇修改，必須協助調整直到確認無誤
 
 # 一致性與更新規則
 
