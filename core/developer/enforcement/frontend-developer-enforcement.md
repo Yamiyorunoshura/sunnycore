@@ -97,7 +97,7 @@
 - **填寫品質要求**：dev_notes不可省略、不可敷衍，必須提供足夠的細節供後續維護參考
 
 ### Markdown格式轉換（絕對強制）
-- **YAML到Markdown**：必須將 `/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml` 結構完整轉換為標準Markdown格式
+- **YAML到Markdown**：必須將 `/Users/tszkinlai/Coding/AI workflow/core/developer/templates/dev-notes-tmpl.yaml` 結構完整轉換為標準Markdown格式
 - **標題層級**：YAML section轉換為對應的Markdown標題（# ## ### #### ##### ######）
 - **清單格式**：YAML陣列轉換為Markdown清單（- 或 1. 格式）
 - **代碼區塊**：代碼片段使用標準Markdown代碼塊（```language）
@@ -109,7 +109,7 @@
 
 ### 輸出位置（固定）
 - **開發記錄**：`{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md`
-- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml`
+- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/developer/templates/dev-notes-tmpl.yaml`
 
 ### 品質門檻（強制通過）
 - **靜態分析**：代碼必須通過ESLint和其他靜態分析

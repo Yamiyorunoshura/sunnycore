@@ -133,7 +133,7 @@ stages:
         purpose: "Load and internalize complete workflow"
         validation: "workflow_file_parsed"
       - tool_call: "read_file"
-        target: "/Users/tszkinlai/Coding/AI workflow/core/templates/implementation-plan-tmpl.yaml"
+        target: "/Users/tszkinlai/Coding/AI workflow/core/developer/templates/implementation-plan-tmpl.yaml"
         purpose: "Load and internalize template structure"
         validation: "template_structure_understood"
       - resolve_project_root:

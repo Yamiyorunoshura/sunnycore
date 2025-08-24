@@ -116,7 +116,7 @@
   - refactor-developer: `/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/refactor-developer-workflow.yaml`
 - **開發完成後撰寫開發記錄**：
   - 子代理完成開發後，主代理自動撰寫開發記錄
-  - 使用標準模板 [`/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml`](/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml)
+  - 使用標準模板 [`/Users/tszkinlai/Coding/AI workflow/core/developer/templates/dev-notes-tmpl.yaml`](/Users/tszkinlai/Coding/AI workflow/core/developer/templates/dev-notes-tmpl.yaml)
   - 遵循指南 [`/Users/tszkinlai/Coding/AI workflow/core/dev-notes-guide.md`](/Users/tszkinlai/Coding/AI workflow/core/dev-notes-guide.md)
   - 處理所有驗證和格式要求
   - 確保文件保存在正確位置 `docs/dev-notes/{task_id}-dev-notes.md`
@@ -160,7 +160,7 @@
      - 若計劃分析失敗則回退到通用後端代理
    - 協調並委派給適當的子代理
    - **開發完成後自動撰寫開發記錄**：
-     - 使用標準模板 [`/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml`](/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml)
+     - 使用標準模板 [`/Users/tszkinlai/Coding/AI workflow/core/developer/templates/dev-notes-tmpl.yaml`](/Users/tszkinlai/Coding/AI workflow/core/developer/templates/dev-notes-tmpl.yaml)
      - 遵循指南 [`/Users/tszkinlai/Coding/AI workflow/core/dev-notes-guide.md`](/Users/tszkinlai/Coding/AI workflow/core/dev-notes-guide.md)
      - 處理所有驗證和格式要求
      - 確保文件保存在正確位置 `docs/dev-notes/{task_id}-dev-notes.md`
