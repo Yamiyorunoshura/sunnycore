@@ -49,7 +49,7 @@ preconditions:
 execution_protocol:
   
   enforcement_compliance:
-    mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/backend-developer-enforcement.md"
+    mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/developer/enforcement/backend-developer-enforcement.md"
     note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the backend enforcement file"
 
 profiles:
@@ -210,7 +210,7 @@ stages:
     mandatory: true
     validation_checkpoint: true
     actions:
-      - load: ["/Users/tszkinlai/Coding/AI workflow/core/workflow/backend-developer-workflow.yaml"]
+      - load: ["/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/backend-developer-workflow.yaml"]
       - detect_developer_type: "backend"
       - resolve_plan_by_task_id: true
       - verify_preconditions: true

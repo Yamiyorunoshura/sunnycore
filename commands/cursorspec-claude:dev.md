@@ -104,16 +104,16 @@
         - DevOps實踐相關內容 → `fullstack-developer:devops` (立即並行激活)
 - **委派給子代理**：以確定的狀態和類型上下文呼叫適當的代理
 - 遵循被呼叫代理的專門工作流程：
-  - frontend-developer: `/Users/tszkinlai/Coding/AI workflow/core/workflow/frontend-developer-workflow.yaml`
-  - backend-developer: `/Users/tszkinlai/Coding/AI workflow/core/workflow/backend-developer-workflow.yaml`
+  - frontend-developer: `/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/frontend-developer-workflow.yaml`
+  - backend-developer: `/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/backend-developer-workflow.yaml`
   - backend-developer:api: 繼承 `backend-developer-workflow.yaml` + API專門化
   - backend-developer:database: 繼承 `backend-developer-workflow.yaml` + 資料庫專門化
   - backend-developer:security: 繼承 `backend-developer-workflow.yaml` + 安全專門化
   - backend-developer:performance: 繼承 `backend-developer-workflow.yaml` + 效能專門化
   - backend-developer:testing: 繼承 `backend-developer-workflow.yaml` + 測試專門化
   - backend-developer:infrastructure: 繼承 `backend-developer-workflow.yaml` + 基礎設施專門化
-  - fullstack-developer: `/Users/tszkinlai/Coding/AI workflow/core/workflow/fullstack-developer-workflow.yaml`
-  - refactor-developer: `/Users/tszkinlai/Coding/AI workflow/core/workflow/refactor-developer-workflow.yaml`
+  - fullstack-developer: `/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/fullstack-developer-workflow.yaml`
+  - refactor-developer: `/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/refactor-developer-workflow.yaml`
 - **開發完成後撰寫開發記錄**：
   - 子代理完成開發後，主代理自動撰寫開發記錄
   - 使用標準模板 [`/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml`](/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml)
@@ -127,14 +127,14 @@
   - **初始狀態**：未找到先前計劃 → 進行全新規劃
   - **棕地狀態**：存在先前計劃 → 進行計劃精進/更新
 - **委派給子代理**：以確定的狀態上下文呼叫代理 `task-planner`
-- 遵循統一任務規劃工作流程：`/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-task-planning-workflow.yaml`
+- 遵循統一任務規劃工作流程：`/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/unified-task-planning-workflow.yaml`
 - 可選標誌：`--project-root <path>` 明確指定目標專案根目錄。
 - 未提供時的專案根目錄解析順序：env `CLAUDE_PROJECT_ROOT` → 活動專案的Git根目錄 → 包含 `docs/specs/` 的最近目錄 → 當前工作目錄。
 - 將解析的 `project_root` 傳遞給代理/工作流程。確保所有輸出都寫在 `<project_root>` 下。
 
 ## 工作流程
 
-- 規劃：`/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-task-planning-workflow.yaml`
+- 規劃：`/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/unified-task-planning-workflow.yaml`
 - 極客開發：每個開發者類型使用專門的工作流程：
   - frontend: `/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/frontend-developer-workflow.yaml`
   - backend: `/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/backend-developer-workflow.yaml`

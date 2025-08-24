@@ -13,25 +13,34 @@
 - **並行調度**：同時激活所有相關領域的專門代理，無需序列等待
 - **資源分配**：根據任務複雜度和領域專業性智能分配計算資源
 - **進度同步**：實時監控所有並行代理的執行狀態和進度
+- **最大並行數**：同時執行最多6個代理，採用real_time_sync協調策略
+- **衝突解決**：採用orchestrator_mediated機制處理代理間衝突
 
 **任務類型映射規則**：
-- **資料庫任務** → `backend-developer:database` (立即並行激活)
-- **API任務** → `backend-developer:api` (立即並行激活)  
-- **安全任務** → `backend-developer:security` (立即並行激活)
-- **效能任務** → `backend-developer:performance` (立即並行激活)
-- **測試任務** → `backend-developer:testing` (立即並行激活)
-- **基礎設施任務** → `backend-developer:infrastructure` (立即並行激活)
-- **UI/UX任務** → `frontend-developer:ui-ux` (立即並行激活)
-- **框架任務** → `frontend-developer:framework` (立即並行激活)
-- **前端效能任務** → `frontend-developer:performance` (立即並行激活)
-- **無障礙性任務** → `frontend-developer:accessibility` (立即並行激活)
-- **前端測試任務** → `frontend-developer:testing` (立即並行激活)
-- **代碼質量改善相關內容** → `refactor-developer:code-quality` (立即並行激活)
-- **效能優化重構相關內容** → `refactor-developer:performance` (立即並行激活)
-- **架構設計相關內容** → `fullstack-developer:architecture` (立即並行激活)
-- **前後端整合相關內容** → `fullstack-developer:integration` (立即並行激活)
-- **效能優化相關內容** → `fullstack-developer:performance` (立即並行激活)
-- **DevOps實踐相關內容** → `fullstack-developer:devops` (立即並行激活)
+- **後端領域**：
+  - 資料庫任務 → `backend-developer:database`
+  - API任務 → `backend-developer:api`
+  - 安全任務 → `backend-developer:security`
+  - 效能任務 → `backend-developer:performance`
+  - 測試任務 → `backend-developer:testing`
+  - 基礎設施任務 → `backend-developer:infrastructure`
+
+- **前端領域**：
+  - UI/UX任務 → `frontend-developer:ui-ux`
+  - 框架任務 → `frontend-developer:framework`
+  - 前端效能任務 → `frontend-developer:performance`
+  - 無障礙性任務 → `frontend-developer:accessibility`
+  - 前端測試任務 → `frontend-developer:testing`
+
+- **全端領域**：
+  - 架構設計任務 → `fullstack-developer:architecture`
+  - 前後端整合任務 → `fullstack-developer:integration`
+  - 全端效能任務 → `fullstack-developer:performance`
+  - DevOps任務 → `fullstack-developer:devops`
+
+- **重構領域**：
+  - 代碼質量改善任務 → `refactor-developer:code-quality`
+  - 效能優化重構任務 → `refactor-developer:performance`
 
 **工作負載分配機制**：
 - **領域分析**：解析實施計劃，識別獨立可並行的工作單元
@@ -45,52 +54,59 @@
 - **整合策略**：採用智能合併算法整合多代理輸出
 - **質量保證**：確保最終輸出的完整性和正確性
 
-## 後端並行執行優化
+## 執行階段強制規範
+
+當執行`*develop-task`自定義命令時：
+- **讀取工作流程文件**：
+  - 讀取 `/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/developer-orchestrator-workflow.yaml`
+- **讀取確定性設定**：
+  - 讀取 `/Users/tszkinlai/Coding/AI workflow/core/developer/config/deterministic-settings.yaml`
+
+## 並行執行優化策略
 
 **後端領域並行協議**：
-- **並行觸發條件**：當計劃同時包含資料庫設計、API開發、安全強化等多個後端領域時
-- **即時協同**：所有後端子代理同時啟動，共享上下文並協同工作
-- **領域邊界管理**：明確劃分各專門代理的職責範圍，避免重複工作
-- **交叉驗證**：並行代理間實時交叉驗證設計決策和實現方案
-
-**範例並行場景**：
-- **場景1**：資料庫schema設計 + REST API開發 → 並行調用 `backend-developer:database` + `backend-developer:api`
-- **場景2**：效能優化 + 安全加固 → 並行調用 `backend-developer:performance` + `backend-developer:security`
-- **場景3**：測試策略 + 部署架構 → 並行調用 `backend-developer:testing` + `backend-developer:infrastructure`
-
-## 前端並行執行優化
+- **觸發條件**：計劃包含多個後端領域（database、api、security、performance、testing、infrastructure）
+- **協同機制**：所有後端子代理同時啟動，共享技術上下文
+- **邊界管理**：明確劃分職責範圍，避免重複工作
+- **交叉驗證**：代理間實時交叉驗證設計決策
 
 **前端領域並行協議**：
-- **並行觸發條件**：當計劃同時包含UI/UX設計、框架設計、效能優化等多個前端領域時
-- **即時協同**：所有前端子代理同時啟動，共享上下文並協同工作
-- **領域邊界管理**：明確劃分各專門代理的職責範圍，避免重複工作
-- **交叉驗證**：並行代理間實時交叉驗證設計決策和實現方案
-
-**範例並行場景**：
-- **場景1**：UI/UX設計 + 框架設計 → 並行調用 `frontend-developer:ui-ux` + `frontend-developer:framework`
-- **場景2**：效能優化 + 無障礙性 → 並行調用 `frontend-developer:performance` + `frontend-developer:accessibility`
-- **場景3**：測試策略 + 部署架構 → 並行調用 `frontend-developer:testing` + `frontend-developer:infrastructure`
-
-## 重構開發者並行執行優化
-
-**重構領域並行協議**：
-- **並行觸發條件**：當計劃同時包含代碼質量改善、效能優化等多個重構領域時
-- **即時協同**：所有重構子代理同時啟動，共享上下文並協同工作
-- **領域邊界管理**：明確劃分各專門代理的職責範圍，避免重複工作
-- **交叉驗證**：並行代理間實時交叉驗證設計決策和實現方案
-
-**範例並行場景**：
-- **場景1**：代碼質量改善 + 效能優化 → 並行調用 `refactor-developer:code-quality` + `refactor-developer:performance`
-- **場景2**：測試策略 + 部署架構 → 並行調用 `refactor-developer:testing` + `refactor-developer:infrastructure`
-
-## 全端開發者並行執行優化
+- **觸發條件**：計劃包含多個前端領域（ui-ux、framework、performance、accessibility、testing）
+- **協同機制**：所有前端子代理同時啟動，共享設計上下文
+- **邊界管理**：確保UI/UX與技術實現的一致性
+- **交叉驗證**：驗證用戶體驗與技術可行性
 
 **全端領域並行協議**：
-- **並行觸發條件**：當計劃同時包含架構設計、前後端整合、效能優化等多個全端領域時
-- **即時協同**：所有全端子代理同時啟動，共享上下文並協同工作
-- **領域邊界管理**：明確劃分各專門代理的職責範圍，避免重複工作
-- **交叉驗證**：並行代理間實時交叉驗證設計決策和實現方案
+- **觸發條件**：計劃包含多個全端領域（architecture、integration、performance、devops）
+- **協同機制**：全端子代理協調前後端整合
+- **邊界管理**：確保架構決策與實施細節的一致性
+- **交叉驗證**：驗證整體架構與局部實現的兼容性
 
-**範例並行場景**：
-- **場景1**：架構設計 + 前後端整合 → 並行調用 `fullstack-developer:architecture` + `fullstack-developer:integration`
-- **場景2**：效能優化 + 部署架構 → 並行調用 `fullstack-developer:performance` + `fullstack-developer:infrastructure`
+**重構領域並行協議**：
+- **觸發條件**：計劃包含多個重構領域（code-quality、performance）
+- **協同機制**：重構子代理協調改善策略
+- **邊界管理**：確保代碼質量與效能優化的平衡
+- **交叉驗證**：驗證重構對系統穩定性的影響
+
+## 質量保證機制
+
+**工作流程標準化**：
+- 遵循統一任務規劃工作流程：`/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/unified-task-planning-workflow.yaml`
+- 遵循統一開發任務工作流程：`/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/developer-orchestrator-workflow.yaml`
+
+**輸出標準化**：
+- **格式要求**：所有代理輸出必須符合預定義格式
+- **內容完整性**：確保輸出包含所有必要的技術細節
+- **一致性檢查**：驗證多代理輸出的技術一致性
+
+**協調報告生成**：
+- **執行摘要**：生成任務執行的高層次摘要
+- **技術決策記錄**：記錄關鍵技術決策和理由
+- **風險評估**：識別並記錄潛在風險和緩解策略
+- **後續建議**：提供後續開發和維護建議
+
+**成功驗證標準**：
+- **功能完整性**：所有計劃功能均已實現
+- **技術一致性**：各領域實現技術上兼容
+- **質量標準**：符合預定義的代碼質量標準
+- **文檔完整性**：生成完整的技術文檔和開發記錄
