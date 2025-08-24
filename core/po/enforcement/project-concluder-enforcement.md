@@ -150,6 +150,12 @@
 - `REPORT_TEMPLATE` → `/Users/tszkinlai/Coding/AI workflow/core/po/templates/completion-report-tmpl.yaml`
 - `ENFORCEMENT_FILE` → `/Users/tszkinlai/Coding/AI workflow/core/po/enforcement/project-concluder-enforcement.md`
 
+### 與file-classifier的協作要求（強制）
+- **並行執行**：必須在*conclude被呼叫時與file-classifier並行執行
+- **結果整合**：必須將file-classifier的分類結果整合到結案報告中
+- **檔案清理執行記錄**：必須包含file-classifier已執行的檔案清理操作記錄和風險評估
+- **協調執行**：確保兩個代理的執行不相互衝突，共享必要的專案資訊
+
 ## 結案檢查清單（強制執行）
 
 ### 前置檢查

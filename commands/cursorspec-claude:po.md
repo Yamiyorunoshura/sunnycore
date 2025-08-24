@@ -16,6 +16,7 @@
 ### `*conclude`
 - 並行協作（固定）：
    - 呼叫代理 `project-concluder`
+   - 呼叫代理 `file-classifier`
    - 呼叫代理 `knowledge-curator` 產出/更新 `{project_root}/docs/knowledge/engineering-lessons.md`
    - 呼叫代理 `architecture-documenter` 產出/更新 `{project_root}/docs/architecture/architecture.md`
 

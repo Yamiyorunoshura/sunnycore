@@ -42,6 +42,7 @@ execution_hints:
       knowledge_and_architecture:
         - "run_knowledge_curator"
         - "run_architecture_documenter"
+        - "run_file_classifier"
   caching:
     enabled: true
     strategy: "content_hash"
@@ -417,6 +418,11 @@ extensions:
       template: "/Users/tszkinlai/Coding/AI workflow/core/po/templates/architecture-doc-tmpl.yaml"
       output: "{{project_root}}/docs/architecture/architecture.md"
       trigger: "after:report_generation"
+    file_classifier:
+      agent: "file-classifier"
+      template: "/Users/tszkinlai/Coding/AI workflow/core/po/workflow/unified-file-classification-workflow.yaml"
+      output: "{{project_root}}/docs/file-classification/file-classification-report.md"
+      trigger: "parallel:with_conclude"
 
 # 整合的驗證規則
 validation_rules:
