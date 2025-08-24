@@ -52,9 +52,6 @@ execution_protocol:
     mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/frontend-developer-enforcement.md"
     note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the frontend enforcement file"
 
-# Profile configurations are now centralized in deterministic-settings.yaml
-# This workflow inherits all LLM settings, output settings, and parallel configurations from there
-
 output_contracts:
   dev_notes: { $ref: "#/schemas/dev_notes_v1" }
   objectives: { $ref: "#/schemas/objectives_v1" }

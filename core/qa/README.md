@@ -17,12 +17,7 @@
 - **內容**：6個核心階段的具體行動、工具調用、檢查點
 - **特點**：提供執行藍圖，引用enforcement和配置
 
-### 4. **`config/deterministic-settings.yaml`** - 統一技術配置
-- **職責**：提供所有技術參數的權威來源
-- **內容**：LLM設定、並行化、快取、監控等技術參數
-- **特點**：被其他所有文件引用，避免重複定義
-
-### 5. **`templates/review-tmpl.yaml`** - 報告範本
+### 4. **`templates/review-tmpl.yaml`** - 報告範本
 - **職責**：定義審查報告的結構和格式
 - **內容**：報告章節、評估維度、輸出格式
 - **特點**：提供標準化的報告結構
@@ -31,9 +26,6 @@
 
 ```
 task-reviewer.md (Agent)
-    ↓ 引用
-deterministic-settings.yaml (Config)
-    ↑ 被引用
     ↓ 引用
 task-reviewer-enforcement.md (Enforcement)
     ↑ 被引用
@@ -46,23 +38,18 @@ review-tmpl.yaml (Template)
 
 ## 配置管理原則
 
-### 1. **單一權威來源**
-- 所有技術參數都在 `deterministic-settings.yaml` 中定義
-- 其他文件通過引用獲取配置，不重複定義
-
-### 2. **職責分離**
+### 1. **職責分離**
 - **Agent**：人格和態度指導
 - **Enforcement**：執行規則和約束
 - **Workflow**：執行步驟和流程
-- **Config**：技術參數和設定
 - **Template**：輸出格式和結構
 
-### 3. **引用優先**
+### 2. **引用優先**
 - 優先使用引用而非重複定義
 - 明確標示引用關係和文件路徑
 - 避免配置不一致的問題
 
-### 4. **維護性**
+### 3. **維護性**
 - 修改技術參數只需更新配置文件
 - 各文件職責明確，便於維護和擴展
 - 減少重複內容，提高一致性
@@ -70,10 +57,9 @@ review-tmpl.yaml (Template)
 ## 使用指南
 
 ### 開發者
-1. 修改技術參數：更新 `deterministic-settings.yaml`
-2. 修改執行規則：更新 `task-reviewer-enforcement.md`
-3. 修改工作流程：更新 `unified-review-workflow.yaml`
-4. 修改代理行為：更新 `task-reviewer.md`
+1. 修改執行規則：更新 `task-reviewer-enforcement.md`
+2. 修改工作流程：更新 `unified-review-workflow.yaml`
+3. 修改代理行為：更新 `task-reviewer.md`
 5. 修改報告格式：更新 `review-tmpl.yaml`
 
 ### AI代理

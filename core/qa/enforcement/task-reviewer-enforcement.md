@@ -3,7 +3,6 @@
 ## 配置引用關係
 
 本文件與以下配置文件的關係：
-- **確定性設定**：引用 `/Users/tszkinlai/Coding/AI workflow/core/qa/config/deterministic-settings.yaml` 中的所有技術參數
 - **工作流程**：被 `/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/unified-review-workflow.yaml` 引用
 - **報告範本**：引用 `/Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml`
 
@@ -13,12 +12,6 @@
 - **建議**：開始前載入統一審查工作流程；若缺失，記錄為 validation_warnings 並持續
 - **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/unified-review-workflow.yaml`，失敗則記錄警告
 - **檔案載入驗證**：未能完全內化時，記錄缺口與替代資訊來源
-
-### 執行環境（決定性與效能）
-- **決定性設定（強制）**：引用 `deterministic-settings.yaml` 中的 llm_settings（temperature=0、top_p=0、frequency_penalty=0、presence_penalty=0），並使用 `{task_id}` 作為可重現隨機種子
-- **並行化原則（強制）**：引用 `deterministic-settings.yaml` 中的 parallel_settings，在不互相依賴的「唯讀發現」步驟中預設並行（例如：多檔讀取、glob、grep、semantic search）
-- **快取策略（強制）**：引用 `deterministic-settings.yaml` 中的 cache_settings，以「絕對路徑+mtime」為鍵快取已讀取檔案內容；避免在同輪審查中重複讀取未變更檔案
-- **時間盒（強制）**：每次工具呼叫≤25秒；各階段時間預算：S1=4m、S2=6m、S3=6m、S4=4m、S5=5m、S6=2m
 
 ### 路徑回退策略（強制）
 - **工作流程檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/unified-review-workflow.yaml`，否則使用 `core/workflow/unified-review-workflow.yaml`

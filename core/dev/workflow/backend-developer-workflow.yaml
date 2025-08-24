@@ -52,9 +52,6 @@ execution_protocol:
     mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/backend-developer-enforcement.md"
     note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the backend enforcement file"
 
-# Profile configurations are now centralized in deterministic-settings.yaml
-# This workflow inherits all LLM settings, output settings, and parallel configurations from there
-
 output_contracts:
   objectives: { $ref: "#/schemas/objectives_v1" }
   modules: { $ref: "#/schemas/modules_v1" }

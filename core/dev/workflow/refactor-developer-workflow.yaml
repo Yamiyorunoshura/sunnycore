@@ -52,9 +52,6 @@ execution_protocol:
     mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/refactor-developer-enforcement.md"
     note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the refactor enforcement file"
 
-# 配置繼承自統一確定性設定
-# 詳細配置請參考: /Users/tszkinlai/Coding/AI workflow/core/dev/config/deterministic-settings.yaml
-
 output_contracts:
   dev_notes: { $ref: "#/schemas/dev_notes_v1" }
   objectives: { $ref: "#/schemas/objectives_v1" }

@@ -6,7 +6,6 @@
 - **絕對要求**：開始檔案分類前必須載入必要文件；若缺失，立即停止並回報
 - **強制讀取順序**：
   1. `/Users/tszkinlai/Coding/AI workflow/core/po/workflow/unified-file-classification-workflow.yaml`
-  2. `/Users/tszkinlai/Coding/AI workflow/core/po/config/deterministic-settings.yaml`
 - **檔案載入驗證**：未能完全載入時，立即停止並回報錯誤
 
 ### 確定性與並行化（絕對強制）

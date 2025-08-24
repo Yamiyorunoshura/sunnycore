@@ -57,7 +57,6 @@ execution_hints:
 path_aliases:
   WORKFLOW_FILE: "/Users/tszkinlai/Coding/AI workflow/core/po/workflow/unified-file-classification-workflow.yaml"
   ENFORCEMENT_FILE: "/Users/tszkinlai/Coding/AI workflow/core/po/enforcement/file-classifier-enforcement.md"
-  DETERMINISTIC_SETTINGS: "/Users/tszkinlai/Coding/AI workflow/core/po/config/deterministic-settings.yaml"
 
 classification_criteria:
   must_keep:

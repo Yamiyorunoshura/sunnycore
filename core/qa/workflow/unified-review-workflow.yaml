@@ -38,25 +38,7 @@ execution_protocol:
     mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/qa/enforcement/task-reviewer-enforcement.md"
     note: "All detailed enforcement rules, validation criteria, and quality standards are defined in the enforcement file"
   
-  # 引用統一配置，避免重複定義
-  configuration_references:
-    deterministic_settings: "/Users/tszkinlai/Coding/AI workflow/core/qa/config/deterministic-settings.yaml"
-    note: "All determinism, parallelization, caching, and monitoring settings are defined in deterministic-settings.yaml"
-
 execution_context:
-  # 移除重複的設定定義，改為引用
-  determinism:
-    note: "Reference deterministic-settings.yaml for all LLM and execution parameters"
-    reference_file: "/Users/tszkinlai/Coding/AI workflow/core/qa/config/deterministic-settings.yaml"
-    
-  parallelization:
-    note: "Reference deterministic-settings.yaml parallel_settings for parallel execution rules"
-    reference_file: "/Users/tszkinlai/Coding/AI workflow/core/qa/config/deterministic-settings.yaml"
-    
-  caching:
-    note: "Reference deterministic-settings.yaml cache_settings for caching policies"
-    reference_file: "/Users/tszkinlai/Coding/AI workflow/core/qa/config/deterministic-settings.yaml"
-    
   path_resolution:
     project_root: "{project_root}"
     fallback_order:
@@ -599,5 +581,4 @@ ai_optimization:
   tool_integration: "Explicit tool calls reduce AI confusion"
   validation_points: "Checkpoints enable early error detection"
   follow_up_support: "Separate handling for iterative reviews"
-  deterministic_settings: "Use temperature=0, top_p=0.1 unless explicitly overridden by user"
   parallel_guidance: "Default to parallel tool execution for independent read-only steps"

@@ -17,15 +17,6 @@ workflow:
   enforcement_level: "lenient"
   halt_on_validation_failure: false
 
-  # 確定性與效率提示（引用統一配置）
-  determinism:
-    note: "所有確定性設定請參考 /Users/tszkinlai/Coding/AI workflow/core/dev/config/deterministic-settings.yaml"
-    reference_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/config/deterministic-settings.yaml"
-
-  execution_hints:
-    note: "並行執行和快取設定請參考 deterministic-settings.yaml 中的 parallel_settings 和 cache_settings"
-    reference_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/config/deterministic-settings.yaml"
-
 # === 輸入定義 ===
 inputs:
   task_id: "<required>"

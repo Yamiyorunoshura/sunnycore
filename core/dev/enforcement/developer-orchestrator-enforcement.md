@@ -57,10 +57,7 @@
 ## 執行階段強制規範
 
 當執行`*develop-task`自定義命令時：
-- **讀取工作流程文件**：
-  - 讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/developer-orchestrator-workflow.yaml`
-- **讀取確定性設定**：
-  - 讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/config/deterministic-settings.yaml`
+- **讀取工作流程文件**：讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/developer-orchestrator-workflow.yaml`
 
 ## 並行執行優化策略
 
