@@ -1,5 +1,12 @@
 # 統一確定性配置
 # 用於所有AI代理以減少隨機性並確保可重現性
+# 
+# 引用關係：
+# - 被 task-reviewer.md (agent) 引用
+# - 被 task-reviewer-enforcement.md (enforcement) 引用  
+# - 被 unified-review-workflow.yaml (workflow) 引用
+#
+# 此文件是唯一權威的技術參數來源，其他文件應引用此配置而非重複定義
 
 llm_settings:
   # 完全確定性的LLM參數

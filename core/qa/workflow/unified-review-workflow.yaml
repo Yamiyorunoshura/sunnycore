@@ -37,22 +37,26 @@ execution_protocol:
   enforcement_compliance:
     mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/qa/enforcement/task-reviewer-enforcement.md"
     note: "All detailed enforcement rules, validation criteria, and quality standards are defined in the enforcement file"
+  
+  # 引用統一配置，避免重複定義
+  configuration_references:
+    deterministic_settings: "/Users/tszkinlai/Coding/AI workflow/core/qa/config/deterministic-settings.yaml"
+    note: "All determinism, parallelization, caching, and monitoring settings are defined in deterministic-settings.yaml"
 
 execution_context:
+  # 移除重複的設定定義，改為引用
   determinism:
-    temperature: 0
-    top_p: 0.1
-    frequency_penalty: 0
-    presence_penalty: 0
-    reproducible_seed: "{task_id}"
+    note: "Reference deterministic-settings.yaml for all LLM and execution parameters"
+    reference_file: "/Users/tszkinlai/Coding/AI workflow/core/qa/config/deterministic-settings.yaml"
+    
   parallelization:
-    guidance: "Run read-only discovery actions in parallel where independent"
-    batch_rules:
-      - "Combine file reads, globs and grep/codebase searches via parallel tool calls"
-      - "Cap to 3-5 concurrent calls to avoid timeouts"
-      - "Prefer parallel for Stage 1 and quality dimension discovery in Stage 3"
+    note: "Reference deterministic-settings.yaml parallel_settings for parallel execution rules"
+    reference_file: "/Users/tszkinlai/Coding/AI workflow/core/qa/config/deterministic-settings.yaml"
+    
   caching:
-    policy: "Cache file contents by absolute path and mtime; avoid re-reading unchanged files"
+    note: "Reference deterministic-settings.yaml cache_settings for caching policies"
+    reference_file: "/Users/tszkinlai/Coding/AI workflow/core/qa/config/deterministic-settings.yaml"
+    
   path_resolution:
     project_root: "{project_root}"
     fallback_order:
@@ -69,15 +73,12 @@ execution_context:
         - "docs/specs/"
         - "docs/specs/"
         - "specs/"
+  
+  # 引用enforcement文件中的時間盒設定
   timeboxes:
-    per_tool_call_seconds: 25
-    overall_stage_budget_minutes:
-      stage_1: 4
-      stage_2: 6
-      stage_3: 6
-      stage_4: 4
-      stage_5: 5
-      stage_6: 2
+    note: "Reference task-reviewer-enforcement.md for detailed timebox specifications"
+    reference_file: "/Users/tszkinlai/Coding/AI workflow/core/qa/enforcement/task-reviewer-enforcement.md"
+    
   failure_policy:
     on_missing_primary_path: "Use fallback order; if none available, append_warning_and_continue_with_limitations"
 
