@@ -52,34 +52,8 @@ execution_protocol:
     mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/backend-developer-enforcement.md"
     note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the backend enforcement file"
 
-profiles:
-  fast_strict:
-    sampling_policy:
-      temperature: 0.1
-      top_p: 0.2
-      json_mode: true
-      max_output_tokens: 4096
-    response_format:
-      default: "json"
-      canonical_key_order: true
-      forbid_extra_keys: true
-      wrap_in_code_fence: false
-    caching:
-      plan_cache_key: ["task_id", "plan_hash"]
-      cache_context_summary: true
-      restore_on_same_key: true
-    generation_style:
-      no_prose: true
-      bullet_only: true
-      allowed_terms_enum: ["F-ID", "N-ID", "acceptance_criteria", "risk", "decision"]
-    parallelizable_actions:
-      - stage: "tests_first"
-        actions: ["unit_tests_skeletons", "integration_tests_skeletons", "acceptance_tests_skeletons"]
-      - stage: "quality_gates"
-        actions: ["static_analysis", "dependency_security_scan"]
-    differential_mode:
-      enabled_when: "brownfield"
-      only_generate_changed_sections: true
+# Profile configurations are now centralized in deterministic-settings.yaml
+# This workflow inherits all LLM settings, output settings, and parallel configurations from there
 
 output_contracts:
   objectives: { $ref: "#/schemas/objectives_v1" }
@@ -346,25 +320,8 @@ stages:
           "PRs_merged_CI_green"
         ]
 
-# === Backend開發者特化配置 ===
-backend_specializations:
-  data_changes:
-    - draft_idempotent_reversible_migrations
-    - define_ordered_steps_and_backout
-    - run_in_non_prod_first
-  
-  api_security:
-    - implement_authentication_authorization
-    - validate_input_sanitization
-    - ensure_proper_error_handling
-  
-  performance:
-    - meet_latency_throughput_memory_targets
-    - implement_proper_logging_monitoring
-
-  documentation_requirements:
-    - update_api_docs_per_interfaces
-    - document_migrations_and_rollback
+# Backend specialization requirements are now defined in backend-developer-enforcement.md
+# This ensures clear separation between workflow process and enforcement rules
 
 # === 關鍵成功因素 ===
 critical_success_factors:
