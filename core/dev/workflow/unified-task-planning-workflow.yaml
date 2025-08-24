@@ -163,6 +163,7 @@ stages:
         target: "docs/specs/task.md"
         purpose: "Load task specification"
         validation: "task_spec_loaded"
+        expectation: "numbers(1/2/3/...)"
       - tool_call: "read_file"
         target: "docs/specs/requirements.md"
         purpose: "Load requirements specification"
