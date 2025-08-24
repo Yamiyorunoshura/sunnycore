@@ -28,8 +28,7 @@ plan_resolution:
     - "yml" 
     - "md"
   expectations:
-    template: "implementation-plan"
-    version: 1
+    - name: "<task_id>-plan.md/<task_id>-plan.yaml/<task_id>-plan.yml"
 
 # === 範圍管控 ===
 guardrails:
