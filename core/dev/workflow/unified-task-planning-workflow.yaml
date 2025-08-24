@@ -1,8 +1,14 @@
 ---
 # 統一任務規劃工作流程
-# 整合了enforcement、validation和workflow為單一文件
+# 專注於階段定義和執行順序，具體規則請參考執行規範文件
 template: unified-task-planning-workflow  
 version: 2.0
+
+# 職責分工：
+# - 此文件：定義工作流程階段和執行順序
+# - 執行規範：定義所有強制規則和驗證標準
+# - 確定性設定：定義所有確定性參數
+# - 範本：定義輸出文檔結構
 
 workflow:
   name: "統一任務規劃證據驅動工作流程"
@@ -11,24 +17,14 @@ workflow:
   enforcement_level: "lenient"
   halt_on_validation_failure: false
 
-  # 確定性與效率提示（執行層可選擇採納）
+  # 確定性與效率提示（引用統一配置）
   determinism:
-    generation:
-      temperature: 0.1
-      top_p: 0.2
-      presence_penalty: 0
-      frequency_penalty: 0
-    retry_policy:
-      io_retries: 2
-      generation_retries: 0
-    idempotency:
-      run_key: "task_id + sources_content_hash"
-      expectation: "identical_output_when_inputs_unchanged"
+    note: "所有確定性設定請參考 /Users/tszkinlai/Coding/AI workflow/core/dev/config/deterministic-settings.yaml"
+    reference_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/config/deterministic-settings.yaml"
 
   execution_hints:
-    parallelize_tool_calls: true
-    content_hash_cache: true
-    max_parallelism: 4
+    note: "並行執行和快取設定請參考 deterministic-settings.yaml 中的 parallel_settings 和 cache_settings"
+    reference_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/config/deterministic-settings.yaml"
 
 # === 輸入定義 ===
 inputs:
@@ -62,34 +58,11 @@ execution_protocol:
 
 
 # === 階段定義 ===
-# 詳細的驗證規則和品質標準在 /Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/task-planner-enforcement.md 中定義
+# 所有詳細的驗證規則、品質標準和執行協議都在執行規範文件中定義
 validation_rules:
-  note: "Detailed validation rules and quality standards are defined in the enforcement file"
-  linters:
-    banned_terms:
-      - "TBD"
-      - "待定"
-      - "視需要"
-      - "to be decided"
-      - "as needed"
-    banned_patterns:
-      - "\\<.*\\>"  # 任何形如 <...> 的佔位符
-    allow_na_with_reason: true  # 僅允許 "N/A - <原因>"
-  consistency_checks:
-    functional_requirements_have_acceptance_criteria: true
-    non_functional_requirements_have_measurements: true
-    modules_mapped_to_milestones: true
-    data_changes_have_migrations_or_reason: true
-    dependencies_have_owner_or_version: true
-  checklists:
-    definition_of_ready:
-      - "workflow and template files loaded"
-      - "project_root resolved"
-    definition_of_done:
-      - "all sections populated"
-      - "no placeholders"
-      - "index updated"
-      - "final validation passed"
+  note: "完整的驗證規則和品質標準請參考執行規範文件"
+  reference_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/task-planner-enforcement.md"
+  summary: "此工作流程專注於階段定義和執行順序，具體規則請參考執行規範"
   
   stage_sequence:
     - workflow_initialization
@@ -100,26 +73,8 @@ validation_rules:
     - finalization
 
   error_handling:
-    validation_errors:
-      missing_stage:
-        severity: "warning"
-        message: "Mandatory stage not completed"
-        action: "append_warning_and_continue"
-
-      incomplete_template:
-        severity: "warning"
-        message: "Template section incomplete or contains placeholders"
-        action: "append_warning_and_continue"
-
-      missing_context:
-        severity: "warning"
-        message: "Valuable context not preserved in document"
-        action: "append_warning_and_continue"
-
-      invalid_format:
-        severity: "warning"
-        message: "Document format does not match template"
-        action: "append_warning_and_continue"
+    note: "詳細的錯誤處理策略請參考執行規範文件"
+    reference_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/task-planner-enforcement.md"
 
 # === 工作流程階段 ===
 stages:
@@ -163,7 +118,7 @@ stages:
         target: "docs/specs/task.md"
         purpose: "Load task specification"
         validation: "task_spec_loaded"
-        expectation: "numbers(1/2/3/...)"
+        expectation: "task named with numbers(1/2/3/...) and having several subtasks(1.1/1.2/1.3/...)"
       - tool_call: "read_file"
         target: "docs/specs/requirements.md"
         purpose: "Load requirements specification"
@@ -313,23 +268,27 @@ stages:
 
 # === 關鍵成功因素 ===
 critical_success_factors:
-  - "Read workflow and template files FIRST - never start without them"
-  - "Resolve project root correctly - ensure output path is valid"
-  - "Collect ALL required inputs - specifications and thorough research"
-  - "Analyze requirements thoroughly - understand before planning"
-  - "Populate template completely - no placeholders allowed"
-  - "Preserve valuable context - include all specific technical details"
-  - "Validate at checkpoints - ensure quality at each stage"
-  - "Generate actionable plans - ready for development team use"
+  - "優先讀取工作流程和範本文件 - 絕不跳過此步驟"
+  - "正確解析專案根目錄 - 確保輸出路徑有效"
+  - "收集所有必要輸入 - 規格文件和深入研究"
+  - "徹底分析需求 - 理解後再規劃"
+  - "完整填充範本 - 不允許佔位符"
+  - "保持有價值的上下文 - 包含所有具體技術細節"
+  - "在檢查點驗證 - 確保每個階段的品質"
+  - "生成可執行的計劃 - 準備供開發團隊使用"
+  - "嚴格遵循執行規範 - 參考 task-planner-enforcement.md 中的所有規則"
 
 # === 工作流程違規回應 ===
 workflow_violation_responses:
-  - "Missing stage execution: Return and complete the skipped stage"
-  - "Incomplete template: Identify missing sections and populate them"
-  - "Placeholder values: Replace all placeholders with actual content"
-  - "Generic content: Add specific technical details and context"
-  - "Invalid format: Correct format to match template exactly"
-  - "Missing context: Extract and include valuable information from specs"
+  note: "詳細的違規處理策略和補救措施請參考執行規範文件"
+  reference_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/task-planner-enforcement.md"
+  summary:
+    - "階段執行缺失：返回並完成跳過的階段"
+    - "範本不完整：識別缺失部分並填充"
+    - "佔位符值：用實際內容替換所有佔位符"
+    - "通用內容：添加具體技術細節和上下文"
+    - "格式無效：修正格式以完全匹配範本"
+    - "上下文缺失：提取並包含規格中的有價值信息"
 
 # === 輸出配置 ===
 output:
