@@ -104,7 +104,6 @@ execution_protocol:
         - "收集所有代理的執行結果"
         - "使用標準模板生成開發記錄"
         - "驗證開發記錄格式和內容"
-        - "保存記錄到指定位置docs/dev-notes/{task_id}-dev-notes.md"
         - "如為棕地狀態，在開發記錄中記錄問題修復情況"
 
 # === 並行執行配置 ===
@@ -116,7 +115,7 @@ parallel_execution:
 
 # === 輸出配置 ===
 outputs:
-  dev_notes_path: "{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md"
+  # 文檔生成已由主agent接管
 
 # === 代理映射規則 ===
 agent_mapping:

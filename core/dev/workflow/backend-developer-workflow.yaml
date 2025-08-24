@@ -330,12 +330,9 @@ stages:
     title: "交接與文件"
     mandatory: true
     validation_checkpoint: true
-    🚨_CRITICAL_STAGE: "DEV_NOTES_MUST_BE_COMPLETED"
     actions:
-      - update_documentation_per_developer_type: "backend"
-      - update_api_docs_per_interfaces: true
-      - document_migrations_and_rollback: true
-      - fill_notes_with: "deviations_and_clarifications"
+      - record_implementation_summary: true
+      - note_deviations_and_clarifications: true
 
   - id: "definition_of_done"
     title: "完成定義"
@@ -371,13 +368,13 @@ critical_success_factors:
 
 # === 工作流程違規回應 ===
 workflow_violation_responses:
-  - "Missing stage execution: Append warning and continue; flag in dev_notes.validation_warnings"
+  - "Missing stage execution: Append warning and continue"
   - "Scope violation: Append warning and continue; open question asynchronously"
-  - "Plan deviation: Append warning; document decision in dev_notes"
+  - "Plan deviation: Append warning; document decision"
   - "🚨 TDD VIOLATION: CRITICAL WARNING - tests must be written before implementation"
   - "Missing tests: Append warning; prioritize remediation next iteration"
   - "Quality gate failure: Append warning; include measurements and remediation plan"
   - "Incomplete documentation: Append warning; complete before release cut if possible"
   - "Missing traceability: Append warning; add task_id references retroactively"
-  - "🚨 HANDOVER_docs_STAGE_SKIPPED: Append warning; ensure documentation post-hoc"
+  - "Handover_docs_stage_skipped: Append warning; ensure documentation post-hoc"
   - "🚨 TDD CYCLE INCOMPLETE: Append warning; ensure RED-GREEN-REFACTOR cycle completed"

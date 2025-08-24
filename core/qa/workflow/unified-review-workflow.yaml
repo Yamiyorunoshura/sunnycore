@@ -11,7 +11,7 @@ metadata:
   description: "全面實施審查的結構化工作流程"
   
 overview:
-  description: "Evidence-driven implementation review with 6 core stages"
+  description: "Evidence-driven implementation review with 5 core stages"
   report_template: "/Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml"
   stages:
     - id: 1
@@ -29,9 +29,6 @@ overview:
     - id: 5
       name: "報告生成與驗證"
       description: "Generate/update template-compliant report and handle task completion"
-    - id: 6
-      name: "更新任務文件"
-      description: "根據審查結果更新 task.md"
 
 execution_protocol:
   enforcement_compliance:
@@ -414,99 +411,28 @@ stages:
       - "Template compliance verified"
       - "QA decision extracted and status variable set"
       - "Final validation passed"
-      - "Only after final validation passes may final_review_status be used by Stage 6"
+      - "Review status variable ready for subsequent processing"
 
   stage_6:
     id: 6
-    name: "更新任務文件"
-    name_en: "Update Task Document"
+    name: "任務狀態同步"
+    name_en: "Task Status Synchronization"
     depends_on: [5]
     objectives:
-      - "根據最終審查狀態更新 task.md"
-      - "確保任務狀態在中央文件中得到準確反映"
+      - "同步最終審查狀態到內部變數"
+      - "準備後續處理所需的狀態信息"
     
     actions:
-      - tool: "edit_file"
-        target: "docs/specs/task.md"
-        purpose: "根據審查結果更新任務狀態"
-        condition: "on_variable_value"
-        variable_name: "final_review_status"
-        
-        on_value:
-          pass:
-            actions:
-              - action_type: "search_and_replace"
-                search_pattern: "- [ ] {task_title}"
-                replace_pattern: "- [x] {task_title}"
-                search_pattern_alt: "- [-] {task_title}"
-                replace_pattern_alt: "- [x] {task_title}"
-              - action_type: "search_and_replace"
-                search_pattern: "- [ ] {task_id}."
-                replace_pattern: "- [x] {task_id}."
-              - action_type: "search_and_replace"
-                search_pattern: "- [-] {task_id}."
-                replace_pattern: "- [x] {task_id}."
-
-          fail:
-            action_type: "search_and_replace"
-            search_pattern: "- [ ] {task_title}"
-            replace_pattern: "- [-] {task_title}"
-
-      - tool: "edit_file"
-        target: "docs/specs/task.md"
-        purpose: "更新任務中繼資料（狀態/文件/時間/審查者）"
-        condition: "on_variable_value"
-        variable_name: "final_review_status"
-        on_value:
-          pass:
-            actions:
-              - action_type: "search_and_replace"
-                search_pattern: "QA狀態: .*"
-                replace_pattern: "QA狀態: 通過"
-              - action_type: "search_and_replace"
-                search_pattern: "審查文件: .*"
-                replace_pattern: "審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
-              - action_type: "search_and_replace"
-                search_pattern: "審查時間: .*"
-                replace_pattern: "審查時間: {now_iso}"
-              - action_type: "search_and_replace"
-                search_pattern: "審查者: .*"
-                replace_pattern: "審查者: task-reviewer"
-              - action_type: "append_if_missing"
-                anchor_heading: "## Metadata"
-                content_lines:
-                  - "## Metadata"
-                  - "- QA狀態: 通過"
-                  - "- 審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
-                  - "- 審查時間: {now_iso}"
-                  - "- 審查者: task-reviewer"
-          fail:
-            actions:
-              - action_type: "search_and_replace"
-                search_pattern: "QA狀態: .*"
-                replace_pattern: "QA狀態: 失敗"
-              - action_type: "search_and_replace"
-                search_pattern: "審查文件: .*"
-                replace_pattern: "審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
-              - action_type: "search_and_replace"
-                search_pattern: "審查時間: .*"
-                replace_pattern: "審查時間: {now_iso}"
-              - action_type: "search_and_replace"
-                search_pattern: "審查者: .*"
-                replace_pattern: "審查者: task-reviewer"
-              - action_type: "append_if_missing"
-                anchor_heading: "## Metadata"
-                content_lines:
-                  - "## Metadata"
-                  - "- QA狀態: 失敗"
-                  - "- 審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
-                  - "- 審查時間: {now_iso}"
-                  - "- 審查者: task-reviewer"
-
+      - action_type: "status_sync"
+        purpose: "同步審查狀態到內部變數"
+        variable_sync:
+          - source: "final_review_status"
+            target: "review_status"
+            purpose: "供後續處理使用"
+    
     validation_checkpoint:
-      - "task.md 文件已根據審查結果更新"
-      - "最終任務狀態已正確標記"
-      - "通過時已同步勾選所有以 {task_id}. 開頭的子任務"
+      - "審查狀態已同步到內部變數"
+      - "準備好進行後續處理"
 
 critical_success_factors:
   mandatory_requirements:
@@ -550,7 +476,7 @@ critical_success_factors:
 
   quality_gates:
     requirements:
-      - "All stages completed sequentially"
+      - "All 5 stages completed sequentially"
       - "All evidence collected and documented"
       - "All template sections populated"
       - "All validation checkpoints passed"
@@ -572,7 +498,6 @@ tool_usage_patterns:
     
   documentation:
     write: "Use for generating final reports"
-    search_replace: "Use for updating existing documents"
 
 # AI Processing Notes
 ai_optimization:

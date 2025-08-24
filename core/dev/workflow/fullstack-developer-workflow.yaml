@@ -53,70 +53,10 @@ execution_protocol:
     note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the fullstack enforcement file"
 
 output_contracts:
-  dev_notes: { $ref: "#/schemas/dev_notes_v1" }
   objectives: { $ref: "#/schemas/objectives_v1" }
   modules: { $ref: "#/schemas/modules_v1" }
 
 schemas:
-  dev_notes_v1:
-    $id: "schemas/dev_notes_v1"
-    type: object
-    required: [developer_type, timestamp, changes_summary, detailed_changes_mapped_to, implementation_decisions, risk_considerations, maintenance_notes]
-    properties:
-      developer_type:
-        enum: ["fullstack"]
-      timestamp:
-        type: string
-        format: date-time
-      task_phase:
-        type: string
-      re_dev_iteration:
-        type: integer
-        minimum: 1
-      changes_summary:
-        type: string
-        minLength: 50
-      detailed_changes_mapped_to:
-        type: object
-        required: ["F-IDs", "N-IDs", "UI-IDs"]
-        properties:
-          F-IDs:
-            type: array
-            items:
-              type: string
-              pattern: "^F-[0-9]+$"
-            minItems: 1
-          N-IDs:
-            type: array
-            items:
-              type: string
-              pattern: "^N-[0-9]+$"
-          UI-IDs:
-            type: array
-            items:
-              type: string
-              pattern: "^UI-[0-9]+$"
-        additionalProperties: false
-      implementation_decisions:
-        type: string
-        minLength: 50
-      risk_considerations:
-        type: string
-        minLength: 30
-      maintenance_notes:
-        type: string
-        minLength: 30
-      challenges_and_deviations:
-        type: string
-        minLength: 30
-      quality_metrics_achieved:
-        type: string
-        minLength: 20
-      validation_warnings:
-        type: array
-        items:
-          type: string
-    additionalProperties: false
 
   objectives_v1:
     $id: "schemas/objectives_v1"
@@ -245,9 +185,7 @@ validation_rules:
     - stage: "architecture_and_modules"
       must_validate_against: "modules"
       on_failure: "append_warning_and_continue"
-    - stage: "handover_docs"
-      must_validate_against: "dev_notes"
-      on_failure: "APPEND_WARNINGS_AND_CONTINUE"
+
     - stage: "tdd_cycle_planning"
       must_validate_against: "tdd_plan"
       on_failure: "append_warning_and_continue"
@@ -409,42 +347,9 @@ stages:
     title: "交接與文件"
     mandatory: true
     validation_checkpoint: true
-    🚨_CRITICAL_STAGE: "DEV_NOTES_MUST_BE_COMPLETED"
     actions:
-      - update_documentation_per_developer_type: "fullstack"
-      - update_api_docs_per_interfaces: true
-      - update_storybook_or_docs_for_components: true
-      - document_migrations_and_rollback: true
-      - fill_notes_with: "deviations_and_clarifications"
-      - 🚨_MANDATORY_DEV_NOTES_VALIDATION:
-          pre_validation_checks:
-            - verify_dev_notes_section_exists: "WARN_AND_CONTINUE"
-            - verify_detailed_changes_not_empty: "WARN_AND_CONTINUE"
-            - verify_f_ids_n_ids_ui_ids_mapping_complete: "WARN_AND_CONTINUE"
-          quality_requirements:
-            - detailed_changes_minimum_length: "300_characters"
-            - must_include_implementation_decisions: true
-            - must_include_risk_considerations: true
-            - must_include_maintenance_notes: true
-          enforcement:
-            - on_validation_failure: "APPEND_WARNINGS_AND_CONTINUE"
-            - require_explicit_confirmation: "DEV_NOTES_COMPLETED_AND_VERIFIED"
-      - write_dev_notes_file:
-          location: "{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md"
-          mode: "append_or_create"
-          content_structure:
-            - developer_type: "fullstack"
-            - timestamp: "current_datetime"
-            - task_phase: "determined_from_task_state"
-            - re_dev_iteration: "current_re_dev_iteration_number_or_1"
-            - changes_summary: "overall_development_work_summary"
-            - detailed_changes_mapped_to: "F-IDs_N-IDs_and_UI-IDs"
-            - challenges_and_deviations: "documented_issues_and_plan_changes"
-            - quality_metrics_achieved: "actual_vs_target_measurements"
-            - implementation_decisions: "technical_choices_and_rationale"
-            - risk_considerations: "identified_risks_and_mitigation"
-            - maintenance_notes: "future_maintenance_requirements_and_considerations"
-            - validation_warnings: "collected_validation_warnings"
+      - record_implementation_summary: true
+      - note_deviations_and_clarifications: true
 
   - id: "definition_of_done"
     title: "完成定義"
@@ -457,20 +362,8 @@ stages:
           "all_UI-IDs_verified_by_user_testing",
           "frontend_backend_integration_verified",
           "no_unresolved_open_questions",
-          "PRs_merged_CI_green",
-          "🚨_dev_notes_completely_filled_and_verified",
-          "🚨_detailed_changes_mapped_to_all_relevant_F-IDs_N-IDs_UI-IDs",
-          "🚨_handover_docs_stage_fully_completed"
+          "PRs_merged_CI_green"
         ]
-      - 🚨_FINAL_DEV_NOTES_VERIFICATION:
-          critical_checks:
-            - dev_notes_section_exists: "MANDATORY"
-            - detailed_changes_field_populated: "MANDATORY" 
-            - f_ids_n_ids_ui_ids_mapping_complete: "MANDATORY"
-            - implementation_decisions_documented: "MANDATORY"
-            - risk_considerations_documented: "MANDATORY"
-            - maintenance_notes_provided: "MANDATORY"
-          validation_failure_action: "APPEND_WARNINGS_AND_CONTINUE"
 
 # === Fullstack開發者特化配置 ===
 # 本工作流程專注於全端特有的整合邏輯
@@ -522,16 +415,13 @@ critical_success_factors:
 
 # === 工作流程違規回應 ===
 workflow_violation_responses:
-  - "Missing stage execution: Append warning and continue; flag in dev_notes.validation_warnings"
+  - "Missing stage execution: Append warning and continue"
   - "Scope violation: Append warning and continue; open question asynchronously"
-  - "Plan deviation: Append warning; document decision in dev_notes"
+  - "Plan deviation: Append warning; document decision"
   - "🚨 TDD VIOLATION: CRITICAL WARNING - tests must be written before implementation"
   - "Missing tests: Append warning; prioritize remediation next iteration"
   - "Quality gate failure: Append warning; include measurements and remediation plan"
   - "Incomplete documentation: Append warning; complete before release cut if possible"
   - "Missing traceability: Append warning; add task_id references retroactively"
-  - "🚨 DEV_NOTES_INCOMPLETE: Append warning and continue to DoD with risk note"
-  - "🚨 DEV_NOTES_MISSING_F-IDs_N-IDs_UI-IDs_MAPPING: Append warning; include provisional mapping or rationale"
-  - "🚨 DEV_NOTES_INSUFFICIENT_DETAIL: Append warning; add details in follow-up commit"
-  - "🚨 HANDOVER_docs_STAGE_SKIPPED: Append warning; ensure documentation post-hoc"
+  - "Handover_docs_stage_skipped: Append warning; ensure documentation post-hoc"
   - "🚨 TDD CYCLE INCOMPLETE: Append warning; ensure RED-GREEN-REFACTOR cycle completed"
