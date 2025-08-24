@@ -56,7 +56,7 @@
 - 所有需求都要具體、可測試、可實現
 
 ### 完成後行動
-- 將文件輸出至 `docs/requirements/requirements.md`
+- 將文件輸出至 `docs/specs/requirements.md`
 - 撰寫完成後，請明確說明：「**需求文檔已完成，請確認是否滿足您的需要。確認後我們將進入設計階段。**」
 
 ---
@@ -175,7 +175,7 @@ CREATE TABLE table_name (
 - 每個章節都要有具體內容，不能空白
 
 ### 完成後行動
-- 將文件輸出至 `docs/design/design.md`
+- 將文件輸出至 `docs/specs/design.md`
 - 撰寫完成後，請明確說明：「**設計文檔已完成，請確認是否符合技術要求。確認後我們將進入實作計劃階段。**」
 
 ---
@@ -223,7 +223,7 @@ CREATE TABLE table_name (
 - 子任務要足夠具體，能夠直接執行
 
 ### 完成後行動
-- 將文件輸出至 `docs/implementation-plan/implementation-plan.md`
+- 將文件輸出至 `docs/specs/task.md`
 - 撰寫完成後，請明確說明：「**實作計劃已完成，整個專案規劃流程已全部完成。您可以根據此計劃開始實作。**」
 
 ---
