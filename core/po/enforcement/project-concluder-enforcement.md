@@ -5,8 +5,8 @@
 ### 必要前置條件（寬鬆）
 - **建議**：開始結案前載入必要文件；若缺失，記錄為 validation_warnings 並持續
 - **建議讀取順序**：
-  1. `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml`
-  2. `/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml`
+  1. `/Users/tszkinlai/Coding/AI workflow/core/po/workflow/unified-project-concluding-workflow.yaml`
+  2. `/Users/tszkinlai/Coding/AI workflow/core/po/templates/completion-report-tmpl.yaml`
 - **檔案載入驗證**：未能完全載入時，記錄缺口與替代資訊來源
 
 ### 確定性與並行化（新增強制）
@@ -28,7 +28,7 @@
 - **失敗處理**：非阻斷性失敗記錄為警告並持續；阻斷性才停止
 
 ### 範本合規性（強制執行）
-- **結構一致性**：報告必須符合 `/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml` 結構
+- **結構一致性**：報告必須符合 `/Users/tszkinlai/Coding/AI workflow/core/po/templates/completion-report-tmpl.yaml` 結構
 - **內容完整性**：所有必需部分都必須有實際內容
 - **佔位符清除**：不得有未填充的 `<placeholder>` 值
 - **格式標準**：必須符合範本的格式要求
@@ -137,7 +137,7 @@
 
 ### 輸出位置（固定）
 - **主報告**：`{{project_root}}/docs/completion-reports/{{task_id}}-completion.md`
-- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml`
+- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/po/templates/completion-report-tmpl.yaml`
 
 ### 文檔和交接要求
 - **完整記錄**：所有重要決策和發現都必須記錄
@@ -146,9 +146,9 @@
 - **可追溯性**：確保所有陳述都可以追溯到源證據
 
 ### 路徑別名（新增）
-- `WORKFLOW_FILE` → `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-project-concluding-workflow.yaml`
-- `REPORT_TEMPLATE` → `/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml`
-- `ENFORCEMENT_FILE` → `/Users/tszkinlai/Coding/AI workflow/core/enforcement/project-concluder-enforcement.md`
+- `WORKFLOW_FILE` → `/Users/tszkinlai/Coding/AI workflow/core/po/workflow/unified-project-concluding-workflow.yaml`
+- `REPORT_TEMPLATE` → `/Users/tszkinlai/Coding/AI workflow/core/po/templates/completion-report-tmpl.yaml`
+- `ENFORCEMENT_FILE` → `/Users/tszkinlai/Coding/AI workflow/core/po/enforcement/project-concluder-enforcement.md`
 
 ## 結案檢查清單（強制執行）
 

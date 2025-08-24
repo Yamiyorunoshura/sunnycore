@@ -22,10 +22,10 @@ prerequisites:
     - path: "/Users/tszkinlai/Coding/AI workflow/core/config/deterministic-settings.yaml"
       type: "config"
       critical: true
-    - path: "/Users/tszkinlai/Coding/AI workflow/core/templates/architecture-doc-tmpl.yaml"
+    - path: "/Users/tszkinlai/Coding/AI workflow/core/po/templates/architecture-doc-tmpl.yaml"
       type: "template"
       critical: false  # 缺失時記錄警告並持續
-    - path: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/architecture-documenter-enforcement.md"
+    - path: "/Users/tszkinlai/Coding/AI workflow/core/po/enforcement/architecture-documenter-enforcement.md"
       type: "enforcement"
       critical: false
       
@@ -70,13 +70,13 @@ stages:
         
       - name: "load_template"
         action: "read_file"
-        target: "/Users/tszkinlai/Coding/AI workflow/core/templates/architecture-doc-tmpl.yaml"
+        target: "/Users/tszkinlai/Coding/AI workflow/core/po/templates/architecture-doc-tmpl.yaml"
         required: false
         on_failure: "log_warning"
         
       - name: "load_enforcement"
         action: "read_file"
-        target: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/architecture-documenter-enforcement.md"
+        target: "/Users/tszkinlai/Coding/AI workflow/core/po/enforcement/architecture-documenter-enforcement.md"
         required: false
         on_failure: "log_warning"
         

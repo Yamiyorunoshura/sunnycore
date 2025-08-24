@@ -4,7 +4,7 @@
 
 ### 必要前置條件（寬鬆）
 - **建議**：開始前載入統一工作流程與範本；若缺失，記錄至 validation_warnings 並持續
-- **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-task-planning-workflow.yaml`，失敗則記錄警告
+- **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/unified-task-planning-workflow.yaml`，失敗則記錄警告
 - **範本讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/templates/implementation-plan-tmpl.yaml`    ，失敗則記錄警告
 - **驗證要求**：若 project_root 未解析或讀取未完整，記錄缺失與替代資訊來源
 

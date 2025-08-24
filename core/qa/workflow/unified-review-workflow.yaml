@@ -12,7 +12,7 @@ metadata:
   
 overview:
   description: "Evidence-driven implementation review with 6 core stages"
-  report_template: "/Users/tszkinlai/Coding/AI workflow/core/templates/review-tmpl.yaml"
+  report_template: "/Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml"
   stages:
     - id: 1
       name: "初始化與證據收集"
@@ -35,7 +35,7 @@ overview:
 
 execution_protocol:
   enforcement_compliance:
-    mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/enforcement/task-reviewer-enforcement.md"
+    mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/qa/enforcement/task-reviewer-enforcement.md"
     note: "All detailed enforcement rules, validation criteria, and quality standards are defined in the enforcement file"
 
 execution_context:
@@ -57,13 +57,13 @@ execution_context:
     project_root: "{project_root}"
     fallback_order:
       enforcement_file:
-        - "/Users/tszkinlai/Coding/AI workflow/core/enforcement/task-reviewer-enforcement.md"
+        - "/Users/tszkinlai/Coding/AI workflow/core/qa/enforcement/task-reviewer-enforcement.md"
         - "core/enforcement/task-reviewer-enforcement.md"
       workflow_file:
-        - "/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-review-workflow.yaml"
+        - "/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/unified-review-workflow.yaml"
         - "core/workflow/unified-review-workflow.yaml"
       report_template:
-        - "/Users/tszkinlai/Coding/AI workflow/core/templates/review-tmpl.yaml"
+        - "/Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml"
         - "core/templates/review-tmpl.yaml"
       specs_root:
         - "docs/specs/"

@@ -4,7 +4,7 @@
 
 ### 必要前置條件（寬鬆）
 - **建議**：開始前載入統一審查工作流程；若缺失，記錄為 validation_warnings 並持續
-- **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-review-workflow.yaml`，失敗則記錄警告
+- **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/unified-review-workflow.yaml`，失敗則記錄警告
 - **檔案載入驗證**：未能完全內化時，記錄缺口與替代資訊來源
 
 ### 執行環境（決定性與效能）
@@ -14,9 +14,9 @@
 - **時間盒（強制）**：每次工具呼叫≤25秒；各階段時間預算：S1=4m、S2=6m、S3=6m、S4=4m、S5=5m、S6=2m
 
 ### 路徑回退策略（強制）
-- **工作流程檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-review-workflow.yaml`，否則使用 `core/workflow/unified-review-workflow.yaml`
-- **執行規範檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/enforcement/task-reviewer-enforcement.md`，否則使用 `core/enforcement/task-reviewer-enforcement.md`
-- **報告範本檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/templates/review-tmpl.yaml`，否則使用 `core/templates/review-tmpl.yaml`
+- **工作流程檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/unified-review-workflow.yaml`，否則使用 `core/workflow/unified-review-workflow.yaml`
+- **執行規範檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/qa/enforcement/task-reviewer-enforcement.md`，否則使用 `core/enforcement/task-reviewer-enforcement.md`
+- **報告範本檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml`，否則使用 `core/templates/review-tmpl.yaml`
 - **規格根目錄**：優先 `docs/specs/`，其次 `docs/specs/`，再次 `specs/`
 
 ### 基於證據的審查（絕對強制）
@@ -198,7 +198,7 @@
 - **占位符清零**：應清除所有範本占位符；殘留時記錄警告與修正計劃
 
 ### Markdown格式轉換（絕對強制）
-- **YAML到Markdown**：必須將 `/Users/tszkinlai/Coding/AI workflow/core/templates/review-tmpl.yaml` 結構完整轉換為標準Markdown格式
+- **YAML到Markdown**：必須將 `/Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml` 結構完整轉換為標準Markdown格式
 - **標題層級**：YAML section轉換為對應的Markdown標題（# ## ### #### ##### ######）
 - **清單格式**：YAML陣列轉換為Markdown清單（- 或 1. 格式）
 - **代碼區塊**：代碼片段、測試結果、配置使用標準Markdown代碼塊（```language）
@@ -269,7 +269,7 @@
 
 ### 輸出位置（固定）
 - **主報告**：`{{project_root}}/docs/implementation-review/{{task_id}}-review.md`
-- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/templates/review-tmpl.yaml`
+- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml`
 
 ## 失敗處理協議（記錄並續行）
 - **工作流程載入失敗**：依回退策略；若仍失敗，記錄缺失與替代資訊來源
