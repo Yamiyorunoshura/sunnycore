@@ -115,9 +115,9 @@
 - **開發完成後撰寫開發記錄**：
   - 子代理完成開發後，主代理自動撰寫開發記錄
   - 使用標準模板 [`/Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-notes-tmpl.yaml`](/Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-notes-tmpl.yaml)
-  - 遵循指南 [`/Users/tszkinlai/Coding/AI workflow/core/dev-notes-guide.md`](/Users/tszkinlai/Coding/AI workflow/core/dev-notes-guide.md)
+  - 必須以markdown格式撰寫，並填入內容至模板中
   - 處理所有驗證和格式要求
-  - 確保文件保存在正確位置 `docs/dev-notes/{task_id}-dev-notes.md`
+  - 確保文件保存在正確位置 `<project_root>/docs/dev-notes/{task_id}-dev-notes.md`
 
 ### `*plan-task <task_id>`
 - **分析任務狀態**：
