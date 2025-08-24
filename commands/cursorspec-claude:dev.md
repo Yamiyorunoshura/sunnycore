@@ -12,7 +12,7 @@
 
 **在任何開發工作之前**：
 1. **載入確定性設定**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/config/deterministic-settings.yaml` - 這包含所有確定性控制參數
-2. **載入強制執行規範**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/developer-enforcement.md` - 這包含所有強制執行規範
+2. **載入強制執行規範**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/developer-orchestrator-enforcement.md` - 這包含所有強制執行規範
 3. **定位並讀取計劃**：查找並讀取task_id的實施計劃
    - **關鍵**：如果沒有實施計劃，立即停止並通知用戶
 4. **執行確定性協議**：嚴格遵循 deterministic-settings.yaml 中的所有 llm_settings、output_settings、validation_settings、parallel_settings、cache_settings
