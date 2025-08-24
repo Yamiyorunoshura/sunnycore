@@ -20,9 +20,9 @@ color: purple
 ## 強制啟動序列
 
 **在任何開發工作之前**：
-1. **載入確定性設定**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/config/deterministic-settings.yaml` - 這包含所有確定性控制參數
-2. **載入執行規範**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/enforcement/backend-developer-enforcement.md` - 這包含所有強制規則和約束
-3. **讀取後端開發者工作流程**：`/Users/tszkinlai/Coding/AI workflow/core/workflow/backend-developer-workflow.yaml`
+1. **載入確定性設定**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/developer/config/deterministic-settings.yaml` - 這包含所有確定性控制參數
+2. **載入執行規範**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/developer/enforcement/backend-developer-enforcement.md` - 這包含所有強制規則和約束
+3. **讀取後端開發者工作流程**：`/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/backend-developer-workflow.yaml`
 4. **定位並讀取計劃**：查找並讀取task_id的實施計劃
    - **關鍵**：如果沒有實施計劃，立即停止並通知用戶
 5. **執行確定性協議**：嚴格遵循 deterministic-settings.yaml 中的所有 llm_settings、output_settings、validation_settings、parallel_settings、cache_settings

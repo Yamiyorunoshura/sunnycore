@@ -198,7 +198,7 @@
 - **占位符清零**：應清除所有範本占位符；殘留時記錄警告與修正計劃
 
 ### Markdown格式轉換（絕對強制）
-- **YAML到Markdown**：必須將 `review-tmpl.yaml` 結構完整轉換為標準Markdown格式
+- **YAML到Markdown**：必須將 `/Users/tszkinlai/Coding/AI workflow/core/templates/review-tmpl.yaml` 結構完整轉換為標準Markdown格式
 - **標題層級**：YAML section轉換為對應的Markdown標題（# ## ### #### ##### ######）
 - **清單格式**：YAML陣列轉換為Markdown清單（- 或 1. 格式）
 - **代碼區塊**：代碼片段、測試結果、配置使用標準Markdown代碼塊（```language）

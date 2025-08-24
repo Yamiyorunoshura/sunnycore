@@ -183,8 +183,8 @@
   - refactor-developer: `/Users/tszkinlai/Coding/AI workflow/core/workflow/refactor-developer-workflow.yaml`
 - **開發完成後撰寫開發記錄**：
   - 子代理完成開發後，主代理自動撰寫開發記錄
-  - 使用標準模板 [`core/templates/dev-notes-tmpl.yaml`](core/templates/dev-notes-tmpl.yaml)
-  - 遵循指南 [`core/dev-notes-guide.md`](core/dev-notes-guide.md)
+  - 使用標準模板 [`/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml`](/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml)
+  - 遵循指南 [`/Users/tszkinlai/Coding/AI workflow/core/dev-notes-guide.md`](/Users/tszkinlai/Coding/AI workflow/core/dev-notes-guide.md)
   - 處理所有驗證和格式要求
   - 確保文件保存在正確位置 `docs/dev-notes/{task_id}-dev-notes.md`
 
@@ -201,8 +201,8 @@
 
 ## 工作流程
 
-- 規劃：`/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-task-planning-workflow.yaml`
-- 開發：每個開發者類型使用專門的工作流程：
+- 規劃：`/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-task极客-planning-workflow.yaml`
+- 極客開發：每個開發者類型使用專門的工作流程：
   - frontend: `/Users/tszkinlai/Coding/AI workflow/core/workflow/frontend-developer-workflow.yaml`
   - backend: `/Users/tszkinlai/Coding/AI workflow/core/workflow/backend-developer-workflow.yaml`
   - backend子代理：繼承 `backend-developer-workflow.yaml` + 各自專門化
@@ -227,8 +227,8 @@
      - 若計劃分析失敗則回退到通用後端代理
    - 協調並委派給適當的子代理
    - **開發完成後自動撰寫開發記錄**：
-     - 使用標準模板 [`core/templates/dev-notes-tmpl.yaml`](core/templates/dev-notes-tmpl.yaml)
-     - 遵循指南 [`core/dev-notes-guide.md`](core/dev-notes-guide.md)
+     - 使用標準模板 [`/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml`](/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml)
+     - 遵循指南 [`/Users/tszkinlai/Coding/AI workflow/core/dev-notes-guide.md`](/Users/tszkinlai/Coding/AI workflow/core/dev-notes-guide.md)
      - 處理所有驗證和格式要求
      - 確保文件保存在正確位置 `docs/dev-notes/{task_id}-dev-notes.md`
    - 不直接執行開發或規劃任務

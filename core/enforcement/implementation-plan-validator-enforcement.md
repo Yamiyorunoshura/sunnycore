@@ -23,7 +23,7 @@
 - **失敗處理**：非阻斷性失敗記錄為警告並持續；阻斷性才停止
 
 ### 範本合規性（強制但不中斷）
-- **結構驗證**：計劃必須符合 `implementation-plan` 範本的必需欄位
+- **結構驗證**：計劃必須符合 `/Users/tszkinlai/Coding/AI workflow/core/templates/implementation-plan-tmpl.yaml` 範本的必需欄位
 - **完整性檢查**：所有必需部分都必須有實際內容
 - **佔位符清除**：應清除 `<placeholder>`；殘留時記錄並補齊計劃
 - **格式一致性**：必須符合範本的格式要求
@@ -103,7 +103,7 @@
 - **決策規則**：任一阻斷條件（如缺失關鍵章節、交叉參考失敗、佔位符殘留、無證據發現）則歸類為關鍵
 
 ### 報告生成要求（強制執行）
-- **範本合規**：報告必須符合 `plan-validation-report-tmpl.yaml` 結構
+- **範本合規**：報告必須符合 `/Users/tszkinlai/Coding/AI workflow/core/templates/plan-validation-report-tmpl.yaml` 結構
 - **內容完整**：所有範本部分都必須有實際內容
 - **證據支持**：所有發現都必須有具體證據
 - **建議具體**：改進建議必須具體且可操作

@@ -28,7 +28,7 @@
 - **失敗處理**：非阻斷性失敗記錄為警告並持續；阻斷性才停止
 
 ### 範本合規性（強制執行）
-- **結構一致性**：報告必須符合 `completion-report-tmpl.yaml` 結構
+- **結構一致性**：報告必須符合 `/Users/tszkinlai/Coding/AI workflow/core/templates/completion-report-tmpl.yaml` 結構
 - **內容完整性**：所有必需部分都必須有實際內容
 - **佔位符清除**：不得有未填充的 `<placeholder>` 值
 - **格式標準**：必須符合範本的格式要求

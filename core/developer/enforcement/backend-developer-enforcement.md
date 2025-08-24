@@ -4,7 +4,7 @@
 
 ### 必要前置條件
 - **建議**：在開始開發前載入統一工作流程與計劃；若缺失，於 dev_notes.validation_warnings 記錄並持續執行
-- **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/workflow/backend-developer-workflow.yaml`，若失敗則記錄警告
+- **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/backend-developer-workflow.yaml`，若失敗則記錄警告
 - **計劃檢查**：嘗試定位並讀取task_id的實施計劃；如缺失，記錄警告並以最小可行上下文繼續
 
 ### 範圍合規性（寬鬆紀錄）
@@ -71,7 +71,7 @@
 - **填寫品質**：不足以支撐維護時，標註為重要警告
 
 ### Markdown格式轉換（絕對強制）
-- **YAML到Markdown**：必須將 `dev-notes-tmpl.yaml` 結構完整轉換為標準Markdown格式
+- **YAML到Markdown**：必須將 `/Users/tszkinlai/Coding/AI workflow/core/templates/dev-notes-tmpl.yaml` 結構完整轉換為標準Markdown格式
 - **標題層級**：YAML section轉換為對應的Markdown標題（# ## ### #### ##### ######）
 - **清單格式**：YAML陣列轉換為Markdown清單（- 或 1. 格式）
 - **代碼區塊**：代碼片段使用標準Markdown代碼塊（```language）

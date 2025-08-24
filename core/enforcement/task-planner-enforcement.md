@@ -32,7 +32,7 @@
 ### 範本合規性（寬鬆）
 - **完整填充**：應以實際內容填充或標記為"N/A - [原因]"；不足時記錄警告
 - **佔位符清除**：應清除 `<placeholder>` 值；殘留時記錄以利後續補齊
-- **結構一致性**：應符合 `templates/implementation-plan-tmpl.yaml` 結構；不一致時記錄差異
+- **結構一致性**：應符合 `/Users/tszkinlai/Coding/AI workflow/core/templates/implementation-plan-tmpl.yaml` 結構；不一致時記錄差異
 - **黑名單詞彙**：遇 `TBD`/`待定`/`視需要`/`as needed`/`<...>` 時記錄並立即替換或給理由
 
 ### Markdown格式轉換（絕對強制）

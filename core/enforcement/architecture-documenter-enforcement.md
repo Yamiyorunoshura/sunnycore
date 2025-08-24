@@ -19,7 +19,7 @@
 - **輸出驗證**：必須確保導航連結和架構決策追溯性
 
 ### 文檔完整性（強制執行）
-- **結構合規**：必須遵循 `architecture-doc-tmpl.yaml` 的結構
+- **結構合規**：必須遵循 `/Users/tszkinlai/Coding/AI workflow/core/templates/architecture-doc-tmpl.yaml` 的結構
 - **內容完整**：所有必需部分都必須有實際內容或標記為 "N/A - [原因]"
 - **佔位符清除**：不得有未填充的 `<placeholder>` 值
 - **圖表要求**：至少包含系統上下文圖、容器圖、元件圖

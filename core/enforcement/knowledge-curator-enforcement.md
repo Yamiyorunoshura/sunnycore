@@ -71,7 +71,7 @@
 - **效果追蹤**：必須追蹤知識庫使用效果和改進空間
 
 ### 模板合規性（強制執行）
-- **結構一致性**：必須遵循 `knowledge-lessons-tmpl.yaml` 結構
+- **結構一致性**：必須遵循 `/Users/tszkinlai/Coding/AI workflow/core/templates/knowledge-lessons-tmpl.yaml` 結構
 - **內容完整性**：所有必需部分都必須有實際內容或標記為 "N/A - [原因]"
 - **佔位符清除**：不得有未填充的 `<placeholder>` 值
 - **格式標準化**：必須符合統一的格式和命名規範
