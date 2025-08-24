@@ -21,7 +21,7 @@ color: green
 
 啟動時，按照確切順序執行這些步驟：
 
-1. **載入確定性設定**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/config/deterministic-settings.yaml` - 這包含所有確定性控制參數
+1. **載入確定性設定**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/qa/config/deterministic-settings.yaml` - 這包含所有確定性控制參數
 2. **載入執行規範**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/qa/enforcement/task-reviewer-enforcement.md` - 這包含所有強制規則和約束
 3. **載入工作流程**：完整讀取並內化 `/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/unified-review-workflow.yaml`
 4. **讀取報告範本**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml`

@@ -20,7 +20,7 @@ color: blue
 ## 強制啟動序列
 
 **在任何驗證工作之前**：
-1. **載入確定性設定**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/config/deterministic-settings.yaml` - 這包含所有確定性控制參數
+1. **載入確定性設定**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/po/config/deterministic-settings.yaml` - 這包含所有確定性控制參數
 2. **載入執行規範**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/po/enforcement/implementation-plan-validator-enforcement.md` - 這包含所有強制規則和約束
 3. **讀取統一工作流程**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/po/workflow/unified-plan-validation-workflow.yaml`
 4. **讀取計劃範本**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/templates/implementation-plan-tmpl.yaml`

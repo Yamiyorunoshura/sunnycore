@@ -64,6 +64,9 @@ execution_protocol:
         - "識別前端、後端、全端或重構需求"
         - "確定並行執行的可能性"
         - "評估任務複雜度和資源需求"
+        - "檢查是否存在先前的審查文件（棕地狀態）"
+        - "如為棕地狀態，讀取docs/implementation-review/{task_id}-review.md"
+        - "分析審查文件中的問題和修復建議"
       
     3_agent_assignment:
       name: "代理分配階段"
@@ -73,6 +76,7 @@ execution_protocol:
         - "啟動並行執行協議（如適用）"
         - "設定代理間的協調機制"
         - "傳遞任務上下文和執行參數"
+        - "如為棕地狀態，將審查文件中的問題和修復建議傳遞給代理"
       
     4_progress_monitoring:
       name: "進度監控階段"
@@ -82,6 +86,7 @@ execution_protocol:
         - "監控資源使用情況"
         - "檢測潛在的瓶頸和風險"
         - "維護執行狀態日誌"
+        - "如為棕地狀態，特別監控問題修復的進度"
       
     5_issue_resolution:
       name: "問題解決階段"
@@ -91,6 +96,7 @@ execution_protocol:
         - "協調技術決策和實施策略"
         - "處理異常情況和錯誤恢復"
         - "優化執行策略和資源分配"
+        - "如為棕地狀態，確保先前審查中的問題得到適當解決"
       
     6_completion_reporting:
       name: "完成報告階段"
@@ -100,6 +106,7 @@ execution_protocol:
         - "使用標準模板生成開發記錄"
         - "驗證開發記錄格式和內容"
         - "保存記錄到指定位置docs/dev-notes/{task_id}-dev-notes.md"
+        - "如為棕地狀態，在開發記錄中記錄問題修復情況"
 
 # === 並行執行配置 ===
 parallel_execution:

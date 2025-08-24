@@ -19,7 +19,7 @@ execution_settings:
 prerequisites:
   required_files:
     # 核心配置檔案
-    - path: "/Users/tszkinlai/Coding/AI workflow/core/config/deterministic-settings.yaml"
+    - path: "/Users/tszkinlai/Coding/AI workflow/core/po/config/deterministic-settings.yaml"
       type: "config"
       critical: true
     - path: "/Users/tszkinlai/Coding/AI workflow/core/po/templates/architecture-doc-tmpl.yaml"
@@ -65,7 +65,7 @@ stages:
     steps:
       - name: "load_deterministic_settings"
         action: "read_file"
-        target: "/Users/tszkinlai/Coding/AI workflow/core/config/deterministic-settings.yaml"
+        target: "/Users/tszkinlai/Coding/AI workflow/core/po/config/deterministic-settings.yaml"
         required: true
         
       - name: "load_template"
