@@ -198,6 +198,7 @@ validation_rules:
     - scope_comprehension
     - objectives_and_acceptance
     - architecture_and_modules
+    - tdd_cycle_planning
     - tests_first
     - implementation
     - quality_gates
@@ -224,6 +225,16 @@ validation_rules:
         severity: "warning"
         message: "Tests not written before implementation"
         action: "append_warning_and_continue"
+      
+      tdd_violation:
+        severity: "warning"
+        message: "TDD cycle not followed - tests should be written first"
+        action: "append_warning_and_continue"
+      
+      behavior_change_detected:
+        severity: "critical_warning"
+        message: "Behavior change detected - verify if intentional for refactoring"
+        action: "append_warning_and_continue"
 
   format_contracts:
     - stage: "objectives_and_acceptance"
@@ -235,6 +246,9 @@ validation_rules:
     - stage: "handover_docs"
       must_validate_against: "dev_notes"
       on_failure: "APPEND_WARNINGS_AND_CONTINUE"
+    - stage: "tdd_cycle_planning"
+      must_validate_against: "tdd_plan"
+      on_failure: "append_warning_and_continue"
 
 # === 工作流程階段 ===
 stages:
@@ -288,41 +302,71 @@ stages:
           - identify: "reuse"
           - create: "module_skeletons_with_feature_flags"
 
-  - id: "tests_first"
-    title: "測試優先"
+  - id: "tdd_cycle_planning"
+    title: "TDD循環規劃 (重構特化)"
     mandatory: true
     validation_checkpoint: true
     actions:
+      - plan_tdd_cycles_per: "F-IDs"
+      - define_test_scenarios_for_each: "acceptance_criteria"
+      - plan_characterization_testing_strategy: true
+      - identify_behavior_preservation_tests: true
+      - plan_refactoring_safety_measures: true
+      - define_test_data_requirements: true
+      - plan_mock_and_stub_strategies: true
+      - define_test_environment_setup: true
+      - create_tdd_iteration_plan: true
+      - plan_rollback_testing: true
+
+  - id: "tests_first"
+    title: "測試優先 (TDD紅階段 - 重構特化)"
+    mandatory: true
+    validation_checkpoint: true
+    actions:
+      - 🚨_TDD_MANDATORY: "WRITE_TESTS_BEFORE_IMPLEMENTATION"
       - create_tests_for_existing_behavior: true
       - assert_invariants_and_contracts: true
       - unit_tests_per_module_aligned_to: "F-IDs"
       - integration_tests_for: ["interfaces", "routing", "api_flows", "failure_paths"]
       - acceptance_tests_mirroring: "acceptance_criteria_per_F-ID"
+      - ensure_tests_fail_initially: "RED_PHASE_OF_TDD"
+      - create_behavior_preservation_tests: true
+      - document_test_behavior_expectations: true
+      - create_test_data_fixtures: true
+      - establish_test_baselines: true
 
   - id: "implementation"
-    title: "實作"
+    title: "實作 (TDD綠階段 - 重構特化)"
     mandatory: true
     validation_checkpoint: true
     actions:
+      - 🚨_TDD_ENFORCEMENT: "IMPLEMENT_MINIMAL_CODE_TO_PASS_TESTS"
       - small_steps_atomic_commits: true
       - keep_green_throughout: true
       - migrate_APIs_or_components_with_adapters: true
       - implement_handlers_and_components_per: ["interfaces", "F-IDs"]
+      - run_tests_after_each_change: "KEEP_TESTS_GREEN"
       - enforce_constraints: true
       - traceability:
           reference_task_id: "metadata.task_id"
           in: ["PR_titles", "commits", "code_annotations"]
 
   - id: "quality_gates"
-    title: "品質門檻"
+    title: "品質門檻 (TDD重構階段 - 重構特化)"
     mandatory: true
     validation_checkpoint: true
     actions:
+      - 🚨_TDD_REFACTOR: "REFACTOR_WHILE_KEEPING_TESTS_GREEN"
       - ensure: "coverage_and_static_analysis_thresholds >= quality_gates"
       - validate_non_functional: "N-IDs_measurements"
       - security_checks: ["dependencies", "SAST"]
       - compare_non_functional_to_baseline: true
       - ensure_no_api_breaks: true
+      - refactor_code_while_maintaining_behavior: true
+      - improve_code_structure_and_readability: true
+      - eliminate_code_duplication: true
+      - optimize_performance_without_breaking_tests: true
+      - verify_behavior_preservation: true
 
   - id: "milestones_timeline"
     title: "里程碑與時程"
@@ -472,6 +516,9 @@ critical_success_factors:
   - "Stay within scope boundaries - pause on any scope questions"
   - "Extract objectives as F-IDs and N-IDs - maintain traceability"
   - "Capture baseline behavior before starting any changes - CRITICAL for refactoring"
+  - "🚨 TDD MANDATORY: Write tests BEFORE implementation - RED phase first"
+  - "🚨 TDD ENFORCEMENT: Implement minimal code to pass tests - GREEN phase"
+  - "🚨 TDD REFACTOR: Refactor while keeping tests green - REFACTOR phase"
   - "Write characterization tests before implementation - ensure behavior preservation"
   - "Make small, atomic changes that keep tests green - refactoring safety principle"
   - "Maintain traceability - task_id in PRs, commits, code"
@@ -481,12 +528,16 @@ critical_success_factors:
   - "NEVER change external behavior - only internal structure"
   - "Always have a rollback plan - refactoring risk management"
   - "Measure performance before and after - prevent regressions"
+  - "NEVER skip TDD cycle - tests must be written first"
+  - "Keep tests green throughout implementation - TDD safety principle"
+  - "Use tests to verify behavior preservation - refactoring TDD requirements"
 
 # === 工作流程違規回應 ===
 workflow_violation_responses:
   - "Missing stage execution: Append warning and continue; flag in dev_notes.validation_warnings"
   - "Scope violation: Append warning and continue; open question asynchronously"
   - "Plan deviation: Append warning; document decision in dev_notes"
+  - "🚨 TDD VIOLATION: CRITICAL WARNING - tests must be written before implementation"
   - "Missing tests: Append warning; prioritize remediation next iteration"
   - "Quality gate failure: Append warning; include measurements and remediation plan"
   - "Behavior change detected: CRITICAL WARNING - verify if intentional"
@@ -497,3 +548,5 @@ workflow_violation_responses:
   - "🚨 DEV_NOTES_MISSING_F-IDs_MAPPING: Append warning; include provisional mapping or rationale"
   - "🚨 DEV_NOTES_INSUFFICIENT_DETAIL: Append warning; add details in follow-up commit"
   - "🚨 HANDOVER_docs_STAGE_SKIPPED: Append warning; ensure documentation post-hoc"
+  - "🚨 TDD CYCLE INCOMPLETE: Append warning; ensure RED-GREEN-REFACTOR cycle completed"
+  - "🚨 BEHAVIOR_PRESERVATION_VIOLATION: CRITICAL WARNING - refactoring must preserve behavior"
