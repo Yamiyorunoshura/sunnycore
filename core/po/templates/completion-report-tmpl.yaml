@@ -66,6 +66,39 @@ qa_potential_problems:
     evidence:
       - "<連結/路徑>"
 
+project_documentation_analysis:
+  overview:
+    total_documents_analyzed: "<數量>"
+    documentation_coverage: "<覆蓋範圍評估>"
+    quality_assessment: "<整體品質評估>"
+  
+  document_categories:
+    specifications:
+      - "docs/specs/task.md - <狀態和品質>"
+      - "docs/specs/requirements.md - <狀態和品質>"
+      - "docs/specs/design.md - <狀態和品質>"
+    implementation:
+      - "docs/implementation-plan/ - <計劃文件狀態>"
+      - "docs/dev-notes/ - <開發筆記狀態>"
+      - "docs/implementation-review/ - <審查文件狀態>"
+    knowledge_and_architecture:
+      - "docs/knowledge/ - <知識文件狀態>"
+      - "docs/architecture/ - <架構文件狀態>"
+    project_files:
+      - "README.md - <狀態和完整性>"
+      - "CHANGELOG.md - <狀態和完整性>"
+  
+  findings:
+    strengths:
+      - "<文檔優點>"
+    gaps:
+      - "<文檔缺口>"
+    improvements:
+      - "<改進建議>"
+  
+  evidence:
+    - "<具體文檔路徑和發現>"
+
 known_issues_and_risks:
   - id: "ISS-1"
     title: "<問題標題>"

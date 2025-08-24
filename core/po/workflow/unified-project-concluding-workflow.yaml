@@ -135,6 +135,13 @@ enforcement_protocol:
       - "QA Feedback: 收集QA審查評論和問題"
       - "Issue Status: 記錄當前處理狀態"
       - "Resolution Plans: 記錄計劃修復和改進"
+    
+    project_md_documents:
+      - "掃描整個專案目錄結構，收集所有 .md 文檔"
+      - "分析文檔內容，提取相關資訊和見解"
+      - "識別文檔之間的關聯性和依賴關係"
+      - "記錄文檔的完整性和品質狀態"
+      - "為 completion report 提供全面的文檔分析基礎"
 
   stage_execution_checkpoints:
     before_stage:
@@ -175,6 +182,13 @@ enforcement_protocol:
       - "描述技術債務和所做權衡"
       - "記錄現有的臨時解決方案"
       - "評估風險等級和影響"
+    
+    project_documentation_analysis:
+      - "綜合分析所有收集的專案文檔"
+      - "識別文檔覆蓋範圍的缺口和重複"
+      - "評估文檔品質、一致性和可維護性"
+      - "記錄文檔架構的優點和改進機會"
+      - "為未來文檔改進提供具體建議"
 
   enhancement_planning:
     gap_based_enhancements:
@@ -239,6 +253,8 @@ enforcement_protocol:
     - "具體記錄已知問題 - 用權宜之計"
     - "規劃未來增強 - 用成功標準"
     - "在檢查點驗證 - 確保每階段品質"
+    - "全面分析專案文檔 - 收集所有相關資訊"
+    - "完成後清理臨時文檔 - 保留重要產出"
 
   workflow_violation_responses:
     missing_stage_execution: "返回並完成跳過的階段"
@@ -248,6 +264,8 @@ enforcement_protocol:
     generic_assessments: "用具體資料和測量替換"
     incomplete_template: "識別缺失章節並填充"
     invalid_format: "修正格式以完全符合範本"
+    incomplete_document_analysis: "完成所有專案文檔的分析"
+    missing_document_cleanup: "執行臨時文檔清理程序"
 
 # 統一階段執行流程
 stages:
@@ -284,6 +302,7 @@ stages:
       - implementation_evidence_documented: true
       - quality_evidence_collected: true
       - qa_feedback_gathered_or_noted_absent: true
+      - all_project_md_documents_analyzed: true
     actions:
       - read_specification_files: ["docs/specs/task.md", "docs/specs/requirements.md", "docs/specs/design.md"]
       - resolve_plan_by_task_id: "{{task_id}}"
@@ -291,6 +310,7 @@ stages:
       - gather_implementation_evidence: ["PRs", "commits", "changed_files", "migrations", "configs"]
       - gather_quality_artifacts: ["test_reports", "coverage", "CI_status", "performance", "security_scans"]
       - gather_qa_reviews_and_feedback: "docs/implementation-review/{{task_id}}-review.md"
+      - analyze_all_project_md_documents: "{{project_root}}"
       - document_evidence_gaps_as_limitations
 
   - id: "delivery_synthesis"
@@ -355,6 +375,7 @@ stages:
           "summary",
           "acceptance",
           "qa_potential_problems",
+          "project_documentation_analysis",
           "known_issues_and_risks",
           "future_enhancements",
           "handover_next_steps",
@@ -365,6 +386,24 @@ stages:
       - verify_no_placeholder_content_remains
 
   - id: "finalization"
+    title: "完成與品質確認"
+    description: "最終驗證和品質檢查"
+    completion_requirements:
+      - final_document_read_back: true
+      - completeness_verified: true
+      - template_compliance_confirmed: true
+      - completion_report_ready_for_stakeholders: true
+      - temporary_documents_cleaned: true
+    actions:
+      - self_check_against_workflow
+      - read_generated_document_back
+      - compare_against_template_structure
+      - verify_no_placeholder_values_remain
+      - confirm_all_completion_claims_supported_by_evidence
+      - validate_markdown_formatting_and_structure
+      - request_feedback_if_needed
+      - cleanup_temporary_documents: "{{project_root}}"
+
 # === 新增：知識與架構產出整合 ===
 extensions:
   agents_integration:
@@ -378,21 +417,6 @@ extensions:
       template: "/Users/tszkinlai/Coding/AI workflow/core/po/templates/architecture-doc-tmpl.yaml"
       output: "{{project_root}}/docs/architecture/architecture.md"
       trigger: "after:report_generation"
-    title: "完成與品質確認"
-    description: "最終驗證和品質檢查"
-    completion_requirements:
-      - final_document_read_back: true
-      - completeness_verified: true
-      - template_compliance_confirmed: true
-      - completion_report_ready_for_stakeholders: true
-    actions:
-      - self_check_against_workflow
-      - read_generated_document_back
-      - compare_against_template_structure
-      - verify_no_placeholder_values_remain
-      - confirm_all_completion_claims_supported_by_evidence
-      - validate_markdown_formatting_and_structure
-      - request_feedback_if_needed
 
 # 整合的驗證規則
 validation_rules:
@@ -409,6 +433,7 @@ validation_rules:
       - completion_status: "deliverables_and_completion_rate"
       - acceptance_criteria_achievement: "cross_reference_with_tests_evidence"
       - qa_potential_problems_summary: "concerns_and_handling_status"
+      - project_documentation_analysis: "comprehensive_document_analysis_and_quality_assessment"
       - known_issues_and_risks: "defects_trade_offs_workarounds"
       - future_enhancements: "specific_proposals_with_success_criteria"
       - next_steps_and_handover: "blockers_fixes_followup_actions"
@@ -420,6 +445,7 @@ validation_rules:
       - performance_data_included: "actual_measurements_not_estimates"
       - test_coverage_reported: "actual_coverage_percentages_and_results"
       - known_issues_specific: "exact_problem_descriptions_and_workarounds"
+      - documentation_analysis_supported: "specific_document_paths_and_findings"
 
     forbidden_content:
       - placeholder_brackets: ["<", ">"]
@@ -427,6 +453,22 @@ validation_rules:
       - generic_placeholders: ["<task_id>", "<project_name>", "<owner>"]
       - unsupported_claims: "all_completion_claims_must_have_evidence"
       - vague_assessments: ["generally good", "mostly complete", "acceptable quality"]
+    
+    document_cleanup_requirements:
+      preserve_files:
+        - "docs/implementation-plan/**/* - 實施計劃文件"
+        - "docs/implementation-review/**/* - 實施審查文件"
+        - "docs/dev-notes/**/* - 開發筆記"
+        - "docs/knowledge/**/* - 知識文件"
+        - "docs/architecture/**/* - 架構文件"
+        - "README.md - 專案說明文件"
+        - "CHANGELOG.md - 變更日誌"
+        - "docs/completion-reports/**/* - 完成報告"
+      cleanup_temporary_files:
+        - "臨時分析過程中創建的文檔"
+        - "用於資訊收集的臨時筆記"
+        - "分析過程中的中間產出"
+        - "不屬於最終交付的臨時文件"
 
   error_handling:
     missing_stage:
@@ -453,6 +495,16 @@ validation_rules:
       severity: "high"
       message: "Template section incomplete or contains placeholders"
       action: "request_template_completion"
+    
+    incomplete_document_analysis:
+      severity: "high"
+      message: "Project documentation analysis incomplete"
+      action: "complete_document_analysis"
+    
+    missing_document_cleanup:
+      severity: "medium"
+      message: "Temporary documents not cleaned up"
+      action: "execute_document_cleanup"
 
 output:
   path: "{{project_root}}/docs/completion-reports/"
