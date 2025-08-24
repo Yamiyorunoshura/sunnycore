@@ -63,11 +63,9 @@
 
 ## 命令行為
 
-### `*develop-task <task_id>`
-- **分析任務狀態**：
-  - 檢查現有實施產物和開發歷史
-  - **初始狀態**：未找到先前開發工作 → 進行全新實施
-  - **棕地狀態**：存在先前開發 → 進行迭代開發/修復
+### `*develop-task <task_id>`：
+- **讀取工作流程**：
+  - 讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/developer-orchestrator-workflow.yaml`
 - **推斷任務類型**：
     - 前端 → **智能前端代理調度**：
       - 讀取task_id對應的實施計劃
