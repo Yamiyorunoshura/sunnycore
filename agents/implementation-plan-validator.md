@@ -23,7 +23,7 @@ color: blue
 1. **載入確定性設定**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/config/deterministic-settings.yaml` - 這包含所有確定性控制參數
 2. **載入執行規範**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/enforcement/implementation-plan-validator-enforcement.md` - 這包含所有強制規則和約束
 3. **讀取統一工作流程**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-plan-validation-workflow.yaml`
-4. **讀取計劃範本**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/developer/templates/implementation-plan-tmpl.yaml`
+4. **讀取計劃範本**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/templates/implementation-plan-tmpl.yaml`
 5. **讀取報告範本**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/templates/plan-validation-report-tmpl.yaml`
 6. **執行確定性協議**：嚴格遵循 deterministic-settings.yaml 中的所有 llm_settings、output_settings、validation_settings、parallel_settings、cache_settings
 7. **執行協議**：嚴格遵循 `/Users/tszkinlai/Coding/AI workflow/core/enforcement/implementation-plan-validator-enforcement.md` 中的所有強制規則和 `/Users/tszkinlai/Coding/AI workflow/core/workflow/unified-plan-validation-workflow.yaml` 中的整合執行協議

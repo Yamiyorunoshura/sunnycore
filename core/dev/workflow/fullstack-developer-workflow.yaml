@@ -1,12 +1,12 @@
 ---
-# Frontend Developer 工作流程
-# 專為前端開發者設計的計劃驅動工作流程
-template: frontend-developer-workflow
+# Fullstack Developer 工作流程
+# 專為全端開發者設計的計劃驅動工作流程
+template: fullstack-developer-workflow
 version: 2.0
 
 workflow:
-  name: "Frontend Developer 計劃驅動工作流程"
-  description: "專為前端開發者設計的工作流程，專注於UI/UX、組件架構和使用者體驗"
+  name: "Fullstack Developer 計劃驅動工作流程"
+  description: "專為全端開發者設計的工作流程，專注於端到端應用程式、前後端整合和架構設計"
   enforcement_level: "lenient"
   halt_on_validation_failure: false
   default_profile: "fast_strict"
@@ -16,7 +16,7 @@ inputs:
   task_id: "<required>"
   plan_path: "<auto>"
   project_root: "<auto>"
-  developer_type: "frontend"
+  developer_type: "fullstack"
 
 # === 計劃解析配置 ===
 plan_resolution:
@@ -49,8 +49,8 @@ preconditions:
 execution_protocol:
   
   enforcement_compliance:
-    mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/developer/enforcement/frontend-developer-enforcement.md"
-    note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the frontend enforcement file"
+    mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/fullstack-developer-enforcement.md"
+    note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the fullstack enforcement file"
 
 profiles:
   fast_strict:
@@ -93,7 +93,7 @@ schemas:
     required: [developer_type, timestamp, changes_summary, detailed_changes_mapped_to, implementation_decisions, risk_considerations, maintenance_notes]
     properties:
       developer_type:
-        enum: ["frontend"]
+        enum: ["fullstack"]
       timestamp:
         type: string
         format: date-time
@@ -125,7 +125,6 @@ schemas:
             items:
               type: string
               pattern: "^UI-[0-9]+$"
-            minItems: 1
         additionalProperties: false
       implementation_decisions:
         type: string
@@ -169,7 +168,6 @@ schemas:
         items:
           type: string
           pattern: "^UI-[0-9]+$"
-        minItems: 1
       acceptance_criteria:
         type: array
         items:
@@ -227,9 +225,9 @@ schemas:
     additionalProperties: false
 
 # === 階段定義 ===
-# 詳細的驗證規則和品質標準在frontend enforcement文件中定義
+# 詳細的驗證規則和品質標準在fullstack enforcement文件中定義
 validation_rules:
-  note: "Detailed validation rules and quality standards are defined in the frontend enforcement file"
+  note: "Detailed validation rules and quality standards are defined in the fullstack enforcement file"
   
   stage_sequence:
     - workflow_initialization
@@ -281,8 +279,8 @@ stages:
     mandatory: true
     validation_checkpoint: true
     actions:
-      - load: ["/Users/tszkinlai/Coding/AI workflow/core/developer/workflow/frontend-developer-workflow.yaml"]
-      - detect_developer_type: "frontend"
+      - load: ["/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/fullstack-developer-workflow.yaml"]
+      - detect_developer_type: "fullstack"
       - resolve_plan_by_task_id: true
       - verify_preconditions: true
 
@@ -308,7 +306,7 @@ stages:
       - extract_functional_objectives_as: "F-IDs"
       - extract_non_functional_objectives_as: "N-IDs"
       - extract_ui_objectives_as: "UI-IDs"
-      - map_acceptance_criteria_to: "UI-IDs"
+      - map_acceptance_criteria_to: ["F-IDs", "UI-IDs"]
       - check_design_assets_from: "metadata.sources.design"
 
   - id: "architecture_and_modules"
@@ -317,6 +315,12 @@ stages:
     validation_checkpoint: true
     actions:
       - read: ["approach.architecture_overview"]
+      - for_each: "approach.modules"
+        do:
+          - define_first: "interfaces"
+          - identify: "reuse"
+          - create: "module_skeletons_with_feature_flags"
+      # Frontend specific
       - define_routes_from_modules: true
       - enumerate_app_states_per_page: true
       - identify_global_state_and_providers: true
@@ -332,7 +336,8 @@ stages:
       - unit_tests_per_module_aligned_to: "F-IDs"
       - integration_tests_for: ["interfaces", "routing", "api_flows", "failure_paths"]
       - acceptance_tests_mirroring: "acceptance_criteria_per_F-ID"
-      - accessibility_tests: ["screen_reader", "keyboard_navigation", "color_contrast"]
+      - contract_tests_for: ["api_contracts", "frontend_backend_integration"]
+      - e2e_tests_for: ["complete_user_flows", "cross_browser_compatibility"]
 
   - id: "implementation"
     title: "實作"
@@ -340,8 +345,20 @@ stages:
     validation_checkpoint: true
     actions:
       - implement_handlers_and_components_per: ["interfaces", "F-IDs", "UI-IDs"]
+      # Backend specific
+      - draft_idempotent_reversible_migrations: true
+      - implement_authentication_authorization: true
+      - validate_input_sanitization: true
+      - ensure_proper_error_handling: true
+      - meet_latency_throughput_memory_targets: true
+      - implement_proper_logging_monitoring: true
+      # Frontend specific
       - apply_design_tokens_if_available: true
       - ensure_accessibility_basics: ["color_contrast", "focus", "aria_labels"]
+      # Fullstack specific
+      - wire_frontend_to_backend_flows: true
+      - ensure_contract_alignment: true
+      - implement_end_to_end_data_flow: true
       - enforce_constraints: true
       - traceability:
           reference_task_id: "metadata.task_id"
@@ -354,9 +371,10 @@ stages:
     actions:
       - ensure: "coverage_and_static_analysis_thresholds >= quality_gates"
       - validate_non_functional: "N-IDs_measurements"
-      - security_checks: ["dependencies", "SAST"]
+      - security_checks: ["dependencies", "SAST", "api_security_audit"]
       - accessibility_audit: ["WCAG_compliance", "screen_reader_testing"]
-      - performance_audit: ["LCP", "INP", "TTI", "bundle_size"]
+      - performance_audit: ["LCP", "INP", "TTI", "bundle_size", "api_latency"]
+      - integration_testing: ["frontend_backend_integration", "end_to_end_flows"]
 
   - id: "milestones_timeline"
     title: "里程碑與時程"
@@ -398,8 +416,10 @@ stages:
     validation_checkpoint: true
     🚨_CRITICAL_STAGE: "DEV_NOTES_MUST_BE_COMPLETED"
     actions:
-      - update_documentation_per_developer_type: "frontend"
+      - update_documentation_per_developer_type: "fullstack"
+      - update_api_docs_per_interfaces: true
       - update_storybook_or_docs_for_components: true
+      - document_migrations_and_rollback: true
       - fill_notes_with: "deviations_and_clarifications"
       - 🚨_MANDATORY_DEV_NOTES_VALIDATION:
           pre_validation_checks:
@@ -418,7 +438,7 @@ stages:
           location: "{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md"
           mode: "append_or_create"
           content_structure:
-            - developer_type: "frontend"
+            - developer_type: "fullstack"
             - timestamp: "current_datetime"
             - task_phase: "determined_from_task_state"
             - re_dev_iteration: "current_re_dev_iteration_number_or_1"
@@ -440,6 +460,7 @@ stages:
           "all_F-IDs_pass_acceptance_tests",
           "all_N-IDs_verified_by_measurement",
           "all_UI-IDs_verified_by_user_testing",
+          "frontend_backend_integration_verified",
           "no_unresolved_open_questions",
           "PRs_merged_CI_green",
           "🚨_dev_notes_completely_filled_and_verified",
@@ -456,28 +477,50 @@ stages:
             - maintenance_notes_provided: "MANDATORY"
           validation_failure_action: "APPEND_WARNINGS_AND_CONTINUE"
 
-# === Frontend開發者特化配置 ===
-frontend_specializations:
-  ux_requirements:
-    - extract_ui_objectives_as: "UI-IDs"
-    - map_acceptance_criteria_to: "UI-IDs"
-    - check_design_assets_from: "metadata.sources.design"
-  
-  routing_and_states:
-    - define_routes_from_modules
-    - enumerate_app_states_per_page
-    - identify_global_state_and_providers
-  
-  components_and_contracts:
-    - create_component_skeletons_with_props
-    - define_types_and_interfaces_first
-    - identify_reused_components
-  
-  styling_and_theming:
-    - apply_design_tokens_if_available
-    - ensure_accessibility_basics: ["color_contrast", "focus", "aria_labels"]
+# === Fullstack開發者特化配置 ===
+fullstack_specializations:
+  backend_specializations:
+    data_changes:
+      - draft_idempotent_reversible_migrations
+      - define_ordered_steps_and_backout
+      - run_in_non_prod_first
+    
+    api_security:
+      - implement_authentication_authorization
+      - validate_input_sanitization
+      - ensure_proper_error_handling
+    
+    performance:
+      - meet_latency_throughput_memory_targets
+      - implement_proper_logging_monitoring
+
+  frontend_specializations:
+    ux_requirements:
+      - extract_ui_objectives_as: "UI-IDs"
+      - map_acceptance_criteria_to: "UI-IDs"
+      - check_design_assets_from: "metadata.sources.design"
+    
+    routing_and_states:
+      - define_routes_from_modules
+      - enumerate_app_states_per_page
+      - identify_global_state_and_providers
+    
+    components_and_contracts:
+      - create_component_skeletons_with_props
+      - define_types_and_interfaces_first
+      - identify_reused_components
+    
+    styling_and_theming:
+      - apply_design_tokens_if_available
+      - ensure_accessibility_basics: ["color_contrast", "focus", "aria_labels"]
+
+  fullstack_specific:
+    - wire_frontend_to_backend_flows: true
+    - ensure_contract_alignment: true
+    - implement_end_to_end_data_flow: true
 
   documentation_requirements:
+    - update_api_docs_per_interfaces
     - update_storybook_or_docs_for_components
 
 # === 關鍵成功因素 ===
@@ -488,7 +531,7 @@ critical_success_factors:
   - "Define interfaces and architecture first - follow plan structure"
   - "Write tests before implementation - aligned to acceptance criteria"
   - "Maintain traceability - task_id in PRs, commits, code"
-  - "Meet quality gates - coverage, static analysis, performance, accessibility"
+  - "Meet quality gates - coverage, static analysis, performance, accessibility, security"
   - "Follow milestones and timeline - track progress accurately"
   - "Manage risks and dependencies - coordinate with owners"
   - "Complete definition of done - all criteria must be satisfied"
@@ -503,6 +546,6 @@ workflow_violation_responses:
   - "Incomplete documentation: Append warning; complete before release cut if possible"
   - "Missing traceability: Append warning; add task_id references retroactively"
   - "🚨 DEV_NOTES_INCOMPLETE: Append warning and continue to DoD with risk note"
-  - "🚨 DEV_NOTES_MISSING_UI-IDs_MAPPING: Append warning; include provisional mapping or rationale"
+  - "🚨 DEV_NOTES_MISSING_F-IDs_N-IDs_UI-IDs_MAPPING: Append warning; include provisional mapping or rationale"
   - "🚨 DEV_NOTES_INSUFFICIENT_DETAIL: Append warning; add details in follow-up commit"
   - "🚨 HANDOVER_docs_STAGE_SKIPPED: Append warning; ensure documentation post-hoc"
