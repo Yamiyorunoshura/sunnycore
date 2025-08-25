@@ -51,7 +51,7 @@
 ## 命令行為
 
 ### `*develop-task <task_id>`：
-  按照 `/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/developer-orchestrator-workflow.yaml` 工作流程完成工作。
+- 讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/task/develop-task.md`。
 
 ### `*plan-task <task_id>`
 - **分析任務狀態**：
