@@ -143,6 +143,11 @@
 - 如為棕地狀態，在開發記錄中詳細記錄問題修復情況、驗證結果和品質改進
 - 生成執行摘要、關鍵決策記錄和後續建議
 - 建立可追溯的交付物清單和品質檢查報告
+- 更新 `{project_root}/docs/specs/task.md`，例：
+    - old_string: [ ] `{task_id}`(如`1`, `2`, `3`...)
+    - new_string: [x] `{task_id}`(如`1`, `2`, `3`...)
+    - old_string: [ ] `{sub_task_id}`(如`1.1`, `1.2`, `1.3`...)
+    - new_string: [x] `{sub_task_id}`(如`1.1`, `1.2`, `1.3`...)
 </execution_actions>
 </think hard>
 
