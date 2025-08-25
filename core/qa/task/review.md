@@ -17,7 +17,7 @@
 
 ### 第三步：載入工作流程規範
 讀取並按照workflow文件執行：
-- 主要路徑：`/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/reviewer-orchestrator-workflow.yaml`
+- 主要路徑：`/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/reviewer-orchestrator-workflow.md`
 - **重要**：此文件定義了6個核心階段的結構化審查流程，請嚴格遵循。
 
 ### 第四步：執行結構化審查流程
