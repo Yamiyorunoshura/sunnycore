@@ -98,7 +98,7 @@ stages:
           
       plan_discovery:
         - tool: "glob_file_search"
-          pattern: "{task_id}-plan.*"
+          pattern: "{task_id}-plan.*(如`1-plan.md`, `2-plan.md`, `3-plan.md`...)"
           location: "docs/implementation-plan/"
           purpose: "尋找實施計劃"
         - tool: "read_file"
@@ -107,7 +107,7 @@ stages:
           
       dev_notes_discovery:
         - tool: "glob_file_search"
-          pattern: "{task_id}-dev-notes.*"
+          pattern: "{task_id}-dev-notes.*(如`1-dev-notes.md`, `2-dev-notes.md`, `3-dev-notes.md`...)"
           location: "docs/dev-notes/"
           purpose: "尋找開發者實施筆記"
         - tool: "read_file"
@@ -178,7 +178,7 @@ stages:
             - action: "驗證dev_notes中F-IDs和N-IDs映射準確性"
               method: "將dev-notes中的需求ID與計劃目標和實際實施進行交叉參考"
               evidence_required: "需求追溯矩陣"
-              source: "docs/dev-notes/{task_id}-dev-notes.md vs docs/implementation-plan/{task_id}-plan.*"
+              source: "docs/dev-notes/{task_id}-dev-notes.md vs docs/implementation-plan/{task_id}-plan.*(如`1-plan.md`, `2-plan.md`, `3-plan.md`...)"
             
             - action: "驗證dev_notes品質指標與測量結果"
               method: "比較dev-notes中記錄的性能/安全/測試指標與實際測試輸出"

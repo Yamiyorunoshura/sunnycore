@@ -28,7 +28,7 @@ plan_resolution:
     - "yml" 
     - "md"
   expectations:
-    - name: "<task_id>-plan.md/<task_id>-plan.yaml/<task_id>-plan.yml"
+    - name: "{task_id}-plan.md/{task_id}-plan.yaml/{task_id}-plan.yml(如`1-plan.md`, `2-plan.md`, `3-plan.md`...)"
 
 # === 範圍管控 ===
 guardrails:

@@ -208,7 +208,7 @@ enforcement_protocol:
     mandatory_steps:
       - "總是先讀取範本檔案再寫入"
       - "按範本需求逐章節填充"
-      - "絕不留下佔位符文本如 <task_id> 或 INSERT VALUE"
+      - "絕不留下佔位符文本如 {task_id} 或 INSERT VALUE"
       - "每個完成聲明都必須包含具體證據"
       - "包含實際測量結果，非估計"
       - "完整性檢查：每個範本章節都必須填充"
@@ -456,7 +456,7 @@ validation_rules:
     forbidden_content:
       - placeholder_brackets: ["<", ">"]
       - placeholder_text: ["INSERT", "TODO", "TBD"]
-      - generic_placeholders: ["<task_id>", "<project_name>", "<owner>"]
+      - generic_placeholders: ["{task_id}", "<project_name>", "<owner>"]
       - unsupported_claims: "all_completion_claims_must_have_evidence"
       - vague_assessments: ["generally good", "mostly complete", "acceptable quality"]
     
