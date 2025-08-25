@@ -50,7 +50,7 @@ execution_protocol:
   
   enforcement_compliance:
     mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/backend-developer-enforcement.md"
-    note: "All detailed enforcement rules, validation criteria, and execution requirements are defined in the backend enforcement file"
+    note: "所有詳細的強制執行規則、驗證標準和執行要求都在後端強制執行文件中定義"
 
 output_contracts:
   objectives: { $ref: "#/schemas/objectives_v1" }
@@ -132,7 +132,7 @@ schemas:
 # === 階段定義 ===
 # 詳細的驗證規則和品質標準在backend enforcement文件中定義
 validation_rules:
-  note: "Detailed validation rules and quality standards are defined in the backend enforcement file"
+  note: "詳細的驗證規則和品質標準定義在後端強制執行檔案中"
   
   stage_sequence:
     - workflow_initialization
@@ -147,29 +147,28 @@ validation_rules:
     - dependencies
     - estimation_tracking
     - risks_changes
-    - handover_docs
     - definition_of_done
 
   error_handling:
     validation_errors:
       missing_stage:
         severity: "warning"
-        message: "Mandatory stage not completed"
+        message: "強制階段未完成"
         action: "append_warning_and_continue"
       
       scope_violation:
         severity: "warning"
-        message: "Implementation outside of defined scope"
+        message: "實作超出定義範圍"
         action: "append_warning_and_continue"
       
       missing_tests:
         severity: "warning"
-        message: "Tests not written before implementation"
+        message: "實作前未撰寫測試"
         action: "append_warning_and_continue"
       
       tdd_violation:
         severity: "warning"
-        message: "TDD cycle not followed - tests should be written first"
+        message: "違反TDD循環 - 應先撰寫測試"
         action: "append_warning_and_continue"
 
   format_contracts:
@@ -247,12 +246,12 @@ stages:
     mandatory: true
     validation_checkpoint: true
     actions:
-      - 🚨_TDD_MANDATORY: "WRITE_TESTS_BEFORE_IMPLEMENTATION"
+      - 🚨_TDD_MANDATORY: "實作前必須先撰寫測試"
       - unit_tests_per_module_aligned_to: "F-IDs"
       - integration_tests_for: ["interfaces", "routing", "api_flows", "failure_paths"]
       - acceptance_tests_mirroring: "acceptance_criteria_per_F-ID"
       - contract_tests_for: ["api_contracts", "service_interfaces"]
-      - ensure_tests_fail_initially: "RED_PHASE_OF_TDD"
+      - ensure_tests_fail_initially: "TDD紅階段"
       - document_test_behavior_expectations: true
       - create_test_data_fixtures: true
 
@@ -261,9 +260,9 @@ stages:
     mandatory: true
     validation_checkpoint: true
     actions:
-      - 🚨_TDD_ENFORCEMENT: "IMPLEMENT_MINIMAL_CODE_TO_PASS_TESTS"
+      - 🚨_TDD_ENFORCEMENT: "實作最少程式碼以通過測試"
       - implement_handlers_and_components_per: ["interfaces", "F-IDs"]
-      - run_tests_after_each_change: "KEEP_TESTS_GREEN"
+      - run_tests_after_each_change: "保持測試綠燈"
       - draft_idempotent_reversible_migrations: true
       - define_ordered_steps_and_backout: true
       - run_in_non_prod_first: true
@@ -282,7 +281,7 @@ stages:
     mandatory: true
     validation_checkpoint: true
     actions:
-      - 🚨_TDD_REFACTOR: "REFACTOR_WHILE_KEEPING_TESTS_GREEN"
+      - 🚨_TDD_REFACTOR: "在保持測試綠燈的情況下重構"
       - ensure: "coverage_and_static_analysis_thresholds >= quality_gates"
       - validate_non_functional: "N-IDs_measurements"
       - security_checks: ["dependencies", "SAST", "api_security_audit"]
@@ -326,14 +325,6 @@ stages:
       - on_realized_risk: ["execute_mitigation", "then_contingency"]
       - on_scope_creep: "open_question_and_pause"
 
-  - id: "handover_docs"
-    title: "交接與文件"
-    mandatory: true
-    validation_checkpoint: true
-    actions:
-      - record_implementation_summary: true
-      - note_deviations_and_clarifications: true
-
   - id: "definition_of_done"
     title: "完成定義"
     mandatory: true
@@ -346,35 +337,33 @@ stages:
           "PRs_merged_CI_green"
         ]
 
-# Backend specialization requirements are now defined in backend-developer-enforcement.md
-# This ensures clear separation between workflow process and enforcement rules
+# 後端專業化需求現在定義在backend-developer-enforcement.md中
+# 這確保了工作流程程序和強制執行規則之間的清楚分離
 
 # === 關鍵成功因素 ===
 critical_success_factors:
-  - "Read workflow and plan files FIRST - never start without them"
-  - "Stay within scope boundaries - pause on any scope questions"
-  - "Extract objectives as F-IDs and N-IDs - maintain traceability"
-  - "🚨 TDD MANDATORY: Write tests BEFORE implementation - RED phase first"
-  - "🚨 TDD ENFORCEMENT: Implement minimal code to pass tests - GREEN phase"
-  - "🚨 TDD REFACTOR: Refactor while keeping tests green - REFACTOR phase"
-  - "Define interfaces and architecture first - follow plan structure"
-  - "Maintain traceability - task_id in PRs, commits, code"
-  - "Meet quality gates - coverage, static analysis, performance, security"
-  - "Follow milestones and timeline - track progress accurately"
-  - "Manage risks and dependencies - coordinate with owners"
-  - "Complete definition of done - all criteria must be satisfied"
-  - "NEVER skip TDD cycle - tests must be written first"
-  - "Keep tests green throughout implementation - TDD safety principle"
+  - "首先讀取工作流程和計劃檔案 - 絕不在沒有它們的情況下開始"
+  - "保持在範圍邊界內 - 對任何範圍問題暫停"
+  - "將目標提取為F-IDs和N-IDs - 維持可追溯性"
+  - "🚨 TDD強制要求：實作前先撰寫測試 - 紅階段優先"
+  - "🚨 TDD強制執行：實作最少程式碼以通過測試 - 綠階段"
+  - "🚨 TDD重構：在保持測試綠燈的情況下重構 - 重構階段"
+  - "首先定義介面和架構 - 遵循計劃結構"
+  - "維持可追溯性 - 在PR、提交、程式碼中包含task_id"
+  - "達到品質門檻 - 覆蓋率、靜態分析、效能、安全性"
+  - "遵循里程碑和時程 - 準確追蹤進度"
+  - "管理風險和依賴項 - 與負責人協調"
+  - "完成完成定義 - 所有標準必須滿足"
+  - "絕不跳過TDD循環 - 必須先撰寫測試"
+  - "在整個實作過程中保持測試綠燈 - TDD安全原則"
 
 # === 工作流程違規回應 ===
 workflow_violation_responses:
-  - "Missing stage execution: Append warning and continue"
-  - "Scope violation: Append warning and continue; open question asynchronously"
-  - "Plan deviation: Append warning; document decision"
-  - "🚨 TDD VIOLATION: CRITICAL WARNING - tests must be written before implementation"
-  - "Missing tests: Append warning; prioritize remediation next iteration"
-  - "Quality gate failure: Append warning; include measurements and remediation plan"
-  - "Incomplete documentation: Append warning; complete before release cut if possible"
-  - "Missing traceability: Append warning; add task_id references retroactively"
-  - "Handover_docs_stage_skipped: Append warning; ensure documentation post-hoc"
-  - "🚨 TDD CYCLE INCOMPLETE: Append warning; ensure RED-GREEN-REFACTOR cycle completed"
+  - "缺少階段執行：附加警告並繼續"
+  - "範圍違規：附加警告並繼續；非同步開啟問題"
+  - "計劃偏離：附加警告；記錄決定"
+  - "🚨 TDD違規：嚴重警告 - 必須在實作前撰寫測試"
+  - "缺少測試：附加警告；在下次迭代中優先修復"
+  - "品質門檻失敗：附加警告；包含測量和修復計劃"
+  - "缺少可追溯性：附加警告；事後添加task_id參考"
+  - "🚨 TDD循環不完整：附加警告；確保完成紅-綠-重構循環"

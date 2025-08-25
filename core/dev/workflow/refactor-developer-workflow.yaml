@@ -148,7 +148,6 @@ validation_rules:
     - dependencies
     - estimation_tracking
     - risks_changes
-    - handover_docs
     - definition_of_done
 
   error_handling:
@@ -342,14 +341,6 @@ stages:
       - on_realized_risk: ["execute_mitigation", "then_contingency"]
       - on_scope_creep: "open_question_and_pause"
 
-  - id: "handover_docs"
-    title: "交接與文件"
-    mandatory: true
-    validation_checkpoint: true
-    actions:
-      - record_implementation_summary: true
-      - note_deviations_and_clarifications: true
-
   - id: "definition_of_done"
     title: "完成定義"
     mandatory: true
@@ -442,6 +433,5 @@ workflow_violation_responses:
   - "API break detected: CRITICAL WARNING - coordinate with stakeholders"
   - "Performance regression: Append warning; include optimization plan"
   - "Missing traceability: Append warning; add task_id references retroactively"
-  - "Handover_docs_stage_skipped: Append warning; ensure documentation post-hoc"
   - "🚨 TDD CYCLE INCOMPLETE: Append warning; ensure RED-GREEN-REFACTOR cycle completed"
   - "🚨 BEHAVIOR_PRESERVATION_VIOLATION: CRITICAL WARNING - refactoring must preserve behavior"

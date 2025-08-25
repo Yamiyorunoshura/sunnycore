@@ -154,7 +154,6 @@ validation_rules:
     - dependencies
     - estimation_tracking
     - risks_changes
-    - handover_docs
     - definition_of_done
 
   error_handling:
@@ -334,14 +333,6 @@ stages:
       - on_realized_risk: ["execute_mitigation", "then_contingency"]
       - on_scope_creep: "open_question_and_pause"
 
-  - id: "handover_docs"
-    title: "交接與文件"
-    mandatory: true
-    validation_checkpoint: true
-    actions:
-      - record_implementation_summary: true
-      - note_deviations_and_clarifications: true
-
   - id: "definition_of_done"
     title: "完成定義"
     mandatory: true
@@ -384,7 +375,5 @@ workflow_violation_responses:
   - "🚨 TDD VIOLATION: CRITICAL WARNING - tests must be written before implementation"
   - "Missing tests: Append warning; prioritize remediation next iteration"
   - "Quality gate failure: Append warning; include measurements and remediation plan"
-  - "Incomplete documentation: Append warning; complete before release cut if possible"
   - "Missing traceability: Append warning; add task_id references retroactively"
-  - "Handover_docs_stage_skipped: Append warning; ensure documentation post-hoc"
   - "🚨 TDD CYCLE INCOMPLETE: Append warning; ensure RED-GREEN-REFACTOR cycle completed"

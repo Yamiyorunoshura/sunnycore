@@ -283,12 +283,13 @@ stages:
       name: "報告生成與維護"
       name_en: "Report Generation & Maintenance"
       objectives:
-        - "生成最終審查報告"
+        - "根據模板生成最終審查報告"
         - "確保報告品質和完整性"
         - "維護報告的專業標準"
       
       actions:
         report_generation:
+          - action: "Read report template from /Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml"
           - action: "Generate comprehensive review report"
           - action: "Include all integrated findings and recommendations"
           - action: "Apply quality assessment and maturity classification"

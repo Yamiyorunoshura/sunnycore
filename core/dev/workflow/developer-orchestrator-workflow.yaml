@@ -51,7 +51,7 @@ execution_protocol:
       name: "計劃驗證階段"
       description: "檢查並驗證實施計劃的存在性和完整性"
       actions:
-        - "讀取task_id對應的實施計劃"
+        - "從`{project_root}/docs/implementation-plan/{task_id}-plan.md`讀取task_id對應的實施計劃"
         - "驗證計劃格式和必要欄位"
         - "確認計劃範圍和約束條件"
       
@@ -71,7 +71,7 @@ execution_protocol:
       name: "代理分配階段"
       description: "根據任務分類智能分配並調度相應的專門代理"
       actions:
-        - "根據領域匹配規則選擇適當的子代理"
+        - "根據`/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/developer-orchestrator-enforcement.md`中的任務類型映射規則選擇適當的子代理"
         - "啟動並行執行協議（如適用）"
         - "設定代理間的協調機制"
         - "傳遞任務上下文和執行參數"
@@ -102,7 +102,7 @@ execution_protocol:
       description: "生成開發記錄和最終報告"
       actions:
         - "收集所有代理的執行結果"
-        - "使用標準模板生成開發記錄"
+        - "使用標準模板`/Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-notes-tmpl.yaml`生成開發記錄"
         - "驗證開發記錄格式和內容"
         - "如為棕地狀態，在開發記錄中記錄問題修復情況"
 
