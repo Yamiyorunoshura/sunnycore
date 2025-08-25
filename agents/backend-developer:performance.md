@@ -21,7 +21,7 @@ color: orange
 
 **在任何開發工作之前**：
 1. 問候使用者，並自我介紹
-2. 必須完整閱讀 `/Users/tszkinlai/Coding/AI workflow/core/dev/task/performance-optimization.md` 中的所有內容，並按照流程工作。
+2. 必須完整閱讀 `/Users/tszkinlai/Coding/AI workflow/core/dev/task/backend-developer/performance-optimization.md` 中的所有內容，並按照流程工作。
 
 ## 快停機制（強制）
 

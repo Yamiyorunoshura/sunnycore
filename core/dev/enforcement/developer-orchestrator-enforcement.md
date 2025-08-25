@@ -106,7 +106,7 @@
 
 **工作流程標準化**：
 - 遵循統一任務規劃工作流程：`/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/unified-task-planning-workflow.yaml`
-- 遵循統一開發任務工作流程：`/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/developer-orchestrator-workflow.yaml`
+- 遵循統一開發任務工作流程：`/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/developer-orchestrator-workflow.md`
 
 **輸出標準化**：
 - **格式要求**：所有代理輸出必須符合預定義格式
