@@ -321,7 +321,7 @@ stages:
           - action: "Prepare for stakeholder review"
           
       output_requirements:
-        location: "{project_root}/docs/implementation-review/{task_id}-review.md"
+        location: "{project_root}/docs/implementation-review/{task_id}-review.md(如`1-review.md`, `2-review.md`, `3-review.md`...)"
         format: "Professional markdown with proper structure"
         content: "Complete, evidence-based, actionable"
         authority: "Signed by Dr. Thompson"
@@ -366,7 +366,7 @@ stages:
                     replace_pattern: "QA狀態: 通過"
                   - action_type: "search_and_replace"
                     search_pattern: "審查文件: .*"
-                    replace_pattern: "審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
+                    replace_pattern: "審查文件: {project_root}/docs/implementation-review/{task_id}-review.md(如`1-review.md`, `2-review.md`, `3-review.md`...)"
                   - action_type: "search_and_replace"
                     search_pattern: "審查時間: .*"
                     replace_pattern: "審查時間: {now_iso}"
@@ -384,7 +384,7 @@ stages:
                     replace_pattern: "QA狀態: 失敗"
                   - action_type: "search_and_replace"
                     search_pattern: "審查文件: .*"
-                    replace_pattern: "審查文件: {project_root}/docs/implementation-review/{task_id}-review.md"
+                    replace_pattern: "審查文件: {project_root}/docs/implementation-review/{task_id}-review.md(如`1-review.md`, `2-review.md`, `3-review.md`...)"
                   - action_type: "search_and_replace"
                     search_pattern: "審查時間: .*"
                     replace_pattern: "審查時間: {now_iso}"

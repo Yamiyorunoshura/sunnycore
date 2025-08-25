@@ -20,7 +20,7 @@
    - 建立完整的專案上下文模型
    - 識別關鍵依賴關係和約束條件
 
-4. **實施計劃驗證**：確認 `{project_root}/docs/implementation-plan/{task_id}-plan.md` 存在且可讀取
+4. **實施計劃驗證**：確認 `{project_root}/docs/implementation-plan/{task_id}-plan.md` (如`1-plan.md`, `2-plan.md`, `3-plan.md`...)存在且可讀取
    - **關鍵檢查點**：如果實施計劃不存在，立即停止並通知用戶需要先執行計劃階段
    - 驗證計劃完整性和可執行性
 

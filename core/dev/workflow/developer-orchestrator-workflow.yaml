@@ -51,7 +51,7 @@ execution_protocol:
       name: "計劃驗證階段"
       description: "檢查並驗證實施計劃的存在性和完整性"
       actions:
-        - "從`{project_root}/docs/implementation-plan/{task_id}-plan.md`讀取task_id對應的實施計劃"
+        - "從`{project_root}/docs/implementation-plan/{task_id}-plan.md`(如`1-plan.md`, `2-plan.md`, `3-plan.md`...)讀取task_id對應的實施計劃"
         - "驗證計劃格式和必要欄位"
         - "確認計劃範圍和約束條件"
       
@@ -64,7 +64,7 @@ execution_protocol:
         - "確定並行執行的可能性"
         - "評估任務複雜度和資源需求"
         - "檢查是否存在先前的審查文件（棕地狀態）"
-        - "如為棕地狀態，讀取docs/implementation-review/{task_id}-review.md"
+        - "如為棕地狀態，讀取docs/implementation-review/{task_id}-review.md(如`1-review.md`, `2-review.md`, `3-review.md`...)"
         - "分析審查文件中的問題和修復建議"
       
     3_agent_assignment:
@@ -102,7 +102,7 @@ execution_protocol:
       description: "生成開發記錄和最終報告"
       actions:
         - "收集所有代理的執行結果"
-        - "使用標準模板`/Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-notes-tmpl.yaml`生成開發記錄"
+        - "使用標準模板`/Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-notes-tmpl.yaml`生成{task_id}-dev-notes.md(如`1-dev-notes.md`, `2-dev-notes.md`, `3-dev-notes.md`...)"
         - "驗證開發記錄格式和內容"
         - "如為棕地狀態，在開發記錄中記錄問題修復情況"
 
