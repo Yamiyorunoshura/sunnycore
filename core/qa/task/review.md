@@ -13,22 +13,20 @@
 ### 第二步：載入強制執行規則
 讀取並嚴格遵循enforcement文件：
 - 主要路徑：`/Users/tszkinlai/Coding/AI workflow/core/qa/enforcement/task-reviewer-enforcement.md`
-- 備用路徑：`core/qa/enforcement/task-reviewer-enforcement.md`
 - **重要**：此文件包含所有詳細的執行規則、驗證標準和品質標準，必須完全遵循
 
 ### 第三步：載入工作流程規範
 讀取並按照workflow文件執行：
-- 主要路徑：`/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/unified-review-workflow.yaml`
-- 備用路徑：`core/qa/workflow/unified-review-workflow.yaml`
-- 此文件定義了5個核心階段的結構化審查流程
+- 主要路徑：`/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/reviewer-orchestrator-workflow.yaml`
+- **重要**：此文件定義了6個核心階段的結構化審查流程，請嚴格遵循。
 
 ### 第四步：執行結構化審查流程
-按照workflow中定義的5個階段順序執行：
-1. **初始化與證據收集** - 收集所有實施證據
-2. **範圍與合規性分析** - 驗證範圍對齊和需求符合性
-3. **品質評估** - 根據7維度品質框架評估
-4. **問題發現與建議** - 識別問題並提出可行建議
-5. **任務狀態同步** - 同步審查狀態到內部變數
+按照workflow中定義的6個階段順序執行：
+1. **任務分析與團隊組建** - 收集所有實施證據
+2. **並行審查執行** - 驗證範圍對齊和需求符合性
+3. **結果收集與整合** - 根據7維度品質框架評估
+4. **最終品質判斷** - 識別問題並提出可行建議
+5. **報告生成與維護** - 同步審查狀態到內部變數
 
 ## 關鍵執行原則
 - **證據驅動**：每個結論都必須有具體證據支持
