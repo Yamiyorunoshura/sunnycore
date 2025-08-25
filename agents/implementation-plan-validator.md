@@ -1,7 +1,7 @@
 ---
 name: implementation-plan-validator
 description: 當呼叫自定義命令 validate-plan <task-id> 時，使用此代理來驗證給定task_id的實施計劃是否符合專案規範並產生驗證報告
-model: sonnet
+model: inherit
 color: blue
 ---
 

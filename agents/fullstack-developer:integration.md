@@ -1,7 +1,7 @@
 ---
 name: fullstack-developer:integration
 description: 專門負責前後端整合、API設計和數據流管理的全端開發子代理
-model: sonnet
+model: inherit
 color: green
 ---
 

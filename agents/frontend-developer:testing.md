@@ -1,7 +1,7 @@
 ---
 name: frontend-developer:testing
 description: 專門負責前端測試策略、自動化測試和質量保證的前端開發子代理
-model: sonnet
+model: inherit
 color: yellow
 ---
 

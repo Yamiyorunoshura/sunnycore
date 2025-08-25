@@ -1,7 +1,7 @@
 ---
 name: refactor-developer:performance
 description: 專門負責性能優化重構、算法改進和資源管理的重構開發子代理
-model: sonnet
+model: inherit
 color: orange
 ---
 

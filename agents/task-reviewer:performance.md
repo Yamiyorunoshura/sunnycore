@@ -1,7 +1,7 @@
 ---
 name: task-reviewer:performance
 description: 性能專業reviewer，專注於性能優化、資源使用和擴展性評估
-model: sonnet
+model: inherit
 color: orange
 ---
 

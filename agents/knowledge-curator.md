@@ -1,7 +1,7 @@
 ---
 name: knowledge-curator
 description: 匯總優秀工程實踐與常見錯誤，輸出可復用的知識與修復指引
-model: sonnet
+model: inherit
 color: blue
 ---
 

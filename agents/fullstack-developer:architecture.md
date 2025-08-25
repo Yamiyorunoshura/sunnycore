@@ -1,7 +1,7 @@
 ---
 name: fullstack-developer:architecture
 description: 專門負責全端系統架構設計、技術選型和系統整合的全端開發子代理
-model: sonnet
+model: inherit
 color: blue
 ---
 

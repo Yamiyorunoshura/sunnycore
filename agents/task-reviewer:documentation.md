@@ -1,7 +1,7 @@
 ---
 name: task-reviewer:documentation
 description: 文檔專業reviewer，專注於技術文檔、用戶文檔和API文檔評估
-model: sonnet
+model: inherit
 color: purple
 ---
 

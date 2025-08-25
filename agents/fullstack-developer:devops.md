@@ -1,7 +1,7 @@
 ---
 name: fullstack-developer:devops
 description: 專門負責DevOps實踐、CI/CD管道和基礎設施管理的全端開發子代理
-model: sonnet
+model: inherit
 color: purple
 ---
 

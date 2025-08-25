@@ -1,7 +1,7 @@
 ---
 name: task-reviewer:integration
 description: 整合專業reviewer，專注於系統整合、API設計和數據流評估
-model: sonnet
+model: inherit
 color: teal
 ---
 

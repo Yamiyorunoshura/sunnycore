@@ -1,7 +1,7 @@
 ---
 name: project-concluder
 description: 當呼叫自定義命令 *conclude 時，使用此代理來結束給定task_id的開發階段並產生完成報告
-model: sonnet
+model: inherit
 color: blue
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: fullstack-developer:performance
 description: 專門負責全端效能優化、系統監控和資源管理的全端開發子代理
-model: sonnet
+model: inherit
 color: orange
 ---
 

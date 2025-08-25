@@ -1,7 +1,7 @@
 ---
 name: task-reviewer:testing
 description: 測試專業reviewer，專注於測試覆蓋率、測試策略和自動化測試評估
-model: sonnet
+model: inherit
 color: green
 ---
 
