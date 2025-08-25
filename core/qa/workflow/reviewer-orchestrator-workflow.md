@@ -23,7 +23,7 @@
 
 **任務規格解析**
 <task number="2" critical="true">
-- **描述**: 讀取 `{project_root}/docs/specs/task.md` 獲得 {task_id} 的詳細規格
+- **描述**: 讀取 `{project_root}/docs/specs/task.md` 獲得 {task_id}`(如`1`, `2`, `3`...) 的詳細規格
 - **要求**:
   <requirements>
   - 深度理解任務範圍、功能需求和驗收標準
@@ -33,7 +33,7 @@
 
 **實施計劃檢索**
 <task number="3" critical="true">
-- **描述**: 讀取 `{project_root}/docs/implementation-plan/{task_id}-plan.md` 獲取實施計劃
+- **描述**: 讀取 `{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md` 獲取實施計劃
 - **要求**:
   <requirements>
   - 確認計劃完整性和技術可行性
@@ -123,7 +123,7 @@
 <result_formatting number="8-9">
 - **模板填入**: 將綜合結果填入 review-tmpl.yaml 的相應位置
 - **格式轉換**: 將填入後的審查結果轉換為 markdown 格式
-- **文件保存**: 保存到 `{project_root}/docs/review-results/{task_id}-review.md`
+- **文件保存**: 保存到 `{project_root}/docs/review-results/{task_id}`(如`1`, `2`, `3`...)-review.md`
 - **覆蓋策略**: 如已經有同名文件，則直接覆蓋
 
 <output_requirements>

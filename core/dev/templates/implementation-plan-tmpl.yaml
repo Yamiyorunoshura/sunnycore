@@ -120,7 +120,7 @@ open_questions:
 notes:
   - "<備註>"
 
-dev_notes_location: "docs/dev-notes/{task_id}-dev-notes.md"
+dev_notes_location: "docs/dev-notes/{task_id}`(如`1`, `2`, `3`...)-dev-notes.md"
 dev_notes_schema: "參考對應developer工作流程中的 dev_notes_v1 結構"
 dev_notes_note: "開發者在實施過程中將在獨立檔案中填寫詳細記錄，不在計劃檔案中維護"
 

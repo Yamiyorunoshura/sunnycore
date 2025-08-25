@@ -4,7 +4,7 @@ version: 1
 
 # 開發者實施記錄模板
 # 此檔案由開發者在實施過程中創建和維護
-# 位置：docs/dev-notes/{task_id}-dev-notes.md
+# 位置：docs/dev-notes/{task_id}`(如`1`, `2`, `3`...)-dev-notes.md
 
 metadata:
   task_id: "必填 - 實際任務識別碼"

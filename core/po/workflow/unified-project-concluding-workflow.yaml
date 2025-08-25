@@ -208,7 +208,7 @@ enforcement_protocol:
     mandatory_steps:
       - "總是先讀取範本檔案再寫入"
       - "按範本需求逐章節填充"
-      - "絕不留下佔位符文本如 {task_id} 或 INSERT VALUE"
+      - "絕不留下佔位符文本如 {task_id}`(如`1`, `2`, `3`...) 或 INSERT VALUE"
       - "每個完成聲明都必須包含具體證據"
       - "包含實際測量結果，非估計"
       - "完整性檢查：每個範本章節都必須填充"
@@ -306,11 +306,11 @@ stages:
       - all_project_md_documents_analyzed: true
     actions:
       - read_specification_files: ["docs/specs/task.md", "docs/specs/requirements.md", "docs/specs/design.md"]
-      - resolve_plan_by_task_id: "{{task_id}}"
-      - read_dev_notes: "docs/dev-notes/{{task_id}}-dev-notes.md"
+      - resolve_plan_by_task_id: "{{task_id}`(如`1`, `2`, `3`...)}"
+      - read_dev_notes: "docs/dev-notes/{{task_id}`(如`1`, `2`, `3`...)}-dev-notes.md"
       - gather_implementation_evidence: ["PRs", "commits", "changed_files", "migrations", "configs"]
       - gather_quality_artifacts: ["test_reports", "coverage", "CI_status", "performance", "security_scans"]
-      - gather_qa_reviews_and_feedback: "docs/implementation-review/{{task_id}}-review.md"
+      - gather_qa_reviews_and_feedback: "docs/implementation-review/{{task_id}`(如`1`, `2`, `3`...)}-review.md"
       - analyze_all_project_md_documents: "{{project_root}}"
       - document_evidence_gaps_as_limitations
 
@@ -456,7 +456,7 @@ validation_rules:
     forbidden_content:
       - placeholder_brackets: ["<", ">"]
       - placeholder_text: ["INSERT", "TODO", "TBD"]
-      - generic_placeholders: ["{task_id}", "<project_name>", "<owner>"]
+      - generic_placeholders: ["{task_id}`(如`1`, `2`, `3`...)", "<project_name>", "<owner>"]
       - unsupported_claims: "all_completion_claims_must_have_evidence"
       - vague_assessments: ["generally good", "mostly complete", "acceptable quality"]
     
@@ -514,5 +514,5 @@ validation_rules:
 
 output:
   path: "{{project_root}}/docs/completion-reports/"
-  filename: "{{task_id}}-completion.md"
+  filename: "{{task_id}`(如`1`, `2`, `3`...)}-completion.md"
   format: markdown

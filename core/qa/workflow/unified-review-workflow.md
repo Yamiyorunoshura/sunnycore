@@ -18,7 +18,7 @@
    - 識別專案依賴關係
    - 了解專案整體目標和限制條件
 
-2. 讀取 `{project_root}/docs/specs/task.md` 獲得 {task_id} 的詳細規格
+2. 讀取 `{project_root}/docs/specs/task.md` 獲得 {task_id}`(如`1`, `2`, `3`...) 的詳細規格
    - 解析任務需求和驗收標準
    - 識別技術要求和性能指標
    - 確認任務優先級和時程限制
@@ -31,7 +31,7 @@
 **目標**: 深入評估實施計劃的合理性和完整性
 
 **執行步驟**:
-3. 讀取 `{project_root}/docs/implementation-plan/{task_id}-plan.md` 獲取實施計劃
+3. 讀取 `{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md` 獲取實施計劃
    - 評估計劃的技術可行性
    - 檢查資源分配的合理性
    - 驗證時程安排的現實性

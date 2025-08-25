@@ -127,7 +127,7 @@
 
 <output_compliance>
 ### 輸出路徑合規
-- **輸出路徑合規**：必須儲存到 `{{project_root}}/docs/implementation-plan/{{task_id}}-plan.md`
+- **輸出路徑合規**：必須儲存到 `{{project_root}}/docs/implementation-plan/{{task_id}`(如`1`, `2`, `3`...)}-plan.md`
 - **索引更新**：必須將JSONL記錄附加到 `{{project_root}}/docs/index/plan-index.jsonl`
 - **路徑驗證**：必須確保輸出路徑在 `project_root` 下
 - **成功驗證**：應確認檔案成功寫入並回顧絕對路徑；失敗則記錄與重試計劃

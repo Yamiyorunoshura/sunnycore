@@ -2,7 +2,7 @@
 <description>檢查並驗證實施計劃的存在性和完整性</description>
 
 <execution_actions>
-- 從`{project_root}/docs/implementation-plan/{task_id}-plan.md`（如`1-plan.md`, `2-plan.md`, `3-plan.md`...）讀取task_id對應的實施計劃
+- 從`{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md`（如`1-plan.md`, `2-plan.md`, `3-plan.md`...）讀取task_id對應的實施計劃
 - 驗證計劃格式和必要欄位（metadata、scope、assumptions、constraints）
 - 確認計劃範圍和約束條件
 - 驗證sources路徑的可解析性
@@ -26,7 +26,7 @@
 - 評估任務間的依賴關係和並行執行可能性
 - 計算任務複雜度和所需資源估算
 - 檢查是否存在先前的審查文件（棕地狀態檢測）
-- 如為棕地狀態，讀取`docs/implementation-review/{task_id}-review.md`（如`1-review.md`, `2-review.md`, `3-review.md`...）
+- 如為棕地狀態，讀取`docs/implementation-review/{task_id}`(如`1`, `2`, `3`...)-review.md`（如`1-review.md`, `2-review.md`, `3-review.md`...）
 - 分析審查文件中的問題清單、修復建議和優先級
 </execution_actions>
 </think harder>
@@ -139,7 +139,7 @@
 <think hard>
 <execution_actions>
 - 收集並整合所有代理的執行結果、決策記錄和產出物
-- 使用標準模板`/Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-notes-tmpl.yaml`生成結構化的`{task_id}-dev-notes.md`（如`1-dev-notes.md`, `2-dev-notes.md`, `3-dev-notes.md`...）
+- 使用標準模板`/Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-notes-tmpl.yaml`生成結構化的`{task_id}`(如`1`, `2`, `3`...)-dev-notes.md`（如`1-dev-notes.md`, `2-dev-notes.md`, `3-dev-notes.md`...）
 - 驗證開發記錄的格式完整性和內容準確性
 - 如為棕地狀態，在開發記錄中詳細記錄問題修復情況、驗證結果和品質改進
 - 生成執行摘要、關鍵決策記錄和後續建議

@@ -6,19 +6,19 @@
 
 ### 1. 載入專案規範與上下文
 <stage name="載入專案規範與上下文" number="1" critical="true">
-- **描述**: 完整閱讀 `{project_root}/docs/specs/` 中的所有文檔，建立任務 `{task_id}` 的完整上下文。
+- **描述**: 完整閱讀 `{project_root}/docs/specs/` 中的所有文檔，建立任務 `{task_id}`(如`1`, `2`, `3`...)`(如`1`, `2`, `3`...) 的完整上下文。
 - **要求**:
   <requirements>
   <think hard>
   - 解析需求、架構、相依關係與限制條件
-  - 匯總對 `{task_id}` 的明確目標與非功能性要求
+  - 匯總對 `{task_id}`(如`1`, `2`, `3`...)`(如`1`, `2`, `3`...) 的明確目標與非功能性要求
   - 輸出關鍵依據清單，確保後續計劃可追溯
   <think hard>
   </requirements>
 - **驗證檢查**:
   <validation_checkpoints>
   - [ ] `{project_root}/docs/specs/` 可讀且已完整掃描
-  - [ ] `{task_id}` 在需求中有明確對應
+  - [ ] `{task_id}`(如`1`, `2`, `3`...)`(如`1`, `2`, `3`...) 在需求中有明確對應
   - [ ] 已形成初步上下文摘要（1-3 句）
   </validation_checkpoints>
 </stage>
@@ -53,12 +53,13 @@
 - **動作**:
   <plan-drafting>
   <think hard>
-  - 填寫 `metadata`（含 `{task_id}`、`{project_root}`、來源清單與日期）
+  - 填寫 `metadata`（含 `{task_id}`(如`1`, `2`, `3`...)`、`{project_root}`、來源清單與日期）
   - 於 `objectives` 中列出功能/非功能需求與可測量指標
   - 明確 `scope` 的 in/out 與邊界假設
   - 在 `approach` 中分解架構、模組、資料與遷移策略
   - 設定 `test_strategy` 與 `quality_gates`（例如覆蓋率與 p95）
   - 補齊 `risks`、`open_questions`、`dependencies`、`timeline`、`estimation`
+  - 完成後不需要輸出文件。
   <think hard>
   </plan-drafting>
 - **驗證檢查**:
@@ -69,28 +70,8 @@
   </validation_checkpoints>
 </stage>
 
-### 4. 思考強度標註與應用指南
-<stage name="思考強度標註與應用指南" number="4" critical="false">
-- **等級定義**:
-  <thinking-levels>
-  - None（留空）: 不啟用思考模式
-  - think: 輕度思考（低複雜、低風險項）
-  - think hard: 中度思考（跨模組、存在關鍵相依）
-  - think harder: 重度思考（高風險/安全/資料遷移/效能門檻高）
-  - Ultra think: 最高強度（不可逆變更、合規/法規影響、平台級決策）
-  </thinking-levels>
-- **標註原則**:
-  <principles>
-  <think>
-  - 以風險、不可逆性、跨界面影響範圍決定強度
-  - 在 `requirements`、`plan-drafting`、`quality-validations` 內就高風險項使用更高強度
-  - 標註僅影響思考深度，不更改交付範圍
-  <think>
-  </principles>
-</stage>
-
-### 5. 計劃品質驗證（內審）
-<stage name="計劃品質驗證（內審）" number="5" critical="true">
+### 4. 計劃品質驗證（內審）
+<stage name="計劃品質驗證（內審）" number="4" critical="true">
 - **持續驗證**:
   <quality-validations>
   <think harder>
@@ -115,8 +96,8 @@
 ## 產出與存檔
 <deliverables>
 
-### 6. 格式轉換與輸出
-<stage name="格式轉換與輸出" number="6" critical="true">
+### 5. 格式轉換與輸出
+<stage name="格式轉換與輸出" number="5" critical="true">
 - **描述**: 在輸出前，將計劃從 YAML 轉換為 Markdown，並存檔。
 - **動作**:
   <conversion>
@@ -128,13 +109,13 @@
   </conversion>
 - **輸出路徑**:
   <paths>
-  - `{project_root}/docs/implementation-plan/{task_id}-plan.md`
+  - `{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md`
   </paths>
 - **驗證檢查**:
   <validation_checkpoints>
   - [ ] 轉換後 Markdown 可讀且段落完整
   - [ ] 文件已正確存至指定路徑
-  - [ ] 封面中含 `{task_id}`、日期與版本資訊
+  - [ ] 封面中含 `{task_id}`(如`1`, `2`, `3`...)`、日期與版本資訊
   </validation_checkpoints>
 </stage>
 
@@ -163,11 +144,11 @@
 <appendix>
 - 模板：`/Users/tszkinlai/Coding/AI workflow/core/dev/templates/implementation-plan-tmpl.yaml`
 - 規範：`{project_root}/docs/specs/`
-- 計劃輸出：`{project_root}/docs/implementation-plan/{task_id}-plan.md`
+- 計劃輸出：`{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md`
 </appendix>
 
 </workflow>
-1. 完整閱讀`{project_root}/docs/specs/`中的所有文檔，並理解整個項目的架構以及{task_id}對應的需求
+1. 完整閱讀`{project_root}/docs/specs/`中的所有文檔，並理解整個項目的架構以及{task_id}`(如`1`, `2`, `3`...)對應的需求
 2. 讀取模板`Users/tszkinlai/Coding/AI workflow/core/dev/templates/implementation-plan-tmpl.yaml`
-3. 依據模板填入開發計劃，並將其保存到`{project_root}/docs/implementation-plan/`中，文件名為`{task_id}-plan.md`
+3. 依據模板填入開發計劃，並將其保存到`{project_root}/docs/implementation-plan/`中，文件名為`{task_id}`(如`1`, `2`, `3`...)-plan.md`
 4. 在輸出文檔前，必須將文檔從yaml格式轉換為markdown格式

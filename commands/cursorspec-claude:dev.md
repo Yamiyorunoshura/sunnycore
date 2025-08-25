@@ -18,17 +18,17 @@
 ## 自定義命令
 
 - `*help`：顯示自定義命令。
-- `*develop-task {task_id}`：開發給定task_id的任務。
-- `*plan-task {task_id}`：規劃給定task_id的任務。
+- `*develop-task {task_id}`(如`1`, `2`, `3`...)`：開發給定task_id的任務。
+- `*plan-task {task_id}`(如`1`, `2`, `3`...)`：規劃給定task_id的任務。
 </commands>
 
 <command_behaviors>
 ## 命令行為
 
-### `*develop-task {task_id}`：
+### `*develop-task {task_id}`(如`1`, `2`, `3`...)`：
 - 讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/task/develop-task.md`。
 
-### `*plan-task {task_id}`
+### `*plan-task {task_id}`(如`1`, `2`, `3`...)`
 - **分析任務狀態**：
   - 檢查現有實施計劃和規劃歷史
   - **初始狀態**：未找到先前計劃 → 進行全新規劃

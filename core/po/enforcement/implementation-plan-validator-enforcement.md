@@ -121,7 +121,7 @@
 - **嚴重性標示**：使用表情符號或標記清楚標示問題嚴重性（🚨 關鍵、⚠️ 重要、ℹ️ 一般、💡 建議）
 
 ### 輸出位置（固定）
-- **主報告**：`{{project_root}}/docs/validation-reports/{{task_id}}-plan-validation.md`
+- **主報告**：`{{project_root}}/docs/validation-reports/{{task_id}`(如`1`, `2`, `3`...)}-plan-validation.md`
 - **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/po/templates/plan-validation-report-tmpl.yaml`
 
 ### 品質標準（強制達到）

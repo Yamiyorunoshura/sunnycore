@@ -174,7 +174,7 @@
 ## 輸出位置（固定）
 
 <file_paths>
-- **開發記錄**：`{{project_root}}/docs/dev-notes/{{task_id}}-dev-notes.md`
+- **開發記錄**：`{{project_root}}/docs/dev-notes/{{task_id}`(如`1`, `2`, `3`...)}-dev-notes.md`
 - **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-notes-tmpl.yaml`
 </file_paths>
 </output_configuration>

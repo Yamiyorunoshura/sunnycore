@@ -1,6 +1,6 @@
 ---
 name: task-planner
-description: 由 `commands/kiro-spec:dev.md` 中定義的自定義命令 *plan-task {task_id} 觸發。規劃給定{task_id}的任務
+description: 由 `commands/kiro-spec:dev.md` 中定義的自定義命令 *plan-task {task_id}`(如`1`, `2`, `3`...) 觸發。規劃給定{task_id}`(如`1`, `2`, `3`...)的任務
 model: inherit
 color: red
 ---

@@ -127,7 +127,7 @@ enforcement_protocol:
     mandatory_steps:
       - "總是先讀取範本檔案再寫入"
       - "按範本需求逐章節填充"
-      - "絕不留下佔位符文本如 {task_id} 或 INSERT VALUE"
+      - "絕不留下佔位符文本如 {task_id}`(如`1`, `2`, `3`...) 或 INSERT VALUE"
       - "每個發現都必須包含具體證據"
       - "提供具體的改進步驟"
       - "完整性檢查：每個範本章節都必須填充"
@@ -227,7 +227,7 @@ stages:
       - all_required_specs_read: true
       - cross_reference_sources_identified: true
     actions:
-      - resolve_plan_by_task_id: "{{task_id}}"
+      - resolve_plan_by_task_id: "{{task_id}`(如`1`, `2`, `3`...)}"
       - read_specification_files: ["docs/specs/task.md", "docs/specs/requirements.md", "docs/specs/design.md"]
       - identify_cross_reference_sources
       - validate_plan_document_completeness
@@ -366,7 +366,7 @@ validation_rules:
     forbidden_content:
       - placeholder_brackets: ["<", ">"]
       - placeholder_text: ["INSERT", "TODO", "TBD"]
-      - generic_placeholders: ["{task_id}", "<project_name>", "<owner>"]
+      - generic_placeholders: ["{task_id}`(如`1`, `2`, `3`...)", "<project_name>", "<owner>"]
       - unsupported_findings: "all_findings_must_have_evidence"
       - vague_recommendations: ["should improve", "consider enhancing", "might benefit"]
 
@@ -398,7 +398,7 @@ validation_rules:
 
 output:
   path: "{{project_root}}/docs/validation-reports/"
-  filename: "{{task_id}}-plan-validation.md"
+  filename: "{{task_id}`(如`1`, `2`, `3`...)}-plan-validation.md"
   format: markdown
 
 reporting:
