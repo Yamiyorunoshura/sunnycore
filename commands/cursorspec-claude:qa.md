@@ -22,9 +22,11 @@
 
 ## 命令行為
 
-### `*review <task-id>`
+### `*help`
+- 當用戶呼叫本指令時，你必須顯示所有自定義命令。
 
-當用戶呼叫本指令時，你必須按照工作流程文件`/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/reviewer-orchestrator-workflow.yaml`完成任務。
+### `*review <task-id>`
+- 當用戶呼叫本指令時，你必須完整閱讀`/Users/tszkinlai/Coding/AI workflow/core/qa/task/review.md`
 
 ## 架構原則
 

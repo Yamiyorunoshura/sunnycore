@@ -13,12 +13,6 @@
 - **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/unified-review-workflow.yaml`，失敗則記錄警告
 - **檔案載入驗證**：未能完全內化時，記錄缺口與替代資訊來源
 
-### 路徑回退策略（強制）
-- **工作流程檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/unified-review-workflow.yaml`，否則使用 `core/workflow/unified-review-workflow.yaml`
-- **執行規範檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/qa/enforcement/task-reviewer-enforcement.md`，否則使用 `core/enforcement/task-reviewer-enforcement.md`
-- **報告範本檔**：優先 `/Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml`，否則使用 `core/templates/review-tmpl.yaml`
-- **規格根目錄**：優先 `docs/specs/`，其次 `docs/specs/`，再次 `specs/`
-
 ### 基於證據的審查（絕對強制）
 - **客觀評估**：所有評估都必須基於具體證據，不允許主觀猜測
 - **證據類型**：測試結果、效能數據、代碼審查記錄、文檔完整性、合規檢查

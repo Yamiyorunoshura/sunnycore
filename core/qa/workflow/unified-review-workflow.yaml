@@ -11,29 +11,29 @@ metadata:
   description: "全面實施審查的結構化工作流程"
   
 overview:
-  description: "Evidence-driven implementation review with 5 core stages"
+  description: "具有5個核心階段的證據驅動實施審查"
   report_template: "/Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml"
   stages:
     - id: 1
       name: "初始化與證據收集"
-      description: "Load workflow, gather all implementation evidence"
+      description: "載入工作流程，收集所有實施證據"
     - id: 2
       name: "範圍與合規性分析"
-      description: "Verify scope alignment and requirements conformance"
+      description: "驗證範圍對齊和需求符合性"
     - id: 3
       name: "品質評估"
-      description: "Assess implementation against 7-dimension quality framework"
+      description: "根據7維度品質框架評估實施"
     - id: 4
       name: "問題發現與建議"
-      description: "Identify issues, rank by severity, propose actionable fixes"
+      description: "識別問題，按嚴重程度排序，提出可行的修復建議"
     - id: 5
-      name: "報告生成與驗證"
-      description: "Generate/update template-compliant report and handle task completion"
+      name: "任務狀態同步"
+      description: "同步審查狀態到內部變數"
 
 execution_protocol:
   enforcement_compliance:
     mandatory_enforcement_file: "/Users/tszkinlai/Coding/AI workflow/core/qa/enforcement/task-reviewer-enforcement.md"
-    note: "All detailed enforcement rules, validation criteria, and quality standards are defined in the enforcement file"
+    note: "所有詳細的執行規則、驗證標準和品質標準都在執行文件中定義"
   
 execution_context:
   path_resolution:
@@ -55,11 +55,11 @@ execution_context:
   
   # 引用enforcement文件中的時間盒設定
   timeboxes:
-    note: "Reference task-reviewer-enforcement.md for detailed timebox specifications"
+    note: "參考task-reviewer-enforcement.md中的詳細時間盒規範"
     reference_file: "/Users/tszkinlai/Coding/AI workflow/core/qa/enforcement/task-reviewer-enforcement.md"
     
   failure_policy:
-    on_missing_primary_path: "Use fallback order; if none available, append_warning_and_continue_with_limitations"
+    on_missing_primary_path: "使用備用順序；如果都不可用，則附加警告並在限制下繼續"
 
 stages:
   stage_1:
@@ -67,16 +67,16 @@ stages:
     name: "初始化與證據收集"
     name_en: "Initialize & Collect Evidence"
     objectives:
-      - "Determine review mode (initial vs follow-up)"
-      - "Gather all required implementation evidence"
-      - "Set review scope and focus areas"
+      - "確定審查模式（初始 vs 後續）"
+      - "收集所有必需的實施證據"
+      - "設定審查範圍和重點領域"
     
     actions:
       file_checks:
         - tool: "glob_file_search"
           pattern: "{task_id}-review.*"
           location: "docs/implementation-review/"
-          purpose: "Check existing review documents"
+          purpose: "檢查現有審查文件"
           
       spec_gathering:
         - tool: "glob_file_search"
@@ -84,186 +84,186 @@ stages:
           pattern_alt:
             - "docs/specs/**"
             - "specs/**"
-          purpose: "Discover all specification files under docs/specs/"
+          purpose: "發現docs/specs/下的所有規範文件"
         - tool: "read_file"
-          files: "<from previous glob_file_search>"
-          purpose: "Gather specification sources (all docs/specs/**)"
+          files: "<來自前一個glob_file_search>"
+          purpose: "收集規範來源（所有docs/specs/**）"
         - tool: "read_file"
           files:
             - "docs/specs/task.md"
             - "docs/specs/requirements.md"
             - "docs/specs/design.md"
-          purpose: "Ensure core specs explicitly loaded"
-          note: "If docs/specs/ is absent, resolve using execution_context.path_resolution.specs_root"
+          purpose: "確保核心規範明確載入"
+          note: "如果docs/specs/不存在，使用execution_context.path_resolution.specs_root解析"
           
       plan_discovery:
         - tool: "glob_file_search"
           pattern: "{task_id}-plan.*"
           location: "docs/implementation-plan/"
-          purpose: "Find implementation plan"
+          purpose: "尋找實施計劃"
         - tool: "read_file"
-          file: "located implementation plan"
-          purpose: "Extract plan details for cross-reference"
+          file: "定位的實施計劃"
+          purpose: "提取計劃詳情以供交叉參考"
           
       dev_notes_discovery:
         - tool: "glob_file_search"
           pattern: "{task_id}-dev-notes.*"
           location: "docs/dev-notes/"
-          purpose: "Find developer implementation notes"
+          purpose: "尋找開發者實施筆記"
         - tool: "read_file"
-          file: "located dev-notes file"
-          purpose: "Extract actual implementation details for cross-reference"
+          file: "定位的dev-notes文件"
+          purpose: "提取實際實施詳情以供交叉參考"
           
       implementation_analysis:
         - tool: "codebase_search"
-          query: "Where are the main implementation changes for this task?"
-          purpose: "Identify implementation changes"
+          query: "此任務的主要實施變更在哪裡？"
+          purpose: "識別實施變更"
           parallelizable: true
         - tool: "grep"
           pattern: "{task_id}"
           output_mode: "files_with_matches"
-          purpose: "Find task-related files"
+          purpose: "尋找任務相關文件"
           parallelizable: true
           
       quality_artifacts:
         - tool: "glob_file_search"
           pattern: "*test*"
-          purpose: "Find test files and reports"
+          purpose: "尋找測試文件和報告"
           parallelizable: true
         - tool: "grep"
           pattern: "coverage|CI|build"
-          purpose: "Find quality metrics"
+          purpose: "尋找品質指標"
           parallelizable: true
     
     follow_up_mode:
       additional_actions:
-        - "Read previous review document"
-        - "Extract previous findings for tracking"
-        - "Identify remediation scope and focus areas"
+        - "讀取先前的審查文件"
+        - "提取先前的發現以供追蹤"
+        - "識別修復範圍和重點領域"
     
     validation_checkpoint:
-      - "Review mode determined (initial/follow-up)"
-      - "All spec files read"
-      - "Implementation plan located"
-      - "Implementation evidence gathered"
-      - "Quality artifacts collected"
-      - "Dev_notes read for cross-reference"
+      - "審查模式已確定（初始/後續）"
+      - "所有規範文件已讀取"
+      - "實施計劃已定位"
+      - "實施證據已收集"
+      - "品質工件已收集"
+      - "Dev_notes已讀取以供交叉參考"
 
   stage_2:
     id: 2
     name: "範圍與合規性分析"
     name_en: "Scope & Conformance Analysis"
     objectives:
-      - "Verify implementation matches planned scope"
-      - "Check requirements conformance"
-      - "Document any scope deviations"
+      - "驗證實施符合計劃範圍"
+      - "檢查需求符合性"
+      - "記錄任何範圍偏差"
     
     actions:
       scope_analysis:
         - tool: "codebase_search"
-          query: "What functionality was actually implemented for this task?"
-          purpose: "Analyze scope alignment"
+          query: "此任務實際實施了什麼功能？"
+          purpose: "分析範圍對齊"
           
       requirements_verification:
         - tool: "codebase_search"
-          query: "How do the implemented changes meet the stated requirements?"
-          purpose: "Verify requirements satisfaction"
+          query: "實施的變更如何滿足既定需求？"
+          purpose: "驗證需求滿足"
         - cross_reference_analysis:
           dev_notes_verification:
-            - action: "Compare dev_notes detailed_changes against actual code changes"
-              method: "Cross-reference documented changes in dev-notes file with actual git commits and file modifications"
-              evidence_required: "File paths, line numbers, commit hashes"
+            - action: "比較dev_notes的detailed_changes與實際代碼變更"
+              method: "將dev-notes文件中記錄的變更與實際git提交和文件修改進行交叉參考"
+              evidence_required: "文件路徑、行號、提交哈希"
               source: "docs/dev-notes/{task_id}-dev-notes.md"
             
-            - action: "Verify F-IDs and N-IDs mapping accuracy in dev_notes"
-              method: "Cross-reference requirement IDs in dev-notes with plan objectives and actual implementation"
-              evidence_required: "Requirement traceability matrix"
+            - action: "驗證dev_notes中F-IDs和N-IDs映射準確性"
+              method: "將dev-notes中的需求ID與計劃目標和實際實施進行交叉參考"
+              evidence_required: "需求追溯矩陣"
               source: "docs/dev-notes/{task_id}-dev-notes.md vs docs/implementation-plan/{task_id}-plan.*"
             
-            - action: "Validate dev_notes quality metrics against measured results"
-              method: "Compare documented performance/security/test metrics in dev-notes with actual test outputs"
-              evidence_required: "Test reports, performance benchmarks, security scan results"
+            - action: "驗證dev_notes品質指標與測量結果"
+              method: "比較dev-notes中記錄的性能/安全/測試指標與實際測試輸出"
+              evidence_required: "測試報告、性能基準、安全掃描結果"
               source: "docs/dev-notes/{task_id}-dev-notes.md"
             
-            - action: "Check dev_notes scope deviations against observed implementation"
-              method: "Verify documented scope deviations in dev-notes match actual implementation scope"
-              evidence_required: "Scope comparison analysis with justification"
+            - action: "檢查dev_notes範圍偏差與觀察到的實施"
+              method: "驗證dev-notes中記錄的範圍偏差與實際實施範圍匹配"
+              evidence_required: "範圍比較分析與理由"
               source: "docs/dev-notes/{task_id}-dev-notes.md"
           
           consistency_validation:
             critical_checks:
-              - "Developer claims vs actual implementation"
-              - "Documented challenges vs code solutions"
-              - "Claimed quality metrics vs measured results"
-              - "Stated deviations vs implementation evidence"
-            failure_escalation: "Inconsistencies treated as severe credibility issues requiring immediate investigation"
+              - "開發者聲稱 vs 實際實施"
+              - "記錄的挑戰 vs 代碼解決方案"
+              - "聲稱的品質指標 vs 測量結果"
+              - "聲明的偏差 vs 實施證據"
+            failure_escalation: "不一致性被視為嚴重的可信度問題，需要立即調查"
           
       deviation_assessment:
         tasks:
-          - "Cross-reference scope vs implementation"
-          - "Document scope violations with evidence"
-          - "Assess deviation impact"
+          - "交叉參考範圍 vs 實施"
+          - "記錄範圍違規並提供證據"
+          - "評估偏差影響"
     
     follow_up_mode:
       additional_actions:
-        - "Verify previous scope violations resolved"
-        - "Check for new scope deviations"
+        - "驗證先前的範圍違規已解決"
+        - "檢查新的範圍偏差"
     
     validation_checkpoint:
-      - "Scope analysis completed"
-      - "Requirements conformance checked"
-      - "Dev_notes detailed_changes verified against actual code"
-      - "F-IDs and N-IDs mapping accuracy confirmed"
-      - "Quality metrics cross-validated (documented vs measured)"
-      - "Developer claims consistency checked"
-      - "Deviations documented with evidence"
-      - "Impact assessment done"
+      - "範圍分析已完成"
+      - "需求符合性已檢查"
+      - "Dev_notes的detailed_changes已與實際代碼驗證"
+      - "F-IDs和N-IDs映射準確性已確認"
+      - "品質指標已交叉驗證（記錄 vs 測量）"
+      - "開發者聲稱一致性已檢查"
+      - "偏差已記錄並提供證據"
+      - "影響評估已完成"
 
   stage_3:
     id: 3
     name: "品質評估"
     name_en: "Quality Assessment"
     objectives:
-      - "Evaluate implementation against 7-dimension quality framework"
-      - "Score each dimension (1-5) with detailed justification"
-      - "Gather quantitative metrics"
+      - "根據7維度品質框架評估實施"
+      - "為每個維度評分（1-5）並提供詳細理由"
+      - "收集定量指標"
     
     quality_dimensions:
       code_quality:
-        name: "Code Quality"
+        name: "代碼品質"
         actions:
           - tool: "codebase_search"
-            query: "How readable and maintainable is the implemented code?"
+            query: "實施的代碼可讀性和可維護性如何？"
           - tool: "grep"
             pattern: "error|exception|catch|handle"
-            purpose: "Review error handling"
+            purpose: "審查錯誤處理"
             
       security:
-        name: "Security Review"
+        name: "安全審查"
         actions:
           - tool: "codebase_search"
-            query: "How are authentication and authorization handled in this implementation?"
+            query: "此實施中如何處理身份驗證和授權？"
           - tool: "grep"
             pattern: "password|secret|token|key|auth"
-            purpose: "Find security-sensitive code"
+            purpose: "尋找安全敏感代碼"
             
       performance:
-        name: "Performance Review"
+        name: "性能審查"
         actions:
           - tool: "codebase_search"
-            query: "What are the performance implications of this implementation?"
+            query: "此實施的性能影響是什麼？"
             
       testing:
-        name: "Testing Review"
+        name: "測試審查"
         actions:
           - tool: "glob_file_search"
             pattern: "*test*"
           - tool: "grep"
             pattern: "describe|it|test|spec"
-            purpose: "Analyze test coverage"
+            purpose: "分析測試覆蓋率"
             
       documentation:
-        name: "Documentation Review"
+        name: "文檔審查"
         actions:
           - tool: "glob_file_search"
             pattern: "README*"
@@ -271,153 +271,86 @@ stages:
             pattern: "*doc*"
               
       maintainability:
-        name: "Maintainability"
+        name: "可維護性"
         evaluation_focus:
-          - "Code structure and organization"
-          - "Dependency management"
-          - "Configuration management"
+          - "代碼結構和組織"
+          - "依賴管理"
+          - "配置管理"
           
       deployment:
-        name: "Deployment & Operations"
+        name: "部署與運維"
         evaluation_focus:
-          - "Deployment process"
-          - "Monitoring and logging"
-          - "Production readiness"
+          - "部署流程"
+          - "監控和日誌"
+          - "生產就緒性"
     
     follow_up_mode:
       additional_actions:
-        - "Compare current vs previous quality metrics"
-        - "Calculate score deltas and identify trends"
-        - "Verify previous quality issues resolved"
+        - "比較當前 vs 先前的品質指標"
+        - "計算分數差異並識別趨勢"
+        - "驗證先前的品質問題已解決"
     
     validation_checkpoint:
-      - "All 7 dimensions assessed with scores"
-      - "Each score justified with evidence"
-      - "Quantitative metrics collected"
-      - "Trend analysis completed (for follow-up)"
+      - "所有7個維度已評估並評分"
+      - "每個分數都有證據支持的理由"
+      - "定量指標已收集"
+      - "趨勢分析已完成（用於後續）"
 
   stage_4:
     id: 4
     name: "問題發現與建議"
     name_en: "Findings & Recommendations"
     objectives:
-      - "Compile all identified issues"
-      - "Rank findings by severity (blocker/high/medium/low)"
-      - "Propose actionable recommendations with success criteria"
+      - "編譯所有識別的問題"
+      - "按嚴重程度排序發現（阻塞/高/中/低）"
+      - "提出具有成功標準的可行建議"
     
     finding_categories:
-      - "Scope violations"
-      - "Quality issues"
-      - "Security concerns"
-      - "Performance problems"
-      - "Test gaps"
-      - "Documentation issues"
+      - "範圍違規"
+      - "品質問題"
+      - "安全問題"
+      - "性能問題"
+      - "測試缺口"
+      - "文檔問題"
     
     severity_levels:
       blocker:
-        description: "Critical issues that prevent deployment"
+        description: "阻止部署的關鍵問題"
         requires_immediate_action: true
       high:
-        description: "Major issues that significantly impact functionality"
+        description: "顯著影響功能的重大問題"
         requires_action_before_release: true
       medium:
-        description: "Issues that should be addressed soon"
+        description: "應該盡快解決的問題"
         can_be_scheduled: true
       low:
-        description: "Minor improvements or suggestions"
+        description: "次要改進或建議"
         optional: true
     
     recommendation_structure:
-      - "Specific remediation steps"
-      - "Measurable success criteria"
-      - "Priority and timeline"
-      - "Resource requirements"
+      - "具體的修復步驟"
+      - "可測量的成功標準"
+      - "優先級和時間表"
+      - "資源需求"
     
     follow_up_mode:
       additional_actions:
-        - "Mark resolved findings"
-        - "Update remaining findings status"
-        - "Identify new findings"
-        - "Track remediation progress"
+        - "標記已解決的發現"
+        - "更新剩餘發現狀態"
+        - "識別新發現"
+        - "追蹤修復進度"
     
     validation_checkpoint:
-      - "All findings compiled and ranked"
-      - "Recommendations are actionable"
-      - "Success criteria defined"
-      - "Evidence provided for each finding"
+      - "所有發現已編譯並排序"
+      - "建議是可行的"
+      - "成功標準已定義"
+      - "每個發現都提供了證據"
 
   stage_5:
     id: 5
-    name: "報告生成與驗證"
-    name_en: "Report Generation & Validation"
-    objectives:
-      - "Generate template-compliant review report"
-      - "Validate document completeness"
-      - "Handle task completion based on QA decision"
-    
-    report_generation:
-      initial_review:
-        tasks:
-          - "Populate all template sections"
-          - "Ensure no placeholder values remain"
-          - "Include all evidence links"
-          
-      follow_up_review:
-        tasks:
-          - "Update existing document sections"
-          - "Preserve metadata/context/appendix"
-          - "Add trend analysis and remediation tracking"
-          
-      output_location: "{project_root}/docs/implementation-review/{task_id}-review.md"
-
-    document_cleanup:
-      actions:
-        - tool: "edit_file"
-          target: "{project_root}/docs/implementation-review/{task_id}-review.md"
-          purpose: "移除驗證檢查清單段落（最終交付不包含內部檢查清單）"
-          action_type: "remove_section_by_heading"
-          headings:
-            - "驗證檢查清單"
-            - "審查檢查清單"
-    
-    qa_decision_handling:
-      analysis_steps:
-        - "Extract QA decision (pass/fail)"
-        - "Identify blocking issues"
-        - "Set internal variable: final_review_status"
-        
-      if_review_passes:
-        actions:
-          - "Set final_review_status to 'pass'"
-          
-      if_review_fails:
-        actions:
-          - "Set final_review_status to 'fail'"
-    
-    final_validation:
-      checks:
-        - tool: "read_file"
-          target: "generated review document"
-          validations:
-            - "Compare against template structure"
-            - "Verify no placeholders remain"
-            - "Confirm evidence links valid"
-            - "Validate markdown formatting"
-            - "Verify implementation_maturity.level present and valid (bronze|silver|gold|platinum)"
-            - "Verify error_log.summary and entries sections populated if findings exist"
-    
-    validation_checkpoint:
-      - "Report generated and saved"
-      - "Template compliance verified"
-      - "QA decision extracted and status variable set"
-      - "Final validation passed"
-      - "Review status variable ready for subsequent processing"
-
-  stage_6:
-    id: 6
     name: "任務狀態同步"
     name_en: "Task Status Synchronization"
-    depends_on: [5]
+    depends_on: [4]
     objectives:
       - "同步最終審查狀態到內部變數"
       - "準備後續處理所需的狀態信息"
@@ -437,73 +370,65 @@ stages:
 critical_success_factors:
   mandatory_requirements:
     evidence_based:
-      description: "Every conclusion supported by concrete evidence"
+      description: "每個結論都有具體證據支持"
       includes:
-        - "File paths"
-        - "PR links"
-        - "Measurements"
-        - "Code references"
+        - "文件路徑"
+        - "PR連結"
+        - "測量數據"
+        - "代碼參考"
         
     sequential_execution:
-      description: "Complete stages in order, validate at each checkpoint"
-      enforcement: "Stop immediately if validation fails"
+      description: "按順序完成階段，在每個檢查點驗證"
+      enforcement: "如果驗證失敗立即停止"
       
     template_compliance:
-      description: "Follow template structure exactly, populate all sections"
+      description: "嚴格遵循模板結構，填充所有部分"
       validation_required: true
       
     no_placeholders:
-      description: "Replace all placeholder values with actual content"
+      description: "用實際內容替換所有佔位符值"
       validation_required: true
-    deterministic_operation:
-      description: "Operate with low-randomness settings for reproducibility"
-      parameters:
-        temperature: 0
-        top_p: 0.1
       
     task_authority:
-      description: "QA has final authority on task completion"
-      authority_level: "final"
+      description: "QA對任務完成有最終權威"
+      authority_level: "最終"
 
   error_handling:
     validation_failure_protocol:
       steps:
-        - "STOP immediately"
-        - "Identify specific failure"
-        - "Return to appropriate stage"
-        - "Re-execute with corrections"
-        - "Re-validate before proceeding"
+        - "立即停止"
+        - "識別具體失敗"
+        - "返回適當階段"
+        - "重新執行並修正"
+        - "重新驗證後再繼續"
 
   quality_gates:
     requirements:
-      - "All 5 stages completed sequentially"
-      - "All evidence collected and documented"
-      - "All template sections populated"
-      - "All validation checkpoints passed"
-      - "Document ready for stakeholder review"
-      - "Implementation maturity classified and error log summarized"
+      - "所有5個階段按順序完成"
+      - "所有證據已收集並記錄"
+      - "所有模板部分已填充"
+      - "所有驗證檢查點已通過"
+      - "實施成熟度已分類"
     
-    success_criteria: "Comprehensive, evidence-based review report that enables informed decisions"
+    success_criteria: "全面的、基於證據的審查報告，能夠支持明智決策"
 
-# Tool Integration Guidelines
+# 工具整合指南
 tool_usage_patterns:
   file_operations:
-    read_file: "Use for reading specific known files"
-    glob_file_search: "Use for pattern-based file discovery"
-    list_dir: "Use for directory exploration"
+    read_file: "用於讀取特定已知文件"
+    glob_file_search: "用於基於模式的文件發現"
+    list_dir: "用於目錄探索"
     
   code_analysis:
-    codebase_search: "Use for semantic code understanding"
-    grep: "Use for pattern matching and exact text search"
-    
-  documentation:
-    write: "Use for generating final reports"
+    codebase_search: "用於語義代碼理解"
+    grep: "用於模式匹配和精確文本搜索"
 
-# AI Processing Notes
+
+# AI處理註記
 ai_optimization:
-  structured_format: "YAML enables better parsing and validation"
-  clear_hierarchy: "Nested structure maps to AI decision trees"
-  tool_integration: "Explicit tool calls reduce AI confusion"
-  validation_points: "Checkpoints enable early error detection"
-  follow_up_support: "Separate handling for iterative reviews"
-  parallel_guidance: "Default to parallel tool execution for independent read-only steps"
+  structured_format: "YAML格式能更好地解析和驗證"
+  clear_hierarchy: "嵌套結構映射到AI決策樹"
+  tool_integration: "明確的工具調用減少AI混淆"
+  validation_points: "檢查點能夠早期錯誤檢測"
+  follow_up_support: "為迭代審查提供單獨處理"
+  parallel_guidance: "對於獨立的只讀步驟，默認並行執行工具"
