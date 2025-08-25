@@ -354,11 +354,11 @@ stages:
               pass:
                 actions:
                   - action_type: "search_and_replace"
-                    search_pattern: "- [ ] {task_title}"
-                    replace_pattern: "- [x] {task_title}"
+                    search_pattern: "- [ ] {task_id}"
+                    replace_pattern: "- [x] {task_id}"
                   - action_type: "search_and_replace"
-                    search_pattern: "- [ ] {task_id}."
-                    replace_pattern: "- [x] {task_id}."
+                    search_pattern: "- [ ] {sub_task_id}."
+                    replace_pattern: "- [x] {sub_task_id}."
                   - action_type: "search_and_replace"
                     search_pattern: "QA狀態: .*"
                     replace_pattern: "QA狀態: 通過"
@@ -375,8 +375,8 @@ stages:
               fail:
                 actions:
                   - action_type: "search_and_replace"
-                    search_pattern: "- [ ] {task_title}"
-                    replace_pattern: "- [-] {task_title}"
+                    search_pattern: "- [ ] {task_id}"
+                    replace_pattern: "- [-] {task_id}"
                   - action_type: "search_and_replace"
                     search_pattern: "QA狀態: .*"
                     replace_pattern: "QA狀態: 失敗"
