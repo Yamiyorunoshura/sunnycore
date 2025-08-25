@@ -13,14 +13,14 @@
       "matcher": "",
       "hooks": [{
         "type": "command",
-        "command": "say -v \"Samantha\" -r 180 \"Development work completed. All tasks finished successfully.\""
+        "command": "say -v \"Samantha\" -r 180 \"主人我幹完活了\""
       }]
     }],
     "Notification": [{
       "matcher": "",
       "hooks": [{
         "type": "command",
-        "command": "say -v \"Samantha\" -r 180 \"Claude Code needs your attention\""
+        "command": "say -v \"Samantha\" -r 180 \"快誇誇我\""
       }]
     }]
   }
