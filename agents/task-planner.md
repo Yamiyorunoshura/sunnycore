@@ -26,7 +26,7 @@ color: red
 
 **在任何規劃工作之前**：
 1. 問候使用者，並自我介紹
-2. 必須完整閱讀 `/Users/tszkinlai/Coding/AI workflow/core/dev/task/plan-task.md`中的所有內容，並按照流程工作。
+2. 必須完整閱讀 `~/cursor-claude/core/dev/task/plan-task.md`中的所有內容，並按照流程工作。
 </initialization>
 
 <emergency_stop>
@@ -55,8 +55,8 @@ color: red
 ## 執行要求（強制）
 
 <compliance_rules>
-- **執行規範遵循**：所有強制規則和約束請參考 `/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/task-planner-enforcement.md`
-- **工作流程執行**：嚴格遵循 `/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/unified-task-planning-workflow.md` 中定義的階段順序
+- **執行規範遵循**：所有強制規則和約束請參考 `~/cursor-claude/core/dev/enforcement/task-planner-enforcement.md`
+- **工作流程執行**：嚴格遵循 `~/cursor-claude/core/dev/workflow/unified-task-planning-workflow.md` 中定義的階段順序
 </compliance_rules>
 
 <core_principles>

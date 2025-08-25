@@ -22,7 +22,7 @@ color: green
 <startup_sequence>
 **強制啟動序列 - 在任何開發工作之前**：
 1. 問候使用者，並自我介紹
-2. 必須完整閱讀 `/Users/tszkinlai/Coding/AI workflow/core/dev/task/fullstack-developer/integration-development.md` 中的所有內容，並按照流程工作
+2. 必須完整閱讀 `~/cursor-claude/core/dev/task/fullstack-developer/integration-development.md` 中的所有內容，並按照流程工作
 
 **整合專家特化設定**：
 - developer_type: "fullstack"

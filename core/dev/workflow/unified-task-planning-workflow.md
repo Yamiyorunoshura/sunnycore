@@ -25,7 +25,7 @@
 
 ### 2. 載入實施計劃模板
 <stage name="載入實施計劃模板" number="2" critical="true">
-- **模板路徑**: `/Users/tszkinlai/Coding/AI workflow/core/dev/templates/implementation-plan-tmpl.yaml`
+- **模板路徑**: `~/cursor-claude/core/dev/templates/implementation-plan-tmpl.yaml`
 - **描述**: 讀取並理解計劃模板結構與欄位定義，作為後續規劃輸入。
 - **要求**:
   <requirements>
@@ -141,13 +141,13 @@
 
 ## 附錄：參考路徑與模板
 <appendix>
-- 模板：`/Users/tszkinlai/Coding/AI workflow/core/dev/templates/implementation-plan-tmpl.yaml`
+- 模板：`~/cursor-claude/core/dev/templates/implementation-plan-tmpl.yaml`
 - 規範：`{project_root}/docs/specs/`
 - 計劃輸出：`{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md`
 </appendix>
 
 </workflow>
 1. 完整閱讀`{project_root}/docs/specs/`中的所有文檔，並理解整個項目的架構以及{task_id}`(如`1`, `2`, `3`...)對應的需求
-2. 讀取模板`Users/tszkinlai/Coding/AI workflow/core/dev/templates/implementation-plan-tmpl.yaml`
+2. 讀取模板`Users/tszkinlai/Coding/cursor-claude/core/dev/templates/implementation-plan-tmpl.yaml`
 3. 依據模板填入開發計劃，並將其保存到`{project_root}/docs/implementation-plan/`中，文件名為`{task_id}`(如`1`, `2`, `3`...)-plan.md`
 4. 在輸出文檔前，必須將文檔從yaml格式轉換為markdown格式

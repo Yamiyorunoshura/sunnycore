@@ -10,11 +10,11 @@
 <description>載入並驗證所有必要的執行規範和工作流程定義</description>
 
 <execution_actions>
-1. **載入強制執行規範**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/developer-orchestrator-enforcement.md`
+1. **載入強制執行規範**：完整讀取 `~/cursor-claude/core/dev/enforcement/developer-orchestrator-enforcement.md`
    - 這包含所有強制執行規則和驗證標準
    - 如果無法載入，立即停止並報告錯誤
 
-2. **載入工作流程定義**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/developer-orchestrator-workflow.md`
+2. **載入工作流程定義**：完整讀取 `~/cursor-claude/core/dev/workflow/developer-orchestrator-workflow.md`
    - 理解所有階段、檢查點和驗證要求
    - 如果無法載入，立即停止並報告錯誤
 </execution_actions>
@@ -70,7 +70,7 @@
 
 <execution_actions>
 6. **開發日誌撰寫**：撰寫開發日誌並記錄所有關鍵決策和實施細節
-   - 讀取`Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-note.md`中的`開發執行`階段
+   - 讀取`Users/tszkinlai/Coding/cursor-claude/core/dev/templates/dev-note.md`中的`開發執行`階段
    - 將開發日誌寫入`{project_root}/docs/dev-note/{task_id}`(如`1`, `2`, `3`...)-dev-note.md` (如`1-dev-note.md`, `2-dev-note.md`, `3-dev-note.md`...)
    - 開發日誌必須包含所有關鍵決策和實施細節
 </execution_actions>

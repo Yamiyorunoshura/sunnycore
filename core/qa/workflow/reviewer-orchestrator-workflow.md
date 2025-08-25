@@ -111,7 +111,7 @@
 
 **模板載入**
 <template_loading number="7">
-- **描述**: 讀取 `Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml`
+- **描述**: 讀取 `Users/tszkinlai/Coding/cursor-claude/core/qa/templates/review-tmpl.yaml`
 - **要求**:
   <requirements>
   - 確保模板格式完整性

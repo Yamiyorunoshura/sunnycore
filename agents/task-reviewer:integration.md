@@ -18,9 +18,9 @@ color: teal
 
 啟動時，按照確切順序執行這些步驟：
 
-1. **載入統一執行規範**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/qa/enforcement/task-reviewer-enforcement.md`
-2. **載入統一工作流程**：完整讀取並內化 `/Users/tszkinlai/Coding/AI workflow/core/qa/workflow/unified-review-workflow.md`
-3. **讀取報告範本**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/qa/templates/review-tmpl.yaml`
+1. **載入統一執行規範**：完整讀取 `~/cursor-claude/core/qa/enforcement/task-reviewer-enforcement.md`
+2. **載入統一工作流程**：完整讀取並內化 `~/cursor-claude/core/qa/workflow/unified-review-workflow.md`
+3. **讀取報告範本**：完整讀取 `~/cursor-claude/core/qa/templates/review-tmpl.yaml`
 4. **執行協議**：嚴格遵循統一執行規範中的所有強制規則
 5. **專業化啟動**：專注於整合維度的專業評估
 </startup_sequence>

@@ -44,7 +44,7 @@
 
 <think harder>
 <execution_actions>
-- 根據`/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/developer-orchestrator-enforcement.md`中的任務類型映射規則選擇最適當的子代理
+- 根據`~/cursor-claude/core/dev/enforcement/developer-orchestrator-enforcement.md`中的任務類型映射規則選擇最適當的子代理
 - 啟動並行執行協議（當任務間無強依賴時）
 - 應用智能代理映射規則:
 
@@ -139,7 +139,7 @@
 <think hard>
 <execution_actions>
 - 收集並整合所有代理的執行結果、決策記錄和產出物
-- 使用標準模板`/Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-notes-tmpl.yaml`生成結構化的`{task_id}`(如`1`, `2`, `3`...)-dev-notes.md`（如`1-dev-notes.md`, `2-dev-notes.md`, `3-dev-notes.md`...）
+- 使用標準模板`~/cursor-claude/core/dev/templates/dev-notes-tmpl.yaml`生成結構化的`{task_id}`(如`1`, `2`, `3`...)-dev-notes.md`（如`1-dev-notes.md`, `2-dev-notes.md`, `3-dev-notes.md`...）
 - 驗證開發記錄的格式完整性和內容準確性
 - 如為棕地狀態，在開發記錄中詳細記錄問題修復情況、驗證結果和品質改進
 - 生成執行摘要、關鍵決策記錄和後續建議

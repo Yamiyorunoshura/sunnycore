@@ -11,12 +11,12 @@
 
 <execution_actions>
 1. **載入後端開發者執行規範**：
-   - 完整閱讀 `/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/backend-developer-enforcement.md`
+   - 完整閱讀 `~/cursor-claude/core/dev/enforcement/backend-developer-enforcement.md`
    - 將其作為項目的**唯一執行規範**
    - 所有效能優化決策必須符合此規範要求
 
 2. **載入後端開發者工作流程**：
-   - 完整閱讀 `/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/backend-developer-workflow.md`
+   - 完整閱讀 `~/cursor-claude/core/dev/workflow/backend-developer-workflow.md`
    - 將其作為項目的**唯一工作流程**
    - 嚴格按照流程步驟執行效能優化工作
 </execution_actions>

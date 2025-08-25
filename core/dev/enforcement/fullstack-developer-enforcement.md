@@ -6,7 +6,7 @@
 <mandatory_prerequisites>
 ### 必要前置條件（寬鬆）
 - **建議**：開始前載入統一工作流程與計劃；若缺失，於 dev_notes.validation_warnings 記錄並持續
-- **工作流程讀取**：應讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/fullstack-developer-workflow.md`，失敗則記錄警告
+- **工作流程讀取**：應讀取 `~/cursor-claude/core/dev/workflow/fullstack-developer-workflow.md`，失敗則記錄警告
 - **計劃檢查**：嘗試定位並讀取 task_id 的實施計劃；如缺失，記錄警告並以最小上下文繼續
 </mandatory_prerequisites>
 
@@ -139,7 +139,7 @@
 
 <markdown_conversion>
 ### Markdown格式轉換（絕對強制）
-- **YAML到Markdown**：必須將 `/Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-notes-tmpl.yaml` 結構完整轉換為標準Markdown格式
+- **YAML到Markdown**：必須將 `~/cursor-claude/core/dev/templates/dev-notes-tmpl.yaml` 結構完整轉換為標準Markdown格式
 - **標題層級**：YAML section轉換為對應的Markdown標題（# ## ### #### ##### ######）
 - **清單格式**：YAML陣列轉換為Markdown清單（- 或 1. 格式）
 - **代碼區塊**：代碼片段使用標準Markdown代碼塊（```language）
@@ -153,7 +153,7 @@
 <output_location>
 ### 輸出位置（固定）
 - **開發記錄**：`{{project_root}}/docs/dev-notes/{{task_id}`(如`1`, `2`, `3`...)}-dev-notes.md`
-- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-notes-tmpl.yaml`
+- **模板參考**：`~/cursor-claude/core/dev/templates/dev-notes-tmpl.yaml`
 </output_location>
 </documentation_requirements>
 

@@ -5,10 +5,10 @@
 -### 必要前置條件（寬鬆）
 - **建議**：在開始驗證前載入所有必要文件；若缺失，記錄為 validation_warnings 並持續
 - **建議讀取順序**：
-  1. `/Users/tszkinlai/Coding/AI workflow/core/po/enforcement/implementation-plan-validator-enforcement.md`
-  2. `/Users/tszkinlai/Coding/AI workflow/core/po/workflow/unified-plan-validation-workflow.yaml`
-  3. `/Users/tszkinlai/Coding/AI workflow/core/po/templates/implementation-plan-tmpl.yaml`
-  4. `/Users/tszkinlai/Coding/AI workflow/core/po/templates/plan-validation-report-tmpl.yaml`
+  1. `~/cursor-claude/core/po/enforcement/implementation-plan-validator-enforcement.md`
+  2. `~/cursor-claude/core/po/workflow/unified-plan-validation-workflow.yaml`
+  3. `~/cursor-claude/core/po/templates/implementation-plan-tmpl.yaml`
+  4. `~/cursor-claude/core/po/templates/plan-validation-report-tmpl.yaml`
 - **檔案載入驗證**：未能完全載入時，記錄缺口與替代資訊來源
 
 ### 基於證據的驗證（絕對強制）
@@ -23,7 +23,7 @@
 - **失敗處理**：非阻斷性失敗記錄為警告並持續；阻斷性才停止
 
 ### 範本合規性（強制但不中斷）
-- **結構驗證**：計劃必須符合 `/Users/tszkinlai/Coding/AI workflow/core/po/templates/implementation-plan-tmpl.yaml` 範本的必需欄位
+- **結構驗證**：計劃必須符合 `~/cursor-claude/core/po/templates/implementation-plan-tmpl.yaml` 範本的必需欄位
 - **完整性檢查**：所有必需部分都必須有實際內容
 - **佔位符清除**：應清除 `<placeholder>`；殘留時記錄並補齊計劃
 - **格式一致性**：必須符合範本的格式要求
@@ -103,7 +103,7 @@
 - **決策規則**：任一阻斷條件（如缺失關鍵章節、交叉參考失敗、佔位符殘留、無證據發現）則歸類為關鍵
 
 ### 報告生成要求（強制執行）
-- **範本合規**：報告必須符合 `/Users/tszkinlai/Coding/AI workflow/core/po/templates/plan-validation-report-tmpl.yaml` 結構
+- **範本合規**：報告必須符合 `~/cursor-claude/core/po/templates/plan-validation-report-tmpl.yaml` 結構
 - **內容完整**：所有範本部分都必須有實際內容
 - **證據支持**：所有發現都必須有具體證據
 - **建議具體**：改進建議必須具體且可操作
@@ -122,7 +122,7 @@
 
 ### 輸出位置（固定）
 - **主報告**：`{{project_root}}/docs/validation-reports/{{task_id}`(如`1`, `2`, `3`...)}-plan-validation.md`
-- **模板參考**：`/Users/tszkinlai/Coding/AI workflow/core/po/templates/plan-validation-report-tmpl.yaml`
+- **模板參考**：`~/cursor-claude/core/po/templates/plan-validation-report-tmpl.yaml`
 
 ### 品質標準（強制達到）
 - **客觀性**：驗證必須客觀，基於可驗證的事實
