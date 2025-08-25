@@ -76,11 +76,6 @@
 - **整合策略**：採用智能合併算法整合多代理輸出
 - **質量保證**：確保最終輸出的完整性和正確性
 
-## 執行階段強制規範
-
-當執行`*develop-task`自定義命令時：
-- **讀取工作流程文件**：讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/developer-orchestrator-workflow.yaml`
-
 ## 並行執行優化策略
 
 **後端領域並行協議**：
