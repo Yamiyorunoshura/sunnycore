@@ -65,6 +65,22 @@
 </validation_checkpoints>
 </stage>
 
+<stage name="撰寫開發日誌" number="4" critical="true">
+<description>撰寫開發日誌並記錄所有關鍵決策和實施細節</description>
+
+<execution_actions>
+6. **開發日誌撰寫**：撰寫開發日誌並記錄所有關鍵決策和實施細節
+   - 讀取`Users/tszkinlai/Coding/AI workflow/core/dev/templates/dev-note.md`中的`開發執行`階段
+   - 將開發日誌寫入`{project_root}/docs/dev-note/{task_id}`(如`1`, `2`, `3`...)-dev-note.md` (如`1-dev-note.md`, `2-dev-note.md`, `3-dev-note.md`...)
+   - 開發日誌必須包含所有關鍵決策和實施細節
+</execution_actions>
+
+<validation_checkpoints>
+- [ ] 開發日誌已撰寫
+- [ ] 開發日誌已記錄所有關鍵決策和實施細節
+</validation_checkpoints>
+</stage>
+
 <critical_execution_principles>
 - **所有開發工作必須基於已驗證的實施計劃**
 - **嚴格遵循強制執行規範中的所有要求**
