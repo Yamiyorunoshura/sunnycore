@@ -72,7 +72,8 @@ stages:
     name: "任務分析與團隊組建"
     name_en: "Task Analysis & Team Assembly"
     objectives:
-      - "分析任務類型和複雜度"
+      - "從 `docs/specs/task.md` 中抽取 `task_id`"
+      - "根據 `project_root/docs/implementation-plan/<task_id>-plan.md` 分析任務類型和複雜度"
       - "組建專業reviewer團隊"
       - "確定審查策略和範圍"
     
