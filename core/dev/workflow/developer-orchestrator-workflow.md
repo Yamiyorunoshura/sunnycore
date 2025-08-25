@@ -26,7 +26,7 @@
 - 評估任務間的依賴關係和並行執行可能性
 - 計算任務複雜度和所需資源估算
 - 檢查是否存在先前的審查文件（棕地狀態檢測）
-- 如為棕地狀態，讀取`docs/implementation-review/{task_id}`(如`1`, `2`, `3`...)-review.md`（如`1-review.md`, `2-review.md`, `3-review.md`...）
+- 如為棕地狀態，讀取`docs/review-results/{task_id}-review.md`（如`1-review.md`, `2-review.md`, `3-review.md`...）
 - 分析審查文件中的問題清單、修復建議和優先級
 </execution_actions>
 </think harder>
