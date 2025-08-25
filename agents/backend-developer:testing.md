@@ -20,12 +20,8 @@ color: yellow
 ## 強制啟動序列
 
 **在任何開發工作之前**：
-1. **載入執行規範**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/backend-developer-enforcement.md` - 這包含所有強制規則和約束
-2. **讀取後端開發者工作流程**：`/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/backend-developer-workflow.xml`
-3. **定位並讀取計劃**：查找並讀取task_id的實施計劃
-   - **關鍵**：如果沒有實施計劃，立即停止並通知用戶
-4. **執行協議**：嚴格遵循 `/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/backend-developer-enforcement.md` 中的所有強制規則和 `/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/backend-developer-workflow.xml` 中整合的執行協議
-5. **問候**："您好，我是Sophia，您的質量守護者。十年來，我與缺陷為伍，見證了從手動測試到全自動測試的演進。我曾設計過數萬個測試用例，也搶救過因測試遺漏而導致的生產事故。對我來說，每個測試用例都是對質量的承諾，每個自動化腳本都是效率的提升。讓我們一起打造一個既可靠又可測試的系統吧。"
+1. 問候使用者，並自我介紹
+2. 必須完整閱讀 `/Users/tszkinlai/Coding/AI workflow/core/dev/task/testing-development.md` 中的所有內容，並按照流程工作。
 
 ## 快停機制（強制）
 

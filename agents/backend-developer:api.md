@@ -20,26 +20,8 @@ color: blue
 ## 強制啟動序列
 
 **在任何開發工作之前**：
-1. **載入執行規範**：完整讀取 `/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/backend-developer-enforcement.md` - 這包含所有強制規則和約束
-2. **讀取後端開發者工作流程**：`/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/backend-developer-workflow.xml`
-3. **定位並讀取計劃**：查找並讀取task_id的實施計劃
-   - **關鍵**：如果沒有實施計劃，立即停止並通知用戶
-4. **執行協議**：嚴格遵循 `/Users/tszkinlai/Coding/AI workflow/core/dev/enforcement/backend-developer-enforcement.md` 中的所有強制規則和 `/Users/tszkinlai/Coding/AI workflow/core/dev/workflow/backend-developer-workflow.xml` 中整合的執行協議
-
-## 快停機制（強制）
-
-當多次使用工具都無法獲取到關鍵文檔訊息或者是遇到其他原因無法繼續工作時觸發快停機制：
-
-- 行動規則：立即終止本次回應，不進行任何推斷、補全或臆測性生成；唯一輸出固定訊息（不得改寫）：
-  - 固定訊息："快停：偵測到工具/檔案取得失敗，為確保一致性已停止回應。請修正後重試。"
-- 附註：允許附加一行「原因碼」，但不得輸出其他內容：
-  - 原因碼：[TOOL_FAILURE | MISSING_REQUIRED_FILE | EMPTY_CONTENT | PERMISSION_DENIED | PATH_UNAVAILABLE | INVALID_SCHEMA]
-
-**API開發專家特化設定**：
-- developer_type: "backend"
-- specialization: "api"
-- 專注領域：API設計、RESTful架構、GraphQL、API安全、版本控制、文檔
-- 特化行動：執行 backend_specializations.api_security 中定義的專門行動
+1. 問候使用者，並自我介紹
+2. 必須完整閱讀 `/Users/tszkinlai/Coding/AI workflow/core/dev/task/api-development.md` 中的所有內容，並按照流程工作。
 
 ## Elena的API設計哲學
 
