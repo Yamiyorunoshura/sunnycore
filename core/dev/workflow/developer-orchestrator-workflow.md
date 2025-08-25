@@ -49,32 +49,32 @@
 - 應用智能代理映射規則:
 
     <agent_mapping category="後端領域專家">
-    - `database` → `backend-developer:database` (數據庫設計、優化、遷移)
-    - `api` → `backend-developer:api` (RESTful API、GraphQL、微服務)
-    - `security` → `backend-developer:security` (認證、授權、安全防護)
-    - `performance` → `backend-developer:performance` (效能優化、負載測試)
-    - `testing` → `backend-developer:testing` (測試策略、自動化測試)
-    - `infrastructure` → `backend-developer:infrastructure` (部署、監控、DevOps)
+    - `database` → `backend-developer_database` (數據庫設計、優化、遷移)
+    - `api` → `backend-developer_api` (RESTful API、GraphQL、微服務)
+    - `security` → `backend-developer_security` (認證、授權、安全防護)
+    - `performance` → `backend-developer_performance` (效能優化、負載測試)
+    - `testing` → `backend-developer_testing` (測試策略、自動化測試)
+    - `infrastructure` → `backend-developer_infrastructure` (部署、監控、DevOps)
     </agent_mapping>
 
     <agent_mapping category="前端領域專家">
-    - `ui_ux` → `frontend-developer:ui-ux` (用戶界面、用戶體驗)
-    - `framework` → `frontend-developer:framework` (React、Vue、Angular)
-    - `performance` → `frontend-developer:performance` (前端優化、打包優化)
-    - `accessibility` → `frontend-developer:accessibility` (無障礙設計)
-    - `testing` → `frontend-developer:testing` (前端測試、E2E測試)
+    - `ui_ux` → `frontend-developer_ui-ux` (用戶界面、用戶體驗)
+    - `framework` → `frontend-developer_framework` (React、Vue、Angular)
+    - `performance` → `frontend-developer_performance` (前端優化、打包優化)
+    - `accessibility` → `frontend-developer_accessibility` (無障礙設計)
+    - `testing` → `frontend-developer_testing` (前端測試、E2E測試)
     </agent_mapping>
 
     <agent_mapping category="全端領域專家">
-    - `architecture` → `fullstack-developer:architecture` (系統架構、技術選型)
-    - `integration` → `fullstack-developer:integration` (系統整合、第三方服務)
-    - `performance` → `fullstack-developer:performance` (全棧效能優化)
-    - `devops` → `fullstack-developer:devops` (CI/CD、容器化、雲端部署)
+    - `architecture` → `fullstack-developer_architecture` (系統架構、技術選型)
+    - `integration` → `fullstack-developer_integration` (系統整合、第三方服務)
+    - `performance` → `fullstack-developer_performance` (全棧效能優化)
+    - `devops` → `fullstack-developer_devops` (CI/CD、容器化、雲端部署)
     </agent_mapping>
 
     <agent_mapping category="重構領域專家">
-    - `code_quality` → `refactor-developer:code-quality` (代碼重構、架構改進)
-    - `performance` → `refactor-developer:performance` (效能重構、優化重構)
+    - `code_quality` → `refactor-developer_code-quality` (代碼重構、架構改進)
+    - `performance` → `refactor-developer_performance` (效能重構、優化重構)
     </agent_mapping>
 
 - 建立代理間的實時協調機制和衝突解決策略

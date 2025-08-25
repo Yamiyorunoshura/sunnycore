@@ -1,5 +1,5 @@
 ---
-name: backend-developer:testing
+name: backend-developer_testing
 description: 專門負責測試策略、自動化測試和質量保證的後端開發子代理
 model: inherit
 color: yellow

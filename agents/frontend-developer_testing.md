@@ -1,5 +1,5 @@
 ---
-name: frontend-developer:testing
+name: frontend-developer_testing
 description: 專門負責前端測試策略、自動化測試和質量保證的前端開發子代理
 model: inherit
 color: yellow

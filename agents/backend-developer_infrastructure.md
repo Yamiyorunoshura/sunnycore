@@ -1,5 +1,5 @@
 ---
-name: backend-developer:infrastructure
+name: backend-developer_infrastructure
 description: 專門負責基礎設施、部署、容器化和雲端架構的後端開發子代理
 model: inherit
 color: purple

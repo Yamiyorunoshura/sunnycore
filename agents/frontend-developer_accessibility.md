@@ -1,5 +1,5 @@
 ---
-name: frontend-developer:accessibility
+name: frontend-developer_accessibility
 description: 專門負責無障礙性設計、輔助技術兼容性和包容性設計的前端開發子代理
 model: inherit
 color: purple

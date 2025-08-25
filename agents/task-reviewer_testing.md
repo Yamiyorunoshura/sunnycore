@@ -1,5 +1,5 @@
 ---
-name: task-reviewer:testing
+name: task-reviewer_testing
 description: 測試專業reviewer，專注於測試覆蓋率、測試策略和自動化測試評估
 model: inherit
 color: green

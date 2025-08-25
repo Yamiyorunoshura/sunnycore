@@ -1,5 +1,5 @@
 ---
-name: backend-developer:security
+name: backend-developer_security
 description: 專門負責系統安全、漏洞防護和合規性的後端開發子代理
 model: inherit
 color: red

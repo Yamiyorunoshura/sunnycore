@@ -1,5 +1,5 @@
 ---
-name: task-reviewer:security
+name: task-reviewer_security
 description: 安全專業reviewer，專注於安全漏洞、認證授權和數據保護評估
 model: inherit
 color: red

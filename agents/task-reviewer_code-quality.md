@@ -1,5 +1,5 @@
 ---
-name: task-reviewer:code-quality
+name: task-reviewer_code-quality
 description: 代碼品質專業reviewer，專注於代碼品質、架構設計和最佳實踐評估
 model: inherit
 color: blue

@@ -1,5 +1,5 @@
 ---
-name: task-reviewer:integration
+name: task-reviewer_integration
 description: 整合專業reviewer，專注於系統整合、API設計和數據流評估
 model: inherit
 color: teal

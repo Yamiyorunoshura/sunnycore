@@ -1,5 +1,5 @@
 ---
-name: frontend-developer:framework
+name: frontend-developer_framework
 description: 專門負責前端框架開發、組件架構和狀態管理的前端開發子代理
 model: inherit
 color: green

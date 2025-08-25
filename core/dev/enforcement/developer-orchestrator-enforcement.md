@@ -60,35 +60,35 @@
 
 <backend_domain>
 - **後端領域**：
-  - 資料庫任務 → `backend-developer:database`
-  - API任務 → `backend-developer:api`
-  - 安全任務 → `backend-developer:security`
-  - 效能任務 → `backend-developer:performance`
-  - 測試任務 → `backend-developer:testing`
-  - 基礎設施任務 → `backend-developer:infrastructure`
+  - 資料庫任務 → `backend-developer_database`
+  - API任務 → `backend-developer_api`
+  - 安全任務 → `backend-developer_security`
+  - 效能任務 → `backend-developer_performance`
+  - 測試任務 → `backend-developer_testing`
+  - 基礎設施任務 → `backend-developer_infrastructure`
 </backend_domain>
 
 <frontend_domain>
 - **前端領域**：
-  - UI/UX任務 → `frontend-developer:ui-ux`
-  - 框架任務 → `frontend-developer:framework`
-  - 前端效能任務 → `frontend-developer:performance`
-  - 無障礙性任務 → `frontend-developer:accessibility`
-  - 前端測試任務 → `frontend-developer:testing`
+  - UI/UX任務 → `frontend-developer_ui-ux`
+  - 框架任務 → `frontend-developer_framework`
+  - 前端效能任務 → `frontend-developer_performance`
+  - 無障礙性任務 → `frontend-developer_accessibility`
+  - 前端測試任務 → `frontend-developer_testing`
 </frontend_domain>
 
 <fullstack_domain>
 - **全端領域**：
-  - 架構設計任務 → `fullstack-developer:architecture`
-  - 前後端整合任務 → `fullstack-developer:integration`
-  - 全端效能任務 → `fullstack-developer:performance`
-  - DevOps任務 → `fullstack-developer:devops`
+  - 架構設計任務 → `fullstack-developer_architecture`
+  - 前後端整合任務 → `fullstack-developer_integration`
+  - 全端效能任務 → `fullstack-developer_performance`
+  - DevOps任務 → `fullstack-developer_devops`
 </fullstack_domain>
 
 <refactor_domain>
 - **重構領域**：
-  - 代碼質量改善任務 → `refactor-developer:code-quality`
-  - 效能優化重構任務 → `refactor-developer:performance`
+  - 代碼質量改善任務 → `refactor-developer_code-quality`
+  - 效能優化重構任務 → `refactor-developer_performance`
 </refactor_domain>
 </task_type_mapping_rules>
 

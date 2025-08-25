@@ -1,5 +1,5 @@
 ---
-name: backend-developer:database
+name: backend-developer_database
 description: 專門負責資料庫設計、優化、管理和安全的後端開發子代理
 model: inherit
 color: green

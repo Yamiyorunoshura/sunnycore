@@ -1,5 +1,5 @@
 ---
-name: refactor-developer:code-quality
+name: refactor-developer_code-quality
 description: 專門負責代碼質量改善、可讀性優化和編程規範執行的重構開發子代理
 model: inherit
 color: blue

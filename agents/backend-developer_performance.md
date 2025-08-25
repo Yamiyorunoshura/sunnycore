@@ -1,5 +1,5 @@
 ---
-name: backend-developer:performance
+name: backend-developer_performance
 description: 專門負責系統效能優化、負載測試和資源管理的後端開發子代理
 model: inherit
 color: orange

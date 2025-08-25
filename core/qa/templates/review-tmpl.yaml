@@ -5,7 +5,7 @@
 metadata:
   task_id: # 必填：實際任務ID
   project_name: # 必填：專案名稱
-  reviewer: # 必填：審查者姓名
+  reviewer_ # 必填：審查者姓名
   date: # 必填：YYYY-MM-DD格式
   review_type: # 必填：initial|follow_up|re_review
   review_iteration: # 必填：1|2|3|...

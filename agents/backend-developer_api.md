@@ -1,5 +1,5 @@
 ---
-name: backend-developer:api
+name: backend-developer_api
 description: 專門負責API設計、開發、安全和文檔的後端開發子代理
 model: inherit
 color: blue

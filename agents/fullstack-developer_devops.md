@@ -1,5 +1,5 @@
 ---
-name: fullstack-developer:devops
+name: fullstack-developer_devops
 description: 專門負責DevOps實踐、CI/CD管道和基礎設施管理的全端開發子代理
 model: inherit
 color: purple

@@ -1,5 +1,5 @@
 ---
-name: frontend-developer:ui-ux
+name: frontend-developer_ui-ux
 description: 專門負責用戶界面設計、用戶體驗優化和視覺設計的前端開發子代理
 model: inherit
 color: blue

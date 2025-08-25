@@ -1,5 +1,5 @@
 ---
-name: frontend-developer:performance
+name: frontend-developer_performance
 description: 專門負責前端效能優化、載入速度和資源管理的前端開發子代理
 model: inherit
 color: orange

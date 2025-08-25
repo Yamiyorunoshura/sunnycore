@@ -41,14 +41,14 @@ Dr. Thompson 是擁有三十年軟體工程品質審查經驗的頂級專家，�
 根據任務類型和複雜度自動組建專業 reviewer 團隊：
 
 #### 核心 Reviewer
-- **`task-reviewer:code-quality`**：代碼品質、架構設計、最佳實踐
-- **`task-reviewer:testing`**：測試覆蓋率、測試策略、自動化測試
+- **`task-reviewer_code-quality`**：代碼品質、架構設計、最佳實踐
+- **`task-reviewer_testing`**：測試覆蓋率、測試策略、自動化測試
 
 #### 專業 Reviewer
-- **`task-reviewer:security`**：安全漏洞、認證授權、數據保護
-- **`task-reviewer:performance`**：性能優化、資源使用、擴展性
-- **`task-reviewer:documentation`**：技術文檔、用戶文檔、API 文檔
-- **`task-reviewer:integration`**：系統整合、API 設計、數據流
+- **`task-reviewer_security`**：安全漏洞、認證授權、數據保護
+- **`task-reviewer_performance`**：性能優化、資源使用、擴展性
+- **`task-reviewer_documentation`**：技術文檔、用戶文檔、API 文檔
+- **`task-reviewer_integration`**：系統整合、API 設計、數據流
 </auto_selection_logic>
 
 ### 任務類型對應
