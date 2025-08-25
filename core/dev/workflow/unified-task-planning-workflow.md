@@ -59,7 +59,6 @@
   - 在 `approach` 中分解架構、模組、資料與遷移策略
   - 設定 `test_strategy` 與 `quality_gates`（例如覆蓋率與 p95）
   - 補齊 `risks`、`open_questions`、`dependencies`、`timeline`、`estimation`
-  - 完成後不需要輸出文件。
   <think hard>
   </plan-drafting>
 - **驗證檢查**:
