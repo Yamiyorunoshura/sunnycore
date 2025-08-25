@@ -278,7 +278,7 @@ stages:
       - 🚨_TDD_ENFORCEMENT: "IMPLEMENT_MINIMAL_CODE_TO_PASS_TESTS"
       - implement_handlers_and_components_per: ["interfaces", "F-IDs", "UI-IDs"]
       # Backend specific (繼承自後端工作流程)
-      - inherit_backend_actions: "backend-developer-workflow.yaml"
+      - inherit_backend_actions: "backend-developer-workflow.xml"
       # Frontend specific (繼承自前端工作流程)
       - inherit_frontend_actions: "frontend-developer-workflow.yaml"
       # Fullstack specific
@@ -361,7 +361,7 @@ stages:
 # 前端和後端專門化內容分別繼承自對應工作流程
 fullstack_specializations:
   # 後端專門化繼承自後端開發者工作流程
-  # 詳細內容請參考: /Users/tszkinlai/Coding/AI workflow/core/dev/workflow/backend-developer-workflow.yaml
+  # 詳細內容請參考: /Users/tszkinlai/Coding/AI workflow/core/dev/workflow/backend-developer-workflow.xml
 
   # 前端專門化繼承自前端開發者工作流程
   # 詳細內容請參考: /Users/tszkinlai/Coding/AI workflow/core/dev/workflow/frontend-developer-workflow.yaml
@@ -377,7 +377,7 @@ fullstack_specializations:
 
   documentation_requirements:
     # 文檔要求繼承自各自專門化工作流程
-    - inherit_documentation_requirements: ["frontend-developer-workflow.yaml", "backend-developer-workflow.yaml"]
+    - inherit_documentation_requirements: ["frontend-developer-workflow.yaml", "backend-developer-workflow.xml"]
     # 全端特有的文檔要求
     - document_integration_points: true
     - document_cross_layer_architecture: true
