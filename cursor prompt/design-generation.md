@@ -4,85 +4,169 @@
 
 # 任務
 
-你的任務是根據一份需求文件，產生一份全面且專業的技術設計文件。這份設計文件將作為開發團隊實作功能的藍圖。
+根據需求文件生成一份全面且專業的技術設計文件，作為開發團隊的實作藍圖。
 
 # 輸入
 
-你將會收到一份以使用者故事（User Story）和驗收標準（Acceptance Criteria）格式撰寫的需求文件。
+以使用者故事和驗收標準格式撰寫的需求文件（`docs/specs/requirement.md`）。
 
 # 輸出規範
 
-請嚴格遵循以下結構和格式，產生一份使用繁體中文（zh-TW）的 Markdown 設計文件。所有程式碼範例應使用 Python，資料庫結構應使用標準 SQL。
+## 格式要求
+- **語言**: 繁體中文（zh-TW）Markdown 格式
+- **程式碼範例**: Python（服務類別）、SQL（資料庫結構）
+- **圖表**: Mermaid `graph TB` 語法，節點命名規範：
+  - `FR_*` - 前端元件
+  - `BE_*` - 後端服務  
+  - `DB_*` - 資料儲存
 
----
+## 文件結構
+```
+<!-- BEGIN:DOC(design) v1 -->
 
 ## 1. 概述 (Overview)
-
-- 根據需求文件，簡要總結本次設計要實現的核心功能和目標。
-- 說明設計將如何解決需求中提出的問題。
+- 核心功能和目標總結
+- 設計如何解決需求問題
+- [可選] 假設與限制（以 TBD: 開頭）
 
 ## 2. 架構 (Architecture)
 
-### 2.1. 整體架構圖 (Overall Architecture Diagram)
+### 2.1. 整體架構圖
+```mermaid
+graph TB
+    FR_UI[前端介面] --> BE_Core[後端核心服務]
+    BE_Core --> DB_Data[資料庫]
+```
 
-- 使用 Mermaid 的 `graph TB` 語法，繪製一個高層次的架構圖。
-- 圖中應清晰地展示使用者介面層（Frontend/Panel）、服務層（Backend/Core）和資料層（Data）之間的關係。
-- 標示出本次設計中新增或修改的主要元件。
-
-### 2.2. 分層架構設計 (Layered Architecture Design)
-
-- **面板層 (Frontend Layer)**: 描述其職責，例如處理使用者互動、輸入驗證和資料展示。強調其不應包含業務邏輯。
-- **服務層 (Backend Core Layer)**: 描述其職責，例如實作核心業務邏輯、資料處理、權限控制和與其他服務的協調。
-- **資料層 (Data Layer)**: 描述其職責，例如資料的持久化、存取、和保證資料一致性。
+### 2.2. 分層架構設計
+- **面板層**: 處理使用者互動、輸入驗證、資料展示（無業務邏輯）
+- **服務層**: 核心業務邏輯、資料處理、權限控制、服務協調
+- **資料層**: 資料持久化、存取、一致性保證
 
 ## 3. 元件和介面 (Components and Interfaces)
+- 按字母順序列出每個功能模組的核心元件
 
-- 對於需求中提到的每一個主要功能模組（例如：成就系統、經濟系統），定義其核心元件。
-- **服務類別 (Service Class)**: 提供 Python 類別定義，包含主要的方法簽名（method signature）和 docstring。方法應反映業務邏輯，例如 `create_achievement()`、`get_balance()`。
-- **面板類別 (Panel Class)**: 提供 Python 類別定義，包含處理使用者互動和界面的方法簽名，例如 `show_user_achievements()`、`handle_interaction()`。
-- **資料結構 (Data Structures)**: 如果需要，定義相關的輔助類別，例如 Enums 或 Dataclasses。
+```python
+# 服務類別範例
+class AchievementService:
+    """成就系統服務"""
+    
+    def create_achievement(self, achievement_data: dict) -> Achievement:
+        """創建新成就"""
+        pass
+        
+    def get_user_achievements(self, user_id: str) -> List[Achievement]:
+        """取得使用者成就列表"""
+        pass
+```
+
+```python
+# 面板類別範例  
+class AchievementPanel:
+    """成就系統面板"""
+    
+    def show_achievements(self, user_id: str) -> None:
+        """顯示使用者成就"""
+        pass
+        
+    def handle_claim_reward(self, achievement_id: str) -> None:
+        """處理獎勵領取"""
+        pass
+```
 
 ## 4. 資料模型 (Data Models)
 
-- 為所有需要持久化的資料提供 SQL `CREATE TABLE` 陳述式。
-- 明確定義每個欄位的名稱、資料類型（例如 `INTEGER`, `TEXT`, `REAL`, `TIMESTAMP`）。
-- 指定 `PRIMARY KEY`、`FOREIGN KEY`、`NOT NULL`、`DEFAULT` 等約束。
-- 在需要時，使用註解解釋重要欄位的用途或格式。
+```sql
+-- 資料表範例
+CREATE TABLE achievements (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    description TEXT,
+    reward_amount INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE user_achievements (
+    user_id TEXT NOT NULL,
+    achievement_id INTEGER NOT NULL,
+    progress INTEGER DEFAULT 0,
+    completed BOOLEAN DEFAULT FALSE,
+    completed_at TIMESTAMP,
+    PRIMARY KEY (user_id, achievement_id),
+    FOREIGN KEY (achievement_id) REFERENCES achievements(id)
+);
+```
 
 ## 5. 錯誤處理 (Error Handling)
 
-- **錯誤類別層次結構**: 設計一個繼承自基礎 `Exception` 的錯誤類別結構，以區分不同類型的錯誤（例如 `ServiceError`, `DatabaseError`, `PermissionError`）。
-- **錯誤處理策略**: 簡要描述在不同層級（服務層、面板層）如何捕獲、記錄和向使用者呈現錯誤。
+```python
+# 錯誤類別層次結構
+class ServiceError(Exception):
+    """服務層基礎錯誤"""
+    pass
+
+class DatabaseError(ServiceError):
+    """資料庫操作錯誤"""
+    pass
+
+class PermissionError(ServiceError):
+    """權限驗證錯誤"""
+    pass
+```
+
+- **錯誤處理策略**: 服務層捕獲技術錯誤，面板層處理使用者錯誤提示
 
 ## 6. 測試策略 (Testing Strategy)
-
-- **測試層次**: 概述將採用的測試類型，例如單元測試（Unit Tests）、整合測試（Integration Tests）和端對端測試（End-to-End Tests）。
-- **測試工具**: 列出建議使用的測試框架和工具（例如 `pytest`, `unittest.mock`）。
-- **測試重點**: 指出針對本次設計需要特別關注的測試場景。
+- **測試層次**: 單元測試、整合測試、端對端測試
+- **測試工具**: pytest, unittest.mock
+- **測試重點**: 核心業務邏輯、邊界情況、錯誤處理
 
 ## 7. 效能考量 (Performance Considerations)
-
-- 提出針對資料庫查詢、快取機制和並發處理的初步最佳化策略。
+- 資料庫查詢優化、快取機制、並發處理策略
 
 ## 8. 安全性 (Security)
-
-- 描述權限控制（例如基於角色的存取控制）、資料保護和輸入驗證的設計考量。
+- 權限控制、資料保護、輸入驗證設計
 
 ## 9. 部署和維護 (Deployment and Maintenance)
+- 容器化部署、監控日誌、資料備份規劃
 
-- 簡要提及部署策略（例如容器化）、監控日誌和資料備份的規劃。
+<!-- 變更摘要 -->
+（僅在更新時出現）
 
----
+<!-- FORMAT_CHECK
+doc_type: design
+schema_version: 1
+sections_present: ["1","2","3","4","5","6","7","8","9"]
+languages_allowed: ["python","sql","mermaid"]
+source_of_truth: "docs/specs/requirement.md"
+has_tbd: true|false
+-->
+
+<!-- END:DOC -->
+```
 
 # 執行步驟
 
-1.  **讀取需求文件**: 讀取 `docs/specs/requirement.md` 檔案的內容。這是生成設計文件的唯一依據。
-2.  **分析需求**: 徹底理解需求文件中的每一個使用者故事和驗收標準。
-3.  **生成設計文件**: 根據「輸出規範」和讀取到的需求，在內部生成完整的 Markdown 設計文件內容。
-4.  **儲存設計文件**: 將生成的 Markdown 內容寫入到 `docs/specs/design.md` 檔案中。如果該檔案或其目錄不存在，請一併建立。
-5.  **使用者確認**: 完成後，詢問使用者「設計文件已生成，請問內容是否有需要調整的地方？」。
-6.  **進入下一階段**: 如果使用者表示沒有問題，則回覆「好的，設計文件已確認。接下來我們可以進入 Implementation Plan（實作計畫）階段了。」
+1. **讀取需求**: 分析 `docs/specs/requirement.md` 的所有使用者故事和驗收標準
+2. **生成設計**: 根據需求創建完整的設計文件內容
+3. **儲存文件**: 寫入 `docs/specs/design.md`，必要時創建目錄
+4. **使用者確認**: 完成後必須立即使用 `ask_followup_question` 工具詢問使用者，提供具體選項：
+   ```xml
+   <ask_followup_question>
+   <question>設計文件已生成，請問內容是否有需要調整的地方？</question>
+   <follow_up>
+   <suggest>確認無誤，繼續任務規劃階段</suggest>
+   <suggest>需要修改設計文件</suggest>
+   <suggest>重新生成設計文件</suggest>
+   </follow_up>
+   </ask_followup_question>
+   ```
+5. **強制等待**: 必須等待使用者回應確認後才能完成流程。如果使用者選擇修改，必須協助調整直到確認無誤
 
----
-
-請開始執行。
+# 範例輸出
+基於購物車需求範例，設計文件會包含：
+- 架構圖顯示前端、後端、資料庫關係
+- ShoppingCartService 和 ShoppingCartPanel 類別定義
+- shopping_carts 和 cart_items 資料表結構
+- 相應的錯誤處理和測試策略

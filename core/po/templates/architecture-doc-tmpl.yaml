@@ -1,0 +1,82 @@
+---
+template: architecture-doc
+version: 1
+
+metadata:
+  generated_by: "architecture-documenter"
+  date: "YYYY-MM-DD"
+  sources:
+    specs:
+      requirements: "<path>"
+      task: "<path>"
+      design: "<path>"
+    plans: [] # implementation plans
+    code_refs: [] # 主要接口/模型/配置檔案路徑
+
+system_context:
+  description: "<系統定位與主要外部依賴>"
+  diagram: |
+    ```mermaid
+    graph LR
+      User-->Frontend
+      Frontend-->Backend
+      Backend-->DB[(Database)]
+      Backend-->ExternalAPI
+    ```
+
+container_view:
+  services:
+    - name: "<Service>"
+      responsibilities: ["<責任>"]
+      interfaces: ["<API或契約>"]
+      data_stores: ["<DB/Cache/Topic>"]
+
+component_view:
+  modules:
+    - name: "<Module>"
+      purpose: "<功能>"
+      dependencies: ["<依賴>"]
+      diagram: |
+        ```mermaid
+        flowchart LR
+          A[Entry]-->B[Core]
+          B-->C[Adapter]
+        ```
+
+data_model:
+  schema:
+    - entity: "<Name>"
+      fields:
+        - name: "<field>"
+          type: "<type>"
+          constraints: ["<constraints>"]
+  migrations:
+    - id: MIG-001
+      description: "<變更說明>"
+
+api_contracts:
+  endpoints:
+    - method: GET
+      path: "/example"
+      request: {}
+      response: {}
+
+deployment_observability:
+  environments: ["dev","staging","prod"]
+  deployment: "<流程與工具>"
+  logging: "<結構化日誌策略>"
+  monitoring: "<指標與告警>"
+
+adr_links:
+  - id: ADR-001
+    title: "<決策題目>"
+    decision: "<摘要>"
+    rationale: "<理由>"
+    consequences: "<後果>"
+
+consistency_checks:
+  plan_alignment: "<計劃 vs 實作差異>"
+  contract_sync: "<契約同步狀態>"
+  known_gaps: []
+
+
