@@ -1,153 +1,132 @@
 # 統一任務規劃工作流程
-<workflow type="unified-task-planning">
 
-## 強制前置條件驗證
-<mandatory-preconditions>
+<task_overview>
+作為任務規劃專家，您需要對指定任務進行全面且結構化的規劃，確保實施計劃的可行性、完整性和執行策略的最佳化。
+</task_overview>
 
-### 1. 載入專案規範與上下文
-<stage name="載入專案規範與上下文" number="1" critical="true">
-- **描述**: 完整閱讀 `{project_root}/docs/specs/` 中的所有文檔，建立任務 `{task_id}`(如`1`, `2`, `3`...)`(如`1`, `2`, `3`...) 的完整上下文。
-- **要求**:
-  <requirements>
-  <think hard>
-  - 解析需求、架構、相依關係與限制條件
-  - 匯總對 `{task_id}`(如`1`, `2`, `3`...)`(如`1`, `2`, `3`...) 的明確目標與非功能性要求
-  - 輸出關鍵依據清單，確保後續計劃可追溯
-  <think hard>
-  </requirements>
-- **驗證檢查**:
-  <validation_checkpoints>
-  - [ ] `{project_root}/docs/specs/` 可讀且已完整掃描
-  - [ ] `{task_id}`(如`1`, `2`, `3`...)`(如`1`, `2`, `3`...) 在需求中有明確對應
-  - [ ] 已形成初步上下文摘要（1-3 句）
-  </validation_checkpoints>
-</stage>
+## 核心規劃階段
 
-### 2. 載入實施計劃模板
-<stage name="載入實施計劃模板" number="2" critical="true">
-- **模板路徑**: `~/cursor-claude/core/dev/templates/implementation-plan-tmpl.yaml`
-- **描述**: 讀取並理解計劃模板結構與欄位定義，作為後續規劃輸入。
-- **要求**:
-  <requirements>
-  <think>
-  - 確認 metadata/context/objectives/scope/approach/test_strategy/quality_gates 等區段完整性
-  - 建立需求項與計劃項目的可追溯映射（如 F-IDs, N-IDs）
-  <think>
-  </requirements>
-- **關鍵檢查點**:
-  <critical-checkpoint>
-  - 若模板不可讀或缺失，立即停止並回報
-  </critical-checkpoint>
-</stage>
+<optimization_phases>
 
-</mandatory-preconditions>
+### 階段一：專案規範理解與分析
+<phase name="project_specification_analysis" complexity="think hard">
+**目標**: 全面理解專案需求、規範和架構設計
 
----
+**執行步驟**:
+1. **專案規範載入**: 完整閱讀 `{project_root}/docs/specs/` 路徑下的所有文檔
+   - 分析專案業務需求和功能規範
+   - 識別技術約束和依賴關係
+   - 建立專案上下文理解模型
+   - 提取關鍵設計決策和原則
 
-## 規劃執行協議
-<execution-protocol>
+2. **架構文檔分析**: 詳細閱讀 `{project_root}/docs/architecture/` 路徑下的所有文檔
+   - 理解系統架構設計和元件關係
+   - 分析技術棧選擇和整合策略
+   - 識別架構約束和效能要求
+   - 建立系統整體架構視圖
 
-### 3. 建立實施計劃初稿（YAML）
-<stage name="建立實施計劃初稿（YAML）" number="3" critical="true">
-- **輸入**: 來自 specs 的上下文、相依與品質門檻
-- **動作**:
-  <plan-drafting>
-  <think hard>
-  - 填寫 `metadata`（含 `{task_id}`(如`1`, `2`, `3`...)`、`{project_root}`、來源清單與日期）
-  - 於 `objectives` 中列出功能/非功能需求與可測量指標
-  - 明確 `scope` 的 in/out 與邊界假設
-  - 在 `approach` 中分解架構、模組、資料與遷移策略
-  - 設定 `test_strategy` 與 `quality_gates`（例如覆蓋率與 p95）
-  - 補齊 `risks`、`open_questions`、`dependencies`、`timeline`、`estimation`
-  <think hard>
-  </plan-drafting>
-- **驗證檢查**:
-  <validation_checkpoints>
-  - [ ] 每個需求項均有對應計劃與驗收準則
-  - [ ] 風險具備緩解與應急方案
-  - [ ] 測試與品質門檻具體、可量測
-  </validation_checkpoints>
-</stage>
+**驗證檢查點**:
+- [ ] 專案需求已完整理解和記錄
+- [ ] 架構設計已全面分析和掌握
+- [ ] 技術約束和依賴關係已識別
+- [ ] 專案上下文模型已建立
 
-### 4. 計劃品質驗證（內審）
-<stage name="計劃品質驗證（內審）" number="4" critical="true">
-- **持續驗證**:
-  <quality-validations>
-  <think harder>
-  - 一致性：需求、設計、測試、驗收條件彼此對齊
-  - 完整性：無缺漏欄位，所有關鍵模組均覆蓋
-  - 可測量性：門檻與 KPI 具體可測
-  - 可追溯性：每個計劃項皆可追溯至來源文檔
-  <think harder>
-  </quality-validations>
-- **驗證檢查**:
-  <validation_checkpoints>
-  - [ ] 追溯矩陣完成（F-IDs/N-IDs 對應）
-  - [ ] 風險等級與緩解策略經複核
-  - [ ] 測試策略覆蓋單元/整合/驗收/契約（如適用）
-  </validation_checkpoints>
-</stage>
+**預期成果**: 建立完整的專案理解基礎，為後續任務規劃提供準確的上下文支援
+</phase>
 
-</execution-protocol>
+### 階段二：任務解析與分解
+<phase name="task_decomposition" complexity="think hard">
+**目標**: 精確解析和分解指定任務及其子任務
 
----
+**執行步驟**:
+3. **任務檔案解析**: 閱讀 task.md 檔案並進行結構化分析
+   - 定位符合 `{task_id}` 的主要任務（例如：1, 2, 3）
+   - 提取該任務下所有子任務（例如：1.1, 1.2, 1.3）
+   - 收集每個任務和子任務的無序列表項
+   - 分析任務間的依賴關係和執行順序
 
-## 產出與存檔
-<deliverables>
+4. **任務顆粒度分解**: 將任務分解為最小執行單位
+   - 將無序列表項轉換為具體的功能需求（F-1, F-2...）
+   - 識別非功能性需求（N-1, N-2...）
+   - 定義每個需求的驗收條件和測量標準
+   - 建立任務執行的優先級排序
 
-### 5. 格式轉換與輸出
-<stage name="格式轉換與輸出" number="5" critical="true">
-- **描述**: 在輸出前，將計劃從 YAML 轉換為 Markdown，並存檔。
-- **動作**:
-  <conversion>
-  <think>
-  - 轉換前執行 YAML 結構校驗（空值/必要欄位）
-  - 轉換為 Markdown 後，檢查標題階層與清單渲染
-  - 若支援自動工具，應使用非互動方式完成轉換
-  <think>
-  </conversion>
-- **輸出路徑**:
-  <paths>
-  - `{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md`
-  </paths>
-- **驗證檢查**:
-  <validation_checkpoints>
-  - [ ] 轉換後 Markdown 可讀且段落完整
-  - [ ] 文件已正確存至指定路徑
-  - [ ] 封面中含 `{task_id}`(如`1`, `2`, `3`...)`、日期與版本資訊
-  </validation_checkpoints>
-</stage>
+**驗證檢查點**:
+- [ ] 指定任務及子任務已正確識別
+- [ ] 任務需求已分解為最小執行單位
+- [ ] 功能和非功能需求已明確分類
+- [ ] 驗收條件已定義完整
 
-</deliverables>
+**預期成果**: 產生結構化、可執行的任務分解結果，為實施計劃奠定基礎
+</phase>
 
----
+### 階段三：實施計劃生成與輸出
+<phase name="implementation_plan_generation" complexity="think harder">
+**目標**: 基於模板生成完整的實施計劃文檔
 
-## 失敗處理機制
-<failure-handling>
-| 失敗情境 | 處理動作 |
-|---------|---------|
-| **模板缺失/不可讀** | 立即停止，報告並請求補齊模板 |
-| **規範不可讀** | 停止並回報；不得以過時或不完整資訊規劃 |
-| **關鍵欄位缺漏** | 標記高風險，補齊後方可進入輸出 |
-| **轉換失敗** | 修復 YAML 結構或工具設定，重試至成功 |
+**執行步驟**:
+5. **模板載入與理解**: 閱讀模板 `~/cursor-claude/core/dev/templates/implementation-plan-tmpl.yaml`
+   - 理解模板結構和必填欄位要求
+   - 分析輸出格式規範和品質標準
+   - 準備符合模板要求的規劃內容
 
-<critical-failures>
-**任何關鍵失敗都必須立即停止流程並報告**
-</critical-failures>
+6. **計劃內容填入**: 將任務規劃結果系統性填入模板
+   - 填寫專案元資料和上下文資訊
+   - 對應功能和非功能需求到模板結構
+   - 完善執行步驟和驗證機制
+   - 確保內容完整性和一致性
 
-</failure-handling>
+7. **文檔輸出與格式化**: 生成最終的實施計劃文檔
+   - 將完成的計劃轉換為 Markdown 格式
+   - 輸出到 `{project_root}/docs/implementation-plan/` 路徑
+   - 使用規範的檔案命名：`{task_id}-plan.md`（例如：1-plan.md, 2-plan.md）
+   - 執行最終的格式和內容驗證
 
----
+**驗證檢查點**:
+- [ ] 模板已正確載入和理解
+- [ ] 所有必填欄位已完整填寫
+- [ ] 計劃內容符合模板規範要求
+- [ ] 文檔已成功輸出到指定路徑
+- [ ] 檔案命名符合規範標準
 
-## 附錄：參考路徑與模板
-<appendix>
-- 模板：`~/cursor-claude/core/dev/templates/implementation-plan-tmpl.yaml`
-- 規範：`{project_root}/docs/specs/`
-- 計劃輸出：`{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md`
-</appendix>
+**預期成果**: 生成高品質、結構化的實施計劃文檔，為任務執行提供完整指導
+</phase>
 
-</workflow>
-1. 完整閱讀`{project_root}/docs/specs/`中的所有文檔，並理解整個項目的架構以及{task_id}`(如`1`, `2`, `3`...)對應的需求
-2. 讀取模板`Users/tszkinlai/Coding/cursor-claude/core/dev/templates/implementation-plan-tmpl.yaml`
-3. 依據模板填入開發計劃，並將其保存到`{project_root}/docs/implementation-plan/`中，文件名為`{task_id}`(如`1`, `2`, `3`...)-plan.md`
-4. 在輸出文檔前，必須將文檔從yaml格式轉換為markdown格式
+</optimization_phases>
+
+## 錯誤處理與品質保證
+
+<quality_assurance>
+
+### 錯誤處理機制
+<error_handling>
+- **檔案存取錯誤**: 無法讀取指定路徑的檔案時，記錄錯誤並提供替代方案
+- **格式解析錯誤**: 檔案格式不符合預期時，進行錯誤報告並嘗試修復
+- **內容驗證失敗**: 規劃內容不完整時，標記缺失項目並要求補充
+- **輸出路徑錯誤**: 目標路徑不存在時，自動建立目錄結構
+</error_handling>
+
+### 驗證標準
+<validation_criteria>
+- [ ] **完整性驗證**: 所有必要的專案規範和架構文檔已載入分析
+- [ ] **準確性驗證**: 任務解析結果與原始需求一致
+- [ ] **結構性驗證**: 生成的計劃符合模板規範和格式要求
+- [ ] **可執行性驗證**: 計劃內容具體、明確且可操作
+- [ ] **追溯性驗證**: 計劃元素與來源需求間具有清晰的對應關係
+- [ ] **一致性驗證**: 術語使用和風格保持統一
+</validation_criteria>
+
+</quality_assurance>
+
+## 輸出格式規範
+
+<output_format>
+**檔案路徑**: `{project_root}/docs/implementation-plan/{task_id}-plan.md`
+
+**檔案命名範例**:
+- 主任務 1: `1-plan.md`
+- 主任務 2: `2-plan.md`
+- 主任務 3: `3-plan.md`
+
+**內容結構**: 嚴格遵循 `implementation-plan-tmpl.yaml` 模板規範，確保所有必填欄位完整填寫，避免使用「視需要」或「待確定」等通用陳述。
+</output_format>
