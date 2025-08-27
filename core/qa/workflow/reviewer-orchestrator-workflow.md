@@ -98,7 +98,7 @@
 <phase name="result_integration" complexity="think hard">
 
 **審查結果綜合**
-<integration_task number="6">
+<integration_task>
 - **描述**: 綜合所有 reviewer 的評估結果
 - **整合要求**:
   <requirements>
@@ -109,39 +109,45 @@
   </requirements>
 </integration_task>
 
-**模板載入**
-<template_loading number="7">
-- **描述**: 讀取 `Users/tszkinlai/Coding/cursor-claude/core/qa/templates/review-tmpl.yaml`
-- **要求**:
-  <requirements>
+**審查報告生成**
+<report_generation>
+- **模板載入**: 讀取 `Users/tszkinlai/Coding/cursor-claude/core/qa/templates/review-tmpl.yaml`
+  <template_requirements>
   - 確保模板格式完整性
   - 理解各欄位的語義和要求
-  </requirements>
-</template_loading>
+  </template_requirements>
 
-**結果填入與格式化**
-<result_formatting number="8-9">
-- **模板填入**: 將綜合結果填入 review-tmpl.yaml 的相應位置
-- **格式轉換**: 將填入後的審查結果轉換為 markdown 格式
-- **文件保存**: 保存到 `{project_root}/docs/review-results/{task_id}`(如`1`, `2`, `3`...)-review.md`
-- **覆蓋策略**: 如已經有同名文件，則直接覆蓋
+- **結果填入與格式化**: 
+  <formatting_process>
+  - 將綜合結果填入 review-tmpl.yaml 的相應位置
+  - 將填入後的審查結果轉換為 markdown 格式
+  - 保存到 `{project_root}/docs/review-results/{task_id}`(如`1`, `2`, `3`...)-review.md`
+  - 如已經有同名文件，則直接覆蓋
+  </formatting_process>
 
-<output_requirements>
-- 確保 markdown 格式的可讀性和結構性
-- 保持審查結果的完整性和準確性
-- 提供明確的問題描述和修復建議
-</output_requirements>
-</result_formatting>
+- **輸出品質要求**:
+  <output_requirements>
+  - 確保 markdown 格式的可讀性和結構性
+  - 保持審查結果的完整性和準確性
+  - 提供明確的問題描述和修復建議
+  </output_requirements>
+</report_generation>
 
-<update_task_md>
-- 更新 `{project_root}/docs/specs/task.md`，例：
-    - old_string: [ ] `{task_id}`(如`1`, `2`, `3`...)
-    - new_string: [x] `{task_id}`(如`1`, `2`, `3`...)
-    - old_string: [ ] `{sub_task_id}`(如`1.1`, `1.2`, `1.3`...)
-    - new_string: [x] `{sub_task_id}`(如`1.1`, `1.2`, `1.3`...)
-</update_task_md>
+**任務狀態更新**
+<task_status_update>
+- **描述**: 更新 `{project_root}/docs/specs/task.md` 中的任務完成狀態
+- **更新規則**:
+  <update_rules>
+  - old_string: [ ] `{task_id}`(如`1`, `2`, `3`...)
+  - new_string: [x] `{task_id}`(如`1`, `2`, `3`...)
+  - old_string: [ ] `{sub_task_id}`(如`1.1`, `1.2`, `1.3`...)
+  - new_string: [x] `{sub_task_id}`(如`1.1`, `1.2`, `1.3`...)
+  </update_rules>
+</task_status_update>
+
 </phase>
 </workflow_phases>
+
 
 ## 品質保證檢查點
 
