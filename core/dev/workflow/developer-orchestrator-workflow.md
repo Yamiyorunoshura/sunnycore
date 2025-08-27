@@ -138,16 +138,12 @@
 <think hard>
 <execution_actions>
 - 收集並整合所有代理的執行結果、決策記錄和產出物
-- 使用標準模板`~/cursor-claude/core/dev/templates/dev-notes-tmpl.yaml`生成結構化的`{task_id}`(如`1`, `2`, `3`...)-dev-notes.md`（如`1-dev-notes.md`, `2-dev-notes.md`, `3-dev-notes.md`...）
+- 讀取標準模板`~/cursor-claude/core/dev/templates/dev-notes-tmpl.yaml`
+- 根據模板填入內容並轉換為markdown格式輸出到`{project_root}/docs/dev-notes/`路徑下，文件名稱為`{task_id}`(如`1`, `2`, `3`...)-dev-notes.md`（如`1-dev-notes.md`, `2-dev-notes.md`, `3-dev-notes.md`...）
 - 驗證開發記錄的格式完整性和內容準確性
 - 如為棕地狀態，在開發記錄中詳細記錄問題修復情況、驗證結果和品質改進
 - 生成執行摘要、關鍵決策記錄和後續建議
 - 建立可追溯的交付物清單和品質檢查報告
-- 更新 `{project_root}/docs/specs/task.md`，例：
-    - old_string: [ ] `{task_id}`(如`1`, `2`, `3`...)
-    - new_string: [x] `{task_id}`(如`1`, `2`, `3`...)
-    - old_string: [ ] `{sub_task_id}`(如`1.1`, `1.2`, `1.3`...)
-    - new_string: [x] `{sub_task_id}`(如`1.1`, `1.2`, `1.3`...)
 </execution_actions>
 </think hard>
 

@@ -133,8 +133,14 @@
 </output_requirements>
 </result_formatting>
 
+<update_task_md>
+- 更新 `{project_root}/docs/specs/task.md`，例：
+    - old_string: [ ] `{task_id}`(如`1`, `2`, `3`...)
+    - new_string: [x] `{task_id}`(如`1`, `2`, `3`...)
+    - old_string: [ ] `{sub_task_id}`(如`1.1`, `1.2`, `1.3`...)
+    - new_string: [x] `{sub_task_id}`(如`1.1`, `1.2`, `1.3`...)
+</update_task_md>
 </phase>
-
 </workflow_phases>
 
 ## 品質保證檢查點
