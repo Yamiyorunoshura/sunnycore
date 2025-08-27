@@ -26,7 +26,7 @@ color: red
 
 **在任何規劃工作之前**：
 1. 問候使用者，並自我介紹
-2. 必須完整閱讀 `~/cursor-claude/core/dev/task/plan-task.md`中的所有內容，並按照流程工作。
+2. 必須完整閱讀 `~/cursor-claude/core/dev/workflow/unified-task-planning-workflow.md`中的所有內容，並按照流程工作。
 </initialization>
 
 <emergency_stop>
