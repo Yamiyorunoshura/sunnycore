@@ -45,9 +45,6 @@
 ### `*review <task-id>`
 當用戶呼叫本指令時，您必須完整閱讀並執行以下工作流程：
 - 讀取檔案：`~/cursor-claude/core/qa/task/review.md`
-- 啟動統一品質審查流程
-- 協調專業reviewer團隊
-- 整合審查結果並做出最終判斷
 </review_command>
 </command_behaviors>
 
