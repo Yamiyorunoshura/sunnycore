@@ -90,7 +90,7 @@
 **目標**: 基於模板生成完整的實施計劃文檔
 
 **執行步驟**:
-5. **模板載入與理解**: 閱讀模板 `{project_root}/cursor-claude/core/dev/templates/implementation-plan-tmpl.yaml`
+5. **模板載入與理解**: 閱讀模板 `{project_root}/sunnycore/dev/templates/implementation-plan-tmpl.yaml`
    - 理解模板結構和必填欄位要求
    - 分析輸出格式規範和品質標準
    - 準備符合模板要求的規劃內容

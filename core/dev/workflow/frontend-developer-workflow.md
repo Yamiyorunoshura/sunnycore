@@ -34,7 +34,7 @@
 
 <stage name="載入執行規範" number="1" critical="true">
 **強制執行規範載入**
-- **描述**: 完整讀取 `{project_root}/cursor-claude/core/dev/enforcement/frontend-developer-enforcement.md`
+- **描述**: 完整讀取 `{project_root}/sunnycore/dev/enforcement/frontend-developer-enforcement.md`
 - **要求**:
   <requirements>
   - 理解所有強制規則、UI/UX標準和品質門檻

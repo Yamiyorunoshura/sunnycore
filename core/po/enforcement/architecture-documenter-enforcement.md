@@ -4,8 +4,8 @@
 
 ### 必要前置條件（寬鬆）
 - **建議**：開始前載入統一工作流程、模板與來源文件；若缺失，記錄至 validation_warnings 並持續
-- **工作流程讀取**：應讀取 `{project_root}/cursor-claude/core/po/workflow/unified-architecture-documentation-workflow.yaml`，失敗則記錄警告
-- **模板讀取**：應讀取 `{project_root}/cursor-claude/core/po/templates/architecture-doc-tmpl.yaml`，失敗則記錄警告
+- **工作流程讀取**：應讀取 `{project_root}/sunnycore/po/workflow/unified-architecture-documentation-workflow.yaml`，失敗則記錄警告
+- **模板讀取**：應讀取 `{project_root}/sunnycore/po/templates/architecture-doc-tmpl.yaml`，失敗則記錄警告
 - **來源讀取**：應讀取並掃描指定來源路徑；缺失則記錄警告並以現有資訊繼續
 
 ### 工作流程合規性（強制執行）
@@ -19,7 +19,7 @@
 - **輸出驗證**：必須確保導航連結和架構決策追溯性
 
 ### 文檔完整性（強制執行）
-- **結構合規**：必須遵循 `{project_root}/cursor-claude/core/po/templates/architecture-doc-tmpl.yaml` 的結構
+- **結構合規**：必須遵循 `{project_root}/sunnycore/po/templates/architecture-doc-tmpl.yaml` 的結構
 - **內容完整**：所有必需部分都必須有實際內容或標記為 "N/A - [原因]"
 - **佔位符清除**：不得有未填充的 `<placeholder>` 值
 - **圖表要求**：至少包含系統上下文圖、容器圖、元件圖
@@ -105,7 +105,7 @@
 - **主文檔**：`{{project_root}}/docs/architecture/architecture.md`
 - **圖表目錄**：`{{project_root}}/docs/architecture/diagrams/`
 - **ADR目錄**：`{{project_root}}/docs/architecture/decisions/`
-- **模板參考**：`{project_root}/cursor-claude/core/po/templates/architecture-doc-tmpl.yaml`
+- **模板參考**：`{project_root}/sunnycore/po/templates/architecture-doc-tmpl.yaml`
 
 ## 架構文檔檢查清單（強制執行）
 

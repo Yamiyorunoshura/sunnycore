@@ -25,8 +25,8 @@
 <prerequisite_conditions>
 ### 必要前置條件（寬鬆）
 - **建議**：開始前載入統一工作流程與範本；若缺失，記錄至 validation_warnings 並持續
-- **工作流程讀取**：應讀取 `{project_root}/cursor-claude/core/dev/workflow/unified-task-planning-workflow.md`，失敗則記錄警告
-- **範本讀取**：應讀取 `{project_root}/cursor-claude/core/dev/templates/implementation-plan-tmpl.yaml`，失敗則記錄警告
+- **工作流程讀取**：應讀取 `{project_root}/sunnycore/dev/workflow/unified-task-planning-workflow.md`，失敗則記錄警告
+- **範本讀取**：應讀取 `{project_root}/sunnycore/dev/templates/implementation-plan-tmpl.yaml`，失敗則記錄警告
 - **驗證要求**：若 project_root 未解析或讀取未完整，記錄缺失與替代資訊來源
 </prerequisite_conditions>
 
@@ -61,7 +61,7 @@
 ### 範本合規性（寬鬆）
 - **完整填充**：應以實際內容填充或標記為"N/A - [原因]"；不足時記錄警告
 - **佔位符清除**：應清除 `<placeholder>` 值；殘留時記錄以利後續補齊
-- **結構一致性**：應符合 `{project_root}/cursor-claude/core/dev/templates/implementation-plan-tmpl.yaml` 結構；不一致時記錄差異
+- **結構一致性**：應符合 `{project_root}/sunnycore/dev/templates/implementation-plan-tmpl.yaml` 結構；不一致時記錄差異
 - **黑名單詞彙**：遇 `TBD`/`待定`/`視需要`/`as needed`/`<...>` 時記錄並立即替換或給理由
 </template_compliance>
 

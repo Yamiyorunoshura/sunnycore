@@ -154,8 +154,8 @@
 
 <workflow_standardization>
 **工作流程標準化**：
-- 遵循統一任務規劃工作流程：`{project_root}/cursor-claude/core/dev/workflow/unified-task-planning-workflow.md`
-- 遵循統一開發任務工作流程：`{project_root}/cursor-claude/core/dev/workflow/developer-orchestrator-workflow.md`
+- 遵循統一任務規劃工作流程：`{project_root}/sunnycore/dev/workflow/unified-task-planning-workflow.md`
+- 遵循統一開發任務工作流程：`{project_root}/sunnycore/dev/workflow/developer-orchestrator-workflow.md`
 </workflow_standardization>
 
 <output_standardization>

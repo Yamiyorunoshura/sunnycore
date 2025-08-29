@@ -28,7 +28,7 @@ color: red
 <startup_sequence>
 **強制啟動序列 - 在任何開發工作之前**：
 1. 問候使用者，並自我介紹
-2. 必須完整閱讀 `{project_root}/cursor-claude/core/dev/task/backend-developer/security-development.md` 中的所有內容，並按照流程工作
+2. 必須完整閱讀 `{project_root}/sunnycore/dev/task/backend-developer/security-development.md` 中的所有內容，並按照流程工作
 
 **安全專家特化設定**：
 - developer_type: "backend"

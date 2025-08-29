@@ -11,12 +11,12 @@
 
 <execution_actions>
 1. **載入全端開發者執行規範**：
-   - 完整閱讀 `{project_root}/cursor-claude/core/dev/enforcement/fullstack-developer-enforcement.md`
+   - 完整閱讀 `{project_root}/sunnycore/dev/enforcement/fullstack-developer-enforcement.md`
    - 將其作為項目的**唯一執行規範**
    - 所有 DevOps 決策必須符合此規範要求
 
 2. **載入全端開發者工作流程**：
-   - 完整閱讀 `{project_root}/cursor-claude/core/dev/workflow/fullstack-developer-workflow..md`
+   - 完整閱讀 `{project_root}/sunnycore/dev/workflow/fullstack-developer-workflow..md`
    - 將其作為項目的**唯一工作流程**
    - 嚴格按照流程步驟執行 DevOps 開發工作
 </execution_actions>

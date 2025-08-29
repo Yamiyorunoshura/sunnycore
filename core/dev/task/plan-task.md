@@ -13,11 +13,11 @@
 **目標**: 載入並驗證所有必要的執行規範和工作流程定義
 
 **執行步驟**:
-1. **載入強制執行規範**：完整讀取 `{project_root}/cursor-claude/core/dev/enforcement/developer-orchestrator-enforcement.md`
+1. **載入強制執行規範**：完整讀取 `{project_root}/sunnycore/dev/enforcement/developer-orchestrator-enforcement.md`
    - 這包含所有強制執行規則和驗證標準
    - 如果無法載入，立即停止並報告錯誤
 
-2. **載入工作流程定義**：完整讀取 `{project_root}/cursor-claude/core/dev/workflow/developer-orchestrator-workflow.md`
+2. **載入工作流程定義**：完整讀取 `{project_root}/sunnycore/dev/workflow/developer-orchestrator-workflow.md`
    - 理解所有階段、檢查點和驗證要求
    - 如果無法載入，立即停止並報告錯誤
 

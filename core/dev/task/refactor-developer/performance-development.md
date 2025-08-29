@@ -11,12 +11,12 @@
 
 <execution_actions>
 1. **載入重構開發者執行規範**：
-   - 完整閱讀 `{project_root}/cursor-claude/core/dev/enforcement/refactor-developer-enforcement.md`
+   - 完整閱讀 `{project_root}/sunnycore/dev/enforcement/refactor-developer-enforcement.md`
    - 將其作為項目的**唯一執行規範**
    - 所有重構決策必須符合此規範要求
 
 2. **載入重構開發者工作流程**：
-   - 完整閱讀 `{project_root}/cursor-claude/core/dev/workflow/refactor-developer-workflow.md`
+   - 完整閱讀 `{project_root}/sunnycore/dev/workflow/refactor-developer-workflow.md`
    - 將其作為項目的**唯一工作流程**
    - 嚴格按照流程步驟執行效能優化重構
 </execution_actions>
