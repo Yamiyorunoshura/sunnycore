@@ -1,4 +1,28 @@
 # 重構開發者工作流程
+
+<enforcement>
+## 🔄 工作流程Todo List製作
+
+### 📋 開始執行前的必要準備
+
+**重要提醒**: 在開始執行任何工作流程步驟之前，AI必須先創建包含所有workflow步驟的todo list，以確保系統性執行和進度追蹤。
+
+**Todo List製作流程**:
+1. **分析工作流程結構** - 仔細閱讀整個workflow文件，識別所有階段、步驟和任務
+2. **提取關鍵任務** - 將每個階段的核心任務轉換為具體的todo項目
+3. **設定優先級** - 根據任務的重要性和依賴關係設定優先級（high/medium/low）
+4. **創建Todo List** - 使用todo_write工具創建包含所有步驟的結構化todo list
+5. **開始執行** - 按照todo list的順序執行任務，並及時更新狀態
+
+**Todo List要求**:
+- 每個主要階段都應該有對應的todo項目
+- 關鍵的驗證檢查點必須包含在todo list中
+- 設定合理的優先級，確保依賴關係得到尊重
+- 在執行過程中及時更新todo狀態（pending → in_progress → completed）
+</enforcement>
+
+---
+
 <workflow type="refactor-developer">
 
 ## 強制前置條件驗證
