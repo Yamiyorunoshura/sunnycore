@@ -58,7 +58,7 @@ todo_list_creation:
 workflow:
   name: "統一專案結案工作流程"
   description: "收集交付證據、QA潛在問題和未來增強的統一結案工作流程，生成完整的完成報告。"
-  report_template: "~/cursor-claude/core/po/templates/completion-report-tmpl.yaml"
+  report_template: "{project_root}/cursor-claude/core/po/templates/completion-report-tmpl.yaml"
   enforcement_level: "lenient"
   halt_on_validation_failure: false
 
@@ -108,9 +108,9 @@ execution_hints:
     normalize_paths: true
 
 path_aliases:
-  WORKFLOW_FILE: "~/cursor-claude/core/po/workflow/unified-project-concluding-workflow.yaml"
-  REPORT_TEMPLATE: "~/cursor-claude/core/po/templates/completion-report-tmpl.yaml"
-  ENFORCEMENT_FILE: "~/cursor-claude/core/po/enforcement/project-concluder-enforcement.md"
+  WORKFLOW_FILE: "{project_root}/cursor-claude/core/po/workflow/unified-project-concluding-workflow.yaml"
+  REPORT_TEMPLATE: "{project_root}/cursor-claude/core/po/templates/completion-report-tmpl.yaml"
+  ENFORCEMENT_FILE: "{project_root}/cursor-claude/core/po/enforcement/project-concluder-enforcement.md"
 
 plan_resolution:
   find_by_task_id: true
@@ -145,14 +145,14 @@ task_completion_check:
 # 整合的執行協議
 enforcement_protocol:
   enforcement_compliance:
-    mandatory_enforcement_file: "~/cursor-claude/core/po/enforcement/project-concluder-enforcement.md"
+    mandatory_enforcement_file: "{project_root}/cursor-claude/core/po/enforcement/project-concluder-enforcement.md"
     compliance_verification: "Verify enforcement rules are understood; record warnings on minor non-compliance and continue"
     halt_on_non_compliance: false
   
   mandatory_file_loading:
     description: "在開始任何結案工作之前必須載入的檔案"
     requirements:
-      - "READ ~/cursor-claude/core/po/enforcement/project-concluder-enforcement.md COMPLETELY - This file contains all mandatory rules and constraints"
+      - "READ {project_root}/cursor-claude/core/po/enforcement/project-concluder-enforcement.md COMPLETELY - This file contains all mandatory rules and constraints"
       - "READ 統一專案結案工作流程 YAML 檔案完整內容"
       - "READ 完成報告範本 YAML 檔案完整內容"
       - "確認理解所有工作流程階段"
@@ -331,8 +331,8 @@ stages:
       - template_structure_understood: true
       - validation_rules_loaded: true
     actions:
-      - load_workflow_file: "~/cursor-claude/core/po/workflow/unified-project-concluding-workflow.yaml"
-      - load_template_from: "~/cursor-claude/core/po/templates/completion-report-tmpl.yaml"
+      - load_workflow_file: "{project_root}/cursor-claude/core/po/workflow/unified-project-concluding-workflow.yaml"
+      - load_template_from: "{project_root}/cursor-claude/core/po/templates/completion-report-tmpl.yaml"
       - verify_file_accessibility
 
   - id: "conclusion_strategy"
@@ -422,7 +422,7 @@ stages:
       - all_evidence_linked: true
       - completion_status_clearly_documented: true
     actions:
-      - load_report_template: "~/cursor-claude/core/po/templates/completion-report-tmpl.yaml"
+      - load_report_template: "{project_root}/cursor-claude/core/po/templates/completion-report-tmpl.yaml"
       - populate_metadata_with_actual_values
       - populate_sections: [
           "metadata",
@@ -463,17 +463,17 @@ extensions:
   agents_integration:
     knowledge_curator:
       agent: "knowledge-curator"
-      template: "~/cursor-claude/core/po/templates/knowledge-lessons-tmpl.yaml"
+      template: "{project_root}/cursor-claude/core/po/templates/knowledge-lessons-tmpl.yaml"
       output: "{{project_root}}/docs/knowledge/engineering-lessons.md"
       trigger: "after:report_generation"
     architecture_documenter:
       agent: "architecture-documenter"
-      template: "~/cursor-claude/core/po/templates/architecture-doc-tmpl.yaml"
+      template: "{project_root}/cursor-claude/core/po/templates/architecture-doc-tmpl.yaml"
       output: "{{project_root}}/docs/architecture/architecture.md"
       trigger: "after:report_generation"
     file_classifier:
       agent: "file-classifier"
-      template: "~/cursor-claude/core/po/workflow/unified-file-classification-workflow.yaml"
+      template: "{project_root}/cursor-claude/core/po/workflow/unified-file-classification-workflow.yaml"
       output: "{{project_root}}/docs/file-classification/file-classification-report.md"
       trigger: "parallel:with_conclude"
 

@@ -14,7 +14,7 @@
 <workflow_loading>
 - **建議行為**：開始前載入統一審查工作流程
 - **失敗處理**：若載入失敗，記錄為 validation_warnings 並持續執行
-- **目標路徑**：`~/cursor-claude/core/qa/workflow/unified-review-workflow.md`
+- **目標路徑**：`{project_root}/cursor-claude/core/qa/workflow/unified-review-workflow.md`
 - **驗證機制**：未能完全內化時，記錄缺口與替代資訊來源
 </workflow_loading>
 

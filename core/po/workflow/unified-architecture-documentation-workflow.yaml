@@ -54,10 +54,10 @@ execution_settings:
 prerequisites:
   required_files:
     # 核心配置檔案
-    - path: "~/cursor-claude/core/po/templates/architecture-doc-tmpl.yaml"
+    - path: "{project_root}/cursor-claude/core/po/templates/architecture-doc-tmpl.yaml"
       type: "template"
       critical: false  # 缺失時記錄警告並持續
-    - path: "~/cursor-claude/core/po/enforcement/architecture-documenter-enforcement.md"
+    - path: "{project_root}/cursor-claude/core/po/enforcement/architecture-documenter-enforcement.md"
       type: "enforcement"
       critical: false
       
@@ -97,13 +97,13 @@ stages:
     steps:
       - name: "load_template"
         action: "read_file"
-        target: "~/cursor-claude/core/po/templates/architecture-doc-tmpl.yaml"
+        target: "{project_root}/cursor-claude/core/po/templates/architecture-doc-tmpl.yaml"
         required: false
         on_failure: "log_warning"
         
       - name: "load_enforcement"
         action: "read_file"
-        target: "~/cursor-claude/core/po/enforcement/architecture-documenter-enforcement.md"
+        target: "{project_root}/cursor-claude/core/po/enforcement/architecture-documenter-enforcement.md"
         required: false
         on_failure: "log_warning"
         
