@@ -4,8 +4,8 @@
 
 ### 必要前置條件（寬鬆）
 - **建議**：開始前載入統一工作流程、模板與來源文件；若缺失，記錄至 validation_warnings 並持續
-- **工作流程讀取**：應讀取 `~/cursor-claude/core/po/workflow/unified-knowledge-curation-workflow.yaml`，失敗則記錄警告
-- **模板讀取**：應讀取 `~/cursor-claude/core/po/templates/knowledge-lessons-tmpl.yaml`，失敗則記錄警告
+- **工作流程讀取**：應讀取 `{project_root}/cursor-claude/core/po/workflow/unified-knowledge-curation-workflow.yaml`，失敗則記錄警告
+- **模板讀取**：應讀取 `{project_root}/cursor-claude/core/po/templates/knowledge-lessons-tmpl.yaml`，失敗則記錄警告
 - **來源掃描**：應掃描指定路徑的審查報告和完成報告；缺失則記錄警告並以現有資訊繼續
 
 ### 工作流程合規性（強制執行）
@@ -71,7 +71,7 @@
 - **效果追蹤**：必須追蹤知識庫使用效果和改進空間
 
 ### 模板合規性（強制執行）
-- **結構一致性**：必須遵循 `~/cursor-claude/core/po/templates/knowledge-lessons-tmpl.yaml` 結構
+- **結構一致性**：必須遵循 `{project_root}/cursor-claude/core/po/templates/knowledge-lessons-tmpl.yaml` 結構
 - **內容完整性**：所有必需部分都必須有實際內容或標記為 "N/A - [原因]"
 - **佔位符清除**：不得有未填充的 `<placeholder>` 值
 - **格式標準化**：必須符合統一的格式和命名規範
@@ -108,7 +108,7 @@
 
 ### 輸出位置（固定）
 - **主文檔**：`{{project_root}}/docs/knowledge/engineering-lessons.md`
-- **模板參考**：`~/cursor-claude/core/po/templates/knowledge-lessons-tmpl.yaml`
+- **模板參考**：`{project_root}/cursor-claude/core/po/templates/knowledge-lessons-tmpl.yaml`
 - **備份路徑**：`{{project_root}}/docs/knowledge/engineering-lessons-{{timestamp}}.md`
 - **索引文件**：`{{project_root}}/docs/knowledge/index.md`
 

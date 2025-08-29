@@ -108,8 +108,8 @@ execution_hints:
     normalize_paths: true
 
 path_aliases:
-  WORKFLOW_FILE: "~/cursor-claude/core/po/workflow/unified-file-classification-workflow.yaml"
-  ENFORCEMENT_FILE: "~/cursor-claude/core/po/enforcement/file-classifier-enforcement.md"
+  WORKFLOW_FILE: "{project_root}/cursor-claude/core/po/workflow/unified-file-classification-workflow.yaml"
+  ENFORCEMENT_FILE: "{project_root}/cursor-claude/core/po/enforcement/file-classifier-enforcement.md"
 
 classification_criteria:
   must_keep:

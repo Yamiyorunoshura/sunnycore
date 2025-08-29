@@ -26,8 +26,8 @@
 ## 命令行為
 
 ### `*develop-task {task_id}`(如`1`, `2`, `3`...)`：
-- 讀取 `~/cursor-claude/core/dev/task/develop-task.md`。
+- 讀取 `{project_root}/cursor-claude/core/dev/task/develop-task.md`。
 
 ### `*plan-task {task_id}`(如`1`, `2`, `3`...)`
-- 讀取 `~/cursor-claude/core/dev/task/plan-task.md`。
+- 讀取 `{project_root}/cursor-claude/core/dev/task/plan-task.md`。
 </command_behaviors>

@@ -58,8 +58,8 @@ todo_list_creation:
 workflow:
   name: "統一計劃驗證工作流程"
   description: "驗證實施計劃的完整性、正確性、範本符合性，並與專案規格交叉引用的統一工作流程。"
-  template_reference: "~/cursor-claude/core/po/templates/implementation-plan-tmpl.yaml"
-  report_template: "~/cursor-claude/core/po/templates/plan-validation-report-tmpl.yaml"
+  template_reference: "{project_root}/cursor-claude/core/po/templates/implementation-plan-tmpl.yaml"
+  report_template: "{project_root}/cursor-claude/core/po/templates/plan-validation-report-tmpl.yaml"
   enforcement_level: "lenient"
   halt_on_validation_failure: false
 
@@ -114,14 +114,14 @@ preconditions:
 # 整合的執行協議
 enforcement_protocol:
   enforcement_compliance:
-    mandatory_enforcement_file: "~/cursor-claude/core/po/enforcement/implementation-plan-validator-enforcement.md"
+    mandatory_enforcement_file: "{project_root}/cursor-claude/core/po/enforcement/implementation-plan-validator-enforcement.md"
     compliance_verification: "Verify enforcement rules are understood; record warnings on minor non-compliance and continue"
     halt_on_non_compliance: false
   
   mandatory_file_loading:
     description: "在開始任何驗證工作之前必須載入的檔案"
     requirements:
-      - "READ ~/cursor-claude/core/po/enforcement/implementation-plan-validator-enforcement.md COMPLETELY - This file contains all mandatory rules and constraints"
+      - "READ {project_root}/cursor-claude/core/po/enforcement/implementation-plan-validator-enforcement.md COMPLETELY - This file contains all mandatory rules and constraints"
       - "READ 統一實施計劃驗證工作流程 YAML 檔案完整內容"
       - "READ 實施計劃範本 YAML 檔案完整內容"
       - "READ 計劃驗證報告範本 YAML 檔案完整內容"
@@ -255,9 +255,9 @@ stages:
       - template_structure_understood: true
       - validation_rules_loaded: true
     actions:
-      - load_workflow_file: "~/cursor-claude/core/po/workflow/unified-plan-validation-workflow.yaml"
-      - load_template_from: "~/cursor-claude/core/po/templates/implementation-plan-tmpl.yaml"
-      - load_report_template: "~/cursor-claude/core/po/templates/plan-validation-report-tmpl.yaml"
+      - load_workflow_file: "{project_root}/cursor-claude/core/po/workflow/unified-plan-validation-workflow.yaml"
+      - load_template_from: "{project_root}/cursor-claude/core/po/templates/implementation-plan-tmpl.yaml"
+      - load_report_template: "{project_root}/cursor-claude/core/po/templates/plan-validation-report-tmpl.yaml"
       - verify_file_accessibility
 
   - id: "validation_strategy"
@@ -359,7 +359,7 @@ stages:
       - all_findings_supported_by_evidence: true
       - recommendations_actionable_and_specific: true
     actions:
-      - load_validation_report_template: "~/cursor-claude/core/po/templates/plan-validation-report-tmpl.yaml"
+      - load_validation_report_template: "{project_root}/cursor-claude/core/po/templates/plan-validation-report-tmpl.yaml"
       - populate_metadata_with_actual_values
       - populate_sections: [
           "metadata",

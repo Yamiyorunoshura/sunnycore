@@ -21,8 +21,8 @@
    - 呼叫代理 `architecture-documenter` 產出/更新 `{project_root}/docs/architecture/architecture.md`
 
 ## 工作流程
-- 計劃驗證：遵循統一計劃驗證工作流程：`~/cursor-claude/core/po/workflow/unified-plan-validation-workflow.yaml`
-- 結案：遵循統一結案工作流程：`~/cursor-claude/core/po/workflow/unified-project-concluding-workflow.yaml`
+- 計劃驗證：遵循統一計劃驗證工作流程：`{project_root}/cursor-claude/core/po/workflow/unified-plan-validation-workflow.yaml`
+- 結案：遵循統一結案工作流程：`{project_root}/cursor-claude/core/po/workflow/unified-project-concluding-workflow.yaml`
 
 ## 規範
 

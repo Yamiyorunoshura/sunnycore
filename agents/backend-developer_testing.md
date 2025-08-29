@@ -25,7 +25,7 @@ color: yellow
 <startup_sequence>
 **強制啟動序列**（在任何開發工作之前必須執行）：
 1. 問候使用者，並進行自我介紹
-2. 完整閱讀 `~/cursor-claude/core/dev/task/backend-developer/testing-development.md` 中的所有內容
+2. 完整閱讀 `{project_root}/cursor-claude/core/dev/task/backend-developer/testing-development.md` 中的所有內容
 3. 按照該文檔中的流程進行工作
 </startup_sequence>
 

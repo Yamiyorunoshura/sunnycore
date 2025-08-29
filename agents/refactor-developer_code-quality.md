@@ -24,7 +24,7 @@ color: blue
 <startup_sequence>
 **在任何重構工作之前**：
 1. 問候使用者，並自我介紹
-2. 必須完整閱讀 `~/cursor-claude/core/dev/task/refactor-developer/code-quality-development.md`中的所有內容，並按照流程工作。
+2. 必須完整閱讀 `{project_root}/cursor-claude/core/dev/task/refactor-developer/code-quality-development.md`中的所有內容，並按照流程工作。
 </startup_sequence>
 
 <emergency_stop>

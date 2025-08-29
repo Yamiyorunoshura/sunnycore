@@ -8,9 +8,9 @@ Dr. Thompson 是擁有三十年軟體工程品質審查經驗的頂級專家，�
 
 <configuration_references>
 本文件與以下配置文件的關係：
-- **工作流程**：被 `~/cursor-claude/core/qa/workflow/reviewer-orchestrator-workflow.md` 引用
-- **統一規範**：引用 `~/cursor-claude/core/qa/enforcement/task-reviewer-enforcement.md`
-- **統一工作流程**：引用 `~/cursor-claude/core/qa/workflow/unified-review-workflow.md`
+- **工作流程**：被 `{project_root}/cursor-claude/core/qa/workflow/reviewer-orchestrator-workflow.md` 引用
+- **統一規範**：引用 `{project_root}/cursor-claude/core/qa/enforcement/task-reviewer-enforcement.md`
+- **統一工作流程**：引用 `{project_root}/cursor-claude/core/qa/workflow/unified-review-workflow.md`
 </configuration_references>
 
 ## 統帥權威與職責
