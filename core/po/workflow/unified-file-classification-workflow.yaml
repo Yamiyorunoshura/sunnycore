@@ -4,8 +4,23 @@ version: 1
 
 # 🔄 工作流程Todo List製作流程
 todo_list_creation:
-  description: "在開始執行任何工作流程步驟之前，AI必須先創建包含所有workflow步驟的todo list"
+  description: "在開始執行任何工作流程步驟之前，必須使用todo_write工具創建包含所有workflow步驟的todo list"
   importance: "critical"
+  
+  # 🛠️ Todo List工具使用指南
+  tool_syntax:
+    format: "JSON"
+    structure: |
+      {
+        "todos": [
+          {
+            "content": "具體任務描述",
+            "status": "pending|in_progress|completed",
+            "id": "唯一識別碼",
+            "priority": "high|medium|low"
+          }
+        ]
+      }
   
   process_steps:
     1_analyze_workflow:
@@ -17,7 +32,7 @@ todo_list_creation:
       priority: "high"
       
     3_set_priorities:
-      description: "設定優先級 - 根據任務的重要性和依賴關係設定優先級（high/medium/low）"
+      description: "設定優先級 - 根據任務的重要性和依賴關係設定優先級"
       priority: "medium"
       
     4_create_todo_list:
@@ -25,14 +40,17 @@ todo_list_creation:
       priority: "high"
       
     5_execute_workflow:
-      description: "開始執行 - 按照todo list的順序執行任務，並及時更新狀態"
+      description: "執行與更新 - 按照todo list順序執行任務，及時更新狀態"
       priority: "high"
   
+  # 📝 Todo List要求
   requirements:
     coverage: "每個主要階段都應該有對應的todo項目"
     validation: "關鍵的驗證檢查點必須包含在todo list中"
     priority_setting: "設定合理的優先級，確保依賴關係得到尊重"
     status_tracking: "在執行過程中及時更新todo狀態（pending → in_progress → completed）"
+    uniqueness: "同時只能有一個任務處於in_progress狀態"
+    completeness: "只有在任務完全完成時才標記為completed"
 
 # 分隔線，以下為原始workflow內容
 ---
