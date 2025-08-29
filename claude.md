@@ -1,23 +1,90 @@
-1. Always respond in Chinese-Traditional
+<agent_config>
+# MCP 智能代理配置指南
 
-## Claude Code思考強度規範
+## 基礎設定
+<language_preference>
+總是用繁體中文回應。
+</language_preference>
 
-根據各agent工作的複雜程度，規範其思考強度等級：
+## 工具組合
 
-### 最高複雜度 - ultrathink
-- **fullstack-developer (Alex)**: 需要前後端整合、架構選型、技術平衡等最複雜的技術決策
-- **task-reviewer (Dr. Thompson)**: 需要最嚴格的多維度品質評估和安全審查
+<tool name="Sequential_Thinking">
+### Sequential Thinking 工具
+**使用時機**: 複雜任務開始前、關鍵決策點、任務總結時
 
-### 高複雜度 - think harder  
-- **backend-developer (Marcus)**: 需要複雜的系統架構、安全防禦和效能調教
-- **implementation-plan-validator (Victoria)**: 需要複雜的驗證邏輯、證據追溯和風險分析
-- **refactor-developer (Sophia)**: 需要深度代碼理解、架構重組和風險控制
-- **task-planner (David)**: 需要複雜的專案架構設計、依賴分析和風險評估
+<commands>
+- `process_thought`: 分析問題複雜度，建立結構化思維框架
+- `generate_summary`: 在重要里程碑生成進度摘要，維護上下文連續性
+- `clear_history`: 任務完成或切換時清理上下文，準備下一週期
+</commands>
+</tool>
 
-### 中高複雜度 - think hard
-- **frontend-developer (Luna)**: 需要UI/UX設計、用戶體驗和無障礙性考量
-- **project-concluder (Richard)**: 需要商業價值評估、ROI分析和多維度結案評估
+<tool name="Context7">
+### Context7 工具
+**使用時機**: 需要最新庫文檔、API參考、版本特定資訊時
 
-## 通用執行規範
+<commands>
+- `resolve-library-id`: 確定正確的庫標識符，選擇最相關匹配
+- `get-library-docs`: 獲取特定主題文檔，設置適當token限制（建議10000）
+</commands>
 
-- 總是使用繁體中文進行回應
+<strategy>
+**優先策略**: 避免使用過時資訊，專注當前任務相關主題
+</strategy>
+</tool>
+
+<tool name="Playwright">
+### Playwright 工具
+**使用時機**: 網頁自動化測試、結構化網頁交互、動態內容獲取時
+
+<features>
+- 使用結構化可訪問性快照，避免依賴視覺模型
+- 確保操作可重現性和穩定性
+- 適用於前端功能驗證和端到端測試
+</features>
+</tool>
+
+<tool name="Claude_Context">
+### Claude Context 工具
+**使用時機**: 大型代碼庫理解、語義代碼搜索、相關模塊定位時
+
+<capabilities>
+- 進行語義搜索定位相關代碼，建立代碼庫上下文理解
+- 識別關鍵模塊和依賴關係，優化token使用降低成本
+- 持續輔助開發過程，維護精確的上下文相關性
+</capabilities>
+</tool>
+
+<workflow>
+## 工具協同使用流程
+
+<phase name="task_initiation">
+### 任務開始階段
+1. **Sequential Thinking** → 分析任務複雜度
+2. **Claude Context** → 語義搜索相關代碼
+3. **Context7** → 獲取最新技術文檔
+</phase>
+
+<phase name="development">
+### 開發實施階段
+1. **持續使用 Claude Context** → 代碼理解與搜索
+2. **定期使用 Sequential Thinking** → 生成進度摘要
+3. **按需使用 Playwright** → 網頁交互與測試
+</phase>
+
+<phase name="completion">
+### 任務完成階段
+1. **Sequential Thinking** → 生成最終總結
+2. **Playwright** → 執行最終測試驗證
+3. **Sequential Thinking** → 清理上下文準備下一任務
+</phase>
+</workflow>
+
+<optimization_principles>
+## ⚡ 效率優化原則
+- **Token優化**: 優先使用Claude Context進行代碼搜索，Context7獲取精確文檔片段
+- **執行效率**: 合理安排工具使用順序，避免重複檢索
+- **錯誤處理**: 為每個工具準備備用方案，建立優雅降級策略
+- **上下文維護**: 使用Sequential Thinking的摘要功能建立檢查點機制
+</optimization_principles>
+</agent_config>
