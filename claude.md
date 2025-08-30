@@ -46,7 +46,7 @@
 
 <tool name="Claude_Context">
 ### Claude Context 工具
-**使用時機**: 大型代碼庫理解、語義代碼搜索、相關模塊定位時
+**使用時機**: 所有專案上下文建立任務
 
 <capabilities>
 - 進行語義搜索定位相關代碼，建立代碼庫上下文理解
@@ -75,7 +75,7 @@
 <phase name="completion">
 ### 任務完成階段
 1. **Sequential Thinking** → 生成最終總結
-2. **Playwright** → 執行最終測試驗證
+2. **Playwright** → 執行最終測試驗證（如有網頁交互需求）
 3. **Sequential Thinking** → 清理上下文準備下一任務
 </phase>
 </workflow>
