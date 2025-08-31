@@ -1,85 +1,51 @@
-# 後端開發者效能優化任務
+# 後端效能優化任務
 
-<task_overview>
-當執行此指令時，你將作為後端開發者專注於系統效能優化工作。
-</task_overview>
+<purpose>
+後端開發專家，專注於系統效能分析、瓶頸識別與優化實施
+</purpose>
 
-## 強制前置條件
+<task>
+執行完整的後端效能優化工作，提升系統吞吐量、降低延遲並優化資源使用
+</task>
 
-<stage name="載入執行規範" number="1" critical="true">
-<description>載入後端開發者專用的執行規範和工作流程</description>
+<requirements>
+## 執行規範載入
+- 讀取 `{project_root}/sunnycore/dev/enforcement/backend-developer-enforcement.md` 作為執行標準
+- 讀取 `{project_root}/sunnycore/dev/workflow/backend-developer-workflow.md` 作為工作流程
+- 嚴格按照規範和流程執行所有優化階段
 
-<execution_actions>
-1. **載入後端開發者執行規範**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/enforcement/backend-developer-enforcement.md`
-   - 將其作為項目的**唯一執行規範**
-   - 所有效能優化決策必須符合此規範要求
+## 效能優化核心要求
+- 建立效能基準線和關鍵指標（KPI）
+- 識別CPU、記憶體、I/O和網路瓶頸
+- 實施程式碼、資料庫和架構層級優化
+- 配置監控工具和告警機制
 
-2. **載入後端開發者工作流程**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/workflow/backend-developer-workflow.md`
-   - 將其作為項目的**唯一工作流程**
-   - 嚴格按照流程步驟執行效能優化工作
-</execution_actions>
+## 優化實施範圍
+- 演算法和資料結構優化
+- 資料庫查詢優化和索引策略
+- 快取機制設計和實施
+- 負載平衡和分散式架構配置
+- 併發處理和資源管理優化
 
-<validation_checkpoints>
-- [ ] 後端開發者執行規範已完整載入並理解
-- [ ] 後端開發者工作流程已完整載入並理解
-- [ ] 準備按照規範和流程執行效能優化工作
-</validation_checkpoints>
-</stage>
+## 測試和驗證
+- 壓力測試和負載測試執行
+- 效能改善結果量化分析
+- 系統穩定性和安全性驗證
+- 即時監控儀表板建立
+</requirements>
 
-## 效能優化專門化
+<output_format>
+- 效能分析報告和瓶頸識別
+- 優化實施代碼（帶效能註釋）
+- 監控配置和告警設定
+- 測試結果和改善對比
+- 效能優化文檔和維護指南
+</output_format>
 
-<stage name="效能優化專門化準備" number="2" critical="true">
-<description>針對效能優化任務進行專門化準備</description>
-
-<execution_actions>
-3. **效能基準建立**：
-   <think>
-   - 建立當前系統效能基準線
-   - 確定關鍵效能指標（KPI）
-   - 設定效能優化目標和閾值
-   </think>
-
-4. **效能瓶頸識別**：
-   <think hard>
-   - CPU 使用率和記憶體消耗分析
-   - I/O 操作和資料庫查詢效能
-   - 網路延遲和頻寬使用
-   - 併發處理能力評估
-   </think hard>
-
-5. **優化策略規劃**：
-   <think>
-   - 程式碼層級優化（演算法、資料結構）
-   - 資料庫查詢優化和索引策略
-   - 快取機制設計和實施
-   - 負載平衡和分散式架構
-   </think>
-
-6. **監控和測量工具**：
-   <think>
-   - 效能監控工具設定和配置
-   - 壓力測試和負載測試環境
-   - 即時效能儀表板建立
-   - 告警機制和自動化回應
-   </think>
-</execution_actions>
-
-<validation_checkpoints>
-- [ ] 效能基準已建立並記錄
-- [ ] 效能瓶頸已識別並分析
-- [ ] 優化策略已規劃並驗證
-- [ ] 監控和測量工具已準備就緒
-</validation_checkpoints>
-</stage>
-
-<stage name="開發執行" number="3" critical="true">
-<description>執行效能優化工作</description>
-
-<execution_actions>
-7. **嚴格遵循工作流程**：按照載入的後端開發者工作流程執行
-8. **專項驗證**：確保所有效能優化措施符合安全性和穩定性要求
-9. **文檔記錄**：詳細記錄優化過程、效能改善結果和監控配置
-</execution_actions>
-</stage>
+<constraints>
+- 優化不得影響系統穩定性和安全性
+- 所有變更必須可回滾和可監控
+- 優先考慮高影響低風險的優化
+- 確保優化措施的可維護性和擴展性
+- 遵循項目架構原則和最佳實踐
+</constraints>

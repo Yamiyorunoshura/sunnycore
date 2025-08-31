@@ -1,99 +1,103 @@
-# Backend Developer 強制執行規範
+# 後端開發強制執行規範
+
+<purpose>
+後端開發專家強制執行協議，確保安全性、效能和架構完整性
+</purpose>
 
 <core_execution_protocol>
 ## 核心執行協議
 
 <mandatory_prerequisites>
 ### 必要前置條件
-- **建議**：在開始開發前載入統一工作流程與計劃；若缺失，於 dev_notes.validation_warnings 記錄並持續執行
-- **工作流程讀取**：應讀取 `{project_root}/sunnycore/dev/workflow/backend-developer-workflow.md`，若失敗則記錄警告
-- **計劃檢查**：嘗試定位並讀取task_id的實施計劃；如缺失，記錄警告並以最小可行上下文繼續
+- 載入統一工作流程：讀取 `{project_root}/sunnycore/dev/workflow/backend-developer-workflow.md`
+- 檢查實施計劃：定位task_id對應的開發計劃
+- 失敗處理：缺失檔案時記錄警告，以最小可行上下文繼續執行
 </mandatory_prerequisites>
 
 <workflow_compliance>
-### 工作流程合規性
-- **階段完整性**：絕不跳過工作流程階段，按順序執行所有階段
+### 工作流程合規
+- 階段完整性：按順序執行所有工作流程階段
+- 絕不跳過任何必要階段
 </workflow_compliance>
 </core_execution_protocol>
 
-<backend_specific_requirements>
-## 後端專門強制要求
+<backend_requirements>
+## 後端專門要求
 
-<data_security_integrity>
-### 資料安全與完整性
-- **資料變更**：必須草擬冪等和可逆的遷移
-- **備份策略**：所有資料變更必須有回滾計劃
-- **交易完整性**：確保ACID特性維護
-</data_security_integrity>
+<data_security>
+### 資料安全
+- 草擬冪等和可逆的資料遷移
+- 制定完整的回滾計劃
+- 維護ACID交易完整性
+</data_security>
 
 <api_security>
 ### API安全
-- **身份驗證**：必須實施完整的身份驗證機制
-- **授權控制**：必須實施細粒度的授權控制
-- **輸入驗證**：必須對所有輸入進行嚴格驗證
-- **資料清理**：必須對所有輸出進行適當清理
-- **機密處理**：絕不在日誌或回應中暴露敏感資訊
+- 實施完整身份驗證機制
+- 建立細粒度授權控制
+- 嚴格驗證所有輸入
+- 適當清理所有輸出
+- 保護敏感資訊不在日誌或回應中暴露
 </api_security>
 
-<performance_requirements>
-### 效能要求
-- **延遲目標**：必須達到計劃中指定的延遲要求
-- **吞吐量目標**：必須達到計劃中指定的吞吐量要求
-- **記憶體目標**：必須符合記憶體使用限制
-- **監控實施**：必須實施適當的效能監控
-</performance_requirements>
+<performance_standards>
+### 效能標準
+- 達到指定延遲要求
+- 滿足吞吐量目標
+- 符合記憶體使用限制
+- 實施效能監控系統
+</performance_standards>
 
-<testing_requirements>
-### 測試要求
-- **測試優先**：應先寫測試後寫實現；若未達成，記錄原因與補回計劃
-- **測試類型**：
-  - 單元測試：與F-IDs對齊
-  - 整合測試：測試服務間互動
-  - 契約測試：確保API契約遵守
-- **覆蓋率門檻**：必須達到指定的測試覆蓋率要求
-</testing_requirements>
+<testing_standards>
+### 測試標準
+- 測試優先開發：先寫測試後寫實現
+- 單元測試與F-IDs對齊
+- 整合測試覆蓋服務間互動
+- 契約測試確保API合規
+- 達到指定測試覆蓋率門檻
+</testing_standards>
 
 <architecture_principles>
 ### 架構原則
-- **SOLID原則**：必須應用SOLID設計原則
-- **清潔架構**：必須實施關注點分離
-- **錯誤處理**：必須實施適當的錯誤處理機制
-- **日誌記錄**：必須實施結構化日誌記錄
-- **監控**：必須實施適當的系統監控
+- 應用SOLID設計原則
+- 實施關注點分離
+- 建立完善錯誤處理機制
+- 實施結構化日誌記錄
+- 部署系統監控
 </architecture_principles>
 
 <reliability_requirements>
 ### 可靠性要求
-- **優雅降級**：系統必須能優雅處理故障
-- **冪等性**：API操作必須設計為冪等
-- **重試機制**：必須實施適當的重試策略
-- **斷路器**：必須實施斷路器模式處理依賴失敗
+- 系統優雅故障處理
+- API操作冪等性設計
+- 實施重試策略
+- 部署斷路器模式處理依賴失敗
 </reliability_requirements>
 
 <quality_gates>
 ### 品質門檻
-- **靜態分析**：代碼必須通過靜態分析檢查
-- **安全掃描**：必須通過安全漏洞掃描
-- **效能測試**：必須通過效能基準測試
-- **相容性測試**：必須維護向後相容性
+- 通過靜態分析檢查
+- 通過安全漏洞掃描
+- 通過效能基準測試
+- 維護向後相容性
 </quality_gates>
-</backend_specific_requirements>
+</backend_requirements>
 
 <security_checklist>
 ## 安全檢查清單
-- [ ] 所有輸入都經過驗證和清理
-- [ ] 所有輸出都經過適當編碼
-- [ ] 敏感資料都經過加密存儲
-- [ ] API都實施了適當的認證和授權
-- [ ] 錯誤處理不暴露敏感資訊
-- [ ] 日誌記錄不包含敏感資料
-- [ ] 依賴項都是最新且安全的版本
+- [ ] 輸入驗證和清理
+- [ ] 輸出適當編碼
+- [ ] 敏感資料加密存儲
+- [ ] API認證授權機制
+- [ ] 錯誤處理資訊保護
+- [ ] 日誌敏感資料過濾
+- [ ] 依賴項安全更新
 </security_checklist>
 
-<failure_handling_protocol>
+<failure_protocol>
 ## 失敗處理協議
-- **計劃缺失**：記錄警告與已採取的替代資訊來源；繼續最小化實作
-- **範圍偏離**：記錄偏離原因、影響與回補計劃；不中斷
-- **安全檢查未達標**：記錄風險與緩解措施；標記為高優先修復
-- **效能未達標**：記錄測量結果與優化計劃；在可控風險下續行
-</failure_handling_protocol>
+- **計劃缺失**：記錄警告，採用替代資訊來源繼續執行
+- **範圍偏離**：記錄偏離原因、影響和補救計劃
+- **安全未達標**：記錄風險和緩解措施，標記高優先修復
+- **效能未達標**：記錄測量結果和優化計劃，風險可控下繼續
+</failure_protocol>

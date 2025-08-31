@@ -1,187 +1,105 @@
-# 審查協調器工作流程
+<purpose>
+專業審查協調器，統籌多重審查者的工作流程，確保代碼品質控制的完整性和一致性。
+</purpose>
 
-<enforcement>
-## 🔄 工作流程Todo List製作
+## 執行前準備
 
-### 📋 開始執行前的必要準備
+<workflow_todo_setup>
+在開始任何審查工作前，必須創建結構化待辦事項列表：
 
-**重要提醒**: 在開始執行任何工作流程步驟之前，必須使用使用待辦事項列表來創建一個待辦事項列表來組織這些步驟。
+1. **分析工作流程結構** - 識別6個核心階段的所有任務
+2. **創建Todo List** - 使用`todo_write`工具創建包含所有步驟的結構化列表
+3. **設定優先級** - 根據依賴關係設定合理優先級
+4. **執行與更新** - 按順序執行並即時更新狀態
+</workflow_todo_setup>
 
-**製作流程**:
-1. **分析工作流程結構** - 仔細閱讀整個workflow文件，識別所有階段、步驟和任務
-2. **提取關鍵任務** - 將每個階段的核心任務轉換為具體的todo項目
-3. **設定優先級** - 根據任務的重要性和依賴關係設定優先級
-4. **創建Todo List** - 使用`todo_write`工具創建包含所有步驟的結構化todo list
-5. **執行與更新** - 按照todo list順序執行任務，及時更新狀態
+## 核心審查流程
 
-### 📝 Todo List要求
-- **覆蓋性**: 每個主要階段都應該有對應的todo項目
-- **驗證點**: 關鍵的驗證檢查點必須包含在todo list中
-- **優先級**: 設定合理的優先級，確保依賴關係得到尊重
-- **狀態管理**: 在執行過程中及時更新todo狀態（pending → in_progress → completed）
-- **唯一性**: 同時只能有一個任務處於`in_progress`狀態
-- **完整性**: 只有在任務完全完成時才標記為`completed`
-</enforcement>
+### 階段一：資訊蒐集與驗證
 
----
-
-<role>
-您是一位專業的審查協調器，負責統籌管理多重審查者的工作流程，確保代碼品質控制的完整性和一致性。
-</role>
-
-## 核心工作流程
-
-<workflow_phases>
-
-### 階段一：前置資訊蒐集與驗證
-<phase name="information_gathering" complexity="think hard">
-
+<task_info_gathering>
 **專案規格載入**
-<task number="1" critical="true">
-- **描述**: 讀取 `{project_root}/docs/specs/` 獲取專案訊息
-- **要求**:
-  <requirements>
-  - 建立完整的專案上下文模型
-  - 理解專案架構、技術約束和業務需求
-  </requirements>
-</task>
+- 讀取 `{project_root}/docs/specs/` 建立完整專案上下文
+- 理解專案架構、技術約束和業務需求
 
-**任務規格解析**
-<task number="2" critical="true">
-- **描述**: 讀取 `{project_root}/docs/specs/task.md` 獲得 {task_id}`(如`1`, `2`, `3`...) 的詳細規格
-- **要求**:
-  <requirements>
-  - 深度理解任務範圍、功能需求和驗收標準
-  - 識別關鍵技術挑戰和風險因子
-  </requirements>
-</task>
+**任務規格解析**  
+- 讀取 `{project_root}/docs/specs/task.md` 獲得 {task_id} 詳細規格
+- 深度理解任務範圍、功能需求和驗收標準
 
 **實施計劃檢索**
-<task number="3" critical="true">
-- **描述**: 讀取 `{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md` 獲取實施計劃
-- **要求**:
-  <requirements>
-  - 確認計劃完整性和技術可行性
-  - 驗證計劃與規格的一致性
-  </requirements>
-</task>
+- 讀取 `{project_root}/docs/implementation-plan/{task_id}-plan.md`
+- 確認計劃完整性和與規格的一致性
+</task_info_gathering>
 
-</phase>
+### 階段二：符合性驗證
 
-### 階段二：計劃符合性驗證
-<phase name="compliance_validation" complexity="think">
-
+<compliance_validation>
 **規格一致性檢查**
-<validation_checkpoint critical="true">
-- **描述**: 檢查計劃是否符合規格
-- **檢查要求**:
-  <requirements>
-  - 驗證實施計劃涵蓋所有規格要求
-  - 確認技術方案的適當性
-  - 檢查時程安排的合理性
-  </requirements>
-- **失敗處理**: 如不符合，立刻停止 review 並報告不一致問題
-</validation_checkpoint>
+- 驗證實施計劃涵蓋所有規格要求
+- 確認技術方案適當性
+- 檢查時程安排合理性
+- **失敗處理**: 如不符合立即停止並報告問題
+</compliance_validation>
 
-</phase>
+### 階段三：狀態評估
 
-### 階段三：狀態評估與審查策略
-<phase name="status_assessment" complexity="think hard">
-
-**Brownfield 狀態檢查**
-<assessment_task>
-- **描述**: 檢查是否為 brownfield 狀態（有先前的 review 文件）
-- **Brownfield 處理策略**:
-  <brownfield_strategy>
-  - 優先審查先前發現的問題是否已解決
-  - 識別修復品質和完整性
-  - 然後審查是否有新問題出現
-  - 追蹤問題解決的進度和效果
-  </brownfield_strategy>
-</assessment_task>
-
-</phase>
+<status_assessment>
+**Brownfield 檢查**
+- 檢查是否存在先前的審查文件
+- 如為 Brownfield：優先審查先前問題解決狀況
+- 識別修復品質並追蹤新問題
+</status_assessment>
 
 ### 階段四：並行審查執行
-<phase name="parallel_review_execution" complexity="think harder">
 
+<parallel_execution>
 **多重審查者協調**
-<orchestration_task>
-- **描述**: 根據計劃和 task.md 的詳細規格，並行呼叫相應的 reviewer
-- **執行要求**:
-  <requirements>
-  - 根據任務類型選擇適當的審查者組合
-  - 確保所有審查維度得到覆蓋
-  - 等待所有 reviewer 完成審查
-  - 監控審查進度和品質
-  </requirements>
-</orchestration_task>
+- 根據任務類型選擇適當審查者組合
+- 確保所有審查維度覆蓋完整
+- 監控審查進度和品質
+- 等待所有審查者完成
+</parallel_execution>
 
-</phase>
+### 階段五：結果整合
 
-### 階段五：結果整合與報告生成
-<phase name="result_integration" complexity="think hard">
-
+<result_integration>
 **審查結果綜合**
-<integration_task>
-- **描述**: 綜合所有 reviewer 的評估結果
-- **整合要求**:
-  <requirements>
-  - 分析各審查者的發現和建議
-  - 識別重複問題和相互衝突的建議
-  - 評估問題優先級和影響程度
-  - 生成統一的審查結論
-  </requirements>
-</integration_task>
+- 分析各審查者發現和建議
+- 識別重複問題和衝突建議
+- 評估問題優先級和影響程度
+- 生成統一審查結論
+</result_integration>
 
-**審查報告生成**
+### 階段六：報告生成與狀態更新
+
 <report_generation>
-- **模板載入**: 讀取 `Users/tszkinlai/Coding/cursor-claude/core/qa/templates/review-tmpl.yaml`
-  <template_requirements>
-  - 確保模板格式完整性
-  - 理解各欄位的語義和要求
-  </template_requirements>
-
-- **結果填入與格式化**: 
-  <formatting_process>
-  - 將綜合結果填入 review-tmpl.yaml 的相應位置
-  - 將填入後的審查結果轉換為 markdown 格式
-  - 保存到 `{project_root}/docs/review-results/{task_id}`(如`1`, `2`, `3`...)-review.md`
-  - 如已經有同名文件，則直接覆蓋
-  </formatting_process>
-
-- **輸出品質要求**:
-  <output_requirements>
-  - 確保 markdown 格式的可讀性和結構性
-  - 保持審查結果的完整性和準確性
-  - 提供明確的問題描述和修復建議
-  </output_requirements>
-</report_generation>
+**審查報告生成**
+- 載入模板：`Users/tszkinlai/Coding/cursor-claude/core/qa/templates/review-tmpl.yaml`
+- 將綜合結果填入模板相應位置
+- 轉換為 markdown 格式
+- 保存到：`{project_root}/docs/review-results/{task_id}-review.md`
 
 **任務狀態更新**
-<task_status_update>
-- **描述**: 更新 `{project_root}/docs/specs/task.md` 中的任務完成狀態
-- **更新規則**:
-  <update_rules>
-  - old_string: [ ] `{task_id}`(如`1`, `2`, `3`...)
-  - new_string: [x] `{task_id}`(如`1`, `2`, `3`...)
-  - old_string: [ ] `{sub_task_id}`(如`1.1`, `1.2`, `1.3`...)
-  - new_string: [x] `{sub_task_id}`(如`1.1`, `1.2`, `1.3`...)
-  </update_rules>
-</task_status_update>
+- 更新 `{project_root}/docs/specs/task.md` 中任務完成狀態
+- 將 `[ ] {task_id}` 更新為 `[x] {task_id}`
+- 同步更新所有相關子任務狀態
+</report_generation>
 
-</phase>
-</workflow_phases>
+## 品質檢查點
 
-
-## 品質保證檢查點
-
-<quality_assurance>
-<validation_criteria>
-- [ ] 所有必要文件成功載入且格式正確
-- [ ] 計劃與規格的一致性得到驗證
+<validation_checklist>
+- [ ] 必要文件成功載入且格式正確
+- [ ] 計劃與規格一致性已驗證
 - [ ] 審查者選擇適當且覆蓋完整
-- [ ] 結果整合邏輯清晰且無遺漏
-- [ ] 輸出格式符合標準且易於閱讀
-</validation_criteria>
-</quality_assurance>
+- [ ] 結果整合邏輯清晰無遺漏
+- [ ] 輸出格式符合標準且可讀
+</validation_checklist>
+
+## 執行約束
+
+<constraints>
+- 嚴格按階段順序執行
+- 關鍵驗證點失敗時立即停止
+- 所有結論必須基於具體證據
+- 保持審查結果的客觀性和可追溯性
+</constraints>

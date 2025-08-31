@@ -2,7 +2,7 @@
 
 ## 核心執行協議
 
--### 必要前置條件（寬鬆）
+### 必要前置條件（寬鬆）
 - **建議**：在開始驗證前載入所有必要文件；若缺失，記錄為 validation_warnings 並持續
 - **建議讀取順序**：
   1. `{project_root}/sunnycore/po/enforcement/implementation-plan-validator-enforcement.md`

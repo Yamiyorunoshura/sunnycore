@@ -1,86 +1,78 @@
 # 前端開發者 測試開發任務
 
-<task_overview>
-當執行此指令時，你將作為前端開發者專注於測試開發工作。
-</task_overview>
+<purpose>
+前端開發專家，專注於現代前端測試架構設計與實施
+</purpose>
 
-## 強制前置條件
+<task>
+執行前端測試開發工作，建立完整的測試體系和自動化測試流程
+</task>
 
-<stage name="載入執行規範" number="1" critical="true">
-<description>載入前端開發者專用的執行規範和工作流程</description>
+## 前置配置
 
-<execution_actions>
-1. **載入前端開發者執行規範**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/enforcement/frontend-developer-enforcement.md`
-   - 將其作為項目的**唯一執行規範**
-   - 所有開發決策必須符合此規範要求
+<requirements>
+1. **執行規範載入**：
+   - 讀取 `{project_root}/sunnycore/dev/enforcement/frontend-developer-enforcement.md`
+   - 作為唯一執行標準
 
-2. **載入前端開發者工作流程**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/workflow/frontend-developer-workflow.md`
-   - 將其作為項目的**唯一工作流程**
-   - 嚴格按照流程步驟執行測試開發工作
-</execution_actions>
+2. **工作流程載入**：
+   - 讀取 `{project_root}/sunnycore/dev/workflow/frontend-developer-workflow.md`
+   - 嚴格按照流程執行
 
-<validation_checkpoints>
-- [ ] 前端開發者執行規範已完整載入並理解
-- [ ] 前端開發者工作流程已完整載入並理解
-- [ ] 準備按照規範和流程執行測試開發工作
-</validation_checkpoints>
-</stage>
+3. **測試技術規範**：
+   - 單元測試：Jest/Vitest + Testing Library
+   - 整合測試：組件交互和API測試
+   - E2E測試：Playwright/Cypress
+   - 視覺回歸：Chromatic/Percy
+   - 效能測試：Lighthouse CI
+</requirements>
 
-## 測試開發專門化
+## 測試策略配置
 
-<stage name="測試專門化準備" number="2" critical="true">
-<description>針對測試開發任務進行專門化準備</description>
+<test_pyramid>
+- **單元測試 (70%)**：組件邏輯、工具函數、狀態管理
+- **整合測試 (20%)**：組件交互、API整合、路由測試  
+- **E2E測試 (10%)**：關鍵用戶流程、跨瀏覽器測試
+</test_pyramid>
 
-<execution_actions>
-3. **測試策略確認**：
-   <think>
-   - 遵循測試金字塔原則（單元測試、整合測試、端到端測試）
-   - 確保測試覆蓋率和測試品質平衡
-   - 考慮不同瀏覽器和設備的相容性測試
-   </think>
+<automation_requirements>
+- CI/CD流程整合
+- 自動測試報告生成
+- 覆蓋率分析和監控
+- 失敗測試自動重試機制
+- 測試數據管理和清理
+</automation_requirements>
 
-4. **測試技術要求特化**：
-   <think hard>
-   - 單元測試框架和工具選擇（Jest、Vitest 等）
-   - 組件測試和視覺回歸測試
-   - 端到端測試工具整合（Playwright、Cypress 等）
-   - 效能測試和負載測試機制
-   - 無障礙測試和使用者體驗測試
-   </think hard>
+## 測試實施要求
 
-5. **測試自動化策略**：
-   <think>
-   - CI/CD 流程中的測試自動化
-   - 測試報告和覆蓋率分析
-   - 失敗測試的偵錯和修復流程
-   - 測試資料管理和模擬服務
-   </think>
+<code_quality>
+- 測試覆蓋率：分支覆蓋 ≥ 80%，行覆蓋 ≥ 90%
+- 測試命名：描述性命名，清楚表達測試意圖
+- 測試組織：按功能模組分組，使用describe/context結構
+- 測試數據：使用Factory模式或Mock Service Worker
+</code_quality>
 
-6. **測試品質保證**：
-   <think>
-   - 測試案例設計和維護標準
-   - 測試環境配置和管理
-   - 測試程式碼審查和重構
-   - 測試文檔和知識分享
-   </think>
-</execution_actions>
+<testing_practices>
+- 遵循AAA模式（Arrange-Act-Assert）
+- 每個測試只測試一個行為
+- 使用數據測試驅動複雜場景
+- 模擬外部依賴和API調用
+- 測試錯誤處理和邊界條件
+</testing_practices>
 
-<validation_checkpoints>
-- [ ] 測試策略已確認並理解
-- [ ] 測試技術要求已明確定義
-- [ ] 自動化策略已制定並準備執行
-- [ ] 測試品質保證標準已建立
-</validation_checkpoints>
-</stage>
+## 輸出要求
 
-<stage name="開發執行" number="3" critical="true">
-<description>執行測試開發工作</description>
+<deliverables>
+- 完整測試套件實施
+- 測試配置和設定文件
+- CI/CD測試流程配置
+- 測試文檔和執行指南
+- 測試覆蓋率報告分析
+</deliverables>
 
-<execution_actions>
-6. **嚴格遵循工作流程**：按照載入的前端開發者工作流程執行
-7. **專項驗證**：確保所有測試相關的覆蓋率和品質要求得到滿足
-8. **文檔記錄**：詳細記錄測試架構、測試案例和測試結果分析
-</execution_actions>
-</stage>
+<constraints>
+- 避免脆弱測試（brittle tests）
+- 優先測試行為而非實現細節
+- 保持測試執行速度和穩定性
+- 確保測試環境隔離性
+</constraints>

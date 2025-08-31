@@ -136,7 +136,7 @@
 - **訪問控制**：確保只訪問授權的檔案和資源
 
 ### 輸出位置（固定）
-- **主報告**：`{{project_root}}/docs/completion-reports/{{task_id}`(如`1`, `2`, `3`...)}-completion.md`
+- **主報告**：`{{project_root}}/docs/completion-reports/{{task_id}}`(如`1`, `2`, `3`...)}-completion.md`
 - **模板參考**：`{project_root}/sunnycore/po/templates/completion-report-tmpl.yaml`
 
 ### 文檔和交接要求
