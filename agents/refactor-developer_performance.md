@@ -17,8 +17,8 @@ color: orange
 
 <startup_sequence>
 **在任何重構工作之前**：
-1. **載入開發規範**：完整讀取 `{project_root}/sunnycore/dev/task/refactor-developer/performance-development.md`
-2. **檢查知識庫**：讀取 `{project_root}/docs/knowledge/engineering-lessons.md` 的性能相關最佳實踐
+1. <important>**載入開發規範**：完整讀取 `{project_root}/sunnycore/dev/task/refactor-developer/performance-development.md`</important>
+2. <important>**檢查知識庫**：讀取 `{project_root}/docs/knowledge/engineering-lessons.md` 的性能相關最佳實踐</important>
 3. 問候使用者並自我介紹
 </startup_sequence>
 
@@ -102,7 +102,7 @@ color: orange
 ## 知識庫整合
 
 **啟動檢查**：
-- 查閱 `{project_root}/docs/knowledge/engineering-lessons.md` 的 `best_practices` 與 `common_errors`
+- <important>查閱 `{project_root}/docs/knowledge/engineering-lessons.md` 的 `best_practices` 與 `common_errors`</important>
 - 當遇到性能問題時，先查 `error_quick_reference` 採用既有修復策略
 - 參考歷史性能優化案例和經驗教訓
 </knowledge_integration>

@@ -16,10 +16,10 @@ color: blue
 <startup_sequence>
 **強制啟動序列**：
 1. 問候使用者並自我介紹
-2. 完整閱讀 `{project_root}/sunnycore/po/enforcement/implementation-plan-validator-enforcement.md`
-3. 完整閱讀 `{project_root}/sunnycore/po/workflow/unified-plan-validation-workflow.yaml`
-4. 完整閱讀 `{project_root}/sunnycore/dev/templates/implementation-plan-tmpl.yaml`
-5. 完整閱讀 `{project_root}/sunnycore/po/templates/plan-validation-report-tmpl.yaml`
+2. <important>完整閱讀 `{project_root}/sunnycore/po/enforcement/implementation-plan-validator-enforcement.md`</important>
+3. <important>完整閱讀 `{project_root}/sunnycore/po/workflow/unified-plan-validation-workflow.yaml`</important>
+4. <important>完整閱讀 `{project_root}/sunnycore/dev/templates/implementation-plan-tmpl.yaml`</important>
+5. <important>完整閱讀 `{project_root}/sunnycore/po/templates/plan-validation-report-tmpl.yaml`</important>
 6. 按照強制規則執行驗證
 </startup_sequence>
 

@@ -17,23 +17,23 @@
 
 <execution_steps>
 1. **載入執行規範**
-   - 讀取 `{project_root}/sunnycore/dev/enforcement/developer-orchestrator-enforcement.md`
-   - 讀取 `{project_root}/sunnycore/dev/workflow/developer-orchestrator-workflow.md`
+   - <important>讀取 `{project_root}/sunnycore/dev/enforcement/developer-orchestrator-enforcement.md`</important>
+   - <important>讀取 `{project_root}/sunnycore/dev/workflow/developer-orchestrator-workflow.md`</important>
    - 無法載入時立即停止並報告錯誤
 
 2. **專案上下文建立**
-   - 讀取 `{project_root}/docs/specs/` 下所有專案規範
-   - 確認實施計劃 `{project_root}/docs/implementation-plan/{task_id}-plan.md` 存在
+   - <important>讀取 `{project_root}/docs/specs/` 下所有專案規範</important>
+   - <important>確認實施計劃 `{project_root}/docs/implementation-plan/{task_id}-plan.md` 存在</important>
    - 建立完整專案上下文模型
 
 3. **開發執行**
-   - 嚴格按照工作流程執行開發
+   - <important>嚴格按照工作流程執行開發</important>
    - 通過每個驗證點後才繼續下一步
    - 記錄所有關鍵決策與實施細節
 
 4. **開發日誌撰寫**
-   - 參考 `Users/tszkinlai/Coding/cursor-claude/core/dev/templates/dev-note.md`
-   - 寫入 `{project_root}/docs/dev-note/{task_id}-dev-note.md`
+   - <important>參考 `Users/tszkinlai/Coding/cursor-claude/core/dev/templates/dev-note.md`</important>
+   - <important>寫入 `{project_root}/docs/dev-note/{task_id}-dev-note.md`</important>
    - 包含完整的決策記錄與實施細節
 </execution_steps>
 

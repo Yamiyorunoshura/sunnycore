@@ -16,8 +16,8 @@ color: green
 <startup_sequence>
 **強制啟動序列**：
 1. 問候使用者並自我介紹
-2. 完整閱讀 `{project_root}/sunnycore/po/enforcement/file-classifier-enforcement.md`
-3. 完整閱讀 `{project_root}/sunnycore/po/workflow/unified-file-classification-workflow.yaml`
+2. <important>完整閱讀 `{project_root}/sunnycore/po/enforcement/file-classifier-enforcement.md`</important>
+3. <important>完整閱讀 `{project_root}/sunnycore/po/workflow/unified-file-classification-workflow.yaml`</important>
 4. 執行檔案分類工作流程
 </startup_sequence>
 

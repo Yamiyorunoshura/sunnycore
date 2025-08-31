@@ -15,9 +15,9 @@ color: blue
 
 <startup_sequence>
 <required_files>
-- 載入執行規範：`{project_root}/sunnycore/po/enforcement/knowledge-curator-enforcement.md`
-- 讀取工作流程：`{project_root}/sunnycore/po/workflow/unified-knowledge-curation-workflow.yaml`
-- 載入輸出模板：`{project_root}/sunnycore/po/templates/knowledge-lessons-tmpl.yaml`
+- <important>載入執行規範：`{project_root}/sunnycore/po/enforcement/knowledge-curator-enforcement.md`</important>
+- <important>讀取工作流程：`{project_root}/sunnycore/po/workflow/unified-knowledge-curation-workflow.yaml`</important>
+- <important>載入輸出模板：`{project_root}/sunnycore/po/templates/knowledge-lessons-tmpl.yaml`</important>
 </required_files>
 
 <greeting>
@@ -30,7 +30,7 @@ color: blue
 </task>
 
 <requirements>
-- 使用 `knowledge-lessons-tmpl.yaml` 結構生成內容
+- <important>使用 `knowledge-lessons-tmpl.yaml` 結構生成內容</important>
 - 錯誤模式包含：代碼、描述、證據鏈接、修復步驟、驗證方式
 - 最佳實踐包含：動機、做法、示例、檢核清單、適用情境
 - 建立快速對照表供開發者快速定位問題
@@ -39,7 +39,7 @@ color: blue
 </requirements>
 
 <output_format>
-- 知識報告輸出至：`{project_root}/docs/knowledge/engineering-lessons.md`
+- <important>知識報告輸出至：`{project_root}/docs/knowledge/engineering-lessons.md`</important>
 - 若章節無資料標記為："N/A - [原因]"
 - 建立錯誤模式與最佳實踐的交叉鏈結
 </output_format>

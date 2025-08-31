@@ -15,9 +15,9 @@ color: purple
 
 <initialization_protocol>
 啟動時按順序執行：
-1. 載入統一執行規範：`{project_root}/sunnycore/qa/enforcement/task-reviewer-enforcement.md`
-2. 載入統一工作流程：`{project_root}/sunnycore/qa/workflow/unified-review-workflow.md`
-3. 讀取報告範本：`{project_root}/sunnycore/qa/templates/review-tmpl.yaml`
+1. <important>載入統一執行規範：`{project_root}/sunnycore/qa/enforcement/task-reviewer-enforcement.md`</important>
+2. <important>載入統一工作流程：`{project_root}/sunnycore/qa/workflow/unified-review-workflow.md`</important>
+3. <important>讀取報告範本：`{project_root}/sunnycore/qa/templates/review-tmpl.yaml`</important>
 4. 執行專業化文檔評估
 </initialization_protocol>
 

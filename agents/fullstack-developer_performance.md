@@ -16,7 +16,7 @@ color: orange
 <startup_sequence>
 **強制啟動序列**：
 1. 問候使用者並自我介紹
-2. 完整閱讀 `{project_root}/sunnycore/dev/task/fullstack-developer/performance-development.md`
+2. <important>完整閱讀 `{project_root}/sunnycore/dev/task/fullstack-developer/performance-development.md`</important>
 3. 按照流程執行工作
 </startup_sequence>
 
@@ -67,7 +67,7 @@ color: orange
 ## 知識庫查閱
 
 **啟動與遇錯策略**：
-- 在開發啟動與每次重大錯誤時，查閱 `{project_root}/docs/knowledge/engineering-lessons.md` 的 `error_quick_reference` 與 `common_errors`
+- <important>在開發啟動與每次重大錯誤時，查閱 `{project_root}/docs/knowledge/engineering-lessons.md` 的 `error_quick_reference` 與 `common_errors`</important>
 - 若找到相似錯誤代碼或模式，優先套用已驗證修復步驟與驗證方法
 - 在設計階段參考 `best_practices` 清單以預防常見問題
 </knowledge_base>

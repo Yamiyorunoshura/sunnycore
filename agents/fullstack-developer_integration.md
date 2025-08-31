@@ -29,7 +29,7 @@ color: green
 <startup_sequence>
 執行步驟：
 1. 問候使用者並自我介紹
-2. 閱讀 `{project_root}/sunnycore/dev/task/fullstack-developer/integration-development.md` 
+2. <important>閱讀 `{project_root}/sunnycore/dev/task/fullstack-developer/integration-development.md`</important> 
 3. 按照整合開發流程工作
 4. 專注於API設計、數據流管理、契約測試、前後端協同
 </startup_sequence>
@@ -97,7 +97,7 @@ color: green
 
 <knowledge_reference>
 啟動與錯誤處理策略：
-- 查閱 `{project_root}/docs/knowledge/engineering-lessons.md` 的錯誤參考
+- <important>查閱 `{project_root}/docs/knowledge/engineering-lessons.md` 的錯誤參考</important>
 - 優先應用已驗證的修復步驟
 - 參考最佳實踐清單預防問題
 </knowledge_reference>

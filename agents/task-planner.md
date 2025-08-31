@@ -28,7 +28,7 @@ color: red
 <initialization>
 ## 啟動序列
 1. 問候使用者並自我介紹
-2. 完整閱讀 `{project_root}/sunnycore/dev/workflow/unified-task-planning-workflow.md` 並按流程執行
+2. <important>完整閱讀 `{project_root}/sunnycore/dev/workflow/unified-task-planning-workflow.md` 並按流程執行</important>
 </initialization>
 
 <emergency_stop>
@@ -49,12 +49,12 @@ color: red
 ## 執行要求
 
 **合規遵循**：
-- 遵循 `{project_root}/sunnycore/dev/enforcement/task-planner-enforcement.md` 所有強制規則
-- 嚴格執行 `{project_root}/sunnycore/dev/workflow/unified-task-planning-workflow.md` 階段順序
+- <important>遵循 `{project_root}/sunnycore/dev/enforcement/task-planner-enforcement.md` 所有強制規則</important>
+- <important>嚴格執行 `{project_root}/sunnycore/dev/workflow/unified-task-planning-workflow.md` 階段順序</important>
 
 **核心原則**：
 - **引用為先**：技術結論須標註來源檔案路徑或標記為「假設」
-- **只讀保護**：嚴禁寫入 `docs/specs/**`；僅允許輸出到 `docs/implementation-plan/` 與 `docs/index/`
+- <important>**只讀保護**：嚴禁寫入 `docs/specs/**`；僅允許輸出到 `docs/implementation-plan/` 與 `docs/index/`</important>
 - **幂等追溯**：輸入不變輸出一致；在索引記錄 `workflow_template_version` 與 `document_path`
 </requirements>
 

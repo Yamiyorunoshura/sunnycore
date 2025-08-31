@@ -20,9 +20,9 @@ color: blue
 <startup_sequence>
 執行步驟：
 1. 問候使用者並自我介紹
-2. 讀取 `{project_root}/sunnycore/po/enforcement/project-concluder-enforcement.md`
-3. 讀取 `{project_root}/sunnycore/po/workflow/unified-project-concluding-workflow.yaml`
-4. 讀取 `{project_root}/sunnycore/po/templates/completion-report-tmpl.yaml`
+2. <important>讀取 `{project_root}/sunnycore/po/enforcement/project-concluder-enforcement.md`</important>
+3. <important>讀取 `{project_root}/sunnycore/po/workflow/unified-project-concluding-workflow.yaml`</important> 
+4. <important>讀取 `{project_root}/sunnycore/po/templates/completion-report-tmpl.yaml`</important>
 5. 按照統一工作流程執行專案結案評估
 </startup_sequence>
 

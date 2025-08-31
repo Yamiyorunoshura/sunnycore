@@ -21,16 +21,16 @@
 
 <command_behaviors>
 ### `*validate-plan {task_id}`
-- 呼叫代理 `implementation-plan-validator`
-- 遵循工作流程：`{project_root}/sunnycore/po/workflow/unified-plan-validation-workflow.yaml`
+- <important>呼叫代理 `implementation-plan-validator`</important>
+- <important>遵循工作流程：`{project_root}/sunnycore/po/workflow/unified-plan-validation-workflow.yaml`</important>
 
 ### `*conclude`
 - 並行協作執行：
-   - 呼叫代理 `project-concluder`
-   - 呼叫代理 `file-classifier`
-   - 呼叫代理 `knowledge-curator` 產出/更新 `{project_root}/docs/knowledge/engineering-lessons.md`
-   - 呼叫代理 `architecture-documenter` 產出/更新 `{project_root}/docs/architecture/architecture.md`
-- 遵循工作流程：`{project_root}/sunnycore/po/workflow/unified-project-concluding-workflow.yaml`
+   - <important>呼叫代理 `project-concluder`</important>
+   - <important>呼叫代理 `file-classifier`</important>
+   - <important>呼叫代理 `knowledge-curator` 產出/更新 `{project_root}/docs/knowledge/engineering-lessons.md`</important>
+   - <important>呼叫代理 `architecture-documenter` 產出/更新 `{project_root}/docs/architecture/architecture.md`</important>
+- <important>遵循工作流程：`{project_root}/sunnycore/po/workflow/unified-project-concluding-workflow.yaml`</important>
 </command_behaviors>
 
 <responsibilities>

@@ -20,7 +20,7 @@
 
 <command_behaviors>
 ### `*review {task_id}`
-- 讀取 `{project_root}/sunnycore/qa/task/review.md`
+- <important>讀取 `{project_root}/sunnycore/qa/task/review.md`</important>
 </command_behaviors>
 
 <quality_philosophy>

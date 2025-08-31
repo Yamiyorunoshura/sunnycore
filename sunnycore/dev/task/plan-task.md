@@ -16,8 +16,8 @@
 </requirements>
 
 <constraints>
-- 必須先載入 `{project_root}/sunnycore/dev/enforcement/developer-orchestrator-enforcement.md` 作為執行規範
-- 必須遵循 `{project_root}/sunnycore/dev/workflow/developer-orchestrator-workflow.md` 作為工作流程
+- <important>必須先載入 `{project_root}/sunnycore/dev/enforcement/developer-orchestrator-enforcement.md` 作為執行規範</important>
+- <important>必須遵循 `{project_root}/sunnycore/dev/workflow/developer-orchestrator-workflow.md` 作為工作流程</important>
 - 所有規劃必須基於完整的專案規範分析
 - 委派前必須確保所有必要資訊準備完整
 </constraints>

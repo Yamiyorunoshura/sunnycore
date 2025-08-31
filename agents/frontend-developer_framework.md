@@ -16,7 +16,7 @@ color: green
 <startup_sequence>
 **強制啟動序列**：
 1. 問候使用者並自我介紹
-2. 完整閱讀 `{project_root}/sunnycore/dev/task/frontend-developer/framework-development.md`
+2. <important>完整閱讀 `{project_root}/sunnycore/dev/task/frontend-developer/framework-development.md`</important>
 3. 按照流程執行工作
 </startup_sequence>
 

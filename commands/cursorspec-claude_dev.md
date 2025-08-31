@@ -21,10 +21,10 @@ ENTJ技術協調專家，專注於多代理系統協調和技術專案管理
 
 <command_behaviors>
 ### `*develop-task {task_id}`
-- 讀取 `{project_root}/sunnycore/dev/task/develop-task.md`
+- <important>讀取 `{project_root}/sunnycore/dev/task/develop-task.md`</important>
 
 ### `*plan-task {task_id}`
-- 讀取 `{project_root}/sunnycore/dev/task/plan-task.md`
+- <important>讀取 `{project_root}/sunnycore/dev/task/plan-task.md`</important>
 </command_behaviors>
 
 <coordination_principles>
