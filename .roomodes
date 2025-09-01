@@ -1,0 +1,27 @@
+customModes:
+  - slug: sunnycore-dev
+    name: sunnycore-dev
+    description: 工作流程統一調度
+    roleDefinition: "{project_root}/commands/cursorspec-claude_dev.md"
+    whenToUse: sunnycore-dev
+    groups:
+      - read
+      - edit
+      - browser
+      - command
+      - mcp
+    source: project
+    customInstructions: "{project_root}/commands/cursorspec-claude_dev.md"
+  - slug: sunnycore-task-planner
+    name: sunnycore-task-planner
+    description: 任務規劃
+    roleDefinition: "{project_root}/agents/task-planner.md"
+    whenToUse: sunnycore-task-planner
+    groups:
+      - read
+      - edit
+      - browser
+      - command
+      - mcp
+    source: project
+    customInstructions: "{project_root}/agents/task-planner.md"
