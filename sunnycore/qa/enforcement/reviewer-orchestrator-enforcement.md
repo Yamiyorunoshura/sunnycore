@@ -257,3 +257,62 @@ Automatically form specialized reviewer teams based on task type and complexity:
 </adaptive_review_optimization>
 </review_monitoring_and_alerting>
 </parallel_review_coordination>
+
+---
+
+## 🚨 CRITICAL: Agent Separation Enforcement
+
+### Strict Domain Separation Rules - NO EXCEPTIONS
+
+<reviewer_domain_restriction>
+**Reviewer Orchestrator Domain Restriction**:
+
+#### ALLOWED Agent Calls
+- **`task-reviewer_*`** - All reviewer agents within the review domain
+  - `task-reviewer_code-quality`
+  - `task-reviewer_testing`
+  - `task-reviewer_security`
+  - `task-reviewer_performance`
+  - `task-reviewer_documentation`
+  - `task-reviewer_integration`
+
+#### FORBIDDEN Agent Calls
+- **`backend-developer_*`** - All development agents are STRICTLY FORBIDDEN
+- **`frontend-developer_*`** - All development agents are STRICTLY FORBIDDEN
+- **`fullstack-developer_*`** - All development agents are STRICTLY FORBIDDEN
+- **`refactor-developer_*`** - All development agents are STRICTLY FORBIDDEN
+- Any agents outside the reviewer domain
+
+#### File Access Rules
+- **Reading development notes is ALLOWED** (e.g., `docs/dev-notes/{task_id}-dev-notes.md`)
+- **Reading implementation plans is ALLOWED** (e.g., `docs/implementation-plan/{task_id}-plan.md`)
+- **Calling development agents is FORBIDDEN**
+- Review result reading and writing is the primary responsibility
+</reviewer_domain_restriction>
+
+### Architectural Principle Enforcement
+
+<separation_rationale>
+**Why This Separation Exists**:
+- **Separation of Concerns**: Review and development are distinct phases
+- **Quality Assurance Independence**: Reviews must be independent of development bias
+- **Workflow Integrity**: Maintains clear boundaries between development and quality assurance
+- **Circular Dependency Prevention**: Prevents infinite loops and architectural violations
+- **Authority Clarity**: Each orchestrator has specific responsibilities and authority
+</separation_rationale>
+
+### Violation Detection and Consequences
+
+<violation_handling>
+**Automatic Violation Detection**:
+- Any call to `*-developer_*` agents from reviewer orchestrator is a critical violation
+- System should immediately flag and halt execution
+- Clear error messages should indicate the architectural violation
+
+**Consequences of Violations**:
+- **Immediate Workflow Halt**: System stops execution upon detection
+- **Quality Assurance Compromise**: Violates the independence of review process
+- **Circular Dependencies**: Can create infinite loops between orchestrators
+- **Authority Confusion**: Blurs the line between development and review phases
+- **Process Integrity Breach**: Compromises the intended quality assurance workflow
+</violation_handling>

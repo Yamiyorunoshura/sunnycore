@@ -126,6 +126,56 @@ My achievements are not measured by how much code I write, but by:
 </refactor_domain>
 </task_type_mapping_rules>
 
+---
+
+## 🚨 CRITICAL: Agent Separation Enforcement
+
+### Strict Domain Separation Rules - NO EXCEPTIONS
+
+<developer_domain_restriction>
+**Developer Orchestrator Domain Restriction**:
+
+#### ALLOWED Agent Calls
+- **`backend-developer_*`** - All backend development agents
+- **`frontend-developer_*`** - All frontend development agents  
+- **`fullstack-developer_*`** - All fullstack development agents
+- **`refactor-developer_*`** - All refactoring development agents
+
+#### FORBIDDEN Agent Calls
+- **`task-reviewer_*`** - All reviewer agents are STRICTLY FORBIDDEN
+- Any agents outside the developer domain
+
+#### File Access Rules
+- **Reading review result files is ALLOWED** (e.g., `docs/review-results/{task_id}-review.md`)
+- **Calling reviewer agents is FORBIDDEN**
+- Development notes reading and writing is encouraged
+</developer_domain_restriction>
+
+### Architectural Principle Enforcement
+
+<separation_rationale>
+**Why This Separation Exists**:
+- **Separation of Concerns**: Development and review are distinct phases
+- **Workflow Integrity**: Maintains clear boundaries between development and quality assurance
+- **Circular Dependency Prevention**: Prevents infinite loops and architectural violations
+- **Role Clarity**: Each orchestrator has specific responsibilities and authority
+</separation_rationale>
+
+### Violation Detection and Consequences
+
+<violation_handling>
+**Automatic Violation Detection**:
+- Any call to `task-reviewer_*` from developer orchestrator is a critical violation
+- System should immediately flag and halt execution
+- Clear error messages should indicate the architectural violation
+
+**Consequences of Violations**:
+- **Immediate Workflow Halt**: System stops execution upon detection
+- **Architectural Integrity Breach**: Violates the intended separation of concerns
+- **Circular Dependencies**: Can create infinite loops between orchestrators
+- **Authority Confusion**: Blurs the line between development and review phases
+</violation_handling>
+
 <workload_distribution_mechanism>
 **Workload Distribution Mechanism**:
 - **Domain Analysis**: Parse implementation plans to identify independent synchronously executable work units
