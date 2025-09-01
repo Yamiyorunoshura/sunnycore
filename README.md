@@ -92,7 +92,156 @@ chmod +x install.command
 ```
 
 ## 📖 使用指南
-下載install.command後執行並輸入目標路徑即可
+
+### 快速開始
+下載 `install.command` 後執行並輸入目標路徑即可開始使用。
+
+### 自定義指令系統
+本專案提供了完整的自定義指令系統：
+# 自定義指令使用指南
+
+## 概述
+
+本專案提供了三套專門設計的自定義指令系統，分別對應不同的開發角色。每套指令都包含特定的命令和行為規範，用於協調 Claude Code 在不同開發階段的工作。
+
+## 指令系統
+
+### 1. 技術協調專家 (Tether) - `cursorspec-claude_dev`
+
+**角色定位**：ENTJ 性格的技術協調專家，專注於系統思維和團隊協作。
+
+**可用命令**：
+
+- `*help`：顯示所有可用自定義命令
+- `*develop-task {task_id}`：開發指定任務 ID 的任務
+- `*plan-task {task_id}`：規劃指定任務 ID 的任務
+
+**使用範例**：
+```bash
+*develop-task 1    # 開發任務 ID 為 1 的任務
+*plan-task 2       # 規劃任務 ID 為 2 的任務
+```
+
+**行為規範**：
+- 讀取 `{project_root}/sunnycore/dev/task/develop-task.md` 執行開發任務
+- 讀取 `{project_root}/sunnycore/dev/task/plan-task.md` 執行規劃任務
+
+### 2. 產品負責人團隊 - `cursorspec-claude_po`
+
+**角色定位**：專注於產品規劃、驗證和專案結案的產品團隊。
+
+**可用命令**：
+
+- `*help`：顯示所有可用自定義命令
+- `*validate-plan {task_id}`：驗證實施計劃是否完整且與需求對齊
+- `*conclude`：結束專案開發並進行結案程序
+
+**使用範例**：
+```bash
+*validate-plan 1   # 驗證任務 ID 為 1 的實施計劃
+*conclude          # 執行專案結案流程
+```
+
+**行為規範**：
+
+**計劃驗證** (`*validate-plan`)：
+- 呼叫 `implementation-plan-validator` 代理
+- 遵循統一計劃驗證工作流程：`{project_root}/sunnycore/po/workflow/unified-plan-validation-workflow.yaml`
+
+**專案結案** (`*conclude`)：
+- 並行呼叫多個代理：
+  - `project-concluder`：專案結案
+  - `file-classifier`：檔案分類
+  - `knowledge-curator`：知識整理，產出/更新 `{project_root}/docs/knowledge/engineering-lessons.md`
+  - `architecture-documenter`：架構文檔，產出/更新 `{project_root}/docs/architecture/architecture.md`
+- 遵循統一結案工作流程：`{project_root}/sunnycore/po/workflow/unified-project-concluding-workflow.yaml`
+
+### 3. 品質保證統帥 (Dr. Thompson) - `cursorspec-claude_qa`
+
+**角色定位**：擁有三十年品質審查經驗的品質保證專家，秉承 Linus Torvalds 的嚴謹風格。
+
+**可用命令**：
+
+- `*help`：顯示所有可用自定義命令
+- `*review <task-id>`：審查指定任務 ID 的任務
+
+**使用範例**：
+```bash
+*review 1          # 審查任務 ID 為 1 的任務
+```
+
+**行為規範**：
+- 讀取 `{project_root}/sunnycore/qa/task/review.md` 執行審查任務
+- 統籌專業 reviewer 團隊進行全面審查
+- 分析任務狀態（初始 vs 棕地）
+- 協調並行審查流程
+- 整合專業意見做出最終判斷
+
+## 工作流程說明
+
+### 開發階段工作流
+1. **任務規劃**：使用 `*plan-task {task_id}` 進行任務規劃
+2. **任務開發**：使用 `*develop-task {task_id}` 執行任務開發
+3. **品質審查**：使用 `*review {task_id}` 進行品質審查
+4. **計劃驗證**：使用 `*validate-plan {task_id}` 驗證實施計劃
+5. **專案結案**：使用 `*conclude` 完成專案結案
+
+### 角色職責分工
+
+| 角色 | 主要職責 | 關鍵命令 |
+|------|---------|----------|
+| **Tether** | 技術協調與任務執行 | `*develop-task`, `*plan-task` |
+| **產品負責人** | 計劃驗證與專案管理 | `*validate-plan`, `*conclude` |
+| **Dr. Thompson** | 品質審查與最終把關 | `*review` |
+
+### 代理協作規範
+
+1. **主代理職責**：
+   - 協調並委派給適當的子代理
+   - 不直接執行具體任務
+   - 維護整體工作流程
+
+2. **子代理職責**：
+   - 處理實際的技術任務
+   - 生成專業報告和文檔
+   - 遵循統一的品質標準
+
+## 使用建議
+
+### 最佳實踐
+1. **按順序執行**：遵循規劃 → 開發 → 審查 → 驗證 → 結案的流程
+2. **角色分工**：根據任務性質選擇合適的指令系統
+3. **狀態追蹤**：使用任務 ID 保持工作連續性
+4. **品質優先**：始終在關鍵節點進行品質審查
+
+### 注意事項
+- 所有命令都使用 `*` 開頭
+- 任務 ID 應使用數字格式 (1, 2, 3...)
+- 確保相關的工作流文件存在於指定路徑
+- 建議在專案的不同階段切換合適的角色
+
+### 故障排除
+- 如果命令無響應，檢查是否正確安裝了相關代理
+- 確保專案結構符合預期路徑要求
+- 驗證任務 ID 是否存在且有效
+
+## 快速參考表
+
+| 階段 | 主要活動 | 推薦命令 | 負責角色 |
+|------|---------|----------|----------|
+| 規劃 | 任務分解、優先級排序 | `*plan-task` | Tether |
+| 開發 | 代碼編寫、功能實現 | `*develop-task` | Tether |
+| 審查 | 代碼品質、安全檢查 | `*review` | Dr. Thompson |
+| 驗證 | 計劃完整性檢查 | `*validate-plan` | 產品負責人 |
+| 結案 | 專案總結、文檔生成 | `*conclude` | 產品負責人 |
+
+---
+
+**主要指令角色**：
+- **Tether** (開發專家)：任務規劃與開發執行
+- **產品負責人**：計劃驗證與專案管理
+- **Dr. Thompson** (品質專家)：代碼審查與品質把關
+
 
 ## 🔧 模塊詳解
 
