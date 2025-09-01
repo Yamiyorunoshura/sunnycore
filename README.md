@@ -140,27 +140,6 @@ export CLAUDE_WORKFLOW_MODE=strict
 export CLAUDE_LOG_LEVEL=info
 ```
 
-### 自訂配置
-
-在 `~/.claude/config.json` 中可以自訂：
-
-```json
-{
-  "agents": {
-    "default_model": "claude-3-5-sonnet-20241022",
-    "max_tokens": 4096,
-    "temperature": 0.7
-  },
-  "workflow": {
-    "auto_commit": true,
-    "backup_enabled": true,
-    "notification_enabled": true
-  },
-  "templates": {
-    "custom_templates_path": "~/my-templates"
-  }
-}
-
 ## 🤝 貢獻指南
 
 歡迎參與專案貢獻！請遵循以下流程：
