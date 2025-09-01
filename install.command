@@ -102,6 +102,35 @@ while true; do
     esac
 done
 
+# 清理舊安裝的函數
+cleanup_old_installation() {
+    local target_dir="$1"
+    local components=("agents" "commands" "sunnycore")
+    
+    echo "檢查並清理舊安裝文件..."
+    
+    for component in "${components[@]}"; do
+        local component_path
+        if [ "$component" = "sunnycore" ]; then
+            component_path="$SUNNYCORE_DIR/$component"
+        else
+            component_path="$target_dir/$component"
+        fi
+        
+        if [ -d "$component_path" ]; then
+            echo "發現舊的 $component，正在清理: $component_path"
+            rm -rf "$component_path"
+            if [ $? -eq 0 ]; then
+                echo "✓ 已清理舊的 $component"
+            else
+                echo "✗ 清理 $component 失敗"
+            fi
+        fi
+    done
+    
+    echo "舊文件清理完成"
+}
+
 # 檢查並創建必要的目錄
 if [ ! -d "$INSTALL_DIR" ]; then
     echo "目錄不存在，正在創建: $INSTALL_DIR"
@@ -183,6 +212,11 @@ done
 
 echo ""
 echo "開始安裝..."
+echo ""
+
+# 清理舊安裝
+cleanup_old_installation "$INSTALL_DIR"
+
 echo ""
 
 # 創建臨時目錄用於下載
