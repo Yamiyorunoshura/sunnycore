@@ -125,21 +125,6 @@ chmod +x install.command
 - **測試覆蓋**：單元測試、整合測試
 - **效能測試**：負載測試和效能基準
 
-## ⚙️ 配置說明
-
-### 環境變數
-
-```bash
-# 設定代理偏好
-export CLAUDE_AGENT_PREFERENCE=backend-developer
-
-# 設定工作流模式
-export CLAUDE_WORKFLOW_MODE=strict
-
-# 設定日誌等級
-export CLAUDE_LOG_LEVEL=info
-```
-
 ## 🤝 貢獻指南
 
 歡迎參與專案貢獻！請遵循以下流程：
