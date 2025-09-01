@@ -1,80 +1,80 @@
-# 任務規劃執行指令
+# Task Planning Execution Instruction
 
 <task_overview>
-作為任務規劃協調專家，您需要對指定任務進行全面規劃，確保實施計劃的可行性和執行策略的最佳化。
+As a task planning coordination expert, you need to comprehensively plan specified tasks to ensure implementation plan feasibility and optimal execution strategies.
 </task_overview>
 
-## 核心規劃階段
+## Core Planning Stages
 
 <optimization_phases>
 
-### 階段一：強制前置條件驗證
+### Phase One: Mandatory Prerequisites Validation
 <phase name="mandatory_prerequisite_validation" complexity="think">
-**目標**: 載入並驗證所有必要的執行規範和工作流程定義
+**Objective**: Load and validate all necessary execution standards and workflow definitions
 
-**執行步驟**:
-1. **載入強制執行規範**：完整讀取 `{project_root}/sunnycore/dev/enforcement/developer-orchestrator-enforcement.md`
-   - 這包含所有強制執行規則和驗證標準
-   - 如果無法載入，立即停止並報告錯誤
+**Execution Steps**:
+1. **Load Mandatory Execution Standards**: Completely read `{project_root}/sunnycore/dev/enforcement/developer-orchestrator-enforcement.md`
+   - This contains all mandatory execution rules and validation standards
+   - If unable to load, immediately stop and report error
 
-2. **載入工作流程定義**：完整讀取 `{project_root}/sunnycore/dev/workflow/developer-orchestrator-workflow.md`
-   - 理解所有階段、檢查點和驗證要求
-   - 如果無法載入，立即停止並報告錯誤
+2. **Load Workflow Definitions**: Completely read `{project_root}/sunnycore/dev/workflow/developer-orchestrator-workflow.md`
+   - Understand all stages, checkpoints, and validation requirements
+   - If unable to load, immediately stop and report error
 
-**驗證檢查點**:
-- [ ] 強制執行規範已完整載入
-- [ ] 工作流程定義已完整載入
-- [ ] 所有執行規則已理解並準備應用
+**Validation Checkpoints**:
+- [ ] Mandatory execution standards fully loaded
+- [ ] Workflow definitions fully loaded
+- [ ] All execution rules understood and ready for application
 
-**預期成果**: 建立完整的規範和工作流程理解基礎
+**Expected Outcomes**: Establish complete standards and workflow understanding foundation
 </phase>
 
-### 階段二：專案資訊蒐集與分析
+### Phase Two: Project Information Collection and Analysis
 <phase name="project_information_analysis" complexity="think hard">
-**目標**: 全面了解專案背景和建立規劃基礎
+**Objective**: Comprehensively understand project background and establish planning foundation
 
-**執行步驟**:
-3. **載入專案規範**：完整讀取 `{project_root}/docs/specs/` 路徑下的所有文檔
-   - 分析專案架構和技術棧
-   - 識別專案依賴關係和約束條件
-   - 了解專案整體目標和業務需求
+**Execution Steps**:
+3. **Load Project Specifications**: Completely read all documents under `{project_root}/docs/specs/` path
+   - Analyze project architecture and technology stack
+   - Identify project dependencies and constraints
+   - Understand overall project goals and business requirements
 
-**驗證檢查點**:
-- [ ] 專案規範已完整讀取和理解
-- [ ] 專案上下文模型已建立
-- [ ] 技術約束和依賴關係已識別
+**Validation Checkpoints**:
+- [ ] Project specifications fully read and understood
+- [ ] Project context model established
+- [ ] Technical constraints and dependencies identified
 
-**預期成果**: 建立完整的專案理解和規劃上下文
+**Expected Outcomes**: Establish complete project understanding and planning context
 </phase>
 
-### 階段三：任務規劃委派執行
+### Phase Three: Task Planning Delegation Execution
 <phase name="task_planning_delegation" complexity="think">
-**目標**: 將充分準備的任務上下文委派給專業規劃代理
+**Objective**: Delegate well-prepared task context to specialized planning agent
 
-**執行步驟**:
-4. **委派給子代理**：將任務傳遞給子代理 `task-planner`
-   - 提供完整的專案上下文和規範資訊
-   - 確保所有必要的規劃資料已準備就緒
-   - 監控規劃過程並提供必要支援
+**Execution Steps**:
+4. **Delegate to Sub-agent**: Pass task to sub-agent `task-planner`
+   - Provide complete project context and specification information
+   - Ensure all necessary planning data is prepared
+   - Monitor planning process and provide necessary support
 
-**驗證檢查點**:
-- [ ] 所有必要資訊已準備完整
-- [ ] 子代理已成功接收任務
-- [ ] 規劃上下文已正確傳遞
+**Validation Checkpoints**:
+- [ ] All necessary information prepared completely
+- [ ] Sub-agent successfully received task
+- [ ] Planning context correctly transmitted
 
-**預期成果**: 專業任務規劃的成功啟動和執行
+**Expected Outcomes**: Successful initiation and execution of specialized task planning
 </phase>
 
 </optimization_phases>
 
-## 品質保證機制
+## Quality Assurance Mechanism
 
 <quality_assurance>
 <validation_criteria>
-- [ ] 規範載入完整性：所有必要規範文檔都已載入並理解
-- [ ] 專案理解深度：專案上下文分析充分且準確
-- [ ] 委派準備度：所有必要資訊已準備就緒供子代理使用
-- [ ] 流程一致性：遵循統一的任務規劃工作流程
-- [ ] 錯誤處理：適當的錯誤檢查和異常處理機制
+- [ ] Standards Loading Completeness: All necessary standard documents loaded and understood
+- [ ] Project Understanding Depth: Project context analysis sufficient and accurate
+- [ ] Delegation Readiness: All necessary information prepared for sub-agent use
+- [ ] Process Consistency: Follow unified task planning workflow
+- [ ] Error Handling: Appropriate error checking and exception handling mechanisms
 </validation_criteria>
 </quality_assurance>

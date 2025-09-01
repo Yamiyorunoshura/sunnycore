@@ -2,86 +2,86 @@
 template: implementation-plan
 version: 1
 
-# 注意：計劃驗證現在由各developer專門工作流程處理
-# 此模板專注於結構化規劃內容，驗證由對應的developer工作流程執行
+# Note: Plan validation is now handled by specialized developer workflows
+# This template focuses on structured planning content, validation is executed by corresponding developer workflows
 
-# 上下文保持要求
-# - 包含規範中所有有價值的技術細節
-# - 避免「視需要」或「待確定」等通用陳述
-# - 參考具體檔案、行號和設計決策
-# - 維護計劃元素與來源規範之間的可追溯性
+# Context preservation requirements
+# - Include all valuable technical details from specifications
+# - Avoid generic statements like "as needed" or "TBD"
+# - Reference specific files, line numbers, and design decisions
+# - Maintain clear traceability between plan elements and source specifications
 
 metadata:
-  task_id: "必填 - 實際任務識別碼"
-  project_name: "必填 - 實際專案名稱"
-  owner: "必填 - 實際負責人姓名"
-  date: "必填 - YYYY-MM-DD 格式"
-  project_root: "必填 - 專案根目錄絕對路徑"
+  task_id: "Required - Actual task identifier"
+  project_name: "Required - Actual project name"
+  owner: "Required - Actual responsible person name"
+  date: "Required - YYYY-MM-DD format"
+  project_root: "Required - Project root directory absolute path"
   sources:
     - type: requirements
-      path: "必填 - requirements.md實際路徑"
+      path: "Required - Actual requirements.md path"
     - type: task
-      path: "必填 - task.md實際路徑"
+      path: "Required - Actual task.md path"
     - type: design
-      path: "必填 - design.md實際路徑"
+      path: "Required - Actual design.md path"
   assumptions:
-    - "列出具體假設或說明'未識別任何'"
+    - "List specific assumptions or state 'none identified'"
   constraints:
-    - "列出具體約束或說明'未識別任何'"
+    - "List specific constraints or state 'none identified'"
 
 context:
-  summary: "必填 - 描述此任務完成內容的1-3個具體句子"
-  background: "必填 - 來自規範的具體背景"
+  summary: "Required - 1-3 specific sentences describing what this task completion entails"
+  background: "Required - Specific background from specifications"
   goals:
-    - "必填 - 從需求中提取的具體目標"
+    - "Required - Specific objectives extracted from requirements"
 
 objectives:
   functional:
     - id: "F-1"
-      description: "必填 - 來自規範的具體功能需求"
+      description: "Required - Specific functional requirements from specifications"
       acceptance_criteria:
-        - "必填 - 具體、可測試的驗收條件"
+        - "Required - Specific, testable acceptance criteria"
   non_functional:
     - id: "N-1"
-      description: "必填 - 具體非功能需求"
-      measurement: "必填 - 可測量目標（例如：p95 < 200ms，99.9%正常運行時間）"
+      description: "Required - Specific non-functional requirements"
+      measurement: "Required - Measurable targets (e.g.: p95 < 200ms, 99.9% uptime)"
 
 scope:
   in_scope:
-    - "必填 - 此任務包含的具體項目"
+    - "Required - Specific items included in this task"
   out_of_scope:
-    - "必填 - 明確排除的具體項目"
+    - "Required - Specific items explicitly excluded"
 
 approach:
-  architecture_overview: "必填 - 來自設計規範的具體架構"
+  architecture_overview: "Required - Specific architecture from design specifications"
   modules:
-    - name: "必填 - 實際模組名稱"
-      purpose: "必填 - 具體目的和職責"
+    - name: "Required - Actual module name"
+      purpose: "Required - Specific purpose and responsibilities"
       interfaces:
-        - "必填 - 具體API/契約定義"
+        - "Required - Specific API/contract definitions"
       reuse:
-        - "列出要重用的現有模組/服務或說明'無'"
+        - "List existing modules/services to reuse or state 'none'"
   data:
     schema_changes:
-      - "必填 - 具體資料庫/資料結構變更"
+      - "Required - Specific database/data structure changes"
     migrations:
-      - "必填 - 具體遷移步驟或說明'不需要'"
+      - "Required - Specific migration steps or state 'not required'"
   test_strategy:
     unit:
-      - "必填 - 具體單元測試區域和方法"
+      - "Required - Specific unit test areas and methods"
     integration:
-      - "必填 - 具體整合測試場景"
+      - "Required - Specific integration test scenarios"
     acceptance:
-      - "必填 - 具體驗收測試條件"
+      - "Required - Specific acceptance test conditions"
   quality_gates:
-    - "必填 - 可測量品質條件（例如：>=90%單元涵蓋率，<500ms p95）"
+    - "Required - Measurable quality conditions (e.g.: >=90% unit coverage, <500ms p95)"
 
 milestones:
   - name: "<M1>"
     deliverables:
-      - "<交付成果>"
+      - "<Deliverables>"
     done_definition:
-      - "<完成定義項目>"
+      - "<Done definition items>"
 
 timeline:
   start_date: "<YYYY-MM-DD>"
@@ -93,34 +93,34 @@ timeline:
 
 dependencies:
   external:
-    - "<服務/函式庫>"
+    - "<Service/Library>"
   internal:
-    - "<團隊/模組>"
+    - "<Team/Module>"
 
 estimation:
-  method: "<T恤尺寸|故事點|小時>"
+  method: "<T-shirt size|Story points|Hours>"
   summary:
     total_person_days: "<N>"
-    confidence: "<低|中|高>"
+    confidence: "<Low|Medium|High>"
   breakdown:
-    - work_item: "<項目>"
-      estimate: "<估算值>"
+    - work_item: "<Item>"
+      estimate: "<Estimate>"
 
 risks:
   - id: "R1"
-    description: "<風險>"
-    probability: "<低|中|高>"
-    impact: "<低|中|高>"
-    mitigation: "<緩解措施>"
-    contingency: "<應急計劃>"
+    description: "<Risk>"
+    probability: "<Low|Medium|High>"
+    impact: "<Low|Medium|High>"
+    mitigation: "<Mitigation measures>"
+    contingency: "<Contingency plan>"
 
 open_questions:
-  - "<問題>"
+  - "<Question>"
 
 notes:
-  - "<備註>"
+  - "<Note>"
 
-dev_notes_location: "docs/dev-notes/{task_id}`(如`1`, `2`, `3`...)-dev-notes.md"
-dev_notes_schema: "參考對應developer工作流程中的 dev_notes_v1 結構"
-dev_notes_note: "開發者在實施過程中將在獨立檔案中填寫詳細記錄，不在計劃檔案中維護"
+dev_notes_location: "docs/dev-notes/{task_id}`(e.g.`1`, `2`, `3`...)-dev-notes.md"
+dev_notes_schema: "Reference dev_notes_v1 structure in corresponding developer workflow"
+dev_notes_note: "Developers will maintain detailed records in separate files during implementation, not in the plan file"
 

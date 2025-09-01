@@ -11,10 +11,10 @@ metadata:
       task: "<path>"
       design: "<path>"
     plans: [] # implementation plans
-    code_refs: [] # 主要接口/模型/配置檔案路徑
+    code_refs: [] # main interface/model/configuration file paths
 
 system_context:
-  description: "<系統定位與主要外部依賴>"
+  description: "<System positioning and main external dependencies>"
   diagram: |
     ```mermaid
     graph LR
@@ -27,15 +27,15 @@ system_context:
 container_view:
   services:
     - name: "<Service>"
-      responsibilities: ["<責任>"]
-      interfaces: ["<API或契約>"]
+      responsibilities: ["<responsibility>"]
+      interfaces: ["<API or contract>"]
       data_stores: ["<DB/Cache/Topic>"]
 
 component_view:
   modules:
     - name: "<Module>"
-      purpose: "<功能>"
-      dependencies: ["<依賴>"]
+      purpose: "<function>"
+      dependencies: ["<dependency>"]
       diagram: |
         ```mermaid
         flowchart LR
@@ -52,7 +52,7 @@ data_model:
           constraints: ["<constraints>"]
   migrations:
     - id: MIG-001
-      description: "<變更說明>"
+      description: "<change description>"
 
 api_contracts:
   endpoints:
@@ -63,20 +63,18 @@ api_contracts:
 
 deployment_observability:
   environments: ["dev","staging","prod"]
-  deployment: "<流程與工具>"
-  logging: "<結構化日誌策略>"
-  monitoring: "<指標與告警>"
+  deployment: "<process and tools>"
+  logging: "<structured logging strategy>"
+  monitoring: "<metrics and alerts>"
 
 adr_links:
   - id: ADR-001
-    title: "<決策題目>"
-    decision: "<摘要>"
-    rationale: "<理由>"
-    consequences: "<後果>"
+    title: "<decision title>"
+    decision: "<summary>"
+    rationale: "<rationale>"
+    consequences: "<consequences>"
 
 consistency_checks:
-  plan_alignment: "<計劃 vs 實作差異>"
-  contract_sync: "<契約同步狀態>"
+  plan_alignment: "<plan vs implementation differences>"
+  contract_sync: "<contract synchronization status>"
   known_gaps: []
-
-

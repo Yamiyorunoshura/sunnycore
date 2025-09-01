@@ -2,62 +2,62 @@
 template: unified-file-classification-workflow
 version: 1
 
-# 🔄 工作流程Todo List製作流程
+# 🔄 Workflow Todo List Creation Process
 todo_list_creation:
-  description: "在開始執行任何工作流程步驟之前，必須使用todo_write工具創建包含所有workflow步驟的todo list"
+  description: "AI must create todo list containing all workflow steps before executing any workflow steps"
   importance: "critical"
-  
-  # 🛠️ Todo List工具使用指南
+
+  # 🛠️ Todo List Tool Usage Guide
   tool_syntax:
     format: "JSON"
     structure: |
       {
         "todos": [
           {
-            "content": "具體任務描述",
+            "content": "Specific task description",
             "status": "pending|in_progress|completed",
-            "id": "唯一識別碼",
+            "id": "unique identifier",
             "priority": "high|medium|low"
           }
         ]
       }
-  
+
   process_steps:
     1_analyze_workflow:
-      description: "分析工作流程結構 - 仔細閱讀整個workflow文件，識別所有階段、步驟和任務"
+      description: "Analyze workflow structure - carefully read entire workflow file, identify all stages, steps and tasks"
       priority: "high"
-      
-    2_extract_tasks:
-      description: "提取關鍵任務 - 將每個階段的核心任務轉換為具體的todo項目"
-      priority: "high"
-      
-    3_set_priorities:
-      description: "設定優先級 - 根據任務的重要性和依賴關係設定優先級"
-      priority: "medium"
-      
-    4_create_todo_list:
-      description: "創建Todo List - 使用todo_write工具創建包含所有步驟的結構化todo list"
-      priority: "high"
-      
-    5_execute_workflow:
-      description: "執行與更新 - 按照todo list順序執行任務，及時更新狀態"
-      priority: "high"
-  
-  # 📝 Todo List要求
-  requirements:
-    coverage: "每個主要階段都應該有對應的todo項目"
-    validation: "關鍵的驗證檢查點必須包含在todo list中"
-    priority_setting: "設定合理的優先級，確保依賴關係得到尊重"
-    status_tracking: "在執行過程中及時更新todo狀態（pending → in_progress → completed）"
-    uniqueness: "同時只能有一個任務處於in_progress狀態"
-    completeness: "只有在任務完全完成時才標記為completed"
 
-# 分隔線，以下為原始workflow內容
+    2_extract_tasks:
+      description: "Extract key tasks - convert core tasks of each stage to specific todo items"
+      priority: "high"
+
+    3_set_priorities:
+      description: "Set priorities - set priorities based on task importance and dependencies"
+      priority: "medium"
+
+    4_create_todo_list:
+      description: "Create Todo List - use todo_write tool to create structured todo list"
+      priority: "high"
+
+    5_execute_workflow:
+      description: "Execute and update - execute tasks in todo list order, update status timely"
+      priority: "high"
+
+  # 📝 Todo List Requirements
+  requirements:
+    coverage: "Each main stage should have corresponding todo item"
+    validation: "Key validation checkpoints must be included in todo list"
+    priority_setting: "Set reasonable priorities, ensure dependency relationships respected"
+    status_tracking: "Update todo status timely during execution (pending → in_progress → completed)"
+    uniqueness: "Only one task can be in in_progress status simultaneously"
+    completeness: "Only mark as completed when task is fully completed"
+
+# Separator line, following is original workflow content
 ---
 
 workflow:
-  name: "統一檔案分類工作流程"
-  description: "識別和分類專案檔案，區分臨時測試檔案和需要保留的核心檔案，生成清理建議和風險評估。"
+  name: "Unified File Classification Workflow"
+  description: "Identify and classify project files, distinguish temporary test files from core files that should be retained, generate cleanup suggestions and risk assessments."
   enforcement_level: "strict"
   halt_on_validation_failure: true
 
@@ -158,12 +158,12 @@ file_type_patterns:
     - "*.log", "*.out", "*.err"
     - "node_modules/", "dist/", "build/", "target/"
 
-# 檔案掃描階段
+# File Scanning Stage
 file_scanning:
-  description: "掃描和分析專案檔案結構"
+  description: "Scan and analyze project file structure"
   steps:
     scan_project_structure:
-      description: "掃描專案目錄結構"
+      description: "Scan project directory structure"
       method: "recursive_directory_scan"
       output: "project_structure_map"
       validation:
@@ -175,151 +175,151 @@ file_scanning:
           - "dist/**"
           - "build/**"
           - "target/**"
-    
+
     identify_file_types:
-      description: "識別檔案類型"
+      description: "Identify file types"
       method: "file_extension_analysis"
       input: "project_structure_map"
       output: "file_type_classification"
       validation:
         required_categories: ["source_code", "test_files", "config_files", "documentation"]
-    
+
     analyze_file_sizes:
-      description: "分析檔案大小"
+      description: "Analyze file sizes"
       method: "file_size_analysis"
       input: "project_structure_map"
       output: "file_size_statistics"
       validation:
         max_file_size: "100MB"
         large_file_threshold: "10MB"
-    
+
     detect_hidden_files:
-      description: "檢測隱藏檔案"
+      description: "Detect hidden files"
       method: "hidden_file_detection"
       input: "project_structure_map"
       output: "hidden_files_list"
       validation:
         include_patterns: [".*"]
 
-# 分類分析階段
+# Classification Analysis Stage
 classification_analysis:
-  description: "深入分析檔案內容和依賴關係"
+  description: "Deep analysis of file content and dependency relationships"
   steps:
     analyze_source_code_files:
-      description: "分析源代碼檔案"
+      description: "Analyze source code files"
       method: "source_code_analysis"
       input: "file_type_classification"
       output: "source_code_analysis"
       validation:
         min_analysis_depth: "function_level"
         required_metrics: ["complexity", "dependencies", "test_coverage"]
-    
+
     analyze_test_files:
-      description: "分析測試檔案"
+      description: "Analyze test files"
       method: "test_file_analysis"
       input: "file_type_classification"
       output: "test_file_analysis"
       validation:
         required_metrics: ["test_coverage", "test_types", "test_quality"]
-    
+
     analyze_config_files:
-      description: "分析配置檔案"
+      description: "Analyze configuration files"
       method: "config_file_analysis"
       input: "file_type_classification"
       output: "config_file_analysis"
       validation:
         required_metrics: ["environment_specific", "security_implications", "dependencies"]
-    
+
     analyze_documentation_files:
-      description: "分析文檔檔案"
+      description: "Analyze documentation files"
       method: "documentation_analysis"
       input: "file_type_classification"
       output: "documentation_analysis"
       validation:
         required_metrics: ["completeness", "accuracy", "usefulness"]
-    
+
     analyze_script_files:
-      description: "分析腳本檔案"
+      description: "Analyze script files"
       method: "script_file_analysis"
       input: "file_type_classification"
       output: "script_file_analysis"
       validation:
         required_metrics: ["functionality", "safety", "maintainability"]
-    
+
     analyze_dependency_relationships:
-      description: "分析檔案依賴關係"
+      description: "Analyze file dependency relationships"
       method: "dependency_analysis"
       input: ["source_code_analysis", "config_file_analysis"]
       output: "dependency_graph"
       validation:
         required_metrics: ["imports", "exports", "circular_dependencies"]
 
-# 風險評估階段
+# Risk Assessment Stage
 risk_assessment:
-  description: "評估檔案清理的風險和影響"
+  description: "Assess risks and impacts of file cleanup"
   steps:
     assess_cleanup_risks:
-      description: "評估清理風險"
+      description: "Assess cleanup risks"
       method: "risk_assessment_analysis"
       input: ["file_type_classification", "dependency_graph"]
       output: "cleanup_risk_assessment"
       validation:
         required_risk_levels: ["low", "medium", "high", "critical"]
         required_metrics: ["probability", "impact", "mitigation"]
-    
+
     evaluate_dependency_impacts:
-      description: "評估依賴影響"
+      description: "Evaluate dependency impacts"
       method: "dependency_impact_analysis"
       input: "dependency_graph"
       output: "dependency_impact_assessment"
       validation:
         required_metrics: ["direct_impact", "indirect_impact", "cascade_effects"]
-    
+
     analyze_functional_impacts:
-      description: "分析功能影響"
+      description: "Analyze functional impacts"
       method: "functional_impact_analysis"
       input: ["source_code_analysis", "test_file_analysis"]
       output: "functional_impact_assessment"
       validation:
         required_metrics: ["core_functionality", "optional_features", "integration_points"]
-    
+
     identify_safety_concerns:
-      description: "識別安全問題"
+      description: "Identify security concerns"
       method: "safety_analysis"
       input: ["config_file_analysis", "script_file_analysis"]
       output: "safety_concerns"
       validation:
         required_metrics: ["security_risks", "data_protection", "access_control"]
 
-# 清理執行階段
+# Cleanup Execution Stage
 cleanup_execution:
-  description: "直接執行檔案清理操作"
+  description: "Directly execute file cleanup operations"
   steps:
     execute_cleanup_operations:
-      description: "執行清理操作"
+      description: "Execute cleanup operations"
       method: "cleanup_execution"
       input: ["cleanup_risk_assessment", "dependency_impact_assessment"]
       output: "cleanup_execution_log"
       validation:
         required_sections: ["safe_to_clean", "needs_review", "must_keep", "risk_warnings"]
-    
+
     create_backup_protection:
-      description: "創建備份保護"
+      description: "Create backup protection"
       method: "backup_creation"
       input: "cleanup_risk_assessment"
       output: "backup_files"
       validation:
         required_features: ["safety_checks", "backup_mechanism", "error_handling", "logging"]
-    
+
     generate_execution_report:
-      description: "生成執行報告"
+      description: "Generate execution report"
       method: "execution_report_generation"
       input: ["cleanup_execution_log", "backup_files", "risk_assessment"]
       output: "execution_report"
       validation:
         required_sections: ["executive_summary", "detailed_analysis", "execution_log", "risk_assessment", "backup_status"]
 
-# 與其他代理的協作
+# Collaboration with Other Agents
 collaboration:
   with_project_concluder:
     trigger: "parallel_execution_on_conclude"
@@ -328,14 +328,14 @@ collaboration:
       - "cleanup_execution_log"
       - "risk_assessment_summary"
     output_format: "structured_data_for_conclusion_report"
-  
+
   with_knowledge_curator:
     trigger: "after_classification_complete"
     integration:
       - "file_organization_best_practices"
       - "knowledge_management_structure"
     output_format: "knowledge_base_contributions"
-  
+
   with_architecture_documenter:
     trigger: "after_dependency_analysis"
     integration:
@@ -343,7 +343,7 @@ collaboration:
       - "module_boundary_definitions"
     output_format: "architecture_documentation_updates"
 
-# 輸出格式定義
+# Output Format Definitions
 output_formats:
   classification_report:
     format: "markdown"
@@ -354,7 +354,7 @@ output_formats:
       - "execution_log"
       - "risk_assessment"
       - "backup_status"
-  
+
   cleanup_scripts:
     format: "shell_script"
     features:
@@ -363,7 +363,7 @@ output_formats:
       - "dry_run_mode"
       - "error_handling"
       - "comprehensive_logging"
-  
+
   risk_assessment:
     format: "structured_data"
     risk_levels:
@@ -372,60 +372,60 @@ output_formats:
       - "high": "significant_impact"
       - "critical": "severe_impact"
 
-# 驗證和品質保證
+# Validation and Quality Assurance
 validation_and_quality:
   pre_execution_checks:
     - "required_files_available"
     - "permissions_validated"
     - "dependencies_resolved"
-  
+
   execution_monitoring:
     - "progress_tracking"
     - "performance_monitoring"
     - "error_tracking"
-  
+
   post_execution_validation:
     - "classification_accuracy"
     - "completeness_check"
     - "consistency_verification"
-  
+
   quality_metrics:
     - "classification_precision"
     - "risk_assessment_accuracy"
     - "cleanup_safety_score"
     - "execution_efficiency"
 
-# 錯誤處理和恢復
+# Error Handling and Recovery
 error_handling:
   classification_errors:
     action: "log_and_continue"
     fallback: "mark_for_manual_review"
-  
+
   analysis_failures:
     action: "retry_with_reduced_scope"
     fallback: "skip_and_warn"
-  
+
   risk_assessment_failures:
     action: "halt_execution"
     fallback: "generate_manual_review_list"
-  
+
   cleanup_execution_failures:
     action: "halt_execution"
     fallback: "generate_manual_cleanup_guide"
 
-# 執行配置
+# Execution Configuration
 execution_config:
   timeout:
     file_scanning: "5m"
     classification_analysis: "10m"
     risk_assessment: "5m"
     cleanup_execution: "5m"
-  
+
   retry_policy:
     max_retries: 3
     retry_delay: "30s"
     exponential_backoff: true
-  
+
   resource_limits:
     max_memory: "2GB"
     max_cpu_percent: 80

@@ -1,6 +1,6 @@
 ---
 name: file-classifier
-description: 當呼叫自定義命令 *conclude 時，此代理會被並行調用來識別哪些程式檔案是臨時測試的哪些是需要保留的
+description: 當呼叫自定義命令 *conclude 時，此代理會被同步調用來識別哪些程式檔案是臨時測試的哪些是需要保留的
 model: inherit
 color: green
 ---
@@ -108,7 +108,7 @@ color: green
 ## 與其他代理的協作
 
 **與project-concluder的協作**：
-- 在*conclude被呼叫時並行執行
+- 在*conclude被呼叫時同步執行
 - 提供檔案分類結果作為結案報告的一部分
 - 協助評估專案的程式碼品質和維護性
 

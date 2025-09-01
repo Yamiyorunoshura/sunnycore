@@ -1,97 +1,97 @@
-# 全端開發者 DevOps 開發任務
+# Fullstack Developer DevOps Development Task
 
 <task_overview>
-當執行此指令時，你將作為全端開發者專注於 DevOps 開發工作，負責前端和後端的部署、監控、CI/CD 和基礎設施管理。
+When executing this instruction, you will act as a fullstack developer focused on DevOps development work, responsible for frontend and backend deployment, monitoring, CI/CD, and infrastructure management.
 </task_overview>
 
-## 強制前置條件
+## Mandatory Prerequisites
 
-<stage name="載入執行規範" number="1" critical="true">
-<description>載入全端開發者專用的執行規範和工作流程</description>
+<stage name="Load Execution Standards" number="1" critical="true">
+<description>Load the fullstack developer specific execution standards and workflow</description>
 
 <execution_actions>
-1. **載入全端開發者執行規範**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/enforcement/fullstack-developer-enforcement.md`
-   - 將其作為項目的**唯一執行規範**
-   - 所有 DevOps 決策必須符合此規範要求
+1. **Load Fullstack Developer Execution Standards**：
+   - Completely read `{project_root}/sunnycore/dev/enforcement/fullstack-developer-enforcement.md`
+   - Treat this as the project's **only execution standard**
+   - All DevOps decisions must comply with this standard's requirements
 
-2. **載入全端開發者工作流程**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/workflow/fullstack-developer-workflow..md`
-   - 將其作為項目的**唯一工作流程**
-   - 嚴格按照流程步驟執行 DevOps 開發工作
+2. **Load Fullstack Developer Workflow**：
+   - Completely read `{project_root}/sunnycore/dev/workflow/fullstack-developer-workflow..md`
+   - Treat this as the project's **only workflow**
+   - Strictly follow the workflow steps to execute DevOps development work
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] 全端開發者執行規範已完整載入並理解
-- [ ] 全端開發者工作流程已完整載入並理解
-- [ ] 準備按照規範和流程執行 DevOps 開發工作
+- [ ] Fullstack developer execution standards have been completely loaded and understood
+- [ ] Fullstack developer workflow has been completely loaded and understood
+- [ ] Ready to execute DevOps development work according to standards and workflow
 </validation_checkpoints>
 </stage>
 
-## DevOps 開發專門化
+## DevOps Development Specialization
 
-<stage name="DevOps 專門化準備" number="2" critical="true">
-<description>針對 DevOps 開發任務進行專門化準備</description>
+<stage name="DevOps Specialization Preparation" number="2" critical="true">
+<description>Conduct specialized preparation for DevOps development tasks</description>
 
 <execution_actions>
-3. **CI/CD 流程設計**：
+3. **CI/CD Process Design**：
    <think hard>
-   - 設計統一的建置、測試、部署流程
-   - 確保前後端部署的協調一致性
-   - 規劃自動化測試和品質檢查
-   - 設計版本管理和發佈策略
+   - Design unified build, test, and deployment processes
+   - Ensure coordinated consistency in frontend and backend deployments
+   - Plan automated testing and quality checks
+   - Design version management and release strategies
    </think hard>
 
-4. **基礎設施即程式碼**：
+4. **Infrastructure as Code**：
    <think hard>
-   - 設計雲端基礎設施架構（IaC）
-   - 規劃容器化和微服務架構
-   - 設計資料庫和快取層基礎設施
-   - 規劃網路和安全組態
+   - Design cloud infrastructure architecture (IaC)
+   - Plan containerization and microservices architecture
+   - Design database and cache layer infrastructure
+   - Plan network and security configurations
    </think hard>
 
-5. **監控和可觀測性**：
+5. **Monitoring and Observability**：
    <think hard>
-   - 設計統一的日誌收集和分析系統
-   - 規劃應用程式效能監控（APM）
-   - 設計業務指標和技術指標監控
-   - 制定告警和事件響應機制
+   - Design unified log collection and analysis systems
+   - Plan application performance monitoring (APM)
+   - Design business metrics and technical metrics monitoring
+   - Formulate alerting and incident response mechanisms
    </think hard>
 
-6. **安全和合規**：
+6. **Security and Compliance**：
    <think>
-   - 設計自動化安全掃描和漏洞評估
-   - 規劃合規性檢查和稽核機制
-   - 設計密碼和敏感資料管理
-   - 制定安全事件響應流程
+   - Design automated security scanning and vulnerability assessment
+   - Plan compliance checks and audit mechanisms
+   - Design password and sensitive data management
+   - Formulate security incident response processes
    </think>
 
-7. **效能和擴展性**：
+7. **Performance and Scalability**：
    <think>
-   - 設計自動擴展和負載均衡策略
-   - 規劃快取和 CDN 架構
-   - 設計資料庫優化和備份策略
-   - 制定災難恢復和業務連續性計劃
+   - Design auto-scaling and load balancing strategies
+   - Plan caching and CDN architecture
+   - Design database optimization and backup strategies
+   - Formulate disaster recovery and business continuity plans
    </think>
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] CI/CD 流程設計已完成
-- [ ] 基礎設施即程式碼架構已設計
-- [ ] 監控和可觀測性系統已規劃
-- [ ] 安全和合規機制已制定
-- [ ] 效能和擴展性策略已設計
+- [ ] CI/CD process design has been completed
+- [ ] Infrastructure as Code architecture has been designed
+- [ ] Monitoring and observability system has been planned
+- [ ] Security and compliance mechanisms have been formulated
+- [ ] Performance and scalability strategies have been designed
 </validation_checkpoints>
 </stage>
 
-<stage name="DevOps 實施執行" number="3" critical="true">
-<description>執行 DevOps 開發工作</description>
+<stage name="DevOps Implementation Execution" number="3" critical="true">
+<description>Execute DevOps development work</description>
 
 <execution_actions>
-8. **嚴格遵循工作流程**：按照載入的全端開發者工作流程執行 DevOps 開發
-9. **前後端整合部署**：確保前端和後端的協調部署和配置一致性
-10. **自動化實現**：實施自動化的建置、測試、部署流程
-11. **文檔記錄**：詳細記錄 DevOps 架構、流程和配置
-12. **品質驗證**：確保 DevOps 實施滿足全端開發要求
+8. **Strictly Follow Workflow**：Execute DevOps development according to the loaded fullstack developer workflow
+9. **Frontend-Backend Integrated Deployment**：Ensure coordinated deployment and configuration consistency between frontend and backend
+10. **Automation Implementation**：Implement automated build, test, and deployment processes
+11. **Documentation Recording**：Detail DevOps architecture, processes, and configurations
+12. **Quality Verification**：Ensure DevOps implementation meets all fullstack development requirements
 </execution_actions>
 </stage>

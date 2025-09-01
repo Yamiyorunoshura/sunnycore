@@ -1,95 +1,95 @@
-# 重構開發者 效能優化重構任務
+# Refactor Developer Performance Optimization Refactoring Task
 
 <task_overview>
-當執行此指令時，你將作為重構開發者專注於效能剖析、瓶頸移除與系統穩定性的改進工作。
+When executing this instruction, you will act as a Refactor Developer focused on performance profiling, bottleneck removal, and system stability improvement work.
 </task_overview>
 
-## 強制前置條件
+## Mandatory Prerequisites
 
-<stage name="載入執行規範" number="1" critical="true">
-<description>載入重構開發者專用的執行規範和工作流程</description>
+<stage name="Load Execution Standards" number="1" critical="true">
+<description>Load the dedicated execution standards and workflow for Refactor Developer</description>
 
 <execution_actions>
-1. **載入重構開發者執行規範**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/enforcement/refactor-developer-enforcement.md`
-   - 將其作為項目的**唯一執行規範**
-   - 所有重構決策必須符合此規範要求
+1. **Load Refactor Developer Execution Standards**:
+   - Completely read `{project_root}/sunnycore/dev/enforcement/refactor-developer-enforcement.md`
+   - Treat it as the project's **only execution standard**
+   - All refactoring decisions must comply with this standard's requirements
 
-2. **載入重構開發者工作流程**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/workflow/refactor-developer-workflow.md`
-   - 將其作為項目的**唯一工作流程**
-   - 嚴格按照流程步驟執行效能優化重構
+2. **Load Refactor Developer Workflow**:
+   - Completely read `{project_root}/sunnycore/dev/workflow/refactor-developer-workflow.md`
+   - Treat it as the project's **only workflow**
+   - Strictly follow the workflow steps to execute performance optimization refactoring
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] 重構開發者執行規範已完整載入並理解
-- [ ] 重構開發者工作流程已完整載入並理解
-- [ ] 準備按照規範和流程執行效能優化重構
+- [ ] Refactor Developer execution standards have been completely loaded and understood
+- [ ] Refactor Developer workflow has been completely loaded and understood
+- [ ] Ready to execute performance optimization refactoring according to standards and workflow
 </validation_checkpoints>
 </stage>
 
-## 效能優化重構專門化
+## Performance Optimization Refactoring Specialization
 
-<stage name="效能專門化準備" number="2" critical="true">
-<description>針對效能優化重構任務進行專門化準備</description>
+<stage name="Performance Specialization Preparation" number="2" critical="true">
+<description>Perform specialized preparation for performance optimization refactoring tasks</description>
 
 <execution_actions>
-3. **效能目標與SLO定義**：
+3. **Performance Goals and SLO Definition**:
    <think>
-   - 延遲 P50/P95/P99、吞吐量、錯誤率與資源使用率目標
-   - 服務等級目標（SLO）與服務等級指標（SLI）
-   - 監控與基準測試方法（負載、壓力、容量）
+   - Latency P50/P95/P99, throughput, error rate, and resource utilization targets
+   - Service Level Objectives (SLO) and Service Level Indicators (SLI)
+   - Monitoring and benchmarking methods (load, stress, capacity)
    </think>
 
-4. **剖析與可觀察性策略**：
+4. **Profiling and Observability Strategy**:
    <think hard>
-   - 端到端追蹤（Tracing）、指標（Metrics）、日誌（Logs）三支柱
-   - 採集慢查詢、GC、鎖競爭、I/O等待與網路延遲
-   - 對關鍵交易路徑建立 profiling 報告與Heatmap
+   - End-to-end Tracing, Metrics, and Logs three pillars
+   - Collect slow queries, GC, lock contention, I/O waits, and network latency
+   - Establish profiling reports and heatmaps for critical transaction paths
    </think hard>
 
-5. **瓶頸識別與優化路徑**：
+5. **Bottleneck Identification and Optimization Path**:
    <think>
-   - 演算法複雜度、資料結構與記憶體配置
-   - 資料庫存取（索引、查詢計劃、N+1、批量化）
-   - 快取階層化（本地/分散式），TTL、失效策略與一致性
-   - 併發與非同步模型、背壓與排程策略
+   - Algorithm complexity, data structures, and memory allocation
+   - Database access (indexing, query plans, N+1, batching)
+   - Caching hierarchy (local/distributed), TTL, invalidation strategies, and consistency
+   - Concurrency and asynchronous models, backpressure, and scheduling strategies
    </think>
 
-6. **架構級優化策略**：
+6. **Architecture-level Optimization Strategy**:
    <think>
-   - 隔離關鍵路徑（CQRS、讀寫分離、事件驅動）
-   - 分片、分區與資料熱點緩解
-   - 服務降級、熔斷、重試、超時與逾時保護
+   - Isolate critical paths (CQRS, read-write separation, event-driven)
+   - Sharding, partitioning, and data hotspot mitigation
+   - Service degradation, circuit breaker, retry, timeout, and overload protection
    </think>
 
-7. **釋出與風險控制**：
+7. **Release and Risk Control**:
    <think>
-   - 金絲雀釋出、灰度、A/B，把握對比度量
-   - 可回滾與影響面評估，明確容量預案
+   - Canary releases, gradual rollout, A/B testing with comparative metrics
+   - Rollback plans and impact assessments with clear capacity plans
    </think>
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] SLO/SLI 與效能目標已定義
-- [ ] 可觀察性覆蓋關鍵路徑並可重現問題
-- [ ] 瓶頸清單與優化順序已確立
-- [ ] 釋出與回滾策略已準備
+- [ ] SLO/SLI and performance goals have been defined
+- [ ] Observability covers critical paths and can reproduce issues
+- [ ] Bottleneck checklist and optimization sequence have been established
+- [ ] Release and rollback strategies have been prepared
 </validation_checkpoints>
 </stage>
 
-<stage name="開發執行" number="3" critical="true">
-<description>執行效能優化重構工作</description>
+<stage name="Development Execution" number="3" critical="true">
+<description>Execute performance optimization refactoring work</description>
 
 <execution_actions>
-8. **嚴格遵循工作流程**：按照載入的重構開發者工作流程執行
-9. **專項驗證**：以基準測試驗證每次改動的效益與回歸
-10. **文檔記錄**：保留剖析報告、效能測量、調參依據與結果對照
+8. **Strictly Follow Workflow**: Execute according to the loaded Refactor Developer workflow
+9. **Specialized Verification**: Validate benefits and regressions of each change with benchmark tests
+10. **Documentation Recording**: Preserve profiling reports, performance measurements, tuning rationale, and result comparisons
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] 基準測試可重現且統計顯著（多次測量區間收斂）
-- [ ] 端到端延遲/吞吐/資源指標達標
-- [ ] 故障率未上升且穩定性不下降
+- [ ] Benchmark tests are reproducible and statistically significant (multiple measurements with converging intervals)
+- [ ] End-to-end latency/throughput/resource metrics meet targets
+- [ ] Failure rate has not increased and stability has not decreased
 </validation_checkpoints>
 </stage>

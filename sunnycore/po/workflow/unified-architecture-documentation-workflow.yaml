@@ -1,98 +1,98 @@
-# 統一架構文檔工作流程
-# 用於 architecture-documenter agent 的完整執行流程
-# 整合實作與計劃，生成同步的架構文檔
+# Unified Architecture Documentation Workflow
+# For architecture-documenter agent complete execution process
+# Integrates current implementation with plans, generates synchronized architecture overview and details, ensures documentation and code synchronization
 
-# 🔄 工作流程Todo List製作流程
+# 🔄 Workflow Todo List Creation Process
 todo_list_creation:
-  description: "在開始執行任何工作流程步驟之前，AI必須先創建包含所有workflow步驟的todo list"
+  description: "AI must create todo list containing all workflow steps before executing any workflow steps"
   importance: "critical"
-  
+
   process_steps:
     1_analyze_workflow:
-      description: "分析工作流程結構 - 仔細閱讀整個workflow文件，識別所有階段、步驟和任務"
+      description: "Analyze workflow structure - carefully read entire workflow file, identify all stages, steps and tasks"
       priority: "high"
-      
-    2_extract_tasks:
-      description: "提取關鍵任務 - 將每個階段的核心任務轉換為具體的todo項目"
-      priority: "high"
-      
-    3_set_priorities:
-      description: "設定優先級 - 根據任務的重要性和依賴關係設定優先級（high/medium/low）"
-      priority: "medium"
-      
-    4_create_todo_list:
-      description: "創建Todo List - 使用todo_write工具創建包含所有步驟的結構化todo list"
-      priority: "high"
-      
-    5_execute_workflow:
-      description: "開始執行 - 按照todo list的順序執行任務，並及時更新狀態"
-      priority: "high"
-  
-  requirements:
-    coverage: "每個主要階段都應該有對應的todo項目"
-    validation: "關鍵的驗證檢查點必須包含在todo list中"
-    priority_setting: "設定合理的優先級，確保依賴關係得到尊重"
-    status_tracking: "在執行過程中及時更新todo狀態（pending → in_progress → completed）"
 
-# 分隔線，以下為原始workflow內容
+    2_extract_tasks:
+      description: "Extract key tasks - convert core tasks of each stage to specific todo items"
+      priority: "high"
+
+    3_set_priorities:
+      description: "Set priorities - set priorities based on task importance and dependencies (high/medium/low)"
+      priority: "medium"
+
+    4_create_todo_list:
+      description: "Create Todo List - use todo_write tool to create structured todo list containing all steps"
+      priority: "high"
+
+    5_execute_workflow:
+      description: "Start execution - execute tasks in todo list order, update status timely"
+      priority: "high"
+
+  requirements:
+    coverage: "Each main stage should have corresponding todo item"
+    validation: "Key validation checkpoints must be included in todo list"
+    priority_setting: "Set reasonable priorities, ensure dependency relationships respected"
+    status_tracking: "Update todo status timely during execution (pending → in_progress → completed)"
+
+# Separator line, following is original workflow content
 ---
 
 workflow_name: "unified-architecture-documentation-workflow"
 version: "2.2.0"
-description: "整合當前實作與計劃，生成最新架構總覽與細節，確保文檔與代碼同步"
+description: "Integrate current implementation with plans, generate latest architecture overview and details, ensure documentation and code synchronization"
 
-# 工作流程執行設定
+# Workflow execution settings
 execution_settings:
   deterministic: true
   parallel_enabled: true
   max_parallel_tasks: 10
   batch_size: 7
   cache_enabled: true
-  fail_fast: false  # 記錄錯誤但不中斷
-  
-# 前置條件檢查
+  fail_fast: false  # Record errors but do not interrupt
+
+# Prerequisites check
 prerequisites:
   required_files:
-    # 核心配置檔案
+    # Core configuration files
     - path: "{project_root}/sunnycore/po/templates/architecture-doc-tmpl.yaml"
       type: "template"
-      critical: false  # 缺失時記錄警告並持續
+      critical: false  # Log warning if missing and continue
     - path: "{project_root}/sunnycore/po/enforcement/architecture-documenter-enforcement.md"
       type: "enforcement"
       critical: false
-      
+
   recommended_files:
-    # 規範文件（建議存在）
+    # Specification files (recommended to exist)
     - path: "{{project_root}}/docs/specs/task.md"
       type: "specification"
     - path: "{{project_root}}/docs/specs/requirements.md"
       type: "specification"
     - path: "{{project_root}}/docs/specs/design.md"
       type: "specification"
-      
+
   optional_directories:
-    # 計劃文件目錄
+    # Plan files directory
     - path: "{{project_root}}/docs/implementation-plan/"
       type: "plans"
       pattern: "*-plan.*"
-    # 現有架構文檔
+    # Existing architecture docs
     - path: "{{project_root}}/docs/architecture/"
       type: "existing_docs"
-      
+
   validation_rules:
     - rule: "project_root_resolved"
-      description: "project_root 必須解析為有效路徑"
+      description: "project_root must resolve to valid path"
     - rule: "codebase_accessible"
-      description: "代碼庫必須可讀取"
+      description: "Codebase must be readable"
     - rule: "output_directory_writable"
-      description: "{{project_root}}/docs/architecture/ 必須可寫"
+      description: "{{project_root}}/docs/architecture/ must be writable"
 
-# 主要執行階段
+# Main execution stages
 stages:
 
-  # 階段 1：環境準備與確定性設定
+  # Stage 1: Environment preparation and deterministic setting
   - name: "preparation"
-    description: "載入設定並準備執行環境"
+    description: "Load settings and prepare execution environment"
     parallel: false
     steps:
       - name: "load_template"
@@ -100,26 +100,26 @@ stages:
         target: "{project_root}/sunnycore/po/templates/architecture-doc-tmpl.yaml"
         required: false
         on_failure: "log_warning"
-        
+
       - name: "load_enforcement"
         action: "read_file"
         target: "{project_root}/sunnycore/po/enforcement/architecture-documenter-enforcement.md"
         required: false
         on_failure: "log_warning"
-        
+
       - name: "verify_output_path"
         action: "ensure_directory"
         target: "{{project_root}}/docs/architecture/"
         permissions: "write"
-        
+
       - name: "verify_diagrams_path"
         action: "ensure_directory"
         target: "{{project_root}}/docs/architecture/diagrams/"
         permissions: "write"
 
-  # 階段 2：規範文件收集與分析
+  # Stage 2: Specification files collection and analysis
   - name: "specification_discovery"
-    description: "並行收集並分析規範文件"
+    description: "Synchronously collect and analyze specification files"
     parallel: true
     depends_on: ["preparation"]
     steps:
@@ -129,30 +129,30 @@ stages:
         required: false
         extract_sections: ["objectives", "requirements", "constraints"]
         on_failure: "log_warning"
-        
+
       - name: "load_requirements"
         action: "read_file"
         target: "{{project_root}}/docs/specs/requirements.md"
         required: false
         extract_sections: ["functional_requirements", "non_functional_requirements"]
         on_failure: "log_warning"
-        
+
       - name: "load_design_specifications"
         action: "read_file"
         target: "{{project_root}}/docs/specs/design.md"
         required: false
         extract_sections: ["architecture", "components", "interfaces", "data_models"]
         on_failure: "log_warning"
-        
+
       - name: "extract_business_context"
         action: "analyze_content"
         sources: ["task_specification", "requirements", "design_specifications"]
         focus: "business_drivers"
         output: "business_context"
 
-  # 階段 3：實施計劃收集與分析
+  # Stage 3: Implementation plans collection and analysis
   - name: "implementation_plan_discovery"
-    description: "收集並分析實施計劃"
+    description: "Collect and analyze implementation plans"
     parallel: true
     depends_on: ["specification_discovery"]
     steps:
@@ -166,23 +166,23 @@ stages:
           - "data_models"
           - "technology_stack"
         on_empty: "log_info"
-        
+
       - name: "analyze_architectural_decisions"
         action: "extract_decisions"
         sources: "implementation_plans"
         focus: "architecture_decisions"
         include_rationale: true
         output: "architectural_decisions"
-        
+
       - name: "extract_planned_components"
         action: "analyze_structure"
         sources: "implementation_plans"
         extract: "component_definitions"
         output: "planned_components"
 
-  # 階段 4：代碼庫掃描與分析
+  # Stage 4: Codebase scanning and analysis
   - name: "codebase_analysis"
-    description: "並行掃描代碼庫獲取實際架構"
+    description: "Synchronously scan codebase to get actual architecture"
     parallel: true
     depends_on: ["implementation_plan_discovery"]
     steps:
@@ -198,7 +198,7 @@ stages:
           - "router\\."          # Express routes
         file_types: ["ts", "tsx", "js", "jsx", "py", "java", "go", "rs"]
         output: "actual_interfaces"
-        
+
       - name: "scan_data_models"
         action: "grep_search"
         target: "{{project_root}}"
@@ -210,7 +210,7 @@ stages:
           - "Schema\\("         # Mongoose schemas
         file_types: ["sql", "py", "ts", "tsx", "java", "js"]
         output: "actual_data_models"
-        
+
       - name: "scan_api_routes"
         action: "grep_search"
         target: "{{project_root}}"
@@ -223,7 +223,7 @@ stages:
           - "router\\.(get|post|put|delete)"
         file_types: ["java", "py", "js", "ts", "tsx"]
         output: "actual_api_routes"
-        
+
       - name: "scan_infrastructure_config"
         action: "glob_search"
         target: "{{project_root}}"
@@ -236,16 +236,16 @@ stages:
           - "**/application*.yml"
           - "**/application*.properties"
         output: "infrastructure_config"
-        
+
       - name: "analyze_dependency_structure"
         action: "analyze_imports"
         target: "{{project_root}}"
         focus: "module_dependencies"
         output: "dependency_graph"
 
-  # 階段 5：架構模型建立
+  # Stage 5: Architecture model establishment
   - name: "architecture_modeling"
-    description: "基於收集的資訊建立架構模型"
+    description: "Establish architecture models based on collected information"
     parallel: false
     depends_on: ["codebase_analysis"]
     steps:
@@ -255,34 +255,34 @@ stages:
         actual_source: ["actual_interfaces", "actual_data_models", "actual_api_routes"]
         identify: "discrepancies"
         output: "architecture_reconciliation"
-        
+
       - name: "build_system_context"
         action: "model_system_context"
         sources: ["business_context", "actual_interfaces", "infrastructure_config"]
         include_external_systems: true
         output: "system_context_model"
-        
+
       - name: "build_container_view"
         action: "model_containers"
         sources: ["infrastructure_config", "dependency_graph", "architectural_decisions"]
         include_data_stores: true
         output: "container_model"
-        
+
       - name: "build_component_view"
         action: "model_components"
         sources: ["actual_interfaces", "planned_components", "dependency_graph"]
         focus: "internal_structure"
         output: "component_model"
-        
+
       - name: "build_data_flow"
         action: "model_data_flow"
         sources: ["actual_api_routes", "actual_data_models", "business_context"]
         trace_user_journeys: true
         output: "data_flow_model"
 
-  # 階段 6：圖表生成
+  # Stage 6: Diagram generation
   - name: "diagram_generation"
-    description: "生成 Mermaid 架構圖表"
+    description: "Generate Mermaid architecture diagrams"
     parallel: true
     depends_on: ["architecture_modeling"]
     steps:
@@ -292,28 +292,28 @@ stages:
         source: "system_context_model"
         title: "System Context Diagram"
         output_file: "{{project_root}}/docs/architecture/diagrams/system-context.mmd"
-        
+
       - name: "generate_container_diagram"
         action: "create_mermaid_diagram"
         type: "graph TB"
         source: "container_model"
         title: "Container Diagram"
         output_file: "{{project_root}}/docs/architecture/diagrams/containers.mmd"
-        
+
       - name: "generate_component_diagram"
         action: "create_mermaid_diagram"
         type: "graph LR"
         source: "component_model"
         title: "Component Diagram"
         output_file: "{{project_root}}/docs/architecture/diagrams/components.mmd"
-        
+
       - name: "generate_data_flow_diagram"
         action: "create_mermaid_diagram"
         type: "sequenceDiagram"
         source: "data_flow_model"
         title: "Data Flow Diagram"
         output_file: "{{project_root}}/docs/architecture/diagrams/data-flow.mmd"
-        
+
       - name: "generate_deployment_diagram"
         action: "create_mermaid_diagram"
         type: "graph TD"
@@ -321,9 +321,9 @@ stages:
         title: "Deployment Diagram"
         output_file: "{{project_root}}/docs/architecture/diagrams/deployment.mmd"
 
-  # 階段 7：文檔內容生成
+  # Stage 7: Documentation content generation
   - name: "documentation_generation"
-    description: "根據模板生成架構文檔內容"
+    description: "Generate architecture documentation content according to template"
     parallel: false
     depends_on: ["diagram_generation"]
     steps:
@@ -338,7 +338,7 @@ stages:
           - "architecture_reconciliation"
           - "architectural_decisions"
         placeholder_handling: "mark_as_na_with_reason"
-        
+
       - name: "add_diagram_references"
         action: "embed_diagrams"
         diagrams:
@@ -352,18 +352,18 @@ stages:
             section: "data_flow"
           - path: "diagrams/deployment.mmd"
             section: "deployment"
-            
+
       - name: "add_code_navigation"
         action: "create_code_links"
         sources: ["actual_interfaces", "actual_data_models", "actual_api_routes"]
         link_format: "relative_path_with_line_numbers"
-        
+
       - name: "add_adr_references"
         action: "link_architectural_decisions"
         source: "architectural_decisions"
         adr_directory: "{{project_root}}/docs/architecture/decisions/"
         create_missing_adr_stubs: true
-        
+
       - name: "add_metadata"
         action: "add_metadata"
         fields:
@@ -373,9 +373,9 @@ stages:
           - "discrepancy_count"
           - "coverage_metrics"
 
-  # 階段 8：同步性驗證
+  # Stage 8: Synchronization validation
   - name: "synchronization_validation"
-    description: "驗證文檔與實際實作的同步性"
+    description: "Validate synchronization between documentation and actual implementation"
     parallel: false
     depends_on: ["documentation_generation"]
     steps:
@@ -385,30 +385,30 @@ stages:
         actual: "actual_api_routes"
         tolerance: "exact_match"
         output: "api_sync_report"
-        
+
       - name: "validate_data_model_sync"
         action: "validate_consistency"
         documented: "data_model_documentation"
         actual: "actual_data_models"
         tolerance: "structural_match"
         output: "data_model_sync_report"
-        
+
       - name: "validate_component_sync"
         action: "validate_consistency"
         documented: "component_documentation"
         actual: "actual_interfaces"
         tolerance: "interface_match"
         output: "component_sync_report"
-        
+
       - name: "identify_evolution_opportunities"
         action: "analyze_evolution"
         source: "architecture_reconciliation"
         focus: "improvement_opportunities"
         output: "evolution_recommendations"
 
-  # 階段 9：輸出與最終驗證
+  # Stage 9: Output and final validation
   - name: "output_and_validation"
-    description: "生成最終文檔並進行品質驗證"
+    description: "Generate final documentation and perform quality validation"
     parallel: false
     depends_on: ["synchronization_validation"]
     steps:
@@ -421,7 +421,7 @@ stages:
           - "structure_compliance"
           - "minimum_content_length"
         failure_action: "log_and_continue"
-        
+
       - name: "validate_discrepancy_handling"
         action: "discrepancy_validation"
         checks:
@@ -429,13 +429,13 @@ stages:
           - "evolution_plans_provided"
           - "risk_assessments_included"
         output: "discrepancy_report"
-        
+
       - name: "write_main_documentation"
         action: "write_file"
         target: "{{project_root}}/docs/architecture/architecture.md"
         backup: true
         backup_path: "{{project_root}}/docs/architecture/architecture-{{timestamp}}.md"
-        
+
       - name: "write_sync_reports"
         action: "write_files"
         targets:
@@ -445,7 +445,7 @@ stages:
             content: "data_model_sync_report"
           - file: "{{project_root}}/docs/architecture/sync-reports/component-sync.md"
             content: "component_sync_report"
-            
+
       - name: "update_architecture_index"
         action: "update_index"
         target: "{{project_root}}/docs/architecture/index.md"
@@ -455,7 +455,7 @@ stages:
           - "sync-reports/"
         include_metadata: true
 
-# 架構分析標準
+# Architecture analysis standards
 analysis_standards:
   interface_detection:
     languages: ["typescript", "javascript", "python", "java", "go", "rust"]
@@ -463,137 +463,137 @@ analysis_standards:
       typescript: ["interface\\s+\\w+", "type\\s+\\w+\\s*="]
       python: ["class\\s+\\w+.*:", "def\\s+\\w+\\("]
       java: ["public\\s+interface", "public\\s+class"]
-      
+
   data_model_detection:
     sources: ["sql_ddl", "orm_models", "schema_definitions"]
     validation: "structural_consistency"
-    
+
   api_route_detection:
     frameworks: ["spring", "flask", "express", "fastapi", "gin"]
     extract: ["method", "path", "parameters", "responses"]
-    
+
   dependency_analysis:
     scope: ["internal_modules", "external_libraries"]
     depth: "full_tree"
     circular_detection: true
 
-# 圖表生成規範
+# Diagram generation specifications
 diagram_specifications:
   system_context:
     type: "graph TD"
     elements: ["system", "users", "external_systems"]
     max_nodes: 15
-    
+
   container:
     type: "graph TB"
     elements: ["services", "databases", "message_queues"]
     include_technologies: true
-    
+
   component:
     type: "graph LR"
     elements: ["modules", "interfaces", "data_stores"]
     show_dependencies: true
-    
+
   data_flow:
     type: "sequenceDiagram"
     trace_user_journeys: true
     include_error_paths: true
 
-# 同步性驗證規則
+# Synchronization validation rules
 synchronization_rules:
   api_contracts:
     tolerance: "exact"
     check_methods: ["GET", "POST", "PUT", "DELETE"]
     check_parameters: true
     check_responses: true
-    
+
   data_models:
     tolerance: "structural"
     check_fields: true
     check_types: true
     check_relationships: true
-    
+
   components:
     tolerance: "interface"
     check_public_methods: true
     check_dependencies: true
-    
+
   infrastructure:
     tolerance: "configuration"
     check_services: true
     check_ports: true
     check_volumes: true
 
-# 錯誤處理策略
+# Error handling strategies
 error_handling:
   specification_file_missing:
     action: "log_warning"
     continue: true
     use_defaults: true
-    
+
   codebase_scan_failure:
     action: "retry_with_reduced_scope"
     max_retries: 2
     continue: true
-    
+
   diagram_generation_failure:
     action: "create_text_description"
     continue: true
-    
+
   synchronization_mismatch:
     action: "document_discrepancy"
     continue: true
     create_evolution_plan: true
 
-# 品質保證檢查
+# Quality assurance checks
 quality_assurance:
   documentation_completeness:
     required_sections: ["overview", "containers", "components", "data_flow", "deployment"]
     minimum_content_per_section: 100
-    
+
   diagram_quality:
     required_diagrams: ["system-context", "containers", "components"]
     diagram_validation: "mermaid_syntax"
-    
+
   synchronization_quality:
     max_acceptable_discrepancies: 5
     critical_discrepancy_threshold: 0
-    
+
   navigation_quality:
     code_link_validity: 100
     cross_reference_completeness: 90
 
-# 並行處理策略
+# Parallel processing strategies
 parallelization:
   specification_discovery:
     max_concurrent: 5
     timeout_per_task: 15
-    
+
   codebase_analysis:
     max_concurrent: 8
     timeout_per_task: 60
     shared_cache: true
-    
+
   diagram_generation:
     max_concurrent: 5
     timeout_per_task: 30
 
-# 快取策略
+# Caching strategies
 caching:
   codebase_analysis:
     strategy: "content_hash"
     ttl_hours: 6
     invalidation_triggers: ["file_modification", "git_commit"]
-    
+
   specification_analysis:
     strategy: "file_hash"
     ttl_hours: 24
-    
+
   diagram_generation:
     strategy: "model_hash"
     ttl_hours: 12
-    
-# 輸出驗證規則
+
+# Output validation rules
 validation_rules:
   content_quality:
     - rule: "all_required_sections_present"
@@ -603,7 +603,7 @@ validation_rules:
       threshold: 95
     - rule: "diagrams_render_correctly"
       severity: "error"
-      
+
   synchronization_quality:
     - rule: "critical_discrepancies_resolved"
       severity: "error"
@@ -612,31 +612,31 @@ validation_rules:
     - rule: "adr_links_valid"
       severity: "info"
 
-# 成功指標
+# Success metrics
 success_metrics:
   coverage_metrics:
     - "specification_coverage_percentage"
     - "codebase_analysis_completeness"
     - "diagram_generation_success_rate"
-    
+
   quality_metrics:
     - "synchronization_accuracy"
     - "navigation_link_validity"
     - "diagram_syntax_validity"
-    
+
   usability_metrics:
     - "new_developer_onboarding_time"
     - "architecture_decision_traceability"
     - "technical_debt_visibility"
 
-# 後處理行動
+# Post-processing actions
 post_processing:
   architecture_maintenance:
     - action: "schedule_synchronization_checks"
       frequency: "weekly"
     - action: "update_evolution_roadmap"
       based_on: "discrepancy_trends"
-      
+
   continuous_improvement:
     - action: "analyze_documentation_usage"
       source: "access_patterns"
@@ -645,20 +645,20 @@ post_processing:
     - action: "optimize_diagram_layouts"
       based_on: "readability_metrics"
 
-# 執行報告模板
+# Execution report template
 execution_report:
   summary:
     - "specifications_processed"
     - "codebase_elements_analyzed"
     - "diagrams_generated"
     - "synchronization_discrepancies"
-    
+
   details:
     - "specification_analysis_breakdown"
     - "codebase_scan_results"
     - "diagram_generation_log"
     - "synchronization_validation_report"
-    
+
   recommendations:
     - "architecture_evolution_priorities"
     - "documentation_improvement_suggestions"

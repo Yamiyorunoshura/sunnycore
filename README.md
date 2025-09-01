@@ -149,7 +149,7 @@ chmod +x install.command
 - 遵循統一計劃驗證工作流程：`{project_root}/sunnycore/po/workflow/unified-plan-validation-workflow.yaml`
 
 **專案結案** (`*conclude`)：
-- 並行呼叫多個代理：
+- 同步呼叫多個代理：
   - `project-concluder`：專案結案
   - `file-classifier`：檔案分類
   - `knowledge-curator`：知識整理，產出/更新 `{project_root}/docs/knowledge/engineering-lessons.md`
@@ -174,7 +174,7 @@ chmod +x install.command
 - 讀取 `{project_root}/sunnycore/qa/task/review.md` 執行審查任務
 - 統籌專業 reviewer 團隊進行全面審查
 - 分析任務狀態（初始 vs 棕地）
-- 協調並行審查流程
+- 協調同步審查流程
 - 整合專業意見做出最終判斷
 
 ## 工作流程說明

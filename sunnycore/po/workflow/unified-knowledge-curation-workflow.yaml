@@ -1,106 +1,105 @@
-# 統一知識策展工作流程
-# 用於 knowledge-curator agent 的完整執行流程
-# 特別強調 platinum 級別實踐的篩選與記錄
+# Unified Knowledge Curation Workflow
+# For knowledge-curator agent complete execution process
+# Specially emphasizes platinum level practice filtering and recording
 
-# 🔄 工作流程Todo List製作流程
+# 🔄 Workflow Todo List Creation Process
 todo_list_creation:
-  description: "在開始執行任何工作流程步驟之前，必須使用todo_write工具創建包含所有workflow步驟的todo list"
+  description: "AI must create todo list containing all workflow steps before executing any workflow steps"
   importance: "critical"
-  
-  # 🛠️ Todo List工具使用指南
+
+  # 🛠️ Todo List Tool Usage Guide
   tool_syntax:
     format: "JSON"
     structure: |
       {
         "todos": [
           {
-            "content": "具體任務描述",
+            "content": "Specific task description",
             "status": "pending|in_progress|completed",
-            "id": "唯一識別碼",
+            "id": "unique identifier",
             "priority": "high|medium|low"
           }
         ]
       }
-  
+
   process_steps:
     1_analyze_workflow:
-      description: "分析工作流程結構 - 仔細閱讀整個workflow文件，識別所有階段、步驟和任務"
+      description: "Analyze workflow structure - carefully read entire workflow file, identify all stages, steps and tasks"
       priority: "high"
-      
-    2_extract_tasks:
-      description: "提取關鍵任務 - 將每個階段的核心任務轉換為具體的todo項目"
-      priority: "high"
-      
-    3_set_priorities:
-      description: "設定優先級 - 根據任務的重要性和依賴關係設定優先級"
-      priority: "medium"
-      
-    4_create_todo_list:
-      description: "創建Todo List - 使用todo_write工具創建包含所有步驟的結構化todo list"
-      priority: "high"
-      
-    5_execute_workflow:
-      description: "執行與更新 - 按照todo list順序執行任務，及時更新狀態"
-      priority: "high"
-  
-  # 📝 Todo List要求
-  requirements:
-    coverage: "每個主要階段都應該有對應的todo項目"
-    validation: "關鍵的驗證檢查點必須包含在todo list中"
-    priority_setting: "設定合理的優先級，確保依賴關係得到尊重"
-    status_tracking: "在執行過程中及時更新todo狀態（pending → in_progress → completed）"
-    uniqueness: "同時只能有一個任務處於in_progress狀態"
-    completeness: "只有在任務完全完成時才標記為completed"
-    status_tracking: "在執行過程中及時更新todo狀態（pending → in_progress → completed）"
 
-# 分隔線，以下為原始workflow內容
+    2_extract_tasks:
+      description: "Extract key tasks - convert core tasks of each stage to specific todo items"
+      priority: "high"
+
+    3_set_priorities:
+      description: "Set priorities - set priorities based on task importance and dependencies"
+      priority: "medium"
+
+    4_create_todo_list:
+      description: "Create Todo List - use todo_write tool to create structured todo list"
+      priority: "high"
+
+    5_execute_workflow:
+      description: "Execute and update - execute tasks in todo list order, update status timely"
+      priority: "high"
+
+  # 📝 Todo List Requirements
+  requirements:
+    coverage: "Each main stage should have corresponding todo item"
+    validation: "Key validation checkpoints must be included in todo list"
+    priority_setting: "Set reasonable priorities, ensure dependency relationships respected"
+    uniqueness: "Only one task can be in in_progress status simultaneously"
+    completeness: "Only mark as completed when task is fully completed"
+    status_tracking: "Update todo status timely during execution (pending → in_progress → completed)"
+
+# Separator line, following is original workflow content
 ---
 
 workflow_name: "unified-knowledge-curation-workflow"
 version: "2.2.0"
-description: "從審查報告與完成報告中策展優秀實踐與錯誤模式，僅記錄platinum級別實踐"
+description: "Curate excellent practices and error patterns from review reports and completion reports, only record platinum level practices"
 
-# 工作流程執行設定
+# Workflow execution settings
 execution_settings:
   deterministic: true
   parallel_enabled: true
   max_parallel_tasks: 10
   batch_size: 7
   cache_enabled: true
-  fail_fast: false  # 記錄錯誤但不中斷
-  
-# 前置條件檢查
+  fail_fast: false  # Record errors but do not interrupt
+
+# Prerequisites check
 prerequisites:
   required_files:
-    # 核心配置檔案
+    # Core configuration files
     - path: "{project_root}/sunnycore/po/templates/knowledge-lessons-tmpl.yaml"
       type: "template"
-      critical: false  # 缺失時記錄警告並持續
+      critical: false  # Log warning if missing and continue
     - path: "{project_root}/sunnycore/po/enforcement/knowledge-curator-enforcement.md"
       type: "enforcement"
       critical: false
-      
+
   optional_directories:
-    # 來源資料目錄（可能不存在）
+    # Source data directories (may not exist)
     - path: "{{project_root}}/docs/implementation-review/"
       type: "source"
       pattern: "*.md"
     - path: "{{project_root}}/docs/completion-reports/"
-      type: "source" 
+      type: "source"
       pattern: "*-completion.md"
-      
+
   validation_rules:
     - rule: "project_root_resolved"
-      description: "project_root 必須解析為有效路徑"
+      description: "project_root must resolve to valid path"
     - rule: "output_directory_writable"
-      description: "{{project_root}}/docs/knowledge/ 必須可寫"
+      description: "{{project_root}}/docs/knowledge/ must be writable"
 
-# 主要執行階段
+# Main execution stages
 stages:
 
-  # 階段 1：環境準備與確定性設定
+  # Stage 1: Environment preparation and deterministic setting
   - name: "preparation"
-    description: "載入設定並準備執行環境"
+    description: "Load settings and prepare execution environment"
     parallel: false
     steps:
       - name: "load_template"
@@ -108,21 +107,21 @@ stages:
         target: "{project_root}/sunnycore/po/templates/knowledge-lessons-tmpl.yaml"
         required: false
         on_failure: "log_warning"
-        
+
       - name: "load_enforcement"
         action: "read_file"
         target: "{project_root}/sunnycore/po/enforcement/knowledge-curator-enforcement.md"
         required: false
         on_failure: "log_warning"
-        
+
       - name: "verify_output_path"
         action: "ensure_directory"
         target: "{{project_root}}/docs/knowledge/"
         permissions: "write"
 
-  # 階段 2：來源資料掃描與收集
+  # Stage 2: Source data scanning and collection
   - name: "source_discovery"
-    description: "並行掃描來源文件並收集原始資料"
+    description: "Synchronously scan source files and collect raw data"
     parallel: true
     depends_on: ["preparation"]
     steps:
@@ -133,8 +132,8 @@ stages:
           - "error_log"
           - "findings"
           - "quality_assessment"
-        on_empty: "log_info"  # 沒有檔案不是錯誤
-        
+        on_empty: "log_info"  # Not an error if no files
+
       - name: "scan_completion_reports"
         action: "glob_search"
         target: "{{project_root}}/docs/completion-reports/*-completion.md"
@@ -143,16 +142,16 @@ stages:
           - "quality_assessment"
           - "summary_score"
         on_empty: "log_info"
-        
+
       - name: "load_existing_knowledge"
         action: "read_file"
         target: "{{project_root}}/docs/knowledge/engineering-lessons.md"
         required: false
         on_failure: "create_new"
 
-  # 階段 3：品質篩選與資料預處理
+  # Stage 3: Quality filtering and data preprocessing
   - name: "quality_filtering"
-    description: "根據品質標準篩選資料，強調platinum級別"
+    description: "Filter data according to quality standards, emphasize platinum level"
     parallel: false
     depends_on: ["source_discovery"]
     steps:
@@ -163,23 +162,23 @@ stages:
           - "quality_assessment.summary_score >= 4"
           - "qa_positive_feedback = true"
         output: "platinum_practices_list"
-        minimum_threshold: 0  # 允許空結果
-        
+        minimum_threshold: 0  # Allow empty results
+
       - name: "categorize_error_patterns"
         action: "analyze_errors"
         source: "error_log"
         severity_order: ["blocker", "high", "medium", "low"]
         grouping: "pattern_similarity"
         output: "categorized_errors"
-        
+
       - name: "validate_evidence_links"
         action: "verify_links"
         targets: ["file_paths", "pr_links", "commit_hashes"]
         on_broken_link: "log_warning"
 
-  # 階段 4：模式識別與分析
+  # Stage 4: Pattern identification and analysis
   - name: "pattern_analysis"
-    description: "識別錯誤模式與成功實踐的深層模式"
+    description: "Identify error patterns and successful practice deep patterns"
     parallel: true
     depends_on: ["quality_filtering"]
     steps:
@@ -191,7 +190,7 @@ stages:
           - "co_occurrence_analysis"
           - "root_cause_clustering"
         output: "error_patterns"
-        
+
       - name: "analyze_success_patterns"
         action: "pattern_recognition"
         source: "platinum_practices_list"
@@ -200,16 +199,16 @@ stages:
           - "outcome_correlation"
           - "replicability_assessment"
         output: "success_patterns"
-        
+
       - name: "cross_reference_patterns"
         action: "cross_analysis"
         sources: ["error_patterns", "success_patterns"]
         identify: "prevention_opportunities"
         output: "prevention_matrix"
 
-  # 階段 5：知識結構化與組織
+  # Stage 5: Knowledge structuring and organization
   - name: "knowledge_structuring"
-    description: "將分析結果組織成三層知識結構"
+    description: "Organize analysis results into three-layer knowledge structure"
     parallel: false
     depends_on: ["pattern_analysis"]
     steps:
@@ -220,14 +219,14 @@ stages:
         criteria: "frequency_and_severity"
         max_entries: 20
         format: "symptoms_to_solutions"
-        
+
       - name: "build_detailed_analysis"
         action: "generate_structure"
         template: "comprehensive_analysis"
         sources: ["error_patterns", "success_patterns", "prevention_matrix"]
         include_evidence: true
         include_case_studies: true
-        
+
       - name: "design_prevention_guides"
         action: "generate_structure"
         template: "prevention_framework"
@@ -236,9 +235,9 @@ stages:
         include_tools: true
         include_checklists: true
 
-  # 階段 6：輸出生成與格式化
+  # Stage 6: Output generation and formatting
   - name: "output_generation"
-    description: "根據模板生成最終知識文檔"
+    description: "Generate final knowledge document according to template"
     parallel: false
     depends_on: ["knowledge_structuring"]
     steps:
@@ -250,7 +249,7 @@ stages:
           - "detailed_analysis"
           - "prevention_guides"
         placeholder_handling: "mark_as_na_with_reason"
-        
+
       - name: "add_metadata"
         action: "add_metadata"
         fields:
@@ -259,7 +258,7 @@ stages:
           - "platinum_practices_count"
           - "error_patterns_count"
           - "evidence_quality_score"
-          
+
       - name: "apply_formatting"
         action: "format_document"
         standards:
@@ -268,9 +267,9 @@ stages:
           - "standardized_links"
           - "sorted_lists"
 
-  # 階段 7：品質驗證與輸出
+  # Stage 7: Quality verification and output
   - name: "quality_validation"
-    description: "驗證輸出品質並寫入檔案"
+    description: "Verify output quality and write to file"
     parallel: false
     depends_on: ["output_generation"]
     steps:
@@ -282,107 +281,111 @@ stages:
           - "structure_compliance"
           - "minimum_content_length"
         failure_action: "log_and_continue"
-        
+
       - name: "validate_platinum_threshold"
         action: "threshold_validation"
         criteria:
           - rule: "platinum_practices_only"
-            description: "確保只有platinum級別實踐被記錄"
+            description: "Ensure only platinum level practices are recorded"
             validation: "implementation_maturity >= 'platinum'"
           - rule: "evidence_supported"
-            description: "確保100%的條目有證據支持"
+            description: "Ensure 100% of entries have evidence support"
             validation: "evidence_links_present = true"
-        
+
       - name: "write_output"
         action: "write_file"
         target: "{{project_root}}/docs/knowledge/engineering-lessons.md"
         backup: true
         backup_path: "{{project_root}}/docs/knowledge/engineering-lessons-{{timestamp}}.md"
-        
+
       - name: "update_index"
         action: "update_index"
         target: "{{project_root}}/docs/knowledge/index.md"
         add_entry: "engineering-lessons.md"
         include_metadata: true
 
-# 資料品質標準
+# Data quality standards
 quality_standards:
   platinum_practices:
     minimum_score: 4.0
     required_maturity: "platinum"
     evidence_requirement: "mandatory"
     success_rate_threshold: 0.8
-    
+
   error_patterns:
     minimum_frequency: 2
     severity_threshold: "medium"
     reproducibility_requirement: true
-    
+
   evidence_links:
     validity_check: true
     accessibility_check: true
     freshness_threshold_days: 180
 
-# 錯誤處理策略
+# Error handling strategies
 error_handling:
   source_file_missing:
     action: "log_warning"
     continue: true
-    message: "來源文件缺失，將以現有資料繼續處理"
-    
+    message: "Source files missing, continue with existing data"
+
   template_load_failure:
     action: "use_fallback"
     fallback: "minimal_template"
     continue: true
-    
+
   evidence_link_broken:
     action: "mark_as_questionable"
     continue: true
     include_in_validation_warnings: true
-    
+
   platinum_threshold_unmet:
     action: "filter_out"
     continue: true
     log_filtered_items: true
 
-# 並行處理策略
+# Parallel processing strategies
 parallelization:
   source_discovery:
     max_concurrent: 5
     timeout_per_task: 30
-    
+
   pattern_analysis:
     max_concurrent: 3
     shared_cache: true
-    
+
   validation:
     sequential_required: true
-    reason: "確保資料一致性"
+    reason: "Ensure data consistency"
 
-# 快取策略
+# Caching strategies
 caching:
   source_files:
     strategy: "content_hash"
     ttl_hours: 24
     invalidation_triggers: ["file_modification", "size_change"]
-    
+
   analysis_results:
     strategy: "dependency_hash"
     ttl_hours: 12
     cache_key_components: ["source_hash", "template_version", "config_hash"]
 
-# 輸出驗證規則
+# Output validation rules
 validation_rules:
   content_quality:
     - rule: "no_empty_sections"
       severity: "warning"
     - rule: "evidence_links_present"
       severity: "error"
-      threshold: 100  # 100% 的條目必須有證據
+      threshold: 100  # 100% of entries must have evidence
     - rule: "platinum_only"
-      severity: "error" 
-      description: "只允許 platinum 級別實踐"
-      
+      severity: "error"
+      description: "Only allow platinum level practices"
+    - rule: "consistent_formatting"
+      severity: "warning"
+    - rule: "sorted_lists"
+      severity: "info"
+
   format_compliance:
     - rule: "template_structure_followed"
       severity: "error"
@@ -391,26 +394,26 @@ validation_rules:
     - rule: "sorted_lists"
       severity: "info"
 
-# 成功指標
+# Success metrics
 success_metrics:
   process_metrics:
     - "source_files_processed"
     - "patterns_identified"
     - "platinum_practices_collected"
     - "error_patterns_categorized"
-    
+
   quality_metrics:
     - "evidence_link_validity_rate"
     - "platinum_practice_ratio"
     - "knowledge_freshness_score"
     - "cross_reference_accuracy"
-    
+
   impact_metrics:
     - "knowledge_base_growth"
     - "pattern_coverage_improvement"
     - "prevention_opportunity_identification"
 
-# 後處理行動
+# Post-processing actions
 post_processing:
   knowledge_base_maintenance:
     - action: "remove_outdated_entries"
@@ -419,7 +422,7 @@ post_processing:
       threshold: "similarity_score > 0.8"
     - action: "update_cross_references"
       scope: "all_related_entries"
-      
+
   continuous_improvement:
     - action: "analyze_usage_patterns"
       source: "access_logs"
@@ -428,20 +431,20 @@ post_processing:
     - action: "suggest_collection_priorities"
       based_on: "gap_analysis_results"
 
-# 執行報告模板
+# Execution report template
 execution_report:
   summary:
     - "total_sources_processed"
     - "platinum_practices_identified"
     - "error_patterns_discovered"
     - "prevention_opportunities_created"
-    
+
   details:
     - "source_file_breakdown"
     - "quality_filtering_results"
     - "pattern_analysis_insights"
     - "evidence_validation_report"
-    
+
   recommendations:
     - "knowledge_collection_priorities"
     - "process_improvement_suggestions"

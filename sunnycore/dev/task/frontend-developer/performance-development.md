@@ -1,84 +1,85 @@
-# 前端開發者 效能開發任務
+# Frontend Developer Performance Development Task
 
 <task_overview>
-當執行此指令時，你將作為前端開發者專注於效能開發工作。
+When executing this instruction, you will act as a frontend developer focused on performance development work.
 </task_overview>
 
-## 強制前置條件
+## Mandatory Prerequisites
 
-<stage name="載入執行規範" number="1" critical="true">
-<description>載入前端開發者專用的執行規範和工作流程</description>
+<stage name="Load Execution Standards" number="1" critical="true">
+<description>Load frontend developer-specific execution standards and workflows</description>
 
 <execution_actions>
-1. **載入前端開發者執行規範**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/enforcement/frontend-developer-enforcement.md`
-   - 將其作為項目的**唯一執行規範**
-   - 所有開發決策必須符合此規範要求
+1. **Load Frontend Developer Execution Standards**:
+   - Fully read `{project_root}/sunnycore/dev/enforcement/frontend-developer-enforcement.md`
+   - Use this as the project's **only execution standard**
+   - All development decisions must comply with these standard requirements
 
-2. **載入前端開發者工作流程**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/workflow/frontend-developer-workflow.md`
-   - 將其作為項目的**唯一工作流程**
-   - 嚴格按照流程步驟執行效能開發工作</execution_actions>
+2. **Load Frontend Developer Workflow**:
+   - Fully read `{project_root}/sunnycore/dev/workflow/frontend-developer-workflow.md`
+   - Use this as the project's **only workflow**
+   - Strictly follow the workflow steps to execute performance development work
+</execution_actions>
 
 <validation_checkpoints>
-- [ ] 前端開發者執行規範已完整載入並理解
-- [ ] 前端開發者工作流程已完整載入並理解
-- [ ] 準備按照規範和流程執行效能開發工作
+- [ ] Frontend developer execution standards fully loaded and understood
+- [ ] Frontend developer workflow fully loaded and understood
+- [ ] Ready to execute performance development work according to standards and workflow
 </validation_checkpoints>
 </stage>
 
-## 效能開發專門化
+## Performance Development Specialization
 
-<stage name="效能專門化準備" number="2" critical="true">
-<description>針對效能開發任務進行專門化準備</description>
+<stage name="Performance Specialization Preparation" number="2" critical="true">
+<description>Conduct specialized preparation for performance development tasks</description>
 
 <execution_actions>
-3. **效能優化原則確認**：
+3. **Performance Optimization Principles Confirmation**:
    <think>
-   - 遵循核心網頁指標（Core Web Vitals）標準
-   - 確保最佳化載入時間、互動性和視覺穩定性
-   - 考慮網路條件和設備效能差異
+   - Follow Core Web Vitals standards
+   - Ensure optimization of loading time, interactivity, and visual stability
+   - Consider network conditions and device performance differences
    </think>
 
-4. **效能監控要求特化**：
+4. **Performance Monitoring Requirements Specialization**:
    <think hard>
-   - 首次內容繪製（FCP）和最大內容繪製（LCP）優化
-   - 累積版面位移（CLS）和首次輸入延遲（FID）控制
-   - 資源載入策略和關鍵渲染路徑優化
-   - 程式碼分割和懶載入實作
-   - 圖片和靜態資源優化策略
+   - First Contentful Paint (FCP) and Largest Contentful Paint (LCP) optimization
+   - Cumulative Layout Shift (CLS) and First Input Delay (FID) control
+   - Resource loading strategy and critical rendering path optimization
+   - Code splitting and lazy loading implementation
+   - Image and static resource optimization strategies
    </think hard>
 
-5. **效能測試策略**：
+5. **Performance Testing Strategy**:
    <think>
-   - 真實用戶監控（RUM）和合成監控
-   - 效能基準測試和回歸測試
-   - 多種網路環境和設備測試
-   - 效能預算設定和監控機制
+   - Real User Monitoring (RUM) and synthetic monitoring
+   - Performance benchmark testing and regression testing
+   - Multi-network environment and device testing
+   - Performance budget setting and monitoring mechanisms
    </think>
 
-6. **效能文檔和規範**：
+6. **Performance Documentation and Standards**:
    <think>
-   - 效能優化指南和最佳實踐文檔
-   - 效能監控儀表板和報告機制
-   - 團隊效能開發規範和檢查清單
+   - Performance optimization guides and best practices documentation
+   - Performance monitoring dashboard and reporting mechanisms
+   - Team performance development standards and checklists
    </think>
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] 效能優化原則已確認並理解
-- [ ] 效能監控要求已明確定義
-- [ ] 測試策略已制定並準備執行
-- [ ] 效能文檔規範已準備
+- [ ] Performance optimization principles confirmed and understood
+- [ ] Performance monitoring requirements clearly defined
+- [ ] Testing strategy formulated and ready for execution
+- [ ] Performance documentation standards prepared
 </validation_checkpoints>
 </stage>
 
-<stage name="開發執行" number="3" critical="true">
-<description>執行效能開發工作</description>
+<stage name="Development Execution" number="3" critical="true">
+<description>Execute performance development work</description>
 
 <execution_actions>
-6. **嚴格遵循工作流程**：按照載入的前端開發者工作流程執行
-7. **專項驗證**：確保所有效能相關的指標和優化要求得到滿足
-8. **文檔記錄**：詳細記錄效能優化實作方式、測試結果和改進建議
+6. **Strictly Follow Workflow**: Execute according to the loaded frontend developer workflow
+7. **Specialized Verification**: Ensure all performance-related metrics and optimization requirements are met
+8. **Documentation Recording**: Detail performance optimization implementation methods, test results, and improvement recommendations
 </execution_actions>
 </stage>

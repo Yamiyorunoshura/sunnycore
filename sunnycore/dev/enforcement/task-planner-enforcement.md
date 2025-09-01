@@ -1,173 +1,173 @@
-# Task Planner 強制執行規範
+# Task Planner Enforcement Standards
 
 <authority_declaration>
-> **重要聲明**：此文件是 Task Planner 代理的唯一權威執行規範來源。所有其他文件（工作流程、代理定義）都應引用此文件，避免重複定義。
+> **Important Declaration**: This document is the sole authoritative source for Task Planner agent execution standards. All other documents (workflows, agent definitions) should reference this file to avoid duplicate definitions.
 </authority_declaration>
 
 <reference_guidelines>
-## 📋 文件引用指南
+## 📋 Document Reference Guidelines
 
-### 其他文件應如何引用此規範：
-- **工作流程文件**：應包含 `reference_file` 指向此文件，避免重複定義規則
-- **代理定義文件**：應簡化描述，詳細規則引用此文件
-- **範本文件**：專注於結構定義，驗證規則引用此文件
+### How other documents should reference this standard:
+- **Workflow Documents**: Should include `reference_file` pointing to this document, avoiding duplicate rule definitions
+- **Agent Definition Documents**: Should provide simplified descriptions with detailed rules referencing this document
+- **Template Documents**: Should focus on structure definitions with validation rules referencing this document
 
-### 此文件包含的完整內容：
-- 所有強制執行規則和約束
-- 完整的驗證標準和品質門檻
-- 詳細的錯誤處理策略
-- 核心規劃原則和最佳實踐
+### Complete content contained in this document:
+- All mandatory execution rules and constraints
+- Complete validation standards and quality gates
+- Detailed error handling strategies
+- Core planning principles and best practices
 </reference_guidelines>
 
 <core_execution_protocol>
-## 核心執行協議
+## Core Execution Protocol
 
 <prerequisite_conditions>
-### 必要前置條件（寬鬆）
-- **建議**：開始前載入統一工作流程與範本；若缺失，記錄至 validation_warnings 並持續
-- **工作流程讀取**：應讀取 `{project_root}/sunnycore/dev/workflow/unified-task-planning-workflow.md`，失敗則記錄警告
-- **範本讀取**：應讀取 `{project_root}/sunnycore/dev/templates/implementation-plan-tmpl.yaml`，失敗則記錄警告
-- **驗證要求**：若 project_root 未解析或讀取未完整，記錄缺失與替代資訊來源
+### Mandatory Prerequisites (Relaxed)
+- **Recommendation**: Load unified workflow and templates before starting; if missing, record in validation_warnings and continue
+- **Workflow Reading**: Should read `{project_root}/sunnycore/dev/workflow/unified-task-planning-workflow.md`, record warning if failed
+- **Template Reading**: Should read `{project_root}/sunnycore/dev/templates/implementation-plan-tmpl.yaml`, record warning if failed
+- **Validation Requirements**: If project_root is unresolved or reading incomplete, record missing items and alternative information sources
 </prerequisite_conditions>
 
 <deterministic_efficiency>
-### 確定性與效率（強制）
-- **零隨機**：生成階段必須使用固定參數（temperature≤0.2、top_p≤0.3、penalties=0）
-- **幂等輸出**：以 `task_id + sources_content_hash` 作為 run_key，輸入不變則輸出必須一致
-- **I/O並行與快取**：規格讀取須並行，並以內容雜湊做結果快取
-- **失敗重試**：僅 I/O 可重試（最多2次），生成不可盲目重試
+### Determinism and Efficiency (Mandatory)
+- **Zero Randomness**: Generation phase must use fixed parameters (temperature≤0.2, top_p≤0.3, penalties=0)
+- **Idempotent Output**: Use `task_id + sources_content_hash` as run_key, output must be consistent when input unchanged
+- **I/O Synchronization and Caching**: Specification reading must be synchronous with content hash-based result caching
+- **Failure Retry**: Only I/O operations can be retried (maximum 2 times), generation cannot be blindly retried
 </deterministic_efficiency>
 
 <workflow_compliance>
-### 工作流程合規性（寬鬆）
-- **階段順序**：應按統一工作流程順序執行；若跳過，記錄原因與補救
-- **階段完整性**：檢查點未通過時，記錄警告並最小化持續
-- **階段要求**：
-  - workflow_initialization：載入工作流程和範本
-  - input_collection：收集所有規範文件
-  - sequential_thinking：分析需求和策略
-  - template_population：填充所有範本部分
-  - document_output：生成和保存計劃
-  - finalization：最終驗證和認證
+### Workflow Compliance (Relaxed)
+- **Stage Sequencing**: Should execute in unified workflow order; if skipped, record reasons and remedies
+- **Stage Completeness**: When checkpoints fail, record warnings and minimize continuation
+- **Stage Requirements**:
+  - workflow_initialization: Load workflows and templates
+  - input_collection: Collect all specification documents
+  - sequential_thinking: Analyze requirements and strategies
+  - template_population: Populate all template sections
+  - document_output: Generate and save plans
+  - finalization: Final validation and certification
 </workflow_compliance>
 
 <readonly_boundaries>
-### 只讀與邊界
-- **只讀保護**：`docs/specs/**` 目錄嚴禁寫入（若偵測到將記錄警告並回退）
-- **路徑白名單**：僅允許在 `{{project_root}}/docs/implementation-plan/` 與 `{{project_root}}/docs/index/` 下寫入；不符合則記錄並拒寫
+### Read-Only Boundaries
+- **Read-Only Protection**: `docs/specs/**` directory strictly prohibits writing (warning recorded and rollback if detected)
+- **Path Whitelist**: Only allow writing under `{{project_root}}/docs/implementation-plan/` and `{{project_root}}/docs/index/`; record and reject if non-compliant
 </readonly_boundaries>
 
 <template_compliance>
-### 範本合規性（寬鬆）
-- **完整填充**：應以實際內容填充或標記為"N/A - [原因]"；不足時記錄警告
-- **佔位符清除**：應清除 `<placeholder>` 值；殘留時記錄以利後續補齊
-- **結構一致性**：應符合 `{project_root}/sunnycore/dev/templates/implementation-plan-tmpl.yaml` 結構；不一致時記錄差異
-- **黑名單詞彙**：遇 `TBD`/`待定`/`視需要`/`as needed`/`<...>` 時記錄並立即替換或給理由
+### Template Compliance (Relaxed)
+- **Complete Population**: Should populate with actual content or mark as "N/A - [reason]"; record warnings when insufficient
+- **Placeholder Clearance**: Should clear `<placeholder>` values; record for subsequent completion if remaining
+- **Structural Consistency**: Should conform to `{project_root}/sunnycore/dev/templates/implementation-plan-tmpl.yaml` structure; record differences when inconsistent
+- **Blacklist Vocabulary**: When encountering `TBD`/`待定`/`視需要`/`as needed`/`<...>`, record and immediately replace or provide reasons
 </template_compliance>
 
 <markdown_conversion>
-### Markdown格式轉換（絕對強制）
-- **YAML到Markdown**：必須將 `implementation-plan-tmpl.yaml` 結構完整轉換為標準Markdown格式
-- **標題層級**：YAML section轉換為對應的Markdown標題（# ## ### #### ##### ######）
-- **清單格式**：YAML陣列轉換為Markdown清單（- 或 1. 格式）
-- **代碼區塊**：代碼片段、配置範例、測試指令使用標準Markdown代碼塊（```language）
-- **表格格式**：需求清單、時程規劃、風險評估使用Markdown表格格式 | 欄位 | 值 |
-- **鏈結格式**：文檔參考、規範連結使用標準Markdown鏈結格式 [文字](URL)
-- **區塊引用**：重要備註、約束條件使用 > 引用格式
-- **強調標記**：使用 **粗體** 和 *斜體* 適當強調關鍵需求和風險
-- **進度標示**：使用表情符號標示里程碑狀態（🎯 目標、⚠️ 風險、🔄 進行中）
-- **優先級標記**：使用星級或顏色標示需求優先級和風險等級
+### Markdown Format Conversion (Absolute Mandatory)
+- **YAML to Markdown**: Must completely convert `implementation-plan-tmpl.yaml` structure to standard Markdown format
+- **Heading Levels**: YAML sections convert to corresponding Markdown headings (# ## ### #### ##### ######)
+- **List Format**: YAML arrays convert to Markdown lists (- or 1. format)
+- **Code Blocks**: Code snippets, configuration examples, test instructions use standard Markdown code blocks (```language)
+- **Table Format**: Requirements lists, schedule planning, risk assessments use Markdown table format | Field | Value |
+- **Link Format**: Document references, specification links use standard Markdown link format [text](URL)
+- **Block Quotes**: Important notes, constraint conditions use > quote format
+- **Emphasis Markers**: Use **bold** and *italic* to appropriately emphasize key requirements and risks
+- **Progress Indicators**: Use emoji to indicate milestone status (🎯 target, ⚠️ risk, 🔄 in progress)
+- **Priority Markers**: Use star ratings or colors to indicate requirement priorities and risk levels
 </markdown_conversion>
 </core_execution_protocol>
 
 <planning_principles>
-## 核心規劃原則（強制執行）
+## Core Planning Principles (Mandatory Execution)
 
 <mandatory_principles>
-1. **安全第一**：絕不修改 `docs/specs/` 中的任何檔案
-2. **RCSD合規**：必須定義功能性和非功能性需求；明確範圍界定
-3. **MD原則**：必須將工作分解為小型、可重用的模組
-4. **KISS原則**：必須偏好最簡單可行的方法
-5. **DRY原則**：必須避免重複；重用現有模組
-6. **TQA要求**：必須規劃具有明確條件的單元、整合和驗收測試
-7. **RACP要求**：必須識別風險和緩解/應急措施
+1. **Safety First**: Never modify any files in `docs/specs/`
+2. **RCSD Compliance**: Must define functional and non-functional requirements; clearly define scope boundaries
+3. **MD Principle**: Must decompose work into small, reusable modules
+4. **KISS Principle**: Must prefer the simplest viable approach
+5. **DRY Principle**: Must avoid duplication; reuse existing modules
+6. **TQA Requirements**: Must plan unit, integration, and acceptance tests with explicit conditions
+7. **RACP Requirements**: Must identify risks and mitigation/contingency measures
 </mandatory_principles>
 
 <cross_consistency>
-### 交叉一致性
-- 功能需求必須對應至少一條可測驗收條件
-- 非功能需求必須具有量化指標
-- 模組必須映射到至少一個里程碑或明示原因
-- 數據變更需提供遷移步驟或"不需要"之理由
-- 依賴需包含版本或內部所有者
+### Cross Consistency
+- Functional requirements must correspond to at least one testable acceptance criterion
+- Non-functional requirements must have quantifiable metrics
+- Modules must map to at least one milestone or provide explicit reasons
+- Data changes must provide migration steps or "not required" justification
+- Dependencies must include version or internal owner information
 </cross_consistency>
 
 <context_research>
-### 上下文和研究要求
-- **上下文保持**：必須包含規範中所有具體技術細節
-- **具體化要求**：必須用具體、可行的細節替換模糊內容
-- **可追溯性**：必須維護計劃元素與來源規範之間的明確連結
+### Context and Research Requirements
+- **Context Preservation**: Must include all specific technical details from specifications
+- **Concretization Requirements**: Must replace vague content with concrete, actionable details
+- **Traceability**: Must maintain clear links between plan elements and source specifications
 </context_research>
 
 <indexing_uniqueness>
-### 索引與唯一性
-- **索引鍵**：`task_id + sources_content_hash`
-- **去重規則**：相同索引鍵不得重複寫入記錄
-- **審計欄位**：記錄 `workflow_template_version`、`document_path`、`timestamp`
+### Indexing and Uniqueness
+- **Index Key**: `task_id + sources_content_hash`
+- **Deduplication Rules**: Same index key must not be written to records repeatedly
+- **Audit Fields**: Record `workflow_template_version`, `document_path`, `timestamp`
 </indexing_uniqueness>
 </planning_principles>
 
 <output_validation>
-## 輸出和驗證要求（寬鬆）
+## Output and Validation Requirements (Relaxed)
 
 <path_resolution>
-### 專案根目錄解析
-按順序解析 `project_root`：env `CLAUDE_PROJECT_ROOT` → Git root → 最近的 `docs/specs/` → cwd
+### Project Root Directory Resolution
+Resolve `project_root` in sequence: env `CLAUDE_PROJECT_ROOT` → Git root → nearest `docs/specs/` → cwd
 </path_resolution>
 
 <output_compliance>
-### 輸出路徑合規
-- **輸出路徑合規**：必須儲存到 `{{project_root}}/docs/implementation-plan/{{task_id}`(如`1`, `2`, `3`...)}-plan.md`
-- **索引更新**：必須將JSONL記錄附加到 `{{project_root}}/docs/index/plan-index.jsonl`
-- **路徑驗證**：必須確保輸出路徑在 `project_root` 下
-- **成功驗證**：應確認檔案成功寫入並回顧絕對路徑；失敗則記錄與重試計劃
-- **終檢擴展**：必須運行黑名單掃描與交叉一致性校驗並全部通過
+### Output Path Compliance
+- **Output Path Compliance**: Must save to `{{project_root}}/docs/implementation-plan/{{task_id}`(e.g.`1`, `2`, `3`...)}-plan.md`
+- **Index Update**: Must append JSONL record to `{{project_root}}/docs/index/plan-index.jsonl`
+- **Path Validation**: Must ensure output path is under `project_root`
+- **Success Validation**: Should confirm file successfully written and review absolute path; record and retry plan if failed
+- **Final Check Extension**: Must run blacklist scan and cross-consistency validation and pass all
 </output_compliance>
 </output_validation>
 
 <failure_handling>
-## 失敗處理協議（記錄並續行）
+## Failure Handling Protocol (Record and Continue)
 
 <failure_protocols>
-- **驗證未通過**：記錄警告與缺口；不中斷並列入補回清單
-- **檔案載入失敗**：記錄失敗與替代路徑；必要時降級流程
-- **範圍解析失敗**：記錄缺口並以最小可行假設繼續；同步提出澄清
-- **黑名單命中**：記錄並回退修正；若不能即時修正，列入補回
-- **一致性缺陷**：記錄差異與補齊計劃；不中斷
+- **Validation Failed**: Record warnings and gaps; do not interrupt and include in follow-up list
+- **File Loading Failed**: Record failure and alternative paths; downgrade process if necessary
+- **Scope Resolution Failed**: Record gaps and continue with minimal viable assumptions; simultaneously request clarification
+- **Blacklist Hit**: Record and rollback corrections; include in follow-up if cannot fix immediately
+- **Consistency Defects**: Record differences and completion plans; do not interrupt
 </failure_protocols>
 </failure_handling>
 
 <quality_gates>
-## 品質門檻
+## Quality Gates
 
 <quality_requirements>
-- 所有範本部分必須有實際內容
-- 所有技術選擇必須有充分的研究支持
-- 所有風險必須有對應的緩解措施
-- 所有測試計劃必須有明確的驗收條件
-- 黑名單零命中；一致性校驗零缺陷
+- All template sections must have actual content
+- All technical choices must have adequate research support
+- All risks must have corresponding mitigation measures
+- All test plans must have explicit acceptance conditions
+- Zero blacklist hits; zero consistency validation defects
 </quality_requirements>
 </quality_gates>
 
 <standard_operating_procedure>
-## SOP（最小閉環）
+## SOP (Minimal Closed Loop)
 
 <sop_steps>
-1. 並行+快取讀取規格（task/requirements/design）
-2. 結構化抽取（FR/NFR/約束/依賴→JSON）
-3. 模板逐段填充（允許 "N/A - 原因"）
-4. Lint（黑名單/佔位符/一致性/Schema）
-5. 幂等落盤與索引去重
-6. 回讀終檢（模板一致/上下文保真/黑名單與一致性綠燈）
+1. Synchronous + cached specification reading (task/requirements/design)
+2. Structured extraction (FR/NFR/constraints/dependencies → JSON)
+3. Template section-by-section population (allow "N/A - reason")
+4. Lint (blacklist/placeholders/consistency/Schema)
+5. Idempotent persistence and index deduplication
+6. Re-read final check (template consistency/context fidelity/blacklist and consistency green light)
 </sop_steps>
 </standard_operating_procedure>

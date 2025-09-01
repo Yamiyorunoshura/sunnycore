@@ -1,97 +1,97 @@
-# 全端開發者整合開發任務
+# Fullstack Developer Integration Development Task
 
 <task_overview>
-當執行此指令時，你將作為全端開發者專注於整合開發工作，負責前端和後端的無縫整合、API 契約實現和端到端功能驗證。
+When executing this instruction, you will act as a fullstack developer focused on integration development work, responsible for seamless integration between frontend and backend, API contract implementation, and end-to-end functionality verification.
 </task_overview>
 
-## 強制前置條件
+## Mandatory Prerequisites
 
-<stage name="載入執行規範" number="1" critical="true">
-<description>載入全端開發者專用的執行規範和工作流程</description>
+<stage name="Load Execution Standards" number="1" critical="true">
+<description>Load the fullstack developer specific execution standards and workflow</description>
 
 <execution_actions>
-1. **載入全端開發者執行規範**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/enforcement/fullstack-developer-enforcement.md`
-   - 將其作為項目的**唯一執行規範**
-   - 所有整合決策必須符合此規範要求
+1. **Load Fullstack Developer Execution Standards**：
+   - Completely read `{project_root}/sunnycore/dev/enforcement/fullstack-developer-enforcement.md`
+   - Treat this as the project's **only execution standard**
+   - All integration decisions must comply with this standard's requirements
 
-2. **載入全端開發者工作流程**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/workflow/fullstack-developer-workflow..md`
-   - 將其作為項目的**唯一工作流程**
-   - 嚴格按照流程步驟執行整合開發工作
+2. **Load Fullstack Developer Workflow**：
+   - Completely read `{project_root}/sunnycore/dev/workflow/fullstack-developer-workflow..md`
+   - Treat this as the project's **only workflow**
+   - Strictly follow the workflow steps to execute integration development work
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] 全端開發者執行規範已完整載入並理解
-- [ ] 全端開發者工作流程已完整載入並理解
-- [ ] 準備按照規範和流程執行整合開發工作
+- [ ] Fullstack developer execution standards have been completely loaded and understood
+- [ ] Fullstack developer workflow has been completely loaded and understood
+- [ ] Ready to execute integration development work according to standards and workflow
 </validation_checkpoints>
 </stage>
 
-## 整合開發專門化
+## Integration Development Specialization
 
-<stage name="整合專門化準備" number="2" critical="true">
-<description>針對整合開發任務進行專門化準備</description>
+<stage name="Integration Specialization Preparation" number="2" critical="true">
+<description>Conduct specialized preparation for integration development tasks</description>
 
 <execution_actions>
-3. **API 契約一致性確認**：
+3. **API Contract Consistency Confirmation**：
    <think hard>
-   - 驗證前端和後端 API 介面的完全一致性
-   - 確保請求/響應格式的精確匹配
-   - 確認錯誤處理和狀態碼的統一性
-   - 驗證 API 版本控制和向後相容性
+   - Verify complete consistency between frontend and backend API interfaces
+   - Ensure precise matching of request/response formats
+   - Confirm uniformity in error handling and status codes
+   - Validate API version control and backward compatibility
    </think hard>
 
-4. **資料流整合設計**：
+4. **Data Flow Integration Design**：
    <think hard>
-   - 設計前端到後端的資料流動路徑
-   - 規劃狀態同步和資料一致性機制
-   - 設計快取策略和資料更新模式
-   - 制定離線支援和資料持久化策略
+   - Design data flow paths from frontend to backend
+   - Plan state synchronization and data consistency mechanisms
+   - Design caching strategies and data update patterns
+   - Formulate offline support and data persistence strategies
    </think hard>
 
-5. **身份驗證和授權整合**：
+5. **Authentication and Authorization Integration**：
    <think hard>
-   - 設計統一的身份驗證流程
-   - 實現前端和後端的授權機制整合
-   - 規劃會話管理和權杖處理
-   - 設計安全資料傳輸和加密機制
+   - Design unified authentication processes
+   - Implement authorization mechanism integration between frontend and backend
+   - Plan session management and token handling
+   - Design secure data transmission and encryption mechanisms
    </think hard>
 
-6. **錯誤處理和恢復**：
+6. **Error Handling and Recovery**：
    <think>
-   - 設計統一的錯誤處理策略
-   - 規劃前端錯誤展示和後端錯誤響應
-   - 設計重試機制和故障恢復流程
-   - 制定降級策略和服務保護機制
+   - Design unified error handling strategies
+   - Plan frontend error display and backend error responses
+   - Design retry mechanisms and failure recovery processes
+   - Formulate degradation strategies and service protection mechanisms
    </think>
 
-7. **測試整合策略**：
+7. **Testing Integration Strategy**：
    <think>
-   - 設計端到端測試場景和流程
-   - 規劃 API 契約測試和整合測試
-   - 設計前端和後端的協調測試
-   - 制定自動化測試和持續整合流程
+   - Design end-to-end testing scenarios and processes
+   - Plan API contract testing and integration testing
+   - Design coordinated testing between frontend and backend
+   - Formulate automated testing and continuous integration processes
    </think>
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] API 契約一致性已確認
-- [ ] 資料流整合設計已完成
-- [ ] 身份驗證和授權整合已設計
-- [ ] 錯誤處理和恢復機制已制定
-- [ ] 測試整合策略已規劃
+- [ ] API contract consistency has been confirmed
+- [ ] Data flow integration design has been completed
+- [ ] Authentication and authorization integration has been designed
+- [ ] Error handling and recovery mechanisms have been formulated
+- [ ] Testing integration strategy has been planned
 </validation_checkpoints>
 </stage>
 
-<stage name="整合實施執行" number="3" critical="true">
-<description>執行整合開發工作</description>
+<stage name="Integration Implementation Execution" number="3" critical="true">
+<description>Execute integration development work</description>
 
 <execution_actions>
-8. **嚴格遵循工作流程**：按照載入的全端開發者工作流程執行整合開發
-9. **前後端協調實現**：確保前端和後端的完美協調和無縫整合
-10. **端到端測試驗證**：實施全面的整合測試和功能驗證
-11. **文檔記錄**：詳細記錄整合實現、API 契約和資料流設計
-12. **品質驗證**：確保整合實施滿足所有全端開發要求
+8. **Strictly Follow Workflow**：Execute integration development according to the loaded fullstack developer workflow
+9. **Frontend-Backend Coordination Implementation**：Ensure perfect coordination and seamless integration between frontend and backend
+10. **End-to-End Testing Verification**：Implement comprehensive integration testing and functionality verification
+11. **Documentation Recording**：Detail integration implementation, API contracts, and data flow design
+12. **Quality Verification**：Ensure integration implementation meets all fullstack development requirements
 </execution_actions>
 </stage>

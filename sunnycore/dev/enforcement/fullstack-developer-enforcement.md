@@ -1,209 +1,209 @@
-# Fullstack Developer 強制執行規範
+# Fullstack Developer Enforcement Standards
 
 <core_execution_protocol>
-## 核心執行協議
+## Core Execution Protocol
 
 <mandatory_prerequisites>
-### 必要前置條件（寬鬆）
-- **建議**：開始前載入統一工作流程與計劃；若缺失，於 dev_notes.validation_warnings 記錄並持續
-- **工作流程讀取**：應讀取 `{project_root}/sunnycore/dev/workflow/fullstack-developer-workflow.md`，失敗則記錄警告
-- **計劃檢查**：嘗試定位並讀取 task_id 的實施計劃；如缺失，記錄警告並以最小上下文繼續
+### Mandatory Prerequisites (Relaxed)
+- **Recommendation**: Load unified workflow and implementation plans before starting; if missing, record in dev_notes.validation_warnings and continue
+- **Workflow Reading**: Should read `{project_root}/sunnycore/dev/workflow/fullstack-developer-workflow.md`, record warning if failed
+- **Plan Verification**: Attempt to locate and read the implementation plan for task_id; if missing, record warning and continue with minimal context
 </mandatory_prerequisites>
 
 <scope_compliance>
-### 範圍合規性（寬鬆紀錄）
-- **範圍邊界**：應維持於 `scope.in_scope`；偏離時記錄警告與原因/補救
-- **違規處理**：不中斷流程，於 dev_notes.validation_warnings 與 challenges_and_deviations 記錄
-- **變更協議**：先決策登記，後補正式附錄
+### Scope Compliance (Relaxed Recording)
+- **Scope Boundaries**: Should maintain within `scope.in_scope`; record warnings with reasons/remedies when deviating
+- **Violation Handling**: Do not interrupt process, record in dev_notes.validation_warnings and challenges_and_deviations
+- **Change Protocol**: Register decisions first, then supplement formal appendices
 </scope_compliance>
 
 <workflow_compliance>
-### 工作流程合規性
-- **階段完整性**：絕不跳過工作流程階段，按順序執行所有階段
-- **雙重專門化**：必須執行 developer_specializations.fullstack 中定義的前端和後端專門行動
+### Workflow Compliance
+- **Stage Integrity**: Never skip workflow stages, execute all stages in sequential order
+- **Dual Specialization**: Must execute frontend and backend specialized actions defined in developer_specializations.fullstack
 </workflow_compliance>
 </core_execution_protocol>
 
 <fullstack_enforcement_requirements>
-## 全端專門強制要求
+## Fullstack Specialization Mandatory Requirements
 
 <end_to_end_consistency>
-### 端到端一致性（絕對強制）
-- **契約對齊**：必須確保前端、後端和資料庫之間的契約完全一致
-- **資料模型同步**：確保前端和後端的資料模型同步
-- **API契約**：前端和後端的API契約必須精確匹配
-- **類型一致性**：跨層的類型定義必須保持一致
+### End-to-End Consistency (Absolute Mandatory)
+- **Contract Alignment**: Must ensure complete consistency of contracts between frontend, backend, and database
+- **Data Model Synchronization**: Ensure synchronization of data models between frontend and backend
+- **API Contracts**: Frontend and backend API contracts must match precisely
+- **Type Consistency**: Type definitions must remain consistent across layers
 </end_to_end_consistency>
 
 <backend_integration_requirements>
-### 後端整合要求
-- **資料變更**：必須草擬冪等和可逆的遷移
-- **API安全**：必須實施完整的身份驗證、授權、驗證、清理機制
-- **效能達標**：必須達到延遲、吞吐量、記憶體目標
-- **錯誤處理**：必須實施統一的錯誤處理策略
+### Backend Integration Requirements
+- **Data Changes**: Must draft idempotent and reversible migrations
+- **API Security**: Must implement complete authentication, authorization, validation, and sanitization mechanisms
+- **Performance Achievement**: Must meet latency, throughput, and memory targets
+- **Error Handling**: Must implement unified error handling strategy
 </backend_integration_requirements>
 
 <frontend_integration_requirements>
-### 前端整合要求（寬鬆）
-- **UX需求**：必須提取所有UI-IDs並檢查設計資產
-- **組件架構**：必須創建組件骨架並定義types和interfaces
-- **無障礙性**：應確保A11Y合規；若暫未達標，記錄風險與修復計劃
-- **狀態管理**：必須定義路由、枚舉應用狀態、識別全域狀態
+### Frontend Integration Requirements (Relaxed)
+- **UX Requirements**: Must extract all UI-IDs and verify design assets
+- **Component Architecture**: Must create component skeleton and define types and interfaces
+- **Accessibility**: Should ensure A11Y compliance; if temporarily not met, record risks and remediation plans
+- **State Management**: Must define routing, enumerate application states, and identify global state
 </frontend_integration_requirements>
 
 <frontend_backend_flow_integration>
-### 前後端流程整合（強制執行）
-- **wire_frontend_to_backend_flows**：必須執行前後端流程整合
-- **資料流驗證**：確保資料在前後端間的正確流動
-- **狀態同步**：前端狀態與後端狀態保持同步
-- **錯誤傳播**：後端錯誤正確傳播到前端並適當顯示
+### Frontend-Backend Flow Integration (Mandatory Execution)
+- **wire_frontend_to_backend_flows**: Must execute frontend-backend flow integration
+- **Data Flow Validation**: Ensure correct data flow between frontend and backend
+- **State Synchronization**: Frontend state must remain synchronized with backend state
+- **Error Propagation**: Backend errors must be properly propagated to frontend and displayed appropriately
 </frontend_backend_flow_integration>
 </fullstack_enforcement_requirements>
 
 <quality_requirements>
-## 品質要求
+## Quality Requirements
 
 <testing_requirements>
-### 測試要求（強制但不中斷）
-- **測試優先**：應先寫測試後寫實現；未達成時記錄原因與補回計劃
-- **全面測試覆蓋**：
-  - 單元測試：覆蓋F-IDs
-  - 整合測試：前後端整合測試
-  - 契約測試：API契約測試
-  - E2E測試：端到端使用者流程測試
-- **覆蓋率門檻**：必須達到指定的測試覆蓋率要求
+### Testing Requirements (Mandatory but Non-Disruptive)
+- **Test-First Approach**: Should write tests before implementation; when not achieved, record reasons and remediation plans
+- **Comprehensive Test Coverage**:
+  - Unit Tests: Cover F-IDs
+  - Integration Tests: Frontend-backend integration tests
+  - Contract Tests: API contract tests
+  - E2E Tests: End-to-end user flow tests
+- **Coverage Threshold**: Must meet specified test coverage requirements
 </testing_requirements>
 
 <performance_requirements>
-### 效能要求（強制達標）
-- **網頁核心指標**：必須達到LCP、INP、TTI目標
-- **API延遲**：必須符合API回應時間要求
-- **資料庫效率**：必須優化查詢效能
-- **資源優化**：前端資源和後端資源都必須優化
+### Performance Requirements (Mandatory Achievement)
+- **Core Web Vitals**: Must achieve LCP, INP, TTI targets
+- **API Latency**: Must comply with API response time requirements
+- **Database Efficiency**: Must optimize query performance
+- **Resource Optimization**: Both frontend and backend resources must be optimized
 </performance_requirements>
 
 <security_requirements>
-### 安全要求（強制執行）
-- **多層安全**：在前端、後端、資料庫各層應用安全最佳實踐
-- **資料驗證**：前端和後端都必須進行資料驗證
-- **身份驗證**：統一的身份驗證機制
-- **授權控制**：一致的授權策略
-- **資料加密**：敏感資料在傳輸和存儲中都必須加密
+### Security Requirements (Mandatory Execution)
+- **Multi-Layer Security**: Apply security best practices across frontend, backend, and database layers
+- **Data Validation**: Both frontend and backend must perform data validation
+- **Authentication**: Unified authentication mechanism
+- **Authorization Control**: Consistent authorization strategy
+- **Data Encryption**: Sensitive data must be encrypted in both transit and storage
 </security_requirements>
 
 <observability_requirements>
-### 可觀測性要求（強制實施）
-- **日誌記錄**：前後端統一的日誌格式和策略
-- **指標監控**：關鍵業務指標和技術指標監控
-- **錯誤追蹤**：端到端的錯誤追蹤機制
-- **效能監控**：全端的效能監控
+### Observability Requirements (Mandatory Implementation)
+- **Logging**: Unified logging format and strategy across frontend and backend
+- **Metrics Monitoring**: Monitoring of key business and technical metrics
+- **Error Tracking**: End-to-end error tracking mechanism
+- **Performance Monitoring**: Full-stack performance monitoring
 </observability_requirements>
 </quality_requirements>
 
 <architectural_principles>
-## 架構原則
+## Architecture Principles
 
 <core_principles>
-### 架構原則（強制遵守）
-- **關注點分離**：清晰的前後端職責分離
-- **SOLID原則**：在前端和後端都應用SOLID原則
-- **一致性原則**：架構決策在全端保持一致
-- **可擴展性**：設計支援未來的擴展需求
+### Architecture Principles (Mandatory Compliance)
+- **Separation of Concerns**: Clear frontend-backend responsibility separation
+- **SOLID Principles**: Apply SOLID principles in both frontend and backend
+- **Consistency Principle**: Architecture decisions must remain consistent across the full stack
+- **Scalability**: Design must support future expansion needs
 </core_principles>
 </architectural_principles>
 
 <documentation_requirements>
-## 文檔要求
+## Documentation Requirements
 
 <traceability_documentation>
-### 文檔和可追溯性
-- **全端文檔**：必須更新API文檔和組件文檔
-- **架構決策記錄**：重要的架構決策必須記錄
-- **可追溯性**：必須在PR、提交和程式碼註釋中引用task_id
-- **整合文檔**：前後端整合點的詳細文檔
+### Documentation and Traceability
+- **Full-Stack Documentation**: Must update API documentation and component documentation
+- **Architecture Decision Records**: Important architecture decisions must be documented
+- **Traceability**: Must reference task_id in PRs, commits, and code comments
+- **Integration Documentation**: Detailed documentation of frontend-backend integration points
 </traceability_documentation>
 
 <dev_notes_requirements>
-### DEV_NOTES填寫要求（🚨 強制記錄但不中斷 🚨）
-- **handover_docs階段執行**：開發完成後必須執行完整的handover_docs階段
-- **detailed_changes記錄**：必須在dev_notes中詳細記錄所有前端、後端和整合變更
-- **F-IDs/UI-IDs映射**：映射缺漏不中斷；記錄缺漏清單與暫行對應/理由
-- **全端整合記錄**：必須詳細記錄前後端整合實施、資料流設計和API契約實現
-- **架構決策記錄**：必須記錄跨層架構決策、技術選型和整合策略
-- **效能整合驗證**：必須記錄端到端效能測試結果和優化措施
-- **安全實施記錄**：必須記錄多層安全實施、身份驗證整合和資料保護措施
-- **部署和配置**：必須記錄部署策略、環境配置和監控設置
-- **整合測試記錄**：必須記錄端到端測試、契約測試和整合驗證結果
-- **填寫品質要求**：dev_notes不可省略、不可敷衍，必須提供足夠的細節供後續維護參考
+### DEV_NOTES Documentation Requirements (🚨 Mandatory Recording but Non-Disruptive 🚨)
+- **handover_docs Stage Execution**: Must execute complete handover_docs stage after development completion
+- **detailed_changes Recording**: Must document all frontend, backend, and integration changes in detail within dev_notes
+- **F-IDs/UI-IDs Mapping**: Mapping gaps do not interrupt; record gap list with provisional mappings/reasons
+- **Full-Stack Integration Recording**: Must document frontend-backend integration implementation, data flow design, and API contract realization
+- **Architecture Decision Recording**: Must document cross-layer architecture decisions, technology selections, and integration strategies
+- **Performance Integration Validation**: Must document end-to-end performance test results and optimization measures
+- **Security Implementation Recording**: Must document multi-layer security implementation, authentication integration, and data protection measures
+- **Deployment and Configuration**: Must document deployment strategy, environment configuration, and monitoring setup
+- **Integration Test Recording**: Must document end-to-end tests, contract tests, and integration validation results
+- **Documentation Quality Requirements**: dev_notes cannot be omitted or superficial, must provide sufficient detail for future maintenance reference
 </dev_notes_requirements>
 
 <markdown_conversion>
-### Markdown格式轉換（絕對強制）
-- **YAML到Markdown**：必須將 `{project_root}/sunnycore/dev/templates/dev-notes-tmpl.yaml` 結構完整轉換為標準Markdown格式
-- **標題層級**：YAML section轉換為對應的Markdown標題（# ## ### #### ##### ######）
-- **清單格式**：YAML陣列轉換為Markdown清單（- 或 1. 格式）
-- **代碼區塊**：代碼片段使用標準Markdown代碼塊（```language）
-- **表格格式**：結構化資料使用Markdown表格格式 | 欄位 | 值 |
-- **鏈結格式**：使用標準Markdown鏈結格式 [文字](URL)
-- **區塊引用**：重要備註使用 > 引用格式
-- **強調標記**：使用 **粗體** 和 *斜體* 適當強調關鍵內容
-- **全端規範**：API契約、資料流程圖、架構圖使用適當的代碼區塊和Mermaid圖表標記
+### Markdown Format Conversion (Absolute Mandatory)
+- **YAML to Markdown**: Must completely convert `{project_root}/sunnycore/dev/templates/dev-notes-tmpl.yaml` structure to standard Markdown format
+- **Heading Levels**: YAML sections convert to corresponding Markdown headings (# ## ### #### ##### ######)
+- **List Format**: YAML arrays convert to Markdown lists (- or 1. format)
+- **Code Blocks**: Code snippets use standard Markdown code blocks (```language)
+- **Table Format**: Structured data uses Markdown table format | Field | Value |
+- **Link Format**: Use standard Markdown link format [text](URL)
+- **Block Quotes**: Important notes use > quote format
+- **Emphasis Markers**: Use **bold** and *italic* to appropriately emphasize key content
+- **Full-Stack Specifications**: API contracts, data flow diagrams, architecture diagrams use appropriate code blocks and Mermaid chart markers
 </markdown_conversion>
 
 <output_location>
-### 輸出位置（固定）
-- **開發記錄**：`{{project_root}}/docs/dev-notes/{{task_id}`(如`1`, `2`, `3`...)}-dev-notes.md`
-- **模板參考**：`{project_root}/sunnycore/dev/templates/dev-notes-tmpl.yaml`
+### Output Location (Fixed)
+- **Development Records**: `{{project_root}}/docs/dev-notes/{{task_id}`(e.g. `1`, `2`, `3`...)}-dev-notes.md`
+- **Template Reference**: `{project_root}/sunnycore/dev/templates/dev-notes-tmpl.yaml`
 </output_location>
 </documentation_requirements>
 
 <quality_gates>
-## 品質門檻
+## Quality Gates
 
 <mandatory_quality_gates>
-### 品質門檻（強制通過）
-- **靜態分析**：前端和後端都必須通過靜態分析
-- **安全掃描**：全端安全漏洞掃描
-- **效能測試**：端到端效能測試
-- **無障礙審核**：前端無障礙性審核
+### Quality Gates (Mandatory Passage)
+- **Static Analysis**: Both frontend and backend must pass static analysis
+- **Security Scanning**: Full-stack security vulnerability scanning
+- **Performance Testing**: End-to-end performance testing
+- **Accessibility Audit**: Frontend accessibility audit
 </mandatory_quality_gates>
 </quality_gates>
 
 <integration_checklist>
-## 全端整合檢查清單（強制執行）
+## Full-Stack Integration Checklist (Mandatory Execution)
 
 <mandatory_integration_checks>
-- [ ] 前後端API契約完全一致
-- [ ] 資料模型在各層保持同步
-- [ ] 錯誤處理策略統一實施
-- [ ] 身份驗證機制端到端一致
-- [ ] 效能目標在各層都達成
-- [ ] 安全措施在各層都實施
-- [ ] 測試覆蓋了端到端流程
-- [ ] 監控和日誌覆蓋全端
+- [ ] Frontend-backend API contracts are completely consistent
+- [ ] Data models remain synchronized across layers
+- [ ] Error handling strategy is uniformly implemented
+- [ ] Authentication mechanism is end-to-end consistent
+- [ ] Performance targets are achieved across all layers
+- [ ] Security measures are implemented across all layers
+- [ ] Tests cover end-to-end flows
+- [ ] Monitoring and logging cover the full stack
 </mandatory_integration_checks>
 </integration_checklist>
 
 <special_considerations>
-## 特殊注意事項
+## Special Considerations
 
 <technology_coordination>
-### 技術協調要求
-- **技術選型一致性**：前端和後端的技術選型必須協調
-- **版本同步**：確保前後端依賴版本的相容性
-- **部署協調**：前後端部署必須協調進行
-- **配置管理**：環境配置在前後端間保持一致
+### Technology Coordination Requirements
+- **Technology Selection Consistency**: Frontend and backend technology selections must be coordinated
+- **Version Synchronization**: Ensure compatibility of frontend and backend dependency versions
+- **Deployment Coordination**: Frontend and backend deployments must be coordinated
+- **Configuration Management**: Environment configuration must remain consistent between frontend and backend
 </technology_coordination>
 </special_considerations>
 
 <failure_handling_protocol>
-## 失敗處理協議（記錄並續行）
+## Failure Handling Protocol (Record and Continue)
 
 <failure_recovery>
-- **計劃缺失**：記錄警告與替代資訊來源；繼續
-- **範圍偏離**：記錄偏離/影響/補救計劃；不中斷
-- **契約不一致**：記錄差異與修復計劃；不中斷
-- **測試未達預期**：記錄失敗與補回計劃；不中斷
-- **效能未達標**：記錄測量/優化計劃；在可控風險下續行
+- **Plan Missing**: Record warnings and alternative information sources; continue
+- **Scope Deviation**: Record deviations/impacts/remediation plans; do not interrupt
+- **Contract Inconsistency**: Record differences and remediation plans; do not interrupt
+- **Testing Not Met**: Record failures and remediation plans; do not interrupt
+- **Performance Not Met**: Record measurements/optimization plans; continue under controlled risk
 </failure_recovery>
 </failure_handling_protocol>

@@ -2,62 +2,62 @@
 template: unified-plan-validation-workflow
 version: 1
 
-# 🔄 工作流程Todo List製作流程
+# 🔄 Workflow Todo List Creation Process
 todo_list_creation:
-  description: "在開始執行任何工作流程步驟之前，必須使用todo_write工具創建包含所有workflow步驟的todo list"
+  description: "AI must create todo list containing all workflow steps before executing any workflow steps"
   importance: "critical"
-  
-  # 🛠️ Todo List工具使用指南
+
+  # 🛠️ Todo List Tool Usage Guide
   tool_syntax:
     format: "JSON"
     structure: |
       {
         "todos": [
           {
-            "content": "具體任務描述",
+            "content": "Specific task description",
             "status": "pending|in_progress|completed",
-            "id": "唯一識別碼",
+            "id": "unique identifier",
             "priority": "high|medium|low"
           }
         ]
       }
-  
+
   process_steps:
     1_analyze_workflow:
-      description: "分析工作流程結構 - 仔細閱讀整個workflow文件，識別所有階段、步驟和任務"
+      description: "Analyze workflow structure - carefully read entire workflow file, identify all stages, steps and tasks"
       priority: "high"
-      
-    2_extract_tasks:
-      description: "提取關鍵任務 - 將每個階段的核心任務轉換為具體的todo項目"
-      priority: "high"
-      
-    3_set_priorities:
-      description: "設定優先級 - 根據任務的重要性和依賴關係設定優先級"
-      priority: "medium"
-      
-    4_create_todo_list:
-      description: "創建Todo List - 使用todo_write工具創建包含所有步驟的結構化todo list"
-      priority: "high"
-      
-    5_execute_workflow:
-      description: "執行與更新 - 按照todo list順序執行任務，及時更新狀態"
-      priority: "high"
-  
-  # 📝 Todo List要求
-  requirements:
-    coverage: "每個主要階段都應該有對應的todo項目"
-    validation: "關鍵的驗證檢查點必須包含在todo list中"
-    priority_setting: "設定合理的優先級，確保依賴關係得到尊重"
-    status_tracking: "在執行過程中及時更新todo狀態（pending → in_progress → completed）"
-    uniqueness: "同時只能有一個任務處於in_progress狀態"
-    completeness: "只有在任務完全完成時才標記為completed"
 
-# 分隔線，以下為原始workflow內容
+    2_extract_tasks:
+      description: "Extract key tasks - convert core tasks of each stage to specific todo items"
+      priority: "high"
+
+    3_set_priorities:
+      description: "Set priorities - set priorities based on task importance and dependencies"
+      priority: "medium"
+
+    4_create_todo_list:
+      description: "Create Todo List - use todo_write tool to create structured todo list"
+      priority: "high"
+
+    5_execute_workflow:
+      description: "Execute and update - execute tasks in todo list order, update status timely"
+      priority: "high"
+
+  # 📝 Todo List Requirements
+  requirements:
+    coverage: "Each main stage should have corresponding todo item"
+    validation: "Key validation checkpoints must be included in todo list"
+    priority_setting: "Set reasonable priorities, ensure dependency relationships respected"
+    status_tracking: "Update todo status timely during execution (pending → in_progress → completed)"
+    uniqueness: "Only one task can be in in_progress status simultaneously"
+    completeness: "Only mark as completed when task is fully completed"
+
+# Separator line, following is original workflow content
 ---
 
 workflow:
-  name: "統一計劃驗證工作流程"
-  description: "驗證實施計劃的完整性、正確性、範本符合性，並與專案規格交叉引用的統一工作流程。"
+  name: "Unified Plan Validation Workflow"
+  description: "Validate implementation plan completeness, correctness, template compliance, and cross-reference with project specifications."
   template_reference: "{project_root}/sunnycore/po/templates/implementation-plan-tmpl.yaml"
   report_template: "{project_root}/sunnycore/po/templates/plan-validation-report-tmpl.yaml"
   enforcement_level: "lenient"
@@ -103,153 +103,145 @@ execution_hints:
     allow_intra_stage_parallelism: true
     max_parallelism: 4
     notes:
-      - "跨階段不可並行；必須保持階段順序與檢查點。"
-      - "同一階段內互不相依的讀檔/檢查可並行。"
+      - "Cannot synchronize across stages; must execute and verify strictly in order"
+      - "Can synchronize mutually independent read/check actions within single stage"
 
 preconditions:
-  - "計劃文件存在且可訪問"
-  - "所有引用的規格文件存在"
-  - "計劃符合預期範本結構"
+  - "Plan file exists and is accessible"
+  - "All referenced specification files exist"
+  - "Plan conforms to expected template structure"
 
-# 整合的執行協議
+# Integrated execution protocol
 enforcement_protocol:
   enforcement_compliance:
     mandatory_enforcement_file: "{project_root}/sunnycore/po/enforcement/implementation-plan-validator-enforcement.md"
     compliance_verification: "Verify enforcement rules are understood; record warnings on minor non-compliance and continue"
     halt_on_non_compliance: false
-  
+
   mandatory_file_loading:
-    description: "在開始任何驗證工作之前必須載入的檔案"
+    description: "Files that must be loaded before starting any validation work"
     requirements:
       - "READ {project_root}/sunnycore/po/enforcement/implementation-plan-validator-enforcement.md COMPLETELY - This file contains all mandatory rules and constraints"
-      - "READ 統一實施計劃驗證工作流程 YAML 檔案完整內容"
-      - "READ 實施計劃範本 YAML 檔案完整內容"
-      - "READ 計劃驗證報告範本 YAML 檔案完整內容"
-      - "確認理解所有工作流程階段"
-      - "確認理解範本結構"
-      - "確認理解驗證需求"
-      - "如果任何檔案無法載入或理解則停止"
-
-  plan_location_and_loading:
-    plan_resolution_process:
-      - "根據 task_id 在 {{project_root}}/docs/implementation-plan/ 中定位計劃"
-      - "支援的副檔名：.yaml, .yml, .md"
-      - "驗證計劃存在且可讀取"
-      - "完整讀取計劃文件"
-      - "載入所有規格檔案：docs/specs/task.md、requirements.md、design.md"
+      - "READ unified plan validation workflow YAML file completely"
+      - "READ implementation plan template YAML file completely"
+      - "READ plan validation report template YAML file completely"
+      - "Confirm understanding of all workflow stages"
+      - "Confirm understanding of template structure"
+      - "Confirm understanding of validation requirements"
+      - "Stop if any files cannot be loaded or understood"
 
   stage_execution_checkpoints:
     before_stage:
-      - "說明正在開始的階段"
-      - "參考工作流程檔案中的特定階段需求"
-    
+      - "Explain stage being started"
+      - "Reference specific stage requirements in workflow file"
+
     during_stage:
-      - "執行該階段列出的所有動作"
-      - "進行系統性分析和驗證"
-      - "執行所有交叉參考檢查"
-    
+      - "Execute all actions listed in stage"
+      - "Perform systematic analysis and validation"
+      - "Execute all cross-reference checks"
+
     after_stage:
-      - "對照驗證規則驗證階段完成"
-      - "確認所有必需的輸出已生成"
-      - "用證據記錄發現"
+      - "Verify stage completion against validation rules"
+      - "Confirm all required outputs generated"
+      - "Record findings with evidence"
 
   cross_reference_validation_requirements:
     schema_validation:
-      - "驗證計劃中所有必需章節存在"
-      - "檢查每個章節的範本符合性"
-      - "識別任何缺失或空白的必需章節"
-      - "用證據記錄架構違規"
-    
+      - "Verify all required sections in plan exist"
+      - "Check template compliance for each section"
+      - "Identify any missing or blank required sections"
+      - "Record schema violations with evidence"
+
     cross_reference_checks:
-      functional_objectives: "將每個目標追溯到 requirements.md、task.md 或 design.md"
-      non_functional_targets: "驗證規格中存在可測量標準"
-      scope_boundaries: "驗證 in_scope/out_of_scope 與任務定義對照"
-      architecture_modules: "檢查方法元素與 design.md 的追溯性"
-      data_changes: "驗證設計文件中的架構變更和遷移"
-      test_strategy: "驗證測試方法與專案標準對照"
-      dependencies: "檢查依賴關係與時間線的一致性"
-      dev_notes_structure: "驗證 dev_notes_location 指向正確路徑結構"
-    
+      functional_objectives: "Trace each objective to requirements.md, task.md or design.md"
+      non_functional_targets: "Verify measurable standards exist in specifications"
+      scope_boundaries: "Verify in_scope/out_of_scope traceable to explicit boundary definitions in specs"
+      architecture_modules: "Check approach elements traceable to design.md"
+      data_changes: "Verify architectural changes and migrations in design docs"
+      test_strategy: "Verify test methods traceable to project standards"
+      dependencies: "Check dependency relations and timeline consistency"
+      dev_notes_structure: "Verify dev_notes_location points to correct path structure"
+
     evidence_requirements:
-      - "每個發現都必須包含具體證據"
-      - "所有聲明的檔案路徑和章節參考"
-      - "儘可能提供行號以精確引用"
-      - "引用相關文本以支持發現"
+      - "Each finding must include concrete evidence"
+      - "All file paths and section references stated"
+      - "Include line numbers when possible for precision"
+      - "Quote relevant text to support findings"
 
   template_population_enforcement:
     mandatory_steps:
-      - "總是先讀取範本檔案再寫入"
-      - "按範本需求逐章節填充"
-      - "絕不留下佔位符文本如 {task_id}`(如`1`, `2`, `3`...) 或 INSERT VALUE"
-      - "每個發現都必須包含具體證據"
-      - "提供具體的改進步驟"
-      - "完整性檢查：每個範本章節都必須填充"
+      - "Always read template file before writing"
+      - "Populate section by section according to template requirements"
+      - "Never leave placeholder text like {task_id} or INSERT VALUE"
+      - "Each finding must include concrete evidence"
+      - "Provide specific improvement steps"
+      - "Completeness check: each template section must be populated"
 
   findings_and_recommendations:
     finding_documentation:
-      - "具體：識別缺失或無法驗證的確切項目"
-      - "證據：為每個發現提供檔案路徑和引用"
-      - "嚴重性：按對計劃品質的影響排等級發現"
-      - "可追溯性：顯示能否追溯到規格"
-    
+      - "Specific: identify exact missing or unverifiable items"
+      - "Evidence: provide file paths and references for each finding"
+      - "Severity: grade findings by impact on plan quality"
+      - "Traceability: show if traceable to specifications"
+
     recommendation_requirements:
-      - "可行：提供具體的改進步驟"
-      - "優先級：按重要性和影響排序"
-      - "可測量：儘可能包含成功標準"
-      - "現實：確保建議可行"
+      - "Actionable: provide concrete improvement steps"
+      - "Prioritized: sort by importance and effort"
+      - "Measurable: include success criteria when possible"
+      - "Realistic: ensure suggestions are feasible"
 
   validation_checkpoints:
     after_document_generation:
-      - "重新讀取生成的文件"
-      - "逐章節與範本結構比較"
-      - "驗證沒有佔位符值殘留"
-      - "確認所有發現都有證據支持"
-      - "驗證markdown格式和結構"
-    
+      - "Read generated document back"
+      - "Compare section by section with template structure"
+      - "Verify no placeholder values remain"
+      - "Confirm all findings supported by evidence"
+      - "Validate markdown format and structure"
+
     completion_criteria:
-      - "所有工作流程階段已完成"
-      - "所有範本章節用實際內容填充"
-      - "所有驗證規則已滿足"
-      - "所有發現有證據支持"
-      - "建議可行且具體"
-      - "文件準備好供利害關係人審查"
+      - "All workflow stages completed"
+      - "All template sections populated with actual content"
+      - "All validation rules satisfied"
+      - "All findings supported by evidence"
+      - "Suggestions actionable and specific"
+      - "Document ready for stakeholder review"
 
   error_handling:
     validation_failures:
-      - "將驗證失敗記錄為警告並持續"
-      - "識別具體驗證失敗"
-      - "返回適當階段進行補齊（非阻斷）"
-      - "修正後重新執行（可延後）"
-      - "於最終報告中附上 validation_warnings"
-    
+      - "Record validation failures as warnings and continue"
+      - "Identify specific validation failures"
+      - "Return to corresponding stage for supplementation (non-blocking)"
+      - "Retry after correction (can be deferred)"
+      - "Include validation_warnings in final report"
+
     cross_reference_failures:
-      - "如果計劃項目無法追溯到規格，記錄為發現"
-      - "如果規格缺少資訊，記錄為約束"
-      - "如果計劃偏離規格，記錄為風險"
+      - "If plan items cannot be traced to specs, record as findings"
+      - "If specs lack information, record as constraints"
+      - "If plan deviates from specs, record as risks"
 
   critical_success_factors:
-    - "先讀取工作流程和範本檔案 - 絕不在沒有它們的情況下開始"
-    - "定位和載入計劃文件 - 確保存在且完整"
-    - "載入所有規格檔案 - 需求、任務、設計"
-    - "系統性分析 - 先定義驗證策略"
-    - "執行徹底的交叉參考 - 將所有計劃元素追溯到規格"
-    - "用證據記錄發現 - 每個聲明都需要證明"
-    - "產生可行建議 - 具體的改進步驟"
-    - "在檢查點驗證 - 確保每階段品質"
+    - "Read workflow and template files first - never start without them"
+    - "Locate and load plan file - ensure existence and completeness"
+    - "Load all specification files - requirements, tasks, designs"
+    - "Systematic analysis - define validation strategy first"
+    - "Thorough cross-referencing - trace all plan elements to specs"
+    - "Record findings with evidence - every statement needs proof"
+    - "Produce actionable suggestions - concrete improvement steps"
+    - "Validate at checkpoints - ensure quality per stage"
 
   workflow_violation_responses:
-    missing_stage_execution: "返回並完成跳過的階段"
-    incomplete_cross_reference: "完成所有可追溯性檢查"
-    unsupported_findings: "為所有聲明提供證據"
-    incomplete_template: "識別缺失章節並填充它們"
-    generic_recommendations: "使建議具體且可行"
-    invalid_format: "修正格式以完全符合範本"
+    missing_stage_execution: "Return and complete skipped stages"
+    incomplete_cross_reference: "Complete all traceability checks"
+    unsupported_findings: "Provide evidence for all statements"
+    incomplete_template: "Identify missing sections and populate them"
+    generic_recommendations: "Make suggestions specific and actionable"
+    invalid_format: "Correct format to fully conform to template"
 
-# 統一階段執行流程
+# Unified stage execution flow
 stages:
   - id: "workflow_initialization"
-    title: "工作流程初始化"
-    description: "載入必要文件並設置驗證環境"
+    title: "Workflow Initialization"
+    description: "Load necessary files and set up validation environment"
     completion_requirements:
       - workflow_file_parsed: true
       - template_structure_understood: true
@@ -261,8 +253,8 @@ stages:
       - verify_file_accessibility
 
   - id: "validation_strategy"
-    title: "驗證策略設置"
-    description: "建立驗證策略和追溯計劃"
+    title: "Validation Strategy Setup"
+    description: "Establish validation strategy and traceability plan"
     completion_requirements:
       - validation_strategy_defined: true
       - validation_focus_areas_defined: true
@@ -273,21 +265,21 @@ stages:
       - establish_cross_reference_strategy
 
   - id: "plan_and_spec_loading"
-    title: "計劃和規格載入"
-    description: "載入計劃文件和所有相關規格文件"
+    title: "Plan and Specification Loading"
+    description: "Load plan file and all related specification files"
     completion_requirements:
       - plan_document_located_and_read: true
       - all_required_specs_read: true
       - cross_reference_sources_identified: true
     actions:
-      - resolve_plan_by_task_id: "{{task_id}`(如`1`, `2`, `3`...)}"
+      - resolve_plan_by_task_id: "{{task_id}}"
       - read_specification_files: ["docs/specs/task.md", "docs/specs/requirements.md", "docs/specs/design.md"]
       - identify_cross_reference_sources
       - validate_plan_document_completeness
 
   - id: "schema_validation"
-    title: "架構和範本符合性驗證"
-    description: "驗證計劃符合實施計劃範本架構"
+    title: "Schema and Template Compliance Validation"
+    description: "Validate plan conforms to implementation plan template schema"
     completion_requirements:
       - template_compliance_checked: true
       - missing_required_sections_identified: true
@@ -299,8 +291,8 @@ stages:
       - document_schema_violations_with_evidence
 
   - id: "cross_reference_validation"
-    title: "交叉參考和可追溯性驗證"
-    description: "驗證計劃元素與規格文件的可追溯性"
+    title: "Cross-reference and Traceability Validation"
+    description: "Validate traceability of plan elements to specification documents"
     completion_requirements:
       - functional_objectives_traced: true
       - non_functional_targets_verified: true
@@ -320,8 +312,8 @@ stages:
       - document_untraceable_items_as_findings
 
   - id: "gap_analysis"
-    title: "差距分析和風險評估"
-    description: "識別計劃中的差距、不一致和風險"
+    title: "Gap Analysis and Risk Assessment"
+    description: "Identify gaps, inconsistencies, and risks in plan"
     completion_requirements:
       - gaps_identified_and_categorized: true
       - risks_assessed_and_documented: true
@@ -336,8 +328,8 @@ stages:
       - prioritize_findings_by_impact
 
   - id: "recommendation_formulation"
-    title: "建議制定"
-    description: "為識別的問題制定具體且可行的改進建議"
+    title: "Recommendation Formulation"
+    description: "Formulate specific and actionable improvement recommendations for identified problems"
     completion_requirements:
       - actionable_recommendations_developed: true
       - recommendations_prioritized: true
@@ -351,8 +343,8 @@ stages:
       - estimate_effort_and_timeline_for_improvements
 
   - id: "report_generation"
-    title: "驗證報告生成"
-    description: "生成結構化的計劃驗證報告"
+    title: "Validation Report Generation"
+    description: "Generate structured implementation plan validation report"
     completion_requirements:
       - template_structure_followed: true
       - no_placeholder_values: true
@@ -375,8 +367,8 @@ stages:
       - verify_no_placeholder_content_remains
 
   - id: "finalization"
-    title: "完成與品質確認"
-    description: "最終驗證和品質檢查"
+    title: "Completion and Quality Confirmation"
+    description: "Final verification and quality checks"
     completion_requirements:
       - final_document_read_back: true
       - completeness_verified: true
@@ -392,7 +384,7 @@ stages:
       - validate_markdown_formatting_and_structure
       - request_feedback_if_needed
 
-# 整合的驗證規則
+# Integrated validation rules
 validation_rules:
   template_validation:
     required_metadata_fields:
@@ -419,7 +411,7 @@ validation_rules:
     forbidden_content:
       - placeholder_brackets: ["<", ">"]
       - placeholder_text: ["INSERT", "TODO", "TBD"]
-      - generic_placeholders: ["{task_id}`(如`1`, `2`, `3`...)", "<project_name>", "<owner>"]
+      - generic_placeholders: ["{task_id}", "<project_name>", "<owner>"]
       - unsupported_findings: "all_findings_must_have_evidence"
       - vague_recommendations: ["should improve", "consider enhancing", "might benefit"]
 
@@ -451,7 +443,7 @@ validation_rules:
 
 output:
   path: "{{project_root}}/docs/validation-reports/"
-  filename: "{{task_id}`(如`1`, `2`, `3`...)}-plan-validation.md"
+  filename: "{{task_id}}-plan-validation.md"
   format: markdown
 
 reporting:

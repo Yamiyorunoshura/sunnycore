@@ -1,85 +1,85 @@
-# 後端開發者效能優化任務
+# Backend Developer Performance Optimization Task
 
 <task_overview>
-當執行此指令時，你將作為後端開發者專注於系統效能優化工作。
+When executing this instruction, you will act as a backend developer focused on system performance optimization work.
 </task_overview>
 
-## 強制前置條件
+## Mandatory Prerequisites
 
-<stage name="載入執行規範" number="1" critical="true">
-<description>載入後端開發者專用的執行規範和工作流程</description>
+<stage name="Load Enforcement Rules" number="1" critical="true">
+<description>Load backend developer specific enforcement rules and workflow</description>
 
 <execution_actions>
-1. **載入後端開發者執行規範**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/enforcement/backend-developer-enforcement.md`
-   - 將其作為項目的**唯一執行規範**
-   - 所有效能優化決策必須符合此規範要求
+1. **Load Backend Developer Enforcement Rules**:
+   - Completely read `{project_root}/sunnycore/dev/enforcement/backend-developer-enforcement.md`
+   - Treat this as the project's **only enforcement rules**
+   - All performance optimization decisions must comply with these rule requirements
 
-2. **載入後端開發者工作流程**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/workflow/backend-developer-workflow.md`
-   - 將其作為項目的**唯一工作流程**
-   - 嚴格按照流程步驟執行效能優化工作
+2. **Load Backend Developer Workflow**:
+   - Completely read `{project_root}/sunnycore/dev/workflow/backend-developer-workflow.md`
+   - Treat this as the project's **only workflow**
+   - Strictly follow workflow steps to execute performance optimization work
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] 後端開發者執行規範已完整載入並理解
-- [ ] 後端開發者工作流程已完整載入並理解
-- [ ] 準備按照規範和流程執行效能優化工作
+- [ ] Backend developer enforcement rules have been completely loaded and understood
+- [ ] Backend developer workflow has been completely loaded and understood
+- [ ] Ready to execute performance optimization work according to rules and workflow
 </validation_checkpoints>
 </stage>
 
-## 效能優化專門化
+## Performance Optimization Specialization
 
-<stage name="效能優化專門化準備" number="2" critical="true">
-<description>針對效能優化任務進行專門化準備</description>
+<stage name="Performance Optimization Specialization Preparation" number="2" critical="true">
+<description>Conduct specialized preparation for performance optimization tasks</description>
 
 <execution_actions>
-3. **效能基準建立**：
+3. **Performance Baseline Establishment**:
    <think>
-   - 建立當前系統效能基準線
-   - 確定關鍵效能指標（KPI）
-   - 設定效能優化目標和閾值
+   - Establish current system performance baseline
+   - Determine key performance indicators (KPIs)
+   - Set performance optimization goals and thresholds
    </think>
 
-4. **效能瓶頸識別**：
+4. **Performance Bottleneck Identification**:
    <think hard>
-   - CPU 使用率和記憶體消耗分析
-   - I/O 操作和資料庫查詢效能
-   - 網路延遲和頻寬使用
-   - 併發處理能力評估
+   - CPU utilization and memory consumption analysis
+   - I/O operations and database query performance
+   - Network latency and bandwidth usage
+   - Concurrent processing capacity assessment
    </think hard>
 
-5. **優化策略規劃**：
+5. **Optimization Strategy Planning**:
    <think>
-   - 程式碼層級優化（演算法、資料結構）
-   - 資料庫查詢優化和索引策略
-   - 快取機制設計和實施
-   - 負載平衡和分散式架構
+   - Code-level optimization (algorithms, data structures)
+   - Database query optimization and indexing strategies
+   - Caching mechanism design and implementation
+   - Load balancing and distributed architecture
    </think>
 
-6. **監控和測量工具**：
+6. **Monitoring and Measurement Tools**:
    <think>
-   - 效能監控工具設定和配置
-   - 壓力測試和負載測試環境
-   - 即時效能儀表板建立
-   - 告警機制和自動化回應
+   - Performance monitoring tool setup and configuration
+   - Stress testing and load testing environments
+   - Real-time performance dashboard creation
+   - Alerting mechanisms and automated responses
    </think>
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] 效能基準已建立並記錄
-- [ ] 效能瓶頸已識別並分析
-- [ ] 優化策略已規劃並驗證
-- [ ] 監控和測量工具已準備就緒
+- [ ] Performance baseline has been established and recorded
+- [ ] Performance bottlenecks have been identified and analyzed
+- [ ] Optimization strategy has been planned and validated
+- [ ] Monitoring and measurement tools have been prepared
 </validation_checkpoints>
 </stage>
 
-<stage name="開發執行" number="3" critical="true">
-<description>執行效能優化工作</description>
+<stage name="Development Execution" number="3" critical="true">
+<description>Execute performance optimization work</description>
 
 <execution_actions>
-7. **嚴格遵循工作流程**：按照載入的後端開發者工作流程執行
-8. **專項驗證**：確保所有效能優化措施符合安全性和穩定性要求
-9. **文檔記錄**：詳細記錄優化過程、效能改善結果和監控配置
+7. **Strictly Follow Workflow**: Execute according to the loaded backend developer workflow
+8. **Specialized Verification**: Ensure all performance optimization measures comply with security and stability requirements
+9. **Documentation Recording**: Detail record optimization process, performance improvement results, and monitoring configuration
 </execution_actions>
 </stage>

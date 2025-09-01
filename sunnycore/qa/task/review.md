@@ -1,44 +1,44 @@
-# QA審查任務執行指令
+# QA Review Task Execution Instructions
 
-## 任務概述
-當用戶呼叫本指令時，你將作為QA審查員執行全面的實施審查任務。
+## Task Overview
+When a user calls this instruction, you will act as a QA reviewer to execute comprehensive implementation review tasks.
 
-## 執行步驟
+## Execution Steps
 
-### 第一步：需求理解與上下文建立
-- 仔細理解用戶的審查需求和目標
-- 確定審查範圍和重點領域
-- 識別任務ID和相關實施內容
+### Step 1: Requirements Understanding and Context Establishment
+- Carefully understand the user's review requirements and objectives
+- Determine the review scope and key focus areas
+- Identify task ID and related implementation content
 
-### 第二步：載入強制執行規則
-讀取並嚴格遵循enforcement文件：
-- 主要路徑：`{project_root}/sunnycore/qa/enforcement/task-reviewer-enforcement.md`
-- **重要**：此文件包含所有詳細的執行規則、驗證標準和品質標準，必須完全遵循
+### Step 2: Load Mandatory Enforcement Rules
+Read and strictly follow the enforcement document:
+- Primary path: `{project_root}/sunnycore/qa/enforcement/task-reviewer-enforcement.md`
+- **Important**: This file contains all detailed execution rules, verification standards, and quality standards that must be completely followed
 
-### 第三步：載入工作流程規範
-讀取並按照workflow文件執行：
-- 主要路徑：`{project_root}/sunnycore/qa/workflow/reviewer-orchestrator-workflow.md`
-- **重要**：此文件定義了6個核心階段的結構化審查流程，請嚴格遵循。
+### Step 3: Load Workflow Specifications
+Read and execute according to the workflow document:
+- Primary path: `{project_root}/sunnycore/qa/workflow/reviewer-orchestrator-workflow.md`
+- **Important**: This file defines 6 core phases of structured review process, please follow strictly.
 
-### 第四步：執行結構化審查流程
-按照workflow中定義的6個階段順序執行：
-1. **任務分析與團隊組建** - 收集所有實施證據
-2. **並行審查執行** - 驗證範圍對齊和需求符合性
-3. **結果收集與整合** - 根據7維度品質框架評估
-4. **最終品質判斷** - 識別問題並提出可行建議
-5. **報告生成與維護** - 同步審查狀態到內部變數
+### Step 4: Execute Structured Review Process
+Execute in the order of 6 phases defined in the workflow:
+1. **Task Analysis and Team Formation** - Collect all implementation evidence
+2. **Synchronized Review Execution** - Verify scope alignment and requirement compliance
+3. **Result Collection and Integration** - Evaluate according to 7-dimension quality framework
+4. **Final Quality Judgment** - Identify issues and provide actionable recommendations
+5. **Report Generation and Maintenance** - Synchronize review status to internal variables
 
-## 關鍵執行原則
-- **證據驅動**：每個結論都必須有具體證據支持
-- **順序執行**：嚴格按階段順序執行，在每個檢查點驗證
-- **模板合規**：使用指定的報告模板，填充所有部分
-- **無佔位符**：用實際內容替換所有佔位符值
-- **最終權威**：QA對任務完成狀態有最終決定權
+## Key Execution Principles
+- **Evidence-Driven**: Every conclusion must be supported by concrete evidence
+- **Sequential Execution**: Strictly execute in phase order, validate at each checkpoint
+- **Template Compliance**: Use specified report templates, fill all sections
+- **No Placeholders**: Replace all placeholder values with actual content
+- **Final Authority**: QA has final authority over task completion status
 
-## 失敗處理
-如果任何驗證檢查點失敗：
-1. 立即停止當前階段
-2. 識別具體失敗原因
-3. 返回適當階段重新執行
-4. 修正問題後重新驗證
-5. 通過驗證後才能繼續下一階段
+## Failure Handling
+If any validation checkpoint fails:
+1. Immediately stop the current phase
+2. Identify specific failure causes
+3. Return to appropriate phase for re-execution
+4. Fix problems then re-validate
+5. Can only continue to next phase after passing validation

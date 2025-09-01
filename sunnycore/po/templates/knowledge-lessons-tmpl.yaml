@@ -6,26 +6,26 @@ metadata:
   generated_by: "knowledge-curator"
   date: "YYYY-MM-DD"
   sources:
-    reviews: [] # 列出引用的 review 檔案路徑
-    completions: [] # 列出引用的 completion 檔案路徑
+    reviews: [] # list referenced review file paths
+    completions: [] # list referenced completion file paths
 
 overview:
-  purpose: "彙整最佳實踐與常見錯誤，提升修復與開發效率"
-  how_to_use: "遇到錯誤先查錯誤對照表；開發前先讀最佳實踐"
+  purpose: "Compile best practices and common errors to improve repair and development efficiency"
+  how_to_use: "Check error reference table first when encountering errors; read best practices first when developing"
 
 best_practices:
   - id: BP-1
-    title: "<做法標題>"
-    motivation: "<為何需要>"
-    practice: "<具體步驟與要點>"
+    title: "<practice title>"
+    motivation: "<why needed>"
+    practice: "<specific steps and key points>"
     example:
-      code: "<可選：片段或檔案路徑>"
-      link: "<PR/檔案>"
+      code: "<optional: snippet or file path>"
+      link: "<PR/file>"
     checklist:
-      - "<檢核點>"
+      - "<check point>"
     applicability:
-      suitable: ["<情境>"]
-      not_suitable: ["<情境>"]
+      suitable: ["<scenario>"]
+      not_suitable: ["<scenario>"]
 
 common_errors:
   summary:
@@ -36,24 +36,22 @@ common_errors:
       low: 0
   items:
     - code: ERR-XXX-001
-      title: "<錯誤名稱>"
+      title: "<error name>"
       severity: "blocker|high|medium|low"
-      description: "<問題現象與根因>"
-      evidence: [] # review findings 或 error_log 連結
-      quick_fix: ["<步驟>"]
-      verified_fixes: ["<PR或commit>"]
-      prevention_practices: ["<關聯BP-IDs>"]
-      validation: ["<如何驗證修復成功>"]
+      description: "<problem phenomenon and root cause>"
+      evidence: [] # review findings or error_log links
+      quick_fix: ["<step>"]
+      verified_fixes: ["<PR or commit>"]
+      prevention_practices: ["<related BP-IDs>"]
+      validation: ["<how to verify repair success>"]
 
 lookup_tables:
   error_quick_reference:
     - code: ERR-XXX-001
-      short: "<一句話描述>"
-      fix: "<關鍵修復動作>"
+      short: "<one-sentence description>"
+      fix: "<key repair action>"
       refs: ["<links>"]
 
 appendix:
   notes: []
   glossary: []
-
-

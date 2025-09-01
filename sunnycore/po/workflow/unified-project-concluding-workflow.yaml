@@ -2,62 +2,61 @@
 template: unified-project-concluding-workflow
 version: 1
 
-# 🔄 工作流程Todo List製作流程
+# 🔄 Workflow Todo List Creation Process
 todo_list_creation:
-  description: "在開始執行任何工作流程步驟之前，必須使用todo_write工具創建包含所有workflow步驟的todo list"
+  description: "AI must create todo list containing all workflow steps before executing any workflow steps"
   importance: "critical"
-  
-  # 🛠️ Todo List工具使用指南
+
+  # 🛠️ Todo List Tool Usage Guide
   tool_syntax:
     format: "JSON"
     structure: |
       {
         "todos": [
           {
-            "content": "具體任務描述",
+            "content": "Specific task description",
             "status": "pending|in_progress|completed",
-            "id": "唯一識別碼",
+            "id": "unique identifier",
             "priority": "high|medium|low"
           }
         ]
       }
-  
+
   process_steps:
     1_analyze_workflow:
-      description: "分析工作流程結構 - 仔細閱讀整個workflow文件，識別所有階段、步驟和任務"
+      description: "Analyze workflow structure - carefully read entire workflow file, identify all stages, steps and tasks"
       priority: "high"
-      
-    2_extract_tasks:
-      description: "提取關鍵任務 - 將每個階段的核心任務轉換為具體的todo項目"
-      priority: "high"
-      
-    3_set_priorities:
-      description: "設定優先級 - 根據任務的重要性和依賴關係設定優先級"
-      priority: "medium"
-      
-    4_create_todo_list:
-      description: "創建Todo List - 使用todo_write工具創建包含所有步驟的結構化todo list"
-      priority: "high"
-      
-    5_execute_workflow:
-      description: "執行與更新 - 按照todo list順序執行任務，及時更新狀態"
-      priority: "high"
-  
-  # 📝 Todo List要求
-  requirements:
-    coverage: "每個主要階段都應該有對應的todo項目"
-    validation: "關鍵的驗證檢查點必須包含在todo list中"
-    priority_setting: "設定合理的優先級，確保依賴關係得到尊重"
-    status_tracking: "在執行過程中及時更新todo狀態（pending → in_progress → completed）"
-    uniqueness: "同時只能有一個任務處於in_progress狀態"
-    completeness: "只有在任務完全完成時才標記為completed"
 
-# 分隔線，以下為原始workflow內容
+    2_extract_tasks:
+      description: "Extract key tasks - convert core tasks of each stage to specific todo items"
+      priority: "high"
+
+    3_set_priorities:
+      description: "Set priorities - set priorities based on task importance and dependencies"
+      priority: "medium"
+
+    4_create_todo_list:
+      description: "Create Todo List - use todo_write tool to create structured todo list"
+      priority: "high"
+
+    5_execute_workflow:
+      description: "Execute and update - execute tasks in todo list order, update status timely"
+      priority: "high"
+
+  # 📝 Todo List Requirements
+  requirements:
+    coverage: "Each main stage should have corresponding todo item"
+    validation: "Key validation checkpoints must be included in todo list"
+    priority_setting: "Set reasonable priorities, ensure dependency relationships respected"
+    uniqueness: "Only one task can be in in_progress status simultaneously"
+    completeness: "Only mark as completed when task is fully completed"
+
+# Separator line, following is original workflow content
 ---
 
 workflow:
-  name: "統一專案結案工作流程"
-  description: "收集交付證據、QA潛在問題和未來增強的統一結案工作流程，生成完整的完成報告。"
+  name: "Unified Project Concluding Workflow"
+  description: "Collect delivery evidence, QA potential problems, and future enhancements for unified conclusion, generate complete completion report."
   report_template: "{project_root}/sunnycore/po/templates/completion-report-tmpl.yaml"
   enforcement_level: "lenient"
   halt_on_validation_failure: false
@@ -127,205 +126,205 @@ guardrails:
   halt_on_preconditions_failure: false
 
 preconditions:
-  - "所有任務已通過QA審查（檢查task.md中所有項目標記為[x]）"
-  - "實施計劃文件存在且可追蹤"
-  - "QA 回饋已收集或確認不可獲得"
-  
+  - "All tasks have passed QA review (check that all items in task.md are marked [x])"
+  - "Implementation plan file exists and is traceable"
+  - "QA feedback has been collected or confirmed unavailable"
+
 task_completion_check:
-  description: "在開始結案前驗證所有任務已完成"
+  description: "Verify all tasks completed before starting conclusion"
   check_method:
-    - "讀取 docs/specs/task.md"
-    - "掃描所有任務項目的狀態標記"
-    - "確認沒有 [ ] 或 [-] 狀態的項目"
-    - "只有所有項目都是 [x] 狀態才允許繼續"
+    - "Read docs/specs/task.md"
+    - "Scan status markers for all task items"
+    - "Confirm no items have [ ] or [-] status"
+    - "Only allow continuation when all items have [x] status"
   on_incomplete_tasks:
     action: "halt_and_report_incomplete_tasks"
-    message: "發現未完成任務，無法執行結案。請先完成所有任務的開發和審查。"
+    message: "Incomplete tasks found, cannot execute conclusion. Please complete all tasks' development and review first."
 
-# 整合的執行協議
+# Integrated execution protocol
 enforcement_protocol:
   enforcement_compliance:
     mandatory_enforcement_file: "{project_root}/sunnycore/po/enforcement/project-concluder-enforcement.md"
     compliance_verification: "Verify enforcement rules are understood; record warnings on minor non-compliance and continue"
     halt_on_non_compliance: false
-  
+
   mandatory_file_loading:
-    description: "在開始任何結案工作之前必須載入的檔案"
+    description: "Files that must be loaded before starting any conclusion work"
     requirements:
       - "READ {project_root}/sunnycore/po/enforcement/project-concluder-enforcement.md COMPLETELY - This file contains all mandatory rules and constraints"
-      - "READ 統一專案結案工作流程 YAML 檔案完整內容"
-      - "READ 完成報告範本 YAML 檔案完整內容"
-      - "確認理解所有工作流程階段"
-      - "確認理解範本結構"
-      - "確認理解驗證需求"
-      - "如果任何檔案無法載入或理解則停止"
+      - "READ unified project concluding workflow YAML file completely"
+      - "READ completion report template YAML file completely"
+      - "Confirm understanding of all workflow stages"
+      - "Confirm understanding of template structure"
+      - "Confirm understanding of validation requirements"
+      - "Stop if any files cannot be loaded or understood"
 
   evidence_collection_requirements:
     specification_files:
-      - "docs/specs/task.md - 任務規格"
-      - "docs/specs/requirements.md - 需求規格"
-      - "docs/specs/design.md - 設計規格"
-    
+      - "docs/specs/task.md - task specifications"
+      - "docs/specs/requirements.md - requirements specifications"
+      - "docs/specs/design.md - design specifications"
+
     implementation_plan:
-      - "根據 task_id 在 docs/implementation-plan/ 中定位計劃"
-      - "完整讀取計劃文件"
-      - "驗證計劃存在且符合預期範本"
-    
+      - "Locate plan in docs/implementation-plan/ by task_id"
+      - "Read plan file completely"
+      - "Verify plan exists and conforms to expected template"
+
     implementation_evidence:
-      - "PRs: 收集PR連結和描述"
-      - "Commits: 記錄相關提交雜湊和訊息"
-      - "Changed Files: 列出修改檔案及其用途"
-      - "Migrations: 記錄資料庫/架構變更"
-      - "Configurations: 記錄環境/配置變更"
-    
+      - "PRs: collect PR links and descriptions"
+      - "Commits: record relevant commit hashes and messages"
+      - "Changed Files: list modified files and their purposes"
+      - "Migrations: record database/architecture changes"
+      - "Configurations: record environment/configuration changes"
+
     quality_artifacts:
-      - "Test Reports: 收集單元、整合、驗收測試結果"
-      - "Coverage: 記錄實際涵蓋率百分比"
-      - "CI Status: 包含建置和部署狀態"
-      - "Performance: 收集實際效能測量結果"
-      - "Security Scans: 包含安全分析結果"
-    
+      - "Test Reports: collect unit, integration, acceptance test results"
+      - "Coverage: record actual coverage percentages"
+      - "CI Status: include build and deployment status"
+      - "Performance: collect actual performance measurements"
+      - "Security Scans: include security analysis results"
+
     qa_reviews:
-      - "QA Feedback: 收集QA審查評論和問題"
-      - "Issue Status: 記錄當前處理狀態"
-      - "Resolution Plans: 記錄計劃修復和改進"
-    
+      - "QA Feedback: collect QA review comments and issues"
+      - "Issue Status: record current processing status"
+      - "Resolution Plans: record resolution plans and improvements"
+
     project_md_documents:
-      - "掃描整個專案目錄結構，收集所有 .md 文檔"
-      - "分析文檔內容，提取相關資訊和見解"
-      - "識別文檔之間的關聯性和依賴關係"
-      - "記錄文檔的完整性和品質狀態"
-      - "為 completion report 提供全面的文檔分析基礎"
+      - "Scan entire project directory structure, collect all .md documents"
+      - "Analyze document content, extract relevant information and insights"
+      - "Identify associations and dependencies between documents"
+      - "Record completeness and quality status of documents"
+      - "Provide comprehensive document analysis foundation for completion report"
 
   stage_execution_checkpoints:
     before_stage:
-      - "說明正在開始的階段"
-      - "參考工作流程檔案中的特定階段需求"
-    
+      - "Explain stage being started"
+      - "Reference specific stage requirements in workflow file"
+
     during_stage:
-      - "執行該階段列出的所有動作"
-      - "進行系統性分析和評估"
-      - "收集所有必需的證據"
-    
+      - "Execute all actions listed in stage"
+      - "Perform systematic analysis and evaluation"
+      - "Collect all required evidence"
+
     after_stage:
-      - "對照驗證規則驗證階段完成"
-      - "確認所有必需的輸出已生成"
-      - "用證據連結記錄發現"
+      - "Verify stage completion against validation rules"
+      - "Confirm all required outputs generated"
+      - "Link evidence to record discoveries"
 
   synthesis_requirements:
     delivery_mapping:
-      - "交叉參考已完成的交付成果與原始範圍"
-      - "記錄每個計劃項目的完成狀態"
-      - "識別任何延期或範圍外變更"
-      - "為所有完成聲明提供證據"
-    
+      - "Cross-reference completed deliverables with original scope"
+      - "Record completion status of each planned item"
+      - "Identify any delays or scope-out changes"
+      - "Provide evidence for all completion statements"
+
     acceptance_criteria_analysis:
-      - "比較實施功能與驗收標準"
-      - "參考測試結果和驗證證據"
-      - "記錄任何未滿足或部分滿足的標準"
-      - "連結到具體測試報告或驗證工件"
-    
+      - "Compare implemented functions with acceptance standards"
+      - "Reference test results and verification evidence"
+      - "Record any unmet or partially met standards"
+      - "Link to specific test reports or verification artifacts"
+
     qa_problem_extraction:
-      - "總結QA回饋和關注點"
-      - "按嚴重性和當前狀態分類"
-      - "記錄解決計劃和時間線"
-      - "追蹤持續問題和權宜之計"
-    
+      - "Summarize QA feedback and concerns"
+      - "Categorize by severity and current status"
+      - "Record resolution plans and timelines"
+      - "Track ongoing issues and workarounds"
+
     known_issues_documentation:
-      - "列出當前缺陷和限制"
-      - "描述技術債務和所做權衡"
-      - "記錄現有的臨時解決方案"
-      - "評估風險等級和影響"
-    
+      - "List all defects and limitations currently existing"
+      - "Describe technical debt and trade-offs made"
+      - "Record existing temporary solutions"
+      - "Assess risk levels and impacts"
+
     project_documentation_analysis:
-      - "綜合分析所有收集的專案文檔"
-      - "識別文檔覆蓋範圍的缺口和重複"
-      - "評估文檔品質、一致性和可維護性"
-      - "記錄文檔架構的優點和改進機會"
-      - "為未來文檔改進提供具體建議"
+      - "Comprehensively analyze all collected project documents"
+      - "Identify coverage gaps and overlaps in documentation"
+      - "Evaluate documentation quality, consistency, and maintainability"
+      - "Record documentation architecture strengths and improvement opportunities"
+      - "Provide concrete suggestions for future documentation improvements"
 
   enhancement_planning:
     gap_based_enhancements:
-      - "從不完整功能中識別機會"
-      - "從QA回饋中衍生改進"
-      - "考慮效能最佳化機會"
-      - "評估可維護性改進"
-    
+      - "Identify opportunities from incomplete functions"
+      - "Derive improvements from QA feedback"
+      - "Consider performance optimization opportunities"
+      - "Evaluate maintainability improvements"
+
     success_criteria_definition:
-      - "為每個增強定義可測量的成功標準"
-      - "設定現實的時間線和努力估計"
-      - "識別依賴關係和先決條件"
-      - "按業務價值和技術影響排優先級"
+      - "Define measurable success criteria for each enhancement"
+      - "Set realistic timelines and effort estimates"
+      - "Identify dependencies and prerequisites"
+      - "Prioritize by business value and technical impact"
 
   template_population_enforcement:
     mandatory_steps:
-      - "總是先讀取範本檔案再寫入"
-      - "按範本需求逐章節填充"
-      - "絕不留下佔位符文本如 {task_id}`(如`1`, `2`, `3`...) 或 INSERT VALUE"
-      - "每個完成聲明都必須包含具體證據"
-      - "包含實際測量結果，非估計"
-      - "完整性檢查：每個範本章節都必須填充"
+      - "Always read template file before writing"
+      - "Populate section by section according to template requirements"
+      - "Never leave placeholder text like {task_id} or INSERT VALUE"
+      - "Each completion statement must include concrete evidence"
+      - "Include actual measurement results, not estimates"
+      - "Completeness check: each template section must be populated"
 
   validation_checkpoints:
     after_document_generation:
-      - "重新讀取生成的文件"
-      - "逐章節與範本結構比較"
-      - "驗證沒有佔位符值殘留"
-      - "確認所有完成聲明都有證據支持"
-      - "驗證markdown格式和結構"
-    
+      - "Read generated document back"
+      - "Compare section by section with template structure"
+      - "Verify no placeholder values remain"
+      - "Confirm all completion statements have evidence support"
+      - "Validate markdown format and structure"
+
     completion_criteria:
-      - "所有工作流程階段已完成"
-      - "所有範本章節用實際內容填充"
-      - "所有驗證規則已滿足"
-      - "所有完成聲明有證據支持"
-      - "QA潛在問題已分析和記錄"
-      - "未來增強具體且有優先級"
-      - "文件準備好交接給利害關係人"
+      - "All workflow stages completed"
+      - "All template sections populated with actual content"
+      - "All validation rules satisfied"
+      - "All completion statements have evidence support"
+      - "QA potential problems analyzed and recorded"
+      - "Future enhancements concrete with priorities"
+      - "Document ready for handover to stakeholders"
 
   error_handling:
     validation_failures:
-      - "如果驗證失敗立即停止"
-      - "識別具體驗證失敗"
-      - "返回適當的工作流程階段"
-      - "修正後重新執行"
-      - "繼續前重新驗證"
-    
+      - "Stop immediately if validation fails"
+      - "Identify specific validation failures"
+      - "Return to corresponding workflow stage"
+      - "Retry after correction"
+      - "Re-verify before continuation"
+
     evidence_collection_failures:
-      - "如果證據缺失，記錄為限制"
-      - "如果QA審查不可獲得，記錄缺失"
-      - "如果效能資料不完整，收集可獲得指標"
-      - "如果測試不足，記錄涵蓋率缺口"
+      - "Record as limitations if evidence missing"
+      - "Record QA review unavailable if not obtainable"
+      - "Collect available metrics if performance data incomplete"
+      - "Record coverage gaps if testing insufficient"
 
   critical_success_factors:
-    - "先讀取工作流程和範本檔案 - 絕不在沒有它們的情況下開始"
-    - "收集全面證據 - PRs、提交、測試、QA回饋"
-    - "系統性分析 - 先定義結案策略"
-    - "將交付映射到原始範圍 - 清晰的完成狀態"
-    - "分析驗收標準達成 - 用測試證據"
-    - "提取和分類QA問題 - 用解決狀態"
-    - "具體記錄已知問題 - 用權宜之計"
-    - "規劃未來增強 - 用成功標準"
-    - "在檢查點驗證 - 確保每階段品質"
-    - "全面分析專案文檔 - 收集所有相關資訊"
-    - "完成後清理臨時文檔 - 保留重要產出"
+    - "Read workflow and template files first - never start without them"
+    - "Collect comprehensive evidence - PRs, commits, tests, QA feedback"
+    - "Systematic analysis - define conclusion strategy first"
+    - "Map delivery to original scope - clear completion status"
+    - "Analyze acceptance criteria achievement - with test evidence"
+    - "Extract and categorize QA problems - with resolution status"
+    - "Clearly record known issues - with workarounds"
+    - "Plan future enhancements - with success criteria"
+    - "Validate at checkpoints - ensure quality per stage"
+    - "Comprehensively analyze project documents - collect all relevant information"
+    - "Clean up temporary documents after completion - preserve important deliverables"
 
   workflow_violation_responses:
-    missing_stage_execution: "返回並完成跳過的階段"
-    incomplete_evidence_collection: "收集所有必需工件"
-    unsupported_completion_claims: "為所有聲明提供證據"
-    missing_qa_analysis: "記錄QA回饋和問題"
-    generic_assessments: "用具體資料和測量替換"
-    incomplete_template: "識別缺失章節並填充"
-    invalid_format: "修正格式以完全符合範本"
-    incomplete_document_analysis: "完成所有專案文檔的分析"
-    missing_document_cleanup: "執行臨時文檔清理程序"
+    missing_stage_execution: "Return and complete skipped stages"
+    incomplete_evidence_collection: "Collect all required artifacts"
+    unsupported_completion_claims: "Provide evidence for all statements"
+    missing_qa_analysis: "Record QA feedback and problems"
+    generic_assessments: "Replace with concrete data and measurements"
+    incomplete_template: "Identify missing sections and populate them"
+    invalid_format: "Correct format to fully conform to template"
+    incomplete_document_analysis: "Complete analysis of all project documents"
+    missing_document_cleanup: "Execute temporary document cleanup procedure"
 
-# 統一階段執行流程
+# Unified stage execution flow
 stages:
   - id: "workflow_initialization"
-    title: "工作流程初始化"
-    description: "載入必要文件並設置結案環境"
+    title: "Workflow Initialization"
+    description: "Load necessary files and set up conclusion environment"
     completion_requirements:
       - workflow_file_parsed: true
       - template_structure_understood: true
@@ -336,8 +335,8 @@ stages:
       - verify_file_accessibility
 
   - id: "conclusion_strategy"
-    title: "結案策略設置"
-    description: "建立結案策略和證據收集計劃"
+    title: "Conclusion Strategy Setup"
+    description: "Establish conclusion strategy and evidence collection plan"
     completion_requirements:
       - conclusion_strategy_defined: true
       - conclusion_focus_areas_defined: true
@@ -348,8 +347,8 @@ stages:
       - establish_evidence_collection_strategy
 
   - id: "evidence_collection"
-    title: "全面證據收集"
-    description: "收集所有必要的專案完成證據"
+    title: "Comprehensive Evidence Collection"
+    description: "Collect all necessary project completion evidence"
     completion_requirements:
       - all_required_specs_read: true
       - plan_document_located_and_read: true
@@ -359,17 +358,17 @@ stages:
       - all_project_md_documents_analyzed: true
     actions:
       - read_specification_files: ["docs/specs/task.md", "docs/specs/requirements.md", "docs/specs/design.md"]
-      - resolve_plan_by_task_id: "{{task_id}`(如`1`, `2`, `3`...)}"
-      - read_dev_notes: "docs/dev-notes/{{task_id}`(如`1`, `2`, `3`...)}-dev-notes.md"
+      - resolve_plan_by_task_id: "{{task_id}}"
+      - read_dev_notes: "docs/dev-notes/{{task_id}}-dev-notes.md"
       - gather_implementation_evidence: ["PRs", "commits", "changed_files", "migrations", "configs"]
       - gather_quality_artifacts: ["test_reports", "coverage", "CI_status", "performance", "security_scans"]
-      - gather_qa_reviews_and_feedback: "docs/implementation-review/{{task_id}`(如`1`, `2`, `3`...)}-review.md"
+      - gather_qa_reviews_and_feedback: "docs/implementation-review/{{task_id}}-review.md"
       - analyze_all_project_md_documents: "{{project_root}}"
       - document_evidence_gaps_as_limitations
 
   - id: "delivery_synthesis"
-    title: "交付成果綜合分析"
-    description: "分析交付成果與原始目標的對照"
+    title: "Delivery Deliverables Comprehensive Analysis"
+    description: "Analyze delivery deliverables and original scope alignment"
     completion_requirements:
       - delivery_mapped_to_scope: true
       - acceptance_criteria_analyzed: true
@@ -382,8 +381,8 @@ stages:
       - summarize_deliverable_status
 
   - id: "qa_problem_analysis"
-    title: "QA 潛在問題分析"
-    description: "提取並分析 QA 回饋中的潛在問題"
+    title: "QA Potential Problems Analysis"
+    description: "Extract and analyze potential problems from QA feedback"
     completion_requirements:
       - qa_potential_problems_extracted: true
       - known_issues_and_risks_documented: true
@@ -397,8 +396,8 @@ stages:
       - link_all_findings_to_evidence
 
   - id: "enhancement_planning"
-    title: "未來增強規劃"
-    description: "基於差距和QA反饋制定未來增強計劃"
+    title: "Future Enhancement Planning"
+    description: "Formulate future enhancement plans based on gaps and QA feedback"
     completion_requirements:
       - enhancement_opportunities_identified: true
       - enhancements_derived_from_gaps_and_qa: true
@@ -414,8 +413,8 @@ stages:
       - prioritize_by_business_value_and_impact
 
   - id: "report_generation"
-    title: "完成報告生成"
-    description: "生成結構化的專案完成報告"
+    title: "Completion Report Generation"
+    description: "Generate structured project completion report"
     completion_requirements:
       - template_structure_followed: true
       - no_placeholder_values: true
@@ -440,8 +439,8 @@ stages:
       - verify_no_placeholder_content_remains
 
   - id: "finalization"
-    title: "完成與品質確認"
-    description: "最終驗證和品質檢查"
+    title: "Completion and Quality Confirmation"
+    description: "Final verification and quality checks"
     completion_requirements:
       - final_document_read_back: true
       - completeness_verified: true
@@ -458,7 +457,7 @@ stages:
       - request_feedback_if_needed
       - cleanup_temporary_documents: "{{project_root}}"
 
-# === 新增：知識與架構產出整合 ===
+# === New: Knowledge and Architecture Product Integration ===
 extensions:
   agents_integration:
     knowledge_curator:
@@ -477,7 +476,7 @@ extensions:
       output: "{{project_root}}/docs/file-classification/file-classification-report.md"
       trigger: "parallel:with_conclude"
 
-# 整合的驗證規則
+# Integrated validation rules
 validation_rules:
   template_validation:
     required_metadata_fields:
@@ -509,25 +508,25 @@ validation_rules:
     forbidden_content:
       - placeholder_brackets: ["<", ">"]
       - placeholder_text: ["INSERT", "TODO", "TBD"]
-      - generic_placeholders: ["{task_id}`(如`1`, `2`, `3`...)", "<project_name>", "<owner>"]
+      - generic_placeholders: ["{task_id}", "<project_name>", "<owner>"]
       - unsupported_claims: "all_completion_claims_must_have_evidence"
       - vague_assessments: ["generally good", "mostly complete", "acceptable quality"]
-    
+
     document_cleanup_requirements:
       preserve_files:
-        - "docs/implementation-plan/**/* - 實施計劃文件"
-        - "docs/implementation-review/**/* - 實施審查文件"
-        - "docs/dev-notes/**/* - 開發筆記"
-        - "docs/knowledge/**/* - 知識文件"
-        - "docs/architecture/**/* - 架構文件"
-        - "README.md - 專案說明文件"
-        - "CHANGELOG.md - 變更日誌"
-        - "docs/completion-reports/**/* - 完成報告"
+        - "docs/implementation-plan/**/* - implementation plan files"
+        - "docs/implementation-review/**/* - implementation review files"
+        - "docs/dev-notes/**/* - development notes"
+        - "docs/knowledge/**/* - knowledge files"
+        - "docs/architecture/**/* - architecture files"
+        - "README.md - project description file"
+        - "CHANGELOG.md - change log"
+        - "docs/completion-reports/**/* - completion reports"
       cleanup_temporary_files:
-        - "臨時分析過程中創建的文檔"
-        - "用於資訊收集的臨時筆記"
-        - "分析過程中的中間產出"
-        - "不屬於最終交付的臨時文件"
+        - "Temporary documents created during analysis process"
+        - "Temporary notes used for information collection"
+        - "Intermediate outputs from analysis process"
+        - "Temporary files not part of final deliverables"
 
   error_handling:
     missing_stage:
@@ -554,12 +553,12 @@ validation_rules:
       severity: "high"
       message: "Template section incomplete or contains placeholders"
       action: "request_template_completion"
-    
+
     incomplete_document_analysis:
       severity: "high"
       message: "Project documentation analysis incomplete"
       action: "complete_document_analysis"
-    
+
     missing_document_cleanup:
       severity: "medium"
       message: "Temporary documents not cleaned up"
@@ -567,5 +566,5 @@ validation_rules:
 
 output:
   path: "{{project_root}}/docs/completion-reports/"
-  filename: "{{task_id}`(如`1`, `2`, `3`...)}-completion.md"
+  filename: "{{task_id}}-completion.md"
   format: markdown

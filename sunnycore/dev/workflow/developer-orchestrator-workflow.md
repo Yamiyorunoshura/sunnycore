@@ -50,7 +50,7 @@
 <execution_actions>
 - 深度分析計劃內容涉及的技術領域和複雜度
 - 智能識別前端、後端、全端或重構需求
-- 評估任務間的依賴關係和並行執行可能性
+- 評估任務間的依賴關係和同步執行可能性
 - 計算任務複雜度和所需資源估算
 - 檢查`docs/review-results/{task_id}-review.md`（如`1-review.md`, `2-review.md`, `3-review.md`...）是否存在先前的審查文件（棕地狀態檢測）
 - 如為棕地狀態，讀取`docs/review-results/{task_id}-review.md`（如`1-review.md`, `2-review.md`, `3-review.md`...）中的問題清單、修復建議和優先級，並將其作為任務分類的參考。
@@ -71,7 +71,7 @@
 <think harder>
 <execution_actions>
 - 根據`{project_root}/sunnycore/dev/enforcement/developer-orchestrator-enforcement.md`中的任務類型映射規則選擇最適當的子代理
-- 啟動並行執行協議（當任務間無強依賴時）
+- 啟動同步執行協議（當任務間無強依賴時）
 - 應用智能代理映射規則:
 
     <agent_mapping category="後端領域專家">
@@ -111,7 +111,7 @@
 
 <assignment_checkpoints>
 - 代理選擇符合任務  需求
-- 並行執行策略合理
+- 同步執行策略合理
 - 協調機制建立完成
 - 上下文傳遞完整
 </assignment_checkpoints>

@@ -1,167 +1,167 @@
-# Knowledge Curator 強制執行規範
+# Knowledge Curator Enforcement Specification
 
-## 核心執行協議
+## Core Execution Protocol
 
-### 必要前置條件（寬鬆）
-- **建議**：開始前載入統一工作流程、模板與來源文件；若缺失，記錄至 validation_warnings 並持續
-- **工作流程讀取**：應讀取 `{project_root}/sunnycore/po/workflow/unified-knowledge-curation-workflow.yaml`，失敗則記錄警告
-- **模板讀取**：應讀取 `{project_root}/sunnycore/po/templates/knowledge-lessons-tmpl.yaml`，失敗則記錄警告
-- **來源掃描**：應掃描指定路徑的審查報告和完成報告；缺失則記錄警告並以現有資訊繼續
+### Prerequisites (Flexible)
+- **Recommendation**: Load unified workflow, templates, and source files before starting; record to validation_warnings if missing and continue
+- **Workflow Reading**: Should read `{project_root}/sunnycore/po/workflow/unified-knowledge-curation-workflow.yaml`, log warning on failure
+- **Template Reading**: Should read `{project_root}/sunnycore/po/templates/knowledge-lessons-tmpl.yaml`, log warning on failure
+- **Source Scanning**: Should scan specified paths for review reports and completion reports; record warning if missing and continue with existing information
 
-### 工作流程合規性（強制執行）
-- **階段完整性**：必須按照 unified-knowledge-curation-workflow.yaml 定義的所有階段順序執行
-- **Platinum級別篩選**：必須嚴格執行 platinum_practices 驗證規則（min_score=4.0, required_maturity="platinum"）
-- **三層知識架構**：必須建立急診清單、詳細分析、預防指南的完整架構
-- **並行執行**：在來源發現階段必須並行掃描審查報告和完成報告
-- **模式分析**：必須執行錯誤模式識別與成功實踐關聯分析
-- **品質驗證**：必須執行證據完整性和platinum標準的最終驗證
+### Workflow Compliance (Mandatory Enforcement)
+- **Stage Integrity**: Must execute all stages in order defined by unified-knowledge-curation-workflow.yaml
+- **Platinum Level Filtering**: Must strictly execute platinum_practices validation rules (min_score=4.0, required_maturity="platinum")
+- **Three-layer Knowledge Architecture**: Must establish complete architecture of emergency list, detailed analysis, prevention guides
+- **Synchronous Execution**: Must synchronously scan review reports and completion reports in source discovery stage
+- **Pattern Analysis**: Must execute error pattern identification and successful practice association analysis
+- **Quality Verification**: Must execute evidence integrity verification and platinum standard final verification
 
-### 來源資料品質（強制驗證）
-- **審查報告**：必須從 `{{project_root}}/docs/implementation-review/*.md` 提取 `error_log` 與 `findings`
-- **完成報告**：必須從 `{{project_root}}/docs/completion-reports/*-completion.md` 提取品質評估資料
-- **證據鏈結**：每個知識條目都必須有具體的證據支持（檔案路徑、行號、PR鏈結）
-- **來源可追溯**：必須能追溯每個最佳實踐和錯誤模式的原始來源
+### Source Data Quality (Mandatory Verification)
+- **Review Reports**: Must extract `error_log` and `findings` from `{{project_root}}/docs/implementation-review/*.md`
+- **Completion Reports**: Must extract quality assessment data from `{{project_root}}/docs/completion-reports/*-completion.md`
+- **Evidence Links**: Every knowledge entry must have concrete evidence support (file paths, line numbers, PR links)
+- **Source Traceability**: Must be able to trace every best practice and error pattern to original sources
 
-### 錯誤模式分析（強制執行）
-- **模式識別**：必須識別重複出現的錯誤模式和共同根因
-- **嚴重性分級**：必須按 blocker > high > medium > low 分級錯誤
-- **可復現性評估**：必須評估錯誤的可復現性和影響範圍
-- **傳播分析**：必須分析錯誤在不同團隊/專案間的傳播模式
+### Error Pattern Analysis (Mandatory Execution)
+- **Pattern Identification**: Must identify repetitive error patterns and common root causes
+- **Severity Grading**: Must grade errors by blocker > high > medium > low
+- **Reproducibility Assessment**: Must assess reproducibility and impact scope of errors
+- **Propagation Analysis**: Must analyze propagation patterns of errors across different teams/projects
 
-### 最佳實踐萃取（強制要求）
-- **品質門檻**：僅收錄 quality_assessment.summary_score ≥ 4 或被QA正面評價的實踐
-- **實證基礎**：每個最佳實踐都必須有實際成功案例支持
-- **適用性分析**：必須明確標註適用和不適用的情境
-- **可檢核清單**：必須提供具體的檢核步驟和驗證方法
+### Best Practice Extraction (Mandatory Requirements)
+- **Quality Threshold**: Only record practices with quality_assessment.summary_score ≥ 4 or positively evaluated by QA
+- **Empirical Foundation**: Every best practice must have actual success case support
+- **Applicability Analysis**: Must clearly annotate applicable and inapplicable scenarios
+- **Auditable Checklists**: Must provide concrete inspection steps and verification methods
 
-### 知識結構化（強制標準）
-- **分層架構**：必須建立快速對照表、詳細分析、預防指南的三層結構
-- **交叉鏈結**：相關的最佳實踐與錯誤模式必須互相鏈結形成閉環
-- **編碼系統**：錯誤代碼必須遵循 ERR-[領域]-[編號] 格式
-- **版本控制**：必須記錄知識庫的版本和更新歷史
+### Knowledge Structuring (Mandatory Standards)
+- **Hierarchical Architecture**: Must establish three-layer structure of quick reference table, detailed analysis, prevention guides
+- **Cross-linking**: Related best practices and error patterns must link to form closed loops
+- **Coding System**: Error codes must follow ERR-[domain]-[number] format
+- **Version Control**: Must record versions and update history of knowledge base
 
-### 修復方案驗證（絕對強制）
-- **實證分離**：必須將「已驗證修復」與「建議步驟」明確分開標示
-- **成功案例**：已驗證修復必須有具體的PR或commit證據
-- **驗證步驟**：必須提供驗證修復成功的具體步驟
-- **失敗率統計**：必須記錄修復方案的成功率和失敗案例
+### Repair Solution Verification (Absolute Mandatory)
+- **Empirical Separation**: Must clearly separate "verified repairs" and "suggested steps" with annotation
+- **Success Cases**: Verified repairs must have concrete PR or commit evidence
+- **Verification Steps**: Must provide concrete steps to verify repair success
+- **Failure Rate Statistics**: Must record success rates and failure cases of repair schemes
 
-### 預防機制設計（強制實施）
-- **根因分析**：必須追溯到錯誤的根本原因而非表面現象
-- **預防策略**：必須為每個錯誤模式提供預防措施
-- **檢測機制**：必須設計早期檢測和預警機制
-- **工具支持**：必須推薦或建立支持預防的工具和流程
+### Prevention Mechanism Design (Mandatory Implementation)
+- **Root Cause Analysis**: Must trace to fundamental causes of errors rather than surface phenomena
+- **Prevention Strategies**: Must provide prevention measures for every error pattern
+- **Detection Mechanisms**: Must design early detection and early warning mechanisms
+- **Tool Support**: Must recommend or establish tools and processes supporting prevention
 
-### 快速響應設計（強制優化）
-- **急診清單**：必須建立可在5分鐘內查找的快速對照表
-- **關鍵詞索引**：必須建立基於錯誤現象的關鍵詞索引
-- **相似性搜索**：必須支持基於錯誤描述的相似性匹配
-- **優先級排序**：必須按影響和緊急程度排序錯誤處理順序
+### Rapid Response Design (Mandatory Optimization)
+- **Emergency List**: Must establish quick reference table findable within 5 minutes
+- **Keyword Indexing**: Must establish keyword index based on error phenomena
+- **Similarity Search**: Must support similarity matching based on error descriptions
+- **Priority Sorting**: Must sort error handling sequence by impact and urgency
 
-### 社群智慧整合（強制促進）
-- **多團隊視角**：必須整合來自不同團隊的經驗和視角
-- **知識共享**：必須建立知識貢獻和共享的機制
-- **專家網路**：必須建立領域專家的聯繫網路
-- **集體學習**：必須促進團隊集體學習和經驗交流
+### Community Wisdom Integration (Mandatory Promotion)
+- **Multi-team Perspectives**: Must integrate experiences and perspectives from different teams
+- **Knowledge Sharing**: Must establish knowledge contribution and sharing mechanisms
+- **Expert Networks**: Must establish networks of domain experts
+- **Collective Learning**: Must promote collective learning and experience exchange among teams
 
-### 持續進化機制（強制建立）
-- **定期更新**：必須建立定期更新知識庫的機制
-- **過時清理**：必須定期清理過時和無效的資訊
-- **新模式發現**：必須持續發現和記錄新的錯誤模式
-- **效果追蹤**：必須追蹤知識庫使用效果和改進空間
+### Continuous Evolution Mechanism (Mandatory Establishment)
+- **Regular Updates**: Must establish mechanism for regular knowledge base updates
+- **Outdated Cleanup**: Must regularly clean outdated and invalid information
+- **New Pattern Discovery**: Must continuously discover and record new error patterns
+- **Effect Tracking**: Must track usage effects and improvement space of knowledge base
 
-### 模板合規性（強制執行）
-- **結構一致性**：必須遵循 `{project_root}/sunnycore/po/templates/knowledge-lessons-tmpl.yaml` 結構
-- **內容完整性**：所有必需部分都必須有實際內容或標記為 "N/A - [原因]"
-- **佔位符清除**：不得有未填充的 `<placeholder>` 值
-- **格式標準化**：必須符合統一的格式和命名規範
+### Template Compliance (Mandatory Enforcement)
+- **Structure Consistency**: Must follow structure of `{project_root}/sunnycore/po/templates/knowledge-lessons-tmpl.yaml`
+- **Content Completeness**: All required sections must have actual content or marked as "N/A - [reason]"
+- **Placeholder Removal**: Must not have unfilled `<placeholder>` values
+- **Format Standardization**: Must conform to unified format and naming norms
 
-### Markdown格式轉換（絕對強制）
-- **YAML到Markdown**：必須將 `knowledge-lessons-tmpl.yaml` 結構完整轉換為標準Markdown格式
-- **標題層級**：YAML section轉換為對應的Markdown標題（# ## ### #### ##### ######）
-- **清單格式**：YAML陣列轉換為Markdown清單（- 或 1. 格式）
-- **代碼區塊**：錯誤代碼、修復步驟、驗證命令使用標準Markdown代碼塊（```language）
-- **表格格式**：快速對照表、錯誤模式清單使用Markdown表格格式 | 欄位 | 值 |
-- **鏈結格式**：證據連結、PR參考使用標準Markdown鏈結格式 [文字](URL)
-- **區塊引用**：重要提醒、警告訊息使用 > 引用格式
-- **強調標記**：使用 **粗體** 和 *斜體* 適當強調關鍵知識點和風險
-- **分類標示**：使用表情符號清楚標示內容類型（🚨 常見錯誤、✅ 已驗證修復、💡 最佳實踐、⚠️ 預防措施）
-- **複雜度指標**：使用星級或顏色標示知識條目的複雜度和重要性
+### Markdown Format Conversion (Absolute Mandatory)
+- **YAML to Markdown**: Must completely convert `knowledge-lessons-tmpl.yaml` structure to standard Markdown format
+- **Heading Hierarchy**: YAML sections converted to corresponding Markdown headings (# ## ### #### ##### ######)
+- **List Format**: YAML arrays converted to Markdown lists (- or 1. format)
+- **Code Blocks**: Error codes, repair steps, verification commands use standard Markdown code blocks (```language)
+- **Table Format**: Quick reference table, error pattern lists use Markdown table format | Field | Value |
+- **Link Format**: Evidence links, PR references use standard Markdown link format [text](URL)
+- **Block Quotes**: Important reminders, warning messages use > quote format
+- **Emphasis Markers**: Use **bold** and *italic* to appropriately emphasize key knowledge points and risks
+- **Classification Indicators**: Use emojis to clearly indicate content types (🚨 Common errors, ✅ Verified repairs, 💡 Best practices, ⚠️ Prevention measures)
+- **Complexity Indicators**: Use star ratings or colors to indicate complexity and importance of knowledge entries
 
-### 品質保證要求（強制達標）
-- **客觀性**：所有分析都必須基於可驗證的事實和數據
-- **準確性**：所有修復方案都必須經過驗證或明確標註為建議
-- **實用性**：所有知識條目都必須對實際工作有明確價值
-- **時效性**：所有資訊都必須反映當前的技術環境和實踐
+### Quality Assurance Requirements (Mandatory Achievement)
+- **Objectivity**: All analyses must be based on verifiable facts and data
+- **Accuracy**: All repair schemes must be verified or clearly marked as suggestions
+- **Practicality**: All knowledge entries must have clear value for actual work
+- **Timeliness**: All information must reflect current technical environment and practices
 
-### 影響測量（強制追蹤）
-- **使用統計**：必須追蹤知識庫的使用頻率和方式
-- **效果評估**：必須評估知識庫對錯誤減少的實際效果
-- **時間節省**：必須測量知識庫對問題解決時間的改善
-- **學習曲線**：必須追蹤對新人學習曲線的改善效果
+### Impact Measurement (Mandatory Tracking)
+- **Usage Statistics**: Must track frequency and methods of knowledge base usage
+- **Effect Evaluation**: Must evaluate actual effects of knowledge base on error reduction
+- **Time Saving**: Must measure improvements in problem-solving time by knowledge base
+- **Learning Curve**: Must track improvements in newcomer learning curves
 
-### 安全要求（強制遵守）
-- **只讀保護**：絕不修改 `docs/specs/` 中的任何檔案
-- **敏感資訊**：避免在知識庫中暴露敏感的系統資訊
-- **訪問控制**：確保只處理授權範圍內的檔案和資料
-- **資料隱私**：保護個人和專案敏感資訊
+### Security Requirements (Mandatory Compliance)
+- **Read-only Protection**: Never modify any files in `docs/specs/`
+- **Sensitive Information**: Avoid exposing sensitive system information in knowledge base
+- **Access Control**: Ensure only authorized files and data are processed
+- **Data Privacy**: Protect personal and project sensitive information
 
-### 輸出位置（固定）
-- **主文檔**：`{{project_root}}/docs/knowledge/engineering-lessons.md`
-- **模板參考**：`{project_root}/sunnycore/po/templates/knowledge-lessons-tmpl.yaml`
-- **備份路徑**：`{{project_root}}/docs/knowledge/engineering-lessons-{{timestamp}}.md`
-- **索引文件**：`{{project_root}}/docs/knowledge/index.md`
+### Output Location (Fixed)
+- **Main Document**: `{{project_root}}/docs/knowledge/engineering-lessons.md`
+- **Template Reference**: `{project_root}/sunnycore/po/templates/knowledge-lessons-tmpl.yaml`
+- **Backup Path**: `{{project_root}}/docs/knowledge/engineering-lessons-{{timestamp}}.md`
+- **Index File**: `{{project_root}}/docs/knowledge/index.md`
 
-## 知識策展檢查清單（強制執行）
+## Knowledge Curation Checklist (Mandatory Enforcement)
 
-### 來源分析檢查
-- [ ] 審查報告已掃描且error_log提取完成
-- [ ] 完成報告已分析且品質評估數據提取完成
-- [ ] 所有知識條目都有明確的證據鏈結
-- [ ] 來源可追溯性已建立
+### Source Analysis Check
+- [ ] Review reports scanned and error_log extraction completed
+- [ ] Completion reports analyzed and quality assessment data extraction completed
+- [ ] All knowledge entries have clear evidence links
+- [ ] Source traceability established
 
-### 錯誤模式分析檢查
-- [ ] 重複錯誤模式已識別並分類
-- [ ] 嚴重性分級準確且有依據
-- [ ] 根因分析深入且準確
-- [ ] 傳播模式分析完整
+### Error Pattern Analysis Check
+- [ ] Repetitive error patterns identified and classified
+- [ ] Severity grading accurate with evidence
+- [ ] Root cause analysis deep and accurate
+- [ ] Propagation pattern analysis complete
 
-### 最佳實踐檢查
-- [ ] 僅收錄高品質實踐（score ≥ 4）
-- [ ] 每個實踐都有實證基礎
-- [ ] 適用性分析明確
-- [ ] 檢核清單具體可操作
+### Best Practice Check
+- [ ] Only high-quality practices recorded (score ≥ 4)
+- [ ] Every practice has empirical foundation
+- [ ] Applicability analysis clear
+- [ ] Inspection checklists concrete and actionable
 
-### 知識結構檢查
-- [ ] 三層結構（急診-治療-預防）已建立
-- [ ] 交叉鏈結網路已形成
-- [ ] 編碼系統一致
-- [ ] 快速對照表可用
+### Knowledge Structure Check
+- [ ] Three-layer structure established (emergency-treatment-prevention)
+- [ ] Cross-linking network formed
+- [ ] Coding system consistent
+- [ ] Quick reference table available
 
-### 修復方案檢查
-- [ ] 已驗證修復與建議步驟明確分離
-- [ ] 所有已驗證修復都有證據支持
-- [ ] 驗證步驟具體可執行
-- [ ] 成功率數據準確
+### Repair Solution Check
+- [ ] Verified repairs and suggested steps clearly separated
+- [ ] All verified repairs have evidence support
+- [ ] Verification steps concrete and executable
+- [ ] Success rate data accurate
 
-### 預防機制檢查
-- [ ] 根因分析深入準確
-- [ ] 預防策略具體可行
-- [ ] 檢測機制設計完整
-- [ ] 工具推薦實用
+### Prevention Mechanism Check
+- [ ] Root cause analysis deep and accurate
+- [ ] Prevention strategies concrete and feasible
+- [ ] Detection mechanisms designed complete
+- [ ] Tool recommendations practical
 
-## 品質門檻（強制通過）
-- **Platinum級別篩選**：只記錄 implementation_maturity >= 'platinum' 或 quality_assessment.summary_score >= 4 的實踐
-- **證據支持率**：100%的知識條目都必須有具體證據（檔案路徑、PR連結、測試報告）
-- **實證比例**：至少70%的修復方案必須是已驗證的
-- **三層架構完整性**：急診清單、詳細分析、預防指南三層必須完整建立
-- **成功率門檻**：納入的實踐必須有 >= 0.8 的成功率
-- **更新頻率**：知識庫必須每季度更新一次
-- **使用效果**：必須能證明對錯誤減少的實際效果
+## Quality Thresholds (Mandatory Pass)
+- **Platinum Level Filtering**: Only record practices with implementation_maturity >= 'platinum' or quality_assessment.summary_score >= 4
+- **Evidence Support Rate**: 100% of knowledge entries must have concrete evidence (file paths, PR links, test reports)
+- **Empirical Proportion**: At least 70% of repair schemes must be verified
+- **Three-layer Architecture Integrity**: Emergency list, detailed analysis, prevention guides three layers must be complete
+- **Success Rate Threshold**: Included practices must have >= 0.8 success rate
+- **Update Frequency**: Knowledge base must be updated quarterly
+- **Usage Effect**: Must prove actual effects on error reduction
 
-## 失敗處理協議（記錄並續行）
-- **來源文件缺失**：記錄缺失路徑與替代資訊來源；繼續處理現有資料
-- **證據鏈結不足**：記錄缺失證據與補充計劃；標註為建議級別
-- **模式識別失敗**：記錄分析困難與人工介入需求；不中斷處理
-- **模板不合規**：記錄差異與修正計劃；不中斷輸出
-- **品質門檻未達**：記錄差距與改進計劃；安排後續增強
+## Failure Handling Protocol (Record and Continue)
+- **Source File Missing**: Record missing paths and alternative information sources; continue processing existing data
+- **Evidence Link Insufficient**: Record missing evidence and supplementation plans; mark as low level
+- **Pattern Identification Failure**: Record analysis difficulties and manual intervention needs; do not interrupt processing
+- **Template Non-compliance**: Record differences and correction plans; do not interrupt output
+- **Quality Threshold Not Met**: Record gaps and improvement plans; arrange subsequent enhancement

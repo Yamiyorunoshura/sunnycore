@@ -1,205 +1,205 @@
-# Project Concluder 強制執行規範
+# Project Concluder Enforcement Specification
 
-## 核心執行協議
+## Core Execution Protocol
 
-### 必要前置條件（寬鬆）
-- **建議**：開始結案前載入必要文件；若缺失，記錄為 validation_warnings 並持續
-- **建議讀取順序**：
+### Prerequisites (Flexible)
+- **Recommendation**: Load necessary files before starting conclusion; record to validation_warnings if missing and continue
+- **Recommended Reading Order**:
   1. `{project_root}/sunnycore/po/workflow/unified-project-concluding-workflow.yaml`
   2. `{project_root}/sunnycore/po/templates/completion-report-tmpl.yaml`
-- **檔案載入驗證**：未能完全載入時，記錄缺口與替代資訊來源
+- **File Loading Verification**: Record gaps and alternative information sources if unable to load completely
 
-### 確定性與並行化（新增強制）
-- **確定性**：所有自動化步驟必須在溫度 0、top_p 1、seed 42 下執行
-- **一致性**：列表輸出採用穩定字典序，並將所有路徑正規化為絕對路徑
-- **並行化**：允許在 `evidence_collection` 與 `delivery_synthesis` 階段的子步驟並行執行，需確保資料相依性不被破壞
-- **快停策略**：若前置條件或必備檔案缺失，必須立即停止並回報，不得繼續後續階段
-- **快取要求**：採用內容雜湊快取；當 `docs/specs/**` 與 `docs/implementation-plan/**` 無變更時重用結果
+### Determinism and Synchronization (New Mandatory)
+- **Determinism**: All automated steps must be executed with temperature 0, top_p 1, seed 42
+- **Consistency**: List output adopts stable lexicographic order, and all paths are normalized to absolute paths
+- **Synchronization**: Allow sub-steps in `evidence_collection` and `delivery_synthesis` stages to execute synchronously, ensuring data dependencies are not broken
+- **Fail-fast Strategy**: If prerequisites or essential files are missing, must stop immediately and report, not continue to subsequent stages
+- **Cache Requirements**: Adopt content hash caching; reuse results when `docs/specs/**` and `docs/implementation-plan/**` have no changes
 
-### 基於證據的結案（絕對強制）
-- **證據要求**：所有結論都必須有具體證據支持
-- **證據類型**：檔案路徑、PR連結、測試報告、測量結果、QA評論
-- **可追溯性**：每個完成聲明都必須能追溯到具體的實施證據
-- **客觀性**：避免主觀判斷，只基於可驗證的事實
+### Evidence-based Conclusion (Absolute Mandatory)
+- **Evidence Requirements**: All conclusions must be supported by concrete evidence
+- **Evidence Types**: File paths, PR links, test reports, measurement results, QA comments
+- **Traceability**: Every completion statement must be traceable to concrete implementation evidence
+- **Objectivity**: Avoid subjective judgments, base only on verifiable facts
 
-### 工作流程合規性（寬鬆）
-- **階段完整性**：應按順序執行；未完成時記錄原因與補救計劃
-- **驗證檢查點**：未通過時記錄警告並最小化持續
-- **失敗處理**：非阻斷性失敗記錄為警告並持續；阻斷性才停止
+### Workflow Compliance (Flexible)
+- **Stage Integrity**: Should execute in order; record reasons and remediation plans when incomplete
+- **Validation Checkpoints**: Record warnings and minimize continuation when not passed
+- **Failure Handling**: Record warnings and continue for non-blocking failures; stop only for blocking failures
 
-### 範本合規性（強制執行）
-- **結構一致性**：報告必須符合 `{project_root}/sunnycore/po/templates/completion-report-tmpl.yaml` 結構
-- **內容完整性**：所有必需部分都必須有實際內容
-- **佔位符清除**：不得有未填充的 `<placeholder>` 值
-- **格式標準**：必須符合範本的格式要求
+### Template Compliance (Mandatory Enforcement)
+- **Structure Consistency**: Report must conform to `{project_root}/sunnycore/po/templates/completion-report-tmpl.yaml` structure
+- **Content Completeness**: All required sections must have actual content
+- **Placeholder Removal**: Must not have unfilled `<placeholder>` values
+- **Format Standards**: Must conform to format requirements of template
 
-### Markdown格式轉換（絕對強制）
-- **YAML到Markdown**：必須將 `completion-report-tmpl.yaml` 結構完整轉換為標準Markdown格式
-- **標題層級**：YAML section轉換為對應的Markdown標題（# ## ### #### ##### ######）
-- **清單格式**：YAML陣列轉換為Markdown清單（- 或 1. 格式）
-- **代碼區塊**：代碼片段、配置、測試結果使用標準Markdown代碼塊（```language）
-- **表格格式**：完成狀態、QA結果、效能數據使用Markdown表格格式 | 欄位 | 值 |
-- **鏈結格式**：PR連結、文檔參考使用標準Markdown鏈結格式 [文字](URL)
-- **區塊引用**：重要發現、風險警告使用 > 引用格式
-- **強調標記**：使用 **粗體** 和 *斜體* 適當強調關鍵成果和風險
-- **狀態標示**：使用表情符號清楚標示完成狀態（✅ 完成、⚠️ 部分完成、❌ 未完成、🔄 進行中）
+### Markdown Format Conversion (Absolute Mandatory)
+- **YAML to Markdown**: Must completely convert `completion-report-tmpl.yaml` structure to standard Markdown format
+- **Heading Hierarchy**: YAML sections converted to corresponding Markdown headings (# ## ### #### ##### ######)
+- **List Format**: YAML arrays converted to Markdown lists (- or 1. format)
+- **Code Blocks**: Code snippets, configurations, test results use standard Markdown code blocks (```language)
+- **Table Format**: Completion status, QA results, performance data use Markdown table format | Field | Value |
+- **Link Format**: PR links, document references use standard Markdown link format [text](URL)
+- **Block Quotes**: Important discoveries, risk warnings use > quote format
+- **Emphasis Markers**: Use **bold** and *italic* to appropriately emphasize key achievements and risks
+- **Status Indicators**: Use emojis to clearly indicate completion status (✅ Completed, ⚠️ Partially completed, ❌ Not completed, 🔄 In progress)
 
-### 範圍合規性（寬鬆紀錄）
-- **計劃對齊**：應遵循計劃與需求；偏離時記錄理由與影響
-- **範圍界定**：將範圍外項目標記為偏離與風險，不中斷
-- **完成定義**：以驗收條件為準；證據不足時記錄限制與補齊計劃
-- **變更記錄**：未能即時記錄時，於報告中補記並說明
+### Scope Compliance (Flexible Recording)
+- **Plan Alignment**: Should follow plan and requirements; record reasons and impacts for deviations
+- **Scope Definition**: Mark scope-out items as deviations and risks, do not interrupt
+- **Completion Definition**: Based on acceptance conditions; record limitations and supplementation plans if evidence insufficient
+- **Change Recording**: Supplement in report if unable to record in real-time and explain
 
-### 證據收集要求（強制執行）
+### Evidence Collection Requirements (Mandatory Enforcement)
 
-#### 規劃文件收集
-- **實施計劃**：必須收集 `docs/implementation-plan/` 中對應的檔案
-- **規範文件**：必須收集 `docs/specs/task.md`、`requirements.md`、`design.md`
-- **計劃對齊**：必須驗證實施與計劃的一致性
+#### Planning Document Collection
+- **Implementation Plan**: Must collect corresponding files from `docs/implementation-plan/`
+- **Specification Documents**: Must collect `docs/specs/task.md`, `requirements.md`, `design.md`
+- **Plan Alignment**: Must verify consistency between implementation and plan
 
-#### 實施證據收集
-- **代碼變更**：必須收集所有相關的PR和提交記錄
-- **檔案清單**：必須列出所有修改的檔案
-- **遷移腳本**：必須記錄所有資料遷移和結構變更
-- **配置變更**：必須記錄所有環境和配置變更
+#### Implementation Evidence Collection
+- **Code Changes**: Must collect all related PR and commit records
+- **File List**: Must list all modified files
+- **Migration Scripts**: Must record all data migrations and structure changes
+- **Configuration Changes**: Must record all environment and configuration changes
 
-#### 測試和品質證據
-- **測試報告**：必須收集完整的測試報告
-- **覆蓋率數據**：必須收集測試覆蓋率統計
-- **CI/CD記錄**：必須收集持續整合和部署記錄
-- **靜態分析**：必須收集靜態分析和安全掃描結果
+#### Testing and Quality Evidence
+- **Test Reports**: Must collect complete test reports
+- **Coverage Data**: Must collect test coverage statistics
+- **CI/CD Records**: Must collect continuous integration and deployment records
+- **Static Analysis**: Must collect static analysis and security scan results
 
-#### QA審查證據
-- **QA報告**：必須收集QA審查摘要或連結
-- **問題清單**：必須記錄QA發現的所有問題
-- **處理狀態**：必須記錄每個問題的當前處理狀態
-- **驗收狀態**：必須記錄QA的最終驗收狀態
+#### QA Review Evidence
+- **QA Reports**: Must collect QA review summaries or links
+- **Issue List**: Must record all problems discovered by QA
+- **Processing Status**: Must record current processing status of each problem
+- **Acceptance Status**: Must record QA's final acceptance status
 
-#### 效能和非功能性證據
-- **效能基線**：必須收集效能測試結果
-- **資源使用**：必須記錄系統資源使用情況
-- **可觀測性**：必須驗證監控和日誌系統
-- **安全驗證**：必須收集安全測試和審核結果
+#### Performance and Non-functional Evidence
+- **Performance Baseline**: Must collect performance test results
+- **Resource Usage**: Must record system resource usage
+- **Observability**: Must verify monitoring and logging systems
+- **Security Verification**: Must collect security test and audit results
 
-### 結案框架檢查（強制執行）
+### Conclusion Framework Check (Mandatory Enforcement)
 
-#### 完成狀態評估
-- **交付成果**：必須列出所有交付成果並評估完成率
-- **完成分類**：必須將項目分類為已完成/延期/範圍外變更
-- **完成證據**：每個完成聲明都必須有具體證據支持
+#### Completion Status Evaluation
+- **Delivery Deliverables**: Must list all delivery deliverables and evaluate completion rates
+- **Completion Classification**: Must classify items as completed/delayed/scope-out changes
+- **Completion Evidence**: Every completion statement must have concrete evidence support
 
-#### 驗收條件驗證
-- **功能驗收**：必須驗證功能是否符合驗收標準
-- **交叉參考**：必須交叉參考計劃/驗收條件與測試/證據
-- **驗收狀態**：明確記錄每個驗收條件的達成狀態
+#### Acceptance Criteria Verification
+- **Functional Acceptance**: Must verify functions meet acceptance standards
+- **Cross-reference**: Must cross-reference plan/acceptance conditions with tests/evidence
+- **Acceptance Status**: Clearly record achievement status of each acceptance condition
 
-#### QA問題總結
-- **問題清單**：必須總結QA審查期間提出的所有關注和問題
-- **處理狀態**：必須記錄每個問題的當前處理狀態
-- **影響評估**：必須評估問題對專案交付的影響
+#### QA Problem Summary
+- **Problem List**: Must summarize all concerns and problems raised during QA review
+- **Processing Status**: Must record current processing status of each problem
+- **Impact Assessment**: Must assess impact of problems on project delivery
 
-#### 已知問題記錄
-- **缺陷清單**：必須記錄目前存在的所有缺陷
-- **風險評估**：必須評估已知風險和權衡
-- **臨時解決方案**：必須記錄所有臨時解決方案和限制
+#### Known Issues Recording
+- **Defect List**: Must record all defects currently existing
+- **Risk Assessment**: Must assess known risks and trade-offs
+- **Temporary Solutions**: Must record all temporary solutions and limitations
 
-#### 文檔和可維護性評估
-- **文檔完整性**：必須評估README、API規範、遷移文檔的完整性
-- **可維護性**：必須評估代碼的可維護性和技術債務
-- **交接文檔**：必須準備適當的交接文檔
+#### Documentation and Maintainability Evaluation
+- **Documentation Completeness**: Must evaluate completeness of README, API specifications, migration documents
+- **Maintainability**: Must evaluate code maintainability and technical debt
+- **Handover Documentation**: Must prepare appropriate handover documentation
 
-#### 非功能性評估
-- **效能評估**：必須評估效能是否符合標準
-- **安全評估**：必須評估安全性是否符合要求
-- **可觀測性**：必須評估監控和可觀測性是否充分
+#### Non-functional Evaluation
+- **Performance Evaluation**: Must evaluate whether performance meets standards
+- **Security Evaluation**: Must evaluate whether security meets requirements
+- **Observability**: Must evaluate whether monitoring and observability are adequate
 
-#### 未來增強建議
-- **差距分析**：基於差距識別具體的增強機會
-- **QA反饋**：基於QA反饋提出改進建議
-- **產品方向**：考慮產品方向的未來增強建議
+#### Future Enhancement Suggestions
+- **Gap Analysis**: Identify specific enhancement opportunities based on gaps
+- **QA Feedback**: Propose improvements based on QA feedback
+- **Product Direction**: Consider future enhancement suggestions based on product direction
 
-### 報告品質標準（強制達到）
-- **客觀性**：報告必須客觀，基於可驗證的事實
-- **全面性**：報告必須涵蓋專案的所有重要方面
-- **準確性**：所有陳述都必須準確且有據可查
-- **實用性**：報告結果必須對未來決策有實際價值
+### Report Quality Standards (Mandatory Achievement)
+- **Objectivity**: Report must be objective, based on verifiable facts
+- **Comprehensiveness**: Report must cover all important aspects of project
+- **Accuracy**: All statements must be accurate and evidence-based
+- **Practicality**: Report results must have actual value for future decisions
 
-### 價值導向評估（強制執行）
-- **商業價值**：必須從商業角度評估交付成果的價值
-- **用戶價值**：必須評估用戶實際獲得的價值
-- **ROI評估**：必須評估專案投入與產出的合理性
-- **成功定義**：必須基於實際價值而非技術完成度定義成功
+### Value-oriented Evaluation (Mandatory Enforcement)
+- **Business Value**: Must evaluate value of delivery deliverables from business perspective
+- **User Value**: Must evaluate actual value obtained by users
+- **ROI Evaluation**: Must evaluate reasonableness of project investment and output
+- **Success Definition**: Must define success based on actual value rather than technical completion
 
-### 安全要求（強制遵守）
-- **文件保護**：絕不修改 `docs/specs/` 中的任何檔案
-- **數據完整性**：確保所有收集的證據的完整性和準確性
-- **訪問控制**：確保只訪問授權的檔案和資源
+### Security Requirements (Mandatory Compliance)
+- **Document Protection**: Never modify any files in `docs/specs/`
+- **Data Integrity**: Ensure integrity and accuracy of all collected evidence
+- **Access Control**: Ensure only authorized files and resources are accessed
 
-### 輸出位置（固定）
-- **主報告**：`{{project_root}}/docs/completion-reports/{{task_id}`(如`1`, `2`, `3`...)}-completion.md`
-- **模板參考**：`{project_root}/sunnycore/po/templates/completion-report-tmpl.yaml`
+### Output Location (Fixed)
+- **Main Report**: `{{project_root}}/docs/completion-reports/{{task_id}}-completion.md`
+- **Template Reference**: `{project_root}/sunnycore/po/templates/completion-report-tmpl.yaml`
 
-### 文檔和交接要求
-- **完整記錄**：所有重要決策和發現都必須記錄
-- **清晰表達**：使用清晰、專業的語言表達
-- **結構化**：按照範本結構組織內容
-- **可追溯性**：確保所有陳述都可以追溯到源證據
+### Documentation and Handover Requirements
+- **Complete Recording**: All important decisions and discoveries must be recorded
+- **Clear Expression**: Use clear, professional language to express
+- **Structuring**: Organize content according to template structure
+- **Traceability**: Ensure all statements can be traced to source evidence
 
-### 路徑別名（新增）
+### Path Aliases (New)
 - `WORKFLOW_FILE` → `{project_root}/sunnycore/po/workflow/unified-project-concluding-workflow.yaml`
 - `REPORT_TEMPLATE` → `{project_root}/sunnycore/po/templates/completion-report-tmpl.yaml`
 - `ENFORCEMENT_FILE` → `{project_root}/sunnycore/po/enforcement/project-concluder-enforcement.md`
 
-### 與file-classifier的協作要求（強制）
-- **並行執行**：必須在*conclude被呼叫時與file-classifier並行執行
-- **結果整合**：必須將file-classifier的分類結果整合到結案報告中
-- **檔案清理執行記錄**：必須包含file-classifier已執行的檔案清理操作記錄和風險評估
-- **協調執行**：確保兩個代理的執行不相互衝突，共享必要的專案資訊
+### Collaboration Requirements with file-classifier (Mandatory)
+- **Synchronous Execution**: Must execute synchronously when *conclude is called
+- **Result Integration**: Must integrate classification results from file-classifier into conclusion report
+- **Cleanup Execution Record**: Must include records of executed file cleanup operations and risk assessments by file-classifier
+- **Coordination Execution**: Ensure execution of two agents does not conflict, share necessary project information
 
-## 結案檢查清單（強制執行）
+## Conclusion Checklist (Mandatory Enforcement)
 
-### 前置檢查
-- [ ] 統一工作流程檔案已載入
-- [ ] 完成報告範本已載入
-- [ ] 相關專案檔案已識別並可讀
+### Pre-checks
+- [ ] Unified workflow file loaded
+- [ ] Completion report template loaded
+- [ ] Related project files identified and readable
 
-### 證據收集檢查
-- [ ] 規劃文件已收集並分析
-- [ ] 實施證據已收集並驗證
-- [ ] 測試和品質證據已收集
-- [ ] QA審查證據已收集
-- [ ] 效能和非功能性證據已收集
+### Evidence Collection Checks
+- [ ] Planning documents collected and analyzed
+- [ ] Implementation evidence collected and verified
+- [ ] Testing and quality evidence collected
+- [ ] QA review evidence collected
+- [ ] Performance and non-functional evidence collected
 
-### 評估檢查
-- [ ] 完成狀態已準確評估
-- [ ] 驗收條件已逐一驗證
-- [ ] QA問題已全面總結
-- [ ] 已知問題已清楚記錄
-- [ ] 文檔和可維護性已評估
-- [ ] 非功能性要求已評估
+### Evaluation Checks
+- [ ] Completion status accurately evaluated
+- [ ] Acceptance criteria verified one by one
+- [ ] QA problems comprehensively summarized
+- [ ] Known issues clearly recorded
+- [ ] Documentation and maintainability evaluated
+- [ ] Non-functional requirements evaluated
 
-### 報告品質檢查
-- [ ] 所有陳述都有證據支持
-- [ ] 報告結構符合範本要求
-- [ ] 沒有未填充的佔位符
-- [ ] 語言表達清晰專業
-- [ ] 建議具體且可操作
+### Report Quality Checks
+- [ ] All statements have evidence support
+- [ ] Report structure conforms to template requirements
+- [ ] No unfilled placeholders
+- [ ] Language expression clear and professional
+- [ ] Suggestions concrete and actionable
 
-### 價值評估檢查
-- [ ] 商業價值已評估
-- [ ] 用戶價值已考慮
-- [ ] ROI已分析
-- [ ] 成功標準已明確
+### Value Evaluation Checks
+- [ ] Business value evaluated
+- [ ] User value considered
+- [ ] ROI analyzed
+- [ ] Success criteria clearly defined
 
-## 嚴重性分類（強制應用）
-- **關鍵**：影響專案成功交付的問題
-- **重要**：影響專案品質或未來維護的問題
-- **一般**：可以改進但不影響核心目標的問題
-- **建議**：最佳實踐建議和未來增強方向
+## Severity Classification (Mandatory Application)
+- **Critical**: Problems affecting project successful delivery
+- **High**: Problems affecting project quality or future maintenance
+- **Medium**: Problems that can be improved but do not affect core objectives
+- **Low**: Best practice suggestions and future enhancement directions
 
-## 失敗處理協議（記錄並續行）
-- **文件載入失敗**：記錄缺失與回退路徑；必要時降級範圍
-- **證據收集不足**：記錄缺口與補充計劃；不中斷其他部分
-- **範本不合規**：記錄差異與修正計劃；不中斷
-- **驗證未通過**：記錄失敗細節與補救計劃；必要時降級
-- **品質未達標**：記錄差距與改進時程；安排後續複審
+## Failure Handling Protocol (Record and Continue)
+- **File Loading Failure**: Record missing sources and fallback paths; supplement scope if necessary
+- **Evidence Collection Insufficiency**: Record gaps and supplementation plans; do not interrupt other sections
+- **Template Non-compliance**: Record differences and correction plans; do not interrupt
+- **Verification Not Passed**: Record failure details and remediation plans; downgrade if necessary
+- **Quality Not Met**: Record gaps and improvement timelines; arrange subsequent review

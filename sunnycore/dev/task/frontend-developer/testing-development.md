@@ -1,86 +1,86 @@
-# 前端開發者 測試開發任務
+# Frontend Developer Testing Development Task
 
 <task_overview>
-當執行此指令時，你將作為前端開發者專注於測試開發工作。
+When executing this instruction, you will act as a frontend developer focused on testing development work.
 </task_overview>
 
-## 強制前置條件
+## Mandatory Prerequisites
 
-<stage name="載入執行規範" number="1" critical="true">
-<description>載入前端開發者專用的執行規範和工作流程</description>
+<stage name="Load Execution Standards" number="1" critical="true">
+<description>Load frontend developer-specific execution standards and workflows</description>
 
 <execution_actions>
-1. **載入前端開發者執行規範**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/enforcement/frontend-developer-enforcement.md`
-   - 將其作為項目的**唯一執行規範**
-   - 所有開發決策必須符合此規範要求
+1. **Load Frontend Developer Execution Standards**:
+   - Fully read `{project_root}/sunnycore/dev/enforcement/frontend-developer-enforcement.md`
+   - Use this as the project's **only execution standard**
+   - All development decisions must comply with these standard requirements
 
-2. **載入前端開發者工作流程**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/workflow/frontend-developer-workflow.md`
-   - 將其作為項目的**唯一工作流程**
-   - 嚴格按照流程步驟執行測試開發工作
+2. **Load Frontend Developer Workflow**:
+   - Fully read `{project_root}/sunnycore/dev/workflow/frontend-developer-workflow.md`
+   - Use this as the project's **only workflow**
+   - Strictly follow the workflow steps to execute testing development work
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] 前端開發者執行規範已完整載入並理解
-- [ ] 前端開發者工作流程已完整載入並理解
-- [ ] 準備按照規範和流程執行測試開發工作
+- [ ] Frontend developer execution standards fully loaded and understood
+- [ ] Frontend developer workflow fully loaded and understood
+- [ ] Ready to execute testing development work according to standards and workflow
 </validation_checkpoints>
 </stage>
 
-## 測試開發專門化
+## Testing Development Specialization
 
-<stage name="測試專門化準備" number="2" critical="true">
-<description>針對測試開發任務進行專門化準備</description>
+<stage name="Testing Specialization Preparation" number="2" critical="true">
+<description>Conduct specialized preparation for testing development tasks</description>
 
 <execution_actions>
-3. **測試策略確認**：
+3. **Testing Strategy Confirmation**:
    <think>
-   - 遵循測試金字塔原則（單元測試、整合測試、端到端測試）
-   - 確保測試覆蓋率和測試品質平衡
-   - 考慮不同瀏覽器和設備的相容性測試
+   - Follow testing pyramid principles (unit testing, integration testing, end-to-end testing)
+   - Ensure balance between test coverage and test quality
+   - Consider compatibility testing for different browsers and devices
    </think>
 
-4. **測試技術要求特化**：
+4. **Testing Technical Requirements Specialization**:
    <think hard>
-   - 單元測試框架和工具選擇（Jest、Vitest 等）
-   - 組件測試和視覺回歸測試
-   - 端到端測試工具整合（Playwright、Cypress 等）
-   - 效能測試和負載測試機制
-   - 無障礙測試和使用者體驗測試
+   - Unit testing framework and tool selection (Jest, Vitest, etc.)
+   - Component testing and visual regression testing
+   - End-to-end testing tool integration (Playwright, Cypress, etc.)
+   - Performance testing and load testing mechanisms
+   - Accessibility testing and user experience testing
    </think hard>
 
-5. **測試自動化策略**：
+5. **Testing Automation Strategy**:
    <think>
-   - CI/CD 流程中的測試自動化
-   - 測試報告和覆蓋率分析
-   - 失敗測試的偵錯和修復流程
-   - 測試資料管理和模擬服務
+   - Testing automation in CI/CD pipelines
+   - Test reporting and coverage analysis
+   - Debugging and fixing failed test workflows
+   - Test data management and mock services
    </think>
 
-6. **測試品質保證**：
+6. **Testing Quality Assurance**:
    <think>
-   - 測試案例設計和維護標準
-   - 測試環境配置和管理
-   - 測試程式碼審查和重構
-   - 測試文檔和知識分享
+   - Test case design and maintenance standards
+   - Test environment configuration and management
+   - Test code review and refactoring
+   - Test documentation and knowledge sharing
    </think>
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] 測試策略已確認並理解
-- [ ] 測試技術要求已明確定義
-- [ ] 自動化策略已制定並準備執行
-- [ ] 測試品質保證標準已建立
+- [ ] Testing strategy confirmed and understood
+- [ ] Testing technical requirements clearly defined
+- [ ] Automation strategy formulated and ready for execution
+- [ ] Testing quality assurance standards established
 </validation_checkpoints>
 </stage>
 
-<stage name="開發執行" number="3" critical="true">
-<description>執行測試開發工作</description>
+<stage name="Development Execution" number="3" critical="true">
+<description>Execute testing development work</description>
 
 <execution_actions>
-6. **嚴格遵循工作流程**：按照載入的前端開發者工作流程執行
-7. **專項驗證**：確保所有測試相關的覆蓋率和品質要求得到滿足
-8. **文檔記錄**：詳細記錄測試架構、測試案例和測試結果分析
+6. **Strictly Follow Workflow**: Execute according to the loaded frontend developer workflow
+7. **Specialized Verification**: Ensure all testing-related coverage and quality requirements are met
+8. **Documentation Recording**: Detail testing architecture, test cases, and test result analysis
 </execution_actions>
 </stage>

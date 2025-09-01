@@ -1,154 +1,154 @@
-# Architecture Documenter 強制執行規範
+# Architecture Documenter Enforcement Specification
 
-## 核心執行協議
+## Core Execution Protocol
 
-### 必要前置條件（寬鬆）
-- **建議**：開始前載入統一工作流程、模板與來源文件；若缺失，記錄至 validation_warnings 並持續
-- **工作流程讀取**：應讀取 `{project_root}/sunnycore/po/workflow/unified-architecture-documentation-workflow.yaml`，失敗則記錄警告
-- **模板讀取**：應讀取 `{project_root}/sunnycore/po/templates/architecture-doc-tmpl.yaml`，失敗則記錄警告
-- **來源讀取**：應讀取並掃描指定來源路徑；缺失則記錄警告並以現有資訊繼續
+### Prerequisites (Flexible)
+- **Recommendation**: Load unified workflow, templates, and source files before starting; if missing, record to validation_warnings and continue
+- **Workflow Reading**: Should read `{project_root}/sunnycore/po/workflow/unified-architecture-documentation-workflow.yaml`, log warning on failure
+- **Template Reading**: Should read `{project_root}/sunnycore/po/templates/architecture-doc-tmpl.yaml`, log warning on failure
+- **Source Reading**: Should read and scan specified source paths; if missing, log warning and continue with existing information
 
-### 工作流程合規性（強制執行）
-- **階段完整性**：必須按照 unified-architecture-documentation-workflow.yaml 定義的所有階段順序執行
-- **規範收集**：必須並行載入 task.md、requirements.md、design.md
-- **計劃分析**：必須提取架構決策和計劃組件
-- **代碼庫掃描**：必須自動發現介面、資料模型、API路由、基礎設施
-- **架構建模**：必須建立系統、容器、組件、資料流模型
-- **圖表生成**：必須並行生成5種核心Mermaid架構圖
-- **同步驗證**：必須驗證文檔與實作的一致性（95%代碼連結有效性）
-- **輸出驗證**：必須確保導航連結和架構決策追溯性
+### Workflow Compliance (Mandatory Enforcement)
+- **Stage Integrity**: Must execute all stages in the order defined by unified-architecture-documentation-workflow.yaml
+- **Specification Collection**: Must synchronously load task.md, requirements.md, design.md
+- **Plan Analysis**: Must extract architectural decisions and planning components
+- **Codebase Scanning**: Must automatically discover interfaces, data models, API routes, infrastructure
+- **Architecture Modeling**: Must establish system, container, component, and data flow models
+- **Diagram Generation**: Must synchronously generate 5 core Mermaid architecture diagrams
+- **Synchronization Validation**: Must validate documentation consistency with implementation (95% code link validity)
+- **Output Validation**: Must ensure navigation links and architectural decision traceability
 
-### 文檔完整性（強制執行）
-- **結構合規**：必須遵循 `{project_root}/sunnycore/po/templates/architecture-doc-tmpl.yaml` 的結構
-- **內容完整**：所有必需部分都必須有實際內容或標記為 "N/A - [原因]"
-- **佔位符清除**：不得有未填充的 `<placeholder>` 值
-- **圖表要求**：至少包含系統上下文圖、容器圖、元件圖
+### Documentation Integrity (Mandatory Enforcement)
+- **Structural Compliance**: Must follow the structure of `{project_root}/sunnycore/po/templates/architecture-doc-tmpl.yaml`
+- **Content Completeness**: All required sections must have actual content or be marked as "N/A - [reason]"
+- **Placeholder Removal**: Must not contain unfilled `<placeholder>` values
+- **Diagram Requirements**: Must include at least system context diagram, container diagram, component diagram
 
-### Markdown格式轉換（絕對強制）
-- **YAML到Markdown**：必須將 `architecture-doc-tmpl.yaml` 結構完整轉換為標準Markdown格式
-- **標題層級**：YAML section轉換為對應的Markdown標題（# ## ### #### ##### ######）
-- **清單格式**：YAML陣列轉換為Markdown清單（- 或 1. 格式）
-- **代碼區塊**：代碼片段使用標準Markdown代碼塊（```language）
-- **表格格式**：結構化資料使用Markdown表格格式 | 欄位 | 值 |
-- **鏈結格式**：使用標準Markdown鏈結格式 [文字](URL)
-- **Mermaid圖表**：使用 ```mermaid 代碼區塊包裝圖表定義
-- **區塊引用**：重要備註使用 > 引用格式
-- **強調標記**：使用 **粗體** 和 *斜體* 適當強調關鍵內容
+### Markdown Format Conversion (Absolute Mandatory)
+- **YAML to Markdown**: Must completely convert `architecture-doc-tmpl.yaml` structure to standard Markdown format
+- **Heading Hierarchy**: YAML sections converted to corresponding Markdown headings (# ## ### #### ##### ######)
+- **List Format**: YAML arrays converted to Markdown lists (- or 1. format)
+- **Code Blocks**: Code snippets use standard Markdown code blocks (```language)
+- **Table Format**: Structured data uses Markdown table format | Field | Value |
+- **Link Format**: Use standard Markdown link format [text](URL)
+- **Mermaid Diagrams**: Use ```mermaid code blocks to wrap diagram definitions
+- **Block Quotes**: Important notes use > quote format
+- **Emphasis Markers**: Use **bold** and *italic* to appropriately emphasize key content
 
-### 真實性與同步性（絕對強制）
-- **代碼一致性**：架構描述必須與實際代碼庫一致
-- **API契約同步**：API文檔必須反映實際的接口實現
-- **資料模型對齊**：資料模型必須與實際資料庫結構一致
-- **差異標註**：若存在不一致，必須明確標註差異和演進計劃
+### Authenticity and Synchronization (Absolute Mandatory)
+- **Code Consistency**: Architecture descriptions must be consistent with actual codebase
+- **API Contract Synchronization**: API documentation must reflect actual interface implementations
+- **Data Model Alignment**: Data models must align with actual database structure
+- **Difference Annotation**: If inconsistencies exist, must clearly annotate differences and evolution plans
 
-### 可追溯性要求（強制執行）
-- **來源鏈結**：每個架構決策都必須能追溯到設計文件或實施計劃
-- **代碼位置**：重要元件必須提供快速導航到代碼位置的鏈結
-- **版本控制**：必須記錄文檔版本與對應的代碼版本
-- **變更追蹤**：重要架構變更必須記錄在ADR中
+### Traceability Requirements (Mandatory Enforcement)
+- **Source Links**: Every architectural decision must be traceable to design documents or implementation plans
+- **Code Locations**: Important components must provide quick navigation links to code locations
+- **Version Control**: Must record document versions with corresponding code versions
+- **Change Tracking**: Important architectural changes must be recorded in ADRs
 
-### Mermaid圖表要求（強制標準）
-- **系統上下文圖**：必須顯示系統與外部實體的關係
-- **容器圖**：必須顯示主要服務和資料存儲
-- **元件圖**：必須顯示關鍵模組的內部結構
-- **資料流圖**：必須顯示用戶旅程的資料流轉
+### Mermaid Diagram Requirements (Mandatory Standards)
+- **System Context Diagram**: Must show relationships between system and external entities
+- **Container Diagram**: Must show main services and data stores
+- **Component Diagram**: Must show internal structure of key modules
+- **Data Flow Diagram**: Must show data flow through user journeys
 
-### 多層次導航（強制實施）
-- **快速導航**：必須提供從概覽到實施細節的快速跳轉
-- **交叉參考**：相關元件之間必須有明確的鏈結
-- **索引結構**：必須建立清晰的文檔索引和目錄結構
-- **搜索友好**：必須使用一致的命名和標籤系統
+### Multi-level Navigation (Mandatory Implementation)
+- **Quick Navigation**: Must provide quick jumps from overview to implementation details
+- **Cross References**: Related components must have clear links between them
+- **Index Structure**: Must establish clear document index and directory structure
+- **Search Friendly**: Must use consistent naming and tagging systems
 
-### 業務價值連結（強制執行）
-- **用戶旅程**：必須以用戶旅程為主線串接技術架構
-- **業務目標**：技術決策必須能追溯到業務目標
-- **價值對應**：每個技術元件都必須說明其業務價值
-- **ROI考量**：重要架構決策必須考慮投資回報率
+### Business Value Connection (Mandatory Enforcement)
+- **User Journeys**: Must connect technical architecture with user journeys as main thread
+- **Business Objectives**: Technical decisions must be traceable to business objectives
+- **Value Mapping**: Each technical component must explain its business value
+- **ROI Consideration**: Important architectural decisions must consider return on investment
 
-### 維護性要求（強制保證）
-- **新人友好**：文檔必須讓新人在一天內理解系統
-- **更新機制**：必須建立文檔與代碼同步更新的機制
-- **責任分工**：必須明確不同元件的維護責任
-- **演進規劃**：必須標註系統的未來演進方向
+### Maintainability Requirements (Mandatory Assurance)
+- **Newcomer Friendly**: Documentation must enable new team members to understand system within one day
+- **Update Mechanism**: Must establish mechanism for synchronized document and code updates
+- **Responsibility Division**: Must clarify maintenance responsibilities for different components
+- **Evolution Planning**: Must annotate future evolution directions of the system
 
-### 架構決策記錄（強制要求）
-- **ADR鏈結**：重要架構決策必須鏈結到對應的ADR
-- **決策背景**：必須記錄決策的背景和考量因素
-- **替代方案**：必須說明考慮過的替代方案
-- **後果評估**：必須評估決策的正面和負面後果
+### Architectural Decision Records (Mandatory Requirements)
+- **ADR Links**: Important architectural decisions must link to corresponding ADRs
+- **Decision Context**: Must record background and considerations for decisions
+- **Alternative Options**: Must explain alternative options that were considered
+- **Consequence Assessment**: Must evaluate positive and negative consequences of decisions
 
-### 一致性檢查（強制驗證）
-- **計劃對齊**：架構文檔必須與實施計劃一致
-- **規範對齊**：必須與需求和設計規範保持一致
-- **代碼對齊**：必須與實際代碼實現保持同步
-- **差異處理**：發現不一致時必須明確標註並制定同步計劃
+### Consistency Checks (Mandatory Verification)
+- **Plan Alignment**: Architecture documentation must be consistent with implementation plans
+- **Specification Alignment**: Must remain consistent with requirements and design specifications
+- **Code Alignment**: Must remain synchronized with actual code implementation
+- **Difference Handling**: When inconsistencies are discovered, must clearly annotate and formulate synchronization plans
 
-### 品質標準（強制達到）
-- **技術準確性**：所有技術描述必須準確無誤
-- **視覺清晰**：圖表必須清晰易讀，邏輯合理
-- **語言簡潔**：文字描述必須簡潔明瞭，避免冗餘
-- **結構邏輯**：文檔結構必須邏輯清晰，易於導航
+### Quality Standards (Mandatory Achievement)
+- **Technical Accuracy**: All technical descriptions must be accurate and error-free
+- **Visual Clarity**: Diagrams must be clear, readable, and logically reasonable
+- **Language Conciseness**: Text descriptions must be concise and clear, avoiding redundancy
+- **Structural Logic**: Document structure must be logically clear and easy to navigate
 
-### 協作友好性（強制實施）
-- **團隊溝通**：文檔必須促進不同角色間的有效溝通
-- **知識傳承**：必須支持知識在團隊成員間的有效傳承
-- **決策支持**：必須為架構決策提供充分的支持資訊
-- **風險識別**：必須標註潛在的架構風險和改進機會
+### Collaboration Friendliness (Mandatory Implementation)
+- **Team Communication**: Documentation must promote effective communication between different roles
+- **Knowledge Transfer**: Must support effective knowledge transfer between team members
+- **Decision Support**: Must provide adequate supporting information for architectural decisions
+- **Risk Identification**: Must annotate potential architectural risks and improvement opportunities
 
-### 安全要求（強制遵守）
-- **只讀保護**：絕不修改 `docs/specs/` 中的任何檔案
-- **權限控制**：確保只訪問授權的檔案和資源
-- **敏感資訊**：避免在文檔中暴露敏感的系統資訊
-- **訪問記錄**：記錄所有文檔訪問和修改操作
+### Security Requirements (Mandatory Compliance)
+- **Read-only Protection**: Never modify any files in `docs/specs/`
+- **Access Control**: Ensure only authorized files and resources are accessed
+- **Sensitive Information**: Avoid exposing sensitive system information in documentation
+- **Access Logging**: Record all documentation access and modification operations
 
-### 輸出位置（固定）
-- **主文檔**：`{{project_root}}/docs/architecture/architecture.md`
-- **圖表目錄**：`{{project_root}}/docs/architecture/diagrams/`
-- **ADR目錄**：`{{project_root}}/docs/architecture/decisions/`
-- **模板參考**：`{project_root}/sunnycore/po/templates/architecture-doc-tmpl.yaml`
+### Output Locations (Fixed)
+- **Main Document**: `{{project_root}}/docs/architecture/architecture.md`
+- **Diagrams Directory**: `{{project_root}}/docs/architecture/diagrams/`
+- **ADR Directory**: `{{project_root}}/docs/architecture/decisions/`
+- **Template Reference**: `{project_root}/sunnycore/po/templates/architecture-doc-tmpl.yaml`
 
-## 架構文檔檢查清單（強制執行）
+## Architecture Documentation Checklist (Mandatory Enforcement)
 
-### 內容完整性檢查
-- [ ] 系統上下文圖已繪製且準確
-- [ ] 容器視圖包含所有主要服務
-- [ ] 元件圖顯示關鍵模組結構
-- [ ] 資料模型與實際資料庫一致
-- [ ] API契約反映實際接口
-- [ ] 部署和可觀測性資訊完整
+### Content Completeness Check
+- [ ] System context diagram has been drawn and is accurate
+- [ ] Container view includes all main services
+- [ ] Component diagram shows key module structure
+- [ ] Data model is consistent with actual database
+- [ ] API contracts reflect actual interfaces
+- [ ] Deployment and observability information is complete
 
-### 技術準確性檢查
-- [ ] 所有技術描述與實際實現一致
-- [ ] 依賴關係圖準確反映現實
-- [ ] 資料流程與實際業務流程對齊
-- [ ] 監控和日誌策略與實施一致
+### Technical Accuracy Check
+- [ ] All technical descriptions are consistent with actual implementation
+- [ ] Dependency diagrams accurately reflect reality
+- [ ] Data flows align with actual business processes
+- [ ] Monitoring and logging strategies are consistent with implementation
 
-### 可用性檢查
-- [ ] 新人能在一天內理解系統結構
-- [ ] 提供快速導航到代碼位置的路徑
-- [ ] 不同層次的讀者都能找到所需資訊
-- [ ] 交叉參考和鏈結功能正常
+### Usability Check
+- [ ] Newcomers can understand system structure within one day
+- [ ] Quick navigation paths to code locations are provided
+- [ ] Readers at different levels can find needed information
+- [ ] Cross-reference and linking functions work properly
 
-### 維護性檢查
-- [ ] 文檔與代碼同步更新機制已建立
-- [ ] 責任分工清晰明確
-- [ ] 演進規劃和風險標註完整
-- [ ] ADR鏈結和決策記錄完整
+### Maintainability Check
+- [ ] Document and code synchronization update mechanism has been established
+- [ ] Responsibility division is clear and explicit
+- [ ] Evolution planning and risk annotation is complete
+- [ ] ADR links and decision records are complete
 
-## 品質門檻（強制通過）
-- **同步性**：架構描述必須100%與實際實現一致
-- **代碼連結有效性**：95%的代碼連結必須有效且準確
-- **API契約精確度**：100%精確匹配實際API實現
-- **資料模型一致性**：結構必須與實際資料庫同步
-- **組件介面驗證**：公開方法與依賴必須驗證正確
-- **基礎設施配置**：配置一致性必須驗證通過
-- **完整性**：所有必需元件都必須有完整描述
-- **可讀性**：文檔必須能被目標受眾輕鬆理解
-- **可維護性**：文檔必須支持長期維護和更新
+## Quality Thresholds (Mandatory Pass)
+- **Synchronization**: Architecture descriptions must be 100% consistent with actual implementation
+- **Code Link Validity**: 95% of code links must be valid and accurate
+- **API Contract Precision**: 100% exact match with actual API implementation
+- **Data Model Consistency**: Structure must be synchronized with actual database
+- **Component Interface Verification**: Public methods and dependencies must be verified correct
+- **Infrastructure Configuration**: Configuration consistency must pass verification
+- **Completeness**: All required components must have complete descriptions
+- **Readability**: Documentation must be easily understandable by target audience
+- **Maintainability**: Documentation must support long-term maintenance and updates
 
-## 失敗處理協議（記錄並續行）
-- **來源文件缺失**：記錄缺失與替代資訊來源；繼續現有資訊處理
-- **代碼同步失敗**：記錄不一致與同步計劃；標註差異繼續
-- **圖表生成失敗**：記錄失敗原因與手動補充計劃；不中斷
-- **ADR鏈結缺失**：記錄缺失與補充計劃；繼續文檔編纂
-- **模板不合規**：記錄差異與修正計劃；不中斷輸出
+## Failure Handling Protocol (Record and Continue)
+- **Missing Source Files**: Record missing sources and alternative information sources; continue with existing information processing
+- **Code Synchronization Failure**: Record inconsistencies and synchronization plans; annotate differences and continue
+- **Diagram Generation Failure**: Record failure reasons and manual supplementation plans; do not interrupt
+- **Missing ADR Links**: Record missing links and supplementation plans; continue documentation compilation
+- **Template Non-compliance**: Record differences and correction plans; do not interrupt output

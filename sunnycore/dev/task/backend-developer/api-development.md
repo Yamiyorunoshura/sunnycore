@@ -1,84 +1,84 @@
-# 後端開發者 API 開發任務
+# Backend Developer API Development Task
 
 <task_overview>
-當執行此指令時，你將作為後端開發者專注於 API 開發工作。
+When executing this instruction, you will act as a backend developer focused on API development work.
 </task_overview>
 
-## 強制前置條件
+## Mandatory Prerequisites
 
-<stage name="載入執行規範" number="1" critical="true">
-<description>載入後端開發者專用的執行規範和工作流程</description>
+<stage name="Load Enforcement Rules" number="1" critical="true">
+<description>Load backend developer specific enforcement rules and workflow</description>
 
 <execution_actions>
-1. **載入後端開發者執行規範**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/enforcement/backend-developer-enforcement.md`
-   - 將其作為項目的**唯一執行規範**
-   - 所有開發決策必須符合此規範要求
+1. **Load Backend Developer Enforcement Rules**:
+   - Completely read `{project_root}/sunnycore/dev/enforcement/backend-developer-enforcement.md`
+   - Treat this as the project's **only enforcement rules**
+   - All development decisions must comply with these rule requirements
 
-2. **載入後端開發者工作流程**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/workflow/backend-developer-workflow.md`
-   - 將其作為項目的**唯一工作流程**
-   - 嚴格按照流程步驟執行 API 開發工作
+2. **Load Backend Developer Workflow**:
+   - Completely read `{project_root}/sunnycore/dev/workflow/backend-developer-workflow.md`
+   - Treat this as the project's **only workflow**
+   - Strictly follow workflow steps to execute API development work
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] 後端開發者執行規範已完整載入並理解
-- [ ] 後端開發者工作流程已完整載入並理解
-- [ ] 準備按照規範和流程執行 API 開發工作
+- [ ] Backend developer enforcement rules have been completely loaded and understood
+- [ ] Backend developer workflow has been completely loaded and understood
+- [ ] Ready to execute API development work according to rules and workflow
 </validation_checkpoints>
 </stage>
 
-## API 開發專門化
+## API Development Specialization
 
-<stage name="API 專門化準備" number="2" critical="true">
-<description>針對 API 開發任務進行專門化準備</description>
+<stage name="API Specialization Preparation" number="2" critical="true">
+<description>Conduct specialized preparation for API development tasks</description>
 
 <execution_actions>
-3. **API 設計原則確認**：
+3. **API Design Principles Confirmation**:
    <think>
-   - 遵循 RESTful 設計原則和 HTTP 標準
-   - 確保 API 介面一致性和可擴展性
-   - 考慮版本控制和向後相容性策略
+   - Follow RESTful design principles and HTTP standards
+   - Ensure API interface consistency and scalability
+   - Consider version control and backward compatibility strategies
    </think>
 
-4. **API 安全性要求特化**：
+4. **API Security Requirements Specialization**:
    <think hard>
-   - 身份驗證和授權機制（JWT、OAuth2 等）
-   - 輸入驗證和參數清理
-   - 速率限制和 DDoS 防護
-   - CORS 政策和安全標頭設定
+   - Authentication and authorization mechanisms (JWT, OAuth2, etc.)
+   - Input validation and parameter sanitization
+   - Rate limiting and DDoS protection
+   - CORS policies and security headers configuration
    </think hard>
 
-5. **API 效能監控策略**：
+5. **API Performance Monitoring Strategy**:
    <think>
-   - 響應時間和吞吐量監控
-   - 錯誤率和可用性追蹤
-   - API 使用分析和效能優化
-   - 負載測試和壓力測試計劃
+   - Response time and throughput monitoring
+   - Error rate and availability tracking
+   - API usage analytics and performance optimization
+   - Load testing and stress testing planning
    </think>
 
-6. **API 文檔和規範**：
+6. **API Documentation and Specifications**:
    <think>
-   - OpenAPI/Swagger 規範文檔
-   - 請求/響應範例和錯誤碼定義
-   - API 使用指南和最佳實踐
+   - OpenAPI/Swagger specification documentation
+   - Request/response examples and error code definitions
+   - API usage guides and best practices
    </think>
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] API 設計原則已確認並理解
-- [ ] API 安全性要求已明確定義
-- [ ] 效能監控策略已制定
-- [ ] API 文檔規範已準備
+- [ ] API design principles have been confirmed and understood
+- [ ] API security requirements have been clearly defined
+- [ ] Performance monitoring strategy has been formulated
+- [ ] API documentation specifications have been prepared
 </validation_checkpoints>
 </stage>
 
-<stage name="開發執行" number="3" critical="true">
-<description>執行 API 開發工作</description>
+<stage name="Development Execution" number="3" critical="true">
+<description>Execute API development work</description>
 
 <execution_actions>
-6. **嚴格遵循工作流程**：按照載入的後端開發者工作流程執行
-7. **專項驗證**：確保所有資料庫相關的安全性和效能要求得到滿足
-8. **文檔記錄**：詳細記錄資料庫架構、查詢優化和安全措施
+7. **Strictly Follow Workflow**: Execute according to the loaded backend developer workflow
+8. **Specialized Verification**: Ensure all API-related security and performance requirements are satisfied
+9. **Documentation Recording**: Detail record API architecture, query optimization, and security measures
 </execution_actions>
 </stage>

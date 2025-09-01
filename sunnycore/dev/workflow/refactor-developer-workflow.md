@@ -1,143 +1,143 @@
-# 重構開發者工作流程
+# Refactor Developer Workflow
 
 <enforcement>
-## 🔄 工作流程Todo List製作
+## 🔄 Workflow Todo List Creation
 
-### 📋 開始執行前的必要準備
+### 📋 Necessary Preparations Before Starting Execution
 
-**重要提醒**: 在開始執行任何工作流程步驟之前，必須使用使用待辦事項列表來創建一個待辦事項列表來組織這些步驟。
+**Important Reminder**: Before starting any workflow steps, you must use a todo list to create a todo list to organize these steps.
 
-**製作流程**:
-1. **分析工作流程結構** - 仔細閱讀整個workflow文件，識別所有階段、步驟和任務
-2. **提取關鍵任務** - 將每個階段的核心任務轉換為具體的todo項目
-3. **設定優先級** - 根據任務的重要性和依賴關係設定優先級
-4. **創建Todo List** - 使用`todo_write`工具創建包含所有步驟的結構化todo list
-5. **執行與更新** - 按照todo list順序執行任務，及時更新狀態
+**Creation Process**:
+1. **Analyze Workflow Structure** - Carefully read the entire workflow file, identify all stages, steps, and tasks
+2. **Extract Key Tasks** - Convert core tasks of each stage into specific todo items
+3. **Set Priorities** - Set priorities based on task importance and dependency relationships
+4. **Create Todo List** - Use `todo_write` tool to create a structured todo list containing all steps
+5. **Execute and Update** - Execute tasks in todo list order, update status in a timely manner
 
-### 📝 Todo List要求
-- **覆蓋性**: 每個主要階段都應該有對應的todo項目
-- **驗證點**: 關鍵的驗證檢查點必須包含在todo list中
-- **優先級**: 設定合理的優先級，確保依賴關係得到尊重
-- **狀態管理**: 在執行過程中及時更新todo狀態（pending → in_progress → completed）
-- **唯一性**: 同時只能有一個任務處於`in_progress`狀態
-- **完整性**: 只有在任務完全完成時才標記為`completed`
+### 📝 Todo List Requirements
+- **Coverage**: Each major stage should have corresponding todo items
+- **Validation Points**: Key validation checkpoints must be included in the todo list
+- **Priorities**: Set reasonable priorities to ensure dependencies are respected
+- **State Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
+- **Uniqueness**: Only one task can be in `in_progress` state at the same time
+- **Completeness**: Only mark as `completed` when tasks are completely finished
 </enforcement>
 
 <workflow type="refactor-developer">
 
-## 強制前置條件驗證
+## Mandatory Preconditions Validation
 <mandatory-preconditions>
 
-### 1. 載入執行規範
+### 1. Load Execution Standards
 
-<stage name="載入執行規範" number="1" critical="true">
-**強制執行規範載入**
-- **描述**: 完整讀取 `{project_root}/sunnycore/dev/enforcement/refactor-developer-enforcement.md`
-- **要求**:
+<stage name="Load Execution Standards" number="1" critical="true">
+**Mandatory Execution Standards Loading**
+- **Description**: Completely read `{project_root}/sunnycore/dev/enforcement/refactor-developer-enforcement.md`
+- **Requirements**:
   <requirements>
-  - 理解所有強制規則、重構標準和品質門檻
-  - 如果無法載入，立即停止並報告錯誤
+  - Understand all mandatory rules, refactoring standards, and quality gates
+  - If unable to load, immediately stop and report error
   </requirements>
 
 </stage>
 
-### 2. 專案上下文建立
+### 2. Project Context Establishment
 
-<stage name="專案上下文建立" number="2" critical="true">
+<stage name="Project Context Establishment" number="2" critical="true">
 
-**專案規範理解**
+**Project Specifications Understanding**
 
-- **描述**: 讀取 `{project_root}/docs/specs/` 路徑下的所有文檔
-- **要求**:
+- **Description**: Read all documents under `{project_root}/docs/specs/` path
+- **Requirements**:
   <requirements>
   <think>
-  重構開發者需要專注於以下類型的專案規範內容：
-  
-  1. **架構設計規範**：
-     - 現有系統架構設計和組件關係
-     - 設計模式使用情況和架構債務
-     - 模組間依賴關係和耦合度分析
-     - 可擴展性瓶頸和改進機會
-  
-  2. **代碼品質規範**：
-     - 編碼標準、命名規範和風格指南
-     - 代碼審查標準和品質門檻
-     - 技術債務識別標準和優先級
-     - 重構安全性和測試覆蓋率要求
-  
-  3. **效能和優化規範**：
-     - 效能基準和瓶頸識別標準
-     - 記憶體使用、CPU效率和I/O優化要求
-     - 演算法複雜度改進目標
-     - 資源使用監控和優化指標
-  
-  4. **維護性規範**：
-     - 代碼可讀性和文檔化標準
-     - 模組化設計和重用性要求
-     - 錯誤處理和日誌記錄標準
-     - 版本相容性和遷移策略
-  
-  5. **安全性規範**：
-     - 安全漏洞修復標準和驗證流程
-     - 安全編碼實踐和風險評估
-     - 敏感資料處理和加密要求
-     - 依賴安全性和漏洞掃描標準
-  
-  6. **測試和驗證規範**：
-     - 重構前後的測試策略和覆蓋率要求
-     - 回歸測試和整合測試標準
-     - 效能測試和負載測試基準
-     - 自動化測試和持續整合要求
+  Refactor Developer needs to focus on the following types of project specification content:
+
+  1. **Architecture Design Specifications**:
+     - Existing system architecture design and component relationships
+     - Design pattern usage and architectural debt
+     - Inter-module dependency relationships and coupling analysis
+     - Scalability bottlenecks and improvement opportunities
+
+  2. **Code Quality Specifications**:
+     - Coding standards, naming conventions, and style guides
+     - Code review standards and quality gates
+     - Technical debt identification standards and priorities
+     - Refactoring safety and test coverage requirements
+
+  3. **Performance and Optimization Specifications**:
+     - Performance benchmarks and bottleneck identification standards
+     - Memory usage, CPU efficiency, and I/O optimization requirements
+     - Algorithm complexity improvement targets
+     - Resource usage monitoring and optimization indicators
+
+  4. **Maintainability Specifications**:
+     - Code readability and documentation standards
+     - Modular design and reusability requirements
+     - Error handling and logging standards
+     - Version compatibility and migration strategies
+
+  5. **Security Specifications**:
+     - Security vulnerability repair standards and verification processes
+     - Secure coding practices and risk assessments
+     - Sensitive data handling and encryption requirements
+     - Dependency security and vulnerability scanning standards
+
+  6. **Testing and Validation Specifications**:
+     - Pre/post-refactoring testing strategies and coverage requirements
+     - Regression testing and integration testing standards
+     - Performance testing and load testing benchmarks
+     - Automated testing and continuous integration requirements
   </think>
-  
-  基於上述思維分析，執行以下任務：
-  - 理解專案需求、現有架構設計和代碼品質標準
-  - 建立涵蓋技術債務、效能瓶頸和維護性問題的專案上下文模型
-  - 識別重構目標區域、風險點和依賴關係
-  - 特別關注代碼架構改進機會、效能優化空間和安全性增強需求
-  - 確認重構範圍邊界、測試策略和向後相容性要求
-  - 評估重構複雜度和資源需求，制定漸進式改進計劃
+
+  Based on the above thinking analysis, execute the following tasks:
+  - Understand project requirements, existing architecture design, and code quality standards
+  - Establish project context model covering technical debt, performance bottlenecks, and maintainability issues
+  - Identify refactoring target areas, risk points, and dependencies
+  - Pay special attention to code architecture improvement opportunities, performance optimization space, and security enhancement needs
+  - Confirm refactoring scope boundaries, testing strategies, and backward compatibility requirements
+  - Evaluate refactoring complexity and resource requirements, formulate incremental improvement plans
   </requirements>
 
-**實施計劃驗證**
-- **描述**: 確認 `{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md` 存在且可讀取
+**Implementation Plan Verification**
+- **Description**: Confirm `{project_root}/docs/implementation-plan/{task_id}`(such as `1`, `2`, `3`...)-plan.md` exists and is readable
 <critical-checkpoint>
-如果實施計劃不存在，立即停止並通知用戶需要先執行計劃階段
+If implementation plan does not exist, immediately stop and notify user that planning stage needs to be executed first
 </critical-checkpoint>
 
-- **要求**:
+- **Requirements**:
   <requirements>
   <think hard>
-  - 驗證計劃完整性、範圍定義和重構可行性
-  - 確認重構目標和品質提升要求
+  - Validate plan completeness, scope definition, and refactoring feasibility
+  - Confirm refactoring goals and quality improvement requirements
   <think hard>
   </requirements>
 
 </stage>
 
-### 3. 重構專門化準備
+### 3. Refactoring Specialization Preparation
 
-<stage name="重構專門化準備" number="3" critical="true">
-**重構檢查清單準備**
-根據強制執行規範準備重構檢查清單：
+<stage name="Refactoring Specialization Preparation" number="3" critical="true">
+**Refactoring Checklist Preparation**
+Prepare refactoring checklist according to mandatory execution standards:
 
 <refactor-checklist>
 <think harder>
-- [ ] 分析計劃內容，識別重構範圍和目標
-- [ ] 評估現有代碼品質和技術債務
-- [ ] 確認重構策略和風險評估
-- [ ] 建立漸進式重構和測試驅動開發（TDD）策略
-- [ ] 驗證向後相容性和效能影響
+- [ ] Analyze plan content, identify refactoring scope and goals
+- [ ] Assess existing code quality and technical debt
+- [ ] Confirm refactoring strategy and risk assessment
+- [ ] Establish incremental refactoring and test-driven development (TDD) strategy
+- [ ] Validate backward compatibility and performance impact
 <think harder>
 </refactor-checklist>
 
-**品質目標確認**
-確認並記錄重構品質要求：
+**Quality Target Confirmation**
+Confirm and record refactoring quality requirements:
 <quality-targets>
 <think>
-- 代碼可讀性和維護性改進目標
-- 效能優化和資源使用改善
-- 技術債務減少和架構改良指標
+- Code readability and maintainability improvement targets
+- Performance optimization and resource usage improvements
+- Technical debt reduction and architecture improvement indicators
 <think>
 </quality-targets>
 </stage>
@@ -145,59 +145,59 @@
 
 ---
 
-## 開發執行流程
+## Development Execution Process
 <development-execution>
 
-### 4. 重構分析流程
+### 4. Refactoring Analysis Process
 
-<stage name="重構分析" number="4" critical="true">
-**深度代碼分析**
-- **描述**: 全面分析現有代碼結構和重構需求
-- **要求**:
+<stage name="Refactoring Analysis" number="4" critical="true">
+**Deep Code Analysis**
+- **Description**: Comprehensive analysis of existing code structure and refactoring requirements
+- **Requirements**:
   <requirements>
   <Ultra think>
-  - 識別代碼異味和設計模式問題
-  - 分析依賴關係和耦合度
-  - 評估重構風險和影響範圍
-  - 制定詳細的重構步驟計劃
+  - Identify code smells and design pattern issues
+  - Analyze dependency relationships and coupling degree
+  - Assess refactoring risks and impact scope
+  - Formulate detailed refactoring step plan
   <Ultra think>
   </requirements>
 
-**重構策略制定**
-根據分析結果制定重構策略：
+**Refactoring Strategy Formulation**
+Formulate refactoring strategy based on analysis results:
 <refactor-strategy>
 <think harder>
-- 確定重構優先級和執行順序
-- 選擇適當的重構技術和模式
-- 建立安全網測試和回滾機制
-- 制定漸進式交付計劃
+- Determine refactoring priorities and execution sequence
+- Select appropriate refactoring techniques and patterns
+- Establish safety net tests and rollback mechanisms
+- Formulate incremental delivery plan
 <think harder>
 </refactor-strategy>
 </stage>
 
-### 5. TDD重構流程
+### 5. TDD Refactoring Process
 
-<stage name="測試驅動重構" number="5" critical="true">
-**按照TDD流程進行重構**
-- **描述**: 遵循測試先行的重構方法論
-- **要求**:
+<stage name="Test-Driven Refactoring" number="5" critical="true">
+**Perform Refactoring According to TDD Process**
+- **Description**: Follow test-first refactoring methodology
+- **Requirements**:
   <requirements>
   <Ultra think>
-  - 建立全面的測試覆蓋，確保重構安全
-  - 採用小步驟、高頻率的重構策略
-  - 持續驗證功能正確性和效能表現
-  - 維護代碼品質和設計原則
+  - Establish comprehensive test coverage to ensure refactoring safety
+  - Adopt small-step, high-frequency refactoring strategy
+  - Continuously validate functional correctness and performance
+  - Maintain code quality and design principles
   <Ultra think>
   </requirements>
 
-**重構執行檢查點**
-在重構過程中持續驗證：
+**Refactoring Execution Checkpoints**
+Continuously validate during refactoring process:
 <refactor-checkpoints>
 <think hard>
-- 每個重構步驟後的測試通過率
-- 代碼覆蓋率和品質指標改善
-- 效能指標和資源使用變化
-- 架構一致性和設計原則遵循
+- Test pass rate after each refactoring step
+- Code coverage and quality indicator improvements
+- Performance indicators and resource usage changes
+- Architectural consistency and design principle adherence
 <think hard>
 </refactor-checkpoints>
 </stage>

@@ -1,95 +1,95 @@
-# 重構開發者 代碼品質重構任務
+# Refactor Developer Code Quality Refactoring Task
 
 <task_overview>
-當執行此指令時，你將作為重構開發者專注於代碼品質改進與結構調整工作。
+When executing this instruction, you will act as a Refactor Developer focused on code quality improvement and structural adjustment work.
 </task_overview>
 
-## 強制前置條件
+## Mandatory Prerequisites
 
-<stage name="載入執行規範" number="1" critical="true">
-<description>載入重構開發者專用的執行規範和工作流程</description>
+<stage name="Load Execution Standards" number="1" critical="true">
+<description>Load the dedicated execution standards and workflow for Refactor Developer</description>
 
 <execution_actions>
-1. **載入重構開發者執行規範**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/enforcement/refactor-developer-enforcement.md`
-   - 將其作為項目的**唯一執行規範**
-   - 所有重構決策必須符合此規範要求
+1. **Load Refactor Developer Execution Standards**:
+   - Completely read `{project_root}/sunnycore/dev/enforcement/refactor-developer-enforcement.md`
+   - Treat it as the project's **only execution standard**
+   - All refactoring decisions must comply with this standard's requirements
 
-2. **載入重構開發者工作流程**：
-   - 完整閱讀 `{project_root}/sunnycore/dev/workflow/refactor-developer-workflow.md`
-   - 將其作為項目的**唯一工作流程**
-   - 嚴格按照流程步驟執行代碼品質重構
+2. **Load Refactor Developer Workflow**:
+   - Completely read `{project_root}/sunnycore/dev/workflow/refactor-developer-workflow.md`
+   - Treat it as the project's **only workflow**
+   - Strictly follow the workflow steps to execute code quality refactoring
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] 重構開發者執行規範已完整載入並理解
-- [ ] 重構開發者工作流程已完整載入並理解
-- [ ] 準備按照規範和流程執行代碼品質重構
+- [ ] Refactor Developer execution standards have been completely loaded and understood
+- [ ] Refactor Developer workflow has been completely loaded and understood
+- [ ] Ready to execute code quality refactoring according to standards and workflow
 </validation_checkpoints>
 </stage>
 
-## 代碼品質重構專門化
+## Code Quality Refactoring Specialization
 
-<stage name="代碼品質專門化準備" number="2" critical="true">
-<description>針對代碼品質重構任務進行專門化準備</description>
+<stage name="Code Quality Specialization Preparation" number="2" critical="true">
+<description>Perform specialized preparation for code quality refactoring tasks</description>
 
 <execution_actions>
-3. **品質基準與門檻定義**：
+3. **Quality Standards and Threshold Definition**:
    <think>
-   - 靜態分析與代碼風格門檻（Linter、Formatter、型別嚴格度）
-   - 測試覆蓋率與品質門檻（單元/整合/契約測試）
-   - Pull Request 檢查項與合併守門規則
+   - Static analysis and code style thresholds (Linter, Formatter, Type strictness)
+   - Test coverage and quality thresholds (Unit/Integration/Contract tests)
+   - Pull Request checklist items and merge gate rules
    </think>
 
-4. **架構與模組化策略**：
+4. **Architecture and Modularization Strategy**:
    <think hard>
-   - 應用 SOLID、分層架構與關注點分離
-   - 消除循環依賴與隱式耦合，穩固邊界（Domain/Module/Package）
-   - 依賴反轉與介面穩定化，提升可測試性
+   - Apply SOLID principles, layered architecture, and separation of concerns
+   - Eliminate circular dependencies and implicit coupling, solidify boundaries (Domain/Module/Package)
+   - Dependency inversion and interface stabilization to improve testability
    </think hard>
 
-5. **代碼氣味與風險清單**：
+5. **Code Smell and Risk Checklist**:
    <think>
-   - 長函式、上帝物件、重複代碼、過度耦合
-   - 原始型別偏執、Feature Envy、臨時式修補
-   - 例外吞噬、日誌缺失、錯誤邏輯分散
+   - Long functions, God objects, duplicate code, excessive coupling
+   - Primitive obsession, Feature Envy, temporary field patterns
+   - Exception swallowing, missing logging, scattered error logic
    </think>
 
-6. **測試與回歸防護設計**：
+6. **Testing and Regression Protection Design**:
    <think>
-   - 以測試驅動重構（先鎖定行為，再調整內部結構）
-   - 為關鍵邊界建立契約測試與金盒/黑盒測試
-   - 建立變異測試或等價類型測試以強化保護網
+   - Test-driven refactoring (lock behavior first, then adjust internal structure)
+   - Establish contract tests and white-box/black-box tests for critical boundaries
+   - Build mutation tests or equivalence class tests to strengthen safety nets
    </think>
 
-7. **變更風險與釋出策略**：
+7. **Change Risk and Release Strategy**:
    <think>
-   - Feature Toggle、Strangler Pattern、分批釋出與漸進重構
-   - 可回滾計畫與影響面說明
+   - Feature Toggle, Strangler Pattern, batch releases and incremental refactoring
+   - Rollback plans and impact area documentation
    </think>
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] 品質門檻與度量已明確
-- [ ] 模組邊界與依賴策略已確認
-- [ ] 代碼氣味清單已建置且有排序
-- [ ] 測試與回歸防護設計已就緒
-- [ ] 變更與釋出策略可執行
+- [ ] Quality thresholds and metrics have been clearly defined
+- [ ] Module boundaries and dependency strategies have been confirmed
+- [ ] Code smell checklist has been established and prioritized
+- [ ] Testing and regression protection design is ready
+- [ ] Change and release strategies are executable
 </validation_checkpoints>
 </stage>
 
-<stage name="開發執行" number="3" critical="true">
-<description>執行代碼品質重構工作</description>
+<stage name="Development Execution" number="3" critical="true">
+<description>Execute code quality refactoring work</description>
 
 <execution_actions>
-8. **嚴格遵循工作流程**：按照載入的重構開發者工作流程執行
-9. **專項驗證**：確保靜態分析零錯誤、依賴分析無循環、公共介面穩定
-10. **文檔記錄**：撰寫 ADR（架構決策記錄）、變更影響面與遷移指南
+8. **Strictly Follow Workflow**: Execute according to the loaded Refactor Developer workflow
+9. **Specialized Verification**: Ensure zero static analysis errors, no circular dependencies, stable public interfaces
+10. **Documentation Recording**: Write ADR (Architecture Decision Records), change impact areas, and migration guides
 </execution_actions>
 
 <validation_checkpoints>
-- [ ] Lint/Format/型別檢查皆為綠燈
-- [ ] 單元/整合/契約測試綠燈且覆蓋率達標
-- [ ] 對外契約向後相容或已提供遷移方案
+- [ ] Lint/Format/Type checks all pass (green)
+- [ ] Unit/Integration/Contract tests pass with coverage meeting targets
+- [ ] External contracts maintain backward compatibility or migration solutions provided
 </validation_checkpoints>
 </stage>

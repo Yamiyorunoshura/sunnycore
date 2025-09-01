@@ -1,188 +1,188 @@
-# Implementation Plan Validator 強制執行規範
+# Implementation Plan Validator Enforcement Specification
 
-## 核心執行協議
+## Core Execution Protocol
 
--### 必要前置條件（寬鬆）
-- **建議**：在開始驗證前載入所有必要文件；若缺失，記錄為 validation_warnings 並持續
-- **建議讀取順序**：
+### Prerequisites (Flexible)
+- **Recommendation**: Load all necessary files before starting validation; record gaps and alternative information sources if missing
+- **Recommended Reading Order**:
   1. `{project_root}/sunnycore/po/enforcement/implementation-plan-validator-enforcement.md`
   2. `{project_root}/sunnycore/po/workflow/unified-plan-validation-workflow.yaml`
   3. `{project_root}/sunnycore/po/templates/implementation-plan-tmpl.yaml`
   4. `{project_root}/sunnycore/po/templates/plan-validation-report-tmpl.yaml`
-- **檔案載入驗證**：未能完全載入時，記錄缺口與替代資訊來源
+- **File Loading Verification**: Record gaps and alternative information sources if unable to load completely
 
-### 基於證據的驗證（絕對強制）
-- **證據要求**：所有判斷都必須有具體證據支持
-- **引用格式**：必須包含檔案路徑、行號、段落引用
-- **可追溯性**：每個發現都必須能追溯到源文件
-- **客觀性**：避免主觀判斷，只基於可驗證的事實
+### Evidence-based Validation (Absolute Mandatory)
+- **Evidence Requirements**: All judgments must be supported by concrete evidence
+- **Citation Format**: Must include file paths, line numbers, paragraph references
+- **Traceability**: Every finding must be traceable to source files
+- **Objectivity**: Avoid subjective judgments, base only on verifiable facts
 
-### 工作流程合規性（寬鬆）
-- **階段完整性**：應按順序執行；未完成時記錄原因與補救計劃
-- **驗證檢查點**：未通過時記錄警告並最小化持續
-- **失敗處理**：非阻斷性失敗記錄為警告並持續；阻斷性才停止
+### Workflow Compliance (Flexible)
+- **Stage Integrity**: Should execute in order; record reasons and remediation plans when incomplete
+- **Validation Checkpoints**: Record warnings and minimize continuation when not passed
+- **Failure Handling**: Record warnings and continue for non-blocking failures; stop only for blocking failures
 
-### 範本合規性（強制但不中斷）
-- **結構驗證**：計劃必須符合 `{project_root}/sunnycore/po/templates/implementation-plan-tmpl.yaml` 範本的必需欄位
-- **完整性檢查**：所有必需部分都必須有實際內容
-- **佔位符清除**：應清除 `<placeholder>`；殘留時記錄並補齊計劃
-- **格式一致性**：必須符合範本的格式要求
+### Template Compliance (Mandatory but Non-blocking)
+- **Structure Validation**: Plan must conform to required fields of `{project_root}/sunnycore/po/templates/implementation-plan-tmpl.yaml` template
+- **Completeness Check**: All required sections must have actual content
+- **Placeholder Removal**: Should remove `<placeholder>`; record and supplement if remaining
+- **Format Consistency**: Must conform to format requirements of template
 
-### 交叉參考驗證（強制執行）
+### Cross-reference Validation (Mandatory Enforcement)
 
-#### 需求交叉參考
-- **功能性需求**：每個功能項目都必須能在 `requirements.md`、`task.md` 或 `design.md` 中找到對應
-- **非功能性需求**：測量目標必須清晰且可追溯到規範或品質門檻
-- **需求完整性**：所有提及的需求都必須有明確的源頭
+#### Requirements Cross-reference
+- **Functional Requirements**: Every functional item must find correspondence in `requirements.md`, `task.md`, or `design.md`
+- **Non-functional Requirements**: Measurement targets must be clear and traceable to specifications or quality thresholds
+- **Requirements Completeness**: All referenced requirements must have clear sources
 
-#### 設計交叉參考
-- **架構對齊**：架構、模組、介面必須能在 `design.md` 中追溯
-- **設計文件**：設計圖表和文件必須與計劃一致
-- **技術選型**：技術選擇必須有設計文件支持
+#### Design Cross-reference
+- **Architecture Alignment**: Architecture, modules, interfaces must be traceable in `design.md`
+- **Design Documents**: Design diagrams and documents must be consistent with plan
+- **Technology Selection**: Technology choices must have design document support
 
-#### 範圍交叉參考
-- **範圍界定**：in_scope/out_of_scope 必須能追溯到規範中的明確邊界定義
-- **範圍一致性**：範圍定義必須與專案文件一致
-- **範圍合理性**：範圍大小必須與資源和時間安排匹配
+#### Scope Cross-reference
+- **Scope Definition**: in_scope/out_of_scope must be traceable to explicit boundary definitions in specifications
+- **Scope Consistency**: Scope definitions must be consistent with project documents
+- **Scope Reasonableness**: Scope size must match resource and time arrangements
 
-### 專案規範合規性（強制驗證）
-- **安全要求**：絕不修改 `docs/specs/` 中的任何檔案
-- **檔案完整性**：所有引用的檔案必須存在且可讀
-- **路徑正確性**：所有檔案路徑必須正確且可解析
+### Project Specification Compliance (Mandatory Verification)
+- **Security Requirements**: Never modify any files in `docs/specs/`
+- **File Integrity**: All referenced files must exist and be readable
+- **Path Correctness**: All file paths must be correct and resolvable
 
-### 詳細驗證要求
+### Detailed Validation Requirements
 
-#### 中繼資料驗證（強制檢查）
-- **路徑存在性**：所有引用的路徑必須存在且可讀
-- **檔案完整性**：確保所有源文件完整且未損壞
-- **版本一致性**：確保文件版本間的一致性
+#### Metadata Validation (Mandatory Check)
+- **Path Existence**: All referenced paths must exist and be readable
+- **File Integrity**: Ensure all source files are complete and uncorrupted
+- **Version Consistency**: Ensure consistency of file versions
 
-#### 目標驗證（強制執行）
-- **功能性目標**：每個項目必須有 `requirements.md`、`task.md` 或 `design.md` 中的對應支持
-- **非功能性目標**：測量目標必須清晰、可測量且可追溯
-- **目標可達性**：目標必須在給定的約束下可實現
+#### Target Validation (Mandatory Enforcement)
+- **Functional Objectives**: Every item must have correspondence in `requirements.md`, `task.md`, or `design.md`
+- **Non-functional Targets**: Measurement targets must be clear, measurable, and traceable
+- **Target Achievability**: Targets must be achievable within given constraints
 
-#### 範圍驗證（強制確認）
-- **邊界清晰**：範圍邊界必須明確定義
-- **包含合理性**：in_scope 項目必須有充分理由
-- **排除合理性**：out_of_scope 項目必須有明確理由
-- **範圍追溯**：範圍定義必須能追溯到規範或計劃背景
+#### Scope Validation (Mandatory Confirmation)
+- **Boundary Clarity**: Scope boundaries must be clearly defined
+- **Inclusion Rationale**: in_scope items must have sufficient justification
+- **Exclusion Rationale**: out_of_scope items must have clear reasons
+- **Scope Traceability**: Scope definitions must be traceable to specifications or plan background
 
-#### 方法驗證（強制檢查）
-- **架構合理性**：架構選擇必須有設計文件支持
-- **模組設計**：模組劃分必須合理且可追溯
-- **介面定義**：介面設計必須在設計文件中有對應
+#### Approach Validation (Mandatory Check)
+- **Architecture Reasonableness**: Architecture choices must have design document support
+- **Module Design**: Module division must be reasonable and traceable
+- **Interface Definition**: Interface design must have correspondence in design documents
 
-#### 資料驗證（強制確認）
-- **資料結構**：必須基於設計或遷移文件
-- **遷移策略**：資料遷移必須有清晰的策略和步驟
-- **資料完整性**：確保資料變更不會破壞完整性
+#### Data Validation (Mandatory Confirmation)
+- **Data Structure**: Must be based on design or migration documents
+- **Migration Strategy**: Data migration must have clear strategy and steps
+- **Data Integrity**: Ensure data changes do not break integrity
 
-#### 測試策略驗證（強制檢查）
-- **測試完整性**：測試策略必須涵蓋所有功能點
-- **品質門檻**：品質門檻必須具體且可驗證
-- **測試可行性**：測試方法必須可行且有效
+#### Testing Strategy Validation (Mandatory Check)
+- **Testing Completeness**: Testing strategy must cover all functional points
+- **Quality Thresholds**: Quality thresholds must be concrete and verifiable
+- **Testing Feasibility**: Testing methods must be feasible and effective
 
-#### 時間線驗證（強制確認）
-- **里程碑合理性**：時間線和里程碑必須合理且可實現
-- **依賴關係**：依賴性必須清晰且邏輯一致
-- **資源匹配**：時間安排必須與可用資源匹配
+#### Timeline Validation (Mandatory Confirmation)
+- **Milestone Reasonableness**: Timelines and milestones must be reasonable and achievable
+- **Dependency Relations**: Dependencies must be clear and logical
+- **Resource Matching**: Time arrangements must match available resources
 
-#### 風險評估驗證（強制檢查）
-- **風險識別**：風險識別必須全面且實際
-- **緩解措施**：每個風險都必須有對應的緩解措施
-- **應急計劃**：重大風險必須有應急計劃
+#### Risk Assessment Validation (Mandatory Check)
+- **Risk Identification**: Risk identification must be comprehensive and actual
+- **Mitigation Measures**: Every risk must have corresponding mitigation measures
+- **Contingency Plans**: Major risks must have contingency plans
 
-#### 嚴重性量化（強制約定）
-- **等級定義**：
-  - 關鍵（Critical）：阻斷工作流程，需立即修復；對應 workflow 規則中的 blocker
-  - 重要（High）：顯著影響品質/時程；需在報告前修復或列為優先行動
-  - 一般（Medium）：建議修正；不阻斷輸出
-  - 建議（Low）：最佳實踐或可改進項
-- **量化維度（至少二項）**：影響範圍（scope）、可復現性（reproducibility）、修復成本（effort）、時效敏感度（time criticality）
-- **決策規則**：任一阻斷條件（如缺失關鍵章節、交叉參考失敗、佔位符殘留、無證據發現）則歸類為關鍵
+#### Severity Quantification (Mandatory Convention)
+- **Level Definitions**:
+  - Critical (Critical): Blocks workflow, needs immediate repair; corresponds to blocker in workflow rules
+  - High (High): Significantly affects quality/timeline; needs repair before report or prioritization as action items
+  - Medium (Medium): Suggest correction; does not block output
+  - Low (Low): Best practices or improvable items
+- **Quantification Dimensions (at least two)**: Impact scope (scope), reproducibility (reproducibility), repair cost (effort), time criticality (time criticality)
+- **Decision Rules**: Classified as critical if any blocking condition (missing critical chapters, cross-reference failures, placeholder residues, no evidence findings)
 
-### 報告生成要求（強制執行）
-- **範本合規**：報告必須符合 `{project_root}/sunnycore/po/templates/plan-validation-report-tmpl.yaml` 結構
-- **內容完整**：所有範本部分都必須有實際內容
-- **證據支持**：所有發現都必須有具體證據
-- **建議具體**：改進建議必須具體且可操作
-- **執行中繼資料**：建議在附錄中包含 run_id、開始/結束時間、各階段耗時、並行度、快取命中率
+### Report Generation Requirements (Mandatory Enforcement)
+- **Template Compliance**: Report must conform to `{project_root}/sunnycore/po/templates/plan-validation-report-tmpl.yaml` structure
+- **Content Completeness**: All template sections must have actual content
+- **Evidence Support**: All findings must have concrete evidence
+- **Suggestions Concrete**: Improvement suggestions must be concrete and actionable
+- **Execution Metadata**: Suggest including run_id, start/end times, stage durations, synchronization, cache hit rate in appendix
 
-### Markdown格式轉換（絕對強制）
-- **YAML到Markdown**：必須將 `plan-validation-report-tmpl.yaml` 結構完整轉換為標準Markdown格式
-- **標題層級**：YAML section轉換為對應的Markdown標題（# ## ### #### ##### ######）
-- **清單格式**：YAML陣列轉換為Markdown清單（- 或 1. 格式）
-- **代碼區塊**：代碼片段和證據引用使用標準Markdown代碼塊（```language）
-- **表格格式**：驗證結果、發現清單使用Markdown表格格式 | 欄位 | 值 |
-- **鏈結格式**：證據鏈結使用標準Markdown鏈結格式 [文字](URL)
-- **區塊引用**：重要發現和建議使用 > 引用格式
-- **強調標記**：使用 **粗體** 和 *斜體* 適當強調關鍵發現和風險
-- **嚴重性標示**：使用表情符號或標記清楚標示問題嚴重性（🚨 關鍵、⚠️ 重要、ℹ️ 一般、💡 建議）
+### Markdown Format Conversion (Absolute Mandatory)
+- **YAML to Markdown**: Must completely convert `plan-validation-report-tmpl.yaml` structure to standard Markdown format
+- **Heading Hierarchy**: YAML sections converted to corresponding Markdown headings (# ## ### #### ##### ######)
+- **List Format**: YAML arrays converted to Markdown lists (- or 1. format)
+- **Code Blocks**: Code snippets and evidence references use standard Markdown code blocks (```language)
+- **Table Format**: Validation results and finding lists use Markdown table format | Field | Value |
+- **Link Format**: Evidence links use standard Markdown link format [text](URL)
+- **Block Quotes**: Important findings and suggestions use > quote format
+- **Emphasis Markers**: Use **bold** and *italic* to appropriately emphasize key findings and risks
+- **Severity Indicators**: Use emojis or markers to clearly indicate problem severity (🚨 Critical, ⚠️ High, ℹ️ Medium, 💡 Low)
 
-### 輸出位置（固定）
-- **主報告**：`{{project_root}}/docs/validation-reports/{{task_id}`(如`1`, `2`, `3`...)}-plan-validation.md`
-- **模板參考**：`{project_root}/sunnycore/po/templates/plan-validation-report-tmpl.yaml`
+### Output Location (Fixed)
+- **Main Report**: `{{project_root}}/docs/validation-reports/{{task_id}}-plan-validation.md`
+- **Template Reference**: `{project_root}/sunnycore/po/templates/plan-validation-report-tmpl.yaml`
 
-### 品質標準（強制達到）
-- **客觀性**：驗證必須客觀，基於可驗證的事實
-- **全面性**：驗證必須涵蓋計劃的所有重要方面
-- **準確性**：所有發現都必須準確且有據可查
-- **實用性**：驗證結果必須對改進計劃有實際價值
+### Quality Standards (Mandatory Achievement)
+- **Objectivity**: Validation must be objective, based on verifiable facts
+- **Comprehensiveness**: Validation must cover all important aspects of plan
+- **Accuracy**: All findings must be accurate and evidence-based
+- **Practicality**: Validation results must have actual value for plan improvement
 
-### 嚴重性評估（強制分類）
-- **關鍵**：可能導致專案失敗的問題
-- **重要**：可能影響專案品質或時程的問題
-- **一般**：可以改進但不影響核心目標的問題
-- **建議**：最佳實踐建議
+### Severity Evaluation (Mandatory Classification)
+- **Critical**: Problems that may lead to project failure
+- **High**: Problems that may affect project quality or timeline
+- **Medium**: Problems that can be improved but do not affect core objectives
+- **Low**: Best practice suggestions and future enhancement directions
 
-### 文檔和可追溯性
-- **證據記錄**：每個發現都必須記錄具體證據
-- **引用格式**：使用標準化的引用格式
-- **可追溯性**：確保所有判斷都可以追溯到源文件
-- **版本控制**：記錄驗證時的文件版本
+### Documentation and Traceability
+- **Evidence Recording**: Every finding must record concrete evidence
+- **Citation Format**: Use standardized citation format
+- **Traceability**: Ensure all judgments can be traced to source files
+- **Version Control**: Record file versions at validation time
 
-### 效率與確定性準則（不改變核心流程）
-- **預取與並行（允許）**：可在單一階段內對互不相依的讀檔與檢查動作進行並行處理；跨階段仍必須嚴格依序執行與驗證。
-- **快取策略（建議）**：基於 `task_id + plan_path + 來源文件雜湊` 建立唯一定址快取；當檔案雜湊或 mtime 變更時無條件失效。
-- **決定論推理（建議）**：對使用之 LLM/工具設定 `temperature=0`、`top_p=0`（如支援），關閉隨機取樣；對輸出清單採用穩定排序（區域→路徑→起始行）。
-- **Fail-fast（強化）**：一旦出現阻斷級（blocker）缺失/違規，立即停止後續步驟並回到對應階段修復。
-- **佔位符掃描（強化）**：在報告輸出前以規則式掃描 `<[^>]+>`、`TBD`、`TODO`、`INSERT` 等佔位符；若命中即視為格式違規。
-- **證據最小單位（規範化）**：每條發現至少包含 `檔案相對路徑`、`行範圍`、`引用片段（必要時）`；鼓勵附上來源檔案 `sha256` 以強化可重現性。
-- **執行遙測（建議）**：為每次驗證生成 `run_id (UUID)`，記錄各階段開始/完成時間、並行度、快取命中率，寫入報告附錄。
+### Efficiency and Determinism Guidelines (Not Changing Core Workflow)
+- **Prefetch and Synchronization (Allowed)**: Can synchronize mutually independent read and check actions within single stage; cross-stage must execute and verify strictly in order
+- **Cache Strategy (Recommended)**: Establish unique addressing cache based on `task_id + plan_path + source file hashes`; invalidate unconditionally when file hashes or mtimes change
+- **Deterministic Reasoning (Recommended)**: Set `temperature=0`, `top_p=0` for LLM/tools used (if supported), close random sampling; adopt stable sorting for output lists (region → path → start line)
+- **Fail-fast (Strengthened)**: Stop subsequent steps immediately and return to corresponding stage for repair once blocker-level (blocker) deficiency/violation occurs
+- **Placeholder Scanning (Strengthened)**: Scan `<[^>]+>`, `TBD`, `TODO`, `INSERT` placeholders with rules before report output; regard as format violation if hit
+- **Evidence Minimum Unit (Standardized)**: Each finding must include at least `relative file path`, `line range`, `reference snippet (if necessary)`; encourage attaching `sha256` of source file to strengthen reproducibility
+- **Execution Telemetry (Recommended)**: Generate `run_id (UUID)` for each validation, record start/completion times of each stage, synchronization, cache hit rate, write to report appendix
 
-## 驗證檢查清單（強制執行）
+## Validation Checklist (Mandatory Enforcement)
 
-### 前置檢查
-- [ ] 統一工作流程檔案已載入
-- [ ] 實施計劃範本已載入
-- [ ] 驗證報告範本已載入
-- [ ] 目標計劃檔案存在且可讀
+### Pre-checks
+- [ ] Unified workflow file loaded
+- [ ] Implementation plan template loaded
+- [ ] Validation report template loaded
+- [ ] Target plan file exists and readable
 
-### 結構檢查
-- [ ] 計劃符合範本結構
-- [ ] 所有必需欄位都有內容
-- [ ] 沒有未填充的佔位符
-- [ ] 格式符合要求
+### Structure Checks
+- [ ] Plan conforms to template structure
+- [ ] All required fields have content
+- [ ] No unfilled placeholders
+- [ ] Format conforms to requirements
 
-### 內容檢查
-- [ ] 所有功能需求都可追溯
-- [ ] 所有非功能需求都可測量
-- [ ] 範圍定義清晰且合理
-- [ ] 架構設計有文件支持
-- [ ] 測試策略完整且可行
-- [ ] 時間線合理且可實現
-- [ ] 風險評估全面且有緩解措施
+### Content Checks
+- [ ] All functional requirements traceable
+- [ ] All non-functional requirements measurable
+- [ ] Scope definition clear and reasonable
+- [ ] Architecture design has document support
+- [ ] Testing strategy complete and feasible
+- [ ] Timeline reasonable and achievable
+- [ ] Risk assessment comprehensive with mitigation measures
 
-### 品質檢查
-- [ ] 所有判斷都有證據支持
-- [ ] 引用格式正確
-- [ ] 建議具體且可操作
-- [ ] 嚴重性分類合理
+### Quality Checks
+- [ ] All judgments have evidence support
+- [ ] Citation format correct
+- [ ] Suggestions concrete and actionable
+- [ ] Severity classification reasonable
 
-## 失敗處理協議（記錄並續行）
-- **文件載入失敗**：記錄缺失與回退路徑；必要時降級範圍
-- **計劃檔案不存在**：記錄缺失與替代資訊來源；不中斷收集其他證據
-- **交叉參考失敗**：記錄為發現並標註嚴重性與補救建議
-- **範本不合規**：記錄差異並提出修正計劃；不中斷
-- **證據不足**：記錄缺口與補充計劃；可延後補齊
+## Failure Handling Protocol (Record and Continue)
+- **File Loading Failure**: Record missing sources and fallback paths; supplement scope if necessary
+- **Plan File Non-existence**: Record missing sources and alternative information sources; do not interrupt evidence collection
+- **Cross-reference Failure**: Record as findings and annotate severity with remediation suggestions
+- **Template Non-compliance**: Record differences and propose correction plans; do not interrupt
+- **Evidence Insufficiency**: Record gaps and supplementation plans; allow delayed supplementation
