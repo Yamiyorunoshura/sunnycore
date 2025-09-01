@@ -1,184 +1,185 @@
-# 開發者協調器工作流程
+# Developer Orchestrator Workflow
 
 <enforcement>
-## 🔄 工作流程Todo List製作
+## 🔄 Workflow Todo List Creation
 
-### 📋 開始執行前的必要準備
+### 📋 Necessary Preparations Before Starting Execution
 
-**重要提醒**: 在開始執行任何工作流程步驟之前，必須使用使用待辦事項列表來創建一個待辦事項列表來組織這些步驟。
+**Important Reminder**: Before starting execution of any workflow steps, you must use the todo list to create a todo list to organize these steps.
 
-**製作流程**:
-1. **分析工作流程結構** - 仔細閱讀整個workflow文件，識別所有階段、步驟和任務
-2. **提取關鍵任務** - 將每個階段的核心任務轉換為具體的todo項目
-3. **設定優先級** - 根據任務的重要性和依賴關係設定優先級
-4. **創建Todo List** - 使用`todo_write`工具創建包含所有步驟的結構化todo list
-5. **執行與更新** - 按照todo list順序執行任務，及時更新狀態
+**Creation Process**:
+1. **Analyze Workflow Structure** - Carefully read the entire workflow file, identify all stages, steps, and tasks
+2. **Extract Key Tasks** - Convert core tasks of each stage into specific todo items
+3. **Set Priorities** - Set priorities based on task importance and dependency relationships
+4. **Create Todo List** - Use `todo_write` tool to create structured todo list containing all steps
+5. **Execute and Update** - Execute tasks in todo list order, update status in a timely manner
 
-### 📝 Todo List要求
-- **覆蓋性**: 每個主要階段都應該有對應的todo項目
-- **驗證點**: 關鍵的驗證檢查點必須包含在todo list中
-- **優先級**: 設定合理的優先級，確保依賴關係得到尊重
-- **狀態管理**: 在執行過程中及時更新todo狀態（pending → in_progress → completed）
-- **唯一性**: 同時只能有一個任務處於`in_progress`狀態
-- **完整性**: 只有在任務完全完成時才標記為`completed`
+### 📝 Todo List Requirements
+- **Coverage**: Each major stage should have corresponding todo items
+- **Verification Points**: Key verification checkpoints must be included in the todo list
+- **Priorities**: Set reasonable priorities to ensure dependency relationships are respected
+- **Status Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
+- **Parallel Execution**: Support multiple tasks in `in_progress` status simultaneously to improve efficiency
+- **Dependency Management**: Ensure tasks with dependencies execute in correct order
+- **Completeness**: Only mark as `completed` when the task is fully completed
 </enforcement>
 
 ---
 
-<stage name="計劃驗證階段" number="1">
-<description>檢查並驗證實施計劃的存在性和完整性</description>
+<stage name="Plan Verification Phase" number="1">
+<description>Check and verify the existence and completeness of implementation plans</description>
 
 <execution_actions>
-- 從`{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md`（如`1-plan.md`, `2-plan.md`, `3-plan.md`...）讀取task_id對應的實施計劃
-- 驗證計劃格式和必要欄位（metadata、scope、assumptions、constraints）
-- 確認計劃範圍和約束條件
-- 驗證sources路徑的可解析性
+- Read the implementation plan corresponding to task_id from `{project_root}/docs/implementation-plan/{task_id}`(such as `1`, `2`, `3`...)-plan.md` (such as `1-plan.md`, `2-plan.md`, `3-plan.md`...)
+- Validate plan format and required fields (metadata, scope, assumptions, constraints)
+- Confirm plan scope and constraints
+- Verify resolvability of sources paths
 </execution_actions>
 
 <validation_checkpoints>
-- 計劃文件存在且可讀取
-- 必要欄位完整（task_id、project_name、owner、date）
-- 範圍定義清晰且可執行
-- 約束條件明確且合理
+- Plan file exists and is readable
+- Required fields complete (task_id, project_name, owner, date)
+- Scope definition clear and executable
+- Constraints explicit and reasonable
 </validation_checkpoints>
 </stage>
 
-<stage name="任務分類階段" number="2">
-<description>分析計劃內容並分類任務類型和技術領域</description>
+<stage name="Task Classification Phase" number="2">
+<description>Analyze plan content and classify task types and technical domains</description>
 
 <think harder>
 <execution_actions>
-- 深度分析計劃內容涉及的技術領域和複雜度
-- 智能識別前端、後端、全端或重構需求
-- 評估任務間的依賴關係和同步執行可能性
-- 計算任務複雜度和所需資源估算
-- 檢查`docs/review-results/{task_id}-review.md`（如`1-review.md`, `2-review.md`, `3-review.md`...）是否存在先前的審查文件（棕地狀態檢測）
-- 如為棕地狀態，讀取`docs/review-results/{task_id}-review.md`（如`1-review.md`, `2-review.md`, `3-review.md`...）中的問題清單、修復建議和優先級，並將其作為任務分類的參考。
+- Deeply analyze technical domains and complexity involved in plan content
+- Intelligently identify frontend, backend, fullstack, or refactoring requirements
+- Evaluate inter-task dependencies and synchronous execution possibilities
+- Calculate task complexity and required resource estimation
+- Check if `docs/review-results/{task_id}-review.md` (such as `1-review.md`, `2-review.md`, `3-review.md`...) exists for previous review documents (brownfield state detection)
+- If in brownfield state, read the issue list, repair recommendations, and priorities from `docs/review-results/{task_id}-review.md` (such as `1-review.md`, `2-review.md`, `3-review.md`...) and use them as reference for task classification.
 </execution_actions>
 </think harder>
 
 <classification_checkpoints>
-- 技術領域正確識別
-- 任務類型準確分類
-- 依賴關係清晰映射
-- 棕地狀態正確檢測
+- Technical domains correctly identified
+- Task types accurately classified
+- Dependencies clearly mapped
+- Brownfield state correctly detected
 </classification_checkpoints>
 </stage>
 
-<stage name="代理分配階段" number="3">
-<description>根據任務分類智能分配並調度相應的專門代理</description>
+<stage name="Agent Assignment Phase" number="3">
+<description>Intelligently assign and schedule corresponding specialized agents based on task classification</description>
 
 <think harder>
 <execution_actions>
-- 根據`{project_root}/sunnycore/dev/enforcement/developer-orchestrator-enforcement.md`中的任務類型映射規則選擇最適當的子代理
-- 啟動同步執行協議（當任務間無強依賴時）
-- 應用智能代理映射規則:
+- Select the most appropriate sub-agent based on task type mapping rules in `{project_root}/sunnycore/dev/enforcement/developer-orchestrator-enforcement.md`
+- Initiate synchronous execution protocol (when there are no strong dependencies between tasks)
+- Apply intelligent agent mapping rules:
 
-    <agent_mapping category="後端領域專家">
-    - `database` → `backend-developer_database` (數據庫設計、優化、遷移)
-    - `api` → `backend-developer_api` (RESTful API、GraphQL、微服務)
-    - `security` → `backend-developer_security` (認證、授權、安全防護)
-    - `performance` → `backend-developer_performance` (效能優化、負載測試)
-    - `testing` → `backend-developer_testing` (測試策略、自動化測試)
-    - `infrastructure` → `backend-developer_infrastructure` (部署、監控、DevOps)
+    <agent_mapping category="Backend Domain Experts">
+    - `database` → `backend-developer_database` (Database design, optimization, migration)
+    - `api` → `backend-developer_api` (RESTful API, GraphQL, microservices)
+    - `security` → `backend-developer_security` (Authentication, authorization, security protection)
+    - `performance` → `backend-developer_performance` (Performance optimization, load testing)
+    - `testing` → `backend-developer_testing` (Testing strategy, automated testing)
+    - `infrastructure` → `backend-developer_infrastructure` (Deployment, monitoring, DevOps)
     </agent_mapping>
 
-    <agent_mapping category="前端領域專家">
-    - `ui_ux` → `frontend-developer_ui-ux` (用戶界面、用戶體驗)
-    - `framework` → `frontend-developer_framework` (React、Vue、Angular)
-    - `performance` → `frontend-developer_performance` (前端優化、打包優化)
-    - `accessibility` → `frontend-developer_accessibility` (無障礙設計)
-    - `testing` → `frontend-developer_testing` (前端測試、E2E測試)
+    <agent_mapping category="Frontend Domain Experts">
+    - `ui_ux` → `frontend-developer_ui-ux` (User interface, user experience)
+    - `framework` → `frontend-developer_framework` (React, Vue, Angular)
+    - `performance` → `frontend-developer_performance` (Frontend optimization, bundle optimization)
+    - `accessibility` → `frontend-developer_accessibility` (Accessibility design)
+    - `testing` → `frontend-developer_testing` (Frontend testing, E2E testing)
     </agent_mapping>
 
-    <agent_mapping category="全端領域專家">
-    - `architecture` → `fullstack-developer_architecture` (系統架構、技術選型)
-    - `integration` → `fullstack-developer_integration` (系統整合、第三方服務)
-    - `performance` → `fullstack-developer_performance` (全棧效能優化)
-    - `devops` → `fullstack-developer_devops` (CI/CD、容器化、雲端部署)
+    <agent_mapping category="Fullstack Domain Experts">
+    - `architecture` → `fullstack-developer_architecture` (System architecture, technology selection)
+    - `integration` → `fullstack-developer_integration` (System integration, third-party services)
+    - `performance` → `fullstack-developer_performance` (Fullstack performance optimization)
+    - `devops` → `fullstack-developer_devops` (CI/CD, containerization, cloud deployment)
     </agent_mapping>
 
-    <agent_mapping category="重構領域專家">
-    - `code_quality` → `refactor-developer_code-quality` (代碼重構、架構改進)
-    - `performance` → `refactor-developer_performance` (效能重構、優化重構)
+    <agent_mapping category="Refactoring Domain Experts">
+    - `code_quality` → `refactor-developer_code-quality` (Code refactoring, architecture improvement)
+    - `performance` → `refactor-developer_performance` (Performance refactoring, optimization refactoring)
     </agent_mapping>
 
-- 建立代理間的實時協調機制和衝突解決策略
-- 傳遞完整的任務上下文、執行參數和品質要求
-- 如為棕地狀態，將審查文件中的問題清單和修復建議精確傳遞給相關代理
+- Establish real-time coordination mechanisms and conflict resolution strategies between agents
+- Transmit complete task context, execution parameters, and quality requirements
+- If in brownfield state, precisely transmit the issue list and repair recommendations from review documents to relevant agents
 </execution_actions>
 </think harder>
 
 <assignment_checkpoints>
-- 代理選擇符合任務  需求
-- 同步執行策略合理
-- 協調機制建立完成
-- 上下文傳遞完整
+- Agent selection meets task requirements
+- Synchronous execution strategy reasonable
+- Coordination mechanism established
+- Context transmission complete
 </assignment_checkpoints>
 </stage>
 
-<stage name="進度監控階段" number="4">
-<description>實時監控所有活躍代理的執行狀態和進度</description>
+<stage name="Progress Monitoring Phase" number="4">
+<description>Real-time monitoring of execution status and progress of all active agents</description>
 
 <execution_actions>
-- 建立代理執行進度的實時追蹤儀表板
-- 監控系統資源使用情況（CPU、內存、網絡）
-- 智能檢測潛在的瓶頸、風險和異常模式
-- 維護詳細的執行狀態日誌和時間線記錄
-- 如為棕地狀態，特別監控問題修復的進度和品質
-- 實施預警機制，提前識別可能的執行問題
+- Establish real-time tracking dashboard for agent execution progress
+- Monitor system resource usage (CPU, memory, network)
+- Intelligently detect potential bottlenecks, risks, and abnormal patterns
+- Maintain detailed execution status logs and timeline records
+- If in brownfield state, specially monitor progress and quality of issue remediation
+- Implement early warning mechanisms to identify potential execution issues in advance
 </execution_actions>
 
 <monitoring_checkpoints>
-- 所有代理狀態可見
-- 資源使用在合理範圍
-- 無阻塞性瓶頸
-- 執行日誌完整記錄
+- All agent statuses visible
+- Resource usage within reasonable ranges
+- No blocking bottlenecks
+- Execution logs completely recorded
 </monitoring_checkpoints>
 </stage>
 
-<stage name="問題解決階段" number="5">
-<description>識別並解決執行過程中的問題和衝突</description>
+<stage name="Problem Resolution Phase" number="5">
+<description>Identify and resolve issues and conflicts during execution process</description>
 
 <think>
 <execution_actions>
-- 智能檢測代理間的衝突、依賴問題和資源競爭
-- 協調技術決策衝突和實施策略分歧
-- 實施異常情況的自動恢復和手動干預機制
-- 動態優化執行策略和資源分配
-- 如為棕地狀態，確保先前審查中的所有問題都得到適當解決和驗證
-- 建立問題升級機制，處理複雜技術決策
+- Intelligently detect conflicts between agents, dependency issues, and resource competition
+- Coordinate technical decision conflicts and implementation strategy differences
+- Implement automatic recovery and manual intervention mechanisms for abnormal situations
+- Dynamically optimize execution strategies and resource allocation
+- If in brownfield state, ensure all issues from previous reviews are properly resolved and verified
+- Establish issue escalation mechanisms to handle complex technical decisions
 </execution_actions>
 </think>
 
 <resolution_checkpoints>
-- 代理間衝突已解決
-- 技術決策達成一致
-- 异常情况已恢复
-- 棕地问题修复完成
+- Inter-agent conflicts resolved
+- Technical decisions reached consensus
+- Abnormal situations recovered
+- Brownfield issues remediation completed
 </resolution_checkpoints>
 </stage>
 
-<stage name="完成報告階段" number="6">
-<description>生成開發記錄和最終報告</description>
+<stage name="Completion Report Phase" number="6">
+<description>Generate development records and final reports</description>
 
 <think hard>
 <execution_actions>
-- 收集並整合所有代理的執行結果、決策記錄和產出物
-- 讀取標準模板`{project_root}/sunnycore/dev/templates/dev-notes-tmpl.yaml`
-- 根據模板填入內容並轉換為markdown格式輸出到`{project_root}/docs/dev-notes/`路徑下，文件名稱為`{task_id}`(如`1`, `2`, `3`...)-dev-notes.md`（如`1-dev-notes.md`, `2-dev-notes.md`, `3-dev-notes.md`...）
-- 驗證開發記錄的格式完整性和內容準確性
-- 如為棕地狀態，在開發記錄中詳細記錄問題修復情況、驗證結果和品質改進
-- 生成執行摘要、關鍵決策記錄和後續建議
-- 建立可追溯的交付物清單和品質檢查報告
+- Collect and integrate all agents' execution results, decision records, and deliverables
+- Read standard template `{project_root}/sunnycore/dev/templates/dev-notes-tmpl.yaml`
+- Fill content according to template and convert to markdown format, output to `{project_root}/docs/dev-notes/` path, with filename `{task_id}`(such as `1`, `2`, `3`...)-dev-notes.md` (such as `1-dev-notes.md`, `2-dev-notes.md`, `3-dev-notes.md`...)
+- Verify completeness of development record format and accuracy of content
+- If in brownfield state, detail issue remediation status, verification results, and quality improvements in development records
+- Generate execution summary, key decision records, and follow-up recommendations
+- Establish traceable deliverable lists and quality inspection reports
 </execution_actions>
 </think hard>
 
 <completion_checkpoints>
-- 所有代理結果已收集
-- 開發記錄格式正確
-- 內容完整且準確
-- 棕地修復情況已記錄，並已更新dev notes文件（特別是迭代次數相關擊落）
-- 交付物清單完整
+- All agent results collected
+- Development record format correct
+- Content complete and accurate
+- Brownfield remediation status recorded and dev notes file updated (especially iteration count related details)
+- Deliverable list complete
 </completion_checkpoints>
 </stage>

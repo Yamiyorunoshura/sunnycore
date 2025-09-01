@@ -19,7 +19,8 @@
 - **Verification Points**: Critical validation checkpoints must be included in todo list
 - **Priority**: Set reasonable priorities to ensure dependency relationships are respected
 - **Status Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
-- **Uniqueness**: Only one task can be in `in_progress` status at a time
+- **Parallel Execution**: Support multiple tasks in `in_progress` status simultaneously to improve efficiency
+- **Dependency Management**: Ensure tasks with dependencies execute in correct order
 - **Completeness**: Only mark as `completed` when tasks are fully completed
 </enforcement>
 

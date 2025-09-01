@@ -3,7 +3,7 @@
 <enforcement>
 ## 🔄 Workflow Todo List Creation
 
-### 📋 Necessary Preparation Before Execution
+### 📋 Necessary Preparations Before Starting Execution
 
 **Important Reminder**: Before starting any workflow steps, you must use the todo list to create a todo list to organize these steps.
 

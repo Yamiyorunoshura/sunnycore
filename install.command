@@ -51,16 +51,58 @@ get_available_versions() {
     echo "$branches"
 }
 
-# 獲取安裝目錄
-read -p "請輸入安裝目錄 (絕對路徑或 ~ 路徑): " INSTALL_DIR
+# 選擇安裝類型
+echo "請選擇安裝類型:"
+echo "1) 全局安裝 (安裝到 ~/.claude)"
+echo "2) 自定義安裝 (安裝到項目目錄下的 .claude 文件夾)"
+echo ""
 
-# 處理 ~ 路徑
-if [[ "$INSTALL_DIR" == ~* ]]; then
-    # 展開 ~ 路徑
-    eval INSTALL_DIR="$INSTALL_DIR"
-fi
+while true; do
+    read -p "請輸入選擇 (1-2): " INSTALL_TYPE_CHOICE
+    
+    case $INSTALL_TYPE_CHOICE in
+        1)
+            INSTALL_TYPE="global"
+            INSTALL_DIR="$HOME/.claude"
+            echo "選擇全局安裝"
+            echo "agents 和 commands 安裝目錄: $INSTALL_DIR"
+            
+            # 獲取 sunnycore 安裝路徑
+            read -p "請輸入 sunnycore 安裝目錄 (絕對路徑或 ~ 路徑): " SUNNYCORE_DIR
+            
+            # 處理 ~ 路徑
+            if [[ "$SUNNYCORE_DIR" == ~* ]]; then
+                # 展開 ~ 路徑
+                eval SUNNYCORE_DIR="$SUNNYCORE_DIR"
+            fi
+            
+            echo "sunnycore 安裝目錄: $SUNNYCORE_DIR"
+            break
+            ;;
+        2)
+            INSTALL_TYPE="custom"
+            read -p "請輸入項目根目錄 (絕對路徑或 ~ 路徑): " PROJECT_ROOT
+            
+            # 處理 ~ 路徑
+            if [[ "$PROJECT_ROOT" == ~* ]]; then
+                # 展開 ~ 路徑
+                eval PROJECT_ROOT="$PROJECT_ROOT"
+            fi
+            
+            INSTALL_DIR="$PROJECT_ROOT/.claude"
+            SUNNYCORE_DIR="$PROJECT_ROOT"
+            echo "選擇自定義安裝，項目根目錄: $PROJECT_ROOT"
+            echo "agents 和 commands 安裝目錄: $INSTALL_DIR"
+            echo "sunnycore 安裝目錄: $SUNNYCORE_DIR"
+            break
+            ;;
+        *)
+            echo "無效選擇，請輸入 1 或 2。"
+            ;;
+    esac
+done
 
-# 檢查目錄是否存在，如果不存在則創建
+# 檢查並創建必要的目錄
 if [ ! -d "$INSTALL_DIR" ]; then
     echo "目錄不存在，正在創建: $INSTALL_DIR"
     mkdir -p "$INSTALL_DIR"
@@ -70,13 +112,21 @@ if [ ! -d "$INSTALL_DIR" ]; then
     fi
 fi
 
-echo "安裝目錄: $INSTALL_DIR"
+if [ ! -d "$SUNNYCORE_DIR" ]; then
+    echo "目錄不存在，正在創建: $SUNNYCORE_DIR"
+    mkdir -p "$SUNNYCORE_DIR"
+    if [ $? -ne 0 ]; then
+        echo "錯誤: 無法創建目錄 $SUNNYCORE_DIR"
+        exit 1
+    fi
+fi
+
 echo ""
 
 # 選擇版本
 echo "請選擇要安裝的版本:"
 echo "1) claude (自動選擇最新版本)"
-echo "2) deepseek (自動選擇最新版本)"
+echo "2) deepseek (尚未完成)"
 echo "3) 顯示所有可用版本"
 echo ""
 
@@ -157,12 +207,13 @@ echo ""
 # 檢查並複製文件
 echo "正在複製文件..."
 
-# 需要複製的文件夾
-FOLDERS=("agents" "commands" "sunnycore")
+# 複製 agents 和 commands 到指定目錄
+FOLDERS=("agents" "commands")
+echo "複製 agents 和 commands 到 $INSTALL_DIR"
 
 for folder in "${FOLDERS[@]}"; do
     if [ -d "$TEMP_DIR/sunnycore/$folder" ]; then
-        echo "複製 $folder..."
+        echo "複製 $folder 到 $INSTALL_DIR..."
         cp -r "$TEMP_DIR/sunnycore/$folder" "$INSTALL_DIR/"
         if [ $? -eq 0 ]; then
             echo "✓ $folder 複製成功"
@@ -173,6 +224,19 @@ for folder in "${FOLDERS[@]}"; do
         echo "警告: 找不到 $folder 文件夾"
     fi
 done
+
+# 複製 sunnycore 到指定目錄
+if [ -d "$TEMP_DIR/sunnycore/sunnycore" ]; then
+    echo "複製 sunnycore 到 $SUNNYCORE_DIR..."
+    cp -r "$TEMP_DIR/sunnycore/sunnycore" "$SUNNYCORE_DIR/"
+    if [ $? -eq 0 ]; then
+        echo "✓ sunnycore 複製成功到 $SUNNYCORE_DIR/sunnycore"
+    else
+        echo "✗ sunnycore 複製失敗"
+    fi
+else
+    echo "警告: 找不到 sunnycore 文件夾"
+fi
 
 echo ""
 
@@ -185,9 +249,21 @@ echo "========================================"
 echo "        安裝完成！"
 echo "========================================"
 echo ""
-echo "已安裝文件至: $INSTALL_DIR"
+echo "安裝類型: $INSTALL_TYPE"
 echo "安裝的分支: $BRANCH"
 echo "版本類型: $VERSION_TYPE"
+echo ""
+
+if [ "$INSTALL_TYPE" = "global" ]; then
+    echo "全局安裝完成！"
+    echo "agents 和 commands 已安裝至: $INSTALL_DIR"
+    echo "sunnycore 已安裝至: $SUNNYCORE_DIR/sunnycore"
+else
+    echo "自定義安裝完成！"
+    echo "agents 和 commands 已安裝至: $INSTALL_DIR"
+    echo "sunnycore 已安裝至: $SUNNYCORE_DIR/sunnycore"
+fi
+
 echo ""
 echo "安裝的文件:"
 for folder in "${FOLDERS[@]}"; do
@@ -197,6 +273,12 @@ for folder in "${FOLDERS[@]}"; do
         echo "✗ $INSTALL_DIR/$folder (安裝失敗)"
     fi
 done
+
+if [ -d "$SUNNYCORE_DIR/sunnycore" ]; then
+    echo "✓ $SUNNYCORE_DIR/sunnycore"
+else
+    echo "✗ $SUNNYCORE_DIR/sunnycore (安裝失敗)"
+fi
 
 echo ""
 echo "感謝使用 SunnyCore！"

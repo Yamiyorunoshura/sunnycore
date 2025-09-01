@@ -1,157 +1,157 @@
-# 統一任務規劃工作流程
+# Unified Task Planning Workflow
 
 <enforcement>
-## 🔄 工作流程Todo List製作
+## 🔄 Workflow Todo List Creation
 
-### 📋 開始執行前的必要準備
+### 📋 Necessary Preparations Before Starting Execution
 
-**重要提醒**: 在開始執行任何工作流程步驟之前，必須使用使用待辦事項列表來創建一個待辦事項列表來組織這些步驟。
+**Important Reminder**: Before starting execution of any workflow steps, you must use the todo list to create a todo list to organize these steps.
 
-**製作流程**:
-1. **分析工作流程結構** - 仔細閱讀整個workflow文件，識別所有階段、步驟和任務
-2. **提取關鍵任務** - 將每個階段的核心任務轉換為具體的todo項目
-3. **設定優先級** - 根據任務的重要性和依賴關係設定優先級
-4. **創建Todo List** - 使用`todo_write`工具創建包含所有步驟的結構化todo list
-5. **執行與更新** - 按照todo list順序執行任務，及時更新狀態
+**Creation Process**:
+1. **Analyze Workflow Structure** - Carefully read the entire workflow file, identify all stages, steps, and tasks
+2. **Extract Key Tasks** - Convert core tasks of each stage into specific todo items
+3. **Set Priorities** - Set priorities based on task importance and dependency relationships
+4. **Create Todo List** - Use `todo_write` tool to create structured todo list containing all steps
+5. **Execute and Update** - Execute tasks in todo list order, update status in a timely manner
 
-### 📝 Todo List要求
-- **覆蓋性**: 每個主要階段都應該有對應的todo項目
-- **驗證點**: 關鍵的驗證檢查點必須包含在todo list中
-- **優先級**: 設定合理的優先級，確保依賴關係得到尊重
-- **狀態管理**: 在執行過程中及時更新todo狀態（pending → in_progress → completed）
-- **唯一性**: 同時只能有一個任務處於`in_progress`狀態
-- **完整性**: 只有在任務完全完成時才標記為`completed`
+### 📝 Todo List Requirements
+- **Coverage**: Each major stage should have corresponding todo items
+- **Verification Points**: Key verification checkpoints must be included in the todo list
+- **Priorities**: Set reasonable priorities to ensure dependency relationships are respected
+- **Status Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
+- **Uniqueness**: Only one task can be in `in_progress` status at a time
+- **Completeness**: Only mark as `completed` when the task is fully completed
 </enforcement>
 
 ---
 
 <task_overview>
-作為任務規劃專家，您需要對指定任務進行全面且結構化的規劃，確保實施計劃的可行性、完整性和執行策略的最佳化。
+As a task planning expert, you need to conduct comprehensive and structured planning for specified tasks to ensure the feasibility, completeness, and optimal execution strategy of implementation plans.
 </task_overview>
 
-## 核心規劃階段
+## Core Planning Phases
 
 <optimization_phases>
 
-### 階段一：專案規範理解與分析
+### Phase 1: Project Specification Understanding and Analysis
 <phase name="project_specification_analysis" complexity="think hard">
-**目標**: 全面理解專案需求、規範和架構設計
+**Goal**: Comprehensive understanding of project requirements, specifications, and architecture design
 
-**執行步驟**:
-1. **專案規範載入**: 完整閱讀 `{project_root}/docs/specs/` 路徑下的所有文檔
-   - 分析專案業務需求和功能規範
-   - 識別技術約束和依賴關係
-   - 建立專案上下文理解模型
-   - 提取關鍵設計決策和原則
+**Execution Steps**:
+1. **Project Specification Loading**: Completely read all documents under the `{project_root}/docs/specs/` path
+   - Analyze project business requirements and functional specifications
+   - Identify technical constraints and dependencies
+   - Establish project context understanding model
+   - Extract key design decisions and principles
 
-2. **架構文檔分析**: 詳細閱讀 `{project_root}/docs/architecture/` 路徑下的所有文檔
-   - 理解系統架構設計和元件關係
-   - 分析技術棧選擇和整合策略
-   - 識別架構約束和效能要求
-   - 建立系統整體架構視圖
+2. **Architecture Document Analysis**: Read all documents under the `{project_root}/docs/architecture/` path in detail
+   - Understand system architecture design and component relationships
+   - Analyze technology stack selection and integration strategies
+   - Identify architectural constraints and performance requirements
+   - Establish overall system architecture view
 
-**驗證檢查點**:
-- [ ] 專案需求已完整理解和記錄
-- [ ] 架構設計已全面分析和掌握
-- [ ] 技術約束和依賴關係已識別
-- [ ] 專案上下文模型已建立
+**Validation Checkpoints**:
+- [ ] Project requirements have been fully understood and recorded
+- [ ] Architecture design has been comprehensively analyzed and mastered
+- [ ] Technical constraints and dependencies have been identified
+- [ ] Project context model has been established
 
-**預期成果**: 建立完整的專案理解基礎，為後續任務規劃提供準確的上下文支援
+**Expected Results**: Establish complete project understanding foundation to provide accurate context support for subsequent task planning
 </phase>
 
-### 階段二：任務解析與分解
+### Phase 2: Task Parsing and Decomposition
 <phase name="task_decomposition" complexity="think hard">
-**目標**: 精確解析和分解指定任務及其子任務
+**Goal**: Precisely parse and decompose specified tasks and their subtasks
 
-**執行步驟**:
-3. **任務檔案解析**: 閱讀 task.md 檔案並進行結構化分析
-   - 定位符合 `{task_id}` 的主要任務（例如：1, 2, 3）
-   - 提取該任務下所有子任務（例如：1.1, 1.2, 1.3）
-   - 收集每個任務和子任務的無序列表項
-   - 分析任務間的依賴關係和執行順序
+**Execution Steps**:
+3. **Task File Parsing**: Read task.md file and perform structured analysis
+   - Locate main tasks matching `{task_id}` (such as: 1, 2, 3)
+   - Extract all subtasks under that task (such as: 1.1, 1.2, 1.3)
+   - Collect unordered list items for each task and subtask
+   - Analyze dependencies between tasks and execution order
 
-4. **任務顆粒度分解**: 將任務分解為最小執行單位
-   - 將無序列表項轉換為具體的功能需求（F-1, F-2...）
-   - 識別非功能性需求（N-1, N-2...）
-   - 定義每個需求的驗收條件和測量標準
-   - 建立任務執行的優先級排序
+4. **Task Granularity Decomposition**: Break down tasks into minimum executable units
+   - Convert unordered list items into specific functional requirements (F-1, F-2...)
+   - Identify non-functional requirements (N-1, N-2...)
+   - Define acceptance criteria and measurement standards for each requirement
+   - Establish priority ranking for task execution
 
-**驗證檢查點**:
-- [ ] 指定任務及子任務已正確識別
-- [ ] 任務需求已分解為最小執行單位
-- [ ] 功能和非功能需求已明確分類
-- [ ] 驗收條件已定義完整
+**Validation Checkpoints**:
+- [ ] Specified tasks and subtasks have been correctly identified
+- [ ] Task requirements have been decomposed into minimum executable units
+- [ ] Functional and non-functional requirements have been clearly classified
+- [ ] Acceptance criteria have been completely defined
 
-**預期成果**: 產生結構化、可執行的任務分解結果，為實施計劃奠定基礎
+**Expected Results**: Generate structured, executable task decomposition results to lay the foundation for implementation plans
 </phase>
 
-### 階段三：實施計劃生成與輸出
+### Phase 3: Implementation Plan Generation and Output
 <phase name="implementation_plan_generation" complexity="think harder">
-**目標**: 基於模板生成完整的實施計劃文檔
+**Goal**: Generate complete implementation plan documents based on templates
 
-**執行步驟**:
-5. **模板載入與理解**: 閱讀模板 `{project_root}/sunnycore/dev/templates/implementation-plan-tmpl.yaml`
-   - 理解模板結構和必填欄位要求
-   - 分析輸出格式規範和品質標準
-   - 準備符合模板要求的規劃內容
+**Execution Steps**:
+5. **Template Loading and Understanding**: Read template `{project_root}/sunnycore/dev/templates/implementation-plan-tmpl.yaml`
+   - Understand template structure and required field requirements
+   - Analyze output format specifications and quality standards
+   - Prepare planning content that meets template requirements
 
-6. **計劃內容填入**: 將任務規劃結果系統性填入模板
-   - 填寫專案元資料和上下文資訊
-   - 對應功能和非功能需求到模板結構
-   - 完善執行步驟和驗證機制
-   - 確保內容完整性和一致性
+6. **Plan Content Filling**: Systematically fill task planning results into template
+   - Fill in project metadata and context information
+   - Map functional and non-functional requirements to template structure
+   - Complete execution steps and validation mechanisms
+   - Ensure content completeness and consistency
 
-7. **文檔輸出與格式化**: 生成最終的實施計劃文檔
-   - 將完成的計劃轉換為 Markdown 格式
-   - 輸出到 `{project_root}/docs/implementation-plan/` 路徑
-   - 使用規範的檔案命名：`{task_id}-plan.md`（例如：1-plan.md, 2-plan.md）
-   - 執行最終的格式和內容驗證
+7. **Document Output and Formatting**: Generate final implementation plan document
+   - Convert completed plan to Markdown format
+   - Output to `{project_root}/docs/implementation-plan/` path
+   - Use standardized file naming: `{task_id}-plan.md` (such as: 1-plan.md, 2-plan.md)
+   - Perform final format and content validation
 
-**驗證檢查點**:
-- [ ] 模板已正確載入和理解
-- [ ] 所有必填欄位已完整填寫
-- [ ] 計劃內容符合模板規範要求
-- [ ] 文檔已成功輸出到指定路徑
-- [ ] 檔案命名符合規範標準
+**Validation Checkpoints**:
+- [ ] Template has been correctly loaded and understood
+- [ ] All required fields have been completely filled
+- [ ] Plan content meets template specification requirements
+- [ ] Document has been successfully output to specified path
+- [ ] File naming meets standard specifications
 
-**預期成果**: 生成高品質、結構化的實施計劃文檔，為任務執行提供完整指導
+**Expected Results**: Generate high-quality, structured implementation plan documents to provide complete guidance for task execution
 </phase>
 
 </optimization_phases>
 
-## 錯誤處理與品質保證
+## Error Handling and Quality Assurance
 
 <quality_assurance>
 
-### 錯誤處理機制
+### Error Handling Mechanism
 <error_handling>
-- **檔案存取錯誤**: 無法讀取指定路徑的檔案時，記錄錯誤並提供替代方案
-- **格式解析錯誤**: 檔案格式不符合預期時，進行錯誤報告並嘗試修復
-- **內容驗證失敗**: 規劃內容不完整時，標記缺失項目並要求補充
-- **輸出路徑錯誤**: 目標路徑不存在時，自動建立目錄結構
+- **File Access Error**: When unable to read files at specified paths, record error and provide alternative solutions
+- **Format Parsing Error**: When file format does not meet expectations, perform error reporting and attempt repair
+- **Content Validation Failure**: When planning content is incomplete, mark missing items and request supplementation
+- **Output Path Error**: When target path does not exist, automatically create directory structure
 </error_handling>
 
-### 驗證標準
+### Validation Standards
 <validation_criteria>
-- [ ] **完整性驗證**: 所有必要的專案規範和架構文檔已載入分析
-- [ ] **準確性驗證**: 任務解析結果與原始需求一致
-- [ ] **結構性驗證**: 生成的計劃符合模板規範和格式要求
-- [ ] **可執行性驗證**: 計劃內容具體、明確且可操作
-- [ ] **追溯性驗證**: 計劃元素與來源需求間具有清晰的對應關係
-- [ ] **一致性驗證**: 術語使用和風格保持統一
+- [ ] **Completeness Verification**: All necessary project specifications and architecture documents have been loaded and analyzed
+- [ ] **Accuracy Verification**: Task parsing results are consistent with original requirements
+- [ ] **Structural Verification**: Generated plans conform to template specifications and format requirements
+- [ ] **Executability Verification**: Plan content is specific, clear, and operable
+- [ ] **Traceability Verification**: Clear correspondence exists between plan elements and source requirements
+- [ ] **Consistency Verification**: Terminology usage and style remain unified
 </validation_criteria>
 
 </quality_assurance>
 
-## 輸出格式規範
+## Output Format Specifications
 
 <output_format>
-**檔案路徑**: `{project_root}/docs/implementation-plan/{task_id}-plan.md`
+**File Path**: `{project_root}/docs/implementation-plan/{task_id}-plan.md`
 
-**檔案命名範例**:
-- 主任務 1: `1-plan.md`
-- 主任務 2: `2-plan.md`
-- 主任務 3: `3-plan.md`
+**File Naming Examples**:
+- Main Task 1: `1-plan.md`
+- Main Task 2: `2-plan.md`
+- Main Task 3: `3-plan.md`
 
-**內容結構**: 嚴格遵循 `implementation-plan-tmpl.yaml` 模板規範，確保所有必填欄位完整填寫，避免使用「視需要」或「待確定」等通用陳述。
+**Content Structure**: Strictly follow `implementation-plan-tmpl.yaml` template specifications, ensure all required fields are completely filled, avoid using generic statements such as "as needed" or "to be determined".
 </output_format>
