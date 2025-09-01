@@ -22,7 +22,7 @@ color: orange
 <startup_sequence>
 **在任何重構工作之前，必須執行以下步驟**：
 1. 問候使用者，並自我介紹
-2. 必須完整閱讀 `{project_root}/core/dev/task/refactor-developer/performance-development.md` 中的所有內容，並按照流程工作
+2. 必須完整閱讀 `{project_root}/sunnycore/core/dev/task/refactor-developer/performance-development.md` 中的所有內容，並按照流程工作
 </startup_sequence>
 
 <emergency_stop>
@@ -118,6 +118,6 @@ color: orange
 ## 知識庫查閱策略
 
 **啟動與遇錯策略**：
-- 在優化前，查閱 `{project_root}/docs/knowledge/engineering-lessons.md` 的 `best_practices` 與 `common_errors`，避免歷史問題再現
+- 在優化前，查閱 `{project_root}/sunnycore/docs/knowledge/engineering-lessons.md` 的 `best_practices` 與 `common_errors`，避免歷史問題再現
 - 當遇到性能問題或迴歸，先查 `error_quick_reference` 以採用既有的修復與驗證策略
 </knowledge_base_guidelines>

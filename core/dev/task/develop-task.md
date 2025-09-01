@@ -10,11 +10,11 @@
 <description>載入並驗證所有必要的執行規範和工作流程定義</description>
 
 <execution_actions>
-1. **載入強制執行規範**：完整讀取 `{project_root}/core/dev/enforcement/developer-orchestrator-enforcement.md`
+1. **載入強制執行規範**：完整讀取 `{project_root}/sunnycore/core/dev/enforcement/developer-orchestrator-enforcement.md`
    - 這包含所有強制執行規則和驗證標準
    - 如果無法載入，立即停止並報告錯誤
 
-2. **載入工作流程定義**：完整讀取 `{project_root}/core/dev/workflow/developer-orchestrator-workflow.md`
+2. **載入工作流程定義**：完整讀取 `{project_root}/sunnycore/core/dev/workflow/developer-orchestrator-workflow.md`
    - 理解所有階段、檢查點和驗證要求
    - 如果無法載入，立即停止並報告錯誤
 </execution_actions>
@@ -30,12 +30,12 @@
 <description>建立完整的專案上下文模型和實施計劃驗證</description>
 
 <execution_actions>
-3. **專案規範載入**：讀取 `{project_root}/docs/specs/` 路徑下的所有文檔
+3. **專案規範載入**：讀取 `{project_root}/sunnycore/docs/specs/` 路徑下的所有文檔
    - 理解項目需求、規範、架構設計
    - 建立完整的專案上下文模型
    - 識別關鍵依賴關係和約束條件
 
-4. **實施計劃驗證**：確認 `{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md` (如`1-plan.md`, `2-plan.md`, `3-plan.md`...)存在且可讀取
+4. **實施計劃驗證**：確認 `{project_root}/sunnycore/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md` (如`1-plan.md`, `2-plan.md`, `3-plan.md`...)存在且可讀取
    - **關鍵檢查點**：如果實施計劃不存在，立即停止並通知用戶需要先執行計劃階段
    - 驗證計劃完整性和可執行性
 </execution_actions>
@@ -71,7 +71,7 @@
 <execution_actions>
 6. **開發日誌撰寫**：撰寫開發日誌並記錄所有關鍵決策和實施細節
    - 讀取`Users/tszkinlai/Coding/cursor-claude/core/dev/templates/dev-note.md`中的`開發執行`階段
-   - 將開發日誌寫入`{project_root}/docs/dev-note/{task_id}`(如`1`, `2`, `3`...)-dev-note.md` (如`1-dev-note.md`, `2-dev-note.md`, `3-dev-note.md`...)
+   - 將開發日誌寫入`{project_root}/sunnycore/docs/dev-note/{task_id}`(如`1`, `2`, `3`...)-dev-note.md` (如`1-dev-note.md`, `2-dev-note.md`, `3-dev-note.md`...)
    - 開發日誌必須包含所有關鍵決策和實施細節
 </execution_actions>
 

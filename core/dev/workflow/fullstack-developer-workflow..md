@@ -34,7 +34,7 @@
 
 <stage name="載入執行規範" number="1" critical="true">
 **強制執行規範載入**
-- **描述**: 完整讀取 `{project_root}/core/dev/enforcement/fullstack-developer-enforcement.md`
+- **描述**: 完整讀取 `{project_root}/sunnycore/core/dev/enforcement/fullstack-developer-enforcement.md`
 - **要求**:
   <requirements>
   - 理解所有強制規則、全端開發標準和品質門檻
@@ -49,7 +49,7 @@
 
 **專案規範理解**
 
-- **描述**: 讀取 `{project_root}/docs/specs/` 路徑下的所有文檔
+- **描述**: 讀取 `{project_root}/sunnycore/docs/specs/` 路徑下的所有文檔
 - **要求**:
   <requirements>
   <think>
@@ -102,7 +102,7 @@
   </requirements>
 
 **實施計劃驗證**
-- **描述**: 確認 `{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md` 存在且可讀取
+- **描述**: 確認 `{project_root}/sunnycore/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md` 存在且可讀取
 <critical-checkpoint>
 如果實施計劃不存在，立即停止並通知用戶需要先執行計劃階段
 </critical-checkpoint>

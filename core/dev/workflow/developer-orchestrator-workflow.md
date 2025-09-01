@@ -29,7 +29,7 @@
 <description>檢查並驗證實施計劃的存在性和完整性</description>
 
 <execution_actions>
-- 從`{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md`（如`1-plan.md`, `2-plan.md`, `3-plan.md`...）讀取task_id對應的實施計劃
+- 從`{project_root}/sunnycore/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md`（如`1-plan.md`, `2-plan.md`, `3-plan.md`...）讀取task_id對應的實施計劃
 - 驗證計劃格式和必要欄位（metadata、scope、assumptions、constraints）
 - 確認計劃範圍和約束條件
 - 驗證sources路徑的可解析性
@@ -70,7 +70,7 @@
 
 <think harder>
 <execution_actions>
-- 根據`{project_root}/core/dev/enforcement/developer-orchestrator-enforcement.md`中的任務類型映射規則選擇最適當的子代理
+- 根據`{project_root}/sunnycore/core/dev/enforcement/developer-orchestrator-enforcement.md`中的任務類型映射規則選擇最適當的子代理
 - 啟動並行執行協議（當任務間無強依賴時）
 - 應用智能代理映射規則:
 
@@ -165,8 +165,8 @@
 <think hard>
 <execution_actions>
 - 收集並整合所有代理的執行結果、決策記錄和產出物
-- 讀取標準模板`{project_root}/core/dev/templates/dev-notes-tmpl.yaml`
-- 根據模板填入內容並轉換為markdown格式輸出到`{project_root}/docs/dev-notes/`路徑下，文件名稱為`{task_id}`(如`1`, `2`, `3`...)-dev-notes.md`（如`1-dev-notes.md`, `2-dev-notes.md`, `3-dev-notes.md`...）
+- 讀取標準模板`{project_root}/sunnycore/core/dev/templates/dev-notes-tmpl.yaml`
+- 根據模板填入內容並轉換為markdown格式輸出到`{project_root}/sunnycore/docs/dev-notes/`路徑下，文件名稱為`{task_id}`(如`1`, `2`, `3`...)-dev-notes.md`（如`1-dev-notes.md`, `2-dev-notes.md`, `3-dev-notes.md`...）
 - 驗證開發記錄的格式完整性和內容準確性
 - 如為棕地狀態，在開發記錄中詳細記錄問題修復情況、驗證結果和品質改進
 - 生成執行摘要、關鍵決策記錄和後續建議

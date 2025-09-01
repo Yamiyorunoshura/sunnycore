@@ -38,7 +38,7 @@
 
 **專案規格載入**
 <task number="1" critical="true">
-- **描述**: 讀取 `{project_root}/docs/specs/` 獲取專案訊息
+- **描述**: 讀取 `{project_root}/sunnycore/docs/specs/` 獲取專案訊息
 - **要求**:
   <requirements>
   - 建立完整的專案上下文模型
@@ -48,7 +48,7 @@
 
 **任務規格解析**
 <task number="2" critical="true">
-- **描述**: 讀取 `{project_root}/docs/specs/task.md` 獲得 {task_id}`(如`1`, `2`, `3`...) 的詳細規格
+- **描述**: 讀取 `{project_root}/sunnycore/docs/specs/task.md` 獲得 {task_id}`(如`1`, `2`, `3`...) 的詳細規格
 - **要求**:
   <requirements>
   - 深度理解任務範圍、功能需求和驗收標準
@@ -58,7 +58,7 @@
 
 **實施計劃檢索**
 <task number="3" critical="true">
-- **描述**: 讀取 `{project_root}/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md` 獲取實施計劃
+- **描述**: 讀取 `{project_root}/sunnycore/docs/implementation-plan/{task_id}`(如`1`, `2`, `3`...)-plan.md` 獲取實施計劃
 - **要求**:
   <requirements>
   - 確認計劃完整性和技術可行性
@@ -146,7 +146,7 @@
   <formatting_process>
   - 將綜合結果填入 review-tmpl.yaml 的相應位置
   - 將填入後的審查結果轉換為 markdown 格式
-  - 保存到 `{project_root}/docs/review-results/{task_id}`(如`1`, `2`, `3`...)-review.md`
+  - 保存到 `{project_root}/sunnycore/docs/review-results/{task_id}`(如`1`, `2`, `3`...)-review.md`
   - 如已經有同名文件，則直接覆蓋
   </formatting_process>
 
@@ -160,7 +160,7 @@
 
 **任務狀態更新**
 <task_status_update>
-- **描述**: 更新 `{project_root}/docs/specs/task.md` 中的任務完成狀態
+- **描述**: 更新 `{project_root}/sunnycore/docs/specs/task.md` 中的任務完成狀態
 - **更新規則**:
   <update_rules>
   - old_string: [ ] `{task_id}`(如`1`, `2`, `3`...)

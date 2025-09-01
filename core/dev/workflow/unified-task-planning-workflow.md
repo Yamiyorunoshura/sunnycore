@@ -38,13 +38,13 @@
 **目標**: 全面理解專案需求、規範和架構設計
 
 **執行步驟**:
-1. **專案規範載入**: 完整閱讀 `{project_root}/docs/specs/` 路徑下的所有文檔
+1. **專案規範載入**: 完整閱讀 `{project_root}/sunnycore/docs/specs/` 路徑下的所有文檔
    - 分析專案業務需求和功能規範
    - 識別技術約束和依賴關係
    - 建立專案上下文理解模型
    - 提取關鍵設計決策和原則
 
-2. **架構文檔分析**: 詳細閱讀 `{project_root}/docs/architecture/` 路徑下的所有文檔
+2. **架構文檔分析**: 詳細閱讀 `{project_root}/sunnycore/docs/architecture/` 路徑下的所有文檔
    - 理解系統架構設計和元件關係
    - 分析技術棧選擇和整合策略
    - 識別架構約束和效能要求
@@ -90,7 +90,7 @@
 **目標**: 基於模板生成完整的實施計劃文檔
 
 **執行步驟**:
-5. **模板載入與理解**: 閱讀模板 `{project_root}/core/dev/templates/implementation-plan-tmpl.yaml`
+5. **模板載入與理解**: 閱讀模板 `{project_root}/sunnycore/core/dev/templates/implementation-plan-tmpl.yaml`
    - 理解模板結構和必填欄位要求
    - 分析輸出格式規範和品質標準
    - 準備符合模板要求的規劃內容
@@ -103,7 +103,7 @@
 
 7. **文檔輸出與格式化**: 生成最終的實施計劃文檔
    - 將完成的計劃轉換為 Markdown 格式
-   - 輸出到 `{project_root}/docs/implementation-plan/` 路徑
+   - 輸出到 `{project_root}/sunnycore/docs/implementation-plan/` 路徑
    - 使用規範的檔案命名：`{task_id}-plan.md`（例如：1-plan.md, 2-plan.md）
    - 執行最終的格式和內容驗證
 
@@ -146,7 +146,7 @@
 ## 輸出格式規範
 
 <output_format>
-**檔案路徑**: `{project_root}/docs/implementation-plan/{task_id}-plan.md`
+**檔案路徑**: `{project_root}/sunnycore/docs/implementation-plan/{task_id}-plan.md`
 
 **檔案命名範例**:
 - 主任務 1: `1-plan.md`

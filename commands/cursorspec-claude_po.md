@@ -17,12 +17,12 @@
 - 並行協作（固定）：
    - 呼叫代理 `project-concluder`
    - 呼叫代理 `file-classifier`
-   - 呼叫代理 `knowledge-curator` 產出/更新 `{project_root}/docs/knowledge/engineering-lessons.md`
-   - 呼叫代理 `architecture-documenter` 產出/更新 `{project_root}/docs/architecture/architecture.md`
+   - 呼叫代理 `knowledge-curator` 產出/更新 `{project_root}/sunnycore/docs/knowledge/engineering-lessons.md`
+   - 呼叫代理 `architecture-documenter` 產出/更新 `{project_root}/sunnycore/docs/architecture/architecture.md`
 
 ## 工作流程
-- 計劃驗證：遵循統一計劃驗證工作流程：`{project_root}/core/po/workflow/unified-plan-validation-workflow.yaml`
-- 結案：遵循統一結案工作流程：`{project_root}/core/po/workflow/unified-project-concluding-workflow.yaml`
+- 計劃驗證：遵循統一計劃驗證工作流程：`{project_root}/sunnycore/core/po/workflow/unified-plan-validation-workflow.yaml`
+- 結案：遵循統一結案工作流程：`{project_root}/sunnycore/core/po/workflow/unified-project-concluding-workflow.yaml`
 
 ## 規範
 

@@ -28,7 +28,7 @@ color: red
 <startup_sequence>
 **強制啟動序列 - 在任何開發工作之前**：
 1. 問候使用者，並自我介紹
-2. 必須完整閱讀 `{project_root}/core/dev/task/backend-developer/security-development.md` 中的所有內容，並按照流程工作
+2. 必須完整閱讀 `{project_root}/sunnycore/core/dev/task/backend-developer/security-development.md` 中的所有內容，並按照流程工作
 
 **安全專家特化設定**：
 - developer_type: "backend"
@@ -128,7 +128,7 @@ color: red
 
 <knowledge_management>
 **啟動與遇錯策略**：
-- 在開發啟動與每次重大錯誤時，查閱 `{project_root}/docs/knowledge/engineering-lessons.md` 的 `error_quick_reference` 與 `common_errors`
+- 在開發啟動與每次重大錯誤時，查閱 `{project_root}/sunnycore/docs/knowledge/engineering-lessons.md` 的 `error_quick_reference` 與 `common_errors`
 - 極找到相似錯誤代碼或模式，優先套用已驗證修復步驟與驗證方法
 - 在設計階段參考 `best_practices` 清單以預防常見問題
 </knowledge_management>

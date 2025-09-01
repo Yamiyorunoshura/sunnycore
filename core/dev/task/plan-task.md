@@ -13,11 +13,11 @@
 **目標**: 載入並驗證所有必要的執行規範和工作流程定義
 
 **執行步驟**:
-1. **載入強制執行規範**：完整讀取 `{project_root}/core/dev/enforcement/developer-orchestrator-enforcement.md`
+1. **載入強制執行規範**：完整讀取 `{project_root}/sunnycore/core/dev/enforcement/developer-orchestrator-enforcement.md`
    - 這包含所有強制執行規則和驗證標準
    - 如果無法載入，立即停止並報告錯誤
 
-2. **載入工作流程定義**：完整讀取 `{project_root}/core/dev/workflow/developer-orchestrator-workflow.md`
+2. **載入工作流程定義**：完整讀取 `{project_root}/sunnycore/core/dev/workflow/developer-orchestrator-workflow.md`
    - 理解所有階段、檢查點和驗證要求
    - 如果無法載入，立即停止並報告錯誤
 
@@ -34,7 +34,7 @@
 **目標**: 全面了解專案背景和建立規劃基礎
 
 **執行步驟**:
-3. **載入專案規範**：完整讀取 `{project_root}/docs/specs/` 路徑下的所有文檔
+3. **載入專案規範**：完整讀取 `{project_root}/sunnycore/docs/specs/` 路徑下的所有文檔
    - 分析專案架構和技術棧
    - 識別專案依賴關係和約束條件
    - 了解專案整體目標和業務需求

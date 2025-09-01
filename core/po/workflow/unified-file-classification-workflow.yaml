@@ -108,8 +108,8 @@ execution_hints:
     normalize_paths: true
 
 path_aliases:
-  WORKFLOW_FILE: "{project_root}/core/po/workflow/unified-file-classification-workflow.yaml"
-  ENFORCEMENT_FILE: "{project_root}/core/po/enforcement/file-classifier-enforcement.md"
+  WORKFLOW_FILE: "{project_root}/sunnycore/core/po/workflow/unified-file-classification-workflow.yaml"
+  ENFORCEMENT_FILE: "{project_root}/sunnycore/core/po/enforcement/file-classifier-enforcement.md"
 
 classification_criteria:
   must_keep:
