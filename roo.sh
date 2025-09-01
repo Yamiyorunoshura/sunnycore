@@ -1,32 +1,33 @@
 #!/bin/bash
 
-# 自動獲取最新的 roocode 版本分支
-REPO_URL="https://github.com/Yamiyorunoshura/sunnycore.git"
+# 提示用戶輸入安裝路徑
+read -p "請輸入要將 roo agent 安裝到的目標路徑: " TARGET_PATH
 
-echo "正在檢查可用的 roocode 分支版本..."
-
-# 獲取所有 roocode 分支，按版本號排序
-LATEST_BRANCH=$(git ls-remote --heads "$REPO_URL" | \
-    grep "refs/heads/roocode/" | \
-    sed 's/.*refs\/heads\/roocode\///' | \
-    sort -V | \
-    tail -1)
-
-if [ -z "$LATEST_BRANCH" ]; then
-    echo "錯誤：找不到任何 roocode 分支"
+# 檢查用戶是否輸入了路徑
+if [ -z "$TARGET_PATH" ]; then
+    echo "錯誤：未輸入目標路徑。腳本將終止。"
     exit 1
 fi
 
-echo "找到最新版本：roocode/$LATEST_BRANCH"
-
-# 刪除舊的目錄（如果存在）
-if [ -d "sunnycore" ]; then
-    echo "刪除舊版本目錄..."
-    rm -rf sunnycore
+# 檢查用戶輸入的路徑是否存在且為一個目錄
+if [ ! -d "$TARGET_PATH" ]; then
+    echo "錯誤：指定的路徑 '$TARGET_PATH' 不存在或不是一個目錄。腳本將終止。"
+    exit 1
 fi
 
-# 克隆最新版本
-echo "正在克隆最新版本..."
-git clone -b "roocode/$LATEST_BRANCH" "$REPO_URL"
+# 定義要複製的目錄
+SOURCE_DIRS=("agents" "commands" "core")
 
-echo "完成！已成功克隆 roocode/$LATEST_BRANCH"
+echo "開始將 roo agent 複製到 '$TARGET_PATH'..."
+
+# 遍歷並複製每個目錄
+for dir in "${SOURCE_DIRS[@]}"; do
+    if [ -d "$dir" ]; then
+        echo "正在複製 '$dir' 目錄..."
+        cp -r "$dir" "$TARGET_PATH"
+    else
+        echo "警告：源目錄 '$dir' 不存在，將跳過。"
+    fi
+done
+
+echo "roo agent 已成功安裝到 '$TARGET_PATH'！"
