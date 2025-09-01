@@ -98,7 +98,7 @@ while true; do
             fi
             ;;
         2)
-            VERSION_TYPE="deepseek"
+            VERSION_TYPE="deepseek(暫未完成)"
             echo "正在檢查 deepseek 系列的最新版本..."
             BRANCH=$(get_latest_branch "deepseek/")
             if [ $? -eq 0 ] && [ -n "$BRANCH" ]; then
