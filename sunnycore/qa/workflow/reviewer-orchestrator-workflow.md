@@ -306,6 +306,93 @@ error_tracking:
 4. **Activate Reviewers**: Simultaneously call all registered reviewer agents
 5. **Update Coordination State**: Increment active_reviewers count
 
+**🚀 Parallel Reviewer Invocation Few-Shot Examples**:
+<parallel_reviewer_call_examples>
+
+**Example 1: Basic Parallel Invocation (Frontend Project)**
+In Claude conversation environment, orchestrator should call multiple reviewers simultaneously rather than sequentially:
+
+```example
+# ❌ Wrong approach - Sequential calling
+// First call code-quality reviewer
+@task-reviewer_code-quality Please execute task 1 code quality review...
+// Wait for completion before calling next one
+@task-reviewer_testing Please execute task 1 testing review...
+
+# ✅ Correct approach - Parallel calling
+// Call all reviewers simultaneously in the same response
+@task-reviewer_code-quality Please execute task 1 code quality review, focusing on:
+- Frontend architecture design
+- React/Vue component structure
+- TypeScript type definitions
+- Code maintainability
+
+@task-reviewer_testing Please execute task 1 testing review, focusing on:
+- Frontend component test coverage
+- E2E testing strategy
+- Jest/Cypress configuration
+- Test data management
+
+@task-reviewer_security Please execute task 1 security review, focusing on:
+- XSS protection mechanisms
+- CSRF protection
+- Input validation
+- Authentication and authorization flows
+```
+
+**Example 2: Backend Project Parallel Invocation**
+```example
+@task-reviewer_code-quality Please execute task 2 backend code quality review, focusing on API design, database models, service architecture
+
+@task-reviewer_testing Please execute task 2 backend testing review, focusing on unit tests, integration tests, API test coverage
+
+@task-reviewer_security Please execute task 2 security review, focusing on SQL injection protection, authentication/authorization, data encryption
+
+@task-reviewer_performance Please execute task 2 performance review, focusing on database query optimization, caching strategies, load handling
+
+@task-reviewer_integration Please execute task 2 integration review, focusing on API interface consistency, microservice communication, external dependencies
+```
+
+**Example 3: Full-Stack Project Parallel Invocation**
+```example
+@task-reviewer_code-quality Please execute task 3 code quality review, covering frontend-backend architecture consistency, component design rationality
+
+@task-reviewer_testing Please execute task 3 testing strategy review, including end-to-end testing, frontend-backend test integration, test environment configuration
+
+@task-reviewer_security Please execute task 3 full-stack security review, checking frontend-backend security measure coordination, data flow security
+
+@task-reviewer_performance Please execute task 3 performance review, evaluating frontend-backend performance optimization, data transmission efficiency
+
+@task-reviewer_integration Please execute task 3 system integration review, ensuring frontend-backend interface consistency, deployment coordination
+
+@task-reviewer_documentation Please execute task 3 documentation review, checking API documentation, user documentation, technical documentation completeness
+```
+
+**Key Parallel Invocation Principles**:
+1. **Simultaneous Launch**: Call all relevant reviewers in the same response
+2. **Clear Division of Work**: Assign specific review focus areas to each reviewer
+3. **Avoid Overlap**: Ensure each reviewer's responsibility scope doesn't overlap
+4. **State Synchronization**: All reviewers start simultaneously with unified state management
+5. **Result Coordination**: Wait for all reviewers to complete before result integration
+
+**State Update Example**:
+```yaml
+# State updates during parallel launch
+reviewers:
+  - reviewer_id: "task-reviewer_code-quality"
+    status: "starting" → "in_progress"
+    started_at: "2024-01-20T10:00:00Z"
+    
+  - reviewer_id: "task-reviewer_testing"  
+    status: "starting" → "in_progress"
+    started_at: "2024-01-20T10:00:00Z"
+    
+  - reviewer_id: "task-reviewer_security"
+    status: "starting" → "in_progress" 
+    started_at: "2024-01-20T10:00:00Z"
+```
+</parallel_reviewer_call_examples>
+
 **Real-Time Progress Monitoring**:
 ```pseudo
 coordination_loop():

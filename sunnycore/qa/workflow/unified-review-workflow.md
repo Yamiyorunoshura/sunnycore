@@ -19,7 +19,7 @@
 - **Verification Points**: Critical validation checkpoints must be included in todo list
 - **Priority**: Set reasonable priorities to ensure dependency relationships are respected
 - **Status Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
-- **Uniqueness**: Only one task can be in `in_progress` status at a time
+- **Limited Parallelism**: Maximum 2-3 tasks can be in `in_progress` status simultaneously (for independent review phases)
 - **Completeness**: Only mark as `completed` when tasks are fully completed
 </enforcement>
 
@@ -180,6 +180,44 @@ As a project quality review expert, you need to conduct comprehensive quality re
    
    **Note**: Remember that in this phase you as reviewer do not need to write review results to any files - the orchestrator handles final report generation.
    </state_managed_completion>
+
+**🔄 Orchestrator Parallel Coordination Guidance**
+<orchestrator_parallel_coordination>
+**Parallel Execution Responsibilities as a Called Reviewer**:
+
+#### Execution Environment Awareness
+- **Parallel Awareness**: Understand that you are one of multiple reviewers called in parallel by orchestrator
+- **Responsibility Boundaries**: Strictly execute according to review focus specified by orchestrator, avoid overstepping
+- **State Synchronization**: Timely update progress status to facilitate orchestrator monitoring and coordination
+
+#### Parallel Execution Best Practices
+1. **Rapid Startup**: Start execution immediately upon receiving call, don't wait for other reviewers
+2. **Focused Execution**: Focus on assigned review dimensions, don't duplicate other reviewers' work
+3. **Regular Heartbeat**: Update progress_percentage and last_heartbeat every 5-10 minutes
+4. **Avoid Conflicts**: Don't attempt to read or modify resources that other reviewers might use
+
+#### State Update Protocol
+```yaml
+# Standard state updates as parallel reviewer
+reviewer_state_updates:
+  startup:
+    status: "registered" → "starting" → "in_progress"
+    heartbeat_frequency: "every_5_minutes"
+    
+  progress_reporting:
+    progress_percentage: # Update based on actual completion 0-95%
+    current_phase: # Current execution phase
+    
+  completion_signaling:
+    pre_completion: # status: "completing", progress: 95%
+    final_completion: # status: "completed", progress: 100%
+```
+
+#### Exception Handling
+- **Autonomous Recovery**: Attempt autonomous recovery when encountering non-fatal errors, don't affect other reviewers
+- **Failure Isolation**: If termination is necessary, ensure errors don't propagate to other parallel reviewers
+- **Status Reporting**: Timely report error status to allow orchestrator to adjust coordination strategy
+</orchestrator_parallel_coordination>
 </phase>
 
 </optimization_phases>
