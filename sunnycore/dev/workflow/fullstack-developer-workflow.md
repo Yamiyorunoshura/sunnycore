@@ -156,23 +156,23 @@ Confirm and record fullstack performance requirements:
 #### Test-First Fullstack Development
 Strictly follow TDD principles for fullstack development:
 <tdd-requirements>
-<think harder>
+<ultra think>
 - **Write tests before implementation (frontend and backend)**
 - **Ensure frontend-backend integration test coverage meets required thresholds**
 - **Implement unit tests, integration tests, end-to-end tests**
 - **API contract tests and database tests**
-<think harder>
+<ultra think>
 </tdd-requirements>
 
 #### Fullstack Architecture Principles Application
 Apply the following principles during development:
 <architecture-principles>
-<think harder>
+<ultra think>
 1. **Frontend-backend separation and API design principles**
 2. **Unified error handling and logging mechanisms**
 3. **Data consistency and transaction management**
 4. **Security design and authentication integration**
-<think harder>
+<ultra think>
 </architecture-principles>
 </stage>
 

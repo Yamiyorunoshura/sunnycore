@@ -122,13 +122,13 @@ If implementation plan does not exist, immediately stop and notify user that pla
 Prepare refactoring checklist according to mandatory execution standards:
 
 <refactor-checklist>
-<think harder>
+<ultra think>
 - [ ] Analyze plan content, identify refactoring scope and goals
 - [ ] Assess existing code quality and technical debt
 - [ ] Confirm refactoring strategy and risk assessment
 - [ ] Establish incremental refactoring and test-driven development (TDD) strategy
 - [ ] Validate backward compatibility and performance impact
-<think harder>
+<ultra think>
 </refactor-checklist>
 
 **Quality Target Confirmation**
@@ -166,12 +166,12 @@ Confirm and record refactoring quality requirements:
 **Refactoring Strategy Formulation**
 Formulate refactoring strategy based on analysis results:
 <refactor-strategy>
-<think harder>
+<ultra think>
 - Determine refactoring priorities and execution sequence
 - Select appropriate refactoring techniques and patterns
 - Establish safety net tests and rollback mechanisms
 - Formulate incremental delivery plan
-<think harder>
+<ultra think>
 </refactor-strategy>
 </stage>
 
