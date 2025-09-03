@@ -103,11 +103,11 @@ update_claude_language_config() {
         "ENG")
             language_mapping="English"
             ;;
-        "ZH-TW")
-            language_mapping="Traditional Chinese"
-            ;;
-        "ZH-CN")
+        "ZH"|"ZH-CN")
             language_mapping="Simplified Chinese"
+            ;;
+        "ZH-TW"|"ZH-HK")
+            language_mapping="Traditional Chinese"
             ;;
         *)
             language_mapping="Traditional Chinese"
@@ -145,7 +145,8 @@ fetch_claude_md_from_github() {
     local branch="$1"
     local temp_file
     local repo_url="https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore"
-    local file_url="$repo_url/$branch/CLAUDE.md"
+    local api_repo_url="https://github.com/Yamiyorunoshura/sunnycore.git"
+    local ref="$branch"
     local curl_exit_code
     local file_size
     
@@ -157,6 +158,17 @@ fetch_claude_md_from_github() {
     
     echo "正在從GitHub獲取CLAUDE.md內容..."
     echo "分支: $branch"
+    
+    # 嘗試用 commit SHA 以支援包含斜線的分支名稱
+    local commit_sha=$(git ls-remote --heads "$api_repo_url" "$branch" | awk '{print $1}' | head -n1)
+    if [ -n "$commit_sha" ]; then
+        ref="$commit_sha"
+        echo "使用 commit SHA 下載: $commit_sha"
+    else
+        echo "未能解析 commit SHA，回退使用分支名下載"
+    fi
+    
+    local file_url="$repo_url/$ref/CLAUDE.md"
     echo "URL: $file_url"
     echo "臨時文件: $temp_file"
     
@@ -219,18 +231,24 @@ create_or_update_claude_md() {
         branch_name="master"
     fi
     
-    # 嘗試從GitHub獲取最新的CLAUDE.md內容
-    echo "嘗試從GitHub獲取CLAUDE.md內容，分支: $branch_name"
-    local github_claude_md=$(fetch_claude_md_from_github "$branch_name")
+    # 優先從本地已克隆倉庫複製 CLAUDE.md
+    local local_repo_path="$TEMP_DIR/sunnycore"
+    local local_claude_md="$local_repo_path/CLAUDE.md"
+    if [ -f "$local_claude_md" ]; then
+        echo "優先使用本地克隆倉庫中的 CLAUDE.md: $local_claude_md"
+        cp "$local_claude_md" "$claude_md_path"
+        github_claude_md=""
+    else
+        # 回退到 GitHub 下載
+        echo "嘗試從GitHub獲取CLAUDE.md內容，分支: $branch_name"
+        local github_claude_md=$(fetch_claude_md_from_github "$branch_name")
+    fi
     
-    if [ $? -eq 0 ] && [ -n "$github_claude_md" ] && [ -f "$github_claude_md" ]; then
-        echo "使用GitHub上的CLAUDE.md內容作為基礎"
+    if [ -f "$claude_md_path" ]; then
+        echo "已獲取 CLAUDE.md 內容"
         
-        # 複製GitHub的CLAUDE.md內容到目標位置
-        cp "$github_claude_md" "$claude_md_path"
-        
-        # 清理臨時文件
-        rm -f "$github_claude_md"
+        # 清理臨時文件（若存在）
+        [ -n "$github_claude_md" ] && [ -f "$github_claude_md" ] && rm -f "$github_claude_md"
         
         # 更新語言配置
         if update_claude_language_config "$claude_md_path" "$SELECTED_LANGUAGE"; then
@@ -241,8 +259,8 @@ create_or_update_claude_md() {
         
         echo "✓ 已使用GitHub最新內容創建CLAUDE.md並更新語言配置"
     else
-        echo "✗ 無法從GitHub獲取 CLAUDE.md，已跳過生成。"
-        echo "  - 請檢查網路連線或分支是否存在: $branch_name"
+        echo "✗ 無法取得 CLAUDE.md，已跳過生成。"
+        echo "  - 已嘗試本地副本與 GitHub 下載 (分支: $branch_name)"
         return 1
     fi
     
@@ -499,7 +517,6 @@ echo ""
 TEMP_DIR=$(mktemp -d)
 echo "臨時目錄: $TEMP_DIR"
 
-# 下載 GitHub 倉庫
 REPO_URL="https://github.com/Yamiyorunoshura/sunnycore.git"
 echo "從 GitHub 下載: $REPO_URL"
 echo "分支: $BRANCH"
@@ -550,9 +567,7 @@ fi
 
 echo ""
 
-# 清理臨時文件
-echo "清理臨時文件..."
-rm -rf "$TEMP_DIR"
+# 注意：延後清理臨時目錄到安裝總結之後，避免影響 MCP 下載回退方案
 
 echo ""
 echo "========================================"
