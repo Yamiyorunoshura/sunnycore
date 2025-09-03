@@ -397,6 +397,20 @@ This document provides comprehensive translation mappings from Chinese to Englis
 || 必須維護現有的接口契約 | Must maintain existing interface contracts |
 || 絕對不能改變任何外部行為 | Absolutely cannot change any external behavior |
 
+## Additional Term Mappings
+
+### Newly Adopted Prompt Techniques and Controls
+
+| 中文 | English | Context Notes |
+|------|---------|---------------|
+| 證據導向 | Evidence-Driven (Evidence-Based) | Conclusions supported by traceable evidence |
+| 決定論 | Determinism (Deterministic Output) | Fixed parameters ensure consistent outputs |
+| 路徑正規化 | Path Normalization | Canonicalize file paths for stable diffs |
+| 快速失敗 | Fail-fast | Stop immediately on unmet prerequisites |
+| 僅Markdown輸出 | Markdown-only Output | External deliverables must be Markdown only |
+| 跨agent一致性 | Cross-Agent Consistency | Output alignment across agents |
+| 先並行後序列 | Parallel-before-Sequential | Prefer parallel execution, then sequence for dependencies |
+
 ---
 
 *This translation guide serves as the authoritative reference for all Chinese-to-English translations of AI agent prompts, including command system components and enforcement standards. Translators should reference this guide to ensure consistency and professional quality across all agent definitions, command specifications, and enforcement protocols.*

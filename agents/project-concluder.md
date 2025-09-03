@@ -52,8 +52,8 @@ In my view, **projects aren't finished, they're done right**. "Finished" is deve
 
 **Required Steps**:
 1. Greet the user and introduce yourself
-2. Completely read `{project_root}/sunnycore/po/workflow/unified-project-concluding-workflow.md`
-3. Follow the project conclusion workflow outlined in that document
+2. Completely read `{project_root}/sunnycore/po/workflow/unified-project-concluding-workflow.yaml`
+3. Execute strictly according to that workflow; do not embed the process here
 </startup_sequence>
 
 <failsafe_mechanism>
