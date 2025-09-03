@@ -8,83 +8,83 @@ prompt_techniques: ["chain_of_thought", "self_discover", "markdown_structured", 
 quality_standards: ["evidence_based", "systematic", "comprehensive", "actionable", "markdown_only_output"]
 <!-- task_metadata>
 
-## 任務概述
-當使用者呼叫 `*conclude` 指令時，請依據統一結案流程協調多代理同步與序列化執行，完成專案結案、文件產出與知識沉澱。
+## Task Overview
+When the user calls the `*conclude` command, coordinate multi-agent synchronous and sequential execution according to the unified concluding workflow to complete project closure, documentation outputs, and knowledge curation.
 
-- **多代理協作目標**：與 `project-concluder`、`file-classifier`、`knowledge-curator`、`architecture-documenter` 協作。
-- **遵循工作流程**：`{project_root}/sunnycore/po/workflow/unified-project-concluding-workflow.yaml`。
-- **強制品質門檻**：遵守 `{project_root}/sunnycore/po/enforcement/project-concluder-enforcement.md`。
-- **輸出規範**：所有對外文件必須為純 Markdown（禁止 XML 標籤出現在最終文件）。
+- **Multi-Agent Collaboration Targets**: Collaborate with `project-concluder`, `file-classifier`, `knowledge-curator`, and `architecture-documenter`.
+- **Follow Workflow**: `{project_root}/sunnycore/po/workflow/unified-project-concluding-workflow.yaml`.
+- **Enforcement**: Comply with `{project_root}/sunnycore/po/enforcement/project-concluder-enforcement.md`.
+- **Output Standard**: All external documents must be Markdown-only (no XML tags in final deliverables).
 
-## 執行步驟（SELF-DISCOVER 框架）
+## Execution Steps (SELF-DISCOVER Framework)
 
-### Step 1: 需求理解與上下文建立（SELECT）
-1. 識別 `*conclude` 指令意圖與輸出期望（完成報告、知識/架構文件、分類報告）。
-2. 載入必要檔案與別名：
+### Step 1: Requirements Understanding and Context Establishment (SELECT)
+1. Identify `*conclude` intent and expected outputs (completion report, knowledge/architecture docs, classification report).
+2. Load required files and aliases:
    - WORKFLOW_FILE → `{project_root}/sunnycore/po/workflow/unified-project-concluding-workflow.yaml`
    - REPORT_TEMPLATE → `{project_root}/sunnycore/po/templates/completion-report-tmpl.yaml`
    - ENFORCEMENT_FILE → `{project_root}/sunnycore/po/enforcement/project-concluder-enforcement.md`
-3. 確認任務前置條件（QA 全通過、計畫可追溯、QA 反饋已收集或確認缺失）。
+3. Verify prerequisites (QA passed, plan traceability, QA feedback collected or acknowledged as missing).
 
-### Step 2: 載入強制規範（ADAPT）
-1. 嚴格遵循 `project-concluder-enforcement.md` 的強制條款：
-   - 決定論：固定參數（temperature=0, top_p=1, seed=42），穩定字典序輸出與路徑正規化。
-   - 證據導向：所有結論需有可追溯證據（PR、commit、檔案、測試、量測）。
-   - 模板一致：完成報告完全對齊模板結構，嚴禁 placeholder。
-   - Markdown 規範：最終對外文件只允許 Markdown。
-2. 若關鍵檔案缺失或前置檢查未通過，立即停止並回報阻斷原因（Fail-fast）。
+### Step 2: Load Mandatory Enforcement Rules (ADAPT)
+1. Strictly follow `project-concluder-enforcement.md` mandatory clauses:
+   - Determinism: Use fixed parameters (temperature=0, top_p=1, seed=42) to ensure stable output ordering and path normalization.
+   - Evidence-driven: Every conclusion must have traceable evidence (PRs, commits, files, tests, measurements).
+   - Template compliance: Completion report must fully match the template structure; placeholders are forbidden.
+   - Markdown standard: Final external documents must be Markdown only.
+2. If key files are missing or prerequisites fail, stop immediately and report the blocking reason (fail-fast).
 
-### Step 3: 依工作流程建立策略（IMPLEMENT）
-1. 參考工作流程的階段與動作，制定結案策略與證據蒐集計畫：
-   - workflow_initialization → 載入 workflow 與模板並驗證可存取。
-   - conclusion_strategy → 明確聚焦範疇與證據來源。
-   - evidence_collection → 蒐集規格、計畫、實作與品質證據、QA 回饋、專案 Markdown 文檔分析。
-   - delivery_synthesis → 對齊原始範疇、核對驗收標準與測試證據。
-   - qa_problem_analysis → 萃取 QA 議題、紀錄狀態與風險。
-   - enhancement_planning → 擬定後續增強與成功準則。
-   - report_generation → 以模板產生完成報告（禁止 placeholder、需附證據）。
-   - finalization → 讀回檢查、格式驗證、清理臨時文件。
+### Step 3: Establish Strategy per Workflow (IMPLEMENT)
+1. Use workflow phases to plan conclusion strategy and evidence collection:
+   - workflow_initialization → Load workflow/template and verify accessibility.
+   - conclusion_strategy → Clarify focus scope and evidence sources.
+   - evidence_collection → Collect specs, plans, implementation and quality evidence, QA feedback, repository Markdown analysis.
+   - delivery_synthesis → Align with original scope, verify acceptance criteria and test evidence.
+   - qa_problem_analysis → Extract QA issues, record status and risks.
+   - enhancement_planning → Propose follow-up enhancements with success criteria.
+   - report_generation → Generate completion report using the template (no placeholders, include evidence).
+   - finalization → Readback check, format validation, and temp file cleanup.
 
-### Step 4: 套用與協同執行（APPLY）
-1. 並行階段（呼叫當下與 conclude 同步）：
-   - `project-concluder`：產出結案核心分析與報告內容（最終輸出為 Markdown）。
-   - `file-classifier`：執行檔案分類/清理，產出分類報告並回填風險與清理紀錄。
-2. 序列階段（在報告生成後觸發）：
-   - `knowledge-curator`：生成/更新 `{project_root}/docs/knowledge/engineering-lessons.md`。
-   - `architecture-documenter`：生成/更新 `{project_root}/docs/architecture/architecture.md`。
-3. 整合所有代理輸出，進行交叉一致性檢查（Cross-Agent Consistency）。
+### Step 4: Apply and Coordinate (APPLY)
+1. Parallel phase (synchronous with conclude call):
+   - `project-concluder`: Produce core analysis and report content (final output is Markdown).
+   - `file-classifier`: Perform file classification/cleanup, produce classification report and feed back risks and cleanup logs.
+2. Sequential phase (after report generation):
+   - `knowledge-curator`: Generate/update `{project_root}/docs/knowledge/engineering-lessons.md`.
+   - `architecture-documenter`: Generate/update `{project_root}/docs/architecture/architecture.md`.
+3. Integrate all agent outputs and perform Cross-Agent Consistency checks.
 
-## 關鍵品質關卡（Quality Gates）
-1. 輸入關卡：工作流程/模板/規範皆已載入且可讀；任務前置條件通過。
-2. 證據關卡：完成報告中每一主張皆有具體證據鏈接（PR/commit/文件/測試/量測）。
-3. 模板關卡：完全對齊模板結構，無 `< >`、`{}` 等 placeholder，使用實際值。
-4. Markdown 關卡：最終對外文件無任何 XML 標籤，標題層級、清單、表格、程式碼區塊語法正確。
-5. 一致性關卡：各代理輸出在範疇、名詞、路徑、度量與結論上相互一致。
+## Quality Gates
+1. Input gate: Workflow/template/enforcement loaded and readable; prerequisites pass.
+2. Evidence gate: Every claim in the completion report has a concrete evidence link (PR/commit/docs/tests/measurements).
+3. Template gate: Fully aligned with template; no placeholders like `< >` or `{}`; use actual values.
+4. Markdown gate: No XML tags in external documents; headings/lists/tables/code blocks are syntactically correct.
+5. Consistency gate: Agents are consistent in scope, terminology, paths, metrics, and conclusions.
 
-## 產出與路徑
-- 完成報告：`{{project_root}}/docs/completion-reports/{{task_id}}-completion.md`（純 Markdown）
-- 知識沉澱：`{{project_root}}/docs/knowledge/engineering-lessons.md`
-- 架構文件：`{{project_root}}/docs/architecture/architecture.md`
-- 檔案分類報告：`{{project_root}}/docs/file-classification/file-classification-report.md`
+## Deliverables and Paths
+- Completion report: `{{project_root}}/docs/completion-reports/{{task_id}}-completion.md` (Markdown only)
+- Knowledge curation: `{{project_root}}/docs/knowledge/engineering-lessons.md`
+- Architecture documentation: `{{project_root}}/docs/architecture/architecture.md`
+- File classification report: `{{project_root}}/docs/file-classification/file-classification-report.md`
 
-## 失敗處理策略
-- 關鍵檔案缺失/前置未過：立即停止並回報（blocker）。
-- 證據不足：在報告中標記限制與補充計畫，不阻斷其他章節。
-- 模板不合規：列出差異與修正計畫，要求補齊後再通過關卡。
-- 並行協作衝突：記錄衝突、調整順序或輸入，確保資料一致性後重試。
+## Failure Handling Strategy
+- Missing key files / failed prerequisites: Stop immediately and report (blocker).
+- Insufficient evidence: Mark limitations and supplement plan in the report; do not block other sections.
+- Template non-compliance: List diffs and a fix plan; require remediation before passing gates.
+- Parallel collaboration conflicts: Record conflicts; adjust order or inputs; ensure consistency then retry.
 
-## 最佳實踐（Prompt Engineering）
-- 運用 Chain of Thought 於策略與整合決策，但最終輸出為 Markdown。
-- 以 SELF-DISCOVER 結構驅動四步驟（SELECT/ADAPT/IMPLEMENT/APPLY）。
-- 嚴守「XML 僅用於內部思考、最終輸出為 Markdown」原則。
-- 全程證據導向，敘述附上具體檔案/PR/測試/量測連結與數值。
-- 多代理協作時先平行後序列，並在整合時做一致性審核。
+## Best Practices (Prompt Engineering)
+- Use Chain of Thought for strategy and integration decisions; final deliverables are Markdown.
+- Drive execution with SELF-DISCOVER (SELECT/ADAPT/IMPLEMENT/APPLY).
+- XML is for internal reasoning; final external documents are Markdown-only.
+- Be evidence-driven throughout; include concrete file/PR/test/measurement links and values.
+- Prefer parallel-before-sequential multi-agent execution, then perform consistency checks during integration.
 
-## 完成定義（DoD）
-- 所有工作流程階段皆完成且有對應產出。
-- 完成報告各章節已依模板填入實際內容且無 placeholder。
-- 全部結論均可追溯到具體證據；品質關卡全部通過。
-- 知識與架構文檔更新完成，檔案分類報告與清理紀錄已整合至完成報告。
-- 臨時文件已清理，文件可交付利害關係人。
+## Definition of Done (DoD)
+- All workflow phases completed with corresponding outputs.
+- Every section of the completion report is filled with actual content; no placeholders.
+- All conclusions are traceable to concrete evidence; all quality gates pass.
+- Knowledge and architecture docs updated; file classification report and cleanup logs integrated into the completion report.
+- Temporary files cleaned up; documents are ready for stakeholders.
 
 
