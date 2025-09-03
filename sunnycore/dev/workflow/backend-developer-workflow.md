@@ -1,3 +1,15 @@
+---
+category: dev
+description: 統一架構系統workflows文檔
+last_updated: '2025-09-03'
+name: backend-developer-workflow
+prompt_techniques:
+- chain_of_thought
+- self_discover
+- xml_structured
+version: '1.0'
+---
+
 # Backend Developer Workflow
 
 <enforcement>
@@ -21,11 +33,11 @@
 - **Status Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
 - **Uniqueness**: Only one task can be in `in_progress` status at a time
 - **Completeness**: Only mark as `completed` when the task is fully completed
-</enforcement>
+<!-- enforcement>
 
 ---
 
-<workflow type="backend-developer">
+<workflow type="backend-developer" -->
 
 ## Mandatory Preconditions Verification
 <mandatory-preconditions>
@@ -39,9 +51,9 @@
   <requirements>
   - Understand all mandatory rules, security requirements, and quality gates
   - If unable to load, immediately stop and report error
-  </requirements>
+  <!-- requirements>
 
-</stage>
+
 
 ### 2. Project Context Establishment
 
@@ -84,7 +96,7 @@
      - Transaction processing and state management
      - Error handling and exception management
      - Business validation rules
-  </think>
+  <!-- think>
 
   Based on the above thinking analysis, execute the following tasks:
   - Understand project requirements, architecture design, technical constraints
@@ -92,23 +104,23 @@
   - Identify key dependencies and security requirements
   - Pay special attention to backend systems' data flow, API design, and security architecture
   - Confirm performance benchmarks and scalability strategies
-  </requirements>
+  
 
 **Implementation Plan Verification**
 - **Description**: Confirm `{project_root}/docs/implementation-plan/{task_id}`(such as `1`, `2`, `3`...)-plan.md` exists and is readable
 <critical-checkpoint>
 If implementation plan does not exist, immediately stop and notify user that planning stage needs to be executed first
-</critical-checkpoint>
+<!-- critical-checkpoint>
 
 - **Requirements**:
-  <requirements>
+  <requirements -->
   <think hard>
   - Validate plan completeness, scope definition, and technical feasibility
   - Confirm security requirements and performance targets
   <think hard>
-  </requirements>
+  <!-- requirements>
 
-</stage>
+
 
 ### 3. Backend Specialization Preparation
 
@@ -123,24 +135,24 @@ Prepare security checklist according to mandatory execution standards:
 - [ ] Data encryption and sensitive information handling
 - [ ] API security design
 <think>
-</security-checklist>
+<!-- security-checklist>
 
 **Performance Targets Confirmation**
 Confirm and record performance requirements:
-<performance-targets>
+<performance-targets -->
 <think>
 - Latency targets and throughput requirements
 - Memory usage limits
 - Monitoring and measurement strategies
 <think>
-</performance-targets>
-</stage>
-</mandatory-preconditions>
+<!-- performance-targets>
+
+<!-- mandatory-preconditions>
 
 ---
 
 ## Execution Protocol
-<execution-protocol>
+<execution-protocol -->
 
 ### TDD Development Process
 <stage name="TDD Development Process" number="4" critical="true">
@@ -153,18 +165,18 @@ Strictly follow TDD principles:
 - **Ensure test coverage meets required thresholds**
 - **Implement unit tests, integration tests, and contract tests**
 <think harder>
-</tdd-requirements>
+<!-- tdd-requirements>
 
 #### Architecture Principles Application
 Apply the following principles during development:
-<architecture-principles>
+<architecture-principles -->
 <think harder>
 1. **SOLID design principles**
 2. **Clean architecture and separation of concerns**
 3. **Error handling and logging mechanisms**
 <think harder>
-</architecture-principles>
-</stage>
+<!-- architecture-principles>
+
 
 ### Quality Assurance
 <stage name="Quality Assurance" number="5" critical="true">
@@ -177,14 +189,14 @@ Continuously execute during development:
 - **Performance benchmarking**
 - **Backward compatibility verification**
 <think hard>
-</quality-validations>
-</stage>
-</execution-protocol>
+<!-- quality-validations>
+
+<!-- execution-protocol>
 
 ---
 
 ## Failure Handling Mechanism
-<failure-handling>
+<failure-handling -->
 | Failure Scenario | Handling Action |
 |---------|---------|
 | **Precondition Failure** | Immediately stop, report specific missing files or conditions |
@@ -194,8 +206,8 @@ Continuously execute during development:
 
 <critical-failures>
 **Any critical failure must immediately stop the process and report**
-</critical-failures>
+<!-- critical-failures>
 
-</failure-handling>
+
 
 </workflow>

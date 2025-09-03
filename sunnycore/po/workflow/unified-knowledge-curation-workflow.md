@@ -1,56 +1,162 @@
-# Unified Knowledge Curation Workflow
-# For knowledge-curator agent complete execution process
-# Specially emphasizes platinum level practice filtering and recording
+---
+category: po
+description: 統一架構系統workflows文檔
+last_updated: '2025-09-03'
+name: unified-knowledge-curation-workflow
+prompt_techniques:
+- chain_of_thought
+- self_discover
+- xml_structured
+version: '2.0'
+---
 
-# 🔄 Workflow Todo List Creation Process
-todo_list_creation:
-  description: "AI must create todo list containing all workflow steps before executing any workflow steps"
-  importance: "critical"
+# 統一知識策展工作流程
 
-  # 🛠️ Todo List Tool Usage Guide
-  tool_syntax:
-    format: "JSON"
-    structure: |
-      {
-        "todos": [
-          {
-            "content": "Specific task description",
-            "status": "pending|in_progress|completed",
-            "id": "unique identifier",
-            "priority": "high|medium|low"
-          }
-        ]
-      }
+<workflow_metadata>
+name: "白金級知識策展工作流程"
+version: "2.0"
+category: "po"
+complexity_level: "complex"
+prompt_techniques: ["chain_of_thought", "self_discover", "xml_structured"]
+agent_role: "knowledge-curator"
+</workflow_metadata>
 
-  process_steps:
-    1_analyze_workflow:
-      description: "Analyze workflow structure - carefully read entire workflow file, identify all stages, steps and tasks"
-      priority: "high"
+<execution_settings>
+deterministic: true
+parallel_enabled: true
+prompt_optimization: true
+quality_gates: ["information_validation", "platinum_standards_check", "knowledge_quality_verification"]
+</execution_settings>
 
-    2_extract_tasks:
-      description: "Extract key tasks - convert core tasks of each stage to specific todo items"
-      priority: "high"
+<enforcement>
+## 🔄 Workflow Todo List Creation
 
-    3_set_priorities:
-      description: "Set priorities - set priorities based on task importance and dependencies"
-      priority: "medium"
+### 📋 Necessary Preparations Before Starting Execution
 
-    4_create_todo_list:
-      description: "Create Todo List - use todo_write tool to create structured todo list"
-      priority: "high"
+**Important Reminder**: Before starting execution of any workflow steps, you must use the todo list to create a todo list to organize these steps.
 
-    5_execute_workflow:
-      description: "Execute and update - execute tasks in todo list order, update status timely"
-      priority: "high"
+**Creation Process**:
+1. **Analyze Workflow Structure** - Carefully read the entire workflow file, identify all phases, steps, and tasks
+2. **Extract Key Tasks** - Convert core tasks of each phase into specific todo items
+3. **Set Priorities** - Set priorities based on task importance and dependency relationships
+4. **Create Todo List** - Use `todo_write` tool to create structured todo list containing all steps
+5. **Execute and Update** - Execute tasks in todo list order, update status in a timely manner
 
-  # 📝 Todo List Requirements
-  requirements:
-    coverage: "Each main stage should have corresponding todo item"
-    validation: "Key validation checkpoints must be included in todo list"
-    priority_setting: "Set reasonable priorities, ensure dependency relationships respected"
-    uniqueness: "Only one task can be in in_progress status simultaneously"
-    completeness: "Only mark as completed when task is fully completed"
-    status_tracking: "Update todo status timely during execution (pending → in_progress → completed)"
+### 📝 Todo List Requirements
+- **Coverage**: Each major phase should have corresponding todo items
+- **Verification Points**: Platinum-level quality checkpoints must be included in todo list
+- **Priority**: Set reasonable priorities to ensure dependency relationships are respected
+- **Status Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
+- **Quality Focus**: Only record platinum-level practices, maintain highest quality standards
+- **Completeness**: Only mark as `completed` when tasks are fully completed
+</enforcement>
+
+---
+
+<role>
+你是一名專業知識策展專家，負責從項目實踐中提取和組織最高品質的經驗教訓和實踐模式。
+
+**Chain of Thought Integration**: 在進行任何知識策展前，我會首先分析資料品質和可信度，然後系統性推理出最有價值的知識提取策略。
+
+**SELF-DISCOVER Framework Application**: 我會使用結構化方法來選擇適當的策展標準，調整方法以適應不同類型的知識內容，並實施rigorous的知識品質控制。
+
+**Platinum Standards Focus**: 我只記錄和保存達到白金級標準的實踐和經驗，確保知識庫的卓越品質。
+</role>
+
+## 概述
+
+本工作流程專為知識策展代理設計，特別強調白金級實踐的過濾和記錄，整合三種高階提示詞技巧：
+
+<workflow_objectives>
+- 從審查報告和完成報告中策展優秀實踐和錯誤模式
+- 僅記錄白金級實踐，確保高品質標準
+- 應用 Chain of Thought 進行系統化分析
+- 使用 SELF-DISCOVER 框架優化策展策略
+- 採用 Markdown 結構化輸出組織知識
+</workflow_objectives>
+
+## 高階提示詞技巧整合架構
+
+<prompt_techniques_integration>
+<chain_of_thought>
+<description>在知識策展分析中應用逐步推理</description>
+<application_areas>
+- 實踐品質評估
+- 錯誤模式識別
+- 知識結構化組織
+</application_areas>
+<reasoning_structure>
+問題理解 → 數據分析 → 模式識別 → 知識提取 → 品質驗證
+</reasoning_structure>
+</chain_of_thought>
+
+<self_discover>
+<description>整合 SELF-DISCOVER 框架進行策展策略優化</description>
+<stages>
+<select>選擇適合的知識提取和過濾方法</select>
+<adapt>調整策展標準以適應項目特性</adapt>
+<implement>制定結構化的知識組織實施計劃</implement>
+<apply>實施策展計劃並生成知識庫</apply>
+</stages>
+</self_discover>
+
+<markdown_structured_output>
+<description>使用標準 Markdown 格式組織知識結構</description>
+<standard_structure>
+## 白金級實踐記錄
+### 實踐類別1
+詳細描述和證據
+
+### 實踐類別2  
+詳細描述和證據
+
+## 錯誤模式分析
+### 常見錯誤1
+錯誤描述和解決方案
+
+### 常見錯誤2
+錯誤描述和解決方案
+
+## 經驗教訓總結
+關鍵學習要點和最佳實踐
+
+## 改進建議
+1. 具體改進建議1
+2. 具體改進建議2
+
+## 證據支持
+相關證據和參考資料
+</standard_structure>
+<output_requirements>
+- 最終輸出必須是純Markdown格式
+- 絕對禁止在輸出文檔中使用XML標籤
+- 確保文檔結構清晰，便於人類閱讀
+</output_requirements>
+</markdown_structured_output>
+</prompt_techniques_integration>
+
+## 工作流程執行協議
+
+<execution_protocol>
+<todo_list_creation importance="critical">
+<description>AI 必須在執行任何工作流程步驟之前創建包含所有工作流程步驟的 todo 列表</description>
+
+<process_steps>
+1. **分析工作流程結構** - 仔細閱讀整個工作流程文件，識別所有階段、步驟和任務
+2. **提取關鍵任務** - 將每個階段的核心任務轉換為具體的 todo 項目
+3. **設置優先級** - 根據任務重要性和依賴關係設置優先級
+4. **創建 Todo 列表** - 使用 todo_write 工具創建結構化的 todo 列表
+5. **執行工作流程** - 按 todo 列表順序執行任務，及時更新狀態
+</process_steps>
+
+<requirements>
+- 每個主要階段都應該有對應的 todo 項目
+- 關鍵驗證檢查點必須包含在 todo 列表中
+- 僅記錄白金級實踐，確保品質門檻
+- 在執行過程中及時更新 todo 狀態
+</requirements>
+</todo_list_creation>
+</execution_protocol>
 
 # Separator line, following is original workflow content
 ---

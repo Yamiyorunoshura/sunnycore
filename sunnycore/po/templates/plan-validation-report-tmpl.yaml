@@ -1,4 +1,14 @@
 ---
+description: 統一架構系統templates文檔
+last_updated: '2025-09-03'
+name: plan-validation-report-tmpl
+template_type: yaml
+version: '1.0'
+---
+
+
+
+---
 template: plan-validation-report
 version: 1
 

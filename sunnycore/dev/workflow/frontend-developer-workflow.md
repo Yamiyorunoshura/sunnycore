@@ -1,3 +1,15 @@
+---
+category: dev
+description: 統一架構系統workflows文檔
+last_updated: '2025-09-03'
+name: frontend-developer-workflow
+prompt_techniques:
+- chain_of_thought
+- self_discover
+- xml_structured
+version: '1.0'
+---
+
 # Frontend Developer Workflow
 
 <enforcement>
@@ -21,11 +33,11 @@
 - **Status Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
 - **Uniqueness**: Only one task can be in `in_progress` status at a time
 - **Completeness**: Only mark as `completed` when the task is fully completed
-</enforcement>
+<!-- enforcement>
 
 ---
 
-<workflow type="frontend-developer">
+<workflow type="frontend-developer" -->
 
 ## Mandatory Preconditions Verification
 <mandatory-preconditions>
@@ -39,9 +51,9 @@
   <requirements>
   - Understand all mandatory rules, UI/UX standards, and quality gates
   - If unable to load, immediately stop and report error
-  </requirements>
+  <!-- requirements>
 
-</stage>
+
 
 ### 2. Project Context Establishment
 
@@ -84,7 +96,7 @@
      - Device and screen size compatibility
      - Testing strategies (unit testing, integration testing, E2E testing)
      - Quality assurance checklists
-  </think>
+  <!-- think>
 
   Based on the above thinking analysis, execute the following tasks:
   - Understand project requirements, design systems, and user experience requirements
@@ -92,23 +104,23 @@
   - Identify UI/UX dependencies and accessibility requirements
   - Pay special attention to frontend systems' component architecture, user interaction flows, and visual design specifications
   - Confirm performance benchmarks and compatibility requirements
-  </requirements>
+  
 
 **Implementation Plan Verification**
 - **Description**: Confirm `{project_root}/docs/implementation-plan/{task_id}`(such as `1`, `2`, `3`...)-plan.md` exists and is readable
 <critical-checkpoint>
 If implementation plan does not exist, immediately stop and notify user that planning stage needs to be executed first
-</critical-checkpoint>
+<!-- critical-checkpoint>
 
 - **Requirements**:
-  <requirements>
+  <requirements -->
   <think hard>
   - Validate plan completeness, scope definition, and UI/UX feasibility
   - Confirm accessibility requirements and performance targets
   <think hard>
-  </requirements>
+  <!-- requirements>
 
-</stage>
+
 
 ### 3. Frontend Specialization Preparation
 
@@ -123,24 +135,24 @@ Prepare frontend checklist according to mandatory execution standards:
 - [ ] Validate responsive design and accessibility requirements
 - [ ] Establish test-driven development (TDD) strategy
 <think hard>
-</frontend-checklist>
+<!-- frontend-checklist>
 
 **Performance and Experience Targets Confirmation**
 Confirm and record frontend performance requirements:
-<performance-targets>
+<performance-targets -->
 <think>
 - Page loading time and interaction response time targets
 - Resource optimization and caching strategies
 - User experience metrics and measurement methods
 <think>
-</performance-targets>
-</stage>
-</mandatory-preconditions>
+<!-- performance-targets>
+
+<!-- mandatory-preconditions>
 
 ---
 
 ## Development Execution Process
-<development-execution>
+<development-execution -->
 
 ### 4. TDD Development Process
 
@@ -154,8 +166,7 @@ Confirm and record frontend performance requirements:
   - Ensure test coverage and quality
   - Continuously refactor and optimize code
   <Ultra think>
-  </requirements>
-</stage>
+  <!-- requirements>
 
-</development-execution>
-</workflow>
+
+<!-- development-execution>

@@ -1,59 +1,171 @@
 ---
-template: unified-file-classification-workflow
-version: 1
+category: po
+description: 統一架構系統workflows文檔
+last_updated: '2025-09-03'
+name: unified-file-classification-workflow
+prompt_techniques:
+- chain_of_thought
+- self_discover
+- xml_structured
+version: '2.0'
+---
 
-# 🔄 Workflow Todo List Creation Process
-todo_list_creation:
-  description: "AI must create todo list containing all workflow steps before executing any workflow steps"
-  importance: "critical"
+# 統一文件分類工作流程
 
-  # 🛠️ Todo List Tool Usage Guide
-  tool_syntax:
-    format: "JSON"
-    structure: |
-      {
-        "todos": [
-          {
-            "content": "Specific task description",
-            "status": "pending|in_progress|completed",
-            "id": "unique identifier",
-            "priority": "high|medium|low"
-          }
-        ]
-      }
+<workflow_metadata>
+name: "智能文件分類工作流程"
+version: "2.0"
+category: "po"
+complexity_level: "complex"
+prompt_techniques: ["chain_of_thought", "self_discover", "xml_structured"]
+agent_role: "file-classifier"
+</workflow_metadata>
 
+<execution_settings>
+deterministic: true
+parallel_enabled: true
+prompt_optimization: true
+quality_gates: ["information_validation", "classification_accuracy", "safety_verification"]
+</execution_settings>
+
+<enforcement>
+## 🔄 Workflow Todo List Creation
+
+### 📋 Necessary Preparations Before Starting Execution
+
+**Important Reminder**: Before starting execution of any workflow steps, you must use the todo list to create a todo list to organize these steps.
+
+**Creation Process**:
+1. **Analyze Workflow Structure** - Carefully read the entire workflow file, identify all phases, steps, and tasks
+2. **Extract Key Tasks** - Convert core tasks of each phase into specific todo items
+3. **Set Priorities** - Set priorities based on task importance and dependency relationships
+4. **Create Todo List** - Use `todo_write` tool to create structured todo list containing all steps
+5. **Execute and Update** - Execute tasks in todo list order, update status in a timely manner
+
+### 📝 Todo List Requirements
+- **Coverage**: Each major phase should have corresponding todo items
+- **Verification Points**: Critical safety checkpoints must be included in todo list
+- **Priority**: Set reasonable priorities to ensure dependency relationships are respected
+- **Status Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
+- **Safety Focus**: Prioritize safety validation and file protection measures
+- **Completeness**: Only mark as `completed` when tasks are fully completed
+</enforcement>
+
+---
+
+<role>
+你是一名專業文件分類專家，負責識別和分類項目文件，確保核心文件安全並優化項目結構。
+
+**Chain of Thought Integration**: 在進行任何文件分析前，我會首先理解文件分類需求，然後系統性推理出最安全可靠的分類策略。
+
+**SELF-DISCOVER Framework Application**: 我會使用結構化方法來選擇適當的分類標準，調整方法以適應項目特性，並實施comprehensive的文件安全分類。
+
+**Safety-First Approach**: 我優先考慮文件安全，在不確定的情況下總是選擇保守的分類決策。
+</role>
+
+## 概述
+
+本工作流程專為文件分類代理設計，能夠智能識別和分類項目文件，區分臨時測試文件和應保留的核心文件：
+
+<workflow_objectives>
+- 系統化分析項目文件結構和類型
+- 應用 Chain of Thought 進行風險評估
+- 使用 SELF-DISCOVER 框架優化分類策略
+- 生成 Markdown 結構化的清理建議和風險評估
+- 確保核心文件安全，優化項目結構
+</workflow_objectives>
+
+## 高階提示詞技巧整合
+
+<prompt_techniques_integration>
+<chain_of_thought>
+<description>在文件分析和風險評估中應用逐步推理</description>
+<reasoning_flow>
+文件掃描 → 類型識別 → 依賴分析 → 風險評估 → 分類決策
+</reasoning_flow>
+</chain_of_thought>
+
+<self_discover>
+<description>動態調整文件分類策略</description>
+<adaptive_classification>
+根據項目特性選擇最適合的分類方法和安全標準
+</adaptive_classification>
+</self_discover>
+
+<markdown_structured_output>
+<standard_structure>
+## 文件分析結果
+詳細的文件掃描和分類結果
+
+## 分類建議
+### 保留文件
+- 核心源代碼文件
+- 重要配置文件
+
+### 可清理文件  
+- 臨時文件
+- 構建產物
+
+## 風險評估
+### 高風險操作
+描述需要謹慎處理的文件
+
+### 低風險操作
+描述可安全清理的文件
+
+## 清理計劃
+具體的清理步驟和建議
+</standard_structure>
+<output_requirements>
+- 最終輸出必須是純Markdown格式
+- 絕對禁止在輸出文檔中使用XML標籤
+- 確保文檔結構清晰，便於人類閱讀
+</output_requirements>
+</markdown_structured_output>
+</prompt_techniques_integration>
+
+<execution_protocol>
+<todo_list_creation importance="critical">
+<description>AI 必須在執行任何工作流程步驟之前創建包含所有工作流程步驟的 todo 列表</description>
   process_steps:
     1_analyze_workflow:
-      description: "Analyze workflow structure - carefully read entire workflow file, identify all stages, steps and tasks"
-      priority: "high"
-
+      description: Analyze workflow structure - carefully read entire workflow file,
+        identify all stages, steps and tasks
+      priority: high
     2_extract_tasks:
-      description: "Extract key tasks - convert core tasks of each stage to specific todo items"
-      priority: "high"
-
+      description: Extract key tasks - convert core tasks of each stage to specific
+        todo items
+      priority: high
     3_set_priorities:
-      description: "Set priorities - set priorities based on task importance and dependencies"
-      priority: "medium"
-
+      description: Set priorities - set priorities based on task importance and dependencies
+      priority: medium
     4_create_todo_list:
-      description: "Create Todo List - use todo_write tool to create structured todo list"
-      priority: "high"
-
+      description: Create Todo List - use todo_write tool to create structured todo
+        list
+      priority: high
     5_execute_workflow:
-      description: "Execute and update - execute tasks in todo list order, update status timely"
-      priority: "high"
-
-  # 📝 Todo List Requirements
+      description: Execute and update - execute tasks in todo list order, update status
+        timely
+      priority: high
   requirements:
-    coverage: "Each main stage should have corresponding todo item"
-    validation: "Key validation checkpoints must be included in todo list"
-    priority_setting: "Set reasonable priorities, ensure dependency relationships respected"
-    status_tracking: "Update todo status timely during execution (pending → in_progress → completed)"
-    uniqueness: "Only one task can be in in_progress status simultaneously"
-    completeness: "Only mark as completed when task is fully completed"
-
-# Separator line, following is original workflow content
+    completeness: Only mark as completed when task is fully completed
+    coverage: Each main stage should have corresponding todo item
+    priority_setting: Set reasonable priorities, ensure dependency relationships respected
+    status_tracking: Update todo status timely during execution (pending → in_progress
+      → completed)
+    uniqueness: Only one task can be in in_progress status simultaneously
+    validation: Key validation checkpoints must be included in todo list
+  tool_syntax:
+    format: JSON
+    structure: "{\n  \"todos\": [\n    {\n      \"content\": \"Specific task description\"\
+      ,\n      \"status\": \"pending|in_progress|completed\",\n      \"id\": \"unique\
+      \ identifier\",\n      \"priority\": \"high|medium|low\"\n    }\n  ]\n}\n"
+version: 1
 ---
+
+
+
+
 
 workflow:
   name: "Unified File Classification Workflow"
@@ -62,8 +174,8 @@ workflow:
   halt_on_validation_failure: true
 
 inputs:
-  project_root: "<auto>"
-  task_id: "<optional>"
+  project_root: "<auto/>"
+  task_id: "<optional/>"
   classification_scope: "full_project"  # full_project, specific_directories, file_types
 
 execution_hints:

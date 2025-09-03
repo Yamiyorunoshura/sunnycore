@@ -1,3 +1,15 @@
+---
+category: dev
+description: 統一架構系統workflows文檔
+last_updated: '2025-09-03'
+name: developer-orchestrator-workflow
+prompt_techniques:
+- chain_of_thought
+- self_discover
+- xml_structured
+version: '1.0'
+---
+
 # Developer Orchestrator Workflow
 
 <enforcement>
@@ -22,32 +34,32 @@
 - **Parallel Execution**: Support multiple tasks in `in_progress` status simultaneously to improve efficiency
 - **Dependency Management**: Ensure tasks with dependencies execute in correct order
 - **Completeness**: Only mark as `completed` when the task is fully completed
-</enforcement>
+<!-- enforcement>
 
 ---
 
-<stage name="Plan Verification Phase" number="1">
-<description>Check and verify the existence and completeness of implementation plans</description>
+<stage name="Plan Verification Phase" number="1" -->
+<description>Check and verify the existence and completeness of implementation plans<!-- description>
 
-<execution_actions>
+<execution_actions -->
 - Read the implementation plan corresponding to task_id from `{project_root}/docs/implementation-plan/{task_id}`(such as `1`, `2`, `3`...)-plan.md` (such as `1-plan.md`, `2-plan.md`, `3-plan.md`...)
 - Validate plan format and required fields (metadata, scope, assumptions, constraints)
 - Confirm plan scope and constraints
 - Verify resolvability of sources paths
-</execution_actions>
+<!-- execution_actions>
 
-<validation_checkpoints>
+<validation_checkpoints -->
 - Plan file exists and is readable
 - Required fields complete (task_id, project_name, owner, date)
 - Scope definition clear and executable
 - Constraints explicit and reasonable
-</validation_checkpoints>
-</stage>
+<!-- validation_checkpoints>
+
 
 <stage name="Task Classification Phase" number="2">
-<description>Analyze plan content and classify task types and technical domains</description>
+<description>Analyze plan content and classify task types and technical domains<!-- description>
 
-<think harder>
+<think harder -->
 <execution_actions>
 - Deeply analyze technical domains and complexity involved in plan content
 - Intelligently identify frontend, backend, fullstack, or refactoring requirements
@@ -55,31 +67,31 @@
 - Calculate task complexity and required resource estimation
 - Check if `docs/review-results/{task_id}-review.md` (such as `1-review.md`, `2-review.md`, `3-review.md`...) exists for previous review documents (brownfield state detection)
 - If in brownfield state, read the issue list, repair recommendations, and priorities from `docs/review-results/{task_id}-review.md` (such as `1-review.md`, `2-review.md`, `3-review.md`...) and use them as reference for task classification.
-</execution_actions>
-</think harder>
+<!-- execution_actions>
+
 
 <classification_checkpoints>
 - Technical domains correctly identified
 - Task types accurately classified
 - Dependencies clearly mapped
 - Brownfield state correctly detected
-</classification_checkpoints>
-</stage>
+<!-- classification_checkpoints>
+
 
 <stage name="Developer Team Formation" number="2.5">
-<description>Analyze development requirements and assemble appropriate developer team based on task classification</description>
+<description>Analyze development requirements and assemble appropriate developer team based on task classification<!-- description>
 
-<think harder>
+<think harder -->
 <execution_actions>
 - **Development Content Analysis**: Based on task classification results, analyze the development content to be implemented
 - **Technical Domain Identification**: Identify specific technical domains involved (backend, frontend, fullstack, refactoring)
 - **Development Dimension Assessment**: Determine development dimensions needed (database, api, security, performance, testing, infrastructure, ui-ux, framework, accessibility, architecture, integration, devops, code-quality)
 - **Developer Team Assembly**: Select appropriate developer agents based on content analysis and domain requirements
 - **Team Coordination Strategy**: Define coordination approach for selected developer team to ensure efficient collaboration
-</execution_actions>
+<!-- execution_actions>
 
 **Development Content Analysis**
-<content_analysis_task>
+<content_analysis_task -->
 - **Description**: Analyze the development content based on implementation plan and task classification results
 - **Analysis Requirements**:
   <analysis_requirements>
@@ -88,8 +100,8 @@
   - Assess development complexity and scope requirements
   - Consider brownfield status and previous review recommendations
   - Evaluate inter-domain dependencies and integration requirements
-  </analysis_requirements>
-</content_analysis_task>
+  <!-- analysis_requirements>
+
 
 **Developer Team Assembly**
 <team_assembly_task>
@@ -117,25 +129,25 @@
   - **Refactoring Domain Experts**:
     - `refactor-developer_code-quality`: Code refactoring, architecture improvement
     - `refactor-developer_performance`: Performance refactoring, optimization refactoring
-  </available_developers>
+  <!-- available_developers>
 - **Selection Criteria**:
-  <selection_criteria>
+  <selection_criteria -->
   - **Domain-Specific Selection**: Select developers based on primary technical domains identified
   - **Complexity-Based Selection**: Include specialized developers for complex requirements (performance, security, testing)
   - **Integration Requirements**: Include fullstack developers for multi-domain integration tasks
   - **Quality Assurance**: Include testing developers for comprehensive test coverage
   - **Refactoring Needs**: Include refactoring developers for code quality improvement or performance optimization
   - **Infrastructure Requirements**: Include infrastructure/devops developers for deployment and operational concerns
-  </selection_criteria>
+  <!-- selection_criteria>
 - **Team Formation Rules**:
-  <formation_rules>
+  <formation_rules -->
   - Minimum team size: 1 developer (domain-specific primary developer)
   - Maximum team size: 8 developers (comprehensive coverage across all domains)
   - Ensure comprehensive coverage without redundancy
   - Consider development efficiency and resource optimization
   - Prioritize parallel execution capabilities
-  </formation_rules>
-</team_assembly_task>
+  <!-- formation_rules>
+
 
 **Development Coordination Strategy**
 <coordination_strategy>
@@ -147,23 +159,23 @@
   - Establish communication protocols between developers
   - Set development completion timeline and checkpoints
   - Ensure consistency across different development domains
-  </coordination_requirements>
-</coordination_strategy>
-</think harder>
+  <!-- coordination_requirements>
 
-<team_formation_checkpoints>
+<!-- think harder>
+
+<team_formation_checkpoints -->
 - Development content analysis completed and technical domains identified
 - Developer team formation appropriate and coverage complete
 - Development coordination strategy defined and communicated
 - Team selection meets development requirements and complexity
 - Parallel execution strategy prepared
-</team_formation_checkpoints>
-</stage>
+<!-- team_formation_checkpoints>
+
 
 <stage name="Agent Assignment Phase" number="3">
-<description>Execute coordinated development using the assembled developer team from Stage 2.5</description>
+<description>Execute coordinated development using the assembled developer team from Stage 2.5<!-- description>
 
-<think harder>
+<think harder -->
 <execution_actions>
 - **Coordinated Team Execution**: Execute development using the assembled developer team from Stage 2.5
 - **Simultaneous Agent Invocation**: Invoke all selected developer agents from the formed team simultaneously
@@ -174,10 +186,10 @@
 - **Brownfield Integration**: If in brownfield state, precisely transmit the issue list and repair recommendations from review documents to relevant agents
 - **Progress Monitoring**: Monitor all developers' progress and quality in real-time
 - **Cross-Domain Validation**: Ensure consistency and integration between different development domains
-</execution_actions>
+<!-- execution_actions>
 
 **Multiple Developer Coordination**
-<orchestration_task>
+<orchestration_task -->
 - **Description**: Execute coordinated development using the assembled developer team from Stage 2.5
 - **Execution Requirements**:
   <requirements>
@@ -188,41 +200,41 @@
   - Handle any developer failures or delays gracefully
   - Collect results from all developers upon completion
   - Ensure cross-domain consistency and integration
-  </requirements>
+  <!-- requirements>
 - **Parallel Execution Strategy**:
-  <parallel_strategy>
+  <parallel_strategy -->
   - **Simultaneous Invocation**: Call all selected developers at the same time
   - **Independent Development**: Each developer works on their assigned focus areas independently
   - **Progress Monitoring**: Track completion status of each developer
   - **Result Aggregation**: Collect and organize results from all developers
   - **Quality Assurance**: Ensure all developers complete their implementations thoroughly
   - **Integration Validation**: Validate consistency between different development domains
-  </parallel_strategy>
+  <!-- parallel_strategy>
 - **Developer Communication**:
-  <communication_protocol>
+  <communication_protocol -->
   - Each developer receives clear instructions on their specific development focus
   - Developers are informed of other team members' areas of responsibility
   - Cross-referencing is encouraged for overlapping concerns and integration points
   - Final results are consolidated by the orchestrator
   - Consistency validation is performed across all development outputs
-  </communication_protocol>
-</orchestration_task>
-</think harder>
+  <!-- communication_protocol>
 
-<assignment_checkpoints>
+<!-- think harder>
+
+<assignment_checkpoints -->
 - All selected developer agents from formed team successfully invoked
 - Parallel execution strategy implemented and coordinated
 - Real-time coordination mechanism established between developers
 - Complete task context and focus areas transmitted to all team members
 - Cross-domain communication protocols activated
 - Progress monitoring systems operational
-</assignment_checkpoints>
-</stage>
+<!-- assignment_checkpoints>
+
 
 <stage name="Progress Monitoring Phase" number="4">
-<description>Real-time monitoring of execution status and progress of all active developer team members</description>
+<description>Real-time monitoring of execution status and progress of all active developer team members<!-- description>
 
-<execution_actions>
+<execution_actions -->
 - Establish real-time tracking dashboard for all developer team members' execution progress
 - Monitor system resource usage (CPU, memory, network) across all parallel executions
 - Intelligently detect potential bottlenecks, risks, and abnormal patterns in team coordination
@@ -231,22 +243,22 @@
 - If in brownfield state, specially monitor progress and quality of issue remediation across all developers
 - Implement early warning mechanisms to identify potential execution issues and team coordination problems in advance
 - Track parallel execution efficiency and team collaboration effectiveness
-</execution_actions>
+<!-- execution_actions>
 
-<monitoring_checkpoints>
+<monitoring_checkpoints -->
 - All developer team member statuses visible and tracked
 - Resource usage within reasonable ranges across all parallel executions
 - No blocking bottlenecks in individual developers or team coordination
 - Execution logs completely recorded for each developer and team interactions
 - Cross-domain integration progress monitored
 - Team collaboration effectiveness measured
-</monitoring_checkpoints>
-</stage>
+<!-- monitoring_checkpoints>
+
 
 <stage name="Problem Resolution Phase" number="5">
-<description>Identify and resolve issues and conflicts during team execution process</description>
+<description>Identify and resolve issues and conflicts during team execution process<!-- description>
 
-<think>
+<think -->
 <execution_actions>
 - Intelligently detect conflicts between developer team members, dependency issues, and resource competition
 - Coordinate technical decision conflicts and implementation strategy differences across multiple developers
@@ -257,8 +269,8 @@
 - Establish issue escalation mechanisms to handle complex technical decisions requiring team consensus
 - Mediate conflicts between different development domains (backend vs frontend vs fullstack)
 - Ensure alignment of architectural decisions across all team members
-</execution_actions>
-</think>
+<!-- execution_actions>
+
 
 <resolution_checkpoints>
 - Inter-developer team conflicts resolved
@@ -267,13 +279,13 @@
 - Abnormal situations recovered in team coordination
 - Brownfield issues remediation completed across all developers
 - Architectural alignment achieved across different development domains
-</resolution_checkpoints>
-</stage>
+<!-- resolution_checkpoints>
+
 
 <stage name="Completion Report Phase" number="6">
-<description>Generate comprehensive development records and final reports from all team members</description>
+<description>Generate comprehensive development records and final reports from all team members<!-- description>
 
-<think hard>
+<think hard -->
 <execution_actions>
 - Collect and integrate all developer team members' execution results, decision records, and deliverables
 - Consolidate cross-domain integration results and consistency validation outcomes
@@ -286,8 +298,8 @@
 - Establish traceable deliverable lists and quality inspection reports covering all development domains
 - Document architectural decisions and their impact across different development areas
 - Record lessons learned from team coordination and parallel execution
-</execution_actions>
-</think hard>
+<!-- execution_actions>
+
 
 <completion_checkpoints>
 - All developer team member results collected and integrated
@@ -299,8 +311,8 @@
 - Deliverable list complete covering all development domains
 - Architectural decisions and cross-domain impacts documented
 - Lessons learned from parallel execution recorded
-</completion_checkpoints>
-</stage>
+<!-- completion_checkpoints>
+
 
 
 ## Quality Assurance Checkpoints
@@ -318,6 +330,6 @@
 - [ ] Output format meets standards and easy to read
 - [ ] Development records comprehensive and cover all team contributions
 - [ ] Orchestrator status report completed
-</validation_criteria>
-</quality_assurance>
+<!-- validation_criteria>
+
 

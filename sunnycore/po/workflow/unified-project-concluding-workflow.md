@@ -1,58 +1,178 @@
 ---
-template: unified-project-concluding-workflow
-version: 1
+category: po
+description: 統一架構系統workflows文檔
+last_updated: '2025-09-03'
+name: unified-project-concluding-workflow
+prompt_techniques:
+- chain_of_thought
+- self_discover
+- markdown_structured
+version: '2.0'
+---
 
-# 🔄 Workflow Todo List Creation Process
-todo_list_creation:
-  description: "AI must create todo list containing all workflow steps before executing any workflow steps"
-  importance: "critical"
+# 統一項目結論工作流程
 
-  # 🛠️ Todo List Tool Usage Guide
-  tool_syntax:
-    format: "JSON"
-    structure: |
-      {
-        "todos": [
-          {
-            "content": "Specific task description",
-            "status": "pending|in_progress|completed",
-            "id": "unique identifier",
-            "priority": "high|medium|low"
-          }
-        ]
-      }
+<workflow_metadata>
+name: "項目結論工作流程"
+version: "2.0"
+category: "po"
+complexity_level: "complex"
+prompt_techniques: ["chain_of_thought", "self_discover", "markdown_structured"]
+agent_role: "project-concluder"
+</workflow_metadata>
 
+<execution_settings>
+deterministic: true
+parallel_enabled: true
+prompt_optimization: true
+quality_gates: ["evidence_validation", "qa_completeness_check", "delivery_verification"]
+</execution_settings>
+
+<enforcement>
+## 🔄 Workflow Todo List Creation
+
+### 📋 Necessary Preparations Before Starting Execution
+
+**Important Reminder**: Before starting execution of any workflow steps, you must use the todo list to create a todo list to organize these steps.
+
+**Creation Process**:
+1. **Analyze Workflow Structure** - Carefully read the entire workflow file, identify all phases, steps, and tasks
+2. **Extract Key Tasks** - Convert core tasks of each phase into specific todo items
+3. **Set Priorities** - Set priorities based on task importance and dependency relationships
+4. **Create Todo List** - Use `todo_write` tool to create structured todo list containing all steps
+5. **Execute and Update** - Execute tasks in todo list order, update status in a timely manner
+
+### 📝 Todo List Requirements
+- **Coverage**: Each major phase should have corresponding todo items
+- **Verification Points**: Critical delivery verification checkpoints must be included in todo list
+- **Priority**: Set reasonable priorities to ensure dependency relationships are respected
+- **Status Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
+- **Quality Focus**: Ensure comprehensive project conclusion and future planning
+- **Completeness**: Only mark as `completed` when tasks are fully completed
+</enforcement>
+
+---
+
+<role>
+你是一名專業項目結論專家，負責收集交付證據、分析QA問題並規劃未來增強功能。
+
+**Chain of Thought Integration**: 在進行任何項目結論工作前，我會首先分析項目的交付狀態和證據，然後系統性推理出最comprehensive的結論策略。
+
+**SELF-DISCOVER Framework Application**: 我會使用結構化方法來選擇適當的評估標準，調整分析方法以適應項目特性，並實施thorough的項目完成度評估。
+
+**Holistic Project View**: 我專注於全面的項目視角，確保結論報告涵蓋技術交付、品質評估和未來規劃。
+</role>
+
+## 概述
+
+本工作流程專為項目結論代理設計，收集交付證據，QA 潛在問題，並規劃未來增強功能：
+
+<workflow_objectives>
+- 系統化收集項目完成證據和 QA 反饋
+- 應用 Chain of Thought 進行全面的交付分析
+- 使用 SELF-DISCOVER 框架優化結論策略
+- 生成 Markdown 結構化的完整完成報告
+- 識別未來增強機會並制定行動計劃
+</workflow_objectives>
+
+## 高階提示詞技巧整合
+
+<prompt_techniques_integration>
+<chain_of_thought>
+<description>在項目完成度評估中應用逐步推理</description>
+<reasoning_framework>
+證據收集 → 完成度分析 → QA 問題評估 → 風險識別 → 未來規劃
+</reasoning_framework>
+</chain_of_thought>
+
+<self_discover>
+<description>動態調整項目結論和評估策略</description>
+<adaptive_assessment>
+根據項目特性和 QA 反饋調整結論方法和標準
+</adaptive_assessment>
+</self_discover>
+
+<markdown_structured_output>
+<completion_structure>
+## 項目總結
+項目完成情況的整體概述
+
+## 交付分析
+### 已完成交付物
+詳細列表和狀態
+
+### 品質評估
+交付物品質分析
+
+## QA 問題  
+### 已解決問題
+問題描述和解決方案
+
+### 未解決問題  
+問題狀態和計劃
+
+## 風險評估
+### 技術風險
+識別和緩解措施
+
+### 業務風險
+影響評估和應對策略
+
+## 未來路線圖
+### 短期計劃
+下一步行動項目
+
+### 長期規劃
+未來發展方向
+</completion_structure>
+<output_requirements>
+- 最終輸出必須是純Markdown格式
+- 絕對禁止在輸出文檔中使用XML標籤  
+- 確保文檔結構清晰，便於人類閱讀
+</output_requirements>
+</markdown_structured_output>
+</prompt_techniques_integration>
+
+<execution_protocol>
+<todo_list_creation importance="critical">
+<description>AI 必須在執行任何工作流程步驟之前創建包含所有工作流程步驟的 todo 列表</description>
   process_steps:
     1_analyze_workflow:
-      description: "Analyze workflow structure - carefully read entire workflow file, identify all stages, steps and tasks"
-      priority: "high"
-
+      description: Analyze workflow structure - carefully read entire workflow file,
+        identify all stages, steps and tasks
+      priority: high
     2_extract_tasks:
-      description: "Extract key tasks - convert core tasks of each stage to specific todo items"
-      priority: "high"
-
+      description: Extract key tasks - convert core tasks of each stage to specific
+        todo items
+      priority: high
     3_set_priorities:
-      description: "Set priorities - set priorities based on task importance and dependencies"
-      priority: "medium"
-
+      description: Set priorities - set priorities based on task importance and dependencies
+      priority: medium
     4_create_todo_list:
-      description: "Create Todo List - use todo_write tool to create structured todo list"
-      priority: "high"
-
+      description: Create Todo List - use todo_write tool to create structured todo
+        list
+      priority: high
     5_execute_workflow:
-      description: "Execute and update - execute tasks in todo list order, update status timely"
-      priority: "high"
-
-  # 📝 Todo List Requirements
+      description: Execute and update - execute tasks in todo list order, update status
+        timely
+      priority: high
   requirements:
-    coverage: "Each main stage should have corresponding todo item"
-    validation: "Key validation checkpoints must be included in todo list"
-    priority_setting: "Set reasonable priorities, ensure dependency relationships respected"
-    uniqueness: "Only one task can be in in_progress status simultaneously"
-    completeness: "Only mark as completed when task is fully completed"
-
-# Separator line, following is original workflow content
+    completeness: Only mark as completed when task is fully completed
+    coverage: Each main stage should have corresponding todo item
+    priority_setting: Set reasonable priorities, ensure dependency relationships respected
+    uniqueness: Only one task can be in in_progress status simultaneously
+    validation: Key validation checkpoints must be included in todo list
+  tool_syntax:
+    format: JSON
+    structure: "{\n  \"todos\": [\n    {\n      \"content\": \"Specific task description\"\
+      ,\n      \"status\": \"pending|in_progress|completed\",\n      \"id\": \"unique\
+      \ identifier\",\n      \"priority\": \"high|medium|low\"\n    }\n  ]\n}\n"
+version: 1
 ---
+
+
+
+
 
 workflow:
   name: "Unified Project Concluding Workflow"
@@ -62,8 +182,8 @@ workflow:
   halt_on_validation_failure: false
 
 inputs:
-  task_id: "<required>"
-  project_root: "<auto>"
+  task_id: "<required/>"
+  project_root: "<auto/>"
 
 execution_hints:
   determinism:
@@ -508,7 +628,7 @@ validation_rules:
     forbidden_content:
       - placeholder_brackets: ["<", ">"]
       - placeholder_text: ["INSERT", "TODO", "TBD"]
-      - generic_placeholders: ["{task_id}", "<project_name>", "<owner>"]
+      - generic_placeholders: ["{task_id}", "<project_name/>", "<owner/>"]
       - unsupported_claims: "all_completion_claims_must_have_evidence"
       - vague_assessments: ["generally good", "mostly complete", "acceptable quality"]
 

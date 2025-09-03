@@ -1,3 +1,15 @@
+---
+category: dev
+description: 統一架構系統workflows文檔
+last_updated: '2025-09-03'
+name: fullstack-developer-workflow
+prompt_techniques:
+- chain_of_thought
+- self_discover
+- xml_structured
+version: '1.0'
+---
+
 # Fullstack Developer Workflow
 
 <enforcement>
@@ -21,11 +33,11 @@
 - **Status Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
 - **Uniqueness**: Only one task can be in `in_progress` status at a time
 - **Completeness**: Only mark as `completed` when the task is fully completed
-</enforcement>
+<!-- enforcement>
 
 ---
 
-<workflow type="fullstack-developer">
+<workflow type="fullstack-developer" -->
 
 ## Mandatory Preconditions Verification
 <mandatory-preconditions>
@@ -39,9 +51,9 @@
   <requirements>
   - Understand all mandatory rules, fullstack development standards, and quality gates
   - If unable to load, immediately stop and report error
-  </requirements>
+  <!-- requirements>
 
-</stage>
+
 
 ### 2. Project Context Establishment
 
@@ -90,7 +102,7 @@
      - Containerization strategies and Kubernetes configuration
      - Environment management and configuration management
      - Disaster recovery and backup strategies
-  </think>
+  <!-- think>
 
   Based on the above thinking analysis, execute the following tasks:
   - Understand project requirements, complete system architecture, and frontend-backend integration requirements
@@ -99,23 +111,23 @@
   - Pay special attention to frontend-backend integration points, security strategies, and performance optimization requirements
   - Confirm DevOps processes, deployment strategies, and monitoring mechanisms
   - Verify cross-layer consistency and technical debt management strategies
-  </requirements>
+  
 
 **Implementation Plan Verification**
 - **Description**: Confirm `{project_root}/docs/implementation-plan/{task_id}`(e.g. `1`, `2`, `3`...)-plan.md` exists and is readable
 <critical-checkpoint>
 If implementation plan does not exist, immediately stop and notify user that planning stage needs to be executed first
-</critical-checkpoint>
+<!-- critical-checkpoint>
 
 - **Requirements**:
-  <requirements>
+  <requirements -->
   <think hard>
   - Validate plan completeness, scope definition, and fullstack technical feasibility
   - Confirm frontend-backend integration requirements and performance targets
   <think hard>
-  </requirements>
+  <!-- requirements>
 
-</stage>
+
 
 ### 3. Fullstack Specialization Preparation
 
@@ -131,24 +143,24 @@ Prepare fullstack checklist according to mandatory execution standards:
 - [ ] Establish unified test-driven development (TDD) strategy
 - [ ] Confirm deployment and DevOps processes
 <think hard>
-</fullstack-checklist>
+<!-- fullstack-checklist>
 
 **Performance and Security Targets Confirmation**
 Confirm and record fullstack performance requirements:
-<performance-targets>
+<performance-targets -->
 <think>
 - Frontend loading time and backend API response time targets
 - Database query performance and system scalability requirements
 - Security, availability, and monitoring strategies
 <think>
-</performance-targets>
-</stage>
-</mandatory-preconditions>
+<!-- performance-targets>
+
+<!-- mandatory-preconditions>
 
 ---
 
 ## Execution Protocol
-<execution-protocol>
+<execution-protocol -->
 
 ### TDD Fullstack Development Process
 <stage name="TDD Fullstack Development Process" number="4" critical="true">
@@ -162,19 +174,19 @@ Strictly follow TDD principles for fullstack development:
 - **Implement unit tests, integration tests, end-to-end tests**
 - **API contract tests and database tests**
 <ultra think>
-</tdd-requirements>
+<!-- tdd-requirements>
 
 #### Fullstack Architecture Principles Application
 Apply the following principles during development:
-<architecture-principles>
+<architecture-principles -->
 <ultra think>
 1. **Frontend-backend separation and API design principles**
 2. **Unified error handling and logging mechanisms**
 3. **Data consistency and transaction management**
 4. **Security design and authentication integration**
 <ultra think>
-</architecture-principles>
-</stage>
+<!-- architecture-principles>
+
 
 ### Quality Assurance
 <stage name="Quality Assurance" number="5" critical="true">
@@ -188,14 +200,14 @@ Continuously execute during development:
 - **Cross-browser and responsive design validation**
 - **Database performance and data integrity checks**
 <think hard>
-</quality-validations>
-</stage>
-</execution-protocol>
+<!-- quality-validations>
+
+<!-- execution-protocol>
 
 ---
 
 ## Failure Handling Mechanism
-<failure-handling>
+<failure-handling -->
 | Failure Scenario | Handling Action |
 |---------|---------|
 | **Precondition Failure** | Immediately stop, report specific missing files or conditions |
@@ -206,8 +218,8 @@ Continuously execute during development:
 
 <critical-failures>
 **Any critical failure must immediately stop the process and report**
-</critical-failures>
+<!-- critical-failures>
 
-</failure-handling>
+
 
 </workflow>

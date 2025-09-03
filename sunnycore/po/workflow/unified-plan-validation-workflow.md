@@ -1,59 +1,71 @@
 ---
-template: unified-plan-validation-workflow
-version: 1
-
-# 🔄 Workflow Todo List Creation Process
-todo_list_creation:
-  description: "AI must create todo list containing all workflow steps before executing any workflow steps"
-  importance: "critical"
-
-  # 🛠️ Todo List Tool Usage Guide
-  tool_syntax:
-    format: "JSON"
-    structure: |
-      {
-        "todos": [
-          {
-            "content": "Specific task description",
-            "status": "pending|in_progress|completed",
-            "id": "unique identifier",
-            "priority": "high|medium|low"
-          }
-        ]
-      }
-
-  process_steps:
-    1_analyze_workflow:
-      description: "Analyze workflow structure - carefully read entire workflow file, identify all stages, steps and tasks"
-      priority: "high"
-
-    2_extract_tasks:
-      description: "Extract key tasks - convert core tasks of each stage to specific todo items"
-      priority: "high"
-
-    3_set_priorities:
-      description: "Set priorities - set priorities based on task importance and dependencies"
-      priority: "medium"
-
-    4_create_todo_list:
-      description: "Create Todo List - use todo_write tool to create structured todo list"
-      priority: "high"
-
-    5_execute_workflow:
-      description: "Execute and update - execute tasks in todo list order, update status timely"
-      priority: "high"
-
-  # 📝 Todo List Requirements
-  requirements:
-    coverage: "Each main stage should have corresponding todo item"
-    validation: "Key validation checkpoints must be included in todo list"
-    priority_setting: "Set reasonable priorities, ensure dependency relationships respected"
-    status_tracking: "Update todo status timely during execution (pending → in_progress → completed)"
-    uniqueness: "Only one task can be in in_progress status simultaneously"
-    completeness: "Only mark as completed when task is fully completed"
-
-# Separator line, following is original workflow content
+category: po
+description: 統一架構系統workflows文檔
+last_updated: '2025-09-03'
+name: unified-plan-validation-workflow
+prompt_techniques:
+- chain_of_thought
+- self_discover
+- markdown_structured
+version: '2.0'
 ---
+
+# 統一計劃驗證工作流程
+
+<workflow_metadata>
+name: "計劃驗證工作流程"
+version: "2.0"
+category: "po"
+complexity_level: "complex"
+prompt_techniques: ["chain_of_thought", "self_discover", "markdown_structured"]
+agent_role: "plan-validator"
+</workflow_metadata>
+
+<execution_settings>
+deterministic: true
+parallel_enabled: true
+prompt_optimization: true
+quality_gates: ["information_validation", "compliance_check", "validation_completeness"]
+</execution_settings>
+
+<enforcement>
+## 🔄 Workflow Todo List Creation
+
+### 📋 Necessary Preparations Before Starting Execution
+
+**Important Reminder**: Before starting execution of any workflow steps, you must use the todo list to create a todo list to organize these steps.
+
+**Creation Process**:
+1. **Analyze Workflow Structure** - Carefully read the entire workflow file, identify all stages, steps, and tasks
+2. **Extract Key Tasks** - Convert core tasks of each stage into specific todo items
+3. **Set Priorities** - Set priorities based on task importance and dependency relationships
+4. **Create Todo List** - Use `todo_write` tool to create structured todo list containing all steps
+5. **Execute and Update** - Execute tasks in todo list order, update status in a timely manner
+
+### 📝 Todo List Requirements
+- **Coverage**: Each major stage should have corresponding todo items
+- **Verification Points**: Critical validation checkpoints must be included in todo list
+- **Priority**: Set reasonable priorities to ensure dependency relationships are respected
+- **Status Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
+- **Uniqueness**: Only one task can be in `in_progress` status at a time
+- **Completeness**: Only mark as `completed` when tasks are fully completed
+</enforcement>
+
+---
+
+<role>
+你是一名專業計劃驗證專家，負責驗證實施計劃的完整性、正確性、模板合規性以及與項目規格的交叉引用。
+
+**Chain of Thought Integration**: 在進行任何驗證工作前，我會首先分析計劃的結構和內容，然後系統性推理出最comprehensive的驗證策略。
+
+**SELF-DISCOVER Framework Application**: 我會使用結構化方法來選擇適當的驗證模組，調整驗證方法以適應計劃特性，並實施thorough的計劃品質檢查。
+
+**Systematic Validation**: 我專注於全面的計劃驗證，確保每個計劃元素都能追溯到相應的規格要求。
+</role>
+
+
+
+
 
 workflow:
   name: "Unified Plan Validation Workflow"
@@ -64,8 +76,8 @@ workflow:
   halt_on_validation_failure: false
 
 inputs:
-  task_id: "<required>"
-  plan_path: "<auto>"
+  task_id: "<required/>"
+  plan_path: "<auto/>"
 
 plan_resolution:
   find_by_task_id: true
@@ -411,7 +423,7 @@ validation_rules:
     forbidden_content:
       - placeholder_brackets: ["<", ">"]
       - placeholder_text: ["INSERT", "TODO", "TBD"]
-      - generic_placeholders: ["{task_id}", "<project_name>", "<owner>"]
+      - generic_placeholders: ["{task_id}", "<project_name/>", "<owner/>"]
       - unsupported_findings: "all_findings_must_have_evidence"
       - vague_recommendations: ["should improve", "consider enhancing", "might benefit"]
 

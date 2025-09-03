@@ -1,3 +1,15 @@
+---
+category: dev
+description: 統一架構系統workflows文檔
+last_updated: '2025-09-03'
+name: refactor-developer-workflow
+prompt_techniques:
+- chain_of_thought
+- self_discover
+- xml_structured
+version: '1.0'
+---
+
 # Refactor Developer Workflow
 
 <enforcement>
@@ -21,9 +33,9 @@
 - **State Management**: Update todo status in a timely manner during execution (pending → in_progress → completed)
 - **Uniqueness**: Only one task can be in `in_progress` state at the same time
 - **Completeness**: Only mark as `completed` when tasks are completely finished
-</enforcement>
+<!-- enforcement>
 
-<workflow type="refactor-developer">
+<workflow type="refactor-developer" -->
 
 ## Mandatory Preconditions Validation
 <mandatory-preconditions>
@@ -37,9 +49,9 @@
   <requirements>
   - Understand all mandatory rules, refactoring standards, and quality gates
   - If unable to load, immediately stop and report error
-  </requirements>
+  <!-- requirements>
 
-</stage>
+
 
 ### 2. Project Context Establishment
 
@@ -88,7 +100,7 @@
      - Regression testing and integration testing standards
      - Performance testing and load testing benchmarks
      - Automated testing and continuous integration requirements
-  </think>
+  <!-- think>
 
   Based on the above thinking analysis, execute the following tasks:
   - Understand project requirements, existing architecture design, and code quality standards
@@ -97,23 +109,23 @@
   - Pay special attention to code architecture improvement opportunities, performance optimization space, and security enhancement needs
   - Confirm refactoring scope boundaries, testing strategies, and backward compatibility requirements
   - Evaluate refactoring complexity and resource requirements, formulate incremental improvement plans
-  </requirements>
+  
 
 **Implementation Plan Verification**
 - **Description**: Confirm `{project_root}/docs/implementation-plan/{task_id}`(such as `1`, `2`, `3`...)-plan.md` exists and is readable
 <critical-checkpoint>
 If implementation plan does not exist, immediately stop and notify user that planning stage needs to be executed first
-</critical-checkpoint>
+<!-- critical-checkpoint>
 
 - **Requirements**:
-  <requirements>
+  <requirements -->
   <think hard>
   - Validate plan completeness, scope definition, and refactoring feasibility
   - Confirm refactoring goals and quality improvement requirements
   <think hard>
-  </requirements>
+  <!-- requirements>
 
-</stage>
+
 
 ### 3. Refactoring Specialization Preparation
 
@@ -129,24 +141,24 @@ Prepare refactoring checklist according to mandatory execution standards:
 - [ ] Establish incremental refactoring and test-driven development (TDD) strategy
 - [ ] Validate backward compatibility and performance impact
 <ultra think>
-</refactor-checklist>
+<!-- refactor-checklist>
 
 **Quality Target Confirmation**
 Confirm and record refactoring quality requirements:
-<quality-targets>
+<quality-targets -->
 <think>
 - Code readability and maintainability improvement targets
 - Performance optimization and resource usage improvements
 - Technical debt reduction and architecture improvement indicators
 <think>
-</quality-targets>
-</stage>
-</mandatory-preconditions>
+<!-- quality-targets>
+
+<!-- mandatory-preconditions>
 
 ---
 
 ## Development Execution Process
-<development-execution>
+<development-execution -->
 
 ### 4. Refactoring Analysis Process
 
@@ -161,19 +173,19 @@ Confirm and record refactoring quality requirements:
   - Assess refactoring risks and impact scope
   - Formulate detailed refactoring step plan
   <Ultra think>
-  </requirements>
+  <!-- requirements>
 
 **Refactoring Strategy Formulation**
 Formulate refactoring strategy based on analysis results:
-<refactor-strategy>
+<refactor-strategy -->
 <ultra think>
 - Determine refactoring priorities and execution sequence
 - Select appropriate refactoring techniques and patterns
 - Establish safety net tests and rollback mechanisms
 - Formulate incremental delivery plan
 <ultra think>
-</refactor-strategy>
-</stage>
+<!-- refactor-strategy>
+
 
 ### 5. TDD Refactoring Process
 
@@ -188,18 +200,17 @@ Formulate refactoring strategy based on analysis results:
   - Continuously validate functional correctness and performance
   - Maintain code quality and design principles
   <Ultra think>
-  </requirements>
+  <!-- requirements>
 
 **Refactoring Execution Checkpoints**
 Continuously validate during refactoring process:
-<refactor-checkpoints>
+<refactor-checkpoints -->
 <think hard>
 - Test pass rate after each refactoring step
 - Code coverage and quality indicator improvements
 - Performance indicators and resource usage changes
 - Architectural consistency and design principle adherence
 <think hard>
-</refactor-checkpoints>
-</stage>
-</development-execution>
-</workflow>
+<!-- refactor-checkpoints>
+
+<!-- development-execution>

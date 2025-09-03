@@ -1,20 +1,111 @@
 ---
-template: architecture-doc
-version: 1
+description: 統一架構系統templates文檔
+last_updated: '2025-09-03'
+name: architecture-doc-tmpl
+template_type: yaml
+version: '1.0'
+---
 
+
+
+---
+template: architecture-doc
+version: 2.0.0
+description: "整合高階提示詞技巧的架構文檔模板"
+prompt_techniques: ["chain_of_thought", "self_discover", "xml_structured"]
+
+# 架構分析的提示詞技巧指導
+prompt_guidance:
+  chain_of_thought:
+    instruction: |
+      在填寫每個架構部分前，請遵循chain_of_thought過程：
+      1. 問題理解：明確該部分需要解決的架構問題
+      2. 分析分解：將複雜的架構概念分解為具體要素
+      3. 逐步推理：基於收集的信息進行邏輯推理
+      4. 結論驗證：確認架構決策的合理性和完整性
+    
+    example: |
+      <analysis>
+      首先理解系統上下文的核心要求：需要清楚定義系統邊界和外部依賴...
+      然後分析系統與外部實體的交互模式...
+      基於業務需求和技術約束，推理出最適合的系統定位...
+      <!-- analysis>
+
+  self_discover_framework:
+    instruction: |
+      在進行架構分析時，應用SELF-DISCOVER框架：
+      SELECT: 選擇適合的架構分析方法和視角
+      ADAPT: 調整分析方法以適應項目特性
+      IMPLEMENT: 制定結構化的分析implement計劃
+      APPLY: implement分析並生成架構文檔
+    
+    stages:
+      select: "根據項目複雜度選擇合適的架構視圖和分析深度"
+      adapt: "根據技術棧和業務特性調整分析重點"
+      implement: "制定詳細的架構分析和文檔生成計劃"
+      apply: "implement分析計劃並生成結構化的架構文檔"
+
+  xml_structured_output:
+    instruction: |
+      使用XML標籤組織複雜的架構分析內容：
+      <analysis -->分析過程<!-- analysis>
+      <findings -->發現和洞察<!-- findings>
+      <decisions -->架構決策<!-- decisions>
+      <rationale -->決策理由<!-- rationale>
+      <implications -->影響和後果<!-- implications>
+    
+    required_sections:
+      - "每個主要架構視圖都應包含分析過程"
+      - "重要的架構決策必須包含決策理由"
+      - "複雜的架構關係需要結構化說明"
+
+# 標準化的元數據格式
 metadata:
   generated_by: "architecture-documenter"
+  generation_method: "unified-architecture-system"
   date: "YYYY-MM-DD"
+  version: "文檔版本號"
+  prompt_techniques_applied: ["chain_of_thought", "self_discover", "xml_structured"]
+  
   sources:
     specs:
-      requirements: "<path>"
+      requirements: "<path -->"
       task: "<path>"
       design: "<path>"
     plans: [] # implementation plans
     code_refs: [] # main interface/model/configuration file paths
+    
+  validation_status:
+    completeness_check: "通過/失敗"
+    consistency_check: "通過/失敗"
+    quality_score: "1-10分"
 
 system_context:
-  description: "<System positioning and main external dependencies>"
+  analysis_guidance: |
+    應用chain_of_thought分析系統上下文：
+    1. 首先理解業務上下文和系統目標
+    2. 然後識別關鍵的外部實體和依賴
+    3. 分析系統邊界和交互模式
+    4. 驗證系統定位的合理性
+  
+  structured_analysis: |
+    <analysis>
+    系統上下文分析：[描述分析過程和方法]
+    <!-- analysis>
+    <findings -->
+    關鍵發現：[列出重要的系統定位和依賴發現]
+    <!-- findings>
+    <decisions -->
+    架構決策：[說明系統邊界和交互設計決策]
+    <!-- decisions>
+  
+  description: "<System positioning and main external dependencies -->"
+  external_entities:
+    - name: "<實體名稱>"
+      type: "<用戶/系統/服務>"
+      interaction: "<交互方式>"
+      criticality: "<高/中/低>"
+  
   diagram: |
     ```mermaid
     graph LR
@@ -25,17 +116,63 @@ system_context:
     ```
 
 container_view:
+  analysis_guidance: |
+    使用SELF-DISCOVER框架分析容器架構：
+    SELECT: 選擇適合的容器分解方法（按功能/按層次/按數據流）
+    ADAPT: 根據技術棧調整容器劃分策略
+    IMPLEMENT: 制定容器設計和交互計劃
+    APPLY: 定義具體的容器和服務
+  
+  structured_analysis: |
+    <analysis>
+    容器架構分析：[說明容器劃分的邏輯和原則]
+    <!-- analysis>
+    <decisions -->
+    容器設計決策：[解釋為什麼選擇這種容器劃分方式]
+    <!-- decisions>
+    <rationale -->
+    決策理由：[基於性能、可維護性、可擴展性等因素的考量]
+    <!-- rationale>
+  
   services:
-    - name: "<Service>"
+    - name: "<Service -->"
+      purpose: "<服務目的和職責>"
       responsibilities: ["<responsibility>"]
       interfaces: ["<API or contract>"]
       data_stores: ["<DB/Cache/Topic>"]
+      technology_stack: "<使用的技術棧>"
+      scaling_strategy: "<擴展策略>"
 
 component_view:
+  analysis_guidance: |
+    應用chain_of_thought分析組件架構：
+    1. 理解組件劃分的目標和原則
+    2. 分析組件之間的依賴關係
+    3. 推理組件交互的最佳模式
+    4. 驗證組件設計的合理性
+  
+  structured_analysis: |
+    <analysis>
+    組件架構分析：[描述組件劃分的邏輯和依賴分析]
+    <!-- analysis>
+    <findings -->
+    關鍵發現：[組件耦合度、內聚性、可測試性等發現]
+    <!-- findings>
+    <decisions -->
+    組件設計決策：[組件邊界、接口設計、依賴管理決策]
+    <!-- decisions>
+  
   modules:
-    - name: "<Module>"
+    - name: "<Module -->"
       purpose: "<function>"
+      responsibilities: ["<具體職責>"]
       dependencies: ["<dependency>"]
+      interfaces:
+        - name: "<接口名稱>"
+          type: "<接口類型>"
+          contract: "<接口契約>"
+      quality_attributes: ["<可維護性/可測試性/性能等>"]
+      
       diagram: |
         ```mermaid
         flowchart LR
@@ -75,6 +212,109 @@ adr_links:
     consequences: "<consequences>"
 
 consistency_checks:
-  plan_alignment: "<plan vs implementation differences>"
+  analysis_guidance: |
+    使用chain_of_thought進行一致性檢查：
+    1. 理解一致性檢查的目標和範圍
+    2. 分析計劃與實現之間的差異
+    3. 推理差異的原因和影響
+    4. 驗證一致性檢查的完整性
+  
+  structured_analysis: |
+    <analysis>
+    一致性分析：[描述檢查方法和發現的差異]
+    <!-- analysis>
+    <findings -->
+    關鍵發現：[重要的不一致問題和潛在風險]
+    <!-- findings>
+    <recommendations -->
+    改進建議：[解決不一致問題的具體建議]
+    <!-- recommendations>
+  
+  plan_alignment: "<plan vs implementation differences -->"
   contract_sync: "<contract synchronization status>"
   known_gaps: []
+  risk_assessment: "<不一致問題的風險評估>"
+  remediation_plan: "<解決不一致問題的計劃>"
+
+# 架構文檔的驗證規則
+validation_rules:
+  completeness_requirements:
+    required_sections:
+      - "system_context"
+      - "container_view"
+      - "component_view"
+      - "data_model"
+      - "api_contracts"
+    
+    content_requirements:
+      - rule: "每個架構視圖都必須包含分析過程"
+        validation: "檢查是否存在<analysis>標籤"
+      - rule: "重要決策必須包含理由說明"
+        validation: "檢查決策是否有對應的<rationale>標籤"
+      - rule: "圖表必須與文字描述一致"
+        validation: "人工檢查圖表與描述的一致性"
+
+  quality_requirements:
+    clarity:
+      - "架構描述清晰易懂"
+      - "技術術語使用準確"
+      - "圖表標註完整"
+    
+    consistency:
+      - "不同視圖之間保持一致"
+      - "術語使用統一"
+      - "命名規範一致"
+    
+    completeness:
+      - "覆蓋所有重要的架構決策"
+      - "包含必要的品質屬性考量"
+      - "提供足夠的implement指導"
+
+  prompt_technique_validation:
+    chain_of_thought_check:
+      - "分析過程邏輯清晰"
+      - "推理步驟完整"
+      - "結論有充分支撐"
+    
+    self_discover_check:
+      - "方法選擇合理"
+      - "適應性調整恰當"
+      - "implement計劃完整"
+    
+    xml_structure_check:
+      - "XML標籤使用正確"
+      - "內容組織結構化"
+      - "標籤語義清晰"
+
+# 使用指南和最佳實踐
+usage_guidelines:
+  filling_instructions:
+    - "在填寫每個部分前，先閱讀對應的analysis_guidance"
+    - "使用structured_analysis模板組織複雜內容"
+    - "確保所有XML標籤都有實質內容"
+    - "在完成後進行validation_rules檢查"
+  
+  best_practices:
+    - "優先使用具體的實例而非抽象描述"
+    - "在架構決策中包含權衡考量"
+    - "提供足夠的上下文信息"
+    - "保持文檔的可維護性"
+  
+  common_mistakes:
+    - "避免空洞的架構描述"
+    - "不要忽略非功能性需求"
+    - "避免過度複雜的圖表"
+    - "不要遺漏重要的依賴關係"
+
+# 品質評估標準
+quality_assessment:
+  scoring_criteria:
+    completeness: "內容完整性 (0-25分)"
+    clarity: "清晰度 (0-25分)"
+    consistency: "一致性 (0-25分)"
+    usefulness: "實用性 (0-25分)"
+  
+  minimum_standards:
+    total_score: "≥70分"
+    individual_criteria: "每項≥15分"
+    critical_sections: "system_context, container_view, component_view必須完整"
