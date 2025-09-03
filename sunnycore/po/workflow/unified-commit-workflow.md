@@ -119,6 +119,7 @@ path_aliases:
   CI_STATUS_FILE_JSON: "{project_root}/docs/ci/ci-cd-status.json"
   COMMIT_MESSAGE_OUTPUT: "{project_root}/docs/commit/last-commit-message.md"
   CI_CD_STATUS_REPORT: "{project_root}/docs/ci/ci-cd-status-report.md"
+  CI_CD_STATUS_WORKFLOW: "{project_root}/sunnycore/po/workflow/unified-ci-cd-status-workflow.md"
 
 guardrails:
   halt_on_preconditions_failure: true
@@ -146,6 +147,7 @@ stages:
       - status_determined: true
     actions:
       - try_read_status_from: ["{CI_STATUS_FILE_JSON}", "{CI_STATUS_FILE_MD}"]
+      - if_missing_then_trigger: "{CI_CD_STATUS_WORKFLOW}"
       - parse_or_mark_unknown
       - write_status_report_from_template: "{CI_CD_REPORT_TEMPLATE}" → "{CI_CD_STATUS_REPORT}"
 

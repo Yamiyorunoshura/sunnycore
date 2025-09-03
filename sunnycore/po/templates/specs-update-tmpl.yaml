@@ -24,13 +24,18 @@ updates:
   requirements:
     target: "{project_root}/docs/specs/requirements.md"
     actions:
+      - type: "ensure_structure"
+        structure_template: "{project_root}/sunnycore/po/templates/specs-structure-requirements-tmpl.yaml"
       - type: "append_section"
         heading: "CI/CD 發現與需求補強"
+        insert_after: "### 需求 6：虛擬環境管理和激活功能"
         bullets:
           - "<明確新增或調整的需求，附測試或驗收依據>"
   design:
     target: "{project_root}/docs/specs/design.md"
     actions:
+      - type: "ensure_structure"
+        structure_template: "{project_root}/sunnycore/po/templates/specs-structure-design-tmpl.yaml"
       - type: "append_section"
         heading: "CI/CD 問題觸發的設計修正"
         bullets:
@@ -38,6 +43,8 @@ updates:
   task:
     target: "{project_root}/docs/specs/task.md"
     actions:
+      - type: "ensure_structure"
+        structure_template: "{project_root}/sunnycore/po/templates/specs-structure-task-tmpl.yaml"
       - type: "append_checklist"
         heading: "CI/CD 修補任務追蹤"
         items:

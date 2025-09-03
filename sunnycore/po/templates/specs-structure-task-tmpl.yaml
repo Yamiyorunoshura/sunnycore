@@ -1,0 +1,24 @@
+---
+description: 規格-任務文件結構模板（依 example/task.md 對齊）
+last_updated: '2025-09-03'
+name: specs-structure-task-tmpl
+template_type: yaml
+version: '1.0'
+---
+
+template: specs-structure-task
+version: 1
+
+sections:
+  - heading: "- [x] 1. "
+  - heading: "- [x] 2. "
+  - heading: "- [x] 3. "
+  - heading: "- [x] 4. "
+  - heading: "- [x] 5. "
+
+validation:
+  - "文件以多個已勾選的任務區塊開頭，每個包含子項"
+  - "清單項需為 Markdown 清單語法，支援縮排"
+  - "不得出現 <placeholder> 或 {} 占位符"
+
+
