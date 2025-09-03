@@ -85,240 +85,7 @@ clean_old_claude_content() {
     fi
 }
 
-# 函數：生成 MCP 工具配置內容
-generate_mcp_config() {
-    local tool_name="$1"
-    local language="$2"
-    
-    case "$tool_name" in
-        "sequential-thinking")
-            case "$language" in
-                "ENG")
-                    cat << 'EOF'
-
-<tool name="Sequential_Thinking">
-### Sequential Thinking Tool
-**Usage**: Before complex tasks, at key decision points, and during task summarization
-
-<commands>
-- `process_thought`: Analyze problem complexity, establish structured thinking framework
-- `generate_summary`: Generate progress summaries at important milestones, maintain context continuity
-- `clear_history`: Clean context when tasks complete or switch, prepare for next cycle
-</commands>
-</tool>
-EOF
-                    ;;
-                *)
-                    cat << 'EOF'
-
-<tool name="Sequential_Thinking">
-### Sequential Thinking 工具
-**使用時機**: 複雜任務開始前、關鍵決策點、任務總結時
-
-<commands>
-- `process_thought`: 分析問題複雜度，建立結構化思維框架
-- `generate_summary`: 在重要里程碑生成進度摘要，維護上下文連續性
-- `clear_history`: 任務完成或切換時清理上下文，準備下一週期
-</commands>
-</tool>
-EOF
-                    ;;
-            esac
-            ;;
-        "context7")
-            case "$language" in
-                "ENG")
-                    cat << 'EOF'
-
-<tool name="Context7">
-### Context7 Tool
-**Usage**: When needing latest library docs, API references, version-specific information
-
-<commands>
-- `resolve-library-id`: Determine correct library identifier, select most relevant match
-- `get-library-docs`: Get topic-specific documentation, set appropriate token limit (recommend 10000)
-</commands>
-
-<strategy>
-**Priority Strategy**: Avoid outdated information, focus on current task-related topics
-</strategy>
-</tool>
-EOF
-                    ;;
-                *)
-                    cat << 'EOF'
-
-<tool name="Context7">
-### Context7 工具
-**使用時機**: 需要最新庫文檔、API參考、版本特定資訊時
-
-<commands>
-- `resolve-library-id`: 確定正確的庫標識符，選擇最相關匹配
-- `get-library-docs`: 獲取特定主題文檔，設置適當token限制（建議10000）
-</commands>
-
-<strategy>
-**優先策略**: 避免使用過時資訊，專注當前任務相關主題
-</strategy>
-</tool>
-EOF
-                    ;;
-            esac
-            ;;
-        "playwright")
-            case "$language" in
-                "ENG")
-                    cat << 'EOF'
-
-<tool name="Playwright">
-### Playwright Tool
-**Usage**: Web automation testing, structured web interaction, dynamic content acquisition
-
-<features>
-- Use structured accessibility snapshots, avoid dependency on visual models
-- Ensure operation reproducibility and stability
-- Suitable for frontend functionality verification and end-to-end testing
-</features>
-</tool>
-EOF
-                    ;;
-                *)
-                    cat << 'EOF'
-
-<tool name="Playwright">
-### Playwright 工具
-**使用時機**: 網頁自動化測試、結構化網頁交互、動態內容獲取時
-
-<features>
-- 使用結構化可訪問性快照，避免依賴視覺模型
-- 確保操作可重現性和穩定性
-- 適用於前端功能驗證和端到端測試
-</features>
-</tool>
-EOF
-                    ;;
-            esac
-            ;;
-        "claude-context")
-            case "$language" in
-                "ENG")
-                    cat << 'EOF'
-
-<tool name="Claude_Context">
-### Claude Context Tool
-**Usage**: All project context establishment tasks
-
-<capabilities>
-- Perform semantic search to locate relevant code, establish codebase context understanding
-- Identify key modules and dependencies, optimize token usage to reduce costs
-- Continuously assist development process, maintain precise context relevance
-</capabilities>
-</tool>
-EOF
-                    ;;
-                *)
-                    cat << 'EOF'
-
-<tool name="Claude_Context">
-### Claude Context 工具
-**使用時機**: 所有專案上下文建立任務
-
-<capabilities>
-- 進行語義搜索定位相關代碼，建立代碼庫上下文理解
-- 識別關鍵模塊和依賴關係，優化token使用降低成本
-- 持續輔助開發過程，維護精確的上下文相關性
-</capabilities>
-</tool>
-EOF
-                    ;;
-            esac
-            ;;
-    esac
-}
-
-# 函數：生成工作流程配置
-generate_workflow_config() {
-    local language="$1"
-    
-    case "$language" in
-        "ENG")
-            cat << 'EOF'
-
-<workflow>
-## Tool Collaboration Workflow
-
-<phase name="task_initiation">
-### Task Initiation Phase
-1. **Sequential Thinking** → Analyze task complexity
-2. **Claude Context** → Semantic search for related code
-3. **Context7** → Get latest technical documentation
-</phase>
-
-<phase name="development">
-### Development Implementation Phase
-1. **Continuous use of Claude Context** → Code understanding and search
-2. **Regular use of Sequential Thinking** → Generate progress summaries
-3. **Use Playwright as needed** → Web interaction and testing
-</phase>
-
-<phase name="completion">
-### Task Completion Phase
-1. **Sequential Thinking** → Generate final summary
-2. **Playwright** → Execute final test verification (if web interaction required)
-3. **Sequential Thinking** → Clean context for next task
-</phase>
-</workflow>
-
-<optimization_principles>
-## ⚡ Efficiency Optimization Principles
-- **Token Optimization**: Prioritize Claude Context for code search, Context7 for precise documentation snippets
-- **Execution Efficiency**: Arrange tool usage order reasonably, avoid duplicate retrieval
-- **Error Handling**: Prepare backup plans for each tool, establish graceful degradation strategy
-- **Context Maintenance**: Use Sequential Thinking's summary function to establish checkpoint mechanism
-</optimization_principles>
-</agent_config>
-EOF
-            ;;
-        *)
-            cat << 'EOF'
-
-<workflow>
-## 工具協同使用流程
-
-<phase name="task_initiation">
-### 任務開始階段
-1. **Sequential Thinking** → 分析任務複雜度
-2. **Claude Context** → 語義搜索相關代碼
-3. **Context7** → 獲取最新技術文檔
-</phase>
-
-<phase name="development">
-### 開發實施階段
-1. **持續使用 Claude Context** → 代碼理解與搜索
-2. **定期使用 Sequential Thinking** → 生成進度摘要
-3. **按需使用 Playwright** → 網頁交互與測試
-</phase>
-
-<phase name="completion">
-### 任務完成階段
-1. **Sequential Thinking** → 生成最終總結
-2. **Playwright** → 執行最終測試驗證（如有網頁交互需求）
-3. **Sequential Thinking** → 清理上下文準備下一任務
-</phase>
-</workflow>
-
-<optimization_principles>
-## ⚡ 效率優化原則
-- **Token優化**: 優先使用Claude Context進行代碼搜索，Context7獲取精確文檔片段
-- **執行效率**: 合理安排工具使用順序，避免重複檢索
-- **錯誤處理**: 為每個工具準備備用方案，建立優雅降級策略
-- **上下文維護**: 使用Sequential Thinking的摘要功能建立檢查點機制
-</optimization_principles>
-</agent_config>
-EOF
-            ;;
-    esac
-}
+# （已移除）生成 MCP 工具配置與工作流程的內嵌模板，改為統一從 GitHub 取得 CLAUDE.md
 
 # 函數：更新 CLAUDE.md 文件中的語言配置
 update_claude_language_config() {
@@ -376,28 +143,69 @@ update_claude_language_config() {
 # 函數：從GitHub獲取CLAUDE.md內容
 fetch_claude_md_from_github() {
     local branch="$1"
-    local temp_file=$(mktemp)
+    local temp_file
     local repo_url="https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore"
-    local file_url="$repo_url/$branch/claude.md"
+    local file_url="$repo_url/$branch/CLAUDE.md"
+    local curl_exit_code
+    local file_size
+    
+    # 創建臨時文件
+    temp_file=$(mktemp) || {
+        echo "✗ 無法創建臨時文件"
+        return 1
+    }
     
     echo "正在從GitHub獲取CLAUDE.md內容..."
+    echo "分支: $branch"
     echo "URL: $file_url"
+    echo "臨時文件: $temp_file"
     
-    # 使用curl獲取文件內容
-    if curl -s -f "$file_url" -o "$temp_file"; then
-        echo "✓ 成功從GitHub獲取CLAUDE.md內容"
-        echo "$temp_file"
-        return 0
+    # 使用curl獲取文件內容，添加更詳細的錯誤處理
+    curl -s -f -L --connect-timeout 30 --max-time 60 "$file_url" -o "$temp_file" 2>/dev/null
+    curl_exit_code=$?
+    
+    if [ $curl_exit_code -eq 0 ] && [ -f "$temp_file" ]; then
+        file_size=$(wc -l < "$temp_file" 2>/dev/null || echo "0")
+        
+        # 驗證文件內容是否有效（至少包含一些預期內容）
+        if [ "$file_size" -gt 10 ] && grep -q "primary_language\|MCP\|Claude" "$temp_file" 2>/dev/null; then
+            echo "✓ 成功從GitHub獲取CLAUDE.md內容 ($file_size 行)"
+            echo "✓ 文件內容驗證通過"
+            echo "$temp_file"
+            return 0
+        else
+            echo "✗ 獲取的文件內容無效或為空 ($file_size 行)"
+            [ "$file_size" -gt 0 ] && echo "文件前幾行:" && head -3 "$temp_file" 2>/dev/null
+            rm -f "$temp_file"
+            return 1
+        fi
     else
-        echo "✗ 無法從GitHub獲取CLAUDE.md內容，將使用預設模板"
+        echo "✗ 無法從GitHub獲取CLAUDE.md內容"
+        case $curl_exit_code in
+            6) echo "  - 無法解析主機名" ;;
+            7) echo "  - 無法連接到服務器" ;;
+            22) echo "  - HTTP錯誤（可能是404或403）" ;;
+            28) echo "  - 操作超時" ;;
+            *) echo "  - curl錯誤代碼: $curl_exit_code" ;;
+        esac
+        echo "  - 檢查網路連接"
+        echo "  - 檢查分支是否存在: $branch"
         rm -f "$temp_file"
         return 1
     fi
 }
 
+
+
 # 函數：創建或更新 CLAUDE.md 文件
 create_or_update_claude_md() {
     local claude_md_path="$1"
+    local branch_name="${2:-$BRANCH}"  # 接受分支參數，如果沒有則使用全局變數
+    
+    echo "調試信息："
+    echo "  - CLAUDE.md路徑: $claude_md_path"
+    echo "  - 使用分支: $branch_name"
+    echo "  - 全局BRANCH變數: $BRANCH"
     
     # 確保目錄存在
     local claude_md_dir=$(dirname "$claude_md_path")
@@ -405,8 +213,15 @@ create_or_update_claude_md() {
         mkdir -p "$claude_md_dir"
     fi
     
+    # 驗證分支變數是否可用
+    if [ -z "$branch_name" ]; then
+        echo "警告: 分支變數為空，使用master作為預設值"
+        branch_name="master"
+    fi
+    
     # 嘗試從GitHub獲取最新的CLAUDE.md內容
-    local github_claude_md=$(fetch_claude_md_from_github "$BRANCH")
+    echo "嘗試從GitHub獲取CLAUDE.md內容，分支: $branch_name"
+    local github_claude_md=$(fetch_claude_md_from_github "$branch_name")
     
     if [ $? -eq 0 ] && [ -n "$github_claude_md" ] && [ -f "$github_claude_md" ]; then
         echo "使用GitHub上的CLAUDE.md內容作為基礎"
@@ -418,88 +233,20 @@ create_or_update_claude_md() {
         rm -f "$github_claude_md"
         
         # 更新語言配置
-        update_claude_language_config "$claude_md_path" "$SELECTED_LANGUAGE"
+        if update_claude_language_config "$claude_md_path" "$SELECTED_LANGUAGE"; then
+            echo "✓ 語言配置更新成功"
+        else
+            echo "⚠ 語言配置更新失敗，但文件內容已獲取"
+        fi
         
         echo "✓ 已使用GitHub最新內容創建CLAUDE.md並更新語言配置"
     else
-        echo "使用預設模板創建CLAUDE.md"
-        
-        # 檢查是否為現有文件且需要更新語言配置
-        if [ -f "$claude_md_path" ]; then
-            echo "發現現有的 CLAUDE.md 文件，正在更新語言配置..."
-            update_claude_language_config "$claude_md_path" "$SELECTED_LANGUAGE"
-        fi
-        
-        # 清理舊版本內容
-        clean_old_claude_content "$claude_md_path"
-        
-        # 如果文件不存在，創建基礎結構
-        if [ ! -f "$claude_md_path" ]; then
-            case "$SELECTED_LANGUAGE" in
-                "ENG")
-                    cat > "$claude_md_path" << EOF
-<agent_config>
-# MCP Smart Agent Configuration Guide
-
-## Basic Settings
-<language_preference>
-${LANGUAGE_PROMPTS[$SELECTED_LANGUAGE]}
-</language_preference>
-
-## Tool Combination
-EOF
-                    ;;
-                *)
-                    cat > "$claude_md_path" << EOF
-<agent_config>
-# MCP 智能代理配置指南
-
-## 基礎設定
-<language_preference>
-${LANGUAGE_PROMPTS[$SELECTED_LANGUAGE]}
-</language_preference>
-
-## 工具組合
-EOF
-                    ;;
-            esac
-        fi
-        
-        # 添加分割線開始標記和 SunnyCore 內容
-        echo "正在配置 CLAUDE.md 文件: $claude_md_path"
-        echo ""
-        echo "$SUNNYCORE_START_MARKER" >> "$claude_md_path"
-        
-        # 添加選定的工具配置
-        if [ "$MCP_CLAUDE_CONTEXT" = true ]; then
-            echo "添加 claude-context 配置..."
-            generate_mcp_config "claude-context" "$SELECTED_LANGUAGE" >> "$claude_md_path"
-            echo "✓ 已添加 claude-context 配置"
-        fi
-        if [ "$MCP_SEQUENTIAL_THINKING" = true ]; then
-            echo "添加 sequential-thinking 配置..."
-            generate_mcp_config "sequential-thinking" "$SELECTED_LANGUAGE" >> "$claude_md_path"
-            echo "✓ 已添加 sequential-thinking 配置"
-        fi
-        if [ "$MCP_CONTEXT7" = true ]; then
-            echo "添加 context7 配置..."
-            generate_mcp_config "context7" "$SELECTED_LANGUAGE" >> "$claude_md_path"
-            echo "✓ 已添加 context7 配置"
-        fi
-        if [ "$MCP_PLAYWRIGHT" = true ]; then
-            echo "添加 playwright 配置..."
-            generate_mcp_config "playwright" "$SELECTED_LANGUAGE" >> "$claude_md_path"
-            echo "✓ 已添加 playwright 配置"
-        fi
-        
-        # 添加工作流程配置
-        generate_workflow_config "$SELECTED_LANGUAGE" >> "$claude_md_path"
-        echo "✓ 已添加工作流程配置"
-        
-        # 添加分割線結束標記
-        echo "$SUNNYCORE_END_MARKER" >> "$claude_md_path"
+        echo "✗ 無法從GitHub獲取 CLAUDE.md，已跳過生成。"
+        echo "  - 請檢查網路連線或分支是否存在: $branch_name"
+        return 1
     fi
     
+    echo ""
     echo "CLAUDE.md 配置完成: $claude_md_path"
 }
 
@@ -715,84 +462,28 @@ echo "========================================"
 echo ""
 select_language
 
-# MCP 工具選擇
 echo ""
 echo "========================================"
 echo "        MCP 工具配置"
 echo "========================================"
 echo ""
-echo "請選擇您想要使用的 MCP 工具 (可多選，用空格分隔):"
-echo "1) claude-context (代碼庫語義搜索)"
-echo "2) sequential-thinking (結構化思維)"
-echo "3) context7 (最新庫文檔)"
-echo "4) playwright (網頁自動化)"
-echo "5) 全部選擇"
-echo "6) 跳過 MCP 工具配置"
-echo ""
-
-# 使用更兼容的方式處理MCP工具選擇
-MCP_CLAUDE_CONTEXT=false
-MCP_SEQUENTIAL_THINKING=false
-MCP_CONTEXT7=false
-MCP_PLAYWRIGHT=false
-
 while true; do
-    read -p "請輸入選擇 (1-6, 可用空格分隔多個選項): " MCP_CHOICES
-    
-    if [[ "$MCP_CHOICES" == "6" ]]; then
-        echo "跳過 MCP 工具配置"
-        SKIP_MCP=true
-        break
-    elif [[ "$MCP_CHOICES" == "5" ]]; then
-        echo "選擇全部 MCP 工具"
-        MCP_CLAUDE_CONTEXT=true
-        MCP_SEQUENTIAL_THINKING=true
-        MCP_CONTEXT7=true
-        MCP_PLAYWRIGHT=true
-        SKIP_MCP=false
-        break
-    else
-        # 重置選擇
-        MCP_CLAUDE_CONTEXT=false
-        MCP_SEQUENTIAL_THINKING=false
-        MCP_CONTEXT7=false
-        MCP_PLAYWRIGHT=false
-        
-        valid_choice=true
-        for choice in $MCP_CHOICES; do
-            case $choice in
-                1)
-                    MCP_CLAUDE_CONTEXT=true
-                    ;;
-                2)
-                    MCP_SEQUENTIAL_THINKING=true
-                    ;;
-                3)
-                    MCP_CONTEXT7=true
-                    ;;
-                4)
-                    MCP_PLAYWRIGHT=true
-                    ;;
-                *)
-                    echo "無效選擇: $choice"
-                    valid_choice=false
-                    break
-                    ;;
-            esac
-        done
-        
-        if [ "$valid_choice" = true ]; then
-            echo "已選擇的 MCP 工具:"
-            [ "$MCP_CLAUDE_CONTEXT" = true ] && echo "✓ claude-context"
-            [ "$MCP_SEQUENTIAL_THINKING" = true ] && echo "✓ sequential-thinking"
-            [ "$MCP_CONTEXT7" = true ] && echo "✓ context7"
-            [ "$MCP_PLAYWRIGHT" = true ] && echo "✓ playwright"
+    read -p "是否啟用 MCP 工具配置? (y/N): " USE_MCP_INPUT
+    case $USE_MCP_INPUT in
+        [Yy]|[Yy][Ee][Ss])
             SKIP_MCP=false
+            echo "將啟用 MCP 工具配置"
             break
-        else
-            echo "請重新選擇"
-        fi
-    fi
+            ;;
+        [Nn]|[Nn][Oo]|"")
+            SKIP_MCP=true
+            echo "已跳過 MCP 工具配置"
+            break
+            ;;
+        *)
+            echo "無效選擇，請輸入 y 或 n。"
+            ;;
+    esac
 done
 
 echo ""
@@ -918,18 +609,23 @@ if [ "$SKIP_MCP" != true ]; then
     fi
     
     # 創建或更新 CLAUDE.md 文件
-    create_or_update_claude_md "$CLAUDE_MD_PATH"
+    echo "調試：MCP配置階段的變數狀態"
+    echo "  - BRANCH: $BRANCH"
+    echo "  - VERSION_TYPE: $VERSION_TYPE"
+    echo "  - CLAUDE_MD_PATH: $CLAUDE_MD_PATH"
+    echo ""
     
-    echo ""
-    echo "✓ MCP 工具配置完成！"
-    echo "配置文件位置: $CLAUDE_MD_PATH"
-    echo ""
-    echo "已配置的 MCP 工具:"
-    [ "$MCP_CLAUDE_CONTEXT" = true ] && echo "  - claude-context"
-    [ "$MCP_SEQUENTIAL_THINKING" = true ] && echo "  - sequential-thinking"
-    [ "$MCP_CONTEXT7" = true ] && echo "  - context7"
-    [ "$MCP_PLAYWRIGHT" = true ] && echo "  - playwright"
-    echo ""
+    if create_or_update_claude_md "$CLAUDE_MD_PATH" "$BRANCH"; then
+        echo ""
+        echo "✓ MCP 工具配置完成！"
+        echo "配置文件位置: $CLAUDE_MD_PATH"
+        echo ""
+    else
+        echo ""
+        echo "✗ MCP 工具配置失敗（未生成 CLAUDE.md）。"
+        echo "  - 您可以稍後重試或選擇跳過 MCP 工具配置。"
+        echo ""
+    fi
 else
     echo "已跳過 MCP 工具配置"
     echo ""
@@ -947,7 +643,11 @@ echo "安裝位置:"
 echo "  - agents 和 commands: $INSTALL_DIR"
 echo "  - sunnycore: $SUNNYCORE_DIR/sunnycore"
 if [ "$SKIP_MCP" != true ]; then
-    echo "  - CLAUDE.md 配置: $CLAUDE_MD_PATH"
+    if [ -f "$CLAUDE_MD_PATH" ]; then
+        echo "  - CLAUDE.md 配置: $CLAUDE_MD_PATH"
+    else
+        echo "  - CLAUDE.md 配置: (未生成)"
+    fi
 fi
 echo ""
 echo "感謝使用 SunnyCore！"
