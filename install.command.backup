@@ -373,28 +373,6 @@ update_claude_language_config() {
     fi
 }
 
-# 函數：從GitHub獲取CLAUDE.md內容
-fetch_claude_md_from_github() {
-    local branch="$1"
-    local temp_file=$(mktemp)
-    local repo_url="https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore"
-    local file_url="$repo_url/$branch/claude.md"
-    
-    echo "正在從GitHub獲取CLAUDE.md內容..."
-    echo "URL: $file_url"
-    
-    # 使用curl獲取文件內容
-    if curl -s -f "$file_url" -o "$temp_file"; then
-        echo "✓ 成功從GitHub獲取CLAUDE.md內容"
-        echo "$temp_file"
-        return 0
-    else
-        echo "✗ 無法從GitHub獲取CLAUDE.md內容，將使用預設模板"
-        rm -f "$temp_file"
-        return 1
-    fi
-}
-
 # 函數：創建或更新 CLAUDE.md 文件
 create_or_update_claude_md() {
     local claude_md_path="$1"
@@ -405,39 +383,20 @@ create_or_update_claude_md() {
         mkdir -p "$claude_md_dir"
     fi
     
-    # 嘗試從GitHub獲取最新的CLAUDE.md內容
-    local github_claude_md=$(fetch_claude_md_from_github "$BRANCH")
-    
-    if [ $? -eq 0 ] && [ -n "$github_claude_md" ] && [ -f "$github_claude_md" ]; then
-        echo "使用GitHub上的CLAUDE.md內容作為基礎"
-        
-        # 複製GitHub的CLAUDE.md內容到目標位置
-        cp "$github_claude_md" "$claude_md_path"
-        
-        # 清理臨時文件
-        rm -f "$github_claude_md"
-        
-        # 更新語言配置
+    # 檢查是否為現有文件且需要更新語言配置
+    if [ -f "$claude_md_path" ]; then
+        echo "發現現有的 CLAUDE.md 文件，正在更新語言配置..."
         update_claude_language_config "$claude_md_path" "$SELECTED_LANGUAGE"
-        
-        echo "✓ 已使用GitHub最新內容創建CLAUDE.md並更新語言配置"
-    else
-        echo "使用預設模板創建CLAUDE.md"
-        
-        # 檢查是否為現有文件且需要更新語言配置
-        if [ -f "$claude_md_path" ]; then
-            echo "發現現有的 CLAUDE.md 文件，正在更新語言配置..."
-            update_claude_language_config "$claude_md_path" "$SELECTED_LANGUAGE"
-        fi
-        
-        # 清理舊版本內容
-        clean_old_claude_content "$claude_md_path"
-        
-        # 如果文件不存在，創建基礎結構
-        if [ ! -f "$claude_md_path" ]; then
-            case "$SELECTED_LANGUAGE" in
-                "ENG")
-                    cat > "$claude_md_path" << EOF
+    fi
+    
+    # 清理舊版本內容
+    clean_old_claude_content "$claude_md_path"
+    
+    # 如果文件不存在，創建基礎結構
+    if [ ! -f "$claude_md_path" ]; then
+        case "$SELECTED_LANGUAGE" in
+            "ENG")
+                cat > "$claude_md_path" << EOF
 <agent_config>
 # MCP Smart Agent Configuration Guide
 
@@ -448,9 +407,9 @@ ${LANGUAGE_PROMPTS[$SELECTED_LANGUAGE]}
 
 ## Tool Combination
 EOF
-                    ;;
-                *)
-                    cat > "$claude_md_path" << EOF
+                ;;
+            *)
+                cat > "$claude_md_path" << EOF
 <agent_config>
 # MCP 智能代理配置指南
 
@@ -461,44 +420,30 @@ ${LANGUAGE_PROMPTS[$SELECTED_LANGUAGE]}
 
 ## 工具組合
 EOF
-                    ;;
-            esac
-        fi
-        
-        # 添加分割線開始標記和 SunnyCore 內容
-        echo "正在配置 CLAUDE.md 文件: $claude_md_path"
-        echo ""
-        echo "$SUNNYCORE_START_MARKER" >> "$claude_md_path"
-        
-        # 添加選定的工具配置
-        if [ "$MCP_CLAUDE_CONTEXT" = true ]; then
-            echo "添加 claude-context 配置..."
-            generate_mcp_config "claude-context" "$SELECTED_LANGUAGE" >> "$claude_md_path"
-            echo "✓ 已添加 claude-context 配置"
-        fi
-        if [ "$MCP_SEQUENTIAL_THINKING" = true ]; then
-            echo "添加 sequential-thinking 配置..."
-            generate_mcp_config "sequential-thinking" "$SELECTED_LANGUAGE" >> "$claude_md_path"
-            echo "✓ 已添加 sequential-thinking 配置"
-        fi
-        if [ "$MCP_CONTEXT7" = true ]; then
-            echo "添加 context7 配置..."
-            generate_mcp_config "context7" "$SELECTED_LANGUAGE" >> "$claude_md_path"
-            echo "✓ 已添加 context7 配置"
-        fi
-        if [ "$MCP_PLAYWRIGHT" = true ]; then
-            echo "添加 playwright 配置..."
-            generate_mcp_config "playwright" "$SELECTED_LANGUAGE" >> "$claude_md_path"
-            echo "✓ 已添加 playwright 配置"
-        fi
-        
-        # 添加工作流程配置
-        generate_workflow_config "$SELECTED_LANGUAGE" >> "$claude_md_path"
-        echo "✓ 已添加工作流程配置"
-        
-        # 添加分割線結束標記
-        echo "$SUNNYCORE_END_MARKER" >> "$claude_md_path"
+                ;;
+        esac
     fi
+    
+    # 添加分割線開始標記和 SunnyCore 內容
+    echo "正在配置 CLAUDE.md 文件: $claude_md_path"
+    echo ""
+    echo "$SUNNYCORE_START_MARKER" >> "$claude_md_path"
+    
+    # 添加選定的工具配置
+    for tool in "${!MCP_TOOLS[@]}"; do
+        if [ "${MCP_TOOLS[$tool]}" = true ]; then
+            echo "添加 $tool 配置..."
+            generate_mcp_config "$tool" "$SELECTED_LANGUAGE" >> "$claude_md_path"
+            echo "✓ 已添加 $tool 配置"
+        fi
+    done
+    
+    # 添加工作流程配置
+    generate_workflow_config "$SELECTED_LANGUAGE" >> "$claude_md_path"
+    echo "✓ 已添加工作流程配置"
+    
+    # 添加分割線結束標記
+    echo "$SUNNYCORE_END_MARKER" >> "$claude_md_path"
     
     echo "CLAUDE.md 配置完成: $claude_md_path"
 }
@@ -730,11 +675,11 @@ echo "5) 全部選擇"
 echo "6) 跳過 MCP 工具配置"
 echo ""
 
-# 使用更兼容的方式處理MCP工具選擇
-MCP_CLAUDE_CONTEXT=false
-MCP_SEQUENTIAL_THINKING=false
-MCP_CONTEXT7=false
-MCP_PLAYWRIGHT=false
+declare -A MCP_TOOLS
+MCP_TOOLS["claude-context"]=false
+MCP_TOOLS["sequential-thinking"]=false
+MCP_TOOLS["context7"]=false
+MCP_TOOLS["playwright"]=false
 
 while true; do
     read -p "請輸入選擇 (1-6, 可用空格分隔多個選項): " MCP_CHOICES
@@ -745,33 +690,33 @@ while true; do
         break
     elif [[ "$MCP_CHOICES" == "5" ]]; then
         echo "選擇全部 MCP 工具"
-        MCP_CLAUDE_CONTEXT=true
-        MCP_SEQUENTIAL_THINKING=true
-        MCP_CONTEXT7=true
-        MCP_PLAYWRIGHT=true
+        MCP_TOOLS["claude-context"]=true
+        MCP_TOOLS["sequential-thinking"]=true
+        MCP_TOOLS["context7"]=true
+        MCP_TOOLS["playwright"]=true
         SKIP_MCP=false
         break
     else
         # 重置選擇
-        MCP_CLAUDE_CONTEXT=false
-        MCP_SEQUENTIAL_THINKING=false
-        MCP_CONTEXT7=false
-        MCP_PLAYWRIGHT=false
+        MCP_TOOLS["claude-context"]=false
+        MCP_TOOLS["sequential-thinking"]=false
+        MCP_TOOLS["context7"]=false
+        MCP_TOOLS["playwright"]=false
         
         valid_choice=true
         for choice in $MCP_CHOICES; do
             case $choice in
                 1)
-                    MCP_CLAUDE_CONTEXT=true
+                    MCP_TOOLS["claude-context"]=true
                     ;;
                 2)
-                    MCP_SEQUENTIAL_THINKING=true
+                    MCP_TOOLS["sequential-thinking"]=true
                     ;;
                 3)
-                    MCP_CONTEXT7=true
+                    MCP_TOOLS["context7"]=true
                     ;;
                 4)
-                    MCP_PLAYWRIGHT=true
+                    MCP_TOOLS["playwright"]=true
                     ;;
                 *)
                     echo "無效選擇: $choice"
@@ -783,10 +728,11 @@ while true; do
         
         if [ "$valid_choice" = true ]; then
             echo "已選擇的 MCP 工具:"
-            [ "$MCP_CLAUDE_CONTEXT" = true ] && echo "✓ claude-context"
-            [ "$MCP_SEQUENTIAL_THINKING" = true ] && echo "✓ sequential-thinking"
-            [ "$MCP_CONTEXT7" = true ] && echo "✓ context7"
-            [ "$MCP_PLAYWRIGHT" = true ] && echo "✓ playwright"
+            for tool in "${!MCP_TOOLS[@]}"; do
+                if [ "${MCP_TOOLS[$tool]}" = true ]; then
+                    echo "✓ $tool"
+                fi
+            done
             SKIP_MCP=false
             break
         else
@@ -925,10 +871,11 @@ if [ "$SKIP_MCP" != true ]; then
     echo "配置文件位置: $CLAUDE_MD_PATH"
     echo ""
     echo "已配置的 MCP 工具:"
-    [ "$MCP_CLAUDE_CONTEXT" = true ] && echo "  - claude-context"
-    [ "$MCP_SEQUENTIAL_THINKING" = true ] && echo "  - sequential-thinking"
-    [ "$MCP_CONTEXT7" = true ] && echo "  - context7"
-    [ "$MCP_PLAYWRIGHT" = true ] && echo "  - playwright"
+    for tool in "${!MCP_TOOLS[@]}"; do
+        if [ "${MCP_TOOLS[$tool]}" = true ]; then
+            echo "  - $tool"
+        fi
+    done
     echo ""
 else
     echo "已跳過 MCP 工具配置"
