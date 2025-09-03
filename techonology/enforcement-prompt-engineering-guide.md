@@ -223,7 +223,21 @@ presence_penalty: 0
   </deterministic_efficiency>
   
   <mandatory_principles>
-    <safety_first>Never modify any files in docs/specs/ directory</safety_first>
+    <safety_first>
+      Default: Never modify any files in docs/specs/** or docs/ci/**
+      Controlled Exceptions:
+      - When executing `sunnycore/po/workflow/unified-commit-workflow.md` FAIL branch,
+        updates to `docs/specs/{requirements,design,task}.md` are permitted strictly via
+        `{project_root}/sunnycore/po/templates/specs-update-tmpl.yaml` with `ensure_structure` and
+        insertion points enforced.
+      - When executing `sunnycore/po/workflow/unified-ci-cd-status-workflow.md`, creation/update of
+        `docs/ci/ci-cd-status.(json|md)` and `docs/ci/ci-cd-status-report.md` is permitted via
+        `{project_root}/sunnycore/po/templates/ci-cd-status-report-tmpl.yaml`.
+      Validation:
+      - Markdown-only deliverables; no XML in outputs
+      - No placeholders remain; template compliance required
+      - Paths restricted to the exact files listed above
+    </safety_first>
     <rcsd_compliance>Must define functional and non-functional requirements</rcsd_compliance>
     <modular_design>Must decompose work into small, reusable modules</modular_design>
     <kiss_principle>Must prefer simplest viable approach</kiss_principle>

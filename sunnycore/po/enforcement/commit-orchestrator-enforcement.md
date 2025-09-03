@@ -18,6 +18,20 @@
 - Fail-fast: If any mandatory file cannot be loaded, stop and report immediately
 - Non-destructive: Do not execute `git commit` automatically; propose the command for approval first
 
+### Path Protection with Controlled Exceptions (Strict)
+- Default Read-Only: `docs/specs/**`, `docs/ci/**`
+- Controlled Exceptions:
+  - FAIL branch of unified-commit-workflow may update ONLY:
+    - `docs/specs/requirements.md`
+    - `docs/specs/design.md`
+    - `docs/specs/task.md`
+    Using `{project_root}/sunnycore/po/templates/specs-update-tmpl.yaml` with `ensure_structure` and defined insertion points.
+  - CI/CD status normalization may create/update ONLY:
+    - `docs/ci/ci-cd-status.(json|md)`
+    - `docs/ci/ci-cd-status-report.md`
+    Using `{project_root}/sunnycore/po/templates/ci-cd-status-report-tmpl.yaml`.
+  - Markdown-only outputs; no placeholders; strict template compliance.
+
 ### CI/CD Status Decision (Mandatory)
 - CI/CD status MUST be determined prior to any commit action
 - Primary source: `{project_root}/docs/ci/ci-cd-status.md` or `{project_root}/docs/ci/ci-cd-status.json`
@@ -69,6 +83,17 @@
 - Gate 3: If passed → Commit message fully conforms to template and is evidence-traceable
 - Gate 4: If failed → Specs updates fully conform to templates; no placeholders remain
 - Gate 5: All outputs validated for Markdown format; no XML tags in deliverables
+
+### Allowed Actions (Aligned with Workflow)
+- Status detection: `try_read_status_from`, `if_missing_then_trigger`
+- Reporting: `write_status_report_from_template`
+- Commit generation: `extract_from_conclusion_report`, `populate_commit_message_fields`, `convert_to_plain_text`, `write_to`, `propose_git_commands`
+- Specs update (fail): `load_specs_update_template`, `update_files`, `validate_against_cursor_prompt_specs`
+
+### Disallowed Actions
+- Writing to any paths outside the controlled exceptions listed above
+- Executing `git commit` automatically
+- Writing non-Markdown deliverables under `docs/**`
 
 ### Failure Handling (Recorded and Actionable)
 - Missing conclusion report → Trigger conclusion workflow; retry commit message generation

@@ -16,6 +16,7 @@ When the user calls the `*commit` command, read this task file and execute the u
 
 Follow the workflow: `{project_root}/sunnycore/po/workflow/unified-commit-workflow.md`.
 Enforce: `{project_root}/sunnycore/po/enforcement/commit-orchestrator-enforcement.md`.
+CI/CD Status Orchestrator Enforce: `{project_root}/sunnycore/po/enforcement/ci-cd-status-orchestrator-enforcement.md`.
 
 ## Execution Steps (SELF-DISCOVER Framework)
 
