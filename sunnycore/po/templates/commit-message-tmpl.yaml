@@ -1,0 +1,64 @@
+---
+description: 標準化 Commit Message 模板
+last_updated: '2025-09-03'
+name: commit-message-tmpl
+template_type: yaml
+version: '1.0'
+---
+
+
+
+---
+template: commit-message
+version: 1
+
+# Usage:
+# - Populate from completion report and CI/CD status
+# - Convert to plain text for git commit -F
+
+header:
+  type: "feat|fix|chore|refactor|docs|perf|test|build|ci|revert|style"
+  scope: "<module or area>"
+  summary: "<short summary in imperative mood>"
+
+body:
+  change_summary:
+    - "<what changed, why>"
+  evidence:
+    prs:
+      - "<link or id>"
+    commits:
+      - "<hash>"
+    tests:
+      - name: "<suite or case>"
+        status: "<passed|failed>"
+        reference: "<path or link>"
+    measurements:
+      - metric: "<metric name>"
+        value: "<value>"
+        baseline: "<baseline>"
+        delta: "<+/- value>"
+  acceptance_and_checks:
+    acceptance_criteria:
+      status: "<passed|partial|failed>"
+      references:
+        - "<test or PR>"
+    ci_cd:
+      status: "<passed|failed|unknown>"
+      report: "{project_root}/docs/ci/ci-cd-status-report.md"
+  impact_and_risks:
+    - "<impact or risk>"
+  breaking_changes:
+    present: "<yes|no>"
+    details: "<description if yes>"
+
+footer:
+  issues:
+    - "Closes #<id>"
+  co_authored_by:
+    - "Name <email>"
+
+output:
+  plain_text_file: "{project_root}/docs/commit/last-commit-message.md"
+
+

@@ -1,0 +1,59 @@
+---
+description: CI/CD 狀態彙總報告模板
+last_updated: '2025-09-03'
+name: ci-cd-status-report-tmpl
+template_type: yaml
+version: '1.0'
+---
+
+
+
+---
+template: ci-cd-status-report
+version: 1
+
+metadata:
+  generated_at: "<YYYY-MM-DD HH:mm:ss>"
+  source:
+    - "{project_root}/docs/ci/ci-cd-status.(json|md)"
+    - "README.md badges"
+    - ".github/ or .gitlab/ pipeline artifacts"
+
+summary:
+  status: "<passed|failed|unknown>"
+  pipeline_id: "<id if any>"
+  commit: "<hash>"
+  branch: "<branch>"
+  duration: "<seconds or human-readable>"
+
+jobs:
+  - name: "<job name>"
+    status: "<passed|failed|skipped>"
+    duration: "<seconds>"
+    url: "<link>"
+
+artifacts:
+  tests:
+    passed: "<count>"
+    failed: "<count>"
+    skipped: "<count>"
+    coverage: "<line %, branch %>"
+  performance:
+    metrics:
+      - metric: "<metric>"
+        value: "<value>"
+        baseline: "<baseline>"
+        delta: "<+/- value>"
+  security:
+    scans:
+      - tool: "<name>"
+        result: "<passed|problems>"
+        notes: "<summary>"
+
+notes:
+  - "<important observations>"
+
+output:
+  markdown_file: "{project_root}/docs/ci/ci-cd-status-report.md"
+
+
