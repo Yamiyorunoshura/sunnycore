@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# SunnyCore 安裝腳本
+# SunnyCore 安裝腳本 v2.0
+# 支援選擇性MCP工具安裝和用戶資料保護
 
 # 語言設定
 declare -A LANGUAGES=(
@@ -13,6 +14,26 @@ declare -A LANGUAGES=(
 # 分割線標記
 SUNNYCORE_START_MARKER="<!-- === SUNNYCORE AUTO-GENERATED CONTENT START === -->"
 SUNNYCORE_END_MARKER="<!-- === SUNNYCORE AUTO-GENERATED CONTENT END === -->"
+
+# MCP工具配置
+declare -A MCP_TOOLS=(
+    ["sequential_thinking"]="🧠 Sequential Thinking System"
+    ["context7"]="📚 Context7 System"
+    ["playwright"]="🌐 Playwright System"
+    ["claude_context"]="🔍 Claude Context System"
+)
+
+# 工具章節邊界標記（用於識別各工具內容範圍）
+declare -A TOOL_SECTION_START=(
+    ["sequential_thinking"]="### 🧠 Sequential Thinking System"
+    ["context7"]="### 📚 Context7 System"
+    ["playwright"]="### 🌐 Playwright System"
+    ["claude_context"]="### 🔍 Claude Context System"
+)
+
+# 選擇的工具列表
+SELECTED_TOOLS=()
+SKIP_MCP_SELECTION=false
 
 # 語言回應提示模板
 declare -A LANGUAGE_PROMPTS=(
@@ -83,6 +104,227 @@ clean_old_claude_content() {
         mv "$temp_file" "$file_path"
         echo "✓ 已清理舊版本配置"
     fi
+}
+
+# 函數：MCP工具選擇界面
+select_mcp_tools() {
+    echo "========================================"
+    echo "        MCP 工具選擇"
+    echo "========================================"
+    echo ""
+    echo "請選擇要安裝的 MCP 工具 (可多選):"
+    echo "1) 🧠 Sequential Thinking System - 認知架構協調專家"
+    echo "2) 📚 Context7 System - 知識資源管理專家"
+    echo "3) 🌐 Playwright System - 網頁自動化測試專家"
+    echo "4) 🔍 Claude Context System - 代碼庫理解和搜索專家"
+    echo "5) 全部安裝"
+    echo "6) 跳過 MCP 工具配置"
+    echo ""
+    
+    while true; do
+        read -p "請輸入選擇 (用逗號分隔多個選項，如 1,2,3): " tool_choices
+        
+        # 處理跳過選項
+        if [[ "$tool_choices" == "6" ]]; then
+            SKIP_MCP_SELECTION=true
+            echo "已跳過 MCP 工具配置"
+            return 0
+        fi
+        
+        # 處理全部安裝
+        if [[ "$tool_choices" == "5" ]]; then
+            SELECTED_TOOLS=("sequential_thinking" "context7" "playwright" "claude_context")
+            echo "已選擇安裝所有 MCP 工具"
+            return 0
+        fi
+        
+        # 解析選擇
+        SELECTED_TOOLS=()
+        IFS=',' read -ra CHOICES <<< "$tool_choices"
+        local valid_choice=true
+        
+        for choice in "${CHOICES[@]}"; do
+            # 移除空格
+            choice=$(echo "$choice" | tr -d ' ')
+            case $choice in
+                1) SELECTED_TOOLS+=("sequential_thinking") ;;
+                2) SELECTED_TOOLS+=("context7") ;;
+                3) SELECTED_TOOLS+=("playwright") ;;
+                4) SELECTED_TOOLS+=("claude_context") ;;
+                *) 
+                    echo "無效選擇: $choice"
+                    valid_choice=false
+                    break
+                    ;;
+            esac
+        done
+        
+        if [ "$valid_choice" = true ] && [ ${#SELECTED_TOOLS[@]} -gt 0 ]; then
+            echo "已選擇安裝以下工具:"
+            for tool in "${SELECTED_TOOLS[@]}"; do
+                echo "  - ${MCP_TOOLS[$tool]}"
+            done
+            return 0
+        else
+            echo "請輸入有效的選擇 (1-6)"
+        fi
+    done
+}
+
+# 函數：從CLAUDE.md提取指定工具的章節內容
+extract_tool_section() {
+    local source_file="$1"
+    local tool_name="$2"
+    local output_file="$3"
+    
+    if [ ! -f "$source_file" ]; then
+        echo "錯誤: 找不到源文件 $source_file"
+        return 1
+    fi
+    
+    local start_pattern="${TOOL_SECTION_START[$tool_name]}"
+    if [ -z "$start_pattern" ]; then
+        echo "錯誤: 未知的工具名稱 $tool_name"
+        return 1
+    fi
+    
+    # 找到所有工具章節的行號
+    local tool_sections=()
+    for tool in "${!TOOL_SECTION_START[@]}"; do
+        local line_num=$(grep -n "^${TOOL_SECTION_START[$tool]}" "$source_file" | cut -d: -f1)
+        if [ -n "$line_num" ]; then
+            tool_sections+=("$line_num:$tool")
+        fi
+    done
+    
+    # 排序章節按行號
+    IFS=$'\n' tool_sections=($(sort -n <<< "${tool_sections[*]}"))
+    
+    # 找到目標工具的開始行號和結束行號
+    local start_line=""
+    local end_line=""
+    
+    for i in "${!tool_sections[@]}"; do
+        local section="${tool_sections[i]}"
+        local line_num="${section%%:*}"
+        local section_tool="${section##*:}"
+        
+        if [ "$section_tool" = "$tool_name" ]; then
+            start_line="$line_num"
+            # 找下一個章節作為結束點
+            if [ $((i + 1)) -lt ${#tool_sections[@]} ]; then
+                local next_section="${tool_sections[$((i + 1))]}"
+                end_line="${next_section%%:*}"
+                end_line=$((end_line - 1))
+            else
+                # 如果是最後一個工具，找到</technical_expertise>標籤
+                end_line=$(grep -n "</technical_expertise>" "$source_file" | cut -d: -f1)
+                if [ -n "$end_line" ]; then
+                    end_line=$((end_line - 1))
+                fi
+            fi
+            break
+        fi
+    done
+    
+    if [ -z "$start_line" ]; then
+        echo "錯誤: 在 $source_file 中找不到工具 $tool_name 的章節"
+        return 1
+    fi
+    
+    # 提取指定範圍的內容
+    if [ -n "$end_line" ]; then
+        sed -n "${start_line},${end_line}p" "$source_file" > "$output_file"
+    else
+        # 如果沒有找到結束行，提取到文件末尾
+        sed -n "${start_line},\$p" "$source_file" > "$output_file"
+    fi
+    
+    echo "✓ 已提取 ${MCP_TOOLS[$tool_name]} 內容 (行 $start_line-${end_line:-EOF})"
+    return 0
+}
+
+# 函數：安全插入MCP工具配置到CLAUDE.md
+safe_insert_mcp_tools() {
+    local claude_md_path="$1"
+    
+    if [ "$SKIP_MCP_SELECTION" = true ]; then
+        echo "跳過 MCP 工具配置"
+        return 0
+    fi
+    
+    if [ ${#SELECTED_TOOLS[@]} -eq 0 ]; then
+        echo "未選擇任何 MCP 工具"
+        return 0
+    fi
+    
+    # 確保目標文件存在
+    if [ ! -f "$claude_md_path" ]; then
+        touch "$claude_md_path"
+        echo "已創建新的 CLAUDE.md 文件"
+    fi
+    
+    # 清理舊的 SunnyCore 內容
+    clean_old_claude_content "$claude_md_path"
+    
+    # 準備要插入的內容
+    local temp_content=$(mktemp)
+    local source_claude_md=""
+    
+    # 優先使用本地克隆的 CLAUDE.md
+    local local_repo_path="$TEMP_DIR/sunnycore"
+    local local_claude_md="$local_repo_path/CLAUDE.md"
+    if [ -f "$local_claude_md" ]; then
+        source_claude_md="$local_claude_md"
+        echo "使用本地 CLAUDE.md: $source_claude_md"
+    else
+        # 回退到 GitHub 下載
+        source_claude_md=$(fetch_claude_md_from_github "$BRANCH")
+        if [ $? -ne 0 ] || [ ! -f "$source_claude_md" ]; then
+            echo "✗ 無法獲取 CLAUDE.md 源文件"
+            return 1
+        fi
+        echo "使用下載的 CLAUDE.md: $source_claude_md"
+    fi
+    
+    # 生成插入內容
+    echo "" > "$temp_content"
+    echo "$SUNNYCORE_START_MARKER" >> "$temp_content"
+    echo "" >> "$temp_content"
+    echo "# SunnyCore MCP Tools Configuration" >> "$temp_content"
+    echo "## Auto-generated content - Do not edit manually" >> "$temp_content"
+    echo "" >> "$temp_content"
+    
+    # 提取並插入選定的工具章節
+    for tool in "${SELECTED_TOOLS[@]}"; do
+        echo "正在提取 ${MCP_TOOLS[$tool]} 配置..."
+        local tool_temp=$(mktemp)
+        
+        if extract_tool_section "$source_claude_md" "$tool" "$tool_temp"; then
+            echo "" >> "$temp_content"
+            cat "$tool_temp" >> "$temp_content"
+            echo "" >> "$temp_content"
+        else
+            echo "⚠ 提取 ${MCP_TOOLS[$tool]} 失敗，跳過"
+        fi
+        
+        rm -f "$tool_temp"
+    done
+    
+    echo "" >> "$temp_content"
+    echo "$SUNNYCORE_END_MARKER" >> "$temp_content"
+    
+    # 插入內容到目標文件末尾
+    cat "$temp_content" >> "$claude_md_path"
+    
+    # 清理臨時文件
+    rm -f "$temp_content"
+    [ -n "$source_claude_md" ] && [ "$source_claude_md" != "$local_claude_md" ] && rm -f "$source_claude_md"
+    
+    echo "✓ 已成功插入選定的 MCP 工具配置到 $claude_md_path"
+    echo "✓ 用戶原有內容已保留，新配置添加在文件末尾"
+    
+    return 0
 }
 
 # （已移除）生成 MCP 工具配置與工作流程的內嵌模板，改為統一從 GitHub 取得 CLAUDE.md
@@ -481,28 +723,8 @@ echo ""
 select_language
 
 echo ""
-echo "========================================"
-echo "        MCP 工具配置"
-echo "========================================"
-echo ""
-while true; do
-    read -p "是否啟用 MCP 工具配置? (y/N): " USE_MCP_INPUT
-    case $USE_MCP_INPUT in
-        [Yy]|[Yy][Ee][Ss])
-            SKIP_MCP=false
-            echo "將啟用 MCP 工具配置"
-            break
-            ;;
-        [Nn]|[Nn][Oo]|"")
-            SKIP_MCP=true
-            echo "已跳過 MCP 工具配置"
-            break
-            ;;
-        *)
-            echo "無效選擇，請輸入 y 或 n。"
-            ;;
-    esac
-done
+# 呼叫MCP工具選擇函數
+select_mcp_tools
 
 echo ""
 echo "開始安裝..."
@@ -608,41 +830,43 @@ fi
 echo ""
 
 # 配置 MCP 工具
-if [ "$SKIP_MCP" != true ]; then
-    echo "========================================"
-    echo "        配置 MCP 工具"
-    echo "========================================"
-    echo ""
-    
-    # 決定 CLAUDE.md 文件位置
-    if [ "$INSTALL_TYPE" = "global" ]; then
-        CLAUDE_MD_PATH="$INSTALL_DIR/CLAUDE.md"
-        echo "全局安裝模式：CLAUDE.md 將創建於 $CLAUDE_MD_PATH"
-    else
-        CLAUDE_MD_PATH="$PROJECT_ROOT/CLAUDE.md"
-        echo "專案安裝模式：CLAUDE.md 將創建於 $CLAUDE_MD_PATH"
-    fi
-    
-    # 創建或更新 CLAUDE.md 文件
-    echo "調試：MCP配置階段的變數狀態"
-    echo "  - BRANCH: $BRANCH"
-    echo "  - VERSION_TYPE: $VERSION_TYPE"
-    echo "  - CLAUDE_MD_PATH: $CLAUDE_MD_PATH"
-    echo ""
-    
-    if create_or_update_claude_md "$CLAUDE_MD_PATH" "$BRANCH"; then
-        echo ""
-        echo "✓ MCP 工具配置完成！"
-        echo "配置文件位置: $CLAUDE_MD_PATH"
-        echo ""
-    else
-        echo ""
-        echo "✗ MCP 工具配置失敗（未生成 CLAUDE.md）。"
-        echo "  - 您可以稍後重試或選擇跳過 MCP 工具配置。"
-        echo ""
-    fi
+echo "========================================"
+echo "        配置 MCP 工具"
+echo "========================================"
+echo ""
+
+# 決定 CLAUDE.md 文件位置
+if [ "$INSTALL_TYPE" = "global" ]; then
+    CLAUDE_MD_PATH="$INSTALL_DIR/CLAUDE.md"
+    echo "全局安裝模式：CLAUDE.md 位於 $CLAUDE_MD_PATH"
 else
-    echo "已跳過 MCP 工具配置"
+    CLAUDE_MD_PATH="$PROJECT_ROOT/CLAUDE.md"
+    echo "專案安裝模式：CLAUDE.md 位於 $CLAUDE_MD_PATH"
+fi
+
+echo "調試：MCP配置階段的變數狀態"
+echo "  - BRANCH: $BRANCH"
+echo "  - VERSION_TYPE: $VERSION_TYPE"
+echo "  - CLAUDE_MD_PATH: $CLAUDE_MD_PATH"
+echo "  - 選擇的工具數量: ${#SELECTED_TOOLS[@]}"
+echo ""
+
+# 使用新的安全插入邏輯
+if safe_insert_mcp_tools "$CLAUDE_MD_PATH"; then
+    echo ""
+    echo "✓ MCP 工具配置完成！"
+    echo "配置文件位置: $CLAUDE_MD_PATH"
+    if [ ${#SELECTED_TOOLS[@]} -gt 0 ]; then
+        echo "已安裝的工具:"
+        for tool in "${SELECTED_TOOLS[@]}"; do
+            echo "  - ${MCP_TOOLS[$tool]}"
+        done
+    fi
+    echo ""
+else
+    echo ""
+    echo "✗ MCP 工具配置失敗。"
+    echo "  - 您可以稍後重試或手動配置。"
     echo ""
 fi
 
@@ -657,12 +881,20 @@ echo ""
 echo "安裝位置:"
 echo "  - agents 和 commands: $INSTALL_DIR"
 echo "  - sunnycore: $SUNNYCORE_DIR/sunnycore"
-if [ "$SKIP_MCP" != true ]; then
+if [ "$SKIP_MCP_SELECTION" != true ]; then
     if [ -f "$CLAUDE_MD_PATH" ]; then
         echo "  - CLAUDE.md 配置: $CLAUDE_MD_PATH"
+        if [ ${#SELECTED_TOOLS[@]} -gt 0 ]; then
+            echo "  - 已安裝的 MCP 工具:"
+            for tool in "${SELECTED_TOOLS[@]}"; do
+                echo "    • ${MCP_TOOLS[$tool]}"
+            done
+        fi
     else
         echo "  - CLAUDE.md 配置: (未生成)"
     fi
+else
+    echo "  - MCP 工具配置: (已跳過)"
 fi
 echo ""
 echo "感謝使用 SunnyCore！"

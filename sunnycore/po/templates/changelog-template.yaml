@@ -1,0 +1,298 @@
+# CHANGELOG Template
+
+## Template Metadata
+template_type: changelog_update
+version: 1.0
+last_updated: 2025-01-15
+format_standard: keep_a_changelog
+versioning_standard: semantic_versioning
+enforcement_compliance: commit-orchestrator-enforcement.md
+
+## CHANGELOG Structure Template
+
+### Header Section
+```yaml
+changelog_header:
+  title: "# Changelog"
+  description: |
+    All notable changes to this project will be documented in this file.
+    
+    The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+    and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+  
+  metadata:
+    project_name: "[PROJECT_NAME]"
+    repository_url: "[REPOSITORY_URL]"
+    documentation_url: "[DOCUMENTATION_URL or N/A]"
+```
+
+### Version Entry Template
+```yaml
+version_entry:
+  version_header: "## [[VERSION]] - [YYYY-MM-DD]"
+  version_format: "MAJOR.MINOR.PATCH (e.g., 1.2.3)"
+  date_format: "ISO 8601 (YYYY-MM-DD)"
+  
+  categories:
+    added:
+      title: "### Added"
+      description: "New features and functionality"
+      entries:
+        - "[NEW_FEATURE_DESCRIPTION] ([#ISSUE_NUMBER])"
+        - "[ANOTHER_NEW_FEATURE] ([COMMIT_HASH])"
+    
+    changed:
+      title: "### Changed"
+      description: "Changes in existing functionality"
+      entries:
+        - "[CHANGE_DESCRIPTION] ([#ISSUE_NUMBER])"
+        - "[ANOTHER_CHANGE] ([COMMIT_HASH])"
+    
+    deprecated:
+      title: "### Deprecated"
+      description: "Soon-to-be removed features"
+      entries:
+        - "[DEPRECATED_FEATURE] - Will be removed in version [FUTURE_VERSION]"
+    
+    removed:
+      title: "### Removed"
+      description: "Removed features"
+      entries:
+        - "[REMOVED_FEATURE] ([#ISSUE_NUMBER])"
+    
+    fixed:
+      title: "### Fixed"
+      description: "Bug fixes"
+      entries:
+        - "[BUG_FIX_DESCRIPTION] ([#ISSUE_NUMBER])"
+        - "[ANOTHER_BUG_FIX] ([COMMIT_HASH])"
+    
+    security:
+      title: "### Security"
+      description: "Security vulnerability fixes"
+      entries:
+        - "[SECURITY_FIX_DESCRIPTION] ([#ISSUE_NUMBER])"
+```
+
+### Breaking Changes Section Template
+```yaml
+breaking_changes:
+  indicator: "⚠️ BREAKING CHANGES"
+  format: |
+    **⚠️ BREAKING CHANGES:**
+    - [BREAKING_CHANGE_DESCRIPTION]
+    - [MIGRATION_INSTRUCTIONS]
+    - [COMPATIBILITY_NOTES]
+  
+  migration_guide:
+    title: "#### Migration Guide"
+    steps:
+      - step: "[MIGRATION_STEP_1]"
+        example: |
+          ```[LANGUAGE]
+          [MIGRATION_CODE_EXAMPLE]
+          ```
+      - step: "[MIGRATION_STEP_2]"
+        example: "[MIGRATION_EXAMPLE_2 or N/A]"
+```
+
+### Entry Requirements Template
+```yaml
+entry_requirements:
+  commit_reference:
+    format: "([COMMIT_HASH] or [#ISSUE_NUMBER] or [#PR_NUMBER])"
+    examples:
+      - "([a1b2c3d])"
+      - "([#123])"
+      - "([#PR-456])"
+  
+  impact_assessment:
+    user_facing: "[USER_FACING_IMPACT_DESCRIPTION]"
+    developer_facing: "[DEVELOPER_FACING_IMPACT_DESCRIPTION or N/A]"
+    performance_impact: "[PERFORMANCE_IMPACT_DESCRIPTION or N/A]"
+    api_changes: "[API_CHANGES_DESCRIPTION or N/A]"
+  
+  migration_notes:
+    required: "[true/false]"
+    complexity: "[SIMPLE/MODERATE/COMPLEX]"
+    instructions: "[MIGRATION_INSTRUCTIONS or N/A]"
+    timeline: "[MIGRATION_TIMELINE or N/A]"
+```
+
+### Version Categorization Guidelines
+```yaml
+version_categorization:
+  major_version_changes:
+    triggers:
+      - "Breaking API changes"
+      - "Architectural changes requiring migration"
+      - "Removal of deprecated features"
+      - "Major functionality overhauls"
+    format: "X.0.0"
+  
+  minor_version_changes:
+    triggers:
+      - "New features (backward compatible)"
+      - "New API endpoints"
+      - "Performance improvements"
+      - "Deprecation announcements"
+    format: "X.Y.0"
+  
+  patch_version_changes:
+    triggers:
+      - "Bug fixes"
+      - "Security patches"
+      - "Documentation updates"
+      - "Internal refactoring"
+    format: "X.Y.Z"
+```
+
+### Unreleased Section Template
+```yaml
+unreleased_section:
+  header: "## [Unreleased]"
+  description: "Changes that have been made but not yet released"
+  
+  structure:
+    added: "[NEW_FEATURES_IN_DEVELOPMENT]"
+    changed: "[CHANGES_IN_DEVELOPMENT]"
+    deprecated: "[FEATURES_MARKED_FOR_DEPRECATION]"
+    removed: "[FEATURES_REMOVED_BUT_NOT_RELEASED]"
+    fixed: "[BUGS_FIXED_BUT_NOT_RELEASED]"
+    security: "[SECURITY_FIXES_IN_DEVELOPMENT]"
+  
+  notes: |
+    - This section is automatically updated with each commit
+    - Content is moved to versioned section upon release
+    - Used for tracking development progress
+```
+
+### Historical Version Example Template
+```yaml
+historical_version_example:
+  version_1_0_0:
+    header: "## [1.0.0] - 2024-12-01"
+    content: |
+      ### Added
+      - Initial release of the project
+      - Core functionality implementation
+      - Basic API endpoints
+      - User authentication system
+      - Documentation and examples
+      
+      ### Security
+      - Implemented secure authentication
+      - Added input validation
+      - Set up HTTPS enforcement
+  
+  version_0_9_0:
+    header: "## [0.9.0] - 2024-11-15"
+    content: |
+      ### Added
+      - Beta version release
+      - Core features implementation
+      - Initial testing framework
+      
+      ### Fixed
+      - Performance optimizations
+      - Bug fixes from alpha testing
+```
+
+### Footer Section Template
+```yaml
+changelog_footer:
+  version_links:
+    unreleased: "[unreleased]: [REPOSITORY_URL]/compare/v[LATEST_VERSION]...HEAD"
+    version_links:
+      - "[1.0.0]: [REPOSITORY_URL]/compare/v0.9.0...v1.0.0"
+      - "[0.9.0]: [REPOSITORY_URL]/releases/tag/v0.9.0"
+  
+  metadata:
+    maintained_by: "[MAINTAINER_NAME or TEAM_NAME]"
+    automation_note: "This changelog is automatically updated by the commit workflow system"
+    last_updated: "[YYYY-MM-DD]"
+```
+
+## Template Usage Instructions
+
+### Entry Creation Rules
+1. **Chronological Order**: Newest versions at the top
+2. **Category Order**: Added, Changed, Deprecated, Removed, Fixed, Security
+3. **Entry Format**: Description + Reference ([#123] or [commit_hash])
+4. **Impact Documentation**: Include user-facing impact description
+5. **Migration Notes**: Provide migration guidance for breaking changes
+
+### Quality Standards
+1. **Completeness**: All changes must be documented
+2. **Clarity**: Entries must be clear and user-focused
+3. **Consistency**: Format must be consistent throughout
+4. **Traceability**: All entries must reference commits or issues
+5. **Accuracy**: Technical information must be accurate
+
+### Semantic Versioning Compliance
+```yaml
+semver_compliance:
+  major_version:
+    increment_when: "Breaking changes introduced"
+    reset_minor_patch: "Minor and patch reset to 0"
+    example: "1.0.0 → 2.0.0"
+  
+  minor_version:
+    increment_when: "New backward-compatible features added"
+    reset_patch: "Patch resets to 0"
+    example: "1.0.0 → 1.1.0"
+  
+  patch_version:
+    increment_when: "Backward-compatible bug fixes"
+    no_reset: "No other version numbers change"
+    example: "1.0.0 → 1.0.1"
+```
+
+### Markdown Conversion Guidelines
+When converting this YAML template to Markdown:
+1. **Version Headers**: Use ## for version headers
+2. **Category Headers**: Use ### for category headers (Added, Changed, etc.)
+3. **Entry Lists**: Use - for all changelog entries
+4. **Code Examples**: Use ```language format for code blocks
+5. **Links**: Use [text](url) format for all links
+6. **Emphasis**: Use **bold** for breaking changes, *italic* for emphasis
+
+### Validation Checklist
+- [ ] All version numbers follow semantic versioning
+- [ ] All dates in ISO 8601 format (YYYY-MM-DD)
+- [ ] All entries have commit/issue references
+- [ ] Breaking changes clearly marked and documented
+- [ ] Migration instructions provided for breaking changes
+- [ ] User-facing impact documented for all changes
+- [ ] Categories used appropriately
+- [ ] Format consistent with Keep a Changelog standard
+
+### Automation Integration
+```yaml
+automation_integration:
+  commit_message_parsing:
+    feat: "Added category"
+    fix: "Fixed category"
+    perf: "Changed category (performance)"
+    refactor: "Changed category (internal)"
+    docs: "Added category (documentation)"
+    style: "Changed category (formatting)"
+    test: "Added category (testing)"
+    build: "Changed category (build system)"
+    ci: "Changed category (CI/CD)"
+    chore: "Changed category (maintenance)"
+  
+  version_determination:
+    breaking_change_indicator: "BREAKING CHANGE:"
+    major_keywords: ["BREAKING", "!:"]
+    minor_keywords: ["feat:", "feature:"]
+    patch_keywords: ["fix:", "bug:", "patch:"]
+```
+
+---
+
+**Template Version**: 1.0  
+**Format Standard**: Keep a Changelog  
+**Versioning Standard**: Semantic Versioning  
+**Maintenance**: Document Updater Agent  
+**Compliance**: commit-orchestrator-enforcement.md

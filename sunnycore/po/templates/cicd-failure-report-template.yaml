@@ -1,0 +1,438 @@
+# CI/CD Failure Report Template
+
+## Template Metadata
+template_type: cicd_failure_report
+version: 1.0
+last_updated: 2025-01-15
+enforcement_compliance: commit-orchestrator-enforcement.md
+report_format: markdown
+
+## CI/CD Failure Report Structure Template
+
+### Report Header
+```yaml
+report_header:
+  title: "# CI/CD Pipeline Failure Report"
+  metadata:
+    report_id: "[REPORT_ID - YYYY-MM-DD-HHMMSS]"
+    generated_by: "CI/CD Monitor Agent"
+    generation_time: "[YYYY-MM-DD HH:MM:SS UTC]"
+    commit_hash: "[COMMIT_HASH]"
+    branch: "[BRANCH_NAME]"
+    pipeline_id: "[PIPELINE_ID]"
+    failure_time: "[YYYY-MM-DD HH:MM:SS UTC]"
+```
+
+### Executive Summary
+```yaml
+executive_summary:
+  title: "## Executive Summary"
+  content:
+    failure_category: "[BUILD/TEST/SECURITY/DEPLOYMENT/VALIDATION]"
+    severity_level: "[CRITICAL/HIGH/MEDIUM/LOW]"
+    impact_assessment: "[USER_IMPACT_DESCRIPTION]"
+    estimated_resolution_time: "[TIME_ESTIMATE]"
+    immediate_actions_required: "[IMMEDIATE_ACTION_SUMMARY]"
+    
+  summary_statement: |
+    The CI/CD pipeline failed during the [STAGE_NAME] stage due to [ROOT_CAUSE_SUMMARY]. 
+    This failure [IMPACT_DESCRIPTION] and requires [ACTION_REQUIRED] to resolve.
+```
+
+### Pipeline Overview
+```yaml
+pipeline_overview:
+  title: "## Pipeline Overview"
+  
+  pipeline_configuration:
+    pipeline_name: "[PIPELINE_NAME]"
+    trigger_event: "[COMMIT/PR/SCHEDULE/MANUAL]"
+    environment: "[PRODUCTION/STAGING/DEVELOPMENT]"
+    total_duration: "[HH:MM:SS before failure]"
+    total_stages: "[NUMBER_OF_STAGES]"
+    failed_stage: "[FAILED_STAGE_NAME]"
+    
+  stage_breakdown:
+    - stage_name: "[STAGE_1_NAME]"
+      status: "[SUCCESS/FAILURE/SKIPPED]"
+      duration: "[HH:MM:SS]"
+      exit_code: "[EXIT_CODE or N/A]"
+    
+    - stage_name: "[STAGE_2_NAME]"
+      status: "[SUCCESS/FAILURE/SKIPPED]"
+      duration: "[HH:MM:SS]"
+      exit_code: "[EXIT_CODE or N/A]"
+      failure_details: "[FAILURE_DESCRIPTION if failed]"
+```
+
+### Detailed Failure Analysis
+```yaml
+failure_analysis:
+  title: "## Detailed Failure Analysis"
+  
+  root_cause_analysis:
+    primary_cause: "[PRIMARY_FAILURE_CAUSE]"
+    contributing_factors:
+      - "[CONTRIBUTING_FACTOR_1]"
+      - "[CONTRIBUTING_FACTOR_2]"
+      - "[CONTRIBUTING_FACTOR_3]"
+    
+    failure_sequence:
+      - step: "[FAILURE_STEP_1]"
+        timestamp: "[YYYY-MM-DD HH:MM:SS]"
+        details: "[STEP_DETAILS]"
+      - step: "[FAILURE_STEP_2]"
+        timestamp: "[YYYY-MM-DD HH:MM:SS]"
+        details: "[STEP_DETAILS]"
+  
+  error_analysis:
+    error_category: "[BUILD_ERROR/TEST_FAILURE/DEPLOYMENT_ERROR/CONFIGURATION_ERROR]"
+    error_code: "[ERROR_CODE or N/A]"
+    error_message: |
+      ```
+      [FULL_ERROR_MESSAGE]
+      ```
+    
+    stack_trace: |
+      ```
+      [STACK_TRACE or N/A]
+      ```
+    
+    related_logs:
+      - log_file: "[LOG_FILE_NAME]"
+        relevant_lines: "[LINE_NUMBERS]"
+        content: |
+          ```
+          [LOG_CONTENT]
+          ```
+```
+
+### Stage-Specific Failure Details
+```yaml
+stage_failure_details:
+  build_stage_failures:
+    title: "### Build Stage Analysis"
+    compilation_errors:
+      - file: "[FILE_PATH]"
+        line: "[LINE_NUMBER]"
+        error: "[COMPILATION_ERROR]"
+    
+    dependency_issues:
+      - dependency: "[DEPENDENCY_NAME]"
+        version_conflict: "[VERSION_CONFLICT_DESCRIPTION]"
+        resolution: "[RESOLUTION_SUGGESTION]"
+    
+    configuration_problems:
+      - config_file: "[CONFIG_FILE_PATH]"
+        issue: "[CONFIGURATION_ISSUE]"
+        fix: "[CONFIGURATION_FIX]"
+  
+  test_stage_failures:
+    title: "### Test Stage Analysis"
+    failed_tests:
+      - test_name: "[TEST_NAME]"
+        test_file: "[TEST_FILE_PATH]"
+        failure_reason: "[FAILURE_REASON]"
+        expected: "[EXPECTED_RESULT]"
+        actual: "[ACTUAL_RESULT]"
+    
+    coverage_issues:
+      current_coverage: "[COVERAGE_PERCENTAGE]%"
+      required_coverage: "[REQUIRED_PERCENTAGE]%"
+      missing_coverage: "[MISSING_COVERAGE_AREAS]"
+    
+    performance_regressions:
+      - metric: "[PERFORMANCE_METRIC]"
+        baseline: "[BASELINE_VALUE]"
+        current: "[CURRENT_VALUE]"
+        regression: "[REGRESSION_PERCENTAGE]%"
+  
+  security_stage_failures:
+    title: "### Security Stage Analysis"
+    vulnerability_detections:
+      - vulnerability_id: "[CVE_ID or INTERNAL_ID]"
+        severity: "[CRITICAL/HIGH/MEDIUM/LOW]"
+        component: "[AFFECTED_COMPONENT]"
+        description: "[VULNERABILITY_DESCRIPTION]"
+        remediation: "[REMEDIATION_STEPS]"
+    
+    dependency_alerts:
+      - package: "[PACKAGE_NAME]"
+        version: "[PACKAGE_VERSION]"
+        advisory: "[SECURITY_ADVISORY]"
+        upgrade_path: "[UPGRADE_INSTRUCTIONS]"
+    
+    compliance_violations:
+      - policy: "[POLICY_NAME]"
+        violation: "[VIOLATION_DESCRIPTION]"
+        correction: "[CORRECTION_REQUIRED]"
+  
+  deployment_stage_failures:
+    title: "### Deployment Stage Analysis"
+    infrastructure_issues:
+      - resource: "[RESOURCE_TYPE]"
+        availability: "[AVAILABILITY_STATUS]"
+        issue: "[INFRASTRUCTURE_ISSUE]"
+        resolution: "[RESOLUTION_STEPS]"
+    
+    configuration_problems:
+      - environment: "[ENVIRONMENT_NAME]"
+        configuration: "[CONFIG_ISSUE]"
+        impact: "[IMPACT_DESCRIPTION]"
+        fix: "[FIX_INSTRUCTIONS]"
+    
+    resource_constraints:
+      - resource_type: "[CPU/MEMORY/DISK/NETWORK]"
+        current_usage: "[CURRENT_USAGE]"
+        available: "[AVAILABLE_RESOURCES]"
+        required: "[REQUIRED_RESOURCES]"
+  
+  validation_stage_failures:
+    title: "### Validation Stage Analysis"
+    health_check_failures:
+      - endpoint: "[ENDPOINT_URL]"
+        expected_status: "[EXPECTED_STATUS]"
+        actual_status: "[ACTUAL_STATUS]"
+        response_time: "[RESPONSE_TIME]"
+        error_details: "[ERROR_DETAILS]"
+    
+    functionality_test_failures:
+      - test_scenario: "[TEST_SCENARIO]"
+        expected_outcome: "[EXPECTED_OUTCOME]"
+        actual_outcome: "[ACTUAL_OUTCOME]"
+        failure_point: "[FAILURE_POINT]"
+    
+    performance_validation_failures:
+      - metric: "[PERFORMANCE_METRIC]"
+        threshold: "[THRESHOLD_VALUE]"
+        measured_value: "[MEASURED_VALUE]"
+        deviation: "[DEVIATION_PERCENTAGE]%"
+```
+
+### Impact Assessment
+```yaml
+impact_assessment:
+  title: "## Impact Assessment"
+  
+  user_impact:
+    affected_users: "[NUMBER_OF_AFFECTED_USERS or PERCENTAGE]"
+    service_availability: "[AVAILABILITY_STATUS]"
+    functionality_impact: "[FUNCTIONALITY_IMPACT_DESCRIPTION]"
+    performance_impact: "[PERFORMANCE_IMPACT_DESCRIPTION]"
+    data_integrity: "[DATA_INTEGRITY_STATUS]"
+  
+  business_impact:
+    revenue_impact: "[REVENUE_IMPACT_ESTIMATE or N/A]"
+    reputation_impact: "[REPUTATION_IMPACT_ASSESSMENT]"
+    compliance_impact: "[COMPLIANCE_IMPACT_DESCRIPTION]"
+    operational_impact: "[OPERATIONAL_IMPACT_DESCRIPTION]"
+  
+  technical_impact:
+    system_stability: "[SYSTEM_STABILITY_ASSESSMENT]"
+    security_posture: "[SECURITY_IMPACT_ASSESSMENT]"
+    development_workflow: "[DEVELOPMENT_IMPACT_DESCRIPTION]"
+    deployment_capability: "[DEPLOYMENT_CAPABILITY_STATUS]"
+```
+
+### Remediation Plan
+```yaml
+remediation_plan:
+  title: "## Remediation Plan"
+  
+  immediate_actions:
+    priority_1_critical:
+      - action: "[CRITICAL_ACTION_1]"
+        responsible: "[RESPONSIBLE_PERSON/TEAM]"
+        timeline: "[IMMEDIATE/WITHIN_1_HOUR]"
+        dependencies: "[DEPENDENCIES or NONE]"
+    
+    priority_2_high:
+      - action: "[HIGH_PRIORITY_ACTION_1]"
+        responsible: "[RESPONSIBLE_PERSON/TEAM]"
+        timeline: "[WITHIN_4_HOURS/TODAY]"
+        dependencies: "[DEPENDENCIES or NONE]"
+  
+  short_term_fixes:
+    - fix: "[SHORT_TERM_FIX_1]"
+      description: "[FIX_DESCRIPTION]"
+      implementation_steps:
+        - "[STEP_1]"
+        - "[STEP_2]"
+        - "[STEP_3]"
+      testing_requirements: "[TESTING_REQUIREMENTS]"
+      rollback_plan: "[ROLLBACK_PLAN]"
+  
+  long_term_improvements:
+    - improvement: "[LONG_TERM_IMPROVEMENT_1]"
+      justification: "[IMPROVEMENT_JUSTIFICATION]"
+      implementation_timeline: "[TIMELINE]"
+      resources_required: "[RESOURCES_REQUIRED]"
+      success_criteria: "[SUCCESS_CRITERIA]"
+```
+
+### Rollback Strategy
+```yaml
+rollback_strategy:
+  title: "## Rollback Strategy"
+  
+  rollback_options:
+    option_1:
+      name: "[ROLLBACK_OPTION_1]"
+      description: "[ROLLBACK_DESCRIPTION]"
+      steps:
+        - "[ROLLBACK_STEP_1]"
+        - "[ROLLBACK_STEP_2]"
+        - "[ROLLBACK_STEP_3]"
+      risks: "[ROLLBACK_RISKS]"
+      verification: "[ROLLBACK_VERIFICATION_STEPS]"
+  
+  decision_criteria:
+    rollback_triggers:
+      - "[ROLLBACK_TRIGGER_1]"
+      - "[ROLLBACK_TRIGGER_2]"
+    
+    go_no_go_decision: "[DECISION_CRITERIA]"
+    decision_makers: "[DECISION_MAKERS]"
+    
+  rollback_validation:
+    verification_steps:
+      - "[VERIFICATION_STEP_1]"
+      - "[VERIFICATION_STEP_2]"
+    acceptance_criteria: "[ACCEPTANCE_CRITERIA]"
+    monitoring_requirements: "[POST_ROLLBACK_MONITORING]"
+```
+
+### Lessons Learned and Prevention
+```yaml
+lessons_learned:
+  title: "## Lessons Learned and Prevention"
+  
+  root_cause_prevention:
+    process_improvements:
+      - improvement: "[PROCESS_IMPROVEMENT_1]"
+        implementation: "[IMPLEMENTATION_PLAN]"
+        owner: "[IMPROVEMENT_OWNER]"
+    
+    technical_improvements:
+      - improvement: "[TECHNICAL_IMPROVEMENT_1]"
+        implementation: "[IMPLEMENTATION_PLAN]"
+        owner: "[IMPROVEMENT_OWNER]"
+  
+  monitoring_enhancements:
+    - enhancement: "[MONITORING_ENHANCEMENT_1]"
+      description: "[ENHANCEMENT_DESCRIPTION]"
+      implementation: "[IMPLEMENTATION_PLAN]"
+      success_metrics: "[SUCCESS_METRICS]"
+  
+  prevention_measures:
+    - measure: "[PREVENTION_MEASURE_1]"
+      description: "[MEASURE_DESCRIPTION]"
+      implementation_priority: "[HIGH/MEDIUM/LOW]"
+      estimated_effort: "[EFFORT_ESTIMATE]"
+```
+
+### Re-Development Preparation
+```yaml
+re_development_preparation:
+  title: "## Re-Development Preparation"
+  
+  specifications_update_required:
+    requirements_updates:
+      - requirement: "[REQUIREMENT_ID]"
+        current_state: "[CURRENT_REQUIREMENT]"
+        proposed_update: "[PROPOSED_UPDATE]"
+        justification: "[UPDATE_JUSTIFICATION]"
+    
+    design_updates:
+      - design_element: "[DESIGN_ELEMENT]"
+        current_design: "[CURRENT_DESIGN]"
+        proposed_design: "[PROPOSED_DESIGN]"
+        impact_assessment: "[IMPACT_ASSESSMENT]"
+    
+    task_updates:
+      - task_id: "[TASK_ID]"
+        current_task: "[CURRENT_TASK_DESCRIPTION]"
+        proposed_task: "[PROPOSED_TASK_DESCRIPTION]"
+        priority_adjustment: "[PRIORITY_CHANGE]"
+  
+  timeline_adjustments:
+    original_timeline: "[ORIGINAL_TIMELINE]"
+    revised_timeline: "[REVISED_TIMELINE]"
+    timeline_impact: "[TIMELINE_IMPACT_DESCRIPTION]"
+    critical_path_changes: "[CRITICAL_PATH_CHANGES]"
+  
+  resource_requirements:
+    additional_resources: "[ADDITIONAL_RESOURCES_NEEDED]"
+    skill_requirements: "[SKILL_REQUIREMENTS]"
+    external_dependencies: "[EXTERNAL_DEPENDENCIES]"
+```
+
+### Report Footer
+```yaml
+report_footer:
+  title: "## Report Information"
+  
+  report_metadata:
+    generated_by: "CI/CD Monitor Agent (David Kumar)"
+    agent_version: "1.0"
+    template_version: "1.0"
+    report_generation_time: "[GENERATION_TIME]"
+    report_retention: "[RETENTION_PERIOD]"
+  
+  distribution_list:
+    immediate_notification:
+      - "[DEVELOPMENT_TEAM_LEAD]"
+      - "[DEVOPS_ENGINEER]"
+      - "[PROJECT_MANAGER]"
+    
+    daily_summary:
+      - "[ENGINEERING_MANAGER]"
+      - "[PRODUCT_OWNER]"
+      - "[QUALITY_ASSURANCE_LEAD]"
+  
+  follow_up_schedule:
+    next_update: "[NEXT_UPDATE_TIME]"
+    resolution_review: "[RESOLUTION_REVIEW_TIME]"
+    post_mortem_meeting: "[POST_MORTEM_MEETING_TIME]"
+```
+
+## Template Usage Instructions
+
+### Mandatory Requirements
+1. **Completeness**: All failure categories must be analyzed
+2. **Evidence**: All conclusions must be supported by logs and data
+3. **Actionability**: All recommendations must be specific and actionable
+4. **Traceability**: All issues must be traceable to specific pipeline stages
+5. **Timeline**: All actions must have realistic timelines and responsible parties
+
+### Quality Standards
+1. **Accuracy**: All technical information must be accurate and verified
+2. **Clarity**: Report must be understandable by both technical and non-technical stakeholders
+3. **Completeness**: All aspects of the failure must be covered
+4. **Usefulness**: Report must enable effective remediation and prevention
+
+### Conversion to Markdown
+When converting this YAML template to Markdown:
+1. **Heading Levels**: Use # for main sections, ## for subsections, ### for categories
+2. **Code Blocks**: Use ```language format for logs and error messages
+3. **Lists**: Use - for unordered lists, 1. for ordered lists
+4. **Tables**: Use Markdown table format for structured data
+5. **Emphasis**: Use **bold** for critical items, *italic* for emphasis
+
+### Validation Checklist
+- [ ] All failure categories analyzed
+- [ ] Root cause identified with evidence
+- [ ] Impact assessment complete
+- [ ] Remediation plan specific and actionable
+- [ ] Rollback strategy defined
+- [ ] Prevention measures identified
+- [ ] Re-development preparation complete (if applicable)
+- [ ] All timelines and responsibilities assigned
+- [ ] Distribution list and follow-up schedule defined
+
+---
+
+**Template Version**: 1.0  
+**Report Type**: CI/CD Failure Analysis  
+**Maintenance**: CI/CD Monitor Agent  
+**Compliance**: commit-orchestrator-enforcement.md
