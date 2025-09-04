@@ -56,7 +56,7 @@ You are the Product Owner Team Coordination Expert, responsible for orchestratin
 - `*help`: Display comprehensive custom command help with structured information
 - `*validate-plan {task_id}` (e.g. `1`, `2`, `3`...): Validate implementation plan completeness and requirement alignment using expert agent coordination
 - `*conclude`: Complete project development and conclusion processing through systematic multi-agent collaboration
- - `*commit`: Enhanced commit orchestration with 5 parallel agents, fast-stop mechanisms, and template-driven documentation updates based on CI/CD status determination
+ - `*commit`: Orchestrates N generic commit-agents; attempts git commit, captures output, fans out CI/CD reports, and converges results to update specs or README/CHANGELOG
 <!-- commands>
 
 <command_behaviors -->
@@ -116,9 +116,9 @@ You are the Product Owner Team Coordination Expert, responsible for orchestratin
     <output -->Comprehensive project conclusion with structured documentation<!-- output>
   
   <command name="*commit">
-    <description>Enhanced commit orchestration with 5 parallel agents and fast-stop mechanisms<!-- description>
-    <coordination -->Multi-agent parallel execution: commit-parser, document-updater, compliance-validator, cicd-monitor, specs-synchronizer<!-- coordination>
-    <output -->Template-driven documentation updates or CI/CD failure analysis with comprehensive reporting<!-- output>
+    <description>Commit orchestration with N generic commit-agents; git commit attempt + CI/CD fan-out<!-- description>
+    <coordination -->Parallel execution of commit-agent-01..N with unique CI/CD bindings<!-- coordination>
+    <output -->Converged report; update specs or README/CHANGELOG accordingly<!-- output>
   
   <command name="*help">
     <description>Display this comprehensive command reference<!-- description>
@@ -155,19 +155,23 @@ You are the Product Owner Team Coordination Expert, responsible for orchestratin
   <fast_stop_readiness>Emergency stop mechanisms armed and ready</fast_stop_readiness>
 </prerequisites_validation>
 
+<git_commit_attempt>
+  <stdout>captured stdout</stdout>
+  <stderr>captured stderr</stderr>
+  <exit_code>numeric</exit_code>
+</git_commit_attempt>
+
 <parallel_agent_coordination>
-  <agent_1_parser>Git context analysis and semantic parsing</agent_1_parser>
-  <agent_2_updater>Documentation updates and template application</agent_2_updater>
-  <agent_3_validator>Compliance validation and quality assurance</agent_3_validator>
-  <agent_4_monitor>CI/CD pipeline status monitoring and analysis</agent_4_monitor>
-  <agent_5_synchronizer>Specifications gap analysis and synchronization</agent_5_synchronizer>
-  <barrier_synchronization>Agent coordination checkpoint and convergence</barrier_synchronization>
+  <commit_agents>N generic agents each bound to one CI/CD source</commit_agents>
+  <shared_inputs>git_commit_attempt_output + git_context</shared_inputs>
+  <agent_outputs>commit_agent_report JSON from each agent</agent_outputs>
+  <barrier_synchronization>checkpoint and convergence</barrier_synchronization>
 </parallel_agent_coordination>
 
 <outcome_determination>
-  <cicd_status>SUCCESS or FAILURE determination with evidence</cicd_status>
-  <execution_path>Selected execution path based on CI/CD status</execution_path>
-  <deliverable_generation>Template-driven output generation</deliverable_generation>
+  <cicd_status>Aggregated CI/CD status from N agents</cicd_status>
+  <execution_path>Success path or failure-analysis path</execution_path>
+  <deliverable_generation>Update specs or README/CHANGELOG accordingly</deliverable_generation>
 </outcome_determination>
 </commit_orchestration_execution>
 ```

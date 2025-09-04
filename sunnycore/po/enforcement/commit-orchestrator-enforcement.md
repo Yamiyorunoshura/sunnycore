@@ -31,6 +31,15 @@ This document provides comprehensive enforcement standards for the commit orches
 ### 2. Git Integration Standards
 ```xml
 <git_integration>
+  <git_commit_attempt>
+    <action>orchestrator must attempt `git commit` and capture outputs</action>
+    <capture>
+      <stdout>full stdout text</stdout>
+      <stderr>full stderr text</stderr>
+      <exit_code>numeric exit code</exit_code>
+    </capture>
+    <exposure>provide as `git_commit_attempt_output` to all commit agents</exposure>
+  </git_commit_attempt>
   <commit_message_rules>
     <format_pattern>^(feat|fix|docs|chore|refactor|test|build|ci)(\(.+\))?: .{1,72}$</format_pattern>
     <type_prefix values="feat,fix,docs,chore,refactor,test,build,ci"/>
@@ -69,11 +78,11 @@ This document provides comprehensive enforcement standards for the commit orches
 <multi_agent_coordination>
   <parallel_execution_framework>
     <agent_distribution>
-      <agent id="commit-parser" max_parallel="1" timeout="120s"/>
-      <agent id="document-updater" max_parallel="1" timeout="180s"/>
-      <agent id="compliance-validator" max_parallel="1" timeout="150s"/>
-      <agent id="cicd-monitor" max_parallel="1" timeout="300s"/>
-      <agent id="specs-synchronizer" max_parallel="1" timeout="240s"/>
+      <agent id="commit-agent-01" max_parallel="1" timeout="300s" binding="cicd_source:github_actions"/>
+      <agent id="commit-agent-02" max_parallel="1" timeout="300s" binding="cicd_source:gitlab_ci"/>
+      <agent id="commit-agent-03" max_parallel="1" timeout="300s" binding="cicd_source:jenkins"/>
+      <agent id="commit-agent-04" max_parallel="1" timeout="300s" binding="cicd_source:other_1"/>
+      <agent id="commit-agent-05" max_parallel="1" timeout="300s" binding="cicd_source:other_2"/>
     </agent_distribution>
     
     <barrier_synchronization>
@@ -100,7 +109,7 @@ This document provides comprehensive enforcement standards for the commit orches
   <communication_protocol>
     <inter_agent_messaging>
       <format>JSON</format>
-      <required_fields>agent_id,timestamp,status,findings,dependencies</required_fields>
+      <required_fields>agent_id,timestamp,status,findings,dependencies,git_commit_attempt_output_ref</required_fields>
       <validation_schema>strict</validation_schema>
     </inter_agent_messaging>
     
@@ -165,6 +174,11 @@ This document provides comprehensive enforcement standards for the commit orches
 ### 5. CI/CD Integration Standards
 ```xml
 <cicd_integration>
+  <fan_out_binding>
+    <principle>Each commit agent receives exactly one CI/CD report source</principle>
+    <sources>github_actions, gitlab_ci, jenkins, other_*</sources>
+    <assignment>binding declared in workflow; orchestrator ensures data routing</assignment>
+  </fan_out_binding>
   <pipeline_monitoring>
     <status_check_frequency>30s</status_check_frequency>
     <timeout_threshold>1800s</timeout_threshold>

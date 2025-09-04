@@ -19,30 +19,11 @@
 ### Parallel Agent Distribution (平行代理分配)
 ```xml
 <parallel_agents>
-  <agent id="commit-parser" role="解析與上下文分析">
-    <responsibility>解析 commit 訊息、分析變更內容、建立上下文</responsibility>
-    <output_format>JSON: 變更分析報告</output_format>
-  </agent>
-  
-  <agent id="document-updater" role="文檔更新實作">
-    <responsibility>依據模板更新 README.md、CHANGELOG.md</responsibility>
-    <output_format>JSON: 文檔更新結果</output_format>
-  </agent>
-  
-  <agent id="compliance-validator" role="合規品質驗證">
-    <responsibility>執行 commit-enforcement.md 規範檢查</responsibility>
-    <output_format>JSON: 合規驗證報告</output_format>
-  </agent>
-  
-  <agent id="cicd-monitor" role="CI/CD 狀態監控">
-    <responsibility>驗證 CI/CD 流程狀態，產出失敗報告</responsibility>
-    <output_format>JSON: CI/CD 狀態報告</output_format>
-  </agent>
-  
-  <agent id="specs-synchronizer" role="規格同步稽核">
-    <responsibility>同步 specs 與實際開發狀態，準備重開發</responsibility>
-    <output_format>JSON: 規格同步報告</output_format>
-  </agent>
+  <agent id="commit-agent-01" role="Generic Commit Agent" binding="cicd_source:github_actions"/>
+  <agent id="commit-agent-02" role="Generic Commit Agent" binding="cicd_source:gitlab_ci"/>
+  <agent id="commit-agent-03" role="Generic Commit Agent" binding="cicd_source:jenkins"/>
+  <agent id="commit-agent-04" role="Generic Commit Agent" binding="cicd_source:other_1"/>
+  <agent id="commit-agent-05" role="Generic Commit Agent" binding="cicd_source:other_2"/>
 </parallel_agents>
 ```
 
@@ -73,20 +54,20 @@
 ### Processing Phases (處理階段)
 ```xml
 <processing_workflow>
-  <phase1 name="Context Analysis">
-    <action>解析 commit 上下文與變更內容</action>
+  <phase1 name="Initialization & Git Commit Attempt">
+    <action>嘗試執行 git commit 並擷取輸出；建立 git 上下文</action>
     <validation>檢查必要文件存在性</validation>
     <fast_stop_condition>缺失 commit-enforcement.md</fast_stop_condition>
   </phase1>
   
   <phase2 name="Parallel Execution">
-    <action>5個 agent 平行執行各自任務</action>
+    <action>N 個通用 Commit Agents 平行分析（每個對應一個 CI/CD 輸入）</action>
     <validation>Barrier 檢查文件與模板</validation>
     <fast_stop_condition>關鍵模板缺失</fast_stop_condition>
   </phase2>
   
   <phase3 name="Result Convergence">
-    <action>收斂 JSON 結果，仲裁衝突</action>
+    <action>收斂各 Commit Agent 的標準 JSON 結果，仲裁衝突</action>
     <validation>合規檢查與品質驗證</validation>
     <fast_stop_condition>嚴重合規失敗</fast_stop_condition>
   </phase3>
