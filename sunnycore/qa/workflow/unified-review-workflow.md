@@ -52,6 +52,24 @@ quality_gates: ["information_validation", "plan_compliance", "review_completenes
 
 ---
 
+## Context Summarization Protocol
+
+<context-summarization>
+**Goal**: Reduce review context length via stage-end structured summaries and pruning.
+
+**When**: After each review phase.
+
+**How**:
+- Use `{project_root}/sunnycore/qa/templates/stage-summary-tmpl.yaml`
+- Target 200 words (hard limit 260)
+- Include: objective, key_findings, evidence, defects(severity/status), risks, recommendations, references
+
+**Retention**:
+- Append-and-prune
+- Keep last 3 full summaries; collapse older to 1–2 line epoch summaries
+- Drop raw context older than 1 phase; carry forward open_defects, blocking_risks, critical_findings
+<!-- context-summarization>
+
 <task_overview -->
 As a project quality review expert, you need to conduct comprehensive quality review of specified tasks to ensure implementation plan feasibility and code quality standards achievement.
 

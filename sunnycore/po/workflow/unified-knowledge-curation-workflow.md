@@ -160,6 +160,16 @@ quality_gates: ["information_validation", "platinum_standards_check", "knowledge
 
 # Separator line, following is original workflow content
 ---
+## 上下文摘要機制
+
+<context-summarization>
+**目的**：每階段完成後輸出結構化摘要以節省上下文。
+
+**方法**：使用 `{project_root}/sunnycore/po/templates/stage-summary-tmpl.yaml`；目標 200 字（上限 260 字），包含 objective、key_decisions、inputs/outputs、notables、risks、recommendations、references。
+
+**保留策略**：保留最近 2 個完整摘要；較舊摘要壓縮為 1–2 行要點；丟棄 2 個階段前原始細節並僅傳遞 open_risks、pending_decisions、followups。
+<!-- context-summarization>
+
 
 workflow_name: "unified-knowledge-curation-workflow"
 version: "2.2.0"

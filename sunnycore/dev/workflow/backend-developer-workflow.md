@@ -37,6 +37,54 @@ version: '1.0'
 
 ---
 
+## Context Summarization Protocol
+
+<context-summarization>
+**Goal**: Reduce context length by summarizing each completed stage into a compact, structured summary and pruning earlier raw content.
+
+**When to summarize**: Immediately after completing each numbered stage in this workflow.
+
+**How to summarize**:
+- Use template `{project_root}/sunnycore/dev/templates/stage-summary-tmpl.yaml`
+- Fill `metadata.stage_number`, `metadata.stage_name`, `metadata.task_id`, and `summary` fields
+- Keep summary within target 250 words (hard limit 300)
+- Include: objective, key decisions, inputs, outputs, notable changes, risks/blockers, next steps, references
+
+**Running summary retention**:
+- Merge strategy: append_and_prune
+- Keep last 2 full stage summaries
+- Collapse older summaries to a 1–2 line epoch summary
+- Drop raw context older than 2 stages; carry forward only: open_risks, pending_decisions, critical_dependencies
+
+**Usage**:
+- Replace earlier detailed context with the running summary; keep full details only for the current and previous stage
+- Optionally persist a lightweight log at `{project_root}/docs/dev-notes/{task_id}-stage-summaries.md`
+
+Example payload (fill at stage end):
+```yaml
+kind: stage_summary
+metadata:
+  workflow_name: backend-developer-workflow
+  workflow_type: dev
+  task_id: "{task_id}"
+  stage_number: {n}
+  stage_name: "{stage_title}"
+  timestamp: "{iso8601}"
+summary:
+  objective: "..."
+  key_decisions: ["...", "..."]
+  inputs: ["..."]
+  outputs: ["..."]
+  notable_changes: ["..."]
+  risks_and_blockers: ["..."]
+  next_steps: ["..."]
+  references: ["path:line_or_anchor"]
+```
+
+Quality gate:
+- [ ] <= 300 words; [ ] decisions explicit; [ ] risks and next steps captured; [ ] references present when applicable
+<!-- context-summarization>
+
 <workflow type="backend-developer" -->
 
 ## Mandatory Preconditions Verification

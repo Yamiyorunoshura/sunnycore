@@ -117,6 +117,25 @@ quality_gates: ["information_validation", "synchronization_check", "output_valid
 
 ---
 
+## 上下文摘要機制
+
+<context-summarization>
+**目的**：在每個階段完成後輸出結構化摘要，節省上下文。
+
+**時機**：每個主要階段完成後立即產出摘要。
+
+**方法**：
+- 使用 `{project_root}/sunnycore/po/templates/stage-summary-tmpl.yaml`
+- 填寫 `metadata` 與 `summary` 欄位
+- 目標 200 字，上限 260 字；包含 objective、key_decisions、inputs/outputs、notables、risks、recommendations、references
+
+**保留策略**：
+- 追加並裁剪：保留最近 2 個完整摘要；較舊摘要壓縮為 1–2 行要點
+- 丟棄 2 個階段前的原始細節；僅傳遞 open_risks、pending_decisions、followups
+
+**可選持久化**：`{project_root}/docs/po-notes/{task_id}-stage-summaries.md`
+<!-- context-summarization>
+
 <role>
 你是一名專業架構文檔編輯器，負責整合當前實現與計劃，生成同步的架構概覽和詳細文檔。
 

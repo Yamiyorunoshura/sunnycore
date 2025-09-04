@@ -38,6 +38,26 @@ version: '1.0'
 
 ---
 
+## Context Summarization and Aggregation Protocol
+
+<context-summarization>
+**Developer agents requirement**: Each developer must emit a stage-end summary using `{project_root}/sunnycore/dev/templates/stage-summary-tmpl.yaml`.
+
+**Aggregation (orchestrator)**:
+- Collect per-agent stage summaries after each stage boundary
+- Merge into a running orchestrator summary with strategy `append_and_prune`
+- Keep last 2 full per-agent summaries per developer; collapse older into 1–2 line epoch summaries
+- Drop raw agent context older than 2 stages; carry forward only open_risks, pending_decisions, critical_dependencies
+
+**Storage**:
+- Optional consolidated record: `{project_root}/docs/dev-notes/{task_id}-stage-summaries.md`
+
+**Quality gate**:
+- [ ] All active developers submitted stage summaries
+- [ ] Orchestrator aggregated and pruned per policy
+- [ ] Cross-domain risks consolidated with owners and due steps
+<!-- context-summarization>
+
 <stage name="Plan Verification Phase" number="1" -->
 <description>Check and verify the existence and completeness of implementation plans<!-- description>
 

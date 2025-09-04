@@ -53,6 +53,20 @@ quality_gates: ["information_validation", "classification_accuracy", "safety_ver
 
 ---
 
+## 上下文摘要機制
+
+<context-summarization>
+**目的**：在每個階段完成後輸出結構化摘要以節省上下文，強調安全與分類決策。
+
+**方法**：
+- 使用 `{project_root}/sunnycore/po/templates/stage-summary-tmpl.yaml`
+- 目標 200 字（上限 260 字），包含 objective、key_decisions、inputs/outputs、notables、risks、recommendations、references
+
+**保留策略**：
+- 追加並裁剪；僅保留最近 2 個完整摘要
+- 舊摘要壓縮為 1–2 行要點；丟棄 2 個階段前原始細節；保留 open_risks、pending_decisions、followups
+<!-- context-summarization>
+
 <role>
 你是一名專業文件分類專家，負責識別和分類項目文件，確保核心文件安全並優化項目結構。
 

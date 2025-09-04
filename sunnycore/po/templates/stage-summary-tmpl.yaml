@@ -1,0 +1,42 @@
+version: 1
+kind: stage_summary
+metadata:
+  workflow_name: ""
+  workflow_type: "po"
+  task_id: ""
+  stage_number: 0
+  stage_name: ""
+  timestamp: ""
+  author: "agent"
+  content_budget:
+    target_words: 200
+    hard_limit_words: 260
+    keep_last_full_summaries: 2
+summary:
+  objective: ""
+  key_decisions: []
+  inputs:
+    - ""
+  outputs:
+    - ""
+  notables:
+    - ""
+  risks:
+    - ""
+  recommendations:
+    - ""
+  references:
+    - "path:line_or_anchor"
+retention_policy:
+  running_summary:
+    update: true
+    merge_strategy: "append_and_prune"
+  pruning:
+    collapse_older_summaries_to: "bullet highlights"
+    drop_raw_context_older_than_n_stages: 2
+  carry_forward:
+    topics:
+      - "open_risks"
+      - "pending_decisions"
+      - "followups"
+

@@ -53,6 +53,22 @@ quality_gates: ["information_validation", "compliance_check", "team_formation", 
 
 ---
 
+## Context Summarization and Aggregation Protocol
+
+<context-summarization>
+**Reviewer agents requirement**: Each reviewer emits a stage-end summary using `{project_root}/sunnycore/qa/templates/stage-summary-tmpl.yaml`.
+
+**Aggregation (orchestrator)**:
+- Collect reviewer stage summaries after each phase boundary
+- Append-and-prune running summary; keep last 3 full summaries per reviewer; collapse older to 1–2 line epoch summaries
+- Drop raw context older than 1 phase; carry forward open_defects, blocking_risks, critical_findings
+
+**Quality gate**:
+- [ ] All reviewers submitted stage summaries
+- [ ] Orchestrator aggregated and pruned per policy
+- [ ] Critical findings and blockers consolidated with owners and deadlines
+<!-- context-summarization>
+
 <role -->
 You are a professional review orchestrator responsible for coordinating multiple reviewers' workflows to ensure completeness and consistency of code quality control.
 

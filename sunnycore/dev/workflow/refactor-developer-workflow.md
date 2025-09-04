@@ -35,6 +35,48 @@ version: '1.0'
 - **Completeness**: Only mark as `completed` when tasks are completely finished
 <!-- enforcement>
 
+## Context Summarization Protocol
+
+<context-summarization>
+**Goal**: Keep refactoring context lean via stage-end summaries and pruning.
+
+**When**: After each numbered stage.
+
+**How**:
+- Template: `{project_root}/sunnycore/dev/templates/stage-summary-tmpl.yaml`
+- Fill stage metadata and `summary` fields
+- Target 250 words (hard limit 300)
+- Include: objective, key decisions, inputs/outputs, notable changes, risks/blockers, next steps, references
+
+**Retention**:
+- Append and prune running summary
+- Keep last 2 full summaries; collapse older ones to 1–2 line epoch summaries
+- Drop raw context older than 2 stages; carry forward open_risks, pending_decisions, critical_dependencies
+
+Example:
+```yaml
+kind: stage_summary
+metadata:
+  workflow_name: refactor-developer-workflow
+  workflow_type: dev
+  task_id: "{task_id}"
+  stage_number: {n}
+  stage_name: "{stage_title}"
+  timestamp: "{iso8601}"
+summary:
+  objective: "..."
+  key_decisions: ["..."]
+  inputs: ["..."]
+  outputs: ["..."]
+  notable_changes: ["..."]
+  risks_and_blockers: ["..."]
+  next_steps: ["..."]
+  references: ["path:line_or_anchor"]
+```
+
+Quality gate: [ ] <=300 words [ ] decisions [ ] risks/next steps [ ] references
+<!-- context-summarization>
+
 <workflow type="refactor-developer" -->
 
 ## Mandatory Preconditions Validation
