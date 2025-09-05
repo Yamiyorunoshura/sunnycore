@@ -54,7 +54,7 @@
   </checks>
   </stage>
 
-  <stage id="1: 根據輸入文件構建專案上下文", level_of_think = "Ultra-think", cache_read_budget = "not more than 190K tokens per request">
+  <stage id="1: 根據輸入文件構建專案上下文", level_of_think = "Ultra think", cache_read_budget = "not more than 190K tokens per request">
   - 使用claude context工具查找輸入文件
   - 閱讀並所有輸入文件
   - 使用sequential-thinking工具協助思考和分析所有輸入文件
