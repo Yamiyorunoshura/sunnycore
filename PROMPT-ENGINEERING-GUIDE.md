@@ -31,6 +31,28 @@
         - cache_write_budget： 定義工作流程的階段快取寫入token預算。
         - cache_read_budget： 定義工作流程的階段快取讀取token預算。
 
+## Chain-of-Thought 推理相關標籤
+- <reasoning_framework, importance = "Optional/Normal/Important/Critical">： 定義推理框架的開始。
+    - importance： 定義推理框架的重要性。
+    - <step_by_step>： 定義逐步推理的引導內容。
+    - <thinking_process>： 定義結構化思考過程。
+    - <decision_points>： 定義關鍵決策點。
+    - <prefill>： 定義預填充輸出格式，用於控制模型的初始輸出結構。
+
+## 模塊化組件相關標籤
+- <modular_components>： 定義模塊化組件的容器。
+    - <role_context, name = "Agent Name">： 定義角色上下文內容。
+        - name： 指定代理角色名稱。
+    - <task_context>： 定義具體任務上下文。
+    - <examples_bank, type = "few_shot/zero_shot">： 定義示例集合。
+        - type： 指定示例類型。
+    - <prefill>： 定義預填充輸出格式。
+
+## 品質保證相關標籤
+- <quality_framework>： 定義品質保證框架。
+    - <reasoning_validation>： 定義推理過程驗證機制。
+    - <output_validation>： 定義輸出品質檢查機制。
+
 # 提示詞架構
 在這個部分，我們將會介紹我們所使用的提示詞架構，協助你理解我們所使用的提示詞技巧。
 

@@ -73,13 +73,55 @@ color: blue
   
   <stage id="2: 審查", level_of_think = "Ultra-think", cache_read_budget = "not more than 190K tokens per request">
   - 閱讀主agent所提供的上下文
-  - 使用sequential-thinking工具協助思考和分析主agent所提供的上下文
+  - 使用CoT效能審查推理框架進行逐步分析
   - 使用claude context查找主agent所提供的上下文中的代碼實踐
   - 使用context7查找是否有相關的優秀實踐
   - 參考範例格式並將審查結果發送給主agent
 
+  <reasoning_framework importance="Critical">
+    <step_by_step>
+      讓我逐步分析這個程式碼的效能實踐：
+      
+      步驟1：演算法複雜度與效能瓶頸分析
+      - 分析時間複雜度和空間複雜度
+      - 識別潛在的效能瓶頸點
+      - 評估迴圈、遞迴等結構效率
+      
+      步驟2：資源使用率評估
+      - 檢查記憶體使用和洩漏風險
+      - 評估CPU密集型操作最佳化
+      - 分析I/O操作效率和並發處理
+      
+      步驟3：快取與資料存取最佳化
+      - 檢查快取策略實作效果
+      - 評估資料庫查詢最佳化
+      - 分析資料結構選擇適切性
+      
+      步驟4：擴展性與負載處理能力
+      - 評估系統水平和垂直擴展能力
+      - 檢查負載均衡和流量處理機制
+      - 分析效能監控和調優機制
+    </step_by_step>
+    
+    <prefill>
+      # 效能實踐分析
+      讓我逐步分析這個程式碼的效能實踐...
+
+      <thinking>
+      步驟1：演算法複雜度與效能瓶頸分析...
+      步驟2：資源使用率評估...
+      步驟3：快取與資料存取最佳化...
+      步驟4：擴展性與負載處理能力...
+      </thinking>
+
+      # 實踐等級
+      - 
+    </prefill>
+  </reasoning_framework>
+
   <checks>
     階段性檢查點：
+    - [ ] CoT推理框架執行完成
     - [ ] 代碼實踐識別完成
     - [ ] 優秀實踐識別完成
     - [ ] 審查發現的問題識別完成

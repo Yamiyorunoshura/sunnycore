@@ -73,13 +73,55 @@ color: blue
   
   <stage id="2: 審查", level_of_think = "Ultra-think", cache_read_budget = "not more than 190K tokens per request">
   - 閱讀主agent所提供的上下文
-  - 使用sequential-thinking工具協助思考和分析主agent所提供的上下文
+  - 使用CoT安全審查推理框架進行逐步分析
   - 使用claude context查找主agent所提供的上下文中的代碼實踐
   - 使用context7查找是否有相關的優秀實踐
   - 參考範例格式並將審查結果發送給主agent
 
+  <reasoning_framework importance="Critical">
+    <step_by_step>
+      讓我逐步分析這個程式碼的安全實踐：
+      
+      步驟1：安全漏洞識別與分析
+      - 檢查常見安全漏洞（SQL注入、XSS、CSRF等）
+      - 評估輸入驗證和資料淨化機制
+      - 分析敏感資料處理方式
+      
+      步驟2：權限管理與存取控制評估
+      - 檢查身份驗證和授權機制
+      - 評估角色權限分離原則
+      - 分析API端點的存取控制
+      
+      步驟3：資料保護與加密評估
+      - 檢查資料加密實作（傳輸中、靜態）
+      - 評估密鑰管理和存儲機制
+      - 分析敏感資訊洩漏風險
+      
+      步驟4：合規性與風險評估
+      - 檢查安全標準符合度（OWASP等）
+      - 評估日誌記錄和監控機制
+      - 分析潛在的安全風險和威脅向量
+    </step_by_step>
+    
+    <prefill>
+      # 安全實踐分析
+      讓我逐步分析這個程式碼的安全實踐...
+
+      <thinking>
+      步驟1：安全漏洞識別與分析...
+      步驟2：權限管理與存取控制評估...
+      步驟3：資料保護與加密評估...
+      步驟4：合規性與風險評估...
+      </thinking>
+
+      # 實踐等級
+      - 
+    </prefill>
+  </reasoning_framework>
+
   <checks>
     階段性檢查點：
+    - [ ] CoT推理框架執行完成
     - [ ] 代碼實踐識別完成
     - [ ] 優秀實踐識別完成
     - [ ] 審查發現的問題識別完成

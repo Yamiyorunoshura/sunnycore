@@ -72,13 +72,55 @@ color: blue
   
   <stage id="2: 審查", level_of_think = "Ultra-think", cache_read_budget = "not more than 190K tokens per request">
   - 閱讀主agent所提供的上下文
-  - 使用sequential-thinking工具協助思考和分析主agent所提供的上下文
+  - 使用CoT整合審查推理框架進行逐步分析
   - 使用claude context查找主agent所提供的上下文中的代碼實踐
   - 使用context7查找是否有相關的優秀實踐
   - 參考範例格式並將審查結果發送給主agent
 
+  <reasoning_framework importance="Critical">
+    <step_by_step>
+      讓我逐步分析這個程式碼的整合實踐：
+      
+      步驟1：系統間介面與整合點分析
+      - 檢查API設計品質和RESTful原則
+      - 評估服務間通信協議和格式
+      - 分析資料交換和序列化機制
+      
+      步驟2：微服務架構與服務邊界評估
+      - 檢查服務職責劃分和邊界設計
+      - 評估服務發現和註冊機制
+      - 分析服務間依賴關係和耦合度
+      
+      步驟3：資料流向與轉換邏輯評估
+      - 檢查資料流設計和處理管線
+      - 評估資料轉換和映射邏輯
+      - 分析事件驅動架構實作品質
+      
+      步驟4：錯誤處理與容錯機制檢查
+      - 檢查分散式系統錯誤處理策略
+      - 評估重試機制和斷路器模式
+      - 分析系統恢復和容錯能力
+    </step_by_step>
+    
+    <prefill>
+      # 整合實踐分析
+      讓我逐步分析這個程式碼的整合實踐...
+
+      <thinking>
+      步驟1：系統間介面與整合點分析...
+      步驟2：微服務架構與服務邊界評估...
+      步驟3：資料流向與轉換邏輯評估...
+      步驟4：錯誤處理與容錯機制檢查...
+      </thinking>
+
+      # 實踐等級
+      - 
+    </prefill>
+  </reasoning_framework>
+
   <checks>
     階段性檢查點：
+    - [ ] CoT推理框架執行完成
     - [ ] 代碼實踐識別完成
     - [ ] 優秀實踐識別完成
     - [ ] 審查發現的問題識別完成

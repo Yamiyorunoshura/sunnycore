@@ -11,42 +11,6 @@ version: '1.0'
 # All sections must be filled with actual content or marked as "N/A - [reason]"
 # This template integrates chain of thought reasoning, SELF-DISCOVER framework, and XML structured output
 
-template_metadata:
-  name: "Standardized QA Review Template"
-  version: "2.0"
-  prompt_techniques: ["chain_of_thought", "self_discover", "xml_structured"]
-  quality_standards: ["completeness", "consistency", "accuracy", "actionability"]
-
-prompt_guidance:
-  chain_of_thought:
-    instruction: "Before filling each section, first analyze the purpose and requirements of that section"
-    structure:
-      - "Understand requirements"
-      - "Analyze available evidence"
-      - "Make informed assessment"
-      - "Validate conclusions"
-  
-  xml_output:
-    required_tags:
-      - "<analysis>Analysis process and reasoning<!-- analysis>"
-      - "<findings -->Structured findings with evidence<!-- findings>"
-      - "<recommendations -->Actionable recommendations<!-- recommendations>"
-      - "<validation -->Quality validation and verification<!-- validation>"
-  
-  self_discover:
-    stages:
-      select: "Select appropriate review methods and evaluation criteria"
-      adapt: "Adapt methods to the specific task and context"
-      implement: "Execute structured review process"
-      apply: "Apply findings to generate actionable recommendations"
-
-usage_instructions: |
-  1. Use chain of thought reasoning for complex assessments
-  2. Structure findings using XML tags for clarity
-  3. Apply SELF-DISCOVER framework for systematic evaluation
-  4. Ensure all recommendations are specific and actionable
-  5. Validate conclusions against evidence and quality standards
-
 metadata:
   task_id: # 必填：實際任務ID
   project_name: # 必填：專案名稱
@@ -271,11 +235,6 @@ recommendations:
       chain_of_thought_analysis: # Document the reasoning process for this recommendation
       steps: [] # List all implementation steps with specific actions and responsibilities
       success_criteria: [] # List measurable success conditions with specific metrics
-      xml_structured_recommendation: |
-        <analysis -->Systematic analysis of the improvement opportunity<!-- analysis>
-        <benefits -->Expected benefits and value proposition<!-- benefits>
-        <implementation -->Detailed implementation approach with timeline<!-- implementation>
-        <validation -->Success criteria and measurement approach</validation>
       
       implementation_details:
         effort_estimate: # small|medium|large (based on complexity and resource requirements)

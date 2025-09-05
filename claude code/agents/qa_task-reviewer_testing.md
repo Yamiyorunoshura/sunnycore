@@ -73,13 +73,55 @@ color: blue
   
   <stage id="2: 審查", level_of_think = "Ultra-think", cache_read_budget = "not more than 190K tokens per request">
   - 閱讀主agent所提供的上下文
-  - 使用sequential-thinking工具協助思考和分析主agent所提供的上下文
+  - 使用CoT測試審查推理框架進行逐步分析
   - 使用claude context查找主agent所提供的上下文中的代碼實踐
   - 使用context7查找是否有相關的優秀實踐
   - 參考範例格式並將審查結果發送給主agent
 
+  <reasoning_framework importance="Critical">
+    <step_by_step>
+      讓我逐步分析這個程式碼的測試實踐：
+      
+      步驟1：測試覆蓋率分析
+      - 檢查單元測試是否充分覆蓋核心邏輯
+      - 評估整合測試的完整性
+      - 分析邊界條件測試覆蓋度
+      
+      步驟2：測試品質評估
+      - 檢查測試案例的可讀性和維護性
+      - 評估測試資料的代表性
+      - 分析測試隔離性和獨立性
+      
+      步驟3：測試策略評估
+      - 檢查是否有適當的測試分層策略
+      - 評估自動化測試的執行效率
+      - 分析測試失敗時的錯誤追蹤能力
+      
+      步驟4：潛在風險識別
+      - 識別測試盲點和潛在遺漏
+      - 評估測試環境的穩定性
+      - 分析測試維護的長期成本
+    </step_by_step>
+    
+    <prefill>
+      # 測試實踐分析
+      讓我逐步分析這個程式碼的測試實踐...
+
+      <thinking>
+      步驟1：測試覆蓋率分析...
+      步驟2：測試品質評估...
+      步驟3：測試策略評估...
+      步驟4：潛在風險識別...
+      </thinking>
+
+      # 實踐等級
+      - 
+    </prefill>
+  </reasoning_framework>
+
   <checks>
     階段性檢查點：
+    - [ ] CoT推理框架執行完成
     - [ ] 代碼實踐識別完成
     - [ ] 優秀實踐識別完成
     - [ ] 審查發現的問題識別完成
