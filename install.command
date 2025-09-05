@@ -213,6 +213,31 @@ download_repository() {
     show_success "倉庫下載完成"
 }
 
+# 移除舊配置
+remove_old_configs() {
+    show_info "檢查並移除舊配置..."
+    
+    # 移除 Claude 目錄中的舊 agents 和 commands
+    if [ -d "$CLAUDE_DIR/agents" ]; then
+        show_warning "發現舊的 agents 配置，正在移除..."
+        rm -rf "$CLAUDE_DIR/agents"
+        show_success "舊 agents 配置已移除"
+    fi
+    
+    if [ -d "$CLAUDE_DIR/commands" ]; then
+        show_warning "發現舊的 commands 配置，正在移除..."
+        rm -rf "$CLAUDE_DIR/commands"
+        show_success "舊 commands 配置已移除"
+    fi
+    
+    # 移除 sunnycore 目錄中的舊配置
+    if [ -d "$SUNNYCORE_DIR/sunnycore" ]; then
+        show_warning "發現舊的 sunnycore 配置，正在移除..."
+        rm -rf "$SUNNYCORE_DIR/sunnycore"
+        show_success "舊 sunnycore 配置已移除"
+    fi
+}
+
 # 安裝檔案
 install_files() {
     show_info "開始安裝檔案..."
@@ -310,6 +335,7 @@ main() {
     # 執行安裝
     get_latest_version
     download_repository
+    remove_old_configs
     install_files
     
     # 顯示總結
