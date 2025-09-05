@@ -1,0 +1,99 @@
+---
+description: 統一架構系統templates文檔
+last_updated: '2025-09-03'
+name: plan-validation-report-tmpl
+template_type: yaml
+version: '1.0'
+---
+
+
+
+---
+template: plan-validation-report
+version: 1
+
+# Note: Report validation is now handled by unified-plan-validation-workflow.yaml
+# This template focuses on structured report content, validation is executed by workflow
+
+# Evidence Requirements
+# - Each alignment statement must include specific file paths and section references
+# - Missing items must reference exact locations where information should exist
+# - Cross-references should include line numbers or section titles when possible
+# - All findings must be traceable to source specifications or plan sections
+
+metadata:
+  task_id: "Required - actual task identifier"
+  plan_path: "Required - actual plan file path"
+  validator: "Required - actual validator's name"
+  date: "Required - YYYY-MM-DD format"
+  specs:
+    requirements: "Required - actual requirements.md path"
+    task: "Required - actual task.md path"
+    design: "Required - actual design.md path"
+
+overall_assessment:
+  verdict: "Required - go|revise|block based on validation results"
+  summary: "Required - 1-3 specific sentences about plan quality and readiness"
+
+alignment_with_specs:
+  functional_objectives:
+    status: "<passed|partial|failed>"
+    evidence:
+      - "<specification reference>"
+  non_functional_targets:
+    status: "<passed|partial|failed>"
+    evidence:
+      - "<specification reference>"
+  scope_boundaries:
+    status: "<clear|unclear>"
+    notes: "<details>"
+  approach_and_interfaces:
+    status: "<aligned|has gaps>"
+    evidence:
+      - "<design reference>"
+
+execution_metadata:
+  run_id: "<optional - UUID>"
+  start_time: "<optional - ISO8601>"
+  end_time: "<optional - ISO8601>"
+  stage_timings:
+    - stage: "<workflow_initialization|...>"
+      duration_ms: 0
+  parallelism:
+    enabled: true
+    max_parallelism: 4
+  cache_stats:
+    hits: 0
+    misses: 0
+    items:
+      - key: "<cache key>"
+        status: "<hit|miss>"
+
+missing_items_and_risks:
+  - id: "MISS-1"
+    type: "<missing|risk>"
+    area: "<requirements|scope|approach|data|testing|timeline|dependencies|estimates|risks|open_issues>"
+    description: "<missing or risky content>"
+    severity: "<high|medium|low>"
+    quantification:
+      scope: "<wide|medium|narrow>"
+      reproducibility: "<high|medium|low>"
+      effort: "<high|medium|low>"
+      time_criticality: "<high|medium|low>"
+    evidence:
+      - "<file/path or section>"
+
+recommendations:
+  - id: "REC-1"
+    title: "<recommendation title>"
+    rationale: "<why helpful>"
+    steps:
+      - "<step>"
+
+next_steps:
+  blockers:
+    - "<item>"
+  prioritized_actions:
+    - "<MISS-1|area>"
+  owners:
+    - "<team or person>"

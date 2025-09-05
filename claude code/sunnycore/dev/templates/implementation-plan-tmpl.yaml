@@ -1,0 +1,535 @@
+---
+description: 統一架構系統templates文檔
+last_updated: '2025-09-03'
+name: implementation-plan-tmpl
+template_type: yaml
+version: '1.0'
+---
+
+---
+template: implementation-plan
+version: 2.0
+prompt_techniques_integrated: true
+
+# 高階提示詞技巧整合版本
+# 本模板整合了以下高階提示詞技巧：
+# - chain_of_thought (Chain of Thought): 用於複雜分析和決策過程
+# - SELF-DISCOVER框架: 用於結構化任務分解
+# - XML結構化輸出: 提高內容組織和可讀性
+# - 第一性原理: 確保從基本需求出發進行規劃
+
+# 注意: 計劃驗證現在由專門的開發者工作流程處理
+# 本模板專注於結構化規劃內容，驗證由相應的開發者工作流程implement
+
+# 上下文保存要求 (應用chain_of_thought)
+# - 包含規格中的所有有價值技術細節
+# - 避免"根據需要"或"待定"等通用陳述
+# - 引用具體文件、行號和設計決策
+# - 保持計劃元素與源規格之間的清晰可追溯性
+
+# XML結構化輸出指導
+# 在填寫複雜內容時，使用以下XML標籤組織信息：
+# <analysis>分析過程<!-- analysis>
+# <solution -->解決方案<!-- solution>
+# <validation -->驗證方法<!-- validation>
+# <reasoning -->推理過程<!-- reasoning>
+
+metadata:
+  task_id: "必需 - 實際任務標識符"
+  project_name: "必需 - 實際項目名稱"
+  owner: "必需 - 實際負責人姓名"
+  date: "必需 - YYYY-MM-DD 格式"
+  project_root: "必需 - 項目根目錄絕對路徑"
+  prompt_techniques_used:
+    - "chain_of_thought: 用於複雜分析和決策過程"
+    - "self_discover: 用於結構化任務分解"
+    - "xml_structured: 用於組織複雜輸出"
+    - "first_principles: 用於基礎原理分析"
+  sources:
+    - type: requirements
+      path: "必需 - 實際 requirements.md 路徑"
+      analysis_method: "應用chain_of_thought逐步分析需求"
+    - type: task
+      path: "必需 - 實際 task.md 路徑"
+      decomposition_method: "使用SELF-DISCOVER框架分解任務"
+    - type: design
+      path: "必需 - 實際 design.md 路徑"
+      understanding_method: "從第一性原理理解設計決策"
+  assumptions:
+    - "列出具體假設或說明'未識別到假設'"
+    - "使用chain_of_thought驗證每個假設的合理性"
+  constraints:
+    - "列出具體約束或說明'未識別到約束'"
+    - "分析約束的根本原因和影響範圍"
+
+context:
+  summary: |
+    必需 - 1-3個具體句子描述此任務完成所涉及的內容
+    
+    應用chain_of_thought填寫指導：
+    <reasoning -->
+    首先，理解任務的核心目標...
+    接下來，分析任務的主要組成部分...
+    最後，總結任務完成後的預期狀態...
+    <!-- reasoning>
+    
+  background: |
+    必需 - 來自規格的具體背景信息
+    
+    使用SELF-DISCOVER框架分析背景：
+    <analysis -->
+    SELECT: 選擇相關的背景信息要素
+    ADAPT: 調整信息以適應當前任務上下文
+    IMPLEMENT: 組織背景信息的邏輯結構
+    APPLY: 將背景信息應用到任務理解中
+    <!-- analysis>
+    
+  goals:
+    - |
+      必需 - 從需求中提取的具體目標
+      
+      第一性原理分析：
+      <goal_analysis -->
+      基本需求: [從最基本的用戶需要出發]
+      核心價值: [識別目標的根本價值]
+      成功標準: [定義可衡量的成功指標]
+      <!-- goal_analysis>
+
+objectives:
+  functional:
+    - id: "F-1"
+      description: |
+        必需 - 來自規格的具體功能需求
+        
+        chain_of_thought分析：
+        <functional_analysis -->
+        需求理解: [首先理解需求的核心功能]
+        用戶價值: [分析此功能為用戶帶來的價值]
+        實現方式: [考慮可能的實現方法]
+        驗證方法: [確定如何驗證功能正確性]
+        <!-- functional_analysis>
+        
+      acceptance_criteria:
+        - |
+          必需 - 具體、可測試的驗收標準
+          
+          XML結構化標準：
+          <criteria -->
+          <given>給定條件<!-- given>
+          <when -->觸發事件<!-- when>
+          <then -->預期結果<!-- then>
+          <measurement -->衡量方法<!-- measurement>
+          
+          
+  non_functional:
+    - id: "N-1"
+      description: |
+        必需 - 具體的非功能性需求
+        
+        第一性原理分析：
+        <nfr_analysis>
+        基本需要: [從用戶體驗的基本需要出發]
+        技術約束: [識別技術層面的根本約束]
+        業務影響: [分析對業務的根本影響]
+        <!-- nfr_analysis>
+        
+      measurement: |
+        必需 - 可衡量的目標 (例如: p95 < 200ms, 99.9% 正常運行時間)
+        
+        衡量標準設定指導：
+        <measurement_guide -->
+        基準值: [當前狀態的基準測量]
+        目標值: [期望達到的具體數值]
+        測量方法: [如何進行測量和監控]
+        驗證頻率: [多久驗證一次]
+        <!-- measurement_guide>
+
+scope:
+  in_scope:
+    - |
+      必需 - 此任務包含的具體項目
+      
+      SELF-DISCOVER範圍分析：
+      <scope_analysis -->
+      SELECT: 選擇與任務目標直接相關的項目
+      ADAPT: 調整範圍以適應資源和時間約束
+      IMPLEMENT: 制定範圍內項目的implement計劃
+      APPLY: 將範圍定義應用到具體工作中
+      <!-- scope_analysis>
+      
+  out_of_scope:
+    - |
+      必需 - 明確排除的具體項目
+      
+      排除原因分析：
+      <exclusion_reasoning -->
+      <item>排除項目名稱<!-- item>
+      <reason -->排除的具體原因<!-- reason>
+      <future_consideration -->是否在未來版本中考慮<!-- future_consideration>
+      <impact -->排除對整體目標的影響<!-- impact>
+      
+
+approach:
+  architecture_overview: |
+    必需 - 來自設計規格的具體架構
+    
+    第一性原理架構分析：
+    <architecture_analysis>
+    基本組件: [識別系統的基本組成要素]
+    核心關係: [分析組件間的根本關係]
+    設計原則: [確定指導架構的基本原則]
+    擴展性考慮: [從基本需求出發考慮未來擴展]
+    <!-- architecture_analysis>
+    
+  modules:
+    - name: "必需 - 實際模組名稱"
+      purpose: |
+        必需 - 具體目的和職責
+        
+        模組設計思維鏈：
+        <module_reasoning -->
+        職責定義: [首先明確模組的核心職責]
+        邊界劃分: [然後確定模組的邊界]
+        接口設計: [接下來設計對外接口]
+        內部實現: [最後考慮內部實現策略]
+        <!-- module_reasoning>
+        
+      interfaces:
+        - |
+          必需 - 具體的API/合約定義
+          
+          接口設計XML結構：
+          <interface_definition -->
+          <endpoint>具體端點或方法名<!-- endpoint>
+          <input -->輸入參數和格式<!-- input>
+          <output -->輸出格式和結構<!-- output>
+          <error_handling -->錯誤處理機制<!-- error_handling>
+          
+          
+      reuse:
+        - |
+          列出要重用的現有模組/服務或說明'無'
+          
+          重用分析：
+          <reuse_analysis>
+          現有資源: [識別可重用的現有組件]
+          適配需求: [分析重用所需的適配工作]
+          風險評估: [評估重用可能帶來的風險]
+          <!-- reuse_analysis>
+          
+  data:
+    schema_changes:
+      - |
+        必需 - 具體的數據庫/數據結構變更
+        
+        數據變更思維鏈：
+        <data_change_reasoning -->
+        變更需求: [首先理解為什麼需要變更]
+        影響分析: [分析變更對現有數據的影響]
+        遷移策略: [制定數據遷移的具體策略]
+        回滾計劃: [準備變更失敗時的回滾方案]
+        <!-- data_change_reasoning>
+        
+    migrations:
+      - |
+        必需 - 具體的遷移步驟或說明'不需要'
+        
+        遷移步驟XML結構：
+        <migration_steps -->
+        <pre_migration>遷移前準備工作<!-- pre_migration>
+        <migration_process -->具體遷移過程<!-- migration_process>
+        <post_migration -->遷移後驗證工作<!-- post_migration>
+        <rollback_procedure -->回滾程序<!-- rollback_procedure>
+        
+        
+  test_strategy:
+    unit:
+      - |
+        必需 - 具體的單元測試領域和方法
+        
+        單元測試策略：
+        <unit_test_strategy>
+        測試範圍: [確定需要單元測試的具體範圍]
+        測試方法: [選擇適合的測試方法和工具]
+        覆蓋率目標: [設定具體的覆蓋率目標]
+        測試數據: [準備測試所需的數據]
+        <!-- unit_test_strategy>
+        
+    integration:
+      - |
+        必需 - 具體的集成測試場景
+        
+        集成測試場景分析：
+        <integration_scenarios -->
+        系統邊界: [識別需要測試的系統邊界]
+        數據流: [測試跨組件的數據流]
+        錯誤處理: [驗證跨組件的錯誤處理]
+        性能驗證: [測試集成後的性能表現]
+        <!-- integration_scenarios>
+        
+    acceptance:
+      - |
+        必需 - 具體的驗收測試條件
+        
+        驗收測試條件：
+        <acceptance_conditions -->
+        用戶場景: [基於真實用戶場景的測試]
+        業務流程: [驗證完整的業務流程]
+        性能標準: [確認性能符合要求]
+        用戶體驗: [驗證用戶體驗質量]
+        <!-- acceptance_conditions>
+        
+  quality_gates:
+    - |
+      必需 - 可衡量的品質條件 (例如:  -->=90% 單元覆蓋率, <500ms p95)
+      
+      品質門檻設定：
+      <quality_gate_definition>
+      <metric>具體的衡量指標<!-- metric>
+      <threshold -->數值門檻<!-- threshold>
+      <measurement_method -->測量方法<!-- measurement_method>
+      <frequency -->檢查頻率<!-- frequency>
+      <action_on_failure -->未達標時的行動<!-- action_on_failure>
+      
+
+milestones:
+  - name: "<M1 - 具體里程碑名稱>"
+    deliverables:
+      - |
+        <具體交付物>
+        
+        交付物定義：
+        <deliverable_definition>
+        <description>交付物的詳細描述<!-- description>
+        <acceptance_criteria -->驗收標準<!-- acceptance_criteria>
+        <quality_standards -->品質標準<!-- quality_standards>
+        
+        
+    done_definition:
+      - |
+        <完成定義項目>
+        
+        完成標準思維鏈：
+        <done_criteria_reasoning>
+        功能完整性: [功能是否完全實現]
+        品質達標: [是否達到品質標準]
+        測試通過: [所有測試是否通過]
+        文檔完備: [相關文檔是否完整]
+        <!-- done_criteria_reasoning>
+
+timeline:
+  start_date: "<YYYY-MM-DD -->"
+  end_date: "<YYYY-MM-DD>"
+  planning_method: |
+    時間規劃方法：
+    <timeline_planning>
+    <estimation_basis>估算基礎和依據<!-- estimation_basis>
+    <risk_buffer -->風險緩衝時間考慮<!-- risk_buffer>
+    <dependency_impact -->依賴關係對時間的影響<!-- dependency_impact>
+    
+    
+  schedule:
+    - milestone: "<M1 - 里程碑名稱>"
+      start: "<YYYY-MM-DD>"
+      end: "<YYYY-MM-DD>"
+      reasoning: |
+        時間安排推理：
+        <schedule_reasoning>
+        工作量評估: [基於具體工作內容的時間評估]
+        資源可用性: [考慮資源的實際可用時間]
+        風險因素: [可能影響進度的風險因素]
+        <!-- schedule_reasoning>
+
+dependencies:
+  external:
+    - |
+      <服務/庫名稱 -->
+      
+      外部依賴分析：
+      <external_dependency>
+      <name>依賴項名稱<!-- name>
+      <type -->依賴類型<!-- type>
+      <impact -->對項目的影響<!-- impact>
+      <mitigation -->風險緩解措施<!-- mitigation>
+      
+      
+  internal:
+    - |
+      <團隊/模組名稱>
+      
+      內部依賴分析：
+      <internal_dependency>
+      <name>依賴項名稱<!-- name>
+      <coordination_method -->協調方法<!-- coordination_method>
+      <timeline_alignment -->時間線對齊<!-- timeline_alignment>
+      
+
+estimation:
+  method: "<T恤尺寸|故事點|小時>"
+  estimation_approach: |
+    估算方法說明：
+    <estimation_methodology>
+    <basis>估算基礎 (歷史數據、專家判斷等)<!-- basis>
+    <factors -->考慮的影響因素<!-- factors>
+    <uncertainty -->不確定性處理方法<!-- uncertainty>
+    
+    
+  summary:
+    total_person_days: "<N>"
+    confidence: "<低|中|高>"
+    confidence_reasoning: |
+      信心度分析：
+      <confidence_analysis>
+      <known_factors>已知因素的確定性<!-- known_factors>
+      <unknown_risks -->未知風險的影響<!-- unknown_risks>
+      <team_experience -->團隊經驗匹配度<!-- team_experience>
+      
+      
+  breakdown:
+    - work_item: "<工作項目>"
+      estimate: "<估算值>"
+      reasoning: |
+        估算推理：
+        <estimation_reasoning>
+        <complexity>複雜度分析<!-- complexity>
+        <similar_experience -->類似經驗參考<!-- similar_experience>
+        <risk_factors -->風險因素考慮<!-- risk_factors>
+        
+
+risks:
+  - id: "R1"
+    description: |
+      <風險描述>
+      
+      風險分析思維鏈：
+      <risk_analysis>
+      <root_cause>根本原因分析<!-- root_cause>
+      <trigger_conditions -->觸發條件<!-- trigger_conditions>
+      <impact_scope -->影響範圍<!-- impact_scope>
+      <detection_method -->檢測方法<!-- detection_method>
+      
+      
+    probability: "<低|中|高>"
+    impact: "<低|中|高>"
+    risk_matrix_reasoning: |
+      風險矩陣推理：
+      <risk_matrix>
+      <probability_factors>影響概率的因素<!-- probability_factors>
+      <impact_factors -->影響程度的因素<!-- impact_factors>
+      <overall_priority -->整體優先級判斷<!-- overall_priority>
+      
+      
+    mitigation: |
+      <緩解措施>
+      
+      緩解策略：
+      <mitigation_strategy>
+      <preventive_measures>預防性措施<!-- preventive_measures>
+      <monitoring_approach -->監控方法<!-- monitoring_approach>
+      <early_warning -->早期預警機制<!-- early_warning>
+      
+      
+    contingency: |
+      <應急計劃>
+      
+      應急響應計劃：
+      <contingency_plan>
+      <trigger_criteria>啟動標準<!-- trigger_criteria>
+      <response_steps -->響應步驟<!-- response_steps>
+      <recovery_procedure -->恢復程序<!-- recovery_procedure>
+      <communication_plan -->溝通計劃<!-- communication_plan>
+      
+
+open_questions:
+  - |
+    <問題描述>
+    
+    問題分析框架：
+    <question_analysis>
+    <context>問題背景和上下文<!-- context>
+    <impact -->對項目的潛在影響<!-- impact>
+    <research_needed -->需要的研究或調查<!-- research_needed>
+    <decision_timeline -->決策時間線<!-- decision_timeline>
+    <stakeholders -->相關利益相關者<!-- stakeholders>
+    
+
+notes:
+  - |
+    <備註內容>
+    
+    備註分類：
+    <note_classification>
+    <type>備註類型 (技術、業務、流程等)<!-- type>
+    <importance -->重要程度<!-- importance>
+    <action_required -->是否需要後續行動<!-- action_required>
+    
+
+# 開發記錄相關配置 (整合高階提示詞技巧)
+dev_notes_location: "docs/dev-notes/{task_id}(例如 1, 2, 3...)-dev-notes.md"
+dev_notes_schema: "參考相應開發者工作流程中的 dev_notes_v1 結構"
+dev_notes_note: |
+  開發者將在implement過程中在單獨文件中維護詳細記錄，而不是在計劃文件中
+  
+  開發記錄指導：
+  <dev_notes_guidance>
+  <chain_of_thought>在記錄決策過程時應用chain_of_thought<!-- chain_of_thought>
+  <xml_structure -->使用XML標籤組織複雜的技術分析<!-- xml_structure>
+  <first_principles -->從基本原理出發記錄設計決策<!-- first_principles>
+  <self_discover -->在問題解決過程中應用SELF-DISCOVER框架<!-- self_discover>
+  
+
+# 高階提示詞技巧使用指南
+prompt_techniques_guide:
+  chain_of_thought:
+    description: "chain_of_thought - 用於複雜分析和決策過程"
+    usage: |
+      在需要逐步分析的地方使用：
+      <reasoning>
+      首先，分析問題的核心要素...
+      接下來，考慮可能的解決方案...
+      然後，評估每個方案的優缺點...
+      最後，做出最佳決策...
+      <!-- reasoning>
+      
+  self_discover:
+    description: "SELF-DISCOVER框架 - 用於結構化任務分解"
+    stages:
+      select: "選擇適合的方法和工具"
+      adapt: "調整方法以適應具體情況"
+      implement: "制定詳細的implement計劃"
+      apply: "將計劃應用到具體實例"
+    usage: |
+      在複雜任務分解時使用四階段方法：
+      <self_discover -->
+      <select>選擇階段的具體內容<!-- select>
+      <adapt -->調整階段的具體內容<!-- adapt>
+      <implement -->implement階段的具體內容<!-- implement>
+      <apply -->應用階段的具體內容<!-- apply>
+      
+      
+  xml_structured:
+    description: "XML結構化輸出 - 提高內容組織和可讀性"
+    best_practices:
+      - "使用語義化的標籤名稱"
+      - "保持標籤結構的一致性"
+      - "適當嵌套以反映信息層次"
+    common_tags:
+      - "<analysis>分析內容<!-- analysis>"
+      - "<solution -->解決方案<!-- solution>"
+      - "<validation -->驗證方法<!-- validation>"
+      - "<reasoning -->推理過程<!-- reasoning>"
+      
+  first_principles:
+    description: "第一性原理 - 從基本原理出發進行分析"
+    approach:
+      - "識別問題的基本組成要素"
+      - "質疑現有假設和慣例"
+      - "從基礎原理重新構建解決方案"
+    usage: |
+      在需要深入理解問題本質時使用：
+      <first_principles -->
+      <basic_elements>基本組成要素<!-- basic_elements>
+      <assumptions -->現有假設質疑<!-- assumptions>
+      <reconstruction -->重新構建過程<!-- reconstruction>
+      
+

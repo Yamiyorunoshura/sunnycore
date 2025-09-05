@@ -1,0 +1,312 @@
+---
+description: 統一架構系統templates文檔
+last_updated: '2025-09-03'
+name: review-tmpl
+template_type: yaml
+version: '1.0'
+---
+
+---
+# Implementation Review Report Template (Standardized with Advanced Prompt Techniques)
+# All sections must be filled with actual content or marked as "N/A - [reason]"
+# This template integrates chain of thought reasoning, SELF-DISCOVER framework, and XML structured output
+
+template_metadata:
+  name: "Standardized QA Review Template"
+  version: "2.0"
+  prompt_techniques: ["chain_of_thought", "self_discover", "xml_structured"]
+  quality_standards: ["completeness", "consistency", "accuracy", "actionability"]
+
+prompt_guidance:
+  chain_of_thought:
+    instruction: "Before filling each section, first analyze the purpose and requirements of that section"
+    structure:
+      - "Understand requirements"
+      - "Analyze available evidence"
+      - "Make informed assessment"
+      - "Validate conclusions"
+  
+  xml_output:
+    required_tags:
+      - "<analysis>Analysis process and reasoning<!-- analysis>"
+      - "<findings -->Structured findings with evidence<!-- findings>"
+      - "<recommendations -->Actionable recommendations<!-- recommendations>"
+      - "<validation -->Quality validation and verification<!-- validation>"
+  
+  self_discover:
+    stages:
+      select: "Select appropriate review methods and evaluation criteria"
+      adapt: "Adapt methods to the specific task and context"
+      implement: "Execute structured review process"
+      apply: "Apply findings to generate actionable recommendations"
+
+usage_instructions: |
+  1. Use chain of thought reasoning for complex assessments
+  2. Structure findings using XML tags for clarity
+  3. Apply SELF-DISCOVER framework for systematic evaluation
+  4. Ensure all recommendations are specific and actionable
+  5. Validate conclusions against evidence and quality standards
+
+metadata:
+  task_id: # 必填：實際任務ID
+  project_name: # 必填：專案名稱
+  reviewer_ # 必填：reviewer姓名
+  date: # 必填：YYYY-MM-DD格式
+  review_type: # 必填：initial|follow_up|re_review
+  review_iteration: # 必填：1|2|3|...
+  
+  # 僅限後續審查：
+  re_review_metadata:
+    previous_review_date: # 先前審查的YYYY-MM-DD
+    previous_review_path: # 先前審查文件路徑
+    remediation_scope: # full|partial|targeted
+    trigger_reason: # scheduled|issue_found|stakeholder_request|other
+    
+    previous_findings_status:
+      # 追蹤每個先前發現：
+      - finding_id: # 先前發現ID（例如：ISS-1）
+        status: # resolved|in_progress|deferred|wontfix
+        resolution_date: # 如已解決則為YYYY-MM-DD
+        evidence: # 解決證據的路徑/連結
+        notes: # 解決註記或狀態原因
+
+  sources:
+    plan:
+      path: # implement計劃路徑
+    specs:
+      requirements: # requirements.md路徑
+      task: # task.md路徑
+      design: # design.md路徑
+    evidence:
+      prs: [] # PR連結或ID清單
+      commits: [] # 提交雜湊清單
+      artifacts: [] # 相關產物路徑清單
+      
+  assumptions: [] # 列出所有審查假設
+  constraints: [] # 列出所有識別的約束
+
+context:
+  summary: # 必填：描述implement的1-3個句子
+  scope_alignment:
+    in_scope_covered: # yes|partial|no
+    justification: # 範圍評估的證據
+    out_of_scope_changes: [] # 列出任何範圍外變更或"未識別任何"
+
+conformance_check:
+  requirements_match:
+    status: # pass|partial|fail
+    justification: # 詳細說明
+    evidence: [] # 列出有路徑的支持證據
+    
+  plan_alignment:
+    status: # pass|partial|fail  
+    justification: # 詳細說明
+    deviations: # 列出所有偏離或"未識別任何"
+      - description: # 偏離內容
+        impact: # low|medium|high
+        evidence: # 檔案路徑或測量
+
+quality_assessment:
+  # Apply SELF-DISCOVER framework: SELECT appropriate assessment criteria, ADAPT to context, IMPLEMENT evaluation, APPLY results
+  
+  chain_of_thought_guidance: |
+    For each quality dimension:
+    1. First, understand what constitutes quality in this area...
+    2. Then, analyze the available evidence systematically...
+    3. Next, apply consistent scoring criteria...
+    4. Finally, validate the assessment against standards...
+  
+  ratings:
+    completeness:
+      score: # 1-5 (Use chain of thought: analyze requirements coverage, implementation coverage, documentation coverage)
+      justification: # Detailed reasoning with examples using structured analysis
+      evidence: # File paths or specific examples with line numbers
+      xml_analysis: # <analysis -->Systematic evaluation process<!-- analysis><findings -->Specific gaps or completeness evidence<!-- findings>
+      
+    consistency:
+      score: # 1-5 (Apply SELF-DISCOVER: select consistency criteria, adapt to codebase, implement checks)
+      justification: # Detailed reasoning with examples using structured analysis
+      evidence: # File paths or specific examples with line numbers
+      xml_analysis: # <analysis -->Consistency evaluation approach<!-- analysis><findings -->Consistency issues or confirmations<!-- findings>
+      
+    readability_maintainability:
+      score: # 1-5 (Chain of thought: code clarity, documentation quality, architectural coherence)
+      justification: # Detailed reasoning with examples using structured analysis
+      evidence: # File paths or specific examples with line numbers
+      xml_analysis: # <analysis -->Maintainability assessment process<!-- analysis><findings -->Specific maintainability factors<!-- findings>
+      
+    security:
+      score: # 1-5 (SELF-DISCOVER: select security frameworks, adapt to threat model, implement assessment)
+      justification: # Security findings and analysis using systematic approach
+      evidence: # File paths or specific examples with line numbers
+      xml_analysis: # <analysis -->Security evaluation methodology<!-- analysis><findings -->Security vulnerabilities or confirmations<!-- findings>
+      
+    performance:
+      score: # 1-5 (Chain of thought: performance requirements, measurement approach, optimization opportunities)
+      justification: # Performance metrics or observations using structured analysis
+      evidence: # Measurements or benchmarks with specific data
+      xml_analysis: # <analysis -->Performance assessment approach<!-- analysis><findings -->Performance bottlenecks or optimizations<!-- findings>
+      
+    test_quality:
+      score: # 1-5 (Apply testing quality framework: coverage, effectiveness, maintainability)
+      justification: # Coverage and results analysis using systematic evaluation
+      evidence: # Test reports or coverage data with specific metrics
+      xml_analysis: # <analysis -->Test quality evaluation process<!-- analysis><findings -->Test coverage gaps or strengths<!-- findings>
+      
+    documentation:
+      score: # 1-5 (SELF-DISCOVER: select documentation standards, adapt to audience, assess completeness)
+      justification: # Documentation adequacy assessment using structured criteria
+      evidence: # Updated documentation paths with specific sections
+      xml_analysis: # <analysis -->Documentation assessment methodology<!-- analysis><findings -->Documentation gaps or quality indicators<!-- findings>
+      
+  summary_score:
+    score: # 整體分數1-5
+    calculation_method: # 摘要分數如何得出
+
+  implementation_maturity:
+    level: # bronze|silver|gold|platinum
+    rationale: # 依據品質分數、品質門檻與量化指標的綜合說明
+    computed_from:
+      - # 例：所有必填章節完整、無blocker、覆蓋率 -->=70% → silver
+    
+  quantitative_metrics:
+    code_metrics:
+      lines_of_code: # 總程式碼行數
+      cyclomatic_complexity: # 平均複雜度分數
+      technical_debt_ratio: # 百分比
+      code_duplication: # 百分比
+      
+    quality_gates:
+      passing_tests: # 數量/百分比
+      code_coverage: # 百分比
+      static_analysis_issues: # 按嚴重性計數
+      security_vulnerabilities: # 按嚴重性計數
+      
+    # 僅限重新審查：
+    trend_analysis:
+      quality_trend: # improving|stable|declining
+      score_delta: # 與先前審查的+/-X.X
+      improvement_areas: [] # 改進區域
+      regression_areas: [] # 退步區域
+
+findings:
+  # Template for each finding - copy to add more findings
+  # Apply chain of thought reasoning for each finding identification and classification
+  
+  finding_guidance: |
+    For each finding, use this chain of thought process:
+    1. First, clearly identify and understand the issue...
+    2. Then, analyze its impact and severity systematically...
+    3. Next, gather comprehensive evidence...
+    4. Finally, formulate specific, actionable recommendations...
+  
+  severity_classification:
+    blocker: "Critical issues that prevent deployment or cause system failure"
+    high: "Significant issues affecting functionality, security, or performance"
+    medium: "Important issues affecting code quality or maintainability"
+    low: "Minor issues or improvement opportunities"
+  
+  area_classification:
+    security: "Authentication, authorization, data protection, vulnerability issues"
+    performance: "Response time, resource usage, scalability concerns"
+    correctness: "Functional bugs, logic errors, requirement violations"
+    consistency: "Code style, naming conventions, architectural alignment"
+    documentation: "Missing or inadequate documentation, unclear specifications"
+    testing: "Test coverage, test quality, testing strategy issues"
+    other: "Issues not covered by other categories"
+  
+  structured_findings:
+    - id: # ISS-1, ISS-2, etc. (Use systematic numbering)
+      title: # Clear, specific issue title (Apply chain of thought: what is the core problem?)
+      severity: # blocker|high|medium|low (Use SELF-DISCOVER: select criteria, assess impact, classify severity)
+      area: # security|performance|correctness|consistency|documentation|testing|other
+      description: # Detailed problem description using structured analysis
+      chain_of_thought_analysis: # Document the reasoning process used to identify and analyze this finding
+      evidence: [] # List specific evidence with exact paths/line numbers (be comprehensive and precise)
+      recommendation: # Specific, actionable recommendation with implementation steps
+      xml_structured_finding: |
+        <analysis>Systematic analysis of the issue and its implications<!-- analysis>
+        <impact -->Assessment of the issue's impact on system quality and functionality<!-- impact>
+        <solution -->Detailed solution approach with specific steps<!-- solution>
+        <validation -->Criteria for verifying the fix is effective<!-- validation>
+
+error_log:
+  summary:
+    total_errors: # 數量
+    by_severity:
+      blocker: 0
+      high: 0
+      medium: 0
+      low: 0
+  entries:
+    - code: # ERR-代碼（例如：ERR-AUTH-001）
+      severity: # blocker|high|medium|low
+      area: # security|performance|correctness|consistency|documentation|testing|other
+      description: # 錯誤/異常的簡述
+      evidence: [] # 具體檔案/行號/PR/測量連結
+      remediation: # 建議修復步驟
+      status: # open|fixed|wontfix
+
+recommendations:
+  # Template for each recommendation - copy to add more recommendations
+  # Use SELF-DISCOVER framework: SELECT improvement opportunities, ADAPT to context, IMPLEMENT solutions, APPLY validation
+  
+  recommendation_guidance: |
+    For each recommendation, apply this systematic approach:
+    1. First, identify the improvement opportunity and its potential value...
+    2. Then, analyze the implementation feasibility and resource requirements...
+    3. Next, design specific implementation steps with clear milestones...
+    4. Finally, define measurable success criteria for validation...
+  
+  prioritization_framework:
+    priority_1: "Critical improvements with high impact and feasible implementation"
+    priority_2: "Important improvements with moderate impact or complexity"
+    priority_3: "Nice-to-have improvements with lower impact or higher complexity"
+  
+  structured_recommendations:
+    - id: # REC-1, REC-2, etc. (Use systematic numbering)
+      title: # Clear recommendation title (Chain of thought: what specific improvement is proposed?)
+      priority: # priority_1|priority_2|priority_3 (Apply impact vs effort analysis)
+      rationale: # Why this recommendation is helpful (use structured reasoning)
+      chain_of_thought_analysis: # Document the reasoning process for this recommendation
+      steps: [] # List all implementation steps with specific actions and responsibilities
+      success_criteria: [] # List measurable success conditions with specific metrics
+      xml_structured_recommendation: |
+        <analysis -->Systematic analysis of the improvement opportunity<!-- analysis>
+        <benefits -->Expected benefits and value proposition<!-- benefits>
+        <implementation -->Detailed implementation approach with timeline<!-- implementation>
+        <validation -->Success criteria and measurement approach</validation>
+      
+      implementation_details:
+        effort_estimate: # small|medium|large (based on complexity and resource requirements)
+        dependencies: [] # List any dependencies or prerequisites
+        risks: [] # Identify potential implementation risks
+        alternatives: [] # Consider alternative approaches if applicable
+
+next_actions:
+  blockers: [] # 列出所有阻礙項目或"未識別阻礙"
+  prioritized_fixes: [] # 按優先順序排列修復（參考發現ID）
+  follow_up: [] # 列出有負責人/時間線的後續行動
+
+appendix:
+  test_summary:
+    coverage:
+      lines: # 百分比
+      branches: # 百分比
+      functions: # 百分比
+    results:
+      - suite: # 測試套件名稱
+        status: # pass|fail
+        notes: # 任何相關註記
+        
+  measurements:
+    performance: # 列出效能指標或"無可用指標"
+      - metric: # 指標名稱（例如：p95_latency_ms）
+        value: # 當前值
+        baseline: # 基線值
+        delta: # +/- 變化
+        
+    security_scans: # 列出安全掃描結果或"未implement掃描"
+      - tool: # 掃描工具名稱
+        result: # pass|issues
+        notes: # 發現摘要

@@ -1,0 +1,430 @@
+---
+description: Read when you are asked to finish task related to prompt engineering
+alwaysApply: false
+---
+```
+
+**必要欄位驗證**:
+- `name`: 必須符合 `{category}_{functional_name}` 格式
+- `description`: 必須包含角色專業領域和主要職責
+- `prompt_techniques`: 必須包含 ["chain_of_thought", "self_discover", "xml_structured"]
+- `version`: 必須使用語義版本格式
+
+### 3.2 XML 主體結構必要元素
+
+#### 3.2.1 任務層 (Task Layer)
+```xml
+<role name="{agent_identifier}"/>
+<goal>{clear_primary_objective}</goal>
+
+<constraints>
+  <item>{specific_limitation_or_prohibition}</item>
+  <!-- 至少 3-5 個具體約束 -->
+</constraints>
+
+<policies>
+  <policy id="{policy_identifier}" version="1.0">{policy_content}</policy>
+  <!-- 至少包含 structured-output 和 workflow-alignment 政策 -->
+</policies>
+
+<metrics>
+  <metric type="{performance_indicator}" target="{threshold_value}"/>
+  <!-- 至少 3 個可量化指標，目標值 >=85% -->
+</metrics>
+```
+
+#### 3.2.2 上下文層 (Context Layer)
+```xml
+<context>
+  <repo-map>{project_root}</repo-map>
+  <files>
+    <file path="{workflow_file_path}">{file_description}</file>
+    <file path="{template_file_path}">{file_description}</file>
+  </files>
+  <dependencies>{required_tools_and_libraries}</dependencies>
+</context>
+```
+
+#### 3.2.3 工具層 (Tools Layer)
+```xml
+<tools>
+  <tool name="{tool_identifier}" kind="command|api|mcp">{tool_description}</tool>
+  <!-- 至少包含專案所需的基本工具 -->
+</tools>
+```
+
+#### 3.2.4 流程層 (Process Layer)
+```xml
+<plan allow-reorder="true|false">
+  <step id="{step_number}" type="read|analyze|test|report">{step_description}</step>
+  <!-- 至少 3-4 個具體步驟 -->
+</plan>
+
+<validation_checklist>
+  <item>{validation_requirement}</item>
+  <!-- 至少 5 個驗證項目 -->
+</validation_checklist>
+```
+
+#### 3.2.5 安全層 (Safety Layer) - 必須包含
+```xml
+<fast_stop_triggers>
+  <trigger id="{trigger_identifier}">
+    <condition>{specific_trigger_condition}</condition>
+    <action>immediate_stop</action>
+    <output>{standardized_error_message}</output>
+  </trigger>
+  <!-- 至少 2-3 個觸發條件 -->
+</fast_stop_triggers>
+
+<emergency_stop>
+  <fixed_message>Emergency Stop: {detailed_stop_reason}</fixed_message>
+  <reason_codes>{TOOL_FAILURE|MISSING_REQUIRED_FILE|EMPTY_CONTENT|SECURITY_VIOLATION}</reason_codes>
+</emergency_stop>
+
+<guardrails>
+  <rule id="{rule_identifier}">{behavioral_restriction}</rule>
+  <!-- 至少 3-4 個守護規則 -->
+</guardrails>
+```
+
+#### 3.2.6 輸入/輸出層 (I/O Layer)
+```xml
+<inputs>
+  <git_context>
+    <message/>
+    <changed_files/>
+    <diff/>
+    <branch/>
+  </git_context>
+  <!-- 根據代理類型添加其他輸入 -->
+</inputs>
+
+<outputs>
+  <final format="json|markdown" schema="{schema_identifier}"/>
+  <output_location>{target_file_path}</output_location>
+</outputs>
+```
+
+#### 3.2.7 推理和輸出層 (Reasoning Layer) - 必須包含
+```xml
+<analysis>{internal_analysis_process}</analysis>
+<implementation>{actual_execution_content}</implementation>
+<validation>{result_verification_quality_checks}</validation>
+```
+
+## 4. 代理分類和特殊要求
+
+### 4.1 開發類代理 (dev_*)
+- **命名格式**: `dev_{specialization}` (如 dev_backend-developer_api)
+- **必須包含**: 程式碼品質指標、測試驗證步驟
+- **特殊要求**: 包含程式碼修改的安全守護規則
+
+### 4.2 專案管理類代理 (po_*)
+- **命名格式**: `po_{function}` (如 po_architecture-documenter)
+- **必須包含**: 文檔品質指標、跨參考驗證
+- **特殊要求**: 包含文檔同步性和完整性檢查
+
+### 4.3 品質保證類代理 (qa_*)
+- **命名格式**: `qa_{review_type}` (如 qa_task-reviewer_code-quality)
+- **必須包含**: 評審標準、合規性檢查
+- **特殊要求**: 包含風險評估和品質閘門機制
+
+## 5. 品質保證機制
+
+### 5.1 必要的驗證檢查清單
+
+**結構完整性檢查**:
+- [ ] YAML 前置區塊格式正確且包含所有必要欄位
+- [ ] XML 結構符合 spec-version="1.0" 規範
+- [ ] 所有必要的安全機制已實作
+- [ ] 推理和輸出層結構完整
+
+**內容品質檢查**:
+- [ ] 角色定義明確且與功能描述一致
+- [ ] 目標陳述具體且可達成
+- [ ] 約束條件具體且可執行
+- [ ] 指標設定合理且可量化
+- [ ] 驗證清單完整且可操作
+
+**安全性檢查**:
+- [ ] Fast stop triggers 涵蓋關鍵失效情境
+- [ ] Emergency stop 機制完整
+- [ ] Guardrails 涵蓋潛在風險
+- [ ] 沒有潛在的安全漏洞或權限問題
+
+**一致性檢查**:
+- [ ] 與相關工作流程文檔一致
+- [ ] 與專案整體架構保持一致
+- [ ] 版本編號和更新日期正確
+
+### 5.2 測試和驗證流程
+
+1. **結構驗證**: 使用 XML schema 驗證工具檢查結構合規性
+2. **內容審查**: 人工審查內容的邏輯性和完整性
+3. **功能測試**: 在受控環境中測試提示詞的實際效果
+4. **安全測試**: 驗證安全機制在異常情況下的有效性
+5. **整合測試**: 確保與其他系統組件的兼容性
+
+## 6. 錯誤處理和緊急停止機制
+
+### 6.1 常見錯誤類型和處理方案
+
+#### 6.1.1 工具失效 (TOOL_FAILURE)
+- **觸發條件**: 外部工具或指令失效
+- **處理方式**: 立即停止，輸出診斷資訊
+- **復原策略**: 提供備用工具或降級方案
+
+#### 6.1.2 必要檔案遺失 (MISSING_REQUIRED_FILE)
+- **觸發條件**: 必需的輸入檔案無法找到
+- **處理方式**: 緊急停止，要求檔案確認
+- **復原策略**: 提供檔案路徑檢查和創建指引
+
+#### 6.1.3 內容為空 (EMPTY_CONTENT)
+- **觸發條件**: 關鍵內容為空或損壞
+- **處理方式**: 記錄警告，嘗試最小可行輸出
+- **復原策略**: 要求重新提供有效輸入
+
+#### 6.1.4 安全性違規 (SECURITY_VIOLATION)
+- **觸發條件**: 偵測到安全政策違反
+- **處理方式**: 立即停止，生成安全警報
+- **復原策略**: 安全審查和權限重新配置
+
+## 7. 實作指引
+
+### 7.1 步驟化撰寫流程
+
+#### 階段一: 需求分析和設計
+1. 確認代理類型和功能需求
+2. 選擇適當的 XML profile (light/standard/strict)
+3. 設計 SELF-DISCOVER 框架整合方案
+4. 規劃輸入/輸出格式和工作流程
+
+#### 階段二: 結構化撰寫
+1. 創建 YAML 前置區塊，確認所有必要欄位
+2. 實作 XML 主體結構，按層次組織內容
+3. 添加完整的安全機制和錯誤處理
+4. 實作推理和輸出層結構
+
+#### 階段三: 品質保證
+1. 執行結構完整性檢查
+2. 進行內容品質審查
+3. 驗證安全機制有效性
+4. 測試與現有系統的整合性
+
+#### 階段四: 文檔和維護
+1. 更新相關文檔和版本記錄
+2. 建立維護和更新流程
+3. 設定反饋收集機制
+4. 規劃定期審查和改進
+
+### 7.2 最佳實踐建議
+
+#### 7.2.1 內容撰寫
+- 使用明確、具體的語言，避免模糊表述
+- 提供具體的範例和使用情境
+- 確保所有約束和政策都是可執行的
+- 使用一致的命名和格式約定
+
+#### 7.2.2 結構組織
+- 遵循邏輯層次，由抽象到具體
+- 確保元素間的依賴關係清晰
+- 使用標準化的 XML 標籤和屬性
+- 保持結構簡潔但完整
+
+#### 7.2.3 安全設計
+- 預期並處理所有可能的失效情況
+- 實作多層次的安全檢查機制
+- 提供明確的錯誤訊息和復原指引
+- 定期審查和更新安全政策
+
+## 8. 範例和模板
+
+### 8.1 標準代理模板
+
+```yaml
+---
+name: category_functional-name
+description: [Role] expert integrating advanced prompt techniques, responsible for [primary responsibility] and integrating [key methodologies]
+model: inherit
+color: blue|green|red|purple|orange
+prompt_techniques: ["chain_of_thought", "self_discover", "xml_structured"]
+version: 1.0
+last_updated: 2025-01-18
+---
+
+<prompt spec-version="1.0" profile="standard">
+  <role name="category_functional-name"/>
+  <goal>[Clear, specific primary objective]</goal>
+  
+  <constraints>
+    <item>[Specific limitation or prohibition]</item>
+    <item>[Additional constraint]</item>
+    <item>[Security or operational constraint]</item>
+  </constraints>
+  
+  <policies>
+    <policy id="structured-output" version="1.0">Separate analysis, implementation, and validation blocks using XML structure.</policy>
+    <policy id="workflow-alignment" version="1.0">Follow [workflow-file-path] for the end-to-end process.</policy>
+  </policies>
+  
+  <metrics>
+    <metric type="[performance_indicator]" target=">=85%"/>
+    <metric type="[quality_measure]" target=">=90%"/>
+    <metric type="[efficiency_measure]" target=">=80%"/>
+  </metrics>
+
+  <context>
+    <repo-map>{project_root}</repo-map>
+    <files>
+      <file path="{workflow_file_path}">[File description]</file>
+      <file path="{template_file_path}">[File description]</file>
+    </files>
+    <dependencies>[Required tools and libraries]</dependencies>
+  </context>
+
+  <tools>
+    <tool name="[tool_name]" kind="command|api|mcp">[Tool description]</tool>
+  </tools>
+
+  <plan allow-reorder="false">
+    <step id="1" type="read">[Step description]</step>
+    <step id="2" type="analyze">[Step description]</step>
+    <step id="3" type="report">[Step description]</step>
+  </plan>
+
+  <validation_checklist>
+    <item>[Validation requirement]</item>
+    <item>[Quality check]</item>
+    <item>[Completeness check]</item>
+  </validation_checklist>
+
+  <fast_stop_triggers>
+    <trigger id="missing_required_file">
+      <condition>[Required file] not found</condition>
+      <action>immediate_stop</action>
+      <output>Error: Missing required [file description]</output>
+    </trigger>
+  </fast_stop_triggers>
+
+  <emergency_stop>
+    <fixed_message>Emergency Stop: Tool/file retrieval failure detected, response stopped for consistency. Please correct and retry.</fixed_message>
+    <reason_codes>TOOL_FAILURE|MISSING_REQUIRED_FILE|EMPTY_CONTENT|SECURITY_VIOLATION</reason_codes>
+  </emergency_stop>
+
+  <guardrails>
+    <rule id="no-destructive-operations">[Safety rule]</rule>
+    <rule id="evidence-requirement">[Quality rule]</rule>
+  </guardrails>
+
+  <inputs>
+    <git_context>
+      <message/>
+      <changed_files/>
+      <diff/>
+      <branch/>
+    </git_context>
+  </inputs>
+
+  <outputs>
+    <final format="markdown|json" schema="[schema_identifier]"/>
+    <output_location>{project_root}/[target_path]</output_location>
+  </outputs>
+
+  <analysis>[Internal analysis and reasoning process]</analysis>
+  <implementation>[Actual execution or content generation]</implementation>
+  <validation>[Result verification and quality checks]</validation>
+
+</prompt>
+```
+
+### 8.2 檢查清單模板
+
+#### 8.2.1 結構驗證檢查清單
+```markdown
+## 結構驗證檢查清單
+
+### YAML 前置區塊
+- [ ] name 欄位符合命名規範
+- [ ] description 包含角色和職責描述
+- [ ] prompt_techniques 包含必要技術
+- [ ] version 使用語義版本格式
+- [ ] last_updated 日期格式正確
+
+### XML 主體結構
+- [ ] 根元素使用正確的 spec-version 和 profile
+- [ ] 包含所有必要的核心元素
+- [ ] 安全機制完整實作
+- [ ] 推理和輸出層結構存在
+- [ ] XML 語法正確無誤
+
+### 內容品質
+- [ ] 目標陳述清晰具體
+- [ ] 約束條件可執行
+- [ ] 指標設定合理
+- [ ] 驗證清單完整
+- [ ] 錯誤處理完善
+```
+
+## 9. 合規性和維護
+
+### 9.1 版本管理和更新機制
+
+#### 9.1.1 版本編號規則
+- **主版本號**: 重大結構變更或不相容更新
+- **次版本號**: 功能增強或相容性改進
+- **修訂版本號**: 錯誤修正或小幅調整
+
+#### 9.1.2 更新觸發條件
+- 基礎規範 (XML Agent System Specification) 更新
+- 安全政策或合規要求變更
+- 工作流程或工具鏈升級
+- 品質指標或性能要求調整
+
+#### 9.1.3 向下相容性要求
+- 新版本必須支援舊版本的核心功能
+- 廢棄功能必須提供遷移路徑
+- 變更必須有充分的文檔和通知
+
+### 9.2 品質監控和改進
+
+#### 9.2.1 定期審查機制
+- **月度審查**: 檢查提示詞效能和錯誤報告
+- **季度評估**: 評估整體品質和用戶滿意度
+- **年度更新**: 全面檢討規範和最佳實踐
+
+#### 9.2.2 反饋收集和處理
+- 建立用戶反饋收集機制
+- 定期分析常見問題和改進建議
+- 實施持續改進流程
+
+## 10. 附錄
+
+### 10.1 常見問題解答
+
+**Q: 如何選擇適當的代理類型？**
+A: 根據主要職責選擇：dev_ 用於開發任務，po_ 用於專案管理，qa_ 用於品質保證。
+
+**Q: 何時使用 strict profile 而非 standard profile？**
+A: 當需要強制審計追蹤和正式簽署時使用 strict profile。
+
+**Q: 如何處理多語言或國際化需求？**
+A: 在 constraints 中明確語言要求，在 policies 中定義本地化政策。
+
+### 10.2 參考資料
+
+- XML Agent System Specification v1.0
+- Prompt Engineering Enforcement Specification v2.0
+- SELF-DISCOVER Framework Documentation
+- W3C XML Schema Definition Language
+- 專案架構文檔和工作流程指引
+
+### 10.3 版本歷史
+
+| 版本 | 日期 | 變更內容 |
+|------|------|---------|
+| 1.0.0 | 2025-01-18 | 初始版本發布，整合核心規範和實作指引 |
+
+---
+
+*本規範由 MCP Intelligent Agent Configuration Expert 維護，定期審查和更新。如有問題或建議，請聯繫維護團隊。*
