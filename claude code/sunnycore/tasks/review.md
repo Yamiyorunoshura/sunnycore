@@ -3,7 +3,7 @@
   1. {project_root}/docs/dev-notes/{task_id}-dev-notes.md
     - dev_entries
     - integration_summary
-  2. {project_root}/docs/implementation_plan/{task_id}-plan.md
+  2. {project_root}/docs/implementation-plan/{task_id}-plan.md
     - context
     - approach
     - risks

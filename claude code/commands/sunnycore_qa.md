@@ -20,7 +20,7 @@
   2. {project_root}/docs/specs/task.md
   3. {project_root}/docs/specs/design.md
   4. {project_root}/docs/implementation-plan/{task_id}-plan.md
-  5. {project_root}/docs/dev_notes/{task_id}-dev-notes.md
+  5. {project_root}/docs/dev-notes/{task_id}-dev-notes.md
   </context>
   <tasks>
   1. {project_root}/sunnycore/tasks/review.md

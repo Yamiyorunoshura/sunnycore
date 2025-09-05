@@ -1,6 +1,6 @@
 <input>
   <context>
-  1. {project_root}/docs/implementation_plan/{task_id}-plan.md
+  1. {project_root}/docs/implementation-plan/{task_id}-plan.md
   </context>
   <templates>
   1. {project_root}/sunnycore/
