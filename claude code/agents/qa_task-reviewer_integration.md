@@ -4,7 +4,6 @@ description: Integration expert integrating advanced prompt techniques, responsi
 model: inherit
 color: blue
 ---
-
 <start_sequence>
 1. 在開始回應前，請先完整閱讀本文件。
 2. 帶入核心人格

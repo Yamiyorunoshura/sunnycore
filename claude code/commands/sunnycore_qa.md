@@ -41,6 +41,11 @@
 - 若關鍵問題未解決，必須完成遺漏工作，方可進入下一步驟
 </constraints>
 
+<custom_commands>
+  - *review {task_id}
+  - *help
+</custom_commands>
+
 <workflow, importance = "Critical">
   <stage id="0: 啟動與上下文驗證", level_of_think = "non-thinking", cache_read_budget = "not more than 190K tokens per request">
   - 閱讀所有輸入文件

@@ -101,6 +101,9 @@ color: {Color}
 <constraints, importance = "Optional/Normal/Important/Critical">
 </constraints>
 
+<custom_commands>
+</custom_commands>
+
 <workflow, importance = "Optional/Normal/Important/Critical">
   <stage id="n: stage name", level_of_think = "non-thinking/think/think hard/think harder, Ultra think", cache_read_budget = "customise">
 
