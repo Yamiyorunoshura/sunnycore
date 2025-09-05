@@ -99,19 +99,23 @@ color: green
 - [ ] xxx
 - [ ] yyy
 - [ ] zzz
+- ...
 
 # 任務開發中遇到的問題
 - xxx
 - yyy
 - zzz
+- ...
 
 # 任務實作的代碼
 - xxx(function/class/module)(line number)
 - yyy(function/class/module)(line number)
 - zzz(function/class/module)(line number)
+- ...
 
 # 開發成果
 - xxx
 - yyy
 - zzz
+- ...
 </example>
