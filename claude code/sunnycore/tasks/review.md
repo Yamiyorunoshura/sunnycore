@@ -1,6 +1,6 @@
 <input>
   <context>
-  1. {project_root}/docs/dev_notes/{task_id}-dev-notes.md
+  1. {project_root}/docs/dev-notes/{task_id}-dev-notes.md
     - dev_entries
     - integration_summary
   2. {project_root}/docs/implementation_plan/{task_id}-plan.md
