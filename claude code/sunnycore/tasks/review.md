@@ -118,6 +118,30 @@
   - [ ] 審查報告保存完成
   </checks>
   </stage>
+
+  <stage id="4: 根據審查結果，構建實踐等級和實踐分數判斷審查是否通過", level_of_think = "think hard", cache_read_budget = "not more than 190K tokens per request">
+  - 根據審查結果，構建實踐等級和實踐分數
+  - 判斷實踐等級和實踐分數是否符合審查標準
+  - 若符合審查標準，則審查通過
+  - 若不符合審查標準，則審查不通過
+  - 按照範例更新task.md來反應審查是否通過
+
+  <questions>
+    關鍵問題：
+    - 實踐等級和實踐分數是否符合審查標準？
+    - 審查是否通過？
+    - 通過的理由是什麼呢？
+    - 不通過的理由是什麼呢？
+  </questions>
+
+  <checks>
+  階段性檢查點：
+  - [ ] 實踐等級和實踐分數構建完成
+  - [ ] 審查是否通過判斷完成
+  - [ ] task.md更新完成
+  - [ ] todo list更新完成
+  </checks>
+  </stage>
 </workflow>
 
 <example>
@@ -144,4 +168,42 @@
 - xxx
 - yyy
 - zzz
+</example>
+
+<example>
+# 原task.md
+- [ ] Task 1: xxx
+  - [ ] Task 1.1: yyy
+  - [ ] Task 1.2: zzz
+- [ ] Task 2: xxx
+  - [ ] Task 2.1: yyy
+  - [ ] Task 2.2: zzz
+- [ ] Task 3: xxx
+  - [ ] Task 3.1: yyy
+  - [ ] Task 3.2: zzz
+- ...
+
+# 更新後的task.md（通過審查）
+- [x] Task 1: xxx
+  - [x] Task 1.1: yyy
+  - [x] Task 1.2: zzz
+- [x] Task 2: xxx
+  - [x] Task 2.1: yyy
+  - [x] Task 2.2: zzz
+- [x] Task 3: xxx
+  - [x] Task 3.1: yyy
+  - [x] Task 3.2: zzz
+- ...
+
+# 更新後的task.md（不通過審查）
+- [-] Task 1: xxx
+  - [-] Task 1.1: yyy
+  - [-] Task 1.2: zzz
+- [-] Task 2: xxx
+  - [-] Task 2.1: yyy
+  - [-] Task 2.2: zzz
+- [-] Task 3: xxx
+  - [-] Task 3.1: yyy
+  - [-] Task 3.2: zzz
+- ...
 </example>
