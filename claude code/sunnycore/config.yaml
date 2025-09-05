@@ -1,0 +1,7 @@
+qa-subagent-list:
+  - qa_task-reviewer_security
+  - qa_task-reviewer_performance
+  - qa_task-reviewer_documentation
+  - qa_task-reviewer_integration
+  - qa_task-reviewer_code-quality
+  - qa_task-reviewer_testing

@@ -1,6 +1,6 @@
 <input>
   <context>
-  1. {project_root}/docs/dev_notes/{task_id}dev_notes.md
+  1. {project_root}/docs/dev_notes/{task_id}-dev-notes.md
     - dev_entries
     - integration_summary
   2. {project_root}/docs/implementation_plan/{task_id}-plan.md
@@ -12,6 +12,10 @@
   <templates>
   3. {project_root}/sunnycore/qa/templates/review-tmpl.yaml
   </templates>
+  <subagent-list>
+  4. {project_root}/sunnycore/config.yaml
+    - qa-subagent-list
+  </subagent-list>
 </input>
 
 <output>
@@ -71,6 +75,7 @@
   </stage>
 
   <stage id="2: 子代理任務分配與啟動", level_of_think = "think", cache_read_budget = "not more than 190K tokens per request">
+  - 閱讀qa-subagent-list獲取可調用的子代理列表
   - 根據輸入文件判斷審查類型，並查看審查類型所對應的子代理
   - 按照範例格式構建給每位子代理的上下文，並將上下文傳遞給每位子代理
   - 為每位子代理發配任務，並同時啟動所有選中的子代理
@@ -78,6 +83,7 @@
   <questions>
   關鍵問題：
   - 審查任務的類型是否正確？
+  - 是否只調用了被允許的子代理？
   - 傳遞給子代理的上下文是否符合範例格式？
   - 是否已經將所有上下文以及審查任務傳遞給所有子代理？
   - 分配給子代理的審查任務是否足夠原子化？
