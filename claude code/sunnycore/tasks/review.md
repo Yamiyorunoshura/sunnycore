@@ -19,7 +19,7 @@
 </input>
 
 <output>
-1. 總結各個子代理的審查結果後得出的綜合報告
+1. 總結各個子代理的審查結果後得出的綜合報告{task_id}-review.md
 2. 實踐等級(bronze/silver/gold/platinum)
 3. 實踐分數(1-5)
 4. 優秀的代碼實踐

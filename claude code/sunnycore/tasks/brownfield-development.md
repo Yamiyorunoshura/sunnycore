@@ -3,7 +3,7 @@
   1. {project_root}/docs/specs/requirements.md
   2. {project_root}/docs/specs/task.md
   3. {project_root}/docs/specs/design.md
-  4. {project_root}/docs/implementation-plan/{task_id}-plan.md
+  4. {project_root}/docs/review-results/{task_id}-review.md
   </context>
   <templates>
   1. {project_root}/sunnycore/templates/dev-notes-tmpl.yaml
@@ -12,9 +12,9 @@
 
 <output>
 1. {project_root}/docs/dev-notes/{task_id}-dev-notes.md
-2. 優質的代碼實踐
-3. 實踐等級(bronze/silver/gold/platinum)
-4. 實踐分數(1-5)
+2. 優質的代碼修復
+3. 等級(bronze/silver/gold/platinum)
+4. 分數(1-5)
 </output>
 
 <workflow, importance = "Critical">

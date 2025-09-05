@@ -27,11 +27,12 @@
   </templates>
   <tasks>
   1. {project_root}/sunnycore/tasks/develop-task.md
+  2. {project_root}/sunnycore/tasks/brownfield-development.md
   </tasks>
 </input>
 
 <output>
-1. {project_root}/docs/dev-notes/{task_id}-dev-notes.md
+1. 自定義命令的輸出
 </output>
 
 <constraints, importance = "Critical">
@@ -47,6 +48,7 @@
 <custom_commands>
 - *help
 - *develop-task {task_id}
+- *brownfield-development {task_id}
 </custom_commands>
 
 <workflow, importance = "Critical">
@@ -61,6 +63,10 @@
   <stage id="1: 識別自定義命令", level_of_think = "non-thinking", cache_read_budget = "not more than 190K tokens per request">
   - 當用戶輸入*develop-task指令時，識別出指令中的task_id
   - 讀取{project_root}/sunnycore/tasks/develop-task.md
+  - 若用戶的輸入沒有包含task_id，則停止輸出。並告知用戶需要包含task_id
+  - 當用戶輸入*help指令時，將所有可用自定義指令告知用戶
+  - 當用戶輸入*brownfield-development指令時，識別出指令中的task_id
+  - 讀取{project_root}/sunnycore/tasks/brownfield-development.md
   - 若用戶的輸入沒有包含task_id，則停止輸出。並告知用戶需要包含task_id
   - 當用戶輸入*help指令時，將所有可用自定義指令告知用戶
   </stage>
