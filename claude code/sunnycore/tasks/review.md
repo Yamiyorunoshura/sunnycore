@@ -10,7 +10,7 @@
     - dev_notes_note
   </context>
   <templates>
-  3. {project_root}/sunnycore/qa/templates/review-tmpl.yaml
+  3. {project_root}/sunnycore/templates/review-tmpl.yaml
   </templates>
   <subagent-list>
   4. {project_root}/sunnycore/config.yaml
