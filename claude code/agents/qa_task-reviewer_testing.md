@@ -52,7 +52,6 @@ color: blue
   - 進一步閱讀所有步驟
   - 閱讀所有步驟下的無序列表項
   - 使用todo-list工具為每個無序列表項在todo list中創建一個todo item
-  </stage>
 
   <checks>
     階段性檢查點：
@@ -65,7 +64,6 @@ color: blue
   <stage id="1: 啟動與上下文驗證", level_of_think = "non-thinking", cache_read_budget = "not more than 190K tokens per request">
   - 閱讀所有輸入文件
   - 驗證所有輸入文件存在
-  </stage>
 
   <checks>
     階段性檢查點：
@@ -80,7 +78,6 @@ color: blue
   - 使用claude context查找主agent所提供的上下文中的代碼實踐
   - 使用context7查找是否有相關的優秀實踐
   - 參考範例格式並將審查結果發送給主agent
-  </stage>
 
   <checks>
     階段性檢查點：
