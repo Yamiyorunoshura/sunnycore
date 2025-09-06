@@ -8,9 +8,9 @@
 ## 上下文相關標籤
 這些標籤用於描述文檔的上下文。
 - <input>：描述文檔的輸入。
-    - <context>： 描述文檔的上下文。
+    - <context>： 描述LLM需要讀取的上下文
 - <output>： 定義文檔的輸出。
-    - <context>： 描述文檔的上下文。
+    - <context>： 描述LLM需要輸出的上下文
 - <constraints>： 描述工作中的規範
 - <example>： 提供實際的例子
 - <questions>： 提出讓LLM自行思考的問題

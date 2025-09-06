@@ -50,9 +50,9 @@
 - *develop-task {task_id}：
   - 識別出指令中的task_id
   - 讀取{project_root}/sunnycore/tasks/develop-task.md
-- *redevlop-task {task_id}：
+- *brownfield-task {task_id}：
   - 識別出指令中的task_id
-  - 讀取{project_root}/sunnycore/tasks/brownfield-development.md
+  - 讀取{project_root}/sunnycore/tasks/brownfield-task.md
 </custom_commands>
 
 <workflow, importance = "Critical">

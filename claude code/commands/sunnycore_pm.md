@@ -47,6 +47,18 @@
 - *plan-task {task_id}
   - 識別出指令中的task_id
   - 讀取{project_root}/sunnycore/tasks/plan-task.md
+- *create-requirements
+  - 讀取{project_root}/sunnycore/tasks/create-requirements.md
+- *create-design
+  - 讀取{project_root}/sunnycore/tasks/create-design.md
+- *create-task
+  - 讀取{project_root}/sunnycore/tasks/create-tasks.md
+- *create-brownfield-requirements
+  - 讀取{project_root}/sunnycore/tasks/create-brownfield-requirements.md
+- *create-brownfield-design
+  - 讀取{project_root}/sunnycore/tasks/create-brownfield-design.md
+- *create-brownfield-task
+  - 讀取{project_root}/sunnycore/tasks/create-brownfield-task.md
 </custom_commands>
 
 <workflow, importance = "Critical">
