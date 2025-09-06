@@ -24,7 +24,9 @@
 <workflow importance="Critical">
   <stage id="1: todo-list-setup" level_of_think="think" read_token_budget="low" write_token_budget="medium" cache_read_budget="low">
     Todo-list Tool設定和初始化
-    - 按照範本在docs/todo-list創建一個Todo文件
+    - 閱讀整份Workflow
+    - 閱讀所有stage的無序列表項
+    - 使用Todo-list Tool創建Todo-list
     - 為每一個Workflow中的無序列表項創建一個todo item
     
     <questions>
@@ -142,23 +144,3 @@ Review Results: security-vulnerabilities-analysis
 4. docs/dev-notes/FIX-001-dev-notes.md
 5. 更新的Todo-list記錄修復進度
 </example>
-
----
-
-# Workflow
-- [ ] xxx
-- [ ] yyy
-- [ ] zzz
-- [ ] ...
-
-# Issues Found in Review
-- [ ] ERR-1: xxx
-- [ ] ERR-2: yyy
-- [ ] ERR-3: zzz
-- [ ] ...
-
-# Review Findings - Recommendations
-- [ ] REC-1: xxx
-- [ ] REC-2: yyy
-- [ ] REC-3: zzz
-- [ ] ...

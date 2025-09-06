@@ -27,7 +27,7 @@
     - {project_root}/docs/specs/design.md
     - {project_root}/sunnycore/tasks/help.md
     - {project_root}/sunnycore/tasks/develop-task.md
-    - {project_root}/sunnycore/tasks/brownfield-development.md
+    - {project_root}/sunnycore/tasks/brownfield-task.md
   </context>
 </input>
 
@@ -54,7 +54,7 @@
     - 閱讀整份Workflow
     - 進一步閱讀所有stages
     - 閱讀所有stages下的無序列表項
-    - 在{project_root}/docs/todo-list中創建一個Todo-list
+    - 使用Todo-list Tool創建Todo-list
     - 為每一個無序列表項在Todo-list中創建一個todo item
     
     <checks>

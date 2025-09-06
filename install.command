@@ -128,8 +128,8 @@ setup_custom_paths() {
             fi
             
             # 設定 Warp Code 的安裝路徑
-            CLAUDE_DIR="$project_path/claude-code"
-            SUNNYCORE_DIR="$project_path/claude-code"
+            CLAUDE_DIR="$project_path"
+            SUNNYCORE_DIR="$project_path/sunnycore"
             break
         done
         return
@@ -339,14 +339,34 @@ install_files() {
         
         cd "$TEMP_DIR/warp code"
         
-        # 安裝 .warp 文件夾到指定目錄
-        if [ -d ".warp" ]; then
-            show_info "安裝 .warp 到 $CLAUDE_DIR"
-            mkdir -p "$CLAUDE_DIR"
-            cp -r .warp "$CLAUDE_DIR/"
-            show_success ".warp 安裝完成"
+        # 安裝 agents, tasks, templates 資料夾到 sunnycore 目錄
+        mkdir -p "$SUNNYCORE_DIR"
+        
+        # 安裝 agents 目錄
+        if [ -d "agents" ]; then
+            show_info "安裝 agents 到 $SUNNYCORE_DIR"
+            cp -r agents "$SUNNYCORE_DIR/"
+            show_success "agents 安裝完成"
         else
-            show_warning "未找到 .warp 目錄"
+            show_warning "未找到 agents 目錄"
+        fi
+        
+        # 安裝 tasks 目錄
+        if [ -d "tasks" ]; then
+            show_info "安裝 tasks 到 $SUNNYCORE_DIR"
+            cp -r tasks "$SUNNYCORE_DIR/"
+            show_success "tasks 安裝完成"
+        else
+            show_warning "未找到 tasks 目錄"
+        fi
+        
+        # 安裝 templates 目錄
+        if [ -d "templates" ]; then
+            show_info "安裝 templates 到 $SUNNYCORE_DIR"
+            cp -r templates "$SUNNYCORE_DIR/"
+            show_success "templates 安裝完成"
+        else
+            show_warning "未找到 templates 目錄"
         fi
     fi
 }
@@ -364,9 +384,15 @@ show_summary() {
     echo -e "SunnyCore 目錄: $SUNNYCORE_DIR"
     
     echo -e "\n${BLUE}已安裝的組件:${NC}"
-    [ -d "$CLAUDE_DIR/agents" ] && echo -e "✓ Agents"
-    [ -d "$CLAUDE_DIR/commands" ] && echo -e "✓ Commands"
-    [ -d "$SUNNYCORE_DIR/sunnycore" ] && echo -e "✓ SunnyCore"
+    if [ "$VERSION" = "claude code" ]; then
+        [ -d "$CLAUDE_DIR/agents" ] && echo -e "✓ Agents"
+        [ -d "$CLAUDE_DIR/commands" ] && echo -e "✓ Commands"
+        [ -d "$SUNNYCORE_DIR/sunnycore" ] && echo -e "✓ SunnyCore"
+    elif [ "$VERSION" = "warp code" ]; then
+        [ -d "$SUNNYCORE_DIR/agents" ] && echo -e "✓ Agents"
+        [ -d "$SUNNYCORE_DIR/tasks" ] && echo -e "✓ Tasks"
+        [ -d "$SUNNYCORE_DIR/templates" ] && echo -e "✓ Templates"
+    fi
     
     echo -e "\n${YELLOW}注意事項:${NC}"
     echo -e "• 請確保 Claude Code 能夠訪問安裝目錄"

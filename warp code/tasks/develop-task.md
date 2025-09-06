@@ -28,7 +28,9 @@
 <workflow importance="Critical">
   <stage id="1: todo-list-setup" level_of_think="think" read_token_budget="low" write_token_budget="medium" cache_read_budget="low">
     Todo-list Tool設定和初始化
-    - 按照範本在docs/todo-list創建一個Todo文件
+    - 閱讀整份Workflow
+    - 閱讀所有stage的無序列表項
+    - 使用Todo-list Tool創建Todo-list  
     - 為每一個Workflow中的無序列表項創建一個todo item
     
     <questions>
@@ -135,23 +137,3 @@ Implementation Plan: feature-login-system
 3. docs/dev-notes/FEAT-001-dev-notes.md
 4. 更新的Todo-list記錄開發進度
 </example>
-
----
-
-# Workflow
-- [ ] xxx
-- [ ] yyy
-- [ ] zzz
-- [ ] ...
-
-# Functional Requirements
-- [ ] F-1: xxx
-- [ ] F-2: yyy
-- [ ] F-3: zzz
-- [ ] ...
-
-# Non-functional Requirements  
-- [ ] N-1: xxx
-- [ ] N-2: yyy
-- [ ] N-3: zzz
-- [ ] ...
