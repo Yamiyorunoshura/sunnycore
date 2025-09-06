@@ -25,7 +25,7 @@
 ## 工作流程相關標籤
 - <workflow, importance = "Optional/Normal/Important/Critical">： 定義工作流程的開始。
     - importance： 定義工作流程的重要性。
-    - <stage, id = "Stage ID", level_of_think = "non-thinking/think/think hard/think harder, Ultra think", read_token_budget = "Customise", write_token_budget = "Customise", cache_write_budget = "Customise", cache_read_budget = "Customise">： 定義工作流程的階段。
+    - <stage, id = "Stage ID", level_of_think = "non-thinking/think/think hard/think harder/ultra think", read_token_budget = "Customise", write_token_budget = "Customise", cache_write_budget = "Customise", cache_read_budget = "Customise">： 定義工作流程的階段。
         - stage id： 定義工作流程的階段ID。
         - level_of_think： 定義工作流程的階段思考能力。
         - read_token_budget： 定義工作流程的階段讀取token預算。
