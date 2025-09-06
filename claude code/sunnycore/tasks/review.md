@@ -19,12 +19,12 @@
 </input>
 
 <output>
-1. 總結各個子代理的審查結果後得出的綜合報告{task_id}-review.md
-2. 實踐等級(bronze/silver/gold/platinum)
-3. 實踐分數(1-5)
-4. 優秀的代碼實踐
-5. 審查發現的問題
-6. 審查發現的潛在問題
+1. 總結各個Sub-agent的Review Results後得出的Comprehensive Report{task_id}-review.md
+2. Practice Level(bronze/silver/gold/platinum)
+3. Practice Score(1-5)
+4. 優秀的Code Practices
+5. Review Findings - Issues
+6. Review Findings - Potential Issues
 </output>
 
 <constraints, importance = "Critical">
@@ -44,7 +44,7 @@
   - 閱讀整份workflow
   - 進一步閱讀所有步驟
   - 閱讀所有步驟下的無序列表項
-  - 使用todo-list工具為每個無序列表項在todo list中創建一個todo item
+  - 使用Todo-list Tool為每個無序列表項在todo list中創建一個todo item
 
   <checks>
     階段性檢查點：
@@ -164,7 +164,7 @@
 - yyy
 - zzz
 
-# 審查任務
+# Review Tasks
 - xxx
 - yyy
 - zzz

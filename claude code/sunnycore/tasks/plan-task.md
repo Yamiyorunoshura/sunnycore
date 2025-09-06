@@ -10,7 +10,7 @@
 </input>
 
 <output>
-1. {project_root}/docs/implementation-plan/{task_id}-plan.md
+1. {project_root}/docs/Implementation Plan/{task_id}-plan.md
 </output>
 
 <constraints, importance = "Critical">
@@ -28,7 +28,7 @@
   - 閱讀整份workflow
   - 進一步閱讀所有步驟
   - 閱讀所有步驟下的無序列表項
-  - 使用todo-list工具為每個無序列表項在todo list中創建一個todo item
+  - 使用Todo-list Tool為每個無序列表項在todo list中創建一個todo item
 
   <checks>
     - [ ] todo list創建完成
@@ -37,46 +37,46 @@
   </checks>
   </stage>
 
-  <stage id="1: 實作計劃構思", level_of_think = "Ultra think", cache_read_budget = "not more than 190K tokens per request">
+  <stage id="1: Implementation Plan構思", level_of_think = "Ultra think", cache_read_budget = "not more than 190K tokens per request">
   - 根據task_id，從task.md中提取相關的任務描述
   - 閱讀與任務描述相關的需求
   - 閱讀design.md，查看項目設計規範
-  - 根據任務描述以及需求，使用sequential-thinking工具構思實作計劃
+  - 根據Task描述以及需求，使用Sequential-thinking Tool構思Implementation Plan
   </stage>
 
   <questions>
     關鍵問題：
-    - 實作計劃是否符合需求？
-    - 實作計劃是否符合項目設計規範？
-    - 實作計劃是否符合實作計劃模板？
+    - Implementation Plan是否符合需求？
+    - Implementation Plan是否符合項目設計規範？
+    - Implementation Plan是否符合Implementation Plan Template？
   </questions>
 
   <checks>
-    - [ ] 實作計劃構思完成
-    - [ ] 實作計劃構思符合需求
-    - [ ] 實作計劃構思符合項目設計規範
+    - [ ] Implementation Plan構思完成
+    - [ ] Implementation Plan構思符合需求
+    - [ ] Implementation Plan構思符合項目設計規範
     - [ ] todo list更新完成
   </checks>
   </stage>
 
-  <stage id="2: 實作計劃生成", level_of_think = "Ultra think", cache_read_budget = "not more than 190K tokens per request">
-  - 將實作計劃構思結果填入實作計劃模板
-  - 將實作計劃模板轉換為markdown格式
-  - 將實作計劃模板輸出至{output}
+  <stage id="2: Implementation Plan生成", level_of_think = "Ultra think", cache_read_budget = "not more than 190K tokens per request">
+  - 將Implementation Plan構思結果填入Implementation Plan Template
+  - 將Implementation Plan Template轉換為Markdown Format
+  - 將Implementation Plan Template輸出至{output}
   </stage>
 
   <questions>
     關鍵問題：
-    - 實作計劃是否符合實作計劃模板？
-    - 實作計劃是否符合需求？
-    - 實作計劃是否符合項目設計規範？
+    - Implementation Plan是否符合Implementation Plan Template？
+    - Implementation Plan是否符合需求？
+    - Implementation Plan是否符合項目設計規範？
   </questions>
 
   <checks>
-    - [ ] 實作計劃生成完成
-    - [ ] 實作計劃符合實作計劃模板
-    - [ ] 實作計劃符合需求
-    - [ ] 實作計劃符合項目設計規範
+    - [ ] Implementation Plan生成完成
+    - [ ] Implementation Plan符合Implementation Plan Template
+    - [ ] Implementation Plan符合需求
+    - [ ] Implementation Plan符合項目設計規範
     - [ ] todo list更新完成
   </checks>
   </stage>

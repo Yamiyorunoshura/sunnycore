@@ -12,9 +12,9 @@
 
 <output>
 1. {project_root}/docs/dev-notes/{task_id}-dev-notes.md
-2. 優質的代碼實踐
-3. 實踐等級(bronze/silver/gold/platinum)
-4. 實踐分數(1-5)
+2. 優質的Code Practices
+3. Practice Level(bronze/silver/gold/platinum)
+4. Practice Score(1-5)
 </output>
 
 <workflow, importance = "Critical">
@@ -22,7 +22,7 @@
   - 閱讀整份workflow
   - 進一步閱讀所有步驟
   - 閱讀所有步驟下的無序列表項
-  - 使用todo-list工具為每個無序列表項在todo list中創建一個todo item
+  - 使用Todo-list Tool為每個無序列表項在todo list中創建一個todo item
 
   <checks>
     - [ ] todo list創建完成
@@ -31,7 +31,7 @@
   </checks>
   </stage>
 
-  <stage id="1: 上下文驗證", level_of_think = "think", cache_read_budget = "not more than 190K tokens per request">
+  <stage id="1: Context Validation", level_of_think = "think", cache_read_budget = "not more than 190K tokens per request">
   - 閱讀所有輸入文件
   - 驗證所有輸入文件存在
   </stage>
@@ -43,50 +43,50 @@
   </checks>
   </stage>
 
-  <stage id="2: 分析實作計劃", level_of_think = "Ultra think", cache_read_budget = "not more than 190K tokens per request">
-  - 閱讀、並使用sequential-thinking工具分析實作計劃
-  - 分析實作計劃的每一個功能性需求與非功能性需求(F-1,N-1)
-  - 對這些需求以及實作計劃進行分類處理，判斷其開發任務類別
+  <stage id="2: 分析Implementation Plan", level_of_think = "Ultra think", cache_read_budget = "not more than 190K tokens per request">
+  - 閱讀、並使用Sequential-thinking Tool分析Implementation Plan
+  - 分析Implementation Plan的每一個Functional Requirements與Non-functional Requirements(F-1,N-1)
+  - 對這些需求以及Implementation Plan進行Classification Processing，判斷其Development Task Categories
   </stage>
 
   <checks>
-    - [ ] 實作計劃分析完成
-    - [ ] 實作計劃需求已經被分類處理
+    - [ ] Implementation Plan分析完成
+    - [ ] Implementation Plan需求已經被Classification Processing
     - [ ] todo list更新完成
   </checks>
   </stage>
 
-  <stage id="3: 構建上下文", level_of_think = "think hard", cache_read_budget = "not more than 190K tokens per request">
-  - 使用claude-context工具索引需要被修改的部分
-  - 查看subagent-list獲取所有可調用的子agent
-  - 使用sequential-thinking工具思考開發任務之間的依賴性
-  - 分辨可並行的任務和不可並行的任務，參考相關範例來發配任務給對應的子agent
-  - 將實作計劃以及實際情況、需求、規範進行整合，根據範本樣式發送給對應開發任務的子agent
-  - 同時啟動所有被呼叫的子agent
+  <stage id="3: Context Construction", level_of_think = "think hard", cache_read_budget = "not more than 190K tokens per request">
+  - 使用Claude-context Tool索引需要被修改的部分
+  - 查看Sub-agent List獲取所有可調用的Sub-agent
+  - 使用Sequential-thinking Tool思考Development Tasks之間的Dependencies
+  - 分辨可Parallel Tasks和不可Parallel Tasks，參考相關範例來發配任務給對應的Sub-agent
+  - 將Implementation Plan以及實際情況、需求、規範進行整合，根據範本樣式發送給對應Development Tasks的Sub-agent
+  - 同時啟動所有被呼叫的Sub-agent
 
   <questions>
-    - 構建的上下文是否符合實作計劃？
-    - 構建的上下文是否符合需求？
-    - 構建的上下文是否符合規範？
-    - 是否已經將所有上下文傳遞給所有子agent？
-    - 是否已經為所有子agent發配任務？
-    - 是否已經啟動所有子agent？
-    - 發配給子agent的開發任務是否足夠原子化？
-    - 開發任務之間的依賴性是否已經被考慮？
+    - 構建的Context是否符合Implementation Plan？
+    - 構建的Context是否符合需求？
+    - 構建的Context是否符合規範？
+    - 是否已經將所有Context傳遞給所有Sub-agent？
+    - 是否已經為所有Sub-agent發配任務？
+    - 是否已經啟動所有Sub-agent？
+    - 發配給Sub-agent的Development Tasks是否足夠Atomization？
+    - Development Tasks之間的Dependencies是否已經被考慮？
   </questions>
   
   <checks>
-    - [ ] 所有子agent已經被啟動
-    - [ ] 所有子agent已經被發配任務
-    - [ ] 所有子agent已經被啟動
-    - [ ] 發配給子agent的開發任務已經足夠原子化
+    - [ ] 所有Sub-agent已經被啟動
+    - [ ] 所有Sub-agent已經被發配任務
+    - [ ] 所有Sub-agent已經被啟動
+    - [ ] 發配給Sub-agent的Development Tasks已經足夠Atomization
     - [ ] todo list更新完成
   </checks>
   </stage>
 
   <stage id="4: 製作dev-notes", level_of_think = "think hard", cache_read_budget = "not more than 190K tokens per request">
-  - 根據subagents的輸出結果，製作dev-notes
-  - 使用dev-notes-tmpl.yaml模板製作dev-notes，並將其轉換為markdown格式
+  - 根據Sub-agents的輸出結果，製作dev-notes
+  - 使用Dev-notes Template製作dev-notes，並將其轉換為Markdown Format
   - 將dev-notes輸出至{output}
   </stage>
 
@@ -98,13 +98,13 @@
 </workflow>
 
 <examples>
-# 實作計劃
-- 功能性需求：
+# Implementation Plan
+- Functional Requirements：
   - F-1: xxx
   - F-2: yyy
   - F-3: zzz
   - ...
-- 非功能性需求：
+- Non-functional Requirements：
   - N-1: xxx
   - N-2: yyy
   - N-3: zzz
@@ -120,7 +120,7 @@
 - yyy
 - zzz
 
-# 開發任務
+# Development Tasks
 - xxx
 - yyy
 - zzz
