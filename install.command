@@ -68,6 +68,13 @@ check_prerequisites() {
 
 # 選擇安裝類型
 select_install_type() {
+    if [ "$VERSION" = "warp code" ]; then
+        echo -e "\n${BLUE}Warp Code 安裝類型:${NC}"
+        echo "Warp Code 僅支援專案目錄安裝"
+        INSTALL_TYPE="project"
+        return
+    fi
+    
     echo -e "\n${BLUE}請選擇安裝類型:${NC}"
     echo "1) 全局安裝 (推薦)"
     echo "2) 自訂路徑安裝"
@@ -94,6 +101,40 @@ select_install_type() {
 
 # 設定自訂路徑
 setup_custom_paths() {
+    if [ "$INSTALL_TYPE" = "project" ]; then
+        echo -e "\n${BLUE}設定 Warp Code 專案安裝路徑${NC}"
+        
+        # 設定專案根目錄
+        while true; do
+            read -p "請輸入專案根目錄路徑: " project_path
+            if [ -z "$project_path" ]; then
+                show_error "路徑不能為空"
+                continue
+            fi
+            
+            # 展開波浪號
+            project_path="${project_path/#\~/$HOME}"
+            
+            if [ ! -d "$project_path" ]; then
+                read -p "目錄 '$project_path' 不存在，是否創建? (y/N): " create_dir
+                if [ "$create_dir" = "y" ] || [ "$create_dir" = "Y" ]; then
+                    mkdir -p "$project_path" || {
+                        show_error "無法創建目錄 '$project_path'"
+                        continue
+                    }
+                else
+                    continue
+                fi
+            fi
+            
+            # 設定 Warp Code 的安裝路徑
+            CLAUDE_DIR="$project_path/claude-code"
+            SUNNYCORE_DIR="$project_path/claude-code"
+            break
+        done
+        return
+    fi
+    
     if [ "$INSTALL_TYPE" = "custom" ]; then
         echo -e "\n${BLUE}設定自訂安裝路徑${NC}"
         
@@ -125,49 +166,58 @@ setup_custom_paths() {
         done
     fi
     
-    # 設定 sunnycore 目錄
-    while true; do
-        read -p "請輸入 sunnycore 資料夾的安裝路徑: " sunnycore_path
-        if [ -z "$sunnycore_path" ]; then
-            show_error "路徑不能為空"
-            continue
-        fi
-        
-        # 展開波浪號
-        sunnycore_path="${sunnycore_path/#\~/$HOME}"
-        
-        if [ ! -d "$sunnycore_path" ]; then
-            read -p "目錄 '$sunnycore_path' 不存在，是否創建? (y/N): " create_dir
-            if [ "$create_dir" = "y" ] || [ "$create_dir" = "Y" ]; then
-                mkdir -p "$sunnycore_path" || {
-                    show_error "無法創建目錄 '$sunnycore_path'"
-                    continue
-                }
-            else
+    # 設定 sunnycore 目錄 (僅對 Claude Code 的 custom 安裝)
+    if [ "$VERSION" = "claude code" ] && [ "$INSTALL_TYPE" = "custom" ]; then
+        while true; do
+            read -p "請輸入 sunnycore 資料夾的安裝路徑: " sunnycore_path
+            if [ -z "$sunnycore_path" ]; then
+                show_error "路徑不能為空"
                 continue
             fi
-        fi
-        
-        SUNNYCORE_DIR="$sunnycore_path"
-        break
-    done
+            
+            # 展開波浪號
+            sunnycore_path="${sunnycore_path/#\~/$HOME}"
+            
+            if [ ! -d "$sunnycore_path" ]; then
+                read -p "目錄 '$sunnycore_path' 不存在，是否創建? (y/N): " create_dir
+                if [ "$create_dir" = "y" ] || [ "$create_dir" = "Y" ]; then
+                    mkdir -p "$sunnycore_path" || {
+                        show_error "無法創建目錄 '$sunnycore_path'"
+                        continue
+                    }
+                else
+                    continue
+                fi
+            fi
+            
+            SUNNYCORE_DIR="$sunnycore_path"
+            break
+        done
+    elif [ "$VERSION" = "claude code" ] && [ "$INSTALL_TYPE" = "global" ]; then
+        SUNNYCORE_DIR="$HOME/.claude"
+    fi
 }
 
 # 選擇版本
 select_version() {
     echo -e "\n${BLUE}請選擇要安裝的版本:${NC}"
-    echo "1) Claude Code (預設)"
+    echo "1) Claude Code (預設) - 支援全域和自訂安裝"
+    echo "2) Warp Code - 僅支援專案目錄安裝"
     echo ""
     
     while true; do
-        read -p "請輸入選項 (1): " choice
+        read -p "請輸入選項 (1-2): " choice
         case $choice in
             1|"")
                 VERSION="claude code"
                 break
                 ;;
+            2)
+                VERSION="warp code"
+                break
+                ;;
             *)
-                show_error "目前只支援 Claude Code 版本"
+                show_error "無效選項，請重新輸入"
                 ;;
         esac
     done
@@ -242,43 +292,65 @@ remove_old_configs() {
 install_files() {
     show_info "開始安裝檔案..."
     
-    # 檢查 claude code 目錄是否存在
-    if [ ! -d "$TEMP_DIR/claude code" ]; then
-        show_error "找不到 'claude code' 目錄"
-        exit 1
-    fi
-    
-    cd "$TEMP_DIR/claude code"
-    
-    # 安裝 agents 和 commands 到 Claude 目錄
-    if [ -d "agents" ]; then
-        show_info "安裝 agents 到 $CLAUDE_DIR"
-        mkdir -p "$CLAUDE_DIR"
-        cp -r agents "$CLAUDE_DIR/"
-        show_success "agents 安裝完成"
-    else
-        show_warning "未找到 agents 目錄"
-    fi
-    
-    if [ -d "commands" ]; then
-        show_info "安裝 commands 到 $CLAUDE_DIR"
-        mkdir -p "$CLAUDE_DIR"
-        cp -r commands "$CLAUDE_DIR/"
-        show_success "commands 安裝完成"
-    else
-        show_warning "未找到 commands 目錄"
-    fi
-    
-    # 安裝 sunnycore 到指定目錄
-    if [ -d "sunnycore" ]; then
-        show_info "安裝 sunnycore 到 $SUNNYCORE_DIR"
-        mkdir -p "$SUNNYCORE_DIR"
-        cp -r sunnycore "$SUNNYCORE_DIR/"
-        show_success "sunnycore 安裝完成"
-    else
-        show_warning "未找到 sunnycore 目錄"
+    if [ "$VERSION" = "claude code" ]; then
+        # 檢查 claude code 目錄是否存在
+        if [ ! -d "$TEMP_DIR/claude code" ]; then
+            show_error "找不到 'claude code' 目錄"
+            exit 1
+        fi
+        
+        cd "$TEMP_DIR/claude code"
+        
+        # 安裝 agents 和 commands 到 Claude 目錄
+        if [ -d "agents" ]; then
+            show_info "安裝 agents 到 $CLAUDE_DIR"
+            mkdir -p "$CLAUDE_DIR"
+            cp -r agents "$CLAUDE_DIR/"
+            show_success "agents 安裝完成"
+        else
+            show_warning "未找到 agents 目錄"
+        fi
+        
+        if [ -d "commands" ]; then
+            show_info "安裝 commands 到 $CLAUDE_DIR"
+            mkdir -p "$CLAUDE_DIR"
+            cp -r commands "$CLAUDE_DIR/"
+            show_success "commands 安裝完成"
+        else
+            show_warning "未找到 commands 目錄"
+        fi
+        
+        # 安裝 sunnycore 到指定目錄
+        if [ -d "sunnycore" ]; then
+            show_info "安裝 sunnycore 到 $SUNNYCORE_DIR"
+            mkdir -p "$SUNNYCORE_DIR"
+            cp -r sunnycore "$SUNNYCORE_DIR/"
+            show_success "sunnycore 安裝完成"
+        else
+            show_warning "未找到 sunnycore 目錄"
+        fi
+        
+    elif [ "$VERSION" = "warp code" ]; then
+        # 檢查 warp code 目錄是否存在
+        if [ ! -d "$TEMP_DIR/warp code" ]; then
+            show_error "找不到 'warp code' 目錄"
+            exit 1
+        fi
+        
+        cd "$TEMP_DIR/warp code"
+        
+        # 安裝 .warp 文件夾到指定目錄
+        if [ -d ".warp" ]; then
+            show_info "安裝 .warp 到 $CLAUDE_DIR"
+            mkdir -p "$CLAUDE_DIR"
+            cp -r .warp "$CLAUDE_DIR/"
+            show_success ".warp 安裝完成"
+        else
+            show_warning "未找到 .warp 目錄"
+        fi
     fi
 }
+
 
 # 顯示安裝總結
 show_summary() {
@@ -309,21 +381,21 @@ main() {
     # 檢查必要工具
     check_prerequisites
     
+    # 選擇版本 (放在安裝類型之前)
+    select_version
+    
     # 選擇安裝類型
     select_install_type
     
     # 設定路徑
     setup_custom_paths
     
-    # 選擇版本
-    select_version
-    
     # 確認安裝資訊
     echo -e "\n${BLUE}安裝確認:${NC}"
+    echo -e "版本: $VERSION"
     echo -e "安裝類型: $INSTALL_TYPE"
     echo -e "Claude 目錄: $CLAUDE_DIR"
     echo -e "SunnyCore 目錄: $SUNNYCORE_DIR"
-    echo -e "版本: $VERSION"
     echo ""
     
     read -p "確認安裝? (y/N): " confirm
@@ -332,7 +404,7 @@ main() {
         exit 0
     fi
     
-    # 執行安裝
+    # 執行安裝 - 統一流程，根據版本安裝不同目錄內容
     get_latest_version
     download_repository
     remove_old_configs
