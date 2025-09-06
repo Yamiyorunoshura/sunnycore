@@ -27,7 +27,7 @@ dev_entries:
     task_phase: "Required - Initial implementation|Iterative development|Bug fix|Refactoring"
     re_dev_iteration: "Required - Development iteration count (number)"
 
-    changes_summary: "Required - At least 50 words: Overall summary of this development work"
+    changes_summary: "Required - Overall summary of this development work"
 
     detailed_changes_mapped_to:
       F-IDs:
@@ -38,35 +38,35 @@ dev_entries:
         - "Required for frontend/fullstack - UI component ID list (e.g.: UI-1)"
 
     implementation_decisions: |
-      Required - At least 50 words:
+      Required:
       - Technology selection decisions and reasoning
       - Architecture decision explanations
       - Important design pattern choices
       - Third-party library/framework selection reasons
     
     risk_considerations: |
-      Required - At least 30 words:
+      Required:
       - Identified technical risks
       - Mitigation measures
       - Contingency plans
       - Potential impact assessments
 
     maintenance_notes: |
-      Required - At least 30 words:
+      Required:
       - Subsequent maintenance points
       - Monitoring recommendations
       - Configuration notes
       - Upgrade/migration considerations
 
     challenges_and_deviations: |
-      Required - At least 30 words:
+      Required:
       - Major technical challenges
       - Deviations from original plan
       - Reasons for deviations
       - Solutions implemented
 
     quality_metrics_achieved: |
-      Required - At least 20 words:
+      Required:
       - Test coverage rate (actual numbers)
       - Performance metrics achievement status
       - Security check results
