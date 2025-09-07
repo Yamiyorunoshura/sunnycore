@@ -38,7 +38,7 @@
 
 ## agents提示詞架構
 
----
+---(optional)
 name: {Agent Name}
 description: {Description}
 model: inherit
@@ -46,6 +46,9 @@ color: {Color}
 ---
 
 <start_sequence>
+1. xxx
+2. yyy
+3. zzz
 </start_sequence>
 
 <role name="Role Name">
@@ -56,21 +59,45 @@ color: {Color}
 
 <input>
   <context>
+  1. xxx
+  2. yyy
+  3. zzz
   </context>
   <templates>
+  1. xxx
+  2. yyy
+  3. zzz
   </templates>
 </input>
 
 <output>
+1. xxx
+2. yyy
+3. zzz
 </output>
 
 <constraints, importance = "Optional/Normal/Important/Critical">
+- xxx
+- yyy
+- zzz
 </constraints>
 
 <workflow, importance = "Optional/Normal/Important/Critical">
   <stage id="n: stage name", level_of_think = "non-thinking/think/think hard/think harder, Ultra think", cache_read_budget = "customise">
+  - xxx
+  - yyy
+  - zzz
 
+  <questions>
+  - xxx?
+  - yyy?
+  - zzz?
+  </questions>
+  
   <checks>
+  - [ ] xxx
+  - [ ] yyy
+  - [ ] zzz
   </checks>
   </stage>
 </workflow>
@@ -79,8 +106,6 @@ color: {Color}
 </example>
 
 ## commands提示詞架構
-<start_sequence>
-</start_sequence>
 
 <role name="Role Name">
 名字：{Role Name}
@@ -90,26 +115,53 @@ color: {Color}
 
 <input>
   <context>
+  1. xxx
+  2. yyy
+  3. zzz
   </context>
   <templates>
+  1. xxx
+  2. yyy
+  3. zzz
   </templates>
   <tasks>
+  1. xxx
+  2. yyy
+  3. zzz
   </tasks>
 </input>
 
 <output>
+1. xxx
+2. yyy
+3. zzz
 </output>
 
 <constraints, importance = "Optional/Normal/Important/Critical">
+- xxx
+- yyy
+- zzz
 </constraints>
 
 <custom_commands>
+- *xxx
+  - 讀取xxx
+- *yyy
+  - 讀取yyy
+- *zzz
+  - 讀取zzz
 </custom_commands>
 
 <workflow, importance = "Optional/Normal/Important/Critical">
   <stage id="n: stage name", level_of_think = "non-thinking/think/think hard/think harder, Ultra think", cache_read_budget = "customise">
+  - xxx
+  - yyy
+  - zzz
 
   <checks>
+  - [ ] xxx
+  - [ ] yyy
+  - [ ] zzz
   </checks>
   </stage>
 
@@ -118,26 +170,50 @@ color: {Color}
 ## tasks提示詞架構
 <input>
   <context>
+  1. xxx
+  2. yyy
+  3. zzz
   </context>
   <templates>
+  1. xxx
+  2. yyy
+  3. zzz
   </templates>
-  <subagent-list>
+  <subagent-list>(optional)
+  1. xxx
+  2. yyy
+  3. zzz
   </subagent-list>
 </input>
 
 <output>
+1. xxx
+2. yyy
+3. zzz
 </output>
 
 <constraints, importance = "Optional/Normal/Important/Critical">
+- xxx
+- yyy
+- zzz
 </constraints>
 
 <workflow, importance = "Optional/Normal/Important/Critical">
   <stage id="n: stage name", level_of_think = "non-thinking/think/think hard/think harder, Ultra think", read_token_budget = "customise", write_token_budget = "customise", cache_write_budget = "customise", cache_read_budget = "customise">
+  - xxx
+  - yyy
+  - zzz
 
   <questions>
+  - xxx?
+  - yyy?
+  - zzz?
   </questions>
 
   <checks>
+  - [ ] xxx
+  - [ ] yyy
+  - [ ] zzz
   </checks>
   </stage>
 

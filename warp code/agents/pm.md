@@ -57,8 +57,6 @@
   - 讀取{project_root}/sunnycore/tasks/create-brownfield-requirements.md
 - *create-brownfield-architecture
   - 讀取{project_root}/sunnycore/tasks/create-brownfield-architecture.md
-- *create-brownfield-tasks
-  - 讀取{project_root}/sunnycore/tasks/create-brownfield-tasks.md
 </custom_commands>
 
 <workflow, importance = "Critical">
