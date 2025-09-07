@@ -1,6 +1,7 @@
 <input>
   <context>
-  1. {project_root}/docs/requirements.md - Project Requirements Documentation
+  1. {project_root}/docs/requirements/*.md - Project Requirements Documentation
+  2. {project_root}/sunnycore/scripts/shard-architecture.sh - Architecture Script
   </context>
   <templates>
   1. {project_root}/sunnycore/templates/architecture-tmpl.yaml - Architecture Template
@@ -8,7 +9,7 @@
 </input>
 
 <output>
-1. {project_root}/docs/architecture.md - Complete Architecture Documentation
+1. {project_root}/docs/architecture/*.md - Complete Architecture Documentation
 </output>
 
 <constraints importance="Critical">
@@ -34,7 +35,7 @@
   </stage>
   
   <stage id="1: Create Architecture Design for Functional Requirements", level_of_think="think hard", cache_read_budget="medium">
-  - 閱讀{project_root}/docs/requirements.md
+  - 閱讀{project_root}/docs/requirements/functional-requirements/*.md
   - 使用Sequential-thinking Tool協助理解User Requirements
   - 使用context7搜索是否有可滿足相關Functional Requirements的Architecture Design
   - 識別Requirements Document當中的Functional Requirements
@@ -52,7 +53,7 @@
   </stage>
   
   <stage id="2: Create Architecture Design for Non-functional Requirements", level_of_think="think hard", cache_read_budget="medium">
-  - 閱讀{project_root}/docs/requirements.md
+  - 閱讀{project_root}/docs/requirements/non-functional-requirements/*.md
   - 使用Sequential-thinking Tool協助理解User Requirements
   - 識別Requirements Document當中的Non-functional Requirements
   - 使用context7搜索是否有可滿足相關Non-functional Requirements的Architecture Design
@@ -73,11 +74,13 @@
   - 詢問User是否滿意完整的Architecture Document
   - 驗證Architecture Document是否完全符合Template Format
   - 輸出最終Document到{project_root}/docs/architecture.md
+  - 運行{project_root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
   
   <checks>
   - [ ] 確認User對完整Architecture Document的滿意度
   - [ ] 驗證Document Format Compliance
   - [ ] 確認Final Document已成功輸出到指定Path
+  - [ ] 確認shard-architecture.sh已正確運行
   </checks>
   </stage>
 </workflow>

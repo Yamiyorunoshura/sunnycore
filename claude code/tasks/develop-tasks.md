@@ -1,9 +1,6 @@
 <input>
   <context>
-  1. {project_root}/docs/specs/requirements.md
-  2. {project_root}/docs/specs/task.md
-  3. {project_root}/docs/specs/design.md
-  4. {project_root}/docs/implementation-plan/{task_id}-plan.md
+  1. {project_root}/docs/implementation-plan/{task_id}-plan.md
   </context>
   <templates>
   1. {project_root}/sunnycore/templates/dev-notes-tmpl.yaml

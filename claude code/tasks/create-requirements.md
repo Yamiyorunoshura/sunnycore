@@ -8,7 +8,7 @@
 </input>
 
 <output>
-  {project_root}/docs/requirements.md - 完整的需求規格文檔，包含功能性需求、非功能性需求和驗收標準
+  {project_root}/docs/requirements/*.md - 完整的需求規格文檔，包含功能性需求、非功能性需求和驗收標準
 </output>
 
 <constraints importance="Critical">
@@ -99,6 +99,7 @@
     - 詢問用戶是否滿意完整的Requirements
     - 驗證Requirements是否完全符合template格式
     - 輸出最終文檔到{project_root}/docs/requirements.md
+    - 運行{project_root}/sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
     
     <questions>
     - 最終文檔是否涵蓋了所有用戶需求？
