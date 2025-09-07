@@ -401,6 +401,58 @@ remove_old_configs() {
     fi
 }
 
+# 處理 AGENTS.md 整合功能
+process_agents_md() {
+    local project_root=""
+    
+    # 根據安裝類型設定專案根目錄
+    if [ "$VERSION" = "codex" ]; then
+        # 對於 codex，需要找到專案根目錄（OTHER_FILES_DIR 的父目錄）
+        project_root=$(dirname "$OTHER_FILES_DIR")
+    else
+        return # 其他版本不需要處理
+    fi
+    
+    local project_agents_md="$project_root/AGENTS.md"
+    local codex_agents_md="$TEMP_DIR/codex/AGENTS.md"
+    
+    # 檢查是否存在 codex/AGENTS.md
+    if [ ! -f "$codex_agents_md" ]; then
+        show_warning "找不到 codex/AGENTS.md，跳過整合功能"
+        return
+    fi
+    
+    show_info "處理 AGENTS.md 整合..."
+    
+    # 創建專案根目錄的 AGENTS.md（如果不存在）
+    if [ ! -f "$project_agents_md" ]; then
+        echo "# Agents" > "$project_agents_md"
+        echo "" >> "$project_agents_md"
+        echo "這是主要的agents配置文件。" >> "$project_agents_md"
+        echo "" >> "$project_agents_md"
+        show_success "創建了新的 AGENTS.md"
+    fi
+    
+    # 檢查是否已經包含 sunnycore_custom_agents 標記
+    if grep -q "<sunnycore_custom_agents>" "$project_agents_md"; then
+        show_warning "AGENTS.md 已包含 sunnycore_custom_agents 內容，跳過整合"
+        return
+    fi
+    
+    # 備份原始檔案
+    local backup_file="$project_agents_md.backup.$(date +%Y%m%d_%H%M%S)"
+    cp "$project_agents_md" "$backup_file"
+    show_success "已備份原始 AGENTS.md 至 $backup_file"
+    
+    # 在 AGENTS.md 末尾添加 sunnycore_custom_agents 內容
+    echo "" >> "$project_agents_md"
+    echo "<sunnycore_custom_agents>" >> "$project_agents_md"
+    cat "$codex_agents_md" >> "$project_agents_md"
+    echo "</sunnycore_custom_agents>" >> "$project_agents_md"
+    
+    show_success "已將 codex agents 功能整合到 AGENTS.md"
+}
+
 # 安裝檔案
 install_files() {
     show_info "開始安裝檔案..."
@@ -531,15 +583,26 @@ install_files() {
 
         cd "$TEMP_DIR/codex"
 
-        # 將 codex 內容安裝到 OTHER_FILES_DIR（sunnycore）
+        # 將 codex 內容安裝到 OTHER_FILES_DIR（sunnycore），但排除 AGENTS.md
         show_info "安裝 codex 內容到 $OTHER_FILES_DIR"
         mkdir -p "$OTHER_FILES_DIR"
-        if cp -r . "$OTHER_FILES_DIR/"; then
-            show_success "codex 內容安裝完成"
-        else
-            show_error "codex 內容安裝失敗"
-            exit 1
-        fi
+        
+        # 複製除了 AGENTS.md 之外的所有檔案
+        for item in *; do
+            if [ "$item" != "AGENTS.md" ] && [ -e "$item" ]; then
+                if cp -r "$item" "$OTHER_FILES_DIR/"; then
+                    show_success "已安裝 $item"
+                else
+                    show_error "$item 安裝失敗"
+                    exit 1
+                fi
+            fi
+        done
+        
+        # 處理 AGENTS.md 整合功能
+        process_agents_md
+        
+        show_success "codex 內容安裝完成"
     fi
 }
 
