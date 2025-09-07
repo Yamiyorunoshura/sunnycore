@@ -73,6 +73,11 @@ select_install_type() {
         echo "Warp Code 僅支援專案目錄安裝"
         INSTALL_TYPE="project"
         return
+    elif [ "$VERSION" = "codex" ]; then
+        echo -e "\n${BLUE}Codex 安裝類型:${NC}"
+        echo "Codex 僅支援專案目錄安裝"
+        INSTALL_TYPE="project"
+        return
     fi
     
     echo -e "\n${BLUE}請選擇 Claude Code 安裝類型:${NC}"
@@ -128,6 +133,37 @@ setup_paths() {
             fi
             
             # 設定 Warp Code 的安裝路徑
+            OTHER_FILES_DIR="$project_path/sunnycore"
+            break
+        done
+        return
+    elif [ "$VERSION" = "codex" ]; then
+        echo -e "\n${BLUE}設定 Codex 專案安裝路徑${NC}"
+        
+        # 設定專案根目錄
+        while true; do
+            read -p "請輸入專案根目錄路徑: " project_path
+            if [ -z "$project_path" ]; then
+                show_error "路徑不能為空"
+                continue
+            fi
+            
+            # 展開波浪號
+            project_path="${project_path/#\~/$HOME}"
+            
+            if [ ! -d "$project_path" ]; then
+                read -p "目錄 '$project_path' 不存在，是否創建? (y/N): " create_dir
+                if [ "$create_dir" = "y" ] || [ "$create_dir" = "Y" ]; then
+                    mkdir -p "$project_path" || {
+                        show_error "無法創建目錄 '$project_path'"
+                        continue
+                    }
+                else
+                    continue
+                fi
+            fi
+            
+            # 設定 Codex 的安裝路徑（只用 OTHER_FILES_DIR）
             OTHER_FILES_DIR="$project_path/sunnycore"
             break
         done
@@ -205,7 +241,7 @@ select_version() {
     echo -e "\n${BLUE}請選擇要安裝的版本:${NC}"
     echo "1) Claude Code (預設) - 支援全域和自訂安裝"
     echo "2) Warp Code - 僅支援專案目錄安裝"
-    echo "3) Codex Code - 支援全域和自訂安裝"
+    echo "3) Codex - 僅安裝到 sunnycore 目錄"
     echo ""
     
     while true; do
@@ -220,7 +256,7 @@ select_version() {
                 break
                 ;;
             3)
-                VERSION="codex code"
+                VERSION="codex"
                 break
                 ;;
             *)
@@ -301,6 +337,12 @@ remove_old_configs() {
             old_configs_found=true
             configs_to_remove+=("warp code 配置目錄: $OTHER_FILES_DIR")
         fi
+    elif [ "$VERSION" = "codex" ]; then
+        # 檢查 codex 目錄中的舊配置（只針對 sunnycore 目錄）
+        if [ -d "$OTHER_FILES_DIR" ] && [ "$(ls -A "$OTHER_FILES_DIR" 2>/dev/null)" ]; then
+            old_configs_found=true
+            configs_to_remove+=("codex 配置目錄: $OTHER_FILES_DIR")
+        fi
     fi
     
     # 如果找到舊配置，詢問用戶是否移除
@@ -342,6 +384,13 @@ remove_old_configs() {
                     show_warning "移除舊的 warp code 配置..."
                     rm -rf "$OTHER_FILES_DIR"/*
                     show_success "舊 warp code 配置已移除"
+                fi
+            elif [ "$VERSION" = "codex" ]; then
+                # 移除 codex 安裝內容（sunnycore 目錄下）
+                if [ -d "$OTHER_FILES_DIR" ] && [ "$(ls -A "$OTHER_FILES_DIR" 2>/dev/null)" ]; then
+                    show_warning "移除舊的 codex 配置..."
+                    rm -rf "$OTHER_FILES_DIR"/*
+                    show_success "舊 codex 配置已移除"
                 fi
             fi
         else
@@ -473,37 +522,24 @@ install_files() {
             show_error "warp code 內容安裝失敗"
             exit 1
         fi
-    elif [ "$VERSION" = "codex code" ]; then
-        # 檢查 codex code 目錄是否存在
-        if [ ! -d "$TEMP_DIR/codex code" ]; then
-            show_error "找不到 'codex code' 目錄"
+    elif [ "$VERSION" = "codex" ]; then
+        # 檢查 codex 目錄是否存在
+        if [ ! -d "$TEMP_DIR/codex" ]; then
+            show_error "找不到 'codex' 目錄"
             exit 1
         fi
 
-        cd "$TEMP_DIR/codex code"
+        cd "$TEMP_DIR/codex"
 
-        # 若有 agents/commands，則安裝到 AGENTS_COMMANDS_DIR
-        if [ -d "agents" ]; then
-            show_info "安裝 agents 到 $AGENTS_COMMANDS_DIR"
-            mkdir -p "$AGENTS_COMMANDS_DIR"
-            cp -r agents "$AGENTS_COMMANDS_DIR/"
-            show_success "agents 安裝完成"
-        fi
-        if [ -d "commands" ]; then
-            show_info "安裝 commands 到 $AGENTS_COMMANDS_DIR"
-            mkdir -p "$AGENTS_COMMANDS_DIR"
-            cp -r commands "$AGENTS_COMMANDS_DIR/"
-            show_success "commands 安裝完成"
-        fi
-
-        # 其餘檔案安裝到 OTHER_FILES_DIR（sunnycore）
-        show_info "安裝 codex code 其他檔案到 $OTHER_FILES_DIR"
+        # 將 codex 內容安裝到 OTHER_FILES_DIR（sunnycore）
+        show_info "安裝 codex 內容到 $OTHER_FILES_DIR"
         mkdir -p "$OTHER_FILES_DIR"
-        for item in *; do
-            if [ "$item" != "agents" ] && [ "$item" != "commands" ]; then
-                [ -e "$item" ] && cp -r "$item" "$OTHER_FILES_DIR/" && show_success "已安裝 $item"
-            fi
-        done
+        if cp -r . "$OTHER_FILES_DIR/"; then
+            show_success "codex 內容安裝完成"
+        else
+            show_error "codex 內容安裝失敗"
+            exit 1
+        fi
     fi
 }
 
@@ -518,15 +554,17 @@ show_summary() {
     echo -e "安裝類型: $INSTALL_TYPE"
     echo -e "Git 分支: $LATEST_VERSION"
     
-    if [ "$VERSION" = "claude code" ] || [ "$VERSION" = "codex code" ]; then
+    if [ "$VERSION" = "claude code" ]; then
         echo -e "Agents/Commands 目錄: $AGENTS_COMMANDS_DIR"
         echo -e "其他檔案目錄: $OTHER_FILES_DIR"
     elif [ "$VERSION" = "warp code" ]; then
         echo -e "安裝目錄: $OTHER_FILES_DIR"
+    elif [ "$VERSION" = "codex" ]; then
+        echo -e "安裝目錄: $OTHER_FILES_DIR"
     fi
     
     echo -e "\n${BLUE}已安裝的組件:${NC}"
-    if [ "$VERSION" = "claude code" ] || [ "$VERSION" = "codex code" ]; then
+    if [ "$VERSION" = "claude code" ]; then
         [ -d "$AGENTS_COMMANDS_DIR/agents" ] && echo -e "✓ Agents (安裝至 $AGENTS_COMMANDS_DIR)"
         [ -d "$AGENTS_COMMANDS_DIR/commands" ] && echo -e "✓ Commands (安裝至 $AGENTS_COMMANDS_DIR)"
         
@@ -547,6 +585,12 @@ show_summary() {
         else
             echo -e "✗ Warp Code 安裝未完成"
         fi
+    elif [ "$VERSION" = "codex" ]; then
+        if [ -d "$OTHER_FILES_DIR" ] && [ "$(ls -A "$OTHER_FILES_DIR" 2>/dev/null)" ]; then
+            echo -e "✓ Codex 內容已安裝到 $OTHER_FILES_DIR"
+        else
+            echo -e "✗ Codex 安裝未完成"
+        fi
     fi
     
     echo -e "\n${YELLOW}注意事項:${NC}"
@@ -554,6 +598,8 @@ show_summary() {
     if [ "$VERSION" = "claude code" ]; then
         echo -e "• Agents 和 Commands 位於: $AGENTS_COMMANDS_DIR"
         echo -e "• 其他檔案位於: $OTHER_FILES_DIR"
+    elif [ "$VERSION" = "codex" ]; then
+        echo -e "• Codex 內容位於: $OTHER_FILES_DIR"
     fi
     echo -e "• 如果需要更新，請重新執行此安裝腳本"
     echo ""
@@ -584,6 +630,8 @@ main() {
         echo -e "Agents/Commands 安裝目錄: $AGENTS_COMMANDS_DIR"
         echo -e "其他檔案安裝目錄: $OTHER_FILES_DIR"
     elif [ "$VERSION" = "warp code" ]; then
+        echo -e "安裝目錄: $OTHER_FILES_DIR"
+    elif [ "$VERSION" = "codex" ]; then
         echo -e "安裝目錄: $OTHER_FILES_DIR"
     fi
     echo ""
