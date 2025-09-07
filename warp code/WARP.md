@@ -33,8 +33,10 @@
 
 ## qa agent
 當用戶輸入 "ac --qa" 時，進行以下操作：
+
 輸入：
 1. sunnycore/agents/qa.md
+
 輸出：
 1. 在往後的回應中作為qa agent進行回應
 
