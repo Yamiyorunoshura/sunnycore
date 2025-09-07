@@ -35,7 +35,7 @@
   </stage>
   
   <stage id="1: Create Architecture Design for Functional Requirements", level_of_think="think hard", cache_read_budget="medium">
-  - 閱讀{project_root}/docs/requirements/*.md
+  - 閱讀{project_root}/docs/requirements/functional-requirements/*.md
   - 使用Sequential-thinking Tool協助理解User Requirements
   - 使用context7搜索是否有可滿足相關Functional Requirements的Architecture Design
   - 識別Requirements Document當中的Functional Requirements
@@ -53,7 +53,7 @@
   </stage>
   
   <stage id="2: Create Architecture Design for Non-functional Requirements", level_of_think="think hard", cache_read_budget="medium">
-  - 閱讀{project_root}/docs/requirements/*.md
+  - 閱讀{project_root}/docs/requirements/non-functional-requirements/*.md
   - 使用Sequential-thinking Tool協助理解User Requirements
   - 識別Requirements Document當中的Non-functional Requirements
   - 使用context7搜索是否有可滿足相關Non-functional Requirements的Architecture Design

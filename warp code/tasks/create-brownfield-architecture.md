@@ -64,7 +64,7 @@
   </stage>
 
   <stage id="2: Create Functional Requirements Architecture" level_of_think="think harder" cache_read_budget="high">
-    - 閱讀{project_root}/docs/requirements/*.md
+    - 閱讀{project_root}/docs/requirements/functional-requirements/*.md
     - 使用Sequential-thinking Tool深度思考分析現有Architecture
     - 使用Context7搜索是否有可滿足相關Functional Requirements的Architecture Design
     - 為每個Functional Requirement創建一個Architecture Design
@@ -81,7 +81,7 @@
     </questions>
 
     <checks>
-    - [ ] 是否完整閱讀了requirements/*.md？
+    - [ ] 是否完整閱讀了requirements/functional-requirements/*.md？
     - [ ] 是否使用Context7搜索了相關的Architecture Design？
     - [ ] 是否為每個Functional Requirement創建了對應的Architecture Design？
     - [ ] 是否獲得了User的Satisfied確認？
@@ -91,7 +91,7 @@
   </stage>
 
   <stage id="3: Create Non-functional Requirements Architecture" level_of_think="think harder" cache_read_budget="high">
-    - 閱讀{project_root}/docs/requirements/*.md 
+    - 閱讀{project_root}/docs/requirements/non-functional-requirements/*.md 
     - 使用Sequential-thinking Tool深度思考分析現有Architecture
     - 使用Context7搜索是否有可滿足相關Non-functional Requirements的Architecture Design
     - 為每個Non-functional Requirement創建一個Architecture Design
@@ -108,6 +108,7 @@
     </questions>
 
     <checks>
+    - [ ] 是否完整閱讀了requirements/non-functional-requirements/*.md？
     - [ ] 是否深入分析了所有Non-functional Requirements？
     - [ ] 是否考慮了Security Architecture Design？
     - [ ] 是否設計了Performance Architecture？
