@@ -339,34 +339,16 @@ install_files() {
         
         cd "$TEMP_DIR/warp code"
         
-        # 安裝 agents, tasks, templates 資料夾到 sunnycore 目錄
+        # 複製 warp code 目錄中的所有內容到 sunnycore 目錄
+        show_info "安裝 warp code 所有內容到 $SUNNYCORE_DIR"
         mkdir -p "$SUNNYCORE_DIR"
         
-        # 安裝 agents 目錄
-        if [ -d "agents" ]; then
-            show_info "安裝 agents 到 $SUNNYCORE_DIR"
-            cp -r agents "$SUNNYCORE_DIR/"
-            show_success "agents 安裝完成"
+        # 複製當前目錄下的所有檔案和資料夾
+        if cp -r . "$SUNNYCORE_DIR/"; then
+            show_success "warp code 所有內容安裝完成"
         else
-            show_warning "未找到 agents 目錄"
-        fi
-        
-        # 安裝 tasks 目錄
-        if [ -d "tasks" ]; then
-            show_info "安裝 tasks 到 $SUNNYCORE_DIR"
-            cp -r tasks "$SUNNYCORE_DIR/"
-            show_success "tasks 安裝完成"
-        else
-            show_warning "未找到 tasks 目錄"
-        fi
-        
-        # 安裝 templates 目錄
-        if [ -d "templates" ]; then
-            show_info "安裝 templates 到 $SUNNYCORE_DIR"
-            cp -r templates "$SUNNYCORE_DIR/"
-            show_success "templates 安裝完成"
-        else
-            show_warning "未找到 templates 目錄"
+            show_error "warp code 內容安裝失敗"
+            exit 1
         fi
     fi
 }
@@ -389,9 +371,15 @@ show_summary() {
         [ -d "$CLAUDE_DIR/commands" ] && echo -e "✓ Commands"
         [ -d "$SUNNYCORE_DIR/sunnycore" ] && echo -e "✓ SunnyCore"
     elif [ "$VERSION" = "warp code" ]; then
-        [ -d "$SUNNYCORE_DIR/agents" ] && echo -e "✓ Agents"
-        [ -d "$SUNNYCORE_DIR/tasks" ] && echo -e "✓ Tasks"
-        [ -d "$SUNNYCORE_DIR/templates" ] && echo -e "✓ Templates"
+        if [ -d "$SUNNYCORE_DIR" ] && [ "$(ls -A "$SUNNYCORE_DIR" 2>/dev/null)" ]; then
+            echo -e "✓ Warp Code 所有內容已安裝到 sunnycore 目錄"
+            # 顯示安裝的主要目錄
+            [ -d "$SUNNYCORE_DIR/agents" ] && echo -e "  - Agents"
+            [ -d "$SUNNYCORE_DIR/tasks" ] && echo -e "  - Tasks"
+            [ -d "$SUNNYCORE_DIR/templates" ] && echo -e "  - Templates"
+        else
+            echo -e "✗ Warp Code 安裝未完成"
+        fi
     fi
     
     echo -e "\n${YELLOW}注意事項:${NC}"

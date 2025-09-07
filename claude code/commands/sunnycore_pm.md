@@ -44,21 +44,21 @@
 <custom_commands>
 - *help
   - 讀取{project_root}/sunnycore/tasks/help.md
-- *plan-task {task_id}
+- *plan-tasks {task_id}
   - 識別出指令中的task_id
-  - 讀取{project_root}/sunnycore/tasks/plan-task.md
+  - 讀取{project_root}/sunnycore/tasks/plan-tasks.md
 - *create-requirements
   - 讀取{project_root}/sunnycore/tasks/create-requirements.md
-- *create-design
-  - 讀取{project_root}/sunnycore/tasks/create-design.md
-- *create-task
+- *create-architecture
+  - 讀取{project_root}/sunnycore/tasks/create-architecture.md
+- *create-tasks
   - 讀取{project_root}/sunnycore/tasks/create-tasks.md
 - *create-brownfield-requirements
   - 讀取{project_root}/sunnycore/tasks/create-brownfield-requirements.md
-- *create-brownfield-design
-  - 讀取{project_root}/sunnycore/tasks/create-brownfield-design.md
-- *create-brownfield-task
-  - 讀取{project_root}/sunnycore/tasks/create-brownfield-task.md
+- *create-brownfield-architecture
+  - 讀取{project_root}/sunnycore/tasks/create-brownfield-architecture.md
+- *create-brownfield-tasks
+  - 讀取{project_root}/sunnycore/tasks/create-brownfield-tasks.md
 </custom_commands>
 
 <workflow, importance = "Critical">

@@ -16,17 +16,17 @@
 
 <input>
   <context>
-  1. {project_root}/docs/specs/requirements.md
-  2. {project_root}/docs/specs/task.md
-  3. {project_root}/docs/specs/design.md
+  1. {project_root}/docs/requirements/*.md
+  2. {project_root}/docs/tasks/*.md
+  3. {project_root}/docs/architecture/*.md
   4. {project_root}/docs/implementation-plan/{task_id}-plan.md
   </context>
   <templates>
   1. {project_root}/sunnycore/templates/dev-notes-tmpl.yaml
   </templates>
   <tasks>
-  1. {project_root}/sunnycore/tasks/develop-task.md
-  2. {project_root}/sunnycore/tasks/brownfield-development.md
+  1. {project_root}/sunnycore/tasks/develop-tasks.md
+  2. {project_root}/sunnycore/tasks/brownfield-tasks.md
   </tasks>
 </input>
 
@@ -47,12 +47,12 @@
 <custom_commands>
 - *help：
 - 讀取{project_root}/sunnycore/tasks/help.md
-- *develop-task {task_id}：
+- *develop-tasks {task_id}：
   - 識別出指令中的task_id
-  - 讀取{project_root}/sunnycore/tasks/develop-task.md
-- *brownfield-task {task_id}：
+  - 讀取{project_root}/sunnycore/tasks/develop-tasks.md
+- *brownfield-tasks {task_id}：
   - 識別出指令中的task_id
-  - 讀取{project_root}/sunnycore/tasks/brownfield-task.md
+  - 讀取{project_root}/sunnycore/tasks/brownfield-tasks.md
 </custom_commands>
 
 <workflow, importance = "Critical">
