@@ -142,7 +142,8 @@
 
   <stage id="5: Review Final Architecture Files" level_of_think="think" cache_read_budget="low">
     - 詢問User是否Satisfied完整的Architecture Files
-    - 將完整的Architecture Files以markdown格式輸出到{project_root}/docs/architecture.md
+    - 將完整的Architecture Files轉換為markdown格式
+    - 將轉換後的architecture文件輸出到{project_root}/docs/architecture.md
     - 運行{project_root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
 
     <questions>
