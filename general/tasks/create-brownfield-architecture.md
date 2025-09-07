@@ -141,9 +141,10 @@
   </stage>
 
   <stage id="5: Review Final Architecture Files" level_of_think="think" cache_read_budget="low">
+    - 按照範本將完整的Architecture Files轉換為markdown格式
     - 詢問User是否Satisfied完整的Architecture Files
-    - 將完整的Architecture Files轉換為markdown格式
-    - 將轉換後的architecture文件輸出到{project_root}/docs/architecture.md
+    - 若User Satisfied、則輸出最終Architecture Files
+    - 若User不Satisfied，則重複上述步驟，直到User Satisfied為止
     - 運行{project_root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
 
     <questions>
@@ -156,6 +157,7 @@
 
     <checks>
     - [ ] 是否獲得了User對完整Architecture Files的Satisfied確認？
+    - [ ] 是否正確轉換為markdown格式？
     - [ ] template中所有需要填入的項目都已填入？
     - [ ] 是否包含了完整的Technical Stack定義？
     - [ ] 是否包含了詳細的System Architecture圖表？
@@ -165,3 +167,26 @@
     </checks>
   </stage>
 </workflow>
+
+<example>
+```yaml
+xxx:
+  111:
+    aaa:
+    bb:
+    cc:
+```
+- example output
+```markdown
+
+# xxx
+
+## 111
+
+### aaa
+
+### bb
+
+### cc
+```
+<example>

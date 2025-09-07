@@ -97,7 +97,7 @@
 
   <stage id="4: Final Validation and Output" level_of_think="think" cache_read_budget="high" write_token_budget="high">
     - 詢問用戶是否滿意完整的Requirements
-    - 將完整的Requirements轉換為markdown格式
+    - 按照範本將完整的Requirements轉換為markdown格式
     - 將轉換後的requirements文件輸出到{project_root}/docs/requirements.md
     - 運行{project_root}/sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
     
@@ -136,3 +136,26 @@ Non-functional Requirements:
 
 現在讓我們逐一澄清每個功能需求。首先關於用戶註冊功能，您希望支援哪些註冊方式？是否需要社交媒體登入選項？"
 </example>
+
+<example>
+```yaml
+xxx:
+  111:
+    aaa:
+    bb:
+    cc:
+```
+- example output
+```markdown
+
+# xxx
+
+## 111
+
+### aaa
+
+### bb
+
+### cc
+```
+<example>

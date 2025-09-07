@@ -117,3 +117,25 @@
     </checks>
   </stage>
 </workflow>
+
+<example>
+```yaml
+xxx:
+  xxx:
+    111:
+    222:
+    333:
+  yyy:
+  zzz:
+```
+```markdown
+
+# xxx:
+  - [ ] xxx
+    - [ ] 111
+    - [ ] 222
+    - [ ] 333
+  - [ ] yyy
+  - [ ] zzz
+```
+</example>
