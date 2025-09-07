@@ -219,5 +219,5 @@ color: {Color}
 
 </workflow>
 
-<example>
+<example>(optional)
 </example>

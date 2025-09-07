@@ -1,7 +1,7 @@
 <input>
   <context>
-    1. {project_root}/docs/requirements.md - Project Functional Requirements and Non-functional Requirements
-    2. {project_root}/docs/design.md - Architecture Design and Technical Specifications  
+    1. {project_root}/docs/requirements/*.md - Project Functional Requirements and Non-functional Requirements
+    2. {project_root}/docs/architecture/*.md - Architecture Design and Technical Specifications  
     3. {project_root}/sunnycore/templates/tasks-tmpl.yaml - Task Template Format
   </context>
   <templates>

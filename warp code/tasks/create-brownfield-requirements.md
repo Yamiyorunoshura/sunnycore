@@ -3,17 +3,15 @@
   1. User Requirements (用戶需求)
   2. {project_root}/docs/architecture/*.md
   3. {project_root}/sunnycore/templates/requirements-tmpl.yaml
+  4. {project_root}/sunnycore/scripts/shard-requirements.sh - Requirements Script
   </context>
   <templates>
   {project_root}/sunnycore/templates/requirements-tmpl.yaml
   </templates>
-  <subagent-list>
-  Sequential-thinking Tool, Context7, Todo-list Tool
-  </subagent-list>
 </input>
 
 <output>
-{project_root}/docs/requirements.md
+1. {project_root}/docs/requirements/*.md
 </output>
 
 <constraints importance="Critical">
@@ -33,8 +31,8 @@
   </questions>
 
   <checks>
-  - 確認Todo-list Tool已正確使用
-  - 驗證所有Stage都已被識別並記錄
+  - [ ] 確認Todo-list Tool已正確使用
+  - [ ] 驗證所有Stage都已被識別並記錄
   </checks>
   </stage>
 
@@ -54,9 +52,9 @@
   </questions>
 
   <checks>
-  - 確認Sequential-thinking Tool已正確使用
-  - 驗證Context7搜索結果的相關性
-  - 確保User滿意度確認已完成
+  - [ ] 確認Sequential-thinking Tool已正確使用
+  - [ ] 驗證Context7搜索結果的相關性
+  - [ ] 確保User滿意度確認已完成
   </checks>
   </stage>
 
@@ -76,9 +74,9 @@
   </questions>
 
   <checks>
-  - 確認Architecture文檔已完整閱讀
-  - 驗證Functional Requirements設計的可行性
-  - 確保User對設計方案滿意
+  - [ ] 確認Architecture文檔已完整閱讀
+  - [ ] 驗證Functional Requirements設計的可行性
+  - [ ] 確保User對設計方案滿意
   </checks>
   </stage>
 
@@ -96,9 +94,9 @@
   </questions>
 
   <checks>
-  - 確認Non-functional Requirements設計的完整性
-  - 驗證與Functional Requirements的協調性
-  - 確保User對設計方案滿意
+  - [ ] 確認Non-functional Requirements設計的完整性
+  - [ ] 驗證與Functional Requirements的協調性
+  - [ ] 確保User對設計方案滿意
   </checks>
   </stage>
 
@@ -107,6 +105,7 @@
   - 詢問用戶是否滿意
   - 若User滿意、則輸出最終Requirements Document
   - 若User不滿意，則重複上述步驟，直到User滿意為止
+  - 運行{project_root}/sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
 
   <questions>
   - 最終Requirements Document是否完整包含所有需求？
@@ -115,27 +114,10 @@
   </questions>
 
   <checks>
-  - 確認Requirements Document格式正確
-  - 驗證所有需求都已包含在最終Document中
-  - 確保User最終滿意度確認
+  - [ ] 確認Requirements Document格式正確
+  - [ ] 驗證所有需求都已包含在最終Document中
+  - [ ] 確保User最終滿意度確認
+  - [ ] 確認shard-requirements.sh已正確運行
   </checks>
   </stage>
 </workflow>
-
-<example>
-範例：Brownfield Development (棕地開發) E-commerce System Requirements Analysis
-
-假設有一個現有的E-commerce System需要新增推薦功能：
-
-1. User Requirements: 用戶希望在商品頁面看到相關推薦
-2. Functional Requirements: 
-   - 推薦算法API Development
-   - 推薦結果顯示UI/UX組件
-   - 用戶行為追蹤(User Behavior Tracking)
-3. Non-functional Requirements:
-   - 推薦響應時間 < 200ms (Performance)
-   - 系統可用性 99.9% (System Availability)
-   - 數據隱私合規 (Data Security)
-
-透過分析現有Architecture，確保新功能與現有購物車、用戶管理、商品管理等模組的無縫Integration。
-</example>
