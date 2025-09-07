@@ -71,9 +71,66 @@ check_input_file() {
     log_success "輸入文件檢查通過: $REQUIREMENTS_FILE"
 }
 
+# 提取二級標題
+extract_second_level_headers() {
+    log_info "提取二級標題..."
+    
+    local current_section=""
+    local current_section_file=""
+    local sections_count=0
+    
+    while IFS= read -r line; do
+        # 檢查是否是二級標題
+        if [[ $line =~ ^##[[:space:]]+(.+)$ ]]; then
+            local section_title="${BASH_REMATCH[1]}"
+            log_info "調試：找到二級標題：$section_title"
+            
+            # 保存前一個章節
+            if [[ -n "$current_section" ]]; then
+                finalize_second_level_section "$current_section" "$current_section_file"
+                ((sections_count++))
+            fi
+            
+            # 開始新章節
+            current_section="$section_title"
+            local filename=$(clean_filename "$section_title")
+            current_section_file="$OUTPUT_DIR/${filename}.md"
+            echo "# $section_title" > "$current_section_file"
+            echo "" >> "$current_section_file"
+            continue
+        fi
+        
+        # 添加內容到當前章節
+        if [[ -n "$current_section" ]]; then
+            echo "$line" >> "$current_section_file"
+        fi
+        
+    done < "$REQUIREMENTS_FILE"
+    
+    # 保存最後一個章節
+    if [[ -n "$current_section" ]]; then
+        finalize_second_level_section "$current_section" "$current_section_file"
+        ((sections_count++))
+    fi
+    
+    log_success "二級標題提取完成，共 $sections_count 個章節"
+    log_info "調試：extract_second_level_headers函數執行完畢"
+}
+
+# 完成二級標題文件保存
+finalize_second_level_section() {
+    local section_title="$1"
+    local filepath="$2"
+    
+    log_info "調試：正在完成章節：$section_title"
+    log_info "已保存: $filepath"
+    log_info "調試：finalize_second_level_section函數完成"
+}
+
 # 提取功能性需求
 extract_functional_requirements() {
     log_info "提取功能性需求..."
+    log_info "調試：extract_functional_requirements函數被調用"
     
     local in_functional_section=false
     local current_requirement=""
@@ -101,8 +158,8 @@ extract_functional_requirements() {
         fi
         
         if [[ $in_functional_section == true ]]; then
-            # 檢查是否是新的功能需求（### F-XXX格式）
-            if [[ $line =~ ^###[[:space:]]+(F-[0-9]+)[[:space:]]+(.+)$ ]]; then
+            # 檢查是否是新的功能需求（### FR-XXX: 格式）
+            if [[ $line =~ ^###[[:space:]]+(FR-[0-9]+):[[:space:]]*(.+)$ ]]; then
                 # 保存前一個需求
                 if [[ -n "$current_requirement" ]]; then
                     save_functional_requirement "$requirement_id" "$requirement_title" "$requirement_content"
@@ -112,8 +169,8 @@ extract_functional_requirements() {
                 # 開始新需求
                 requirement_id="${BASH_REMATCH[1]}"
                 requirement_title="${BASH_REMATCH[2]}"
-                current_requirement="$requirement_id $requirement_title"
-                requirement_content="# $requirement_title\n\n"
+                current_requirement="$requirement_id: $requirement_title"
+                requirement_content="# $requirement_id: $requirement_title\n\n"
                 continue
             fi
             
@@ -139,7 +196,7 @@ save_functional_requirement() {
     local req_title="$2"
     local req_content="$3"
     
-    local filename=$(clean_filename "$req_id $req_title")
+    local filename=$(clean_filename "$req_id: $req_title")
     local filepath="$FUNCTIONAL_DIR/${filename}.md"
     
     echo -e "$req_content" > "$filepath"
@@ -149,11 +206,13 @@ save_functional_requirement() {
 # 提取非功能性需求
 extract_nonfunctional_requirements() {
     log_info "提取非功能性需求..."
+    log_info "調試：extract_nonfunctional_requirements函數被調用"
     
     local in_nonfunctional_section=false
     local current_requirement=""
     local requirement_content=""
     local requirement_id=""
+    local requirement_title=""
     local nonfunctional_count=0
     
     while IFS= read -r line; do
@@ -167,7 +226,7 @@ extract_nonfunctional_requirements() {
         if [[ $in_nonfunctional_section == true && $line =~ ^##[[:space:]]+ && ! $line =~ ^##[[:space:]]+非功能性需求 ]]; then
             # 保存最後一個需求
             if [[ -n "$current_requirement" ]]; then
-                save_nonfunctional_requirement "$requirement_id" "$requirement_content"
+                save_nonfunctional_requirement "$requirement_id" "$requirement_title" "$requirement_content"
                 ((nonfunctional_count++))
             fi
             in_nonfunctional_section=false
@@ -175,18 +234,19 @@ extract_nonfunctional_requirements() {
         fi
         
         if [[ $in_nonfunctional_section == true ]]; then
-            # 檢查是否是新的非功能需求（### NFR-XXX格式）
-            if [[ $line =~ ^###[[:space:]]+(NFR-[A-Z]+-[0-9]+) ]]; then
+            # 檢查是否是新的非功能需求（### NFR-XXX-XXX: 格式）
+            if [[ $line =~ ^###[[:space:]]+(NFR-[A-Z]+-[0-9]+):[[:space:]]*(.+)$ ]]; then
                 # 保存前一個需求
                 if [[ -n "$current_requirement" ]]; then
-                    save_nonfunctional_requirement "$requirement_id" "$requirement_content"
+                    save_nonfunctional_requirement "$requirement_id" "$requirement_title" "$requirement_content"
                     ((nonfunctional_count++))
                 fi
                 
                 # 開始新需求
                 requirement_id="${BASH_REMATCH[1]}"
-                current_requirement="$requirement_id"
-                requirement_content="# $requirement_id\n\n"
+                requirement_title="${BASH_REMATCH[2]}"
+                current_requirement="$requirement_id: $requirement_title"
+                requirement_content="# $requirement_id: $requirement_title\n\n"
                 continue
             fi
             
@@ -199,7 +259,7 @@ extract_nonfunctional_requirements() {
     
     # 保存最後一個需求
     if [[ $in_nonfunctional_section == true && -n "$current_requirement" ]]; then
-        save_nonfunctional_requirement "$requirement_id" "$requirement_content"
+        save_nonfunctional_requirement "$requirement_id" "$requirement_title" "$requirement_content"
         ((nonfunctional_count++))
     fi
     
@@ -209,78 +269,16 @@ extract_nonfunctional_requirements() {
 # 保存非功能性需求文件
 save_nonfunctional_requirement() {
     local req_id="$1"
-    local req_content="$2"
+    local req_title="$2"
+    local req_content="$3"
     
-    local filename="$req_id"
+    local filename=$(clean_filename "$req_id: $req_title")
     local filepath="$NONFUNCTIONAL_DIR/${filename}.md"
     
     echo -e "$req_content" > "$filepath"
     log_info "已保存: $filepath"
 }
 
-# 提取其他章節
-extract_other_sections() {
-    log_info "提取其他章節..."
-    
-    local current_section=""
-    local section_content=""
-    local in_target_section=false
-    local sections_count=0
-    
-    # 定義需要提取的章節
-    local target_sections=("項目資訊" "約束條件" "假設與依賴" "測試需求" "文檔控制")
-    
-    while IFS= read -r line; do
-        # 檢查是否是新的章節標題
-        if [[ $line =~ ^##[[:space:]]+(.+)$ ]]; then
-            local section_title="${BASH_REMATCH[1]}"
-            
-            # 保存前一個章節
-            if [[ $in_target_section == true && -n "$current_section" ]]; then
-                save_other_section "$current_section" "$section_content"
-                ((sections_count++))
-            fi
-            
-            # 檢查是否是目標章節
-            in_target_section=false
-            for target in "${target_sections[@]}"; do
-                if [[ "$section_title" == "$target" ]]; then
-                    in_target_section=true
-                    current_section="$section_title"
-                    section_content="# $section_title\n\n"
-                    break
-                fi
-            done
-            continue
-        fi
-        
-        # 添加內容到當前章節
-        if [[ $in_target_section == true ]]; then
-            section_content+="$line\n"
-        fi
-        
-    done < "$REQUIREMENTS_FILE"
-    
-    # 保存最後一個章節
-    if [[ $in_target_section == true && -n "$current_section" ]]; then
-        save_other_section "$current_section" "$section_content"
-        ((sections_count++))
-    fi
-    
-    log_success "其他章節提取完成，共 $sections_count 個章節"
-}
-
-# 保存其他章節文件
-save_other_section() {
-    local section_title="$1"
-    local section_content="$2"
-    
-    local filename=$(clean_filename "$section_title")
-    local filepath="$OUTPUT_DIR/${filename}.md"
-    
-    echo -e "$section_content" > "$filepath"
-    log_info "已保存: $filepath"
-}
 
 # 生成處理報告
 generate_report() {
@@ -301,9 +299,9 @@ generate_report() {
     fi
     echo ""
     echo "文件統計:"
+    echo "- 二級標題文件: $(find "$OUTPUT_DIR" -maxdepth 1 -name "*.md" | wc -l)"
     echo "- 功能性需求文件: $(find "$FUNCTIONAL_DIR" -name "*.md" | wc -l)"
     echo "- 非功能性需求文件: $(find "$NONFUNCTIONAL_DIR" -name "*.md" | wc -l)"
-    echo "- 其他章節文件: $(find "$OUTPUT_DIR" -maxdepth 1 -name "*.md" | wc -l)"
     echo "- 總文件數: $(find "$OUTPUT_DIR" -name "*.md" | wc -l)"
     echo "=============================================="
 }
@@ -319,9 +317,9 @@ main() {
     create_directory_structure
     
     # 提取各部分內容
+    extract_second_level_headers
     extract_functional_requirements
-    extract_nonfunctional_requirements  
-    extract_other_sections
+    extract_nonfunctional_requirements
     
     # 生成報告
     generate_report

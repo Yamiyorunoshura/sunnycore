@@ -205,10 +205,11 @@ select_version() {
     echo -e "\n${BLUE}請選擇要安裝的版本:${NC}"
     echo "1) Claude Code (預設) - 支援全域和自訂安裝"
     echo "2) Warp Code - 僅支援專案目錄安裝"
+    echo "3) Codex Code - 支援全域和自訂安裝"
     echo ""
     
     while true; do
-        read -p "請輸入選項 (1-2): " choice
+        read -p "請輸入選項 (1-3): " choice
         case $choice in
             1|"")
                 VERSION="claude code"
@@ -216,6 +217,10 @@ select_version() {
                 ;;
             2)
                 VERSION="warp code"
+                break
+                ;;
+            3)
+                VERSION="codex code"
                 break
                 ;;
             *)
@@ -350,7 +355,21 @@ remove_old_configs() {
 # 安裝檔案
 install_files() {
     show_info "開始安裝檔案..."
-    
+
+    # 先安裝 general 檔案至 $OTHER_FILES_DIR
+    if [ -d "$TEMP_DIR/general" ]; then
+        show_info "安裝 general 檔案到 $OTHER_FILES_DIR"
+        mkdir -p "$OTHER_FILES_DIR"
+        if cp -a "$TEMP_DIR/general/." "$OTHER_FILES_DIR/"; then
+            show_success "general 檔案安裝完成"
+        else
+            show_error "general 檔案安裝失敗"
+            exit 1
+        fi
+    else
+        show_warning "找不到 'general' 目錄，跳過通用檔案安裝"
+    fi
+
     if [ "$VERSION" = "claude code" ]; then
         # 檢查 claude code 目錄是否存在
         if [ ! -d "$TEMP_DIR/claude code" ]; then
@@ -454,6 +473,37 @@ install_files() {
             show_error "warp code 內容安裝失敗"
             exit 1
         fi
+    elif [ "$VERSION" = "codex code" ]; then
+        # 檢查 codex code 目錄是否存在
+        if [ ! -d "$TEMP_DIR/codex code" ]; then
+            show_error "找不到 'codex code' 目錄"
+            exit 1
+        fi
+
+        cd "$TEMP_DIR/codex code"
+
+        # 若有 agents/commands，則安裝到 AGENTS_COMMANDS_DIR
+        if [ -d "agents" ]; then
+            show_info "安裝 agents 到 $AGENTS_COMMANDS_DIR"
+            mkdir -p "$AGENTS_COMMANDS_DIR"
+            cp -r agents "$AGENTS_COMMANDS_DIR/"
+            show_success "agents 安裝完成"
+        fi
+        if [ -d "commands" ]; then
+            show_info "安裝 commands 到 $AGENTS_COMMANDS_DIR"
+            mkdir -p "$AGENTS_COMMANDS_DIR"
+            cp -r commands "$AGENTS_COMMANDS_DIR/"
+            show_success "commands 安裝完成"
+        fi
+
+        # 其餘檔案安裝到 OTHER_FILES_DIR（sunnycore）
+        show_info "安裝 codex code 其他檔案到 $OTHER_FILES_DIR"
+        mkdir -p "$OTHER_FILES_DIR"
+        for item in *; do
+            if [ "$item" != "agents" ] && [ "$item" != "commands" ]; then
+                [ -e "$item" ] && cp -r "$item" "$OTHER_FILES_DIR/" && show_success "已安裝 $item"
+            fi
+        done
     fi
 }
 
@@ -468,7 +518,7 @@ show_summary() {
     echo -e "安裝類型: $INSTALL_TYPE"
     echo -e "Git 分支: $LATEST_VERSION"
     
-    if [ "$VERSION" = "claude code" ]; then
+    if [ "$VERSION" = "claude code" ] || [ "$VERSION" = "codex code" ]; then
         echo -e "Agents/Commands 目錄: $AGENTS_COMMANDS_DIR"
         echo -e "其他檔案目錄: $OTHER_FILES_DIR"
     elif [ "$VERSION" = "warp code" ]; then
@@ -476,7 +526,7 @@ show_summary() {
     fi
     
     echo -e "\n${BLUE}已安裝的組件:${NC}"
-    if [ "$VERSION" = "claude code" ]; then
+    if [ "$VERSION" = "claude code" ] || [ "$VERSION" = "codex code" ]; then
         [ -d "$AGENTS_COMMANDS_DIR/agents" ] && echo -e "✓ Agents (安裝至 $AGENTS_COMMANDS_DIR)"
         [ -d "$AGENTS_COMMANDS_DIR/commands" ] && echo -e "✓ Commands (安裝至 $AGENTS_COMMANDS_DIR)"
         
