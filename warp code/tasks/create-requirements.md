@@ -98,8 +98,8 @@
   <stage id="4: Final Validation and Output" level_of_think="think" cache_read_budget="high" write_token_budget="high">
     - 詢問用戶是否滿意完整的Requirements
     - 驗證Requirements是否完全符合template格式
-    - 輸出最終文檔到{project_root}/docs/requirements/*.md
-    - 運行sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
+    - 輸出最終文檔到{project_root}/docs/requirements.md
+    - 運行{project_root}/sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
     
     <questions>
     - 最終文檔是否涵蓋了所有用戶需求？

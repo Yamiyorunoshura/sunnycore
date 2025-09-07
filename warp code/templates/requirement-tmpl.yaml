@@ -23,36 +23,38 @@ functional_requirements:
     notes: ""                       # Additional notes
 
 non_functional_requirements:
-  performance:
-    - id: "NFR-P-001"
+  - id: "NFR-P-001"
       description: ""               # Performance requirement description
       metric: ""                    # Measurement metric
+      type: "performance"           
       target_value: ""              # Target performance value
       test_method: ""               # How to test this requirement
-      
-  security:
-    - id: "NFR-S-001"
+  - id: "NFR-S-001"
       description: ""               # Security requirement description
       compliance_standard: ""       # Related compliance standard
+      type: "security"               
       risk_level: "High"            # High/Medium/Low
       mitigation_approach: ""       # How to address this requirement
       
-  usability:
+  - id: "NFR-U-001"
     - id: "NFR-U-001"
       description: ""               # Usability requirement description
+      type: "usability"             
       user_experience_goal: ""      # UX objective
       accessibility_level: ""       # Accessibility standard (e.g., WCAG 2.1)
       device_compatibility: []      # Supported devices/browsers
       
-  scalability:
+  - id: "NFR-SC-001"
     - id: "NFR-SC-001"
       description: ""               # Scalability requirement description
+      type: "scalability"           
       capacity_requirement: ""      # Expected capacity
       growth_projection: ""         # Future growth expectations
       
-  reliability:
+  - id: "NFR-R-001"
     - id: "NFR-R-001"
       description: ""               # Reliability requirement description
+      type: "reliability"           
       availability_target: ""       # Uptime requirement (e.g., 99.9%)
       recovery_time: ""             # Maximum recovery time
       backup_frequency: ""          # Backup requirements
