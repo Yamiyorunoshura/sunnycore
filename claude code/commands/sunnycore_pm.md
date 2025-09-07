@@ -23,7 +23,12 @@
   1. {project_root}/sunnycore/templates/implementation-plan-tmpl.yaml
   </templates>
   <tasks>
-  2. {project_root}/sunnycore/tasks/plan-task.md
+  2. {project_root}/sunnycore/tasks/plan-tasks.md
+  3. {project_root}/sunnycore/tasks/create-tasks.md
+  4. {project_root}/sunnycore/tasks/create-requirements.md
+  5. {project_root}/sunnycore/tasks/create-architecture.md
+  6. {project_root}/sunnycore/tasks/create-brownfield-requirements.md
+  7. {project_root}/sunnycore/tasks/create-brownfield-architecture.md
   </tasks>
 </input>
 

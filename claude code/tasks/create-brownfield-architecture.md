@@ -142,8 +142,7 @@
 
   <stage id="5: Review Final Architecture Files" level_of_think="think" cache_read_budget="low">
     - 詢問User是否Satisfied完整的Architecture Files
-    - 驗證Architecture Files是否完全符合Template格式
-    - 輸出最終文檔到{project_root}/docs/architecture.md
+    - 將完整的Architecture Files以markdown格式輸出到{project_root}/docs/architecture.md
     - 運行{project_root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
 
     <questions>
@@ -156,7 +155,7 @@
 
     <checks>
     - [ ] 是否獲得了User對完整Architecture Files的Satisfied確認？
-    - [ ] 是否驗證了Architecture Files符合Template格式？
+    - [ ] template中所有需要填入的項目都已填入？
     - [ ] 是否包含了完整的Technical Stack定義？
     - [ ] 是否包含了詳細的System Architecture圖表？
     - [ ] 是否包含了Implementation Roadmap？

@@ -97,19 +97,18 @@
 
   <stage id="4: Final Validation and Output" level_of_think="think" cache_read_budget="high" write_token_budget="high">
     - 詢問用戶是否滿意完整的Requirements
-    - 驗證Requirements是否完全符合template格式
-    - 輸出最終文檔到{project_root}/docs/requirements.md
+    - 將完整的Requirements以markdown格式輸出到{project_root}/docs/requirements.md
     - 運行{project_root}/sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
     
     <questions>
     - 最終文檔是否涵蓋了所有用戶需求？
-    - 文檔格式是否完全符合template？
+    - template中所有需要填入的項目都已填入？
     - 是否存在需要進一步澄清的遺漏點？
     </questions>
     
     <checks>
     - [ ] 用戶確認滿意最終Requirements
-    - [ ] 文檔格式完全符合requirement template
+    - [ ] template中所有需要填入的項目都已填入
     - [ ] 所有功能性和非功能性需求都已包含
     - [ ] 驗收標準完整且可測試
     </checks>

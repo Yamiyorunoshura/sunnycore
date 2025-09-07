@@ -72,13 +72,12 @@
   
   <stage id="3: Final Architecture Document Review", level_of_think="think", cache_read_budget="low">
   - 詢問User是否滿意完整的Architecture Document
-  - 驗證Architecture Document是否完全符合Template Format
-  - 輸出最終Document到{project_root}/docs/architecture.md
+  - 將完整的Architecture Document以markdown格式輸出到{project_root}/docs/architecture.md
   - 運行{project_root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
   
   <checks>
   - [ ] 確認User對完整Architecture Document的滿意度
-  - [ ] 驗證Document Format Compliance
+  - [ ] template中所有需要填入的項目都已填入
   - [ ] 確認Final Document已成功輸出到指定Path
   - [ ] 確認shard-architecture.sh已正確運行
   </checks>

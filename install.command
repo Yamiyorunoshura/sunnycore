@@ -267,36 +267,83 @@ download_repository() {
 
 # 移除舊配置
 remove_old_configs() {
-    show_info "檢查並移除舊配置..."
+    show_info "檢查舊配置..."
+    
+    local old_configs_found=false
+    local configs_to_remove=()
     
     if [ "$VERSION" = "claude code" ]; then
-        # 移除 agents 和 commands 目錄中的舊配置
+        # 檢查 agents 和 commands 目錄中的舊配置
         if [ -d "$AGENTS_COMMANDS_DIR/agents" ]; then
-            show_warning "發現舊的 agents 配置，正在移除..."
-            rm -rf "$AGENTS_COMMANDS_DIR/agents"
-            show_success "舊 agents 配置已移除"
+            old_configs_found=true
+            configs_to_remove+=("agents 配置目錄: $AGENTS_COMMANDS_DIR/agents")
         fi
         
         if [ -d "$AGENTS_COMMANDS_DIR/commands" ]; then
-            show_warning "發現舊的 commands 配置，正在移除..."
-            rm -rf "$AGENTS_COMMANDS_DIR/commands"
-            show_success "舊 commands 配置已移除"
+            old_configs_found=true
+            configs_to_remove+=("commands 配置目錄: $AGENTS_COMMANDS_DIR/commands")
         fi
         
-        # 移除 sunnycore 目錄中的舊配置
-        if [ -d "$OTHER_FILES_DIR/sunnycore" ]; then
-            show_warning "發現舊的 sunnycore 配置，正在移除..."
-            rm -rf "$OTHER_FILES_DIR/sunnycore"
-            show_success "舊 sunnycore 配置已移除"
+        # 檢查 sunnycore 目錄中的舊配置
+        if [ -d "$OTHER_FILES_DIR" ] && [ "$(ls -A "$OTHER_FILES_DIR" 2>/dev/null)" ]; then
+            old_configs_found=true
+            configs_to_remove+=("sunnycore 配置目錄: $OTHER_FILES_DIR")
         fi
         
     elif [ "$VERSION" = "warp code" ]; then
-        # 移除整個 warp code 目錄中的舊配置
+        # 檢查 warp code 目錄中的舊配置
         if [ -d "$OTHER_FILES_DIR" ] && [ "$(ls -A "$OTHER_FILES_DIR" 2>/dev/null)" ]; then
-            show_warning "發現舊的 warp code 配置，正在移除..."
-            rm -rf "$OTHER_FILES_DIR"/*
-            show_success "舊 warp code 配置已移除"
+            old_configs_found=true
+            configs_to_remove+=("warp code 配置目錄: $OTHER_FILES_DIR")
         fi
+    fi
+    
+    # 如果找到舊配置，詢問用戶是否移除
+    if [ "$old_configs_found" = true ]; then
+        echo -e "\n${YELLOW}發現以下舊配置:${NC}"
+        for config in "${configs_to_remove[@]}"; do
+            echo -e "  - $config"
+        done
+        echo ""
+        
+        read -p "是否移除這些舊配置? (y/N): " confirm_remove
+        if [ "$confirm_remove" = "y" ] || [ "$confirm_remove" = "Y" ]; then
+            show_info "開始移除舊配置..."
+            
+            if [ "$VERSION" = "claude code" ]; then
+                # 移除 agents 和 commands 目錄中的舊配置
+                if [ -d "$AGENTS_COMMANDS_DIR/agents" ]; then
+                    show_warning "移除舊的 agents 配置..."
+                    rm -rf "$AGENTS_COMMANDS_DIR/agents"
+                    show_success "舊 agents 配置已移除"
+                fi
+                
+                if [ -d "$AGENTS_COMMANDS_DIR/commands" ]; then
+                    show_warning "移除舊的 commands 配置..."
+                    rm -rf "$AGENTS_COMMANDS_DIR/commands"
+                    show_success "舊 commands 配置已移除"
+                fi
+                
+                # 移除 sunnycore 目錄中的舊配置
+                if [ -d "$OTHER_FILES_DIR" ] && [ "$(ls -A "$OTHER_FILES_DIR" 2>/dev/null)" ]; then
+                    show_warning "移除舊的 sunnycore 配置..."
+                    rm -rf "$OTHER_FILES_DIR"/*
+                    show_success "舊 sunnycore 配置已移除"
+                fi
+                
+            elif [ "$VERSION" = "warp code" ]; then
+                # 移除整個 warp code 目錄中的舊配置
+                if [ -d "$OTHER_FILES_DIR" ] && [ "$(ls -A "$OTHER_FILES_DIR" 2>/dev/null)" ]; then
+                    show_warning "移除舊的 warp code 配置..."
+                    rm -rf "$OTHER_FILES_DIR"/*
+                    show_success "舊 warp code 配置已移除"
+                fi
+            fi
+        else
+            show_warning "保留舊配置，可能會與新安裝產生衝突"
+        fi
+    else
+        show_success "未發現舊配置，可以直接安裝"
     fi
 }
 
@@ -340,8 +387,49 @@ install_files() {
         for item in *; do
             if [ "$item" != "agents" ] && [ "$item" != "commands" ]; then
                 if [ -e "$item" ]; then
-                    cp -r "$item" "$OTHER_FILES_DIR/"
-                    show_success "已安裝 $item"
+                    # CLAUDE.md 檔案特殊處理
+                    if [ "$item" = "CLAUDE.md" ] && [ -f "$OTHER_FILES_DIR/CLAUDE.md" ]; then
+                        echo -e "\n${YELLOW}發現現有的 CLAUDE.md 檔案${NC}"
+                        echo "現有檔案: $OTHER_FILES_DIR/CLAUDE.md"
+                        echo "新檔案: $PWD/$item"
+                        echo ""
+                        echo "請選擇處理方式:"
+                        echo "1) 備份現有檔案並安裝新檔案"
+                        echo "2) 保留現有檔案，跳過新檔案"
+                        echo "3) 覆蓋現有檔案（不備份）"
+                        echo ""
+                        
+                        while true; do
+                            read -p "請輸入選項 (1-3): " claude_choice
+                            case $claude_choice in
+                                1)
+                                    # 備份現有檔案
+                                    backup_file="$OTHER_FILES_DIR/CLAUDE.md.backup.$(date +%Y%m%d_%H%M%S)"
+                                    mv "$OTHER_FILES_DIR/CLAUDE.md" "$backup_file"
+                                    show_success "現有 CLAUDE.md 已備份至 $backup_file"
+                                    cp "$item" "$OTHER_FILES_DIR/"
+                                    show_success "已安裝新的 CLAUDE.md"
+                                    break
+                                    ;;
+                                2)
+                                    show_info "保留現有 CLAUDE.md，跳過新檔案"
+                                    break
+                                    ;;
+                                3)
+                                    cp "$item" "$OTHER_FILES_DIR/"
+                                    show_success "已覆蓋 CLAUDE.md"
+                                    break
+                                    ;;
+                                *)
+                                    show_error "無效選項，請重新輸入"
+                                    ;;
+                            esac
+                        done
+                    else
+                        # 其他檔案正常複製
+                        cp -r "$item" "$OTHER_FILES_DIR/"
+                        show_success "已安裝 $item"
+                    fi
                 fi
             fi
         done

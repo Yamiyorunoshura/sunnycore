@@ -109,7 +109,7 @@
 
   <questions>
   - 最終Requirements Document是否完整包含所有需求？
-  - Document格式是否符合Template要求？
+  - template中所有需要填入的項目都已填入？
   - User是否對最終輸出滿意？
   </questions>
 

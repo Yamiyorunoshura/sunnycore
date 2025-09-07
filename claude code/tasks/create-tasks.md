@@ -98,7 +98,7 @@
   <stage id="4: Quality Assurance and Validation" level_of_think="think" read_token_budget="1500" write_token_budget="1000" cache_read_budget="800">
     - 閱讀Tasks.md
     - 使用Sequential-thinking Tool深度分析Tasks.md
-    - 校對Tasks.md是否符合Template Files格式
+    - 校對template中所有需要填入的項目都已填入
     - 若不符合，則重複上述步驟，直到Tasks.md符合Template Files格式
     - 確認所有Functional Requirements和Non-functional Requirements都被識別且Tasks被創建完成
 
@@ -112,7 +112,7 @@
     <checks>
     - [ ] Priority Rationality檢查：Task順序是否符合Development Logic
     - [ ] Resource Allocation檢查：Task複雜度分配是否平衡合理
-    - [ ] 最終Template Compliance驗證
+    - [ ] template中所有需要填入的項目都已填入
     - [ ] Completeness和Consistency最終確認
     </checks>
   </stage>
