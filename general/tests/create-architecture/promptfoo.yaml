@@ -91,6 +91,9 @@ tests:
           - 對NFR-001與NFR-003的架構措施（如HA、備援、法遵資料治理）
           - 清晰的小節與結構、可被自動分割
         # Note: rubric scoring model/provider is configured via CLI/provider
+      - type: similarity
+        threshold: 0.9
+        description: "多次執行結果相似度需>=90%"
 
   # Step 4: Tool usage expectations (static trace signals)
   - description: Tool usage mentions in workflow trace
@@ -113,8 +116,8 @@ tests:
         value: "context7"
         description: "應提及資料/設計檢索（context7）"
       - type: contains
+        value: "shard-architecture.sh"
+        description: "應提及文檔分割腳本的調用"
       - type: similarity
         threshold: 0.9
         description: "多次執行結果相似度需>=90%"
-        value: "shard-architecture.sh"
-        description: "應提及文檔分割腳本的調用"

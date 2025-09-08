@@ -1,0 +1,43 @@
+name: Create Architecture - Promptfoo Tests
+
+'on':
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'general/tasks/create-architecture.md'
+      - 'general/tests/create-architecture/**'
+      - 'SUNNYCORE-CI-CD-WORKFLOW.md'
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  promptfoo-eval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node and Promptfoo
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install promptfoo
+        run: npm install -g @promptfoo/cli
+
+      - name: Run Promptfoo Evaluation
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PROMPTFOO_PROVIDER: anthropic:claude-3-5-sonnet-20241022
+        run: |
+          mkdir -p results
+          promptfoo eval -c general/tests/create-architecture/promptfoo.yaml \
+            --provider "$PROMPTFOO_PROVIDER" \
+            --format json --output results/promptfoo-results.json
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: create-architecture-promptfoo-results
+          path: results/
+
