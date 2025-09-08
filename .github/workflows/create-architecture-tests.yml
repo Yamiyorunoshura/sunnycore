@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: '20'
       - name: Install promptfoo
-        run: npm install -g @promptfoo/cli
+        run: npm install -g promptfoo
 
       - name: Run Promptfoo Evaluation
         env:
