@@ -101,7 +101,7 @@
   </stage>
 
   <stage id="4: Output Final Requirements Document", level_of_think="think", read_token_budget="1500", write_token_budget="2000", cache_write_budget="800", cache_read_budget="400">
-  - 按照範本將完整的Requirements轉換為markdown格式
+  - 使用sequential thinking思考如何將完整的Requirements轉換為markdown格式
   - 將轉換後的requirements文件輸出到{project_root}/docs/requirements.md
   - 詢問用戶是否滿意
   - 若User滿意、則輸出最終Requirements Document

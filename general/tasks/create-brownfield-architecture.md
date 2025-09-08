@@ -141,7 +141,7 @@
   </stage>
 
   <stage id="5: Review Final Architecture Files" level_of_think="think" cache_read_budget="low">
-    - 按照範本將完整的Architecture Files轉換為markdown格式
+    - 使用sequential thinking思考如何將完整的Architecture Files轉換為markdown格式
     - 詢問User是否Satisfied完整的Architecture Files
     - 若User Satisfied、則輸出最終Architecture Files
     - 若User不Satisfied，則重複上述步驟，直到User Satisfied為止

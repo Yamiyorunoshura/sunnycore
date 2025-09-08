@@ -71,7 +71,7 @@
   </stage>
   
   <stage id="3: Final Architecture Document Review", level_of_think="think", cache_read_budget="low">
-  - 按照範本將完整的Architecture Document轉換為markdown格式
+  - 使用sequential thinking思考如何將完整的Architecture Document轉換為markdown格式
   - 詢問User是否滿意完整的Architecture Document
   - 若User滿意、則輸出最終Architecture Document
   - 若User不滿意，則重複上述步驟，直到User滿意為止

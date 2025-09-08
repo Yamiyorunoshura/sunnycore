@@ -88,7 +88,7 @@ extract_second_level_headers() {
             # 保存前一個章節
             if [[ -n "$current_section" ]]; then
                 finalize_second_level_section "$current_section" "$current_section_file"
-                ((sections_count++))
+                ((++sections_count))
             fi
             
             # 開始新章節
@@ -110,7 +110,7 @@ extract_second_level_headers() {
     # 保存最後一個章節
     if [[ -n "$current_section" ]]; then
         finalize_second_level_section "$current_section" "$current_section_file"
-        ((sections_count++))
+        ((++sections_count))
     fi
     
     log_success "二級標題提取完成，共 $sections_count 個章節"
@@ -151,7 +151,7 @@ extract_functional_requirements() {
             # 保存最後一個需求
             if [[ -n "$current_requirement" ]]; then
                 save_functional_requirement "$requirement_id" "$requirement_title" "$requirement_content"
-                ((functional_count++))
+                ((++functional_count))
             fi
             in_functional_section=false
             break
@@ -163,7 +163,7 @@ extract_functional_requirements() {
                 # 保存前一個需求
                 if [[ -n "$current_requirement" ]]; then
                     save_functional_requirement "$requirement_id" "$requirement_title" "$requirement_content"
-                    ((functional_count++))
+                    ((++functional_count))
                 fi
                 
                 # 開始新需求
@@ -184,7 +184,7 @@ extract_functional_requirements() {
     # 保存最後一個需求
     if [[ $in_functional_section == true && -n "$current_requirement" ]]; then
         save_functional_requirement "$requirement_id" "$requirement_title" "$requirement_content"
-        ((functional_count++))
+        ((++functional_count))
     fi
     
     log_success "功能性需求提取完成，共 $functional_count 個需求"
@@ -227,7 +227,7 @@ extract_nonfunctional_requirements() {
             # 保存最後一個需求
             if [[ -n "$current_requirement" ]]; then
                 save_nonfunctional_requirement "$requirement_id" "$requirement_title" "$requirement_content"
-                ((nonfunctional_count++))
+                ((++nonfunctional_count))
             fi
             in_nonfunctional_section=false
             break
@@ -239,7 +239,7 @@ extract_nonfunctional_requirements() {
                 # 保存前一個需求
                 if [[ -n "$current_requirement" ]]; then
                     save_nonfunctional_requirement "$requirement_id" "$requirement_title" "$requirement_content"
-                    ((nonfunctional_count++))
+                    ((++nonfunctional_count))
                 fi
                 
                 # 開始新需求
@@ -260,7 +260,7 @@ extract_nonfunctional_requirements() {
     # 保存最後一個需求
     if [[ $in_nonfunctional_section == true && -n "$current_requirement" ]]; then
         save_nonfunctional_requirement "$requirement_id" "$requirement_title" "$requirement_content"
-        ((nonfunctional_count++))
+        ((++nonfunctional_count))
     fi
     
     log_success "非功能性需求提取完成，共 $nonfunctional_count 個需求"

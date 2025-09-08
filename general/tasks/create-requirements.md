@@ -97,7 +97,7 @@
 
   <stage id="4: Final Validation and Output" level_of_think="think" cache_read_budget="high" write_token_budget="high">
     - 詢問用戶是否滿意完整的Requirements
-    - 按照範本將完整的Requirements轉換為markdown格式
+    - 使用sequential thinking思考如何將完整的Requirements轉換為markdown格式
     - 將轉換後的requirements文件輸出到{project_root}/docs/requirements.md
     - 運行{project_root}/sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
     
