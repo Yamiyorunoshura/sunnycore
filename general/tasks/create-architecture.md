@@ -85,26 +85,3 @@
   </checks>
   </stage>
 </workflow>
-
-<example>
-```yaml
-xxx:
-  111:
-    aaa:
-    bb:
-    cc:
-```
-- example output
-```markdown
-
-# xxx
-
-## 111
-
-### aaa
-
-### bb
-
-### cc
-```
-<example>
