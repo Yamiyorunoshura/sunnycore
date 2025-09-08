@@ -1,0 +1,120 @@
+# Promptfoo evaluation config for create-architecture task
+version: 1
+
+# The prompt under test is the task file itself
+prompts:
+  - file: general/tasks/create-architecture.md
+
+# Global options can be overridden per-test
+options:
+  # If not set here, pass via CLI: --provider "$PROMPTFOO_PROVIDER"
+  runs: 1
+
+tests:
+  # Step 2: Output consistency tests
+  - description: Output consistency and structure
+    options:
+      runs: 5
+    vars:
+      project_root: "/workspace"
+      functional_requirements: |
+        - FR-001: 使用者可以註冊與登入
+        - FR-002: 使用者可以透過電子郵件重設密碼
+        - FR-003: 使用者可以檢視與更新個人資料
+      non_functional_requirements: |
+        - NFR-001: 可用性 >= 99.9%
+        - NFR-002: P95 響應時間 < 200ms
+        - NFR-003: GDPR 個資合規
+    assert:
+      # Presence of mandatory sections
+      - type: contains
+        value: "系統概述"
+      - type: contains
+        value: "架構設計"
+      - type: contains
+        value: "技術選型"
+      - type: contains
+        value: "部署方案"
+      - type: contains
+        value: "安全考量"
+      # User satisfaction checkpoint (review gate)
+      - type: regex
+        value: "滿意"
+      # Mapping evidence: requirement IDs appear in output
+      - type: contains
+        value: "FR-001"
+      - type: contains
+        value: "FR-002"
+      - type: contains
+        value: "FR-003"
+      - type: contains
+        value: "NFR-001"
+      - type: contains
+        value: "NFR-002"
+      - type: contains
+        value: "NFR-003"
+      # Similarity across multiple runs should be high
+      - type: similarity
+        threshold: 0.9
+        description: "多次執行結果相似度需>=90%"
+
+  # Step 3: Document generation tests
+  - description: Document generation completeness and template conformance
+    options:
+      runs: 3
+    vars:
+      project_root: "/workspace"
+      functional_requirements: |
+        - FR-001: 使用者可以註冊與登入
+        - FR-002: 使用者可以透過電子郵件重設密碼
+      non_functional_requirements: |
+        - NFR-001: 可用性 >= 99.9%
+        - NFR-003: GDPR 個資合規
+    assert:
+      # Template-like heading structure (ATX headings)
+      - type: regex
+        value: "^# .+" 
+        flags: "m"
+        description: "應輸出Markdown頂層標題"
+      - type: regex
+        value: "^## .+"
+        flags: "m"
+        description: "應包含二級章節"
+      - type: contains
+        value: "Architecture"
+        description: "應有Architecture相關標題或內容"
+      # Content adequacy via rubric (LLM-based)
+      - type: llm-rubric
+        value: |
+          應包含：
+          - 對FR-001與FR-002的具體架構設計對應（如服務、資料流、元件）
+          - 對NFR-001與NFR-003的架構措施（如HA、備援、法遵資料治理）
+          - 清晰的小節與結構、可被自動分割
+        # Note: rubric scoring model/provider is configured via CLI/provider
+
+  # Step 4: Tool usage expectations (static trace signals)
+  - description: Tool usage mentions in workflow trace
+    options:
+      runs: 3
+    vars:
+      project_root: "/workspace"
+      functional_requirements: |
+        - FR-001: 使用者可以註冊與登入
+      non_functional_requirements: |
+        - NFR-001: 可用性 >= 99.9%
+    assert:
+      - type: contains
+        value: "Sequential-thinking"
+        description: "應提及Sequential-thinking Tool的使用（或等價描述）"
+      - type: contains
+        value: "Todo List"
+        description: "應提及Todo List更新/管理"
+      - type: contains
+        value: "context7"
+        description: "應提及資料/設計檢索（context7）"
+      - type: contains
+      - type: similarity
+        threshold: 0.9
+        description: "多次執行結果相似度需>=90%"
+        value: "shard-architecture.sh"
+        description: "應提及文檔分割腳本的調用"
