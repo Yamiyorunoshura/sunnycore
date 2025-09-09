@@ -1,0 +1,278 @@
+# Create Requirements 文檔生成一致性測試
+# 此配置驗證需求文檔生成的格式合規性和內容完整性
+
+description: "Create Requirements Document Generation Consistency Tests"
+
+providers:
+  - claude-sonnet
+
+prompts:
+  - file: prompts/create-requirements-full.md
+
+tests:
+  # YAML Template格式合規性測試
+  - description: "Requirements YAML模板格式合規性測試"
+    vars:
+      user_input: "開發一個任務管理系統，包含用戶管理、項目管理、任務分配、進度追蹤和報表生成功能。"
+      template_path: "sunnycore/templates/requirement-tmpl.yaml"
+    options:
+      provider: claude-sonnet
+      runs: 3
+    assert:
+      - type: yaml-structure
+        description: "必須符合requirement template的YAML結構"
+      - type: contains-all
+        values: ["project_info", "functional_requirements", "non_functional_requirements"]
+        description: "必須包含所有必要的頂層結構"
+      - type: json-schema
+        value: |
+          {
+            "type": "object",
+            "required": ["project_info", "functional_requirements", "non_functional_requirements"],
+            "properties": {
+              "project_info": {
+                "type": "object",
+                "required": ["name", "version", "description"],
+                "properties": {
+                  "name": {"type": "string", "minLength": 1},
+                  "version": {"type": "string"},
+                  "description": {"type": "string", "minLength": 10},
+                  "objectives": {"type": "array"}
+                }
+              },
+              "functional_requirements": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["id", "title", "description", "priority", "acceptance_criteria"],
+                  "properties": {
+                    "id": {"type": "string", "pattern": "^F-\\d{3}$"},
+                    "title": {"type": "string", "minLength": 5},
+                    "description": {"type": "string", "minLength": 20},
+                    "priority": {"enum": ["High", "Medium", "Low"]},
+                    "acceptance_criteria": {"type": "array", "minItems": 1}
+                  }
+                }
+              },
+              "non_functional_requirements": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["id", "description", "type"],
+                  "properties": {
+                    "id": {"type": "string", "pattern": "^NFR-[A-Z]-\\d{3}$"},
+                    "description": {"type": "string", "minLength": 10},
+                    "type": {"enum": ["performance", "security", "usability", "reliability", "scalability"]}
+                  }
+                }
+              }
+            }
+          }
+        description: "嚴格的模板結構和格式檢查"
+
+  # 需求完整性測試
+  - description: "需求內容完整性測試"
+    vars:
+      user_input: "建立一個電子商務平台，支援商品管理、用戶註冊、購物車、訂單處理、支付整合、庫存管理和客服系統。"
+    options:
+      provider: claude-sonnet
+      runs: 2
+    assert:
+      - type: requirements-completeness
+        description: "需求完整性檢查：所有需求都有完整的必要字段"
+      - type: llm-rubric
+        value: |
+          評估標準：
+          1. 每個功能需求都有明確的ID、標題、描述、優先級和驗收標準
+          2. 每個非功能需求都有類型、量化指標和測試方法
+          3. 驗收標準具體可測試，包含明確的成功條件
+          4. 需求描述詳細且無歧義
+          5. 優先級設定合理，反映業務價值
+        description: "需求品質綜合評估"
+      - type: custom-function
+        value: |
+          function(output) {
+            const yaml = require('js-yaml');
+            try {
+              const parsed = yaml.load(output);
+              let qualityScore = 0;
+              
+              // 檢查項目資訊完整性
+              if (parsed.project_info && parsed.project_info.name && 
+                  parsed.project_info.description && parsed.project_info.objectives) {
+                qualityScore += 20;
+              }
+              
+              // 檢查功能需求品質
+              const funcReqs = parsed.functional_requirements || [];
+              let funcQualityScore = 0;
+              funcReqs.forEach(req => {
+                let reqScore = 0;
+                if (req.id && req.id.match(/^F-\d{3}$/)) reqScore += 2;
+                if (req.title && req.title.length >= 5) reqScore += 2;
+                if (req.description && req.description.length >= 20) reqScore += 3;
+                if (req.acceptance_criteria && req.acceptance_criteria.length > 0) reqScore += 3;
+                funcQualityScore += reqScore;
+              });
+              if (funcReqs.length > 0) {
+                qualityScore += (funcQualityScore / (funcReqs.length * 10)) * 40;
+              }
+              
+              // 檢查非功能需求品質
+              const nonFuncReqs = parsed.non_functional_requirements || [];
+              let nonFuncQualityScore = 0;
+              nonFuncReqs.forEach(req => {
+                let reqScore = 0;
+                if (req.id && req.id.match(/^NFR-[A-Z]-\d{3}$/)) reqScore += 3;
+                if (req.description && req.description.length >= 10) reqScore += 3;
+                if (req.type && ['performance', 'security', 'usability', 'reliability', 'scalability'].includes(req.type)) reqScore += 2;
+                if (req.metric) reqScore += 1;
+                if (req.target_value) reqScore += 1;
+                nonFuncQualityScore += reqScore;
+              });
+              if (nonFuncReqs.length > 0) {
+                qualityScore += (nonFuncQualityScore / (nonFuncReqs.length * 10)) * 40;
+              }
+              
+              return {
+                pass: qualityScore >= 80,
+                score: qualityScore / 100,
+                reason: `文檔完整性分數: ${qualityScore.toFixed(1)}% (功能需求: ${funcReqs.length}, 非功能需求: ${nonFuncReqs.length})`
+              };
+            } catch (error) {
+              return { pass: false, score: 0, reason: `解析失敗: ${error.message}` };
+            }
+          }
+        description: "自定義品質評估函數"
+
+  # Markdown轉換一致性測試
+  - description: "YAML到Markdown轉換一致性測試"
+    vars:
+      user_input: "開發一個內容管理系統(CMS)，支援文章管理、用戶權限、媒體庫、SEO優化和多語言支援。"
+      output_format: "markdown"
+    options:
+      provider: claude-sonnet
+      runs: 3
+    assert:
+      - type: similarity
+        threshold: 0.85
+        description: "多次執行的Markdown輸出相似度>=85%"
+      - type: contains-all
+        values: ["# ", "## ", "### ", "- [ ]", "|"]
+        description: "必須包含Markdown標準格式元素"
+      - type: regex
+        value: "^# .+\n\n## .+"
+        description: "必須以標題開始並包含適當的層級結構"
+      - type: custom-function
+        value: |
+          function(output) {
+            // 檢查Markdown結構的完整性
+            const hasMainTitle = /^# .+/.test(output);
+            const hasSubTitles = (output.match(/^## .+/gm) || []).length >= 2;
+            const hasLists = output.includes('- ') || output.includes('1. ');
+            const hasTables = output.includes('|');
+            const hasTaskLists = output.includes('- [ ]');
+            
+            let structureScore = 0;
+            if (hasMainTitle) structureScore += 20;
+            if (hasSubTitles) structureScore += 20;
+            if (hasLists) structureScore += 20;
+            if (hasTables) structureScore += 20;
+            if (hasTaskLists) structureScore += 20;
+            
+            // 檢查內容合理性（不應該過短或過長）
+            const wordCount = output.split(/\s+/).length;
+            const lengthScore = (wordCount >= 200 && wordCount <= 2000) ? 20 : 0;
+            
+            const totalScore = structureScore + lengthScore;
+            
+            return {
+              pass: totalScore >= 80,
+              score: totalScore / 100,
+              reason: `Markdown結構評分: ${totalScore}% (字數: ${wordCount})`
+            };
+          }
+        description: "Markdown格式和內容品質檢查"
+
+  # Template字段映射完整性測試
+  - description: "Template字段映射完整性測試"
+    vars:
+      user_input: "建立一個學習管理系統(LMS)，包含課程管理、學員管理、進度追蹤、考試系統、證書頒發和分析報表功能。"
+    options:
+      provider: claude-sonnet
+      runs: 2
+    assert:
+      - type: contains-all
+        values: ["project_info", "name", "version", "description", "objectives"]
+        description: "必須包含所有project_info字段"
+      - type: contains-all
+        values: ["functional_requirements", "id", "title", "description", "priority", "user_story", "acceptance_criteria"]
+        description: "必須包含所有功能需求必要字段"
+      - type: contains-all
+        values: ["non_functional_requirements", "metric", "target_value", "test_method"]
+        description: "必須包含非功能需求量化字段"
+      - type: custom-function
+        value: |
+          function(output) {
+            const yaml = require('js-yaml');
+            try {
+              const parsed = yaml.load(output);
+              
+              // 檢查template字段覆蓋率
+              const requiredProjectFields = ['name', 'version', 'description', 'objectives'];
+              const projectFieldsCovered = requiredProjectFields.filter(field => 
+                parsed.project_info && parsed.project_info[field] !== undefined
+              ).length;
+              
+              const requiredFuncFields = ['id', 'title', 'description', 'priority', 'acceptance_criteria'];
+              let funcFieldsCovered = 0;
+              if (parsed.functional_requirements) {
+                const avgCoverage = parsed.functional_requirements.reduce((acc, req) => {
+                  const covered = requiredFuncFields.filter(field => req[field] !== undefined).length;
+                  return acc + (covered / requiredFuncFields.length);
+                }, 0) / parsed.functional_requirements.length;
+                funcFieldsCovered = avgCoverage * 100;
+              }
+              
+              const requiredNonFuncFields = ['id', 'description', 'type', 'metric'];
+              let nonFuncFieldsCovered = 0;
+              if (parsed.non_functional_requirements) {
+                const avgCoverage = parsed.non_functional_requirements.reduce((acc, req) => {
+                  const covered = requiredNonFuncFields.filter(field => req[field] !== undefined).length;
+                  return acc + (covered / requiredNonFuncFields.length);
+                }, 0) / parsed.non_functional_requirements.length;
+                nonFuncFieldsCovered = avgCoverage * 100;
+              }
+              
+              const projectScore = (projectFieldsCovered / requiredProjectFields.length) * 100;
+              const overallScore = (projectScore + funcFieldsCovered + nonFuncFieldsCovered) / 3;
+              
+              return {
+                pass: overallScore >= 85,
+                score: overallScore / 100,
+                reason: `字段覆蓋率 - 項目: ${projectScore.toFixed(1)}%, 功能需求: ${funcFieldsCovered.toFixed(1)}%, 非功能需求: ${nonFuncFieldsCovered.toFixed(1)}%`
+              };
+            } catch (error) {
+              return { pass: false, score: 0, reason: `Template字段檢查失敗: ${error.message}` };
+            }
+          }
+        description: "Template字段映射覆蓋率檢查"
+
+  # 多語言和特殊字符處理測試
+  - description: "多語言和特殊字符處理測試"
+    vars:
+      user_input: "開發一個國際化的社交媒體平台，需要支援多語言（中文、英文、日文）、emoji表情、特殊字符處理、內容審核和地區化功能。"
+    options:
+      provider: claude-sonnet
+      runs: 2
+    assert:
+      - type: contains-all
+        values: ["多語言", "國際化", "社交媒體"]
+        description: "必須正確處理中文內容"
+      - type: yaml-structure
+        description: "包含特殊字符的內容仍須符合YAML格式"
+      - type: llm-rubric
+        value: "輸出正確處理了多語言需求，包含國際化考量，格式依然規範，沒有因特殊字符導致格式錯誤"
+        description: "多語言和特殊字符處理品質評估"

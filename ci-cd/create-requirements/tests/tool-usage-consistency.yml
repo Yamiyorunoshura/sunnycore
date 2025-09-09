@@ -1,0 +1,243 @@
+# Create Requirements 工具調用一致性測試
+# 此配置驗證Sequential-thinking Tool和Todo-list Tool的正確使用
+
+description: "Create Requirements Tool Usage Consistency Tests"
+
+providers:
+  - claude-sonnet
+
+prompts:
+  - file: prompts/create-requirements-full.md
+
+tests:
+  # Sequential-thinking Tool使用一致性測試
+  - description: "Sequential-thinking Tool使用一致性測試"
+    vars:
+      user_input: "開發一個智慧城市管理平台，整合交通監控、環境監測、公共安全、能源管理和市民服務等模組。"
+      context: "這是一個複雜的系統需求，需要深度分析各模組之間的關聯性和依賴關係。"
+    options:
+      provider: claude-sonnet
+      runs: 4
+    assert:
+      - type: contains
+        value: "Sequential-thinking Tool"
+        description: "必須明確使用Sequential-thinking Tool"
+      - type: contains-any
+        values: ["深度分析", "逐步", "思考", "分解", "sequential"]
+        description: "必須體現深度思考過程"
+      - type: similarity
+        threshold: 0.80
+        description: "不同執行的思考過程相似度應>=80%"
+      - type: llm-rubric
+        value: |
+          評估標準：
+          1. 明確提及使用Sequential-thinking Tool進行分析
+          2. 展現了系統化的思考過程，從整體到細節
+          3. 對複雜需求進行了合理的分解和分類
+          4. 思考過程邏輯清晰，層次分明
+          5. 最終產出的需求分析品質高且完整
+        description: "Sequential-thinking Tool使用品質評估"
+      - type: custom-function
+        value: |
+          function(output) {
+            // 檢查Sequential-thinking Tool使用相關的指標
+            const hasToolMention = output.includes('Sequential-thinking') || output.includes('sequential thinking');
+            const hasThinkingProcess = /思考|分析|考慮|評估/.test(output);
+            const hasStructuredAnalysis = /首先|其次|然後|最後|第一|第二/.test(output);
+            const hasDepthIndicators = /深度|詳細|全面|系統/.test(output);
+            
+            // 檢查分析的結構化程度
+            const analysisSteps = (output.match(/\d+[.、]|[一二三四五六七八九十][、.]|首先|其次|然後|最後|第一階段|第二階段/g) || []).length;
+            
+            let toolUsageScore = 0;
+            if (hasToolMention) toolUsageScore += 25;
+            if (hasThinkingProcess) toolUsageScore += 20;
+            if (hasStructuredAnalysis) toolUsageScore += 20;
+            if (hasDepthIndicators) toolUsageScore += 15;
+            if (analysisSteps >= 3) toolUsageScore += 20;
+            
+            return {
+              pass: toolUsageScore >= 75,
+              score: toolUsageScore / 100,
+              reason: `Sequential-thinking Tool使用評分: ${toolUsageScore}% (分析步驟: ${analysisSteps})`
+            };
+          }
+        description: "Sequential-thinking Tool使用深度檢查"
+
+  # Todo-list Tool使用一致性測試
+  - description: "Todo-list Tool使用一致性測試"
+    vars:
+      user_input: "建立一個企業資源規劃(ERP)系統，涵蓋財務管理、人力資源、供應鏈管理、生產計畫和客戶關係管理等功能模組。"
+      workflow_stage: "Setup and Planning"
+    options:
+      provider: claude-sonnet
+      runs: 3
+    assert:
+      - type: contains
+        value: "Todo-list Tool"
+        description: "必須明確使用Todo-list Tool"
+      - type: contains-any
+        values: ["todo item", "待辦項目", "任務清單", "create_todo", "todo list"]
+        description: "必須體現任務管理過程"
+      - type: regex
+        value: "todo.*(item|項目|清單)"
+        description: "必須包含todo相關的具體操作描述"
+      - type: llm-rubric
+        value: |
+          評估標準：
+          1. 明確提及使用Todo-list Tool創建任務項目
+          2. 為workflow的各個階段創建了適當的todo items
+          3. Todo items具體明確，具有可執行性
+          4. 展現了良好的項目管理思維
+          5. Todo items之間有合理的邏輯順序
+        description: "Todo-list Tool使用品質評估"
+      - type: custom-function
+        value: |
+          function(output) {
+            const hasToolMention = output.includes('Todo-list') || output.includes('todo list');
+            const hasCreateAction = /創建|建立|create.*todo|新增.*todo/.test(output);
+            const hasItemDescription = /todo.*item|項目|待辦事項/.test(output);
+            const hasWorkflowBreakdown = /workflow|階段|步驟|stage/.test(output);
+            
+            // 計算提及的todo項目數量（粗略估計）
+            const todoMentions = (output.match(/todo|項目|任務/gi) || []).length;
+            const workflowStages = (output.match(/階段|stage|步驟|step/gi) || []).length;
+            
+            let todoToolScore = 0;
+            if (hasToolMention) todoToolScore += 30;
+            if (hasCreateAction) todoToolScore += 25;
+            if (hasItemDescription) todoToolScore += 20;
+            if (hasWorkflowBreakdown) todoToolScore += 15;
+            if (todoMentions >= 3 && workflowStages >= 2) todoToolScore += 10;
+            
+            return {
+              pass: todoToolScore >= 70,
+              score: todoToolScore / 100,
+              reason: `Todo-list Tool使用評分: ${todoToolScore}% (todo提及: ${todoMentions}, 工作流程提及: ${workflowStages})`
+            };
+          }
+        description: "Todo-list Tool使用完整性檢查"
+
+  # 雙工具協同使用測試
+  - description: "Sequential-thinking與Todo-list工具協同使用測試"
+    vars:
+      user_input: "設計一個區塊鏈基礎設施平台，支援智慧合約執行、去中心化應用(DApp)部署、數位資產管理、跨鏈橋接和治理機制。"
+    options:
+      provider: claude-sonnet
+      runs: 3
+    assert:
+      - type: contains-all
+        values: ["Sequential-thinking Tool", "Todo-list Tool"]
+        description: "必須同時使用兩種工具"
+      - type: similarity
+        threshold: 0.75
+        description: "雙工具協同使用的一致性>=75%"
+      - type: llm-rubric
+        value: |
+          評估標準：
+          1. 先使用Sequential-thinking Tool進行深度需求分析
+          2. 然後使用Todo-list Tool將分析結果轉化為具體任務
+          3. 兩個工具使用順序合理，體現良好的工作流程
+          4. 工具之間的配合自然流暢
+          5. 最終輸出體現了兩個工具的協同效果
+        description: "雙工具協同使用品質評估"
+      - type: custom-function
+        value: |
+          function(output) {
+            const hasSequential = output.includes('Sequential-thinking');
+            const hasTodo = output.includes('Todo-list');
+            
+            // 檢查工具使用順序（Sequential-thinking通常應該在Todo-list之前）
+            const sequentialIndex = output.indexOf('Sequential-thinking');
+            const todoIndex = output.indexOf('Todo-list');
+            const correctOrder = sequentialIndex !== -1 && todoIndex !== -1 && sequentialIndex < todoIndex;
+            
+            // 檢查兩個工具之間的連接性
+            const hasTransition = /基於.*分析|根據.*思考|將.*分析.*轉化|分析完成.*創建/.test(output);
+            
+            // 檢查最終輸出的完整性
+            const hasAnalysisResult = /需求分析|功能模組|系統架構/.test(output);
+            const hasTodoResult = /todo.*item|任務清單|工作項目/.test(output);
+            
+            let coordinationScore = 0;
+            if (hasSequential) coordinationScore += 25;
+            if (hasTodo) coordinationScore += 25;
+            if (correctOrder) coordinationScore += 20;
+            if (hasTransition) coordinationScore += 15;
+            if (hasAnalysisResult && hasTodoResult) coordinationScore += 15;
+            
+            return {
+              pass: coordinationScore >= 80,
+              score: coordinationScore / 100,
+              reason: `雙工具協同評分: ${coordinationScore}% (順序正確: ${correctOrder}, 有過渡: ${hasTransition})`
+            };
+          }
+        description: "工具協同使用效果檢查"
+
+  # 工具使用錯誤檢測測試
+  - description: "工具使用錯誤檢測測試"
+    vars:
+      user_input: "開發一個簡單的個人部落格系統，包含文章發布、評論管理和基本的SEO功能。"
+      anti_pattern: "不應該過度使用工具或使用不當"
+    options:
+      provider: claude-sonnet
+      runs: 2
+    assert:
+      - type: contains-all
+        values: ["Sequential-thinking Tool", "Todo-list Tool"]
+        description: "即使是簡單需求也應該使用必要的工具"
+      - type: llm-rubric
+        value: "工具使用適度且恰當，沒有過度複雜化簡單需求，但仍然遵循了標準的工作流程"
+        description: "工具使用適度性評估"
+      - type: custom-function
+        value: |
+          function(output) {
+            const toolMentionCount = (output.match(/(Sequential-thinking|Todo-list)/g) || []).length;
+            const outputLength = output.length;
+            const wordCount = output.split(/\s+/).length;
+            
+            // 檢查是否過度使用工具（重複提及太多次）
+            const overuse = toolMentionCount > 10;
+            
+            // 檢查輸出是否過度冗長（對於簡單需求）
+            const tooVerbose = wordCount > 1500;
+            
+            // 檢查是否有基本的工具使用
+            const hasBasicToolUsage = toolMentionCount >= 2;
+            
+            // 檢查內容品質與長度的平衡
+            const balancedOutput = wordCount >= 200 && wordCount <= 1200;
+            
+            let appropriatenessScore = 0;
+            if (hasBasicToolUsage) appropriatenessScore += 40;
+            if (!overuse) appropriatenessScore += 30;
+            if (!tooVerbose) appropriatenessScore += 15;
+            if (balancedOutput) appropriatenessScore += 15;
+            
+            return {
+              pass: appropriatenessScore >= 75,
+              score: appropriatenessScore / 100,
+              reason: `工具使用適度性評分: ${appropriatenessScore}% (工具提及: ${toolMentionCount}, 字數: ${wordCount})`
+            };
+          }
+        description: "工具使用適度性檢查"
+
+  # Template使用一致性測試
+  - description: "Requirement Template使用一致性測試"
+    vars:
+      user_input: "建立一個醫療管理系統，支援病患資料管理、預約掛號、醫療記錄、藥物管理和報表統計功能。"
+    options:
+      provider: claude-sonnet
+      runs: 3
+    assert:
+      - type: contains
+        value: "requirement-tmpl"
+        description: "必須提及使用requirement template"
+      - type: contains-all
+        values: ["template", "模板", "格式"]
+        description: "必須體現template的使用"
+      - type: yaml-structure
+        description: "最終輸出必須符合template結構"
+      - type: llm-rubric
+        value: "正確使用requirement template，輸出格式規範，包含了template要求的所有必要字段"
+        description: "Template使用正確性評估"

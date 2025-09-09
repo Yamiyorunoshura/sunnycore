@@ -1,0 +1,659 @@
+name: 'Create Requirements Task CI/CD Pipeline'
+
+# 觸發條件
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'general/tasks/create-requirements.md'
+      - 'general/templates/**'
+      - 'ci-cd/create-requirements/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'general/tasks/create-requirements.md' 
+      - 'general/templates/**'
+      - 'ci-cd/create-requirements/**'
+  workflow_dispatch:  # 允許手動觸發
+    inputs:
+      environment:
+        description: '測試環境選擇'
+        required: true
+        default: 'test'
+        type: choice
+        options:
+          - dev
+          - test
+          - prod
+      skip_quality_gate:
+        description: '跳過品質門檻檢查'
+        required: false
+        default: false
+        type: boolean
+
+# 環境變數
+env:
+  NODE_VERSION: '18'
+  WORKING_DIR: 'ci-cd/create-requirements'
+
+# 工作流程
+jobs:
+  # 階段1：預處理驗證
+  pre-validation:
+    name: '📋 預處理驗證'
+    runs-on: ubuntu-latest
+    outputs:
+      validation-passed: ${{ steps.validation.outputs.passed }}
+      files-changed: ${{ steps.changes.outputs.files }}
+    
+    steps:
+      - name: '📥 Checkout代碼'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # 需要比較變更
+      
+      - name: '📂 檢查文件變更'
+        id: changes
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            changed_files=$(git diff --name-only HEAD^ HEAD)
+          else
+            changed_files=$(git diff --name-only HEAD~1 HEAD)
+          fi
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$changed_files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "Changed files: $changed_files"
+      
+      - name: '🔍 YAML語法檢查'
+        run: |
+          # 安裝yamllint
+          pip install yamllint
+          
+          # 檢查所有YAML配置文件
+          echo "檢查promptfoo配置文件..."
+          if [ -f "$WORKING_DIR/promptfoo.config.js" ]; then
+            echo "✅ Promptfoo配置文件存在"
+          else
+            echo "❌ Promptfoo配置文件不存在"
+            exit 1
+          fi
+          
+          # 檢查測試配置YAML文件
+          yaml_files=$(find $WORKING_DIR/tests -name "*.yml" 2>/dev/null || echo "")
+          if [ -n "$yaml_files" ]; then
+            echo "檢查測試配置文件："
+            echo "$yaml_files" | xargs yamllint -d relaxed
+            echo "✅ YAML文件語法檢查通過"
+          else
+            echo "⚠️  未找到YAML測試配置文件"
+          fi
+      
+      - name: '📋 Markdown格式驗證'
+        run: |
+          # 檢查需求task文件
+          if [ -f "general/tasks/create-requirements.md" ]; then
+            echo "✅ Create Requirements任務文件存在"
+            
+            # 簡單的格式檢查
+            if grep -q "<input>" "general/tasks/create-requirements.md" && \
+               grep -q "<output>" "general/tasks/create-requirements.md" && \
+               grep -q "<workflow>" "general/tasks/create-requirements.md"; then
+              echo "✅ 任務文件格式正確"
+            else
+              echo "❌ 任務文件缺少必要的格式標籤"
+              exit 1
+            fi
+          else
+            echo "❌ Create Requirements任務文件不存在"
+            exit 1
+          fi
+      
+      - name: '✅ 驗證結果'
+        id: validation
+        run: |
+          echo "passed=true" >> $GITHUB_OUTPUT
+          echo "✅ 預處理驗證通過"
+
+  # 階段2：環境設置和依賴安裝
+  setup-environment:
+    name: '🔧 環境設置'
+    runs-on: ubuntu-latest
+    needs: pre-validation
+    if: needs.pre-validation.outputs.validation-passed == 'true'
+    strategy:
+      matrix:
+        test-env: [dev, test]  # 支援多環境測試
+    
+    steps:
+      - name: '📥 Checkout代碼'
+        uses: actions/checkout@v4
+      
+      - name: '⚙️ 設置Node.js'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: ${{ env.WORKING_DIR }}/package.json
+      
+      - name: '📦 安裝依賴'
+        working-directory: ${{ env.WORKING_DIR }}
+        run: |
+          # 創建package.json如果不存在
+          if [ ! -f package.json ]; then
+            cat > package.json << EOF
+          {
+            "name": "create-requirements-ci",
+            "version": "1.0.0",
+            "description": "CI/CD for Create Requirements Task",
+            "scripts": {
+              "test": "promptfoo eval",
+              "test:verbose": "promptfoo eval --verbose",
+              "quality-gate": "node scripts/quality-gate.js"
+            },
+            "dependencies": {
+              "@promptfoo/cli": "^0.47.0",
+              "js-yaml": "^4.1.0",
+              "dotenv": "^16.3.1"
+            },
+            "engines": {
+              "node": ">=18.0.0"
+            }
+          }
+          EOF
+            echo "✅ 創建package.json"
+          fi
+          
+          # 安裝依賴
+          npm install
+          
+          # 驗證promptfoo安裝
+          npx promptfoo --version
+          echo "✅ Promptfoo安裝成功"
+      
+      - name: '🔐 載入環境變數'
+        working-directory: ${{ env.WORKING_DIR }}
+        run: |
+          # 創建環境特定的.env文件
+          cat > .env << EOF
+          # ${{ matrix.test-env }} 環境配置
+          NODE_ENV=${{ matrix.test-env }}
+          ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_BASE_URL=${{ secrets.ANTHROPIC_BASE_URL || 'https://api.anthropic.com' }}
+          ANTHROPIC_MODEL=${{ secrets.ANTHROPIC_MODEL || 'claude-3-5-sonnet-20241022' }}
+          
+          # 測試配置
+          TEST_RUNS=${{ matrix.test-env == 'dev' && '2' || '3' }}
+          CONSISTENCY_THRESHOLD=${{ matrix.test-env == 'dev' && '0.80' || '0.85' }}
+          QUALITY_THRESHOLD=${{ matrix.test-env == 'dev' && '75' || '85' }}
+          
+          # 品質閾值
+          AGENT_CONSISTENCY_THRESHOLD=${{ matrix.test-env == 'dev' && '80' || '90' }}
+          DOC_QUALITY_THRESHOLD=${{ matrix.test-env == 'dev' && '75' || '85' }}
+          TOOL_USAGE_THRESHOLD=${{ matrix.test-env == 'dev' && '90' || '95' }}
+          TEMPLATE_COMPLIANCE_THRESHOLD=100
+          OVERALL_SUCCESS_THRESHOLD=${{ matrix.test-env == 'dev' && '85' || '90' }}
+          EOF
+          
+          echo "✅ 環境變數配置完成 (${{ matrix.test-env }})"
+      
+      - name: '💾 快取環境設置'
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.WORKING_DIR }}/node_modules
+            ${{ env.WORKING_DIR }}/.env
+          key: ${{ runner.os }}-create-requirements-${{ matrix.test-env }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-create-requirements-${{ matrix.test-env }}-
+            ${{ runner.os }}-create-requirements-
+
+  # 階段3：Agent一致性測試
+  agent-consistency-tests:
+    name: '🤖 Agent一致性測試'
+    runs-on: ubuntu-latest
+    needs: [pre-validation, setup-environment]
+    if: needs.pre-validation.outputs.validation-passed == 'true'
+    strategy:
+      matrix:
+        test-env: [dev, test]
+        test-suite: [simple, complex, edge-cases]
+      fail-fast: false  # 不要因為一個測試失敗就停止所有測試
+    
+    steps:
+      - name: '📥 Checkout代碼'
+        uses: actions/checkout@v4
+      
+      - name: '♻️ 恢復環境快取'
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.WORKING_DIR }}/node_modules
+            ${{ env.WORKING_DIR }}/.env
+          key: ${{ runner.os }}-create-requirements-${{ matrix.test-env }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-create-requirements-${{ matrix.test-env }}-
+      
+      - name: '🧪 執行Agent一致性測試'
+        working-directory: ${{ env.WORKING_DIR }}
+        timeout-minutes: 15  # 設置超時防止hanging
+        run: |
+          echo "🚀 開始執行Agent一致性測試 (${{ matrix.test-env }} - ${{ matrix.test-suite }})"
+          
+          # 確保測試結果目錄存在
+          mkdir -p test-results
+          
+          # 執行特定測試套件
+          if [ "${{ matrix.test-suite }}" = "simple" ]; then
+            # 執行簡單測試案例
+            npx promptfoo eval \
+              --config promptfoo.config.js \
+              --filter "*簡單*" \
+              --output test-results/agent-consistency-simple-${{ matrix.test-env }}.json \
+              --verbose
+          elif [ "${{ matrix.test-suite }}" = "complex" ]; then
+            # 執行複雜測試案例  
+            npx promptfoo eval \
+              --config promptfoo.config.js \
+              --filter "*複雜*|*企業級*" \
+              --output test-results/agent-consistency-complex-${{ matrix.test-env }}.json \
+              --verbose
+          else
+            # 執行邊界條件測試
+            npx promptfoo eval \
+              --config promptfoo.config.js \
+              --filter "*模糊*|*邊界*|*工具*" \
+              --output test-results/agent-consistency-edge-${{ matrix.test-env }}.json \
+              --verbose
+          fi
+          
+          echo "✅ Agent一致性測試完成"
+      
+      - name: '📊 上傳測試結果'
+        uses: actions/upload-artifact@v4
+        if: always()  # 即使測試失敗也要上傳結果
+        with:
+          name: agent-consistency-results-${{ matrix.test-env }}-${{ matrix.test-suite }}
+          path: ${{ env.WORKING_DIR }}/test-results/
+          retention-days: 7
+
+  # 階段4：文檔生成一致性測試
+  document-consistency-tests:
+    name: '📄 文檔一致性測試'
+    runs-on: ubuntu-latest
+    needs: [pre-validation, setup-environment]
+    if: needs.pre-validation.outputs.validation-passed == 'true'
+    strategy:
+      matrix:
+        test-env: [test]  # 文檔測試只在test環境運行
+    
+    steps:
+      - name: '📥 Checkout代碼'
+        uses: actions/checkout@v4
+      
+      - name: '♻️ 恢復環境快取'
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.WORKING_DIR }}/node_modules
+            ${{ env.WORKING_DIR }}/.env
+          key: ${{ runner.os }}-create-requirements-${{ matrix.test-env }}-${{ hashFiles('**/package.json') }}
+      
+      - name: '📋 執行文檔生成測試'
+        working-directory: ${{ env.WORKING_DIR }}
+        timeout-minutes: 10
+        run: |
+          echo "🚀 開始執行文檔生成一致性測試"
+          
+          mkdir -p test-results
+          
+          # 執行文檔一致性測試
+          npx promptfoo eval \
+            --config tests/doc-generation-consistency.yml \
+            --output test-results/doc-consistency-${{ matrix.test-env }}.json \
+            --verbose
+          
+          echo "✅ 文檔生成測試完成"
+      
+      - name: '📊 上傳文檔測試結果'
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: doc-consistency-results-${{ matrix.test-env }}
+          path: ${{ env.WORKING_DIR }}/test-results/
+          retention-days: 7
+
+  # 階段5：工具調用一致性測試
+  tool-usage-tests:
+    name: '🔧 工具使用測試'
+    runs-on: ubuntu-latest
+    needs: [pre-validation, setup-environment]
+    if: needs.pre-validation.outputs.validation-passed == 'true'
+    strategy:
+      matrix:
+        test-env: [test]
+    
+    steps:
+      - name: '📥 Checkout代碼'
+        uses: actions/checkout@v4
+      
+      - name: '♻️ 恢復環境快取'
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.WORKING_DIR }}/node_modules
+            ${{ env.WORKING_DIR }}/.env
+          key: ${{ runner.os }}-create-requirements-${{ matrix.test-env }}-${{ hashFiles('**/package.json') }}
+      
+      - name: '🛠️ 執行工具使用測試'
+        working-directory: ${{ env.WORKING_DIR }}
+        timeout-minutes: 12
+        run: |
+          echo "🚀 開始執行工具調用一致性測試"
+          
+          mkdir -p test-results
+          
+          npx promptfoo eval \
+            --config tests/tool-usage-consistency.yml \
+            --output test-results/tool-usage-${{ matrix.test-env }}.json \
+            --verbose
+          
+          echo "✅ 工具使用測試完成"
+      
+      - name: '📊 上傳工具測試結果'
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tool-usage-results-${{ matrix.test-env }}
+          path: ${{ env.WORKING_DIR }}/test-results/
+          retention-days: 7
+
+  # 階段6：品質保證測試
+  quality-assurance-tests:
+    name: '✨ 品質保證測試'
+    runs-on: ubuntu-latest
+    needs: [pre-validation, setup-environment]
+    if: needs.pre-validation.outputs.validation-passed == 'true'
+    strategy:
+      matrix:
+        test-env: [test]
+    
+    steps:
+      - name: '📥 Checkout代碼'
+        uses: actions/checkout@v4
+      
+      - name: '♻️ 恢復環境快取'
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.WORKING_DIR }}/node_modules
+            ${{ env.WORKING_DIR }}/.env
+          key: ${{ runner.os }}-create-requirements-${{ matrix.test-env }}-${{ hashFiles('**/package.json') }}
+      
+      - name: '🏆 執行品質保證測試'
+        working-directory: ${{ env.WORKING_DIR }}
+        timeout-minutes: 20
+        run: |
+          echo "🚀 開始執行品質保證測試"
+          
+          mkdir -p test-results
+          
+          npx promptfoo eval \
+            --config tests/quality-assurance.yml \
+            --output test-results/quality-assurance-${{ matrix.test-env }}.json \
+            --verbose
+          
+          echo "✅ 品質保證測試完成"
+      
+      - name: '📊 上傳品質測試結果'
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quality-assurance-results-${{ matrix.test-env }}
+          path: ${{ env.WORKING_DIR }}/test-results/
+          retention-days: 7
+
+  # 階段7：品質門檻檢查
+  quality-gate-check:
+    name: '🚦 品質門檻檢查'
+    runs-on: ubuntu-latest
+    needs: [agent-consistency-tests, document-consistency-tests, tool-usage-tests, quality-assurance-tests]
+    if: always()  # 即使某些測試失敗也要執行品質檢查
+    outputs:
+      quality-passed: ${{ steps.quality-gate.outputs.passed }}
+      overall-score: ${{ steps.quality-gate.outputs.score }}
+    
+    steps:
+      - name: '📥 Checkout代碼'
+        uses: actions/checkout@v4
+      
+      - name: '♻️ 恢復環境快取'
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.WORKING_DIR }}/node_modules
+            ${{ env.WORKING_DIR }}/.env
+          key: ${{ runner.os }}-create-requirements-test-${{ hashFiles('**/package.json') }}
+      
+      - name: '📥 下載所有測試結果'
+        uses: actions/download-artifact@v4
+        with:
+          path: ${{ env.WORKING_DIR }}/test-results/
+          merge-multiple: true
+      
+      - name: '🔍 合併測試結果'
+        working-directory: ${{ env.WORKING_DIR }}
+        run: |
+          echo "🔄 合併所有測試結果..."
+          
+          # 創建合併的結果文件
+          echo '{"results": {"stats": {"successes": 0, "failures": 0}, "results": []}}' > test-results/latest.json
+          
+          # 合併所有JSON結果文件
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            
+            let combinedResults = {
+              results: {
+                stats: { successes: 0, failures: 0 },
+                results: []
+              }
+            };
+            
+            // 讀取所有結果文件
+            const files = fs.readdirSync('test-results').filter(f => f.endsWith('.json') && f !== 'latest.json');
+            
+            files.forEach(file => {
+              try {
+                const data = JSON.parse(fs.readFileSync(path.join('test-results', file)));
+                if (data.results) {
+                  combinedResults.results.stats.successes += data.results.stats.successes || 0;
+                  combinedResults.results.stats.failures += data.results.stats.failures || 0;
+                  combinedResults.results.results = combinedResults.results.results.concat(data.results.results || []);
+                }
+              } catch (e) {
+                console.log('警告：無法解析文件', file, e.message);
+              }
+            });
+            
+            fs.writeFileSync('test-results/latest.json', JSON.stringify(combinedResults, null, 2));
+            console.log('✅ 測試結果合併完成');
+            console.log('總測試：', combinedResults.results.stats.successes + combinedResults.results.stats.failures);
+            console.log('通過：', combinedResults.results.stats.successes);
+            console.log('失敗：', combinedResults.results.stats.failures);
+          "
+      
+      - name: '🚦 執行品質門檻檢查'
+        id: quality-gate
+        working-directory: ${{ env.WORKING_DIR }}
+        continue-on-error: true  # 即使品質檢查失敗也要生成報告
+        run: |
+          echo "🔍 開始品質門檻檢查..."
+          
+          # 跳過品質門檻檢查的選項
+          if [ "${{ inputs.skip_quality_gate }}" = "true" ]; then
+            echo "⚠️ 品質門檻檢查已跳過（手動設定）"
+            echo "passed=true" >> $GITHUB_OUTPUT
+            echo "score=100" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # 執行品質門檻檢查
+          if node scripts/quality-gate.js; then
+            echo "✅ 品質門檻檢查通過"
+            echo "passed=true" >> $GITHUB_OUTPUT
+            
+            # 提取總分數（如果可用）
+            if [ -f test-results/quality-report.json ]; then
+              score=$(node -e "console.log(JSON.parse(require('fs').readFileSync('test-results/quality-report.json')).summary.successRate || 0)")
+              echo "score=$score" >> $GITHUB_OUTPUT
+            else
+              echo "score=100" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "❌ 品質門檻檢查失敗"
+            echo "passed=false" >> $GITHUB_OUTPUT
+            
+            if [ -f test-results/quality-report.json ]; then
+              score=$(node -e "console.log(JSON.parse(require('fs').readFileSync('test-results/quality-report.json')).summary.successRate || 0)")
+              echo "score=$score" >> $GITHUB_OUTPUT
+            else
+              echo "score=0" >> $GITHUB_OUTPUT
+            fi
+            
+            exit 1
+          fi
+      
+      - name: '📋 生成品質報告'
+        if: always()
+        working-directory: ${{ env.WORKING_DIR }}
+        run: |
+          echo "📋 生成詳細品質報告..."
+          
+          # 如果品質報告不存在，創建基本報告
+          if [ ! -f test-results/quality-report.md ]; then
+            cat > test-results/quality-report.md << 'EOF'
+          # Create Requirements Task 品質報告
+          
+          ## 執行摘要
+          
+          - **執行時間**: $(date)
+          - **狀態**: ${{ steps.quality-gate.outcome == 'success' && '✅ 通過' || '❌ 失敗' }}
+          - **總分**: ${{ steps.quality-gate.outputs.score }}%
+          
+          ## 測試結果概覽
+          
+          請檢查上傳的artifacts以獲取詳細測試結果。
+          EOF
+          fi
+          
+          echo "✅ 品質報告生成完成"
+      
+      - name: '📊 上傳品質報告'
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quality-gate-report
+          path: |
+            ${{ env.WORKING_DIR }}/test-results/quality-report.*
+            ${{ env.WORKING_DIR }}/test-results/latest.json
+          retention-days: 30
+      
+      - name: '📝 更新PR評論'
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            // 嘗試讀取品質報告
+            const workingDir = '${{ env.WORKING_DIR }}';
+            const reportPath = path.join(workingDir, 'test-results', 'quality-report.md');
+            
+            let reportContent = '# Create Requirements Task 品質檢查結果\n\n';
+            
+            if (fs.existsSync(reportPath)) {
+              reportContent = fs.readFileSync(reportPath, 'utf8');
+            } else {
+              reportContent += `**狀態**: ${{ steps.quality-gate.outcome == 'success' && '✅ 通過' || '❌ 需要改進' }}\n`;
+              reportContent += `**評分**: ${{ steps.quality-gate.outputs.score }}%\n\n`;
+              reportContent += '詳細報告請查看workflow artifacts。\n';
+            }
+            
+            // 更新或創建PR評論
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const existingComment = comments.find(comment => 
+              comment.body.includes('Create Requirements Task 品質檢查結果')
+            );
+            
+            if (existingComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existingComment.id,
+                body: reportContent
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: reportContent
+              });
+            }
+
+  # 階段8：部署決策和清理
+  deployment-decision:
+    name: '🚀 部署決策'
+    runs-on: ubuntu-latest
+    needs: [quality-gate-check]
+    if: always()
+    
+    steps:
+      - name: '📋 評估部署條件'
+        run: |
+          echo "📊 品質門檻檢查結果: ${{ needs.quality-gate-check.outputs.quality-passed }}"
+          echo "🎯 整體評分: ${{ needs.quality-gate-check.outputs.overall-score }}%"
+          
+          if [ "${{ needs.quality-gate-check.outputs.quality-passed }}" = "true" ]; then
+            echo "✅ 所有品質標準已達到，Ready for Deployment"
+            echo "🎉 Create Requirements Task通過所有CI/CD檢查！"
+          else
+            echo "❌ 品質標準未達到，Deployment Blocked"
+            echo "🔧 請根據品質報告改進後重新提交"
+          fi
+      
+      - name: '📈 設置部署狀態'
+        if: needs.quality-gate-check.outputs.quality-passed == 'true'
+        run: |
+          echo "DEPLOYMENT_READY=true" >> $GITHUB_ENV
+          echo "✅ 部署狀態：Ready"
+      
+      - name: '🧹 清理和總結'
+        run: |
+          echo "🏁 Create Requirements Task CI/CD Pipeline 執行完成"
+          echo ""
+          echo "📊 執行摘要:"
+          echo "  - 觸發事件: ${{ github.event_name }}"
+          echo "  - 分支: ${{ github.ref_name }}"
+          echo "  - 提交: ${{ github.sha }}"
+          echo "  - 品質評分: ${{ needs.quality-gate-check.outputs.overall-score }}%"
+          echo "  - 部署狀態: ${{ needs.quality-gate-check.outputs.quality-passed == 'true' && 'Ready' || 'Blocked' }}"
+          echo ""
+          echo "📋 後續步驟:"
+          if [ "${{ needs.quality-gate-check.outputs.quality-passed }}" = "true" ]; then
+            echo "  1. ✅ 所有測試通過，可以進行部署"
+            echo "  2. 📄 查看artifacts獲取詳細報告"
+            echo "  3. 🚀 繼續進行後續集成流程"
+          else
+            echo "  1. 📋 檢查品質報告了解具體問題"
+            echo "  2. 🔧 根據建議改進代碼或配置"
+            echo "  3. 🔄 修復後重新提交觸發新的檢查"
+          fi
