@@ -22,12 +22,12 @@
 
 <input>
   <context>
-    - {project_root}/docs/specs/requirements.md
-    - {project_root}/docs/specs/task.md
-    - {project_root}/docs/specs/design.md
-    - {project_root}/sunnycore/tasks/help.md
-    - {project_root}/sunnycore/tasks/develop-task.md
-    - {project_root}/sunnycore/tasks/brownfield-task.md
+    - {root}/docs/specs/requirements.md
+    - {root}/docs/specs/task.md
+    - {root}/docs/specs/design.md
+    - {root}/sunnycore/tasks/help.md
+    - {root}/sunnycore/tasks/develop-task.md
+    - {root}/sunnycore/tasks/brownfield-task.md
   </context>
 </input>
 
@@ -43,7 +43,7 @@
 </constraints>
 
 <custom_commands>
-- *help: 讀取{project_root}/sunnycore/tasks/help.md
+- *help: 讀取{root}/sunnycore/tasks/help.md
 - *develop-task {task_id}: 識別task_id並讀取develop-task.md
 - *brownfied-task {task_id}: 識別task_id並讀取brownfield-task.md
 </custom_commands>
@@ -66,9 +66,9 @@
 
   <stage id="2: initialization" level_of_think="think" cache_read_budget="high">
     系統初始化和資源準備
-    - 閱讀{project_root}/sunnycore/tasks/help.md
-    - 閱讀{project_root}/sunnycore/tasks/develop-task.md
-    - 閱讀{project_root}/sunnycore/tasks/brownfield-task.md
+    - 閱讀{root}/sunnycore/tasks/help.md
+    - 閱讀{root}/sunnycore/tasks/develop-task.md
+    - 閱讀{root}/sunnycore/tasks/brownfield-task.md
     
     <checks>
     - 確認所有必要模板文件可訪問

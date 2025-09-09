@@ -1,17 +1,17 @@
 <input>
   <context>
   1. User Requirements (用戶需求)
-  2. {project_root}/docs/architecture/*.md
-  3. {project_root}/sunnycore/templates/requirements-tmpl.yaml
-  4. {project_root}/sunnycore/scripts/shard-requirements.sh - Requirements Script
+  2. {root}/docs/architecture/*.md
+  3. {root}/sunnycore/templates/requirements-tmpl.yaml
+  4. {root}/sunnycore/scripts/shard-requirements.sh - Requirements Script
   </context>
   <templates>
-  {project_root}/sunnycore/templates/requirements-tmpl.yaml
+  {root}/sunnycore/templates/requirements-tmpl.yaml
   </templates>
 </input>
 
 <output>
-1. {project_root}/docs/requirements/*.md
+1. {root}/docs/requirements/*.md
 </output>
 
 <constraints importance="Critical">
@@ -19,7 +19,7 @@
 </constraints>
 
 <workflow importance="Critical">
-  <stage id="0: Create Todo List", level_of_think="think", read_token_budget="1000", write_token_budget="500", cache_write_budget="200", cache_read_budget="300">
+  <stage id="0: Create Todo List", level_of_think="think">
   - 閱讀整份Workflow
   - 進一步閱讀所有Stage
   - 閱讀所有Stage下的無序列表項
@@ -36,7 +36,7 @@
   </checks>
   </stage>
 
-  <stage id="1: Analyze User Requirements", level_of_think="think hard", read_token_budget="2000", write_token_budget="1000", cache_write_budget="400", cache_read_budget="600">
+  <stage id="1: Analyze User Requirements", level_of_think="think hard">
   - 閱讀User Requirements (用戶需求)
   - 使用Sequential-thinking Tool深度分析User Requirements
   - 使用Context7搜索是否有可滿足相關需求的Requirements
@@ -58,8 +58,8 @@
   </checks>
   </stage>
 
-  <stage id="2: Design Functional Requirements on Existing Architecture", level_of_think="think harder", read_token_budget="2500", write_token_budget="1200", cache_write_budget="500", cache_read_budget="800">
-  - 閱讀{project_root}/docs/architecture/*.md
+  <stage id="2: Design Functional Requirements on Existing Architecture", level_of_think="think harder">
+  - 閱讀{root}/docs/architecture/*.md
   - 使用Sequential-thinking Tool深度思考分析現有Architecture
   - 使用Context7搜索是否有可滿足相關需求的Requirements
   - 構思(Conceptualization)如何在盡可能不破壞現有Architecture之上滿足Functional Requirements (功能性需求)
@@ -80,8 +80,8 @@
   </checks>
   </stage>
 
-  <stage id="3: Design Non-functional Requirements on Existing Architecture", level_of_think="think harder", read_token_budget="2500", write_token_budget="1200", cache_write_budget="500", cache_read_budget="800">
-  - 閱讀{project_root}/docs/architecture/*.md
+  <stage id="3: Design Non-functional Requirements on Existing Architecture", level_of_think="think harder">
+  - 閱讀{root}/docs/architecture/*.md
   - 使用Sequential-thinking Tool深度思考分析現有Architecture
   - 使用Context7搜索是否有可滿足相關需求的Requirements
   - 構思(Conceptualization)如何在盡可能不破壞現有Architecture之上滿足Non-functional Requirements (非功能性需求)
@@ -100,13 +100,13 @@
   </checks>
   </stage>
 
-  <stage id="4: Output Final Requirements Document", level_of_think="think", read_token_budget="1500", write_token_budget="2000", cache_write_budget="800", cache_read_budget="400">
+  <stage id="4: Output Final Requirements Document", level_of_think="think">
   - 使用sequential thinking思考如何將完整的Requirements轉換為markdown格式
-  - 將轉換後的requirements文件輸出到{project_root}/docs/requirements.md
+  - 將轉換後的requirements文件輸出到{root}/docs/requirements.md
   - 詢問用戶是否滿意
   - 若User滿意、則輸出最終Requirements Document
   - 若User不滿意，則重複上述步驟，直到User滿意為止
-  - 運行{project_root}/sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
+  - 運行{root}/sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
 
   <questions>
   - 最終Requirements Document是否完整包含所有需求？

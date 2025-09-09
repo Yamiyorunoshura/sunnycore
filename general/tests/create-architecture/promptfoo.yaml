@@ -16,7 +16,7 @@ tests:
     options:
       runs: 5
     vars:
-      project_root: "/workspace"
+      root: "/workspace"
       functional_requirements: |
         - FR-001: 使用者可以註冊與登入
         - FR-002: 使用者可以透過電子郵件重設密碼
@@ -63,7 +63,7 @@ tests:
     options:
       runs: 3
     vars:
-      project_root: "/workspace"
+      root: "/workspace"
       functional_requirements: |
         - FR-001: 使用者可以註冊與登入
         - FR-002: 使用者可以透過電子郵件重設密碼
@@ -100,7 +100,7 @@ tests:
     options:
       runs: 3
     vars:
-      project_root: "/workspace"
+      root: "/workspace"
       functional_requirements: |
         - FR-001: 使用者可以註冊與登入
       non_functional_requirements: |

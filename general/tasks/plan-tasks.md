@@ -1,16 +1,16 @@
 <input>
   <context>
-  1. {project_root}/docs/requirements/*.md
-  2. {project_root}/docs/architecture/*.md
-  3. {project_root}/docs/tasks.md
+  1. {root}/docs/requirements/*.md
+  2. {root}/docs/architecture/*.md
+  3. {root}/docs/tasks.md
   </context>
   <templates>
-  4. {project_root}/sunnycore/templates/implementation-plan-tmpl.yaml
+  4. {root}/sunnycore/templates/implementation-plan-tmpl.yaml
   </templates>
 </input>
 
 <output>
-1. {project_root}/docs/implementation-plan/{task_id}-plan.md
+1. {root}/docs/implementation-plan/{task_id}-plan.md
 </output>
 
 <constraints importance="Important">
@@ -43,7 +43,7 @@
   </checks>
   </stage>
 
-  <stage id="1: 構建計劃上下文", level_of_think="think hard", read_token_budget="medium", cache_read_budget="medium">
+  <stage id="1: 構建計劃上下文", level_of_think="think hard">
   - 閱讀requirements/*.md
   - 使用Sequential-thinking Tool深度分析requirements.md
   - 識別第一個Functional Requirements
@@ -71,7 +71,7 @@
   </checks>
   </stage>
 
-  <stage id="2: 構建計劃", level_of_think="think harder", read_token_budget="high", write_token_budget="high", cache_write_budget="medium">
+  <stage id="2: 構建計劃", level_of_think="think harder">
   - 根據模板文件構建Implementation Plan
   - 將計劃文件轉換為markdown格式
   - 輸出Implementation Plan至指定位置

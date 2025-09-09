@@ -1,15 +1,15 @@
 <input>
   <context>
-  1. {project_root}/docs/requirements/*.md - Project Requirements Documentation
-  2. {project_root}/sunnycore/scripts/shard-architecture.sh - Architecture Script
+  1. {root}/docs/requirements/*.md - Project Requirements Documentation
+  2. {root}/sunnycore/scripts/shard-architecture.sh - Architecture Script
   </context>
   <templates>
-  1. {project_root}/sunnycore/templates/architecture-tmpl.yaml - Architecture Template
+  1. {root}/sunnycore/templates/architecture-tmpl.yaml - Architecture Template
   </templates>
 </input>
 
 <output>
-1. {project_root}/docs/architecture/*.md - Complete Architecture Documentation
+1. {root}/docs/architecture/*.md - Complete Architecture Documentation
 </output>
 
 <constraints importance="Critical">
@@ -35,7 +35,7 @@
   </stage>
   
   <stage id="1: Create Architecture Design for Functional Requirements", level_of_think="think hard", cache_read_budget="medium">
-  - 閱讀{project_root}/docs/requirements/functional-requirements/*.md
+  - 閱讀{root}/docs/requirements/functional-requirements/*.md
   - 使用Sequential-thinking Tool協助理解User Requirements
   - 使用context7搜索是否有可滿足相關Functional Requirements的Architecture Design
   - 識別Requirements Document當中的Functional Requirements
@@ -53,7 +53,7 @@
   </stage>
   
   <stage id="2: Create Architecture Design for Non-functional Requirements", level_of_think="think hard", cache_read_budget="medium">
-  - 閱讀{project_root}/docs/requirements/non-functional-requirements/*.md
+  - 閱讀{root}/docs/requirements/non-functional-requirements/*.md
   - 使用Sequential-thinking Tool協助理解User Requirements
   - 識別Requirements Document當中的Non-functional Requirements
   - 使用context7搜索是否有可滿足相關Non-functional Requirements的Architecture Design
@@ -75,7 +75,7 @@
   - 詢問User是否滿意完整的Architecture Document
   - 若User滿意、則輸出最終Architecture Document
   - 若User不滿意，則重複上述步驟，直到User滿意為止
-  - 運行{project_root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
+  - 運行{root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
   
   <checks>
   - [ ] 確認User對完整Architecture Document的滿意度

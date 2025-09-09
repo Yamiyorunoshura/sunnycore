@@ -1,16 +1,16 @@
 <input>
   <context>
-    1. {project_root}/docs/requirements
-    2. {project_root}/docs/architecture/*.md
-    3. {project_root}/sunnycore/scripts/shard-architecture.sh - Architecture Script
+    1. {root}/docs/requirements
+    2. {root}/docs/architecture/*.md
+    3. {root}/sunnycore/scripts/shard-architecture.sh - Architecture Script
   </context>
   <templates>
-    {project_root}/sunnycore/templates/architecture-tmpl.yaml
+    {root}/sunnycore/templates/architecture-tmpl.yaml
   </templates>
 </input>
 
 <output>
-1. {project_root}/docs/architecture/*.md
+1. {root}/docs/architecture/*.md
 </output>
 
 <constraints importance="Critical">
@@ -42,8 +42,8 @@
   </stage>
 
   <stage id="1: Read Existing Architecture Files" level_of_think="think hard" cache_read_budget="medium">
-    - 閱讀{project_root}/docs/architecture/technical-stack.md
-    - 閱讀{project_root}/docs/architecture/system-architecture.md  
+    - 閱讀{root}/docs/architecture/technical-stack.md
+    - 閱讀{root}/docs/architecture/system-architecture.md  
     - 使用Sequential-thinking Tool深度思考分析現有Architecture
 
     <questions>
@@ -64,7 +64,7 @@
   </stage>
 
   <stage id="2: Create Functional Requirements Architecture" level_of_think="think harder" cache_read_budget="high">
-    - 閱讀{project_root}/docs/requirements/functional-requirements/*.md
+    - 閱讀{root}/docs/requirements/functional-requirements/*.md
     - 使用Sequential-thinking Tool深度思考分析現有Architecture
     - 使用Context7搜索是否有可滿足相關Functional Requirements的Architecture Design
     - 為每個Functional Requirement創建一個Architecture Design
@@ -91,7 +91,7 @@
   </stage>
 
   <stage id="3: Create Non-functional Requirements Architecture" level_of_think="think harder" cache_read_budget="high">
-    - 閱讀{project_root}/docs/requirements/non-functional-requirements/*.md 
+    - 閱讀{root}/docs/requirements/non-functional-requirements/*.md 
     - 使用Sequential-thinking Tool深度思考分析現有Architecture
     - 使用Context7搜索是否有可滿足相關Non-functional Requirements的Architecture Design
     - 為每個Non-functional Requirement創建一個Architecture Design
@@ -145,7 +145,7 @@
     - 詢問User是否Satisfied完整的Architecture Files
     - 若User Satisfied、則輸出最終Architecture Files
     - 若User不Satisfied，則重複上述步驟，直到User Satisfied為止
-    - 運行{project_root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
+    - 運行{root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
 
     <questions>
     - Architecture Files是否完整地涵蓋了所有Requirements？
