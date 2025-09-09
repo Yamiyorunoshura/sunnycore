@@ -26,7 +26,8 @@
     - 閱讀整份Workflow
     - 進一步閱讀所有Steps
     - 閱讀所有Steps下的無序列表項
-    - 使用Todo-list Tool為每個無序列表項在Todo List中創建一個Todo Item
+    - 使用Sequential-thinking Tool深度思考如何創建計劃
+    - 使用plan tool創建計劃
     - 建立Dependencies Analysis
 
     <questions>
@@ -38,7 +39,7 @@
 
     <checks>
     - [ ] 確認所有Input Files已被讀取和理解
-    - [ ] 驗證Todo List包含所有必要的Work Items
+    - [ ] 驗證計劃包含所有必要的Work Items
     - [ ] 檢查Dependencies Identification的完整性
     </checks>
   </stage>

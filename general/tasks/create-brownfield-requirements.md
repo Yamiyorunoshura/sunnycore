@@ -14,16 +14,13 @@
 1. {root}/docs/requirements/*.md
 </output>
 
-<constraints importance="Critical">
-在完成每一項步驟後，必須更新Todo-list狀態
-</constraints>
-
 <workflow importance="Critical">
   <stage id="0: Create Todo List", level_of_think="think">
   - 閱讀整份Workflow
   - 進一步閱讀所有Stage
   - 閱讀所有Stage下的無序列表項
-  - 使用Todo-list Tool為每個無序列表項在todo list中創建一個todo item
+  - 使用Sequential-thinking Tool思考如何使用plan tool創建計劃
+  - 使用plan tool創建計劃
 
   <questions>
   - 是否已完整閱讀所有Workflow步驟？
@@ -31,8 +28,8 @@
   </questions>
 
   <checks>
-  - [ ] 確認Todo-list Tool已正確使用
-  - [ ] 驗證所有Stage都已被識別並記錄
+  - [ ] 確認Sequential-thinking Tool已正確使用
+  - [ ] 驗證計劃已創建並包含所有必要項目
   </checks>
   </stage>
 

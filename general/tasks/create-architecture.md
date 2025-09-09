@@ -25,12 +25,12 @@
   <stage id="0: Create Todo List", level_of_think="think", cache_read_budget="low">
   - 閱讀整份Workflow
   - 進一步閱讀所有Steps
-  - 閱讀所有Steps下的無序列表項
-  - 使用Todo-list Tool為每個無序列表項在Todo List中創建一個Todo Item
+  - 使用sequential thinking tools思考如何使用plan tool創建計劃
+  - 使用plan tool創建計劃
   
   <checks>
   - [ ] 確認已為所有Task Items創建對應的Todo Items
-  - [ ] 驗證Todo List結構完整性
+  - [ ] 驗證計劃結構完整性
   </checks>
   </stage>
   

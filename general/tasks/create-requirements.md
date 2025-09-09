@@ -24,7 +24,8 @@
   <stage id="0: Setup and Planning" level_of_think="think">
     - 閱讀整份workflow
     - 進一步閱讀所有步驟和無序列表項
-    - 使用Todo-list Tool為每個無序列表項創建todo item
+    - 使用Sequential-thinking Tool思考如何使用plan tool創建計劃
+    - 使用plan tool創建計劃
     
     <questions>
     - 工作流程的完整範圍是什麼？
@@ -33,7 +34,7 @@
     
     <checks>
     - [ ] 所有workflow步驟都已識別
-    - [ ] Todo list已創建並包含所有必要項目
+    - [ ] 計劃已創建並包含所有必要項目
     </checks>
   </stage>
 

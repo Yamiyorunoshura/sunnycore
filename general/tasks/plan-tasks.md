@@ -27,19 +27,20 @@
   - 閱讀整份workflow
   - 進一步閱讀所有步驟
   - 閱讀所有步驟下的無序列表項
-  - 使用Todo-list Tool為每個無序列表項在todo list中創建一個todo item
+  - 使用Sequential-thinking Tool深度思考如何創建計劃
+  - 使用plan tool創建計劃
 
   <questions>
   - 是否已完整理解整個workflow的結構和要求？
   - 每個步驟的無序列表項是否都已正確識別？
-  - todo list的粒度是否適當，既不過於細化也不過於粗糙？
+  - 計劃的粒度是否適當，既不過於細化也不過於粗糙？
   </questions>
 
   <checks>
   - [ ] 已完整閱讀整份workflow
   - [ ] 已識別所有步驟及其無序列表項
   - [ ] 已為每個無序列表項創建對應的todo item
-  - [ ] Todo list結構清晰且具有可執行性
+  - [ ] 計劃結構清晰且具有可執行性
   </checks>
   </stage>
 
