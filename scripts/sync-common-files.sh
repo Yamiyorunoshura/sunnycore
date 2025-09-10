@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# 分支同步腳本 - 同步兩個分支的共有文件
-# 用途：更新目標分支與源分支共有的內容，同時保留目標分支獨有的文件
+# 分支同步腳本 - 同步源分支文件到目標分支
+# 用途：將源分支的所有文件同步到目標分支，同時保留目標分支獨有的文件
 # 作者：AI Assistant
 # 日期：$(date +%Y-%m-%d)
 
@@ -16,9 +16,9 @@ NC='\033[0m' # No Color
 
 # 函數：顯示使用說明
 show_usage() {
-    echo -e "${BLUE}分支同步腳本 - 同步共有文件${NC}"
+    echo -e "${BLUE}分支同步腳本 - 同步源分支文件${NC}"
     echo ""
-    echo "用途：將源分支的共有文件內容同步到目標分支，保留目標分支獨有文件"
+    echo "用途：將源分支的所有文件同步到目標分支，保留目標分支獨有文件"
     echo ""
     echo "使用方法："
     echo "  $0 <源分支> <目標分支> [選項]"
@@ -54,8 +54,8 @@ check_branch_exists() {
     fi
 }
 
-# 函數：獲取共有文件列表
-get_common_files() {
+# 函數：獲取要同步的文件列表
+get_sync_files() {
     local source_branch=$1
     local target_branch=$2
     local temp_dir="/tmp/sync_branches_$$"
@@ -66,27 +66,36 @@ get_common_files() {
     git ls-tree -r --name-only "$source_branch" | sort > "$temp_dir/source_files.txt"
     git ls-tree -r --name-only "$target_branch" | sort > "$temp_dir/target_files.txt"
     
-    # 找出共有文件（排除 .DS_Store）
-    comm -12 "$temp_dir/source_files.txt" "$temp_dir/target_files.txt" | grep -v '\.DS_Store$' > "$temp_dir/common_files.txt"
+    # 獲取源分支的所有文件（排除 .DS_Store）
+    grep -v '\.DS_Store$' "$temp_dir/source_files.txt" > "$temp_dir/sync_files.txt"
     
-    echo "$temp_dir/common_files.txt"
+    # 同時生成共有文件和源分支獨有文件列表用於統計
+    comm -12 "$temp_dir/source_files.txt" "$temp_dir/target_files.txt" | grep -v '\.DS_Store$' > "$temp_dir/common_files.txt"
+    comm -23 "$temp_dir/source_files.txt" "$temp_dir/target_files.txt" | grep -v '\.DS_Store$' > "$temp_dir/source_only_files.txt"
+    
+    echo "$temp_dir/sync_files.txt"
 }
 
 # 函數：顯示文件統計
 show_file_stats() {
     local source_branch=$1
     local target_branch=$2
-    local common_files_path=$3
+    local sync_files_path=$3
+    local temp_dir=$(dirname "$sync_files_path")
     
     local source_count=$(git ls-tree -r --name-only "$source_branch" | wc -l | tr -d ' ')
     local target_count=$(git ls-tree -r --name-only "$target_branch" | wc -l | tr -d ' ')
-    local common_count=$(cat "$common_files_path" | wc -l | tr -d ' ')
+    local sync_count=$(cat "$sync_files_path" | wc -l | tr -d ' ')
+    local common_count=$(cat "$temp_dir/common_files.txt" | wc -l | tr -d ' ')
+    local source_only_count=$(cat "$temp_dir/source_only_files.txt" | wc -l | tr -d ' ')
     local target_only=$((target_count - common_count))
     
     echo -e "${BLUE}文件統計：${NC}"
     echo "  源分支 ($source_branch): $source_count 個文件"
     echo "  目標分支 ($target_branch): $target_count 個文件"
-    echo -e "  ${GREEN}共有文件: $common_count 個${NC}"
+    echo -e "  ${GREEN}將同步的文件: $sync_count 個${NC}"
+    echo "    - 共有文件: $common_count 個"
+    echo "    - 源分支獨有文件: $source_only_count 個（新增到目標分支）"
     echo -e "  ${YELLOW}目標分支獨有: $target_only 個（將被保留）${NC}"
 }
 
@@ -94,10 +103,10 @@ show_file_stats() {
 perform_sync() {
     local source_branch=$1
     local target_branch=$2
-    local common_files_path=$3
+    local sync_files_path=$3
     local dry_run=$4
     
-    echo -e "\n${BLUE}開始同步共有文件...${NC}"
+    echo -e "\n${BLUE}開始同步源分支文件...${NC}"
     
     local updated_count=0
     
@@ -111,7 +120,7 @@ perform_sync() {
             fi
             ((updated_count++))
         fi
-    done < "$common_files_path"
+    done < "$sync_files_path"
     
     echo -e "\n${GREEN}完成！共處理 $updated_count 個文件${NC}"
     
@@ -132,11 +141,11 @@ commit_changes() {
     local target_branch=$2
     local updated_count=$3
     
-    local commit_message="同步 $source_branch 分支的共有文件內容到 $target_branch
+    local commit_message="同步 $source_branch 分支的所有文件到 $target_branch
 
-- 更新了兩個分支共有的 $updated_count 個文件
+- 同步了源分支的 $updated_count 個文件（包括共有文件和源分支獨有文件）
 - 保留了 $target_branch 分支獨有的文件
-- 確保只同步共有內容，避免覆蓋分支特有檔案
+- 確保目標分支特有檔案不被覆蓋
 
 自動生成於: $(date '+%Y-%m-%d %H:%M:%S')"
     
@@ -212,12 +221,12 @@ main() {
         echo -e "${YELLOW}模式: 預覽模式（不會實際修改文件）${NC}"
     fi
     
-    # 獲取共有文件
+    # 獲取要同步的文件
     echo -e "\n${BLUE}分析分支文件...${NC}"
-    local common_files_path=$(get_common_files "$source_branch" "$target_branch")
+    local sync_files_path=$(get_sync_files "$source_branch" "$target_branch")
     
     # 顯示統計信息
-    show_file_stats "$source_branch" "$target_branch" "$common_files_path"
+    show_file_stats "$source_branch" "$target_branch" "$sync_files_path"
     
     # 確認操作
     if [ "$auto_yes" = "false" ] && [ "$dry_run" = "false" ]; then
@@ -236,11 +245,11 @@ main() {
     fi
     
     # 執行同步
-    perform_sync "$source_branch" "$target_branch" "$common_files_path" "$dry_run"
+    perform_sync "$source_branch" "$target_branch" "$sync_files_path" "$dry_run"
     
     # 提交更改（非預覽模式）
     if [ "$dry_run" = "false" ] && ! git diff --cached --quiet; then
-        local updated_count=$(cat "$common_files_path" | wc -l | tr -d ' ')
+        local updated_count=$(cat "$sync_files_path" | wc -l | tr -d ' ')
         
         if [ "$auto_yes" = "false" ]; then
             echo -e "\n${YELLOW}是否提交這些更改？ (y/N)${NC}"
