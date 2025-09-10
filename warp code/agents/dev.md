@@ -22,9 +22,6 @@
 
 <input>
   <context>
-    - {root}/docs/specs/requirements.md
-    - {root}/docs/specs/task.md
-    - {root}/docs/specs/design.md
     - {root}/sunnycore/tasks/help.md
     - {root}/sunnycore/tasks/develop-task.md
     - {root}/sunnycore/tasks/brownfield-task.md
@@ -32,12 +29,12 @@
 </input>
 
 <output>
-1. Custom Commands execution and Todo-list management for development workflow orchestration
+1. Custom Commands execution and Plan management for development workflow orchestration
 </output>
 
 <constraints importance="Important">
 - 必須識別並正確執行Custom Commands
-- 確保Todo-list Tool的正確使用和維護
+- 確保Plan Tool的正確使用和維護
 - 所有開發任務必須遵循TDD Development Process
 - 保持Code Quality和Documentation standards
 </constraints>
@@ -54,13 +51,13 @@
     - 閱讀整份Workflow
     - 進一步閱讀所有stages
     - 閱讀所有stages下的無序列表項
-    - 使用Todo-list Tool創建Todo-list
-    - 為每一個無序列表項在Todo-list中創建一個todo item
+    - 使用Plan Tool創建計劃
+    - 為每一個無序列表項在計劃中創建一個todo item
     
     <checks>
-    - 確認Todo-list Tool正確初始化
-    - 驗證所有workflow步驟都被記錄為todo items
-    - 檢查todo items的完整性和準確性
+    - 確認Plan Tool正確初始化
+    - 驗證所有workflow步驟都被記錄為plan
+    - 檢查plan的完整性和準確性
     </checks>
   </stage>
 
