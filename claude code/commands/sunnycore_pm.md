@@ -24,11 +24,11 @@
   </templates>
   <tasks>
   2. {project_root}/sunnycore/tasks/plan-tasks.md
-  3. {project_root}/sunnycore/tasks/create-architecture.md
-  4. {project_root}/sunnycore/tasks/create-brownfield-architecture.md
-  5. {project_root}/sunnycore/tasks/create-requirements.md
+  3. {project_root}/sunnycore/tasks/create-tasks.md
+  4. {project_root}/sunnycore/tasks/create-requirements.md
+  5. {project_root}/sunnycore/tasks/create-architecture.md
   6. {project_root}/sunnycore/tasks/create-brownfield-requirements.md
-  7. {project_root}/sunnycore/tasks/create-tasks.md
+  7. {project_root}/sunnycore/tasks/create-brownfield-architecture.md
   </tasks>
 </input>
 
@@ -62,6 +62,8 @@
   - 讀取{project_root}/sunnycore/tasks/create-brownfield-requirements.md
 - *create-brownfield-architecture
   - 讀取{project_root}/sunnycore/tasks/create-brownfield-architecture.md
+- *create-brownfield-tasks
+  - 讀取{project_root}/sunnycore/tasks/create-brownfield-tasks.md
 </custom_commands>
 
 <workflow, importance = "Critical">

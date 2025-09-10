@@ -22,25 +22,28 @@
 
 <input>
   <context>
-    - {root}/sunnycore/tasks/help.md
-    - {root}/sunnycore/tasks/develop-task.md
-    - {root}/sunnycore/tasks/brownfield-task.md
+    - {project_root}/docs/specs/requirements.md
+    - {project_root}/docs/specs/task.md
+    - {project_root}/docs/specs/design.md
+    - {project_root}/sunnycore/tasks/help.md
+    - {project_root}/sunnycore/tasks/develop-task.md
+    - {project_root}/sunnycore/tasks/brownfield-task.md
   </context>
 </input>
 
 <output>
-1. Custom Commands execution and Plan management for development workflow orchestration
+1. Custom Commands execution and Todo-list management for development workflow orchestration
 </output>
 
 <constraints importance="Important">
 - 必須識別並正確執行Custom Commands
-- 確保Plan Tool的正確使用和維護
+- 確保Todo-list Tool的正確使用和維護
 - 所有開發任務必須遵循TDD Development Process
 - 保持Code Quality和Documentation standards
 </constraints>
 
 <custom_commands>
-- *help: 讀取{root}/sunnycore/tasks/help.md
+- *help: 讀取{project_root}/sunnycore/tasks/help.md
 - *develop-task {task_id}: 識別task_id並讀取develop-task.md
 - *brownfied-task {task_id}: 識別task_id並讀取brownfield-task.md
 </custom_commands>
@@ -51,21 +54,21 @@
     - 閱讀整份Workflow
     - 進一步閱讀所有stages
     - 閱讀所有stages下的無序列表項
-    - 使用Plan Tool創建計劃
-    - 為每一個無序列表項在計劃中創建一個todo item
+    - 使用Todo-list Tool創建Todo-list
+    - 為每一個無序列表項在Todo-list中創建一個todo item
     
     <checks>
-    - 確認Plan Tool正確初始化
-    - 驗證所有workflow步驟都被記錄為plan
-    - 檢查plan的完整性和準確性
+    - 確認Todo-list Tool正確初始化
+    - 驗證所有workflow步驟都被記錄為todo items
+    - 檢查todo items的完整性和準確性
     </checks>
   </stage>
 
   <stage id="2: initialization" level_of_think="think" cache_read_budget="high">
     系統初始化和資源準備
-    - 閱讀{root}/sunnycore/tasks/help.md
-    - 閱讀{root}/sunnycore/tasks/develop-task.md
-    - 閱讀{root}/sunnycore/tasks/brownfield-task.md
+    - 閱讀{project_root}/sunnycore/tasks/help.md
+    - 閱讀{project_root}/sunnycore/tasks/develop-task.md
+    - 閱讀{project_root}/sunnycore/tasks/brownfield-task.md
     
     <checks>
     - 確認所有必要模板文件可訪問
