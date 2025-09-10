@@ -17,7 +17,7 @@ version: 1
 metadata:
   task_id: "Required - Actual task identifier"
   plan_reference: "Required - Corresponding implementation plan path"
-  project_root: "Required - Project root directory path"
+  root: "Required - Project root directory path"
 
 # Development Record Entries - Add one entry per development phase
 dev_entries:
