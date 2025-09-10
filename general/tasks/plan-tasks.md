@@ -1,16 +1,16 @@
 <input>
   <context>
-  1. {project_root}/docs/requirements/*.md
-  2. {project_root}/docs/architecture/*.md
-  3. {project_root}/docs/tasks.md
+  1. {root}/docs/requirements/*.md
+  2. {root}/docs/architecture/*.md
+  3. {root}/docs/tasks.md
   </context>
   <templates>
-  4. {project_root}/sunnycore/templates/implementation-plan-tmpl.yaml
+  4. {root}/sunnycore/templates/implementation-plan-tmpl.yaml
   </templates>
 </input>
 
 <output>
-1. {project_root}/docs/implementation-plan/{task_id}-plan.md
+1. {root}/docs/implementation-plan/{task_id}-plan.md
 </output>
 
 <constraints importance="Important">
@@ -27,23 +27,24 @@
   - 閱讀整份workflow
   - 進一步閱讀所有步驟
   - 閱讀所有步驟下的無序列表項
-  - 使用Todo-list Tool為每個無序列表項在todo list中創建一個todo item
+  - 使用Sequential-thinking Tool深度思考如何創建計劃
+  - 使用plan tool創建計劃
 
   <questions>
   - 是否已完整理解整個workflow的結構和要求？
   - 每個步驟的無序列表項是否都已正確識別？
-  - todo list的粒度是否適當，既不過於細化也不過於粗糙？
+  - 計劃的粒度是否適當，既不過於細化也不過於粗糙？
   </questions>
 
   <checks>
   - [ ] 已完整閱讀整份workflow
   - [ ] 已識別所有步驟及其無序列表項
   - [ ] 已為每個無序列表項創建對應的todo item
-  - [ ] Todo list結構清晰且具有可執行性
+  - [ ] 計劃結構清晰且具有可執行性
   </checks>
   </stage>
 
-  <stage id="1: 構建計劃上下文", level_of_think="think hard", read_token_budget="medium", cache_read_budget="medium">
+  <stage id="1: 構建計劃上下文", level_of_think="think hard">
   - 閱讀requirements/*.md
   - 使用Sequential-thinking Tool深度分析requirements.md
   - 識別第一個Functional Requirements
@@ -71,7 +72,7 @@
   </checks>
   </stage>
 
-  <stage id="2: 構建計劃", level_of_think="think harder", read_token_budget="high", write_token_budget="high", cache_write_budget="medium">
+  <stage id="2: 構建計劃", level_of_think="think harder">
   - 根據模板文件構建Implementation Plan
   - 將計劃文件轉換為markdown格式
   - 輸出Implementation Plan至指定位置

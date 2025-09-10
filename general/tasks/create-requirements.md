@@ -3,12 +3,12 @@
     協助用戶通過結構化的互動流程，將初始想法和需求轉化為完整的功能性和非功能性需求文檔
   </context>
   <templates>
-    {project_root}/sunnycore/templates/requirement-tmpl.yaml
+    {root}/sunnycore/templates/requirement-tmpl.yaml
   </templates>
 </input>
 
 <output>
-  {project_root}/docs/requirements/*.md - 完整的需求規格文檔，包含功能性需求、非功能性需求和驗收標準
+  {root}/docs/requirements/*.md - 完整的需求規格文檔，包含功能性需求、非功能性需求和驗收標準
 </output>
 
 <constraints importance="Critical">
@@ -21,10 +21,11 @@
 </constraints>
 
 <workflow importance="Critical">
-  <stage id="0: Setup and Planning" level_of_think="think" read_token_budget="low" write_token_budget="low">
+  <stage id="0: Setup and Planning" level_of_think="think">
     - 閱讀整份workflow
     - 進一步閱讀所有步驟和無序列表項
-    - 使用Todo-list Tool為每個無序列表項創建todo item
+    - 使用Sequential-thinking Tool思考如何使用plan tool創建計劃
+    - 使用plan tool創建計劃
     
     <questions>
     - 工作流程的完整範圍是什麼？
@@ -33,11 +34,11 @@
     
     <checks>
     - [ ] 所有workflow步驟都已識別
-    - [ ] Todo list已創建並包含所有必要項目
+    - [ ] 計劃已創建並包含所有必要項目
     </checks>
   </stage>
 
-  <stage id="1: User Requirements Analysis" level_of_think="think hard" read_token_budget="medium" write_token_budget="medium">
+  <stage id="1: User Requirements Analysis" level_of_think="think hard">
     - 深度思考、分析用戶的輸入
     - 使用Sequential-thinking Tool協助分析用戶需求
     - 將用戶需求分類為Functional Requirements與Non-functional Requirements
@@ -55,7 +56,7 @@
     </checks>
   </stage>
 
-  <stage id="2: Functional Requirements Clarification" level_of_think="think harder" read_token_budget="high" write_token_budget="medium">
+  <stage id="2: Functional Requirements Clarification" level_of_think="think harder">
     - 與用戶討論每個Functional Requirement
     - 使用Sequential-thinking Tool協助進行逐步的需求澄清
     - 根據用戶反饋適時更新需求
@@ -75,7 +76,7 @@
     </checks>
   </stage>
 
-  <stage id="3: Non-functional Requirements Clarification" level_of_think="think harder" read_token_budget="high" write_token_budget="medium">
+  <stage id="3: Non-functional Requirements Clarification" level_of_think="think harder">
     - 與用戶討論每個Non-functional Requirement
     - 使用Sequential-thinking Tool協助進行逐步的需求澄清
     - 根據用戶反饋適時更新需求
@@ -98,8 +99,8 @@
   <stage id="4: Final Validation and Output" level_of_think="think" cache_read_budget="high" write_token_budget="high">
     - 詢問用戶是否滿意完整的Requirements
     - 使用sequential thinking思考如何將完整的Requirements轉換為markdown格式
-    - 將轉換後的requirements文件輸出到{project_root}/docs/requirements.md
-    - 運行{project_root}/sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
+    - 將轉換後的requirements文件輸出到{root}/docs/requirements.md
+    - 運行{root}/sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
     
     <questions>
     - 最終文檔是否涵蓋了所有用戶需求？
