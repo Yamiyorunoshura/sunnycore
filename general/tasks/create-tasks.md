@@ -1,8 +1,8 @@
 <input>
   <context>
-    1. {root}/docs/requirements/*.md - Project Functional Requirements and Non-functional Requirements
-    2. {root}/docs/architecture/*.md - Architecture Design and Technical Specifications  
-    3. {root}/sunnycore/templates/tasks-tmpl.yaml - Task Template Format
+    1. {project_root}/docs/requirements/*.md - Project Functional Requirements and Non-functional Requirements
+    2. {project_root}/docs/architecture/*.md - Architecture Design and Technical Specifications  
+    3. {project_root}/sunnycore/templates/tasks-tmpl.yaml - Task Template Format
   </context>
   <templates>
     - tasks-tmpl.yaml - Standard task structure template
@@ -10,7 +10,7 @@
 </input>
 
 <output>
-  1. {root}/docs/tasks.md - Comprehensive task breakdown with atomized sub-tasks
+  1. {project_root}/docs/tasks.md - Comprehensive task breakdown with atomized sub-tasks
 </output>
 
 <constraints importance="Critical">
@@ -22,12 +22,11 @@
 </constraints>
 
 <workflow importance="Critical">
-  <stage id="1: Context Analysis and Planning" level_of_think="think hard">
+  <stage id="1: Context Analysis and Planning" level_of_think="think hard" read_token_budget="2000" write_token_budget="500" cache_read_budget="1000">
     - 閱讀整份Workflow
     - 進一步閱讀所有Steps
     - 閱讀所有Steps下的無序列表項
-    - 使用Sequential-thinking Tool深度思考如何創建計劃
-    - 使用plan tool創建計劃
+    - 使用Todo-list Tool為每個無序列表項在Todo List中創建一個Todo Item
     - 建立Dependencies Analysis
 
     <questions>
@@ -39,12 +38,12 @@
 
     <checks>
     - [ ] 確認所有Input Files已被讀取和理解
-    - [ ] 驗證計劃包含所有必要的Work Items
+    - [ ] 驗證Todo List包含所有必要的Work Items
     - [ ] 檢查Dependencies Identification的完整性
     </checks>
   </stage>
 
-  <stage id="2: Functional Requirements Task Creation" level_of_think="think hard">
+  <stage id="2: Functional Requirements Task Creation" level_of_think="think hard" read_token_budget="3000" write_token_budget="2000" cache_read_budget="1500">
     - 閱讀Requirements.md
     - 使用Sequential-thinking Tool深度分析Requirements.md
     - 識別第一個Functional Requirement
@@ -70,7 +69,7 @@
     </checks>
   </stage>
 
-  <stage id="3: Non-Functional Requirements Task Creation" level_of_think="think hard">
+  <stage id="3: Non-Functional Requirements Task Creation" level_of_think="think hard" read_token_budget="2500" write_token_budget="2000" cache_read_budget="1200">
     - 閱讀Requirements.md
     - 使用Sequential-thinking Tool深度分析Requirements.md
     - 識別第一個Non-functional Requirement
@@ -96,7 +95,7 @@
     </checks>
   </stage>
 
-  <stage id="4: Quality Assurance and Validation" level_of_think="think">
+  <stage id="4: Quality Assurance and Validation" level_of_think="think" read_token_budget="1500" write_token_budget="1000" cache_read_budget="800">
     - 閱讀Tasks.md
     - 使用Sequential-thinking Tool深度分析Tasks.md
     - 校對template中所有需要填入的項目都已填入

@@ -1,15 +1,15 @@
 <input>
   <context>
-  1. {root}/docs/requirements/*.md - Project Requirements Documentation
-  2. {root}/sunnycore/scripts/shard-architecture.sh - Architecture Script
+  1. {project_root}/docs/requirements/*.md - Project Requirements Documentation
+  2. {project_root}/sunnycore/scripts/shard-architecture.sh - Architecture Script
   </context>
   <templates>
-  1. {root}/sunnycore/templates/architecture-tmpl.yaml - Architecture Template
+  1. {project_root}/sunnycore/templates/architecture-tmpl.yaml - Architecture Template
   </templates>
 </input>
 
 <output>
-1. {root}/docs/architecture/*.md - Complete Architecture Documentation
+1. {project_root}/docs/architecture/*.md - Complete Architecture Documentation
 </output>
 
 <constraints importance="Critical">
@@ -25,17 +25,17 @@
   <stage id="0: Create Todo List", level_of_think="think", cache_read_budget="low">
   - 閱讀整份Workflow
   - 進一步閱讀所有Steps
-  - 使用sequential thinking tools思考如何使用plan tool創建計劃
-  - 使用plan tool創建計劃
+  - 閱讀所有Steps下的無序列表項
+  - 使用Todo-list Tool為每個無序列表項在Todo List中創建一個Todo Item
   
   <checks>
   - [ ] 確認已為所有Task Items創建對應的Todo Items
-  - [ ] 驗證計劃結構完整性
+  - [ ] 驗證Todo List結構完整性
   </checks>
   </stage>
   
   <stage id="1: Create Architecture Design for Functional Requirements", level_of_think="think hard", cache_read_budget="medium">
-  - 閱讀{root}/docs/requirements/functional-requirements/*.md
+  - 閱讀{project_root}/docs/requirements/functional-requirements/*.md
   - 使用Sequential-thinking Tool協助理解User Requirements
   - 使用context7搜索是否有可滿足相關Functional Requirements的Architecture Design
   - 識別Requirements Document當中的Functional Requirements
@@ -53,7 +53,7 @@
   </stage>
   
   <stage id="2: Create Architecture Design for Non-functional Requirements", level_of_think="think hard", cache_read_budget="medium">
-  - 閱讀{root}/docs/requirements/non-functional-requirements/*.md
+  - 閱讀{project_root}/docs/requirements/non-functional-requirements/*.md
   - 使用Sequential-thinking Tool協助理解User Requirements
   - 識別Requirements Document當中的Non-functional Requirements
   - 使用context7搜索是否有可滿足相關Non-functional Requirements的Architecture Design
@@ -75,7 +75,7 @@
   - 詢問User是否滿意完整的Architecture Document
   - 若User滿意、則輸出最終Architecture Document
   - 若User不滿意，則重複上述步驟，直到User滿意為止
-  - 運行{root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
+  - 運行{project_root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
   
   <checks>
   - [ ] 確認User對完整Architecture Document的滿意度

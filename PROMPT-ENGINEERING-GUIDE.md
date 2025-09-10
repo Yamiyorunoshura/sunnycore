@@ -25,10 +25,14 @@
 ## 工作流程相關標籤
 - <workflow, importance = "Optional/Normal/Important/Critical">： 定義工作流程的開始。
     - importance： 定義工作流程的重要性。
-    - <stage, id = "Stage ID", level_of_think = "non-thinking/think/think hard/think harder/ultra think">： 定義工作流程的階段。
+    - <stage, id = "Stage ID", level_of_think = "non-thinking/think/think hard/think harder/ultra think", read_token_budget = "Customise", write_token_budget = "Customise", cache_write_budget = "Customise", cache_read_budget = "Customise">： 定義工作流程的階段。
         - stage id： 定義工作流程的階段ID。
         - level_of_think： 定義工作流程的階段思考能力。
-        
+        - read_token_budget： 定義工作流程的階段讀取token預算。
+        - write_token_budget： 定義工作流程的階段寫入token預算。
+        - cache_write_budget： 定義工作流程的階段快取寫入token預算。
+        - cache_read_budget： 定義工作流程的階段快取讀取token預算。
+
 # 提示詞架構
 在這個部分，我們將會介紹我們所使用的提示詞架構，協助你理解我們所使用的提示詞技巧。
 
@@ -195,7 +199,7 @@ color: {Color}
 </constraints>
 
 <workflow, importance = "Optional/Normal/Important/Critical">
-  <stage id="n: stage name", level_of_think = "non-thinking/think/think hard/think harder, Ultra think">
+  <stage id="n: stage name", level_of_think = "non-thinking/think/think hard/think harder, Ultra think", read_token_budget = "customise", write_token_budget = "customise", cache_write_budget = "customise", cache_read_budget = "customise">
   - xxx
   - yyy
   - zzz

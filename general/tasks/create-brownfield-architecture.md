@@ -1,16 +1,16 @@
 <input>
   <context>
-    1. {root}/docs/requirements
-    2. {root}/docs/architecture/*.md
-    3. {root}/sunnycore/scripts/shard-architecture.sh - Architecture Script
+    1. {project_root}/docs/requirements
+    2. {project_root}/docs/architecture/*.md
+    3. {project_root}/sunnycore/scripts/shard-architecture.sh - Architecture Script
   </context>
   <templates>
-    {root}/sunnycore/templates/architecture-tmpl.yaml
+    {project_root}/sunnycore/templates/architecture-tmpl.yaml
   </templates>
 </input>
 
 <output>
-1. {root}/docs/architecture/*.md
+1. {project_root}/docs/architecture/*.md
 </output>
 
 <constraints importance="Critical">
@@ -25,8 +25,7 @@
     - 閱讀整份Workflow Specifications
     - 進一步閱讀所有Stage Steps
     - 閱讀所有步驟下的無序列表項
-    - 使用Sequential-thinking Tool思考如何使用plan tool創建計劃
-    - 使用plan tool創建計劃
+    - 使用Todo-list Tool為每個無序列表項在todo list中創建一個todo item
 
     <questions>
     - 是否完整理解了整個Brownfield Architecture創建流程？
@@ -38,14 +37,13 @@
     - [ ] 是否成功閱讀了完整的Workflow？
     - [ ] 是否識別了所有Stage Steps？
     - [ ] 是否為每個無序列表項創建了todo item？
-    - [ ] Sequential-thinking Tool是否正常運作？
-    - [ ] plan tool是否正常運作？
+    - [ ] Todo-list Tool是否正常運作？
     </checks>
   </stage>
 
   <stage id="1: Read Existing Architecture Files" level_of_think="think hard" cache_read_budget="medium">
-    - 閱讀{root}/docs/architecture/technical-stack.md
-    - 閱讀{root}/docs/architecture/system-architecture.md  
+    - 閱讀{project_root}/docs/architecture/technical-stack.md
+    - 閱讀{project_root}/docs/architecture/system-architecture.md  
     - 使用Sequential-thinking Tool深度思考分析現有Architecture
 
     <questions>
@@ -66,7 +64,7 @@
   </stage>
 
   <stage id="2: Create Functional Requirements Architecture" level_of_think="think harder" cache_read_budget="high">
-    - 閱讀{root}/docs/requirements/functional-requirements/*.md
+    - 閱讀{project_root}/docs/requirements/functional-requirements/*.md
     - 使用Sequential-thinking Tool深度思考分析現有Architecture
     - 使用Context7搜索是否有可滿足相關Functional Requirements的Architecture Design
     - 為每個Functional Requirement創建一個Architecture Design
@@ -93,7 +91,7 @@
   </stage>
 
   <stage id="3: Create Non-functional Requirements Architecture" level_of_think="think harder" cache_read_budget="high">
-    - 閱讀{root}/docs/requirements/non-functional-requirements/*.md 
+    - 閱讀{project_root}/docs/requirements/non-functional-requirements/*.md 
     - 使用Sequential-thinking Tool深度思考分析現有Architecture
     - 使用Context7搜索是否有可滿足相關Non-functional Requirements的Architecture Design
     - 為每個Non-functional Requirement創建一個Architecture Design
@@ -147,7 +145,7 @@
     - 詢問User是否Satisfied完整的Architecture Files
     - 若User Satisfied、則輸出最終Architecture Files
     - 若User不Satisfied，則重複上述步驟，直到User Satisfied為止
-    - 運行{root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
+    - 運行{project_root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
 
     <questions>
     - Architecture Files是否完整地涵蓋了所有Requirements？
