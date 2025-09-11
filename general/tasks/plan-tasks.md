@@ -18,7 +18,6 @@
 - 必須嚴格遵循模板格式
 - 必須使用指定的工具（Sequential-thinking Tool, Todo-list Tool）
 - 輸出必須轉換為markdown格式
-- 必須確保Implementation Plan的可執行性
 - 必須採用標準化的技術術語
 </constraints>
 
