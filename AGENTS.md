@@ -1,3 +1,6 @@
+# General rules
+1. Always respond in Chinese-traditional
+
 # Repository Guidelines
 
 ## Project Structure & Module Organization
