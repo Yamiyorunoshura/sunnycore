@@ -26,7 +26,8 @@
     - 閱讀整份Workflow
     - 進一步閱讀所有Steps
     - 閱讀所有Steps下的無序列表項
-    - 使用todo list tool為每一個無序列表項創建一個todo item
+    - 使用Sequential-thinking Tool深度思考如何創建計劃
+    - 使用plan tool創建計劃
     - 建立Dependencies Analysis
 
     <questions>
