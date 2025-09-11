@@ -26,7 +26,7 @@
   - 識別所有Workflow Steps
   - 閱讀所有工作步驟下的無序列表項
   - 使用sequential thinking tool深度思考如何實作每一個步驟
-  - 使用todo list tool創建Implementation Plan
+  - 使用plan tool創建Implementation Plan
 
   <questions>
   - 所有必要的輸入文件是否都已識別？
