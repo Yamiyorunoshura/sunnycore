@@ -89,6 +89,53 @@
 - 效能分析和優化建議
 - 文檔品質和整合測試
 
+## 安裝方法
+
+### 自動安裝腳本
+
+Sunnycore 提供了自動化安裝腳本 `sunnycore.command`，可以快速安裝不同版本到本地系統。
+
+#### 系統需求
+- macOS 或 Linux 系統
+- Git（必須已安裝）
+- Bash shell
+- 網路連線
+
+#### 安裝步驟
+
+1. **準備腳本**：
+   ```bash
+   chmod +x sunnycore.command
+   ```
+
+2. **修改倉庫 URL**（首次使用）：
+   編輯 `sunnycore.command` 檔案，設置正確的 GitHub 倉庫地址：
+   ```bash
+   REPO_URL="https://github.com/Yamiyorunoshura/sunnycore.git"
+   ```
+
+3. **執行安裝**：
+   ```bash
+   ./sunnycore.command
+   ```
+
+4. **選擇版本**：
+   - **Warp Code**: 通用角色化平台（需要 `warp-code` 分支）
+   - **Claude Code**: 專業細分化平台（需要 `claude-code` 分支）
+   - **Codex**: 基礎版本（需要 `codex` 分支）
+
+#### 安裝結果
+安裝完成後，目標路徑將包含：
+```
+目標路徑/
+├── sunnycore/           # 主要系統檔案
+│   ├── config.yaml     # 配置檔案
+│   ├── agents/         # Agent 定義
+│   ├── tasks/          # 任務模板
+│   └── templates/      # 文檔模板
+└── [VERSION].md        # 版本特定文檔
+```
+
 ## 快速開始
 
 ### 1. 啟動 Agent
