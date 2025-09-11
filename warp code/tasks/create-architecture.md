@@ -25,8 +25,8 @@
   <stage id="0: Create Todo List", level_of_think="think", cache_read_budget="low">
   - 閱讀整份Workflow
   - 進一步閱讀所有Steps
-  - 使用sequential thinking tools思考如何使用todo list tool創建計劃
-  - 使用todo list tool創建計劃
+  - 使用sequential thinking tools思考如何使用plan tool創建計劃
+  - 使用plan tool創建計劃
   
   <checks>
   - [ ] 確認已為所有Task Items創建對應的Todo Items

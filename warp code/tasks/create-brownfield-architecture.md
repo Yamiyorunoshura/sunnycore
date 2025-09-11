@@ -25,7 +25,8 @@
     - 閱讀整份Workflow Specifications
     - 進一步閱讀所有Stage Steps
     - 閱讀所有步驟下的無序列表項
-    - 使用todo list tool為每一個無序列表項創建todo items
+    - 使用Sequential-thinking Tool思考如何使用plan tool創建計劃
+    - 使用plan tool創建計劃
 
     <questions>
     - 是否完整理解了整個Brownfield Architecture創建流程？
@@ -38,7 +39,7 @@
     - [ ] 是否識別了所有Stage Steps？
     - [ ] 是否為每個無序列表項創建了todo item？
     - [ ] Sequential-thinking Tool是否正常運作？
-    - [ ] todo list tool是否正常運作？
+    - [ ] plan tool是否正常運作？
     </checks>
   </stage>
 

@@ -24,11 +24,12 @@
   <stage id="1: Implementation Planning" level_of_think="think hard">
   - 識別所有Workflow步驟和依賴關係
   - 閱讀所有工作步驟下的無序列表項
-  - 使用todo list tool為每一個無序列表項創建todo items
+  - 使用Sequential Thinking Tool深度思考如何實作這些步驟
+  - 使用Todo List Tool創建詳細的Implementation Plan
 
   <questions>
   - 所有相關的Review Results和Development Notes文件都已識別了嗎？
-  - todo list是否涵蓋了所有必要的步驟？
+  - Implementation Plan是否涵蓋了所有必要的步驟？
   - 是否考慮了文件間的依賴關係和處理順序？
   </questions>
   
@@ -36,7 +37,7 @@
   - [ ] 已完整掃描{root}/docs/review-results/目錄
   - [ ] 已完整掃描{root}/docs/dev-notes/目錄
   - [ ] 已確認project-knowledge-tmpl.md的存在和可讀性
-  - [ ] todo list已創建並包含所有必要的步驟
+  - [ ] Implementation Plan已創建並包含所有階段
   </checks>
   </stage>
 
