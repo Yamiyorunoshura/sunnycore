@@ -13,6 +13,14 @@
   2. Comprehensive development notes: {root}/docs/dev-notes/{task_id}-notes.md
 </output>
 
+<constraints, importance = "Important">
+  - Changes must be minimal, reversible, and scoped to identified issues
+  - Preserve existing architecture, public APIs, and naming conventions; justify any new dependency in plan/dev-notes
+  - Add or update tests to cover each fix/action and run tests after every change
+  - Follow project style and lint rules; avoid unrelated reformatting or file churn
+  - Keep todos updated per stages and record decisions/risks in the development notes
+</constraints>
+
 <workflow, importance = "Normal">
   <stage id="0: Create a todo list">
   - Read the entire document
