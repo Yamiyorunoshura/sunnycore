@@ -14,7 +14,6 @@
 
 <constraints, importance = "Important">
 - Read only the specified inputs; do not invent content
-- Keep 3–5 workflow stages; 2–3 items for questions/checks
 - Produce concise, action-oriented bullets
 - Use the provided completion report template sections
 - Output exactly one file at the stated path
