@@ -77,8 +77,6 @@ Note: Call resolve-library-id first to obtain the exact library ID, then call ge
 ## Todo List
 The Todo List tool manages your task items.
 Use it to create, update, and track tasks or when asked to produce todos.
-Available tools:
-- todo_write
 
 ### When to use this tool
 - Project task management
@@ -90,11 +88,6 @@ Available tools:
 ## Plan
 Plan is a built-in tool for orchestrating agents to create and manage plans.
 Use it to create, update, and track execution plans.
-Available tools (if available in your environment):
-- create_plan
-- update_plan
-- delete_plan
-- list_plans
 
 ### When to use this tool
 - Project roadmap creation

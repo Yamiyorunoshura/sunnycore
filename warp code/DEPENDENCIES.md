@@ -2,7 +2,6 @@
 - context7
 - sequential-thinking
 - playwright
-- claude_context
 
 # Json example
 {

@@ -32,11 +32,6 @@
   - Do todos map cleanly to the workflow stages?
   </questions>
 
-  <checks>
-  - [ ] Todos cover every stage in this file
-  - [ ] Each todo has a clear completion outcome
-  - [ ] Only one stage is in progress at a time
-  </checks>
   </stage>
 
   <stage id="1: conclude the current issues">
@@ -50,11 +45,6 @@
   - Do any fixes introduce cross-cutting changes?
   </questions>
 
-  <checks>
-  - [ ] Each issue maps to a concrete, feasible fix
-  - [ ] Fixes are scoped and prioritised
-  - [ ] No identified issue is left without action
-  </checks>
   </stage>
 
   <stage id="2: conclude the recommended actions">
@@ -68,11 +58,6 @@
   - Which best practices or references support each action?
   </questions>
 
-  <checks>
-  - [ ] Actions are prioritised with brief rationale
-  - [ ] Best practices are cited or summarised
-  - [ ] Each action has measurable acceptance criteria
-  </checks>
   </stage>
 
   <stage id="3: conclude the completion report">
