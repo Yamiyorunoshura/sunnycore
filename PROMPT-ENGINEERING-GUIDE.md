@@ -1,6 +1,7 @@
 # 使用技術
 本專案使用xml標籤配合結構化提示詞，實現統一工作流框架。在本文檔，我們將會介紹統一的xml標籤格式以及使用方法，協助開發者快速上手。
 初次之外，我們還會介紹我們所使用的prompt統一架構，協助你理解我們所使用的prompt技巧。
+雖然本文檔使用中文撰寫，但為了提高token使用效率，所有提示詞都應使用英文撰寫。
 
 # 通用xml標籤
 在這個部分，我們將會介紹在所有文檔中都會出現的通用xml標籤，協助你理解這些標籤的用途。
@@ -25,16 +26,31 @@
 ## 工作流程相關標籤
 - <workflow, importance = "Optional/Normal/Important/Critical">： 定義工作流程的開始。
     - importance： 定義工作流程的重要性。
-    - <stage, id = "Stage ID", level_of_think = "non-thinking/think/think hard/think harder/ultra think">： 定義工作流程的階段。
+    - <stage, id = "Stage ID">： 定義工作流程的階段。
         - stage id： 定義工作流程的階段ID。
-        - level_of_think： 定義工作流程的階段思考能力。
+
+# 提示詞規範
+在這個部分，我們將會介紹我們所使用的提示詞規範，協助你理解我們所使用的提示詞技巧。
+
+## Constraints標籤規範
+在constraints標籤之中，應儘可能列明重要的3-5項規則，避免過分提示。
+
+## Questions標籤規範
+在questions標籤之中，應儘可能列明重要的2-3個問題，避免過分提示。
+
+## Checks標籤規範
+在checks標籤之中，應儘可能列明重要的2-3個檢查項目，不可超過5個，避免過分提示。
+Checks應該被放在整個工作流程的末尾，列出整個工作流程中最重要的檢查項目。
+
+## Workflow標籤規範
+在workflow標籤之中，應儘可能用最重要的3-5個階段來描述工作流程，避免過分提示。
         
 # 提示詞架構
 在這個部分，我們將會介紹我們所使用的提示詞架構，協助你理解我們所使用的提示詞技巧。
 
 ## agents提示詞架構
 
----(optional)
+--- (optional)
 name: {Agent Name}
 description: {Description}
 model: inherit
@@ -79,7 +95,7 @@ color: {Color}
 </constraints>
 
 <workflow, importance = "Optional/Normal/Important/Critical">
-  <stage id="n: stage name", level_of_think = "non-thinking/think/think hard/think harder, Ultra think", cache_read_budget = "customise">
+  <stage id="n: stage name">
   - xxx
   - yyy
   - zzz
@@ -149,7 +165,7 @@ color: {Color}
 </custom_commands>
 
 <workflow, importance = "Optional/Normal/Important/Critical">
-  <stage id="n: stage name", level_of_think = "non-thinking/think/think hard/think harder, Ultra think", cache_read_budget = "customise">
+  <stage id="n: stage name">
   - xxx
   - yyy
   - zzz
@@ -195,7 +211,7 @@ color: {Color}
 </constraints>
 
 <workflow, importance = "Optional/Normal/Important/Critical">
-  <stage id="n: stage name", level_of_think = "non-thinking/think/think hard/think harder, Ultra think">
+  <stage id="n: stage name">
   - xxx
   - yyy
   - zzz
