@@ -22,9 +22,9 @@
 
 <workflow, importance = "Important">
   <stage id="0: create todo list">
-  - Read the entire document
-  - Recognise all the steps
-  - Create a todo item for each step
+  - Read this file end-to-end
+  - Enumerate all stages and sub-steps
+  - Create one TODO per step (atomic, outcome-focused)
 
   <questions>
   - Are all steps captured as actionable todos?
@@ -40,9 +40,9 @@
   </stage>
 
   <stage id="1: conclude the current issues">
-  - Recognise all the issues from review results document
-  - Think about the best solution to fix the issues
-  - Conclude the issues with best solution
+  - Extract all issues from the review records
+  - Define the minimal effective fix for each issue
+  - Finalise each issue with assigned fix and priority
 
   <questions>
   - What root causes recur across review records?
@@ -58,9 +58,9 @@
   </stage>
 
   <stage id="2: conclude the recommended actions">
-  - Recognise all the recommended actions from review results document
-  - Think about the best practices to enact the recommended actions
-  - Conclude the recommended actions with best practices
+  - Extract all recommended actions from the review records
+  - Specify best-practice approach and sequencing per action
+  - Finalise the action plan with rationale and sequencing
 
   <questions>
   - Which actions yield the highest impact/effort ratio?
@@ -76,9 +76,9 @@
   </stage>
 
   <stage id="3: conclude the completion report">
-  - Think about how to sum up the current issues and recommended actions
-  - Create a completion report based on the template
-  - Output the markdown format completion-report to the stated directory
+  - Synthesise issues and actions into a coherent summary
+  - Draft the completion report using the template
+  - Save the Markdown report to the stated path
 
   <questions>
   - Does the report clearly synthesise issues and actions?

@@ -1,34 +1,34 @@
 # General Guidelines
-Read the entire document before starting.
+Read this document end-to-end before using any tools.
 
-## Input Regulations
-Read the input document specified in prompts before beginning.
-Only read other documents when you have >90% confidence they are part of the context.
+## Input Rules
+Before starting, read only the input document explicitly referenced in the prompt.
+Only consult other documents if you have >90% confidence they are in-scope context.
 
-## Output Regulations
+## Output Rules
 Only output content when you have >90% confidence it is correct.
-If uncertain, use additional tools or reasoning to improve confidence.
+If uncertain, use tools or structured reasoning to raise confidence before responding.
 
-# Tool Explanations
+# Tool Guide
 
 ## Sequential Thinking
 
 ### Introduction
-Sequential thinking is an MCP tool for step-by-step reasoning.
-Use the sequential thinking MCP tool when reasoning is required.
+Sequential Thinking is an MCP tool for step-by-step reasoning.
+Use it whenever structured, multi-step reasoning is needed.
 Available tools:
 - sequentialthinking
 
-### Common situations that you need to use this tool
-- Analysation
+### When to use this tool
+- Analysis
 - Reasoning
 - Complex problem solving
-- Debugging issues
-- Decision making processes
+- Debugging
+- Decision-making processes
 
 ## Playwright
-Playwright is an MCP tool for web browsing.
-Use the Playwright MCP tool when you need to browse the web.
+Playwright is an MCP tool for web browsing and UI automation.
+Use Playwright when you need to browse the web or automate UI workflows.
 Available tools:
 - browser_close
 - browser_resize
@@ -36,14 +36,14 @@ Available tools:
 - browser_handle_dialog
 - browser_evaluate
 - browser_file_upload
-- browser_file_form
+- browser_fill_form
 - browser_install
 - browser_press_key
 - browser_type
 - browser_navigate
 - browser_navigate_back
 - browser_network_requests
-- browser_task_screenshot
+- browser_take_screenshot
 - browser_snapshot
 - browser_click
 - browser_drag
@@ -52,7 +52,7 @@ Available tools:
 - browser_tabs
 - browser_wait_for
 
-### Common situations that you need to use this tool
+### When to use this tool
 - Testing web applications
 - Web scraping and data extraction
 - UI automation tasks
@@ -60,29 +60,27 @@ Available tools:
 - Performance monitoring
 
 ## Context7
-Context7 is an MCP tool for repository searching.
-Use it to grep different codebases from github.
+Context7 is an MCP tool for repository search and library documentation.
+Use it to semantically search GitHub codebases and fetch library docs.
 Available tools:
 - resolve-library-id
 - get-library-docs
+Note: Call resolve-library-id first to obtain the exact library ID, then call get-library-docs.
 
-### Common situations that you need to use this tool
+### When to use this tool
 - Finding specific code patterns
 - Understanding library documentation
-- Best practice code exploration and discovery
+- Best-practice code exploration and discovery
 - API reference lookup
 - Dependency analysis
 
 ## Todo List
-Todo list is a built-in tool for managing your todo list.
-Use the todo list tool when you need to manage todo items or when asked to create them.
+The Todo List tool manages your task items.
+Use it to create, update, and track tasks or when asked to produce todos.
 Available tools:
-- create_todo
-- update_todo
-- delete_todo
-- list_todos
+- todo_write
 
-### Common situations that you need to use this tool
+### When to use this tool
 - Project task management
 - Breaking down complex requirements
 - Tracking progress on deliverables
@@ -90,15 +88,15 @@ Available tools:
 - Meeting action items
 
 ## Plan
-Plan is a built-in tool for calling different agents to create plans.
-Use the plan tool when you need to create a plan.
-Available tools:
+Plan is a built-in tool for orchestrating agents to create and manage plans.
+Use it to create, update, and track execution plans.
+Available tools (if available in your environment):
 - create_plan
 - update_plan
 - delete_plan
 - list_plans
 
-### Common situations that you need to use this tool
+### When to use this tool
 - Project roadmap creation
 - Sprint planning
 - Feature implementation planning
