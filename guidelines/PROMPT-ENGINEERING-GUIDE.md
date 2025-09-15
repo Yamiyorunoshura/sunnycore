@@ -350,10 +350,20 @@ color: {Color}
 </workflow>
 
 <example>(optional)
+範本輸出：
+
+# Functional Requirements
+- xxx
+- yyy
+- zzz
+
+# Non-functional Requirements
+- xxx
+- yyy
+- zzz
+
+# Acceptance Criteria
+- xxx
+- yyy
+- zzz
 </example>
-示例（精簡）：
-<output>
-1. User stories with acceptance criteria.
-2. API spec in OpenAPI 3.0.
-3. Test plan outline.
-</output>
