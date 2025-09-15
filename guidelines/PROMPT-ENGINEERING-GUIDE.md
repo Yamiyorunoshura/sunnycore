@@ -34,6 +34,7 @@
 ## Constraints 標籤規範
 - 重點聚焦在「限制」與「不可違反的規則」，建議 3-5 條。
 - 以可驗證的述句撰寫：可度量、可真偽檢驗、可透過工具檢查。
+- 規範應與工作步驟相關。
 - 優先順序明確；必要時以「Must/Should/May」區分強弱。
 - 避免空泛要求（如「更自然」），改為具體（如「用短句，平均每句 < 20 詞」）。
 
@@ -322,7 +323,13 @@ color: {Color}
   - xxx
   - yyy
   - zzz
+  </stage>
 
+  <stage id="n: stage name">
+  - xxx
+  - yyy
+  - zzz
+  
   <questions>
   - xxx?
   - yyy?
