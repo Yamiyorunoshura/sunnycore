@@ -5,7 +5,7 @@
   3. Maintain English-only prompt content; user communications may be multilingual.
   </context>
   <templates>
-  1. {root}/warp code/templates/requirement-tmpl.yaml - Standard requirement template
+  1. {root}/sunnycore/templates/requirement-tmpl.yaml - Standard requirement template
   </templates>
 </input>
 
@@ -18,6 +18,7 @@
 - Use numbered lists and concise sentences (average < 20 words) for scanability.
 - Align sections and field names exactly with the requirement template.
 - Do not include sensitive or personal data in examples.
+- Clarify the requirements and the acceptance criteria with the user.
 </constraints>
 
 <workflow importance="Important">

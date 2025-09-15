@@ -2,10 +2,10 @@
   <context>
     1. {root}/docs/requirements/*.md - Project functional and non-functional requirements
     2. {root}/docs/architecture/*.md - Architecture design and technical specifications
-    3. {root}/warp code/templates/tasks-tmpl.yaml - Task template format
+    3. {root}/sunnycore/templates/tasks-tmpl.yaml - Task template format
   </context>
   <templates>
-    1. warp code/templates/tasks-tmpl.yaml - Standard task structure template
+    1. sunnycore/templates/tasks-tmpl.yaml - Standard task structure template
   </templates>
 </input>
 

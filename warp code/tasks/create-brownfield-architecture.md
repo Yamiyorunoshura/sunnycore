@@ -2,10 +2,10 @@
   <context>
     1. {root}/docs/requirements - Canonical requirements source
     2. {root}/docs/architecture/*.md - Existing architecture corpus
-    3. {root}/warp code/scripts/shard-architecture.sh - Architecture sharding script
+    3. {root}/sunnycore/scripts/shard-architecture.sh - Architecture sharding script
   </context>
   <templates>
-    {root}/warp code/templates/architecture-tmpl.yaml
+    {root}/sunnycore/templates/architecture-tmpl.yaml
   </templates>
 </input>
 

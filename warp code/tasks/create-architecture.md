@@ -1,10 +1,10 @@
 <input>
   <context>
   1. {root}/docs/requirements/*.md - Authoritative project requirements
-  2. {root}/warp code/scripts/shard-architecture.sh - Architecture sharding script
+  2. {root}/sunnycore/scripts/shard-architecture.sh - Architecture sharding script
   </context>
   <templates>
-  1. {root}/warp code/templates/architecture-tmpl.yaml - Canonical architecture template
+  1. {root}/sunnycore/templates/architecture-tmpl.yaml - Canonical architecture template
   </templates>
 </input>
 
