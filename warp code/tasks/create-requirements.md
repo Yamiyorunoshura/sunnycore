@@ -22,12 +22,12 @@
 </constraints>
 
 <workflow importance="Important">
-  <stage id="init">
+  <stage id="1, init">
   - Read all working steps to understand the expected deliverables.
   - Create an internal TODO item for each working step.
   </stage>
 
-  <stage id="functional">
+  <stage id="2, functional">
   - Derive functional requirements from the user's input and context.
   - Consolidate duplicates and remove ambiguity; keep each statement atomic.
   - Organize by user stories or system capabilities as appropriate.
@@ -39,7 +39,7 @@
   </questions>
   </stage>
 
-  <stage id="nonfunctional">
+  <stage id="3, nonfunctional">
   - Identify non-functional requirements across performance, reliability, security, compliance, and operability.
   - Quantify targets (e.g., P95 latency, uptime SLO, RTO/RPO) and constraints.
   - Map NFRs to monitoring/observability signals when relevant.
@@ -51,15 +51,16 @@
   </questions>
   </stage>
 
-  <stage id="acceptance">
+  <stage id="4, acceptance">
   - Define acceptance criteria per requirement; ensure they are deterministic and testable.
   - Reference inputs, preconditions, and explicit pass/fail outcomes.
   - Use clear structure; Gherkin-style is acceptable if helpful.
   </stage>
 
-  <stage id="finalize">
+  <stage id="5, finalize">
   - Populate the requirement template and place outputs under {root}/docs/requirements/.
   - Cross-check consistency across FRs, NFRs, and acceptance criteria.
+  - Run the {root}/sunnycore/scripts/shard-requirements.sh script to shard the requirements
 
   <checks>
   - [ ] Outputs include FRs, NFRs, and acceptance criteria per template
@@ -67,6 +68,7 @@
   - [ ] Each requirement is measurable and verifiable (no ambiguity)
   - [ ] File paths and names match {root}/docs/requirements/*.md
   - [ ] Sensitive data has not been introduced in examples
+  - [ ] The requirements are sharded into {root}/docs/requirements/*.md
   </checks>
   </stage>
 </workflow>
