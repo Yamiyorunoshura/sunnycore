@@ -330,13 +330,13 @@ color: {Color}
   - yyy
   - zzz
   
-  <questions>
+  <questions>(optional, base on the complexity of the task)
   - xxx?
   - yyy?
   - zzz?
   </questions>
 
-  <checks>
+  <checks>(only at the last stage)
   - [ ] xxx
   - [ ] yyy
   - [ ] zzz
