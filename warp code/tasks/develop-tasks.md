@@ -37,6 +37,7 @@
   
   <stage id="2: functional-requirements">
   - Identify the functional requirements
+  - Think about the test cases for each functional requirement and update the todo list
   - Write the test cases for each functional requirement
   - Write the code for each functional requirement
   
@@ -49,6 +50,7 @@
   
   <stage id="3: non-functional-requirements">
   - Identify the non-functional requirements
+  - Think about the test cases for each non-functional requirement and update the todo list base on the test cases
   - Write the test cases for each non-functional requirement
   - Write the code for each non-functional requirement
   
@@ -61,6 +63,7 @@
   
   <stage id="4: refactor">
   - Refactor the code to meet best practices and actual requirements
+  - Think about the test cases for the refactoring and update the todo list base on the test cases
   - Refactor the code of functional requirements
   - Refactor the code of non-functional requirements
   

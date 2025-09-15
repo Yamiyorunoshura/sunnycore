@@ -14,7 +14,6 @@
 </output>
 
 <constraints, importance = "Important">
-- Write all prompt content in English.
 - Derive tasks strictly from provided documents; do not invent requirements.
 - Map every plan item to requirement IDs and architecture sections.
 - Use Markdown with ATX headings; prefer numbered lists and concise bullets.
