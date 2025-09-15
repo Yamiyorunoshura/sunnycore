@@ -226,24 +226,59 @@ normalize_version() {
   esac
 }
 
-# 輔助函式：展開家目錄符號「~」為實際路徑（僅支援當前使用者）
+# 輔助函式：展開家目錄符號「~」為實際路徑（支援開頭 "~"/"~/"，並移除中間的 "~" 片段）
 expand_path() {
   local input="${1:-}"
   if [[ -z "$input" ]]; then
     printf '%s' ""
     return 0
   fi
+
+  # 開頭為 ~ 或 ~/ 的常見情況
   if [[ "${input:0:1}" == "~" ]]; then
     if [[ "${#input}" -eq 1 ]]; then
       printf '%s' "${HOME:-$input}"
       return 0
     fi
     if [[ "${input:0:2}" == "~/" ]]; then
-      printf '%s' "${HOME}/${input#~/}"
-      return 0
+      input="${HOME}/${input#~/}"
     fi
   fi
-  printf '%s' "$input"
+
+  # 以分段法處理：移除任何等於 "~" 的路徑片段
+  local is_abs=0
+  [[ "$input" == /* ]] && is_abs=1
+  local IFS='/'
+  read -r -a __parts <<< "$input"
+  local -a __out=()
+  local __idx=0
+  local __seg
+  for __seg in "${__parts[@]}"; do
+    if [[ $is_abs -eq 1 && $__idx -eq 0 && -z "$__seg" ]]; then
+      __idx=$((__idx+1))
+      continue
+    fi
+    if [[ "$__seg" == "~" || -z "$__seg" ]]; then
+      __idx=$((__idx+1))
+      continue
+    fi
+    __out+=("$__seg")
+    __idx=$((__idx+1))
+  done
+
+  # 重組路徑
+  local __result=""
+  if [[ $is_abs -eq 1 ]]; then
+    __result="/"
+  fi
+  local __i
+  for __i in "${!__out[@]}"; do
+    if [[ -n "$__result" && "${__result: -1}" != "/" ]]; then
+      __result="${__result}/"
+    fi
+    __result="${__result}${__out[$__i]}"
+  done
+  printf '%s' "$__result"
 }
 
 parse_args() {
