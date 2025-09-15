@@ -1,5 +1,5 @@
 # General Guidelines
-Read this document end-to-end before using any tools.
+*Read this document end-to-end before any actions.*
 
 ## Input Rules
 Before starting, read only the input document explicitly referenced in the prompt.
