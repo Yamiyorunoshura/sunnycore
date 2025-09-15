@@ -14,6 +14,7 @@ if [[ -n "${BASH_SOURCE[0]:-}" ]]; then
 else
   SCRIPT_DIR="$(pwd -P)"
 fi
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 VERSION="0.2.0"
 
 # 全域變數
@@ -25,6 +26,8 @@ REPO_URL="https://github.com/Yamiyorunoshura/sunnycore.git"   # 預設為本倉�
 BRANCH=""     # 允許以 --branch 指定；未指定時自動偵測
 REMOTE_NAME_INPUT=""   # 允許以 --remote-name 指定
 TMP_CLONE_DIR=""
+MIRROR_MODE=0           # 是否啟用鏡像模式（rsync --delete）
+OVERWRITE_MODE=""      # 覆寫策略：clean | mirror | overlay
 
 # 輔助函式：遠程檢測
 detect_remote_name() {
@@ -170,6 +173,7 @@ usage() {
       --branch <名稱>     指定 Git 分支（預設自動偵測遠程 HEAD）
       --remote-name <名稱> 指定 Git 遠程名（預設自動偵測）
       --dry-run           僅顯示將執行的動作，不實際變更
+      --mirror            啟用鏡像更新（優先使用 rsync --delete；無 rsync 則回退）
   -y, --yes               安裝時自動同意覆寫動作（若目標已存在）
   -h, --help              顯示此說明
 
@@ -226,6 +230,26 @@ normalize_version() {
   esac
 }
 
+# 輔助函式：展開家目錄符號「~」為實際路徑（僅支援當前使用者）
+expand_path() {
+  local input="${1:-}"
+  if [[ -z "$input" ]]; then
+    printf '%s' ""
+    return 0
+  fi
+  if [[ "${input:0:1}" == "~" ]]; then
+    if [[ "${#input}" -eq 1 ]]; then
+      printf '%s' "${HOME:-$input}"
+      return 0
+    fi
+    if [[ "${input:0:2}" == "~/" ]]; then
+      printf '%s' "${HOME}/${input#~/}"
+      return 0
+    fi
+  fi
+  printf '%s' "$input"
+}
+
 parse_args() {
   while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -258,6 +282,10 @@ parse_args() {
         DRY_RUN=1
         shift
         ;;
+      --mirror)
+        MIRROR_MODE=1
+        shift
+        ;;
       -y|--yes)
         AUTO_YES=1
         shift
@@ -273,6 +301,11 @@ parse_args() {
         ;;
     esac
   done
+
+  # 將使用者提供的安裝路徑中的「~」展開為實際家目錄
+  if [[ -n "${INSTALL_BASE:-}" ]]; then
+    INSTALL_BASE="$(expand_path "$INSTALL_BASE")"
+  fi
 
   local v
   v=$(normalize_version "${SELECTED_VERSION:-}")
@@ -330,7 +363,7 @@ prompt_install_path() {
   if [[ -z "${input_path:-}" ]]; then
     INSTALL_BASE="$default_path"
   else
-    INSTALL_BASE="$input_path"
+    INSTALL_BASE="$(expand_path "$input_path")"
   fi
 }
 
@@ -340,19 +373,38 @@ confirm_overwrite_if_needed() {
   if [[ -d "$target_dir" ]]; then
     log "目標目錄已存在"
     if [[ $AUTO_YES -eq 1 ]]; then
+      if [[ $MIRROR_MODE -eq 1 ]]; then
+        OVERWRITE_MODE="mirror"
+        info "自動模式：啟用鏡像更新（不先清空）"
+        return
+      fi
+      OVERWRITE_MODE="clean"
       info "清空既有目錄：$target_dir"
       log "自動模式，直接清空目錄"
       run_cmd rm -rf "$target_dir"
       return
     fi
-    log "詢問使用者是否覆寫"
-    read -r -p "目標已存在：${target_dir}，是否清空後重新安裝？[y/N]: " yn
-    log "使用者回應: $yn"
-    case "$yn" in
-      y|Y|yes|YES)
-        info "清空既有目錄：$target_dir"
-        log "使用者同意覆寫，清空目錄"
+    log "詢問使用者覆寫策略"
+    echo "目標已存在：${target_dir}。選擇覆蓋策略："
+    echo "  1) 清空後安裝（會刪除 target 內所有內容）"
+    echo "  2) 鏡像更新（rsync --delete，無 rsync 則回退清空）"
+    echo "  3) 直接覆蓋（保留多餘舊檔，僅覆蓋同名檔）"
+    echo "  4) 取消"
+    read -r -p "輸入選項 [1-4]: " choice
+    log "使用者回應: $choice"
+    case "$choice" in
+      1)
+        OVERWRITE_MODE="clean"
+        info "將清空既有目錄：$target_dir"
         run_cmd rm -rf "$target_dir"
+        ;;
+      2)
+        OVERWRITE_MODE="mirror"
+        info "將進行鏡像更新（如無 rsync 會回退清空）"
+        ;;
+      3)
+        OVERWRITE_MODE="overlay"
+        info "將直接覆蓋（保留多餘舊檔）"
         ;;
       *)
         log "使用者取消安裝"
@@ -512,7 +564,7 @@ install_warp_code() {
   
   # 如果遠端拉取失敗，回退到本地來源
   if [[ $clone_success -eq 0 ]]; then
-    local local_src="${SCRIPT_DIR}/warp code"
+    local local_src="${PROJECT_ROOT}/warp code"
     log "嘗試使用本地來源: $local_src"
     if [[ -d "$local_src" ]]; then
       src="$local_src"
@@ -551,6 +603,12 @@ install_warp_code() {
   require_cmd cp
   require_cmd rm
   require_cmd find
+  # rsync 可選：存在時以其做鏡像
+  if command -v rsync >/dev/null 2>&1; then
+    RSYNC_AVAILABLE=1
+  else
+    RSYNC_AVAILABLE=0
+  fi
 
   log "檢查目標目錄狀態..."
   if [[ -d "$dst" ]]; then
@@ -564,10 +622,46 @@ install_warp_code() {
   confirm_overwrite_if_needed "$dst"
   run_cmd mkdir -p "$dst"
 
-  # 拷貝來源內容（包含隱藏檔）到目標資料夾
-  info "開始拷貝檔案…"
-  log "執行拷貝命令: cp -a $src/. $dst/"
-  run_cmd cp -a "$src/." "$dst/"
+  # 拷貝策略
+  # OVERWRITE_MODE: clean | mirror | overlay
+  # - clean: 先清空後再完整拷貝（上方 confirm 已 rm -rf）
+  # - mirror: 使用 rsync --delete（無 rsync 時回退 clean）
+  # - overlay: 直接 cp -a 覆蓋（保留多餘舊檔）
+  if [[ -z "${OVERWRITE_MODE:-}" ]]; then
+    if [[ $MIRROR_MODE -eq 1 ]]; then
+      OVERWRITE_MODE="mirror"
+    else
+      OVERWRITE_MODE="overlay"
+    fi
+  fi
+
+  info "拷貝策略：${OVERWRITE_MODE}"
+  case "$OVERWRITE_MODE" in
+    mirror)
+      if [[ $RSYNC_AVAILABLE -eq 1 ]]; then
+        info "開始鏡像（rsync --delete）…"
+        log "執行: rsync -a --delete $src/ $dst/"
+        run_cmd rsync -a --delete "$src/" "$dst/"
+      else
+        warn "rsync 不可用，回退為清空後安裝"
+        run_cmd rm -rf "$dst"
+        run_cmd mkdir -p "$dst"
+        info "開始拷貝檔案…"
+        log "執行拷貝命令: cp -a $src/. $dst/"
+        run_cmd cp -a "$src/." "$dst/"
+      fi
+      ;;
+    clean)
+      info "開始拷貝檔案（目標已清空）…"
+      log "執行拷貝命令: cp -a $src/. $dst/"
+      run_cmd cp -a "$src/." "$dst/"
+      ;;
+    overlay|*)
+      info "開始拷貝檔案（直接覆蓋）…"
+      log "執行拷貝命令: cp -a $src/. $dst/"
+      run_cmd cp -a "$src/." "$dst/"
+      ;;
+  esac
 
   # 安裝後驗證：目標不應為空（仅在非 dry-run 模式下執行）
   log "開始安裝後驗證..."
