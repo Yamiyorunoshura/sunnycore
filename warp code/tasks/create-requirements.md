@@ -14,7 +14,6 @@
 </output>
 
 <constraints importance="Important">
-- Write all prompts and generated requirement content in English.
 - Each requirement must be verifiable and measurable; avoid ambiguous or subjective phrasing.
 - Use numbered lists and concise sentences (average < 20 words) for scanability.
 - Align sections and field names exactly with the requirement template.
@@ -72,17 +71,3 @@
   </checks>
   </stage>
 </workflow>
-
-<example>
-<input>
-  <context>
-  1. Build paid subscription billing with Stripe.
-  2. Compliance: PCI DSS SAQ-A; never handle raw card data directly.
-  3. Performance: Create subscription end-to-end < 2s (P95).
-  </context>
-</input>
-
-<output>
-1. {root}/docs/requirements/billing.md - Requirements for subscription and invoicing
-</output>
-</example>
