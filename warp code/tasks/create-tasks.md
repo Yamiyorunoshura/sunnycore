@@ -59,18 +59,3 @@
   </checks>
   </stage>
 </workflow>
-
-<example-tasks-snippet>
-```yaml
-# tasks-tmpl.yaml aligned structure (excerpt)
-- id: export-api-spec
-  title: Define CSV export API endpoints
-  acceptance:
-    - OpenAPI 3.0 spec includes params, rate limits, and error codes
-- id: export-streaming-plan
-  title: Decide streaming strategy and chunk size
-  acceptance:
-    - Justifies chunk size via latency and memory estimates
-```
-</example-tasks-snippet>
-</example>
