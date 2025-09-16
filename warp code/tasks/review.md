@@ -2,7 +2,7 @@
   <context>
   1. {root}/docs/dev-notes/{task_id}-dev-notes.md
   2. {root}/docs/implementation-plans/{task_id}-plan.md
-  3. {root}/sunnycore/templates/review-tmpl.md
+  3. {root}/sunnycore/templates/review-tmpl.yaml
   </context>
   <templates>
   1. review-tmpl.yaml
