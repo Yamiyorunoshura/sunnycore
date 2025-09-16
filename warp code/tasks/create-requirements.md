@@ -66,8 +66,8 @@
   </stage>
 
   <stage id="5, finalize">
+  - Cross-check consistency across FRs, NFRs, and acceptance criteria and ask for user's confirmation.
   - Populate the requirement template and place outputs under {root}/docs/requirements/.
-  - Cross-check consistency across FRs, NFRs, and acceptance criteria.
   - Run the {root}/sunnycore/scripts/shard-requirements.sh script to shard the requirements
 
   <checks>
