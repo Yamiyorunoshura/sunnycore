@@ -23,20 +23,26 @@
 
 <workflow importance="Critical">
   <stage id="0: plan-todos">
+  <tools: todo-list>
   - Review all working steps comprehensively.
   - Instantiate TODO items for each step.
+  </tools: todo-list>
   </stage>
 
   <stage id="1: assess-existing">
+  <tools: sequential-thinking>
   - Examine the current architecture under {root}/docs/architecture/*.md.
   - Identify extension points, constraints, and shared services.
   - Map affected domains, bounded contexts, and dependencies.
+  </tools: sequential-thinking>
   </stage>
 
   <stage id="2: design-new-modules">
+  <tools: sequential-thinking, context7>
   - Define responsibilities, boundaries, and interfaces for new modules.
   - Specify data flows and interactions with existing components.
   - Evaluate non-functional requirements (security, observability, performance) and compatibility.
+  </tools: sequential-thinking, context7>
   
   <questions>
   - Which extension points or APIs will the new modules depend on?

@@ -22,10 +22,12 @@
 
 <workflow importance="Important">
   <stage id="research">
+  <tools: sequential-thinking>
   - Read requirements and architecture sources.
   - Identify scope, success criteria, and constraints to drive task design.
   - Map non-functional requirements to cross-cutting tasks.
-
+  </tools: sequential-thinking>
+  
   <questions>
   - Are all FRs and NFRs discoverable and current?
   - What dependencies or sequencing constraints exist between tasks?

@@ -22,15 +22,19 @@
 
 <workflow importance="Critical">
   <stage id="0: plan-todos">
+  <tools: todo-list>
   - Review this task end-to-end.
   - Materialize TODO entries for each workflow stage.
+  </tools: todo-list>
   </stage>
 
   <stage id="1: research">
+  <tools: sequential-thinking, context7>
   - Digest all requirements under {root}/docs/requirements/*.md.
   - Delineate components, boundaries, and canonical data flows.
   - Converge on the macro-architecture and principal interaction contracts.
-  
+  </tools: sequential-thinking, context7>
+
   <questions>
   - Are the requirements complete, current, and authoritative?
   - Which cross-cutting concerns (security, observability, performance) are mandatory, and how will they be enforced?

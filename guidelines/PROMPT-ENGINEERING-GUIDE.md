@@ -15,6 +15,7 @@
 - <example>：示例輸入與輸出（以最小可用示例為主，必要時多樣化）。
 - <questions>：自我提問引導模型澄清重點與避免謬誤。
 - <checks>：最終自檢清單，聚焦可觀察且可驗證的項目。
+- <tools>：工具列表，用於指示模型使用工具。
 
 ## 角色相關標籤
 - <role, name = "Role Name">：設定模型的專業定位與語氣邊界。
@@ -56,6 +57,9 @@
 ## Example 標籤規範
 - 必要時提供實例
 - 用於規範或提示模型輸出格式
+
+## Tools 標籤規範
+- 提供工具列表，用於指示模型使用工具。
         
 # 提示詞架構
 本節提供 agents / commands / tasks 三種常用模板的結構化格式、欄位說明與最小示例。模板中的實際內容請以英文撰寫。
@@ -324,9 +328,11 @@ color: {Color}
 
 <workflow, importance = "Optional/Normal/Important/Critical">
   <stage id="n: stage name">
+  <tools: xxx>
   - xxx
   - yyy
   - zzz
+  </tools: xxx>
   </stage>
 
   <stage id="n: stage name">
