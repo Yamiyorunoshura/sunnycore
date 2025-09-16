@@ -52,7 +52,7 @@
   </stage>
 
   <stage id="3: author-and-shard">
-  - Use the architecture template to draft {root}/docs/architecture.md.
+  - Use the architecture template to draft markdown formatted {root}/docs/architecture.md.
   - Ensure sections emphasize new modules and integration impacts.
   - Run the sharding script to split the document:
     - bash '{root}/sunnycore/scripts/shard-architecture.sh'

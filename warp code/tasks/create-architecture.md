@@ -43,7 +43,7 @@
   </stage>
 
   <stage id="2: author">
-  - Leverage the architecture template to draft {root}/docs/architecture.md.
+  - Leverage the architecture template to draft markdown formatted {root}/docs/architecture.md.
   - Ensure sections comprehensively cover components, interactions, data flows, risks, and decisions.
   - Execute the sharding script to partition the document:
     - bash '{root}/sunnycore/scripts/shard-architecture.sh'
