@@ -86,6 +86,7 @@
   <stage id="5: dev-notes">
   - Use the development notes template to write the development notes for the code
   - Output the markdown format development notes to {root}/docs/dev-notes/{task_id}-dev-notes.md
+  - If there is already an existing development notes, update the development notes with the new information
   
   <checks>
   - [ ] All outputs in <output> are produced and consistent

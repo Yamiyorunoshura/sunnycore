@@ -65,6 +65,7 @@
   <stage id="4: produce-results">
   - Use the template to create the markdown formatted review results
   - Save to {root}/docs/review-results/{task_id}-review.md
+  - If there is already an existing review results, update the review results with the new information
   <checks>
   - [ ] All required sections present and consistent
   - [ ] Findings reference plan/code/notes with links or anchors

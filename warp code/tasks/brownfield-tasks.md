@@ -79,8 +79,8 @@
   </stage>
 
   <stage id="4: Create a development notes">
-  - Conclude the development process
-  - Create development notes based on the template
+  - Conclude the development process and create development notes based on the template
+  - If there is already an existing development notes, update the development notes with the new information
   - Save the markdown dev-notes to the stated directory
 
   <questions>
