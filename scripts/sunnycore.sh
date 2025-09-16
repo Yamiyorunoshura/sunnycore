@@ -2,8 +2,8 @@
 
 # Sunnycore 安裝腳本
 # - 允許選擇安裝版本
-# - 目前僅支援安裝 warp-code（會將「warp code/」資料夾下所有內容拷貝到使用者指定路徑的 sunnycore/ 資料夾）
-# - claude code 與 codex 版本暫不提供安裝
+# - 支援安裝 warp-code 與 codex
+# - claude code 版本暫不提供安裝
 
 set -euo pipefail
 
@@ -14,7 +14,7 @@ if [[ -n "${BASH_SOURCE[0]:-}" ]]; then
 else
   SCRIPT_DIR="$(pwd -P)"
 fi
-VERSION="0.2.0"
+VERSION="0.3.0"
 
 # 全域變數
 DRY_RUN=0
@@ -164,7 +164,7 @@ usage() {
   bash sunnycore.sh [選項]
 
 選項：
-  -v, --version <名稱>   指定要安裝的版本（僅支援：warp-code）
+  -v, --version <名稱>   指定要安裝的版本（支援：warp-code, codex）
   -p, --path <路徑>       指定安裝路徑（會在該路徑下建立/使用 sunnycore 資料夾）
       --repo <URL>        指定 Git 倉庫 URL（若本機無來源時可用來拉取）
       --branch <名稱>     指定 Git 分支（預設自動偵測遠程 HEAD）
@@ -174,7 +174,7 @@ usage() {
   -h, --help              顯示此說明
 
 說明：
-  - 目前僅可安裝 warp-code；claude code 與 codex 暫不提供安裝。
+  - 可安裝 warp-code 與 codex；claude code 暫不提供安裝。
   - 若未提供 --version 與 --path，腳本會以互動方式詢問。
   - 若專案本地來源資料夾不存在，可搭配 --repo 或自動偵測本機 git origin 進行拉取。
 EOF
@@ -214,7 +214,10 @@ normalize_version() {
     warp|warp-code|warp_code)
       printf 'warp-code'
       ;;
-    codex|claude|claude-code|claude_code)
+    codex)
+      printf 'codex'
+      ;;
+    claude|claude-code|claude_code)
       printf 'unsupported'
       ;;
     "")
@@ -340,8 +343,11 @@ parse_args() {
     warp-code)
       SELECTED_VERSION="warp-code"
       ;;
+    codex)
+      SELECTED_VERSION="codex"
+      ;;
     unsupported)
-      error "目前僅支援安裝 warp-code；claude code 與 codex 暫不提供。"
+      error "目前僅暫不支援安裝 claude code。"
       exit 1
       ;;
     invalid)
@@ -360,15 +366,18 @@ prompt_select_version() {
   fi
   echo "請選擇要安裝的版本："
   echo "  1) warp-code（可安裝）"
-  echo "  2) codex（尚未開放）"
+  echo "  2) codex（可安裝）"
   echo "  3) claude code（尚未開放）"
   read -r -p "輸入選項 [1-3]: " choice
   case "$choice" in
     1)
       SELECTED_VERSION="warp-code"
       ;;
-    2|3)
-      error "目前僅支援安裝 warp-code；所選版本尚未開放。"
+    2)
+      SELECTED_VERSION="codex"
+      ;;
+    3)
+      error "目前僅暫不支援安裝 claude code。"
       exit 1
       ;;
     *)
@@ -658,6 +667,216 @@ install_warp_code() {
   ok "已完成拷貝到：$dst"
 }
 
+install_codex() {
+  local src dst use_local=0
+  
+  log "開始 codex 安裝程序"
+  log "腳本目錄: $SCRIPT_DIR"
+  
+  # 優先嘗試從遠端倉庫拉取，除非明確指定使用本地版本或遠端不可用
+  log "嘗試從遠端倉庫拉取來源..."
+  # 先嘗試自動偵測當前倉庫的遠程 URL（若 REPO_URL 未設定）
+  log "當前 REPO_URL: ${REPO_URL:-未設定}"
+  if [[ -z "${REPO_URL:-}" ]]; then
+    log "嘗試自動偵測 git 倉庫資訊..."
+    if command -v git >/dev/null 2>&1; then
+      log "git 命令可用"
+      if git -C "$SCRIPT_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        log "當前目錄位於 git 工作樹中"
+        local detected_remote
+        if detected_remote="$(detect_remote_name "$SCRIPT_DIR" "" "${REMOTE_NAME_INPUT:-}")" 2>/dev/null; then
+          REPO_URL="$(git -C "$SCRIPT_DIR" remote get-url "$detected_remote" 2>/dev/null || true)"
+          info "偵測到遠程倉庫：$REPO_URL (遠程：$detected_remote)"
+        else
+          warn "無法偵測到遠程倉庫"
+        fi
+      else
+        warn "當前目錄不在 git 工作樹中"
+      fi
+    else
+      warn "git 命令不可用"
+    fi
+  fi
+  
+  # 嘗試從遠端拉取
+  local clone_success=0
+  if [[ -n "${REPO_URL:-}" ]] && command -v git >/dev/null 2>&1; then
+    log "開始從遠端倉庫拉取..."
+    
+    require_cmd git
+    TMP_CLONE_DIR="$(mktemp -d 2>/dev/null || mktemp -d -t sunnycore)"
+    log "建立暫存目錄: $TMP_CLONE_DIR"
+    info "以 git 拉取來源：$REPO_URL"
+    
+    local target_branch="${BRANCH:-}"
+    log "指定分支: ${BRANCH:-未指定}"
+    log "目標分支: ${target_branch:-將自動偵測}"
+    
+    if [[ -n "${BRANCH:-}" ]]; then
+      target_branch="$BRANCH"
+      log "使用指定分支: $target_branch"
+    fi
+    
+    if [[ $DRY_RUN -eq 1 ]]; then
+      if [[ -z "$target_branch" ]]; then
+        info "偵測遠程預設分支..."
+        run_cmd git clone --depth=1 "$REPO_URL" "$TMP_CLONE_DIR"
+        target_branch="master"
+        info "dry-run: 假設預設分支為 $target_branch"
+      else
+        run_cmd git clone --depth=1 --branch "$target_branch" --single-branch "$REPO_URL" "$TMP_CLONE_DIR"
+        info "dry-run: 使用指定分支 $target_branch"
+      fi
+      clone_success=1
+    else
+      if [[ -z "$target_branch" ]]; then
+        info "偵測遠程預設分支..."
+        log "執行: git clone --depth=1 $REPO_URL $TMP_CLONE_DIR"
+        if git clone --depth=1 "$REPO_URL" "$TMP_CLONE_DIR"; then
+          log "git clone 成功"
+          if target_branch="$(detect_default_branch "$TMP_CLONE_DIR")"; then
+            info "偵測到預設分支：$target_branch"
+          else
+            target_branch="master"
+            warn "無法偵測預設分支，使用 master"
+          fi
+          if [[ -z "$target_branch" ]]; then
+            target_branch="master"
+            warn "target_branch 為空，強制設為 master"
+          fi
+          clone_success=1
+        else
+          warn "git clone 失敗，將嘗試使用本地來源"
+          clone_success=0
+        fi
+      else
+        info "使用指定分支：$target_branch"
+        log "執行: git clone --depth=1 --branch $target_branch --single-branch $REPO_URL $TMP_CLONE_DIR"
+        if git clone --depth=1 --branch "$target_branch" --single-branch "$REPO_URL" "$TMP_CLONE_DIR"; then
+          log "git clone 成功"
+          clone_success=1
+        else
+          warn "git clone 失敗（分支：$target_branch）"
+          clone_success=0
+        fi
+      fi
+    fi
+    
+    if [[ $clone_success -eq 1 ]]; then
+      if [[ $DRY_RUN -eq 1 ]]; then
+        src="$TMP_CLONE_DIR/codex"
+        info "dry-run: 假設來源目錄存在於 $src"
+        run_cmd mkdir -p "$src"
+        run_cmd touch "$src/README.md"
+      else
+        log "檢查克隆目錄內容..."
+        log "暫存目錄內容:"
+        ls -la "$TMP_CLONE_DIR" || true
+        if [[ -d "$TMP_CLONE_DIR/codex" ]]; then
+          src="$TMP_CLONE_DIR/codex"
+          log "找到 codex 目錄: $src"
+          info "成功從遠端倉庫獲取來源"
+        else
+          warn "遠端倉庫中找不到 'codex' 來源資料夾，將嘗試使用本地來源"
+          log "可用的目錄:"
+          find "$TMP_CLONE_DIR" -type d -maxdepth 2 || true
+          clone_success=0
+        fi
+      fi
+    fi
+  else
+    log "無法從遠端拉取（REPO_URL 未設定或 git 不可用），將嘗試使用本地來源"
+    clone_success=0
+  fi
+  
+  # 如果遠端拉取失敗，回退到本地來源
+  if [[ $clone_success -eq 0 ]]; then
+    local local_src="${SCRIPT_DIR}/codex"
+    log "嘗試使用本地來源: $local_src"
+    if [[ -d "$local_src" ]]; then
+      src="$local_src"
+      log "本地來源目錄存在: $src"
+      info "使用本地來源進行安裝"
+    else
+      error "無法從遠端拉取，且本地來源不存在：$local_src"
+      error "請確認網路連線或使用 --repo 參數指定正確的倉庫 URL"
+      exit 1
+    fi
+  fi
+  
+  dst="${INSTALL_BASE%/}/sunnycore"
+  log "設定目標目錄"
+  log "安裝基礎路徑: $INSTALL_BASE"
+  log "目標目錄: $dst"
+  
+  info "安裝版本：codex"
+  info "來源：$src"
+  info "目標：$dst"
+  
+  log "檢查來源目錄內容..."
+  if [[ $DRY_RUN -eq 1 ]]; then
+    log "dry-run: 跳過來源目錄實際檢查"
+    info "dry-run: 假設來源目錄包含必要檔案"
+  elif [[ -d "$src" ]]; then
+    log "來源目錄存在，內容:"
+    ls -la "$src" | head -10 || true
+    log "來源目錄檔案數量: $(find "$src" -type f | wc -l)"
+  else
+    error "來源目錄不存在: $src"
+    exit 1
+  fi
+  
+  require_cmd mkdir
+  require_cmd cp
+  require_cmd rm
+  require_cmd find
+  
+  log "檢查目標目錄狀態..."
+  if [[ -d "$dst" ]]; then
+    log "目標目錄已存在: $dst"
+    log "目標目錄內容:"
+    ls -la "$dst" | head -5 || true
+  else
+    log "目標目錄不存在，將建立: $dst"
+  fi
+  
+  confirm_overwrite_if_needed "$dst"
+  run_cmd mkdir -p "$dst"
+  
+  # 拷貝來源內容（包含隱藏檔）到目標資料夾
+  info "開始拷貝檔案…"
+  log "執行拷貝命令: cp -a $src/. $dst/"
+  run_cmd cp -a "$src/." "$dst/"
+  
+  # 安裝後驗證：目標不應為空（於非 dry-run 模式）
+  log "開始安裝後驗證..."
+  if [[ $DRY_RUN -eq 1 ]]; then
+    info "dry-run: 將於 $dst 執行安裝後檢查"
+  else
+    if [[ -d "$dst" ]]; then
+      log "檢查目標目錄: $dst"
+      local file_count
+      file_count=$(find "$dst" -type f | wc -l)
+      log "目標目錄檔案數量: $file_count"
+      
+      if [[ $file_count -eq 0 ]]; then
+        error "拷貝後目標目錄為空：$dst"
+        log "目標目錄內容:"
+        ls -la "$dst" || true
+        exit 1
+      else
+        log "驗證成功，目標目錄包含 $file_count 個檔案"
+        log "目標目錄頂層內容:"
+        ls -la "$dst" | head -10 || true
+      fi
+    else
+      warn "安裝目錄不存在：$dst，略過檢查"
+    fi
+  fi
+  
+  ok "已完成拷貝到：$dst"
+}
+
 main() {
   log "=== Sunnycore 安裝腳本開始執行 ==="
   log "腳本版本: $VERSION"
@@ -688,6 +907,11 @@ main() {
       log "開始安裝 warp-code 版本"
       install_warp_code
       log "warp-code 安裝完成"
+      ;;
+    codex)
+      log "開始安裝 codex 版本"
+      install_codex
+      log "codex 安裝完成"
       ;;
     *)
       error "未知或未支援的版本：$SELECTED_VERSION"
