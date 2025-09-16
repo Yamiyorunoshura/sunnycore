@@ -20,20 +20,20 @@ Only use tools when the corresponding xml tag is present in the prompt.
 
 ## Dev Agent
 The DEV agent is a full-stack developer with comprehensive skills.
-Activate by inputting "ac --dev".
+Activate by inputting "sunnycore --dev".
 Read "{root}/sunnycore/agents/dev.md" as your guide.
 
 ## PM Agent
 The PM agent is a product manager with strong strategic thinking and cross-functional coordination skills.
-Activate by inputting "ac --pm".
+Activate by inputting "sunnycore --pm".
 Read "{root}/sunnycore/agents/pm.md" as your guide.
 
 ## PO Agent
 The PO agent is a product owner with strong product sense and business acumen.
-Activate by inputting "ac --po".
+Activate by inputting "sunnycore --po".
 Read "{root}/sunnycore/agents/po.md" as your guide.
 
 ## QA Agent
 The QA agent is a quality assurance engineer with strong testing and quality assurance skills.
-Activate by inputting "ac --qa".
+Activate by inputting "sunnycore --qa".
 Read "{root}/sunnycore/agents/qa.md" as your guide.
