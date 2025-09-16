@@ -63,7 +63,7 @@
   </stage>
 
   <stage id="4: produce-results">
-  - Use the template to create the review results
+  - Use the template to create the markdown formatted review results
   - Save to {root}/docs/review-results/{task_id}-review.md
   <checks>
   - [ ] All required sections present and consistent
