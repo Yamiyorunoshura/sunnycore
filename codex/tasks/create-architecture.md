@@ -1,7 +1,7 @@
 <input>
   <context>
   1. {root}/docs/requirements/*.md - Authoritative project requirements
-  2. {root}/sunnycore/scripts/shard-architecture.sh - Architecture sharding script
+  2. {root}/sunnycore/scripts/shard-architecture.py - Architecture sharding script
   </context>
   <templates>
   1. {root}/sunnycore/templates/architecture-tmpl.yaml - Canonical architecture template
@@ -16,7 +16,7 @@
 - Prior to authorship, instantiate TODO items for every workflow stage.
 - Exhaustively review all requirements under {root}/docs/requirements/*.md and determine the macro-architecture and critical interaction patterns before drafting.
 - Author the draft with the architecture template into {root}/docs/architecture.md; comprehensively cover components, boundaries, data flows, risks, and decisions; strictly preserve section ordering.
-- Post-draft, execute the sharding script: bash '{root}/warp code/scripts/shard-architecture.sh'; verify materialized files under {root}/docs/architecture/.
+- Post-draft, execute the sharding script: bash '{root}/warp code/scripts/shard-architecture.py'; verify materialized files under {root}/docs/architecture/.
 - Use clear, concise English and 2-space indentation; refrain from introducing non-existent paths or files.
 </constraints>
 
@@ -46,7 +46,7 @@
   - Leverage the architecture template to draft markdown formatted {root}/docs/architecture.md.
   - Ensure sections comprehensively cover components, interactions, data flows, risks, and decisions.
   - Execute the sharding script to partition the document:
-    - bash '{root}/sunnycore/scripts/shard-architecture.sh'
+    - bash '{root}/sunnycore/scripts/shard-architecture.py'
   - Verify artifacts appear under {root}/docs/architecture/.
   </stage>
 

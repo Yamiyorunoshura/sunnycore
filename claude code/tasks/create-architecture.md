@@ -1,7 +1,7 @@
 <input>
   <context>
   1. {root}/docs/requirements/*.md - Project Requirements Documentation
-  2. {root}/sunnycore/scripts/shard-architecture.sh - Architecture Script
+  2. {root}/sunnycore/scripts/shard-architecture.py - Architecture Script
   </context>
   <templates>
   1. {root}/sunnycore/templates/architecture-tmpl.yaml - Architecture Template
@@ -75,13 +75,13 @@
   - 詢問User是否滿意完整的Architecture Document
   - 若User滿意、則輸出最終Architecture Document
   - 若User不滿意，則重複上述步驟，直到User滿意為止
-  - 運行{root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
+  - 運行{root}/sunnycore/scripts/shard-architecture.py將architecture.md分割為多個文件
   
   <checks>
   - [ ] 確認User對完整Architecture Document的滿意度
   - [ ] template中所有需要填入的項目都已填入
   - [ ] 確認Final Document已成功輸出到指定Path
-  - [ ] 確認shard-architecture.sh已正確運行
+  - [ ] 確認shard-architecture.py已正確運行
   </checks>
   </stage>
 </workflow>

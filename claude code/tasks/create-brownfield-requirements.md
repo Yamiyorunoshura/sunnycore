@@ -3,7 +3,7 @@
   1. User Requirements (用戶需求)
   2. {root}/docs/architecture/*.md
   3. {root}/sunnycore/templates/requirements-tmpl.yaml
-  4. {root}/sunnycore/scripts/shard-requirements.sh - Requirements Script
+  4. {root}/sunnycore/scripts/shard-requirements.py - Requirements Script
   </context>
   <templates>
   {root}/sunnycore/templates/requirements-tmpl.yaml
@@ -102,7 +102,7 @@
   - 詢問用戶是否滿意
   - 若User滿意、則輸出最終Requirements Document
   - 若User不滿意，則重複上述步驟，直到User滿意為止
-  - 運行{root}/sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
+  - 運行{root}/sunnycore/scripts/shard-requirements.py將requirements.md分割為多個文件
 
   <questions>
   - 最終Requirements Document是否完整包含所有需求？
@@ -114,7 +114,7 @@
   - [ ] 確認Requirements Document格式正確
   - [ ] 驗證所有需求都已包含在最終Document中
   - [ ] 確保User最終滿意度確認
-  - [ ] 確認shard-requirements.sh已正確運行
+  - [ ] 確認shard-requirements.py已正確運行
   </checks>
   </stage>
 </workflow>

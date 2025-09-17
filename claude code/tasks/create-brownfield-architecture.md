@@ -2,7 +2,7 @@
   <context>
     1. {root}/docs/requirements
     2. {root}/docs/architecture/*.md
-    3. {root}/sunnycore/scripts/shard-architecture.sh - Architecture Script
+    3. {root}/sunnycore/scripts/shard-architecture.py - Architecture Script
   </context>
   <templates>
     {root}/sunnycore/templates/architecture-tmpl.yaml
@@ -146,7 +146,7 @@
     - 詢問User是否Satisfied完整的Architecture Files
     - 若User Satisfied、則輸出最終Architecture Files
     - 若User不Satisfied，則重複上述步驟，直到User Satisfied為止
-    - 運行{root}/sunnycore/scripts/shard-architecture.sh將architecture.md分割為多個文件
+    - 運行{root}/sunnycore/scripts/shard-architecture.py將architecture.md分割為多個文件
 
     <questions>
     - Architecture Files是否完整地涵蓋了所有Requirements？
@@ -164,7 +164,7 @@
     - [ ] 是否包含了詳細的System Architecture圖表？
     - [ ] 是否包含了Implementation Roadmap？
     - [ ] 是否成功輸出到指定路徑？
-    - [ ] 是否成功運行shard-architecture.sh？
+    - [ ] 是否成功運行shard-architecture.py？
     </checks>
   </stage>
 </workflow>

@@ -68,7 +68,7 @@
   <stage id="5, finalize">
   - Cross-check consistency across FRs, NFRs, and acceptance criteria and ask for user's confirmation.
   - Populate the requirement template and place markdown formatted outputs under {root}/docs/requirements/.
-  - Run the {root}/sunnycore/scripts/shard-requirements.sh script to shard the requirements
+  - Run the {root}/sunnycore/scripts/shard-requirements.py script by using uv run to shard the requirements
 
   <checks>
   - [ ] Outputs include FRs, NFRs, and acceptance criteria per template

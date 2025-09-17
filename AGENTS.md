@@ -14,8 +14,8 @@
 
 ## Build, Test, and Development Commands
 - `./install.command` – interactive setup (language, MCP/tool config, copies templates). Run from repo root.
-- `bash general/scripts/shard-architecture.sh` – split `docs/architecture.md` into `docs/architecture/` files.
-- `bash general/scripts/shard-requirements.sh` – split `docs/requirements.md` into structured parts.
+- `bash general/scripts/shard-architecture.py` – split `docs/architecture.md` into `docs/architecture/` files.
+- `bash general/scripts/shard-requirements.py` – split `docs/requirements.md` into structured parts.
 - Syntax checks:
   - `bash -n path/to/script.sh` – shell syntax check.
   - Optional: run `tree docs/architecture` to verify generated files.

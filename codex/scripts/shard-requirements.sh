@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# shard-requirements.sh
+# shard-requirements.py
 # 將requirements.md文檔拆分為多個獨立文檔的腳本
 # 作者: SunnyCore System
 # 版本: 1.0.0

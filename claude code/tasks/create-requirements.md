@@ -99,7 +99,7 @@
     - 詢問用戶是否滿意完整的Requirements
     - 使用sequential thinking思考如何將完整的Requirements轉換為markdown格式
     - 將轉換後的requirements文件輸出到{root}/docs/requirements.md
-    - 運行{root}/sunnycore/scripts/shard-requirements.sh將requirements.md分割為多個文件
+    - 運行{root}/sunnycore/scripts/shard-requirements.py將requirements.md分割為多個文件
     
     <questions>
     - 最終文檔是否涵蓋了所有用戶需求？

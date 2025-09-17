@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# shard-architecture.sh
+# shard-architecture.py
 # 將architecture.md文檔拆分為多個獨立文檔的腳本
 # 作者: SunnyCore System
 # 版本: 1.0.0
