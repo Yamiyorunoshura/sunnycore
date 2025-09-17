@@ -18,7 +18,7 @@
 <input>
   <context>
   1. {project_root}/docs/requirements/*.md
-  2. {project_root}/docs/task.md
+  2. {project_root}/docs/tasks.md
   3. {project_root}/docs/architecture/*.md
   4. {project_root}/docs/implementation-plan/{task_id}-plan.md
   5. {project_root}/docs/dev-notes/{task_id}-dev-notes.md
