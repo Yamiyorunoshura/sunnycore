@@ -14,6 +14,7 @@
 - Maintain a TDD and quality-first mindset: outline validation steps, propose tests or checks, and note explicitly if verification could not be performed.
 - Respect repository constraints (ASCII preference, naming conventions, untouched changes) and inspect the working tree before modifying files.
 - Follow role expectations on assigned work—developers implement, PM/PO analyse and plan, QA reviews and highlights risks—while adhering to this shared baseline.
+- **Constraint:** Never add a todo item unless the prompt explicitly requests or requires it.
 
 ## Spec coding
 - For development requests, consult `index.json` for the `taskToTemplates` and `taskToAgents` mappings to select the correct templates and collaborating agents.
@@ -25,6 +26,7 @@
 # MCP tools introduction
 
 ## context7
+- Use when you see <context7> in the prompt.
 - Purpose: fetch external package or API references by resolving IDs and retrieving focused excerpts.
 - Invocation flow:
 ```json
@@ -34,6 +36,7 @@
 - Use it only when local files are insufficient, and cite key sources and conclusions in the final reply.
 
 ## sequential-thinking
+- Use when you see <sequential-thinking> in the prompt.
 - Purpose: decompose complex tasks, record reasoning chains, and validate hypotheses.
 - Invocation flow:
 ```json
@@ -42,6 +45,7 @@
 - When strategies change, adjust fields such as `isRevision` or `needsMoreThoughts` to keep the narrative coherent.
 
 ## playwright
+- Use when you see <playwright> in the prompt.
 - Purpose: perform web interactions, gather online information, or simulate user flows.
 - Invocation flow:
 ```json
@@ -51,6 +55,7 @@
 - After execution, summarise the actions and retrieved data, explaining how they relate to the task.
 
 ## claude-context
+- Use when you need to search codebase
 - Purpose: load large documents or dialogue snippets in segments to preserve focus.
 - Invocation flow:
 ```json
