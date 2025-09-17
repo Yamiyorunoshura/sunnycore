@@ -5,7 +5,7 @@
   3. {root}/docs/architecture/*.md
   </context>
   <templates>
-  1. {root}/sunnycore/templates/dev-notes-tmpl.md - Development Notes Template
+  1. {root}/sunnycore/templates/dev-notes-tmpl.yaml - Development Notes Template
   </templates>
 </input>
 
