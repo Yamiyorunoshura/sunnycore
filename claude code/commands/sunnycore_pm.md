@@ -20,16 +20,18 @@
 
 <input>
   <templates>
-  1. {project_root}/sunnycore/templates/implementation-plan-tmpl.yaml
+  1. {root}/sunnycore/templates/implementation-plan-tmpl.yaml
   </templates>
   <tasks>
-  2. {project_root}/sunnycore/tasks/plan-tasks.md
-  3. {project_root}/sunnycore/tasks/create-tasks.md
-  4. {project_root}/sunnycore/tasks/create-requirements.md
-  5. {project_root}/sunnycore/tasks/create-architecture.md
-  6. {project_root}/sunnycore/tasks/create-brownfield-requirements.md
-  7. {project_root}/sunnycore/tasks/create-brownfield-architecture.md
+  2. {root}/sunnycore/tasks/plan-tasks.md
+  3. {root}/sunnycore/tasks/create-architecture.md
+  4. {root}/sunnycore/tasks/create-brownfield-architecture.md
+  5. {root}/sunnycore/tasks/create-requirements.md
+  6. {root}/sunnycore/tasks/create-tasks.md
   </tasks>
+  <context>
+  7. {root}/sunnycore/CLAUDE.md
+  </context>
 </input>
 
 <output>
@@ -48,22 +50,18 @@
 
 <custom_commands>
 - *help
-  - 讀取{project_root}/sunnycore/tasks/help.md
+  - 讀取{root}/sunnycore/tasks/help.md
 - *plan-tasks {task_id}
   - 識別出指令中的task_id
-  - 讀取{project_root}/sunnycore/tasks/plan-tasks.md
+  - 讀取{root}/sunnycore/tasks/plan-tasks.md
 - *create-requirements
-  - 讀取{project_root}/sunnycore/tasks/create-requirements.md
+  - 讀取{root}/sunnycore/tasks/create-requirements.md
 - *create-architecture
-  - 讀取{project_root}/sunnycore/tasks/create-architecture.md
+  - 讀取{root}/sunnycore/tasks/create-architecture.md
 - *create-tasks
-  - 讀取{project_root}/sunnycore/tasks/create-tasks.md
-- *create-brownfield-requirements
-  - 讀取{project_root}/sunnycore/tasks/create-brownfield-requirements.md
+  - 讀取{root}/sunnycore/tasks/create-tasks.md
 - *create-brownfield-architecture
-  - 讀取{project_root}/sunnycore/tasks/create-brownfield-architecture.md
-- *create-brownfield-tasks
-  - 讀取{project_root}/sunnycore/tasks/create-brownfield-tasks.md
+  - 讀取{root}/sunnycore/tasks/create-brownfield-architecture.md
 </custom_commands>
 
 <workflow, importance = "Critical">

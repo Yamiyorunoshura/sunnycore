@@ -2,8 +2,7 @@
 
 # Sunnycore 安裝腳本
 # - 允許選擇安裝版本
-# - 支援安裝 warp-code 與 codex
-# - claude code 版本暫不提供安裝
+# - 支援安裝 warp-code、codex 與 claude code
 
 set -euo pipefail
 
@@ -164,7 +163,7 @@ usage() {
   bash sunnycore.sh [選項]
 
 選項：
-  -v, --version <名稱>   指定要安裝的版本（支援：warp-code, codex）
+  -v, --version <名稱>   指定要安裝的版本（支援：warp-code, codex, claude-code）
   -p, --path <路徑>       指定安裝路徑（會在該路徑下建立/使用 sunnycore 資料夾）
       --repo <URL>        指定 Git 倉庫 URL（若本機無來源時可用來拉取）
       --branch <名稱>     指定 Git 分支（預設自動偵測遠程 HEAD）
@@ -174,7 +173,7 @@ usage() {
   -h, --help              顯示此說明
 
 說明：
-  - 可安裝 warp-code 與 codex；claude code 暫不提供安裝。
+  - 可安裝 warp-code、codex 與 claude code。
   - 若未提供 --version 與 --path，腳本會以互動方式詢問。
   - 若專案本地來源資料夾不存在，可搭配 --repo 或自動偵測本機 git origin 進行拉取。
 EOF
@@ -218,7 +217,7 @@ normalize_version() {
       printf 'codex'
       ;;
     claude|claude-code|claude_code)
-      printf 'unsupported'
+      printf 'claude-code'
       ;;
     "")
       printf ''
@@ -346,9 +345,8 @@ parse_args() {
     codex)
       SELECTED_VERSION="codex"
       ;;
-    unsupported)
-      error "目前僅暫不支援安裝 claude code。"
-      exit 1
+    claude-code)
+      SELECTED_VERSION="claude-code"
       ;;
     invalid)
       error "不支援的版本名稱：${SELECTED_VERSION}"
@@ -365,9 +363,9 @@ prompt_select_version() {
     return
   fi
   echo "請選擇要安裝的版本："
-  echo "  1) warp-code（可安裝）"
-  echo "  2) codex（可安裝）"
-  echo "  3) claude code（尚未開放）"
+  echo "  1) warp-code"
+  echo "  2) codex"
+  echo "  3) claude code"
   read -r -p "輸入選項 [1-3]: " choice
   case "$choice" in
     1)
@@ -377,8 +375,7 @@ prompt_select_version() {
       SELECTED_VERSION="codex"
       ;;
     3)
-      error "目前僅暫不支援安裝 claude code。"
-      exit 1
+      SELECTED_VERSION="claude-code"
       ;;
     *)
       error "無效的選項：$choice"
@@ -877,6 +874,257 @@ install_codex() {
   ok "已完成拷貝到：$dst"
 }
 
+install_claude_code() {
+  local src dst_sunnycore dst_claude commands_dst use_local=0
+
+  log "開始 claude code 安裝程序"
+  log "腳本目錄: $SCRIPT_DIR"
+
+  log "嘗試從遠端倉庫拉取來源..."
+  log "當前 REPO_URL: ${REPO_URL:-未設定}"
+  if [[ -z "${REPO_URL:-}" ]]; then
+    log "嘗試自動偵測 git 倉庫資訊..."
+    if command -v git >/dev/null 2>&1; then
+      log "git 命令可用"
+      if git -C "$SCRIPT_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        log "當前目錄位於 git 工作樹中"
+        local detected_remote
+        if detected_remote="$(detect_remote_name "$SCRIPT_DIR" "" "${REMOTE_NAME_INPUT:-}")" 2>/dev/null; then
+          REPO_URL="$(git -C "$SCRIPT_DIR" remote get-url "$detected_remote" 2>/dev/null || true)"
+          info "偵測到遠程倉庫：$REPO_URL (遠程：$detected_remote)"
+        else
+          warn "無法偵測到遠程倉庫"
+        fi
+      else
+        warn "當前目錄不在 git 工作樹中"
+      fi
+    else
+      warn "git 命令不可用"
+    fi
+  fi
+
+  local clone_success=0
+  if [[ -n "${REPO_URL:-}" ]] && command -v git >/dev/null 2>&1; then
+    log "開始從遠端倉庫拉取..."
+
+    require_cmd git
+    TMP_CLONE_DIR="$(mktemp -d 2>/dev/null || mktemp -d -t sunnycore)"
+    log "建立暫存目錄: $TMP_CLONE_DIR"
+    info "以 git 拉取來源：$REPO_URL"
+
+    local target_branch="${BRANCH:-}"
+    log "指定分支: ${BRANCH:-未指定}"
+    log "目標分支: ${target_branch:-將自動偵測}"
+
+    if [[ -n "${BRANCH:-}" ]]; then
+      target_branch="$BRANCH"
+      log "使用指定分支: $target_branch"
+    fi
+
+    if [[ $DRY_RUN -eq 1 ]]; then
+      if [[ -z "$target_branch" ]]; then
+        info "偵測遠程預設分支..."
+        run_cmd git clone --depth=1 "$REPO_URL" "$TMP_CLONE_DIR"
+        target_branch="master"
+        info "dry-run: 假設預設分支為 $target_branch"
+      else
+        run_cmd git clone --depth=1 --branch "$target_branch" --single-branch "$REPO_URL" "$TMP_CLONE_DIR"
+        info "dry-run: 使用指定分支 $target_branch"
+      fi
+      clone_success=1
+    else
+      if [[ -z "$target_branch" ]]; then
+        info "偵測遠程預設分支..."
+        log "執行: git clone --depth=1 $REPO_URL $TMP_CLONE_DIR"
+        if git clone --depth=1 "$REPO_URL" "$TMP_CLONE_DIR"; then
+          log "git clone 成功"
+          if target_branch="$(detect_default_branch "$TMP_CLONE_DIR")"; then
+            info "偵測到預設分支：$target_branch"
+          else
+            target_branch="master"
+            warn "無法偵測預設分支，使用 master"
+          fi
+          if [[ -z "$target_branch" ]]; then
+            target_branch="master"
+            warn "target_branch 為空，強制設為 master"
+          fi
+          clone_success=1
+        else
+          warn "git clone 失敗，將嘗試使用本地來源"
+          clone_success=0
+        fi
+      else
+        info "使用指定分支：$target_branch"
+        log "執行: git clone --depth=1 --branch $target_branch --single-branch $REPO_URL $TMP_CLONE_DIR"
+        if git clone --depth=1 --branch "$target_branch" --single-branch "$REPO_URL" "$TMP_CLONE_DIR"; then
+          log "git clone 成功"
+          clone_success=1
+        else
+          warn "git clone 失敗（分支：$target_branch）"
+          clone_success=0
+        fi
+      fi
+    fi
+
+    if [[ $clone_success -eq 1 ]]; then
+      if [[ $DRY_RUN -eq 1 ]]; then
+        src="$TMP_CLONE_DIR/claude code"
+        info "dry-run: 假設來源目錄存在於 $src"
+        run_cmd mkdir -p "$src"
+        run_cmd mkdir -p "$src/commands"
+        run_cmd touch "$src/README.md"
+        run_cmd touch "$src/commands/example.json"
+      else
+        log "檢查克隆目錄內容..."
+        log "暫存目錄內容:"
+        ls -la "$TMP_CLONE_DIR" || true
+        if [[ -d "$TMP_CLONE_DIR/claude code" ]]; then
+          src="$TMP_CLONE_DIR/claude code"
+          log "找到 claude code 目錄: $src"
+          info "成功從遠端倉庫獲取來源"
+        else
+          warn "遠端倉庫中找不到 'claude code' 來源資料夾，將嘗試使用本地來源"
+          log "可用的目錄:"
+          find "$TMP_CLONE_DIR" -type d -maxdepth 2 || true
+          clone_success=0
+        fi
+      fi
+    fi
+  else
+    log "無法從遠端拉取（REPO_URL 未設定或 git 不可用），將嘗試使用本地來源"
+    clone_success=0
+  fi
+
+  if [[ $clone_success -eq 0 ]]; then
+    local local_src="${SCRIPT_DIR}/claude code"
+    log "嘗試使用本地來源: $local_src"
+    if [[ -d "$local_src" ]]; then
+      src="$local_src"
+      log "本地來源目錄存在: $src"
+      info "使用本地來源進行安裝"
+      use_local=1
+    else
+      error "無法從遠端拉取，且本地來源不存在：$local_src"
+      error "請確認網路連線或使用 --repo 參數指定正確的倉庫 URL"
+      exit 1
+    fi
+  fi
+
+  local commands_src="$src/commands"
+  if [[ $DRY_RUN -eq 1 ]]; then
+    info "dry-run: 假設 commands 來源目錄存在於 $commands_src"
+  elif [[ ! -d "$commands_src" ]]; then
+    error "來源目錄缺少 commands 子目錄：$commands_src"
+    exit 1
+  fi
+
+  dst_sunnycore="${INSTALL_BASE%/}/sunnycore"
+  dst_claude="${INSTALL_BASE%/}/.claude"
+  commands_dst="${dst_claude%/}/commands"
+
+  log "設定目標目錄"
+  log "安裝基礎路徑: $INSTALL_BASE"
+  log "Sunnycore 目標目錄: $dst_sunnycore"
+  log "Claude commands 目標目錄: $commands_dst"
+
+  info "安裝版本：claude code"
+  info "來源：$src"
+  info "Sunnycore 目標：$dst_sunnycore"
+  info "Claude commands 目標：$commands_dst"
+
+  if [[ $DRY_RUN -eq 1 ]]; then
+    log "dry-run: 跳過來源目錄實際檢查"
+    info "dry-run: 假設來源目錄包含必要檔案"
+  elif [[ -d "$src" ]]; then
+    log "來源目錄存在，內容:"
+    ls -la "$src" | head -10 || true
+    log "來源目錄檔案數量: $(find "$src" -type f | wc -l)"
+  else
+    error "來源目錄不存在: $src"
+    exit 1
+  fi
+
+  require_cmd mkdir
+  require_cmd cp
+  require_cmd rm
+  require_cmd find
+
+  confirm_overwrite_if_needed "$dst_sunnycore"
+  confirm_overwrite_if_needed "$commands_dst"
+  run_cmd mkdir -p "$dst_sunnycore"
+  run_cmd mkdir -p "$dst_claude"
+
+  info "開始拷貝 Sunnycore 檔案…"
+  log "執行拷貝命令: cp -a $src/. $dst_sunnycore/"
+  run_cmd cp -a "$src/." "$dst_sunnycore/"
+
+  info "開始拷貝 commands 檔案至 .claude…"
+  log "執行拷貝命令: cp -a $commands_src $dst_claude/"
+  run_cmd cp -a "$commands_src" "$dst_claude/"
+
+  info "移除 Sunnycore 目錄中的 commands 目錄"
+  log "執行移除命令: rm -rf $dst_sunnycore/commands"
+  run_cmd rm -rf "$dst_sunnycore/commands"
+
+  log "開始安裝後驗證 (sunnycore)…"
+  if [[ $DRY_RUN -eq 1 ]]; then
+    info "dry-run: 將於 $dst_sunnycore 執行安裝後檢查"
+  else
+    if [[ -d "$dst_sunnycore" ]]; then
+      log "檢查 Sunnycore 目錄: $dst_sunnycore"
+      local sunnycore_file_count
+      sunnycore_file_count=$(find "$dst_sunnycore" -type f | wc -l)
+      log "Sunnycore 目標目錄檔案數量: $sunnycore_file_count"
+
+      if [[ -d "$dst_sunnycore/commands" ]]; then
+        warn "Sunnycore 目錄中仍存在 commands 目錄，將移除"
+        run_cmd rm -rf "$dst_sunnycore/commands"
+      fi
+
+      if [[ $sunnycore_file_count -eq 0 ]]; then
+        error "拷貝後 Sunnycore 目標目錄為空：$dst_sunnycore"
+        log "Sunnycore 目標目錄內容:"
+        ls -la "$dst_sunnycore" || true
+        exit 1
+      else
+        log "Sunnycore 驗證成功，目標目錄包含 $sunnycore_file_count 個檔案"
+        log "Sunnycore 目標目錄頂層內容:"
+        ls -la "$dst_sunnycore" | head -10 || true
+      fi
+    else
+      warn "Sunnycore 安裝目錄不存在：$dst_sunnycore，略過檢查"
+    fi
+  fi
+
+  log "開始安裝後驗證 (.claude/commands)…"
+  if [[ $DRY_RUN -eq 1 ]]; then
+    info "dry-run: 將於 $commands_dst 執行安裝後檢查"
+  else
+    if [[ -d "$commands_dst" ]]; then
+      log "檢查 commands 目錄: $commands_dst"
+      local commands_file_count
+      commands_file_count=$(find "$commands_dst" -type f | wc -l)
+      log "commands 目錄檔案數量: $commands_file_count"
+
+      if [[ $commands_file_count -eq 0 ]]; then
+        error ".claude/commands 目錄為空：$commands_dst"
+        log "commands 目錄內容:"
+        ls -la "$commands_dst" || true
+        exit 1
+      else
+        log "commands 驗證成功，目錄包含 $commands_file_count 個檔案"
+        log "commands 目錄頂層內容:"
+        ls -la "$commands_dst" | head -10 || true
+      fi
+    else
+      error ".claude/commands 目錄不存在：$commands_dst"
+      exit 1
+    fi
+  fi
+
+  ok "已完成 claude code 安裝至：$dst_sunnycore 與 $commands_dst"
+}
+
 main() {
   log "=== Sunnycore 安裝腳本開始執行 ==="
   log "腳本版本: $VERSION"
@@ -912,6 +1160,11 @@ main() {
       log "開始安裝 codex 版本"
       install_codex
       log "codex 安裝完成"
+      ;;
+    claude-code)
+      log "開始安裝 claude code 版本"
+      install_claude_code
+      log "claude code 安裝完成"
       ;;
     *)
       error "未知或未支援的版本：$SELECTED_VERSION"
