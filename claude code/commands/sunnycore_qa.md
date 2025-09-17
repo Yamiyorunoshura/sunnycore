@@ -16,14 +16,12 @@
 </role>
 
 <input>
-  <tasks>
-  1. {project_root}/docs/specs/requirements.md
-  2. {project_root}/docs/specs/task.md
-  3. {project_root}/docs/specs/design.md
+  <context>
+  1. {project_root}/docs/requirements/*.md
+  2. {project_root}/docs/task.md
+  3. {project_root}/docs/architecture/*.md
   4. {project_root}/docs/implementation-plan/{task_id}-plan.md
   5. {project_root}/docs/dev-notes/{task_id}-dev-notes.md
-  </tasks>
-  <context>
   6. {project_root}/sunnycore/CLAUDE.md
   </context>
   <tasks>
