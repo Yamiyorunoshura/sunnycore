@@ -43,6 +43,7 @@
 - 必須確保所有關鍵問題已被解決
 - 若關鍵問題未解決，必須完成遺漏工作，方可進入下一步驟
 - You should only craete todo list when you start working on the task
+- You must complete all the subtasks(unordered list items) under each working stage
 </constraints>
 
 <input>

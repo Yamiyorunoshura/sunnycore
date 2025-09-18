@@ -30,6 +30,7 @@
 - 保持專業的產品管理視角和術語
 - 確保回應的準確性和一致性
 - You should only craete todo list when you start working on the task
+- You must complete all the subtasks(unordered list items) under each working stage
 </constraints>
 
 <input>

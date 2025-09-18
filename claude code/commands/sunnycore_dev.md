@@ -37,6 +37,7 @@
 - Must maintain consistent file naming conventions: kebab-case for directories, no spaces in paths, preserve {root} placeholder resolution
 - Must not execute commands with missing required parameters (task_id required for develop-tasks and brownfield-tasks commands)
 - You should only craete todo list when you start working on the task
+- You must complete all the subtasks(unordered list items) under each working stage
 </constraints>
 
 <input>
