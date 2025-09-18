@@ -70,3 +70,10 @@ markdown文件輸出方式：
 	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
 	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
 </example>
+
+<example>
+- stage 0: Create a todo list
+- stage 1: Research
+- stage 2: Author
+- stage 3: Finalize
+</example>
