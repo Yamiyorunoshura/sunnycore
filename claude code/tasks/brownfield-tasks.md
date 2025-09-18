@@ -26,7 +26,7 @@
   <tools: todo-list>
   - Read this file end-to-end
   - Enumerate all stages and sub-steps
-  - For each unordered list item, create a todo item
+  - Base on the work stages, create atomic todo items
   </tools: todo-list>
 
   <questions>

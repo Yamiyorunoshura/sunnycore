@@ -23,7 +23,7 @@
   <stage id="0: plan">
   <tools: todo-list>
   - Read all working steps.
-  - For each unordered list item, create a todo item
+  - Base on the work stages, create atomic todo items
   </tools: todo-list, sequential-thinking>
   </stage>
 
