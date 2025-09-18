@@ -19,12 +19,15 @@
 - When updating or creating documents, use ATX headings with concise wording; format YAML with two-space indentation and kebab-case keys; keep shell scripts POSIX-compatible and guard flows with `set -e`.
 - Check whether scripts need elevated permissions or user approval before running them; MCP tool calls are built-in interfaces and can be used directly.
 - Before starting new work or altering a workflow, provide a summary implementation plan, testing strategy, and notable risks, then report verification results afterward.
-- Place new files or templates in the appropriate `agents/`, `tasks/`, `templates/`, or `scripts/` directories and update `index.json` plus related guides (`AGENTS.md`/`README.md`).
 
 # MCP tools introduction
 
 ## context7
-- Use when you see <tools: context7> in the prompt.
+- Use when you see <tools: context7>:
+    <tools: context7>
+    - xxx
+    - yyy
+    </tools: context7>
 - Purpose: fetch external package or API references by resolving IDs and retrieving focused excerpts.
 - Invocation flow:
 ```json
@@ -34,7 +37,11 @@
 - Use it only when local files are insufficient, and cite key sources and conclusions in the final reply.
 
 ## sequential-thinking
-- Use when you see <tools: sequential-thinking> in the prompt.
+- Use when you see <tools: sequential-thinking>:
+    <tools: sequential-thinking>
+    - xxx
+    - yyy
+    </tools: sequential-thinking>
 - Purpose: decompose complex tasks, record reasoning chains, and validate hypotheses.
 - Invocation flow:
 ```json
@@ -43,7 +50,11 @@
 - When strategies change, adjust fields such as `isRevision` or `needsMoreThoughts` to keep the narrative coherent.
 
 ## playwright
-- Use when you see <tools: playwright> in the prompt.
+- Use when you see <tools: playwright>:
+    <tools: playwright>
+    - xxx
+    - yyy
+    </tools: playwright>
 - Purpose: perform web interactions, gather online information, or simulate user flows.
 - Invocation flow:
 ```json
