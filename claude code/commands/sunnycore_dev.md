@@ -16,17 +16,11 @@
 
 <input>
   <context>
-  1. {root}/sunnycore/CLAUDE.md - Core project documentation and guidelines
-  2. User commands and task identifiers for development workflow execution
+  1. User commands and corresponding task files
+  2. {root}/sunnycore/CLAUDE.md - Core project documentation and guidelines
   3. Project templates and task definitions for structured development processes
   </context>
-  
-  <templates>
-  1. {root}/sunnycore/tasks/help.md - Command usage and workflow guidance
-  2. {root}/sunnycore/tasks/develop-tasks.md - Development task execution templates
-  3. {root}/sunnycore/tasks/brownfield-tasks.md - Legacy system improvement workflows
-  </templates>
-  
+
   <tasks>
   1. Perform lexical analysis and semantic validation of user-submitted command directives
   2. Orchestrate execution of corresponding development workflow automation pipelines
