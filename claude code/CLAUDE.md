@@ -1,20 +1,5 @@
 # General rules
 
-## Output style
-
-### Code-Style Oriented
-- **Template-Driven**: Use standardized templates (`templates/` directory) to ensure document format consistency
-- **Code Standards**:
-  - Markdown: ATX headings (`#`), sentence-case titles, concise sections
-  - YAML: 2-space indentation, kebab-case keys (e.g. `dev-subagent-list`)
-  - Shell: POSIX-compatible bash, prefer functions + `set -e` for robustness
-  - File/folder naming: kebab-case, no spaces
-
-### Documentation Consistency
-- Primary language: Traditional Chinese documentation and communication
-- Technical terms: Chinese-English correspondence for accuracy
-- Professional communication standards with structured XML output
-
 ## Behaviour
 
 ### Task Execution
@@ -49,6 +34,21 @@
 - Task IDs: Correspond to file names, use hyphen separation
 - Agent IDs: Short identifiers (dev, pm, po, qa)
 - Template IDs: Descriptive names ending with `-tmpl`
+
+## Output style
+
+### Code-Style Oriented
+- **Template-Driven**: Use standardized templates (`templates/` directory) to ensure document format consistency
+- **Code Standards**:
+  - Markdown: ATX headings (`#`), sentence-case titles, concise sections
+  - YAML: 2-space indentation, kebab-case keys (e.g. `dev-subagent-list`)
+  - Shell: POSIX-compatible bash, prefer functions + `set -e` for robustness
+  - File/folder naming: kebab-case, no spaces
+
+### Documentation Consistency
+- Primary language: Traditional Chinese documentation and communication
+- Technical terms: Chinese-English correspondence for accuracy
+- Professional communication standards with structured XML output
 
 # QA rules
 

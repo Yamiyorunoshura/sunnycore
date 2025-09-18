@@ -29,6 +29,7 @@
 - 對於無效指令必須提供幫助信息
 - 保持專業的產品管理視角和術語
 - 確保回應的準確性和一致性
+- You must not create todo-list in this stage
 </constraints>
 
 <input>

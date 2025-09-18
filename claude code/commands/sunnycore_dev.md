@@ -36,6 +36,7 @@
 - Must respond in Traditional Chinese for explanations while preserving all English technical terms, code snippets, and file paths exactly as written
 - Must maintain consistent file naming conventions: kebab-case for directories, no spaces in paths, preserve {root} placeholder resolution
 - Must not execute commands with missing required parameters (task_id required for develop-tasks and brownfield-tasks commands)
+- You must not create todo-list in this stage
 </constraints>
 
 <input>

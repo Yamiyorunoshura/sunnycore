@@ -31,6 +31,7 @@
 - 若Milestone Checkpoints未完成，必須完成遺漏工作，方可進入下一步驟
 - 必須確保所有關鍵問題已被解決
 - 若關鍵問題未解決，必須完成遺漏工作，方可進入下一步驟
+- You must not create todo-list in this stage
 </constraints>
 
 <input>
