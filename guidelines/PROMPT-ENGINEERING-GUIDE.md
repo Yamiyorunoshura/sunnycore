@@ -88,6 +88,12 @@ color: {Color}
 - zzz
 </role>
 
+<constraints, importance = "Optional/Normal/Important/Critical">
+- xxx
+- yyy
+- zzz
+</constraints>
+
 <input>
   <context>
   1. xxx
@@ -106,12 +112,6 @@ color: {Color}
 2. yyy
 3. zzz
 </output>
-
-<constraints, importance = "Optional/Normal/Important/Critical">
-- xxx
-- yyy
-- zzz
-</constraints>
 
 <workflow, importance = "Optional/Normal/Important/Critical">
   <stage id="n: stage name">
@@ -142,17 +142,17 @@ color: {Color}
   </context>
 </input>
 
-<output>
-1. API spec with endpoint, params, and response codes.
-2. Streaming strategy and chunk size rationale.
-3. Test plan including large dataset benchmarks.
-</output>
-
 <constraints>
 - Use English for prompts; code comments in English.
 - CSV must escape quotes per RFC4180.
 - Include memory footprint estimate per 10k rows.
 </constraints>
+
+<output>
+1. API spec with endpoint, params, and response codes.
+2. Streaming strategy and chunk size rationale.
+3. Test plan including large dataset benchmarks.
+</output>
 
 <workflow importance="Important">
   <stage id="research">
@@ -233,6 +233,21 @@ color: {Color}
 人格特質：{Role Description}
 </role>
 
+<custom_commands>
+- *xxx
+  - 讀取xxx
+- *yyy
+  - 讀取yyy
+- *zzz
+  - 讀取zzz
+</custom_commands>
+
+<constraints, importance = "Optional/Normal/Important/Critical">
+- xxx
+- yyy
+- zzz
+</constraints>
+
 <input>
   <context>
   1. xxx
@@ -256,21 +271,6 @@ color: {Color}
 2. yyy
 3. zzz
 </output>
-
-<constraints, importance = "Optional/Normal/Important/Critical">
-- xxx
-- yyy
-- zzz
-</constraints>
-
-<custom_commands>
-- *xxx
-  - 讀取xxx
-- *yyy
-  - 讀取yyy
-- *zzz
-  - 讀取zzz
-</custom_commands>
 
 <workflow, importance = "Optional/Normal/Important/Critical">
   <stage id="n: stage name">
