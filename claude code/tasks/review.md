@@ -47,6 +47,7 @@
   <tools: sequential-thinking>
   - Read and understand the code
   - Check alignment with the plan and the requirements
+  - Run tests to verify the code
   </tools: sequential-thinking>
   
   <questions>
