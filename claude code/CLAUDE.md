@@ -8,8 +8,6 @@
 - Keep responses succinct and avoid dumping large files; when examples are required, quote only the relevant fragment and cite its source.
 
 ## Behaviour
-- Produce a plan first (`update_plan`) for tasks that require multiple steps, and keep it updated as work progresses; skip planning for genuinely simple requests.
-- Review `index.json` and the README first to understand agent responsibilities, task mappings, templates, and scripts; choose workflows according to those mappings.
 - When requirements are unclear or data is missing, ask questions or investigate (via context7 or Playwright when appropriate) instead of guessing.
 - Maintain a TDD and quality-first mindset: outline validation steps, propose tests or checks, and note explicitly if verification could not be performed.
 - Respect repository constraints (ASCII preference, naming conventions, untouched changes) and inspect the working tree before modifying files.
@@ -26,7 +24,7 @@
 # MCP tools introduction
 
 ## context7
-- Use when you see <context7> in the prompt.
+- Use when you see <tools: context7> in the prompt.
 - Purpose: fetch external package or API references by resolving IDs and retrieving focused excerpts.
 - Invocation flow:
 ```json
@@ -36,7 +34,7 @@
 - Use it only when local files are insufficient, and cite key sources and conclusions in the final reply.
 
 ## sequential-thinking
-- Use when you see <sequential-thinking> in the prompt.
+- Use when you see <tools: sequential-thinking> in the prompt.
 - Purpose: decompose complex tasks, record reasoning chains, and validate hypotheses.
 - Invocation flow:
 ```json
@@ -45,7 +43,7 @@
 - When strategies change, adjust fields such as `isRevision` or `needsMoreThoughts` to keep the narrative coherent.
 
 ## playwright
-- Use when you see <playwright> in the prompt.
+- Use when you see <tools: playwright> in the prompt.
 - Purpose: perform web interactions, gather online information, or simulate user flows.
 - Invocation flow:
 ```json
