@@ -23,9 +23,9 @@
 
 <workflow importance="Important">
   <stage id="1, init">
-  <tools: todo-list, sequential-thinking>
+  <tools: todo-list>
   - Read all working steps to understand the expected deliverables.
-  - Base on the working stage and the actual scenario, create a todo-list with atomic, applicable todo-items after deep thinking
+  - For each unordered list item, create a todo item
   </tools: todo-list, sequential-thinking>
   </stage>
 

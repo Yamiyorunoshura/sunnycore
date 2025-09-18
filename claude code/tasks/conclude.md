@@ -21,10 +21,10 @@
 
 <workflow, importance = "Important">
   <stage id="0: create todo list">
-  <tools: todo-list, sequential-thinking>
+  <tools: todo-list>
   - Read this file end-to-end
   - Enumerate all stages and sub-steps
-  - Base on the working stage and the actual scenario, create a todo-list with atomic, applicable todo-items after deep thinking
+  - For each unordered list item, create a todo item
   </tools: todo-list, sequential-thinking>
 
   <questions>
