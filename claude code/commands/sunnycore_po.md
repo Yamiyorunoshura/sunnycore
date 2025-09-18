@@ -33,7 +33,8 @@
 
 <input>
   <context>
-  1. {root}/sunnycore/CLAUDE.md
+  1. The custom command that user input
+  2. {root}/sunnycore/CLAUDE.md
   </context>
 </input>
 

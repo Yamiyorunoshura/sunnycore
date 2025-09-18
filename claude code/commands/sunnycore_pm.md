@@ -46,10 +46,11 @@
 
 <input>
   <templates>
-  1. {root}/sunnycore/templates/implementation-plan-tmpl.yaml
+  1. The custom command that user input
+  2. {root}/sunnycore/templates/implementation-plan-tmpl.yaml
   </templates>
   <context>
-  2. {root}/sunnycore/CLAUDE.md
+  3. {root}/sunnycore/CLAUDE.md
   </context>
 </input>
 
