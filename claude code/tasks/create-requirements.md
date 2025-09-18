@@ -25,7 +25,7 @@
   <stage id="1, init">
   <tools: todo-list, sequential-thinking>
   - Read all working steps to understand the expected deliverables.
-  - Create a comprehensive plan after deep thinking and then update the todo items
+  - Base on the working stage and the actual scenario, create a todo-list with atomic, applicable todo-items after deep thinking
   </tools: todo-list, sequential-thinking>
   </stage>
 
