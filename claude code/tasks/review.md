@@ -3,6 +3,8 @@
   1. {root}/docs/dev-notes/{task_id}-dev-notes.md
   2. {root}/docs/implementation-plans/{task_id}-plan.md
   3. {root}/sunnycore/templates/review-tmpl.yaml
+  4. {root}/sunnycore/CLAUDE.md
+    - QA rules
   </context>
   <templates>
   1. review-tmpl.yaml
