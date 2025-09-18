@@ -18,14 +18,7 @@
   <context>
   1. User commands and corresponding task files
   2. {root}/sunnycore/CLAUDE.md - Core project documentation and guidelines
-  3. Project templates and task definitions for structured development processes
   </context>
-
-  <tasks>
-  1. Perform lexical analysis and semantic validation of user-submitted command directives
-  2. Orchestrate execution of corresponding development workflow automation pipelines
-  3. Generate structured deliverables with actionable technical guidance and implementation roadmaps
-  </tasks>
 </input>
 
 <output>
