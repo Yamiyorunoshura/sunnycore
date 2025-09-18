@@ -21,7 +21,7 @@
 - You must complete the tasks by following the unordered list items under each working stage
 
 ### Tool Usage Restrictions
-**Core Principle**: Agents must not use any tools unless explicitly specified by XML tags in the prompt
+**Core Principle**: Agents must not use any mcp or todo-list tools unless explicitly specified by XML tags in the prompt
 
 #### Conditional Tool Activation
 - Tools may only be used when the corresponding XML tags are present:
