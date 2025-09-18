@@ -24,7 +24,7 @@
   <tools: todo-list>
   - Read this file end-to-end
   - Enumerate all stages and sub-steps
-  - Base on the work stages, create atomic todo items
+  - Create a todo item for each working stage
   </tools: todo-list, sequential-thinking>
 
   <questions>

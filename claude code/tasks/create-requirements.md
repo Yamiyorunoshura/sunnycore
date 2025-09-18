@@ -25,7 +25,7 @@
   <stage id="1, init">
   <tools: todo-list>
   - Read all working steps to understand the expected deliverables.
-  - Base on the work stages, create atomic todo items
+  - Create a todo item for each working stage
   </tools: todo-list, sequential-thinking>
   </stage>
 

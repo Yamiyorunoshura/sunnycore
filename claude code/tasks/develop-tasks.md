@@ -28,8 +28,8 @@
   <stage id="0: todo">
   <tools: todo-list>
   - Read all working steps
-  - Base on the work stages, create atomic todo items
-  </tools: todo-list, sequential-thinking>
+  - Create a todo item for each working stage
+  </tools: todo-list>
   </stage>
   
   <stage id="1: understand-plan">
