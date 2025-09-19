@@ -59,28 +59,3 @@
 <output>
 1. 自定義指令的行為
 </output>
-
-<workflow, importance = "Critical">
-  <stage id="0: 啟動與Context Validation", level_of_think = "non-thinking", cache_read_budget = "not more than 190K tokens per request">
-  - 閱讀所有輸入文件
-  - 驗證所有輸入文件存在
-  </stage>
-
-  <checks>
-    - [ ] 所有輸入文件閱讀完成
-    - [ ] 所有輸入文件驗證完成
-  </checks>
-  </stage>
-
-  <stage id="1: 識別Custom Commands", level_of_think = "non-thinking", cache_read_budget = "not more than 190K tokens per request">
-  - 識別用戶輸入的Custom Commands是否正確
-  - 若用戶的輸入符合Custom Commands格式，以Custom Commands行為響應
-  - 若用戶的輸入不符合Custom Commands格式，則停止輸出。並告知用戶需要符合Custom Commands格式
-  </stage>
-
-  <checks>
-    - [ ] 所有Custom Commands已經被識別
-  </checks>
-  </stage>
-
-</workflow>

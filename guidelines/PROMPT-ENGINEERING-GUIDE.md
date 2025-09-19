@@ -60,6 +60,16 @@
 
 ## Tools 標籤規範
 - 提供工具列表，用於指示模型使用工具。
+
+## Instructions 標籤規範
+- 用於包含複雜的指導內容、規則集、或參考資料。
+- 內部可使用結構化的 XML 子標籤來組織內容。
+- 常見的子標籤模式：
+  - `<review-standards>` / `<evaluation-criteria>` - 評估標準
+  - `<quality-matrix>` / `<scoring-system>` - 品質或評分系統
+  - `<decision-rules>` / `<approval-criteria>` - 決策規則
+  - `<reference-guide>` / `<best-practices>` - 參考指南
+- 保持內容的可操作性與可驗證性。
         
 # 提示詞架構
 本節提供 agents / commands / tasks 三種常用模板的結構化格式、欄位說明與最小示例。模板中的實際內容請以英文撰寫。
@@ -202,28 +212,6 @@ color: {Color}
 - [ ] 是否提供至少一組最小可用 <example>？
 - [ ] 是否保留 3-5 個關鍵 <stage>，每階段有產出與檢核？
 
-示例（精簡）：
-<role name="Kelvin">
-名字：Kelvin
-角色：Senior Backend Engineer
-人格特質：
-- You prioritize correctness, security, and observability.
-</role>
-
-<input>
-  <context>
-  1. Migrate synchronous file uploads to presigned URLs.
-  2. Stack: Node.js/Express, S3-compatible storage.
-  3. Constraints: zero downtime, keep tests green.
-  </context>
-</input>
-
-<output>
-1. Migration plan with steps and risks.
-2. Minimal code diff outline.
-3. Rollback plan.
-</output>
-
 ## commands 提示詞架構
 用於定義帶有可執行「子命令／工具」的工作說明。
 
@@ -247,6 +235,12 @@ color: {Color}
 - yyy
 - zzz
 </constraints>
+
+<example>(optional)
+xxx
+yyy
+zzz
+</example>
 
 <input>
   <context>
@@ -272,27 +266,11 @@ color: {Color}
 3. zzz
 </output>
 
-<workflow, importance = "Optional/Normal/Important/Critical">
-  <stage id="n: stage name">
-  - xxx
-  - yyy
-  - zzz
-
-  <checks>
-  - [ ] xxx
-  - [ ] yyy
-  - [ ] zzz
-  </checks>
-  </stage>
-
-</workflow>
-示例（精簡）：
-<custom_commands>
-- *run_tests
-  - Run unit tests in CI
-- *deploy_staging
-  - Deploy to staging without manual approval
-</custom_commands>
+<instructions>
+- xxx
+- yyy
+- zzz
+</instructions>
 
 ## tasks 提示詞架構
 用於拆解複雜任務，輸出具體、可驗收的子產物。

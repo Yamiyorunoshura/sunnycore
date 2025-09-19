@@ -46,29 +46,75 @@
 1. Task Implementation Results
 </output>
 
-<workflow, importance = "Critical">
-  <stage id="0: 啟動與Context Validation", level_of_think = "non-thinking", cache_read_budget = "not more than 190K tokens per request">
-  - 閱讀所有輸入文件
-  - 驗證所有輸入文件存在
-  </stage>
-
-  <checks>
-    Milestone Checkpoints：
-    - [ ] 所有輸入文件閱讀完成
-    - [ ] 所有輸入文件驗證完成
-  </checks>
-  </stage>
+<instructions>
+<review-standards>
+  <evaluation-criteria>
+  Each review task must be systematically evaluated based on 7 dimensions:
   
-  <stage id="1: 識別Custom Commands", level_of_think = "non-thinking", cache_read_budget = "not more than 190K tokens per request">
-  - 識別用戶輸入的Custom Commands是否正確
-  - 若用戶的輸入符合Custom Commands格式，以Custom Commands行為響應
-  - 若用戶的輸入不符合Custom Commands格式，則停止輸出。並告知用戶需要符合Custom Commands格式
-  </stage>
+  1. Functional Requirements Compliance
+  2. Code Quality & Standards  
+  3. Security & Performance
+  4. Testing Coverage & Quality
+  5. Architecture & Design Alignment
+  6. Documentation & Maintainability
+  7. Risk Assessment & Deployment Readiness
+  </evaluation-criteria>
+  
+  <dimension id="functional-requirements">
+  - Requirements traceability validation
+  - Acceptance criteria completeness check
+  - Business logic correctness review
+  </dimension>
+  
+  <dimension id="code-quality">
+  - Coding standards compliance
+  - Code readability and maintainability assessment
+  - Technical debt identification and categorization
+  </dimension>
+  
+  <dimension id="security-performance">
+  - Security vulnerability identification and remediation
+  - Performance bottleneck analysis
+  - Resource utilization efficiency assessment
+  </dimension>
+  
+  <dimension id="test-coverage">
+  - Unit test coverage measurement (minimum 80%)
+  - Integration test completeness validation
+  - Edge case and error scenario coverage
+  </dimension>
+  
+  <dimension id="architecture-alignment">
+  - Architectural principles adherence validation
+  - Design pattern consistency review
+  - Module coupling and cohesion assessment
+  </dimension>
+  
+  <dimension id="documentation">
+  - Code documentation completeness audit
+  - API documentation accuracy verification
+  - Maintenance documentation quality review
+  </dimension>
+  
+  <dimension id="deployment-readiness">
+  - Rollback strategy validation
+  - Deployment risk assessment
+  - Production readiness checklist completion
+  </dimension>
+</review-standards>
 
-  <checks>
-    Milestone Checkpoints：
-    - [ ] Custom Commands識別完成
-    - [ ] Custom Commands行為完成
-  </checks>
-  </stage>
-</workflow>
+<quality-matrix>
+  <scoring-system>
+  - Bronze (1.0): Basic implementation, significant improvements needed
+  - Silver (2.0): Meets minimum standards, minor improvements needed  
+  - Gold (3.0): High quality implementation, best practices followed
+  - Platinum (4.0): Exceptional quality, exemplary implementation
+  </scoring-system>
+  
+  <decision-rules>
+  - Accept: All dimensions reach Silver level or above (score ≥ 2.0/4.0)
+  - Accept with Changes: 1-2 dimensions below Silver with clear improvement plan (score ≥ 1.5/4.0)
+  - Reject: 3+ dimensions below Silver, or critical security/functional issues (score < 1.5/4.0)
+  </decision-rules>
+</quality-matrix>
+</instructions>
