@@ -1,3 +1,8 @@
+# Prompt 品質評估報告：sunnycore_pm.md
+
+## 待評估的 Prompt
+**Input:**
+```
 <start_sequence>
 1. 驗證使用者輸入是否符合指令模式；未命中則自動執行 *help 並輸出結構化提示。
 2. 解析任務/文件根目錄（預設 {root}/sunnycore/；可由環境變數 SUNNYCORE_ROOT 覆寫，且需存在）。
@@ -79,3 +84,49 @@
 3. Deterministic, automation-ready results（固定欄位與檔名約定）
 4. Prioritized next actions 與風險/阻塞清單
 </output>
+```
+---
+
+## 評估結果
+
+### 分數計算
+1. **正確性 (Correctness)**: 94 分
+2. **清晰度與可執行性 (Clarity & Actionability)**: 92 分  
+3. **理解負荷與歧義控制 (Cognitive Load & Ambiguity Control)**: 92 分
+4. **推理引導適切性 (Reasoning Guidance Appropriateness)**: 91 分
+5. **對齊性與相關性 (Alignment & Relevance)**: 95 分
+6. **信息完整性與最小充分性 (Completeness & Minimality)**: 90 分
+7. **約束設計適切性 (Constraint Design)**: 93 分
+8. **用戶體驗 (User Experience)**: 92 分
+
+**總分：92 分 / 100 分** *(8 個維度的平均分；預設等權重)*
+
+### 評分提示（常見誤用的糾偏）
+- 語言或推理越長並不代表更好。以「能否準確完成任務」為最高準則。
+- 過多的欄位、步驟與約束不是優點。僅保留提升結果品質的必要項。
+- 優先把「思考過程」轉為「可驗證的標準/輸出格式」，而非要求冗長思維鏈。
+
+### 品質等級
+- **卓越 (Excellent)**
+
+---
+
+## 優勢
+- **指令模式與參數驗證完備**：針對 `*plan-tasks {task_id}` 提供明確 regex 並定義未命中回退至 `*help`，避免歧義與提早失敗。
+- **路徑與檔案系統治理**：預設 `{root}/sunnycore/` 並允許 `SUNNYCORE_ROOT` 覆寫；宣告 File System Integrity 與結構化錯誤契約，便於自動化與監控。
+- **在地化與非互動預設**：固定繁中、保留英文術語；非互動輸出具確定性，提升重現性與 CI/CD 友好度。
+- **產出契約清晰且可驗證**：針對各命令明訂產出（implementation plan、backlog、roadmap），並指向模板來源，利於落地與工具鏈整合。
+- **里程碑關卡與治理意識**：加入 Milestone Gates，避免在關鍵阻塞未解除時流於表面產物。
+- **上下文約束與對齊**：將 `CLAUDE.md`、`tasks/*` 與 repo guidelines 納入上下文，降低認知負荷與行為漂移。
+
+## 改進建議
+- **錯誤代碼表與可觀測性**：在 `{ type, code, message, hints, retryable }` 中為 `code` 引入標準枚舉與文件連結，並建議日誌鍵名約定（例如 `event`, `command`, `task_id`）。
+- **產出檔名與目錄約定**：為各產物提供範例路徑與命名（如 `reports/pm/{task_id}/implementation-plan.yaml`、`roadmap.md`），便於自動化收斂與測試。
+- **驗收檢核清單**：為每個工作流補充 DoR/DoD 與驗收準則模板，將「里程碑關卡」具體化為可驗證條目。
+- **模板版本化**：於模板與產出中加入 `schema_version` 與 `generated_at` 欄位，並說明向前/向後相容策略。
+- **示例與常見錯誤**：在 `*help` 命令的輸出中加入最小可行示例與常見錯誤對照表，以縮短學習曲線。
+
+---
+
+## 補充說明
+- 路徑預設與示例皆採 `{root}/sunnycore/`（符合專案記憶規則）；若實際不存在再回報錯誤，不因開發路徑差異主動更正。
