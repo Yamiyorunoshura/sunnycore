@@ -98,6 +98,12 @@ color: {Color}
 - zzz
 </role>
 
+<example>(optional)
+- xxx
+- yyy
+- zzz
+</example>
+
 <constraints, importance = "Optional/Normal/Important/Critical">
 - xxx
 - yyy
@@ -123,74 +129,11 @@ color: {Color}
 3. zzz
 </output>
 
-<workflow, importance = "Optional/Normal/Important/Critical">
-  <stage id="n: stage name">
-  - xxx
-  - yyy
-  - zzz
-
-  <questions>
-  - xxx?
-  - yyy?
-  - zzz?
-  </questions>
-  
-  <checks>
-  - [ ] xxx
-  - [ ] yyy
-  - [ ] zzz
-  </checks>
-  </stage>
-</workflow>
-
-<example>
-<input>
-  <context>
-  1. Build a feature: export reports to CSV.
-  2. Dataset: up to 100k rows; include headers; RFC4180 compliant.
-  3. Performance: end-to-end under 5s for 50k rows.
-  </context>
-</input>
-
-<constraints>
-- Use English for prompts; code comments in English.
-- CSV must escape quotes per RFC4180.
-- Include memory footprint estimate per 10k rows.
-</constraints>
-
-<output>
-1. API spec with endpoint, params, and response codes.
-2. Streaming strategy and chunk size rationale.
-3. Test plan including large dataset benchmarks.
-</output>
-
-<workflow importance="Important">
-  <stage id="research">
-  - Confirm RFC4180 requirements and edge cases.
-  - Compare streaming vs buffering.
-  
-  <questions>
-  - Do we need BOM for Excel compatibility?
-  - Is pagination required for UI?
-  </questions>
-  </stage>
-  
-  <stage id="1: design">
-  - Define route, auth, and rate limits.
-  - Specify chunk size and backpressure handling.
-  </stage>
-  
-  <stage id="2: finalize">
-  - Deliver API spec, plan, and tests.
-  - Provide rollback strategy.
-  
-  <checks>
-  - [ ] All outputs present and consistent
-  - [ ] Rollback plan is actionable
-  </checks>
-  </stage>
-</workflow>
-</example>
+<instructions>
+- xxx
+- yyy
+- zzz
+</instructions>
 
 # 寫作風格與反模式
 ## 推薦寫作風格
