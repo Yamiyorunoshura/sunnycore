@@ -55,3 +55,7 @@ coverage/
 .cursorrules
 .cursor/
 development-agents-prompt/
+
+# Sunnycore
+sunnycore/
+.claude/
