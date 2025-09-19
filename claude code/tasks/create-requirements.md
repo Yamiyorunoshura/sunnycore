@@ -42,7 +42,7 @@ todo list example:
   <stage id="1, init">
   <tools: todo-list>
   - Read all working steps to understand the expected deliverables.
-  - Create a todo item for each working stage
+  - Take reference from the example and create a todo item 
   </tools: todo-list, sequential-thinking>
   </stage>
 

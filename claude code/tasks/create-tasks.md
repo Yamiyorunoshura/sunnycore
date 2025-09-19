@@ -38,7 +38,7 @@ todo list example:
 </example>
 
 <workflow importance="Important">
-  <stage id="research">
+  <stage id="1: research">
   <tools: sequential-thinking>
   - Read requirements and architecture sources.
   - Identify scope, success criteria, and constraints to drive task design.
@@ -52,19 +52,19 @@ todo list example:
   </questions>
   </stage>
 
-  <stage id="draft">
+  <stage id="2: draft">
   - Use the template to generate atomic tasks.
   - Include brief acceptance hints for verifiability.
   - Group tasks logically while avoiding overlaps.
   </stage>
 
-  <stage id="review">
+  <stage id="3: review">
   - De-duplicate and prune non-actionable items.
   - Ensure traceability from each task to requirement(s).
   - Validate formatting against the template.
   </stage>
 
-  <stage id="finalize">
+  <stage id="4: finalize">
   - Write markdown format tasks to {root}/docs/tasks.md.
   - Include a short introduction explaining grouping and scope.
 

@@ -44,7 +44,7 @@ todo list example:
   <tools: todo-list>
   - Read this file end-to-end
   - Enumerate all stages and sub-steps
-  - Create a todo item for each working stage
+  - Take reference from the example and create a todo item 
   </tools: todo-list>
 
   <questions>

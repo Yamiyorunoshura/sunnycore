@@ -39,7 +39,7 @@ markdown文件輸出方式：
   <stage id="0: plan-todos">
   <tools: todo-list>
   - Review this task end-to-end.
-  - Create a todo item for each working stage
+  - Take reference from the example and create a todo item 
   </tools: todo-list, sequential-thinking>
   </stage>
 

@@ -71,7 +71,7 @@ the updated todo list during non-functional requirements stage:
   <stage id="0: todo">
   <tools: todo-list>
   - Read all working steps
-  - Create a todo item for each working stage
+  - Take reference from the example and create a todo item 
   </tools: todo-list>
   </stage>
   
