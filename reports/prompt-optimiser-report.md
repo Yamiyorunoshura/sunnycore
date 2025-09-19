@@ -1,94 +1,164 @@
-### Prompt 品質評估報告 — prompt-optimiser.md
+# Prompt Quality Assessment Report: prompt-optimiser.md
 
-#### 待評估的 Prompt
-- 檔案：`prompt-optimiser.md`
+## 執行摘要
+- **評估目標**: development-agents-prompt/prompt-optimiser.md
+- **評估日期**: 2025-09-19
+- **評估者**: Prompt Quality Evaluator
+- **總體品質等級**: **Excellence (卓越)**
+- **總分**: **96.1/100**
 
----
+## 維度評分詳細分析
+
+### 1. **Correctness (正確性)**: 97/100
+**優勢**:
+- XML標籤語法正確且完整（role, constraints, input, output, workflow等）
+- 結構一致性良好，無衝突指令
+- 提示工程術語使用準確
+- 邏輯流程從輸入到輸出連貫清晰
+
+**問題識別**: 少數標點符號不一致
+**分數計算**: 100分 - 3分（標點不一致） = 97分
+**支持證據**: XML結構完整，workflow階段邏輯清楚，technical terminology准確
+
+### 2. **Clarity & Actionability (清晰度與可操作性)**: 95/100  
+**優勢**:
+- 任務目標明確：分析品質報告並執行結構化優化
+- 3階段workflow提供具體執行步驟
+- start_sequence提供清楚的起始指引
+- 每階段包含tools和questions指導
+
+**問題識別**: 部分工具描述過於模糊（如"分析工具"）
+**分數計算**: 100分 - 5分（工具描述模糊） = 95分
+**支持證據**: "讀取所有輸入文件" 和 "問題識別與優先序排列" 等描述
+
+### 3. **Cognitive Load & Ambiguity Control (認知負荷與歧義控制)**: 82/100
+**優勢**:
+- 使用XML標籤有效分段
+- 關鍵概念如"語義保全"、"不變量清單"定義清楚
+- 邏輯分組結構良好
+
+**問題識別**: 
+- 整體內容較長，認知負荷較重
+- 部分術語需要更清楚定義（"無損重述策略"、"分析工具"）
+**分數計算**: 95分 - 8分（內容長度） - 5分（未定義術語） = 82分
+**支持證據**: 136行的檔案長度，"分析工具：問題識別與優先序排列" 等模糊描述
+
+### 4. **Reasoning Guidance Appropriateness (推理指導適當性)**: 100/100
+**優勢**:
+- 在複雜的提示詞優化任務中提供適當的step-by-step指導
+- workflow階段和questions提供必要的思考引導
+- 重視結果驗證和checks清單
+- 平衡思考深度與執行效率
+
+**問題識別**: 無
+**分數計算**: 100分 - 0分 = 100分
+**支持證據**: 3階段workflow設計恰當，questions引導合理，checks清單具體
+
+### 5. **Alignment & Relevance (對齊性與關聯性)**: 100/100
+**優勢**:
+- 完美對齊提示詞優化專家的角色定位
+- 所有內容直接服務於核心任務
+- 遵循倫理原則和操作準則
+- 無冗餘或無關內容
+
+**問題識別**: 無
+**分數計算**: 100分 - 0分 = 100分
+**支持證據**: 所有sections都聚焦於提示詞優化任務
+
+### 6. **Information Completeness & Minimality (資訊完整性與最小性)**: 100/100
+**優勢**:
+- 提供執行任務所需的完整資訊
+- input/output定義明確
+- workflow完整涵蓋分析、優化、驗證三階段
+- 避免資訊冗餘，每部分都有其功能
+
+**問題識別**: 無
+**分數計算**: 100分 - 0分 = 100分
+**支持證據**: input/output sections明確，workflow completeness良好
+
+### 7. **Constraint Design Appropriateness (約束設計適當性)**: 100/100
+**優勢**:
+- 4個核心約束條件明確且可驗證
+- 強調品質導向（語義保全、結構規範）
+- 約束範圍適當，不過度限制創新
+- 無互相衝突的約束
+
+**問題識別**: 無
+**分數計算**: 100分 - 0分 = 100分
+**支持證據**: constraints section包含語言一致性、語義保全、結構規範、改進聚焦等明確約束
+
+### 8. **User Experience (用戶體驗)**: 95/100
+**優勢**:
+- 輸出實用且可立即實施
+- 結構化workflow減少迭代需求
+- 提供具體的檢核清單和驗證機制
+- 適合系統化應用和擴展
+
+**問題識別**: 由於任務複雜性，可能需要少量後續澄清
+**分數計算**: 100分 - 5分（潛在後續需求） = 95分
+**支持證據**: 複雜的3階段workflow和多維度輸出要求
+
+## 總體品質評估
 
 ### 分數計算
-1. 正確性（Correctness）: 88 分
-2. 清晰度與可執行性（Clarity & Actionability）: 94 分  
-3. 理解負荷與歧義控制（Cognitive Load & Ambiguity Control）: 92 分
-4. 推理引導適切性（Reasoning Guidance Appropriateness）: 93 分
-5. 對齊性與相關性（Alignment & Relevance）: 97 分
-6. 信息完整性與最小充分性（Completeness & Minimality）: 90 分
-7. 約束設計適切性（Constraint Design）: 93 分
-8. 用戶體驗（User Experience）: 92 分
+**總分 = (97+95+82+100+100+100+100+95) ÷ 8 = 96.1/100**
 
-**總分：92.4 分 / 100 分**（8 維度等權平均）
+### 品質等級: **Excellence (卓越)**
+達到 90-100 分數段，屬於行業領先品質，改進需求極少。
 
-### 品質等級
-- 卓越（Excellent）
+### 分級理由
+- 8個維度中有6個達到滿分或接近滿分
+- 唯一顯著扣分的維度是認知負荷控制（82分）
+- 整體結構完善，功能定位準確，執行指導清晰
 
----
+## 結構化回饋
 
-### 評分提示（常見誤用的糾偏）
-- 語言或推理越長不代表更好；以能否準確完成任務為最高準則。
-- 過多欄位、步驟與約束不是優點；僅保留提升結果品質的必要項。
-- 優先把「思考過程」轉為「可驗證的標準／輸出格式」，避免冗長思維鏈要求。
+### 優勢識別
+1. **卓越的結構設計**: XML標籤使用規範，sections分工明確
+2. **完整的工作流程**: 3階段workflow涵蓋分析、優化、驗證全流程  
+3. **語義保全重視**: 強調不變量維護和等價性證明
+4. **實用導向**: 提供具體的檢核清單和驗證機制
+5. **專業術語精準**: 提示工程領域術語使用準確
 
----
+### 必要改進 (高優先級)
+1. **術語定義補強**: 定義"分析工具"、"無損重述策略"等關鍵概念
+   - 影響維度: 認知負荷控制 (+5分)
+   - 實施建議: 在workflow section或terminology定義section中補充
 
-### 優勢
-- 清晰結構與高可執行性：採用 `role / input / output / constraints / workflow / instructions / example` 的分層設計，並提供三階段工作流程與檢核清單，行動導向明確。
-- 對齊任務目標：強調「報告一致性、結構規範、可驗證性與最小充分性」，與優化任務高度一致。
-- 可驗證導向：在 `<workflow>` 的 validation 階段給出明確的勾選式檢核項，有助於穩定與可重複輸出。
-- 擴充友好：明確指出需遵循《提示工程使用指南》，並支援 agents/commands/tasks 三種架構模板，便於在不同場景下複用。
+2. **工具描述具體化**: 將"分析工具：問題識別與優先序排列"具體化
+   - 影響維度: 清晰度與可操作性 (+3分)
+   - 實施建議: 說明具體的分析方法或框架
 
----
+### 建議改進 (中優先級)
+1. **內容結構精簡**: 考慮將部分詳細說明移至附錄或參考文件
+   - 影響維度: 認知負荷控制 (+3分)
+   - 實施建議: 保持核心workflow簡潔，詳細說明可外置
 
-### 改進建議（依優先序）
-1. 明確化與強化輸出契約（提升：正確性、完整性、用戶體驗）
-   - 問題：目前僅描述四項輸出，缺少「機器可判讀」的固定結構與檔名約定。
-   - 建議：定義嚴格的輸出結構與檔名規範，包含欄位必填與型別說明；對於錯誤與例外輸出也給出固定格式。
-   - 範例（建議片段）：
-```xml
-<deliverables>
-  <analysis-report path="reports/{input_basename}-analysis.md" required="true" />
-  <optimized-prompt path="optimized/{input_basename}.md" schema="agents|commands|tasks" required="true" />
-  <improvement-summary path="reports/{input_basename}-improvements.md" required="true" />
-  <self-check path="reports/{input_basename}-self-check.json" format="json" required="true" />
-</deliverables>
-```
+2. **範例豐富化**: 在example section增加更多具體的優化前後對比
+   - 影響維度: 用戶體驗 (+2分)
+   - 實施建議: 提供2-3個不同類型的優化案例
 
-2. 完整 XML 結構與根元素（提升：正確性、清晰度）
-   - 問題：目前文件以多個頂層節點呈現，若需機器解析，建議添加單一根元素與版本資訊。
-   - 建議：以單一根元素包裹，提供 `id`、`version`、`language` 與 `target-quality` 等中繼資料。
-   - 範例：
-```xml
-<prompt-spec id="prompt-optimiser" version="1.0" language="zh-Hant" target-quality="Excellent">
-  <!-- 既有 role/input/output/constraints/workflow/instructions/example 節點置於此 -->
-</prompt-spec>
-```
+## 語義保全驗證
 
-3. 強化錯誤處理與回退流程（提升：用戶體驗、完整性）
-   - 問題：若評估報告缺失、格式不符或內容不足，缺少明確回應機制。
-   - 建議：在 validation 階段加入錯誤輸出契約與回退策略（如最小可行優化、需人工補件清單）。
-   - 範例：
-```xml
-<errors>
-  <error code="E-MISSING-REPORT" action="request-attachment">缺少評估報告，請提供 reports/{input_basename}-report.md</error>
-  <error code="E-SCHEMA-MISMATCH" action="fallback-minimal">評估報告格式不符，將僅套用必要優化清單</error>
-</errors>
-```
+### 核心不變量
+- ✅ 角色定位: Prompt Optimiser專家身份維持
+- ✅ 功能邊界: 提示詞品質優化與結構化改進
+- ✅ 輸入契約: 原始提示詞 + 評估報告 + 指南規範
+- ✅ 輸出契約: 5項核心輸出（分析報告、優化後提示詞等）
+- ✅ 工作流程: 3階段順序（analysis → optimization → validation）
 
-4. 指令與限制更具體可檢驗（提升：約束設計、清晰度）
-   - 建議將關鍵約束改為可量化條款，例如：
-   - 「輸出應包含 3–5 條可驗證約束，每條以動詞開頭並具有具體檢核條件」
-   - 「單一回應字元上限與各段落最大長度」
-   - 「所有輸出一律使用 Chinese-traditional」
+### 等價性確認
+所有建議改進都聚焦於表達清晰度和可操作性提升，不涉及核心功能邏輯變更。
 
-5. 提供更具體的樣例與通用骨架（提升：清晰度、用戶體驗）
-   - 問題：`<example>` 中「（完整優化內容）」為佔位符，示例不易直接套用。
-   - 建議：補充一份可直接複製使用的「最小可行」優化後提示詞骨架，並對 agents/commands/tasks 三類各給一例。
+## 預期改進效果
 
-6. 增補版本與追溯中繼資料（提升：對齊性、完整性）
-   - 建議：在輸出中加入 `source-report-path`、`optimiser-version`、`timestamp`、`hash` 等欄位，便於審計與回溯。
+**實施必要改進後預期分數:**
+- Cognitive Load & Ambiguity Control: 82 → 87 (+5)
+- Clarity & Actionability: 95 → 98 (+3)
+- **預期總分: 96.1 → 97.1/100**
 
-7. 工具使用與禁止事項（提升：正確性、風險控管）
-   - 建議：在 `<tools>` 明確列出允許的工具與禁用操作（如不得執行有副作用的命令、不得寫入非指定路徑）。
+**改進後品質等級維持: Excellence (卓越)**
 
 ---
 
-### 備註
-- 本評估以「達成任務效果」為核心，偏好可驗證、可執行且最小充分的設計；建議皆可在不改變原始角色定位下以漸進式方式落地。
+*本報告基於8維度評估框架生成，採用量化評分和證據支持的評估方法，確保評估結果的客觀性和可追溯性。*

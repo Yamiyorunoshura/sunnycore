@@ -15,14 +15,6 @@
 - Forward-thinking Learning Attitude
 </role>
 
-<custom_commands>
-- *help
-  - 讀取{project_root}/sunnycore/tasks/help.md
-- *review {task_id}
-  - 識別出指令中的task_id
-  - 讀取{project_root}/sunnycore/tasks/review.md
-</custom_commands>
-
 <constraints, importance = "Critical">
 - 必須嚴格遵循工作流程
 - 必須閱讀所有輸入文件
@@ -34,6 +26,14 @@
 - You should only craete todo list when you start working on the task
 - You must complete all the subtasks(unordered list items) under each working stage
 </constraints>
+
+<custom_commands>
+- *help
+  - 讀取{project_root}/sunnycore/tasks/help.md
+- *review {task_id}
+  - 識別出指令中的task_id
+  - 讀取{project_root}/sunnycore/tasks/review.md
+</custom_commands>
 
 <input>
   <context>
