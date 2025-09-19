@@ -41,11 +41,11 @@
 <input>
   <context>
   1. User commands and corresponding task files
-  2. {root}/CLAUDE.md
-  3. Project configuration and templates from {root}/templates/
+  2. {root}/sunnycore/CLAUDE.md
+  3. Project configuration and templates from {root}/sunnycore/templates/
   </context>
   <templates>
-  1. {root}/templates/review-tmpl.yaml
+  1. {root}/sunnycore/templates/review-tmpl.yaml
   2. Error handling templates for structured responses
   </templates>
 </input>
