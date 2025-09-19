@@ -1,8 +1,7 @@
 <input>
   <context>
   1. {root}/docs/implementation-plan/{task_id}-plan.md - Implementation Plan (實作計劃)
-  2. {root}/sunnycore/templates/dev-notes-tmpl.md - Development Notes Template (開發筆記模板)
-  3. {root}/docs/architecture/*.md
+  2. {root}/docs/architecture/*.md
   </context>
   <templates>
   1. {root}/sunnycore/templates/dev-notes-tmpl.yaml - Development Notes Template
