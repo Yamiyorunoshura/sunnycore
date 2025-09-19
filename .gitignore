@@ -50,3 +50,7 @@ coverage/
 # 其他
 .vercel
 .next
+
+# Cursor
+.cursorrules
+.cursor/
