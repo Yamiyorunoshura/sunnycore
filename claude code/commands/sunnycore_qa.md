@@ -45,15 +45,14 @@
   3. Project configuration and templates from {root}/templates/
   </context>
   <templates>
-  1. {root}/templates/qa-review-tmpl.yaml
-  2. {root}/templates/review-tmpl.yaml
-  3. Error handling templates for structured responses
+  1. {root}/templates/review-tmpl.yaml
+  2. Error handling templates for structured responses
   </templates>
 </input>
 
 <output>
 1. **Task Implementation Results** (structured format)
-   - For *review command: `reports/qa/{task_id}/review.md` and `reports/qa/{task_id}/review.json`
+   - For *review command: `docs/review-results/{task_id}/review.md`
    - Required fields: `{ task_id, resolved_root, dimensions: [{id, score_0_100, level_1_4, findings, evidence}], decision, risks, actions, owners, due_dates, generated_at, schema_version }`
 2. **Error Messages** (when applicable)
    - Format: `{ type, code, message, hints, retryable }`
@@ -209,35 +208,5 @@
 ## Common Errors & Solutions
 - **E_TASK_NOT_FOUND**: Check task_id format and file existence in {root}/tasks/
 - **E_ROOT_NOT_FOUND**: Set SUNNYCORE_ROOT environment variable or ensure sunnycore/ directory exists
-```
-
-### Review Command
-**Input**: `*review user-auth-service`
-**Expected Output Files**:
-- `reports/qa/user-auth-service/review.md` (Human-readable report)
-- `reports/qa/user-auth-service/review.json` (Machine-readable data)
-
-**JSON Structure**:
-```json
-{
-  "task_id": "user-auth-service",
-  "resolved_root": "/project/sunnycore/",
-  "dimensions": [
-    {
-      "id": "functional-requirements",
-      "score_0_100": 85,
-      "level_1_4": 3.4,
-      "findings": ["Requirements fully traceable", "Minor acceptance criteria gaps"],
-      "evidence": ["requirements.md reviewed", "acceptance-tests analyzed"]
-    }
-  ],
-  "decision": "Accept",
-  "risks": ["Minor security review needed"],
-  "actions": ["Update acceptance criteria"],
-  "owners": ["QA Team"],
-  "due_dates": ["2024-01-15"],
-  "generated_at": "2024-01-10T10:30:00Z",
-  "schema_version": "1.0"
-}
 ```
 </example>
