@@ -1,3 +1,8 @@
+# Prompt 品質評估報告：sunnycore_qa.md
+
+## 待評估的 Prompt
+**Input:**
+````
 <start_sequence>
 1. 在開始回應前，請先完整閱讀本文件。
 2. 帶入核心人格
@@ -241,3 +246,55 @@
 }
 ```
 </example>
+````
+---
+
+## 評估結果
+
+### 分數計算
+1. **正確性 (Correctness)**: 95 分
+2. **清晰度與可執行性 (Clarity & Actionability)**: 94 分  
+3. **理解負荷與歧義控制 (Cognitive Load & Ambiguity Control)**: 91 分
+4. **推理引導適切性 (Reasoning Guidance Appropriateness)**: 93 分
+5. **對齊性與相關性 (Alignment & Relevance)**: 97 分
+6. **信息完整性與最小充分性 (Completeness & Minimality)**: 92 分
+7. **約束設計適切性 (Constraint Design)**: 95 分
+8. **用戶體驗 (User Experience)**: 92 分
+
+**總分：93.6 分 / 100 分** *(8 個維度的平均分；預設等權重，可按場景加權)*
+
+### 評分提示（常見誤用的糾偏）
+- 語言或推理越長並不代表更好。以「能否準確完成任務」為最高準則。
+- 過多的欄位、步驟與約束不是優點。僅保留提升結果品質的必要項。
+- 優先把「思考過程」轉為「可驗證的標準/輸出格式」，而非要求冗長思維鏈。
+
+### 品質等級
+- **卓越 (Excellent)**
+
+---
+
+## 優勢
+- **指令模式可檢驗**：`*help` 與 `*review {task_id}` 具明確 regex patterns 與參數界限（長度、字元集），利於自動化解析。
+- **根路徑解析規範完善**：統一 `{root}` 命名，定義 `SUNNYCORE_ROOT` 覆寫、fallback 與存在性驗證，失敗回傳結構化錯誤（`E_ROOT_NOT_FOUND`）。
+- **輸出契約明確**：對 `reports/qa/{task_id}/review.{md,json}` 規定必填欄位與資料結構，並補充觀測性日誌鍵名。
+- **審查框架完整**：7 維度含細項檢核，涵蓋功能、品質、安全/性能、測試、架構、文件與上線準備。
+- **品質矩陣與門檻**：提供 Bronze→Platinum 與分數換算、決策規則與最低門檻，便於治理落地。
+- **錯誤處理結構化**：規範化 JSON error 格式與錯誤代碼枚舉，並提供 `retryable` 與 `hints` 欄位，提升可恢復性。
+- **在地化與非互動模式**：強制 Traditional Chinese 並保留 English technical terms，假設非互動執行以確保可重現。
+- **範例充分**：含 `*help`/`*review` 的輸入與期望產出示例，以及 `review.json` 的結構示例。
+
+## 改進建議
+- **模板可用性（必要）**：確認 `{root}/templates/qa-review-tmpl.yaml` 實際存在；若缺失，提供 fallback 至 `review-tmpl.yaml` 或在錯誤碼中加入 `E_TEMPLATE_NOT_FOUND`。
+- **機器可驗證 Schema（必要）**：為 `review.json` 提供 JSON Schema（型別、必填、範圍），例如 `score_0_100 ∈ [0,100]`、`level_1_4 ∈ [1.0,4.0]`、`generated_at` 使用 ISO-8601（帶 `Z`）等，並給出驗證與失敗處理（`E_SCHEMA_INVALID`）。
+- **決策邊界與四捨五入（建議）**：定義分數小數位數（如 1 位）與臨界值 tie-breaker 規則，以避免 49.95 → 50 的歧義。
+- **檔案系統行為（建議）**：明確 `mkdir -p` 建立 `reports/qa/{task_id}`、覆寫策略、與 idempotent 要求；若無寫入權限則回傳 `configuration_error`。
+- **觀測性細化（建議）**：擴充日誌鍵為 `{event,start_ts,end_ts,duration_ms,command,task_id,status,error_code}` 並枚舉事件（`start|validate|write|done|error`）。
+- **風險與行動定義（建議）**：新增 `risk.severity ∈ {low,medium,high,critical}` 與 `action.type/owner/due_date` 格式，利於追蹤。
+- **版本與相容策略（建議）**：固定 `schema_version: "1.0"` 並在文件頂部提供 `spec_version`、變更日誌與相容性宣告（backward-compatible/minor/breaking）。
+- **安全/性能指標門檻（建議）**：給出最小基準或參考指南（如 P95 latency、OWASP 基線）以使評分更一致。
+- **驗證與試跑模式（建議）**：提供 `--validate-only` 或 `dry-run` 行為，僅輸出檢核與將產出清單，不落地檔案。
+
+---
+
+## 備註
+- 本評估以「達成任務效果」為最高原則，偏好可驗證、可執行與最小充分設計；以上建議不改變既有角色定位，並可透過增量方式落地。

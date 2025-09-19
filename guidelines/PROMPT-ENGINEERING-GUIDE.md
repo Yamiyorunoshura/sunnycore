@@ -247,6 +247,25 @@ zzz
 - zzz
 </constraints>
 
+<example>(optional)
+範本輸出：
+
+# Functional Requirements
+- xxx
+- yyy
+- zzz
+
+# Non-functional Requirements
+- xxx
+- yyy
+- zzz
+
+# Acceptance Criteria
+- xxx
+- yyy
+- zzz
+</example>
+
 <workflow, importance = "Optional/Normal/Important/Critical">
   <stage id="n: stage name">
   <tools: xxx>
@@ -275,22 +294,3 @@ zzz
   </stage>
 
 </workflow>
-
-<example>(optional)
-範本輸出：
-
-# Functional Requirements
-- xxx
-- yyy
-- zzz
-
-# Non-functional Requirements
-- xxx
-- yyy
-- zzz
-
-# Acceptance Criteria
-- xxx
-- yyy
-- zzz
-</example>
