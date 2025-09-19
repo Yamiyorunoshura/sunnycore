@@ -36,6 +36,12 @@
 - Localization Standards：繁體中文回應；保留英文技術詞與程式碼。
 - Non-Interactive Mode：避免互動式流程，輸出具確定性與可重現性。
 - Milestone Gates：僅在完成/驗證里程碑與關鍵阻塞解除後方可進入下一階段。
+ - Todo Creation Policy: Only create todo items when a matched custom command is executing a working stage of its corresponding task; prohibited during help, parsing, planning, or review phases.
+ - Todo Preflight Gate: Before any `todo_write`, assert `todo_allowed=true` (derived from command match and stage permission rules); otherwise reject with a structured error response and log the attempt.
+ - Stage Permission Markers: Tasks may annotate allowed sections using HTML comments, e.g., `<!-- todo:allowed stage=working -->` and `<!-- todo:disallowed -->`. Only content within allowed blocks may create TODOs.
+ - Output Contract Extension: The validation report must include `todo_allowed: boolean` (default false). TODO creation is disallowed unless `todo_allowed` is true.
+ - Observability: Record every `todo_write` attempt in Execution Logs with `event`, `command`, `task_id`, `stage`, `allowed`, and `status` to enable auditability.
+ - Environment Override (debug only): `FORCE_TODO=1` may temporarily bypass the gate for local debugging; it must never be enabled in CI or production.
 </constraints>
 
 <custom_commands>

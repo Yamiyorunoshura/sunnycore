@@ -54,3 +54,4 @@ coverage/
 # Cursor
 .cursorrules
 .cursor/
+development-agents-prompt/
