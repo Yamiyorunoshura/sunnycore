@@ -1,0 +1,420 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/company/multi-stage-testing-framework/schemas/architecture_schema.json",
+  "title": "Architecture Document Schema",
+  "description": "JSON Schema for validating architecture documents in the multi-stage testing pipeline",
+  "type": "object",
+  "required": [
+    "metadata",
+    "components",
+    "data_flow",
+    "interfaces"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": [
+        "document_id",
+        "version",
+        "created_date",
+        "author",
+        "status"
+      ],
+      "properties": {
+        "document_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "description": "Unique identifier for the architecture document"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Semantic version of the architecture document"
+        },
+        "created_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when the document was created"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author or team responsible for the architecture"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "review", "approved", "deprecated"],
+          "description": "Current status of the architecture document"
+        },
+        "reviewers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of reviewers who have approved the architecture"
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "component_id",
+          "name",
+          "type",
+          "layer",
+          "responsibilities"
+        ],
+        "properties": {
+          "component_id": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Za-z0-9_-]*[A-Za-z0-9]$",
+            "description": "Unique identifier for the component"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Human-readable name of the component"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["service", "library", "database", "queue", "cache", "gateway", "proxy", "utility"],
+            "description": "Type of the component"
+          },
+          "layer": {
+            "type": "string",
+            "enum": ["presentation", "business", "data", "infrastructure"],
+            "description": "Architectural layer of the component"
+          },
+          "responsibilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "description": "List of responsibilities of the component"
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Za-z0-9_-]*[A-Za-z0-9]$"
+            },
+            "description": "List of component IDs this component depends on"
+          },
+          "interfaces": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "type",
+                "protocol"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Name of the interface"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": ["REST", "GraphQL", "gRPC", "Message Queue", "Database", "File"],
+                  "description": "Type of the interface"
+                },
+                "protocol": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Protocol used by the interface"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Description of the interface"
+                }
+              }
+            },
+            "description": "List of interfaces provided by the component"
+          },
+          "technology": {
+            "type": "string",
+            "description": "Technology stack used by the component"
+          },
+          "scaling": {
+            "type": "object",
+            "properties": {
+              "min_instances": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Minimum number of instances"
+              },
+              "max_instances": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Maximum number of instances"
+              },
+              "auto_scaling": {
+                "type": "boolean",
+                "description": "Whether auto-scaling is enabled"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 1,
+      "description": "List of components in the architecture"
+    },
+    "data_flow": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "flow_id",
+          "source",
+          "target",
+          "data_type",
+          "description"
+        ],
+        "properties": {
+          "flow_id": {
+            "type": "string",
+            "pattern": "^FLOW-[0-9]+$",
+            "description": "Unique identifier for the data flow"
+          },
+          "source": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Za-z0-9_-]*[A-Za-z0-9]$",
+            "description": "Source component ID"
+          },
+          "target": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Za-z0-9_-]*[A-Za-z0-9]$",
+            "description": "Target component ID"
+          },
+          "data_type": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Type of data being transferred"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Description of the data flow"
+          },
+          "frequency": {
+            "type": "string",
+            "description": "Frequency of the data flow"
+          },
+          "volume": {
+            "type": "string",
+            "description": "Expected volume of data"
+          },
+          "protocol": {
+            "type": "string",
+            "description": "Protocol used for data transfer"
+          }
+        }
+      },
+      "minItems": 0,
+      "description": "List of data flows between components"
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "interface_id",
+          "name",
+          "type",
+          "components"
+        ],
+        "properties": {
+          "interface_id": {
+            "type": "string",
+            "pattern": "^IF-[0-9]+$",
+            "description": "Unique identifier for the interface"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the interface"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["REST", "GraphQL", "gRPC", "Message Queue", "Database", "File", "WebSocket"],
+            "description": "Type of the interface"
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Za-z0-9_-]*[A-Za-z0-9]$"
+            },
+            "minItems": 2,
+            "description": "List of component IDs connected by this interface"
+          },
+          "specification": {
+            "type": "object",
+            "properties": {
+              "endpoint": {
+                "type": "string",
+                "description": "Endpoint URL or connection string"
+              },
+              "authentication": {
+                "type": "string",
+                "enum": ["none", "basic", "bearer", "api_key", "oauth"],
+                "description": "Authentication method"
+              },
+              "rate_limiting": {
+                "type": "object",
+                "properties": {
+                  "requests_per_minute": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "burst_limit": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          },
+          "sla": {
+            "type": "object",
+            "properties": {
+              "availability": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100,
+                "description": "Availability percentage"
+              },
+              "response_time": {
+                "type": "object",
+                "properties": {
+                  "p50": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "p95": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "p99": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              },
+              "throughput": {
+                "type": "object",
+                "properties": {
+                  "requests_per_second": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "minItems": 0,
+      "description": "List of interfaces between components"
+    },
+    "design_patterns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "pattern",
+          "purpose",
+          "components"
+        ],
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the design pattern"
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Purpose of using this pattern"
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Za-z0-9_-]*[A-Za-z0-9]$"
+            },
+            "description": "List of components using this pattern"
+          }
+        }
+      },
+      "description": "List of design patterns used in the architecture"
+    },
+    "security_considerations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "concern",
+          "mitigation",
+          "components"
+        ],
+        "properties": {
+          "concern": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Security concern"
+          },
+          "mitigation": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Mitigation strategy"
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Za-z0-9_-]*[A-Za-z0-9]$"
+            },
+            "description": "Components affected by this security consideration"
+          }
+        }
+      },
+      "description": "List of security considerations in the architecture"
+    },
+    "performance_requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "metric",
+          "target",
+          "scope"
+        ],
+        "properties": {
+          "metric": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Performance metric"
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Target value for the metric"
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Scope of the performance requirement"
+          }
+        }
+      },
+      "description": "List of performance requirements"
+    }
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/company/multi-stage-testing-framework/schemas/requirements_schema.json",
+  "title": "Requirements Document Schema",
+  "description": "JSON Schema for validating requirements documents in the multi-stage testing pipeline",
+  "type": "object",
+  "required": [
+    "metadata",
+    "functional_requirements",
+    "non_functional_requirements"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": [
+        "document_id",
+        "version",
+        "created_date",
+        "author",
+        "status"
+      ],
+      "properties": {
+        "document_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "description": "Unique identifier for the requirements document"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Semantic version of the requirements document"
+        },
+        "created_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when the document was created"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author or team responsible for the requirements"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "review", "approved", "deprecated"],
+          "description": "Current status of the requirements document"
+        },
+        "reviewers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of reviewers who have approved the requirements"
+        }
+      }
+    },
+    "functional_requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "description",
+          "priority",
+          "acceptance_criteria"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^F-[0-9]+$",
+            "description": "Functional requirement identifier (e.g., F-001)"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Brief title of the functional requirement"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Detailed description of the functional requirement"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"],
+            "description": "Priority level of the requirement"
+          },
+          "acceptance_criteria": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "description": "List of acceptance criteria for the requirement"
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^F-[0-9]+$"
+            },
+            "description": "List of functional requirements this depends on"
+          },
+          "estimated_effort": {
+            "type": "object",
+            "properties": {
+              "hours": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Estimated effort in hours"
+              },
+              "story_points": {
+                "type": "number",
+                "minimum": 1,
+                "description": "Estimated effort in story points"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 1,
+      "description": "List of functional requirements"
+    },
+    "non_functional_requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "category",
+          "title",
+          "description",
+          "metrics"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^N-[0-9]+$",
+            "description": "Non-functional requirement identifier (e.g., N-001)"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["performance", "security", "usability", "reliability", "maintainability", "scalability"],
+            "description": "Category of the non-functional requirement"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Brief title of the non-functional requirement"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Detailed description of the non-functional requirement"
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "target",
+                "measurement_method"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Name of the metric"
+                },
+                "target": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Target value or range for the metric"
+                },
+                "measurement_method": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "How the metric will be measured"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of measurement for the metric"
+                }
+              }
+            },
+            "minItems": 1,
+            "description": "List of metrics for the non-functional requirement"
+          }
+        }
+      },
+      "minItems": 0,
+      "description": "List of non-functional requirements"
+    },
+    "stakeholders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "name",
+          "responsibilities"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Role of the stakeholder"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the stakeholder"
+          },
+          "responsibilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "description": "List of responsibilities"
+          }
+        }
+      },
+      "description": "List of stakeholders involved in the requirements"
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "List of assumptions made in the requirements"
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "List of constraints affecting the requirements"
+    },
+    "glossary": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Glossary of terms used in the requirements"
+    }
+  }
+}
