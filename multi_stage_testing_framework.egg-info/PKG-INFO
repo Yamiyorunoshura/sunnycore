@@ -1,3 +1,52 @@
+Metadata-Version: 2.4
+Name: multi-stage-testing-framework
+Version: 1.0.0
+Summary: Multi-Stage Spec-Coding Pipeline Testing Framework
+Author-email: Development Team <dev@company.com>
+License: MIT
+Project-URL: Homepage, https://github.com/company/multi-stage-testing-framework
+Project-URL: Repository, https://github.com/company/multi-stage-testing-framework
+Project-URL: Documentation, https://multi-stage-testing-framework.readthedocs.io
+Project-URL: Bug Tracker, https://github.com/company/multi-stage-testing-framework/issues
+Keywords: testing,validation,llm,rag,quality-assurance
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: jsonschema>=4.17.0
+Requires-Dist: pytest>=7.0.0
+Requires-Dist: pytest-cov>=4.0.0
+Requires-Dist: promptfoo>=0.1.0
+Requires-Dist: deepeval>=0.21.0
+Requires-Dist: ragas>=0.1.0
+Requires-Dist: nltk>=3.8.0
+Requires-Dist: spacy>=3.6.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: typing-extensions>=4.5.0
+Requires-Dist: click>=8.1.0
+Requires-Dist: rich>=13.0.0
+Requires-Dist: pyyaml>=6.0.0
+Requires-Dist: toml>=0.10.0
+Provides-Extra: dev
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: isort>=5.12.0; extra == "dev"
+Requires-Dist: flake8>=6.0.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Requires-Dist: pre-commit>=3.0.0; extra == "dev"
+Provides-Extra: security
+Requires-Dist: bandit>=1.7.0; extra == "security"
+Requires-Dist: safety>=2.3.0; extra == "security"
+Provides-Extra: performance
+Requires-Dist: memory-profiler>=0.61.0; extra == "performance"
+Requires-Dist: line-profiler>=4.0.0; extra == "performance"
+
 # Sunnycore - 多平台 AI Agent 工作流程系統
 
 一個創新的多平台 AI 助手系統，提供角色化的專業 AI agents 來優化開發工作流程，支援測試驅動開發 (TDD) 和質量保證流程。
@@ -91,43 +140,7 @@
 
 ## 安裝方法
 
-### Multi-Stage Testing Framework 安裝
-
-#### 系統需求
-- Python 3.9+
-- Node.js 18+
-- UV package manager (可選，但推薦)
-- Git（必須已安裝）
-
-#### Python 依賴安裝
-```bash
-# 克隆倉庫
-git clone <repository-url>
-cd multi-stage-testing-framework
-
-# 使用 UV (推薦)
-uv pip install -e .
-
-# 或使用 pip
-pip install -e .
-```
-
-#### Node.js 依賴安裝
-```bash
-# 安裝 Promptfoo CLI 工具
-npm install -g promptfoo
-```
-
-#### 驗證安裝
-```bash
-# 驗證 Python 依賴
-python -c "import yaml, deepeval, jsonschema; print('Python dependencies OK')"
-
-# 驗證 Node.js 依賴
-promptfoo --version
-```
-
-### Sunnycore 自動安裝腳本
+### 自動安裝腳本
 
 Sunnycore 提供了自動化安裝腳本 `sunnycore.command`，可以快速安裝不同版本到本地系統。
 
