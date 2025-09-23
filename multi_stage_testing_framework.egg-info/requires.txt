@@ -1,7 +1,6 @@
 jsonschema>=4.17.0
 pytest>=7.0.0
 pytest-cov>=4.0.0
-promptfoo>=0.1.0
 deepeval>=0.21.0
 ragas>=0.1.0
 nltk>=3.8.0
@@ -13,6 +12,9 @@ click>=8.1.0
 rich>=13.0.0
 pyyaml>=6.0.0
 toml>=0.10.0
+black>=25.9.0
+isort>=6.0.1
+mypy>=1.18.2
 
 [dev]
 black>=23.0.0
