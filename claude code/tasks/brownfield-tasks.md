@@ -41,11 +41,9 @@ todo list example:
 
 <workflow, importance = "Normal">
   <stage id="0: Create a todo list">
-  <tools: todo-list>
   - Read this file end-to-end
   - Enumerate all stages and sub-steps
   - Take reference from the example and create a todo item 
-  </tools: todo-list>
 
   <questions>
   - Have all steps been enumerated without omission?
@@ -55,11 +53,9 @@ todo list example:
   </stage>
 
   <stage id="1: Analyse the current issues">
-  <tools: sequential-thinking>
   - Read the review results document
   - Analyse current issues and root causes
   - Define the minimal effective fix for each issue
-  </tools: sequential-thinking>
 
   <questions>
   - What are the root causes vs symptoms?
@@ -69,11 +65,9 @@ todo list example:
   </stage>
 
   <stage id="2: Fix the issues">
-  <tools: todo-list>
   - Update the todo list with concrete steps per solution
   - Implement fixes iteratively, one at a time
   - Run and pass tests after each fix
-  </tools: todo-list>
 
   <questions>
   - Is each change minimal and reversible?
@@ -83,11 +77,9 @@ todo list example:
   </stage>
 
   <stage id="3: Enact recommended actions">
-  <tools: todo-list>
   - Update the todo list with sequenced steps for the recommended actions
   - Enact the recommended actions iteratively
   - Run and pass tests after each action
-  </tools: todo-list>
   
   <questions>
   - Are recommendations prioritized by value/effort?

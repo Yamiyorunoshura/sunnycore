@@ -38,11 +38,9 @@ todo list example:
 
 <workflow, importance = "Important">
   <stage id="0: create todo list">
-  <tools: todo-list>
   - Read this file end-to-end
   - Enumerate all stages and sub-steps
   - Take reference from the example and create a todo item 
-  </tools: todo-list, sequential-thinking>
 
   <questions>
   - Are all steps captured as actionable todos?
@@ -53,11 +51,9 @@ todo list example:
   </stage>
 
   <stage id="1: conclude the current issues">
-  <tools: sequential-thinking>
   - Extract all issues from the review records
   - Define the minimal effective fix for each issue
   - Finalise each issue with assigned fix and priority
-  </tools: sequential-thinking>
   
   <questions>
   - What root causes recur across review records?
@@ -68,11 +64,9 @@ todo list example:
   </stage>
 
   <stage id="2: conclude the recommended actions">
-  <tools: sequential-thinking>
   - Extract all recommended actions from the review records
   - Specify best-practice approach and sequencing per action
   - Finalise the action plan with rationale and sequencing
-  </tools: sequential-thinking>
 
   <questions>
   - Which actions yield the highest impact/effort ratio?

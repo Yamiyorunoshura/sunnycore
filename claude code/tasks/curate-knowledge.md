@@ -50,18 +50,14 @@ todo list example:
 
 <workflow importance="Important">
   <stage id="0: plan">
-  <tools: todo-list>
   - Read all working steps.
   - Take reference from the example and create a todo item 
-  </tools: todo-list, sequential-thinking>
   </stage>
 
   <stage id="1: conclude_review_results">
-  <tools: sequential-thinking>
   - Read the review results.
   - Extract best practices and error cases with file references.
   - Summarize patterns and practice levels if available.
-  </tools: sequential-thinking>
 
   <questions>
   - Are there repeated failure patterns across files?
@@ -70,11 +66,9 @@ todo list example:
   </stage>
 
   <stage id="2: conclude_development_notes">
-  <tools: sequential-thinking>
   - Read the development notes.
   - Extract best practices and error cases with file references.
   - Normalize naming for similar issues.
-  </tools: sequential-thinking>
   </stage>
 
   <stage id="3: curate_knowledge">

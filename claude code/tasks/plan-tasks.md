@@ -38,18 +38,14 @@ todo list example:
 
 <workflow, importance = "Important">
   <stage id="0: setup">
-  <tools: todo-list>
   - Read all working steps
   - Take reference from the example and create a todo item 
-  </tools: todo-list, sequential-thinking>
   </stage>
 
   <stage id="1: functional">
-  <tools: sequential-thinking>
   - Identify functional requirements
   - Map each to the corresponding architecture component(s)
   - Draft an implementation plan for each functional requirement
-  </tools: sequential-thinking>
 
   <questions>
   - Are requirement IDs and architecture references complete and unambiguous?
@@ -58,11 +54,9 @@ todo list example:
   </stage>
 
   <stage id="2: non-functional">
-  <tools: sequential-thinking>
   - Identify non-functional requirements
   - Map each to the corresponding architecture capability
   - Create tasks and acceptance criteria for each non-functional requirement
-  </tools: sequential-thinking>
   
   <questions>
   - Do tasks include measurable targets (latency, availability, security)?

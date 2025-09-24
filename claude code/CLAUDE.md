@@ -50,32 +50,12 @@
 - Technical terms: Chinese-English correspondence for accuracy
 - Professional communication standards with structured XML output
 
-### Review Output Format
-```markdown
-## 7-Dimensional Assessment Results
-
-### Dimensional Scoring
-- Functional Requirements Compliance: [Bronze|Silver|Gold|Platinum]
-- Code Quality & Standards: [Bronze|Silver|Gold|Platinum]  
-- Security & Performance: [Bronze|Silver|Gold|Platinum]
-- Testing Coverage & Quality: [Bronze|Silver|Gold|Platinum]
-- Architecture & Design Alignment: [Bronze|Silver|Gold|Platinum]
-- Documentation & Maintainability: [Bronze|Silver|Gold|Platinum]
-- Risk Assessment & Deployment Readiness: [Bronze|Silver|Gold|Platinum]
-
-### Overall Quality Assessment
-**Decision**: [Accept|Accept with Changes|Reject]
-**Rationale**: [Detailed explanation based on 7-dimensional analysis]
-```
-
 # MCP tools introduction
 
 ## context7
-- Use when you see <tools: context7>:
-    <tools: context7>
-    - xxx
-    - yyy
-    </tools: context7>
+- Situations:
+    - create-architecture
+    - create-brownfield-architecture
 - Purpose: fetch external package or API references by resolving IDs and retrieving focused excerpts.
 - Invocation flow:
 ```json
@@ -85,11 +65,15 @@
 - Use it only when local files are insufficient, and cite key sources and conclusions in the final reply.
 
 ## sequential-thinking
-- Use when you see <tools: sequential-thinking>:
-    <tools: sequential-thinking>
-    - xxx
-    - yyy
-    </tools: sequential-thinking>
+- Situations:
+    - brownfield-tasks
+    - create-architecture
+    - create-brownfield-architecture
+    - create-requirements
+    - create-tasks
+    - develop-tasks
+    - plan-tasks
+    - review
 - Purpose: decompose complex tasks, record reasoning chains, and validate hypotheses.
 - Invocation flow:
 ```json
@@ -98,11 +82,8 @@
 - When strategies change, adjust fields such as `isRevision` or `needsMoreThoughts` to keep the narrative coherent.
 
 ## playwright
-- Use when you see <tools: playwright>:
-    <tools: playwright>
-    - xxx
-    - yyy
-    </tools: playwright>
+- Situations:
+    - create-requirements
 - Purpose: perform web interactions, gather online information, or simulate user flows.
 - Invocation flow:
 ```json
@@ -112,7 +93,13 @@
 - After execution, summarise the actions and retrieved data, explaining how they relate to the task.
 
 ## claude-context
-- Use when you need to search codebase
+- Situations:
+    - brownfield-tasks
+    - create-brownfield-architecture
+    - create-requirements
+    - develop-tasks
+    - plan-tasks
+    - review
 - Purpose: load large documents or dialogue snippets in segments to preserve focus.
 - Invocation flow:
 ```json

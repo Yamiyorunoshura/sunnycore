@@ -68,26 +68,20 @@ the updated todo list during non-functional requirements stage:
 
 <workflow, importance = "Important">
   <stage id="0: todo">
-  <tools: todo-list>
   - Read all working steps
   - Take reference from the example and create a todo item 
-  </tools: todo-list>
   </stage>
   
   <stage id="1: understand-plan">
-  <tools: sequential-thinking>
   - Read the implementation plan
   - Think about the steps to implement the implementation plan based on TDD approach
-  </tools: sequential-thinking>
   </stage>
   
   <stage id="2: functional-requirements">
-  <tools: sequential-thinking>
   - Identify the functional requirements
   - Think about the test cases for each functional requirement and update the todo list
   - Write the test cases for each functional requirement
   - Write the code for each functional requirement
-  </tools: sequential-thinking>
 
   <questions>
   - What are the acceptance criteria and boundary cases for each function?
@@ -97,12 +91,10 @@ the updated todo list during non-functional requirements stage:
   </stage>
   
   <stage id="3: non-functional-requirements">
-  <tools: sequential-thinking>
   - Identify the non-functional requirements
   - Think about the test cases for each non-functional requirement and update the todo list base on the test cases
   - Write the test cases for each non-functional requirement
   - Write the code for each non-functional requirement
-  </tools: sequential-thinking>
 
   <questions>
   - What measurable budgets apply (latency, memory, throughput)?
@@ -112,12 +104,10 @@ the updated todo list during non-functional requirements stage:
   </stage>
   
   <stage id="4: refactor">
-  <tools: sequential-thinking>
   - Refactor the code to meet best practices and actual requirements
   - Think about the test cases for the refactoring and update the todo list base on the test cases
   - Refactor the code of functional requirements
   - Refactor the code of non-functional requirements
-  </tools: sequential-thinking>
   
   <questions>
   - Does the refactor preserve behavior and keep tests green?

@@ -37,18 +37,14 @@ markdown文件輸出方式：
 
 <workflow importance="Critical">
   <stage id="0: plan-todos">
-  <tools: todo-list>
   - Review this task end-to-end.
   - Take reference from the example and create a todo item 
-  </tools: todo-list, sequential-thinking>
   </stage>
 
   <stage id="1: research">
-  <tools: sequential-thinking, context7>
   - Digest all requirements under {root}/docs/requirements/*.md.
   - Delineate components, boundaries, and canonical data flows.
   - Converge on the macro-architecture and principal interaction contracts.
-  </tools: sequential-thinking, context7>
 
   <questions>
   - Are the requirements complete, current, and authoritative?

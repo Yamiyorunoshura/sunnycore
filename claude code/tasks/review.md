@@ -64,17 +64,13 @@ todo list example:
 
 <workflow, importance = "Important">
   <stage id="0: plan-todos">
-  <tools: todo-list>
   - Read all working steps
   - Take reference from the example and create a todo item 
-  </tools: todo-list, sequential-thinking>
   </stage>
 
   <stage id="1: review-plan">
-  <tools: sequential-thinking>
   - Read and understand the implementation plan
   - Identify verification approach and success criteria
-  </tools: sequential-thinking>
 
   <questions>
   - Are acceptance criteria complete, testable, and measurable?
@@ -83,11 +79,9 @@ todo list example:
   </stage>
 
   <stage id="2: review-code">
-  <tools: sequential-thinking>
   - Read and understand the code
   - Check alignment with the plan and the requirements
   - Run tests to verify the code
-  </tools: sequential-thinking>
   
   <questions>
   - Do tests cover critical paths, edge cases, and regressions?
@@ -96,10 +90,8 @@ todo list example:
   </stage>
 
   <stage id="3: review-dev-notes">
-  <tools: sequential-thinking>
   - Read and understand the development notes
   - Check alignment between notes and implementation
-  </tools: sequential-thinking>
   </stage>
 
   <stage id="4: produce-results">

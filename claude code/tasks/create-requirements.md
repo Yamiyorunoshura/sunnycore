@@ -40,18 +40,14 @@ todo list example:
 
 <workflow importance="Important">
   <stage id="1, init">
-  <tools: todo-list>
   - Read all working steps to understand the expected deliverables.
   - Take reference from the example and create a todo item 
-  </tools: todo-list, sequential-thinking>
   </stage>
 
   <stage id="2, functional">
-  <tools: sequential-thinking>
   - Derive functional requirements from the user's input and context.
   - Consolidate duplicates and remove ambiguity; keep each statement atomic.
   - Organize by user stories or system capabilities as appropriate.
-  </tools: sequential-thinking>
 
   <questions>
   - What are the core user goals and success criteria for each scenario?
@@ -61,11 +57,9 @@ todo list example:
   </stage>
 
   <stage id="3, nonfunctional">
-  <tools: sequential-thinking>
   - Identify non-functional requirements across performance, reliability, security, compliance, and operability.
   - Quantify targets (e.g., P95 latency, uptime SLO, RTO/RPO) and constraints.
   - Map NFRs to monitoring/observability signals when relevant.
-  </tools: sequential-thinking>
   
   <questions>
   - What performance baselines and environment assumptions are in scope?
@@ -75,11 +69,9 @@ todo list example:
   </stage>
 
   <stage id="4, acceptance">
-  <tools: sequential-thinking>
   - Define acceptance criteria per requirement; ensure they are deterministic and testable.
   - Reference inputs, preconditions, and explicit pass/fail outcomes.
   - Use clear structure; Gherkin-style is acceptable if helpful.
-  </tools: sequential-thinking>
   </stage>
 
   <stage id="5, finalize">
