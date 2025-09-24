@@ -116,9 +116,6 @@
 - 必要時提供實例
 - 用於規範或提示模型輸出格式
 
-## Tools 標籤規範
-- 提供工具列表，用於指示模型使用工具。
-
 ## Instructions 標籤規範
 - 用於包含複雜的指導內容、規則集、或參考資料。
 - 內部可使用結構化的 XML 子標籤來組織內容。
@@ -179,12 +176,6 @@ description: {Description}
 model: inherit
 color: {Color}
 ---
-
-<start_sequence>
-1. {Start Action 1}
-2. {Start Action 2}
-3. {Start Action 3}
-</start_sequence>
 
 <role name="Role Name">
 名字：{Role Name}
