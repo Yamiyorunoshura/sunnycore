@@ -21,24 +21,6 @@
   - Keep todos updated per stages and record decisions/risks in the development notes
 </constraints>
 
-
-<example>
-markdown文件輸出方式：
-	•	YAML 第一層 key 轉換為 Markdown 一級標題 (#)
-	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
-	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
-	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
-</example>
-
-<example>
-todo list example:
-- [ ] stage 0: Create a todo list
-- [ ] stage 1: Analyse the current issues
-- [ ] stage 2: Fix the issues
-- [ ] stage 3: Enact recommended actions
-- [ ] stage 4: Create a development notes
-</example>
-
 <workflow, importance = "Normal">
   <stage id="0: Create a todo list">
   - Read this file end-to-end
@@ -107,3 +89,20 @@ todo list example:
   - [ ] No scope creep; todos remain atomic
   </checks>
 </workflow>
+
+<example>
+markdown文件輸出方式：
+	•	YAML 第一層 key 轉換為 Markdown 一級標題 (#)
+	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
+	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
+	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
+</example>
+
+<example>
+todo list example:
+- [ ] stage 0: Create a todo list
+- [ ] stage 1: Analyse the current issues
+- [ ] stage 2: Fix the issues
+- [ ] stage 3: Enact recommended actions
+- [ ] stage 4: Create a development notes
+</example>

@@ -19,35 +19,6 @@
 - Prefer concise bullet points; average sentence length < 20 words.
 </constraints>
 
-<example>
-<snippet>
-# Best Practices
-- Retry external requests with exponential backoff (source: docs/review-results/service-a.md).
-
-# Error Cases
-- Null pointer due to async race in handler.
-  - Root cause: early access before promise resolution.
-  - Fix: guard with null checks; await dependencies.
-  - Source: docs/dev-notes/2025-05-10-null-pointer.md
-</snippet>
-</example>
-
-<example>
-markdown文件輸出方式：
-	•	YAML 第一層 key 轉換為 Markdown 一級標題 (#)
-	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
-	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
-	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
-</example>
-
-<example>
-todo list example:
-- [ ] stage 0: Create a todo list
-- [ ] stage 1: Conclude the review results
-- [ ] stage 2: Conclude the development notes
-- [ ] stage 3: Curate the knowledge
-</example>
-
 <workflow importance="Important">
   <stage id="0: plan">
   - Read all working steps.
@@ -84,3 +55,19 @@ todo list example:
   </checks>
   </stage>
 </workflow>
+
+<example>
+markdown文件輸出方式：
+	•	YAML 第一層 key 轉換為 Markdown 一級標題 (#)
+	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
+	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
+	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
+</example>
+
+<example>
+todo list example:
+- [ ] stage 0: Create a todo list
+- [ ] stage 1: Conclude the review results
+- [ ] stage 2: Conclude the development notes
+- [ ] stage 3: Curate the knowledge
+</example>
