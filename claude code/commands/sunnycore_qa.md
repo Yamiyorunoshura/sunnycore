@@ -1,8 +1,8 @@
 <start sequence>
 1. MUST read all required input files specified in context and templates sections before proceeding with any command execution
-2. MUST create structured todo list using todo_write tool immediately after command validation, based on the specific custom command type (help/review)
-3. MUST execute workflow stages sequentially following the created todo list, updating todo status throughout execution
-4. MUST ensure first todo item is marked as "in_progress" and complete all items before stage completion
+2. MUST read the corresponding task file (e.g., {root}/sunnycore/tasks/review.md, {root}/sunnycore/tasks/help.md) to understand the specific workflow stages and requirements
+3. MUST create structured todo list using todo_write tool based on BOTH the workflow stages defined in the task file AND the todo format examples provided in this command file
+4. MUST execute workflow stages sequentially following the created todo list, updating todo status throughout execution and ensuring first todo item is marked as "in_progress"
 </start sequence>
 
 <input>
