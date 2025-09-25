@@ -275,6 +275,12 @@ color: {Color}
 
 ### 模板結構
 ```
+<start sequence>
+1. {Start Sequence 1}
+2. {Start Sequence 2}
+3. {Start Sequence 3}
+</start sequence>
+
 <input>
   <context>
   1. {Context Item 1}

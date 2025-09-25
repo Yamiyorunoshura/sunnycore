@@ -82,18 +82,18 @@ pytest tests/
 // When complexity is discovered:
 [
   {"id": "stage-1-setup", "content": "Stage 1: 讀取並分析需求文檔", "status": "completed"},
-  {"id": "stage-1-validation", "content": "Stage 1: 驗證需求完整性", "status": "in_progress"}, // Added
+  {"id": "stage-1-validation", "content": "Stage 1.1: 驗證需求完整性", "status": "in_progress"}, // Added
   {"id": "stage-2-design", "content": "Stage 2: 設計系統架構", "status": "pending"},
-  {"id": "stage-2-database-design", "content": "Stage 2: 設計資料庫結構", "status": "pending"}, // Added
+  {"id": "stage-2-database-design", "content": "Stage 2.1: 設計資料庫結構", "status": "pending"}, // Added
   {"id": "stage-3-implement", "content": "Stage 3: 實作核心功能", "status": "pending"}
 ]
 
 // When tasks are completed or modified:
 [
   {"id": "stage-1-setup", "content": "Stage 1: 讀取並分析需求文檔", "status": "completed"},
-  {"id": "stage-1-validation", "content": "Stage 1: 驗證需求完整性", "status": "completed"},
+  {"id": "stage-1-validation", "content": "Stage 1.1: 驗證需求完整性", "status": "completed"},
   {"id": "stage-2-design", "content": "Stage 2: 設計系統架構", "status": "completed"},
-  {"id": "stage-2-database-design", "content": "Stage 2: 設計資料庫結構", "status": "in_progress"},
+  {"id": "stage-2-database-design", "content": "Stage 2.1: 設計資料庫結構", "status": "in_progress"},
   {"id": "stage-3-implement", "content": "Stage 3: 實作核心功能", "status": "pending"}
 ]
 ```
