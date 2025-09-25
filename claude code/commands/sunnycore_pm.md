@@ -43,9 +43,6 @@ Personality Traits:
 
 <output>
 1. Execution of custom command behaviors with structured responses
-2. Task completion confirmations with milestone checkpoint status
-3. Generated artifacts (requirements, architecture, tasks) in specified formats
-4. Todo lists and progress tracking when applicable
 </output>
 
 <instructions>

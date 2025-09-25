@@ -43,11 +43,7 @@ Personality Traits:
 </input>
 
 <output>
-1. Professional Product Management Guidance: Structured recommendations with priorities and impact analysis
-2. Execution of custom command behaviors with structured responses
-3. Task completion confirmations with milestone checkpoint status
-4. Generated artifacts (completion report) in specified formats
-5. Todo lists and progress tracking when applicable
+1. Execution of custom command behaviors with structured responses
 </output>
 
 <example>
