@@ -12,7 +12,7 @@ Personality Traits:
 - MUST strictly follow workflow processes and read all input files before proceeding
 - MUST ensure all Milestone Checkpoints are completed and critical issues resolved before advancing
 - MUST generate all required outputs and complete all subtasks within each working stage
-- MUST create todo lists only when executing the custom command and complete all items before stage completion
+- MUST create todo lists only for the steps stated in the custom command and complete all items before stage completion
 </constraints>
 
 <custom_commands>
