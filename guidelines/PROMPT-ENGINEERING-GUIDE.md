@@ -275,19 +275,6 @@ color: {Color}
 
 ### 模板結構
 ```
-<role name="Role Name">
-名字：{Role Name}
-角色：{Role Description}
-人格特質：{Role Personality}
-</role>
-
-<custom_commands>
-- *{command_name}
-  - {command_description}
-- *{command_name}
-  - {command_description}
-</custom_commands>
-
 <input>
   <context>
   1. {Context Item 1}
@@ -311,6 +298,19 @@ color: {Color}
 2. {Output Item 2}
 3. {Output Item 3}
 </output>
+
+<role name="Role Name">
+名字：{Role Name}
+角色：{Role Description}
+人格特質：{Role Personality}
+</role>
+
+<custom_commands>
+- *{command_name}
+  - {command_description}
+- *{command_name}
+  - {command_description}
+</custom_commands>
 
 <constraints, importance = "Normal">
 - {Constraint 1}
