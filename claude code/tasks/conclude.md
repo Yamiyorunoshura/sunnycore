@@ -16,24 +16,9 @@
 - Produce concise, action-oriented bullets
 - Use the provided completion report template sections
 - Output exactly one file at the stated path
-- MUST update the todo list document after completing each individual todo item by marking it as completed
-- MUST delete the todo file completely after all todo items are marked as completed
 </constraints>
 
 <workflow, importance = "Important">
-  <stage id="0: create todo list">
-  - Read this file end-to-end
-  - Enumerate all stages and sub-steps
-  - Create a todo list markdown file at {root}/docs/conclude-todo.md following the todo list format 
-
-  <questions>
-  - Are all steps captured as actionable todos?
-  - Is each todo unambiguous and outcome-focused?
-  - Do todos map cleanly to the workflow stages?
-  </questions>
-
-  </stage>
-
   <stage id="1: conclude the current issues">
   - Extract all issues from the review records
   - Define the minimal effective fix for each issue
@@ -85,30 +70,4 @@ markdown文件輸出方式：
 	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
 	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
 	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
-</example>
-
-<example>
-todo list format for {root}/docs/conclude-todo.md:
-
-conclude
-
-# Stage 0
-- [ ] Read this file end-to-end
-- [ ] Enumerate all stages and sub-steps
-- [ ] Create a todo list markdown file
-
-# Stage 1
-- [ ] Extract all issues from the review records
-- [ ] Define the minimal effective fix for each issue
-- [ ] Finalise each issue with assigned fix and priority
-
-# Stage 2
-- [ ] Extract all recommended actions from the review records
-- [ ] Specify best-practice approach and sequencing per action
-- [ ] Finalise the action plan with rationale and sequencing
-
-# Stage 3
-- [ ] Synthesise issues and actions into a coherent summary
-- [ ] Draft the completion report using the template
-- [ ] Save the Markdown report to the stated path
 </example>

@@ -17,18 +17,11 @@
 - Thoroughly review requirements and the extant architecture before proposing designs.
 - New modules must integrate without violating existing contracts; include an explicit impact analysis for any proposed changes.
 - Rigorously follow the template structure and section order.
-- MUST update the todo list document after completing each individual todo item by marking it as completed.
-- MUST delete the todo file completely after all todo items are marked as completed.
 - Draft into {root}/docs/architecture.md, then execute {root}/sunnycore/scripts/shard-architecture.py to shard.
 - Use clear, concise English and 2-space indentation.
 </constraints>
 
 <workflow importance="Critical">
-  <stage id="0: plan-todos">
-  - Review all working steps comprehensively.
-  - Create a todo list markdown file at {root}/docs/create-brownfield-architecture-todo.md following the todo list format 
-  </stage>
-
   <stage id="1: assess-existing">
   - Examine the current architecture under {root}/docs/architecture/*.md.
   - Identify extension points, constraints, and shared services.
@@ -73,34 +66,4 @@ markdown文件輸出方式：
 	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
 	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
 	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
-</example>
-
-<example>
-todo list format for {root}/docs/create-brownfield-architecture-todo.md:
-
-create-brownfield-architecture
-
-# Stage 0
-- [ ] Review all working steps comprehensively
-- [ ] Create a todo list markdown file
-
-# Stage 1
-- [ ] Examine the current architecture under docs/architecture
-- [ ] Identify extension points, constraints, and shared services
-- [ ] Map affected domains, bounded contexts, and dependencies
-
-# Stage 2
-- [ ] Define responsibilities, boundaries, and interfaces for new modules
-- [ ] Specify data flows and interactions with existing components
-- [ ] Evaluate non-functional requirements and compatibility
-
-# Stage 3
-- [ ] Use the architecture template to draft markdown
-- [ ] Ensure sections emphasize new modules and integration impacts
-- [ ] Run the sharding script to split the document
-- [ ] Verify files appear under docs/architecture
-
-# Stage 4
-- [ ] Cross-check against constraints and guiding questions
-- [ ] Remedy gaps and inconsistencies
 </example>

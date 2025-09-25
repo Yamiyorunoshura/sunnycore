@@ -18,13 +18,10 @@
 - Create atomic, verifiable tasks (≤14 words, clear outcome).
 - Exclude operational actions unless explicitly requested by the user.
 - Ensure no filenames/paths use spaces; prefer kebab-case.
-- MUST update the todo list document after completing each individual todo item by marking it as completed.
-- MUST delete the todo file completely after all todo items are marked as completed.
 </constraints>
 
 <workflow importance="Important">
   <stage id="1: research">
-  - Create a todo list markdown file at {root}/docs/create-tasks-todo.md following the todo list format
   - Read requirements and architecture sources.
   - Identify scope, success criteria, and constraints to drive task design.
   - Map non-functional requirements to cross-cutting tasks.
@@ -67,29 +64,4 @@ markdown文件輸出方式：
 	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
 	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
 	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
-</example>
-
-<example>
-todo list format for {root}/docs/create-tasks-todo.md:
-
-create-tasks
-
-# Stage 1
-- [ ] Read requirements and architecture sources
-- [ ] Identify scope, success criteria, and constraints
-- [ ] Map non-functional requirements to cross-cutting tasks
-
-# Stage 2
-- [ ] Use the template to generate atomic tasks
-- [ ] Include brief acceptance hints for verifiability
-- [ ] Group tasks logically while avoiding overlaps
-
-# Stage 3
-- [ ] De-duplicate and prune non-actionable items
-- [ ] Ensure traceability from each task to requirement(s)
-- [ ] Validate formatting against the template
-
-# Stage 4
-- [ ] Write markdown format tasks to docs/tasks.md
-- [ ] Include a short introduction explaining grouping and scope
 </example>

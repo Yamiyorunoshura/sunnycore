@@ -18,8 +18,6 @@
 <constraints, importance = "Important">
 - MUST adhere to acceptance criteria and architectural mappings defined in the implementation plan
 - MUST follow TDD cycle: implement tests first (RED), minimal code (GREEN), then refactor (REFACTOR)
-- MUST update the todo list document after completing each individual todo item by marking it as completed
-- MUST delete the todo file completely after all todo items are marked as completed
 - Keep file paths exactly as specified in <input> and <output>
 - Preserve indentation and numbering styles used in this document
 - Do not change the semantics of <input> and <output>
@@ -27,13 +25,12 @@
 </constraints>
 
 <workflow, importance = "Important">
-  <stage id="0: setup">
+  <stage id="1: setup">
   - Read all working steps and the TDD-based implementation plan from plan-tasks phase
-  - Create a todo list markdown file at {root}/docs/develop-tasks-todo.md following the todo list format
   - Extract acceptance criteria and test conditions defined in the implementation plan
   </stage>
   
-  <stage id="1: red-implement-tests">
+  <stage id="2: red-implement-tests">
   - Implement test cases based on acceptance criteria from the implementation plan (RED phase)
   - Convert each acceptance criterion into executable test code
   - Ensure tests fail initially as expected (RED state)
@@ -46,7 +43,7 @@
   </questions>
   </stage>
   
-  <stage id="2: green-minimal-implementation">
+  <stage id="3: green-minimal-implementation">
   - Implement minimal code to make tests pass (GREEN phase)
   - Follow the architectural mappings specified in the implementation plan
   - Focus on making tests green with simplest possible solutions
@@ -59,7 +56,7 @@
   </questions>
   </stage>
   
-  <stage id="3: refactor-optimize">
+  <stage id="4: refactor-optimize">
   - Refactor code while maintaining all tests green (REFACTOR phase)
   - Apply optimizations and consolidations identified in the implementation plan
   - Implement cross-cutting concerns as specified in the plan
@@ -72,7 +69,7 @@
   </questions>
   </stage>
   
-  <stage id="4: validate-and-document">
+  <stage id="5: validate-and-document">
   - Validate final implementation against all acceptance criteria from the plan
   - Ensure all planned test conditions are satisfied
   - Generate development notes using the template
@@ -95,39 +92,4 @@ markdown文件輸出方式：
 	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
 	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
 	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
-</example>
-
-<example>
-todo list format for {root}/docs/develop-tasks-todo.md:
-
-develop-tasks
-
-# Stage 0: Setup
-- [ ] Read all working steps and the TDD-based implementation plan from plan-tasks phase
-- [ ] Create a todo list markdown file
-- [ ] Extract acceptance criteria and test conditions defined in the implementation plan
-
-# Stage 1: RED - Implement Tests
-- [ ] Implement test cases based on acceptance criteria from the implementation plan
-- [ ] Convert each acceptance criterion into executable test code
-- [ ] Ensure tests fail initially as expected (RED state)
-- [ ] Validate test coverage matches the planned verification methods
-
-# Stage 2: GREEN - Minimal Implementation
-- [ ] Implement minimal code to make tests pass
-- [ ] Follow the architectural mappings specified in the implementation plan
-- [ ] Focus on making tests green with simplest possible solutions
-- [ ] Implement both functional and non-functional requirements as planned
-
-# Stage 3: REFACTOR - Optimize
-- [ ] Refactor code while maintaining all tests green
-- [ ] Apply optimizations and consolidations identified in the implementation plan
-- [ ] Implement cross-cutting concerns as specified in the plan
-- [ ] Enhance code quality without breaking test coverage
-
-# Stage 4: Validate and Document
-- [ ] Validate final implementation against all acceptance criteria from the plan
-- [ ] Ensure all planned test conditions are satisfied
-- [ ] Generate development notes using the template
-- [ ] Output documentation to docs/dev-notes
 </example>

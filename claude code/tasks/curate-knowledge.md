@@ -17,16 +17,9 @@
 - Cite source file paths for each best practice and error case.
 - Align sections and fields to the template structure.
 - Prefer concise bullet points; average sentence length < 20 words.
-- MUST update the todo list document after completing each individual todo item by marking it as completed.
-- MUST delete the todo file completely after all todo items are marked as completed.
 </constraints>
 
 <workflow importance="Important">
-  <stage id="0: plan">
-  - Read all working steps.
-  - Create a todo list markdown file at {root}/docs/curate-knowledge-todo.md following the todo list format 
-  </stage>
-
   <stage id="1: conclude_review_results">
   - Read the review results.
   - Extract best practices and error cases with file references.
@@ -64,29 +57,4 @@ markdown文件輸出方式：
 	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
 	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
 	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
-</example>
-
-<example>
-todo list format for {root}/docs/curate-knowledge-todo.md:
-
-curate-knowledge
-
-# Stage 0
-- [ ] Read all working steps
-- [ ] Create a todo list markdown file
-
-# Stage 1
-- [ ] Read the review results
-- [ ] Extract best practices and error cases with file references
-- [ ] Summarize patterns and practice levels if available
-
-# Stage 2
-- [ ] Read the development notes
-- [ ] Extract best practices and error cases with file references
-- [ ] Normalize naming for similar issues
-
-# Stage 3
-- [ ] Use the project knowledge template to structure content
-- [ ] Output to docs/project-knowledge.md in Markdown
-- [ ] Ensure cross-references and links resolve
 </example>

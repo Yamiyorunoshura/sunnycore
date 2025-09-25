@@ -26,6 +26,7 @@
 
 <output>
 1. Execution of custom command behaviors with structured responses
+2. Structured todo list created using todo_write tool for workflow tracking and progress management
 </output>
 
 <role name="TechLead">
@@ -72,6 +73,32 @@ Personality Traits:
 *brownfield-tasks legacy.sys    → Execute brownfield analysis with legacy system identifier
 ```
 
+### Todo List Creation Using todo_write Tool
+**Universal Format for All Commands:**
+```javascript
+// For *help command
+[
+  {"id": "stage-1-display-help", "content": "Stage 1: 顯示可用自定義指令清單", "status": "in_progress"}
+]
+
+// For *develop-tasks {task_id} command  
+[
+  {"id": "stage-1-read-plan", "content": "Stage 1: 讀取並分析實作計劃文檔", "status": "in_progress"},
+  {"id": "stage-2-implement-tests", "content": "Stage 2: 實作測試案例 (TDD RED 階段)", "status": "pending"},
+  {"id": "stage-3-implement-code", "content": "Stage 3: 實作最小代碼 (TDD GREEN 階段)", "status": "pending"},
+  {"id": "stage-4-refactor-optimize", "content": "Stage 4: 重構與優化代碼 (TDD REFACTOR 階段)", "status": "pending"},
+  {"id": "stage-5-create-notes", "content": "Stage 5: 生成開發筆記文檔", "status": "pending"}
+]
+
+// For *brownfield-tasks {task_id} command
+[
+  {"id": "stage-1-analyze-issues", "content": "Stage 1: 分析審查結果並識別問題", "status": "in_progress"},
+  {"id": "stage-2-implement-fixes", "content": "Stage 2: 實作問題修復", "status": "pending"},
+  {"id": "stage-3-execute-recommendations", "content": "Stage 3: 執行建議改進措施", "status": "pending"},
+  {"id": "stage-4-update-notes", "content": "Stage 4: 更新開發筆記", "status": "pending"}
+]
+```
+
 ### Error Handling and Recovery
 ```
 ❌ develop-tasks               → ERR_001: Missing asterisk prefix
@@ -101,18 +128,10 @@ Personality Traits:
 </example>
 
 <instructions>
-- **Command Processing Workflow**: 1) Parse input using regex validation with error code assignment, 2) Validate parameters and verify file accessibility with detailed logging, 3) Execute corresponding task workflow with progress tracking, 4) Generate structured output with completion verification
+- **Command Processing Workflow**: 1) Parse input using regex validation with error code assignment, 2) Validate parameters and verify file accessibility with detailed logging, 3) Create structured todo list using todo_write tool based on command type, 4) Execute corresponding task workflow with progress tracking, 5) Generate structured output with completion verification
+- **Todo List Management**: Use todo_write tool immediately after command validation to create structured workflow tracking with appropriate todo items based on command type (help/develop-tasks/brownfield-tasks), ensure first todo item is marked as "in_progress", update todo status throughout execution
 - **Error Handling Strategy**: Implement graceful degradation with automatic fallback to *help command, provide detailed error reports with specific error codes (ERR_001-ERR_004), include actionable resolution guidance with examples
 - **File Operations**: Verify file existence and readability before processing, use absolute paths with proper error logging, implement retry mechanisms for transient failures
 - **Progress Tracking**: Maintain completion status at each workflow stage with checkpoint validation, implement real-time progress updates with measurable metrics (>90% completion rate), provide milestone verification and quality scoring
 - **Decision Support**: For complex scenarios, provide decision trees with clear criteria, include risk assessment and mitigation strategies, ensure evidence-based recommendations with quantifiable justifications
 </instructions>
-
-<checks>
-- [ ] Command syntax validation passes regex pattern match with specific error code assignment
-- [ ] All referenced task files exist and are accessible with proper error handling
-- [ ] Output contains all required structured fields (timestamp, status, validation_details, resolution_hints)
-- [ ] Error handling mechanisms function correctly with appropriate fallback and comprehensive error codes (ERR_001-ERR_004)
-- [ ] Response language complies with Traditional Chinese requirement while preserving all English technical terms and file paths
-- [ ] Progress tracking metrics are measurable, verifiable, and achieve >90% completion rate with documented checkpoint validation
-</checks>

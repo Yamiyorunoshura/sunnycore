@@ -19,8 +19,6 @@
 - Align sections and field names exactly with the requirement template.
 - Do not include sensitive or personal data in examples.
 - Clarify the requirements and the acceptance criteria with the user.
-- MUST update the todo list document after completing each individual todo item by marking it as completed.
-- MUST delete the todo file completely after all todo items are marked as completed.
 - MUST maintain English-only content throughout the prompt and generated documentation.
 </constraints>
 
@@ -28,10 +26,8 @@
   <stage id="1: init">
   <tools>
   - read_file: Review workflow stages and deliverable requirements
-  - edit_file: Create todo list tracking document
   </tools>
   - Read all working steps to understand the expected deliverables.
-  - Create a todo list markdown file at {root}/docs/create-requirements-todo.md following the todo list format.
   </stage>
 
   <stage id="2: functional">
@@ -108,34 +104,4 @@ Markdown output conversion format:
 • YAML second-level keys convert to Markdown level 2 headings (##)
 • YAML third-level keys convert to Markdown level 3 headings (###)
 • YAML values (strings or numbers) convert to Markdown body text
-</example>
-
-<example>
-Todo list format for {root}/docs/create-requirements-todo.md:
-
-create-requirements
-
-# Stage 1
-- [ ] Read all working steps to understand the expected deliverables
-- [ ] Create a todo list markdown file
-
-# Stage 2
-- [ ] Derive functional requirements from the user's input and context
-- [ ] Consolidate duplicates and remove ambiguity
-- [ ] Organize by user stories or system capabilities
-
-# Stage 3
-- [ ] Identify non-functional requirements across performance, reliability, security
-- [ ] Quantify targets and constraints
-- [ ] Map NFRs to monitoring/observability signals
-
-# Stage 4
-- [ ] Define acceptance criteria per requirement
-- [ ] Reference inputs, preconditions, and explicit pass/fail outcomes
-- [ ] Use clear structure
-
-# Stage 5
-- [ ] Cross-check consistency across FRs, NFRs, and acceptance criteria
-- [ ] Populate the requirement template
-- [ ] Run the sharding script to shard the requirements
 </example>

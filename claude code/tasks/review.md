@@ -20,8 +20,6 @@
 <constraints, importance = "Critical">
 - MUST execute all tests created during develop tasks phase and verify test results align with implementation plan.
 - MUST verify that all production code strictly follows the implementation plan specifications and acceptance criteria.
-- MUST update the todo list document after completing each individual todo item by marking it as completed.
-- MUST delete the todo file completely after all todo items are marked as completed.
 - MUST produce machine-checkable Markdown with sections: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items.
 - MUST cross-reference plan/code/notes with file paths, line ranges, or anchors when available.
 - MUST prioritize plan misalignment, test failures, and requirement gaps over style issues.
@@ -30,11 +28,6 @@
 </constraints>
 
 <workflow, importance = "Important">
-  <stage id="0: plan-todos">
-  - Read all working steps
-  - Create a todo list markdown file at {root}/docs/review-todo.md following the todo list format 
-  </stage>
-
   <stage id="1: review-plan">
   - Read and understand the implementation plan
   - Identify verification approach and success criteria
@@ -90,36 +83,4 @@ markdown文件輸出方式：
 	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
 	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
 	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
-</example>
-
-<example>
-todo list format for {root}/docs/review-todo.md:
-
-review
-
-# Stage 0
-- [ ] Read all working steps
-- [ ] Create a todo list markdown file
-
-# Stage 1
-- [ ] Read and understand the implementation plan
-- [ ] Identify verification approach and success criteria
-
-# Stage 2
-- [ ] Read and understand all production code
-- [ ] Execute all tests created during develop tasks phase and document results
-- [ ] Verify test coverage matches implementation plan acceptance criteria
-- [ ] Check strict alignment between code implementation and plan specifications
-- [ ] Validate that code meets all requirements defined in the implementation plan
-
-# Stage 3
-- [ ] Read and understand the development notes
-- [ ] Check alignment between notes and implementation
-
-# Stage 4
-- [ ] Use the template to create the markdown formatted review results including test execution summary
-- [ ] Document all test results with pass/fail status and alignment to plan
-- [ ] Create detailed code alignment analysis comparing implementation to plan specifications
-- [ ] Save to docs/review-results
-- [ ] Update existing review results if present
 </example>

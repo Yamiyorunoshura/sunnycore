@@ -16,19 +16,12 @@
 - MUST verify that {root}/docs/requirements/*.md exists and is complete before starting architecture design.
 - MUST create explicit requirement-to-architecture mapping to ensure full coverage of functional and non-functional requirements.
 - MUST validate that every requirement has corresponding architectural component or design decision.
-- MUST update the todo list document after completing each individual todo item by marking it as completed.
-- MUST delete the todo file completely after all todo items are marked as completed.
 - Author the draft with the architecture template into {root}/docs/architecture.md; comprehensively cover components, boundaries, data flows, risks, and decisions; strictly preserve section ordering.
 - Post-draft, execute the sharding script: '{root}/sunnycore/scripts/shard-architecture.py'; verify materialized files under {root}/docs/architecture/.
 - Use clear, concise English and 2-space indentation; refrain from introducing non-existent paths or files.
 </constraints>
 
 <workflow importance="Critical">
-  <stage id="0: plan-todos">
-  - Review this task end-to-end.
-  - Create a todo list markdown file at {root}/docs/create-architecture-todo.md following the todo list format 
-  </stage>
-
   <stage id="1: requirement-analysis">
   - Verify completeness and consistency of all requirements under {root}/docs/requirements/*.md.
   - Analyze functional requirements to identify core system components and their responsibilities.
@@ -92,40 +85,4 @@ markdown文件輸出方式：
 	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
 	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
 	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
-</example>
-
-<example>
-todo list format for {root}/docs/create-architecture-todo.md:
-
-create-architecture
-
-# Stage 0
-- [ ] Review this task end-to-end
-- [ ] Create a todo list markdown file
-
-# Stage 1
-- [ ] Verify completeness and consistency of all requirements
-- [ ] Analyze functional requirements to identify core system components
-- [ ] Extract non-functional requirements and translate to architectural constraints
-- [ ] Create explicit requirement-to-architecture mapping matrix
-- [ ] Identify requirement gaps or conflicts
-
-# Stage 2
-- [ ] Design macro-architecture ensuring every requirement has corresponding element
-- [ ] Define component interaction contracts and data flow patterns
-- [ ] Document architectural decisions with requirement traceability
-- [ ] Address cross-cutting concerns mandated by non-functional requirements
-
-# Stage 3
-- [ ] Draft architecture document using template with requirement references
-- [ ] Include requirement traceability matrix in architecture document
-- [ ] Validate every requirement from mapping matrix is addressed
-- [ ] Execute the sharding script to partition the document
-- [ ] Verify artifacts appear under docs/architecture
-
-# Stage 4
-- [ ] Cross-validate architecture against all requirements using mapping matrix
-- [ ] Verify requirement traceability matrix is complete and accurate
-- [ ] Confirm architectural decisions are justified by requirements
-- [ ] Remediate typographical errors and normalize terminology
 </example>

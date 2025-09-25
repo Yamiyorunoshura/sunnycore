@@ -49,6 +49,65 @@ pytest tests/
 #### Conditional Tool Activation
 - Tools may only be used when the corresponding XML tags are present:
 
+### Dynamic Todo List Management
+**Core Principle**: Commands generate initial todo lists; tasks execute and dynamically update them based on actual development situations
+
+#### Todo List Lifecycle
+1. **Initial Creation**: Commands create structured todo lists using `todo_write` tool based on command type
+2. **Dynamic Updates**: Tasks update todo status and add/modify items as development progresses
+3. **Stage-Based Organization**: Todo items organized by workflow stages for better tracking
+4. **Adaptive Management**: Adjust todo lists based on actual project complexities and discoveries
+
+#### Todo List Update Strategies
+- **Progress Tracking**: Mark items as "completed" immediately after finishing each task
+- **Discovery-Based Addition**: Add new todo items when discovering additional requirements during execution
+- **Complexity Adaptation**: Break down complex todo items into smaller, atomic tasks when needed
+- **Context-Aware Updates**: Modify todo descriptions based on actual findings and decisions
+- **Stage Synchronization**: Ensure todo items align with current workflow stage execution
+
+#### Universal Todo Management Examples
+```javascript
+// Initial Command Creation (Stage-based structure)
+[
+  {"id": "stage-1-setup", "content": "Stage 1: 讀取並分析需求文檔", "status": "in_progress"},
+  {"id": "stage-2-design", "content": "Stage 2: 設計系統架構", "status": "pending"},
+  {"id": "stage-3-implement", "content": "Stage 3: 實作核心功能", "status": "pending"}
+]
+
+// Dynamic Updates During Task Execution
+// When complexity is discovered:
+[
+  {"id": "stage-1-setup", "content": "Stage 1: 讀取並分析需求文檔", "status": "completed"},
+  {"id": "stage-1-validation", "content": "Stage 1: 驗證需求完整性", "status": "in_progress"}, // Added
+  {"id": "stage-2-design", "content": "Stage 2: 設計系統架構", "status": "pending"},
+  {"id": "stage-2-database-design", "content": "Stage 2: 設計資料庫結構", "status": "pending"}, // Added
+  {"id": "stage-3-implement", "content": "Stage 3: 實作核心功能", "status": "pending"}
+]
+
+// When tasks are completed or modified:
+[
+  {"id": "stage-1-setup", "content": "Stage 1: 讀取並分析需求文檔", "status": "completed"},
+  {"id": "stage-1-validation", "content": "Stage 1: 驗證需求完整性", "status": "completed"},
+  {"id": "stage-2-design", "content": "Stage 2: 設計系統架構", "status": "completed"},
+  {"id": "stage-2-database-design", "content": "Stage 2: 設計資料庫結構", "status": "in_progress"},
+  {"id": "stage-3-implement", "content": "Stage 3: 實作核心功能", "status": "pending"}
+]
+```
+
+#### Situational Adaptations
+- **Simple Projects**: Maintain original todo structure with minimal additions
+- **Complex Projects**: Add detailed sub-tasks and cross-cutting concerns
+- **Discovery-Driven**: Add new stages or modify existing ones based on findings
+- **Error Recovery**: Add remediation tasks when issues are discovered
+- **Integration Challenges**: Add specific integration and testing tasks as needed
+
+#### Best Practices
+- **Atomic Tasks**: Each todo item should be specific and achievable
+- **Clear Descriptions**: Use descriptive content that indicates expected outcome
+- **Stage Alignment**: Ensure todo items map to specific workflow stages
+- **Status Consistency**: Update status immediately after task completion
+- **Merge Strategy**: Always use `merge: true` when updating existing todo lists
+
 ### Execution Mode
 1. **Environment Awareness**: Detect and analyze current execution environment
 2. **Context Validation**: Read and verify all input files

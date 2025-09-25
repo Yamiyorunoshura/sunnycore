@@ -18,24 +18,10 @@
   - Preserve existing architecture, public APIs, and naming conventions; justify any new dependency in plan/dev-notes
   - Add or update tests to cover each fix/action and run tests after every change
   - Follow project style and lint rules; avoid unrelated reformatting or file churn
-  - MUST update the todo list document after completing each individual todo item by marking it as completed
-  - MUST delete the todo file completely after all todo items are marked as completed
   - Keep todos updated per stages and record decisions/risks in the development notes
 </constraints>
 
 <workflow, importance = "Normal">
-  <stage id="0: Create a todo list">
-  - Read this file end-to-end
-  - Enumerate all stages and sub-steps
-  - Create a todo list markdown file at {root}/docs/brownfield-tasks-todo.md following the todo list format 
-
-  <questions>
-  - Have all steps been enumerated without omission?
-  - Are todos atomic and actionable?
-  - Is naming consistent with project conventions?
-  </questions>
-  </stage>
-
   <stage id="1: Analyse the current issues">
   - Read the review results document
   - Analyse current issues and root causes
@@ -49,7 +35,6 @@
   </stage>
 
   <stage id="2: Fix the issues">
-  - Update the todo list with concrete steps per solution
   - Implement fixes iteratively, one at a time
   - Run and pass tests after each fix
 
@@ -61,7 +46,6 @@
   </stage>
 
   <stage id="3: Enact recommended actions">
-  - Update the todo list with sequenced steps for the recommended actions
   - Enact the recommended actions iteratively
   - Run and pass tests after each action
   
@@ -98,35 +82,4 @@ markdown文件輸出方式：
 	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
 	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
 	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
-</example>
-
-<example>
-todo list format for {root}/docs/brownfield-tasks-todo.md:
-
-brownfield-tasks
-
-# Stage 0
-- [ ] Read this file end-to-end
-- [ ] Enumerate all stages and sub-steps
-- [ ] Create a todo list markdown file
-
-# Stage 1
-- [ ] Read the review results document
-- [ ] Analyse current issues and root causes
-- [ ] Define the minimal effective fix for each issue
-
-# Stage 2
-- [ ] Update the todo list with concrete steps per solution
-- [ ] Implement fixes iteratively, one at a time
-- [ ] Run and pass tests after each fix
-
-# Stage 3
-- [ ] Update the todo list with sequenced steps for the recommended actions
-- [ ] Enact the recommended actions iteratively
-- [ ] Run and pass tests after each action
-
-# Stage 4
-- [ ] Conclude the development process and create development notes
-- [ ] Update existing development notes if present
-- [ ] Save the markdown dev-notes to the stated directory
 </example>

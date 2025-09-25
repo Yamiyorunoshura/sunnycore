@@ -16,16 +16,9 @@
 - Follow project documentation standards and templates
 - Include all necessary sections for project understanding
 - Use clear, concise language and proper formatting
-- MUST update the todo list document after completing each individual todo item by marking it as completed
-- MUST delete the todo file completely after all todo items are marked as completed
 </constraints>
 
 <workflow, importance = "Normal">
-  <stage id="0: setup">
-  - Read all working steps
-  - Create a todo list markdown file at {root}/docs/document-project-todo.md following the todo list format
-  </stage>
-
   <stage id="1: analyze">
   - Review existing project structure and documentation
   - Identify documentation gaps and requirements
@@ -60,22 +53,3 @@ markdown文件輸出方式：
 	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
 </example>
 
-<example>
-todo list format for {root}/docs/document-project-todo.md:
-
-document-project
-
-# Stage 0
-- [ ] Read all working steps
-- [ ] Create a todo list markdown file
-
-# Stage 1
-- [ ] Review existing project structure and documentation
-- [ ] Identify documentation gaps and requirements
-- [ ] Plan documentation structure and content
-
-# Stage 2
-- [ ] Generate comprehensive project documentation
-- [ ] Follow template structure and formatting guidelines
-- [ ] Include all necessary sections and cross-references
-</example>
