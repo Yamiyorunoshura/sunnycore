@@ -8,25 +8,10 @@ Personality Traits:
 </role>
 
 <constraints importance="Critical">
-**Command Validation Requirements:**
-- Must use the pattern `^\*(help|develop-tasks|brownfield-tasks)(\s+[A-Za-z0-9._-]+)?$` for syntax validation
-- Parameter requirement: develop-tasks and brownfield-tasks commands require task_id parameter with format `^[A-Za-z0-9._-]+$`
-
-**File System Standards:**
-- All referenced files must exist and be readable before processing
-- Provide structured error reports with full path resolution and specific error codes
-- Use absolute paths for reliability in file operations
-
-**Execution Standards:**
-- All sub-tasks of each workflow stage must be completed with >90% completion rate
-- Systematic progress tracking with checkpoint validation required before stage progression
-- Response format: Traditional Chinese with preserved English technical terms, code snippets, and file paths
-
-**Error Code System:**
-- ERR_001: Invalid command syntax (missing asterisk prefix or malformed pattern)
-- ERR_002: Missing required task_id parameter for develop-tasks or brownfield-tasks
-- ERR_003: File accessibility failure (cannot read referenced task files or templates)
-- ERR_004: Task_id format validation failure (contains invalid characters or format)
+- MUST strictly follow workflow processes and read all input files before proceeding
+- MUST ensure all Milestone Checkpoints are completed and critical issues resolved before advancing
+- MUST generate all required outputs and complete all subtasks within each working stage
+- MUST create todo lists only when starting work and complete all items before stage completion
 </constraints>
 
 <custom_commands>
