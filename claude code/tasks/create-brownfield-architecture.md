@@ -17,6 +17,8 @@
 - Thoroughly review requirements and the extant architecture before proposing designs.
 - New modules must integrate without violating existing contracts; include an explicit impact analysis for any proposed changes.
 - Rigorously follow the template structure and section order.
+- MUST update the todo list document after completing each individual todo item by marking it as completed.
+- MUST delete the todo file completely after all todo items are marked as completed.
 - Draft into {root}/docs/architecture.md, then execute {root}/sunnycore/scripts/shard-architecture.py to shard.
 - Use clear, concise English and 2-space indentation.
 </constraints>

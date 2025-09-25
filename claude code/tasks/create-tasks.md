@@ -18,6 +18,8 @@
 - Create atomic, verifiable tasks (≤14 words, clear outcome).
 - Exclude operational actions unless explicitly requested by the user.
 - Ensure no filenames/paths use spaces; prefer kebab-case.
+- MUST update the todo list document after completing each individual todo item by marking it as completed.
+- MUST delete the todo file completely after all todo items are marked as completed.
 </constraints>
 
 <workflow importance="Important">

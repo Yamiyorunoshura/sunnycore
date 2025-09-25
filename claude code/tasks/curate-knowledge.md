@@ -17,6 +17,8 @@
 - Cite source file paths for each best practice and error case.
 - Align sections and fields to the template structure.
 - Prefer concise bullet points; average sentence length < 20 words.
+- MUST update the todo list document after completing each individual todo item by marking it as completed.
+- MUST delete the todo file completely after all todo items are marked as completed.
 </constraints>
 
 <workflow importance="Important">

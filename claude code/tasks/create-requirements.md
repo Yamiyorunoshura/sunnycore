@@ -19,6 +19,8 @@
 - Align sections and field names exactly with the requirement template.
 - Do not include sensitive or personal data in examples.
 - Clarify the requirements and the acceptance criteria with the user.
+- MUST update the todo list document after completing each individual todo item by marking it as completed.
+- MUST delete the todo file completely after all todo items are marked as completed.
 - MUST maintain English-only content throughout the prompt and generated documentation.
 </constraints>
 

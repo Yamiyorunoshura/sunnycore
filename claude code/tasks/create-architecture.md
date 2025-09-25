@@ -16,6 +16,8 @@
 - MUST verify that {root}/docs/requirements/*.md exists and is complete before starting architecture design.
 - MUST create explicit requirement-to-architecture mapping to ensure full coverage of functional and non-functional requirements.
 - MUST validate that every requirement has corresponding architectural component or design decision.
+- MUST update the todo list document after completing each individual todo item by marking it as completed.
+- MUST delete the todo file completely after all todo items are marked as completed.
 - Author the draft with the architecture template into {root}/docs/architecture.md; comprehensively cover components, boundaries, data flows, risks, and decisions; strictly preserve section ordering.
 - Post-draft, execute the sharding script: '{root}/sunnycore/scripts/shard-architecture.py'; verify materialized files under {root}/docs/architecture/.
 - Use clear, concise English and 2-space indentation; refrain from introducing non-existent paths or files.

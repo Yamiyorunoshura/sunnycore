@@ -18,6 +18,8 @@
 - Map every plan item to requirement IDs and architecture sections.
 - Use Markdown with ATX headings; prefer numbered lists and concise bullets.
 - Produce exactly one file at the specified output path.
+- MUST update the todo list document after completing each individual todo item by marking it as completed.
+- MUST delete the todo file completely after all todo items are marked as completed.
 </constraints>
 
 <workflow, importance = "Important">

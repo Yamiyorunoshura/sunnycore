@@ -20,6 +20,8 @@
 <constraints, importance = "Critical">
 - MUST execute all tests created during develop tasks phase and verify test results align with implementation plan.
 - MUST verify that all production code strictly follows the implementation plan specifications and acceptance criteria.
+- MUST update the todo list document after completing each individual todo item by marking it as completed.
+- MUST delete the todo file completely after all todo items are marked as completed.
 - MUST produce machine-checkable Markdown with sections: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items.
 - MUST cross-reference plan/code/notes with file paths, line ranges, or anchors when available.
 - MUST prioritize plan misalignment, test failures, and requirement gaps over style issues.

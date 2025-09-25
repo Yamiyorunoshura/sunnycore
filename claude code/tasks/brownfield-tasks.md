@@ -18,6 +18,8 @@
   - Preserve existing architecture, public APIs, and naming conventions; justify any new dependency in plan/dev-notes
   - Add or update tests to cover each fix/action and run tests after every change
   - Follow project style and lint rules; avoid unrelated reformatting or file churn
+  - MUST update the todo list document after completing each individual todo item by marking it as completed
+  - MUST delete the todo file completely after all todo items are marked as completed
   - Keep todos updated per stages and record decisions/risks in the development notes
 </constraints>
 

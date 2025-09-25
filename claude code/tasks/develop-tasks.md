@@ -18,6 +18,8 @@
 <constraints, importance = "Important">
 - MUST adhere to acceptance criteria and architectural mappings defined in the implementation plan
 - MUST follow TDD cycle: implement tests first (RED), minimal code (GREEN), then refactor (REFACTOR)
+- MUST update the todo list document after completing each individual todo item by marking it as completed
+- MUST delete the todo file completely after all todo items are marked as completed
 - Keep file paths exactly as specified in <input> and <output>
 - Preserve indentation and numbering styles used in this document
 - Do not change the semantics of <input> and <output>

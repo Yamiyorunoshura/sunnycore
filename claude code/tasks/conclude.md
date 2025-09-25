@@ -16,6 +16,8 @@
 - Produce concise, action-oriented bullets
 - Use the provided completion report template sections
 - Output exactly one file at the stated path
+- MUST update the todo list document after completing each individual todo item by marking it as completed
+- MUST delete the todo file completely after all todo items are marked as completed
 </constraints>
 
 <workflow, importance = "Important">
