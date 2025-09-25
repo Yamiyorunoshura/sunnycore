@@ -98,10 +98,3 @@
   </stage>
 </workflow>
 
-<example>
-Markdown output conversion format:
-• YAML first-level keys convert to Markdown level 1 headings (#)
-• YAML second-level keys convert to Markdown level 2 headings (##)
-• YAML third-level keys convert to Markdown level 3 headings (###)
-• YAML values (strings or numbers) convert to Markdown body text
-</example>

@@ -1,14 +1,15 @@
-# General rules
+# Claude Agent Configuration
 
-## Behaviour
+## Core Principles
 
-### Task Execution
-- You must complete the tasks by following the unordered list items under each working stage
+### Task Execution Framework
+- Complete all tasks by following the unordered list items under each working stage
+- Maintain systematic approach to task completion with proper validation at each stage
 
-### Environment Sensation & Awareness
+### Environment Awareness & Adaptation
 **Core Principle**: Agents must detect and adapt to the current execution environment before performing any operations
 
-#### Environment Detection
+#### Environment Detection Requirements
 - **Virtual Environment Check**: Always detect if working within virtual environments (venv, conda, poetry, etc.)
 - **Package Manager Detection**: Identify available package managers (pip, uv, poetry, npm, etc.)
 - **Dependency Files**: Check for `requirements.txt`, `pyproject.toml`, `package.json`, etc.
@@ -43,11 +44,14 @@ pytest tests/
 - **Script Execution**: Prefer `uv run <command>` to ensure proper environment
 - **Environment Activation**: Not required when using `uv run`
 
+## Task & Todo Management
+
 ### Tool Usage Restrictions
 **Core Principle**: Agents must not use any mcp or todo-list tools unless explicitly specified by XML tags in the prompt
 
 #### Conditional Tool Activation
-- Tools may only be used when the corresponding XML tags are present:
+- Tools may only be used when the corresponding XML tags are present in the task prompt
+- Always verify tool permissions before attempting to use specialized tools
 
 ### Dynamic Todo List Management
 **Core Principle**: Commands generate initial todo lists; tasks execute and dynamically update them based on actual development situations
@@ -108,7 +112,7 @@ pytest tests/
 - **Status Consistency**: Update status immediately after task completion
 - **Merge Strategy**: Always use `merge: true` when updating existing todo lists
 
-### Execution Mode
+### Execution Workflow
 1. **Environment Awareness**: Detect and analyze current execution environment
 2. **Context Validation**: Read and verify all input files
 3. **Task Categorization**: Assign to appropriate agents based on domain expertise
@@ -116,7 +120,9 @@ pytest tests/
 5. **Collaborative Execution**: Parallel task execution with specialized agents
 6. **Structured Output**: Generate standardized documentation using templates
 
-### File Structure Specifications
+## File Organization & Standards
+
+### Project Structure
 ```
 {root}/
 ├── .claude/
@@ -129,14 +135,12 @@ pytest tests/
 ```
 
 ### Naming Conventions
-- File names: kebab-case, no spaces (avoid introducing new spaced naming)
-- Task IDs: Correspond to file names, use hyphen separation
-- Agent IDs: Short identifiers (dev, pm, po, qa)
-- Template IDs: Descriptive names ending with `-tmpl`
+- **File names**: kebab-case, no spaces (avoid introducing new spaced naming)
+- **Task IDs**: Correspond to file names, use hyphen separation
+- **Agent IDs**: Short identifiers (dev, pm, po, qa)
+- **Template IDs**: Descriptive names ending with `-tmpl`
 
-## Output style
-
-### Code-Style Oriented
+### Code Standards & Formatting
 - **Template-Driven**: Use standardized templates (`templates/` directory) to ensure document format consistency
 - **Code Standards**:
   - Markdown: ATX headings (`#`), sentence-case titles, concise sections
@@ -144,69 +148,96 @@ pytest tests/
   - Shell: POSIX-compatible bash, prefer functions + `set -e` for robustness
   - File/folder naming: kebab-case, no spaces
 
-### Documentation Consistency
-- Primary language: Traditional Chinese documentation and communication
-- Technical terms: Chinese-English correspondence for accuracy
-- Professional communication standards with structured XML output
+### Documentation Standards
+- **Primary Language**: Traditional Chinese documentation and communication
+- **Technical Terms**: Chinese-English correspondence for accuracy
+- **Communication**: Professional standards with structured XML output
 
-# MCP tools introduction
+### Template Usage Guidelines
 
-## context7
-- Situations:
-    - create-architecture
-    - create-brownfield-architecture
-- Purpose: fetch external package or API references by resolving IDs and retrieving focused excerpts.
-- Invocation flow:
+#### YAML to Markdown Conversion Rules
+**Core Principle**: All template-based outputs must follow standardized YAML-to-Markdown conversion patterns for consistency across project documentation.
+
+**Conversion Standards****:
+- **YAML first-level keys** → **Markdown level 1 headings (#)**
+- **YAML second-level keys** → **Markdown level 2 headings (##)**
+- **YAML third-level keys** → **Markdown level 3 headings (###)**
+- **YAML values (strings or numbers)** → **Markdown body text**
+
+#### Template Application Guidelines
+- **Consistent Structure**: All generated documents must adhere to template section ordering and hierarchy
+- **Standardized Formatting**: Use ATX headings (`#`) and maintain proper indentation
+- **Template Adherence**: Follow template field names and structure exactly as specified
+- **Output Validation**: Ensure generated Markdown maintains readability and proper nesting
+
+## Specialized Tools & Integrations
+
+### Context7 Integration
+**Use Cases**:
+- create-architecture
+- create-brownfield-architecture
+
+**Purpose**: Fetch external package or API references by resolving IDs and retrieving focused excerpts.
+
+**Invocation Flow**:
 ```json
 {"name":"functions.context7__resolve-library-id","arguments":{"libraryName":"<package name>"}}
 {"name":"functions.context7__get-library-docs","arguments":{"context7CompatibleLibraryID":"<resolved ID>","tokens":2000,"topic":"<optional topic>"}}
 ```
-- Use it only when local files are insufficient, and cite key sources and conclusions in the final reply.
+**Guidelines**: Use only when local files are insufficient, and cite key sources and conclusions in the final reply.
 
-## sequential-thinking
-- Situations:
-    - brownfield-tasks
-    - create-architecture
-    - create-brownfield-architecture
-    - create-requirements
-    - create-tasks
-    - develop-tasks
-    - plan-tasks
-    - review
-- Purpose: decompose complex tasks, record reasoning chains, and validate hypotheses.
-- Invocation flow:
+### Sequential Thinking Tool
+**Use Cases**:
+- brownfield-tasks
+- create-architecture
+- create-brownfield-architecture
+- create-requirements
+- create-tasks
+- develop-tasks
+- plan-tasks
+- review
+
+**Purpose**: Decompose complex tasks, record reasoning chains, and validate hypotheses.
+
+**Invocation Flow**:
 ```json
 {"name":"functions.sequential-thinking__sequentialthinking","arguments":{"thought":"<current reasoning>","thoughtNumber":1,"totalThoughts":3,"nextThoughtNeeded":true}}
 ```
-- When strategies change, adjust fields such as `isRevision` or `needsMoreThoughts` to keep the narrative coherent.
+**Guidelines**: When strategies change, adjust fields such as `isRevision` or `needsMoreThoughts` to keep the narrative coherent.
 
-## playwright
-- Situations:
-    - create-requirements
-- Purpose: perform web interactions, gather online information, or simulate user flows.
-- Invocation flow:
+### Playwright Browser Automation
+**Use Cases**:
+- create-requirements
+
+**Purpose**: Perform web interactions, gather online information, or simulate user flows.
+
+**Invocation Flow**:
 ```json
 {"name":"functions.playwright__browser_navigate","arguments":{"url":"https://example.com"}}
 {"name":"functions.playwright__browser_click","arguments":{"element":"Submit button","ref":"<element ref>"}}
 ```
-- After execution, summarise the actions and retrieved data, explaining how they relate to the task.
+**Guidelines**: After execution, summarize the actions and retrieved data, explaining how they relate to the task.
 
-## claude-context
-- Situations:
-    - brownfield-tasks
-    - create-brownfield-architecture
-    - create-requirements
-    - develop-tasks
-    - plan-tasks
-    - review
-- Purpose: load large documents or dialogue snippets in segments to preserve focus.
-- Invocation flow:
+### Claude Context Management
+**Use Cases**:
+- brownfield-tasks
+- create-brownfield-architecture
+- create-requirements
+- develop-tasks
+- plan-tasks
+- review
+
+**Purpose**: Load large documents or dialogue snippets in segments to preserve focus.
+
+**Invocation Flow**:
 ```json
 {"name":"functions.claude-context","arguments":{"source":"<source description>","focus":"<requested topic>"}}
 ```
-- Track which segments have been fetched across multiple requests to avoid duplication and minimise context load.
+**Guidelines**: Track which segments have been fetched across multiple requests to avoid duplication and minimize context load.
 
-## Partial Reading Strategy
+## Advanced Reading Strategies
+
+### Partial Reading Strategy
 **Core Principle**: Intelligently determine when to use partial reading to optimize context consumption and focus on relevant content sections.
 
 ### When to Use Partial Reading
