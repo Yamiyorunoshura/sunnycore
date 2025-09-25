@@ -16,72 +16,73 @@
 </output>
 
 <constraints, importance = "Important">
-- keep file paths as specified
+- MUST adhere to acceptance criteria and architectural mappings defined in the implementation plan
+- MUST follow TDD cycle: implement tests first (RED), minimal code (GREEN), then refactor (REFACTOR)
+- Keep file paths exactly as specified in <input> and <output>
 - Preserve indentation and numbering styles used in this document
 - Do not change the semantics of <input> and <output>
-- Follow TDD: do not leave failing tests without implementation
 - Avoid introducing new directories or files beyond those specified
 </constraints>
 
 <workflow, importance = "Important">
-  <stage id="0: todo">
-  - Read all working steps
-  - Take reference from the example and create a todo item 
+  <stage id="0: setup">
+  - Read all working steps and the TDD-based implementation plan from plan-tasks phase
+  - Create a todo list markdown file at {root}/docs/develop-tasks-todo.md following the todo list format
+  - Extract acceptance criteria and test conditions defined in the implementation plan
   </stage>
   
-  <stage id="1: understand-plan">
-  - Read the implementation plan
-  - Think about the steps to implement the implementation plan based on TDD approach
-  </stage>
-  
-  <stage id="2: functional-requirements">
-  - Identify the functional requirements
-  - Think about the test cases for each functional requirement and update the todo list
-  - Write the test cases for each functional requirement
-  - Write the code for each functional requirement
+  <stage id="1: red-implement-tests">
+  - Implement test cases based on acceptance criteria from the implementation plan (RED phase)
+  - Convert each acceptance criterion into executable test code
+  - Ensure tests fail initially as expected (RED state)
+  - Validate test coverage matches the planned verification methods
 
   <questions>
-  - What are the acceptance criteria and boundary cases for each function?
-  - Which external dependencies must be mocked or faked in tests?
-  - How will error handling and retries be validated?
+  - Do implemented tests directly correspond to acceptance criteria from the plan?
+  - Are all edge cases and failure scenarios from the plan covered in tests?
+  - Do tests fail appropriately before implementation begins?
   </questions>
   </stage>
   
-  <stage id="3: non-functional-requirements">
-  - Identify the non-functional requirements
-  - Think about the test cases for each non-functional requirement and update the todo list base on the test cases
-  - Write the test cases for each non-functional requirement
-  - Write the code for each non-functional requirement
+  <stage id="2: green-minimal-implementation">
+  - Implement minimal code to make tests pass (GREEN phase)
+  - Follow the architectural mappings specified in the implementation plan
+  - Focus on making tests green with simplest possible solutions
+  - Implement both functional and non-functional requirements as planned
 
   <questions>
-  - What measurable budgets apply (latency, memory, throughput)?
-  - How will observability (logs, metrics, traces) be validated?
-  - Are security/compliance constraints testable and enforced?
+  - Does implementation follow the architecture components mapped in the plan?
+  - Are solutions minimal and focused on making specific tests pass?
+  - Do all tests transition from RED to GREEN state?
   </questions>
   </stage>
   
-  <stage id="4: refactor">
-  - Refactor the code to meet best practices and actual requirements
-  - Think about the test cases for the refactoring and update the todo list base on the test cases
-  - Refactor the code of functional requirements
-  - Refactor the code of non-functional requirements
-  
+  <stage id="3: refactor-optimize">
+  - Refactor code while maintaining all tests green (REFACTOR phase)
+  - Apply optimizations and consolidations identified in the implementation plan
+  - Implement cross-cutting concerns as specified in the plan
+  - Enhance code quality without breaking test coverage
+
   <questions>
-  - Does the refactor preserve behavior and keep tests green?
-  - Are interfaces clearer and modules decoupled without added complexity?
+  - Does refactoring maintain all acceptance criteria from the plan?
+  - Are cross-cutting concerns implemented as specified in the plan?
+  - Do optimizations align with the plan's quality targets?
   </questions>
   </stage>
   
-  <stage id="5: dev-notes">
-  - Use the development notes template to write the development notes for the code
-  - Output the markdown format development notes to {root}/docs/dev-notes/{task_id}-dev-notes.md
-  - If there is already an existing development notes, update the development notes with the new information
-  
+  <stage id="4: validate-and-document">
+  - Validate final implementation against all acceptance criteria from the plan
+  - Ensure all planned test conditions are satisfied
+  - Generate development notes using the template
+  - Output documentation to {root}/docs/dev-notes/{task_id}-dev-notes.md
+
   <checks>
+  - [ ] All acceptance criteria from implementation plan are satisfied
+  - [ ] Tests cover all verification methods specified in the plan
+  - [ ] Implementation follows TDD cycle: RED → GREEN → REFACTOR
+  - [ ] Code maps to architecture components as planned
   - [ ] All outputs in <output> are produced and consistent
-  - [ ] All tests pass in CI with acceptable coverage thresholds
-  - [ ] Code style and repository conventions are followed
-  - [ ] Dev notes path and filename follow the specified pattern
+  - [ ] Development notes document the TDD process and plan adherence
   </checks>
   </stage>
 </workflow>
@@ -95,36 +96,36 @@ markdown文件輸出方式：
 </example>
 
 <example>
-initial todo list example:
-- [ ] stage 0: Create a todo list
-- [ ] stage 1: Understand the plan
-- [ ] stage 2: Functional requirements
-- [ ] stage 3: Non-functional requirements
-- [ ] stage 4: Refactor
-- [ ] stage 5: Dev notes
-</example>
+todo list format for {root}/docs/develop-tasks-todo.md:
 
-<example>
-the updated todo list during functional requirements stage:
-- [x] stage 0: Create a todo list
-- [x] stage 1: Understand the plan
-- [x] stage 2: Functional requirements
-- [ ] xxx(e.g F-1: xxx)
-- [ ] yyy
-- [ ] zzz
-- [ ] stage 3: Non-functional requirements
-- [ ] stage 4: Refactor
-- [ ] stage 5: Dev notes
-</example>
+develop-tasks
 
-<example>
-the updated todo list during non-functional requirements stage:
-- [x] stage 0: Create a todo list
-- [x] stage 1: Understand the plan
-- [x] stage 2: Functional requirements
-- [x] stage 3: Non-functional requirements
-- [ ] xxx(e.g N-1: xxx)
-- [ ] yyy
-- [ ] zzz
-- [ ] stage 4: Refactor
-- [ ] stage 5: Dev notes
+# Stage 0: Setup
+- [ ] Read all working steps and the TDD-based implementation plan from plan-tasks phase
+- [ ] Create a todo list markdown file
+- [ ] Extract acceptance criteria and test conditions defined in the implementation plan
+
+# Stage 1: RED - Implement Tests
+- [ ] Implement test cases based on acceptance criteria from the implementation plan
+- [ ] Convert each acceptance criterion into executable test code
+- [ ] Ensure tests fail initially as expected (RED state)
+- [ ] Validate test coverage matches the planned verification methods
+
+# Stage 2: GREEN - Minimal Implementation
+- [ ] Implement minimal code to make tests pass
+- [ ] Follow the architectural mappings specified in the implementation plan
+- [ ] Focus on making tests green with simplest possible solutions
+- [ ] Implement both functional and non-functional requirements as planned
+
+# Stage 3: REFACTOR - Optimize
+- [ ] Refactor code while maintaining all tests green
+- [ ] Apply optimizations and consolidations identified in the implementation plan
+- [ ] Implement cross-cutting concerns as specified in the plan
+- [ ] Enhance code quality without breaking test coverage
+
+# Stage 4: Validate and Document
+- [ ] Validate final implementation against all acceptance criteria from the plan
+- [ ] Ensure all planned test conditions are satisfied
+- [ ] Generate development notes using the template
+- [ ] Output documentation to docs/dev-notes
+</example>

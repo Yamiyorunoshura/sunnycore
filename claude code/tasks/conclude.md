@@ -1,10 +1,9 @@
 <input>
   <context>
   1. {root}/docs/review-results/*.md - Review Records from development process
-  2. {root}/sunnycore/templates/completion-report-tmpl.yaml - Completion Report Template
   </context>
   <templates>
-  1. {root}/sunnycore/completion-report-tmpl.yaml - Project completion report template
+  1. {root}/sunnycore/templates/completion-report-tmpl.yaml - Project completion report template
   </templates>
 </input>
 
@@ -23,7 +22,7 @@
   <stage id="0: create todo list">
   - Read this file end-to-end
   - Enumerate all stages and sub-steps
-  - Take reference from the example and create a todo item 
+  - Create a todo list markdown file at {root}/docs/conclude-todo.md following the todo list format 
 
   <questions>
   - Are all steps captured as actionable todos?
@@ -87,9 +86,27 @@ markdown文件輸出方式：
 </example>
 
 <example>
-todo list example:
-- [ ] stage 0: create todo list
-- [ ] stage 1: conclude the current issues
-- [ ] stage 2: conclude the recommended actions
-- [ ] stage 3: conclude the completion report
+todo list format for {root}/docs/conclude-todo.md:
+
+conclude
+
+# Stage 0
+- [ ] Read this file end-to-end
+- [ ] Enumerate all stages and sub-steps
+- [ ] Create a todo list markdown file
+
+# Stage 1
+- [ ] Extract all issues from the review records
+- [ ] Define the minimal effective fix for each issue
+- [ ] Finalise each issue with assigned fix and priority
+
+# Stage 2
+- [ ] Extract all recommended actions from the review records
+- [ ] Specify best-practice approach and sequencing per action
+- [ ] Finalise the action plan with rationale and sequencing
+
+# Stage 3
+- [ ] Synthesise issues and actions into a coherent summary
+- [ ] Draft the completion report using the template
+- [ ] Save the Markdown report to the stated path
 </example>

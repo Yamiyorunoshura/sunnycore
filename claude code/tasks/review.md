@@ -17,18 +17,20 @@
 2. {root}/docs/tasks.md
 </output>
 
-<constraints, importance = "Important">
-- Must produce machine-checkable Markdown with sections: Overview, Findings, Risks, Action Items.
-- Must cross-reference plan/code/notes with file paths, line ranges, or anchors when available.
-- Must prioritize requirement mismatches and critical defects over style issues.
-- Should keep each finding concise (<= 120 words) and one issue per bullet.
-- Must record an acceptance decision with rationale: Accept / Accept with changes / Reject.
+<constraints, importance = "Critical">
+- MUST execute all tests created during develop tasks phase and verify test results align with implementation plan.
+- MUST verify that all production code strictly follows the implementation plan specifications and acceptance criteria.
+- MUST produce machine-checkable Markdown with sections: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items.
+- MUST cross-reference plan/code/notes with file paths, line ranges, or anchors when available.
+- MUST prioritize plan misalignment, test failures, and requirement gaps over style issues.
+- SHOULD keep each finding concise (<= 120 words) and one issue per bullet.
+- MUST record an acceptance decision with rationale: Accept / Accept with changes / Reject.
 </constraints>
 
 <workflow, importance = "Important">
   <stage id="0: plan-todos">
   - Read all working steps
-  - Take reference from the example and create a todo item 
+  - Create a todo list markdown file at {root}/docs/review-todo.md following the todo list format 
   </stage>
 
   <stage id="1: review-plan">
@@ -42,13 +44,18 @@
   </stage>
 
   <stage id="2: review-code">
-  - Read and understand the code
-  - Check alignment with the plan and the requirements
-  - Run tests to verify the code
+  - Read and understand all production code
+  - Execute all tests created during develop tasks phase and document results
+  - Verify test coverage matches implementation plan acceptance criteria
+  - Check strict alignment between code implementation and plan specifications
+  - Validate that code meets all requirements defined in the implementation plan
   
   <questions>
-  - Do tests cover critical paths, edge cases, and regressions?
-  - Are security, performance, and observability concerns addressed?
+  - Do all tests pass and align with the success criteria defined in the implementation plan?
+  - Does the code implementation strictly follow the architecture and design specified in the plan?
+  - Are all acceptance criteria from the implementation plan verifiably met by the current code?
+  - Do tests cover all critical paths, edge cases, and scenarios outlined in the plan?
+  - Are security, performance, and observability requirements from the plan properly implemented?
   </questions>
   </stage>
 
@@ -58,14 +65,19 @@
   </stage>
 
   <stage id="4: produce-results">
-  - Use the template to create the markdown formatted review results
+  - Use the template to create the markdown formatted review results including test execution summary
+  - Document all test results with pass/fail status and alignment to plan
+  - Create detailed code alignment analysis comparing implementation to plan specifications
   - Save to {root}/docs/review-results/{task_id}-review.md
   - If there is already an existing review results, update the review results with the new information
   <checks>
-  - [ ] All required sections present and consistent
+  - [ ] All tests executed with documented results and plan alignment verification
+  - [ ] Code alignment analysis completed with specific references to plan deviations
+  - [ ] All required sections present: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
+  - [ ] Test failures and plan misalignments clearly identified and prioritized
   - [ ] Findings reference plan/code/notes with links or anchors
-  - [ ] Acceptance decision recorded with rationale
-  - [ ] Action items prioritized and assignable
+  - [ ] Acceptance decision recorded with rationale based on test results and plan compliance
+  - [ ] Action items prioritized and assignable with clear remediation steps
   </checks>
   </stage>
 </workflow>
@@ -79,10 +91,33 @@ markdown文件輸出方式：
 </example>
 
 <example>
-todo list example:
-- [ ] stage 0: Create a todo list
-- [ ] stage 1: Review the plan
-- [ ] stage 2: Review the code
-- [ ] stage 3: Review the dev notes
-- [ ] stage 4: Produce the results
+todo list format for {root}/docs/review-todo.md:
+
+review
+
+# Stage 0
+- [ ] Read all working steps
+- [ ] Create a todo list markdown file
+
+# Stage 1
+- [ ] Read and understand the implementation plan
+- [ ] Identify verification approach and success criteria
+
+# Stage 2
+- [ ] Read and understand all production code
+- [ ] Execute all tests created during develop tasks phase and document results
+- [ ] Verify test coverage matches implementation plan acceptance criteria
+- [ ] Check strict alignment between code implementation and plan specifications
+- [ ] Validate that code meets all requirements defined in the implementation plan
+
+# Stage 3
+- [ ] Read and understand the development notes
+- [ ] Check alignment between notes and implementation
+
+# Stage 4
+- [ ] Use the template to create the markdown formatted review results including test execution summary
+- [ ] Document all test results with pass/fail status and alignment to plan
+- [ ] Create detailed code alignment analysis comparing implementation to plan specifications
+- [ ] Save to docs/review-results
+- [ ] Update existing review results if present
 </example>

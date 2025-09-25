@@ -22,6 +22,7 @@
 
 <workflow importance="Important">
   <stage id="1: research">
+  - Create a todo list markdown file at {root}/docs/create-tasks-todo.md following the todo list format
   - Read requirements and architecture sources.
   - Identify scope, success criteria, and constraints to drive task design.
   - Map non-functional requirements to cross-cutting tasks.
@@ -67,10 +68,26 @@ markdown文件輸出方式：
 </example>
 
 <example>
-todo list example:
-- [ ] stage 0: Create a todo list
-- [ ] stage 1: Research
-- [ ] stage 2: Draft
-- [ ] stage 3: Review
-- [ ] stage 4: Finalize
+todo list format for {root}/docs/create-tasks-todo.md:
+
+create-tasks
+
+# Stage 1
+- [ ] Read requirements and architecture sources
+- [ ] Identify scope, success criteria, and constraints
+- [ ] Map non-functional requirements to cross-cutting tasks
+
+# Stage 2
+- [ ] Use the template to generate atomic tasks
+- [ ] Include brief acceptance hints for verifiability
+- [ ] Group tasks logically while avoiding overlaps
+
+# Stage 3
+- [ ] De-duplicate and prune non-actionable items
+- [ ] Ensure traceability from each task to requirement(s)
+- [ ] Validate formatting against the template
+
+# Stage 4
+- [ ] Write markdown format tasks to docs/tasks.md
+- [ ] Include a short introduction explaining grouping and scope
 </example>

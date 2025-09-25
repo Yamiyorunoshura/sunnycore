@@ -15,21 +15,31 @@
 
 <constraints importance="Important">
 - Each requirement must be verifiable and measurable; avoid ambiguous or subjective phrasing.
-- Use numbered lists and concise sentences (average < 20 words) for scanability.
+- Use numbered lists and concise sentences (average < 20 words) for scannability.
 - Align sections and field names exactly with the requirement template.
 - Do not include sensitive or personal data in examples.
 - Clarify the requirements and the acceptance criteria with the user.
+- MUST maintain English-only content throughout the prompt and generated documentation.
 </constraints>
 
 <workflow importance="Important">
-  <stage id="1, init">
+  <stage id="1: init">
+  <tools>
+  - read_file: Review workflow stages and deliverable requirements
+  - edit_file: Create todo list tracking document
+  </tools>
   - Read all working steps to understand the expected deliverables.
-  - Take reference from the example and create a todo item 
+  - Create a todo list markdown file at {root}/docs/create-requirements-todo.md following the todo list format.
   </stage>
 
-  <stage id="2, functional">
+  <stage id="2: functional">
+  <tools>
+  - User interaction: Gather functional requirements through structured questioning
+  - Analysis: Consolidate and organize requirements by user stories or capabilities
+  </tools>
   - Derive functional requirements from the user's input and context.
-  - Consolidate duplicates and remove ambiguity; keep each statement atomic.
+  - Consolidate duplicates using comparison criteria: same trigger condition, same outcome, same user role.
+  - Remove ambiguity by ensuring each statement is atomic (single testable condition).
   - Organize by user stories or system capabilities as appropriate.
 
   <questions>
@@ -39,7 +49,11 @@
   </questions>
   </stage>
 
-  <stage id="3, nonfunctional">
+  <stage id="3: nonfunctional">
+  <tools>
+  - Analysis: Identify Non-Functional Requirements (NFRs) across domains
+  - Measurement: Define quantifiable targets and constraints
+  </tools>
   - Identify non-functional requirements across performance, reliability, security, compliance, and operability.
   - Quantify targets (e.g., P95 latency, uptime SLO, RTO/RPO) and constraints.
   - Map NFRs to monitoring/observability signals when relevant.
@@ -51,16 +65,27 @@
   </questions>
   </stage>
 
-  <stage id="4, acceptance">
+  <stage id="4: acceptance">
+  <tools>
+  - Specification: Define testable acceptance criteria
+  - Validation: Ensure deterministic pass/fail outcomes
+  </tools>
   - Define acceptance criteria per requirement; ensure they are deterministic and testable.
-  - Reference inputs, preconditions, and explicit pass/fail outcomes.
+  - Reference inputs, preconditions, and explicit pass/fail outcomes using Given-When-Then format when helpful.
   - Use clear structure; Gherkin-style is acceptable if helpful.
+  - Validate each criterion can be automated or manually verified with binary outcomes.
   </stage>
 
-  <stage id="5, finalize">
+  <stage id="5: finalize">
+  <tools>
+  - Review: Cross-check consistency across requirement types
+  - File operations: Generate structured documentation
+  - Script execution: Run sharding automation
+  </tools>
   - Cross-check consistency across FRs, NFRs, and acceptance criteria and ask for user's confirmation.
   - Populate the requirement template and place markdown formatted outputs under {root}/docs/requirements/.
-  - Run the {root}/sunnycore/scripts/shard-requirements.py script by using uv run to shard the requirements
+  - Run the {root}/sunnycore/scripts/shard-requirements.py script by using uv run to shard the requirements.
+  - Handle script execution failures: if sharding fails, document requirements in single file and notify user of manual sharding requirement.
 
   <checks>
   - [ ] Outputs include FRs, NFRs, and acceptance criteria per template
@@ -69,23 +94,46 @@
   - [ ] File paths and names match {root}/docs/requirements/*.md
   - [ ] Sensitive data has not been introduced in examples
   - [ ] The requirements are sharded into {root}/docs/requirements/*.md
+  - [ ] User confirmation obtained for final requirement set
+  - [ ] Script execution completed successfully or fallback documented
   </checks>
   </stage>
 </workflow>
 
 <example>
-markdown文件輸出方式：
-	•	YAML 第一層 key 轉換為 Markdown 一級標題 (#)
-	•	YAML 第二層 key 轉換為 Markdown 二級標題 (##)
-	•	YAML 第三層 key 轉換為 Markdown 三級標題 (###)
-	•	YAML value（字串或數字） 轉換為 Markdown 正文文字
+Markdown output conversion format:
+• YAML first-level keys convert to Markdown level 1 headings (#)
+• YAML second-level keys convert to Markdown level 2 headings (##)
+• YAML third-level keys convert to Markdown level 3 headings (###)
+• YAML values (strings or numbers) convert to Markdown body text
 </example>
 
 <example>
-todo list example:
-- [ ] stage 0: Create a todo list
-- [ ] stage 1: Functional
-- [ ] stage 2: Nonfunctional
-- [ ] stage 3: Acceptance
-- [ ] stage 4: Finalize
+Todo list format for {root}/docs/create-requirements-todo.md:
+
+create-requirements
+
+# Stage 1
+- [ ] Read all working steps to understand the expected deliverables
+- [ ] Create a todo list markdown file
+
+# Stage 2
+- [ ] Derive functional requirements from the user's input and context
+- [ ] Consolidate duplicates and remove ambiguity
+- [ ] Organize by user stories or system capabilities
+
+# Stage 3
+- [ ] Identify non-functional requirements across performance, reliability, security
+- [ ] Quantify targets and constraints
+- [ ] Map NFRs to monitoring/observability signals
+
+# Stage 4
+- [ ] Define acceptance criteria per requirement
+- [ ] Reference inputs, preconditions, and explicit pass/fail outcomes
+- [ ] Use clear structure
+
+# Stage 5
+- [ ] Cross-check consistency across FRs, NFRs, and acceptance criteria
+- [ ] Populate the requirement template
+- [ ] Run the sharding script to shard the requirements
 </example>

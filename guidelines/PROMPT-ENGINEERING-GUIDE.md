@@ -370,11 +370,9 @@ color: {Color}
 
 <workflow, importance = "Normal">
   <stage id="1: stage_name">
-  <tools>
-  - {Tool 1}
-  - {Tool 2}
-  - {Tool 3}
-  </tools>
+  - {Stage Action 1}
+  - {Stage Action 2}
+  - {Stage Action 3}
   </stage>
 
   <stage id="2: stage_name">

@@ -25,7 +25,7 @@
   <stage id="0: Create a todo list">
   - Read this file end-to-end
   - Enumerate all stages and sub-steps
-  - Take reference from the example and create a todo item 
+  - Create a todo list markdown file at {root}/docs/brownfield-tasks-todo.md following the todo list format 
 
   <questions>
   - Have all steps been enumerated without omission?
@@ -99,10 +99,32 @@ markdown文件輸出方式：
 </example>
 
 <example>
-todo list example:
-- [ ] stage 0: Create a todo list
-- [ ] stage 1: Analyse the current issues
-- [ ] stage 2: Fix the issues
-- [ ] stage 3: Enact recommended actions
-- [ ] stage 4: Create a development notes
+todo list format for {root}/docs/brownfield-tasks-todo.md:
+
+brownfield-tasks
+
+# Stage 0
+- [ ] Read this file end-to-end
+- [ ] Enumerate all stages and sub-steps
+- [ ] Create a todo list markdown file
+
+# Stage 1
+- [ ] Read the review results document
+- [ ] Analyse current issues and root causes
+- [ ] Define the minimal effective fix for each issue
+
+# Stage 2
+- [ ] Update the todo list with concrete steps per solution
+- [ ] Implement fixes iteratively, one at a time
+- [ ] Run and pass tests after each fix
+
+# Stage 3
+- [ ] Update the todo list with sequenced steps for the recommended actions
+- [ ] Enact the recommended actions iteratively
+- [ ] Run and pass tests after each action
+
+# Stage 4
+- [ ] Conclude the development process and create development notes
+- [ ] Update existing development notes if present
+- [ ] Save the markdown dev-notes to the stated directory
 </example>

@@ -22,7 +22,7 @@
 <workflow importance="Important">
   <stage id="0: plan">
   - Read all working steps.
-  - Take reference from the example and create a todo item 
+  - Create a todo list markdown file at {root}/docs/curate-knowledge-todo.md following the todo list format 
   </stage>
 
   <stage id="1: conclude_review_results">
@@ -65,9 +65,26 @@ markdown文件輸出方式：
 </example>
 
 <example>
-todo list example:
-- [ ] stage 0: Create a todo list
-- [ ] stage 1: Conclude the review results
-- [ ] stage 2: Conclude the development notes
-- [ ] stage 3: Curate the knowledge
+todo list format for {root}/docs/curate-knowledge-todo.md:
+
+curate-knowledge
+
+# Stage 0
+- [ ] Read all working steps
+- [ ] Create a todo list markdown file
+
+# Stage 1
+- [ ] Read the review results
+- [ ] Extract best practices and error cases with file references
+- [ ] Summarize patterns and practice levels if available
+
+# Stage 2
+- [ ] Read the development notes
+- [ ] Extract best practices and error cases with file references
+- [ ] Normalize naming for similar issues
+
+# Stage 3
+- [ ] Use the project knowledge template to structure content
+- [ ] Output to docs/project-knowledge.md in Markdown
+- [ ] Ensure cross-references and links resolve
 </example>

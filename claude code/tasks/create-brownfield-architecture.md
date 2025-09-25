@@ -17,14 +17,14 @@
 - Thoroughly review requirements and the extant architecture before proposing designs.
 - New modules must integrate without violating existing contracts; include an explicit impact analysis for any proposed changes.
 - Rigorously follow the template structure and section order.
-- Draft into {root}/docs/architecture.md, then execute {root}/warp code/scripts/shard-architecture.py to shard.
+- Draft into {root}/docs/architecture.md, then execute {root}/sunnycore/scripts/shard-architecture.py to shard.
 - Use clear, concise English and 2-space indentation.
 </constraints>
 
 <workflow importance="Critical">
   <stage id="0: plan-todos">
   - Review all working steps comprehensively.
-  - Take reference from the example and create a todo item 
+  - Create a todo list markdown file at {root}/docs/create-brownfield-architecture-todo.md following the todo list format 
   </stage>
 
   <stage id="1: assess-existing">
@@ -60,7 +60,7 @@
   - [ ] Compatibility with existing contracts articulated (no breaking changes)
   - [ ] {root}/docs/architecture.md exists and adheres to the template
   - [ ] Sharded files generated under {root}/docs/architecture/
-  - [ ] Paths and commands reference {root}/warp code/scripts/shard-architecture.py
+  - [ ] Paths and commands reference {root}/sunnycore/scripts/shard-architecture.py
   </checks>
   </stage>
 </workflow>
@@ -74,10 +74,31 @@ markdown文件輸出方式：
 </example>
 
 <example>
-todo list example:
-- [ ] stage 0: Create a todo list
-- [ ] stage 1: Assess the existing
-- [ ] stage 2: Design new modules
-- [ ] stage 3: Author and shard
-- [ ] stage 4: Finalize
+todo list format for {root}/docs/create-brownfield-architecture-todo.md:
+
+create-brownfield-architecture
+
+# Stage 0
+- [ ] Review all working steps comprehensively
+- [ ] Create a todo list markdown file
+
+# Stage 1
+- [ ] Examine the current architecture under docs/architecture
+- [ ] Identify extension points, constraints, and shared services
+- [ ] Map affected domains, bounded contexts, and dependencies
+
+# Stage 2
+- [ ] Define responsibilities, boundaries, and interfaces for new modules
+- [ ] Specify data flows and interactions with existing components
+- [ ] Evaluate non-functional requirements and compatibility
+
+# Stage 3
+- [ ] Use the architecture template to draft markdown
+- [ ] Ensure sections emphasize new modules and integration impacts
+- [ ] Run the sharding script to split the document
+- [ ] Verify files appear under docs/architecture
+
+# Stage 4
+- [ ] Cross-check against constraints and guiding questions
+- [ ] Remedy gaps and inconsistencies
 </example>
