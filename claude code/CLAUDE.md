@@ -205,3 +205,79 @@ pytest tests/
 {"name":"functions.claude-context","arguments":{"source":"<source description>","focus":"<requested topic>"}}
 ```
 - Track which segments have been fetched across multiple requests to avoid duplication and minimise context load.
+
+## Partial Reading Strategy
+**Core Principle**: Intelligently determine when to use partial reading to optimize context consumption and focus on relevant content sections.
+
+### When to Use Partial Reading
+- **Large Files (>500 lines)**: Always consider partial reading first
+- **Specific Content Search**: When looking for particular sections, functions, or configurations  
+- **Context Optimization**: When full file reading would exceed reasonable token limits
+- **Iterative Analysis**: When building understanding incrementally through multiple focused reads
+
+### Partial Reading Decision Framework
+1. **File Size Assessment**: 
+   - Small files (<100 lines): Read entire file
+   - Medium files (100-500 lines): Consider context relevance
+   - Large files (>500 lines): Default to partial reading unless specifically requested otherwise
+
+2. **Content Type Analysis**:
+   - Code files: Focus on specific functions, classes, or modules
+   - Configuration files: Target specific sections or settings
+   - Documentation: Read relevant sections based on current task
+   - Log files: Read recent entries or specific time ranges
+
+3. **Task Context Consideration**:
+   - Debugging: Read around error locations (±20 lines)
+   - Feature development: Focus on relevant modules/functions
+   - Architecture review: Read headers, imports, and key structures
+   - Configuration changes: Target specific config sections
+
+### Partial Reading Techniques
+```markdown
+## Strategic Reading Patterns
+
+### 1. Header-First Reading (Documentation/Code)
+- Read first 50 lines to understand structure
+- Read table of contents or import sections
+- Then target specific sections based on findings
+
+### 2. Function-Focused Reading (Code Files)
+- Use grep to find function/class definitions first
+- Read specific functions with context (±10 lines)
+- Read import statements and dependencies
+
+### 3. Configuration-Targeted Reading
+- Read specific configuration sections
+- Focus on changed or relevant settings
+- Include related comments and examples
+
+### 4. Error-Context Reading (Debugging)
+- Read around specific line numbers (±20 lines)
+- Include function definitions and variable declarations
+- Read relevant imports and dependencies
+```
+
+### Partial Reading Implementation
+```json
+// Example: Reading specific function in large code file
+{"name":"read_file","arguments":{"target_file":"large_file.py","offset":245,"limit":30}}
+
+// Example: Reading configuration section  
+{"name":"read_file","arguments":{"target_file":"config.yaml","offset":100,"limit":50}}
+
+// Example: Reading file header for structure understanding
+{"name":"read_file","arguments":{"target_file":"documentation.md","offset":1,"limit":100}}
+```
+
+### Adaptive Reading Strategy
+- **First Pass**: Read file structure (headers, imports, TOC) - typically first 50-100 lines
+- **Second Pass**: Based on first pass findings, read relevant sections using targeted offset/limit
+- **Third Pass**: If needed, read additional context around identified areas of interest
+- **Integration**: Combine insights from multiple partial reads to form complete understanding
+
+### Context Preservation Techniques
+- **Reference Tracking**: Note line numbers and section headers when making partial reads
+- **Cross-Reference**: Link findings across different partial reads of the same file
+- **Progressive Building**: Use each partial read to inform the next reading strategy
+- **Summary Integration**: Maintain running summary of insights from multiple partial reads
