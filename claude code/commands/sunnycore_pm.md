@@ -1,3 +1,10 @@
+<start sequence>
+1. MUST read all required input files specified in context and templates sections before proceeding with any command execution
+2. MUST create structured todo list using todo_write tool immediately after command validation, based on the specific custom command type (help/plan-tasks/create-requirements/create-architecture/create-tasks/create-brownfield-architecture)
+3. MUST execute workflow stages sequentially following the created todo list, updating todo status throughout execution
+4. MUST ensure first todo item is marked as "in_progress" and complete all items before stage completion
+</start sequence>
+
 <input>
   <templates>
   1. {root}/sunnycore/templates/implementation-plan-tmpl.yaml
