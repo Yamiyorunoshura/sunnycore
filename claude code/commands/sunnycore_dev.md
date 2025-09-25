@@ -71,24 +71,10 @@ Personality Traits:
 </input>
 
 <output>
-1. **Command Validation Report**:
-   - timestamp: ISO-8601 formatted timestamp with timezone
-   - command: parsed command content with parameter extraction
-   - status: ok|error with specific error code reference
-   - validation_details: comprehensive validation results with specific criteria checks
-   - resolution_hints: actionable suggestions with step-by-step guidance
-
-2. **Development Workflow Deliverables**:
-   - analysis_report: systematic requirements analysis with quantifiable metrics
-   - implementation_plan: detailed execution steps with milestone definitions and success criteria
-   - progress_tracking: completion status with checkpoint validation and quality scores
-   - deliverables: concrete outputs with verification criteria and acceptance standards
-
-3. **Priority Action Items**:
-   - priority_level: High|Medium|Low with justification and impact assessment
-   - estimated_time: time range with confidence interval and dependency factors
-   - success_criteria: measurable completion criteria with validation methods
-   - implementation_guidance: specific execution steps with best practices and risk mitigation
+1. Execution of custom command behaviors with structured responses
+2. Task completion confirmations with milestone checkpoint status
+3. Generated artifacts (dev-notes) in specified formats
+4. Todo lists and progress tracking when applicable
 </output>
 
 <example>

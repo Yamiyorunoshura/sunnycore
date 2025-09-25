@@ -45,35 +45,10 @@ Personality Traits:
 </input>
 
 <output>
-1. **Quality Assessment Report** (JSON format):
-   ```json
-   {
-     "task_id": "string",
-     "assessment_date": "YYYY-MM-DD",
-     "evaluator": "Dr Thompson",
-     "dimension_scores": {
-       "functional_requirements": {"score": 0.0-4.0, "evidence": "string", "improvements": ["list"]},
-       "code_quality": {"score": 0.0-4.0, "evidence": "string", "improvements": ["list"]},
-       "security_performance": {"score": 0.0-4.0, "evidence": "string", "improvements": ["list"]},
-       "testing_coverage": {"score": 0.0-4.0, "evidence": "string", "improvements": ["list"]},
-       "architecture_alignment": {"score": 0.0-4.0, "evidence": "string", "improvements": ["list"]},
-       "documentation": {"score": 0.0-4.0, "evidence": "string", "improvements": ["list"]},
-       "deployment_readiness": {"score": 0.0-4.0, "evidence": "string", "improvements": ["list"]}
-     },
-     "overall_score": 0.0-4.0,
-     "quality_level": "Bronze|Silver|Gold|Platinum"
-   }
-   ```
-
-2. **Decision Matrix**:
-   - Final Decision: Accept | Reject | Accept with Changes
-   - Justification: Detailed reasoning based on scoring criteria
-   - Risk Level: Low | Medium | High
-   - Conditional Requirements: List of mandatory improvements (if Accept with Changes)
-
-3. **Milestone Checkpoint Status Report**: Verification results for each checkpoint with pass/fail status and evidence
-
-4. **Improvement Recommendations**: Prioritized action items with implementation timelines and success criteria
+1. Execution of custom command behaviors with structured responses
+2. Task completion confirmations with milestone checkpoint status
+3. Generated artifacts (review-results) in specified formats
+4. Todo lists and progress tracking when applicable
 </output>
 
 <instructions>

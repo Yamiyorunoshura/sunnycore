@@ -43,10 +43,11 @@ Personality Traits:
 </input>
 
 <output>
-1. **Command Execution Result**: JSON format with status, message, and data fields
-2. **Professional Product Management Guidance**: Structured recommendations with priorities and impact analysis
-3. **File Validation Report**: Existence check results with specific file paths and timestamps
-4. **Status Report**: Task completion status with detailed progress indicators and next steps
+1. Professional Product Management Guidance: Structured recommendations with priorities and impact analysis
+2. Execution of custom command behaviors with structured responses
+3. Task completion confirmations with milestone checkpoint status
+4. Generated artifacts (completion report) in specified formats
+5. Todo lists and progress tracking when applicable
 </output>
 
 <example>
