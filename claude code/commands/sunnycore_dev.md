@@ -7,28 +7,18 @@
 
 <input>
   <context>
-  1. User command input and task file specifications
-  2. {root}/sunnycore/CLAUDE.md - Core project documentation and standards
-  3. Command validation patterns and comprehensive error handling requirements
-  4. Workflow execution stages with measurable completion tracking requirements
-  
-  **Key Terminology with Validation Criteria:**
-  - **Workflow Stages**: Structured execution phases with defined inputs, processes, outputs, and measurable milestones. Validation: Each stage must have completion criteria >90% before progression.
-  - **Brownfield Tasks**: Legacy system improvement tasks requiring minimum 70% backward compatibility while introducing modern practices. Validation: Must include compatibility matrix and migration timeline.
-  - **task_id**: Unique identifier allowing alphanumeric characters, hyphens, underscores, and dots only. Validation: Must match regex `^[A-Za-z0-9._-]+$` and be 3-50 characters long.
-  - **Systematic Analysis**: Structured evaluation including requirement gathering, technical assessment, risk analysis, and implementation planning. Validation: Must include quantifiable metrics and documented assumptions.
-  - **Checkpoint Validation**: Progress verification at each workflow stage requiring completion confirmation, quality checks, and readiness assessment. Validation: Must achieve >90% completion score before proceeding.
+  1. User command input and task file specification
+  2. Command validation patterns and comprehensive error handling requirements
+  3. Workflow execution stages with measurable completion tracking requirements
+  </context>
+  <rules>
+  1. {root}/sunnycore/CLAUDE.md - rules for all the actions
   </context>
   <templates>
   1. {root}/sunnycore/templates/ - Standardized project templates for consistent output formatting
   2. Development workflow templates and implementation plan structures
   3. Error message templates with resolution guidance and escalation paths
   </templates>
-  <tasks>
-  1. {root}/sunnycore/tasks/ - Task execution workflows with stage definitions and completion criteria
-  2. Command-specific task files: help.md, develop-tasks.md, brownfield-tasks.md
-  3. Project lifecycle management workflows with progress tracking mechanisms
-  </tasks>
 </input>
 
 <output>
@@ -141,4 +131,10 @@ Personality Traits:
 - **File Operations**: Verify file existence and readability before processing, use absolute paths with proper error logging, implement retry mechanisms for transient failures
 - **Progress Tracking**: Maintain completion status at each workflow stage with checkpoint validation, implement real-time progress updates with measurable metrics (>90% completion rate), provide milestone verification and quality scoring
 - **Decision Support**: For complex scenarios, provide decision trees with clear criteria, include risk assessment and mitigation strategies, ensure evidence-based recommendations with quantifiable justifications
+- **Key Terminology with Validation Criteria:**
+  - **Workflow Stages**: Structured execution phases with defined inputs, processes, outputs, and measurable milestones. Validation: Each stage must have completion criteria >90% before progression.
+  - **Brownfield Tasks**: Legacy system improvement tasks requiring minimum 70% backward compatibility while introducing modern practices. Validation: Must include compatibility matrix and migration timeline.
+  - **task_id**: Unique identifier allowing alphanumeric characters, hyphens, underscores, and dots only. Validation: Must match regex `^[A-Za-z0-9._-]+$` and be 3-50 characters long.
+  - **Systematic Analysis**: Structured evaluation including requirement gathering, technical assessment, risk analysis, and implementation planning. Validation: Must include quantifiable metrics and documented assumptions.
+  - **Checkpoint Validation**: Progress verification at each workflow stage requiring completion confirmation, quality checks, and readiness assessment. Validation: Must achieve >90% completion score before proceeding.
 </instructions>

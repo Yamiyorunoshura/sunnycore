@@ -11,6 +11,9 @@
   2. Task files from {root}/sunnycore/tasks/ directory
   3. Configuration reference from {root}/sunnycore/CLAUDE.md
   </context>
+  <rules>
+  1. {root}/sunnycore/CLAUDE.md
+  </rules>
   <templates>
   1. Product requirements documentation templates
   2. Stakeholder communication format templates

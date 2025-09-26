@@ -11,8 +11,10 @@
   </templates>
   <context>
   2. User commands and corresponding task files
-  3. {root}/sunnycore/CLAUDE.md
   </context>
+  <rules>
+  3. {root}/sunnycore/CLAUDE.md
+  </rules>
 </input>
 
 <output>
