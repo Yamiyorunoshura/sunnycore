@@ -34,4 +34,5 @@ tests/test_behavior_integration.py
 tests/test_contract_validation.py
 tests/test_golden_set.py
 tests/test_quality_report_generator.py
+tests/test_rag_evaluation.py
 tests/test_robustness_engine.py

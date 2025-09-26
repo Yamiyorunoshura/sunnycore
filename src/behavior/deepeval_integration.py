@@ -161,7 +161,7 @@ class TestArchitectureAlignment:
         expected_components = set(expected_output.get('components', []))
 
         assert actual_components.issuperset(expected_components), \\
-            f"Missing components: {{expected_components - actual_components}}"
+            f"Missing components: {expected_components - actual_components}"
 
         # Check component dependencies
         self._validate_component_dependencies(actual_output)
@@ -252,13 +252,12 @@ class TestArchitectureValidation:
         methods = interface.get('methods', [])
 
         assert interface_id is not None, "Interface missing ID"
-        assert len(methods) > 0, f"Interface {{interface_id}} has no methods"
+        assert len(methods) > 0, f"Interface {interface_id} has no methods"
 
     def _test_performance_requirement(self, req_name, req_value):
         """Test individual performance requirement"""
         # This would involve actual performance testing
-        assert req_value is not None, f"Performance requirement {{req_name}} has no value"
-'''
+        assert req_value is not None, f"Performance requirement {req_name} has no value"
 
         # Save test file
         test_filename = f"test_architecture_{datetime.now().strftime('%Y%m%d_%H%M%S')}.py"

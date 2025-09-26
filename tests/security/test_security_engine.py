@@ -398,7 +398,7 @@ class TestSecurityTestEngine:
 
             result = self.engine.run_test(self.sample_test_case)
             assert result.status == TestStatus.FAILED
-            assert "timeout" in result.description.lower()
+            assert "timeout" in result.description.lower() or "timed out" in result.description.lower()
 
         test_timeout_error()
 
