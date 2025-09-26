@@ -1,121 +1,128 @@
 {
   "metadata": {
-    "prompt_name": "prompt-reviewer.md",
+    "prompt_name": "prompt-reviewer",
     "review_date": "2025-09-26",
     "reviewer": "Prompt Quality Evaluator"
   },
-  "overall_score": 91,
+  "overall_score": 91.6,
   "grade": "Excellence",
   "dimensions": {
     "correctness": {
-      "score": 87,
-      "evidence": "整體語法良好，結構邏輯連貫，技術方法論專業。主要問題：行190閾值不一致(150+ vs 265行實際長度)，某些術語需更精確定義",
+      "score": 89,
+      "evidence": "<tools> uses bullet text entries (L86-L89) vs structured <tool name=\"...\"/> required by guide (guidelines L51-L61). Stage ID naming rule is defined in guide (L219-L223).",
       "issues": [
-        "行190: '150+ line documents' 與實際265行文檔不一致",
-        "部分技術術語如'semantic validation'可更明確定義",
-        "輕微格式不一致問題"
+        {"code": "CR-01", "severity": "moderate", "text": "<tools> uses bullets instead of structured <tool name=\"...\"/> entries (L86-L89; guide L51-L61)."},
+        {"code": "CR-02", "severity": "minor", "text": "Methodology documentation location not explicitly specified despite requirement (L107-L109)."}
       ]
     },
     "clarity": {
-      "score": 95,
-      "evidence": "任務目標、範圍、約束條件明確。3階段工作流程具體可操作。MUST/SHOULD/MAY分層清晰。JSON輸出格式詳細無歧義",
+      "score": 92,
+      "evidence": "Clear TL;DR and checklist (L15-L25). Slight ambiguity: 'document the methodology' lacks explicit location (L107-L109).",
       "issues": [
-        "某些執行細節可更具體",
-        "錯誤處理流程不夠明確"
+        {"code": "CL-01", "severity": "minor", "text": "Specify where to document methodology (e.g., summary or metadata)."}
       ]
     },
     "cognitive_load": {
-      "score": 92,
-      "evidence": "TL;DR提供優秀概覽，結構化組織良好，術語定義section有效控制歧義。265行總長度對複雜工具合理但偏長",
+      "score": 89,
+      "evidence": "Long but well-chunked with headings and bullets (L15-L25, L84-L118, L132-L311). Stages within 3-5; checks concise (L110-L116).",
       "issues": [
-        "總體文檔長度可能造成認知負擔",
-        "某些section間連接可更順暢"
+        {"code": "COG-01", "severity": "minor", "text": "Slight verbosity across multiple sections; consider consolidating overlapping guidance."}
       ]
     },
     "reasoning_guidance": {
-      "score": 88,
-      "evidence": "明確要求使用sequential-thinking工具，強調證據導向評估，3階段結構化避免過度推理，每階段有具體引導問題",
-      "issues": [
-        "對簡單提示可能存在過度指導",
-        "'systematic analysis'需更具體定義"
-      ]
+      "score": 94,
+      "evidence": "Explicit 3-stage workflow (L84-L118), dimension rubrics with anchors and deductions (L160-L275), deduction rules (L277-L283), scoring example (L120-L130).",
+      "issues": []
     },
     "alignment": {
-      "score": 94,
-      "evidence": "完全對齊提示品質評估目標，符合專業評估標準，內容高度相關，角色界線清晰(評估者非創作者)",
+      "score": 90,
+      "evidence": "Follows language policy (guide L10-L13). Stage IDs use kebab-case vs required snake_case (guide L219-L223) as seen at L85, L95, L106.",
       "issues": [
-        "某些細節可能超出核心需求範圍"
+        {"code": "AL-01", "severity": "minor", "text": "Stage IDs use kebab-case ('comprehensive-analysis') vs snake_case required (L85, L95, L106; guide L219-L223)."}
       ]
     },
     "completeness": {
-      "score": 90,
-      "evidence": "涵蓋完整評估所需信息，輸入輸出格式、約束、成功標準清楚定義，大部分內容有明確用途",
-      "issues": [
-        "某些section有輕微重複(如bias-correction多處提及)",
-        "可進一步精簡冗餘內容"
-      ]
+      "score": 94,
+      "evidence": "Includes input/output/constraints/example/instructions/workflow/checks (L26-L33, L35-L73, L84-L118, L120-L130, L132-L311). Final checks listed (L110-L116).",
+      "issues": []
     },
     "constraint_design": {
       "score": 93,
-      "evidence": "MUST/SHOULD/MAY分層清晰無衝突，約束促進評估品質，範圍適中，大部分具可驗證性",
-      "issues": [
-        "某些約束如'systematic analysis'仍需更具體定義",
-        "部分質化約束可量化"
-      ]
+      "evidence": "Constraints are measurable: 8 dimensions scored 0-100, arithmetic mean, JSON save path, 3-5 recommendations (L75-L82).",
+      "issues": []
     },
     "user_experience": {
-      "score": 89,
-      "evidence": "JSON格式便於後續處理，3階段流程清晰減少迭代，支援自動化批次處理，評估標準標準化可重現",
+      "score": 92,
+      "evidence": "Consistent headings and bulleting; naming rules (L69-L73) and reporting standards (L305-L311) aid readability. Tools list formatting could be more structural.",
       "issues": [
-        "對新手用戶存在學習curve",
-        "某些操作細節可更直觀"
+        {"code": "UX-01", "severity": "minor", "text": "Use structured <tool name=\"...\"/> items inside <tools> for scanability (L86-L89; guide L51-L61)."}
       ]
     }
   },
   "recommendations": [
     {
       "priority": "high",
-      "action": "修正行190閾值不一致問題",
-      "impact": "消除數值矛盾，提升技術準確性",
-      "implementation": "將'150+ line documents'調整為'200+ line documents'或移除具體數值",
+      "action": "Replace bullet entries inside <tools> with structured <tool name=\"...\"/> tags.",
+      "impact": "Ensures schema compliance and machine-readability.",
+      "implementation": "Use <tools><tool name=\"sequential-thinking\"/><tool name=\"todo_list\"/></tools>.",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
       "dimension_affected": "correctness"
     },
     {
-      "priority": "high", 
-      "action": "補充terminology-definitions中的技術術語定義",
-      "impact": "減少歧義，提升可操作性",
-      "implementation": "為'semantic validation'、'constraint verifiability'等術語提供具體定義和示例",
+      "priority": "high",
+      "action": "Standardize stage IDs to snake_case per guideline.",
+      "impact": "Aligns with naming conventions; reduces ambiguity.",
+      "implementation": "Use ids: '1: comprehensive_analysis', '2: dimensional_evaluation', '3: synthesis_and_reporting'.",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "alignment"
+    },
+    {
+      "priority": "medium",
+      "action": "Specify where to document the scoring methodology.",
+      "impact": "Removes ambiguity; boosts clarity and verifiability.",
+      "implementation": "Add instruction: State method in summary: 'Method = equal-weighted mean of 8 dimensions (1 decimal)'.",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
       "dimension_affected": "clarity"
     },
     {
-      "priority": "medium",
-      "action": "精簡重複性表述，優化文檔長度",
-      "impact": "降低認知負載，提升用戶體驗",
-      "implementation": "合併bias-correction重複提及，精簡某些section的冗餘內容",
-      "dimension_affected": "cognitive_load"
-    },
-    {
-      "priority": "medium",
-      "action": "增強錯誤處理和edge case指導",
-      "impact": "提升操作robustness",
-      "implementation": "添加評估過程中異常情況的處理指南",
-      "dimension_affected": "user_experience"
-    },
-    {
       "priority": "low",
-      "action": "優化section間的邏輯連接",
-      "impact": "改善信息架構流暢性",
-      "implementation": "添加適當的過渡句和交叉引用",
+      "action": "Consolidate overlapping guidance to lower scanning effort.",
+      "impact": "Reduces cognitive load for reviewers.",
+      "implementation": "Merge closely related sections (e.g., deduction rules and scoring-scale) to a single reference.",
+      "change_scope": "targeted",
+      "semantic_preservation": "requires_care",
       "dimension_affected": "cognitive_load"
     }
   ],
-  "strengths": [
-    "優秀的3階段結構化工作流程(分析→評分→報告)",
-    "清晰的MUST/SHOULD/MAY約束分層設計", 
-    "全面的8維度評估框架with量化標準",
-    "結構化JSON輸出格式支援自動化處理",
-    "TL;DR section有效管理認知負載",
-    "Evidence-based評估方法論專業可靠"
+  "advisory_suggestions": [
+    {
+      "approach": "Add 'methodology' field under metadata with value 'equal-weighted mean of 8 dimensions'.",
+      "rationale": "Machine-checkable documentation of scoring method.",
+      "implementation_consideration": "Requires updating output schema and any consumers.",
+      "user_acceptance_required": true
+    },
+    {
+      "approach": "Include 'schema_version' in metadata and validate checks programmatically.",
+      "rationale": "Improves maintainability and automated validation.",
+      "implementation_consideration": "Introduce versioning and backward compatibility policy.",
+      "user_acceptance_required": true
+    },
+    {
+      "approach": "Standardize rounding to one decimal for scores.",
+      "rationale": "Consistency across reports and comparisons.",
+      "implementation_consideration": "Define rounding rule in reporting-standards.",
+      "user_acceptance_required": true
+    }
   ],
-  "summary": "prompt-reviewer.md 展現優秀的專業品質(91/100 Excellence等級)。其3階段工作流程、8維度評估框架和結構化輸出設計為行業領先水準。主要優勢包括清晰的約束分層、全面的評估標準和良好的認知負載管理。建議優先修正閾值不一致問題和補充術語定義，以進一步提升技術準確性和可操作性。整體而言，這是一個設計良好、功能完整的提示品質評估工具。"
+  "strengths": [
+    "Comprehensive dimension rubrics with anchor criteria and deduction rules.",
+    "Clear, machine-readable JSON output specification.",
+    "Measurable constraints and explicit naming rules.",
+    "Strong reasoning scaffolding and verification via checks.",
+    "Bias mitigation and calibration protocol included."
+  ],
+  "summary": "Overall score 91.6 (Excellence). Method: equal-weighted mean of 8 dimension scores. Highest-impact fixes: (1) normalize <tools> to <tool name=\"...\"/>, (2) use snake_case stage IDs, (3) specify where to document methodology. Example scoring: Clarity base 100; -8 for 'document the methodology' location vagueness (L107-L109); final 92."
 }

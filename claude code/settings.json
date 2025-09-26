@@ -1,0 +1,82 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "MCP(*)",
+      "Python(*)",
+      "Node(*)",
+      "Git(*)",
+      "Npm(*)",
+      "Pip(*)",
+      "Docker(*)",
+      "Curl(*)",
+      "Wget(*)",
+      "Make(*)",
+      "Grep(*)",
+      "Find(*)",
+      "Sed(*)",
+      "Awk(*)",
+      "Cat(*)",
+      "Head(*)",
+      "Tail(*)",
+      "Less(*)",
+      "More(*)",
+      "Ls(*)",
+      "Pwd(*)",
+      "Cd(*)",
+      "Mkdir(*)",
+      "Touch(*)",
+      "Cp(*)",
+      "Mv(*)",
+      "Ln(*)",
+      "Chmod(*)",
+      "Chown(*)"
+    ],
+    "ask": [
+      "Bash(rm -rf*)",
+      "Bash(sudo rm*)",
+      "Bash(sudo dd*)",
+      "Bash(mkfs*)",
+      "Bash(fdisk*)",
+      "Bash(format*)",
+      "Bash(sudo halt*)",
+      "Bash(sudo reboot*)",
+      "Bash(sudo shutdown*)",
+      "Bash(sudo killall*)",
+      "Bash(sudo pkill*)",
+      "Bash(sudo systemctl stop*)",
+      "Bash(sudo service stop*)",
+      "Bash(sudo ufw*)",
+      "Bash(sudo iptables*)",
+      "Bash(sudo passwd*)",
+      "Bash(sudo userdel*)",
+      "Bash(sudo groupdel*)",
+      "Bash(sudo crontab*)",
+      "Bash(sudo mount*)",
+      "Bash(sudo umount*)",
+      "Docker(stop*)",
+      "Docker(kill*)",
+      "Docker(rm*)",
+      "Docker(rmi*)",
+      "Docker(system prune*)"
+    ],
+    "deny": [
+      "Bash(:(){ :|:& };:)",
+      "Bash(curl * | bash)",
+      "Bash(wget * | bash)",
+      "Bash(eval*)",
+      "Bash(exec*)"
+    ]
+  },
+  "defaultMode": "default",
+  "mcp": {
+    "enabled": true,
+    "allowedServers": ["*"],
+    "requireConfirmation": false
+  },
+  "security": {
+    "requireConfirmationForFileSystem": false,
+    "requireConfirmationForNetwork": false,
+    "requireConfirmationForSystemCommands": true
+  }
+}

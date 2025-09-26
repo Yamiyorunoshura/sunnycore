@@ -4,79 +4,113 @@
     "review_date": "2025-09-26",
     "reviewer": "Prompt Quality Evaluator"
   },
-  "overall_score": 99,
-  "grade": "Excellence",
+  "overall_score": 90,
+  "grade": "Excellent",
   "dimensions": {
     "correctness": {
-      "score": 100,
-      "evidence": "語法完美無誤，XML標籤使用正確，無矛盾指令，技術術語準確且有明確定義，內部邏輯連貫從輸入到輸出流程清晰",
-      "issues": []
+      "score": 92,
+      "evidence": "明確定義 role/input/output/constraints/workflow 與語言度量法；每個 <output> 項目均含 Format 與 Example（L30-L46）；constraints 指定英文化比與計量方法（L48-L54, L110-L119）。",
+      "issues": [
+        "未提供啟動層級的一頁式步驟摘要，正確性雖高但首用者易遺漏步驟（可於頂部加入 Quick Execution Checklist）"
+      ]
     },
     "clarity": {
-      "score": 100,
-      "evidence": "任務目標明確(優化prompt品質)，三階段工作流程具體可操作，執行路徑清晰，每階段輸出明確定義，有具體驗證checklist",
-      "issues": []
+      "score": 89,
+      "evidence": "段落清楚、結構化良好；workflow 三階段含工具、問題、檢核（L56-L95）。",
+      "issues": [
+        "關鍵操作資訊分散於多處（output/constraints/workflow/instructions），缺少聚合的快速總覽"
+      ]
     },
     "cognitive_load": {
-      "score": 95,
-      "evidence": "結構清晰分段合理，關鍵術語都有定義，信息架構邏輯分組良好，但文件長度121行稍長",
-      "issues": ["文件長度121行，建議縮減至100行以下以降低認知負荷"]
+      "score": 84,
+      "evidence": "內容完整而詳盡；需在多區段間往返以取得所需訊息（如度量法、核對點、輸出結構）。",
+      "issues": [
+        "缺少 3 行級別的快速執行清單，初學者理解成本較高"
+      ]
     },
     "reasoning_guidance": {
-      "score": 100,
-      "evidence": "明確要求使用sequential-thinking工具進行複雜推理，只在必要時要求逐步思考，偏好可驗證標準，效率最佳",
+      "score": 92,
+      "evidence": "workflow 要求分階段分析與驗證；明示使用 sequential-thinking 與待辦工具（L57-L71）。",
       "issues": []
     },
     "alignment": {
-      "score": 100,
-      "evidence": "與prompt優化任務目標完美對齊，角色邊界清晰，遵循倫理安全操作指南，所有內容直接貢獻任務完成",
+      "score": 94,
+      "evidence": "所有章節緊扣『品質評估與優化』之目標；語義等價與最小變更原則被多處強化（L50-L53, L121-L129）。",
       "issues": []
     },
     "completeness": {
-      "score": 100,
-      "evidence": "包含執行任務所需完整信息，輸入/輸出格式明確定義，約束條件清楚，成功標準明確，無冗餘信息",
-      "issues": []
+      "score": 92,
+      "evidence": "輸入/輸出/約束/流程/語言政策/自檢與核對點完整；提供示例（L160-L175）。",
+      "issues": [
+        "雖有示例，但缺少單一維度的扣分示例以統一評分口徑"
+      ]
     },
     "constraint_design": {
-      "score": 100,
-      "evidence": "MUST/SHOULD/MAY分級清晰，約束條件可滿足且可驗證，無衝突，增強輸出品質，平衡靈活性與控制",
-      "issues": []
+      "score": 93,
+      "evidence": "constraints 嚴格以 MUST 陳述且可驗證（含英文化比例與輸出結構檢查）（L48-L54）。",
+      "issues": [
+        "可考慮在 checks 中加入『英文化比 ≥ 0.95 之自動化驗證結果已記錄』的具體核對項"
+      ]
     },
     "user_experience": {
-      "score": 100,
-      "evidence": "輸出實用穩定可實施，最小迭代需求，清晰工作流程，自驗證機制，適合系統化應用和擴展",
-      "issues": []
+      "score": 87,
+      "evidence": "結構完善、可直接使用；但首次操作需來回查閱數段內容。",
+      "issues": [
+        "缺少一目了然的 TL;DR/Quick Start 區塊以降低上手時間"
+      ]
     }
   },
   "recommendations": [
     {
       "priority": "high",
-      "action": "將文件長度從121行縮減至100行以下",
-      "impact": "減少認知負荷5分，提升可讀性和理解速度",
-      "implementation": "整合相似內容段落，簡化範例說明，移除非關鍵描述",
+      "action": "在文件開頭加入 TL;DR/Quick Execution Checklist（3 行）。",
+      "impact": "降低初次使用的迷航成本，提升正確執行率。",
+      "implementation": "示例：1) 讀取原始提示與評估報告並建立不變項；2) 依 8 維度評分並計算平均；3) 產出優化建議並更新原檔案。",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
       "dimension_affected": "cognitive_load"
     },
     {
-      "priority": "medium", 
-      "action": "增加更多具體的優化模式範例",
-      "impact": "提升可操作性和學習效果，增強實用性",
-      "implementation": "在現有範例基礎上增加2-3個常見優化場景的具體示例",
-      "dimension_affected": "clarity"
+      "priority": "medium",
+      "action": "在 <example> 或 <instructions> 補充單一維度的評分示例（基準分→扣分→最終分）。",
+      "impact": "標準化評分流程，減少評審分歧。",
+      "implementation": "沿用現有範例風格，提供 3-4 行可複製的扣分條目。",
+      "change_scope": "targeted",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "user_experience"
+    },
+    {
+      "priority": "medium",
+      "action": "在 <checks> 增補對英文化比與輸出 Format/Example 的顯式核對項。",
+      "impact": "進一步強化可驗證性與一致性。",
+      "implementation": "新增兩條：[ ] 英文化比 ≥ 0.95 已檢核；[ ] 所有 <output> 項目含 Format 與 Example。",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "constraint_design"
     },
     {
       "priority": "low",
-      "action": "考慮添加錯誤處理指導",
-      "impact": "提升robustness和異常情況處理能力",
-      "implementation": "在workflow中加入異常情況處理步驟和fallback機制",
-      "dimension_affected": "user_experience"
+      "action": "集中與合併多處重覆的『最小變更/語義等價』提醒為單一原則段落。",
+      "impact": "降低重覆閱讀造成的負擔。",
+      "implementation": "將相同原則彙總於 <semantic_invariance_principles> 之後以一段式說明。",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "clarity"
+    }
+  ],
+  "advisory_suggestions": [
+    {
+      "approach": "提供缺少評估報告時的操作提示彙總與範例 WARN 記錄樣式。",
+      "rationale": "雖已在 workflow 提及 WARN 記錄（L61-L64），集中呈現可提升一致性。",
+      "implementation_consideration": "於 instructions 內新增簡短樣式區塊即可，不影響主流程。",
+      "user_acceptance_required": true
     }
   ],
   "strengths": [
-    "創新的語義不變性檢查清單機制，確保優化不破壞原始功能意圖",
-    "完美的XML標籤結構設計，嚴格遵循PROMPT-ENGINEERING-GUIDE.md規範",
-    "系統化的三階段工作流程(分析→優化→驗證)，邏輯清晰可執行",
-    "明確的約束分級(MUST/SHOULD/MAY)和優先級管理",
-    "多層次驗證機制，包含技術驗證、語義驗證和品質預測"
+    "模板與語言政策定義清晰，含可計量之英文化比度量法",
+    "每個輸出項提供 Format 與 Example，機器可讀且易驗證",
+    "多階段 workflow 與工具欄位有助可追蹤性與審計",
+    "語義等價與最小變更原則被明確強調，便於安全優化"
   ],
-  "summary": "這是一個優秀級別(Excellence)的prompt，得分99/100。展現了專業的prompt工程設計，具備完整的功能架構、清晰的執行流程和創新的語義保持機制。唯一的微小改進空間是適度縮減文件長度以進一步降低認知負荷。整體而言，這是一個高度成熟且可實際應用的prompt工程工具。"
+  "summary": "本提示整體結構完善、規範嚴謹，已達 Excellent（90/100）。建議加入 3 行級別的 Quick Execution Checklist 與單一維度扣分示例，並在 checks 中補強對英文化比與輸出結構的顯式核對，以同時降低認知負擔並提升驗證一致性。整體變更範圍小且不影響既有語義與流程。整體分數計算方式：8 維度等權算術平均。"
 }

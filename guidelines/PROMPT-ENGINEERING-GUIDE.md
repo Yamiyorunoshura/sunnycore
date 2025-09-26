@@ -49,7 +49,15 @@
 ## 特殊功能標籤
 
 **`<example>`** – 實際示例（最小可用為主）  
-**`<tools>`** – 工具列表  
+**`<tools>`** – 工具列表 
+```xml
+使用範例:
+<tools>
+  <tool name="{Tool 1}"/>
+  <tool name="{Tool 2}"/>
+  <tool name="{Tool 3}"/>
+</tools>
+```
 **`<instructions>`** – 複雜指導內容
 
 ## 專業角色標籤
@@ -63,7 +71,7 @@
 
 **`<workflow importance="等級">`** – 流程骨架（3-5 階段）
 - **`<stage id="階段ID">`** – 關鍵工作階段
-  - ID 格式：`1: {tasks_name_1}`、`2: {tasks_name_2}`、`3: {tasks_name_3}`、`4: {tasks_name_4}`、`5: {tasks_name_5}`
+  - ID 格式：`1: {stage_name_1}`、`2: {stage_name_2}`、`3: {stage_name_3}`、`4: {stage_name_4}`、`5: {stage_name_5}`
   - 每階段必須有明確產出與檢核點
 
 # 3 分鐘快速入門
@@ -111,7 +119,7 @@
 **解決**: 改為具體指標，例如「平均每句 < 20 詞」
 
 ### 錯誤 2: 角色設定過於繁瑣
-**問題**: 描述冷長的背景故事或人格特質  
+**問題**: 描述冗長的背景故事或人格特質  
 **解決**: 只保留與決策風格相關的關鍵特質
 
 ### 錯誤 3: 缺乏明確輸出結構
@@ -182,26 +190,37 @@
 ## `<workflow>` 規範
 
 **結構要求**：
-- 階段數：3-5 個關鍵階段
-- ID 格式：`research` → `draft` → `review` → `finalize`
+- 階段數：3-5 個關鍵階段。
+- 步驟數：每階段最多 3 個關鍵步驟。
+- ID 格式：`1:{stage_name}` → `2:{stage_name}` → `3:{stage_name}` → `4:{stage_name}` → `5:{stage_name}`
 - 每階段必須：明確產出 + 檢核點
 
 **格式範例**：
 ```xml
 <workflow importance="Normal">
-  <stage id="1: research">
+  <stage id="1: {stage_name}">
   - Gather requirements from context
   - Identify key constraints
   - Document assumptions
   </stage>
   
-  <stage id="2: draft">
+  <stage id="2: {stage_name}">
   - Create initial structure
   - Develop core content
   - Apply formatting standards
   </stage>
 </workflow>
 ```
+
+## 命名與標籤規約
+
+- 屬性書寫：使用小寫鍵名與雙引號，避免空白，例如 `importance="Normal"`。
+- 枚舉值：`importance` 僅允許 `Critical`、`Important`、`Normal`、`Optional`。
+- 階段 ID：使用 `n: stage_name` 形式，冒號後保留一個空白；`stage_name` 採用 `snake_case`。
+- 名稱風格：標識名稱（如 `stage_name`、`command_name`）採用 `snake_case`；不使用空白或大寫。
+- 結構化清單：`<tools>` 使用 `<tool name="..."/>`；`<custom_commands>` 使用 `<command name="..." description="..."/>`。
+- 數量限制：每個 `<workflow>` 僅包含 3-5 個 `<stage>`；每個 `<stage>` 不超過 3 個步驟。
+- 術語一致：請參考 `guidelines/CHIN-ENG-TECHNICAL-VOCABULARY.md`。
 
 ## Example 標籤規範
 - 必要時提供實例
@@ -286,20 +305,20 @@ color: {Color}
 3. {Output Item 3}
 </output>
 
-<constraints, importance = "Normal">
+<constraints importance="Normal">
 - {Constraint 1}
 - {Constraint 2}
 - {Constraint 3}
 </constraints>
 
-<example>(optional)
+<example>
 {Example Content}
 </example>
 
 <instructions>
-- {Instruction 1}
-- {Instruction 2}
-- {Instruction 3}
+  - {Instruction 1}
+  - {Instruction 2}
+  - {Instruction 3}
 </instructions>
 ```
 
@@ -350,6 +369,9 @@ color: {Color}
 - [ ] `<output>` 定義機器可讀的結構
 - [ ] `<constraints>` 3-5 條可驗證限制
 - [ ] `<checks>` 2-5 個可勾選檢核點
+- [ ] `importance` 僅使用 Critical/Important/Normal/Optional
+- [ ] `<tools>` 與 `<custom_commands>` 使用結構化子標籤
+- [ ] `<workflow>` 每階段步驟不超過 3
 
 ### 加分項目
 - [ ] 提供實用 `<example>`
@@ -365,11 +387,11 @@ color: {Color}
 
 ### 模板結構
 ```
-<start sequence>
-1. {Start Sequence 1}
-2. {Start Sequence 2}
-3. {Start Sequence 3}
-</start sequence>
+<start-sequence>
+  <step index="1">{Start Sequence 1}</step>
+  <step index="2">{Start Sequence 2}</step>
+  <step index="3">{Start Sequence 3}</step>
+</start-sequence>
 
 <input>
   <context>
@@ -401,29 +423,29 @@ color: {Color}
 人格特質：{Role Personality}
 </role>
 
-<custom_commands>
-- *{command_name}
-  - {command_description}
-- *{command_name}
-  - {command_description}
-</custom_commands>
+<custom-commands>
+  <command name="{command_name}" description="{command_description}"/>
+  <command name="{command_name}" description="{command_description}"/>
+</custom-commands>
 
-<constraints, importance = "Normal">
+<constraints importance="Normal">
 - {Constraint 1}
 - {Constraint 2}
 - {Constraint 3}
 </constraints>
 
-<example>(optional)
+<example>
 {Example Content}
 </example>
 
 <instructions>
-- {Instruction 1}
-- {Instruction 2}
-- {Instruction 3}
+  - {Instruction 1}
+  - {Instruction 2}
+  - {Instruction 3}
 </instructions>
 ```
+
+可選說明：`<example>`、`<custom-commands>` 為可選；若存在 `<custom-commands>`，每個 `<command>` 需提供 `name` 與 `description` 屬性。
 
 ## tasks 提示詞架構
 用於拆解複雜任務，輸出具體、可驗收的子產物。
@@ -441,10 +463,10 @@ color: {Color}
   2. {Template Reference 2}
   3. {Template Reference 3}
   </templates>
-  <subagent-list>(optional)
-  1. {Subagent 1}
-  2. {Subagent 2}
-  3. {Subagent 3}
+  <subagent-list>
+    <subagent name="{Subagent 1}"/>
+    <subagent name="{Subagent 2}"/>
+    <subagent name="{Subagent 3}"/>
   </subagent-list>
 </input>
 
@@ -454,17 +476,17 @@ color: {Color}
 3. {Output Item 3}
 </output>
 
-<constraints, importance = "Normal">
+<constraints importance="Normal">
 - {Constraint 1}
 - {Constraint 2}
 - {Constraint 3}
 </constraints>
 
-<example>(optional)
+<example>
 {Example Content}
 </example>
 
-<workflow, importance = "Normal">
+<workflow importance="Normal">
   <stage id="1: stage_name">
   - {Stage Action 1}
   - {Stage Action 2}
@@ -476,13 +498,13 @@ color: {Color}
   - {Stage Action 2}
   - {Stage Action 3}
   
-  <questions>(optional)
+  <questions>
   - {Question 1}?
   - {Question 2}?
   - {Question 3}?
   </questions>
 
-  <checks>(only at the last stage)
+  <checks>
   - [ ] {Check Item 1}
   - [ ] {Check Item 2}
   - [ ] {Check Item 3}
@@ -490,6 +512,8 @@ color: {Color}
   </stage>
 </workflow>
 ```
+
+可選說明：`<subagent-list>`、`<example>`、`<questions>`、`<checks>` 為可選；建議僅在最後一個 `<stage>` 放置 `<checks>` 作為整體驗收清單。
 
 # 問題解決面板
 
