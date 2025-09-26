@@ -21,6 +21,10 @@
 
 <workflow importance="Important">
   <stage id="1: conclude_review_results">
+  <tools>
+  - read_file: Load and analyze review results documents
+  - grep: Search for recurring patterns across review files
+  </tools>
   - Read the review results.
   - Extract best practices and error cases with file references.
   - Summarize patterns and practice levels if available.
@@ -32,12 +36,20 @@
   </stage>
 
   <stage id="2: conclude_development_notes">
+  <tools>
+  - read_file: Load and analyze development notes documents
+  - grep: Extract error patterns and solutions across dev notes
+  </tools>
   - Read the development notes.
   - Extract best practices and error cases with file references.
   - Normalize naming for similar issues.
   </stage>
 
   <stage id="3: curate_knowledge">
+  <tools>
+  - read_file: Load project knowledge template
+  - write: Generate consolidated project knowledge documentation
+  </tools>
   - Use the project knowledge template to structure content.
   - Output to {root}/docs/project-knowledge.md in Markdown.
   - Ensure cross-references and links resolve.

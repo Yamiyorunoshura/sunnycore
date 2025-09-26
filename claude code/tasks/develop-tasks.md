@@ -26,11 +26,20 @@
 
 <workflow, importance = "Important">
   <stage id="1: setup">
+  <tools>
+  - read_file: Load implementation plan and architecture documents
+  - Claude Context Management: Process large implementation plans in segments
+  </tools>
   - Read all working steps and the TDD-based implementation plan from plan-tasks phase
   - Extract acceptance criteria and test conditions defined in the implementation plan
   </stage>
   
   <stage id="2: red-implement-tests">
+  <tools>
+  - write: Implement test cases based on acceptance criteria
+  - Sequential Thinking Tool: Design test scenarios and edge cases systematically
+  - run_terminal_cmd: Execute tests to ensure RED state
+  </tools>
   - Implement test cases based on acceptance criteria from the implementation plan (RED phase)
   - Convert each acceptance criterion into executable test code
   - Ensure tests fail initially as expected (RED state)
@@ -44,6 +53,11 @@
   </stage>
   
   <stage id="3: green-minimal-implementation">
+  <tools>
+  - search_replace: Implement minimal code to satisfy test requirements
+  - run_terminal_cmd: Execute tests to verify GREEN state
+  - Sequential Thinking Tool: Design simple solutions that make tests pass
+  </tools>
   - Implement minimal code to make tests pass (GREEN phase)
   - Follow the architectural mappings specified in the implementation plan
   - Focus on making tests green with simplest possible solutions
@@ -57,6 +71,11 @@
   </stage>
   
   <stage id="4: refactor-optimize">
+  <tools>
+  - search_replace: Refactor code while maintaining test coverage
+  - run_terminal_cmd: Execute tests continuously during refactoring
+  - Sequential Thinking Tool: Identify optimization opportunities and consolidation patterns
+  </tools>
   - Refactor code while maintaining all tests green (REFACTOR phase)
   - Apply optimizations and consolidations identified in the implementation plan
   - Implement cross-cutting concerns as specified in the plan
@@ -70,6 +89,11 @@
   </stage>
   
   <stage id="5: validate-and-document">
+  <tools>
+  - run_terminal_cmd: Execute final test suite validation
+  - read_file: Load development notes template
+  - write: Generate comprehensive development notes documentation
+  </tools>
   - Validate final implementation against all acceptance criteria from the plan
   - Ensure all planned test conditions are satisfied
   - Generate development notes using the template

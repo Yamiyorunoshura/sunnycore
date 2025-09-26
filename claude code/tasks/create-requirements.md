@@ -34,6 +34,8 @@
   <tools>
   - User interaction: Gather functional requirements through structured questioning
   - Analysis: Consolidate and organize requirements by user stories or capabilities
+  - Sequential Thinking Tool: Decompose complex functional requirements systematically
+  - Playwright Browser Automation: Perform web research for requirement examples if needed
   </tools>
   - Derive functional requirements from the user's input and context.
   - Consolidate duplicates using comparison criteria: same trigger condition, same outcome, same user role.
@@ -51,6 +53,8 @@
   <tools>
   - Analysis: Identify Non-Functional Requirements (NFRs) across domains
   - Measurement: Define quantifiable targets and constraints
+  - Sequential Thinking Tool: Systematically analyze NFRs across performance, security, and compliance domains
+  - Claude Context Management: Process large requirement documents in segments
   </tools>
   - Identify non-functional requirements across performance, reliability, security, compliance, and operability.
   - Quantify targets (e.g., P95 latency, uptime SLO, RTO/RPO) and constraints.

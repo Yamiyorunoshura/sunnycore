@@ -20,6 +20,11 @@
 
 <workflow, importance = "Normal">
   <stage id="1: analyze">
+  <tools>
+  - list_dir: Review existing project structure and files
+  - read_file: Load existing documentation and standards
+  - grep: Search for documentation patterns and requirements
+  </tools>
   - Review existing project structure and documentation
   - Identify documentation gaps and requirements
   - Plan documentation structure and content
@@ -32,6 +37,10 @@
   </stage>
 
   <stage id="2: create">
+  <tools>
+  - read_file: Load project documentation template
+  - write: Generate comprehensive project documentation
+  </tools>
   - Generate comprehensive project documentation
   - Follow template structure and formatting guidelines
   - Include all necessary sections and cross-references

@@ -22,6 +22,11 @@
 
 <workflow importance="Important">
   <stage id="1: research">
+  <tools>
+  - read_file: Load requirements and architecture documents
+  - Sequential Thinking Tool: Analyze requirements complexity and task dependencies
+  - grep: Search for functional and non-functional requirement patterns
+  </tools>
   - Read requirements and architecture sources.
   - Identify scope, success criteria, and constraints to drive task design.
   - Map non-functional requirements to cross-cutting tasks.
@@ -34,6 +39,10 @@
   </stage>
 
   <stage id="2: draft">
+  <tools>
+  - read_file: Load task template structure
+  - Sequential Thinking Tool: Design atomic tasks and logical groupings
+  </tools>
   - Use the template to generate atomic tasks.
   - Include brief acceptance hints for verifiability.
   - Group tasks logically while avoiding overlaps.
@@ -46,6 +55,10 @@
   </stage>
 
   <stage id="4: finalize">
+  <tools>
+  - write: Generate final tasks documentation
+  - read_file: Validate against template formatting requirements
+  </tools>
   - Write markdown format tasks to {root}/docs/tasks.md.
   - Include a short introduction explaining grouping and scope.
 
