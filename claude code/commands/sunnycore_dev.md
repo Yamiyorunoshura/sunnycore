@@ -8,17 +8,10 @@
 <input>
   <context>
   1. User command input and task file specification
-  2. Command validation patterns and comprehensive error handling requirements
-  3. Workflow execution stages with measurable completion tracking requirements
   </context>
   <rules>
-  1. {root}/sunnycore/CLAUDE.md - rules for all the actions
+  2. {root}/sunnycore/CLAUDE.md - rules for all the actions
   </context>
-  <templates>
-  1. {root}/sunnycore/templates/ - Standardized project templates for consistent output formatting
-  2. Development workflow templates and implementation plan structures
-  3. Error message templates with resolution guidance and escalation paths
-  </templates>
 </input>
 
 <output>

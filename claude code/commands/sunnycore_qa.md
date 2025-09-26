@@ -8,18 +8,10 @@
 <input>
   <context>
   1. User commands and corresponding task files
-  2. Code repositories, documentation, and test artifacts for quality assessment
-  3. Previous quality reports and improvement tracking records
   </context>
   <rules>
-  1. {root}/sunnycore/CLAUDE.md
+  2. {root}/sunnycore/CLAUDE.md
   </rules>
-  <templates>
-  1. Quality assessment templates for 7-dimension evaluation
-  2. Decision matrix templates for Accept/Reject/Accept with Changes
-  3. Risk assessment and deployment readiness checklists
-  4. Structured report templates with scoring justifications
-  </templates>
 </input>
 
 <output>

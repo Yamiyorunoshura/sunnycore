@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "prompt_name": "prompt-optimiser",
+    "review_date": "2025-09-26",
+    "reviewer": "Prompt Quality Evaluator"
+  },
+  "overall_score": 99,
+  "grade": "Excellence",
+  "dimensions": {
+    "correctness": {
+      "score": 100,
+      "evidence": "語法完美無誤，XML標籤使用正確，無矛盾指令，技術術語準確且有明確定義，內部邏輯連貫從輸入到輸出流程清晰",
+      "issues": []
+    },
+    "clarity": {
+      "score": 100,
+      "evidence": "任務目標明確(優化prompt品質)，三階段工作流程具體可操作，執行路徑清晰，每階段輸出明確定義，有具體驗證checklist",
+      "issues": []
+    },
+    "cognitive_load": {
+      "score": 95,
+      "evidence": "結構清晰分段合理，關鍵術語都有定義，信息架構邏輯分組良好，但文件長度121行稍長",
+      "issues": ["文件長度121行，建議縮減至100行以下以降低認知負荷"]
+    },
+    "reasoning_guidance": {
+      "score": 100,
+      "evidence": "明確要求使用sequential-thinking工具進行複雜推理，只在必要時要求逐步思考，偏好可驗證標準，效率最佳",
+      "issues": []
+    },
+    "alignment": {
+      "score": 100,
+      "evidence": "與prompt優化任務目標完美對齊，角色邊界清晰，遵循倫理安全操作指南，所有內容直接貢獻任務完成",
+      "issues": []
+    },
+    "completeness": {
+      "score": 100,
+      "evidence": "包含執行任務所需完整信息，輸入/輸出格式明確定義，約束條件清楚，成功標準明確，無冗餘信息",
+      "issues": []
+    },
+    "constraint_design": {
+      "score": 100,
+      "evidence": "MUST/SHOULD/MAY分級清晰，約束條件可滿足且可驗證，無衝突，增強輸出品質，平衡靈活性與控制",
+      "issues": []
+    },
+    "user_experience": {
+      "score": 100,
+      "evidence": "輸出實用穩定可實施，最小迭代需求，清晰工作流程，自驗證機制，適合系統化應用和擴展",
+      "issues": []
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "high",
+      "action": "將文件長度從121行縮減至100行以下",
+      "impact": "減少認知負荷5分，提升可讀性和理解速度",
+      "implementation": "整合相似內容段落，簡化範例說明，移除非關鍵描述",
+      "dimension_affected": "cognitive_load"
+    },
+    {
+      "priority": "medium", 
+      "action": "增加更多具體的優化模式範例",
+      "impact": "提升可操作性和學習效果，增強實用性",
+      "implementation": "在現有範例基礎上增加2-3個常見優化場景的具體示例",
+      "dimension_affected": "clarity"
+    },
+    {
+      "priority": "low",
+      "action": "考慮添加錯誤處理指導",
+      "impact": "提升robustness和異常情況處理能力",
+      "implementation": "在workflow中加入異常情況處理步驟和fallback機制",
+      "dimension_affected": "user_experience"
+    }
+  ],
+  "strengths": [
+    "創新的語義不變性檢查清單機制，確保優化不破壞原始功能意圖",
+    "完美的XML標籤結構設計，嚴格遵循PROMPT-ENGINEERING-GUIDE.md規範",
+    "系統化的三階段工作流程(分析→優化→驗證)，邏輯清晰可執行",
+    "明確的約束分級(MUST/SHOULD/MAY)和優先級管理",
+    "多層次驗證機制，包含技術驗證、語義驗證和品質預測"
+  ],
+  "summary": "這是一個優秀級別(Excellence)的prompt，得分99/100。展現了專業的prompt工程設計，具備完整的功能架構、清晰的執行流程和創新的語義保持機制。唯一的微小改進空間是適度縮減文件長度以進一步降低認知負荷。整體而言，這是一個高度成熟且可實際應用的prompt工程工具。"
+}

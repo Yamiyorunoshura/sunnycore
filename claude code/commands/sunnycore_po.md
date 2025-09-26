@@ -9,16 +9,10 @@
   <context>
   1. User commands matching custom command patterns (*conclude.md, *curate-knowledge.md, *document-project.md, *help.md)
   2. Task files from {root}/sunnycore/tasks/ directory
-  3. Configuration reference from {root}/sunnycore/CLAUDE.md
   </context>
   <rules>
-  1. {root}/sunnycore/CLAUDE.md
+  3. {root}/sunnycore/CLAUDE.md
   </rules>
-  <templates>
-  1. Product requirements documentation templates
-  2. Stakeholder communication format templates
-  3. Task execution reporting templates
-  </templates>
 </input>
 
 <output>

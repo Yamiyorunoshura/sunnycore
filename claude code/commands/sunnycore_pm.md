@@ -6,14 +6,11 @@
 </start sequence>
 
 <input>
-  <templates>
-  1. {root}/sunnycore/templates/implementation-plan-tmpl.yaml
-  </templates>
   <context>
-  2. User commands and corresponding task files
+  1. User commands and corresponding task files
   </context>
   <rules>
-  3. {root}/sunnycore/CLAUDE.md
+  2. {root}/sunnycore/CLAUDE.md
   </rules>
 </input>
 
