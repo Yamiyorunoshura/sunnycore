@@ -23,7 +23,8 @@
 <workflow, importance = "Important">
   <stage id="1: setup">
   <tools>
-  - read_file: Load requirements, architecture, and task documents
+  - sequential_thinking
+  - todo_write
   - Claude Context Management: Process large documents in segments if needed
   </tools>
   - Read all working steps and requirements documents
@@ -33,7 +34,7 @@
   <stage id="2: red-define-tests">
   <tools>
   - Sequential Thinking Tool: Analyze requirements complexity and design test conditions
-  - grep: Search for requirement patterns and dependencies
+  - todo_write
   </tools>
   - Define acceptance criteria and test conditions for each requirement (RED phase)
   - Create measurable success metrics before designing implementation
@@ -50,7 +51,7 @@
   <stage id="3: green-minimal-design">
   <tools>
   - Sequential Thinking Tool: Design minimal implementation approaches
-  - read_file: Reference architecture documents for component mapping
+  - todo_write
   </tools>
   - Design minimal implementation plans that satisfy the defined acceptance criteria (GREEN phase)
   - Map each acceptance criterion to specific architecture components and tasks
@@ -67,6 +68,7 @@
   <stage id="4: refactor-optimize">
   <tools>
   - Sequential Thinking Tool: Identify consolidation opportunities and optimize task sequencing
+  - todo_write
   </tools>
   - Refactor and optimize the implementation plan while maintaining test coverage (REFACTOR phase)
   - Consolidate duplicate efforts and identify cross-cutting concerns
@@ -82,8 +84,8 @@
 
   <stage id="5: finalize">
   <tools>
-  - read_file: Load implementation plan template
-  - write: Generate structured implementation plan documentation
+  - sequential_thinking
+  - todo_write
   </tools>
   - Validate final plan against all defined acceptance criteria
   - Use the template to output the structured implementation plan

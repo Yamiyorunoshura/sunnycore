@@ -27,7 +27,8 @@
 <workflow, importance = "Important">
   <stage id="1: setup">
   <tools>
-  - read_file: Load implementation plan and architecture documents
+  - sequential_thinking
+  - todo_write
   - Claude Context Management: Process large implementation plans in segments
   </tools>
   - Read all working steps and the TDD-based implementation plan from plan-tasks phase
@@ -36,9 +37,9 @@
   
   <stage id="2: red-implement-tests">
   <tools>
-  - write: Implement test cases based on acceptance criteria
+  - todo_write
   - Sequential Thinking Tool: Design test scenarios and edge cases systematically
-  - run_terminal_cmd: Execute tests to ensure RED state
+  - Claude Context Management: 
   </tools>
   - Implement test cases based on acceptance criteria from the implementation plan (RED phase)
   - Convert each acceptance criterion into executable test code
@@ -54,9 +55,9 @@
   
   <stage id="3: green-minimal-implementation">
   <tools>
-  - search_replace: Implement minimal code to satisfy test requirements
-  - run_terminal_cmd: Execute tests to verify GREEN state
+  - todo_write
   - Sequential Thinking Tool: Design simple solutions that make tests pass
+  - Claude Context Management: 
   </tools>
   - Implement minimal code to make tests pass (GREEN phase)
   - Follow the architectural mappings specified in the implementation plan
@@ -72,9 +73,9 @@
   
   <stage id="4: refactor-optimize">
   <tools>
-  - search_replace: Refactor code while maintaining test coverage
-  - run_terminal_cmd: Execute tests continuously during refactoring
+  - todo_write
   - Sequential Thinking Tool: Identify optimization opportunities and consolidation patterns
+  - Claude Context Management: 
   </tools>
   - Refactor code while maintaining all tests green (REFACTOR phase)
   - Apply optimizations and consolidations identified in the implementation plan
@@ -90,9 +91,8 @@
   
   <stage id="5: validate-and-document">
   <tools>
-  - run_terminal_cmd: Execute final test suite validation
-  - read_file: Load development notes template
-  - write: Generate comprehensive development notes documentation
+  - sequential_thinking
+  - todo_write
   </tools>
   - Validate final implementation against all acceptance criteria from the plan
   - Ensure all planned test conditions are satisfied
@@ -109,4 +109,3 @@
   </checks>
   </stage>
 </workflow>
-

@@ -21,8 +21,8 @@
 <workflow, importance = "Important">
   <stage id="1: conclude the current issues">
   <tools>
-  - read_file: Load and analyze all review records
-  - grep: Search for recurring issue patterns across documents
+  - sequential_thinking
+  - todo_write
   </tools>
   - Extract all issues from the review records
   - Define the minimal effective fix for each issue
@@ -38,8 +38,8 @@
 
   <stage id="2: conclude the recommended actions">
   <tools>
-  - read_file: Analyze review records for recommended actions
-  - grep: Extract action items and their priorities across documents
+  - sequential_thinking
+  - todo_write
   </tools>
   - Extract all recommended actions from the review records
   - Specify best-practice approach and sequencing per action
@@ -55,8 +55,8 @@
 
   <stage id="3: conclude the completion report">
   <tools>
-  - read_file: Load completion report template
-  - write: Generate the final completion report
+  - sequential_thinking
+  - todo_write
   </tools>
   - Synthesise issues and actions into a coherent summary
   - Draft the completion report using the template

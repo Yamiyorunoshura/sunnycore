@@ -24,9 +24,9 @@
 <workflow importance="Critical">
   <stage id="1: assess-existing">
   <tools>
-  - read_file: Load requirements and existing architecture documents
+  - sequential_thinking
+  - todo_write
   - Claude Context Management: Process large architecture corpus in segments
-  - grep: Search for extension points and architectural patterns
   </tools>
   - Examine the current architecture under {root}/docs/architecture/*.md.
   - Identify extension points, constraints, and shared services.
@@ -37,6 +37,7 @@
   <tools>
   - Sequential Thinking Tool: Design module boundaries and integration patterns
   - Context7 Integration: Research architectural patterns and best practices
+  - todo_write
   </tools>
   - Define responsibilities, boundaries, and interfaces for new modules.
   - Specify data flows and interactions with existing components.
@@ -51,9 +52,8 @@
 
   <stage id="3: author-and-shard">
   <tools>
-  - read_file: Load architecture template
-  - write: Generate updated architecture.md document
-  - run_terminal_cmd: Execute sharding script to partition document
+  - sequential_thinking
+  - todo_write
   </tools>
   - Use the architecture template to draft markdown formatted {root}/docs/architecture.md.
   - Ensure sections emphasize new modules and integration impacts.
@@ -62,10 +62,6 @@
   </stage>
 
   <stage id="4: finalize">
-  <tools>
-  - read_file: Cross-validate against constraints and existing architecture
-  - list_dir: Verify sharded files were generated correctly
-  </tools>
   - Cross-check against constraints and guiding questions; remedy gaps and inconsistencies.
   
   <checks>

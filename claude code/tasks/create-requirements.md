@@ -25,14 +25,15 @@
 <workflow importance="Important">
   <stage id="1: init">
   <tools>
-  - read_file: Review workflow stages and deliverable requirements
+  - sequential_thinking
+  - todo_write
   </tools>
   - Read all working steps to understand the expected deliverables.
   </stage>
 
   <stage id="2: functional">
   <tools>
-  - User interaction: Gather functional requirements through structured questioning
+  - todo_write
   - Analysis: Consolidate and organize requirements by user stories or capabilities
   - Sequential Thinking Tool: Decompose complex functional requirements systematically
   - Playwright Browser Automation: Perform web research for requirement examples if needed
@@ -51,8 +52,7 @@
 
   <stage id="3: nonfunctional">
   <tools>
-  - Analysis: Identify Non-Functional Requirements (NFRs) across domains
-  - Measurement: Define quantifiable targets and constraints
+  - todo_write
   - Sequential Thinking Tool: Systematically analyze NFRs across performance, security, and compliance domains
   - Claude Context Management: Process large requirement documents in segments
   </tools>
@@ -69,8 +69,8 @@
 
   <stage id="4: acceptance">
   <tools>
-  - Specification: Define testable acceptance criteria
-  - Validation: Ensure deterministic pass/fail outcomes
+  - todo_write
+  - sequential_thinking
   </tools>
   - Define acceptance criteria per requirement; ensure they are deterministic and testable.
   - Reference inputs, preconditions, and explicit pass/fail outcomes using Given-When-Then format when helpful.
@@ -79,11 +79,6 @@
   </stage>
 
   <stage id="5: finalize">
-  <tools>
-  - Review: Cross-check consistency across requirement types
-  - File operations: Generate structured documentation
-  - Script execution: Run sharding automation
-  </tools>
   - Cross-check consistency across FRs, NFRs, and acceptance criteria and ask for user's confirmation.
   - Populate the requirement template and place markdown formatted outputs under {root}/docs/requirements/.
   - Run the {root}/sunnycore/scripts/shard-requirements.py script by using uv run to shard the requirements.

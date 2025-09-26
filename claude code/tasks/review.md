@@ -30,7 +30,8 @@
 <workflow, importance = "Important">
   <stage id="1: review-plan">
   <tools>
-  - read_file: Load implementation plan and development notes
+  - sequential_thinking
+  - todo_write
   - Claude Context Management: Process large plan documents in segments
   </tools>
   - Read and understand the implementation plan
@@ -44,10 +45,9 @@
 
   <stage id="2: review-code">
   <tools>
-  - read_file: Load and analyze all production code
-  - run_terminal_cmd: Execute test suites and capture results
-  - grep: Search for code patterns and implementation alignment
+  - todo_write
   - Sequential Thinking Tool: Systematically analyze code against plan specifications
+  - Claude Context Management: Process large plan documents in segments
   </tools>
   - Read and understand all production code
   - Execute all tests created during develop tasks phase and document results
@@ -66,8 +66,8 @@
 
   <stage id="3: review-dev-notes">
   <tools>
-  - read_file: Load and analyze development notes
-  - grep: Cross-reference notes with implementation details
+  - sequential_thinking
+  - todo_write
   </tools>
   - Read and understand the development notes
   - Check alignment between notes and implementation
@@ -75,9 +75,8 @@
 
   <stage id="4: produce-results">
   <tools>
-  - read_file: Load review template and existing review results if present
-  - write: Generate comprehensive review results documentation
-  - search_replace: Update existing review results with new information
+  - sequential_thinking
+  - todo_write
   </tools>
   - Use the template to create the markdown formatted review results including test execution summary
   - Document all test results with pass/fail status and alignment to plan

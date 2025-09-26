@@ -41,9 +41,8 @@
 
   <stage id="2: Fix the issues">
   <tools>
-  - search_replace: Implement code fixes iteratively
-  - run_terminal_cmd: Execute tests after each fix
-  - grep: Search for related code patterns and usage
+  - sequential_thinking
+  - todo_write
   </tools>
   - Implement fixes iteratively, one at a time
   - Run and pass tests after each fix
@@ -57,9 +56,8 @@
 
   <stage id="3: Enact recommended actions">
   <tools>
-  - search_replace: Implement recommended code changes
-  - run_terminal_cmd: Execute tests after each action
-  - read_file: Review architecture guidelines for alignment
+  - sequential_thinking
+  - todo_write
   </tools>
   - Enact the recommended actions iteratively
   - Run and pass tests after each action
@@ -72,11 +70,6 @@
   </stage>
 
   <stage id="4: Create a development notes">
-  <tools>
-  - read_file: Load development notes template
-  - write: Generate or update development notes documentation
-  - search_replace: Update existing development notes if present
-  </tools>
   - Conclude the development process and create development notes based on the template
   - If there is already an existing development notes, update the development notes with the new information
   - Save the markdown dev-notes to the stated directory

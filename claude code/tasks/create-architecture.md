@@ -24,9 +24,8 @@
 <workflow importance="Critical">
   <stage id="1: requirement-analysis">
   <tools>
-  - read_file: Load and analyze all requirements documents
+  - todo_write
   - Sequential Thinking Tool: Decompose complex requirements and identify architectural patterns
-  - grep: Search for requirement patterns and cross-references
   </tools>
   - Verify completeness and consistency of all requirements under {root}/docs/requirements/*.md.
   - Analyze functional requirements to identify core system components and their responsibilities.
@@ -46,6 +45,7 @@
   <tools>
   - Sequential Thinking Tool: Architect system components and validate design decisions
   - Context7 Integration: Fetch external package and architectural pattern references
+  - todo_write
   </tools>
   - Based on requirement analysis, delineate system components, boundaries, and canonical data flows.
   - Design macro-architecture ensuring every requirement has corresponding architectural element.
@@ -62,9 +62,8 @@
 
   <stage id="3: author">
   <tools>
-  - read_file: Load architecture template
-  - write: Generate architecture.md document
-  - run_terminal_cmd: Execute sharding script to partition document
+  - todo_write
+  - sequential_thinking
   </tools>
   - Leverage the architecture template to draft markdown formatted {root}/docs/architecture.md.
   - Include requirement traceability matrix in architecture document.
@@ -76,8 +75,8 @@
 
   <stage id="4: finalize">
   <tools>
-  - read_file: Cross-validate against requirements documents
-  - list_dir: Verify sharded files were generated correctly
+  - sequential_thinking
+  - todo_write
   </tools>
   - Cross-validate architecture against all requirements using the mapping matrix.
   - Verify that every functional and non-functional requirement is addressed.
