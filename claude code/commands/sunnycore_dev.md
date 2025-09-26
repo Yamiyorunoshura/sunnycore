@@ -70,29 +70,29 @@ Personality Traits:
 *brownfield-tasks legacy.sys    → Execute brownfield analysis with legacy system identifier
 ```
 
-### Todo List Creation Using todo_write Tool
-**Universal Format for All Commands:**
+### Todo List Format Templates
+**IMPORTANT**: These are FORMAT TEMPLATES only. Actual workflow stages MUST be read from corresponding task files before creating todo lists.
+
+**Template Structure Based on Command Type:**
 ```javascript
 // For *help command
 [
-  {"id": "stage-1-display-help", "content": "Stage 1: 顯示可用自定義指令清單", "status": "in_progress"}
+  {"id": "stage-1-{action_from_task_file}", "content": "Stage 1: {description_from_task_file}", "status": "in_progress"}
 ]
 
 // For *develop-tasks {task_id} command  
 [
-  {"id": "stage-1-read-plan", "content": "Stage 1: 讀取並分析實作計劃文檔", "status": "in_progress"},
-  {"id": "stage-2-implement-tests", "content": "Stage 2: 實作測試案例 (TDD RED 階段)", "status": "pending"},
-  {"id": "stage-3-implement-code", "content": "Stage 3: 實作最小代碼 (TDD GREEN 階段)", "status": "pending"},
-  {"id": "stage-4-refactor-optimize", "content": "Stage 4: 重構與優化代碼 (TDD REFACTOR 階段)", "status": "pending"},
-  {"id": "stage-5-create-notes", "content": "Stage 5: 生成開發筆記文檔", "status": "pending"}
+  {"id": "stage-1-{task_stage_1}", "content": "Stage 1: {stage_1_from_develop_tasks_md}", "status": "in_progress"},
+  {"id": "stage-2-{task_stage_2}", "content": "Stage 2: {stage_2_from_develop_tasks_md}", "status": "pending"},
+  {"id": "stage-3-{task_stage_3}", "content": "Stage 3: {stage_3_from_develop_tasks_md}", "status": "pending"},
+  {"id": "stage-N-{task_stage_n}", "content": "Stage N: {final_stage_from_develop_tasks_md}", "status": "pending"}
 ]
 
 // For *brownfield-tasks {task_id} command
 [
-  {"id": "stage-1-analyze-issues", "content": "Stage 1: 分析審查結果並識別問題", "status": "in_progress"},
-  {"id": "stage-2-implement-fixes", "content": "Stage 2: 實作問題修復", "status": "pending"},
-  {"id": "stage-3-execute-recommendations", "content": "Stage 3: 執行建議改進措施", "status": "pending"},
-  {"id": "stage-4-update-notes", "content": "Stage 4: 更新開發筆記", "status": "pending"}
+  {"id": "stage-1-{brownfield_stage_1}", "content": "Stage 1: {stage_1_from_brownfield_tasks_md}", "status": "in_progress"},
+  {"id": "stage-2-{brownfield_stage_2}", "content": "Stage 2: {stage_2_from_brownfield_tasks_md}", "status": "pending"},
+  {"id": "stage-N-{brownfield_stage_n}", "content": "Stage N: {final_stage_from_brownfield_tasks_md}", "status": "pending"}
 ]
 ```
 
@@ -125,8 +125,8 @@ Personality Traits:
 </example>
 
 <instructions>
-- **Command Processing Workflow**: 1) Parse input using regex validation with error code assignment, 2) Validate parameters and verify file accessibility with detailed logging, 3) Create structured todo list using todo_write tool based on command type, 4) Execute corresponding task workflow with progress tracking, 5) Generate structured output with completion verification
-- **Todo List Management**: Use todo_write tool immediately after command validation to create structured workflow tracking with appropriate todo items based on command type (help/develop-tasks/brownfield-tasks), ensure first todo item is marked as "in_progress", update todo status throughout execution
+- **Command Processing Workflow**: 1) Parse input using regex validation with error code assignment, 2) Validate parameters and verify file accessibility with detailed logging, 3) **MUST READ corresponding task file first to understand actual workflow stages**, 4) Create structured todo list using todo_write tool based on ACTUAL stages from task file (not examples), 5) Execute corresponding task workflow with progress tracking, 6) Generate structured output with completion verification
+- **Todo List Management**: **CRITICAL**: MUST read task file before creating todos. Use todo_write tool only after reading task file to extract actual workflow stages. Create structured workflow tracking with appropriate todo items based on ACTUAL stages from task file (help/develop-tasks/brownfield-tasks), ensure first todo item is marked as "in_progress", update todo status throughout execution
 - **Error Handling Strategy**: Implement graceful degradation with automatic fallback to *help command, provide detailed error reports with specific error codes (ERR_001-ERR_004), include actionable resolution guidance with examples
 - **File Operations**: Verify file existence and readability before processing, use absolute paths with proper error logging, implement retry mechanisms for transient failures
 - **Progress Tracking**: Maintain completion status at each workflow stage with checkpoint validation, implement real-time progress updates with measurable metrics (>90% completion rate), provide milestone verification and quality scoring
