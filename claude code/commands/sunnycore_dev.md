@@ -69,10 +69,10 @@ Personality Traits:
 
 **Error Handling:**
 ```
-❌ develop-tasks               → ERR_001: Missing asterisk prefix
-❌ *develop-tasks             → ERR_002: Missing required task_id  
-❌ *invalid-command           → ERR_001: Unrecognized command
-❌ *develop-tasks task@123     → ERR_004: Invalid task_id format
+develop-tasks               → ERR_001: Missing asterisk prefix
+*develop-tasks             → ERR_002: Missing required task_id  
+*invalid-command           → ERR_001: Unrecognized command
+*develop-tasks task@123     → ERR_004: Invalid task_id format
 ```
 
 ## Todo List Templates
