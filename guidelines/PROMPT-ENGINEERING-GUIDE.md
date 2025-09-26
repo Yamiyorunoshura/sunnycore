@@ -1,80 +1,108 @@
 # 提示工程使用指南（Prompt Engineering Guide）
-本指南說明如何以 XML 風格標籤搭配結構化提示詞，建立一致、可維護、可審查的工作流框架。內容涵蓋：標籤語法、撰寫規範、常見模板（agents/commands/tasks）與示例，協助你快速上手並降低溝通成本。
-為提升 token 使用效率與跨語系可移植性：文件敘述採用繁體中文；實際「提示詞內容」一律以英文撰寫。
 
-## 術語對照表（Terminology Reference）
-| 中文術語 | 英文術語 | 說明 |
-|---------|---------|-----|
-| 提示詞 | Prompt | 與 LLM 交互的指令內容 |
-| 標籤 | Tag | XML 風格的結構化標記 |
-| 約束條件 | Constraints | 任務規範與硬性限制 |
-| 檢核點 | Checks | 可驗證的品質檢查項目 |
-| 工作流程 | Workflow | 任務執行的階段性流程 |
-| 優先等級 | Importance Level | Optional/Normal/Important/Critical |
-| 角色設定 | Role | 模型的專業定位與語氣邊界 |
-| 模板 | Template | 結構化的提示詞框架 |
+## 指南目的
+本指南提供基於 XML 標籤的結構化提示詞框架，幫助您建立：
+- **一致性**：標準化的提示詞結構
+- **可維護性**：清晰的組織與更新流程  
+- **可審查性**：明確的品質檢核點
 
-# 通用 XML 標籤
-本節說明在所有文檔中通用的 XML 風格標籤及其用途與最小建議用法。
+## 使用原則
+- 文檔說明：繁體中文
+- 提示詞內容：英文（提升 token 效率與可移植性）
+- 結構優先：先定義格式，後填入內容
 
-## 上下文相關標籤
-用於描述任務輸入與期望輸出。
-- <input>：任務輸入容器。
-    - <context>：LLM 需要讀取的背景與資料來源（要具體、可引用）。
-    - <templates>：模板列表，用於指示模型使用文件模板。
-    - <tasks>：任務列表，用於指示模型調用任務流程。
-    - <rules>：規則列表，用於告知模型遵守規則。
-- <output>：明確定義輸出格式與欄位（讓結果可機器判讀或人工快速核對）。
-    - <context>：可用於補充輸出的結構化格式說明。
-- <constraints>：任務規範與硬性限制（例如長度、格式、不得事項）。
-- <example>：示例輸入與輸出（以最小可用示例為主，必要時多樣化）。
-- <questions>：自我提問引導模型澄清重點與避免謬誤。
-- <checks>：最終自檢清單，聚焦可觀察且可驗證的項目。
-- <tools>：工具列表，用於指示模型使用工具。
+## 核心術語
 
-## 角色相關標籤
-- <role, name = "Role Name">：設定模型的專業定位與語氣邊界。
-  - 名字：可留空或以職稱替代。
-  - 角色：描述職能與決策範圍，避免空泛形容詞。
-  - 人格特質：只保留與決策風格或風險偏好相關的特質。
+| 中文 | 英文 | 定義 |
+|------|------|------|
+| 提示詞 | Prompt | LLM 交互指令 |
+| 標籤 | Tag | XML 結構標記 |
+| 約束條件 | Constraints | 硬性限制規則 |
+| 檢核點 | Checks | 品質驗證項目 |
+| 角色 | Role | 專業定位設定 |
+| 模板 | Template | 結構化框架 |
 
-## 工作流程相關標籤
-- <workflow, importance = "Optional/Normal/Important/Critical">：定義工作流程骨架，僅保留 3-5 個關鍵階段。
-    - importance：標示整體優先等級，用於任務調度或審查。
-    - <stage, id = "Stage ID">：工作階段，描述本階段的關鍵產出與檢核點。
-        - id：不含空白、具語義（例如 research、draft、review、finalize）。
+## 優先等級
+- **Critical**：關鍵項目，必須立即處理
+- **Important**：重要項目，影響整體品質
+- **Normal**：標準優先級，按計劃執行
+- **Optional**：可選項目，資源充裕時執行
 
-### 優先等級定義（Importance Level Guidelines）
-- **Optional**: 可選項目，不影響核心功能或品質，資源充裕時執行
-- **Normal**: 標準項目，正常優先級，按計劃執行
-- **Important**: 重要項目，影響整體品質或用戶體驗，需優先分配資源
-- **Critical**: 關鍵項目，阻塞性需求，必須立即處理且不可延遲
+# 必備 XML 標籤工具箱
 
-# 快速入門指南（Quick Start Guide）
+## 輸入輸出標籤（基礎組件）
 
-## 步驟 1: 選擇模板類型
-1. **agents**: 定義獨立的智能助理，具有特定的角色與能力
-2. **commands**: 創建帶有子命令的互動工作流
-3. **tasks**: 拆解複雜任務為可執行的子項目
+**`<input>`** – 任務輸入容器
+- `<context>` – 背景資料（必須具體可引用）  
+- `<templates>` – 模板列表
+- `<tasks>` – 任務流程  
+- `<rules>` – 規則
 
-## 步驟 2: 遵循決策樹
+**`<output>`** – 輸出格式定義（必須機器可讀）
+
+## 品質控制標籤（進階組件）
+
+**`<constraints>`** – 硬性限制（3-5 條可驗證規則）  
+**`<questions>`** – 自我檢查問題（2-3 個重點問題）  
+**`<checks>`** – 品質檢核清單（2-5 個可勾選項目）
+
+## 特殊功能標籤
+
+**`<example>`** – 實際示例（最小可用為主）  
+**`<tools>`** – 工具列表  
+**`<instructions>`** – 複雜指導內容
+
+## 專業角色標籤
+
+**`<role name="角色名稱">`** – 專業定位設定
+- **名字**：職稱或專業領域
+- **角色**：核心職能與決策範圍
+- **人格特質**：僅保留影響決策風格的關鍵特質
+
+## 工作流程標籤
+
+**`<workflow importance="等級">`** – 流程骨架（3-5 階段）
+- **`<stage id="階段ID">`** – 關鍵工作階段
+  - ID 格式：`1: {tasks_name_1}`、`2: {tasks_name_2}`、`3: {tasks_name_3}`、`4: {tasks_name_4}`、`5: {tasks_name_5}`
+  - 每階段必須有明確產出與檢核點
+
+# 3 分鐘快速入門
+
+## 第一步：選擇模板類型
+
+🤖 **agents** → 需要人格化助理？  
+📝 **commands** → 需要互動子命令？  
+✅ **tasks** → 需要拆解複雜流程？
+
+### 決策樹
 ```
-是否需要人格化角色？
-│
-├── 是 → 使用 agents 模板
-│
-└── 否 → 是否有子命令？
-     │
-     ├── 是 → 使用 commands 模板
-     │
-     └── 否 → 使用 tasks 模板
+人格化角色？ ──YES──▶ agents
+       │
+      NO
+       │
+互動命令？ ──YES──▶ commands  
+       │
+      NO
+       │
+       ▼
+     tasks
 ```
 
-## 步驟 3: 確保必要組件
-- [ ] `<input>` 定義清晰的輸入要求
-- [ ] `<output>` 明確輸出格式與欄位
-- [ ] `<constraints>` 3-5 條可驗證的限制
-- [ ] `<checks>` 2-5 個可勾選的檢核點
+## 第二步：完成核心組件
+
+**必須項：**
+- ☑️ `<input>` 輸入要求
+- ☑️ `<output>` 輸出格式  
+- ☑️ `<constraints>` 3-5 條限制
+- ☑️ `<checks>` 2-5 個檢核點
+
+**選擇性：**
+- 📝 `<example>` 實際示例
+- ❓ `<questions>` 自檢問題
+- 🔧 `<tools>` 工具列表
+
+## 第三步：品質檢查
+進行最終檢查，確保文檔符合標準
 
 ## 常見錯誤與解決方案
 
@@ -82,7 +110,7 @@
 **問題**: 使用「更自然」、「更好」等不可驗證的描述  
 **解決**: 改為具體指標，例如「平均每句 < 20 詞」
 
-### 錯誤 2: 角色設定過於繁琐
+### 錯誤 2: 角色設定過於繁瑣
 **問題**: 描述冷長的背景故事或人格特質  
 **解決**: 只保留與決策風格相關的關鍵特質
 
@@ -90,30 +118,90 @@
 **問題**: `<output>` 部分只有模糊要求  
 **解決**: 定義機器可讀的結構，例如 JSON 格式或特定欄位
 
-# 提示詞規範
-本節提供撰寫 Constraints、Questions、Checks 的可操作準則，避免過度指示與冗語。
+# 標籤撰寫規範
 
-## Constraints 標籤規範
-- 重點聚焦在「限制」與「不可違反的規則」，建議 3-5 條。
-- 以可驗證的述句撰寫：可度量、可真偽檢驗、可透過工具檢查。
-- 規範應與工作步驟相關。
-- 優先順序明確；必要時以「Must/Should/May」區分強弱。
-- 避免空泛要求（如「更自然」），改為具體（如「用短句，平均每句 < 20 詞」）。
+以下提供各標籤的實用準則，確保內容可驗證、可操作。
 
-## Questions 標籤規範
-- 以 2-3 個高價值問題引導模型釐清不確定性。
-- 著重：輸入完整性、關鍵假設、成功條件、風險與邊界案例。
-- 問題應可由當前上下文回答或引導生成可驗證的補充需求。
+## `<constraints>` 規範
 
-## Checks 標籤規範
-- 於工作流程末尾執行；列出 2-5 個可觀察、可勾選的檢核點。
-- 每一項應對應到可量測的輸出特徵或格式要求。
-- 鼓勵加入「失敗案例」對照（例如：若未包含欄位 X，則失敗）。
+**基本要求**：
+- 數量：3-5 條限制
+- 格式：可驗證、可度量
+- 優先級：`MUST` > `SHOULD` > `MAY`
 
-## Workflow 標籤規範
-- 僅保留 3-5 個階段；每階段皆要有明確輸出與檢核。
-- 階段描述避免流程化細節，聚焦於決策與產物。
-- 可用 importance 標註任務級別，幫助排程與審查。
+**實例對比**：
+- ❌ 「回應要自然」
+- ✅ 「句子 < 20 詞」
+
+**格式範例**：
+```xml
+<constraints importance="Normal">
+- MUST: Response length 100-300 words
+- SHOULD: Use bullet points (exactly 3)
+- MAY: Include relevant examples
+</constraints>
+```
+
+## `<questions>` 規範
+
+**重點問題類型**：
+- 輸入完整性：「所需資料是否完整？」  
+- 關鍵假設：「這個方案的前提是什麼？」
+- 成功條件：「怎樣算達到目標？」
+
+**格式範例**：
+```xml
+<questions>
+- Have I defined all required input parameters?
+- What assumptions am I making about user context?
+- How will success be measured?
+</questions>
+```
+
+## `<checks>` 規範
+
+**檢核點要求**：
+- 數量：2-5 個可勾選項目
+- 格式：`[ ]` 清單式
+- 內容：可觀察、可驗證
+
+**實例範例**：
+```xml
+<checks>
+- [ ] Output contains exactly 3 bullet points
+- [ ] All technical terms are defined
+- [ ] Response length is 200-400 words
+- [ ] Includes at least one practical example
+</checks>
+```
+
+**避免模糊**：
+- ❌ 「內容是否完整」
+- ✅ 「包含 5 個主要部分」
+
+## `<workflow>` 規範
+
+**結構要求**：
+- 階段數：3-5 個關鍵階段
+- ID 格式：`research` → `draft` → `review` → `finalize`
+- 每階段必須：明確產出 + 檢核點
+
+**格式範例**：
+```xml
+<workflow importance="Normal">
+  <stage id="1: research">
+  - Gather requirements from context
+  - Identify key constraints
+  - Document assumptions
+  </stage>
+  
+  <stage id="2: draft">
+  - Create initial structure
+  - Develop core content
+  - Apply formatting standards
+  </stage>
+</workflow>
+```
 
 ## Example 標籤規範
 - 必要時提供實例
@@ -129,43 +217,33 @@
   - `<reference-guide>` / `<best-practices>` - 參考指南
 - 保持內容的可操作性與可驗證性。
         
-# 提示詞架構
-本節提供 agents / commands / tasks 三種常用模板的結構化格式、欄位說明與最小示例。模板中的實際內容請以英文撰寫。
+# 三大模板架構
 
-## 通用模板組件（Common Template Components）
-以下組件為所有模板共用，保持一致的結構與格式：
+選擇適合的模板類型，快速建立結構化提示詞。
 
-### 基本輸入結構
+## 基礎組件模板
+
+所有模板都包含以下核心組件：
+
 ```xml
 <input>
   <context>
-  1. {Context Item 1}
-  2. {Context Item 2}
-  3. {Context Item 3}
+  1. {Context Item} 
+  2. {Context Item}
   </context>
   <templates>
-  1. {Template Reference 1}
-  2. {Template Reference 2}
-  3. {Template Reference 3}
+  1. {Template Reference}
   </templates>
 </input>
-```
 
-### 基本輸出結構
-```xml
 <output>
-1. {Output Item 1}
-2. {Output Item 2}
-3. {Output Item 3}
+1. {Output Specification}
+2. {Format Requirements}
 </output>
-```
 
-### 約束條件結構
-```xml
-<constraints, importance = "Normal">
-- {Constraint 1}
-- {Constraint 2}
-- {Constraint 3}
+<constraints importance="Normal">
+- MUST: {Hard Requirement}
+- SHOULD: {Preferred Approach}
 </constraints>
 ```
 
@@ -238,40 +316,49 @@ color: {Color}
 - 指令稀釋：同時要求過多目標（>5）導致回應表面完整、實則鬆散。
 - 缺乏邊界：未定義不得事項（security、PII、法律合規）。
 
-## 快速參考卡（Quick Reference Card）
+# 快速參考手冊 📚
 
-### 核心標籤速查
-| 標籤 | 用途 | 最佳實踐 |
+## 標籤速查表
+
+| 標籤 | 用途 | 数量/標準 |
 |------|------|----------|
-| `<input>` | 定義輸入要求 | 包含 `<context>` 和 `<templates>` |
-| `<output>` | 明確輸出格式 | 機器可讀、有明確欄位 |
-| `<constraints>` | 任務限制 | 3-5 條，可驗證 |
-| `<questions>` | 自我提問 | 2-3 個高價值問題 |
-| `<checks>` | 品質檢核 | 2-5 個可勾選項目 |
-| `<role>` | 角色設定 | 避免冗長背景故事 |
+| `<input>` | 輸入要求 | 必須包含 `<context>` |
+| `<output>` | 輸出格式 | 機器可讀結構 |
+| `<constraints>` | 硬性限制 | 3-5 條，可驗證 |
+| `<checks>` | 品質檢核 | 2-5 個可勾選 |
+| `<questions>` | 自檢問題 | 2-3 個高價值 |
+| `<role>` | 角色設定 | 簡潔明確 |
 | `<workflow>` | 工作流程 | 3-5 個階段 |
 
-### 重要性級別速查
-- **Optional**: 可選項目，資源充裕時執行
-- **Normal**: 標準優先級，按計劃執行  
-- **Important**: 影響整體品質，需優先分配資源
-- **Critical**: 關鍵項目，必須立即處理
+## 模板快選
 
-### 常用模板選擇器
-```
-需要角色扮演？ → agents
-需要子命令？   → commands  
-需要任務拆解？ → tasks
-```
+🤖 **agents** = 人格化角色  
+📝 **commands** = 互動子命令  
+✅ **tasks** = 流程拆解
 
-## 快速檢查表（出稿前自查）
-- [ ] <output> 是否定義了機器可讀的結構與欄位？
-- [ ] <constraints> 是否 3-5 條且可驗證、可度量？
-- [ ] <checks> 是否可逐項勾選且能明確判斷成敗？
-- [ ] 是否提供至少一組最小可用 <example>？
-- [ ] 是否保留 3-5 個關鍵 <stage>，每階段有產出與檢核？
-- [ ] 術語使用是否一致（參考術語對照表）？
-- [ ] 重要性級別是否明確且適當？
+## 優先等級
+
+🔴 **Critical** → 必須立即處理  
+🟡 **Important** → 影響整體品質  
+🟢 **Normal** → 標準優先級  
+⚪ **Optional** → 可選項目
+
+## 出稿前檢查清單 ✅
+
+### 必須項目
+- [ ] `<input>` 輸入要求明確具體
+- [ ] `<output>` 定義機器可讀的結構
+- [ ] `<constraints>` 3-5 條可驗證限制
+- [ ] `<checks>` 2-5 個可勾選檢核點
+
+### 加分項目
+- [ ] 提供實用 `<example>`
+- [ ] 包含 `<questions>` 自檢問題
+- [ ] 設定適當 importance 等級
+- [ ] 術語使用一致性
+
+### 最終確認
+❓ **問問自己：這份提示詞是否能產出一致、可驗證的結果？**
 
 ## commands 提示詞架構
 用於定義帶有可執行「子命令／工具」的工作說明。
@@ -404,23 +491,28 @@ color: {Color}
 </workflow>
 ```
 
-# 故障排除與最佳實踐（Troubleshooting & Best Practices）
+# 問題解決面板
 
-## 常見問題診斷與解決
+## 常見問題速查表
 
-### 問題 1: 模型回應不符預期格式
-**症狀**: 輸出格式混亂、缺少欄位或結構不正確  
-**診斷**: 檢查 `<output>` 是否足夠明確  
-**解決方案**:
-- 使用具體的格式範例，如 JSON schema
-- 在 `<constraints>` 中明確要求格式驗證
-- 提供失敗案例對比
+| 問題 | 症狀 | 快速修復 |
+|------|------|----------|
+| 格式混亂 | 輸出結構不一致 | 加入 JSON 範例到 `<output>` |
+| 約束無效 | 模型忽略限制 | 使用 MUST/SHOULD/MAY 優先級 |
+| 角色混亂 | 回應風格不穩 | 簡化角色描述，只保留核心特質 |
+| 流程不完整 | 跳過某些階段 | 每階段都要有明確產出要求 |
 
-**範例**:
+## 一鍵修復範例
+
+### 格式問題修復
 ```xml
+<!-- Before: 模糊要求 -->
+<output>Provide a good summary</output>
+
+<!-- After: 明確結構 -->
 <output>
-Format: JSON with fields: {title, summary, tags}
-Example: {"title": "Task Name", "summary": "Brief description", "tags": ["tag1", "tag2"]}
+Format: JSON {"title": string, "summary": string, "tags": array}
+Example: {"title": "Task Overview", "summary": "Brief description", "tags": ["urgent", "review"]}
 </output>
 ```
 
