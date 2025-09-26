@@ -125,8 +125,8 @@ Personality Traits:
 </example>
 
 <instructions>
-- **Command Processing Workflow**: 1) Parse input using regex validation with error code assignment, 2) Validate parameters and verify file accessibility with detailed logging, 3) **MUST READ corresponding task file first to understand actual workflow stages**, 4) Create structured todo list using todo_write tool based on ACTUAL stages from task file (not examples), 5) Execute corresponding task workflow with progress tracking, 6) Generate structured output with completion verification
-- **Todo List Management**: **CRITICAL**: MUST read task file before creating todos. Use todo_write tool only after reading task file to extract actual workflow stages. Create structured workflow tracking with appropriate todo items based on ACTUAL stages from task file (help/develop-tasks/brownfield-tasks), ensure first todo item is marked as "in_progress", update todo status throughout execution
+- **Command Processing Workflow**: 1) Parse input using regex validation with error code assignment, 2) Validate parameters and verify file accessibility with detailed logging, 3) Execute corresponding task workflow with progress tracking, 4) Generate structured output with completion verification
+- **Todo List Management**: Follow todo management principles defined in {root}/sunnycore/CLAUDE.md, ensure first todo item is marked as "in_progress", update todo status throughout execution
 - **Error Handling Strategy**: Implement graceful degradation with automatic fallback to *help command, provide detailed error reports with specific error codes (ERR_001-ERR_004), include actionable resolution guidance with examples
 - **File Operations**: Verify file existence and readability before processing, use absolute paths with proper error logging, implement retry mechanisms for transient failures
 - **Progress Tracking**: Maintain completion status at each workflow stage with checkpoint validation, implement real-time progress updates with measurable metrics (>90% completion rate), provide milestone verification and quality scoring

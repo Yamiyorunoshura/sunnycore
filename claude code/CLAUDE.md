@@ -56,8 +56,11 @@ pytest tests/
 ### Dynamic Todo List Management
 **Core Principle**: Commands generate initial todo lists; tasks execute and dynamically update them based on actual development situations
 
+#### Critical Prerequisites
+**MUST READ TASK FILES FIRST**: Before creating any todo lists, commands MUST read the corresponding task file (e.g., {root}/sunnycore/tasks/*.md) to understand the actual workflow stages and requirements. Todo lists MUST be based on ACTUAL stages from task files, not template examples.
+
 #### Todo List Lifecycle
-1. **Initial Creation**: Commands create structured todo lists using `todo_write` tool based on command type
+1. **Initial Creation**: Commands create structured todo lists using `todo_write` tool based on ACTUAL stages from corresponding task files
 2. **Dynamic Updates**: Tasks update todo status and add/modify items as development progresses
 3. **Stage-Based Organization**: Todo items organized by workflow stages for better tracking
 4. **Adaptive Management**: Adjust todo lists based on actual project complexities and discoveries
@@ -70,31 +73,33 @@ pytest tests/
 - **Stage Synchronization**: Ensure todo items align with current workflow stage execution
 
 #### Universal Todo Management Examples
+**IMPORTANT**: Examples below use variables to represent actual content from task files. Commands MUST read corresponding task files first to populate these variables.
+
 ```javascript
 // Initial Command Creation (Stage-based structure)
 [
-  {"id": "stage-1-setup", "content": "Stage 1: 讀取並分析需求文檔", "status": "in_progress"},
-  {"id": "stage-2-design", "content": "Stage 2: 設計系統架構", "status": "pending"},
-  {"id": "stage-3-implement", "content": "Stage 3: 實作核心功能", "status": "pending"}
+  {"id": "stage-1-{task_stage_1}", "content": "Stage 1: {stage_1_description_from_task_file}", "status": "in_progress"},
+  {"id": "stage-2-{task_stage_2}", "content": "Stage 2: {stage_2_description_from_task_file}", "status": "pending"},
+  {"id": "stage-N-{task_stage_n}", "content": "Stage N: {final_stage_description_from_task_file}", "status": "pending"}
 ]
 
 // Dynamic Updates During Task Execution
 // When complexity is discovered:
 [
-  {"id": "stage-1-setup", "content": "Stage 1: 讀取並分析需求文檔", "status": "completed"},
-  {"id": "stage-1-validation", "content": "Stage 1.1: 驗證需求完整性", "status": "in_progress"}, // Added
-  {"id": "stage-2-design", "content": "Stage 2: 設計系統架構", "status": "pending"},
-  {"id": "stage-2-database-design", "content": "Stage 2.1: 設計資料庫結構", "status": "pending"}, // Added
-  {"id": "stage-3-implement", "content": "Stage 3: 實作核心功能", "status": "pending"}
+  {"id": "stage-1-{task_stage_1}", "content": "Stage 1: {stage_1_description_from_task_file}", "status": "completed"},
+  {"id": "stage-1-{discovered_substage}", "content": "Stage 1.1: {discovered_requirement_description}", "status": "in_progress"}, // Added
+  {"id": "stage-2-{task_stage_2}", "content": "Stage 2: {stage_2_description_from_task_file}", "status": "pending"},
+  {"id": "stage-2-{discovered_subtask}", "content": "Stage 2.1: {additional_task_discovered}", "status": "pending"}, // Added
+  {"id": "stage-N-{task_stage_n}", "content": "Stage N: {final_stage_description_from_task_file}", "status": "pending"}
 ]
 
 // When tasks are completed or modified:
 [
-  {"id": "stage-1-setup", "content": "Stage 1: 讀取並分析需求文檔", "status": "completed"},
-  {"id": "stage-1-validation", "content": "Stage 1.1: 驗證需求完整性", "status": "completed"},
-  {"id": "stage-2-design", "content": "Stage 2: 設計系統架構", "status": "completed"},
-  {"id": "stage-2-database-design", "content": "Stage 2.1: 設計資料庫結構", "status": "in_progress"},
-  {"id": "stage-3-implement", "content": "Stage 3: 實作核心功能", "status": "pending"}
+  {"id": "stage-1-{task_stage_1}", "content": "Stage 1: {stage_1_description_from_task_file}", "status": "completed"},
+  {"id": "stage-1-{discovered_substage}", "content": "Stage 1.1: {discovered_requirement_description}", "status": "completed"},
+  {"id": "stage-2-{task_stage_2}", "content": "Stage 2: {stage_2_description_from_task_file}", "status": "completed"},
+  {"id": "stage-2-{discovered_subtask}", "content": "Stage 2.1: {additional_task_discovered}", "status": "in_progress"},
+  {"id": "stage-N-{task_stage_n}", "content": "Stage N: {final_stage_description_from_task_file}", "status": "pending"}
 ]
 ```
 

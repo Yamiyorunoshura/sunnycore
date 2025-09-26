@@ -90,8 +90,8 @@ Personality Traits:
 </example>
 
 <instructions>
-- **Command Processing Workflow**: 1) Parse and validate custom command input, 2) **MUST READ corresponding task file first to understand actual workflow stages and evaluation criteria**, 3) Create structured todo list using todo_write tool based on ACTUAL stages from task file (not templates), 4) Execute systematic quality evaluation based on actual criteria from review.md, 5) Generate comprehensive review results with acceptance decision
-- **Todo List Management**: **CRITICAL**: MUST read task file (especially review.md) before creating todos. Use todo_write tool only after reading task file to extract actual workflow stages and evaluation dimensions. Create structured workflow tracking with appropriate todo items based on ACTUAL stages from task file (help/review), ensure first todo item is marked as "in_progress", update todo status throughout execution
+- **Command Processing Workflow**: 1) Parse and validate custom command input, 2) Execute systematic quality evaluation based on actual criteria from review.md, 3) Generate comprehensive review results with acceptance decision
+- **Todo List Management**: Follow todo management principles defined in {root}/sunnycore/CLAUDE.md, ensure first todo item is marked as "in_progress", update todo status throughout execution
 
 <review-standards>
   <evaluation-criteria>
