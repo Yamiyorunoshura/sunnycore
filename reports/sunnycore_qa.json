@@ -1,0 +1,131 @@
+{
+  "metadata": {
+    "prompt_name": "sunnycore_qa",
+    "review_date": "2025-09-28",
+    "reviewer": "Prompt Quality Evaluator"
+  },
+  "overall_score": 94.0,
+  "grade": "Excellence",
+  "dimensions": {
+    "correctness": {
+      "score": 90,
+      "evidence": "<input> 僅含 <context>/<rules>（L13-L20），未含 <templates>/<tasks> 參照；與指南 commands 模板（guide L396-L412）略有落差。其他標籤（如 <start-sequence>、<custom-commands>、<constraints>）對齊指南（guide L388-L446）。",
+      "issues": [
+        "CR-01 (moderate): <input> 缺少 <templates> 與 <tasks> 參照"
+      ]
+    },
+    "clarity": {
+      "score": 92,
+      "evidence": "TL;DR 與 <start-sequence> 4 步明確，<output> 提供 Format/Example（L22-L29）。'Complete all Milestone Checkpoints'（L49-L54）未具體量化驗收標準。",
+      "issues": [
+        "CL-01 (minor): 里程碑完成條件缺少可驗證標準"
+      ]
+    },
+    "cognitive_load": {
+      "score": 90,
+      "evidence": "內容完整、段落分明；惟標準段落較長（L97-L218, L220-L239），可抽為共享模板以降低掃描成本。",
+      "issues": [
+        "CG-01 (minor): 標準說明篇幅長、交叉引用多"
+      ]
+    },
+    "reasoning_guidance": {
+      "score": 100,
+      "evidence": "具體的 <start-sequence>、<checks>、決策規則與錯誤處理，提供步驟與驗證導向。",
+      "issues": []
+    },
+    "alignment": {
+      "score": 100,
+      "evidence": "角色與意圖一致；語言與結構遵循專案指南，未見政策衝突。",
+      "issues": []
+    },
+    "completeness": {
+      "score": 90,
+      "evidence": "核心標籤齊全；唯 `<input>` 未含 `<templates>`/`<tasks>` 參照為輕度缺口。",
+      "issues": [
+        "CP-01 (moderate): 未列 <templates>/<tasks> 於 <input>"
+      ]
+    },
+    "constraint_design": {
+      "score": 92,
+      "evidence": "多數 MUST 條款可驗證（如第一個 todo 為 in_progress、輸出包含 Format/Example、英文比例門檻），里程碑與更新頻率可再量化。",
+      "issues": [
+        "CD-01 (minor): 部分 MUST 欄位未附量化指標"
+      ]
+    },
+    "user_experience": {
+      "score": 98,
+      "evidence": "結構清楚、示例充分、格式一致，實際採用成本低。",
+      "issues": []
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "high",
+      "action": "於 <input> 補充 <templates> 與 <tasks> 參照清單以符合 commands 模板",
+      "impact": "提升正確性與完整性，便於發現依賴並自動化檢查",
+      "implementation": "在 <input> 內新增 <templates> 指向 'claude code/templates/*'；新增 <tasks> 指向相關任務文件（例如 sunnycore/tasks/*.md）",
+      "change_scope": "targeted",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "correctness, completeness"
+    },
+    {
+      "priority": "medium",
+      "action": "將 'Complete all Milestone Checkpoints' 量化為可驗證清單",
+      "impact": "降低執行歧義並提升驗收一致性",
+      "implementation": "在 <checks> 或 <constraints> 中加入具體項（列出里程碑與通過條件，如 traceability 確認、coverage≥80% 等）",
+      "change_scope": "targeted",
+      "semantic_preservation": "requires_care",
+      "dimension_affected": "clarity, constraint_design"
+    },
+    {
+      "priority": "medium",
+      "action": "將冗長的標準說明抽成共享模板（透過 <templates> 引用）",
+      "impact": "降低掃描成本、提升重用與維護性",
+      "implementation": "把 review-standards/quality-matrix 等段落萃取為模板檔，於本命令以 <templates> 參照",
+      "change_scope": "targeted",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "cognitive_load, user_experience"
+    },
+    {
+      "priority": "low",
+      "action": "為 MUST 條款補充量化指標（如最少 todo 數、文件列表必讀項）",
+      "impact": "提高約束可測性與執行一致性",
+      "implementation": "將 'update status at each stage' 擴寫為 '每次階段切換均更新一次（≥N 次）' 等",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "constraint_design"
+    }
+  ],
+  "advisory_suggestions": [
+    {
+      "approach": "引入 <workflow>（3-4 階段）對齊 <start-sequence>，並在最後一階段整合驗收 <checks>",
+      "rationale": "統一語意與視覺掃描結構，讓產出/檢核點更明確",
+      "implementation_consideration": "每階段不超過 3 個關鍵步驟，維持簡潔",
+      "user_acceptance_required": true
+    },
+    {
+      "approach": "把 'review-standards' 與 'quality-matrix' 重構為共享模板並版本化",
+      "rationale": "促進跨命令重用，避免重複維護",
+      "implementation_consideration": "以 <templates> 索引並在發版時更新引用版本",
+      "user_acceptance_required": true
+    }
+  ],
+  "strengths": [
+    "結構化明確（start-sequence、checks、Format/Example）可直接落地",
+    "涵蓋完整的評估維度與決策規則，風險矩陣清楚",
+    "錯誤處理與優先級指南完善，有助於一致執行",
+    "使用者體驗佳，段落與清單組織良好"
+  ],
+  "summary": "整體評級 Excellence（94.0）。主要改進：在 <input> 補足 <templates>/<tasks> 參照、將里程碑與 MUST 條款量化、抽取長段標準為模板以降低掃描負擔。皆屬最小與定向變更，可在不改變語意前提下提升正確性、完整性與一致性。",
+  "scoring_example": {
+    "dimension": "clarity",
+    "base_score": 100,
+    "deductions": [
+      {"points": 8, "reason": "里程碑語句未量化（L49-L54），造成驗收歧義"}
+    ],
+    "final_score": 92,
+    "rationale": "目標清楚但仍有一處可測性不足"
+  },
+  "calculation_note": "overall_score = 平均(8 維度分數) = 94.0"
+}
+

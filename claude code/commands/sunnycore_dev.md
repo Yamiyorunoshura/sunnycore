@@ -17,9 +17,6 @@ TL;DR / Quick Execution Checklist:
   <rules>
   1. {root}/sunnycore/CLAUDE.md - rules for all the actions
   </rules>
-  <templates>
-  1. {root}/sunnycore/templates/ - Standardized project templates for consistent output formatting
-  </templates>
 </input>
 
 <output>

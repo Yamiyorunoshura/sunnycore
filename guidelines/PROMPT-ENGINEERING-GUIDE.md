@@ -35,7 +35,6 @@
 **`<input>`** – 任務輸入容器
 - `<context>` – 背景資料（必須具體可引用）  
 - `<templates>` – 模板列表
-- `<tasks>` – 任務流程  
 - `<rules>` – 規則
 
 **`<output>`** – 輸出格式定義（必須機器可讀）
@@ -292,11 +291,11 @@ color: {Color}
   2. {Context Item 2}
   3. {Context Item 3}
   </context>
-  <templates>
-  1. {Template Reference 1}
-  2. {Template Reference 2}
-  3. {Template Reference 3}
-  </templates>
+  <rules>
+  1. {Rule Reference 1}
+  2. {Rule Reference 2}
+  3. {Rule Reference 3}
+  </rules>
 </input>
 
 <output>
@@ -399,16 +398,11 @@ color: {Color}
   2. {Context Item 2}
   3. {Context Item 3}
   </context>
-  <templates>
-  1. {Template Reference 1}
-  2. {Template Reference 2}
-  3. {Template Reference 3}
-  </templates>
-  <tasks>
-  1. {Task Reference 1}
-  2. {Task Reference 2}
-  3. {Task Reference 3}
-  </tasks>
+  <rules>
+  1. {Rule Reference 1}
+  2. {Rule Reference 2}
+  3. {Rule Reference 3}
+  </rules>
 </input>
 
 <output>
@@ -463,11 +457,6 @@ color: {Color}
   2. {Template Reference 2}
   3. {Template Reference 3}
   </templates>
-  <subagent-list>
-    <subagent name="{Subagent 1}"/>
-    <subagent name="{Subagent 2}"/>
-    <subagent name="{Subagent 3}"/>
-  </subagent-list>
 </input>
 
 <output>
