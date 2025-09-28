@@ -1,0 +1,124 @@
+{
+  "metadata": {
+    "prompt_name": "sunnycore_pm",
+    "review_date": "2025-09-26",
+    "reviewer": "Prompt Quality Evaluator"
+  },
+  "overall_score": 93,
+  "grade": "Excellence",
+  "dimensions": {
+    "correctness": {
+      "score": 94,
+      "evidence": "Conforms to commands template: '<start-sequence>' present (claude code/commands/sunnycore_pm.md L1-L6); '<custom-commands>' used with structured <command/> entries (L44-L51); machine-readable <output> JSON defined (L17-L25); <checks> present (L105-L110). External reference '{root}/sunnycore/CLAUDE.md' (L13-L14) may be environment-specific.",
+      "issues": [
+        "CR-01 (minor): External reference may be missing in some repos; add fallback guidance"
+      ]
+    },
+    "clarity": {
+      "score": 93,
+      "evidence": "Constraints define 'Milestone Checkpoints' as 'per-stage required outputs produced and all checks passed' (L39-L41). TODO timing clarified: 'immediately after reading the task file and before executing Stage 1; never during command identification' (L41-L42).",
+      "issues": [
+        "CL-01 (minor): Add a brief inline definition/link for 'Milestone Checkpoints' in <instructions> for quick recall"
+      ]
+    },
+    "cognitive_load": {
+      "score": 92,
+      "evidence": "Four-step start sequence (L2-L5), well-chunked sections, and concise example templates (L53-L96) keep working-memory demand low.",
+      "issues": []
+    },
+    "reasoning_guidance": {
+      "score": 90,
+      "evidence": "Stepwise flow via <start-sequence> (L2-L5); actionable examples (L53-L96); quality gates in <instructions> (L97-L103); explicit acceptance checks (L105-L110).",
+      "issues": [
+        "RG-01 (minor): Consider adding an acceptance item to require evidence-citations when applicable"
+      ]
+    },
+    "alignment": {
+      "score": 94,
+      "evidence": "Role 'Jason' aligns with PM scope (L27-L35). Language/structure follow guide; importance uses allowed enum 'Critical' (guide L218-L223).",
+      "issues": [
+        "AL-01 (minor): Guide shows both '<custom-commands>' and '<custom_commands>'; clarify canonical form to avoid confusion"
+      ]
+    },
+    "completeness": {
+      "score": 95,
+      "evidence": "Includes required tags for a commands prompt: <start-sequence>, <input>, <output>, <role>, <constraints>, <custom-commands>, <example>, <instructions>, and <checks>. Output specs and examples are present (L17-L25, L53-L96, L105-L110).",
+      "issues": []
+    },
+    "constraint_design": {
+      "score": 92,
+      "evidence": "Four MUST constraints (L37-L42) are verifiable, including a precise definition for Milestone Checkpoints and timing rules for TODO creation.",
+      "issues": [
+        "CD-01 (minor): Reiterate measurability by linking checkpoints to specific artifacts (JSON + TODO updates)"
+      ]
+    },
+    "user_experience": {
+      "score": 93,
+      "evidence": "Readable headings, bullets, and code-fenced examples. Consistent structure makes adoption straightforward.",
+      "issues": [
+        "UX-01 (minor): Add a one-line reminder about canonical tag naming to aid quick scanning"
+      ]
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "high",
+      "action": "Clarify canonical tag naming for commands (prefer '<custom-commands>' consistently).",
+      "impact": "Removes ambiguity from mixed guide references and ensures parser consistency.",
+      "implementation": "In <instructions> or <checks>, add: 'Tag naming canonicalization: use <start-sequence> and <custom-commands>.'",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "correctness"
+    },
+    {
+      "priority": "high",
+      "action": "Add a fallback reference for '{root}/sunnycore/CLAUDE.md' when absent.",
+      "impact": "Prevents execution blocking in repos lacking that file; improves portability.",
+      "implementation": "Append to <rules>: 'If missing, consult docs/configuration-guide.md and guidelines/PROMPT-ENGINEERING-GUIDE.md.'",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "correctness"
+    },
+    {
+      "priority": "medium",
+      "action": "Add one acceptance item requiring evidence citations when applicable.",
+      "impact": "Strengthens verification and auditability of runs.",
+      "implementation": "Under <checks>, add: '[ ] Evidence includes minimal quotes with line numbers when available.'",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "reasoning_guidance"
+    },
+    {
+      "priority": "medium",
+      "action": "Reference checkpoint artifacts explicitly.",
+      "impact": "Improves constraint measurability and traceability.",
+      "implementation": "Clarify that checkpoints are satisfied when JSON report saved and TODO statuses updated for each stage.",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "constraint_design"
+    }
+  ],
+  "advisory_suggestions": [
+    {
+      "approach": "Introduce a brief <questions> block (2-3 items).",
+      "rationale": "Supports self-check before execution per guide; optional but helpful.",
+      "implementation_consideration": "Focus on inputs completeness, assumptions, and success criteria.",
+      "user_acceptance_required": true
+    },
+    {
+      "approach": "Standardize code-fence language hints (e.g., json) in examples where appropriate.",
+      "rationale": "Slightly improves readability and copy-paste accuracy.",
+      "implementation_consideration": "Apply to <output> example blocks without altering semantics.",
+      "user_acceptance_required": true
+    }
+  ],
+  "strengths": [
+    "Clear PM role and actionable constraints",
+    "Machine-readable output with concrete JSON examples",
+    "Explicit checks ensuring execution integrity",
+    "Concise, well-chunked structure with helpful templates"
+  ],
+  "summary": "Excellence (93). The prompt is structurally strong, complete, and aligned with the guide. Minor improvements include clarifying canonical tag naming, adding a fallback for external references, and enhancing verification via evidence-citation checks. Overall score = mean of 8 dimension scores."
+}
+
+
