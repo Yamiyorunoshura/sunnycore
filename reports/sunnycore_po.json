@@ -1,0 +1,213 @@
+{
+  "metadata": {
+    "prompt_name": "sunnycore_po",
+    "review_date": "2025-09-28T00:00:00Z",
+    "reviewer": "Prompt Quality Evaluator"
+  },
+  "overall_score": 90,
+  "grade": "Excellence",
+  "dimensions": {
+    "correctness": {
+      "score": 88,
+      "evidence": "Uses canonical <custom-commands> (L41-L43) consistent with commands template; guide L221 mentions <custom_commands> creating a minor naming conflict.",
+      "issues": [
+        "CR-01 (moderate): Guide L221 recommends <custom_commands> while prompt enforces <custom-commands> (L41-L43); standardize to one canonical form."
+      ]
+    },
+    "clarity": {
+      "score": 92,
+      "evidence": "Objectives, I/O schema, checks, and constraints are explicit (L18-L26, L58-L64). Term 'canonical' (L41) can be more explicit.",
+      "issues": [
+        "CL-01 (minor): Ambiguous term 'canonical' (L41); replace with explicit rule 'Use <custom-commands>'."
+      ]
+    },
+    "cognitive_load": {
+      "score": 85,
+      "evidence": "Well-structured sections; two outputs each provide Format+Example. Constraints list has 6 items (L37-L43), exceeding the 3-5 guideline.",
+      "issues": [
+        "CG-01 (minor): 6 constraints present (L37-L43); reduce or merge to meet 3-5 recommended range."
+      ]
+    },
+    "reasoning_guidance": {
+      "score": 90,
+      "evidence": "Start sequence, checks, and instructions provide a stepwise flow and verification (L1-L5, L58-L64, L132-L141).",
+      "issues": []
+    },
+    "alignment": {
+      "score": 94,
+      "evidence": "PO role and stakeholder orientation are clear (L28-L35, L42). Structure aligns with the commands template.",
+      "issues": []
+    },
+    "completeness": {
+      "score": 95,
+      "evidence": "Contains start-sequence, input, output, role, constraints, custom-commands, questions, checks, example, and instructions (e.g., L1-L5, L18-L26, L45-L50, L52-L64, L66-L130, L132-L141).",
+      "issues": []
+    },
+    "constraint_design": {
+      "score": 87,
+      "evidence": "MUST/SHOULD priorities used with measurable checks (e.g., exists==true AND readable==true; first todo in_progress; ISO8601). One 'SHOULD' is not testable (L42).",
+      "issues": [
+        "CD-01 (minor): 'SHOULD maintain product management perspective' (L42) is not directly testable; move to instructions or define a measurable indicator.",
+        "CD-02 (minor): Exceeds the recommended 3-5 constraints; consolidate to core MUST items."
+      ]
+    },
+    "user_experience": {
+      "score": 90,
+      "evidence": "Headings, bullets, and JSON example (L97-L129) aid scannability; minor verbosity remains acceptable.",
+      "issues": [
+        "UX-01 (minor): Slight verbosity across sections; compress phrasing where safe without altering required 'Format'/'Example' lines."
+      ]
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "high",
+      "action": "Standardize tag naming to <custom-commands> and remove the term 'canonical'.",
+      "impact": "Eliminates naming conflict vs guide; prevents tool/parser ambiguity.",
+      "implementation": "Replace L41 text to: 'MUST use <start-sequence> and <custom-commands> with structured children; do not use <custom_commands>.'",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "correctness"
+    },
+    {
+      "priority": "high",
+      "action": "Reduce constraints to 3-5 core MUST items; demote non-testable items to instructions.",
+      "impact": "Lowers cognitive load and improves enforceability.",
+      "implementation": "Keep file validation, todo sequencing, JSON schema compliance, and tag usage as MUST; move stakeholder perspective guidance to <instructions>.",
+      "change_scope": "targeted",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "constraint_design"
+    },
+    {
+      "priority": "medium",
+      "action": "Make 'SHOULD' guidance measurable or relocate to instructions.",
+      "impact": "Improves testability and reviewer consistency.",
+      "implementation": "E.g., 'SHOULD provide 3 stakeholder-focused recommendations in guidance' or move to <instructions>.",
+      "change_scope": "targeted",
+      "semantic_preservation": "requires_care",
+      "dimension_affected": "constraint_design"
+    },
+    {
+      "priority": "medium",
+      "action": "Tighten phrasing to reduce verbosity while preserving structure.",
+      "impact": "Better scannability without changing behavior.",
+      "implementation": "Shorten repeated qualifiers; keep 'Format' and 'Example' lines intact per requirement.",
+      "change_scope": "minimal",
+      "semantic_preservation": "guaranteed",
+      "dimension_affected": "user_experience"
+    }
+  ],
+  "advisory_suggestions": [
+    {
+      "approach": "Align project guide at L221 to use <custom-commands> (hyphen) for consistency across all templates.",
+      "rationale": "Removes cross-document inconsistency and avoids parser confusion.",
+      "implementation_consideration": "Update the 'Naming and Tag Conventions' section to match the commands template; announce in changelog.",
+      "user_acceptance_required": true
+    },
+    {
+      "approach": "Optionally add a concise <workflow> block with 3 stages to mirror execution at a glance.",
+      "rationale": "Improves navigability for new users without changing behavior.",
+      "implementation_consideration": "Keep each stage ≤3 steps; reference existing checks.",
+      "user_acceptance_required": true
+    },
+    {
+      "approach": "Introduce a CI lint rule to verify presence of required 'Format' and 'Example' lines under every <output> item.",
+      "rationale": "Prevents regressions; enforces machine-readability.",
+      "implementation_consideration": "Static check over markdown/XML blocks in commands directory.",
+      "user_acceptance_required": true
+    }
+  ],
+  "strengths": [
+    "Clear, machine-readable JSON output schema with concrete example.",
+    "Strong, testable constraints (file validation, todo sequencing, ISO8601).",
+    "Product Owner role framing with stakeholder-oriented guidance.",
+    "Checks and questions provide verification and self-audit anchors."
+  ],
+  "summary": "Overall score 90 (Excellence). Method: arithmetic mean across 8 dimensions. Strengths: rigorous JSON schema, measurable constraints, and stakeholder alignment. Key fixes: standardize <custom-commands> naming, reduce constraints to 3-5 core MUST items, and tighten phrasing. Example scoring: Clarity = 100 - 8 (ambiguous 'canonical') = 92."
+}
+
+{
+  "metadata": {
+    "prompt_name": "sunnycore_po",
+    "review_date": "2025-09-28",
+    "reviewer": "Prompt Quality Evaluator"
+  },
+  "overall_score": 84,
+  "grade": "Good",
+  "dimensions": {
+    "correctness": {
+      "score": 74,
+      "evidence": "Uses <custom_commands> vs guide prefers <custom-commands>; lacks structured <tools>/<custom-commands> child tags per guide lines 221, 426-429.",
+      "issues": [
+        {"code": "CR-01", "severity": "moderate", "detail": "Tag naming deviates from guide: uses <custom_commands> not <custom-commands> (guide 221, 426-429)."},
+        {"code": "CR-02", "severity": "minor", "detail": "Workflow stage id format not strictly 'n: snake_case' as recommended (guide 219)."}
+      ]
+    },
+    "clarity": {
+      "score": 86,
+      "evidence": "Objectives and sequences are explicit; minor ambiguity in 'MUST create todo lists ONLY when executing custom commands...' could be clarified for exception handling.",
+      "issues": [
+        {"code": "CL-01", "severity": "minor", "detail": "Ambiguous exception cases for todo creation timing; specify detection vs execution phases."}
+      ]
+    },
+    "cognitive_load": {
+      "score": 90,
+      "evidence": "Concise lists; ~4-6 bullets per section; minimal redundancy.",
+      "issues": []
+    },
+    "reasoning_guidance": {
+      "score": 84,
+      "evidence": "Provides examples and output JSON; lacks explicit acceptance criteria checks beyond general guidelines.",
+      "issues": [
+        {"code": "RG-01", "severity": "minor", "detail": "Add explicit verification checklist for command execution success and error handling."}
+      ]
+    },
+    "alignment": {
+      "score": 90,
+      "evidence": "Role, intent, and product-owner orientation consistent; language of prompt in English acceptable within file despite guide Chinese doc rule applying to guide itself.",
+      "issues": []
+    },
+    "completeness": {
+      "score": 78,
+      "evidence": "Has <input>, <output>, <constraints>, <example>, <instructions>; lacks explicit <checks> block and <questions> where recommended.",
+      "issues": [
+        {"code": "CP-01", "severity": "moderate", "detail": "No <checks> acceptance list for command run session."},
+        {"code": "CP-02", "severity": "minor", "detail": "No <questions> self-check prompts for edge cases."}
+      ]
+    },
+    "constraint_design": {
+      "score": 82,
+      "evidence": "Constraints use MUST and are testable, but some are process-oriented without measurable success metric.",
+      "issues": [
+        {"code": "CD-01", "severity": "minor", "detail": "Add measurable criteria (e.g., 'first todo marked in_progress', 'save report file path exists')."}
+      ]
+    },
+    "user_experience": {
+      "score": 88,
+      "evidence": "Readable sections, clear headings, example JSON; small tag naming inconsistency may confuse reuse.",
+      "issues": [
+        {"code": "UX-01", "severity": "minor", "detail": "Standardize tag spelling to match guide for transferability."}
+      ]
+    }
+  },
+  "recommendations": [
+    {"priority": "high", "action": "Rename <custom_commands> to <custom-commands> and use child <command name=... description=.../>", "impact": "Aligns with project-wide tag schema; prevents parser mismatch.", "implementation": "Replace tag names; add structured child items per guide lines 426-429.", "change_scope": "minimal", "semantic_preservation": "guaranteed", "dimension_affected": "correctness"},
+    {"priority": "medium", "action": "Add <checks> block listing 3-5 acceptance items for execution.", "impact": "Improves verification and repeatability.", "implementation": "Include checks for todo creation, status transitions, and JSON output saved.", "change_scope": "targeted", "semantic_preservation": "guaranteed", "dimension_affected": "completeness"},
+    {"priority": "medium", "action": "Introduce <questions> self-check with 2-3 items for edge cases.", "impact": "Enhances reasoning and robustness.", "implementation": "Add questions about task file existence, readability, and naming rules.", "change_scope": "targeted", "semantic_preservation": "guaranteed", "dimension_affected": "reasoning_guidance"},
+    {"priority": "low", "action": "Clarify todo creation timing sentence to separate detection vs execution phases.", "impact": "Reduces ambiguity.", "implementation": "Specify 'Do not create todos during command-identification; create after task file validation passes.'", "change_scope": "minimal", "semantic_preservation": "guaranteed", "dimension_affected": "clarity"},
+    {"priority": "low", "action": "Add measurable criteria into constraints.", "impact": "Improves enforceability.", "implementation": "E.g., 'Ensure first todo status == in_progress; ensure report saved at absolute path'.", "change_scope": "minimal", "semantic_preservation": "requires_care", "dimension_affected": "constraint_design"}
+  ],
+  "advisory_suggestions": [
+    {"approach": "Add <tools> with explicit tool entries used in workflow.", "rationale": "Makes tool usage auditable and reproducible.", "implementation_consideration": "List todo_write, read_file as <tool name=.../>.", "user_acceptance_required": true},
+    {"approach": "Provide a compact TL;DR checklist inside <instructions>.", "rationale": "Further reduces cognitive load for operators.", "implementation_consideration": "3 bullets max.", "user_acceptance_required": true}
+  ],
+  "strengths": [
+    "Clear PO role focus and stakeholder mindset",
+    "Good output example JSON for machine-readability",
+    "Well-structured constraints emphasizing sequential execution",
+    "Concise, scannable sections"
+  ],
+  "summary": "Overall Good (84). Main gap is schema correctness vs guide (<custom-commands> naming) and missing <checks>/<questions>. Minimal edits will raise correctness and completeness; add measurable criteria to strengthen constraint enforcement."
+}
+
+
