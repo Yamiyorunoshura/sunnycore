@@ -26,7 +26,7 @@
   <tools>
   - read_file: Review implementation plan and review results documents
   - Sequential Thinking Tool: Decompose complex issues and analyze root causes
-  - Claude Context Management: Load large review documents in segments if needed
+  - Claude-Context: Load large review documents in segments if needed
   </tools>
   - Read the review results document
   - Analyse current issues and root causes

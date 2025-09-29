@@ -26,7 +26,7 @@
   <tools>
   - sequential_thinking
   - todo_write
-  - Claude Context Management: Process large architecture corpus in segments
+  - Claude-Context: Process large architecture corpus in segments
   </tools>
   - Examine the current architecture under {root}/docs/architecture/*.md.
   - Identify extension points, constraints, and shared services.

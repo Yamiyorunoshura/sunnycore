@@ -1,0 +1,37 @@
+{
+  "metadata": {
+    "prompt_name": "sunnycore_dev",
+    "review_date": "2025-09-28",
+    "reviewer": "Prompt Quality Evaluator",
+    "version": "v1.0"
+  },
+  "overall_score": 92.38,
+  "grade": "Excellent",
+  "dimensions": {
+    "correctness": { "score": 92, "evidence": "Commands template tags present; JSON Schema + validation intent; inert handling enforced.", "issues": [] },
+    "clarity": { "score": 92, "evidence": "Concise steps, examples, and error cases; outputs and todo format clear.", "issues": [] },
+    "cognitive_load": { "score": 93, "evidence": "≤4 main phases; scannable bullets; minimal branching.", "issues": [] },
+    "reasoning_guidance": { "score": 91, "evidence": "Checks placed in final stage; averaging/rounding rules specified.", "issues": [] },
+    "alignment": { "score": 93, "evidence": "Guide-compliant tags, enums, IDs; language policy observed.", "issues": [] },
+    "completeness": { "score": 92, "evidence": "Includes input/output/constraints/example/instructions; error handling and SLA.", "issues": [] },
+    "constraint_design": { "score": 93, "evidence": "Measurable MUST/SHOULD; JSON strictness; performance SLAs.", "issues": ["No explicit JSON auto-retry count stated in constraints."] },
+    "user_experience": { "score": 93, "evidence": "Scannable structure; quick checklist; actionable wording.", "issues": [] }
+  },
+  "recommendations": [
+    { "priority": "medium", "item": "Add explicit JSON validation retry policy (e.g., retry up to 2 times)." },
+    { "priority": "medium", "item": "Consider adding <guardrails> with anti-injection tests and refusal templates." },
+    { "priority": "low", "item": "If migrating to tasks template, ensure stage IDs use 'n: snake_case'." }
+  ],
+  "advisory_suggestions": [
+    "Include optional <tools> section with parameters/returns schemas if tools are invoked.",
+    "Add brief success criteria summary at the end of instructions."
+  ],
+  "strengths": [
+    "Well-structured commands template with clear start-sequence.",
+    "Strict JSON Schema and measurable constraints.",
+    "Clear error handling and SLA guidance.",
+    "Readable, concise, and task-focused."
+  ],
+  "summary": "Strong, guide-compliant command prompt. Clear structure, measurable constraints, and validation focus. Minor improvements: explicit JSON auto-retry, add guardrails, and optional tools schema."
+}
+

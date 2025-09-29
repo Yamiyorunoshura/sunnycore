@@ -1,8 +1,3 @@
-TL;DR / Quick Execution Checklist:
-1) Read required input files and the specified task file
-2) Create a structured todo list from task stages; set the first item to in_progress
-3) Execute stages sequentially; update todo statuses in real time
-
 <start-sequence>
   <step index="1">MUST read all required input files specified in context and templates sections before proceeding with any command execution</step>
   <step index="2">MUST read the corresponding task file (e.g., {root}/sunnycore/tasks/develop-tasks.md, {root}/sunnycore/tasks/brownfield-tasks.md, {root}/sunnycore/tasks/help.md) to understand the specific workflow stages and requirements</step>

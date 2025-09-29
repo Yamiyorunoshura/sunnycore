@@ -54,7 +54,7 @@
   <tools>
   - todo_write
   - Sequential Thinking Tool: Systematically analyze NFRs across performance, security, and compliance domains
-  - Claude Context Management: Process large requirement documents in segments
+  - Claude-Context: Process large requirement documents in segments
   </tools>
   - Identify non-functional requirements across performance, reliability, security, compliance, and operability.
   - Quantify targets (e.g., P95 latency, uptime SLO, RTO/RPO) and constraints.

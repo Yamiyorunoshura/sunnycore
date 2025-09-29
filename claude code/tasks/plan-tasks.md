@@ -25,7 +25,7 @@
   <tools>
   - sequential_thinking
   - todo_write
-  - Claude Context Management: Process large documents in segments if needed
+  - Claude-Context: Process large documents in segments if needed
   </tools>
   - Read all working steps and requirements documents
   - Establish TDD cycle structure for task planning

@@ -32,7 +32,7 @@
   <tools>
   - sequential_thinking
   - todo_write
-  - Claude Context Management: Process large plan documents in segments
+  - Claude-Context: Process large plan documents in segments
   </tools>
   - Read and understand the implementation plan
   - Identify verification approach and success criteria
@@ -47,7 +47,7 @@
   <tools>
   - todo_write
   - Sequential Thinking Tool: Systematically analyze code against plan specifications
-  - Claude Context Management: Process large plan documents in segments
+  - Claude-Context: Process large plan documents in segments
   </tools>
   - Read and understand all production code
   - Execute all tests created during develop tasks phase and document results

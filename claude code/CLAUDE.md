@@ -464,7 +464,7 @@ pytest tests/
 ```
 **Guidelines**: After execution, summarize the actions and retrieved data, explaining how they relate to the task.
 
-### Claude Context Management
+### Claude-Context
 **Use Cases**:
 - brownfield-tasks
 - create-brownfield-architecture

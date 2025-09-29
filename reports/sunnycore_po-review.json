@@ -1,0 +1,81 @@
+{
+  "metadata": {
+    "prompt_name": "sunnycore_po",
+    "review_date": "2025-09-29",
+    "reviewer": "Prompt Quality Evaluator",
+    "version": "v1.0",
+    "prompt_type": "commands"
+  },
+  "overall_score": 92.13,
+  "grade": "Excellent",
+  "dimensions": {
+    "correctness": {
+      "score": 92,
+      "evidence": "Commands template with <start-sequence>, <input>, <output> (JSON Schema+Example), <role>, <custom-commands>, <constraints>, <tools> present.",
+      "issues": []
+    },
+    "clarity": {
+      "score": 93,
+      "evidence": "Sections are concise, scannable; examples illustrate expected outputs.",
+      "issues": [
+        "Some examples are verbose; could keep a minimal sample."
+      ]
+    },
+    "cognitive_load": {
+      "score": 90,
+      "evidence": "Clear headings and numbered items; schema-driven outputs reduce ambiguity.",
+      "issues": [
+        "Lengthy examples slightly increase reading effort."
+      ]
+    },
+    "reasoning_guidance": {
+      "score": 91,
+      "evidence": "<questions> and explicit checks in outputs guide verification and execution order.",
+      "issues": []
+    },
+    "alignment": {
+      "score": 92,
+      "evidence": "Matches commands architecture in the guide; proper use of <custom-commands> and canonical tags.",
+      "issues": [
+        "Naming of <custom-commands> vs guide's <custom_commands> could be unified."
+      ]
+    },
+    "completeness": {
+      "score": 94,
+      "evidence": "Includes all core components; output schemas + examples for both items.",
+      "issues": []
+    },
+    "constraint_design": {
+      "score": 92,
+      "evidence": "Measurable constraints (file checks, JSON validation, retries, canonical tags).",
+      "issues": [
+        "Consider adding explicit retry count and validation strategy under <instructions>."
+      ]
+    },
+    "user_experience": {
+      "score": 93,
+      "evidence": "Scannable structure, concrete schemas, actionable guidance; easy to operationalize.",
+      "issues": []
+    }
+  },
+  "recommendations": [
+    { "priority": "medium", "item": "Add a top-level <checks> with JSON validation, todo state, and absolute-path checks." },
+    { "priority": "medium", "item": "Augment <tools> with parameters/returns schemas and on-failure/retries per guide." },
+    { "priority": "low", "item": "Unify <custom-commands> naming with guide’s <custom_commands> or document both as acceptable." },
+    { "priority": "low", "item": "Trim examples to a minimal valid sample to reduce cognitive load." },
+    { "priority": "low", "item": "Optionally add <guardrails> for injection resistance and refusal patterns." }
+  ],
+  "advisory_suggestions": [
+    "Include a minimal end-to-end sample that passes all checks.",
+    "Document decision priority: System > template constraints > role > user request."
+  ],
+  "strengths": [
+    "Well-structured commands template with clear sections.",
+    "Strong, testable constraints and JSON Schema outputs.",
+    "Actionable <custom-commands> definitions with role clarity.",
+    "Explicit tool declaration for todo management."
+  ],
+  "summary": "High-quality commands prompt: structurally correct, schema-driven, and operational. Minor refinements on naming consistency, tools detail, and example brevity could further improve usability."
+}
+
+

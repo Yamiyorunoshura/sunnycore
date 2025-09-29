@@ -29,7 +29,7 @@
   <tools>
   - sequential_thinking
   - todo_write
-  - Claude Context Management: Process large implementation plans in segments
+  - Claude-Context: Process large implementation plans in segments
   </tools>
   - Read all working steps and the TDD-based implementation plan from plan-tasks phase
   - Extract acceptance criteria and test conditions defined in the implementation plan
@@ -39,7 +39,7 @@
   <tools>
   - todo_write
   - Sequential Thinking Tool: Design test scenarios and edge cases systematically
-  - Claude Context Management: 
+  - Claude-Context: 
   </tools>
   - Implement test cases based on acceptance criteria from the implementation plan (RED phase)
   - Convert each acceptance criterion into executable test code
@@ -57,7 +57,7 @@
   <tools>
   - todo_write
   - Sequential Thinking Tool: Design simple solutions that make tests pass
-  - Claude Context Management: 
+  - Claude-Context: 
   </tools>
   - Implement minimal code to make tests pass (GREEN phase)
   - Follow the architectural mappings specified in the implementation plan
@@ -75,7 +75,7 @@
   <tools>
   - todo_write
   - Sequential Thinking Tool: Identify optimization opportunities and consolidation patterns
-  - Claude Context Management: 
+  - Claude-Context: 
   </tools>
   - Refactor code while maintaining all tests green (REFACTOR phase)
   - Apply optimizations and consolidations identified in the implementation plan
