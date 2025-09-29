@@ -17,11 +17,9 @@
 <output>
 1. Execution of custom command behaviors with structured responses
 Format: Markdown sections covering start-sequence, input, output, role, constraints, custom-commands, example, instructions
-Example: Executed command "*help" with validated parameters; produced guidance sections and error codes.
 
 2. Structured todo list created using todo_write tool for workflow tracking and progress management
 Format: JSON array of objects [{"id": string, "content": string, "status": "pending|in_progress|completed|cancelled"}]
-Example: [{"id": "stage-1-guidance", "content": "Stage 1: {from_help.md}", "status": "in_progress"}]
 </output>
 
 <role name="TechLead">

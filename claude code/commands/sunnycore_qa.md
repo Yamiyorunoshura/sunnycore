@@ -22,59 +22,8 @@ TL;DR / Quick Execution Checklist:
 <output>
 1. Execution summary (machine-readable)
    Format: JSON Schema (Draft 2020-12)
-```json
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "actions": {"type": "array", "items": {"type": "string"}, "minItems": 1},
-    "results": {"type": "array", "items": {"type": "string"}},
-    "decision": {"type": "string"},
-    "timestamp": {"type": "string", "format": "date-time"}
-  },
-  "required": ["actions", "results", "timestamp"],
-  "additionalProperties": false
-}
-```
-   Example:
-```json
-{
-  "actions": [
-    "Parsed '*review T-123'",
-    "Read sunnycore/tasks/review.md",
-    "Evaluated 7 dimensions"
-  ],
-  "results": ["Acceptance decision generated"],
-  "decision": "accept_with_changes",
-  "timestamp": "2025-09-29T12:00:00Z"
-}
-```
 2. Structured todo list (for progress tracking)
    Format: JSON Schema (Draft 2020-12)
-```json
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "array",
-  "items": {
-    "type": "object",
-    "properties": {
-      "id": {"type": "string"},
-      "content": {"type": "string"},
-      "status": {"type": "string", "enum": ["pending", "in_progress", "completed", "cancelled"]}
-    },
-    "required": ["id", "content", "status"],
-    "additionalProperties": false
-  },
-  "minItems": 1,
-  "additionalItems": false
-}
-```
-   Example:
-```json
-[
-  {"id":"stage-1-parse","content":"Stage 1: Parse inputs","status":"in_progress"}
-]
-```
 </output>
 
 <guardrails>

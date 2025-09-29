@@ -17,12 +17,10 @@
 
 <output>
 1. Execution of custom command behaviors with structured responses
-Format: JSON Schema {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","additionalProperties":false,"required":["status","command","timestamp","file_validation","task_execution"],"properties":{"status":{"type":"string","enum":["success","error"]},"command":{"type":"string"},"timestamp":{"type":"string","format":"date-time"},"file_validation":{"type":"object","additionalProperties":false,"required":["target_file","exists","readable"],"properties":{"target_file":{"type":"string"},"exists":{"type":"boolean"},"readable":{"type":"boolean"},"last_modified":{"type":"string","format":"date-time"},"error_code":{"type":"string"}}},"task_execution":{"type":"object","additionalProperties":false,"required":["todo_checklist_created","subtasks_completed","subtasks_total"],"properties":{"todo_checklist_created":{"type":"boolean"},"subtasks_completed":{"type":"integer","minimum":0},"subtasks_total":{"type":"integer","minimum":0},"completion_rate":{"type":"string","pattern":"^[0-9]{1,3}%$"}}},"guidance":{"type":"object","additionalProperties":false,"properties":{"priority":{"type":"string","enum":["High","Medium","Low"]},"recommendations":{"type":"array","items":{"type":"string"}},"impact_analysis":{"type":"string"}}},"next_steps":{"type":"array","items":{"type":"string"}}}}
-Example: {"status":"success","command":"{command_name}","timestamp":"2025-09-24T10:30:00Z","file_validation":{"target_file":"{root}/sunnycore/tasks/{command_name}","exists":true,"readable":true,"last_modified":"2025-09-24T09:15:00Z"},"task_execution":{"todo_checklist_created":true,"subtasks_completed":5,"subtasks_total":5,"completion_rate":"100%"},"guidance":{"priority":"High","recommendations":["Focus on user story documentation for Sprint 3","Update stakeholder communication matrix","Review acceptance criteria with development team"],"impact_analysis":"Critical for next sprint planning"},"next_steps":["Schedule stakeholder review meeting","Prepare backlog prioritization session"]}
+Format: JSON Schema
 
 2. Structured todo list created using todo_write tool for workflow tracking and progress management
-Format: JSON Schema {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"array","items":{"type":"object","additionalProperties":false,"required":["id","content","status"],"properties":{"id":{"type":"string"},"content":{"type":"string"},"status":{"type":"string","enum":["pending","in_progress","completed","cancelled"]}}}}
-Example: [{"id":"stage-1-{doc_stage_1}","content":"Stage 1: {stage_1_from_document_project_md}","status":"in_progress"},{"id":"stage-N-{doc_stage_n}","content":"Stage N: {final_stage_from_document_project_md}","status":"pending"}]
+Format: JSON Schema 
 </output>
 
 <role name="Product Owner">

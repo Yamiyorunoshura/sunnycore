@@ -17,43 +17,9 @@
 <output>
 1. Execution of custom command behaviors with structured responses
   Format: JSON Schema (Draft 2020-12)
-  Example: {"execution_summary": {"status": "ok", "notes": ["Completed command workflow"], "milestone_checkpoints": ["Stage 1 complete", "Stage 2 complete"]}}
-  {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
-    "additionalProperties": false,
-    "required": ["execution_summary"],
-    "properties": {
-      "execution_summary": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["status", "notes", "milestone_checkpoints"],
-        "properties": {
-          "status": {"type": "string", "enum": ["ok", "error"]},
-          "notes": {"type": "array", "items": {"type": "string"}},
-          "milestone_checkpoints": {"type": "array", "items": {"type": "string"}}
-        }
-      }
-    }
-  }
 
 2. Structured TODO list created using todo_write tool for workflow tracking and progress management
   Format: JSON Schema (Draft 2020-12)
-  Example: [{"id": "stage-1-analysis", "content": "Stage 1: Read prompt + reports + guide; parse and determine template", "status": "in_progress"}]
-  {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "array",
-    "items": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "content", "status"],
-      "properties": {
-        "id": {"type": "string"},
-        "content": {"type": "string"},
-        "status": {"type": "string", "enum": ["pending", "in_progress", "completed", "cancelled"]}
-      }
-    }
-  }
 </output>
 
 <role name="Jason">
