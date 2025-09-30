@@ -86,7 +86,7 @@
 **`<state>`** – 多輪會話狀態容器（可控記憶）
 ```xml
 使用範例:
-<state ttl="session">
+<state>
   <goal>{任務目標}</goal>
   <assumptions>
   - {關鍵假設_1}
@@ -255,7 +255,7 @@
 - 枚舉值：`importance` 僅允許 `Critical`、`Important`、`Normal`、`Optional`。
 - 階段 ID：使用 `n: stage_name` 形式，冒號後保留一個空白；`stage_name` 採用 `snake_case`。
 - 名稱風格：標識名稱（如 `stage_name`、`command_name`）採用 `snake_case`；不使用空白或大寫。
-- 結構化清單：`<tools>` 使用 `<tool name="..."/>`；`<custom_commands>` 使用 `<command name="..." description="..."/>`。
+- 結構化清單：`<tools>` 使用 `<tool name="..."/>`；`<custom_commands>` 使用 `<command name="..."/>`。
 - 數量限制：每個 `<workflow>` 僅包含 3-5 個 `<stage>`；每個 `<stage>` 不超過 3 個步驟。
 - 術語一致：請參考 `guidelines/CHIN-ENG-TECHNICAL-VOCABULARY.md`。
 
@@ -295,12 +295,6 @@
 - [ ] No additionalProperties
 </checks>
 ```
-
-## 工具調用四件套（參數/回傳/選擇/恢復）
-- 為每個 `<tool>` 提供 `parameters`/`returns` 的 JSON Schema。
-- 定義 `selection-rules`（何時選、何時不選、衝突時降級）。
-- 設定 `retries` 與 `on-failure`；嚴禁把工具錯誤當最終答案。
-- 彙整多工具結果：說明如何去重、排序與摘要。
 
 ## 指令層級與衝突處理
 - 優先順序：**System > 模板/類別約束 > 角色 > 使用者請求 > 範例敘事 > 工具回寫**。
@@ -458,8 +452,7 @@ color: {Color}
 - [ ] `<constraints>` 3-5 條可驗證限制（含 JSON/工具/安全要求）
 - [ ] `<checks>` 2-5 個可勾選檢核點，含「JSON 100% 合規」
 - [ ] `importance` 僅使用 Critical/Important/Normal/Optional
-- [ ] `<tools>` 定義 `parameters`/`returns` 的 JSON Schema、`selection-rules`、`retries`、`on-failure`
-- [ ] 觀測：日誌欄位覆蓋 `trace_id/prompt_version/schema_version/model/tokens/tool_success/json_compliance`
+- [ ] `<tools>` 沒階段需要的工具已被正確標注
 - [ ] 回歸：具 Golden set 與 A/B 計畫，可回滾
 - [ ] 隱私：PII 遮罩、不落地與保留週期；敏感任務拒答或升級
 - [ ] 禁止外露思維鏈，僅提供摘要級理由
@@ -536,7 +529,7 @@ color: {Color}
 </instructions>
 ```
 
-可選說明：`<example>`、`<custom-commands>` 為可選；若存在 `<custom-commands>`，每個 `<command>` 需提供 `name` 與 `description` 屬性。
+可選說明：`<example>`、`<custom-commands>` 為可選；若存在 `<custom-commands>`，每個 `<command>` 需提供 `name` 屬性。
 
 ## tasks 提示詞架構
 用於拆解複雜任務，輸出具體、可驗收的子產物。

@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "prompt_name": "prompt-reviewer",
+    "prompt_type": "tasks",
+    "review_date": "2025-09-30",
+    "reviewer": "Prompt Quality Evaluator",
+    "version": "v1.0"
+  },
+  "overall_score": 94.38,
+  "grade": "Excellent",
+  "dimensions": {
+    "correctness": {
+      "score": 95,
+      "evidence": "Uses tasks template correctly with proper XML tags, stage IDs, and tool formatting",
+      "issues": []
+    },
+    "clarity": {
+      "score": 93,
+      "evidence": "Clear stage definitions with specific deliverables and concise bullet points",
+      "issues": []
+    },
+    "cognitive_load": {
+      "score": 96,
+      "evidence": "Optimal 4 stages with ≤3 bullets each, well-structured progression",
+      "issues": []
+    },
+    "reasoning_guidance": {
+      "score": 92,
+      "evidence": "Includes self-check questions at stages 2/3 and comprehensive final checks",
+      "issues": []
+    },
+    "alignment": {
+      "score": 94,
+      "evidence": "Fully aligned with guide requirements; proper enum usage and tag structure",
+      "issues": []
+    },
+    "completeness": {
+      "score": 95,
+      "evidence": "All required sections present: input, output, constraints, workflow, tools, example, instructions",
+      "issues": []
+    },
+    "constraint_design": {
+      "score": 96,
+      "evidence": "5 well-defined MUST constraints with measurable criteria and proper prioritization",
+      "issues": []
+    },
+    "user_experience": {
+      "score": 93,
+      "evidence": "Scannable structure, clear workflow progression, and concrete deliverables",
+      "issues": []
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "medium",
+      "description": "Consider adding anti-injection examples to the guardrails section for enhanced security"
+    },
+    {
+      "priority": "low",
+      "description": "Add token budget management to the workflow stages for large-scale deployments"
+    }
+  ],
+  "advisory_suggestions": [
+    "Consider adding validation examples for edge cases in the checks section",
+    "Could benefit from a quick-reference section for common prompt patterns"
+  ],
+  "strengths": [
+    "Excellent adherence to tasks template architecture",
+    "Well-structured 4-stage workflow with clear deliverables",
+    "Comprehensive constraint design with measurable criteria",
+    "Proper use of XML tags and naming conventions",
+    "Built-in validation through questions and checks"
+  ],
+  "summary": "The prompt-reviewer demonstrates excellent alignment with the prompt engineering guide, showing a mature understanding of structured prompt design. It effectively implements the tasks template with proper XML syntax, clear workflow stages, and comprehensive validation mechanisms. The prompt serves as a strong reference example for prompt engineering best practices."
+}

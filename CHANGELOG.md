@@ -1,5 +1,15 @@
 # Warp Code v0.3.0
 
+## Unreleased
+
+### Added
+- README：新增以 curl 一行指令執行 `scripts/sunnycore.sh` 的安裝教學
+
+### Changed
+- README：將安裝腳本名稱由 `sunnycore.command` 更正為 `scripts/sunnycore.sh`
+
+# Warp Code v0.3.0
+
 ## Added
 - Sequential thinking integration for deep analysis and planning
 - Comprehensive TDD (Test-Driven Development) workflow

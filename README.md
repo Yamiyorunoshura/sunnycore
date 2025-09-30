@@ -129,7 +129,7 @@ promptfoo --version
 
 ### Sunnycore 自動安裝腳本
 
-Sunnycore 提供了自動化安裝腳本 `sunnycore.command`，可以快速安裝不同版本到本地系統。
+Sunnycore 提供了自動化安裝腳本 `scripts/sunnycore.sh`，可快速安裝不同版本到本機。
 
 #### 系統需求
 - macOS 或 Linux 系統
@@ -137,28 +137,32 @@ Sunnycore 提供了自動化安裝腳本 `sunnycore.command`，可以快速安�
 - Bash shell
 - 網路連線
 
-#### 安裝步驟
+#### 以 curl 一行安裝（推薦）
 
-1. **準備腳本**：
-   ```bash
-   chmod +x sunnycore.command
-   ```
+互動模式（不帶參數會在終端互動選擇版本與安裝路徑）：
+```bash
+curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash
+```
 
-2. **修改倉庫 URL**（首次使用）：
-   編輯 `sunnycore.command` 檔案，設置正確的 GitHub 倉庫地址：
-   ```bash
-   REPO_URL="https://github.com/Yamiyorunoshura/sunnycore.git"
-   ```
+非互動模式（直接指定版本與路徑，並自動確認）：
+```bash
+curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash -s -- -v warp-code -p ~/sunnycore -y
+```
 
-3. **執行安裝**：
-   ```bash
-   ./sunnycore.command
-   ```
+可用版本代號：`warp-code`、`codex`、`claude-code`
 
-4. **選擇版本**：
-   - **Warp Code**: 通用角色化平台（需要 `warp-code` 分支）
-   - **Claude Code**: 專業細分化平台（需要 `claude-code` 分支）
-   - **Codex**: 基礎版本（需要 `codex` 分支）
+可選參數：
+- `-v, --version`：指定版本（如 `warp-code`）
+- `-p, --path`：安裝基礎路徑（會在該路徑下建立 `sunnycore/`）
+- `-y, --yes`：自動同意覆寫與操作
+- `--repo`、`--branch`、`--remote-name`：進階 Git 來源/分支控制
+
+#### 從本地倉庫執行
+
+若已經克隆本倉庫，可直接執行腳本：
+```bash
+bash scripts/sunnycore.sh -v warp-code -p ~/sunnycore -y
+```
 
 #### 安裝結果
 安裝完成後，目標路徑將包含：

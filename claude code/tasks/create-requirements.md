@@ -11,37 +11,50 @@
 
 <output>
 1. {root}/docs/requirements/*.md - Complete requirement specifications including functional, non-functional, and acceptance criteria.
+Format: JSON Schema
+Example: {"requirements_manifest":{"file_count":1,"paths":["{root}/docs/requirements/requirements.md"],"includes":["functional-requirements","non-functional-requirements","acceptance-criteria"]},"notes":"Files must follow template structure; additionalProperties=false in validation"}
 </output>
 
 <constraints importance="Important">
-- Each requirement must be verifiable and measurable; avoid ambiguous or subjective phrasing.
-- Use numbered lists and concise sentences (average < 20 words) for scannability.
-- Align sections and field names exactly with the requirement template.
-- Do not include sensitive or personal data in examples.
-- Clarify the requirements and the acceptance criteria with the user.
-- MUST maintain English-only content throughout the prompt and generated documentation.
+- MUST: Each requirement is verifiable and measurable; no ambiguous or subjective phrasing.
+- MUST: Use numbered lists; average sentence length < 20 words.
+- MUST: Align section and field names exactly with the requirement template.
+- MUST: Do not include sensitive or personal data in examples.
+- MUST: Maintain English-only content throughout the prompt and generated documentation.
 </constraints>
 
 <workflow importance="Important">
   <stage id="1: init">
   <tools>
-  - sequential_thinking
-  - todo_write
+    <tool name="sequential_thinking" description="Structured decomposition and reflective reasoning">
+      <parameters>{"type":"object","properties":{},"additionalProperties":false}</parameters>
+      <returns>{"type":"object","properties":{"notes":{"type":"string"}},"additionalProperties":false}</returns>
+      <selection-rules>
+      - Use to break down complex requirements and plan steps
+      - Avoid for trivial edits
+      </selection-rules>
+    </tool>
+    <tool name="todo_write" description="Manage execution tasks with statuses">
+      <parameters>{"type":"object","properties":{"merge":{"type":"boolean"},"todos":{"type":"array"}},"required":["merge","todos"],"additionalProperties":false}</parameters>
+      <returns>{"type":"object","properties":{"ok":{"type":"boolean"}},"additionalProperties":false}</returns>
+      <selection-rules>
+      - Use to create/update task list per workflow stages
+      - Avoid for content generation
+      </selection-rules>
+    </tool>
   </tools>
   - Read all working steps to understand the expected deliverables.
   </stage>
 
   <stage id="2: functional">
   <tools>
-  - todo_write
-  - Analysis: Consolidate and organize requirements by user stories or capabilities
-  - Sequential Thinking Tool: Decompose complex functional requirements systematically
-  - Playwright Browser Automation: Perform web research for requirement examples if needed
+    <tool name="todo_write" description="Track functional analysis tasks and decisions"/>
+    <tool name="sequential_thinking" description="Systematically decompose complex functional requirements"/>
+    <tool name="playwright_browser" description="Perform web research for requirement examples when needed"/>
   </tools>
   - Derive functional requirements from the user's input and context.
-  - Consolidate duplicates using comparison criteria: same trigger condition, same outcome, same user role.
-  - Remove ambiguity by ensuring each statement is atomic (single testable condition).
-  - Organize by user stories or system capabilities as appropriate.
+  - Deduplicate and atomize statements (single testable condition).
+  - Organize by user stories or system capabilities.
 
   <questions>
   - What are the core user goals and success criteria for each scenario?
@@ -52,9 +65,9 @@
 
   <stage id="3: nonfunctional">
   <tools>
-  - todo_write
-  - Sequential Thinking Tool: Systematically analyze NFRs across performance, security, and compliance domains
-  - Claude-Context: Process large requirement documents in segments
+    <tool name="todo_write" description="Track non-functional analysis tasks"/>
+    <tool name="sequential_thinking" description="Systematic NFR analysis across domains"/>
+    <tool name="claude_context" description="Process large requirement documents in segments"/>
   </tools>
   - Identify non-functional requirements across performance, reliability, security, compliance, and operability.
   - Quantify targets (e.g., P95 latency, uptime SLO, RTO/RPO) and constraints.
@@ -69,30 +82,25 @@
 
   <stage id="4: acceptance">
   <tools>
-  - todo_write
-  - sequential_thinking
+    <tool name="todo_write" description="Track acceptance criteria authoring and validation"/>
+    <tool name="sequential_thinking" description="Structure Given-When-Then and validation logic"/>
   </tools>
   - Define acceptance criteria per requirement; ensure they are deterministic and testable.
-  - Reference inputs, preconditions, and explicit pass/fail outcomes using Given-When-Then format when helpful.
-  - Use clear structure; Gherkin-style is acceptable if helpful.
+  - Structure Given-When-Then with inputs, preconditions, and pass/fail outcomes.
   - Validate each criterion can be automated or manually verified with binary outcomes.
   </stage>
 
   <stage id="5: finalize">
-  - Cross-check consistency across FRs, NFRs, and acceptance criteria and ask for user's confirmation.
-  - Populate the requirement template and place markdown formatted outputs under {root}/docs/requirements/.
-  - Run the {root}/sunnycore/scripts/shard-requirements.py script by using uv run to shard the requirements.
-  - Handle script execution failures: if sharding fails, document requirements in single file and notify user of manual sharding requirement.
+  - Cross-check FRs, NFRs, and acceptance criteria; request user's confirmation.
+  - Populate the requirement template and write outputs under {root}/docs/requirements/.
+  - Run "uv run {root}/sunnycore/scripts/shard-requirements.py"; document fallback on failure.
 
   <checks>
   - [ ] Outputs include FRs, NFRs, and acceptance criteria per template
-  - [ ] All content is written in English and uses numbered lists where applicable
+  - [ ] English-only content and numbered lists used where applicable
   - [ ] Each requirement is measurable and verifiable (no ambiguity)
-  - [ ] File paths and names match {root}/docs/requirements/*.md
-  - [ ] Sensitive data has not been introduced in examples
-  - [ ] The requirements are sharded into {root}/docs/requirements/*.md
+  - [ ] Sharding executed successfully or fallback documented
   - [ ] User confirmation obtained for final requirement set
-  - [ ] Script execution completed successfully or fallback documented
   </checks>
   </stage>
 </workflow>

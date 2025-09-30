@@ -9,49 +9,52 @@
 </input>
 
 <output>
-1. {root}/docs/architecture/*.md - Comprehensive architecture corpus
+1. Architecture corpus
+  Format: Files (*.md) under {root}/docs/architecture/
+  Example: {root}/docs/architecture/
 </output>
 
 <constraints importance="Critical">
-- MUST verify that {root}/docs/requirements/*.md exists and is complete before starting architecture design.
-- MUST create explicit requirement-to-architecture mapping to ensure full coverage of functional and non-functional requirements.
-- MUST validate that every requirement has corresponding architectural component or design decision.
-- Author the draft with the architecture template into {root}/docs/architecture.md; comprehensively cover components, boundaries, data flows, risks, and decisions; strictly preserve section ordering.
-- Post-draft, execute the sharding script: '{root}/sunnycore/scripts/shard-architecture.py'; verify materialized files under {root}/docs/architecture/.
-- Use clear, concise English and 2-space indentation; refrain from introducing non-existent paths or files.
+- MUST: Verify {root}/docs/requirements/*.md exists and is complete before architecture design.
+- MUST: Create explicit requirement-to-architecture mapping covering functional and non-functional requirements.
+- MUST: Validate that every requirement has a corresponding architectural component or design decision.
+- MUST: Author {root}/docs/architecture.md with the canonical template; strictly preserve section ordering and 2-space indentation; do not introduce non-existent paths.
+- MUST: After drafting, run 'uv run {root}/sunnycore/scripts/shard-architecture.py' and verify artifacts materialize under {root}/docs/architecture/.
 </constraints>
 
+<example>
+Example: Minimal expected files generated under {root}/docs/architecture/
+- {root}/docs/architecture/overview.md
+- {root}/docs/architecture/components.md
+- {root}/docs/architecture/traceability_matrix.md
+</example>
+
 <workflow importance="Critical">
-  <stage id="1: requirement-analysis">
+  <stage id="1: requirement_analysis">
   <tools>
-  - todo_write
-  - Sequential Thinking Tool: Decompose complex requirements and identify architectural patterns
+  <tool name="todo_write" description="Track and update execution tasks"/>
+  <tool name="sequential_thinking" description="Decompose requirements and identify architectural patterns"/>
   </tools>
   - Verify completeness and consistency of all requirements under {root}/docs/requirements/*.md.
-  - Analyze functional requirements to identify core system components and their responsibilities.
-  - Extract non-functional requirements (performance, security, reliability) and translate to architectural constraints.
-  - Create explicit mapping matrix: Requirement ID → Architectural Component/Decision.
-  - Identify requirement gaps or conflicts that must be resolved before proceeding.
+  - Extract functional/non-functional requirements and translate NFRs into architectural constraints.
+  - Create mapping matrix (Requirement ID → Component/Decision) and identify gaps or conflicts.
 
   <questions>
   - Are all functional requirements mapped to specific architectural components?
   - Do non-functional requirements translate to measurable architectural constraints?
   - Are there conflicting requirements that need architectural trade-off decisions?
-  - Which external dependencies and integration points are mandated by requirements?
   </questions>
   </stage>
 
-  <stage id="2: architecture-design">
+  <stage id="2: architecture_design">
   <tools>
-  - Sequential Thinking Tool: Architect system components and validate design decisions
-  - Context7 Integration: Fetch external package and architectural pattern references
-  - todo_write
+  <tool name="sequential_thinking" description="Architect system components and validate design decisions"/>
+  <tool name="context7" description="Fetch external package and architectural pattern references"/>
+  <tool name="todo_write" description="Update task statuses during design"/>
   </tools>
-  - Based on requirement analysis, delineate system components, boundaries, and canonical data flows.
-  - Design macro-architecture ensuring every requirement has corresponding architectural element.
-  - Define component interaction contracts and data flow patterns.
-  - Document architectural decisions with requirement traceability.
-  - Address cross-cutting concerns (security, observability, performance) as mandated by non-functional requirements.
+  - Delineate components, boundaries, and canonical data flows based on requirement analysis.
+  - Ensure every requirement maps to an architectural element; define interaction contracts and data patterns.
+  - Document decisions with requirement traceability and address cross-cutting concerns (security, observability, performance).
 
   <questions>
   - Does the proposed architecture address all identified requirements?
@@ -62,36 +65,29 @@
 
   <stage id="3: author">
   <tools>
-  - todo_write
-  - sequential_thinking
+  <tool name="todo_write" description="Track authoring progress and results"/>
+  <tool name="sequential_thinking" description="Structure drafting and verification steps"/>
   </tools>
-  - Leverage the architecture template to draft markdown formatted {root}/docs/architecture.md.
-  - Include requirement traceability matrix in architecture document.
-  - Ensure sections comprehensively cover components, interactions, data flows, risks, and decisions with explicit requirement references.
-  - Validate that every requirement from the mapping matrix is addressed in the architecture.
-  - Execute the sharding script to partition the document: uv run '{root}/sunnycore/scripts/shard-architecture.py'
-  - Verify artifacts appear under {root}/docs/architecture/.
+  - Draft {root}/docs/architecture.md using {root}/sunnycore/templates/architecture-tmpl.yaml.
+  - Include the requirement traceability matrix and ensure every mapping is addressed.
+  - Execute 'uv run {root}/sunnycore/scripts/shard-architecture.py' and verify artifacts under {root}/docs/architecture/.
   </stage>
 
-  <stage id="4: finalize">
+  <stage id="4: final_validation">
   <tools>
-  - sequential_thinking
-  - todo_write
+  <tool name="sequential_thinking" description="Run final validation sequence"/>
+  <tool name="todo_write" description="Close tasks with final statuses"/>
   </tools>
-  - Cross-validate architecture against all requirements using the mapping matrix.
-  - Verify that every functional and non-functional requirement is addressed.
-  - Remediate typographical errors and normalize terminology.
+  - Cross-validate the architecture against all requirements via the mapping matrix.
+  - Remediate typographical issues and normalize terminology.
   - Confirm architectural decisions are justified by requirements.
   
   <checks>
   - [ ] {root}/docs/architecture.md exists and adheres to the template
   - [ ] All requirements from {root}/docs/requirements/*.md are mapped to architectural elements
-  - [ ] Requirement traceability matrix is complete and accurate
-  - [ ] Non-functional requirements translate to measurable architectural constraints
-  - [ ] Sharded files are generated under {root}/docs/architecture/
-  - [ ] Section order and headings exactly match the template
-  - [ ] Paths and commands are valid within this repository
-  - [ ] Language is clear, concise, and free of typographical errors
+  - [ ] Requirement traceability matrix exists at {root}/docs/architecture/traceability_matrix.md and is complete and accurate
+  - [ ] Non-functional requirements are expressed as measurable architectural constraints
+  - [ ] Sharded files are generated under {root}/docs/architecture/ and paths/commands are valid
   </checks>
   </stage>
 </workflow>

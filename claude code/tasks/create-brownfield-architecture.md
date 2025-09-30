@@ -11,33 +11,34 @@
 
 <output>
 1. {root}/docs/architecture/*.md - Updated architecture documentation set
+  Format: Files under {root}/docs/architecture/ matching *.md
 </output>
 
 <constraints importance="Important">
-- Thoroughly review requirements and the extant architecture before proposing designs.
-- New modules must integrate without violating existing contracts; include an explicit impact analysis for any proposed changes.
-- Rigorously follow the template structure and section order.
-- Draft into {root}/docs/architecture.md, then execute {root}/sunnycore/scripts/shard-architecture.py to shard.
-- Use clear, concise English and 2-space indentation.
+- MUST: Thoroughly review {root}/docs/requirements and {root}/docs/architecture/*.md before proposing designs (evidence: cite reviewed sections in draft).
+- MUST: Preserve existing contracts; include an explicit "Impact Analysis" subsection for any proposed changes.
+- MUST: Follow {root}/sunnycore/templates/architecture-tmpl.yaml structure and section order exactly.
+- MUST: Draft into {root}/docs/architecture.md, then execute: uv run '{root}/sunnycore/scripts/shard-architecture.py' to shard.
+- SHOULD: Use clear, concise English and 2-space indentation throughout.
 </constraints>
 
 <workflow importance="Critical">
-  <stage id="1: assess-existing">
+  <stage id="1: assess_existing">
   <tools>
-  - sequential_thinking
-  - todo_write
-  - Claude-Context: Process large architecture corpus in segments
+  <tool name="sequential_thinking"/>
+  <tool name="todo_write">
+  <tool name="Claude-Context" description="Process large architecture corpus in segments"/>
   </tools>
   - Examine the current architecture under {root}/docs/architecture/*.md.
   - Identify extension points, constraints, and shared services.
   - Map affected domains, bounded contexts, and dependencies.
   </stage>
 
-  <stage id="2: design-new-modules">
+  <stage id="2: design_new_modules">
   <tools>
-  - Sequential Thinking Tool: Design module boundaries and integration patterns
-  - Context7 Integration: Research architectural patterns and best practices
-  - todo_write
+  <tool name="sequential_thinking" description="Design module boundaries and integration patterns"/>
+  <tool name="context7_integration" description="Research architectural patterns and best practices"/>
+  <tool name="todo_write"/>
   </tools>
   - Define responsibilities, boundaries, and interfaces for new modules.
   - Specify data flows and interactions with existing components.
@@ -50,11 +51,11 @@
   </questions>
   </stage>
 
-  <stage id="3: author-and-shard">
+  <stage id="3: author_and_shard">
   <tools>
-  - sequential_thinking
-  - todo_write
-  </tools>
+  <tool name="sequential_thinking"/>
+  <tool name="todo_write">
+  </tool>
   - Use the architecture template to draft markdown formatted {root}/docs/architecture.md.
   - Ensure sections emphasize new modules and integration impacts.
   - Run the sharding script to split the document: uv run '{root}/sunnycore/scripts/shard-architecture.py'

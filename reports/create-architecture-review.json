@@ -1,0 +1,71 @@
+{
+  "metadata": {
+    "prompt_name": "create-architecture",
+    "review_date": "2025-09-30",
+    "reviewer": "Prompt Quality Evaluator",
+    "version": "v1.0",
+    "prompt_type": "tasks"
+  },
+  "overall_score": 93.38,
+  "grade": "Excellent",
+  "dimensions": {
+    "correctness": {
+      "score": 95,
+      "evidence": "Uses <input>, <output>, <constraints>, <workflow>; stage IDs snake_case; <tools> use <tool name=\"...\"/>; final <checks> present.",
+      "issues": []
+    },
+    "clarity": {
+      "score": 92,
+      "evidence": "Concise ≤3 bullets per stage with explicit actions and paths.",
+      "issues": [
+        "No strict JSON Schema in <output>"
+      ]
+    },
+    "cognitive_load": {
+      "score": 90,
+      "evidence": "4 stages, ≤3 bullets each; final checks 5 items; manageable load.",
+      "issues": []
+    },
+    "reasoning_guidance": {
+      "score": 93,
+      "evidence": "Stage questions and mapping matrix guide reasoning and verification.",
+      "issues": []
+    },
+    "alignment": {
+      "score": 94,
+      "evidence": "GUIDE-compliant tags, enums, naming rules, and tools syntax.",
+      "issues": [
+        "Tool name 'context7' not snake_case (minor)"
+      ]
+    },
+    "completeness": {
+      "score": 96,
+      "evidence": "Includes example, questions, and final checks; FR/NFR mapping and sharding covered.",
+      "issues": []
+    },
+    "constraint_design": {
+      "score": 95,
+      "evidence": "MUST rules are measurable: file existence, mapping coverage, script execution.",
+      "issues": []
+    },
+    "user_experience": {
+      "score": 92,
+      "evidence": "Scannable structure; clear deliverables and acceptance criteria.",
+      "issues": []
+    }
+  },
+  "recommendations": [
+    "MEDIUM: Provide a strict JSON Schema in <output> (additionalProperties=false) with an example.",
+    "LOW: Normalize tool naming to snake_case for consistency if feasible.",
+    "LOW: Document evidence capture for traceability matrix generation and validation."
+  ],
+  "advisory_suggestions": [
+    "Consider adding guardrails in related prompts for anti-injection and policy boundaries."
+  ],
+  "strengths": [
+    "Strong requirement-to-architecture traceability via explicit mapping.",
+    "Clear verification steps (script execution and artifact checks).",
+    "Balanced stages with concise steps and targeted checks."
+  ],
+  "summary": "High-quality tasks prompt with strong traceability and measurable constraints. Minor improvements: add JSON Schema to <output> and ensure naming consistency for tools."
+}

@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "prompt_name": "create-requirements",
+    "review_date": "2025-09-30",
+    "reviewer": "Prompt Quality Evaluator",
+    "version": "v1.0",
+    "prompt_type": "tasks"
+  },
+  "overall_score": 92.00,
+  "grade": "Excellent",
+  "dimensions": {
+    "correctness": {
+      "score": 92,
+      "evidence": "Uses tasks template with <input>, <output>, <constraints>, <workflow>; final <checks> present; stage IDs follow n: snake_case.",
+      "issues": [
+        "Inconsistent <tools> formatting (mixed attributes and nested fields)",
+        "Parameters/returns missing for some tools"
+      ]
+    },
+    "clarity": {
+      "score": 92,
+      "evidence": "Concise English bullets, explicit file paths and deliverables; JSON manifest example included.",
+      "issues": [
+        "Some bullets are multi-clause; could be split"
+      ]
+    },
+    "cognitive_load": {
+      "score": 90,
+      "evidence": "Five stages with ≤3 steps each; questions grouped; acceptance checks centralized.",
+      "issues": [
+        "Nested tool metadata may add overhead"
+      ]
+    },
+    "reasoning_guidance": {
+      "score": 93,
+      "evidence": "Stage questions for FR/NFR; Gherkin-style acceptance guidance; final checks ensure determinism.",
+      "issues": []
+    },
+    "alignment": {
+      "score": 90,
+      "evidence": "Conforms to GUIDE tags, stage IDs, importance enum, and English-only policy.",
+      "issues": [
+        "<tools> format deviates from GUIDE's simple <tool name=\"...\"/> style"
+      ]
+    },
+    "completeness": {
+      "score": 95,
+      "evidence": "Covers FRs, NFRs, acceptance; outputs and fallback step defined; questions and final checks included.",
+      "issues": [
+        "<output> references JSON Schema but no strict schema provided"
+      ]
+    },
+    "constraint_design": {
+      "score": 92,
+      "evidence": "Five MUST rules; measurable (English-only, sentence length <20, numbered lists, no sensitive data).",
+      "issues": [
+        "Consider adding schema-level validation requirement (additionalProperties=false)"
+      ]
+    },
+    "user_experience": {
+      "score": 92,
+      "evidence": "Numbered lists and short sentences; scannable layout with explicit paths and commands.",
+      "issues": [
+        "Mixed tool notation may distract slightly"
+      ]
+    }
+  },
+  "recommendations": [
+    "HIGH: Normalize <tools> to <tool name=\"...\"/> across stages; avoid nested content or move details to <instructions>.",
+    "MEDIUM: Provide a strict JSON Schema in <output> with an example (additionalProperties=false).",
+    "MEDIUM: Keep one action per bullet; split multi-clause bullets for brevity.",
+    "LOW: Optionally add minimal <example> for a requirements file outline to guide outputs.",
+    "LOW: Document parameters/returns consistently if tool specs are necessary."
+  ],
+  "advisory_suggestions": [
+    "Consider adding <guardrails> in related prompts for anti-injection boundaries and refusal templates.",
+    "If automating validation, include observability fields (trace_id, prompt_version)."
+  ],
+  "strengths": [
+    "Clear multi-stage workflow with deterministic final checks",
+    "Measurable constraints and explicit language policy",
+    "Good coverage of FRs/NFRs with fallback for sharding"
+  ],
+  "summary": "Strong tasks prompt aligned with the GUIDE; standardize tool formatting and add a strict JSON Schema to further improve compliance and reduce cognitive load."
+}
+
+
