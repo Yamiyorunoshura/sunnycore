@@ -52,9 +52,9 @@
 ```xml
 使用範例:
 <tools>
-  <tool name="{Tool 1}", description="{Tool 1 Description}"/>
-  <tool name="{Tool 2}", description="{Tool 2 Description}"/>
-  <tool name="{Tool 3}", description="{Tool 3 Description}"/>
+  <tool name="{Tool 1}" description="{Tool 1 Description}"/>
+  <tool name="{Tool 2}" description="{Tool 2 Description}"/>
+  <tool name="{Tool 3}" description="{Tool 3 Description}"/>
 </tools>
 ```
 **`<instructions>`** – 複雜指導內容
@@ -454,14 +454,11 @@ color: {Color}
 
 ### 必須項目
 - [ ] `<input>` 輸入要求明確具體
-- [ ] `<output>` 提供嚴格 JSON Schema（`additionalProperties=false`）與合法樣例
-- [ ] 嚴格 JSON：輸出不得含 JSON 外文字，驗證失敗有自動修復與重試
+- [ ] `<output>` 提供嚴格Schema（`additionalProperties=false`）
 - [ ] `<constraints>` 3-5 條可驗證限制（含 JSON/工具/安全要求）
 - [ ] `<checks>` 2-5 個可勾選檢核點，含「JSON 100% 合規」
 - [ ] `importance` 僅使用 Critical/Important/Normal/Optional
 - [ ] `<tools>` 定義 `parameters`/`returns` 的 JSON Schema、`selection-rules`、`retries`、`on-failure`
-- [ ] `<guardrails>` 定義拒答/升級/測試樣本，並重申邊界
-- [ ] `<state>` 定義多輪欄位與存活週期；回合小結與裁剪順序明確
 - [ ] 觀測：日誌欄位覆蓋 `trace_id/prompt_version/schema_version/model/tokens/tool_success/json_compliance`
 - [ ] 回歸：具 Golden set 與 A/B 計畫，可回滾
 - [ ] 隱私：PII 遮罩、不落地與保留週期；敏感任務拒答或升級
@@ -473,6 +470,10 @@ color: {Color}
 - [ ] 設定適當 importance 等級
 - [ ] 術語使用一致性
 - [ ] 提供反例/對抗樣本與期望行為
+
+## 可選項目
+- [ ] `<guardrails>` 定義拒答/升級/測試樣本，並重申邊界
+- [ ] `<state>` 定義多輪欄位與存活週期；回合小結與裁剪順序明確
 
 ### 最終確認
 ❓ **問問自己：這份提示詞是否能產出一致、可驗證的結果？**
@@ -620,8 +621,7 @@ color: {Color}
 
 <!-- After: 明確結構 -->
 <output>
-Format: JSON {"title": string, "summary": string, "tags": array}
-Example: {"title": "Task Overview", "summary": "Brief description", "tags": ["urgent", "review"]}
+Format: JSON schema
 </output>
 ```
 
