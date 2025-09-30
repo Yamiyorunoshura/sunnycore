@@ -27,21 +27,7 @@ Example: {"requirements_manifest":{"file_count":1,"paths":["{root}/docs/requirem
   <stage id="1: init">
   <tools>
     <tool name="sequential_thinking" description="Structured decomposition and reflective reasoning">
-      <parameters>{"type":"object","properties":{},"additionalProperties":false}</parameters>
-      <returns>{"type":"object","properties":{"notes":{"type":"string"}},"additionalProperties":false}</returns>
-      <selection-rules>
-      - Use to break down complex requirements and plan steps
-      - Avoid for trivial edits
-      </selection-rules>
-    </tool>
     <tool name="todo_write" description="Manage execution tasks with statuses">
-      <parameters>{"type":"object","properties":{"merge":{"type":"boolean"},"todos":{"type":"array"}},"required":["merge","todos"],"additionalProperties":false}</parameters>
-      <returns>{"type":"object","properties":{"ok":{"type":"boolean"}},"additionalProperties":false}</returns>
-      <selection-rules>
-      - Use to create/update task list per workflow stages
-      - Avoid for content generation
-      </selection-rules>
-    </tool>
   </tools>
   - Read all working steps to understand the expected deliverables.
   </stage>

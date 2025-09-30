@@ -974,7 +974,7 @@ install_claude_code() {
         run_cmd mkdir -p "$src/commands"
         run_cmd touch "$src/README.md"
         run_cmd touch "$src/commands/example.json"
-        run_cmd touch "$src/settings.json"
+        run_cmd touch "$src/settings.local.json"
       else
         log "檢查克隆目錄內容..."
         log "暫存目錄內容:"
@@ -1012,10 +1012,10 @@ install_claude_code() {
   fi
 
   local commands_src="$src/commands"
-  local settings_src="$src/settings.json"
+  local settings_src="$src/settings.local.json"
   if [[ $DRY_RUN -eq 1 ]]; then
     info "dry-run: 假設 commands 來源目錄存在於 $commands_src"
-    info "dry-run: 假設 settings.json 檔案存在於 $settings_src"
+    info "dry-run: 假設 settings.local.json 檔案存在於 $settings_src"
   elif [[ ! -d "$commands_src" ]]; then
     error "來源目錄缺少 commands 子目錄：$commands_src"
     exit 1
@@ -1024,19 +1024,19 @@ install_claude_code() {
   dst_sunnycore="${INSTALL_BASE%/}/sunnycore"
   dst_claude="${INSTALL_BASE%/}/.claude"
   commands_dst="${dst_claude%/}/commands"
-  settings_dst="${dst_claude%/}/settings.json"
+  settings_dst="${dst_claude%/}/settings.local.json"
 
   log "設定目標目錄"
   log "安裝基礎路徑: $INSTALL_BASE"
   log "Sunnycore 目標目錄: $dst_sunnycore"
   log "Claude commands 目標目錄: $commands_dst"
-  log "Claude settings.json 目標：$settings_dst"
+  log "Claude settings.local.json 目標：$settings_dst"
 
   info "安裝版本：claude code"
   info "來源：$src"
   info "Sunnycore 目標：$dst_sunnycore"
   info "Claude commands 目標：$commands_dst"
-  info "Claude settings.json 目標：$settings_dst"
+  info "Claude settings.local.json 目標：$settings_dst"
 
   if [[ $DRY_RUN -eq 1 ]]; then
     log "dry-run: 跳過來源目錄實際檢查"
@@ -1068,30 +1068,30 @@ install_claude_code() {
   log "執行拷貝命令: cp -a $commands_src $dst_claude/"
   run_cmd cp -a "$commands_src" "$dst_claude/"
 
-  # 拷貝 settings.json 檔案（如果存在）
+  # 拷貝 settings.local.json 檔案（如果存在）
   if [[ $DRY_RUN -eq 1 ]]; then
-    info "dry-run: 拷貝 settings.json 至 .claude…"
+    info "dry-run: 拷貝 settings.local.json 至 .claude…"
     log "dry-run: cp $settings_src $settings_dst"
   elif [[ -f "$settings_src" ]]; then
-    info "開始拷貝 settings.json 檔案至 .claude…"
+    info "開始拷貝 settings.local.json 檔案至 .claude…"
     log "執行拷貝命令: cp $settings_src $settings_dst"
     run_cmd cp "$settings_src" "$settings_dst"
   else
-    log "settings.json 檔案不存在於來源目錄，跳過拷貝"
+    log "settings.local.json 檔案不存在於來源目錄，跳過拷貝"
   fi
 
   info "移除 Sunnycore 目錄中的 commands 目錄"
   log "執行移除命令: rm -rf $dst_sunnycore/commands"
   run_cmd rm -rf "$dst_sunnycore/commands"
 
-  # 移除 Sunnycore 目錄中的 settings.json（如果存在）
+  # 移除 Sunnycore 目錄中的 settings.local.json（如果存在）
   if [[ $DRY_RUN -eq 1 ]]; then
-    info "dry-run: 移除 Sunnycore 目錄中的 settings.json"
-    log "dry-run: rm -f $dst_sunnycore/settings.json"
-  elif [[ -f "$dst_sunnycore/settings.json" ]]; then
-    info "移除 Sunnycore 目錄中的 settings.json"
-    log "執行移除命令: rm -f $dst_sunnycore/settings.json"
-    run_cmd rm -f "$dst_sunnycore/settings.json"
+    info "dry-run: 移除 Sunnycore 目錄中的 settings.local.json"
+    log "dry-run: rm -f $dst_sunnycore/settings.local.json"
+  elif [[ -f "$dst_sunnycore/settings.local.json" ]]; then
+    info "移除 Sunnycore 目錄中的 settings.local.json"
+    log "執行移除命令: rm -f $dst_sunnycore/settings.local.json"
+    run_cmd rm -f "$dst_sunnycore/settings.local.json"
   fi
 
   log "開始安裝後驗證 (sunnycore)…"
@@ -1109,9 +1109,9 @@ install_claude_code() {
         run_cmd rm -rf "$dst_sunnycore/commands"
       fi
 
-      if [[ -f "$dst_sunnycore/settings.json" ]]; then
-        warn "Sunnycore 目錄中仍存在 settings.json 檔案，將移除"
-        run_cmd rm -f "$dst_sunnycore/settings.json"
+      if [[ -f "$dst_sunnycore/settings.local.json" ]]; then
+        warn "Sunnycore 目錄中仍存在 settings.local.json 檔案，將移除"
+        run_cmd rm -f "$dst_sunnycore/settings.local.json"
       fi
 
       if [[ $sunnycore_file_count -eq 0 ]]; then

@@ -12,56 +12,6 @@
 <output>
   1. Deliverables specification
      Format: Strict JSON Schema (additionalProperties=false)
-     Example: {"deliverables":[{"path":"{root}/docs/tasks.md","description":"Comprehensive task breakdown with atomized sub-tasks"}],"tasks_document":{"introduction":"...","tasks":[{"id":"setup-ci","title":"Configure CI pipeline","acceptance_hints":"...","traceability":["FR-1","NFR-2"]}]}}
-     Schema:
-     {
-       "$schema": "http://json-schema.org/draft-07/schema#",
-       "title": "CreateTasksOutput",
-       "type": "object",
-       "additionalProperties": false,
-       "properties": {
-         "deliverables": {
-           "type": "array",
-           "minItems": 1,
-           "items": {
-             "type": "object",
-             "additionalProperties": false,
-             "properties": {
-               "path": { "type": "string", "pattern": "^[^\\s]+$" },
-               "description": { "type": "string", "minLength": 1 }
-             },
-             "required": ["path", "description"]
-           }
-         },
-         "tasks_document": {
-           "type": "object",
-           "additionalProperties": false,
-           "properties": {
-             "introduction": { "type": "string" },
-             "tasks": {
-               "type": "array",
-               "minItems": 1,
-               "items": {
-                 "type": "object",
-                 "additionalProperties": false,
-                 "properties": {
-                   "id": { "type": "string", "pattern": "^[a-z0-9-]{1,64}$" },
-                   "title": { "type": "string", "maxLength": 80 },
-                   "acceptance_hints": { "type": "string" },
-                   "traceability": {
-                     "type": "array",
-                     "items": { "type": "string" }
-                   }
-                 },
-                 "required": ["id", "title"]
-               }
-             }
-           },
-           "required": ["tasks"]
-         }
-       },
-       "required": ["deliverables", "tasks_document"]
-     }
 </output>
 
 <constraints importance="Important">

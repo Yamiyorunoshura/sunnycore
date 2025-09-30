@@ -1,51 +1,29 @@
-# Warp Code v0.3.0
+# Claude code v1.7.11
 
-## Unreleased
-
-### Added
+## Added
 - README：新增以 curl 一行指令執行 `scripts/sunnycore.sh` 的安裝教學
 
-### Changed
+## Changed
 - README：將安裝腳本名稱由 `sunnycore.command` 更正為 `scripts/sunnycore.sh`
 
-# Warp Code v0.3.0
+# Claude code v1.7.10
 
-## Added
-- Sequential thinking integration for deep analysis and planning
-- Comprehensive TDD (Test-Driven Development) workflow
-- Advanced review process with multi-dimensional quality checks
-- Enhanced development notes templates and documentation standards
-- Brownfield development support with backward compatibility
+# Claude code v1.7.9
 
-## Changed
-- Improved workflow stages with detailed milestone checkpoints
-- Enhanced constraint validation and quality assurance processes
-- Optimized task execution with better error handling and recovery
+# Claude code v1.7.8
 
-## Fixed
-- Workflow consistency issues across different development scenarios
-- Template integration and standardization improvements
+# Claude code v1.7.7
 
-# Warp Code v0.2.0
+# Claude code v1.7.6
 
-## Added
-- Complete custom agents system with four specialized roles
-- Dev agent (Biden) - Full-stack developer with comprehensive skill set
-- PM agent (Jason) - Product Manager with strategic thinking capabilities
-- PO and QA agents for complete development lifecycle coverage
-- Custom commands system (*help, *develop-task, *brownfield-task)
-- Structured task templates and workflow definitions
-- Implementation plan and development notes templates
+# Claude code v1.7.5
 
-## Changed
-- Standardized agent activation commands (ac --dev, ac --pm, ac --po, ac --qa)
-- Enhanced role-based personality traits and professional capabilities
-- Improved cross-functional communication and coordination features
+# Claude code v1.7.4
 
-# Warp Code v0.1.0
+# Claude code v1.7.3
 
-## Added
-- Basic agent framework and architecture
-- Core workflow process definitions
-- Initial custom agent concept and role-based AI assistant foundation
-- Basic task management and execution structure
+# Claude code v1.7.2
+
+# Claude code v1.7.1
+
+# Claude code v1.7.0

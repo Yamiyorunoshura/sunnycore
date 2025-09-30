@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "prompt_name": "document-project",
+    "prompt_type": "tasks",
+    "review_date": "2025-09-30",
+    "reviewer": "Prompt Quality Evaluator",
+    "version": "v1.0"
+  },
+  "overall_score": 87.13,
+  "grade": "Good",
+  "dimensions": {
+    "correctness": {
+      "score": 80,
+      "evidence": "Uses tasks tags <input>/<output>/<constraints>/<workflow>; stage IDs in n: snake_case; final-stage <checks> present. Output block lacks a JSON Schema; stage 2 has stray '<tools/>' closure; template path invalid; shard script exists (claude code/tasks/document-project.md L25–28, L49–53, L17, L69–71).",
+      "issues": [
+        "Invalid tools closure in stage 2: '<tools/>' should be '</tools>'",
+        "Nonexistent path: sunnycore/templates/concluded-architecture-tmpl.yaml"
+      ]
+    },
+    "clarity": {
+      "score": 88,
+      "evidence": "Concise bullets; Deliverable lines for stages 1 and 2 (L46–47, L57); example provided (L82–97). Lack of explicit JSON Schema reduces explicitness.",
+      "issues": [
+        "No JSON Schema example in <output>",
+        "Stage 3 lacks an explicit 'Deliverable:' label (optional but improves traceability)"
+      ]
+    },
+    "cognitive_load": {
+      "score": 90,
+      "evidence": "Three stages; scannable structure; per-stage ≤3–4 bullets; questions scoped in stage 2.",
+      "issues": []
+    },
+    "reasoning_guidance": {
+      "score": 90,
+      "evidence": "Stage 2 questions guide verification; final-stage checks enable acceptance criteria (L58–63, L72–78).",
+      "issues": []
+    },
+    "alignment": {
+      "score": 84,
+      "evidence": "Complies with GUIDE on stage ID format and importance enums; tools markup mostly correct but has an invalid '<tools/>' closure in stage 2; output lacks machine-validated JSON Schema; content is in English.",
+      "issues": [
+        "Invalid tools closure in stage 2",
+        "Output lacks JSON Schema per GUIDE"
+      ]
+    },
+    "completeness": {
+      "score": 86,
+      "evidence": "Core tags present; example and final checks included; missing JSON Schema and wrong template path reduce completeness.",
+      "issues": [
+        "Missing JSON Schema",
+        "Referenced template path does not exist"
+      ]
+    },
+    "constraint_design": {
+      "score": 92,
+      "evidence": "Measurable MUST/SHOULD/MAY constraints; enforce 'no text outside JSON' and schema validation intent.",
+      "issues": []
+    },
+    "user_experience": {
+      "score": 87,
+      "evidence": "Readable and scannable; acceptance checks clear; invalid path and tools closure may cause execution friction.",
+      "issues": [
+        "Broken template path",
+        "Malformed tools block in stage 2"
+      ]
+    }
+  },
+  "recommendations": [
+    "HIGH: Provide a strict JSON Schema under <output> (Draft 2020-12, additionalProperties=false) and enforce validation.",
+    "HIGH: Fix template path to an existing file (e.g., sunnycore/templates/architecture-tmpl.yaml).",
+    "HIGH: Correct the stage 2 tools block by replacing '<tools/>' with '</tools>'.",
+    "MEDIUM: Add an explicit 'Deliverable:' line for stage 3 (e.g., 'Final JSON report saved to reports/').",
+    "LOW: Clarify the final-stage check 'Every output item includes \"Format\" and \"Example\" lines' or replace with a more actionable acceptance check."
+  ],
+  "advisory_suggestions": [
+    "Reiterate the language policy (English) at top-level to avoid drift.",
+    "Optionally add a retry-on-validation-failure note (up to 2 attempts).",
+    "Consider adding a brief mapping example showing files[] with source_refs and path validation."
+  ],
+  "strengths": [
+    "Guide-aligned tasks structure with snake_case stage IDs.",
+    "Measurable constraints and final-stage checks.",
+    "Clear role boundaries and scoped deliverables for stages 1 and 2."
+  ],
+  "summary": "Classified as tasks. Strong structure with measurable constraints and final checks. To reach template-grade quality, add a concrete JSON Schema, correct the stage 2 tools closure, and fix the template path; optionally label stage 3 deliverable."
+}

@@ -1,57 +1,86 @@
 <input>
   <context>
-  1. Project documentation requirements and standards
-  2. Existing project files and structure
+  1. {root}/docs/architecture/*.md (context)
   </context>
-  <templates>
-  1. {root}/sunnycore/templates/project-documentation-tmpl.yaml
+  <rules>
+  2. {root}/sunnycore/CLAUDE.md (rules)
+  </rules>
+  <template>
+  3. {root}/sunnycore/templates/architecture-tmpl.yaml (template)
   </templates>
 </input>
 
 <output>
-1. {root}/docs/project-documentation.md - Comprehensive project documentation
+1. {root}/docs/architecture/*.md
+Format: Markdown
 </output>
 
-<constraints, importance = "Important">
-- Follow project documentation standards and templates
-- Include all necessary sections for project understanding
-- Use clear, concise language and proper formatting
+<constraints importance="Important">
+- MUST: Produce valid JSON exactly matching the schema (additionalProperties=false)
+- MUST: Output no text outside JSON when producing deliverables
+- SHOULD: Use 3 stages and place <checks> in the last stage
+- SHOULD: Map each produced file to at least 1 source reference
+- MAY: Include architecture diagrams as fenced Markdown code blocks
 </constraints>
 
-<workflow, importance = "Normal">
-  <stage id="1: analyze">
+<workflow importance="Important">
+  <stage id="1: analysis_and_todo">
   <tools>
-  - list_dir: Review existing project structure and files
-  - read_file: Load existing documentation and standards
-  - grep: Search for documentation patterns and requirements
+    <tool name="todo_write" description="Maintain execution todo list and statuses"/>
   </tools>
-  - Review existing project structure and documentation
-  - Identify documentation gaps and requirements
-  - Plan documentation structure and content
-  
+  - Read all steps and provided inputs; derive a task-level todo list
+  - Inventory architecture sources; note gaps and assumptions
+  - Plan target document sections according to the template
+  - Deliverable: Task-level todo list and source inventory
+  </stage>
+
+  <stage id="2: author_architecture_documents">
+  <tools>
+    <tool name = "todo_write" description="Maintain execution todo list and statuses"/>
+    <tool name = "sequential-thinking" description="Aggregate and normalize content; author documents per template"/>
+  </tools>
+  - Aggregate and normalize content; author documents per template
+  - Validate completeness and internal consistency across sections
+  - Prepare the JSON deliverable with files[] ready to write
+  - Deliverable: files[] conforming to schema, ready to write
   <questions>
-  - What are the key project components that need documentation?
-  - Are there existing documentation standards to follow?
-  - What level of detail is appropriate for the target audience?
+  - Are all required sections covered per template?
+  - Do files trace back to their source_refs without fabrication?
+  - Is each file path under docs/architecture/ and .md?
   </questions>
   </stage>
 
-  <stage id="2: create">
+  <stage id="3: shard_and_finalize">
   <tools>
-  - read_file: Load project documentation template
-  - write: Generate comprehensive project documentation
+    <tool name = "todo_write" description="Maintain execution todo list and statuses"/>
   </tools>
-  - Generate comprehensive project documentation
-  - Follow template structure and formatting guidelines
-  - Include all necessary sections and cross-references
-  
+  - Run sunnycore/scripts/shard-architecture.py and record shards_created
+  - Validate output JSON against schema; fix violations before finalizing
+  - Emit final JSON only; do not include explanations
+  - Deliverable: Final JSON-only deliverable with shards_created recorded
   <checks>
-  - [ ] All required sections are complete and accurate
-  - [ ] Documentation follows established templates and standards
-  - [ ] Cross-references and links are valid and functional
-  - [ ] Content is clear, comprehensive, and well-organized
+  - [ ] Template architecture conforms to tasks decision tree (3 stages)
+  - [ ] Output JSON passes schema; no additionalProperties
+  - [ ] Every output item includes 'Format' and 'Example' lines in this prompt
+  - [ ] All file paths under docs/architecture/ with .md extension
+  - [ ] Source references present for every file
   </checks>
   </stage>
 </workflow>
 
-
+<example>
+{
+  "files": [
+    {
+      "path": "docs/architecture/overview.md",
+      "title": "System Overview",
+      "content": "# Overview\nThis document provides the high-level system architecture.",
+      "source_refs": [
+        { "file": "docs/architecture/architecture.md", "lines": "12-45" }
+      ],
+      "format": "markdown"
+    }
+  ],
+  "shards_created": 0
+}
+</example>

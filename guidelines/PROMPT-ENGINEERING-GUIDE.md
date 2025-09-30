@@ -245,6 +245,11 @@
   - Create initial structure
   - Develop core content
   - Apply formatting standards
+  
+  <tools>
+    <tool name="{tool_name_1}" description="{purpose_1}"/>
+    <tool name="{tool_name_2}" description="{purpose_2}"/>
+  </tools>
   </stage>
 </workflow>
 ```
@@ -275,24 +280,26 @@
         
 # 工程級增補與最佳實踐
 
-## 嚴格輸出與自動修復（JSON Schema + 重試）
-- **MUST** 在 `<output>` 內提供嚴格 JSON Schema（`additionalProperties=false`）。
-- **MUST** 附合法樣例；禁止在 JSON 外輸出任何解釋文字。
+## 輸出格式策略與自動修復（JSON/Markdown/Text + 重試）
+- **MUST** 明確指定輸出格式（JSON / Markdown / Text）。
+- If JSON：**MUST** 要求以JSON Schema格式輸出（e.g. JSON SCHEMA **Required**）
+- If Markdown/Text：**MUST** 明確章節、清單與長度等規格，避免歧義。如有提供模板文件，則必須遵守模板
 - **SHOULD** 設置「驗證失敗 → 自動修復提示 → 最多 N 次重試」流程。
 
-最小可用模板：
+最小可用模板（簡短）：
 ```xml
 <output>
-  {JSON Schema here}
+  Format: {JSON | Markdown | Text}  <!-- choose one -->
+  When: JSON=programmatic; Markdown=human-readable; Text=short freeform
 </output>
 <constraints importance="Important">
-- MUST: Produce valid JSON per schema (no extra keys)
-- MUST: No text outside JSON
+- MUST: Follow the chosen format
+- IF JSON: Provide schema (additionalProperties=false), no extra text
 - SHOULD: Retry up to 2 times on validation failure
 </constraints>
 <checks>
-- [ ] JSON passes schema validation
-- [ ] No additionalProperties
+- [ ] Output matches declared format
+- [ ] If JSON, schema-valid
 </checks>
 ```
 
@@ -431,7 +438,7 @@ color: {Color}
 | 標籤 | 目的 | 要點 |
 |------|------|------|
 | `<input>` | 定義輸入 | 必含 `<context>` 與必要 `<rules>`/`<templates>` |
-| `<output>` | 定義輸出 | 機器可讀；建議 JSON Schema（`additionalProperties=false`）|
+| `<output>` | 定義輸出 | 指定格式（JSON/Markdown/Text）；機器處理→JSON Schema（`additionalProperties=false`）|
 | `<constraints>` | 硬性限制 | 3-5 條、可驗證、MUST/SHOULD/MAY |
 | `<checks>` | 驗收檢核 | 2-5 項、可勾選、可觀察 |
 | `<questions>` | 自檢 | 2-3 個高價值問題 |
@@ -452,7 +459,7 @@ color: {Color}
 - [ ] `<constraints>` 3-5 條可驗證限制（含 JSON/工具/安全要求）
 - [ ] `<checks>` 2-5 個可勾選檢核點，含「JSON 100% 合規」
 - [ ] `importance` 僅使用 Critical/Important/Normal/Optional
-- [ ] `<tools>` 沒階段需要的工具已被正確標注
+- [ ] `<tools>` 每階段需要的工具已被正確標注
 - [ ] 回歸：具 Golden set 與 A/B 計畫，可回滾
 - [ ] 隱私：PII 遮罩、不落地與保留週期；敏感任務拒答或升級
 - [ ] 禁止外露思維鏈，僅提供摘要級理由
@@ -567,6 +574,10 @@ color: {Color}
 
 <workflow importance="Normal">
   <stage id="1: stage_name">
+  <tools>
+    <tool name="{tool_name_1}" description="{purpose_1}"/>
+    <tool name="{tool_name_2}" description="{purpose_2}"/>
+  </tools>
   - {Stage Action 1}
   - {Stage Action 2}
   - {Stage Action 3}
@@ -592,7 +603,7 @@ color: {Color}
 </workflow>
 ```
 
-可選說明：`<subagent-list>`、`<example>`、`<questions>`、`<checks>`、`<instructions>` 為可選；建議僅在最後一個 `<stage>` 放置 `<checks>` 作為整體驗收清單。
+可選說明：`<subagent-list>`、`<example>`、`<questions>`、`<checks>`、`<instructions>` 、`<tools>`為可選；建議僅在最後一個 `<stage>` 放置 `<checks>` 作為整體驗收清單。
 
 # 問題解決面板
 
@@ -614,7 +625,7 @@ color: {Color}
 
 <!-- After: 明確結構 -->
 <output>
-Format: JSON schema
+Format: {JSON | Markdown | Text}  <!-- choose one -->
 </output>
 ```
 

@@ -14,25 +14,27 @@
 
 <output>
 1. {root}/docs/review-results/{task_id}-review.md
+   Format: Machine-checkable Markdown with sections [Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items] and a final Acceptance Decision (Accept/Accept with changes/Reject).
+   Example: Create or update the review file with headings, cross-references to plan/code/notes using file paths and line ranges, and a summarized pass/fail test matrix aligned to acceptance criteria.
 2. {root}/docs/tasks.md
+   Format: Updated tasks status reflecting review outcomes and action items while preserving existing structure.
+   Example: Modify the row for {task_id} to include review status, acceptance decision, and prioritized action items.
 </output>
 
-<constraints, importance = "Critical">
+<constraints importance="Critical">
 - MUST execute all tests created during develop tasks phase and verify test results align with implementation plan.
 - MUST verify that all production code strictly follows the implementation plan specifications and acceptance criteria.
 - MUST produce machine-checkable Markdown with sections: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items.
 - MUST cross-reference plan/code/notes with file paths, line ranges, or anchors when available.
-- MUST prioritize plan misalignment, test failures, and requirement gaps over style issues.
-- SHOULD keep each finding concise (<= 120 words) and one issue per bullet.
 - MUST record an acceptance decision with rationale: Accept / Accept with changes / Reject.
 </constraints>
 
-<workflow, importance = "Important">
-  <stage id="1: review-plan">
+<workflow importance="Important">
+  <stage id="1: review_plan">
   <tools>
-  - sequential_thinking
-  - todo_write
-  - Claude-Context: Process large plan documents in segments
+    <tool name="sequential_thinking" description="Structured reasoning"/>
+    <tool name="todo_write" description="Execution tracking"/>
+    <tool name="Claude-Context" description="Process large plan documents in segments"/>
   </tools>
   - Read and understand the implementation plan
   - Identify verification approach and success criteria
@@ -43,54 +45,46 @@
   </questions>
   </stage>
 
-  <stage id="2: review-code">
+  <stage id="2: review_code">
   <tools>
-  - todo_write
-  - Sequential Thinking Tool: Systematically analyze code against plan specifications
-  - Claude-Context: Process large plan documents in segments
+    <tool name="todo_write" description="Execution tracking"/>
+    <tool name="sequential_thinking" description="Analyze code against plan"/>
+    <tool name="Claude-Context" description="Process large plan documents in segments"/>
   </tools>
   - Read and understand all production code
-  - Execute all tests created during develop tasks phase and document results
-  - Verify test coverage matches implementation plan acceptance criteria
-  - Check strict alignment between code implementation and plan specifications
-  - Validate that code meets all requirements defined in the implementation plan
-  
+  - Execute all tests and document pass/fail with alignment to plan
+  - Verify coverage and strict alignment to architecture/design and acceptance criteria
+
   <questions>
   - Do all tests pass and align with the success criteria defined in the implementation plan?
-  - Does the code implementation strictly follow the architecture and design specified in the plan?
-  - Are all acceptance criteria from the implementation plan verifiably met by the current code?
-  - Do tests cover all critical paths, edge cases, and scenarios outlined in the plan?
   - Are security, performance, and observability requirements from the plan properly implemented?
   </questions>
   </stage>
 
-  <stage id="3: review-dev-notes">
+  <stage id="3: review_dev_notes">
   <tools>
-  - sequential_thinking
-  - todo_write
+    <tool name="sequential_thinking" description="Structured reasoning"/>
+    <tool name="todo_write" description="Execution tracking"/>
   </tools>
   - Read and understand the development notes
   - Check alignment between notes and implementation
   </stage>
 
-  <stage id="4: produce-results">
+  <stage id="4: produce_results">
   <tools>
-  - sequential_thinking
-  - todo_write
+    <tool name="sequential_thinking" description="Synthesize results"/>
+    <tool name="todo_write" description="Finalize tracking"/>
   </tools>
-  - Use the template to create the markdown formatted review results including test execution summary
-  - Document all test results with pass/fail status and alignment to plan
-  - Create detailed code alignment analysis comparing implementation to plan specifications
-  - Save to {root}/docs/review-results/{task_id}-review.md
-  - If there is already an existing review results, update the review results with the new information
+  - Create review results using the template, including test execution summary
+  - Document test results with pass/fail status and plan alignment; analyze code alignment with specific references
+  - Save to {root}/docs/review-results/{task_id}-review.md; update if file exists
+
   <checks>
   - [ ] All tests executed with documented results and plan alignment verification
   - [ ] Code alignment analysis completed with specific references to plan deviations
   - [ ] All required sections present: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
   - [ ] Test failures and plan misalignments clearly identified and prioritized
-  - [ ] Findings reference plan/code/notes with links or anchors
   - [ ] Acceptance decision recorded with rationale based on test results and plan compliance
-  - [ ] Action items prioritized and assignable with clear remediation steps
   </checks>
   </stage>
 </workflow>
