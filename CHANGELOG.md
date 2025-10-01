@@ -1,3 +1,9 @@
+# Claude code v1.7.13
+
+## Changed
+- 修正README中安裝腳本名稱為`scripts/sunnycore.sh`
+- 優化`brownfield-tasks`提示詞，使其更符合實際需求
+
 # Claude code v1.7.11
 
 ## Added
