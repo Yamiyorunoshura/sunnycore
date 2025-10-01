@@ -1,0 +1,322 @@
+{
+  "prompt_name": "prompt-reviewer",
+  "review_date": "2025-10-01",
+  "reviewer": "sunnycore_prompt-reviewer",
+  "overall_score": 4.1,
+  "scoring_method": "weighted_average",
+  "pass_threshold": 4.0,
+  "status": "合格（但有改進空間）",
+  
+  "dimensions": [
+    {
+      "name": "結構完整性",
+      "weight": 1.5,
+      "score": 4.0,
+      "weighted_score": 6.0,
+      "status": "合格",
+      "findings": [
+        {
+          "type": "positive",
+          "item": "必要區塊齊全",
+          "evidence": "[輸入]L1-2, [輸出]L4-7, [角色]L9-10, [技能]L12-16, [核心原則]L18-22, [操作約束]L23-28, [工具]L29-33, [工具指引]L35-41, [步驟]L43-62, [DoD]L63-67, [評分指引]L69-80",
+          "comment": "包含所有必要結構元素，架構完整"
+        },
+        {
+          "type": "positive",
+          "item": "區塊邏輯順序合理",
+          "evidence": "[輸入]→[輸出]→[角色]→[技能]→[核心原則]→[操作約束]→[工具]→[步驟]→[DoD]→[評分指引]",
+          "comment": "依循「基本資訊→能力→約束→工具→執行→檢核」的邏輯順序"
+        },
+        {
+          "type": "issue",
+          "severity": "medium",
+          "item": "區塊概念重疊",
+          "evidence": "[核心原則]L18-22 與 [操作約束]L23-28",
+          "comment": "兩個區塊界線模糊，「安全與合規」既是原則也是約束，建議整合或明確區分",
+          "suggestion": "考慮將[核心原則]重新命名為[設計原則]，[操作約束]重新命名為[執行規範]，以強化區隔"
+        }
+      ]
+    },
+    {
+      "name": "表達清晰度",
+      "weight": 2.0,
+      "score": 4.2,
+      "weighted_score": 8.4,
+      "status": "良好",
+      "findings": [
+        {
+          "type": "positive",
+          "item": "專業術語一致性",
+          "evidence": "全文",
+          "comment": "「提示詞」「審查」「維度」等核心術語使用一致"
+        },
+        {
+          "type": "issue",
+          "severity": "low",
+          "item": "單位不明確",
+          "evidence": "[核心原則]L20「單項建議<100字」",
+          "comment": "「字」可能指中文字、字元或英文字，建議明確單位",
+          "suggestion": "建議改為「單項建議<100中文字（或200字元）」"
+        },
+        {
+          "type": "issue",
+          "severity": "low",
+          "item": "括號內容過長",
+          "evidence": "[步驟]L46-47",
+          "comment": "「（常見維度包括：結構完整性、表達清晰度、約束有效性、工具指引、評分機制、實務可行性等）」影響可讀性",
+          "suggestion": "建議改為獨立說明項或註解區塊"
+        },
+        {
+          "type": "issue",
+          "severity": "low",
+          "item": "內容重複",
+          "evidence": "[步驟]L50 與 [操作約束]L24",
+          "comment": "證據引用格式說明重複出現，造成冗餘",
+          "suggestion": "刪除[步驟]L50中的重複說明，僅保留[操作約束]中的定義"
+        },
+        {
+          "type": "issue",
+          "severity": "low",
+          "item": "加權機制說明分散",
+          "evidence": "[評分指引]L72-76",
+          "comment": "權重說明使用列表項但結構不夠清晰",
+          "suggestion": "建議改用表格或更結構化的格式呈現"
+        }
+      ]
+    },
+    {
+      "name": "約束有效性",
+      "weight": 2.0,
+      "score": 3.8,
+      "weighted_score": 7.6,
+      "status": "未達標（需改進）",
+      "findings": [
+        {
+          "type": "positive",
+          "item": "約束涵蓋面向完整",
+          "evidence": "[核心原則]L18-22, [操作約束]L23-28",
+          "comment": "涵蓋標準、效率、證據、安全、輸入、範圍等面向"
+        },
+        {
+          "type": "positive",
+          "item": "證據標註格式明確",
+          "evidence": "[操作約束]L24",
+          "comment": "「證據以[區塊名稱]+行號標註（例：[角色]L8-L11）」具體可執行"
+        },
+        {
+          "type": "issue",
+          "severity": "high",
+          "item": "邏輯矛盾",
+          "evidence": "[操作約束]L28「審查過程忽視舊報告以保持獨立性」vs [DoD]L66「若檔案已存在則覆寫」",
+          "comment": "「忽視舊報告」與「覆寫檔案」存在執行層面的矛盾，可能導致執行者困惑",
+          "suggestion": "建議修改為「審查過程不參考舊審查內容，但產出報告時可直接覆寫舊檔案」，明確區分審查獨立性與檔案處理"
+        },
+        {
+          "type": "issue",
+          "severity": "medium",
+          "item": "抽象約束缺乏執行指引",
+          "evidence": "[核心原則]L21「抑制偏見」",
+          "comment": "「抑制偏見」過於抽象，缺乏具體執行方法",
+          "suggestion": "補充執行指引，例如「必要時多角度核驗並採保守判斷」"
+        },
+        {
+          "type": "issue",
+          "severity": "medium",
+          "item": "可理解性標準不清",
+          "evidence": "[核心原則]L19「確保 LLM 可理解且輸出一致」",
+          "comment": "「LLM 可理解」的標準不明確，可能因模型而異",
+          "suggestion": "建議補充具體標準，例如「使用明確的動詞、避免歧義詞彙、提供示例」"
+        }
+      ]
+    },
+    {
+      "name": "工具指引完整性",
+      "weight": 1.5,
+      "score": 4.3,
+      "weighted_score": 6.45,
+      "status": "良好",
+      "findings": [
+        {
+          "type": "positive",
+          "item": "sequentialthinking 指引完整",
+          "evidence": "[工具指引]L35-41",
+          "comment": "提供清晰的 totalThoughts 設定指引和使用時機說明"
+        },
+        {
+          "type": "positive",
+          "item": "工具使用場景明確",
+          "evidence": "[工具]L30-33",
+          "comment": "明確標註每個工具對應的步驟與用途"
+        },
+        {
+          "type": "issue",
+          "severity": "low",
+          "item": "todo_write 指引缺失",
+          "evidence": "[工具指引]L35-41",
+          "comment": "僅提供 sequentialthinking 的詳細指引，缺少 todo_write 的使用說明",
+          "suggestion": "補充 todo_write 的使用指引，例如何時更新狀態、如何命名任務等"
+        },
+        {
+          "type": "issue",
+          "severity": "low",
+          "item": "工具限制說明不足",
+          "evidence": "[工具]L29-33",
+          "comment": "未說明工具使用的限制或注意事項",
+          "suggestion": "補充說明，例如「sequentialthinking 適合邏輯推理，不適合記憶事實」"
+        }
+      ]
+    },
+    {
+      "name": "評分機制合理性",
+      "weight": 1.0,
+      "score": 4.8,
+      "weighted_score": 4.8,
+      "status": "優秀",
+      "findings": [
+        {
+          "type": "positive",
+          "item": "評分尺度明確",
+          "evidence": "[評分指引]L70",
+          "comment": "0-5尺度並提供各分數的語義定義，清晰可操作"
+        },
+        {
+          "type": "positive",
+          "item": "加權機制科學",
+          "evidence": "[評分指引]L72-76",
+          "comment": "引入高/中/標準權重機制，合理突出重要維度（表達清晰度、約束有效性、實務可行性）"
+        },
+        {
+          "type": "positive",
+          "item": "合格門檻合理",
+          "evidence": "[評分指引]L77",
+          "comment": "≥4.0的門檻對應「良好」等級，既有質量要求又務實"
+        },
+        {
+          "type": "positive",
+          "item": "低分處置機制完善",
+          "evidence": "[評分指引]L79-80",
+          "comment": "明確定義低分情況的處理方式，並要求分數與證據、建議對齊"
+        },
+        {
+          "type": "positive",
+          "item": "邊界分數檢視",
+          "evidence": "[評分指引]L78",
+          "comment": "3.9-4.0之間需額外檢視，體現審慎態度"
+        }
+      ]
+    },
+    {
+      "name": "實務可行性",
+      "weight": 2.0,
+      "score": 4.0,
+      "weighted_score": 8.0,
+      "status": "合格",
+      "findings": [
+        {
+          "type": "positive",
+          "item": "執行流程清晰",
+          "evidence": "[步驟]L43-62",
+          "comment": "三階段（準備→審查→評分）流程結構清晰，易於跟隨"
+        },
+        {
+          "type": "positive",
+          "item": "完成標準明確",
+          "evidence": "[DoD]L63-67",
+          "comment": "提供可檢核的完成標準，避免遺漏"
+        },
+        {
+          "type": "issue",
+          "severity": "medium",
+          "item": "工作量可能過大",
+          "evidence": "[步驟]L46「構思5-8審查維度；每維度3-5審查項目」",
+          "comment": "最多可能需要審查40個項目（8×5），與[核心原則]L20「效率與簡潔」存在張力",
+          "suggestion": "建議調整為「構思5-7審查維度；每維度3-4審查項目」，或根據提示詞複雜度彈性調整"
+        },
+        {
+          "type": "issue",
+          "severity": "low",
+          "item": "破壞性優化識別標準不明",
+          "evidence": "[輸出]L7",
+          "comment": "提供了破壞性優化的定義，但未說明如何在審查過程中識別",
+          "suggestion": "在[步驟]中補充「審查時標註可能影響原架構的建議為破壞性優化」"
+        }
+      ]
+    }
+  ],
+  
+  "destructive_optimization_suggestions": [
+    {
+      "type": "architecture_change",
+      "severity": "medium",
+      "title": "合併或重新劃分[核心原則]與[操作約束]",
+      "current": "[核心原則]L18-22 與 [操作約束]L23-28 概念重疊",
+      "suggestion": "考慮將兩個區塊合併為單一的[執行原則]區塊，或更明確地將[核心原則]定位為高層設計理念、[操作約束]定位為具體執行規範",
+      "impact": "影響提示詞整體架構，需重新組織約束相關內容",
+      "benefit": "提升結構清晰度，減少概念混淆"
+    },
+    {
+      "type": "constraint_logic_change",
+      "severity": "high",
+      "title": "解決「忽視舊報告」與「覆寫檔案」的矛盾",
+      "current": "[操作約束]L28 vs [DoD]L66",
+      "suggestion": "修改[操作約束]L28為「審查過程不參考舊審查內容以保持獨立性；產出報告時直接覆寫舊檔案」，明確區分審查獨立性（過程）與檔案管理（輸出）",
+      "impact": "改變核心約束邏輯，影響執行者對「獨立性」的理解",
+      "benefit": "消除邏輯矛盾，提升執行明確性"
+    },
+    {
+      "type": "scope_reduction",
+      "severity": "low",
+      "title": "優化審查工作量預期",
+      "current": "[步驟]L46 要求5-8維度×3-5項目=最多40個審查項目",
+      "suggestion": "調整為「構思5-7審查維度；每維度3-4審查項目」，並補充「可根據提示詞複雜度彈性調整」",
+      "impact": "改變工作量預期，可能影響審查深度",
+      "benefit": "平衡全面性與效率，更符合[核心原則]的效率要求"
+    }
+  ],
+  
+  "summary": {
+    "strengths": [
+      "評分機制設計優秀，引入加權機制科學合理",
+      "結構完整，包含所有必要元素",
+      "sequentialthinking 工具指引詳細實用",
+      "執行流程清晰，DoD 明確可檢核"
+    ],
+    "weaknesses": [
+      "約束有效性未達標（3.8/5.0），存在邏輯矛盾",
+      "[核心原則]與[操作約束]界線模糊",
+      "部分抽象約束缺乏具體執行指引",
+      "工作量預期可能過大，與效率原則存在張力"
+    ],
+    "critical_issues": [
+      {
+        "issue": "邏輯矛盾",
+        "location": "[操作約束]L28 vs [DoD]L66",
+        "impact": "high",
+        "must_fix": true
+      }
+    ],
+    "recommendation": "建議優先修復約束邏輯矛盾問題後再投入使用。其他改進項目可視實際使用情況逐步優化。"
+  },
+  
+  "metadata": {
+    "total_lines": 80,
+    "review_dimensions": 6,
+    "total_findings": 25,
+    "issues_count": {
+      "high": 1,
+      "medium": 4,
+      "low": 7
+    },
+    "weight_distribution": {
+      "high_weight_dimensions": 3,
+      "medium_weight_dimensions": 2,
+      "standard_weight_dimensions": 1
+    },
+    "calculation": {
+      "formula": "(各維度分數×權重)之和 / 權重總和",
+      "numerator": "6.0 + 8.4 + 7.6 + 6.45 + 4.8 + 8.0 = 41.25",
+      "denominator": "1.5 + 2.0 + 2.0 + 1.5 + 1.0 + 2.0 = 10.0",
+      "result": "41.25 / 10.0 = 4.125 ≈ 4.1"
+    }
+  }
+}

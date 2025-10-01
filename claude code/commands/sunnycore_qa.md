@@ -1,8 +1,3 @@
-TL;DR / Quick Execution Checklist:
-1) Read required inputs and task file; extract invariants
-2) Create todo list (≥3 items); set first to "in_progress"
-3) Execute stages sequentially; update todos; generate outputs and checks
-
 <start-sequence>
   <step index="1">MUST read all required input files specified in context and templates sections before proceeding with any command execution</step>
   <step index="2">MUST read the corresponding task file (e.g., {root}/sunnycore/tasks/review.md, {root}/sunnycore/tasks/help.md) to understand the specific workflow stages and requirements</step>
