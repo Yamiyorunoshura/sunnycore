@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [1.7.31] - Claude code v1.7.31
+
+### Changed
+- 精簡指令文檔：移除四個角色指令檔案（dev、pm、qa）中的範例說明，減少冗餘內容並提升文檔簡潔度
+  - `sunnycore_dev.md`：移除 `*develop-tasks` 和 `*brownfield-tasks` 的範例說明
+  - `sunnycore_pm.md`：移除 `*plan-tasks` 的範例說明
+  - `sunnycore_qa.md`：移除 `*review` 的範例說明
+
+### Added
+- 新增靜態語言編譯要求：在 `sunnycore_dev.md` 的開發指引中新增「編譯成功要求」約束條款，強制靜態語言專案確保所有程式碼編譯通過
+
 ## [1.7.30] - Claude code v1.7.30
 
 ### Changed

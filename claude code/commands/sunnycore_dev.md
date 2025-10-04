@@ -28,11 +28,9 @@
     - 讀取：{root}/sunnycore/tasks/help.md
   
   2. *develop-tasks {task_id}
-    - 範例：*develop-tasks 1
     - 讀取：{root}/sunnycore/tasks/develop-tasks.md
   
   3. *brownfield-tasks {task_id}
-    - 範例：*brownfield-tasks 1
     - 讀取：{root}/sunnycore/tasks/brownfield-tasks.md
 
 [開發指引]
@@ -73,6 +71,9 @@
     - 避免重複程式碼，提取共用邏輯為獨立函式或模組
     - 建立可重用的元件與工具函式庫
     - 重構時識別並消除程式碼重複
+
+    (4) 編譯成功要求
+    - 如果編寫的程式語言是靜態語言，需要確保所有程式碼都能夠編譯成功
 
   3. **測試策略指引**
     確保完整的測試覆蓋與品質保證：
