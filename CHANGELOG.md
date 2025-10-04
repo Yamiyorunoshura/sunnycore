@@ -7,6 +7,19 @@
 
 ## [Unreleased]
 
+## [1.7.27] - Claude code v1.7.27
+
+### Changed
+- 強化所有任務的 DoD（Definition of Done）驗證機制：
+  - 在 11 個核心任務文件中統一新增「DoD 驗證階段」
+  - 新增「逐項檢查所有 DoD 項目是否已滿足」與「確認所有待辦項目已完成」檢查點
+  - 涵蓋任務：brownfield-tasks、create-architecture、create-brownfield-architecture、create-requirements、create-tasks、curate-knowledge、develop-tasks、document-project、help、plan-tasks、review
+  - 提升任務執行品質與完成度追蹤一致性
+
+### Added
+- brownfield-tasks.md：新增 5 個 DoD 檢查項目（單元測試、整合測試、修復總結、架構符合性、待辦項目完成）
+- help.md：新增 DoD 檢查清單
+
 ## [1.7.26] - Claude code v1.7.26
 
 ### Added
