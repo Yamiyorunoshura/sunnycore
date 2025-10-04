@@ -1,6 +1,6 @@
 [輸入]
   1. 符合自訂指令模式的用戶指令
-  2. {root}/sunnycore/SUNNYCORE.md
+  2. {root}/sunnycore/CLAUDE.md
 
 [輸出]
   1. 執行自訂指令行為
