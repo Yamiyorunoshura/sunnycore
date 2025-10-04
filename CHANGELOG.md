@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [1.7.36] - Claude code v1.7.36
+
+### Changed
+- 重構任務命令命名：將 `create-tasks` 重命名為 `create-epic`，更符合敏捷開發中的 Epic 概念
+  - README.md：更新所有命令參考（Greenfield 與 Brownfield 流程）
+  - commands/sunnycore_pm.md：更新第 5 項自訂指令從 `*create-tasks` 改為 `*create-epic`
+  - index.json：更新任務 ID、路徑映射、模板關聯、代理關聯等配置
+  - tasks/create-epic.md：將輸出檔案從 `{root}/docs/tasks.md` 改為 `{root}/docs/epic.md`
+  - tasks/plan-tasks.md：將輸入檔案從 `{root}/docs/tasks.md` 改為 `{root}/docs/epic.md`
+- 版本號更新：claude-code.lock 從 1.7.35 升級至 1.7.36
+
 ## [1.7.35] - Claude code v1.7.35
 
 ### Changed

@@ -4,7 +4,7 @@
   3. {root}/sunnycore/templates/tasks-tmpl.yaml --任務模板格式
 
 [輸出]
-  1. {root}/docs/tasks.md --任務清單（Markdown 格式）
+  1. {root}/docs/epic.md --任務清單（Markdown 格式）
 
 [約束]
   1. 必須創建原子化、可驗證的任務（≤14 字，結果明確）
@@ -51,7 +51,7 @@
     - 驗證格式是否符合模板要求
 
   4. 最終化階段
-    - 將任務寫入 {root}/docs/tasks.md（Markdown 格式）
+    - 將任務寫入 {root}/docs/epic.md（Markdown 格式）
     - 包含簡短介紹說明分組與範圍
     - 逐項檢查所有 DoD 項目是否已滿足
     - 確認所有待辦項目已完成
@@ -59,7 +59,7 @@
 [DoD]
   - [ ] 已閱讀所有需求與架構文件
   - [ ] 研究筆記已完成，包含功能性需求/非功能性需求至任務的對應關係
-  - [ ] 檔案 {root}/docs/tasks.md 存在且為有效 Markdown
+  - [ ] 檔案 {root}/docs/epic.md 存在且為有效 Markdown
   - [ ] 所有任務符合模板欄位
   - [ ] 每個任務為原子化、結果導向且可驗證
   - [ ] 無檔案名稱或鍵名使用空格；已強制使用 kebab-case
