@@ -67,6 +67,8 @@
     - 交叉檢查功能性需求、非功能性需求與驗收標準；請求用戶確認
     - 填充需求模板並將輸出寫入 {root}/docs/requirements.md
     - 執行 "uv run {root}/sunnycore/scripts/shard-requirements.py"；若失敗則記錄錯誤於 {root}/logs/errors.log（包含時間戳、錯誤類型、失敗原因、影響範圍）並通知用戶
+    - 逐項檢查所有 DoD 項目是否已滿足
+    - 確認所有待辦項目已完成
 
 [DoD]
   - [ ] 已閱讀並理解所有工作步驟

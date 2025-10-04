@@ -55,6 +55,8 @@
     - 執行 {root}/sunnycore/scripts/shard-architecture.py 並記錄 shards_created 數量
     - 驗證輸出 JSON 是否符合 schema；若有違規應立即修正
     - 僅輸出最終 JSON，不包含任何說明文字
+    - 逐項檢查所有 DoD 項目是否已滿足
+    - 確認所有待辦項目已完成
     - 交付物：包含 shards_created 的最終 JSON 交付物
 
 [DoD]
