@@ -346,6 +346,19 @@ parse_args() {
     if [[ ! -t 0 ]]; then
       info "檢測到從管道執行，自動啟用互動模式"
       INTERACTIVE_MODE=1
+      warn "注意：在管道模式下互動可能受限。建議使用以下方式之一："
+      warn "1. 下載腳本後執行：curl -fsSL URL -o install.sh && bash install.sh"
+      warn "2. 使用參數指定選項：curl -fsSL URL | bash -s -- -v claude-code -p ~/install-path"
+      warn "3. 使用強制互動模式：curl -fsSL URL | bash -s -- -i"
+
+      # 嘗試重新定向到終端，如果失敗則使用預設值
+      if [[ -t 1 ]] && [[ -c /dev/tty ]]; then
+        exec < /dev/tty 2>/dev/null || {
+          warn "無法重定向到終端，將使用預設設置"
+          SELECTED_VERSION="claude-code"
+          INSTALL_BASE="${HOME:-$(pwd -P)}"
+        }
+      fi
     fi
   fi
 
@@ -381,28 +394,67 @@ prompt_select_version() {
     return
   fi
 
-  # 在互動模式下或檢測到 curl 管道時才詢問
-  if [[ $INTERACTIVE_MODE -eq 1 || ! -t 0 ]]; then
+  # 在互動模式下才詢問
+  if [[ $INTERACTIVE_MODE -eq 1 ]]; then
     echo "請選擇要安裝的版本："
     echo "  1) warp-code"
     echo "  2) codex"
     echo "  3) claude code"
-    read -r -p "輸入選項 [1-3]: " choice
-    case "$choice" in
-      1)
-        SELECTED_VERSION="warp-code"
-        ;;
-      2)
-        SELECTED_VERSION="codex"
-        ;;
-      3)
-        SELECTED_VERSION="claude-code"
-        ;;
-      *)
-        error "無效的選項：$choice"
-        exit 1
-        ;;
-    esac
+
+    # 確保可以從終端讀取輸入
+    local input_choice=""
+    local read_attempts=0
+    local max_attempts=3
+
+    while [[ -z "$input_choice" ]] && [[ $read_attempts -lt $max_attempts ]]; do
+      read_attempts=$((read_attempts + 1))
+
+      if [[ -t 0 ]] && [[ -c /dev/tty ]]; then
+        # 嘗試從終端讀取
+        if read -r -p "輸入選項 [1-3]: " input_choice < /dev/tty 2>/dev/null; then
+          # 讀取成功，繼續處理
+          :
+        else
+          # 讀取失敗，使用預設值
+          warn "無法從終端讀取輸入，使用預設版本：claude-code"
+          SELECTED_VERSION="claude-code"
+          return
+        fi
+      else
+        # 直接讀取
+        if read -r -p "輸入選項 [1-3]: " input_choice; then
+          # 讀取成功，繼續處理
+          :
+        else
+          # 讀取失敗，使用預設值
+          warn "無法讀取輸入，使用預設版本：claude-code"
+          SELECTED_VERSION="claude-code"
+          return
+        fi
+      fi
+
+      case "$input_choice" in
+        1)
+          SELECTED_VERSION="warp-code"
+          ;;
+        2)
+          SELECTED_VERSION="codex"
+          ;;
+        3)
+          SELECTED_VERSION="claude-code"
+          ;;
+        *)
+          if [[ $read_attempts -lt $max_attempts ]]; then
+            echo "無效的選項：$input_choice，請輸入 1、2 或 3"
+            input_choice=""
+          else
+            warn "超過最大嘗試次數，使用預設版本：claude-code"
+            SELECTED_VERSION="claude-code"
+            return
+          fi
+          ;;
+      esac
+    done
   else
     # 非互動模式且未指定版本，使用預設值
     warn "未指定安裝版本，使用預設版本：claude-code"
@@ -415,13 +467,40 @@ prompt_install_path() {
     return
   fi
 
-  # 在互動模式下或檢測到 curl 管道時才詢問
-  if [[ $INTERACTIVE_MODE -eq 1 || ! -t 0 ]]; then
+  # 在互動模式下才詢問
+  if [[ $INTERACTIVE_MODE -eq 1 ]]; then
     local default_path
     # 在 set -u 環境下安全讀取 HOME，若不存在則退回當前工作目錄
     default_path="${HOME:-$(pwd -P)}"
     echo "將在安裝路徑下建立/使用 sunnycore 資料夾。"
-    read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path
+
+    # 確保可以從終端讀取輸入
+    local input_path=""
+
+    if [[ -t 0 ]] && [[ -c /dev/tty ]]; then
+      # 嘗試從終端讀取
+      if read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path < /dev/tty 2>/dev/null; then
+        # 讀取成功，繼續處理
+        :
+      else
+        # 讀取失敗，使用預設值
+        warn "無法從終端讀取輸入，使用預設路徑：${default_path}"
+        INSTALL_BASE="$default_path"
+        return
+      fi
+    else
+      # 直接讀取
+      if read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path; then
+        # 讀取成功，繼續處理
+        :
+      else
+        # 讀取失敗，使用預設值
+        warn "無法讀取輸入，使用預設路徑：${default_path}"
+        INSTALL_BASE="$default_path"
+        return
+      fi
+    fi
+
     if [[ -z "${input_path:-}" ]]; then
       INSTALL_BASE="$default_path"
     else
@@ -447,10 +526,36 @@ confirm_overwrite_if_needed() {
       run_cmd rm -rf "$target_dir"
       return
     fi
-    # 在互動模式下或檢測到 curl 管道時才詢問
-    if [[ $INTERACTIVE_MODE -eq 1 || ! -t 0 ]]; then
+    # 在互動模式下才詢問
+    if [[ $INTERACTIVE_MODE -eq 1 ]]; then
       log "詢問使用者是否覆寫"
-      read -r -p "目標已存在：${target_dir}，是否清空後重新安裝？[y/N]: " yn
+
+      # 確保可以從終端讀取輸入
+      local yn=""
+      if [[ -t 0 ]] && [[ -c /dev/tty ]]; then
+        # 嘗試從終端讀取
+        if read -r -p "目標已存在：${target_dir}，是否清空後重新安裝？[y/N]: " yn < /dev/tty 2>/dev/null; then
+          # 讀取成功，繼續處理
+          :
+        else
+          # 讀取失敗，取消安裝
+          warn "無法從終端讀取輸入，為安全起見取消安裝"
+          warn "如需覆寫，請使用 -y 參數或手動刪除該目錄：$target_dir"
+          exit 1
+        fi
+      else
+        # 直接讀取
+        if read -r -p "目標已存在：${target_dir}，是否清空後重新安裝？[y/N]: " yn; then
+          # 讀取成功，繼續處理
+          :
+        else
+          # 讀取失敗，取消安裝
+          warn "無法讀取輸入，為安全起見取消安裝"
+          warn "如需覆寫，請使用 -y 參數或手動刪除該目錄：$target_dir"
+          exit 1
+        fi
+      fi
+
       log "使用者回應: $yn"
       case "$yn" in
         y|Y|yes|YES)
