@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [1.7.33] - Claude code v1.7.33
+
+### Changed
+- 簡化檔案讀取約束規則：優化四個角色指令檔案（dev、pm、po、qa）中的約束條款，將「除相關程式碼或指令文檔額外要求讀取之文檔外，僅讀取[輸入]中明確定義的檔案」精簡為「必須閱讀所有[輸入]中明確定義的檔案」，提升規則清晰度與可理解性
+  - `sunnycore_dev.md`：約束第4條文字簡化
+  - `sunnycore_pm.md`：約束第4條文字簡化
+  - `sunnycore_po.md`：約束第4條文字簡化
+  - `sunnycore_qa.md`：約束第4條文字簡化
+
 ## [1.7.32] - Claude code v1.7.32
 
 ### Changed
