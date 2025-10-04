@@ -111,3 +111,6 @@
     - Track architecture evolution history and change rationale
     - Record motivation, impact, and migration path for each architecture change
     - Preserve comparison and upgrade guidance between architecture versions
+
+[DoD]
+  - [ ] Read corresponding command document

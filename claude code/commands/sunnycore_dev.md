@@ -123,3 +123,6 @@
     - Ensure all changes can be safely rolled back
     - Document rollback steps and dependencies
     - Test rollback process feasibility
+
+[DoD]
+  - [ ] Read corresponding command document

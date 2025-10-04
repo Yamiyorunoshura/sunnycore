@@ -114,3 +114,6 @@
     - Focus on deliverables and acceptance criteria
     - Exclude operational actions (e.g., version control commands like git commit, package installation commands like npm install, environment setup commands, etc.) unless explicitly requested by user
     - Task descriptions should highlight deliverables rather than execution steps
+
+[DoD]
+  - [ ] Read corresponding command document

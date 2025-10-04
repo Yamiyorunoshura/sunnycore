@@ -94,3 +94,6 @@
     - **Low Risk**: All dimensions ≥ 2.5, no security concerns, verified deployment process
     - **Medium Risk**: 1-2 dimensions between 2.0-2.4, minor security concerns, standard deployment
     - **High Risk**: Any dimension < 2.0, security vulnerabilities exist, or complex deployment requirements
+
+[DoD]
+  - [ ] Read corresponding command document
