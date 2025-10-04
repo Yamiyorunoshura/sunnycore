@@ -23,7 +23,6 @@
     - 讀取：{root}/sunnycore/tasks/help.md
   
   2. **review {task_id}**
-    - 識別 task_id
     - 讀取：{root}/sunnycore/tasks/review.md
 
 [評分指引]

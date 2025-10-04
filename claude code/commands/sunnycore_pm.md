@@ -23,7 +23,6 @@
     - 讀取：{root}/sunnycore/tasks/help.md
   
   2. **plan-tasks {task_id}**
-    - 從指令參數中提取 task_id
     - 讀取：{root}/sunnycore/tasks/plan-tasks.md
   
   3. **create-requirements**
