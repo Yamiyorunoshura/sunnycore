@@ -1,6 +1,6 @@
 [輸入]
   1. 符合自訂指令模式的用戶指令
-  2. {root}/sunnycore/tasks/ 目錄的任務檔案
+  2. {root}/sunnycore/SUNNYCORE.md
 
 [輸出]
   1. 執行自訂指令行為

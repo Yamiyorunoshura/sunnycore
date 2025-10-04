@@ -1,18 +1,19 @@
 # Claude code v1.7.19
 
 ## Added
-- 新增 `claude code/mcp.json` - 獨立的 MCP 伺服器配置文件，使用安全的佔位符代替敏感資訊
+- 新增 `claude code/SUNNYCORE.md` - 集中化的模板與工具使用指引文檔
+  - 提供 YAML 轉 Markdown 的格式轉換指引
+  - 強調 MCP 工具優先使用原則
 
 ## Changed
-- 重構 `claude code/DEPENDENCIES.md` - 從完整的 JSON 配置簡化為 MCP 伺服器列表說明
-- 提升安全性：將所有敏感資訊（API keys、tokens）從文檔中移除，改用佔位符（如 `YOUR-CONTEXT7-API-KEY`）
-
-## Removed
-- `claude code/settings.local.json` - 移除本地配置文件，簡化配置管理
-
-## Security
-- 🔒 修正敏感資訊暴露問題：移除 DEPENDENCIES.md 中的 CONTEXT7_API_KEY、OPENAI_API_KEY、MILVUS_TOKEN 等敏感資訊
-- 🔐 新增安全配置範本：mcp.json 使用佔位符提示用戶填入自己的密鑰
+- 更新所有指令檔案 (`sunnycore_dev.md`, `sunnycore_pm.md`, `sunnycore_po.md`, `sunnycore_qa.md`) - 新增 SUNNYCORE.md 作為輸入參考文檔
+- 優化 `claude code/tasks/create-requirements.md` - 將輸出路徑從 `{root}/docs/requirements/` 統一為 `{root}/docs/requirements.md`
+- 大幅改進 `scripts/sunnycore.sh` 安裝腳本：
+  - ✨ 新增互動模式支援 (`-i, --interactive` 參數)
+  - 🚀 支援 curl 一行指令安裝（互動與非互動模式）
+  - 🔍 自動偵測 curl 管道執行環境，智能啟用互動模式
+  - 💬 改善用戶提示與預設值處理
+  - 📝 更新使用說明文檔，新增 curl 安裝範例
 
 # Claude code v1.7.18
 
