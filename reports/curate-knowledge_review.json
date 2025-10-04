@@ -1,0 +1,164 @@
+{
+  "prompt_name": "curate-knowledge",
+  "review_date": "2025-10-03",
+  "reviewer": "sunnycore_prompt-reviewer",
+  "overall_score": 4.3,
+  "pass_threshold": 4.0,
+  "status": "通過",
+  "dimensions": [
+    {
+      "name": "結構完整性",
+      "weight": 1.5,
+      "score": 4.0,
+      "findings": [
+        {
+          "id": "I1",
+          "severity": "中",
+          "type": "非破壞性",
+          "evidence": "[工具]L23-24 vs [步驟]L51",
+          "issue": "工具使用場景標註不完整",
+          "description": "[工具]L23-24標註todo_write用於「[步驟2:創建任務清單、追蹤任務進度]」和「[步驟3:追蹤任務進度]」，但實際上[步驟]L51在準備階段（步驟1）就要求「創建todo list以追蹤後續知識庫構思與輸出任務」，使用場景標註遺漏了步驟1",
+          "suggestion": "將[工具]L23的標註調整為「[步驟1:創建任務清單]、[步驟2:追蹤任務進度]、[步驟3:追蹤任務進度]」或簡化為「[步驟1-3:創建與追蹤任務清單]」",
+          "expected_effect": "確保工具使用場景標註與實際步驟一致，避免執行者遺漏在準備階段創建todo list"
+        }
+      ]
+    },
+    {
+      "name": "表達清晰度",
+      "weight": 2.0,
+      "score": 4.5,
+      "findings": []
+    },
+    {
+      "name": "約束有效性",
+      "weight": 2.0,
+      "score": 4.3,
+      "findings": [
+        {
+          "id": "A1",
+          "severity": "低",
+          "type": "非破壞性",
+          "evidence": "[規則]L13",
+          "issue": "規則3的處理方式未在步驟中明確說明",
+          "description": "[規則]L13提到「若未發現platinum級別實踐，應在知識庫中記錄『本階段尚無驗證充分的最佳實踐』並說明原因」，但[步驟]區塊沒有明確說明這個訊息應該寫在哪個文件、使用什麼格式、放在什麼位置",
+          "suggestion": "在[步驟]3補充說明：「若未發現platinum級別實踐，在best-practices.md中記錄『本階段尚無驗證充分的最佳實踐』並說明原因（如：所有實踐仍在驗證階段、缺乏足夠的使用證據等）」",
+          "expected_effect": "確保執行者知道如何處理沒有platinum實踐的情況，避免遺漏這個重要訊息"
+        }
+      ]
+    },
+    {
+      "name": "工具指引完整性",
+      "weight": 1.5,
+      "score": 4.5,
+      "findings": []
+    },
+    {
+      "name": "步驟完整性",
+      "weight": 1.5,
+      "score": 4.5,
+      "findings": []
+    },
+    {
+      "name": "實務可行性",
+      "weight": 2.0,
+      "score": 4.0,
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "中",
+          "type": "非破壞性",
+          "evidence": "[DoD]L71",
+          "issue": "DoD檢查項過於嚴格",
+          "description": "[DoD]L71要求「todo list已創建且所有項目已標記為completed」，但這個標準未考慮任務取消或不適用的情況。例如，如果發現platinum實踐和錯誤案例都為0，某些輸出任務可能被標記為cancelled而非completed，此時DoD檢查會失敗",
+          "suggestion": "將檢查項調整為更靈活的標準：「todo list已創建且所有項目已處理完畢（completed或cancelled）」或「todo list已創建並持續更新，所有applicable任務已完成」",
+          "expected_effect": "提供更合理的完成標準，允許某些任務被取消而不影響整體完成度的判定"
+        }
+      ]
+    }
+  ],
+  "non_destructive_suggestions": [
+    {
+      "id": "I1",
+      "title": "工具使用場景標註不完整",
+      "suggestion": "將todo_write的使用場景標註補充步驟1"
+    },
+    {
+      "id": "A1",
+      "title": "規則3的處理方式未在步驟中明確說明",
+      "suggestion": "在步驟3補充如何記錄「無platinum實踐」的訊息"
+    },
+    {
+      "id": "F1",
+      "title": "DoD檢查項過於嚴格",
+      "suggestion": "調整為允許任務cancelled的更靈活標準"
+    }
+  ],
+  "destructive_suggestions": [],
+  "non_issues": [
+    {
+      "id": "C1-old",
+      "title": "輸出位置指代不清",
+      "original_category": "表達清晰度",
+      "user_reason": "輸出位置已經在[輸出]區塊中定義",
+      "timestamp": "2025-10-03"
+    },
+    {
+      "id": "C3-old",
+      "title": "platinum級別術語未定義",
+      "original_category": "表達清晰度",
+      "user_reason": "platinum級別標記會直接在review文檔中標記，無需額外定義格式",
+      "timestamp": "2025-10-03"
+    },
+    {
+      "id": "A1-old",
+      "title": "platinum標記格式可驗證性不足",
+      "original_category": "約束有效性",
+      "user_reason": "platinum級別標記會直接在review文檔中標記，可驗證性已足夠",
+      "timestamp": "2025-10-03"
+    }
+  ],
+  "summary": {
+    "total_findings": 3,
+    "high_severity": 0,
+    "medium_severity": 2,
+    "low_severity": 1,
+    "key_improvements": [
+      "相比舊版本，已採納多項建議：證據來源標註格式已補充（L62）、目錄創建時機已明確（L58）、claude-context使用場景已優化（L20-21）",
+      "當前版本整體質量良好，結構完整，步驟邏輯清晰，工具指引詳細"
+    ],
+    "remaining_issues": [
+      "工具使用場景標註與實際步驟不一致（中嚴重度）",
+      "DoD檢查項過於嚴格，未考慮任務取消情況（中嚴重度）",
+      "規則3的處理方式在步驟中缺乏明確說明（低嚴重度）"
+    ],
+    "recommendations": [
+      "優先處理中嚴重度問題（I1, F1），確保工具標註一致性和DoD檢查項的合理性",
+      "補充低嚴重度的細節（A1），說明如何處理無platinum實踐的情況"
+    ]
+  },
+  "calculation_details": {
+    "weighted_scores": {
+      "結構完整性": "4.0 × 1.5 = 6.0",
+      "表達清晰度": "4.5 × 2.0 = 9.0",
+      "約束有效性": "4.3 × 2.0 = 8.6",
+      "工具指引完整性": "4.5 × 1.5 = 6.75",
+      "步驟完整性": "4.5 × 1.5 = 6.75",
+      "實務可行性": "4.0 × 2.0 = 8.0"
+    },
+    "total_weighted_score": 45.1,
+    "total_weight": 10.5,
+    "final_score": "45.1 / 10.5 = 4.3"
+  },
+  "review_notes": {
+    "improvements_from_previous_review": [
+      "已在[步驟]L62補充證據來源標註格式範例（解決舊C1）",
+      "已在[步驟]L58明確「首先創建{root}/docs/knowledge/目錄」（解決舊P1）",
+      "已在[工具]L20-21調整claude-context使用場景描述（解決舊T1）"
+    ],
+    "new_findings_focus": [
+      "本次審查發現的問題集中在工具標註一致性和DoD合理性",
+      "整體質量相比舊版本有提升，主要建議已被採納",
+      "剩餘問題為細節優化，不影響核心可執行性"
+    ]
+  }
+}

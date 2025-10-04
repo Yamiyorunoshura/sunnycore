@@ -1,3 +1,9 @@
+# Claude code v1.7.14
+
+## Changed
+- 統一任務提示詞格式：將`brownfield-tasks`、`conclude`、`curate-knowledge`、`document-project`從XML格式改為Markdown格式
+- 更新審查報告：優化`brownfield-tasks`、`conclude`、`curate-knowledge`、`document-project`、`prompt-reviewer`的審查報告結構與評分機制
+
 # Claude code v1.7.13
 
 ## Changed

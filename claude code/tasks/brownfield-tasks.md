@@ -1,9 +1,8 @@
 [輸入]
-  1. {root}/sunnycore/CLAUDE.md --規範
-  2. {root}/sunnycore/templates/dev-notes-tmpl.yaml --開發筆記模板
-  3. {root}/docs/dev-notes/{task_id}-dev-notes.md --開發筆記
-  4. {root}/docs/review-results/{task_id}-review.md --審查報告
-  5. {root}/docs/architecture/*.md --架構設計
+  1. {root}/sunnycore/templates/dev-notes-tmpl.yaml --開發筆記模板
+  2. {root}/docs/dev-notes/{task_id}-dev-notes.md --開發筆記
+  3. {root}/docs/review-results/{task_id}-review.md --審查報告
+  4. {root}/docs/architecture/*.md --架構設計
 
 [輸出]
   1. 修復過後可正常運行的程式碼
@@ -57,6 +56,6 @@
     - 將總結依照模板寫入或更新到對應開發筆記
 
 [DoD]
-- [ ] 所有單元測試已通過
-- [ ] 所有整合測試已通過
-- [ ] 開發筆記已更新並輸出
+  - [ ] 所有單元測試已通過
+  - [ ] 所有整合測試已通過
+  - [ ] 開發筆記已更新並輸出
