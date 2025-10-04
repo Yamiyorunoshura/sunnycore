@@ -1,3 +1,17 @@
+# Claude code v1.7.18
+
+## Changed
+- 精簡所有模板文件：將 9 個 YAML 模板從複雜結構簡化為精簡版本，顯著減少 token 使用量
+- 優化架構模板：`architecture-tmpl.yaml` 從 282 行簡化至 60 行，轉為需求導向設計
+- 優化實作計劃模板：`implementation-plan-tmpl.yaml` 對齊 TDD 流程（Red-Green-Refactor）
+- 優化需求模板：`requirement-tmpl.yaml` 移除冗餘欄位，保留核心需求資訊
+- 優化審查模板：`review-tmpl.yaml` 簡化為 7 維度評分系統（功能合規、代碼品質、安全效能、測試覆蓋、架構對齊、文檔、部署就緒）
+- 優化開發筆記模板：`dev-notes-tmpl.yaml` 精簡為核心實作資訊記錄
+- 優化任務模板：`tasks-tmpl.yaml` 採用扁平化結構，移除複雜巢狀層級
+- 優化完成報告模板：`completion-report-tmpl.yaml` 精簡為關鍵專案總結資訊
+- 優化總結架構模板：`concluded-architecture-tmpl.yaml` 聚焦最終實作狀態記錄
+- 優化知識庫模板：`project-knowledge-tmpl.yaml` 精簡為最佳實踐與錯誤案例記錄
+
 # Claude code v1.7.17
 
 ## Changed
