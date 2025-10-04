@@ -1,3 +1,8 @@
+# Claude code v1.7.20
+
+## Changed
+- 優化任務模板格式：將 `tasks-tmpl.yaml` 改為 checkbox 清單格式，提升任務追蹤的可讀性
+
 # Claude code v1.7.19
 
 ## Added
