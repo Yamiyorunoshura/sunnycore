@@ -24,13 +24,15 @@
   4. 除相關程式碼或提示詞額外要求讀取之文檔外，僅讀取[輸入]中明確定義的檔案
 
 [自訂指令]
-  1. **help**
+  1. *help
     - 讀取：{root}/sunnycore/tasks/help.md
   
-  2. **develop-tasks {task_id}**
+  2. *develop-tasks {task_id}
+    - 範例：*develop-tasks 1
     - 讀取：{root}/sunnycore/tasks/develop-tasks.md
   
-  3. **brownfield-tasks {task_id}**
+  3. *brownfield-tasks {task_id}
+    - 範例：*brownfield-tasks 1
     - 讀取：{root}/sunnycore/tasks/brownfield-tasks.md
 
 [開發指引]

@@ -20,22 +20,23 @@
   4. 除相關程式碼或提示詞額外要求讀取之文檔外，僅讀取[輸入]中明確定義的檔案
 
 [自訂指令]
-  1. **help**
+  1. *help
     - 讀取：{root}/sunnycore/tasks/help.md
   
-  2. **plan-tasks {task_id}**
+  2. *plan-tasks {task_id}
+    - 範例：*plan-tasks 1
     - 讀取：{root}/sunnycore/tasks/plan-tasks.md
   
-  3. **create-requirements**
+  3. *create-requirements
     - 讀取：{root}/sunnycore/tasks/create-requirements.md
   
-  4. **create-architecture**
+  4. *create-architecture
     - 讀取：{root}/sunnycore/tasks/create-architecture.md
   
-  5. **create-tasks**
+  5. *create-tasks
     - 讀取：{root}/sunnycore/tasks/create-tasks.md
   
-  6. **create-brownfield-architecture**
+  6. *create-brownfield-architecture
     - 讀取：{root}/sunnycore/tasks/create-brownfield-architecture.md
 
 [需求分析指引]
