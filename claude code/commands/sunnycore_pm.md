@@ -1,5 +1,6 @@
 [輸入]
   1. 用戶指令與對應任務檔案
+  2. {root}/sunnycore/SUNNYCORE.md
 
 [輸出]
   1. 執行自訂指令行為

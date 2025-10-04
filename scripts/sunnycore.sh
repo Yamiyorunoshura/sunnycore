@@ -24,6 +24,7 @@ REPO_URL="https://github.com/Yamiyorunoshura/sunnycore.git"   # 預設為本倉�
 BRANCH=""     # 允許以 --branch 指定；未指定時自動偵測
 REMOTE_NAME_INPUT=""   # 允許以 --remote-name 指定
 TMP_CLONE_DIR=""
+INTERACTIVE_MODE=0  # 互動模式標誌
 
 # 輔助函式：遠程檢測
 detect_remote_name() {
@@ -161,6 +162,7 @@ usage() {
   cat <<'EOF'
 用法：
   bash sunnycore.sh [選項]
+  curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash -s -- [選項]
 
 選項：
   -v, --version <名稱>   指定要安裝的版本（支援：warp-code, codex, claude-code）
@@ -170,12 +172,15 @@ usage() {
       --remote-name <名稱> 指定 Git 遠程名（預設自動偵測）
       --dry-run           僅顯示將執行的動作，不實際變更
   -y, --yes               安裝時自動同意覆寫動作（若目標已存在）
+  -i, --interactive       強制啟用互動模式（curl 使用時建議使用）
   -h, --help              顯示此說明
 
 說明：
   - 可安裝 warp-code、codex 與 claude code。
   - 若未提供 --version 與 --path，腳本會以互動方式詢問。
   - 若專案本地來源資料夾不存在，可搭配 --repo 或自動偵測本機 git origin 進行拉取。
+  - 使用 curl 時建議加上 -i 參數啟用互動模式，或直接使用互動式安裝：
+    curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash
 EOF
 }
 
@@ -319,6 +324,10 @@ parse_args() {
         AUTO_YES=1
         shift
         ;;
+      -i|--interactive)
+        INTERACTIVE_MODE=1
+        shift
+        ;;
       -h|--help)
         usage
         exit 0
@@ -330,6 +339,15 @@ parse_args() {
         ;;
     esac
   done
+
+  # 檢測是否為 curl 方式執行，如果沒有提供任何參數則自動啟用互動模式
+  if [[ $INTERACTIVE_MODE -eq 0 && -z "${SELECTED_VERSION:-}" && -z "${INSTALL_BASE:-}" ]]; then
+    # 檢查腳本是否從 stdin 讀取（curl 方式）
+    if [[ ! -t 0 ]]; then
+      info "檢測到從管道執行，自動啟用互動模式"
+      INTERACTIVE_MODE=1
+    fi
+  fi
 
   # 將使用者提供的安裝路徑中的「~」展開為實際家目錄
   if [[ -n "${INSTALL_BASE:-}" ]]; then
@@ -362,41 +380,59 @@ prompt_select_version() {
   if [[ -n "${SELECTED_VERSION:-}" ]]; then
     return
   fi
-  echo "請選擇要安裝的版本："
-  echo "  1) warp-code"
-  echo "  2) codex"
-  echo "  3) claude code"
-  read -r -p "輸入選項 [1-3]: " choice
-  case "$choice" in
-    1)
-      SELECTED_VERSION="warp-code"
-      ;;
-    2)
-      SELECTED_VERSION="codex"
-      ;;
-    3)
-      SELECTED_VERSION="claude-code"
-      ;;
-    *)
-      error "無效的選項：$choice"
-      exit 1
-      ;;
-  esac
+
+  # 在互動模式下或檢測到 curl 管道時才詢問
+  if [[ $INTERACTIVE_MODE -eq 1 || ! -t 0 ]]; then
+    echo "請選擇要安裝的版本："
+    echo "  1) warp-code"
+    echo "  2) codex"
+    echo "  3) claude code"
+    read -r -p "輸入選項 [1-3]: " choice
+    case "$choice" in
+      1)
+        SELECTED_VERSION="warp-code"
+        ;;
+      2)
+        SELECTED_VERSION="codex"
+        ;;
+      3)
+        SELECTED_VERSION="claude-code"
+        ;;
+      *)
+        error "無效的選項：$choice"
+        exit 1
+        ;;
+    esac
+  else
+    # 非互動模式且未指定版本，使用預設值
+    warn "未指定安裝版本，使用預設版本：claude-code"
+    SELECTED_VERSION="claude-code"
+  fi
 }
 
 prompt_install_path() {
   if [[ -n "${INSTALL_BASE:-}" ]]; then
     return
   fi
-  local default_path
-  # 在 set -u 環境下安全讀取 HOME，若不存在則退回當前工作目錄
-  default_path="${HOME:-$(pwd -P)}"
-  echo "將在安裝路徑下建立/使用 sunnycore 資料夾。"
-  read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path
-  if [[ -z "${input_path:-}" ]]; then
-    INSTALL_BASE="$default_path"
+
+  # 在互動模式下或檢測到 curl 管道時才詢問
+  if [[ $INTERACTIVE_MODE -eq 1 || ! -t 0 ]]; then
+    local default_path
+    # 在 set -u 環境下安全讀取 HOME，若不存在則退回當前工作目錄
+    default_path="${HOME:-$(pwd -P)}"
+    echo "將在安裝路徑下建立/使用 sunnycore 資料夾。"
+    read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path
+    if [[ -z "${input_path:-}" ]]; then
+      INSTALL_BASE="$default_path"
+    else
+      INSTALL_BASE="$(expand_path "$input_path")"
+    fi
   else
-    INSTALL_BASE="$(expand_path "$input_path")"
+    # 非互動模式且未指定路徑，使用預設值
+    local default_path
+    default_path="${HOME:-$(pwd -P)}"
+    warn "未指定安裝路徑，使用預設路徑：${default_path}"
+    INSTALL_BASE="$default_path"
   fi
 }
 
@@ -411,21 +447,28 @@ confirm_overwrite_if_needed() {
       run_cmd rm -rf "$target_dir"
       return
     fi
-    log "詢問使用者是否覆寫"
-    read -r -p "目標已存在：${target_dir}，是否清空後重新安裝？[y/N]: " yn
-    log "使用者回應: $yn"
-    case "$yn" in
-      y|Y|yes|YES)
-        info "清空既有目錄：$target_dir"
-        log "使用者同意覆寫，清空目錄"
-        run_cmd rm -rf "$target_dir"
-        ;;
-      *)
-        log "使用者取消安裝"
-        echo "已取消。"
-        exit 1
-        ;;
-    esac
+    # 在互動模式下或檢測到 curl 管道時才詢問
+    if [[ $INTERACTIVE_MODE -eq 1 || ! -t 0 ]]; then
+      log "詢問使用者是否覆寫"
+      read -r -p "目標已存在：${target_dir}，是否清空後重新安裝？[y/N]: " yn
+      log "使用者回應: $yn"
+      case "$yn" in
+        y|Y|yes|YES)
+          info "清空既有目錄：$target_dir"
+          log "使用者同意覆寫，清空目錄"
+          run_cmd rm -rf "$target_dir"
+          ;;
+        *)
+          log "使用者取消安裝"
+          echo "已取消。"
+          exit 1
+          ;;
+      esac
+    else
+      # 非互動模式且目標目錄存在，給出警告但不清空
+      warn "目標目錄已存在但非互動模式，將保留現有檔案：$target_dir"
+      warn "如需覆寫，請使用 -y 參數或手動刪除該目錄"
+    fi
   else
     log "目標目錄不存在，無需覆寫"
   fi
@@ -875,7 +918,7 @@ install_codex() {
 }
 
 install_claude_code() {
-  local src dst_sunnycore dst_claude commands_dst use_local=0
+  local src dst_sunnycore dst_claude commands_dst settings_dst use_local=0
 
   log "開始 claude code 安裝程序"
   log "腳本目錄: $SCRIPT_DIR"
@@ -1155,7 +1198,7 @@ install_claude_code() {
     fi
   fi
 
-  ok "已完成 claude code 安裝至：$dst_sunnycore、$commands_dst 與 $settings_dst"
+  ok "Claude code installation completed: $dst_sunnycore, $commands_dst and $settings_dst"
 }
 
 main() {
