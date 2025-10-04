@@ -22,16 +22,16 @@
   4. 除相關程式碼或提示詞額外要求讀取之文檔外，僅讀取[輸入]中明確定義的檔案
 
 [自訂指令]
-  1. **conclude**
+  1. *conclude
     - 讀取並執行：{root}/sunnycore/tasks/conclude.md
   
-  2. **curate-knowledge**
+  2. *curate-knowledge
     - 讀取並執行：{root}/sunnycore/tasks/curate-knowledge.md
   
-  3. **document-project**
+  3. *document-project
     - 讀取並執行：{root}/sunnycore/tasks/document-project.md
   
-  4. **help**
+  4. *help
     - 讀取並執行：{root}/sunnycore/tasks/help.md
 
 [專案總結指引]

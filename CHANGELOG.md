@@ -7,6 +7,12 @@
 
 ## [Unreleased]
 
+## [1.7.30] - Claude code v1.7.30
+
+### Changed
+- 優化自訂指令格式：統一將所有角色指令檔案（dev、pm、po、qa）中的自訂指令格式從雙星號（`**指令**`）改為單星號（`*指令`），提升視覺簡潔度
+- 新增指令使用範例：為需要參數的指令（`*develop-tasks`、`*brownfield-tasks`、`*plan-tasks`、`*review`）增加「範例」說明，改善使用者體驗
+
 ## [1.7.29] - Claude code v1.7.29
 
 ### Changed
