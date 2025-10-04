@@ -1,3 +1,19 @@
+# Claude code v1.7.19
+
+## Added
+- 新增 `claude code/mcp.json` - 獨立的 MCP 伺服器配置文件，使用安全的佔位符代替敏感資訊
+
+## Changed
+- 重構 `claude code/DEPENDENCIES.md` - 從完整的 JSON 配置簡化為 MCP 伺服器列表說明
+- 提升安全性：將所有敏感資訊（API keys、tokens）從文檔中移除，改用佔位符（如 `YOUR-CONTEXT7-API-KEY`）
+
+## Removed
+- `claude code/settings.local.json` - 移除本地配置文件，簡化配置管理
+
+## Security
+- 🔒 修正敏感資訊暴露問題：移除 DEPENDENCIES.md 中的 CONTEXT7_API_KEY、OPENAI_API_KEY、MILVUS_TOKEN 等敏感資訊
+- 🔐 新增安全配置範本：mcp.json 使用佔位符提示用戶填入自己的密鑰
+
 # Claude code v1.7.18
 
 ## Changed

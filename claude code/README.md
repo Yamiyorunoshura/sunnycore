@@ -34,6 +34,47 @@
 | 8 | `/sunnycore_po *curate-knowledge` | 整理知識文檔 |
 | 9 | `/sunnycore_po *document-project` | 產出專案架構文件 |
 
+## ⚙️ 配置說明
+
+### MCP 伺服器配置
+
+本專案使用 Model Context Protocol (MCP) 伺服器提供增強功能。配置文件位於 `mcp.json`。
+
+**必要步驟：配置 API Keys**
+
+在使用前，請先在 `mcp.json` 中填入您自己的 API keys：
+
+1. **Context7** - 需要填入 `CONTEXT7_API_KEY`
+2. **Claude Context** - 需要填入以下環境變數：
+   - `EMBEDDING_MODEL`: 嵌入模型名稱
+   - `OPENAI_API_KEY`: OpenAI API key
+   - `OPENAI_BASE_URL`: OpenAI API 基礎 URL
+   - `MILVUS_TOKEN`: Milvus 向量資料庫 token
+
+**配置範例**：
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "env": {
+        "CONTEXT7_API_KEY": "ctx7sk-your-actual-key-here"
+      }
+    }
+  }
+}
+```
+
+⚠️ **安全提醒**：
+- 請勿將包含真實 API keys 的 `mcp.json` 提交到版本控制
+- 建議將此文件加入 `.gitignore`
+- 使用環境變數管理敏感資訊
+
+### 依賴清單
+
+詳見 `DEPENDENCIES.md` 查看所需的 MCP 伺服器列表。
+
+---
+
 ### 🔄 流程圖
 
 ```mermaid
