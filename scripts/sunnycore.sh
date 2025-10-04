@@ -409,28 +409,25 @@ prompt_select_version() {
     while [[ -z "$input_choice" ]] && [[ $read_attempts -lt $max_attempts ]]; do
       read_attempts=$((read_attempts + 1))
 
+      # 臨時禁用嚴格模式以防止 read 失敗導致腳本退出
+      set +e
       if [[ -t 0 ]] && [[ -c /dev/tty ]]; then
         # 嘗試從終端讀取
-        if read -r -p "輸入選項 [1-3]: " input_choice < /dev/tty 2>/dev/null; then
-          # 讀取成功，繼續處理
-          :
-        else
-          # 讀取失敗，使用預設值
-          warn "無法從終端讀取輸入，使用預設版本：claude-code"
-          SELECTED_VERSION="claude-code"
-          return
-        fi
+        read -r -p "輸入選項 [1-3]: " input_choice < /dev/tty 2>/dev/null
+        local read_result=$?
       else
         # 直接讀取
-        if read -r -p "輸入選項 [1-3]: " input_choice; then
-          # 讀取成功，繼續處理
-          :
-        else
-          # 讀取失敗，使用預設值
-          warn "無法讀取輸入，使用預設版本：claude-code"
-          SELECTED_VERSION="claude-code"
-          return
-        fi
+        read -r -p "輸入選項 [1-3]: " input_choice
+        local read_result=$?
+      fi
+      set -e  # 重新啟用嚴格模式
+
+      # 檢查 read 是否成功
+      if [[ $read_result -ne 0 ]]; then
+        # 讀取失敗，使用預設值
+        warn "無法讀取用戶輸入，使用預設版本：claude-code"
+        SELECTED_VERSION="claude-code"
+        return
       fi
 
       case "$input_choice" in
@@ -445,7 +442,11 @@ prompt_select_version() {
           ;;
         *)
           if [[ $read_attempts -lt $max_attempts ]]; then
-            echo "無效的選項：$input_choice，請輸入 1、2 或 3"
+            if [[ -n "$input_choice" ]]; then
+              echo "無效的選項：$input_choice，請輸入 1、2 或 3"
+            else
+              echo "無效的選項，請輸入 1、2 或 3"
+            fi
             input_choice=""
           else
             warn "超過最大嘗試次數，使用預設版本：claude-code"
@@ -477,28 +478,25 @@ prompt_install_path() {
     # 確保可以從終端讀取輸入
     local input_path=""
 
+    # 臨時禁用嚴格模式以防止 read 失敗導致腳本退出
+    set +e
     if [[ -t 0 ]] && [[ -c /dev/tty ]]; then
       # 嘗試從終端讀取
-      if read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path < /dev/tty 2>/dev/null; then
-        # 讀取成功，繼續處理
-        :
-      else
-        # 讀取失敗，使用預設值
-        warn "無法從終端讀取輸入，使用預設路徑：${default_path}"
-        INSTALL_BASE="$default_path"
-        return
-      fi
+      read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path < /dev/tty 2>/dev/null
+      local read_result=$?
     else
       # 直接讀取
-      if read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path; then
-        # 讀取成功，繼續處理
-        :
-      else
-        # 讀取失敗，使用預設值
-        warn "無法讀取輸入，使用預設路徑：${default_path}"
-        INSTALL_BASE="$default_path"
-        return
-      fi
+      read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path
+      local read_result=$?
+    fi
+    set -e  # 重新啟用嚴格模式
+
+    # 檢查 read 是否成功
+    if [[ $read_result -ne 0 ]]; then
+      # 讀取失敗，使用預設值
+      warn "無法讀取用戶輸入，使用預設路徑：${default_path}"
+      INSTALL_BASE="$default_path"
+      return
     fi
 
     if [[ -z "${input_path:-}" ]]; then
@@ -532,28 +530,25 @@ confirm_overwrite_if_needed() {
 
       # 確保可以從終端讀取輸入
       local yn=""
+      # 臨時禁用嚴格模式以防止 read 失敗導致腳本退出
+      set +e
       if [[ -t 0 ]] && [[ -c /dev/tty ]]; then
         # 嘗試從終端讀取
-        if read -r -p "目標已存在：${target_dir}，是否清空後重新安裝？[y/N]: " yn < /dev/tty 2>/dev/null; then
-          # 讀取成功，繼續處理
-          :
-        else
-          # 讀取失敗，取消安裝
-          warn "無法從終端讀取輸入，為安全起見取消安裝"
-          warn "如需覆寫，請使用 -y 參數或手動刪除該目錄：$target_dir"
-          exit 1
-        fi
+        read -r -p "目標已存在：${target_dir}，是否清空後重新安裝？[y/N]: " yn < /dev/tty 2>/dev/null
+        local read_result=$?
       else
         # 直接讀取
-        if read -r -p "目標已存在：${target_dir}，是否清空後重新安裝？[y/N]: " yn; then
-          # 讀取成功，繼續處理
-          :
-        else
-          # 讀取失敗，取消安裝
-          warn "無法讀取輸入，為安全起見取消安裝"
-          warn "如需覆寫，請使用 -y 參數或手動刪除該目錄：$target_dir"
-          exit 1
-        fi
+        read -r -p "目標已存在：${target_dir}，是否清空後重新安裝？[y/N]: " yn
+        local read_result=$?
+      fi
+      set -e  # 重新啟用嚴格模式
+
+      # 檢查 read 是否成功
+      if [[ $read_result -ne 0 ]]; then
+        # 讀取失敗，取消安裝
+        warn "無法讀取用戶輸入，為安全起見取消安裝"
+        warn "如需覆寫，請使用 -y 參數或手動刪除該目錄：$target_dir"
+        exit 1
       fi
 
       log "使用者回應: $yn"
