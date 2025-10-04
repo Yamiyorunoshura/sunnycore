@@ -7,6 +7,16 @@
 
 ## [Unreleased]
 
+## [1.7.35] - Claude code v1.7.35
+
+### Changed
+- 國際化指令文件：將所有角色指令檔案（sunnycore_dev.md, sunnycore_pm.md, sunnycore_po.md, sunnycore_qa.md）從繁體中文完整翻譯為英文，提升國際用戶可用性
+  - 翻譯範圍涵蓋所有章節：輸入、輸出、角色、技能、約束、自訂指令、專業指引
+  - sunnycore_dev.md：開發指引（TDD 實踐準則、程式碼品質標準、測試策略、文檔規範、風險管理）全面英文化
+  - sunnycore_pm.md：需求分析指引、架構設計指引、任務管理指引全面英文化
+  - sunnycore_po.md：專案總結指引、知識管理指引、架構管理指引全面英文化
+  - sunnycore_qa.md：評分指引（7 維度評分標準、品質矩陣、決策規則）全面英文化
+
 ## [1.7.34] - Claude code v1.7.34
 
 ### Added
