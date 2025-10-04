@@ -24,7 +24,6 @@
     - 讀取：{root}/sunnycore/tasks/help.md
   
   2. *plan-tasks {task_id}
-    - 範例：*plan-tasks 1
     - 讀取：{root}/sunnycore/tasks/plan-tasks.md
   
   3. *create-requirements

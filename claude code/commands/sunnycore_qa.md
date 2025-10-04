@@ -24,7 +24,6 @@
     - 讀取：{root}/sunnycore/tasks/help.md
   
   2. *review {task_id}
-    - 範例：*review 1
     - 讀取：{root}/sunnycore/tasks/review.md
 
 [評分指引]
