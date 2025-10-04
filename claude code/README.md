@@ -10,7 +10,7 @@
 |------|------|------|
 | 1 | `/sunnycore_pm *create-requirements` | 互動式創建需求文檔 |
 | 2 | `/sunnycore_pm *create-architecture` | 互動式創建架構文檔 |
-| 3 | `/sunnycore_pm *create-tasks` | 互動式創建任務文檔 |
+| 3 | `/sunnycore_pm *create-epic` | 互動式創建任務文檔 |
 
 ### 💻 階段二：開發迭代
 
@@ -84,7 +84,7 @@ flowchart TD
     subgraph Phase1 ["📋 階段一：需求分析"]
         A1["1️⃣ /sunnycore_pm<br/>*create-requirements<br/>📝 建立需求"]
         A2["2️⃣ /sunnycore_pm<br/>*create-architecture<br/>🏗️ 建立架構"]
-        A3["3️⃣ /sunnycore_pm<br/>*create-tasks<br/>📌 建立任務"]
+        A3["3️⃣ /sunnycore_pm<br/>*create-epic<br/>📌 建立任務"]
         A1 --> A2 --> A3
     end
     
@@ -140,7 +140,7 @@ flowchart TD
 | 1 | `/sunnycore_po *document-project` | 確保專案架構文件是最新的 |
 | 2 | `/sunnycore_pm *create-brownfield-requirements` | 互動式創建需求文檔 |
 | 3 | `/sunnycore_pm *create-brownfield-architecture` | 互動式創建架構文檔 |
-| 4 | `/sunnycore_pm *create-brownfield-tasks` | 互動式創建任務文檔 |
+| 4 | `/sunnycore_pm *create-brownfield-epic` | 互動式創建任務文檔 |
 
 ### 💻 階段二：開發迭代
 
@@ -174,7 +174,7 @@ flowchart TD
         A0["1️⃣ /sunnycore_po<br/>*document-project<br/>📖 更新專案文件"]
         A1["2️⃣ /sunnycore_pm<br/>*create-brownfield-requirements<br/>📝 建立需求"]
         A2["3️⃣ /sunnycore_pm<br/>*create-brownfield-architecture<br/>🏗️ 建立架構"]
-        A3["4️⃣ /sunnycore_pm<br/>*create-brownfield-tasks<br/>📌 建立任務"]
+        A3["4️⃣ /sunnycore_pm<br/>*create-brownfield-epic<br/>📌 建立任務"]
         A0 --> A1 --> A2 --> A3
     end
     
@@ -229,7 +229,7 @@ flowchart TD
 | **起始步驟** | 直接建立需求 | 先更新專案文件 |
 | **需求命令** | `*create-requirements` | `*create-brownfield-requirements` |
 | **架構命令** | `*create-architecture` | `*create-brownfield-architecture` |
-| **任務命令** | `*create-tasks` | `*create-brownfield-tasks` |
+| **任務命令** | `*create-epic` |
 | **總步驟數** | 9 步 | 10 步 |
 
 ### 🎯 關鍵決策點

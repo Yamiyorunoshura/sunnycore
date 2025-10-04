@@ -1,7 +1,7 @@
 [輸入]
   1. {root}/docs/requirements/*.md --專案需求
   2. {root}/docs/architecture/*.md --架構設計
-  3. {root}/docs/tasks.md --任務清單
+  3. {root}/docs/epic.md --任務清單
   4. {root}/sunnycore/templates/implementation-plan-tmpl.yaml --實作計畫模板（包含：專案資訊、需求對應、架構參照、RED/GREEN/REFACTOR 三階段等章節）
 
 [輸出]

@@ -32,8 +32,8 @@
   4. *create-architecture
     - Read: {root}/sunnycore/tasks/create-architecture.md
   
-  5. *create-tasks
-    - Read: {root}/sunnycore/tasks/create-tasks.md
+  5. *create-epic
+    - Read: {root}/sunnycore/tasks/create-epic.md
   
   6. *create-brownfield-architecture
     - Read: {root}/sunnycore/tasks/create-brownfield-architecture.md

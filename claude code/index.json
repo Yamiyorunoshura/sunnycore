@@ -34,7 +34,7 @@
     { "id": "create-brownfield-architecture", "path": "claude code/tasks/create-brownfield-architecture.md" },
     { "id": "create-brownfield-requirements", "path": "claude code/tasks/create-brownfield-requirements.md" },
     { "id": "create-requirements", "path": "claude code/tasks/create-requirements.md" },
-    { "id": "create-tasks", "path": "claude code/tasks/create-tasks.md" },
+    { "id": "create-epic", "path": "claude code/tasks/create-epic.md" },
     { "id": "curate-knowledge", "path": "claude code/tasks/curate-knowledge.md" },
     { "id": "develop-tasks", "path": "claude code/tasks/develop-tasks.md" },
     { "id": "document-project", "path": "claude code/tasks/document-project.md" },
@@ -54,7 +54,7 @@
       "document-project": ["concluded-architecture-tmpl"],
       "conclude": ["completion-report-tmpl"],
       "curate-knowledge": ["project-knowledge-tmpl"],
-      "create-tasks": ["tasks-tmpl"],
+      "create-epic": ["tasks-tmpl"],
       "brownfield-tasks": ["tasks-tmpl"],
       "help": []
     },
@@ -75,7 +75,7 @@
       "document-project": ["dev", "qa", "pm"],
       "conclude": ["pm", "qa"],
       "curate-knowledge": ["dev", "po"],
-      "create-tasks": ["pm"],
+      "create-epic": ["pm"],
       "brownfield-tasks": ["pm", "dev"],
       "help": ["pm"]
     },
@@ -98,7 +98,7 @@
         "review",
         "document-project",
         "conclude",
-        "create-tasks",
+        "create-epic",
         "brownfield-tasks",
         "help"
       ],
@@ -149,7 +149,7 @@
         "brownfield-tasks"
       ],
       "tasks-tmpl": [
-        "create-tasks"
+        "create-epic"
       ]
     }
   }
