@@ -7,6 +7,11 @@
 
 ## [Unreleased]
 
+## [1.7.23] - Claude code v1.7.23
+
+## Changed
+- 重構文檔結構：將 `claude code/SUNNYCORE.md` 重命名為 `claude code/CLAUDE.md`，統一文檔命名規範與平台識別
+
 ## [1.7.22] - Claude code v1.7.22
 
 ## Changed
