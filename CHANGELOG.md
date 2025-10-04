@@ -1,20 +1,29 @@
-# Claude code v1.7.22
+# Changelog
+
+本專案的所有重要變更都會記錄在此檔案中。
+
+此檔案格式基於 [Keep a Changelog](https://keepachangelog.com/zh-TW/1.0.0/)，
+並且本專案遵循[語義化版本](https://semver.org/lang/zh-TW/)。
+
+## [Unreleased]
+
+## [1.7.22] - Claude code v1.7.22
 
 ## Changed
 - 優化 Context7 工具使用說明：統一 `create-architecture.md` 與 `create-brownfield-architecture.md` 中的 context7 使用場景描述，強調避免重複造輪子的核心目的
 - 優化任務文檔格式：改進 `create-requirements.md` 工具部分的格式與描述，提升可讀性
 
-# Claude code v1.7.21
+## [1.7.21] - Claude code v1.7.21
 
 ## Changed
 - 更新 `plan-tasks.md` 範例路徑：將實作計畫範例從 `ABC-123-plan.md` 修正為 `1-plan.md`，統一檔案命名規範
 
-# Claude code v1.7.20
+## [1.7.20] - Claude code v1.7.20
 
 ## Changed
 - 優化任務模板格式：將 `tasks-tmpl.yaml` 改為 checkbox 清單格式，提升任務追蹤的可讀性
 
-# Claude code v1.7.19
+## [1.7.19] - Claude code v1.7.19
 
 ## Added
 - 新增 `claude code/SUNNYCORE.md` - 集中化的模板與工具使用指引文檔
@@ -31,8 +40,7 @@
   - 💬 改善用戶提示與預設值處理
   - 📝 更新使用說明文檔，新增 curl 安裝範例
 
-# Claude code v1.7.18
-
+## [1.7.18] - Claude code v1.7.18
 ## Changed
 - 精簡所有模板文件：將 9 個 YAML 模板從複雜結構簡化為精簡版本，顯著減少 token 使用量
 - 優化架構模板：`architecture-tmpl.yaml` 從 282 行簡化至 60 行，轉為需求導向設計
@@ -45,7 +53,7 @@
 - 優化總結架構模板：`concluded-architecture-tmpl.yaml` 聚焦最終實作狀態記錄
 - 優化知識庫模板：`project-knowledge-tmpl.yaml` 精簡為最佳實踐與錯誤案例記錄
 
-# Claude code v1.7.17
+## [1.7.17] - Claude code v1.7.17
 
 ## Changed
 - 簡化指令文檔格式：將所有 command 檔案（dev、pm、po、qa）從複雜的 XML 結構簡化為清晰的中文 Markdown 格式
@@ -55,33 +63,33 @@
 ## Removed
 - `claude code/CLAUDE.md` - 560 行的大型配置文件，內容已精簡整合至各指令檔案
 
-# Claude code v1.7.16
+## [1.7.16] - Claude code v1.7.16
 
 ## Changed
 - 統一任務提示詞格式：將 `develop-tasks`、`help`、`review` 從 XML 格式改為 Markdown 格式
 - 強化任務提示詞結構：在 `develop-tasks` 和 `review` 中新增工具指引、DoD 檢查清單等章節以提升執行品質
 - 優化 README：重構 Greenfield/Brownfield 流程說明，採用結構化表格與 Mermaid 流程圖，增強可讀性與視覺化呈現
 
-# Claude code v1.7.15
+## [1.7.15] - Claude code v1.7.15
 
 ## Changed
 - 統一核心任務提示詞格式：將 `create-architecture`、`create-brownfield-architecture`、`create-requirements`、`create-tasks`、`plan-tasks` 從 XML 格式改為 Markdown 格式
 - 強化工作流程結構：新增工具指引、DoD 檢查清單、異常處理等章節以提升任務執行品質
 - 新增 concluded-architecture-tmpl 模板並關聯至 document-project 任務
 
-# Claude code v1.7.14
+## [1.7.14] - Claude code v1.7.14
 
 ## Changed
 - 統一任務提示詞格式：將`brownfield-tasks`、`conclude`、`curate-knowledge`、`document-project`從XML格式改為Markdown格式
 - 更新審查報告：優化`brownfield-tasks`、`conclude`、`curate-knowledge`、`document-project`、`prompt-reviewer`的審查報告結構與評分機制
 
-# Claude code v1.7.13
+## [1.7.13] - Claude code v1.7.13
 
 ## Changed
 - 修正README中安裝腳本名稱為`scripts/sunnycore.sh`
 - 優化`brownfield-tasks`提示詞，使其更符合實際需求
 
-# Claude code v1.7.11
+## [1.7.11] - Claude code v1.7.11
 
 ## Added
 - README：新增以 curl 一行指令執行 `scripts/sunnycore.sh` 的安裝教學
