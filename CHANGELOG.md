@@ -1,3 +1,10 @@
+# Claude code v1.7.15
+
+## Changed
+- 統一核心任務提示詞格式：將 `create-architecture`、`create-brownfield-architecture`、`create-requirements`、`create-tasks`、`plan-tasks` 從 XML 格式改為 Markdown 格式
+- 強化工作流程結構：新增工具指引、DoD 檢查清單、異常處理等章節以提升任務執行品質
+- 新增 concluded-architecture-tmpl 模板並關聯至 document-project 任務
+
 # Claude code v1.7.14
 
 ## Changed

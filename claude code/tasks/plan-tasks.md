@@ -1,215 +1,95 @@
-<input>
-  <context>
-  1. {root}/docs/requirements/*.md
-  2. {root}/docs/architecture/*.md
-  3. {root}/docs/tasks.md
-  </context>
-  <templates>
-  4. {root}/sunnycore/templates/implementation-plan-tmpl.yaml
-  </templates>
-</input>
+[輸入]
+  1. {root}/docs/requirements/*.md --專案需求
+  2. {root}/docs/architecture/*.md --架構設計
+  3. {root}/docs/tasks.md --任務清單
+  4. {root}/sunnycore/templates/implementation-plan-tmpl.yaml --實作計畫模板（包含：專案資訊、需求對應、架構參照、RED/GREEN/REFACTOR 三階段等章節）
 
-<output>
-1. {root}/docs/implementation-plan/{task_id}-plan.md
-Format: Markdown file using ATX headings; numbered lists; explicit requirement/architecture mapping sections.
-Example: {root}/docs/implementation-plan/ABC-123-plan.md
-</output>
+[輸出]
+  1. {root}/docs/implementation-plan/{task_id}-plan.md --實作計畫（Markdown 格式）
+    - 格式：使用 ATX 標題；編號清單；明確的需求/架構對應章節
+    - 範例：{root}/docs/implementation-plan/ABC-123-plan.md
 
-<constraints importance="Important">
-- MUST: Derive tasks strictly from provided documents; do not invent requirements.
-- MUST: Map every plan item to requirement IDs and architecture sections.
-- MUST: Use Markdown with ATX headings and numbered lists where applicable.
-- MUST: Produce exactly one file at the specified output path.
-</constraints>
+[約束]
+  1. 必須嚴格從提供的文件中提取任務；不得杜撰需求
+  2. 必須將每個計畫項目對應至需求 ID 與架構章節
+  3. 必須使用 Markdown 格式（ATX 標題與編號清單）
+  4. 必須在指定輸出路徑產出恰好一個檔案
+  5. 產出的實作計畫必須確保 TDD 三階段邏輯連貫：RED 階段的驗收標準須可追溯至需求；GREEN 階段的實作步驟須對應至 RED 驗收標準；REFACTOR 階段的優化須不破壞驗收標準
+  6. 若發現需求與架構衝突、需求不明確、或必要文件缺失，須記錄問題並請求用戶澄清，不得自行臆測或跳過
 
-<workflow importance="Important">
-  <stage id="1: setup">
-  <tools>
-  <tool name="sequential_thinking" description="Plan analysis and step design">
-    <parameters>
-    {"type":"object","additionalProperties":false,"properties":{"thought":{"type":"string"},"nextThoughtNeeded":{"type":"boolean"},"thoughtNumber":{"type":"integer","minimum":1},"totalThoughts":{"type":"integer","minimum":1}},"required":["thought","nextThoughtNeeded","thoughtNumber","totalThoughts"]}
-    </parameters>
-    <returns>
-    {"type":"object","additionalProperties":false,"properties":{"thought":{"type":"string"},"nextThoughtNeeded":{"type":"boolean"},"thoughtNumber":{"type":"integer"},"totalThoughts":{"type":"integer"}},"required":["thought","nextThoughtNeeded","thoughtNumber","totalThoughts"]}
-    </returns>
-    <selection-rules>
-    - Use for analysis/design steps; avoid for file editing or schema emission.
-    - Prefer when complex trade-offs or sequencing decisions are required.
-    </selection-rules>
-  </tool>
-  <tool name="todo_write" description="Manage execution tasks and statuses">
-    <parameters>
-    {"type":"object","additionalProperties":false,"properties":{"merge":{"type":"boolean"},"todos":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"content":{"type":"string","minLength":3},"status":{"type":"string","enum":["pending","in_progress","completed","cancelled"]},"id":{"type":"string","minLength":3}},"required":["content","status","id"]}}},"required":["merge","todos"]}
-    </parameters>
-    <returns>
-    {"type":"object","additionalProperties":false,"properties":{"ok":{"type":"boolean"}},"required":["ok"]}
-    </returns>
-    <selection-rules>
-    - Use to create/update task statuses at each stage boundary.
-    - Do not use for storing operational actions; keep tasks high-level.
-    </selection-rules>
-  </tool>
-  <tool name="claude_context" description="Process large documents in segments if needed">
-    <parameters>
-    {"type":"object","additionalProperties":false,"properties":{"operation":{"type":"string","enum":["read","split","summarize"]},"target":{"type":"string"}},"required":["operation","target"]}
-    </parameters>
-    <returns>
-    {"type":"object","additionalProperties":false,"properties":{"chunks":{"type":"array","items":{"type":"string"}}},"required":["chunks"]}
-    </returns>
-    <selection-rules>
-    - Use when input sources are lengthy or require segmentation.
-    - Avoid when content is already in-memory and under token limits.
-    </selection-rules>
-  </tool>
-  </tools>
-  - Read all working steps and requirements documents
-  - Establish TDD cycle structure for task planning
-  </stage>
+[工具]
+  1. **todo_write**
+    - [步驟1（設置階段）:創建待辦清單]
+    - [步驟2-4（各階段規劃）:更新進度]
+    - [步驟5（最終化階段）:標記完成]
+  2. **sequentialthinking**
+    - [步驟1:分析需求與任務複雜度]
+    - [步驟2:規劃RED階段內容(測試與驗收標準設計)]
+    - [步驟3:規劃GREEN階段內容（最小實作步驟設計）]
+    - [步驟4:規劃REFACTOR階段內容（重構與優化工作識別）]
+    - [步驟5:最終計劃驗證]
+  3. **claude-context**
+    - [步驟1:若需要時分段處理大型文件]
 
-  <stage id="2: red_define_tests">
-  <tools>
-  <tool name="sequential_thinking" description="Analyze requirements complexity and design test conditions">
-    <parameters>
-    {"type":"object","additionalProperties":false,"properties":{"thought":{"type":"string"},"nextThoughtNeeded":{"type":"boolean"},"thoughtNumber":{"type":"integer","minimum":1},"totalThoughts":{"type":"integer","minimum":1}},"required":["thought","nextThoughtNeeded","thoughtNumber","totalThoughts"]}
-    </parameters>
-    <returns>
-    {"type":"object","additionalProperties":false,"properties":{"thought":{"type":"string"},"nextThoughtNeeded":{"type":"boolean"},"thoughtNumber":{"type":"integer"},"totalThoughts":{"type":"integer"}},"required":["thought","nextThoughtNeeded","thoughtNumber","totalThoughts"]}
-    </returns>
-    <selection-rules>
-    - Use to enumerate acceptance criteria, tests, and edge cases.
-    </selection-rules>
-  </tool>
-  <tool name="todo_write" description="Track RED-phase tasks">
-    <parameters>
-    {"type":"object","additionalProperties":false,"properties":{"merge":{"type":"boolean"},"todos":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"content":{"type":"string","minLength":3},"status":{"type":"string","enum":["pending","in_progress","completed","cancelled"]},"id":{"type":"string","minLength":3}},"required":["content","status","id"]}}},"required":["merge","todos"]}
-    </parameters>
-    <returns>
-    {"type":"object","additionalProperties":false,"properties":{"ok":{"type":"boolean"}},"required":["ok"]}
-    </returns>
-    <selection-rules>
-    - Update tasks as acceptance criteria are drafted and finalized.
-    </selection-rules>
-  </tool>
-  </tools>
-  - Define acceptance criteria and test conditions for each requirement (RED phase)
-  - Map requirements to testable outcomes and verification methods
-  - Create measurable success metrics; define failure conditions and edge cases
+[工具指引]
+  1. **todo_write**
+    - 在設置階段創建待辦清單，包含所有主要任務（步驟1-5）
+    - 每完成一個步驟即更新對應待辦項目狀態為 completed
+    - 不用於儲存操作性動作；任務保持高層級
+    - 建議使用階段前綴命名（setup-、red-、green-、refactor-、finalize-）以便追蹤
+  2. **sequentialthinking**
+    - 簡單任務推理：1-3 totalThoughts
+    - 中等任務推理：3-5 totalThoughts
+    - 複雜任務推理：5-8 totalThoughts
+    - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
+    - 你必須完成所有設定的推理步數
+    - 使用時機：
+      * 分析/設計步驟；避免用於檔案編輯或 schema 產出
+      * 需要複雜權衡或排序決策時優先使用
+  3. **claude-context**
+    - 使用時機：輸入來源冗長或需要分段處理時（如文件超過 1000 行或跨多個子目錄）
+    - 避免在內容已在記憶體且在 token 限制內時使用
 
-  <questions>
-  - Are acceptance criteria specific, measurable, and verifiable?
-  - Do test conditions cover both functional behavior and non-functional constraints?
-  - Are edge cases and failure scenarios explicitly defined?
-  </questions>
-  </stage>
+[步驟]
+  1. 設置階段
+    - 閱讀所有工作步驟與需求文件
+    - 理解目標任務的範圍與複雜度
+      * 識別任務涉及的需求數量、架構元件數量、以及跨系統依賴
+      * 統計涉及的需求數量、架構元件數量、跨系統依賴數量來評估複雜度（簡單/中等/複雜）
+      * 根據複雜度決定後續規劃深度
+    - 創建todo list追蹤步驟2-5的執行進度
 
-  <stage id="3: green_minimal_design">
-  <tools>
-  <tool name="sequential_thinking" description="Design minimal implementation approaches">
-    <parameters>
-    {"type":"object","additionalProperties":false,"properties":{"thought":{"type":"string"},"nextThoughtNeeded":{"type":"boolean"},"thoughtNumber":{"type":"integer","minimum":1},"totalThoughts":{"type":"integer","minimum":1}},"required":["thought","nextThoughtNeeded","thoughtNumber","totalThoughts"]}
-    </parameters>
-    <returns>
-    {"type":"object","additionalProperties":false,"properties":{"thought":{"type":"string"},"nextThoughtNeeded":{"type":"boolean"},"thoughtNumber":{"type":"integer"},"totalThoughts":{"type":"integer"}},"required":["thought","nextThoughtNeeded","thoughtNumber","totalThoughts"]}
-    </returns>
-    <selection-rules>
-    - Use to select simplest implementation path that satisfies tests.
-    </selection-rules>
-  </tool>
-  <tool name="todo_write" description="Track GREEN-phase tasks">
-    <parameters>
-    {"type":"object","additionalProperties":false,"properties":{"merge":{"type":"boolean"},"todos":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"content":{"type":"string","minLength":3},"status":{"type":"string","enum":["pending","in_progress","completed","cancelled"]},"id":{"type":"string","minLength":3}},"required":["content","status","id"]}}},"required":["merge","todos"]}
-    </parameters>
-    <returns>
-    {"type":"object","additionalProperties":false,"properties":{"ok":{"type":"boolean"}},"required":["ok"]}
-    </returns>
-    <selection-rules>
-    - Update tasks as design decisions are made and dependencies resolved.
-    </selection-rules>
-  </tool>
-  </tools>
-  - Design minimal implementation plans that satisfy the defined acceptance criteria (GREEN phase)
-  - Map each acceptance criterion to specific architecture components and tasks
-  - Ensure each task addresses at least one test condition; prioritize simplest solutions
+  2. 規劃 RED 階段內容：定義測試與驗收
+    - 為計劃撰寫「RED 階段」章節：列出每個需求對應的驗收標準與測試條件
+    - 將需求對應至可測試結果與驗證方法
+    - 定義可衡量的成功指標、失敗條件與邊緣案例
 
-  <questions>
-  - Does each implementation task map to specific acceptance criteria?
-  - Are solutions minimal and focused on meeting defined test conditions?
-  - Are architecture references complete and unambiguous?
-  </questions>
-  </stage>
+  3. 規劃 GREEN 階段內容：最小實作步驟
+    - 為計劃撰寫「GREEN 階段」章節：設計滿足 RED 階段驗收標準的最小實作步驟
+    - 將每個驗收標準對應至特定架構元件、檔案與具體開發任務
+    - 每個實作步驟都應明確指向至少一個測試條件；優先選擇最簡單的實作方式
 
-  <stage id="4: refactor_optimize">
-  <tools>
-  <tool name="sequential_thinking" description="Identify consolidation opportunities and optimize sequencing">
-    <parameters>
-    {"type":"object","additionalProperties":false,"properties":{"thought":{"type":"string"},"nextThoughtNeeded":{"type":"boolean"},"thoughtNumber":{"type":"integer","minimum":1},"totalThoughts":{"type":"integer","minimum":1}},"required":["thought","nextThoughtNeeded","thoughtNumber","totalThoughts"]}
-    </parameters>
-    <returns>
-    {"type":"object","additionalProperties":false,"properties":{"thought":{"type":"string"},"nextThoughtNeeded":{"type":"boolean"},"thoughtNumber":{"type":"integer"},"totalThoughts":{"type":"integer"}},"required":["thought","nextThoughtNeeded","thoughtNumber","totalThoughts"]}
-    </returns>
-    <selection-rules>
-    - Use to consolidate cross-cutting concerns and optimize sequencing.
-    </selection-rules>
-  </tool>
-  <tool name="todo_write" description="Track REFACTOR-phase tasks">
-    <parameters>
-    {"type":"object","additionalProperties":false,"properties":{"merge":{"type":"boolean"},"todos":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"content":{"type":"string","minLength":3},"status":{"type":"string","enum":["pending","in_progress","completed","cancelled"]},"id":{"type":"string","minLength":3}},"required":["content","status","id"]}}},"required":["merge","todos"]}
-    </parameters>
-    <returns>
-    {"type":"object","additionalProperties":false,"properties":{"ok":{"type":"boolean"}},"required":["ok"]}
-    </returns>
-    <selection-rules>
-    - Use when refactors are planned/applied to keep task list consistent.
-    </selection-rules>
-  </tool>
-  </tools>
-  - Refactor and optimize the implementation plan while maintaining test coverage (REFACTOR phase)
-  - Consolidate duplicate efforts and cross-cutting concerns
-  - Optimize task sequencing and dependencies for efficiency without breaking acceptance criteria
+  4. 規劃 REFACTOR 階段內容：重構與優化步驟
+    - 為計劃撰寫「REFACTOR 階段」章節：列出在 GREEN 階段完成後的重構與優化工作
+    - 識別並整合重複程式碼、跨領域關注點（認證、日誌、錯誤處理等）
+    - 規劃效能優化、程式碼品質提升與架構改善步驟
+    - 確保重構步驟不破壞 RED 階段定義的驗收標準
 
-  <questions>
-  - Are cross-cutting concerns (auth, logging, i18n) properly consolidated?
-  - Do optimizations maintain coverage of all acceptance criteria?
-  - Are task dependencies and sequencing optimized to avoid blocking?
-  </questions>
-  </stage>
+  5. 最終化階段
+    - 整合步驟 2-4 的內容，組裝完整的實作計劃文件
+    - 使用模板格式化計劃：參考模板結構組織內容，確保包含所有必要章節（需求對應、架構參照、RED/GREEN/REFACTOR 三階段等）
+    - 驗證計劃的完整性與可執行性
+      * 依 DoD 逐項檢查每個驗收標準
+      * 若有未滿足項目，須回到對應步驟補充或調整，直至全部滿足
+    - 產生 Markdown 計畫至 {root}/docs/implementation-plan/{task_id}-plan.md
 
-  <stage id="5: finalize">
-  <tools>
-  <tool name="sequential_thinking" description="Final validation of deliverables">
-    <parameters>
-    {"type":"object","additionalProperties":false,"properties":{"thought":{"type":"string"},"nextThoughtNeeded":{"type":"boolean"},"thoughtNumber":{"type":"integer","minimum":1},"totalThoughts":{"type":"integer","minimum":1}},"required":["thought","nextThoughtNeeded","thoughtNumber","totalThoughts"]}
-    </parameters>
-    <returns>
-    {"type":"object","additionalProperties":false,"properties":{"thought":{"type":"string"},"nextThoughtNeeded":{"type":"boolean"},"thoughtNumber":{"type":"integer"},"totalThoughts":{"type":"integer"}},"required":["thought","nextThoughtNeeded","thoughtNumber","totalThoughts"]}
-    </returns>
-    <selection-rules>
-    - Use to verify checks and acceptance criteria before completion.
-    </selection-rules>
-  </tool>
-  <tool name="todo_write" description="Close tasks and record completion">
-    <parameters>
-    {"type":"object","additionalProperties":false,"properties":{"merge":{"type":"boolean"},"todos":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"content":{"type":"string","minLength":3},"status":{"type":"string","enum":["pending","in_progress","completed","cancelled"]},"id":{"type":"string","minLength":3}},"required":["content","status","id"]}}},"required":["merge","todos"]}
-    </parameters>
-    <returns>
-    {"type":"object","additionalProperties":false,"properties":{"ok":{"type":"boolean"}},"required":["ok"]}
-    </returns>
-    <selection-rules>
-    - Use to mark all tasks done and close the workflow.
-    </selection-rules>
-  </tool>
-  </tools>
-  - Validate final plan against all defined acceptance criteria
-  - Use the template to output the structured implementation plan
-  - Generate Markdown plan to {root}/docs/implementation-plan/{task_id}-plan.md
-
-  <checks>
-  - [ ] Every requirement has corresponding acceptance criteria and test conditions
-  - [ ] All implementation tasks map to specific acceptance criteria
-  - [ ] Plan follows TDD cycle: test-first, minimal implementation, then refactor
-  - [ ] Cross-cutting concerns are consolidated and optimized
-  - [ ] Output path and file naming follow the specified pattern
-  </checks>
-  </stage>
-</workflow>
-
+[DoD]
+  - [ ] 已閱讀所有需求、架構與任務文件
+  - [ ] 計劃文件包含 TDD 三階段結構（RED/GREEN/REFACTOR 章節）
+  - [ ] RED 章節：每個需求都有對應的驗收標準與測試條件
+  - [ ] GREEN 章節：所有實作步驟對應至特定驗收標準，且包含架構/檔案參照
+  - [ ] REFACTOR 章節：規劃了重構與優化工作，包含跨領域關注點整合
+  - [ ] 計劃遵循 TDD 週期結構：測試優先（RED）、最小實作（GREEN）、重構優化（REFACTOR）
+  - [ ] 輸出路徑與檔案命名遵循指定模式
+  - [ ] {root}/docs/implementation-plan/{task_id}-plan.md 已創建
+  - [ ] 所有待辦項目已完成
