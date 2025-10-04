@@ -1,3 +1,9 @@
+# Claude code v1.7.22
+
+## Changed
+- 優化 Context7 工具使用說明：統一 `create-architecture.md` 與 `create-brownfield-architecture.md` 中的 context7 使用場景描述，強調避免重複造輪子的核心目的
+- 優化任務文檔格式：改進 `create-requirements.md` 工具部分的格式與描述，提升可讀性
+
 # Claude code v1.7.21
 
 ## Changed
