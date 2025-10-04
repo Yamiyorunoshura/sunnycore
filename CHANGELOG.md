@@ -7,6 +7,20 @@
 
 ## [Unreleased]
 
+## [1.7.26] - Claude code v1.7.26
+
+### Added
+- 新增文檔拆分腳本自動清理功能：`shard-architecture.py` 與 `shard-requirements.py` 完成拆分後自動刪除原始文檔
+
+### Changed
+- 優化 `develop-tasks.md` 任務說明：
+  - 精簡約束條款，將「保留縮排風格」限定於開發筆記
+  - 補充「計畫外檔案」定義，明確包含共用工具類、配置檔案等
+  - 新增失敗重試機制：3次嘗試後升級至項目負責人處理
+  - 強化工具使用指引：明確 `sequentialthinking` 與 `todo_write` 的具體使用場景
+  - 優化 TDD 階段說明：為 RED、GREEN、REFACTOR 階段新增明確的轉換條件
+  - 補充關鍵術語定義：升級處理（escalation）與回退機制（rollback）的具體操作方式
+
 ## [1.7.25] - Claude code v1.7.25
 
 ## Fixed
