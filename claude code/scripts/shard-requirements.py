@@ -194,6 +194,12 @@ def main() -> None:
     extract_second_level_headers(input_file, output_dir)
     generate_report(input_file, output_dir)
     log_success("需求文檔拆分完成！")
+    
+    # 刪除原始文檔
+    if input_file.exists():
+        log_info(f"刪除原始文檔: {input_file}")
+        input_file.unlink()
+        log_success("原始文檔已刪除")
 
 
 if __name__ == "__main__":
