@@ -7,6 +7,12 @@
 
 ## [Unreleased]
 
+## [1.7.25] - Claude code v1.7.25
+
+## Fixed
+- 修正所有指令檔案中的文檔參考路徑：將 `SUNNYCORE.md` 更正為 `CLAUDE.md`
+- 修正 `sunnycore_qa.md` 中的錯字：將「測試覆蓋率s架構合規性」更正為「測試覆蓋率與架構合規性」
+
 ## [1.7.24] - Claude code v1.7.24
 
 ## Changed
