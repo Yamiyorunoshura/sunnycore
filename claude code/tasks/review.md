@@ -5,7 +5,7 @@
 
 [輸出]
   1. {root}/docs/review-results/{task_id}-review.md
-  2. {root}/docs/tasks.md
+  2. {root}/docs/epic.md
 
 [約束]
   1. 必須執行 develop-tasks 任務階段創建的所有測試，並驗證測試結果與實作計畫對齊

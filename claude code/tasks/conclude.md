@@ -3,7 +3,7 @@
   2. {root}/docs/review_results/{task_id}-review.md --審查報告（必要）
   3. {root}/claude code/templates/completion-report-tmpl.yaml --總結報告模板（必要）
   4. {root}/docs/requirements/*.md --需求文件（可選）
-  5. {root}/docs/tasks.md --任務清單（可選）
+  5. {root}/docs/epic.md --任務清單（可選）
 
 [輸出]
   1. 總結報告：{root}/docs/completion-report.md（Markdown 格式）
