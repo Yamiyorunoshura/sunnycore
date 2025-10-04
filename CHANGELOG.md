@@ -7,6 +7,11 @@
 
 ## [Unreleased]
 
+## [1.7.24] - Claude code v1.7.24
+
+## Changed
+- 優化 `review.md` 審查流程：新增「如果審查通過的話更新 task.md 反映項目進展」步驟，強化審查後的項目追蹤機制
+
 ## [1.7.23] - Claude code v1.7.23
 
 ## Changed
