@@ -1,3 +1,13 @@
+# Claude code v1.7.17
+
+## Changed
+- 簡化指令文檔格式：將所有 command 檔案（dev、pm、po、qa）從複雜的 XML 結構簡化為清晰的中文 Markdown 格式
+- 移除冗餘配置：刪除 `CLAUDE.md` 大型配置文件，將核心規則精簡整合至各指令檔案中
+- 優化指引內容：保留核心指引（任務管理、專案總結、知識管理、架構管理、評分標準），移除過度複雜的結構化標籤
+
+## Removed
+- `claude code/CLAUDE.md` - 560 行的大型配置文件，內容已精簡整合至各指令檔案
+
 # Claude code v1.7.16
 
 ## Changed
