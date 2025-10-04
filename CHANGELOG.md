@@ -1,3 +1,8 @@
+# Claude code v1.7.21
+
+## Changed
+- 更新 `plan-tasks.md` 範例路徑：將實作計畫範例從 `ABC-123-plan.md` 修正為 `1-plan.md`，統一檔案命名規範
+
 # Claude code v1.7.20
 
 ## Changed

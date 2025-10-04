@@ -7,7 +7,7 @@
 [輸出]
   1. {root}/docs/implementation-plan/{task_id}-plan.md --實作計畫（Markdown 格式）
     - 格式：使用 ATX 標題；編號清單；明確的需求/架構對應章節
-    - 範例：{root}/docs/implementation-plan/ABC-123-plan.md
+    - 範例：{root}/docs/implementation-plan/1-plan.md
 
 [約束]
   1. 必須嚴格從提供的文件中提取任務；不得杜撰需求
