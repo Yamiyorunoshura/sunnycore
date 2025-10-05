@@ -7,6 +7,13 @@
 
 ## [Unreleased]
 
+## [1.8.7] - Claude code v1.8.7
+
+### Changed
+- 強化架構設計任務的 context7 工具使用指引：在 `create-architecture.md` 和 `create-brownfield-architecture.md` 中新增 API 文檔檢索功能說明
+  - 新增功能描述：「可檢索函式庫與框架的最新 API 文檔，確保架構設計使用當前最佳實踐與 API」
+  - 提升架構設計階段對最新技術標準的掌握度與準確性
+
 ## [1.8.6] - Claude code v1.8.6
 
 ### Added

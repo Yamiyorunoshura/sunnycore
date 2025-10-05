@@ -41,6 +41,7 @@
   4. **context7 (MCP)**
     - Usage scenario: Finding domain-specific best practices or researching specific technology stacks or design patterns
     - Used to find high-quality open source project practices that meet user needs, avoiding reinventing the wheel
+    - Can retrieve latest API documentation for libraries and frameworks to ensure architecture design uses current best practices and APIs
 
 [Steps]
   1. Evaluate Existing Architecture Phase
