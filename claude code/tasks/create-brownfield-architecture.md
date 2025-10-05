@@ -16,14 +16,12 @@
 
 [工具]
   1. **todo_write**
-    - [步驟1:追蹤任務]
-    - [步驟2:更新任務狀態]
-    - [步驟3:追蹤任務]
-  2. **sequentialthinking**
+    - [步驟1:追蹤任務;步驟2-4:追蹤任務狀態]
+  2. **sequentialthinking (MCP)**
     - [步驟1:評估既有架構]
     - [步驟2:設計模組邊界與整合模式]
     - [步驟3:結構化草擬]
-  3. **claude-context**
+  3. **claude-context (MCP)**
     - [步驟1:評估既有架構-處理大型文件集]
 
 [工具指引]
@@ -31,16 +29,16 @@
     - 在評估階段創建待辦清單，包含所有主要任務
     - 每完成一個步驟即更新對應待辦項目狀態為 completed
     - 狀態閘門：僅允許單一任務為 in_progress；完成後立即標記 completed
-  2. **sequentialthinking**
+  2. **sequentialthinking (MCP)**
     - 簡單任務推理：1-3 totalThoughts
     - 中等任務推理：3-5 totalThoughts
     - 複雜任務推理：5-8 totalThoughts
     - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
     - 必須完成所有設定的推理步數
-  3. **claude-context**
+  3. **claude-context (MCP)**
     - 使用場景：處理大型既有架構文件集時
     - 可用於分段讀取與理解複雜架構
-  4. **context7**
+  4. **context7 (MCP)**
     - 使用場景：尋找特定領域的最佳實踐或可用於研究特定技術棧或設計模式
     - 用於尋找是否有能滿足使用者需求的優質開源項目實踐，避免重複造輪子
 

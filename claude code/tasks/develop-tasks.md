@@ -18,15 +18,15 @@
   6. 若經過3次嘗試仍無法使測試通過或重構成功，應記錄問題、保留當前進度，並升級至項目負責人處理
 
 [工具]
-  1. **sequentialthinking**
+  1. **sequentialthinking (MCP)**
     - [步驟1:分析實作計畫複雜度；步驟2-4:推理TDD各階段的實作策略；步驟5:評估驗證結果]
   2. **todo_write**
     - [步驟1:創建TDD階段待辦清單；步驟2-5:追蹤各階段實作進度]
-  3. **claude-context**
+  3. **claude-context (MCP)**
     - [步驟1:分段處理大型實作計畫]
 
 [工具指引]
-  1. **sequentialthinking**
+  1. **sequentialthinking (MCP)**
     - 簡單任務推理：1-3 totalThoughts
     - 中等任務推理：3-5 totalThoughts
     - 複雜任務推理：5-8 totalThoughts
@@ -37,7 +37,7 @@
     - 每完成一個步驟即更新對應待辦項目狀態為 completed
     - 狀態閘門：僅允許單一任務為 in_progress；完成後立即標記 completed
     - todo list 應依 TDD 階段創建（準備、RED、GREEN、REFACTOR、驗證），同一時間僅將當前階段標記為 in_progress
-  3. **claude-context**
+  3. **claude-context (MCP)**
     - 使用場景：當實作計畫文件過大需要分段處理時
     - 可用於分段讀取與理解複雜的實作計畫
 

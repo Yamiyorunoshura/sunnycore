@@ -19,16 +19,10 @@
 
 [工具]
   1. **todo_write**
-    - [步驟1（設置階段）:創建待辦清單]
-    - [步驟2-4（各階段規劃）:更新進度]
-    - [步驟5（最終化階段）:標記完成]
-  2. **sequentialthinking**
-    - [步驟1:分析需求與任務複雜度]
-    - [步驟2:規劃RED階段內容(測試與驗收標準設計)]
-    - [步驟3:規劃GREEN階段內容（最小實作步驟設計）]
-    - [步驟4:規劃REFACTOR階段內容（重構與優化工作識別）]
-    - [步驟5:最終計劃驗證]
-  3. **claude-context**
+    - [步驟1（設置階段）:創建待辦清單;步驟2-4:追蹤任務進度]
+  2. **sequentialthinking (MCP)**
+    - [步驟1:分析需求與任務複雜度;步驟2:規劃RED階段內容(測試與驗收標準設計);步驟3:規劃GREEN階段內容（最小實作步驟設計）;步驟4:規劃REFACTOR階段內容（重構與優化工作識別）]
+  3. **claude-context (MCP)**
     - [步驟1:若需要時分段處理大型文件]
 
 [工具指引]
@@ -37,13 +31,13 @@
     - 每完成一個步驟即更新對應待辦項目狀態為 completed
     - 不用於儲存操作性動作；任務保持高層級
     - 建議使用階段前綴命名（setup-、red-、green-、refactor-、finalize-）以便追蹤
-  2. **sequentialthinking**
+  2. **sequentialthinking (MCP)**
     - 簡單任務推理：1-3 totalThoughts
     - 中等任務推理：3-5 totalThoughts
     - 複雜任務推理：5-8 totalThoughts
     - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
     - 必須完成所有設定的推理步數
-  3. **claude-context**
+  3. **claude-context (MCP)**
     - 使用時機：輸入來源冗長或需要分段處理時（如文件超過 1000 行或跨多個子目錄）
     - 避免在內容已在記憶體且在 token 限制內時使用
 

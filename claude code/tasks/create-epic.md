@@ -14,17 +14,15 @@
 
 [工具]
   1. **todo_write**
-    - [步驟1:創建任務清單]
-    - [步驟2:追蹤任務進度]
-  2. **sequentialthinking**
-    - [步驟1:分析需求複雜度與任務依賴關係]
-    - [步驟2:設計原子任務與邏輯分組]
+    - [步驟1:創建任務清單;步驟2-4:追蹤任務進度]
+  2. **sequentialthinking (MCP)**
+    - [步驟1:分析需求複雜度與任務依賴關係;步驟2:設計原子任務與邏輯分組]
 
 [工具指引]
   1. **todo_write**
     - 在研究階段創建待辦清單，包含所有主要任務
     - 每完成一個步驟即更新對應待辦項目狀態為 completed
-  2. **sequentialthinking**
+  2. **sequentialthinking (MCP)**
     - 簡單任務推理：1-3 totalThoughts
     - 中等任務推理：3-5 totalThoughts
     - 複雜任務推理：5-8 totalThoughts
