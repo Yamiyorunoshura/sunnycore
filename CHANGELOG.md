@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [1.8.6] - Claude code v1.8.6
+
+### Added
+- 新增對話壓縮指引：在 `CLAUDE.md` 中新增 `[Summary-Instructions]` 章節，定義 AI 自動壓縮對話時的內容保留與丟棄規則
+  - 必須保留內容：[Constraints]、[Tools]、[Output]、[DoD]、所有 [xxx-Guidelines] 相關指引
+  - 可壓縮內容：任務狀態資訊（進度、結果等），保留關鍵資訊並摘要
+  - 可丟棄內容：已完成任務的測試結果與輸出內容（如已寫入的文檔、程式碼等）
+  - 提升 token 使用效率並維持關鍵指引的完整性
+
 ## [1.8.5] - Claude code v1.8.5
 
 ### Added
