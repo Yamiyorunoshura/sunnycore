@@ -18,3 +18,21 @@
     - 2nd key -> Level 2 heading
     - 3rd key -> Level 3 heading
     And so on
+
+[Summary-Instructions]
+When performing auto-compact (automatic conversation compression), follow these rules:
+
+1. Content that MUST be preserved:
+  - [Constraints] All constraint conditions
+  - [Tools] Tool definitions
+  - [Output] Output format requirements
+  - [DoD] Definition of Done
+  - All [xxx-Guidelines] related guidelines
+
+2. Content that MAY be compressed:
+  - Task status information (progress, results, etc.)
+  - Can be summarized while retaining key information
+
+3. Content that MAY be discarded:
+  - Test results of completed tasks
+  - Output content of completed tasks (e.g., already written documents, code, etc.)
