@@ -7,6 +7,27 @@
 
 ## [Unreleased]
 
+## [1.7.39] - Claude code v1.7.39
+
+### Changed
+- 重構 QA 審查系統：將通用 7 維度評分系統改為領域特定審查指引，提升審查精準度與適用性
+  - 新增 8 個領域專屬審查標準：
+    * Backend (7 維度)：API 設計、資料驗證、錯誤處理、資料庫互動、認證授權、並發處理、測試覆蓋
+    * Frontend (7 維度)：UI/UX 一致性、狀態管理、渲染效能、打包優化、無障礙性、瀏覽器相容性、響應式設計
+    * API (7 維度)：RESTful/GraphQL 標準、版本控制、錯誤碼標準化、文檔完整性、速率限制、安全性、向後相容
+    * Database (6 維度)：Schema 設計、索引策略、遷移腳本、查詢效能、資料完整性、備份策略
+    * DevOps (6 維度)：CI/CD 配置、容器化、監控告警、日誌策略、備份恢復、部署策略
+    * Testing (6 維度)：測試策略、覆蓋率要求、Mock 策略、測試資料管理、測試可維護性、測試執行效率
+    * Documentation (6 維度)：內容完整性、範例有效性、格式標準、版本同步、可讀性、準確性
+    * General (4 維度)：功能需求合規、程式碼品質、測試完整性、文檔完整性（作為無法識別領域時的備案）
+  - 保留統一的 4 級評分系統（Platinum/Gold/Silver/Bronze）與決策規則
+  - 新增常見問題與反模式說明，提供具體審查指引
+- 統一任務文檔工具標註格式：優化 11 個任務文檔的工具使用說明，提升文檔一致性
+  - 統一工具標註格式：將使用場景描述簡化為簡短的步驟標註（例如：`[步驟1:追蹤任務;步驟2-4:追蹤任務狀態]`）
+  - 新增 MCP 工具標註：明確標示 MCP 工具（例如：`sequentialthinking (MCP)`、`claude-context (MCP)`）
+  - 涵蓋任務：brownfield-tasks、conclude、create-architecture、create-brownfield-architecture、create-epic、create-requirements、curate-knowledge、develop-tasks、document-project、plan-tasks、review
+  - 提升工具使用指引的清晰度與可讀性
+
 ## [1.7.38] - Claude code v1.7.38
 
 ### Changed
