@@ -1,79 +1,79 @@
-[輸入]
-  1. {root}/docs/requirements --規範需求來源
-  2. {root}/docs/architecture/*.md --既有架構文件集
-  3. {root}/sunnycore/scripts/shard-architecture.py --架構分片腳本
-  4. {root}/sunnycore/templates/architecture-tmpl.yaml --架構模板
+[Input]
+  1. {root}/docs/requirements --Standardized requirement source
+  2. {root}/docs/architecture/*.md --Existing architecture document collection
+  3. {root}/sunnycore/scripts/shard-architecture.py --Architecture sharding script
+  4. {root}/sunnycore/templates/architecture-tmpl.yaml --Architecture template
 
-[輸出]
-  1. {root}/docs/architecture/*.md --更新後的架構文件集（*.md 格式）
+[Output]
+  1. {root}/docs/architecture/*.md --Updated architecture document collection (*.md format)
 
-[約束]
-  1. 必須在提議設計前徹底審查 {root}/docs/requirements 與 {root}/docs/architecture/*.md（證據：在架構草稿中以 `參考：{檔案路徑}#{章節標題}` 格式引用已審查內容）
-  2. 必須保留既有契約；任何提議變更都必須包含明確的「影響分析」子章節
-  3. 必須完全遵循 {root}/sunnycore/templates/architecture-tmpl.yaml 結構與章節順序
-  4. 必須草擬至 {root}/docs/architecture.md，然後執行：uv run {root}/sunnycore/scripts/shard-architecture.py 進行分片
-  5. 應使用清晰簡潔的英文與全文 2 空格縮排
+[Constraints]
+  1. Must thoroughly review {root}/docs/requirements and {root}/docs/architecture/*.md before proposing design (evidence: reference reviewed content in architecture draft using `Reference: {file path}#{section heading}` format)
+  2. Must preserve existing contracts; any proposed changes must include explicit "Impact Analysis" subsection
+  3. Must fully comply with {root}/sunnycore/templates/architecture-tmpl.yaml structure and section order
+  4. Must draft to {root}/docs/architecture.md, then execute: uv run {root}/sunnycore/scripts/shard-architecture.py to perform sharding
+  5. Should use clear, concise English with 2-space indentation throughout
 
-[工具]
+[Tools]
   1. **todo_write**
-    - [步驟1:追蹤任務;步驟2-4:追蹤任務狀態]
+    - [Step 1: Track tasks; Steps 2-4: Track task status]
   2. **sequentialthinking (MCP)**
-    - [步驟1:評估既有架構]
-    - [步驟2:設計模組邊界與整合模式]
-    - [步驟3:結構化草擬]
+    - [Step 1: Evaluate existing architecture]
+    - [Step 2: Design module boundaries and integration patterns]
+    - [Step 3: Structured drafting]
   3. **claude-context (MCP)**
-    - [步驟1:評估既有架構-處理大型文件集]
+    - [Step 1: Evaluate existing architecture - handling large document collections]
 
-[工具指引]
+[Tool Guidelines]
   1. **todo_write**
-    - 在評估階段創建待辦清單，包含所有主要任務
-    - 每完成一個步驟即更新對應待辦項目狀態為 completed
-    - 狀態閘門：僅允許單一任務為 in_progress；完成後立即標記 completed
+    - Create a todo list during evaluation phase, including all major tasks
+    - Update the status of each completed step to completed
+    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
   2. **sequentialthinking (MCP)**
-    - 簡單任務推理：1-3 totalThoughts
-    - 中等任務推理：3-5 totalThoughts
-    - 複雜任務推理：5-8 totalThoughts
-    - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
-    - 必須完成所有設定的推理步數
+    - Simple task reasoning: 1-3 totalThoughts
+    - Medium task reasoning: 3-5 totalThoughts
+    - Complex task reasoning: 5-8 totalThoughts
+    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
+    - Must complete all configured reasoning steps
   3. **claude-context (MCP)**
-    - 使用場景：處理大型既有架構文件集時
-    - 可用於分段讀取與理解複雜架構
+    - Usage scenario: When handling large existing architecture document collections
+    - Can be used to read and understand complex architectures in segments
   4. **context7 (MCP)**
-    - 使用場景：尋找特定領域的最佳實踐或可用於研究特定技術棧或設計模式
-    - 用於尋找是否有能滿足使用者需求的優質開源項目實踐，避免重複造輪子
+    - Usage scenario: Finding domain-specific best practices or researching specific technology stacks or design patterns
+    - Used to find high-quality open source project practices that meet user needs, avoiding reinventing the wheel
 
-[步驟]
-  1. 評估既有架構階段
-    - 檢視 {root}/docs/architecture/*.md 下的當前架構
-    - 識別擴充點、約束條件與共享服務
-    - 對應受影響的領域、限界上下文與依賴關係
-    - 創建 todo list 以追蹤後續設計與撰寫任務
+[Steps]
+  1. Evaluate Existing Architecture Phase
+    - Review current architecture under {root}/docs/architecture/*.md
+    - Identify extension points, constraints, and shared services
+    - Map affected domains, bounded contexts, and dependencies
+    - Create todo list to track subsequent design and writing tasks
 
-  2. 設計新模組階段
-    - 定義新模組的責任、邊界與介面
-    - 指定與既有元件的資料流與互動方式
-    - 評估非功能性需求（安全性、可觀測性、效能）與相容性
-    - 為所有提議變更撰寫「影響分析」以說明對既有系統的潛在影響
+  2. Design New Module Phase
+    - Define responsibilities, boundaries, and interfaces of new module
+    - Specify data flows and interaction methods with existing components
+    - Assess non-functional requirements (security, observability, performance) and compatibility
+    - Write "Impact Analysis" for all proposed changes to explain potential impact on existing system
 
-  3. 撰寫與分片階段
-    - 使用架構模板草擬 Markdown 格式的 {root}/docs/architecture.md
-    - 確保章節強調新模組與整合影響
-    - 執行分片腳本以分割文件：uv run {root}/sunnycore/scripts/shard-architecture.py
-    - 驗證文件出現在 {root}/docs/architecture/ 下
+  3. Writing and Sharding Phase
+    - Use architecture template to draft {root}/docs/architecture.md in Markdown format
+    - Ensure sections emphasize new module and integration impact
+    - Execute sharding script to split documents: uv run {root}/sunnycore/scripts/shard-architecture.py
+    - Verify documents appear under {root}/docs/architecture/
 
-  4. 最終化階段
-    - 對照約束與指引問題進行交叉檢查；修正缺口與不一致
-    - 確認所有影響分析已包含且完整
-    - 驗證新舊模組間的相容性
-    - 逐項檢查所有 DoD 項目是否已滿足
-    - 確認所有待辦項目已完成
+  4. Finalization Phase
+    - Cross-check against constraints and guidance questions; fix gaps and inconsistencies
+    - Confirm all impact analyses are included and complete
+    - Verify compatibility between new and old modules
+    - Check all DoD items one by one to ensure they are met
+    - Confirm all todo items are completed
 
 [DoD]
-  - [ ] 已徹底審查 {root}/docs/requirements 與 {root}/docs/architecture/*.md
-  - [ ] 已識別擴充點、約束條件與受影響領域
-  - [ ] 新模組已記錄邊界、介面與資料流
-  - [ ] 所有提議變更都包含明確的「影響分析」子章節
-  - [ ] 與既有契約的相容性已闡明（無破壞性變更）
-  - [ ] {root}/docs/architecture.md 存在且遵循模板
-  - [ ] 已執行 shard-architecture.py 並驗證分片文件生成
-  - [ ] 所有待辦項目已完成
+  - [ ] {root}/docs/requirements and {root}/docs/architecture/*.md have been thoroughly reviewed
+  - [ ] Extension points, constraints, and affected domains have been identified
+  - [ ] New module has documented boundaries, interfaces, and data flows
+  - [ ] All proposed changes include explicit "Impact Analysis" subsections
+  - [ ] Compatibility with existing contracts has been clarified (no breaking changes)
+  - [ ] {root}/docs/architecture.md exists and follows the template
+  - [ ] shard-architecture.py has been executed and shard file generation has been verified
+  - [ ] All todo items are completed

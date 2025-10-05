@@ -1,74 +1,74 @@
-[輸入]
-  1. {root}/docs/review-results/*.md --審查報告
-  2. {root}/docs/dev-notes/*.md --開發筆記
+[Input]
+  1. {root}/docs/review-results/*.md --Review reports
+  2. {root}/docs/dev-notes/*.md --Development notes
 
-[輸出]
-  1. {root}/docs/knowledge/*.md --知識庫（若目錄不存在需先創建）
-    - 文件組織：根據實際內容可能產生 best-practices.md、errors.md，或按領域/類型細分
-    - 內容分配：每個platinum實踐為一個條目，每個錯誤案例為一個條目
+[Output]
+  1. {root}/docs/knowledge/*.md --Knowledge base (create directory first if it does not exist)
+    - Document organization: May produce best-practices.md, errors.md based on actual content, or subdivide by domain/type
+    - Content allocation: One entry per platinum practice, one entry per error case
 
-[規則]
-  1. 必須識別開發中的所有實踐與錯誤，但僅將 platinum 級別實踐定義為最佳實踐並產生
-  2. platinum 級別會在審查報告中被標記，只需讀取標記無需自行判定
-  3. 若未發現platinum級別實踐，應在知識庫中記錄「本階段尚無驗證充分的最佳實踐」並說明原因
-  4. 若發現矛盾的實踐建議，應標註衝突並保留所有證據來源以供後續決策
+[Rules]
+  1. Must identify all practices and errors during development, but only define platinum-level practices as best practices and produce them
+  2. Platinum level will be marked in review reports, only need to read marks without making own judgment
+  3. If no platinum-level practices are found, should record "No sufficiently validated best practices in this phase" in the knowledge base and explain the reason
+  4. If contradictory practice recommendations are found, should annotate conflicts and preserve all evidence sources for subsequent decision-making
 
-[工具]
+[Tools]
   1. **sequentialthinking (MCP)**
-    - [步驟2:推理知識庫組織架構]
+    - [Step 2: Reason about knowledge base organization structure]
   2. **claude-context (MCP)**
-    - [步驟2:尋找相關程式碼]
-    - 使用場景：需要從程式碼中驗證或補充文檔中提到的技術細節時
+    - [Step 2: Find relevant code]
+    - Usage scenario: When technical details mentioned in documentation need to be verified or supplemented from code
   3. **todo_write**
-    - [步驟2:創建任務清單;步驟3-4:追蹤任務進度]
-    - 使用場景：在準備階段創建待辦清單，追蹤任務進度
+    - [Step 2: Create task list; Steps 3-4: Track task progress]
+    - Usage scenario: Create todo list in preparation phase, track task progress
 
-[工具指引]
+[Tool Guidelines]
   1. **sequentialthinking (MCP)**
-    - 簡單任務推理：1-3 totalThoughts
-    - 中等任務推理：3-5 totalThoughts
-    - 複雜任務推理：5-8 totalThoughts
-    - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
-    - 必須完成所有設定的推理步數
-    - 參數說明：
-      * totalThoughts (number): 預估推理步數，可依實際需求調整
-      * nextThoughtNeeded (boolean): 是否需要繼續推理，完成所有步驟後設為 false
+    - Simple task reasoning: 1-3 totalThoughts
+    - Medium task reasoning: 3-5 totalThoughts
+    - Complex task reasoning: 5-8 totalThoughts
+    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
+    - Must complete all configured reasoning steps
+    - Parameter explanation:
+      * totalThoughts (number): Estimated reasoning steps, can be adjusted according to actual needs
+      * nextThoughtNeeded (boolean): Whether to continue reasoning, set to false after completing all steps
   2. **claude-context (MCP)**
-    - 使用場景：需要定位特定實作細節或驗證技術決策時
-    - 使用前提：程式碼庫已通過 index_codebase 索引
-    - 操作指引：搜尋語句應包含技術關鍵詞+情境描述，例如：「錯誤處理機制的實作方式」
-    - 失敗處理：若未索引或搜尋失敗，標註「無法定位程式碼證據」並繼續執行
+    - Usage scenario: When specific implementation details need to be located or technical decisions verified
+    - Prerequisite: Codebase has been indexed through index_codebase
+    - Operation guidance: Search statements should include technical keywords + context description, e.g., "Implementation approach of error handling mechanism"
+    - Failure handling: If not indexed or search fails, annotate "Unable to locate code evidence" and continue execution
   3. **todo_write**
-    - 在準備階段創建待辦清單，包含所有主要任務
-    - 每完成一個步驟即更新對應待辦項目狀態為 completed
-    
-[步驟]
-  1. 準備階段
-    - 閱讀所有開發筆記和審查報告
-    - 識別當中標記為 platinum 級別的最佳實踐，並記錄於臨時清單中
-    - 識別所有開發過程中遇到的錯誤（包含錯誤類型、發生情境、解決方案），並記錄於臨時清單中
-    - 創建 todo list 以追蹤後續知識庫構思與產出任務
+    - Create a todo list in preparation phase, including all major tasks
+    - Update the status of each completed step to completed
 
-  2. 知識庫構思階段
-    - 構思項目知識庫的結構與分類方式（參考：按技術領域/錯誤類型/開發階段分類，根據實際內容選擇。考量因素包含：內容數量、技術領域分布、錯誤類型多樣性等。技術領域分類範例：API設計/錯誤處理/測試策略等）
-    - 決定最佳實踐與錯誤的組織架構
-    
-  3. 產出文檔階段
-    - 首先創建 {root}/docs/knowledge/ 目錄（若不存在）
-    - 將最佳實踐按分類產生至對應文檔（文檔命名：best-practices-{領域}.md 或 best-practices.md）
-    - 將錯誤案例按分類產生至對應文檔（文檔命名：errors-{類型}.md 或 errors.md）
-    - 文檔內容格式：每個知識點包含標題、描述、證據來源、適用場景
-    - 為每個知識點標註證據來源（標註格式：檔案路徑+相關章節，例如：docs/dev-notes/feature-x.md [錯誤處理]段落）
+[Steps]
+  1. Preparation Phase
+    - Read all development notes and review reports
+    - Identify best practices marked as platinum level and record in temporary list
+    - Identify all errors encountered during development process (including error type, occurrence context, solution) and record in temporary list
+    - Create todo list to track subsequent knowledge base conception and production tasks
 
-  4. DoD 驗證階段
-    - 逐項檢查所有 DoD 項目是否已滿足
-    - 確認所有 todo 項目已完成
+  2. Knowledge Base Conception Phase
+    - Conceive the structure and classification method of project knowledge base (reference: classify by technical domain/error type/development phase, choose based on actual content. Consideration factors include: content volume, technical domain distribution, error type diversity, etc. Technical domain classification examples: API design/error handling/testing strategy, etc.)
+    - Decide organization structure for best practices and errors
+
+  3. Produce Documents Phase
+    - First create {root}/docs/knowledge/ directory (if it does not exist)
+    - Produce best practices to corresponding documents by classification (document naming: best-practices-{domain}.md or best-practices.md)
+    - Produce error cases to corresponding documents by classification (document naming: errors-{type}.md or errors.md)
+    - Document content format: Each knowledge point includes title, description, evidence source, applicable scenarios
+    - Annotate evidence source for each knowledge point (annotation format: file path + relevant section, e.g., docs/dev-notes/feature-x.md [Error Handling] paragraph)
+
+  4. DoD Verification Phase
+    - Check all DoD items one by one to ensure they are met
+    - Confirm all todo items are completed
 
 [DoD]
-  - [ ] 已閱讀所有 {root}/docs/review-results/ 和 {root}/docs/dev-notes/ 中的文件
-  - [ ] 已構思知識庫結構與分類方式
-  - [ ] 知識庫目錄 {root}/docs/knowledge/ 已創建
-  - [ ] 所有 platinum 級別的最佳實踐已識別並分類產生
-  - [ ] 所有開發過程中的錯誤已識別並記錄（包含類型、情境、解決方案）
-  - [ ] 每個知識點都有明確的證據來源標註
-  - [ ] todo list 已創建且所有項目已標記為 completed
+  - [ ] All files in {root}/docs/review-results/ and {root}/docs/dev-notes/ have been read
+  - [ ] Knowledge base structure and classification method have been conceived
+  - [ ] Knowledge base directory {root}/docs/knowledge/ has been created
+  - [ ] All platinum-level best practices have been identified and produced by classification
+  - [ ] All errors during development process have been identified and recorded (including type, context, solution)
+  - [ ] Each knowledge point has clear evidence source annotation
+  - [ ] Todo list has been created and all items are marked as completed

@@ -1,86 +1,86 @@
-[輸入]
-  1. {root}/docs/requirements/*.md --專案需求
-  2. {root}/docs/architecture/*.md --架構設計
-  3. {root}/docs/epic.md --任務清單
-  4. {root}/sunnycore/templates/implementation-plan-tmpl.yaml --實作計畫模板（包含：專案資訊、需求對應、架構參照、RED/GREEN/REFACTOR 三階段等章節）
+[Input]
+  1. {root}/docs/requirements/*.md --Project requirements
+  2. {root}/docs/architecture/*.md --Architecture design
+  3. {root}/docs/epic.md --Task list
+  4. {root}/sunnycore/templates/implementation-plan-tmpl.yaml --Implementation plan template (including: project information, requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
 
-[輸出]
-  1. {root}/docs/implementation-plan/{task_id}-plan.md --實作計畫（Markdown 格式）
-    - 格式：使用 ATX 標題；編號清單；明確的需求/架構對應章節
-    - 範例：{root}/docs/implementation-plan/1-plan.md
+[Output]
+  1. {root}/docs/implementation-plan/{task_id}-plan.md --Implementation plan (Markdown format)
+    - Format: Use ATX headings; numbered lists; explicit requirement/architecture mapping sections
+    - Example: {root}/docs/implementation-plan/1-plan.md
 
-[約束]
-  1. 必須嚴格從提供的文件中提取任務；不得杜撰需求
-  2. 必須將每個計畫項目對應至需求 ID 與架構章節
-  3. 必須使用 Markdown 格式（ATX 標題與編號清單）
-  4. 必須在指定輸出路徑產出恰好一個檔案
-  5. 產出的實作計畫必須確保 TDD 三階段邏輯連貫：RED 階段的驗收標準須可追溯至需求；GREEN 階段的實作步驟須對應至 RED 驗收標準；REFACTOR 階段的優化須不破壞驗收標準
-  6. 若發現需求與架構衝突、需求不明確、或必要文件缺失，須記錄問題並請求用戶澄清，不得自行臆測或跳過
+[Constraints]
+  1. Must strictly extract tasks from provided documents; do not fabricate requirements
+  2. Must map each plan item to requirement ID and architecture section
+  3. Must use Markdown format (ATX headings and numbered lists)
+  4. Must produce exactly one file at the specified output path
+  5. The produced implementation plan must ensure logical coherence of TDD three phases: RED phase acceptance criteria must be traceable to requirements; GREEN phase implementation steps must correspond to RED acceptance criteria; REFACTOR phase optimizations must not break acceptance criteria
+  6. If requirement-architecture conflicts, unclear requirements, or missing necessary files are found, must record issues and request user clarification, do not make assumptions or skip
 
-[工具]
+[Tools]
   1. **todo_write**
-    - [步驟1（設置階段）:創建待辦清單;步驟2-4:追蹤任務進度]
+    - [Step 1 (Setup Phase): Create todo list; Steps 2-4: Track task progress]
   2. **sequentialthinking (MCP)**
-    - [步驟1:分析需求與任務複雜度;步驟2:規劃RED階段內容(測試與驗收標準設計);步驟3:規劃GREEN階段內容（最小實作步驟設計）;步驟4:規劃REFACTOR階段內容（重構與優化工作識別）]
+    - [Step 1: Analyze requirement and task complexity; Step 2: Plan RED phase content (test and acceptance criteria design); Step 3: Plan GREEN phase content (minimal implementation step design); Step 4: Plan REFACTOR phase content (refactoring and optimization work identification)]
   3. **claude-context (MCP)**
-    - [步驟1:若需要時分段處理大型文件]
+    - [Step 1: Process large files in segments if needed]
 
-[工具指引]
+[Tool Guidelines]
   1. **todo_write**
-    - 在設置階段創建待辦清單，包含所有主要任務（步驟1-5）
-    - 每完成一個步驟即更新對應待辦項目狀態為 completed
-    - 不用於儲存操作性動作；任務保持高層級
-    - 建議使用階段前綴命名（setup-、red-、green-、refactor-、finalize-）以便追蹤
+    - Create a todo list during setup phase, including all major tasks (Steps 1-5)
+    - Update the status of each completed step to completed
+    - Not used for storing operational actions; tasks remain high-level
+    - Recommend using phase prefixes (setup-, red-, green-, refactor-, finalize-) for tracking
   2. **sequentialthinking (MCP)**
-    - 簡單任務推理：1-3 totalThoughts
-    - 中等任務推理：3-5 totalThoughts
-    - 複雜任務推理：5-8 totalThoughts
-    - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
-    - 必須完成所有設定的推理步數
+    - Simple task reasoning: 1-3 totalThoughts
+    - Medium task reasoning: 3-5 totalThoughts
+    - Complex task reasoning: 5-8 totalThoughts
+    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
+    - Must complete all configured reasoning steps
   3. **claude-context (MCP)**
-    - 使用時機：輸入來源冗長或需要分段處理時（如文件超過 1000 行或跨多個子目錄）
-    - 避免在內容已在記憶體且在 token 限制內時使用
+    - Usage timing: When input sources are lengthy or require segmented processing (e.g., files exceeding 1000 lines or spanning multiple subdirectories)
+    - Avoid using when content is already in memory and within token limits
 
-[步驟]
-  1. 設置階段
-    - 閱讀所有工作步驟與需求文件
-    - 理解目標任務的範圍與複雜度
-      * 識別任務涉及的需求數量、架構元件數量、以及跨系統依賴
-      * 統計涉及的需求數量、架構元件數量、跨系統依賴數量以評估複雜度（簡單/中等/複雜）
-      * 根據複雜度決定後續規劃深度
-    - 創建 todo list 以追蹤步驟2-5的執行進度
+[Steps]
+  1. Setup Phase
+    - Read all workflow steps and requirement documents
+    - Understand the scope and complexity of the target task
+      * Identify the number of requirements, number of architecture components, and cross-system dependencies involved in the task
+      * Count the number of requirements, architecture components, and cross-system dependencies to assess complexity (simple/medium/complex)
+      * Determine the depth of subsequent planning based on complexity
+    - Create todo list to track execution progress of Steps 2-5
 
-  2. 規劃 RED 階段內容：定義測試與驗收
-    - 為計劃撰寫「RED 階段」章節：列出每個需求對應的驗收標準與測試條件
-    - 將需求對應至可測試結果與驗證方法
-    - 定義可衡量的成功指標、失敗條件與邊緣案例
+  2. Planning RED Phase Content: Define Tests and Acceptance
+    - Write the "RED Phase" section for the plan: list acceptance criteria and test conditions corresponding to each requirement
+    - Map requirements to testable outcomes and verification methods
+    - Define measurable success metrics, failure conditions, and edge cases
 
-  3. 規劃 GREEN 階段內容：最小實作步驟
-    - 為計劃撰寫「GREEN 階段」章節：設計滿足 RED 階段驗收標準的最小實作步驟
-    - 將每個驗收標準對應至特定架構元件、檔案與具體開發任務
-    - 每個實作步驟都應明確指向至少一個測試條件；優先選擇最簡單的實作方式
+  3. Planning GREEN Phase Content: Minimal Implementation Steps
+    - Write the "GREEN Phase" section for the plan: design minimal implementation steps that satisfy RED phase acceptance criteria
+    - Map each acceptance criterion to specific architecture components, files, and concrete development tasks
+    - Each implementation step should clearly point to at least one test condition; prioritize the simplest implementation approach
 
-  4. 規劃 REFACTOR 階段內容：重構與優化步驟
-    - 為計劃撰寫「REFACTOR 階段」章節：列出在 GREEN 階段完成後的重構與優化工作
-    - 識別並整合重複程式碼、跨領域關注點（認證、日誌、錯誤處理等）
-    - 規劃效能優化、程式碼品質提升與架構改善步驟
-    - 確保重構步驟不破壞 RED 階段定義的驗收標準
+  4. Planning REFACTOR Phase Content: Refactoring and Optimization Steps
+    - Write the "REFACTOR Phase" section for the plan: list refactoring and optimization work after GREEN phase completion
+    - Identify and integrate duplicate code, cross-cutting concerns (authentication, logging, error handling, etc.)
+    - Plan performance optimizations, code quality improvements, and architecture enhancement steps
+    - Ensure refactoring steps do not break acceptance criteria defined in RED phase
 
-  5. 最終化階段
-    - 整合步驟 2-4 的內容為完整的實作計劃文件
-    - 使用模板格式化計劃：參考模板結構組織內容以確保包含所有必要章節（需求對應、架構參照、RED/GREEN/REFACTOR 三階段等）
-    - 驗證計劃的完整性與可執行性
-    - 逐項檢查所有 DoD 項目是否已滿足（依 DoD 逐項檢查每個驗收標準；若有未滿足項目，須回到對應步驟補充或調整，直至全部滿足）
-    - 產生 Markdown 計畫至 {root}/docs/implementation-plan/{task_id}-plan.md
-    - 確認所有待辦項目已完成
+  5. Finalization Phase
+    - Integrate content from Steps 2-4 into a complete implementation plan document
+    - Format the plan using the template: reference template structure to organize content ensuring all necessary sections are included (requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
+    - Verify completeness and executability of the plan
+    - Check all DoD items one by one to ensure they are met (check each acceptance criterion item by item according to DoD; if any item is not met, return to the corresponding step to supplement or adjust until all are met)
+    - Generate Markdown plan to {root}/docs/implementation-plan/{task_id}-plan.md
+    - Confirm all todo items are completed
 
 [DoD]
-  - [ ] 已閱讀所有需求、架構與任務文件
-  - [ ] 計劃文件包含 TDD 三階段結構（RED/GREEN/REFACTOR 章節）
-  - [ ] RED 章節：每個需求都有對應的驗收標準與測試條件
-  - [ ] GREEN 章節：所有實作步驟對應至特定驗收標準，且包含架構/檔案參照
-  - [ ] REFACTOR 章節：規劃了重構與優化工作，包含跨領域關注點整合
-  - [ ] 計劃遵循 TDD 週期結構：測試優先（RED）、最小實作（GREEN）、重構優化（REFACTOR）
-  - [ ] 產出路徑與檔案命名遵循指定模式
-  - [ ] {root}/docs/implementation-plan/{task_id}-plan.md 已創建
-  - [ ] 所有待辦項目已完成
+  - [ ] All requirement, architecture, and task documents have been read
+  - [ ] Plan document includes TDD three-phase structure (RED/GREEN/REFACTOR sections)
+  - [ ] RED section: Each requirement has corresponding acceptance criteria and test conditions
+  - [ ] GREEN section: All implementation steps correspond to specific acceptance criteria and include architecture/file references
+  - [ ] REFACTOR section: Refactoring and optimization work has been planned, including cross-cutting concerns integration
+  - [ ] Plan follows TDD cycle structure: test-first (RED), minimal implementation (GREEN), refactoring optimization (REFACTOR)
+  - [ ] Output path and file naming follow specified pattern
+  - [ ] {root}/docs/implementation-plan/{task_id}-plan.md has been created
+  - [ ] All todo items are completed

@@ -1,96 +1,96 @@
-[輸入]
-  1. {root}/docs/dev-notes/{task_id}-dev-notes.md --開發筆記
-  2. {root}/docs/implementation-plan/{task_id}-plan.md --實作計畫
-  3. {root}/sunnycore/templates/review-tmpl.yaml --審查模板
+[Input]
+  1. {root}/docs/dev-notes/{task_id}-dev-notes.md --Development notes
+  2. {root}/docs/implementation-plan/{task_id}-plan.md --Implementation plan
+  3. {root}/sunnycore/templates/review-tmpl.yaml --Review template
 
-[輸出]
+[Output]
   1. {root}/docs/review-results/{task_id}-review.md
   2. {root}/docs/epic.md
 
-[約束]
-  1. 必須執行 develop-tasks 任務階段創建的所有測試，並驗證測試結果與實作計畫對齊。若測試檔案不存在或無法執行，應記錄為審查阻塞項並標記為 Reject
-  2. 必須驗證所有正式程式碼嚴格遵循實作計畫規格與驗收標準；任何偏離處需明確記錄並說明理由。「嚴格遵循」指：1) 所有計畫中的功能已實作；2) 公開介面簽名與計畫一致；3) 任何偏離處已在開發筆記中記錄並說明理由。重點檢查公開介面、核心邏輯和驗收標準相關部分
-  3. 必須產出機器可檢查的 Markdown（包含結構化的標題層級 H1-H3、清單項目、程式碼區塊，並使用一致的標記格式），包含章節：Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
-  4. 必須使用檔案路徑、行範圍或錨點（若可用）交叉參照計畫/程式碼/筆記。格式規範：檔案路徑使用相對於 root 的路徑；行範圍格式為 Lstart-Lend（如 L10-L20）；錨點格式為 #anchor-id
-  5. 必須記錄驗收決策與理由：Accept / Accept with changes / Reject
+[Constraints]
+  1. Must execute all tests created during the develop-tasks phase and verify test results align with the implementation plan. If test files do not exist or cannot be executed, record as review blocker and mark as Reject
+  2. Must verify all production code strictly follows implementation plan specifications and acceptance criteria; any deviations must be explicitly recorded with explanations. "Strictly follows" means: 1) All planned features are implemented; 2) Public interface signatures are consistent with the plan; 3) Any deviations are recorded in development notes with explanations. Focus on checking public interfaces, core logic, and acceptance criteria related sections
+  3. Must produce machine-checkable Markdown (including structured heading hierarchy H1-H3, list items, code blocks, and using consistent markup format), containing sections: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
+  4. Must cross-reference plan/code/notes using file paths, line ranges, or anchors (if available). Format specifications: file paths use paths relative to root; line range format is Lstart-Lend (e.g., L10-L20); anchor format is #anchor-id
+  5. Must record acceptance decision and rationale: Accept / Accept with changes / Reject
 
-[工具]
-  1. **sequentialthinking (MCP)** - 結構化推理工具，用於複雜邏輯分析
-    - [步驟1審查計劃階段:推理任務領域識別與評分標準選擇;步驟2審查程式碼階段:推理領域特定評分邏輯與對齊分析;步驟3審查開發筆記階段:推理筆記與實作對齊關係;步驟4產出結果階段:推理問題優先級、風險評估與決策理由]
-  2. **todo_write** - 任務追蹤工具，用於管理待辦清單
-    - [步驟1:創建待辦清單包含步驟2-4的主要檢查點;步驟2-4:每完成一個子步驟即更新狀態;步驟4結束前:確認所有項目已完成]
-  3. **claude-context (MCP)** - 程式碼庫語義搜尋與索引工具，用於大型文件分段處理
-    - [步驟1:當實作計畫文件超過500行時分段索引和搜尋;步驟2:當程式碼文件超過500行時分段索引和搜尋]
+[Tools]
+  1. **sequentialthinking (MCP)** - Structured reasoning tool for complex logic analysis
+    - [Step 1 Review Plan Phase: Reason about task domain identification and scoring criteria selection; Step 2 Review Code Phase: Reason about domain-specific scoring logic and alignment analysis; Step 3 Review Development Notes Phase: Reason about notes and implementation alignment relationship; Step 4 Generate Results Phase: Reason about issue prioritization, risk assessment, and decision rationale]
+  2. **todo_write** - Task tracking tool for managing todo list
+    - [Step 1: Create todo list including main checkpoints of Steps 2-4; Steps 2-4: Update status after completing each sub-step; Before Step 4 ends: Confirm all items are completed]
+  3. **claude-context (MCP)** - Codebase semantic search and indexing tool for processing large documents in segments
+    - [Step 1: When implementation plan document exceeds 500 lines, segment indexing and search; Step 2: When code document exceeds 500 lines, segment indexing and search]
 
-[工具指引]
+[Tool Guidelines]
   1. **sequentialthinking (MCP)**
-    - 簡單任務推理：1-3 totalThoughts
-    - 中等任務推理：3-5 totalThoughts
-    - 複雜任務推理：5-8 totalThoughts
-    - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
-    - 必須完成所有設定的推理步數
+    - Simple task reasoning: 1-3 totalThoughts
+    - Medium task reasoning: 3-5 totalThoughts
+    - Complex task reasoning: 5-8 totalThoughts
+    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
+    - Must complete all configured reasoning steps
   2. **todo_write**
-    - 在 [步驟] 1 創建待辦清單，包含步驟2-4的主要檢查點
-    - 每完成一個子步驟（如2.1、2.2、3、4.1/4.2/4.3）即更新狀態為 completed
-    - 狀態閘門：僅允許單一任務為 in_progress；完成後立即標記 completed
+    - Create a todo list in [Steps] 1, including main checkpoints of Steps 2-4
+    - Update status to completed after completing each sub-step (such as 2.1, 2.2, 3, 4.1/4.2/4.3)
+    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
   3. **claude-context (MCP)**
-    - 使用場景：當實作計畫或程式碼文件超過500行時，應使用此工具分段索引和搜尋
-    - 步驟1和步驟2中若遇到大型文件，應先使用此工具建立索引再進行語義搜尋
+    - Usage scenario: When implementation plan or code document exceeds 500 lines, should use this tool for segment indexing and search
+    - In Steps 1 and 2, if encountering large documents, should first use this tool to build index then perform semantic search
 
-[步驟]
-  1. 審查計劃階段
-    - 閱讀實作計畫並理解其內容
-    - **識別任務領域**：根據實作計畫內容判斷任務屬於哪個領域（後端/前端/API/資料庫/DevOps/測試/文檔/通用）
-    - 識別驗證方法與成功標準
-    - 創建 todo list 以追蹤後續審查任務（包含步驟2-4的主要檢查點）
+[Steps]
+  1. Review Plan Phase
+    - Read the implementation plan and understand its content
+    - **Identify task domain**: Determine which domain the task belongs to based on implementation plan content (backend/frontend/API/database/DevOps/testing/documentation/general)
+    - Identify verification methods and success criteria
+    - Create todo list to track subsequent review tasks (including main checkpoints of Steps 2-4)
 
-  2. 審查程式碼階段
-    - 閱讀所有正式程式碼並理解其實作
-    - **應用領域特定審查標準**：根據步驟1識別的任務領域，依照該領域的評分維度進行審查
-    - 執行所有測試並記錄通過/失敗狀態與計畫對齊情況（若測試數量>100或預計執行時間>30分鐘，優先執行關鍵路徑測試和受影響模組測試）
-    - if 測試全部通過 then 執行 2.1, else if 測試部分失敗 then 執行 2.2
-      2.1 測試通過路徑
-        - 執行整合測試以確認實作不影響原有程式碼（範圍：新增/修改模組與現有系統的介面測試，以及關鍵業務流程的端到端測試）
-        - 驗證測試覆蓋率
-        - 驗證程式碼嚴格對齊架構/設計及驗收標準
-        - **記錄領域特定的評分**：為每個領域維度評分並計算整體分數
-      2.2 測試失敗路徑
-        - 記錄失敗測試詳情（測試名稱、錯誤訊息、預期vs實際）
-        - 標記審查結果為 Reject 或 Accept with changes
-        - 明確列出必要修復項目
-        - 不執行後續的覆蓋率與對齊驗證 
+  2. Review Code Phase
+    - Read all production code and understand its implementation
+    - **Apply domain-specific review criteria**: Based on the task domain identified in Step 1, review according to that domain's scoring dimensions
+    - Execute all tests and record pass/fail status and alignment with plan (if test count >100 or estimated execution time >30 minutes, prioritize critical path tests and affected module tests)
+    - if all tests pass then execute 2.1, else if some tests fail then execute 2.2
+      2.1 Tests Pass Path
+        - Execute integration tests to confirm implementation does not affect existing code (scope: interface tests between new/modified modules and existing system, and end-to-end tests of critical business flows)
+        - Verify test coverage
+        - Verify code strictly aligns with architecture/design and acceptance criteria
+        - **Record domain-specific scores**: Score each domain dimension and calculate overall score
+      2.2 Tests Fail Path
+        - Record failed test details (test name, error message, expected vs actual)
+        - Mark review result as Reject or Accept with changes
+        - Explicitly list necessary fix items
+        - Do not execute subsequent coverage and alignment verification
 
-  3. 審查開發筆記階段
-    - 閱讀開發筆記並理解其內容
-    - 檢查筆記與實作之間的對齊情況
+  3. Review Development Notes Phase
+    - Read development notes and understand their content
+    - Check alignment between notes and implementation
 
-  4. 產出結果階段
-    - 使用模板創建審查結果，包含測試執行摘要
-    - 記錄測試結果與通過/失敗狀態及計畫對齊情況；分析程式碼對齊情況與特定參照
-    - 儲存至 {root}/docs/review-results/{task_id}-review.md；若檔案存在，則更新
-    - if 審查結果為 Accept then 執行 4.1, else if 審查結果為 Accept with changes then 執行 4.2, else 執行 4.3
-      4.1 Accept 路徑
-        - 更新 epic.md 標記任務完成
-        - 記錄完成時間與最終評分
-      4.2 Accept with changes 路徑
-        - 記錄改進建議與優先級
-        - 更新 epic.md 並註記待改進項目
-        - 標記任務為「有條件完成」
-      4.3 Reject 路徑
-        - 產出詳細審查報告
-        - 不更新 epic.md
-        - 等待 brownfield-tasks 修復後重新審查
-    - 逐項檢查所有 DoD 項目是否已滿足
-    - 確認所有待辦項目已完成
+  4. Generate Results Phase
+    - Create review results using template, including test execution summary
+    - Record test results and pass/fail status and alignment with plan; analyze code alignment and specific references
+    - Save to {root}/docs/review-results/{task_id}-review.md; if file exists, update it
+    - if review result is Accept then execute 4.1, else if review result is Accept with changes then execute 4.2, else execute 4.3
+      4.1 Accept Path
+        - Update epic.md to mark task as completed
+        - Record completion time and final score
+      4.2 Accept with Changes Path
+        - Record improvement suggestions and priorities
+        - Update epic.md and note items to be improved
+        - Mark task as "conditionally completed"
+      4.3 Reject Path
+        - Generate detailed review report
+        - Do not update epic.md
+        - Wait for brownfield-tasks to fix then review again
+    - Check all DoD items one by one to ensure they are met
+    - Confirm all todo items are completed
 
 [DoD]
-  - [ ] 已識別任務領域並應用對應的領域特定審查標準
-  - [ ] 已根據領域特定的評分維度進行評分
-  - [ ] 已執行所有測試並記錄結果
-  - [ ] 已執行整合測試確認實作不影響原有程式碼並紀錄結果
-  - [ ] 已驗證測試結果與計畫對齊
-  - [ ] 程式碼對齊分析已完成，包含對計畫偏離的特定參照
-  - [ ] 所有必要章節已呈現：Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
-  - [ ] 測試失敗與計畫不對齊情況已清楚識別並優先化
-  - [ ] 已記錄驗收決策與基於測試結果及計畫遵循的理由
-  - [ ] 所有待辦項目已完成
+  - [ ] Task domain has been identified and corresponding domain-specific review criteria have been applied
+  - [ ] Scoring has been performed according to domain-specific scoring dimensions
+  - [ ] All tests have been executed and results recorded
+  - [ ] Integration tests have been executed to confirm implementation does not affect existing code and results recorded
+  - [ ] Test results have been verified to align with the plan
+  - [ ] Code alignment analysis is complete, including specific references to deviations from the plan
+  - [ ] All necessary sections are present: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
+  - [ ] Test failures and plan misalignments have been clearly identified and prioritized
+  - [ ] Acceptance decision has been recorded with rationale based on test results and plan adherence
+  - [ ] All todo items are completed

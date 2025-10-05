@@ -1,78 +1,77 @@
-[輸入]
-  1. {root}/sunnycore/templates/requirement-tmpl.yaml --需求模板
-  2. 用戶提供的初始想法與需求描述
+[Input]
+  1. {root}/sunnycore/templates/requirement-tmpl.yaml --Requirement template
+  2. User-provided initial ideas and requirement descriptions
 
-[輸出]
-  1. {root}/docs/requirements/*.md --完整需求規格（包含功能性需求、非功能性需求與驗收標準）
+[Output]
+  1. {root}/docs/requirements/*.md --Complete requirement specifications (including functional requirements, non-functional requirements, and acceptance criteria)
 
-[約束]
-  1. 每個需求必須可驗證且可衡量；不得使用模糊或主觀的措辭
-  2. 章節與欄位名稱必須與需求模板完全對齊
-  3. 範例中不得包含敏感或個人資料
-  4. 本工作流程透過結構化互動將初始想法轉換為完整、可測試的需求
-  5. 使用規範的需求模板確保一致性與可驗證性
+[Constraints]
+  1. Each requirement must be verifiable and measurable; vague or subjective wording is not allowed
+  2. Section and field names must align exactly with the requirement template
+  3. Examples must not contain sensitive or personal data
+  4. This workflow transforms initial ideas into complete, testable requirements through structured interaction
+  5. Use standardized requirement templates to ensure consistency and verifiability
 
-[工具]
+[Tools]
   1. **todo_write**
-    - [步驟1:創建任務清單;步驟2-4:追蹤任務進度]
+    - [Step 1: Create task list; Steps 2-4: Track task progress]
   2. **sequentialthinking (MCP)**
-    - [步驟1:結構化分解與反思性推理;步驟2:系統化分解複雜功能性需求;步驟3:跨領域系統化非功能性需求分析;步驟4:結構化Given-When-Then與驗證邏輯]
+    - [Step 1: Structured decomposition and reflective reasoning; Step 2: Systematically decompose complex functional requirements; Step 3: Cross-domain systematic non-functional requirement analysis; Step 4: Structured Given-When-Then and verification logic]
   3. **playwright_browser (MCP)**
-    - [步驟2:於需要時執行網頁研究以獲取需求範例]
+    - [Step 2: Conduct web research when needed to obtain requirement examples]
   4. **claude-context (MCP)**
-    - [步驟3:分段處理大型需求文件]
+    - [Step 3: Process large requirement documents in segments]
 
-[工具指引]
+[Tool Guidelines]
   1. **todo_write**
-    - 在初始階段創建待辦清單，包含所有主要任務
-    - 每完成一個步驟即更新對應待辦項目狀態為 completed
+    - Create a todo list in the initial phase, including all major tasks
+    - Update the status of each completed step to completed
   2. **sequentialthinking (MCP)**
-    - 簡單任務推理：1-3 totalThoughts
-    - 中等任務推理：3-5 totalThoughts
-    - 複雜任務推理：5-8 totalThoughts
-    - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
-    - 必須完成所有設定的推理步數
+    - Simple task reasoning: 1-3 totalThoughts
+    - Medium task reasoning: 3-5 totalThoughts
+    - Complex task reasoning: 5-8 totalThoughts
+    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
+    - Must complete all configured reasoning steps
   3. **playwright_browser (MCP)**
-    - 使用場景：需要參考業界標準或範例需求時
-    - 避免包含敏感或專有資訊
+    - Usage scenario: When referencing industry standards or example requirements
+    - Avoid including sensitive or proprietary information
   4. **claude-context (MCP)**
-    - 使用場景：當需求文件輸入超過 5000 tokens 或包含大量複雜內容需分段處理時
-    - 避免在內容已在記憶體且在 token 限制內時使用
+    - Usage scenario: When requirement document input exceeds 5000 tokens or contains large amounts of complex content requiring segmented processing
+    - Avoid using when content is already in memory and within token limits
 
-[步驟]
-  1. 初始化階段
-    - 閱讀所有工作步驟以理解預期工作
-    - 創建 todo list 以追蹤後續需求提取與撰寫任務
+[Steps]
+  1. Initialization Phase
+    - Read all workflow steps to understand expected work
+    - Create todo list to track subsequent requirement extraction and writing tasks
 
-  2. 功能性需求階段
-    - 從用戶輸入與上下文中提取功能性需求
-    - 去重與原子化陳述（單一可測試條件）
-    - 依照用戶故事或系統能力組織
+  2. Functional Requirements Phase
+    - Extract functional requirements from user input and context
+    - Deduplicate and atomize statements (single testable condition)
+    - Organize by user stories or system capabilities
 
-  3. 非功能性需求階段
-    - 識別跨效能、可靠性、安全性、合規性與可操作性的非功能性需求
-    - 量化目標（例如：P95 延遲、正常運行時間 SLO、RTO/RPO）與約束條件
-    - 將非功能性需求對應至監控/可觀測性信號（若相關）
+  3. Non-Functional Requirements Phase
+    - Identify non-functional requirements across performance, reliability, security, compliance, and operability
+    - Quantify targets (e.g., P95 latency, uptime SLO, RTO/RPO) and constraints
+    - Map non-functional requirements to monitoring/observability signals (if relevant)
 
-  4. 驗收標準階段
-    - 為每個需求定義驗收標準；確保具有確定性且可測試
-    - 使用 Given-When-Then 結構，包含輸入、前置條件與通過/失敗結果
-    - 驗證每個標準可以自動化或人工驗證，具有二元結果
+  4. Acceptance Criteria Phase
+    - Define acceptance criteria for each requirement; ensure deterministic and testable
+    - Use Given-When-Then structure, including inputs, preconditions, and pass/fail outcomes
+    - Verify each criterion can be automated or manually verified with binary results
 
-  5. 最終化階段
-    - 交叉檢查功能性需求、非功能性需求與驗收標準；請求用戶確認
-    - 填充需求模板並將產出寫入 {root}/docs/requirements.md
-    - 執行 uv run {root}/sunnycore/scripts/shard-requirements.py；若失敗，則記錄錯誤於 {root}/logs/errors.log（包含時間戳、錯誤類型、失敗原因、影響範圍）並通知用戶
-    - 逐項檢查所有 DoD 項目是否已滿足
-    - 確認所有待辦項目已完成
+  5. Finalization Phase
+    - Cross-check functional requirements, non-functional requirements, and acceptance criteria; request user confirmation
+    - Populate requirement template and write output to {root}/docs/requirements.md
+    - Execute uv run {root}/sunnycore/scripts/shard-requirements.py; if it fails, log the error to {root}/logs/errors.log (including timestamp, error type, failure reason, impact scope) and notify the user
+    - Check all DoD items one by one to ensure they are met
+    - Confirm all todo items are completed
 
 [DoD]
-  - [ ] 已閱讀並理解所有工作步驟
-  - [ ] 功能性需求已提取、去重與原子化
-  - [ ] 非功能性需求已識別並量化（包含效能、安全性、可靠性等）
-  - [ ] 每個需求都有對應的驗收標準（使用 Given-When-Then 結構）
-  - [ ] 內容為英文且使用編號清單
-  - [ ] 每個需求可衡量且可驗證
-  - [ ] 已執行 shard-requirements.py 或已記錄錯誤於 {root}/logs/errors.log 並通知用戶
-  - [ ] 已取得用戶對最終需求集的確認
-  - [ ] 所有待辦項目已完成
+  - [ ] Functional requirements have been extracted, deduplicated, and atomized
+  - [ ] Non-functional requirements have been identified and quantified (including performance, security, reliability, etc.)
+  - [ ] Each requirement has corresponding acceptance criteria (using Given-When-Then structure)
+  - [ ] Content is in English and uses numbered lists
+  - [ ] Each requirement is measurable and verifiable
+  - [ ] shard-requirements.py has been executed or errors have been logged to {root}/logs/errors.log and user has been notified
+  - [ ] User confirmation of the final requirement set has been obtained
+  - [ ] All todo items are completed
