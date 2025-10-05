@@ -7,6 +7,26 @@
 
 ## [Unreleased]
 
+## [1.8.0] - Claude code v1.8.0
+
+### Added
+- 新增專案初始化任務：新增 `init` 任務支援開發環境與專案文檔的自動初始化
+  - 新增 `claude code/tasks/init.md`：提供專案初始化的完整工作流程
+    * 環境初始化：自動設置開發環境（虛擬環境、工具鏈、數據庫、依賴套件）
+    * 文檔生成：創建 `{root}/CLAUDE.md` 專案指導文檔（包含技術棧、開發規範、需求概述、項目目標、文檔索引）
+    * 代碼庫索引：使用 claude-context (MCP) 工具建立代碼庫索引
+    * 環境驗證：確保所有工具已安裝且配置正確
+  - 更新 `claude code/commands/sunnycore_dev.md`：新增第 4 項自訂指令 `*init`
+  - 更新 `claude code/index.json`：註冊 init 任務及其與 dev agent 的關聯
+  - 版本號更新：claude-code.lock 從 1.7.39 升級至 1.8.0
+
+### Changed
+- 優化開發工作流程：在 README.md 中將 `init` 任務整合為階段二的第一步（步驟 4），確保開發環境在任務規劃前完成初始化
+  - Greenfield 流程：步驟 4 為 `/sunnycore_dev *init`，後續步驟順延（plan-tasks 為步驟 5、develop-tasks 為步驟 6、review 為步驟 7）
+  - Brownfield 流程：步驟 5 為 `/sunnycore_dev *init`，後續步驟順延（plan-tasks 為步驟 6、develop-tasks 為步驟 7、review 為步驟 8）
+  - 階段三步驟編號相應調整
+  - 更新流程圖以反映新的步驟順序
+
 ## [1.7.39] - Claude code v1.7.39
 
 ### Changed

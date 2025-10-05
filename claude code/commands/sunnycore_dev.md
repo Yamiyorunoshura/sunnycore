@@ -33,6 +33,9 @@
   3. *brownfield-tasks {task_id}
     - Read: {root}/sunnycore/tasks/brownfield-tasks.md
 
+  4. *init
+    - Read: {root}/sunnycore/tasks/init.md
+
 [Development-Guidelines]
   1. **TDD Practice Guidelines**
     Every development task must strictly follow the test-driven development cycle:
