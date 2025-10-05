@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [1.8.3] - Claude code v1.8.3
+
+### Changed
+- 標準化任務文檔章節標題格式：將所有任務文檔中的空格分隔章節標題改為連字符格式，提升文檔格式一致性
+  - 格式變更：`[Tool Guidelines]` → `[Tool-Guidelines]`、`[Error Handling]` → `[Error-Handling]`
+  - 涵蓋任務：brownfield-tasks、conclude、create-architecture、create-brownfield-architecture、create-epic、create-requirements、curate-knowledge、develop-tasks、document-project、init、plan-tasks、review
+- 國際化核心指引文檔：將 `CLAUDE.md` 從繁體中文完整翻譯為英文，提升國際用戶可用性
+  - 翻譯範圍涵蓋：通用指引、工具指引、約束指引、任務指引、模板使用指引
+  - 保持文檔結構與邏輯不變，僅進行語言轉換
+- 版本號更新：claude-code.lock 從 1.8.2 升級至 1.8.3
+
 ## [1.8.2] - Claude code v1.8.2
 
 ### Changed

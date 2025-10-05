@@ -22,7 +22,7 @@
   4. **claude-context (MCP)**
     - [Step 3: Process large requirement documents in segments]
 
-[Tool Guidelines]
+[Tool-Guidelines]
   1. **todo_write**
     - Create a todo list in the initial phase, including all major tasks
     - Update the status of each completed step to completed

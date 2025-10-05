@@ -25,7 +25,7 @@
   3. **context7 (MCP)**
     - [Step 2: Obtain external package and architecture pattern references]
 
-[Tool Guidelines]
+[Tool-Guidelines]
   1. **todo_write**
     - Create a todo list during requirement analysis phase, including all major tasks
     - Update the status of each completed step to completed
@@ -64,7 +64,7 @@
     - Check all DoD items one by one to ensure they are met
     - Confirm all todo items are completed
 
-[Error Handling]
+[Error-Handling]
   1. shard-architecture.py execution failure: Check if architecture.md format complies with template specifications, fix and re-execute
   2. Unresolvable requirement conflicts: Record conflicts and confirm with requirement authors, do not make assumptions
   3. Architecture design infeasibility: Record technical limitations and propose alternative solutions

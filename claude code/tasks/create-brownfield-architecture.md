@@ -24,7 +24,7 @@
   3. **claude-context (MCP)**
     - [Step 1: Evaluate existing architecture - handling large document collections]
 
-[Tool Guidelines]
+[Tool-Guidelines]
   1. **todo_write**
     - Create a todo list during evaluation phase, including all major tasks
     - Update the status of each completed step to completed

@@ -29,7 +29,7 @@
     - Prerequisite: Codebase has been indexed through index_codebase
     - Failure handling: If not indexed or search fails, switch to grep tool for keyword search, or annotate "Unable to locate code evidence" and continue execution
 
-[Tool Guidelines]
+[Tool-Guidelines]
   1. **todo_write**
     - Create a todo list in preparation phase, including all major tasks
     - Update the status of each completed step to completed

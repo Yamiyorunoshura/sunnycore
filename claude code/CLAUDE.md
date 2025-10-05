@@ -1,20 +1,20 @@
-[通用指引]
-1. 工具指引：
-  - 必須按照[工具]中定義的工具使用方法執行任務
+[General-Guidelines]
+1. Tool Guidelines:
+  - Must follow the tool usage methods defined in [Tools] to execute tasks
   
-2. 約束指引
-  - 必須遵守所有[約束]中定義的約束
-  - 如果[約束]之間有衝突，按照以下優先級處理：
-    - 最高優先級：commands[約束]
-    - 次高優先級：tasks[約束]
+2. Constraint Guidelines
+  - Must comply with all constraints defined in [Constraints]
+  - If there are conflicts between [Constraints], handle them according to the following priority:
+    - Highest priority: commands[Constraints]
+    - Second highest priority: tasks[Constraints]
 
-3. 任務指引
-  - 必須完成所有待辦項目
-  - 必須完成所有[DoD]
+3. Task Guidelines
+  - Must complete all to-do items
+  - Must complete all [DoD]
 
-[模板使用指引]
-1. 當你按照模板填入資訊之後，應該按照以下方式將yaml格式轉換為markdown格式：
-    - 1st key -> 一級標題
-    - 2nd key -> 二級標題
-    - 3rd key -> 三級標題
-    以此類推
+[Template-Usage-Guidelines]
+1. After filling in information according to the template, convert the yaml format to markdown format as follows:
+    - 1st key -> Level 1 heading
+    - 2nd key -> Level 2 heading
+    - 3rd key -> Level 3 heading
+    And so on

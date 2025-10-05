@@ -18,7 +18,7 @@
   2. **sequentialthinking (MCP)**
     - [Step 1: Analyze requirement complexity and task dependencies; Step 2: Design atomic tasks and logical grouping]
 
-[Tool Guidelines]
+[Tool-Guidelines]
   1. **todo_write**
     - Create a todo list during research phase, including all major tasks
     - Update the status of each completed step to completed

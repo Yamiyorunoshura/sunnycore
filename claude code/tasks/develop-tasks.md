@@ -24,7 +24,7 @@
   3. **claude-context (MCP)**
     - [Step 1: Process large implementation plans in segments]
 
-[Tool Guidelines]
+[Tool-Guidelines]
   1. **sequentialthinking (MCP)**
     - Simple task reasoning: 1-3 totalThoughts
     - Medium task reasoning: 3-5 totalThoughts

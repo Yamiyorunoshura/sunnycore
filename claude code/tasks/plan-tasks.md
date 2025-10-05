@@ -25,7 +25,7 @@
   3. **claude-context (MCP)**
     - [Step 1: Process large files in segments if needed]
 
-[Tool Guidelines]
+[Tool-Guidelines]
   1. **todo_write**
     - Create a todo list during setup phase, including all major tasks (Steps 1-5)
     - Update the status of each completed step to completed
