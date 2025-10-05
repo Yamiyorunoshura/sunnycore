@@ -91,6 +91,7 @@
   - [ ] Test results have been verified to align with the plan
   - [ ] Code alignment analysis is complete, including specific references to deviations from the plan
   - [ ] All necessary sections are present: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
+  - [ ] {root}/docs/epic.md has been updated with completion status and score
   - [ ] Test failures and plan misalignments have been clearly identified and prioritized
   - [ ] Acceptance decision has been recorded with rationale based on test results and plan adherence
   - [ ] All todo items are completed

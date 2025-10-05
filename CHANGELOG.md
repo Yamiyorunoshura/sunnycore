@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [1.8.5] - Claude code v1.8.5
+
+### Added
+- 強化審查流程追蹤機制：在 `review.md` 的 DoD 檢查清單中新增 epic 更新要求
+  - 新增檢查項目：「{root}/docs/epic.md has been updated with completion status and score」
+  - 確保審查完成後同步更新 epic 文檔的任務完成狀態與評分
+  - 提升專案進度追蹤的完整性與一致性
+
 ## [1.8.4] - Claude code v1.8.4
 
 ### Added
