@@ -161,6 +161,42 @@ bash scripts/sunnycore.sh -v warp-code -p ~/sunnycore -y
 
 ## 快速開始
 
+### Greenfield 專案（從零開始）
+
+1. **安裝 Sunnycore**
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash
+   ```
+
+2. **執行階段一：需求與架構**
+   - `/sunnycore_po *create-requirements` - 創建需求文檔
+   - `/sunnycore_pm *create-architecture` - 創建架構設計
+   - `/sunnycore_pm *create-epic` - 創建任務清單
+
+3. **執行階段二：開發迭代**
+   - `/sunnycore_dev *init` - 初始化開發環境（新功能！）
+   - `/sunnycore_pm *plan-tasks {task_id}` - 規劃任務
+   - `/sunnycore_dev *develop-tasks {task_id}` - 開發實作
+   - `/sunnycore_qa *review {task_id}` - 審查文檔
+
+4. **執行階段三：總結**
+   - `/sunnycore_po *conclude` - 總結文檔
+   - `/sunnycore_po *curate-knowledge` - 整理知識
+   - `/sunnycore_po *document-project` - 產出專案文件
+
+### Brownfield 專案（既有專案）
+
+1. **安裝 Sunnycore**（同上）
+
+2. **執行階段一：了解現有架構**
+   - `/sunnycore_po *create-requirements` - 創建新需求文檔
+   - `/sunnycore_pm *create-brownfield-architecture` - 分析現有架構
+   - `/sunnycore_pm *create-epic` - 創建任務清單
+
+3. **執行階段二：開發迭代**
+   - `/sunnycore_dev *init` - 初始化開發環境（新功能！）
+   - 後續步驟與 Greenfield 相同
+
 ## 技術特色
 
 - **Sequential Thinking**: 深度分析和規劃能力

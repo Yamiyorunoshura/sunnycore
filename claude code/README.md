@@ -16,23 +16,24 @@
 
 | 步驟 | 命令 | 說明 |
 |------|------|------|
-| 4 | `/sunnycore_pm *plan-tasks {task_id}` | 創建特定 task 的計劃文檔 |
-| 5 | `/sunnycore_dev *develop-tasks {task_id}` | 創建特定 task 的開發文檔 |
-| 6 | `/sunnycore_qa *review {task_id}` | 審查特定 task 的文檔 |
+| 4 | `/sunnycore_dev *init` | 初始化開發環境與專案文檔 |
+| 5 | `/sunnycore_pm *plan-tasks {task_id}` | 創建特定 task 的計劃文檔 |
+| 6 | `/sunnycore_dev *develop-tasks {task_id}` | 創建特定 task 的開發文檔 |
+| 7 | `/sunnycore_qa *review {task_id}` | 審查特定 task 的文檔 |
 
 **流程控制：**
 - ✅ **Review 通過**：檢查是否還有其他任務
-  - 有任務 → 回到步驟 4
+  - 有任務 → 回到步驟 5
   - 無任務 → 進入階段三
-- ❌ **Review 未通過**：使用 `/sunnycore_dev *brownfield-tasks {task_id}` 進行重開發，回到步驟 5
+- ❌ **Review 未通過**：使用 `/sunnycore_dev *brownfield-tasks {task_id}` 進行重開發，回到步驟 6
 
 ### 📊 階段三：總結與文檔化
 
 | 步驟 | 命令 | 說明 |
 |------|------|------|
-| 7 | `/sunnycore_po *conclude` | 總結文檔 |
-| 8 | `/sunnycore_po *curate-knowledge` | 整理知識文檔 |
-| 9 | `/sunnycore_po *document-project` | 產出專案架構文件 |
+| 8 | `/sunnycore_po *conclude` | 總結文檔 |
+| 9 | `/sunnycore_po *curate-knowledge` | 整理知識文檔 |
+| 10 | `/sunnycore_po *document-project` | 產出專案架構文件 |
 
 ## ⚙️ 配置說明
 
@@ -89,10 +90,11 @@ flowchart TD
     end
     
     subgraph Phase2 ["💻 階段二：開發迭代"]
-        B1["4️⃣ /sunnycore_pm<br/>*plan-tasks<br/>🗓️ 規劃任務"]
-        B2["5️⃣ /sunnycore_dev<br/>*develop-tasks<br/>⚙️ 開發實作"]
-        B3["6️⃣ /sunnycore_qa<br/>*review<br/>🔍 文件審查"]
-        B1 --> B2 --> B3
+        B0["4️⃣ /sunnycore_dev<br/>*init<br/>⚙️ 初始化專案"]
+        B1["5️⃣ /sunnycore_pm<br/>*plan-tasks<br/>🗓️ 規劃任務"]
+        B2["6️⃣ /sunnycore_dev<br/>*develop-tasks<br/>⚙️ 開發實作"]
+        B3["7️⃣ /sunnycore_qa<br/>*review<br/>🔍 文件審查"]
+        B0 --> B1 --> B2 --> B3
     end
     
     D1{"✅ Review<br/>通過?"}
@@ -100,15 +102,15 @@ flowchart TD
     R1["🔄 /sunnycore_dev<br/>*brownfield-tasks<br/>重新開發"]
     
     subgraph Phase3 ["📊 階段三：總結"]
-        C1["7️⃣ /sunnycore_po<br/>*conclude<br/>📋 總結文檔"]
-        C2["8️⃣ /sunnycore_po<br/>*curate-knowledge<br/>📚 整理知識"]
-        C3["9️⃣ /sunnycore_po<br/>*document-project<br/>📖 產出專案文件"]
+        C1["8️⃣ /sunnycore_po<br/>*conclude<br/>📋 總結文檔"]
+        C2["9️⃣ /sunnycore_po<br/>*curate-knowledge<br/>📚 整理知識"]
+        C3["🔟 /sunnycore_po<br/>*document-project<br/>📖 產出專案文件"]
         C1 --> C2 --> C3
     end
     
     Done([✨ 完成開發 Cycle])
     
-    A3 --> B1
+    A3 --> B0
     B3 --> D1
     D1 -->|"❌ 否"| R1
     R1 --> B2
@@ -146,23 +148,24 @@ flowchart TD
 
 | 步驟 | 命令 | 說明 |
 |------|------|------|
-| 5 | `/sunnycore_pm *plan-tasks {task_id}` | 創建特定 task 的計劃文檔 |
-| 6 | `/sunnycore_dev *develop-tasks {task_id}` | 創建特定 task 的開發文檔 |
-| 7 | `/sunnycore_qa *review {task_id}` | 審查特定 task 的文檔 |
+| 5 | `/sunnycore_dev *init` | 初始化開發環境與專案文檔 |
+| 6 | `/sunnycore_pm *plan-tasks {task_id}` | 創建特定 task 的計劃文檔 |
+| 7 | `/sunnycore_dev *develop-tasks {task_id}` | 創建特定 task 的開發文檔 |
+| 8 | `/sunnycore_qa *review {task_id}` | 審查特定 task 的文檔 |
 
 **流程控制：**
 - ✅ **Review 通過**：檢查是否還有其他任務
-  - 有任務 → 回到步驟 5
+  - 有任務 → 回到步驟 6
   - 無任務 → 進入階段三
-- ❌ **Review 未通過**：使用 `/sunnycore_dev *brownfield-tasks {task_id}` 進行重開發，回到步驟 6
+- ❌ **Review 未通過**：使用 `/sunnycore_dev *brownfield-tasks {task_id}` 進行重開發，回到步驟 7
 
 ### 📊 階段三：總結與文檔化
 
 | 步驟 | 命令 | 說明 |
 |------|------|------|
-| 8 | `/sunnycore_po *conclude` | 總結文檔 |
-| 9 | `/sunnycore_po *curate-knowledge` | 整理知識文檔 |
-| 10 | `/sunnycore_po *document-project` | 更新專案架構文件 |
+| 9 | `/sunnycore_po *conclude` | 總結文檔 |
+| 10 | `/sunnycore_po *curate-knowledge` | 整理知識文檔 |
+| 11 | `/sunnycore_po *document-project` | 更新專案架構文件 |
 
 ### 🔄 流程圖
 
@@ -179,10 +182,11 @@ flowchart TD
     end
     
     subgraph Phase2 ["💻 階段二：開發迭代"]
-        B1["5️⃣ /sunnycore_pm<br/>*plan-tasks<br/>🗓️ 規劃任務"]
-        B2["6️⃣ /sunnycore_dev<br/>*develop-tasks<br/>⚙️ 開發實作"]
-        B3["7️⃣ /sunnycore_qa<br/>*review<br/>🔍 文件審查"]
-        B1 --> B2 --> B3
+        B0["5️⃣ /sunnycore_dev<br/>*init<br/>⚙️ 初始化專案"]
+        B1["6️⃣ /sunnycore_pm<br/>*plan-tasks<br/>🗓️ 規劃任務"]
+        B2["7️⃣ /sunnycore_dev<br/>*develop-tasks<br/>⚙️ 開發實作"]
+        B3["8️⃣ /sunnycore_qa<br/>*review<br/>🔍 文件審查"]
+        B0 --> B1 --> B2 --> B3
     end
     
     D1{"✅ Review<br/>通過?"}
@@ -190,15 +194,15 @@ flowchart TD
     R1["🔄 /sunnycore_dev<br/>*brownfield-tasks<br/>重新開發"]
     
     subgraph Phase3 ["📊 階段三：總結"]
-        C1["8️⃣ /sunnycore_po<br/>*conclude<br/>📋 總結文檔"]
-        C2["9️⃣ /sunnycore_po<br/>*curate-knowledge<br/>📚 整理知識"]
-        C3["🔟 /sunnycore_po<br/>*document-project<br/>📖 更新專案文件"]
+        C1["9️⃣ /sunnycore_po<br/>*conclude<br/>📋 總結文檔"]
+        C2["🔟 /sunnycore_po<br/>*curate-knowledge<br/>📚 整理知識"]
+        C3["1️⃣1️⃣ /sunnycore_po<br/>*document-project<br/>📖 更新專案文件"]
         C1 --> C2 --> C3
     end
     
     Done([✨ 完成開發 Cycle])
     
-    A3 --> B1
+    A3 --> B0
     B3 --> D1
     D1 -->|"❌ 否"| R1
     R1 --> B2
