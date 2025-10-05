@@ -16,10 +16,8 @@
 
 [工具]
   1. **todo_write**
-    - [步驟1:創建任務清單]
-    - [步驟2:追蹤任務進度]
-    - [步驟3:追蹤任務進度]
-  2. **sequentialthinking**
+    - [步驟1:創建任務清單;步驟2-3:追蹤任務進度]
+  2. **sequentialthinking (MCP)**
     - [步驟2:內容整合與文件撰寫的推理任務]
 
 [工具指引]
@@ -27,7 +25,7 @@
     - 在分析階段創建待辦清單，包含所有主要任務
     - 每完成一個步驟即更新對應待辦項目狀態為 completed
     - 狀態閘門：僅允許單一任務為 in_progress；完成後立即標記 completed
-  2. **sequentialthinking**
+  2. **sequentialthinking (MCP)**
     - 簡單任務推理：1-3 totalThoughts
     - 中等任務推理：3-5 totalThoughts
     - 複雜任務推理：5-8 totalThoughts

@@ -14,18 +14,17 @@
   4. 若發現矛盾的實踐建議，應標註衝突並保留所有證據來源以供後續決策
 
 [工具]
-  1. **sequentialthinking**
+  1. **sequentialthinking (MCP)**
     - [步驟2:推理知識庫組織架構]
-  2. **claude-context**
+  2. **claude-context (MCP)**
     - [步驟2:尋找相關程式碼]
     - 使用場景：需要從程式碼中驗證或補充文檔中提到的技術細節時
   3. **todo_write**
-    - [步驟2:創建任務清單、追蹤任務進度]
-    - [步驟3:追蹤任務進度]
+    - [步驟2:創建任務清單;步驟3-4:追蹤任務進度]
     - 使用場景：在準備階段創建待辦清單，追蹤任務進度
 
 [工具指引]
-  1. **sequentialthinking**
+  1. **sequentialthinking (MCP)**
     - 簡單任務推理：1-3 totalThoughts
     - 中等任務推理：3-5 totalThoughts
     - 複雜任務推理：5-8 totalThoughts
@@ -34,7 +33,7 @@
     - 參數說明：
       * totalThoughts (number): 預估推理步數，可依實際需求調整
       * nextThoughtNeeded (boolean): 是否需要繼續推理，完成所有步驟後設為 false
-  2. **claude-context**
+  2. **claude-context (MCP)**
     - 使用場景：需要定位特定實作細節或驗證技術決策時
     - 使用前提：程式碼庫已通過 index_codebase 索引
     - 操作指引：搜尋語句應包含技術關鍵詞+情境描述，例如：「錯誤處理機制的實作方式」

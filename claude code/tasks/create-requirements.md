@@ -14,32 +14,28 @@
 
 [工具]
   1. **todo_write**
-    - [步驟1:創建任務清單]
-    - [步驟2-4:追蹤任務進度]
-  2. **sequentialthinking**
-    - [步驟1:結構化分解與反思性推理]
-    - [步驟2:系統化分解複雜功能性需求]
-    - [步驟3:跨領域系統化非功能性需求分析]
-    - [步驟4:結構化Given-When-Then與驗證邏輯]
-  3. **playwright_browser**
+    - [步驟1:創建任務清單;步驟2-4:追蹤任務進度]
+  2. **sequentialthinking (MCP)**
+    - [步驟1:結構化分解與反思性推理;步驟2:系統化分解複雜功能性需求;步驟3:跨領域系統化非功能性需求分析;步驟4:結構化Given-When-Then與驗證邏輯]
+  3. **playwright_browser (MCP)**
     - [步驟2:於需要時執行網頁研究以獲取需求範例]
-  4. **claude-context**
+  4. **claude-context (MCP)**
     - [步驟3:分段處理大型需求文件]
 
 [工具指引]
   1. **todo_write**
     - 在初始階段創建待辦清單，包含所有主要任務
     - 每完成一個步驟即更新對應待辦項目狀態為 completed
-  2. **sequentialthinking**
+  2. **sequentialthinking (MCP)**
     - 簡單任務推理：1-3 totalThoughts
     - 中等任務推理：3-5 totalThoughts
     - 複雜任務推理：5-8 totalThoughts
     - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
     - 必須完成所有設定的推理步數
-  3. **playwright_browser**
+  3. **playwright_browser (MCP)**
     - 使用場景：需要參考業界標準或範例需求時
     - 避免包含敏感或專有資訊
-  4. **claude-context**
+  4. **claude-context (MCP)**
     - 使用場景：當需求文件輸入超過 5000 tokens 或包含大量複雜內容需分段處理時
     - 避免在內容已在記憶體且在 token 限制內時使用
 
