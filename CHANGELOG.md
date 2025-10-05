@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [1.8.4] - Claude code v1.8.4
+
+### Added
+- 強化文檔化任務功能：在 `document-project.md` 中新增知識庫整合與專案指引自動更新機制
+  - 新增輸入源：`{root}/docs/knowledge/*.md` 知識庫文檔作為文檔化參考
+  - 新增輸出項：`{root}/CLAUDE.md` 專案指引文檔的文檔索引自動更新
+  - 新增約束條款：「必須在創建架構文檔後更新 {root}/CLAUDE.md 的 Document Index 章節」
+  - 新增 DoD 檢查項目：「{root}/CLAUDE.md Document Index 章節已更新並包含新創建的架構文檔」
+  - 優化 Steps：在 Sharding and Finalization Phase 新增「更新 CLAUDE.md 文檔索引」步驟
+  - 提升文檔化流程完整性與專案指引同步性
+
 ## [1.8.3] - Claude code v1.8.3
 
 ### Changed
