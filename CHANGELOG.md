@@ -7,6 +7,26 @@
 
 ## [Unreleased]
 
+## [1.8.1] - Claude code v1.8.1
+
+### Changed
+- 優化任務流程控制：在 `develop-tasks.md`、`brownfield-tasks.md`、`review.md` 中新增詳細的條件分支流程（if-then-else），提升流程清晰度與錯誤處理能力
+  - develop-tasks.md：
+    * 移除「3次嘗試後升級」的失敗處理約束
+    * 新增 RED 階段條件分支（測試正確失敗 vs 測試部分通過路徑）
+    * 新增 GREEN 階段條件分支（測試全部通過 vs 測試部分失敗路徑）
+    * 新增 REFACTOR 階段條件分支（重構後測試通過 vs 失敗路徑）
+  - brownfield-tasks.md：
+    * 新增修復階段的測試通過/失敗分支流程
+    * 詳細定義測試失敗後的回退與重試機制
+  - review.md：
+    * 優化約束描述，明確「嚴格遵循」的檢查重點與範圍
+    * 增強工具指引的使用場景說明（claude-context 使用時機、todo_write 更新頻率）
+    * 新增審查程式碼階段的測試通過/失敗分支流程（2.1 vs 2.2）
+    * 新增產出結果階段的決策分支流程（Accept/Accept with changes/Reject 路徑）
+- 統一文檔命名：修正 README.md 中的命令參考，將 `*create-brownfield-epic` 統一改為 `*create-epic`
+- 版本號更新：claude-code.lock 從 1.8.0 升級至 1.8.1
+
 ## [1.8.0] - Claude code v1.8.0
 
 ### Added

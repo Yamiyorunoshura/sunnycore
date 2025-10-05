@@ -142,7 +142,7 @@ flowchart TD
 | 1 | `/sunnycore_po *document-project` | 確保專案架構文件是最新的 |
 | 2 | `/sunnycore_pm *create-brownfield-requirements` | 互動式創建需求文檔 |
 | 3 | `/sunnycore_pm *create-brownfield-architecture` | 互動式創建架構文檔 |
-| 4 | `/sunnycore_pm *create-brownfield-epic` | 互動式創建任務文檔 |
+| 4 | `/sunnycore_pm *create-epic` | 互動式創建任務文檔 |
 
 ### 💻 階段二：開發迭代
 
@@ -177,7 +177,7 @@ flowchart TD
         A0["1️⃣ /sunnycore_po<br/>*document-project<br/>📖 更新專案文件"]
         A1["2️⃣ /sunnycore_pm<br/>*create-brownfield-requirements<br/>📝 建立需求"]
         A2["3️⃣ /sunnycore_pm<br/>*create-brownfield-architecture<br/>🏗️ 建立架構"]
-        A3["4️⃣ /sunnycore_pm<br/>*create-brownfield-epic<br/>📌 建立任務"]
+        A3["4️⃣ /sunnycore_pm<br/>*create-epic<br/>📌 建立任務"]
         A0 --> A1 --> A2 --> A3
     end
     
