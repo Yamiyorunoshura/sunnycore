@@ -1,10 +1,12 @@
 [Input]
   1. {root}/docs/architecture/*.md --Existing architecture documents (as context)
   2. {root}/sunnycore/templates/concluded-architecture-tmpl.yaml --Architecture document template
+  3. {root}/docs/knowledge/*.md --Knowledge base
 
 [Output]
   1. {root}/docs/architecture/*.md --Architecture documents (Markdown format)
-  2. JSON format output results (including files array and shards_created count)
+  2. {root}/CLAUDE.md --Updated project guidance document with refreshed document index
+  3. JSON format output results (including files array and shards_created count)
 
 [Constraints]
   1. Must produce valid JSON that fully complies with schema (additionalProperties=false)
@@ -13,6 +15,7 @@
   4. Every produced document must correspond to at least 1 source reference (source_refs)
   5. Can include architecture diagrams in Markdown documents as fenced code blocks
   6. All file paths must be under docs/architecture/ with .md extension
+  7. Must update the Document Index section in {root}/CLAUDE.md after creating architecture documents
 
 [Tools]
   1. **todo_write**
@@ -51,6 +54,7 @@
 
   3. Sharding and Finalization Phase
     - Execute {root}/sunnycore/scripts/shard-architecture.py and record shards_created count
+    - Update Document Index section in {root}/CLAUDE.md with newly created architecture documents (including path and purpose of each document)
     - Verify generated JSON complies with schema; if violations exist, should fix immediately
     - Only produce final JSON, without any explanatory text
     - Check all DoD items one by one to ensure they are met
@@ -64,5 +68,6 @@
   - [ ] Each produced document includes at least 1 source reference (source_refs)
   - [ ] All file paths are under docs/architecture/ with .md extension
   - [ ] shard-architecture.py has been executed and shards_created recorded
+  - [ ] {root}/CLAUDE.md Document Index section has been updated with newly created architecture documents
   - [ ] Generated JSON complies with schema (no additionalProperties violations)
   - [ ] Final production includes only JSON, no additional explanatory text
