@@ -7,6 +7,21 @@
 
 ## [Unreleased]
 
+## [1.7.38] - Claude code v1.7.38
+
+### Changed
+- 標準化任務提示詞語言風格：重寫 12 個核心任務文件，統一指令性語言與動詞使用
+  - 指令性語言標準化：「你需要」→「必須」、「你必須」→「必須」，完全去除「你」作為主詞
+  - 動詞使用統一：
+    * 創建類：統一使用「創建」（不用「建立」）、「產生」（不用「產出」）
+    * 執行類：統一使用「執行」（不用「運行」）、「檢視」（不用「查看」）
+    * 整合類：統一使用「整合」（不用「組裝」）
+  - 句式標準化：
+    * 條件分支：「若X則Y」→「若X，則Y」（統一標點使用）
+    * 步驟動作：增加目的性說明（「閱讀X並理解Y」、「閱讀X以Y」）
+  - 涵蓋任務：brownfield-tasks、conclude、create-architecture、create-brownfield-architecture、create-epic、create-requirements、curate-knowledge、develop-tasks、document-project、plan-tasks、review
+  - 提升文檔專業性、一致性與可讀性
+
 ## [1.7.37] - Claude code v1.7.37
 
 ### Added

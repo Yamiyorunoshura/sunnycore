@@ -35,7 +35,7 @@
     - 中等任務推理：3-5 totalThoughts
     - 複雜任務推理：5-8 totalThoughts
     - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
-    - 你必須完成所有設定的推理步數
+    - 必須完成所有設定的推理步數
   3. **playwright_browser**
     - 使用場景：需要參考業界標準或範例需求時
     - 避免包含敏感或專有資訊
@@ -46,7 +46,7 @@
 [步驟]
   1. 初始化階段
     - 閱讀所有工作步驟以理解預期工作
-    - 創建todo list追蹤後續需求提取與撰寫任務
+    - 創建 todo list 以追蹤後續需求提取與撰寫任務
 
   2. 功能性需求階段
     - 從用戶輸入與上下文中提取功能性需求
@@ -65,8 +65,8 @@
 
   5. 最終化階段
     - 交叉檢查功能性需求、非功能性需求與驗收標準；請求用戶確認
-    - 填充需求模板並將輸出寫入 {root}/docs/requirements.md
-    - 執行 "uv run {root}/sunnycore/scripts/shard-requirements.py"；若失敗則記錄錯誤於 {root}/logs/errors.log（包含時間戳、錯誤類型、失敗原因、影響範圍）並通知用戶
+    - 填充需求模板並將產出寫入 {root}/docs/requirements.md
+    - 執行 uv run {root}/sunnycore/scripts/shard-requirements.py；若失敗，則記錄錯誤於 {root}/logs/errors.log（包含時間戳、錯誤類型、失敗原因、影響範圍）並通知用戶
     - 逐項檢查所有 DoD 項目是否已滿足
     - 確認所有待辦項目已完成
 
