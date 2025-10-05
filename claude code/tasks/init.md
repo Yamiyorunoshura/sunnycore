@@ -1,69 +1,69 @@
-[輸入]
-  1. {root}/docs/architecture/*.md --架構設計文檔（提取技術棧、開發環境需求）
-  2. {root}/docs/requirements/*.md --專案需求文檔
-  3. {root}/docs/epic.md --任務清單
+[Input]
+  1. {root}/docs/architecture/*.md --Architecture design documents (extract technology stack, development environment requirements)
+  2. {root}/docs/requirements/*.md --Project requirement documents
+  3. {root}/docs/epic.md --Task list
 
-[輸出]
-  1. {root}/CLAUDE.md --專案指導文檔（包含技術棧、開發規範、需求概述、項目目標、文檔索引）
-  2. 初始化的開發環境（如虛擬環境、數據庫、工具鏈等）
+[Output]
+  1. {root}/CLAUDE.md --Project guidance document (including technology stack, development standards, requirement overview, project goals, document index)
+  2. Initialized development environment (such as virtual environment, database, toolchain, etc.)
 
-[約束]
-  1. 必須從架構文檔中提取所有技術棧和環境需求
-  2. 必須創建文檔索引以方便後續開發查找架構和需求文檔
-  3. 環境初始化必須基於架構文檔中的明確需求，不得自行添加未定義的工具或配置
-  4. {root}/CLAUDE.md 必須包含完整的技術資訊、需求概述、項目目標和文檔索引
+[Constraints]
+  1. Must extract all technology stack and environment requirements from architecture documents
+  2. Must create document index for convenient lookup of architecture and requirement documents during subsequent development
+  3. Environment initialization must be based on explicit requirements in architecture documents, do not add undefined tools or configurations
+  4. {root}/CLAUDE.md must include complete technical information, requirement overview, project goals, and document index
 
-[工具]
+[Tools]
   1. **todo_write**
-    - [步驟1:創建待辦清單;步驟2-4:追蹤執行進度]
+    - [Step 1: Create todo list; Steps 2-4: Track execution progress]
   2. **claude-context (MCP)**
-    - [步驟2:為代碼庫建立索引]
+    - [Step 2: Build index for codebase]
 
-[工具指引]
+[Tool Guidelines]
   1. **todo_write**
-    - 在準備階段創建待辦清單，包含所有主要任務（步驟1-4）
-    - 每完成一個步驟即更新對應待辦項目狀態為 completed
-    - 不用於儲存操作性動作；任務保持高層級
+    - Create a todo list during preparation phase, including all major tasks (Steps 1-4)
+    - Update the status of each completed step to completed
+    - Not used for storing operational actions; tasks remain high-level
   2. **claude-context (MCP)**
-    - 為代碼庫建立索引：index_codebase
-    - 尋找相關程式碼：search_code
-    - 產出時標註來源文件與行號，以利後續稽核（對應 evidence）
+    - Build index for codebase: index_codebase
+    - Find relevant code: search_code
+    - When producing output, annotate source documents and line numbers for subsequent auditing (corresponding to evidence)
 
-[步驟]
-  1. 準備階段
-    - 閱讀所有架構、需求和任務文檔
-    - 識別所需的技術棧和開發環境配置
-    - 創建 todo list 以追蹤步驟2-4的執行進度
+[Steps]
+  1. Preparation Phase
+    - Read all architecture, requirement, and task documents
+    - Identify required technology stack and development environment configuration
+    - Create todo list to track execution progress of Steps 2-4
 
-  2. 環境初始化階段
-    - 根據架構文檔設置開發環境
-      * 創建虛擬環境（如 Python venv、Node.js 環境等）
-      * 安裝必要的工具鏈（如編譯器、套件管理器等）
-      * 配置數據庫（如 PostgreSQL、Redis 等）
-      * 安裝項目依賴套件
-    - 驗證環境配置正確性
-    - 記錄任何環境配置問題或依賴衝突
-    - 為代碼庫建立索引
+  2. Environment Initialization Phase
+    - Set up development environment according to architecture documents
+      * Create virtual environment (such as Python venv, Node.js environment, etc.)
+      * Install necessary toolchain (such as compilers, package managers, etc.)
+      * Configure databases (such as PostgreSQL, Redis, etc.)
+      * Install project dependencies
+    - Verify environment configuration correctness
+    - Record any environment configuration issues or dependency conflicts
+    - Build index for codebase
 
-  3. 文檔生成階段
-    - 創建 {root}/CLAUDE.md 專案指導文檔
-    - 包含以下章節：
-      * 技術棧：從架構文檔提取的技術選型
-      * 開發規範：編碼風格、測試要求等
-      * 需求概述：從需求文檔提取的核心需求摘要
-      * 項目目標：專案的主要目標和成功標準
-      * 文檔索引：列出所有架構和需求文檔的位置和用途
-    - 確保文檔格式清晰易讀
+  3. Document Generation Phase
+    - Create {root}/CLAUDE.md project guidance document
+    - Include the following sections:
+      * Technology Stack: Technology selections extracted from architecture documents
+      * Development Standards: Coding style, testing requirements, etc.
+      * Requirement Overview: Core requirement summary extracted from requirement documents
+      * Project Goals: Main goals and success criteria of the project
+      * Document Index: List locations and purposes of all architecture and requirement documents
+    - Ensure document format is clear and readable
 
-  4. 驗證階段
-    - 確認開發環境已成功初始化並可用
-    - 驗證 {root}/CLAUDE.md 已創建且包含完整資訊
-    - 逐項檢查所有 DoD 項目是否已滿足
-    - 確認所有待辦項目已完成
+  4. Verification Phase
+    - Confirm development environment has been successfully initialized and is usable
+    - Verify {root}/CLAUDE.md has been created and contains complete information
+    - Check all DoD items one by one to ensure they are met
+    - Confirm all todo items are completed
 
 [DoD]
-  - [ ] 已閱讀所有架構、需求和任務文檔
-  - [ ] 開發環境已初始化並可用（所有必要工具已安裝且配置正確）
-  - [ ] 代碼庫已建立索引
-  - [ ] {root}/CLAUDE.md 已創建且包含所有必須章節
-  - [ ] 所有待辦項目已完成
+  - [ ] All architecture, requirement, and task documents have been read
+  - [ ] Development environment has been initialized and is usable (all necessary tools are installed and configured correctly)
+  - [ ] Codebase index has been built
+  - [ ] {root}/CLAUDE.md has been created and includes all required sections
+  - [ ] All todo items are completed

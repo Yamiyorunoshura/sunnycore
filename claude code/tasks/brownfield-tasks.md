@@ -1,75 +1,75 @@
-[輸入]
-  1. {root}/sunnycore/templates/dev-notes-tmpl.yaml --開發筆記模板
-  2. {root}/docs/dev-notes/{task_id}-dev-notes.md --開發筆記
-  3. {root}/docs/review-results/{task_id}-review.md --審查報告
-  4. {root}/docs/architecture/*.md --架構設計
+[Input]
+  1. {root}/sunnycore/templates/dev-notes-tmpl.yaml --Development notes template
+  2. {root}/docs/dev-notes/{task_id}-dev-notes.md --Development notes
+  3. {root}/docs/review-results/{task_id}-review.md --Review report
+  4. {root}/docs/architecture/*.md --Architecture design
 
-[輸出]
-  1. 修復過後可正常運行的程式碼
-  2. 修復總結（建議使用 MARKDOWN 呈現，包含：changes、tests、evidence、risk、rollback；建議格式，可根據專案需求調整）
-  3. 更新後的開發筆記{root}/docs/dev-notes/{task_id}-dev-notes.md
+[Output]
+  1. Fixed code that runs properly
+  2. Fix summary (recommend presenting in MARKDOWN, including: changes, tests, evidence, risk, rollback; suggested format, can be adjusted according to project needs)
+  3. Updated development notes {root}/docs/dev-notes/{task_id}-dev-notes.md
 
-[約束]
-  1. 必須確保修復後的程式碼正常運行
-  2. 必須確保修復後的程式碼符合架構設計
-  3. 必須確保修復後的程式碼不破壞原有功能
+[Constraints]
+  1. Must ensure fixed code runs properly
+  2. Must ensure fixed code complies with architecture design
+  3. Must ensure fixed code does not break existing functionality
 
-[工具]
+[Tools]
   1. **todo_write**
-    - [步驟2-4:追蹤任務進度]（詳見工具指引）
+    - [Steps 2-4: Track task progress] (see Tool Guidelines for details)
   2. **sequentialthinking (MCP)**
-    - [步驟1:所有推理任務;步驟2:程式碼修復推理任務]
+    - [Step 1: All reasoning tasks; Step 2: Code fix reasoning tasks]
   3. **claude-context (MCP)**
-    - [步驟1:尋找相關程式碼]
-    - [步驟2:尋找相關程式碼]
+    - [Step 1: Find relevant code]
+    - [Step 2: Find relevant code]
 
-[工具指引]
+[Tool Guidelines]
   1. **sequentialthinking**
-    - 簡單任務推理：1-3 totalThoughts
-    - 中等任務推理：3-5 totalThoughts
-    - 複雜任務推理：5-8 totalThoughts
-    - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
-    - 必須完成所有設定的推理步數
+    - Simple task reasoning: 1-3 totalThoughts
+    - Medium task reasoning: 3-5 totalThoughts
+    - Complex task reasoning: 5-8 totalThoughts
+    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
+    - Must complete all configured reasoning steps
   2. **claude-context**
-    - 尋找相關程式碼：search_code
-    - 產出時標註來源文件與行號，以利後續稽核（對應 evidence）
+    - Find relevant code: search_code
+    - When producing output, annotate source documents and line numbers for subsequent auditing (corresponding to evidence)
   3. **todo_write**
-    - 狀態閘門：僅允許單一任務為 in_progress；完成後立即標記 completed；取消需註記理由
-    - 更新節點：每完成可驗收步驟（如建立檔案、通過測試）即時更新狀態
+    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion; cancellations need reason annotation
+    - Update node: Update status in real-time after completing each deliverable step (such as creating files, passing tests)
 
-[步驟]
-  1. 準備階段
-    - 閱讀審查報告並理解問題所在
-    - 閱讀架構設計以對齊整體方向
-    - 閱讀開發筆記與實際程式碼以思考問題所在
-    - 結合架構與程式碼制定原子化的修復任務
+[Steps]
+  1. Preparation Phase
+    - Read review report and understand the issues
+    - Read architecture design to align with overall direction
+    - Read development notes and actual code to think about where the issues are
+    - Combine architecture and code to formulate atomic fix tasks
 
-  2. 修復階段
-    - 創建 todo list 以追蹤修復進度（依狀態閘門更新，詳見工具指引）
-    - 每次程式碼修復後應執行測試以確保未引入新問題（例如：pytest -q 或 make test；以全部通過為準）
-    - if 測試通過（退出碼=0）then 2.1, else 2.2
-      2.1. 測試通過路徑
-        - 繼續下一個修復任務
-        - 或進入整合測試
-      2.2. 測試失敗路徑
-        - 使用 git reset 或手動撤銷最近變更
-        - 重新分析失敗原因
-        - 修正後重新執行測試
-        - 重複此流程直到測試通過
-    - 完成所有修復後應執行整合測試（如：pytest tests/integration, make test-integration, 或其他程式語言或專案的整合測試指令；同樣以測試全部通過為準）
+  2. Fix Phase
+    - Create todo list to track fix progress (update according to state gate, see Tool Guidelines for details)
+    - After each code fix, tests should be executed to ensure no new issues are introduced (e.g., pytest -q or make test; all must pass)
+    - if tests pass (exit code=0) then 2.1, else 2.2
+      2.1. Tests Pass Path
+        - Continue with next fix task
+        - Or enter integration testing
+      2.2. Tests Fail Path
+        - Use git reset or manually undo recent changes
+        - Re-analyze failure reasons
+        - Fix and re-execute tests
+        - Repeat this process until tests pass
+    - After completing all fixes, integration tests should be executed (such as: pytest tests/integration, make test-integration, or integration test commands for other programming languages or projects; all tests must also pass)
 
-  3. 總結階段
-    - 總結修復過程與結果（應附帶文件路徑與行號/段落ID作為證據；若為版控專案，應附PR/commit連結；對應『修復總結』的 evidence 欄位，便於稽核）
-    - 依照模板將總結寫入或更新至對應開發筆記
+  3. Summary Phase
+    - Summarize the fix process and results (should include document paths and line numbers/paragraph IDs as evidence; for version control projects, should include PR/commit links; corresponding to the evidence field of "Fix Summary" for auditing purposes)
+    - Write or update the summary to the corresponding development notes according to the template
 
-  4. DoD 驗證階段
-    - 逐項檢查所有 DoD 項目是否已滿足
-    - 確認所有 todo 項目已完成
+  4. DoD Verification Phase
+    - Check all DoD items one by one to ensure they are met
+    - Confirm all todo items are completed
 
 [DoD]
-  - [ ] 所有單元測試已通過
-  - [ ] 所有整合測試已通過
-  - [ ] 修復總結已產生並包含 changes/tests/evidence/risk/rollback
-  - [ ] 修復後的程式碼符合架構設計
-  - [ ] 開發筆記已更新並產生
-  - [ ] 所有待辦項目已完成
+  - [ ] All unit tests have passed
+  - [ ] All integration tests have passed
+  - [ ] Fix summary has been generated and includes changes/tests/evidence/risk/rollback
+  - [ ] Fixed code complies with architecture design
+  - [ ] Development notes have been updated and generated
+  - [ ] All todo items are completed

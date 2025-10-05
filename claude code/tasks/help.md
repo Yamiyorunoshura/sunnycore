@@ -1,6 +1,6 @@
-[步驟]
-  1. 回應用戶
-    - 顯示可用自定義指令
+[Steps]
+  1. Respond to User
+    - Display available custom commands
 
 [DoD]
-  - [ ] 已顯示可用自定義指令清單
+  - [ ] Available custom command list has been displayed

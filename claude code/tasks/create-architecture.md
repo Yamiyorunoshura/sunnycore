@@ -1,79 +1,79 @@
-[輸入]
-  1. {root}/docs/requirements/*.md --權威專案需求
-  2. {root}/sunnycore/scripts/shard-architecture.py --架構分片腳本
-  3. {root}/sunnycore/templates/architecture-tmpl.yaml --規範架構模板
+[Input]
+  1. {root}/docs/requirements/*.md --Authoritative project requirements
+  2. {root}/sunnycore/scripts/shard-architecture.py --Architecture sharding script
+  3. {root}/sunnycore/templates/architecture-tmpl.yaml --Standardized architecture template
 
-[輸出]
-  1. {root}/docs/architecture/ 目錄下的架構文件集（*.md 格式）
-  2. 最小預期文件範例（可根據專案複雜度產出更多分類文件）：
+[Output]
+  1. Architecture document collection under {root}/docs/architecture/ directory (*.md format)
+  2. Minimum expected files example (more classification files can be produced based on project complexity):
     - {root}/docs/architecture/overview.md
     - {root}/docs/architecture/components.md
     - {root}/docs/architecture/traceability_matrix.md
 
-[約束]
-  1. 必須在架構設計前驗證 {root}/docs/requirements/*.md 存在且完整；若發現需求不完整或存在衝突，應記錄問題並與需求制定者確認，不得自行臆測
-  2. 必須創建明確的需求至架構對應關係，涵蓋功能性與非功能性需求（對應係指需求 ID 明確關聯至特定元件名稱或設計決策編號）
-  3. 必須驗證每個需求都有對應的架構元件或設計決策
-  4. 必須使用規範模板撰寫 {root}/docs/architecture.md；嚴格保留章節順序與 2 空格縮排；不得引入不存在的路徑
-  5. 草擬完成後，必須執行 'uv run {root}/sunnycore/scripts/shard-architecture.py' 並驗證產出物出現在 {root}/docs/architecture/ 下
+[Constraints]
+  1. Must verify that {root}/docs/requirements/*.md exists and is complete before architecture design; if requirements are incomplete or contain conflicts, record the issues and confirm with requirement authors, do not make assumptions
+  2. Must create explicit requirement-to-architecture mapping relationships covering functional and non-functional requirements (mapping means requirement ID explicitly links to specific component names or design decision numbers)
+  3. Must verify that each requirement has corresponding architecture components or design decisions
+  4. Must use the standardized template to write {root}/docs/architecture.md; strictly preserve section order and 2-space indentation; do not introduce non-existent paths
+  5. After drafting is complete, must execute 'uv run {root}/sunnycore/scripts/shard-architecture.py' and verify output appears under {root}/docs/architecture/
 
-[工具]
+[Tools]
   1. **todo_write**
-    - [步驟1:追蹤與更新執行任務;步驟2-4:追蹤撰寫進度與結果]
+    - [Step 1: Track and update execution tasks; Steps 2-4: Track writing progress and results]
   2. **sequentialthinking (MCP)**
-    - [步驟1:分解需求並識別架構模式;步驟2:架構系統元件並驗證設計決策;步驟3:結構化草擬與驗證步驟;步驟4:執行最終驗證序列]
+    - [Step 1: Decompose requirements and identify architecture patterns; Step 2: Architect system components and verify design decisions; Step 3: Structured drafting and verification steps; Step 4: Execute final verification sequence]
   3. **context7 (MCP)**
-    - [步驟2:取得外部套件與架構模式參考]
+    - [Step 2: Obtain external package and architecture pattern references]
 
-[工具指引]
+[Tool Guidelines]
   1. **todo_write**
-    - 在需求分析階段創建待辦清單，包含所有主要任務
-    - 每完成一個步驟即更新對應待辦項目狀態為 completed
-    - 狀態閘門：僅允許單一任務為 in_progress；完成後立即標記 completed
+    - Create a todo list during requirement analysis phase, including all major tasks
+    - Update the status of each completed step to completed
+    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
   2. **sequentialthinking**
-    - 簡單任務推理：1-3 totalThoughts
-    - 中等任務推理：3-5 totalThoughts
-    - 複雜任務推理：5-8 totalThoughts
-    - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
-    - 必須完成所有設定的推理步數
+    - Simple task reasoning: 1-3 totalThoughts
+    - Medium task reasoning: 3-5 totalThoughts
+    - Complex task reasoning: 5-8 totalThoughts
+    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
+    - Must complete all configured reasoning steps
   3. **context7**
-    - 使用場景：尋找特定領域的最佳實踐或可用於研究特定技術棧或設計模式
-    - 用於尋找是否有能滿足使用者需求的優質開源項目實踐，避免重複造輪子
+    - Usage scenario: Finding domain-specific best practices or researching specific technology stacks or design patterns
+    - Used to find high-quality open source project practices that meet user needs, avoiding reinventing the wheel
 
-[步驟]
-  1. 需求分析階段
-    - 驗證 {root}/docs/requirements/*.md 下所有需求的完整性與一致性
-    - 提取功能性/非功能性需求，並將非功能性需求轉換為架構約束
-    - 創建對應矩陣（需求 ID → 元件/決策）並識別缺口或衝突
-    - 創建 todo list 以追蹤後續架構設計任務
+[Steps]
+  1. Requirement Analysis Phase
+    - Verify the completeness and consistency of all requirements under {root}/docs/requirements/*.md
+    - Extract functional/non-functional requirements and convert non-functional requirements into architecture constraints
+    - Create mapping matrix (requirement ID → component/decision) and identify gaps or conflicts
+    - Create todo list to track subsequent architecture design tasks
 
-  2. 架構設計階段
-    - 基於需求分析劃定元件、邊界與規範資料流
-    - 確保每個需求對應至架構元素；定義互動契約與資料模式
-    - 記錄決策（建議使用 ADR 格式或表格形式）並包含需求可追溯性，處理跨領域關注點（安全性、可觀測性、效能）
+  2. Architecture Design Phase
+    - Define components, boundaries, and specify data flows based on requirement analysis
+    - Ensure each requirement maps to an architecture element; define interaction contracts and data schemas
+    - Record decisions (recommend ADR format or table format) and include requirement traceability, handle cross-cutting concerns (security, observability, performance)
 
-  3. 撰寫階段
-    - 使用 {root}/sunnycore/templates/architecture-tmpl.yaml 草擬 {root}/docs/architecture.md
-    - 包含需求追溯矩陣並確保每個對應關係都已處理
-    - 執行 uv run {root}/sunnycore/scripts/shard-architecture.py 並驗證產出物出現在 {root}/docs/architecture/ 下；若執行失敗，應檢查 architecture.md 格式是否符合模板規範，並修正後重新執行
+  3. Writing Phase
+    - Use {root}/sunnycore/templates/architecture-tmpl.yaml to draft {root}/docs/architecture.md
+    - Include requirement traceability matrix and ensure each mapping relationship has been handled
+    - Execute uv run {root}/sunnycore/scripts/shard-architecture.py and verify output appears under {root}/docs/architecture/; if execution fails, check if architecture.md format complies with template specifications, fix and re-execute
 
-  4. 最終驗證階段
-    - 透過對應矩陣交叉驗證架構是否滿足所有需求
-    - 修正印刷錯誤並標準化術語
-    - 確認架構決策由需求證明合理
-    - 逐項檢查所有 DoD 項目是否已滿足
-    - 確認所有待辦項目已完成
+  4. Final Verification Phase
+    - Cross-verify through mapping matrix whether architecture satisfies all requirements
+    - Fix typographical errors and standardize terminology
+    - Confirm architecture decisions are justified by requirements
+    - Check all DoD items one by one to ensure they are met
+    - Confirm all todo items are completed
 
-[異常處理]
-  1. shard-architecture.py 執行失敗：檢查 architecture.md 格式是否符合模板規範，修正後重新執行
-  2. 需求衝突無法調和：記錄衝突並與需求制定者確認，不得自行臆測
-  3. 架構設計不可行：記錄技術限制並提出替代方案
+[Error Handling]
+  1. shard-architecture.py execution failure: Check if architecture.md format complies with template specifications, fix and re-execute
+  2. Unresolvable requirement conflicts: Record conflicts and confirm with requirement authors, do not make assumptions
+  3. Architecture design infeasibility: Record technical limitations and propose alternative solutions
 
 [DoD]
-  - [ ] 已驗證 {root}/docs/requirements/*.md 存在且完整
-  - [ ] 已創建需求至架構對應矩陣（需求 ID → 元件/決策），完整準確（覆蓋率100%，無遺漏或錯誤對應）
-  - [ ] 所有功能性需求已對應至特定架構元件
-  - [ ] 非功能性需求已轉換為可衡量的架構約束
-  - [ ] {root}/docs/architecture.md 存在且遵循模板
-  - [ ] 已執行 shard-architecture.py 並驗證分片文件生成
-  - [ ] 所有待辦項目已完成
+  - [ ] Verified that {root}/docs/requirements/*.md exists and is complete
+  - [ ] Created requirement-to-architecture mapping matrix (requirement ID → component/decision), complete and accurate (100% coverage, no omissions or incorrect mappings)
+  - [ ] All functional requirements have been mapped to specific architecture components
+  - [ ] Non-functional requirements have been converted to measurable architecture constraints
+  - [ ] {root}/docs/architecture.md exists and follows the template
+  - [ ] shard-architecture.py has been executed and shard file generation has been verified
+  - [ ] All todo items are completed

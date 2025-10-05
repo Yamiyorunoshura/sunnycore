@@ -1,68 +1,68 @@
-[輸入]
-  1. {root}/docs/architecture/*.md --現有架構文件（作為上下文）
-  2. {root}/sunnycore/templates/concluded-architecture-tmpl.yaml --架構文件模板
+[Input]
+  1. {root}/docs/architecture/*.md --Existing architecture documents (as context)
+  2. {root}/sunnycore/templates/concluded-architecture-tmpl.yaml --Architecture document template
 
-[輸出]
-  1. {root}/docs/architecture/*.md --架構文件（Markdown 格式）
-  2. JSON 格式的輸出結果（包含 files 陣列與 shards_created 計數）
+[Output]
+  1. {root}/docs/architecture/*.md --Architecture documents (Markdown format)
+  2. JSON format output results (including files array and shards_created count)
 
-[約束]
-  1. 必須產生完全符合 schema 的有效 JSON（additionalProperties=false）
-  2. 產生最終交付物時，JSON 外不得包含任何文字說明
-  3. 應該使用 3 階段工作流程，並將檢查項目放在最後階段
-  4. 每個產出的文件都必須對應至少 1 個來源參考（source_refs）
-  5. 可以在 Markdown 文件中以 fenced code block 形式包含架構圖
-  6. 所有文件路徑必須在 docs/architecture/ 下且副檔名為 .md
+[Constraints]
+  1. Must produce valid JSON that fully complies with schema (additionalProperties=false)
+  2. When producing final deliverables, no text descriptions are allowed outside of JSON
+  3. Should use a 3-phase workflow, with checklist items placed in the final phase
+  4. Every produced document must correspond to at least 1 source reference (source_refs)
+  5. Can include architecture diagrams in Markdown documents as fenced code blocks
+  6. All file paths must be under docs/architecture/ with .md extension
 
-[工具]
+[Tools]
   1. **todo_write**
-    - [步驟1:創建任務清單;步驟2-3:追蹤任務進度]
+    - [Step 1: Create task list; Steps 2-3: Track task progress]
   2. **sequentialthinking (MCP)**
-    - [步驟2:內容整合與文件撰寫的推理任務]
+    - [Step 2: Reasoning tasks for content integration and document writing]
 
-[工具指引]
+[Tool Guidelines]
   1. **todo_write**
-    - 在分析階段創建待辦清單，包含所有主要任務
-    - 每完成一個步驟即更新對應待辦項目狀態為 completed
-    - 狀態閘門：僅允許單一任務為 in_progress；完成後立即標記 completed
+    - Create a todo list during analysis phase, including all major tasks
+    - Update the status of each completed step to completed
+    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
   2. **sequentialthinking (MCP)**
-    - 簡單任務推理：1-3 totalThoughts
-    - 中等任務推理：3-5 totalThoughts
-    - 複雜任務推理：5-8 totalThoughts
-    - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
-    - 必須完成所有設定的推理步數
-    - 參數說明：
-      * totalThoughts (number): 預估推理步數，可依實際需求調整
-      * nextThoughtNeeded (boolean): 是否需要繼續推理，完成所有步驟後設為 false
+    - Simple task reasoning: 1-3 totalThoughts
+    - Medium task reasoning: 3-5 totalThoughts
+    - Complex task reasoning: 5-8 totalThoughts
+    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
+    - Must complete all configured reasoning steps
+    - Parameter explanation:
+      * totalThoughts (number): Estimated reasoning steps, can be adjusted according to actual needs
+      * nextThoughtNeeded (boolean): Whether to continue reasoning, set to false after completing all steps
 
-[步驟]
-  1. 分析與規劃階段
-    - 閱讀所有輸入文件
-    - 清點架構來源文件以記錄缺口與假設
-    - 根據模板規劃目標文件的章節結構
-    - 根據實際任務創建 todo list
-    - 交付物：任務清單與來源文件清單
+[Steps]
+  1. Analysis and Planning Phase
+    - Read all input documents
+    - Inventory architecture source documents to record gaps and assumptions
+    - Plan target document section structure according to template
+    - Create todo list based on actual tasks
+    - Deliverable: Task list and source document list
 
-  2. 撰寫架構文件階段
-    - 整合並標準化內容以依照模板撰寫文件
-    - 驗證文件完整性與內部一致性（逐一檢查：所有必要章節是否涵蓋、文件是否追溯至來源參考、文件路徑是否在 docs/architecture/ 下且為 .md 格式）
-    - 準備 JSON 交付物，包含 files[] 陣列（每個元素包含：path, title, content, source_refs, format）
-    - 交付物：符合 schema 的 files[] 陣列，準備寫入文件系統
+  2. Write Architecture Documents Phase
+    - Integrate and standardize content to write documents according to template
+    - Verify document completeness and internal consistency (check item by item: whether all necessary sections are covered, whether documents trace back to source references, whether document paths are under docs/architecture/ and in .md format)
+    - Prepare JSON deliverable, including files[] array (each element includes: path, title, content, source_refs, format)
+    - Deliverable: files[] array that complies with schema, ready to write to file system
 
-  3. 分片與最終化階段
-    - 執行 {root}/sunnycore/scripts/shard-architecture.py 並記錄 shards_created 數量
-    - 驗證產生的 JSON 是否符合 schema；若有違規，則應立即修正
-    - 僅產生最終 JSON，不包含任何說明文字
-    - 逐項檢查所有 DoD 項目是否已滿足
-    - 確認所有待辦項目已完成
-    - 交付物：包含 shards_created 的最終 JSON 交付物
+  3. Sharding and Finalization Phase
+    - Execute {root}/sunnycore/scripts/shard-architecture.py and record shards_created count
+    - Verify generated JSON complies with schema; if violations exist, should fix immediately
+    - Only produce final JSON, without any explanatory text
+    - Check all DoD items one by one to ensure they are met
+    - Confirm all todo items are completed
+    - Deliverable: Final JSON deliverable including shards_created
 
 [DoD]
-  - [ ] 已閱讀所有輸入文件
-  - [ ] 已創建任務清單且所有項目已標記為 completed
-  - [ ] 所有架構文件已依模板撰寫完成
-  - [ ] 每個產出文件都包含至少 1 個來源參考（source_refs）
-  - [ ] 所有文件路徑在 docs/architecture/ 下且副檔名為 .md
-  - [ ] 已執行 shard-architecture.py 並記錄 shards_created
-  - [ ] 產生的 JSON 符合 schema（無 additionalProperties 違規）
-  - [ ] 最終產生僅包含 JSON，無額外說明文字
+  - [ ] All input documents have been read
+  - [ ] Task list has been created and all items are marked as completed
+  - [ ] All architecture documents have been written according to template
+  - [ ] Each produced document includes at least 1 source reference (source_refs)
+  - [ ] All file paths are under docs/architecture/ with .md extension
+  - [ ] shard-architecture.py has been executed and shards_created recorded
+  - [ ] Generated JSON complies with schema (no additionalProperties violations)
+  - [ ] Final production includes only JSON, no additional explanatory text

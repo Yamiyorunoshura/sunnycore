@@ -1,103 +1,103 @@
-[輸入]
-  1. {root}/docs/implementation-plan/{task_id}-plan.md --實作計畫
-  2. {root}/docs/architecture/*.md --架構設計
-  3. {root}/sunnycore/templates/dev-notes-tmpl.yaml --開發筆記模板
+[Input]
+  1. {root}/docs/implementation-plan/{task_id}-plan.md --Implementation plan
+  2. {root}/docs/architecture/*.md --Architecture design
+  3. {root}/sunnycore/templates/dev-notes-tmpl.yaml --Development notes template
 
-[輸出]
-  1. {root}/docs/dev-notes/{task_id}-dev-notes.md --完整開發筆記文件
-  2. 高品質、已測試的程式碼實作
-  3. 完整測試覆蓋率與測試案例
-  4. 符合最佳實踐的重構程式碼
+[Output]
+  1. {root}/docs/dev-notes/{task_id}-dev-notes.md --Complete development notes document
+  2. High-quality, tested code implementation
+  3. Complete test coverage and test cases
+  4. Refactored code following best practices
 
-[約束]
-  1. 必須遵守實作計畫中定義的驗收標準與架構對應
-  2. 必須遵循 TDD 循環：先實作測試（RED）、最小程式碼（GREEN）、然後重構（REFACTOR）
-  3. 開發筆記須保留模板使用的縮排和編號風格
-  4. 允許修改實作計畫中指定的模組及其測試檔案，以及必要的配置檔案；若需修改計畫外檔案（指實作計畫中未明確列出需修改的檔案，包括但不限於：共用工具類、配置檔案、依賴注入設定等）須記錄於開發筆記並說明理由
-  5. 開發筆記需包含：實作摘要、技術決策、風險考量、測試結果等完整章節（參照模板）
+[Constraints]
+  1. Must comply with acceptance criteria and architecture mapping defined in the implementation plan
+  2. Must follow TDD cycle: implement tests first (RED), minimal code (GREEN), then refactor (REFACTOR)
+  3. Development notes must preserve the indentation and numbering style used in the template
+  4. Allowed to modify modules specified in the implementation plan and their test files, as well as necessary configuration files; if modification of files outside the plan is needed (referring to files not explicitly listed for modification in the implementation plan, including but not limited to: shared utility classes, configuration files, dependency injection settings, etc.), must record in development notes and explain the reason
+  5. Development notes must include: implementation summary, technical decisions, risk considerations, test results, and other complete sections (refer to template)
 
-[工具]
+[Tools]
   1. **sequentialthinking (MCP)**
-    - [步驟1:分析實作計畫複雜度；步驟2-4:推理TDD各階段的實作策略；步驟5:評估驗證結果]
+    - [Step 1: Analyze implementation plan complexity; Steps 2-4: Reason about implementation strategies for each TDD phase; Step 5: Evaluate validation results]
   2. **todo_write**
-    - [步驟1:創建TDD階段待辦清單；步驟2-5:追蹤各階段實作進度]
+    - [Step 1: Create TDD phase todo list; Steps 2-5: Track implementation progress for each phase]
   3. **claude-context (MCP)**
-    - [步驟1:分段處理大型實作計畫]
+    - [Step 1: Process large implementation plans in segments]
 
-[工具指引]
+[Tool Guidelines]
   1. **sequentialthinking (MCP)**
-    - 簡單任務推理：1-3 totalThoughts
-    - 中等任務推理：3-5 totalThoughts
-    - 複雜任務推理：5-8 totalThoughts
-    - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
-    - 必須完成所有設定的推理步數
+    - Simple task reasoning: 1-3 totalThoughts
+    - Medium task reasoning: 3-5 totalThoughts
+    - Complex task reasoning: 5-8 totalThoughts
+    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
+    - Must complete all configured reasoning steps
   2. **todo_write**
-    - 在準備階段創建待辦清單，包含所有主要任務
-    - 每完成一個步驟即更新對應待辦項目狀態為 completed
-    - 狀態閘門：僅允許單一任務為 in_progress；完成後立即標記 completed
-    - todo list 應依 TDD 階段創建（準備、RED、GREEN、REFACTOR、驗證），同一時間僅將當前階段標記為 in_progress
+    - Create a todo list during preparation phase, including all major tasks
+    - Update the status of each completed step to completed
+    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
+    - Todo list should be created according to TDD phases (preparation, RED, GREEN, REFACTOR, validation), only mark the current phase as in_progress at the same time
   3. **claude-context (MCP)**
-    - 使用場景：當實作計畫文件過大需要分段處理時
-    - 可用於分段讀取與理解複雜的實作計畫
+    - Usage scenario: When implementation plan document is too large and needs segmented processing
+    - Can be used to read and understand complex implementation plans in segments
 
-[步驟]
-  1. 準備階段
-    - 閱讀 plan-tasks 階段產出的基於 TDD 的實作計畫
-    - 提取當中 RED, GREEN, REFACTOR 三個階段的實作步驟
-    - 根據實作步驟創建 todo list
+[Steps]
+  1. Preparation Phase
+    - Read the TDD-based implementation plan produced in the plan-tasks phase
+    - Extract the implementation steps for RED, GREEN, REFACTOR three phases
+    - Create todo list based on implementation steps
 
-  2. RED 階段：實作測試
-    - 閱讀實作計劃中的 RED 階段並獲取需要實作的測試案例
-    - 實作所有測試案例並檢查是否如預期一般全部紅燈
-    - 執行測試套件（如 pytest/npm test）以確認所有新增測試案例狀態為 FAILED，且錯誤訊息符合預期
-    - if 所有新增測試皆失敗且錯誤訊息符合預期 then 2.1, else 2.2
-      2.1. 測試正確失敗
-        - 進入 GREEN 階段
-      2.2. 測試部分通過或無錯誤
-        - 檢查測試實作是否正確
-        - 修正測試案例
-        - 重新執行驗證
-        - 重複此流程直到所有測試正確失敗
+  2. RED Phase: Implement Tests
+    - Read the RED phase in the implementation plan and obtain the test cases to be implemented
+    - Implement all test cases and check if all are red as expected
+    - Execute test suite (such as pytest/npm test) to confirm all newly added test cases have status FAILED and error messages match expectations
+    - if all new tests fail and error messages match expectations then 2.1, else 2.2
+      2.1. Tests fail correctly
+        - Enter GREEN phase
+      2.2. Tests partially pass or no errors
+        - Check if test implementation is correct
+        - Fix test cases
+        - Re-execute validation
+        - Repeat this process until all tests fail correctly
 
-  3. GREEN 階段：最小實作
-    - 實作最小程式碼以使測試通過（GREEN 階段）
-    - 遵循實作計畫中指定的架構對應
-    - 執行所有測試
-    - if 所有測試通過且驗收標準已滿足 then 3.1, else 3.2
-      3.1. 測試全部通過
-        - 進入 REFACTOR 階段
-      3.2. 測試部分失敗
-        - 分析失敗原因
-        - 修正程式碼
-        - 重新執行測試
-        - 重複此流程直到測試通過
+  3. GREEN Phase: Minimal Implementation
+    - Implement minimal code to make tests pass (GREEN phase)
+    - Follow architecture mapping specified in the implementation plan
+    - Execute all tests
+    - if all tests pass and acceptance criteria are met then 3.1, else 3.2
+      3.1. All tests pass
+        - Enter REFACTOR phase
+      3.2. Some tests fail
+        - Analyze failure reasons
+        - Fix code
+        - Re-execute tests
+        - Repeat this process until tests pass
 
-  4. REFACTOR 階段：重構優化
-    - 在保持所有測試綠燈的情況下進行重構（REFACTOR 階段）
-    - 應用計畫的優化與跨領域關注點，不降低覆蓋率
-    - 提升程式碼品質與可維護性以符合品質目標
-    - 每次重構後執行測試
-    - if 所有測試仍保持通過 then 4.1, else 4.2
-      4.1. 重構後測試通過
-        - 繼續下一項重構
-        - 或進入驗證與文檔階段
-      4.2. 重構後測試失敗
-        - 立即回退重構（git reset 或手動撤銷）
-        - 重新評估重構策略
-        - 修正重構方法
-        - 重複此流程直到重構完成且測試通過
+  4. REFACTOR Phase: Refactoring and Optimization
+    - Perform refactoring while keeping all tests green (REFACTOR phase)
+    - Apply planned optimizations and cross-cutting concerns without reducing coverage
+    - Improve code quality and maintainability to meet quality goals
+    - Execute tests after each refactoring
+    - if all tests still pass then 4.1, else 4.2
+      4.1. Tests pass after refactoring
+        - Continue with next refactoring
+        - Or enter validation and documentation phase
+      4.2. Tests fail after refactoring
+        - Immediately rollback refactoring (git reset or manual undo)
+        - Re-evaluate refactoring strategy
+        - Fix refactoring approach
+        - Repeat this process until refactoring is complete and tests pass
 
-  5. 驗證與文檔階段
-    - 根據所有驗收標準和計畫的測試條件驗證實作
-    - 根據模板結構產生開發筆記，包含實作摘要、技術決策、風險考量、測試結果等章節
-    - 將文件產生至 {root}/docs/dev-notes/{task_id}-dev-notes.md
-    - 逐項檢查所有 DoD 項目是否已滿足
-    - 確認所有待辦項目已完成
+  5. Validation and Documentation Phase
+    - Validate implementation against all acceptance criteria and planned test conditions
+    - Generate development notes according to template structure, including implementation summary, technical decisions, risk considerations, test results, and other sections
+    - Generate document to {root}/docs/dev-notes/{task_id}-dev-notes.md
+    - Check all DoD items one by one to ensure they are met
+    - Confirm all todo items are completed
 
 [DoD]
-  - [ ] 實作計畫中的所有驗收標準已滿足
-  - [ ] 測試覆蓋計畫中指定的所有驗證方法
-  - [ ] 實作遵循 TDD 循環：RED → GREEN → REFACTOR
-  - [ ] 程式碼對應至計畫的架構元件
-  - [ ] [輸出] 中的所有產出已產生且一致
-  - [ ] 所有待辦項目已完成
+  - [ ] All acceptance criteria in the implementation plan have been met
+  - [ ] Tests cover all verification methods specified in the plan
+  - [ ] Implementation follows TDD cycle: RED → GREEN → REFACTOR
+  - [ ] Code corresponds to planned architecture components
+  - [ ] All outputs in [Output] have been generated and are consistent
+  - [ ] All todo items are completed

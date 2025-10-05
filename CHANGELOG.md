@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [1.8.2] - Claude code v1.8.2
+
+### Changed
+- 國際化任務文檔：將所有任務文檔從繁體中文完整翻譯為英文，提升國際用戶可用性
+  - 翻譯範圍涵蓋 14 個任務文檔的所有章節：[Input]、[Output]、[Constraints]、[Tools]、[Tool Guidelines]、[Steps]、[DoD]
+  - 涵蓋任務：brownfield-tasks、conclude、create-architecture、create-brownfield-architecture、create-epic、create-requirements、curate-knowledge、develop-tasks、document-project、help、init、plan-tasks、review
+  - 保持原有文檔結構與邏輯不變，僅進行語言轉換
+  - 版本號更新：claude-code.lock 從 1.8.1 升級至 1.8.2
+
 ## [1.8.1] - Claude code v1.8.1
 
 ### Changed

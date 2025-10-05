@@ -1,64 +1,64 @@
-[輸入]
-  1. {root}/docs/requirements/*.md --專案功能性與非功能性需求
-  2. {root}/docs/architecture/*.md --架構設計與技術規格
-  3. {root}/sunnycore/templates/tasks-tmpl.yaml --任務模板格式
+[Input]
+  1. {root}/docs/requirements/*.md --Project functional and non-functional requirements
+  2. {root}/docs/architecture/*.md --Architecture design and technical specifications
+  3. {root}/sunnycore/templates/tasks-tmpl.yaml --Task template format
 
-[輸出]
-  1. {root}/docs/epic.md --任務清單（Markdown 格式）
+[Output]
+  1. {root}/docs/epic.md --Task list (Markdown format)
 
-[約束]
-  1. 必須創建原子化、可驗證的任務（≤14 字，結果明確）
-  2. 必須排除操作性動作，除非用戶明確要求
-    - 操作性動作指執行層級指令如 git commit、npm install 等，但設計、實作、測試等開發任務不屬於此類
-  3. 必須確保所有檔案名稱/路徑不使用空格；優先使用 kebab-case
+[Constraints]
+  1. Must create atomic, verifiable tasks (≤14 characters, clear outcomes)
+  2. Must exclude operational actions unless explicitly requested by the user
+    - Operational actions refer to execution-level commands such as git commit, npm install, etc., but design, implementation, testing and other development tasks do not fall into this category
+  3. Must ensure all file names/paths do not use spaces; prefer kebab-case
 
-[工具]
+[Tools]
   1. **todo_write**
-    - [步驟1:創建任務清單;步驟2-4:追蹤任務進度]
+    - [Step 1: Create task list; Steps 2-4: Track task progress]
   2. **sequentialthinking (MCP)**
-    - [步驟1:分析需求複雜度與任務依賴關係;步驟2:設計原子任務與邏輯分組]
+    - [Step 1: Analyze requirement complexity and task dependencies; Step 2: Design atomic tasks and logical grouping]
 
-[工具指引]
+[Tool Guidelines]
   1. **todo_write**
-    - 在研究階段創建待辦清單，包含所有主要任務
-    - 每完成一個步驟即更新對應待辦項目狀態為 completed
+    - Create a todo list during research phase, including all major tasks
+    - Update the status of each completed step to completed
   2. **sequentialthinking (MCP)**
-    - 簡單任務推理：1-3 totalThoughts
-    - 中等任務推理：3-5 totalThoughts
-    - 複雜任務推理：5-8 totalThoughts
-    - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
-    - 必須完成所有設定的推理步數
+    - Simple task reasoning: 1-3 totalThoughts
+    - Medium task reasoning: 3-5 totalThoughts
+    - Complex task reasoning: 5-8 totalThoughts
+    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
+    - Must complete all configured reasoning steps
 
-[步驟]
-  1. 研究階段
-    - 驗證所有必要輸入檔案（包含模板）存在且可讀取。若讀取失敗，則停止回應並明確通知用戶缺失的檔案路徑
-    - 閱讀需求與架構來源文件
-    - 識別範圍、成功標準與約束條件以驅動任務設計
-    - 將非功能性需求對應至跨領域任務
-    - 創建 todo list 以追蹤後續任務設計工作
+[Steps]
+  1. Research Phase
+    - Verify all necessary input files (including templates) exist and are readable. If reading fails, stop responding and explicitly notify the user of missing file paths
+    - Read requirement and architecture source documents
+    - Identify scope, success criteria, and constraints to drive task design
+    - Map non-functional requirements to cross-cutting tasks
+    - Create todo list to track subsequent task design work
 
-  2. 草擬階段
-    - 使用模板產生原子化任務
-    - 包含簡要的驗收提示以確保可驗證性
-    - 邏輯分組任務，避免重疊
-    - 交付物：Markdown 格式的任務草稿
+  2. Drafting Phase
+    - Use template to generate atomic tasks
+    - Include brief acceptance hints to ensure verifiability
+    - Logically group tasks, avoid overlap
+    - Deliverable: Task draft in Markdown format
 
-  3. 審查階段
-    - 去重與刪除不可執行的項目
-    - 確保每個任務都可追溯至需求
-    - 驗證格式是否符合模板要求
+  3. Review Phase
+    - Deduplicate and remove non-actionable items
+    - Ensure each task is traceable to requirements
+    - Verify format complies with template requirements
 
-  4. 最終化階段
-    - 將任務寫入 {root}/docs/epic.md（Markdown 格式）
-    - 包含簡短介紹說明分組與範圍
-    - 逐項檢查所有 DoD 項目是否已滿足
-    - 確認所有待辦項目已完成
+  4. Finalization Phase
+    - Write tasks to {root}/docs/epic.md (Markdown format)
+    - Include brief introduction explaining grouping and scope
+    - Check all DoD items one by one to ensure they are met
+    - Confirm all todo items are completed
 
 [DoD]
-  - [ ] 已閱讀所有需求與架構文件
-  - [ ] 研究筆記已完成，包含功能性需求/非功能性需求至任務的對應關係
-  - [ ] 檔案 {root}/docs/epic.md 存在且為有效 Markdown
-  - [ ] 所有任務符合模板欄位
-  - [ ] 每個任務為原子化、結果導向且可驗證
-  - [ ] 無檔案名稱或鍵名使用空格；已強制使用 kebab-case
-  - [ ] 所有待辦項目已完成
+  - [ ] All requirement and architecture documents have been read
+  - [ ] Research notes are complete, including mapping of functional requirements/non-functional requirements to tasks
+  - [ ] File {root}/docs/epic.md exists and is valid Markdown
+  - [ ] All tasks comply with template fields
+  - [ ] Each task is atomic, outcome-oriented, and verifiable
+  - [ ] No file names or key names use spaces; kebab-case is enforced
+  - [ ] All todo items are completed
