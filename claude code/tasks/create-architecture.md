@@ -41,7 +41,7 @@
     - 中等任務推理：3-5 totalThoughts
     - 複雜任務推理：5-8 totalThoughts
     - 完成原本推理步數後依然有疑問：nextThoughtNeeded = true
-    - 你必須完成所有設定的推理步數
+    - 必須完成所有設定的推理步數
   3. **context7**
     - 使用場景：尋找特定領域的最佳實踐或可用於研究特定技術棧或設計模式
     - 用於尋找是否有能滿足使用者需求的優質開源項目實踐，避免重複造輪子
@@ -51,7 +51,7 @@
     - 驗證 {root}/docs/requirements/*.md 下所有需求的完整性與一致性
     - 提取功能性/非功能性需求，並將非功能性需求轉換為架構約束
     - 創建對應矩陣（需求 ID → 元件/決策）並識別缺口或衝突
-    - 創建todo list追蹤後續架構設計任務
+    - 創建 todo list 以追蹤後續架構設計任務
 
   2. 架構設計階段
     - 基於需求分析劃定元件、邊界與規範資料流
@@ -61,7 +61,7 @@
   3. 撰寫階段
     - 使用 {root}/sunnycore/templates/architecture-tmpl.yaml 草擬 {root}/docs/architecture.md
     - 包含需求追溯矩陣並確保每個對應關係都已處理
-    - 執行 'uv run {root}/sunnycore/scripts/shard-architecture.py' 並驗證產出物出現在 {root}/docs/architecture/ 下；若執行失敗，應檢查 architecture.md 格式是否符合模板規範，並修正後重新執行
+    - 執行 uv run {root}/sunnycore/scripts/shard-architecture.py 並驗證產出物出現在 {root}/docs/architecture/ 下；若執行失敗，應檢查 architecture.md 格式是否符合模板規範，並修正後重新執行
 
   4. 最終驗證階段
     - 透過對應矩陣交叉驗證架構是否滿足所有需求
