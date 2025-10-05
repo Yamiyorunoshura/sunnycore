@@ -20,7 +20,7 @@
   2. **sequentialthinking (MCP)**
     - [Step 2: Reasoning tasks for content integration and document writing]
 
-[Tool Guidelines]
+[Tool-Guidelines]
   1. **todo_write**
     - Create a todo list during analysis phase, including all major tasks
     - Update the status of each completed step to completed

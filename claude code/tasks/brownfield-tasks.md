@@ -23,7 +23,7 @@
     - [Step 1: Find relevant code]
     - [Step 2: Find relevant code]
 
-[Tool Guidelines]
+[Tool-Guidelines]
   1. **sequentialthinking**
     - Simple task reasoning: 1-3 totalThoughts
     - Medium task reasoning: 3-5 totalThoughts

@@ -19,7 +19,7 @@
   2. **claude-context (MCP)**
     - [Step 2: Build index for codebase]
 
-[Tool Guidelines]
+[Tool-Guidelines]
   1. **todo_write**
     - Create a todo list during preparation phase, including all major tasks (Steps 1-4)
     - Update the status of each completed step to completed

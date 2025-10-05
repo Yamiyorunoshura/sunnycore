@@ -23,7 +23,7 @@
     - [Step 2: Create task list; Steps 3-4: Track task progress]
     - Usage scenario: Create todo list in preparation phase, track task progress
 
-[Tool Guidelines]
+[Tool-Guidelines]
   1. **sequentialthinking (MCP)**
     - Simple task reasoning: 1-3 totalThoughts
     - Medium task reasoning: 3-5 totalThoughts
