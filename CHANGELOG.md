@@ -7,6 +7,26 @@
 
 ## [Unreleased]
 
+## [1.12.2] - sunnycore v1.12.2
+
+### Changed
+- 重構安裝腳本：從 Bash 改為 Python，提升跨平台支援能力
+  - 新增 `scripts/install.py`：使用 Python 3.6+ 實作安裝腳本
+    * 跨平台支援：支援 macOS、Linux、Windows 系統
+    * 標準庫實作：使用 urllib、argparse、pathlib 等標準庫
+    * 智能下載：從 GitHub API 遞迴獲取目錄內容並下載文件
+    * URL 編碼處理：正確處理包含空格的文件路徑（如 "claude code/"）
+    * 互動模式：支援互動式路徑選擇與自動確認模式
+    * 參數支援：-v (版本)、-p (路徑)、-y (自動確認)、--repo、--branch
+  - 移除 `scripts/sunnycore.sh`：舊的 Bash 安裝腳本（1520 行）
+  - 移除 `scripts/sync-common-files.sh`：分支同步腳本（274 行）
+- 更新 README.md：反映新的 Python 安裝腳本
+  - 系統需求更新：macOS/Linux → macOS/Linux/Windows，Bash → Python 3.6+
+  - 安裝指令更新：`curl ... | bash` → `curl ... | python3`
+  - 參數說明調整：移除 Bash 特定參數，新增 Python 腳本參數
+  - 安裝路徑範例更新：從 `~/sunnycore` 改為 `~/myproject`
+  - 目錄結構說明優化：更清晰地說明 `.claude/` 與 `sunnycore/` 的作用
+
 ## [1.12.1] - sunnycore v1.12.1
 
 ### Changed
