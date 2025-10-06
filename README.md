@@ -72,6 +72,30 @@
 - **Documentation**: 內容完整性、範例有效性、格式標準、版本同步、可讀性、準確性
 - **General**: 功能需求合規、程式碼品質、測試完整性、文檔完整性（備案）
 
+### Assistant 技術助理
+**核心能力**:
+- 通用技術問題解答
+- Bug 診斷與修復
+- 程式碼優化建議
+- 開發支援與諮詢
+
+**工作流程**:
+1. 接收用戶問題或 bug 報告
+2. 分析並提供解決方案
+3. 執行修復或優化
+4. 自動調用 progress-manager 記錄進度
+
+### Progress Manager 進度管理員
+**核心能力**:
+- 智能上下文分析
+- 語意重要性分類（critical/important/normal/not-important）
+- 進度記錄管理（僅記錄 critical 和 important 信息）
+- 知識庫維護（bug 修復、最佳實踐、經驗教訓）
+
+**記錄策略**:
+- **progress.md**: 僅記錄 critical 和 important 級別的信息
+- **knowledge/*.md**: 有條件地記錄 bug 修復和重要經驗
+
 ### Sunnycore 自動安裝腳本
 
 Sunnycore 提供了自動化安裝腳本 `scripts/sunnycore.sh`，可快速安裝不同版本到本機。

@@ -7,6 +7,28 @@
 
 ## [Unreleased]
 
+## [1.11.0] - Claude code v1.11.0
+
+### Added
+- 新增技術支援工作流程：提供快速問題解答、Bug 修復、程式碼優化等日常技術支援
+  - 新增 `claude code/commands/sunnycore_assistant.md`：定義 Technical Assistant 角色
+    * 核心能力：問題診斷、Bug 分析與修復、技術諮詢、程式碼審查與優化、知識轉移
+    * 自動調用 progress-manager 記錄重要進度和知識
+  - 新增 `claude code/agents/progress-manager.md`：定義 Progress Manager 代理
+    * 智能上下文分析與語意重要性分類（critical/important/normal/not-important）
+    * 進度記錄管理：僅記錄 critical 和 important 級別信息至 `docs/progress.md`
+    * 知識庫維護：有條件地記錄 bug 修復和重要經驗至 `docs/knowledge/*.md`
+  - 更新 `claude code/README.md`：新增「技術支援流程」章節
+    * 詳細說明 `/sunnycore_assistant` 使用方式與特點
+    * 新增進度記錄格式與知識庫組織說明
+  - 更新根目錄 `README.md`：新增 Assistant 和 Progress Manager 的角色說明與核心能力描述
+- 更新配置檔案：`claude code/index.json` 反映新的代理註冊
+  - 新增 assistant 和 progress-manager agents 定義
+  - 更新代理清單順序（assistant 置於 architect 後、progress-manager 置於 po 後）
+
+### Changed
+- 版本號升級：claude-code.lock 從 1.10.1 升級至 1.11.0
+
 ## [1.10.1] - Claude code v1.10.1
 
 ### Changed

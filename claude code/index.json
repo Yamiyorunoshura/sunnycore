@@ -8,9 +8,11 @@
   },
   "agents": [
     { "id": "architect", "title": "Technical Architect Agent", "path": "claude code/commands/sunnycore_architect.md" },
+    { "id": "assistant", "title": "Technical Assistant Agent", "path": "claude code/commands/sunnycore_assistant.md" },
     { "id": "dev", "title": "Developer Agent", "path": "claude code/agents/dev.md" },
     { "id": "pm", "title": "Project Manager Agent", "path": "claude code/agents/pm.md" },
     { "id": "po", "title": "Product Owner Agent", "path": "claude code/commands/sunnycore_po.md" },
+    { "id": "progress-manager", "title": "Progress Manager Agent", "path": "claude code/agents/progress-manager.md" },
     { "id": "qa", "title": "QA Agent", "path": "claude code/agents/qa.md" }
   ],
   "scripts": [
@@ -106,6 +108,7 @@
         "document-project",
         "help"
       ],
+      "assistant": [],
       "dev": [
         "brownfield-tasks",
         "develop-prd",
@@ -130,6 +133,7 @@
         "cutover",
         "help"
       ],
+      "progress-manager": [],
       "qa": [
         "help",
         "review"
