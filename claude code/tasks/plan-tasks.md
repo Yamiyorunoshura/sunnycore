@@ -25,22 +25,6 @@
   3. **claude-context (MCP)**
     - [Step 1: Process large files in segments if needed]
 
-[Tool-Guidelines]
-  1. **todo_write**
-    - Create a todo list during setup phase, including all major tasks (Steps 1-5)
-    - Update the status of each completed step to completed
-    - Not used for storing operational actions; tasks remain high-level
-    - Recommend using phase prefixes (setup-, red-, green-, refactor-, finalize-) for tracking
-  2. **sequentialthinking (MCP)**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-  3. **claude-context (MCP)**
-    - Usage timing: When input sources are lengthy or require segmented processing (e.g., files exceeding 1000 lines or spanning multiple subdirectories)
-    - Avoid using when content is already in memory and within token limits
-
 [Steps]
   1. Setup Phase
     - Read all workflow steps and requirement documents

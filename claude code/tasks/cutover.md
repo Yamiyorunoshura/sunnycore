@@ -21,18 +21,6 @@
   2. **sequentialthinking (MCP)**: Perform structured reasoning and verification
     - [Step 2: Reason about configuration needs; Step 4: Analyze acceptance test results]
 
-[Tool-Guidelines]
-  1. **todo_write**
-    - Create a todo list in preparation phase, including all major tasks
-    - Update the status of each completed step to completed
-    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
-  2. **sequentialthinking**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-
 [Steps]
   1. Preparation and Validation Phase
     - Verify existence of all required input files

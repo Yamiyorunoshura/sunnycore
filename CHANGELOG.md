@@ -7,6 +7,21 @@
 
 ## [Unreleased]
 
+## [1.10.1] - Claude code v1.10.1
+
+### Changed
+- 重構工具使用指引文檔結構：將分散在各任務文檔中的 [Tool-Guidelines] 章節整合至 `CLAUDE.md` 集中管理
+  - 新增 `claude code/CLAUDE.md` 的 [Tool-Guidelines] 章節：詳細說明 5 個核心工具使用場景
+    * **todo_write**：任務追蹤與多階段工作流程管理
+    * **sequentialthinking (MCP)**：結構化推理與複雜問題分析（含推理步驟建議）
+    * **claude-context (MCP)**：代碼庫語義搜尋與索引建構
+    * **context7 (MCP)**：外部套件參考與 API 文檔檢索
+    * **playwright_browser (MCP)**：網頁瀏覽與產業標準研究
+  - 移除 15 個任務文檔中的重複 [Tool-Guidelines] 章節：提升可維護性並減少 token 使用量
+    * 涵蓋任務：brownfield-tasks、conclude、create-architecture、create-brownfield-architecture、create-epic、create-prd、create-requirements、curate-knowledge、cutover、develop-prd、develop-tasks、document-project、fix-acceptance-issues、init、plan-tasks、review
+  - 優化 `claude code/CLAUDE.md` 的 [Summary-Instructions] 章節：將 [Tool-Guidelines] 標註為必須保留內容
+- 版本號升級：claude-code.lock 從 1.10.0 升級至 1.10.1
+
 ## [1.10.0] - Claude code v1.10.0
 
 ### Added

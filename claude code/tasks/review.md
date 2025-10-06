@@ -22,21 +22,6 @@
   3. **claude-context (MCP)** - Codebase semantic search and indexing tool for processing large documents in segments
     - [Step 1: When implementation plan document exceeds 500 lines, segment indexing and search; Step 2: When code document exceeds 500 lines, segment indexing and search]
 
-[Tool-Guidelines]
-  1. **sequentialthinking (MCP)**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-  2. **todo_write**
-    - Create a todo list in [Steps] 1, including main checkpoints of Steps 2-4
-    - Update status to completed after completing each sub-step (such as 2.1, 2.2, 3, 4.1/4.2/4.3)
-    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
-  3. **claude-context (MCP)**
-    - Usage scenario: When implementation plan or code document exceeds 500 lines, should use this tool for segment indexing and search
-    - In Steps 1 and 2, if encountering large documents, should first use this tool to build index then perform semantic search
-
 [Steps]
   1. Review Plan Phase
     - Read the implementation plan and understand its content

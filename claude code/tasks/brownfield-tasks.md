@@ -23,20 +23,6 @@
     - [Step 1: Find relevant code]
     - [Step 2: Find relevant code]
 
-[Tool-Guidelines]
-  1. **sequentialthinking**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-  2. **claude-context**
-    - Find relevant code: search_code
-    - When producing output, annotate source documents and line numbers for subsequent auditing (corresponding to evidence)
-  3. **todo_write**
-    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion; cancellations need reason annotation
-    - Update node: Update status in real-time after completing each deliverable step (such as creating files, passing tests)
-
 [Steps]
   1. Preparation Phase
     - Read review report and understand the issues

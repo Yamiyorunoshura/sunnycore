@@ -22,23 +22,6 @@
   4. **claude-context (MCP)**
     - [Step 3: Process large requirement documents in segments]
 
-[Tool-Guidelines]
-  1. **todo_write**
-    - Create a todo list in the initial phase, including all major tasks
-    - Update the status of each completed step to completed
-  2. **sequentialthinking (MCP)**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-  3. **playwright_browser (MCP)**
-    - Usage scenario: When referencing industry standards or example requirements
-    - Avoid including sensitive or proprietary information
-  4. **claude-context (MCP)**
-    - Usage scenario: When requirement document input exceeds 5000 tokens or contains large amounts of complex content requiring segmented processing
-    - Avoid using when content is already in memory and within token limits
-
 [Steps]
   1. Initialization Phase
     - Read all workflow steps to understand expected work

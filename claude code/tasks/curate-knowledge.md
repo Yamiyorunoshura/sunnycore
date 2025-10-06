@@ -23,25 +23,6 @@
     - [Step 2: Create task list; Steps 3-4: Track task progress]
     - Usage scenario: Create todo list in preparation phase, track task progress
 
-[Tool-Guidelines]
-  1. **sequentialthinking (MCP)**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-    - Parameter explanation:
-      * totalThoughts (number): Estimated reasoning steps, can be adjusted according to actual needs
-      * nextThoughtNeeded (boolean): Whether to continue reasoning, set to false after completing all steps
-  2. **claude-context (MCP)**
-    - Usage scenario: When specific implementation details need to be located or technical decisions verified
-    - Prerequisite: Codebase has been indexed through index_codebase
-    - Operation guidance: Search statements should include technical keywords + context description, e.g., "Implementation approach of error handling mechanism"
-    - Failure handling: If not indexed or search fails, annotate "Unable to locate code evidence" and continue execution
-  3. **todo_write**
-    - Create a todo list in preparation phase, including all major tasks
-    - Update the status of each completed step to completed
-
 [Steps]
   1. Preparation Phase
     - Read all development notes and review reports

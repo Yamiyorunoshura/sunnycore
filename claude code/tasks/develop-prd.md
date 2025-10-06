@@ -22,21 +22,6 @@
   3. **claude-context (MCP)**
     - [Step 1: Process large PRD documents in segments]
 
-[Tool-Guidelines]
-  1. **todo_write**
-    - Create a todo list during preparation phase based on PRD tasks
-    - Update the status of each completed task to completed
-    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
-    - Track all tasks with their TDD phases (RED/GREEN/REFACTOR)
-  2. **sequentialthinking (MCP)**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-  3. **claude-context (MCP)**
-    - Usage scenario: When PRD document is too large and needs segmented processing
-
 [Steps]
   1. Preparation Phase
     - Read {root}/docs/PRD.md completely

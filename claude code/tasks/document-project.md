@@ -23,21 +23,6 @@
   2. **sequentialthinking (MCP)**
     - [Step 2: Reasoning tasks for content integration and document writing]
 
-[Tool-Guidelines]
-  1. **todo_write**
-    - Create a todo list during analysis phase, including all major tasks
-    - Update the status of each completed step to completed
-    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
-  2. **sequentialthinking (MCP)**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-    - Parameter explanation:
-      * totalThoughts (number): Estimated reasoning steps, can be adjusted according to actual needs
-      * nextThoughtNeeded (boolean): Whether to continue reasoning, set to false after completing all steps
-
 [Steps]
   1. Analysis and Planning Phase
     - Read all input documents
