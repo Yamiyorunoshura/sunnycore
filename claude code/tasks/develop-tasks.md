@@ -22,7 +22,7 @@
   2. **todo_write**
     - [Step 1: Create TDD phase todo list; Steps 2-5: Track implementation progress for each phase]
   3. **claude-context (MCP)**
-    - [Step 1: Process large implementation plans in segments]
+    - [Step 1: Search codebase for implementation plan-related code]
 
 [Steps]
   1. Preparation Phase

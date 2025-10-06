@@ -17,7 +17,7 @@
   1. **todo_write**
     - [Step 1: Create todo list; Steps 2-4: Track execution progress]
   2. **claude-context (MCP)**
-    - [Step 2: Build index for codebase]
+    - [Step 2: Search codebase and build index for existing implementations]
 
 [Steps]
   1. Preparation Phase

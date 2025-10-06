@@ -20,7 +20,7 @@
   3. **playwright_browser (MCP)**
     - [Step 2: Conduct web research when needed to obtain requirement examples]
   4. **claude-context (MCP)**
-    - [Step 3: Process large requirement documents in segments]
+    - [Step 3: Search codebase for requirement-related implementations]
 
 [Steps]
   1. Initialization Phase

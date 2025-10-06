@@ -24,7 +24,7 @@
     - [Step 2: Design module boundaries and integration patterns]
     - [Step 3: Structured drafting]
   3. **claude-context (MCP)**
-    - [Step 1: Evaluate existing architecture - handling large document collections]
+    - [Step 1: Search codebase for existing architecture implementations]
 
 [Steps]
   1. Evaluate Existing Architecture Phase

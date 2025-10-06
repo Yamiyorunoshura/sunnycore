@@ -24,7 +24,7 @@
   2. **sequentialthinking (MCP)**
     - [Step 1: Analyze requirement and task complexity; Step 2: Plan RED phase content (test and acceptance criteria design); Step 3: Plan GREEN phase content (minimal implementation step design); Step 4: Plan REFACTOR phase content (refactoring and optimization work identification)]
   3. **claude-context (MCP)**
-    - [Step 1: Process large files in segments if needed]
+    - [Step 1: Search codebase for relevant implementations if needed]
 
 [Steps]
   1. Setup Phase

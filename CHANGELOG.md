@@ -7,6 +7,31 @@
 
 ## [Unreleased]
 
+## [1.13.2] - sunnycore v1.13.2
+
+### Changed
+- 重構任務文檔工具使用說明：統一12個任務文件中的 claude-context (MCP) 工具使用格式
+  - 工具使用說明統一化：將 "Process large ..." 格式改為 "Search codebase for ..." 格式
+  - 涵蓋任務：brownfield-tasks、create-brownfield-architecture、create-prd、create-requirements、curate-knowledge、develop-prd、develop-tasks、document-project、init、plan-tasks、review
+  - 提升工具使用說明的語義清晰度與一致性
+- 重構架構模板系統：將兩個架構模板合併為通用模板
+  - 新增 `claude code/templates/architecture-tmpl.yaml`：全新的通用架構模板設計
+    * 統一支援：初始架構設計、實作中的架構更新、最終架構總結
+    * 新增欄位：last-updated（最後更新時間）、status（Draft|In Progress|Active）
+    * 新增區塊：deployment（部署架構）、quality-attributes（架構品質）、source-references（來源參考）
+    * 擴展技術堆疊：新增 development-tools 欄位
+    * 擴展橫切關注點：新增 observability（可觀測性）區塊
+    * 優化需求追溯：新增 implementation 和 status 欄位
+  - 刪除 `claude code/templates/concluded-architecture-tmpl.yaml`：舊的總結架構模板（已合併至通用模板）
+- 優化專案文檔化任務：簡化 document-project.md 工作流程
+  - 更新 `claude code/tasks/document-project.md`：移除 shard-architecture.py 執行步驟
+    * 輸入源調整：使用通用架構模板、新增 dev-notes 和 review-results 作為輸入
+    * 流程簡化：直接根據實作狀況更新 architecture/*.md 文件，不再執行拆分腳本
+    * 步驟重構：Step 2（Write → Update）、Step 3（移除 Sharding 改為 Finalization）
+    * 新增約束：基於實際實作狀態更新、保留現有架構結構
+    * 新增 DoD：新增 codebase 搜尋、dev-notes 和 review-reports 檢視檢查項
+  - 提升文檔化流程的實用性與可維護性
+
 ## [1.13.1] - sunnycore v1.13.1
 
 ### Changed

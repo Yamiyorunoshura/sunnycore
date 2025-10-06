@@ -23,7 +23,7 @@
   3. **context7 (MCP)**
     - [Step 3: Obtain external package and architecture pattern references when needed]
   4. **claude-context (MCP)**
-    - [Step 1: Process large existing architecture documents if Brownfield]
+    - [Step 1: Search codebase for existing architecture implementations if Brownfield]
 
 [Steps]
   1. Initialization and Project Type Detection Phase
