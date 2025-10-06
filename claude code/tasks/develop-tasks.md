@@ -1,10 +1,10 @@
 [Input]
-  1. {root}/docs/implementation-plan/{task_id}-plan.md --Implementation plan
-  2. {root}/docs/architecture/*.md --Architecture design
-  3. {root}/sunnycore/templates/dev-notes-tmpl.yaml --Development notes template
+  1. "{root}/docs/implementation-plan/{task_id}-plan.md" --Implementation plan
+  2. "{root}/docs/architecture/*.md" --Architecture design
+  3. "{root}/sunnycore/templates/dev-notes-tmpl.yaml" --Development notes template
 
 [Output]
-  1. {root}/docs/dev-notes/{task_id}-dev-notes.md --Complete development notes document
+  1. "{root}/docs/dev-notes/{task_id}-dev-notes.md" --Complete development notes document
   2. High-quality, tested code implementation
   3. Complete test coverage and test cases
   4. Refactored code following best practices
@@ -74,7 +74,7 @@
   5. Validation and Documentation Phase
     - Validate implementation against all acceptance criteria and planned test conditions
     - Generate development notes according to template structure, including implementation summary, technical decisions, risk considerations, test results, and other sections
-    - Generate document to {root}/docs/dev-notes/{task_id}-dev-notes.md
+    - Generate document to "{root}/docs/dev-notes/{task_id}-dev-notes.md"
     - Check all DoD items one by one to ensure they are met
     - Confirm all todo items are completed
 

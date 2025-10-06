@@ -1,9 +1,9 @@
 [Input]
-  1. {root}/sunnycore/templates/requirement-tmpl.yaml --Requirement template
+  1. "{root}/sunnycore/templates/requirement-tmpl.yaml" --Requirement template
   2. User-provided initial ideas and requirement descriptions
 
 [Output]
-  1. {root}/docs/requirements/*.md --Complete requirement specifications (including functional requirements, non-functional requirements, and acceptance criteria)
+  1. "{root}/docs/requirements/*.md" --Complete requirement specifications (including functional requirements, non-functional requirements, and acceptance criteria)
 
 [Constraints]
   1. Each requirement must be verifiable and measurable; vague or subjective wording is not allowed
@@ -44,14 +44,14 @@
 
   5. Finalization Phase
     - Cross-check functional requirements, non-functional requirements, and acceptance criteria
-    - Populate requirement template and prepare draft content for {root}/docs/requirements.md
+    - Populate requirement template and prepare draft content for "{root}/docs/requirements.md"
     - Present draft content to user showing all sections (functional requirements, non-functional requirements, acceptance criteria)
     - if user approves draft then proceed to 5.1, else proceed to 5.2
       
       5.1. Write Final Documents
-        - Write approved content to {root}/docs/requirements.md
-        - Execute uv run {root}/sunnycore/scripts/shard-requirements.py
-        - if execution succeeds then proceed to verification, else log error to {root}/logs/errors.log (including timestamp, error type, failure reason, impact scope) and notify the user
+        - Write approved content to "{root}/docs/requirements.md"
+        - Execute uv run "{root}/sunnycore/scripts/shard-requirements.py"
+        - if execution succeeds then proceed to verification, else log error to "{root}/logs/errors.log" (including timestamp, error type, failure reason, impact scope) and notify the user
         - Check all DoD items one by one to ensure they are met
         - Confirm all todo items are completed
       
@@ -66,6 +66,6 @@
   - [ ] Each requirement has corresponding acceptance criteria (using Given-When-Then structure)
   - [ ] Content is in English and uses numbered lists
   - [ ] Each requirement is measurable and verifiable
-  - [ ] shard-requirements.py has been executed or errors have been logged to {root}/logs/errors.log and user has been notified
+  - [ ] "shard-requirements.py" has been executed or errors have been logged to "{root}/logs/errors.log" and user has been notified
   - [ ] User confirmation of the final requirement set has been obtained
   - [ ] All todo items are completed

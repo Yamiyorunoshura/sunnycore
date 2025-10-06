@@ -1,6 +1,6 @@
 [Input]
-  1. User command input and corresponding command documentation (e.g., help.md, cutover.md, etc.)
-  2. {root}/sunnycore/CLAUDE.md
+  1. User command input and corresponding command documentation (e.g., "help.md", "cutover.md", etc.)
+  2. "{root}/sunnycore/CLAUDE.md"
 
 [Output]
   1. Execute custom command behavior
@@ -23,10 +23,10 @@
 
 [Custom-Commands]
   1. *cutover
-    - Read and execute: {root}/sunnycore/tasks/cutover.md
+    - Read and execute: "{root}/sunnycore/tasks/cutover.md"
   
   2. *help
-    - Read and execute: {root}/sunnycore/tasks/help.md
+    - Read and execute: "{root}/sunnycore/tasks/help.md"
 
 [Acceptance-Guidelines]
   1. **Requirements Verification**
