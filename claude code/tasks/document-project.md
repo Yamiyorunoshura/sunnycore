@@ -36,37 +36,30 @@
     - Read development notes and review reports to capture implementation details
     - Identify gaps between planned architecture and actual implementation
     - Create todo list for architecture documents to update
-    - Deliverable: Task list and identified gaps
 
   2. Update Architecture Documents Phase
-    - **IF** architecture documents are missing or do not exist:
-      * **THEN** generate new architecture documents based on existing codebase architecture:
+    - if architecture documents are missing or do not exist then proceed to 2.1, else proceed to 2.2
+      
+      2.1. Generate New Architecture Documents
         - Search codebase to understand actual implementation architecture
         - Generate architecture documents according to universal architecture template
         - Run "{root}/sunnycore/scripts/shard-architecture.py" to shard large architecture documents
         - Ensure all generated documents follow template structure and are in .md format
-      * **ELSE** update existing architecture documents:
-        - For each architecture document in "{root}/docs/architecture/*.md":
-          * Review existing content and identify sections needing updates
-          * **IF** document structure does not align with universal architecture template fields:
-            - **THEN** restructure the document to match template structure
-            - **AND** rename the file if necessary to better reflect its purpose
-            - **ELSE** proceed with incremental updates
-          * Search codebase for actual implementation details
-          * Integrate information from dev-notes and review-reports
-          * Update document according to universal architecture template structure
-          * Add actual implementation details, deviations, and lessons learned
-          * Ensure all changes are traceable to source references
+      
+      2.2. Update Existing Architecture Documents
+        - For each architecture document in "{root}/docs/architecture/*.md", review existing content and identify sections needing updates
+        - if document structure does not align with universal architecture template fields then restructure the document to match template structure and rename the file if necessary, else proceed with incremental updates
+        - Search codebase for actual implementation details
+        - Integrate information from dev-notes and review-reports
+        - Update document according to universal architecture template structure
     - Verify document completeness and internal consistency
     - Ensure all documents follow template structure and are in .md format
-    - Deliverable: Updated architecture documents
 
   3. Finalization Phase
     - Update Document Index section in "{root}/CLAUDE.md" with refreshed architecture documents (including path and purpose of each document)
     - Verify all source references are properly documented
     - Check all DoD items one by one to ensure they are met
     - Confirm all todo items are completed
-    - Deliverable: Updated architecture documentation reflecting actual implementation
 
 [DoD]
   - [ ] All existing architecture documents have been read

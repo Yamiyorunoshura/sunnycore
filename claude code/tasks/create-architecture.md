@@ -36,7 +36,8 @@
   2. Architecture Design Phase
     - Define components, boundaries, and specify data flows based on requirement analysis
     - Ensure each requirement maps to an architecture element; define interaction contracts and data schemas
-    - Record decisions (recommend ADR format or table format) and include requirement traceability, handle cross-cutting concerns (security, observability, performance)
+    - Record decisions (recommend ADR format or table format) and include requirement traceability
+    - Handle cross-cutting concerns (security, observability, performance)
 
   3. Writing Phase
     - Use "{root}/sunnycore/templates/architecture-tmpl.yaml" to draft "{root}/docs/architecture.md" content

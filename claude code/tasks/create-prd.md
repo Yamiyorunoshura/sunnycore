@@ -29,11 +29,13 @@
   1. Initialization and Project Type Detection Phase
     - Read all workflow steps to understand expected work
     - Check if "{root}/docs/architecture/" directory exists
-    - If the directory exists, execute the Brownfield flow (1.1); otherwise, execute the Greenfield flow (1.2)
+    - if directory exists then proceed to 1.1, else proceed to 1.2
+      
       1.1. Brownfield Project
         - Read all existing architecture documents from "{root}/docs/architecture/*.md"
         - Identify extension points, constraints, and shared services
         - Create todo list for Brownfield PRD creation
+      
       1.2. Greenfield Project
         - No existing architecture to consider
         - Create todo list for Greenfield PRD creation
@@ -44,16 +46,17 @@
     - Identify non-functional requirements across performance, reliability, security, compliance
     - Quantify targets (e.g., P95 latency, uptime SLO) and constraints
     - Define acceptance criteria for each requirement using Given-When-Then structure
-    - Cross-check and request user confirmation
 
   3. Architecture Design Phase
-    - if Brownfield then 3.1, else 3.2
+    - if Brownfield then proceed to 3.1, else proceed to 3.2
+      
       3.1. Brownfield Architecture Design
         - Define new module responsibilities, boundaries, and interfaces
         - Specify data flows and interaction methods with existing components
         - Assess non-functional requirements compatibility
         - Write "Impact Analysis" for all proposed changes
         - Ensure compatibility with existing contracts
+      
       3.2. Greenfield Architecture Design
         - Define components, boundaries, and specify data flows based on requirements
         - Ensure each requirement maps to an architecture element
@@ -67,17 +70,13 @@
     - Ensure each task conforms to the constraints defined in [Constraints] (feature-level, verifiable, clear outcomes)
     - Include brief acceptance hints to ensure verifiability at feature level
     - Map each task to specific requirement IDs and architecture components
-    - Identify task dependencies and execution order
-    - Logically group tasks by module or feature area, avoid overlap
-    - Exclude operational actions (git commit, npm install, etc.) unless explicitly requested
-    - Note: Atomic breakdown of tasks will be handled later in the plan-tasks phase using TDD RED/GREEN/REFACTOR cycles
 
   5. PRD Integration Phase
     - Integrate requirements, architecture, and tasks into PRD template structure
     - Set project-info.type to "greenfield" or "brownfield" based on Step 1 determination
     - Include requirement-to-architecture-to-task traceability
+    - Identify task dependencies and execution order
     - Add constraints, assumptions, and risks sections
-    - Ensure all sections are complete and consistent
 
   6. Finalization Phase
     - Cross-verify PRD completeness and consistency

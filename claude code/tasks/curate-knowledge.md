@@ -34,19 +34,21 @@
     - Identify all errors encountered during development process (including error type, occurrence context, solution) and record in temporary list
     - Create todo list to track subsequent knowledge base conception and production tasks
 
-  2. Knowledge Base Conception Phase
-    - Conceive the structure and classification method of project knowledge base (reference: classify by technical domain/error type/development phase, choose based on actual content. Consideration factors include: content volume, technical domain distribution, error type diversity, etc. Technical domain classification examples: API design/error handling/testing strategy, etc.)
-    - Decide organization structure for best practices and errors
+  2. Knowledge Base Design Phase
+    - Conceive the structure and classification method of project knowledge base (classify by technical domain/error type/development phase based on actual content)
+    - Evaluate consideration factors including content volume, technical domain distribution, and error type diversity
+    - Decide organization structure for best practices and errors (e.g., API design/error handling/testing strategy)
+    - Plan document naming conventions and semantic classification approach
 
   3. Produce Documents Phase
-    - First create "{root}/docs/knowledge/" directory (if it does not exist)
+    - Create "{root}/docs/knowledge/" directory if it does not exist
     - Produce best practices to corresponding documents by classification (document naming: "best-practices-{domain}.md" or "best-practices.md")
     - Produce error cases to corresponding documents by classification (document naming: "errors-{type}.md" or "errors.md")
     - Document content format: Each knowledge point includes title, description, evidence source, applicable scenarios
     - Annotate evidence source for each knowledge point (annotation format: file path + relevant section, e.g., "docs/dev-notes/feature-x.md" [Error Handling] paragraph)
-    - Archive the "review-results/" and "dev-notes/" files to "{root}/docs/archive/{version_name}/"
 
-  4. DoD Verification Phase
+  4. Finalization Phase
+    - Archive the "review-results/" and "dev-notes/" files to "{root}/docs/archive/{version_name}/"
     - Check all DoD items one by one to ensure they are met
     - Confirm all todo items are completed
 

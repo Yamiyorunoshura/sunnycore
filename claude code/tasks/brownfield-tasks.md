@@ -33,17 +33,19 @@
 
   2. Fix Phase
     - Create todo list to track fix progress (update according to state gate, see Tool Guidelines for details)
-    - After each code fix, tests should be executed to ensure no new issues are introduced (e.g., pytest -q or make test; all must pass)
-    - if tests pass (exit code=0) then 2.1, else 2.2
+    - After each code fix, execute tests to ensure no new issues are introduced (e.g., pytest -q or make test; all must pass)
+    - if tests pass (exit code=0) then proceed to 2.1, else proceed to 2.2
+      
       2.1. Tests Pass Path
         - Continue with next fix task
         - Or enter integration testing
+      
       2.2. Tests Fail Path
         - Use git reset or manually undo recent changes
         - Re-analyze failure reasons
         - Fix and re-execute tests
         - Repeat this process until tests pass
-    - After completing all fixes, integration tests should be executed (such as: pytest tests/integration, make test-integration, or integration test commands for other programming languages or projects; all tests must also pass)
+    - After completing all fixes, execute integration tests (such as: pytest tests/integration, make test-integration, or integration test commands for other programming languages or projects; all tests must also pass)
 
   3. Summary Phase
     - Summarize the fix process and results (should include document paths and line numbers/paragraph IDs as evidence; for version control projects, should include PR/commit links; corresponding to the evidence field of "Fix Summary" for auditing purposes)

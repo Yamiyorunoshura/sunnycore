@@ -32,11 +32,9 @@
 [Steps]
   1. Setup Phase
     - Read all workflow steps and requirement documents
-    - Understand the scope and complexity of the target feature-level task
-      * Identify the number of requirements, number of architecture components, and cross-system dependencies involved in the task
-      * Count the number of requirements, architecture components, and cross-system dependencies to assess complexity (simple/medium/complex)
-      * Determine the depth of subsequent planning based on complexity
-      * Note: The input task is at feature-level; this phase will break it down into atomic implementation steps
+    - Understand the scope and complexity of the target feature-level task (identify number of requirements, architecture components, and cross-system dependencies)
+    - Assess complexity level (simple/medium/complex) based on requirement count and architecture component count
+    - Determine the depth of subsequent planning based on complexity (note: input task is at feature-level and will be broken down into atomic implementation steps)
     - Create todo list to track execution progress of Steps 2-5
 
   2. Planning RED Phase Content: Define Tests and Acceptance

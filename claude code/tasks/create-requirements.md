@@ -43,7 +43,7 @@
     - Verify each criterion can be automated or manually verified with binary results
 
   5. Finalization Phase
-    - Cross-check functional requirements, non-functional requirements, and acceptance criteria
+    - Cross-check functional requirements, non-functional requirements, and acceptance criteria for consistency
     - Populate requirement template and prepare draft content for "{root}/docs/requirements.md"
     - Present draft content to user showing all sections (functional requirements, non-functional requirements, acceptance criteria)
     - if user approves draft then proceed to 5.1, else proceed to 5.2
@@ -51,9 +51,17 @@
       5.1. Write Final Documents
         - Write approved content to "{root}/docs/requirements.md"
         - Execute uv run "{root}/sunnycore/scripts/shard-requirements.py"
-        - if execution succeeds then proceed to verification, else log error to "{root}/logs/errors.log" (including timestamp, error type, failure reason, impact scope) and notify the user
-        - Check all DoD items one by one to ensure they are met
-        - Confirm all todo items are completed
+        - if execution succeeds then proceed to 5.1.1, else proceed to 5.1.2
+          
+          5.1.1. Execution Success Path
+            - Check all DoD items one by one to ensure they are met
+            - Confirm all todo items are completed
+          
+          5.1.2. Execution Failure Path
+            - Log error to "{root}/logs/errors.log" (including timestamp, error type, failure reason, impact scope)
+            - Notify the user of execution failure
+            - Check all DoD items one by one to ensure they are met
+            - Confirm all todo items are completed
       
       5.2. Revise Based on Feedback
         - Collect user feedback on what needs to be changed

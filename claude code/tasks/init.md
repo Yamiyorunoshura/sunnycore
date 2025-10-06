@@ -25,24 +25,17 @@
     - Identify required technology stack and development environment configuration
     - Create todo list to track execution progress of Steps 2-4
 
-  2. Environment Initialization Phase
-    - Set up development environment according to architecture documents
-      * Create virtual environment (such as Python venv, Node.js environment, etc.)
-      * Install necessary toolchain (such as compilers, package managers, etc.)
-      * Configure databases (such as PostgreSQL, Redis, etc.)
-      * Install project dependencies
-    - Verify environment configuration correctness
+  2. Environment Setup Phase
+    - Set up development environment according to architecture documents (create virtual environment, install toolchain, configure databases)
+    - Install project dependencies and verify environment configuration correctness
     - Record any environment configuration issues or dependency conflicts
     - Build index for codebase
 
   3. Document Generation Phase
-    - Create "{root}/CLAUDE.md" project guidance document
-    - Include the following sections:
-      * Technology Stack: Technology selections extracted from architecture documents
-      * Development Standards: Coding style, testing requirements, etc.
-      * Requirement Overview: Core requirement summary extracted from requirement documents
-      * Project Goals: Main goals and success criteria of the project
-      * Document Index: List locations and purposes of all architecture and requirement documents
+    - Create "{root}/CLAUDE.md" project guidance document with required sections (Technology Stack, Development Standards, Requirement Overview, Project Goals, Document Index)
+    - Extract technology selections from architecture documents for Technology Stack section
+    - Extract core requirement summary from requirement documents for Requirement Overview section
+    - List locations and purposes of all architecture and requirement documents in Document Index section
     - Ensure document format is clear and readable
 
   4. Verification Phase
