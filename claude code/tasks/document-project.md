@@ -41,7 +41,7 @@
   2. Integration Phase - Create Unified Architecture Document
     - Search codebase for actual implementation architecture details
     - Integrate information from [input]
-    - Generate unified "{root}/docs/architecture.md" according to universal architecture template structure
+    - Generate markdon format unified "{root}/docs/architecture.md" according to the universal architecture template
     - Ensure all content includes proper source references (source_refs)
     - Verify document completeness and internal consistency
 
