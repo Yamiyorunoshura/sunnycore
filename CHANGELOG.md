@@ -7,6 +7,28 @@
 
 ## [Unreleased]
 
+## [1.13.6] - sunnycore v1.13.6
+
+### Changed
+- 重構文檔化任務流程：優化 `document-project.md` 架構文檔生成與拆分機制
+  - 新增統一架構文檔生成流程：先產生統一的 `{root}/docs/architecture.md`，再執行拆分
+  - 新增 Cleanup and Sharding Phase（步驟 3）：刪除舊有架構文檔後執行拆分腳本
+  - 調整輸出說明：明確區分統一架構文檔（臨時）與拆分後的架構文檔
+  - 優化 Integration Phase 說明：強調統一文檔的完整性與來源參考
+  - 擴展輸入源：新增知識庫 (knowledge base) 作為文檔化參考
+  - 擴展 DoD 檢查項目：新增舊文檔刪除、拆分腳本執行、原始文檔刪除等檢查點
+  - 提升文檔化流程的系統性與可追溯性
+- 優化架構模板結構：重構 `architecture-tmpl.yaml` 專案元資料格式
+  - 將 project-name、version、last-updated、status 四個欄位整合進 project-metadata 區塊
+  - 提升模板結構的層次性與可讀性
+
+### Removed
+- 移除配置檔案：刪除 `claude code/config.yaml` 以簡化專案結構
+  - 移除 orchestrator-subagent-list 配置
+  - 移除 dev-subagent-list 配置（11 個 subagent 定義）
+  - 移除 qa-subagent-list 配置（6 個 subagent 定義）
+  - 簡化專案維護成本
+
 ## [1.13.5] - sunnycore v1.13.5
 
 ### Changed

@@ -2,10 +2,11 @@
 # Universal Architecture Template
 # 通用架構模板 - 實時反映項目真實架構狀態
 
-project-name: ""
-version: ""
-last-updated: ""
-status: "Draft|In Progress|Active"
+project-metadata:
+  - project-name: ""
+  - version: ""
+  - last-updated: ""
+  - status: "Draft|In Progress|Active"
 
 # ==========================================
 # Executive Summary / 執行摘要
