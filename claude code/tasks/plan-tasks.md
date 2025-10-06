@@ -1,13 +1,14 @@
 [Input]
   1. "{root}/docs/requirements/*.md" --Project requirements
   2. "{root}/docs/architecture/*.md" --Architecture design
-  3. "{root}/docs/epic.md" --Task list
+  3. "{root}/docs/epic.md" --Feature-level task list
   4. "{root}/sunnycore/templates/implementation-plan-tmpl.yaml" --Implementation plan template (including: project information, requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
   5. "{root}/docs/knowledge/*.md" --Project knowledge (if exist)
 
 [Output]
   1. "{root}/docs/implementation-plan/{task_id}-plan.md" --Implementation plan (Markdown format)
     - Format: Use ATX headings; numbered lists; explicit requirement/architecture mapping sections
+    - Content: Breaks down feature-level tasks into atomic implementation steps across TDD RED/GREEN/REFACTOR phases
     - Example: "{root}/docs/implementation-plan/1-plan.md"
 
 [Constraints]
@@ -17,6 +18,8 @@
   4. Must produce exactly one file at the specified output path
   5. The produced implementation plan must ensure logical coherence of TDD three phases: RED phase acceptance criteria must be traceable to requirements; GREEN phase implementation steps must correspond to RED acceptance criteria; REFACTOR phase optimizations must not break acceptance criteria
   6. If requirement-architecture conflicts, unclear requirements, or missing necessary files are found, must record issues and request user clarification, do not make assumptions or skip
+  7. Must break down feature-level tasks (from epic.md) into atomic, executable steps within each TDD phase
+  8. Each atomic step in GREEN phase should be minimal and directly traceable to a specific acceptance criterion in RED phase
 
 [Tools]
   1. **todo_write**
@@ -29,21 +32,25 @@
 [Steps]
   1. Setup Phase
     - Read all workflow steps and requirement documents
-    - Understand the scope and complexity of the target task
+    - Understand the scope and complexity of the target feature-level task
       * Identify the number of requirements, number of architecture components, and cross-system dependencies involved in the task
       * Count the number of requirements, architecture components, and cross-system dependencies to assess complexity (simple/medium/complex)
       * Determine the depth of subsequent planning based on complexity
+      * Note: The input task is at feature-level; this phase will break it down into atomic implementation steps
     - Create todo list to track execution progress of Steps 2-5
 
   2. Planning RED Phase Content: Define Tests and Acceptance
-    - Write the "RED Phase" section for the plan: list acceptance criteria and test conditions corresponding to each requirement
+    - Write the "RED Phase" section for the plan: break down the feature-level task into specific acceptance criteria and test conditions
     - Map requirements to testable outcomes and verification methods
     - Define measurable success metrics, failure conditions, and edge cases
+    - Each acceptance criterion should be atomic and directly verifiable
 
   3. Planning GREEN Phase Content: Minimal Implementation Steps
-    - Write the "GREEN Phase" section for the plan: design minimal implementation steps that satisfy RED phase acceptance criteria
+    - Write the "GREEN Phase" section for the plan: break down the feature into atomic, minimal implementation steps that satisfy RED phase acceptance criteria
     - Map each acceptance criterion to specific architecture components, files, and concrete development tasks
-    - Each implementation step should clearly point to at least one test condition; prioritize the simplest implementation approach
+    - Each implementation step should be atomic, executable, and clearly point to at least one test condition
+    - Prioritize the simplest implementation approach
+    - Steps should be granular enough for straightforward TDD implementation (e.g., "Create User model", "Add login endpoint", "Implement password validation")
 
   4. Planning REFACTOR Phase Content: Refactoring and Optimization Steps
     - Write the "REFACTOR Phase" section for the plan: list refactoring and optimization work after GREEN phase completion

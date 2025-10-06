@@ -7,6 +7,50 @@
 
 ## [Unreleased]
 
+## [1.13.3] - sunnycore v1.13.3
+
+### Changed
+- 重構任務粒度管理：將任務拆分策略從「原子任務」改為「功能級任務 + TDD 原子拆分」兩階段模式
+  - 更新 `claude code/tasks/create-epic.md`：任務粒度從原子任務改為功能級任務
+    * 約束調整：「必須創建原子、可驗證的任務（≤14 字元）」→「必須創建功能級任務，代表模組內的主要功能」
+    * 新增說明：原子拆分將於 plan-tasks 階段使用 TDD RED/GREEN/REFACTOR 週期處理
+    * DoD 更新：「每個任務是原子的」→「每個任務是功能級的」
+  - 更新 `claude code/tasks/create-prd.md`：任務生成策略改為功能級
+    * 任務生成階段：「生成原子、可驗證的任務（≤50 字元）」→「生成功能級任務，每個任務代表模組內的主要功能」
+    * 新增說明：原子拆分將於 plan-tasks 階段使用 TDD RED/GREEN/REFACTOR 週期處理
+    * DoD 更新：「原子任務已生成」→「功能級任務已生成」
+  - 更新 `claude code/tasks/plan-tasks.md`：新增功能級任務拆分為原子步驟的詳細說明
+    * 輸入描述：「任務清單」→「功能級任務清單」
+    * 輸出格式：新增「將功能級任務拆分為原子實作步驟」說明
+    * 新增約束：「必須將功能級任務拆分為原子、可執行的步驟」、「每個原子步驟應該最小化且可直接追溯到特定驗收標準」
+    * 步驟優化：在 Setup、RED、GREEN 階段新增功能級任務拆分說明
+  - 提升任務管理的靈活性與 TDD 流程的清晰度
+- 擴展架構模板功能：新增 API 文檔區塊
+  - 更新 `claude code/templates/architecture-tmpl.yaml`：新增 `api-documentation` 區塊
+    * 新增欄位：internal-apis（內部 API 文檔：端點、方法、參數、回應、認證）
+    * 新增欄位：external-apis（外部 API 文檔：服務、函式庫、版本、文檔 URL、使用情境）
+    * 新增欄位：api-standards（API 標準：版本控制、認證、錯誤處理、速率限制）
+  - 提升架構文檔的 API 描述完整性
+- 優化任務與 PRD 模板：新增功能級任務說明與註釋
+  - 更新 `claude code/templates/prd-tmpl.yaml`：新增任務粒度說明
+    * 新增註釋：「任務應為功能級（例如：'實作登入功能'）」
+    * 新增註釋：「原子拆分將於 plan-tasks 階段使用 TDD RED/GREEN/REFACTOR 週期處理」
+  - 更新 `claude code/templates/tasks-tmpl.yaml`：新增功能級任務說明與註釋
+    * 新增註釋：「任務應為功能級（例如：'實作使用者認證'）」
+    * 新增註釋：「原子拆分將於 plan-tasks 階段使用 TDD RED/GREEN/REFACTOR 週期處理」
+  - 提升模板的使用指引清晰度
+- 強化文檔化任務：新增缺失架構文檔的自動生成功能
+  - 更新 `claude code/tasks/document-project.md`：新增架構文檔缺失處理邏輯
+    * 新增條件分支：若架構文檔缺失或不存在，則基於現有程式碼生成新架構文檔
+    * 新增條件分支：若文檔結構與通用架構模板不符，則重構文檔結構並重新命名檔案
+    * 新增生成流程：搜尋程式碼庫理解實作架構、根據通用架構模板生成文檔、執行 shard-architecture.py 拆分大型文檔
+  - 提升文檔化任務的完整性與自動化能力
+
+### Fixed
+- 修正任務模板錯字：更正 `claude code/templates/tasks-tmpl.yaml` 中的 ID 錯字
+  - 非功能任務第一項：`id: "Task-N1"r` → `id: "Task-N1"`
+  - 提升模板格式正確性
+
 ## [1.13.2] - sunnycore v1.13.2
 
 ### Changed

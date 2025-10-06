@@ -26,6 +26,8 @@
     - [Step 2: Reasoning tasks for content integration and document writing]
   3. **claude-context (MCP)**
     - [Step 1: Search codebase for actual implementation details]
+  4. **context7 (MCP)**
+    - [Step 1-2: Search API documentation of existing architecture's technology stack and libraries]
 
 [Steps]
   1. Analysis and Planning Phase
@@ -37,13 +39,24 @@
     - Deliverable: Task list and identified gaps
 
   2. Update Architecture Documents Phase
-    - For each architecture document in "{root}/docs/architecture/*.md":
-      * Review existing content and identify sections needing updates
-      * Search codebase for actual implementation details
-      * Integrate information from dev-notes and review-reports
-      * Update document according to universal architecture template structure
-      * Add actual implementation details, deviations, and lessons learned
-      * Ensure all changes are traceable to source references
+    - **IF** architecture documents are missing or do not exist:
+      * **THEN** generate new architecture documents based on existing codebase architecture:
+        - Search codebase to understand actual implementation architecture
+        - Generate architecture documents according to universal architecture template
+        - Run "{root}/sunnycore/scripts/shard-architecture.py" to shard large architecture documents
+        - Ensure all generated documents follow template structure and are in .md format
+      * **ELSE** update existing architecture documents:
+        - For each architecture document in "{root}/docs/architecture/*.md":
+          * Review existing content and identify sections needing updates
+          * **IF** document structure does not align with universal architecture template fields:
+            - **THEN** restructure the document to match template structure
+            - **AND** rename the file if necessary to better reflect its purpose
+            - **ELSE** proceed with incremental updates
+          * Search codebase for actual implementation details
+          * Integrate information from dev-notes and review-reports
+          * Update document according to universal architecture template structure
+          * Add actual implementation details, deviations, and lessons learned
+          * Ensure all changes are traceable to source references
     - Verify document completeness and internal consistency
     - Ensure all documents follow template structure and are in .md format
     - Deliverable: Updated architecture documents

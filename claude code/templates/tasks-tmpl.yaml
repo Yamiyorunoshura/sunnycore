@@ -1,13 +1,15 @@
 ---
 # Tasks Template - Flattened structure
 # 任務模板 - 扁平化結構
+# Note: Tasks should be at feature-level (e.g., "Implement login functionality")
+# Atomic breakdown will be handled in plan-tasks phase using TDD RED/GREEN/REFACTOR cycles
 
 functional_tasks:
   - [ ] id: "Task-1"
-      - name: ""
+      - name: ""  # Feature-level task name (e.g., "Implement user authentication")
       - requirements: []  # F-001, F-002
       - architecture_refs: []  # component names
-      - acceptance_hint: ""
+      - acceptance_hint: ""  # Feature-level acceptance criteria
 
   - [ ] id: "Task-2"
       - name: ""
@@ -16,7 +18,7 @@ functional_tasks:
       - acceptance_hint: ""
 
 non_functional_tasks:
-  - [ ] id: "Task-N1"r
+  - [ ] id: "Task-N1"
       - name: ""
       - requirements: []  # NFR-P-001
       - architecture_refs: []
