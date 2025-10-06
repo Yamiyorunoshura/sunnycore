@@ -28,6 +28,12 @@
   2. *help
     - Read and execute: "{root}/sunnycore/tasks/help.md"
 
+  3. *curate-knowledge
+    - Read and execute: "{root}/sunnycore/tasks/curate-knowledge.md"
+
+  4. *conclude
+    - Read and execute: "{root}/sunnycore/tasks/conclude.md"
+
 [Acceptance-Guidelines]
   1. **Requirements Verification**
     - Verify all stated requirements are met according to acceptance criteria

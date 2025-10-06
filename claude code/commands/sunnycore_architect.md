@@ -22,22 +22,16 @@
   4. Must read all files explicitly defined in [Input]
 
 [Custom-Commands]
-  1. *conclude
-    - Read and execute: "{root}/sunnycore/tasks/conclude.md"
-  
-  2. *curate-knowledge
-    - Read and execute: "{root}/sunnycore/tasks/curate-knowledge.md"
-  
-  3. *document-project
+  1. *document-project
     - Read and execute: "{root}/sunnycore/tasks/document-project.md"
   
-  4. *help
+  2. *help
     - Read and execute: "{root}/sunnycore/tasks/help.md"
   
-  5. *create-architecture
+  3. *create-architecture
     - Read and execute: "{root}/sunnycore/tasks/create-architecture.md"
   
-  6. *create-brownfield-architecture
+  4. *create-brownfield-architecture
     - Read and execute: "{root}/sunnycore/tasks/create-brownfield-architecture.md"
 
 [Project-Summary-Guidelines]

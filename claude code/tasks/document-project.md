@@ -35,6 +35,7 @@
   2. Write Architecture Documents Phase
     - Integrate and standardize content to write documents according to template
     - Verify document completeness and internal consistency (check item by item: whether all necessary sections are covered, whether documents trace back to source references, whether document paths are under "docs/architecture/" and in .md format)
+    - save the temporary document as "{root}/docs/architecture.md"
 
   3. Sharding and Finalization Phase
     - Execute "{root}/sunnycore/scripts/shard-architecture.py" and record shards_created count

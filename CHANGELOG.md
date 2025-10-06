@@ -7,6 +7,29 @@
 
 ## [Unreleased]
 
+## [1.12.5] - sunnycore v1.12.5
+
+### Changed
+- 重構角色職責分配：將專案總結與知識管理任務從 Architect 轉移至 PO
+  - 更新 `claude code/commands/sunnycore_architect.md`：移除 *conclude 和 *curate-knowledge 命令
+  - 更新 `claude code/commands/sunnycore_po.md`：新增 *conclude 和 *curate-knowledge 命令
+  - 更新 `claude code/README.md`：調整 Greenfield 和 Brownfield 流程中的步驟 9 和 10，改為由 PO 執行總結與知識整理
+  - 優化角色定位：PO 專注於業務驗收與專案交付，Architect 專注於技術架構設計
+- 增強任務輸入源：優化總結與知識整理任務的資訊收集範圍
+  - `claude code/tasks/conclude.md`：新增 cutover.md、cutover-dev-notes.md、progress.md 作為輸入源
+  - `claude code/tasks/curate-knowledge.md`：新增 cutover.md、cutover-dev-notes.md、progress.md 作為輸入源
+  - 提升專案總結與知識庫的完整性與準確性
+- 優化文件歸檔流程：擴大歸檔範圍並增強自動化
+  - `claude code/tasks/conclude.md`：新增 implementation-plan/ 目錄至歸檔清單
+  - `claude code/tasks/curate-knowledge.md`：新增自動歸檔 review-results/ 和 dev-notes/ 至 archive/{version_name}/
+  - 提升專案文件管理的系統性與可追溯性
+- 修正模板路徑引用：統一任務文檔中的路徑格式
+  - `claude code/tasks/conclude.md`：將模板路徑從 "{root}/claude code/templates/" 更正為 "{root}/sunnycore/templates/"
+  - 提升路徑引用的一致性與正確性
+- 優化文檔化任務：新增臨時文檔保存步驟
+  - `claude code/tasks/document-project.md`：新增將臨時文檔保存為 "{root}/docs/architecture.md" 的步驟
+  - 改善文檔產出流程的可檢視性
+
 ## [1.12.4] - sunnycore v1.12.4
 
 ### Added
