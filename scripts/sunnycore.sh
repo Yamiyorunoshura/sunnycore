@@ -146,8 +146,88 @@ run_cmd() {
       log "命令執行成功: $*"
     else
       error "命令執行失敗 (退出碼: $exit_code): $*"
+      handle_command_error "$exit_code" "$@"
       return $exit_code
     fi
+  fi
+}
+
+# 輔助函式：處理命令執行錯誤
+handle_command_error() {
+  local exit_code="$1"
+  shift
+  local failed_cmd="$*"
+
+  error "❌ 命令執行失敗：$failed_cmd"
+  error "   退出碼：$exit_code"
+
+  case "$exit_code" in
+    1)
+      error "   一般錯誤：命令執行失敗"
+      ;;
+    2)
+      error "   誤用錯誤：命令參數或語法錯誤"
+      ;;
+    126)
+      error "   權限錯誤：命令不可執行"
+      ;;
+    127)
+      error "   命令不存在：$failed_cmd"
+      ;;
+    128)
+      error "   無效參數傳遞"
+      ;;
+    130)
+      error "   被終端中斷 (Ctrl+C)"
+      ;;
+    137)
+      error "   被終止信號 (SIGKILL)"
+      ;;
+    *)
+      error "   未知錯誤"
+      ;;
+  esac
+
+  # 根據失敗的命令提供具體建議
+  case "${failed_cmd%% *}" in
+    "git")
+      error "   Git 相關建議："
+      error "     • 檢查網路連線"
+      error "     • 確認 Git 倉庫 URL 正確"
+      error "     • 檢查 Git 權限設置"
+      ;;
+    "mkdir"|"cp"|"rm")
+      error "   檔案系統相關建議："
+      error "     • 檢查目錄權限"
+      error "     • 確認磁碟空間充足"
+      error "     • 檢查路徑是否正確"
+      ;;
+    "curl"|"wget")
+      error "   網路相關建議："
+      error "     • 檢查網路連線"
+      error "     • 確認 URL 可訪問"
+      error "     • 檢查防火牆設置"
+      ;;
+  esac
+
+  if [[ $INTERACTIVE_MODE -eq 1 ]]; then
+    echo ""
+    local retry_choice
+    retry_choice=$(safe_read_with_timeout "是否重試此命令？[y/N]: " 15 "n")
+    case "$retry_choice" in
+      y|Y|yes|YES)
+        info "🔄 重試命令：$failed_cmd"
+        if "$@"; then
+          ok "✓ 重試成功"
+          return 0
+        else
+          error "❌ 重試仍然失敗"
+        fi
+        ;;
+      *)
+        warn "⚠️  跳過失敗的命令"
+        ;;
+    esac
   fi
 }
 
@@ -209,7 +289,147 @@ error() { printf '錯誤  %s\n' "$*" 1>&2; }
 ok() { printf '完成  %s\n' "$*"; }
 
 require_cmd() {
-  command -v "$1" >/dev/null 2>&1 || { error "缺少必要指令：$1"; exit 1; }
+  if ! command -v "$1" >/dev/null 2>&1; then
+    error "❌ 缺少必要指令：$1"
+
+    case "$1" in
+      "git")
+        error "   安裝 Git："
+        error "   • macOS: xcode-select --install 或 brew install git"
+        error "   • Ubuntu/Debian: sudo apt-get install git"
+        error "   • CentOS/RHEL: sudo yum install git"
+        error "   • Windows: 從 https://git-scm.com/ 下載"
+        ;;
+      "curl")
+        error "   安裝 curl："
+        error "   • macOS: brew install curl"
+        error "   • Ubuntu/Debian: sudo apt-get install curl"
+        error "   • CentOS/RHEL: sudo yum install curl"
+        error "   • Windows: 從 https://curl.se/ 下載"
+        ;;
+      "bash")
+        error "   安裝 bash："
+        error "   • macOS: 預設安裝"
+        error "   • Linux: 預設安裝"
+        error "   • Windows: 使用 WSL 或 Git Bash"
+        ;;
+    esac
+
+    if [[ $INTERACTIVE_MODE -eq 1 ]]; then
+      echo ""
+      local continue_choice
+      continue_choice=$(safe_read_with_timeout "是否繼續安裝（可能會失敗）？[y/N]: " 15 "n")
+      case "$continue_choice" in
+        y|Y|yes|YES)
+          warn "⚠️  繼續安裝但可能失敗"
+          return
+          ;;
+        *)
+          error "❌ 安裝已取消"
+          exit 1
+          ;;
+      esac
+    else
+      error "❌ 請安裝 $1 後重新執行"
+      exit 1
+    fi
+  fi
+}
+
+# 輔助函式：系統環境檢測
+check_system_environment() {
+  log "開始系統環境檢測"
+
+  # 檢測作業系統
+  local os_name="unknown"
+  local os_version="unknown"
+
+  if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    os_name="Linux"
+    if [[ -f /etc/os-release ]]; then
+      os_version="$(grep PRETTY_NAME /etc/os-release | cut -d '"' -f 2)"
+    fi
+  elif [[ "$OSTYPE" == "darwin"* ]]; then
+    os_name="macOS"
+    os_version="$(sw_vers -productVersion 2>/dev/null || echo "未知版本")"
+  elif [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "cygwin" ]]; then
+    os_name="Windows"
+    os_version="Windows (Unix-like environment)"
+  fi
+
+  log "作業系統: $os_name $os_version"
+
+  # 檢測 Shell 環境
+  local shell_name="$SHELL"
+  local shell_version="$BASH_VERSION"
+  log "Shell: $shell_name"
+  [[ -n "$shell_version" ]] && log "Bash 版本: $shell_version"
+
+  # 檢測權限
+  local current_dir="$(pwd)"
+  local can_write=0
+  if [[ -w "$current_dir" ]]; then
+    can_write=1
+    log "當前目錄可寫: 是"
+  else
+    log "當前目錄可寫: 否"
+  fi
+
+  # 檢測網路連線（可選）
+  if command -v ping >/dev/null 2>&1; then
+    if ping -c 1 github.com >/dev/null 2>&1; then
+      log "網路連線: 正常"
+    else
+      warn "網路連線: 可能異常（無法連線到 github.com）"
+    fi
+  fi
+
+  # 檢測磁碟空間
+  if command -v df >/dev/null 2>&1; then
+    local available_space
+    available_space="$(df -h . | awk 'NR==2 {print $4}' 2>/dev/null || echo "未知")"
+    log "可用磁碟空間: $available_space"
+  fi
+
+  # 在互動模式下顯示摘要
+  if [[ $INTERACTIVE_MODE -eq 1 && $QUIET_MODE -eq 0 ]]; then
+    echo ""
+    info "🖥️  系統環境："
+    echo "   作業系統: $os_name $os_version"
+    echo "   Shell: $shell_name"
+    echo "   當前目錄: $current_dir"
+    echo "   目錄權限: $([[ $can_write -eq 1 ]] && echo "可寫" || echo "只讀")"
+    echo ""
+  fi
+
+  # 檢查關鍵要求
+  local issues=0
+
+  if [[ $can_write -eq 0 ]]; then
+    warn "⚠️  當前目錄不可寫，安裝可能失敗"
+    issues=$((issues + 1))
+  fi
+
+  if ! command -v git >/dev/null 2>&1; then
+    warn "⚠️  Git 未安裝，無法從遠端倉庫拉取"
+    issues=$((issues + 1))
+  fi
+
+  if [[ $issues -gt 0 && $INTERACTIVE_MODE -eq 1 ]]; then
+    local continue_install
+    continue_install=$(safe_read_with_timeout "檢測到 $issues 個問題，是否繼續安裝？[y/N]: " 15 "n")
+    case "$continue_install" in
+      y|Y|yes|YES)
+        info "🔧 將繼續安裝（可能遇到問題）"
+        ;;
+      *)
+        error "❌ 安裝已取消"
+        exit 1
+        ;;
+    esac
+  fi
+
+  log "系統環境檢測完成"
 }
 
 run() {
@@ -347,23 +567,82 @@ parse_args() {
     esac
   done
 
-  # 檢測是否為 curl 方式執行，如果沒有提供任何參數則自動啟用互動模式
-  if [[ $INTERACTIVE_MODE -eq 0 && -z "${INSTALL_BASE:-}" ]]; then
-    # 檢查腳本是否從 stdin 讀取（curl 方式）
+  # 改進的執行方式檢測和兼容性處理
+  detect_execution_method() {
+    local execution_method="unknown"
+    local is_from_stdin=0
+    local is_from_file=0
+
+    # 檢測是否從 stdin 讀取（curl 方式）
     if [[ ! -t 0 ]]; then
-      info "檢測到從管道執行，自動啟用互動與靜默模式"
-      INTERACTIVE_MODE=1
-      QUIET_MODE=1  # 自動啟用靜默模式以減少冗長輸出
-      
-      # 嘗試重新定向到終端，如果失敗則使用預設值
-      if [[ -t 1 ]] && [[ -c /dev/tty ]]; then
-        exec < /dev/tty 2>/dev/null || {
-          warn "無法重定向到終端，將使用預設設置"
-          INSTALL_BASE="${HOME:-$(pwd -P)}"
-        }
-      fi
+      is_from_stdin=1
+      execution_method="curl"
+      log "檢測到從管道執行 (curl 方式)"
+    elif [[ -n "${BASH_SOURCE[0]:-}" ]] && [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
+      # 腳本被 source 執行
+      execution_method="source"
+      log "檢測到 source 執行方式"
+    elif [[ -f "$0" ]] && [[ "$(basename "$0")" == "${SCRIPT_NAME}" ]]; then
+      # 直接執行腳本檔案
+      is_from_file=1
+      execution_method="direct"
+      log "檢測到直接執行腳本檔案"
     fi
-  fi
+
+    # 根據執行方式調整設置
+    case "$execution_method" in
+      "curl")
+        # curl 執行方式：自動啟用互動模式
+        if [[ $INTERACTIVE_MODE -eq 0 && -z "${INSTALL_BASE:-}" ]]; then
+          info "📥 檢測到 curl 執行方式，自動啟用互動模式"
+          INTERACTIVE_MODE=1
+          QUIET_MODE=1  # 自動啟用靜默模式以減少冗長輸出
+
+          # 嘗試重新定向到終端
+          if [[ -t 1 ]] && [[ -c /dev/tty ]]; then
+            if exec < /dev/tty 2>/dev/null; then
+              log "成功重定向到終端"
+            else
+              warn "⚠️  無法重定向到終端，將使用預設設置"
+              INSTALL_BASE="${HOME:-$(pwd -P)}"
+              info "將安裝到預設路徑：$INSTALL_BASE"
+            fi
+          else
+            warn "⚠️  終端不可用，將使用預設設置"
+            INSTALL_BASE="${HOME:-$(pwd -P)}"
+            info "將安裝到預設路徑：$INSTALL_BASE"
+          fi
+        fi
+        ;;
+      "direct")
+        # 直接執行：保持現有邏輯
+        log "直接執行腳本，保持現有設置"
+        ;;
+      "source")
+        # source 執行：給出警告
+        warn "⚠️  檢測到 source 執行方式，建議直接執行腳本"
+        ;;
+      *)
+        # 未知執行方式：保守處理
+        log "未知執行方式，使用保守設置"
+        if [[ -z "${INSTALL_BASE:-}" ]]; then
+          INSTALL_BASE="${HOME:-$(pwd -P)}"
+          info "將安裝到預設路徑：$INSTALL_BASE"
+        fi
+        ;;
+    esac
+
+    # 記錄執行環境信息
+    log "執行方式: $execution_method"
+    log "互動模式: $INTERACTIVE_MODE"
+    log "靜默模式: $QUIET_MODE"
+    log "stdin 是否為終端: $([[ -t 0 ]] && echo "是" || echo "否")"
+    log "stdout 是否為終端: $([[ -t 1 ]] && echo "是" || echo "否")"
+    log "/dev/tty 是否可用: $([[ -c /dev/tty ]] && echo "是" || echo "否")"
+  }
+
+  # 執行檢測
+  detect_execution_method
 
   # 將使用者提供的安裝路徑中的「~」展開為實際家目錄
   if [[ -n "${INSTALL_BASE:-}" ]]; then
@@ -414,53 +693,64 @@ prompt_install_type() {
   # 在互動模式下才詢問
   if [[ $INTERACTIVE_MODE -eq 1 ]]; then
     echo ""
-    echo "請選擇安裝方式："
-    echo "  1) 專案安裝（安裝到當前專案目錄）"
-    echo "  2) 指定路徑安裝（自訂安裝位置）"
+    echo "🔧 請選擇安裝方式："
+    echo ""
+    echo "  1️⃣  專案安裝（安裝到當前專案目錄）"
+    echo "     • 適合將 Sunnycore 整合到現有專案中"
+    echo "     • 只安裝 commands/ 和 agents/ 到 .claude/"
+    echo ""
+    echo "  2️⃣  指定路徑安裝（自訂安裝位置）"
+    echo "     • 適合獨立安裝或多專案共用"
+    echo "     • 會在指定路徑下建立 sunnycore/ 和 .claude/ 資料夾"
+    echo ""
 
     local input_choice=""
-    local read_attempts=0
     local max_attempts=3
+    local attempt=0
 
-    while [[ -z "$input_choice" ]] && [[ $read_attempts -lt $max_attempts ]]; do
-      read_attempts=$((read_attempts + 1))
+    while [[ $attempt -lt $max_attempts ]]; do
+      attempt=$((attempt + 1))
 
-      set +e
-      if [[ -t 0 ]] && [[ -c /dev/tty ]]; then
-        read -r -p "輸入選項 [1-2]（預設：1）: " input_choice < /dev/tty 2>/dev/null
-        local read_result=$?
-      else
-        read -r -p "輸入選項 [1-2]（預設：1）: " input_choice
-        local read_result=$?
+      local prompt_text="請輸入選項 [1-2]（預設：1）: "
+      if [[ $attempt -gt 1 ]]; then
+        prompt_text="請輸入有效選項 [1-2]（預設：1，剩餘嘗試：$((max_attempts - attempt + 1))）: "
       fi
-      set -e
+
+      # 使用改進的讀取函式
+      input_choice=$(safe_read_with_timeout "$prompt_text" 30 "1")
+      local read_result=$?
 
       if [[ $read_result -ne 0 ]]; then
-        info "使用預設選項：專案安裝"
+        warn "⚠️  無法讀取用戶輸入，使用預設選項：專案安裝"
         INSTALL_TYPE="project"
         return
       fi
 
-      # 如果用戶直接按 Enter，使用預設值
-      if [[ -z "$input_choice" ]]; then
-        input_choice="1"
+      # 如果用戶直接按 Enter 或預設值，使用預設值
+      if [[ -z "$input_choice" || "$input_choice" == "1" ]]; then
+        echo ""
+        info "✓ 選擇：專案安裝"
+        echo "   將安裝到當前專案目錄的 .claude/ 資料夾"
+        echo ""
+        INSTALL_TYPE="project"
+        return
       fi
 
       case "$input_choice" in
-        1)
-          INSTALL_TYPE="project"
-          info "選擇：專案安裝"
-          ;;
         2)
+          echo ""
+          info "✓ 選擇：指定路徑安裝"
+          echo "   將詢問自訂安裝位置"
+          echo ""
           INSTALL_TYPE="custom"
-          info "選擇：指定路徑安裝"
+          return
           ;;
         *)
-          if [[ $read_attempts -lt $max_attempts ]]; then
-            echo "無效的選項：$input_choice，請輸入 1 或 2"
-            input_choice=""
+          if [[ $attempt -lt $max_attempts ]]; then
+            warn "❌ 無效的選項：$input_choice，請輸入 1 或 2"
           else
-            warn "超過最大嘗試次數，使用預設選項：專案安裝"
+            warn "⚠️  超過最大嘗試次數，使用預設選項：專案安裝"
+            echo ""
             INSTALL_TYPE="project"
             return
           fi
@@ -471,8 +761,10 @@ prompt_install_type() {
     # 非互動模式，檢查是否有指定路徑
     if [[ -n "${INSTALL_BASE:-}" ]]; then
       INSTALL_TYPE="custom"
+      log "非互動模式：檢測到指定路徑，設定為指定路徑安裝"
     else
       INSTALL_TYPE="project"
+      log "非互動模式：未指定路徑，設定為專案安裝"
     fi
   fi
 }
@@ -486,7 +778,14 @@ prompt_install_path() {
   if [[ "${INSTALL_TYPE:-}" == "project" ]]; then
     # 專案安裝：使用當前工作目錄
     INSTALL_BASE="$(pwd -P)"
-    info "專案安裝模式：將安裝到 ${INSTALL_BASE}/.claude"
+    if [[ $INTERACTIVE_MODE -eq 1 ]]; then
+      echo ""
+      info "📁 專案安裝模式："
+      echo "   安裝路徑：${INSTALL_BASE}/.claude"
+      echo ""
+    else
+      log "專案安裝模式：將安裝到 ${INSTALL_BASE}/.claude"
+    fi
     return
   fi
 
@@ -495,38 +794,163 @@ prompt_install_path() {
     local default_path
     default_path="${HOME:-$(pwd -P)}"
     echo ""
-    echo "指定路徑安裝模式："
+    echo "📂 指定路徑安裝模式："
+    echo "   將在指定路徑下建立："
+    echo "   • sunnycore/ - 主程式檔案"
+    echo "   • .claude/ - Claude Code 整合檔案"
+    echo ""
 
     local input_path=""
+    local max_attempts=3
+    local attempt=0
 
-    set +e
-    if [[ -t 0 ]] && [[ -c /dev/tty ]]; then
-      read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path < /dev/tty 2>/dev/null
-      local read_result=$?
-    else
-      read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path
-      local read_result=$?
-    fi
-    set -e
+    while [[ $attempt -lt $max_attempts ]]; do
+      attempt=$((attempt + 1))
 
-    if [[ $read_result -ne 0 ]]; then
-      warn "無法讀取用戶輸入，使用預設路徑：${default_path}"
-      INSTALL_BASE="$default_path"
+      local prompt_text="請輸入安裝路徑（預設：${default_path}）："
+      if [[ $attempt -gt 1 ]]; then
+        prompt_text="請輸入有效路徑（預設：${default_path}，剩餘嘗試：$((max_attempts - attempt + 1))）："
+      fi
+
+      # 使用改進的讀取函式
+      input_path=$(safe_read_with_timeout "$prompt_text" 45 "$default_path")
+      local read_result=$?
+
+      if [[ $read_result -ne 0 ]]; then
+        warn "⚠️  無法讀取用戶輸入，使用預設路徑：${default_path}"
+        INSTALL_BASE="$default_path"
+        echo ""
+        return
+      fi
+
+      # 處理空輸入
+      if [[ -z "$input_path" ]]; then
+        input_path="$default_path"
+      fi
+
+      # 展開路徑
+      local expanded_path
+      expanded_path="$(expand_path "$input_path")"
+
+      # 驗證路徑
+      if [[ -z "$expanded_path" ]]; then
+        if [[ $attempt -lt $max_attempts ]]; then
+          warn "❌ 無效的路徑：${input_path}"
+        else
+          warn "⚠️  超過最大嘗試次數，使用預設路徑：${default_path}"
+          expanded_path="$default_path"
+        fi
+        continue
+      fi
+
+      # 檢查父目錄是否存在或可創建
+      local parent_dir
+      parent_dir="$(dirname "$expanded_path")"
+      if [[ ! -d "$parent_dir" ]]; then
+        warn "⚠️  父目錄不存在：${parent_dir}"
+        if [[ $attempt -lt $max_attempts ]]; then
+          local create_parent
+          create_parent=$(safe_read_with_timeout "是否嘗試創建父目錄？[y/N]: " 15 "n")
+          case "$create_parent" in
+            y|Y|yes|YES)
+              if mkdir -p "$parent_dir" 2>/dev/null; then
+                info "✓ 成功創建父目錄：${parent_dir}"
+              else
+                warn "❌ 無法創建父目錄，請選擇其他路徑"
+                continue
+              fi
+              ;;
+            *)
+              continue
+              ;;
+          esac
+        else
+          warn "⚠️  無法創建父目錄，使用預設路徑：${default_path}"
+          expanded_path="$default_path"
+        fi
+      fi
+
+      # 成功獲得有效路徑
+      INSTALL_BASE="$expanded_path"
+      echo ""
+      info "✓ 選擇的安裝路徑：${INSTALL_BASE}"
+      echo ""
       return
-    fi
-
-    if [[ -z "${input_path:-}" ]]; then
-      INSTALL_BASE="$default_path"
-    else
-      INSTALL_BASE="$(expand_path "$input_path")"
-    fi
+    done
   else
     # 非互動模式且未指定路徑，使用預設值
     local default_path
     default_path="${HOME:-$(pwd -P)}"
-    warn "未指定安裝路徑，使用預設路徑：${default_path}"
+    warn "⚠️  未指定安裝路徑，使用預設路徑：${default_path}"
     INSTALL_BASE="$default_path"
   fi
+}
+
+# 輔助函式：安全讀取用戶輸入，支援超時
+safe_read_with_timeout() {
+  local prompt="$1"
+  local timeout="${2:-30}"  # 預設 30 秒超時
+  local default_value="${3:-}"  # 預設值
+  local result_var="$4"  # 結果變數名稱
+
+  local response=""
+  local read_result=0
+
+  # 臨時禁用嚴格模式
+  set +e
+
+  if [[ -t 0 ]] && [[ -c /dev/tty ]]; then
+    # 嘗試從終端讀取，支援超時
+    if command -v timeout >/dev/null 2>&1; then
+      # 使用 timeout 命令
+      response=$(timeout "$timeout" bash -c "read -r -p '$prompt' response; echo \\\$response" < /dev/tty 2>/dev/null)
+      read_result=$?
+    else
+      # 沒有 timeout 命令，使用普通 read
+      read -r -p "$prompt" response < /dev/tty 2>/dev/null
+      read_result=$?
+    fi
+  else
+    # 嘗試直接讀取
+    if command -v timeout >/dev/null 2>&1; then
+      response=$(timeout "$timeout" bash -c "read -r -p '$prompt' response; echo \\\$response" 2>/dev/null)
+      read_result=$?
+    else
+      read -r -p "$prompt" response
+      read_result=$?
+    fi
+  fi
+
+  set -e  # 重新啟用嚴格模式
+
+  # 處理結果
+  if [[ $read_result -eq 0 ]]; then
+    # 讀取成功
+    if [[ -z "$response" && -n "$default_value" ]]; then
+      response="$default_value"
+    fi
+  elif [[ $read_result -eq 124 ]]; then
+    # 超時
+    warn "讀取用戶輸入超時 (${timeout}秒)，使用預設值：${default_value:-取消操作}"
+    response="$default_value"
+    read_result=0
+  else
+    # 讀取失敗
+    if [[ -n "$default_value" ]]; then
+      warn "無法讀取用戶輸入，使用預設值：$default_value"
+      response="$default_value"
+      read_result=0
+    fi
+  fi
+
+  # 將結果賦值給指定變數
+  if [[ -n "$result_var" ]]; then
+    printf -v "$result_var" '%s' "$response"
+  else
+    echo "$response"
+  fi
+
+  return $read_result
 }
 
 confirm_overwrite_if_needed() {
@@ -543,47 +967,60 @@ confirm_overwrite_if_needed() {
     # 在互動模式下才詢問
     if [[ $INTERACTIVE_MODE -eq 1 ]]; then
       log "詢問使用者是否覆寫"
+      echo ""
+      warn "⚠️  目標目錄已存在：${target_dir}"
+      echo "此操作將會刪除該目錄下的所有檔案並重新安裝。"
+      echo ""
 
-      # 確保可以從終端讀取輸入
       local yn=""
-      # 臨時禁用嚴格模式以防止 read 失敗導致腳本退出
-      set +e
-      if [[ -t 0 ]] && [[ -c /dev/tty ]]; then
-        # 嘗試從終端讀取
-        read -r -p "目標已存在：${target_dir}，是否清空後重新安裝？[y/N]: " yn < /dev/tty 2>/dev/null
-        local read_result=$?
-      else
-        # 直接讀取
-        read -r -p "目標已存在：${target_dir}，是否清空後重新安裝？[y/N]: " yn
-        local read_result=$?
-      fi
-      set -e  # 重新啟用嚴格模式
+      local read_result=0
 
-      # 檢查 read 是否成功
+      # 使用改進的讀取函式
+      yn=$(safe_read_with_timeout "是否清空後重新安裝？[y/N]: " 30 "n")
+      read_result=$?
+
       if [[ $read_result -ne 0 ]]; then
-        # 讀取失敗，取消安裝
-        warn "無法讀取用戶輸入，為安全起見取消安裝"
-        warn "如需覆寫，請使用 -y 參數或手動刪除該目錄：$target_dir"
+        # 讀取完全失敗
+        echo ""
+        warn "❌ 無法讀取用戶輸入"
+        echo "解決方案："
+        echo "  1. 使用 -y 參數自動同意覆寫：bash $SCRIPT_NAME -y"
+        echo "  2. 手動刪除目錄：rm -rf $target_dir"
+        echo "  3. 選擇其他安裝路徑"
+        echo ""
         exit 1
       fi
 
       log "使用者回應: $yn"
       case "$yn" in
         y|Y|yes|YES)
-          info "清空既有目錄：$target_dir"
+          echo ""
+          info "✓ 同意覆寫，清空既有目錄：$target_dir"
           log "使用者同意覆寫，清空目錄"
           run_cmd rm -rf "$target_dir"
           ;;
+        n|N|no|NO|"")
+          echo ""
+          warn "❌ 使用者取消安裝"
+          echo "已取消安裝。如需重新安裝，請："
+          echo "  1. 使用 -y 參數自動同意覆寫"
+          echo "  2. 手動刪除目錄後重新執行"
+          echo "  3. 選擇其他安裝路徑"
+          echo ""
+          exit 1
+          ;;
         *)
-          log "使用者取消安裝"
-          echo "已取消。"
+          echo ""
+          warn "❌ 無效的選項：$yn"
+          warn "   將取消安裝以避免意外操作"
+          echo ""
           exit 1
           ;;
       esac
     else
       # 非互動模式且目標目錄存在，給出警告但不清空
-      warn "目標目錄已存在但非互動模式，將保留現有檔案：$target_dir"
-      warn "如需覆寫，請使用 -y 參數或手動刪除該目錄"
+      warn "⚠️  目標目錄已存在但非互動模式，將保留現有檔案：$target_dir"
+      warn "   如需覆寫，請使用 -y 參數或手動刪除該目錄"
     fi
   else
     log "目標目錄不存在，無需覆寫"
@@ -989,9 +1426,15 @@ main() {
   log "傳入參數: $*"
   log "當前工作目錄: $(pwd)"
   log "當前使用者: $(whoami)"
-  
+
+  # 設置錯誤處理
+  set -euo pipefail
+
+  # 捕獲中斷信號
+  trap 'echo ""; warn "安裝被用戶中斷"; cleanup; exit 130' INT TERM
+
   parse_args "$@"
-  
+
   log "參數解析完成"
   log "DRY_RUN: $DRY_RUN"
   log "AUTO_YES: $AUTO_YES"
@@ -999,15 +1442,53 @@ main() {
   log "SELECTED_VERSION: ${SELECTED_VERSION:-未設定}"
   log "REPO_URL: ${REPO_URL:-未設定}"
   log "BRANCH: ${BRANCH:-未設定}"
-  
+
+  # 系統環境檢測
+  check_system_environment
+
+  # 歡迎信息
+  if [[ $INTERACTIVE_MODE -eq 1 && $QUIET_MODE -eq 0 ]]; then
+    echo ""
+    info "🌞 歡迎使用 Sunnycore 安裝程式！"
+    info "   版本：$VERSION"
+    echo ""
+  fi
+
   prompt_select_version
   log "選擇的版本: $SELECTED_VERSION"
-  
+
   prompt_install_type
   log "安裝類型: $INSTALL_TYPE"
-  
+
   prompt_install_path
   log "安裝路徑: $INSTALL_BASE"
+
+  # 最後確認
+  if [[ $INTERACTIVE_MODE -eq 1 && $AUTO_YES -eq 0 ]]; then
+    echo ""
+    info "📋 安裝摘要："
+    echo "   版本：Claude Code"
+    echo "   類型：$([[ $INSTALL_TYPE == "project" ]] && echo "專案安裝" || echo "指定路徑安裝")"
+    echo "   路徑：$INSTALL_BASE"
+    if [[ -d "$INSTALL_BASE/.claude" ]] || [[ -d "$INSTALL_BASE/sunnycore" ]]; then
+      echo "   狀態：⚠️  目標目錄已存在，將覆寫"
+    else
+      echo "   狀態：✓ 目標目錄可用"
+    fi
+    echo ""
+
+    local final_confirm
+    final_confirm=$(safe_read_with_timeout "確認開始安裝？[Y/n]: " 20 "y")
+    case "$final_confirm" in
+      n|N|no|NO)
+        warn "❌ 用戶取消安裝"
+        exit 1
+        ;;
+      *)
+        ok "✓ 開始安裝..."
+        ;;
+    esac
+  fi
 
   case "$SELECTED_VERSION" in
     claude-code)
@@ -1020,7 +1501,19 @@ main() {
       exit 1
       ;;
   esac
-  
+
+  # 成功完成
+  if [[ $INTERACTIVE_MODE -eq 1 || $QUIET_MODE -eq 0 ]]; then
+    echo ""
+    ok "🎉 Sunnycore 安裝完成！"
+    echo ""
+    info "接下來可以："
+    echo "   1. 重啟 Claude Code"
+    echo "   2. 檢查 .claude/ 目錄中的檔案"
+    echo "   3. 開始使用 Sunnycore 功能"
+    echo ""
+  fi
+
   log "=== Sunnycore 安裝腳本執行完成 ==="
 }
 

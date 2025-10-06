@@ -39,9 +39,21 @@
     - Record decisions (recommend ADR format or table format) and include requirement traceability, handle cross-cutting concerns (security, observability, performance)
 
   3. Writing Phase
-    - Use {root}/sunnycore/templates/architecture-tmpl.yaml to draft {root}/docs/architecture.md
+    - Use {root}/sunnycore/templates/architecture-tmpl.yaml to draft {root}/docs/architecture.md content
     - Include requirement traceability matrix and ensure each mapping relationship has been handled
-    - Execute uv run {root}/sunnycore/scripts/shard-architecture.py and verify output appears under {root}/docs/architecture/; if execution fails, check if architecture.md format complies with template specifications, fix and re-execute
+    - Present draft content to user showing key sections (overview, components, traceability matrix, design decisions)
+    - if user approves draft then proceed to 3.1, else proceed to 3.2
+      
+      3.1. Write Final Documents
+        - Write approved content to {root}/docs/architecture.md
+        - Execute uv run {root}/sunnycore/scripts/shard-architecture.py
+        - Verify output appears under {root}/docs/architecture/
+        - if execution succeeds then proceed to Step 4, else check if architecture.md format complies with template specifications, fix and re-execute
+      
+      3.2. Revise Based on Feedback
+        - Collect user feedback on what needs to be changed
+        - Revise the draft content according to feedback
+        - Return to present revised draft and request approval again
 
   4. Final Verification Phase
     - Cross-verify through mapping matrix whether architecture satisfies all requirements
@@ -60,6 +72,7 @@
   - [ ] Created requirement-to-architecture mapping matrix (requirement ID → component/decision), complete and accurate (100% coverage, no omissions or incorrect mappings)
   - [ ] All functional requirements have been mapped to specific architecture components
   - [ ] Non-functional requirements have been converted to measurable architecture constraints
+  - [ ] User approval has been obtained for architecture draft
   - [ ] {root}/docs/architecture.md exists and follows the template
   - [ ] shard-architecture.py has been executed and shard file generation has been verified
   - [ ] All todo items are completed
