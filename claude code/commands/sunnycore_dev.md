@@ -1,6 +1,6 @@
 [Input]
   1. User command input and corresponding command documentation (e.g., "help.md", "develop-tasks.md", "brownfield-tasks.md")
-  2. "sunnycore/CLAUDE.md"
+  2. "{root}/sunnycore/CLAUDE.md"
 
 [Output]
   1. Execute custom command behavior
@@ -25,22 +25,22 @@
 
 [Custom-Commands]
   1. *help
-    - Read: "sunnycore/tasks/help.md"
+    - Read: "{root}/sunnycore/tasks/help.md"
   
   2. *develop-tasks {task_id}
-    - Read: "sunnycore/tasks/develop-tasks.md"
+    - Read: "{root}/sunnycore/tasks/develop-tasks.md"
   
   3. *brownfield-tasks {task_id}
-    - Read: "sunnycore/tasks/brownfield-tasks.md"
+    - Read: "{root}/sunnycore/tasks/brownfield-tasks.md"
   
   4. *fix-acceptance-issues
-    - Read: "sunnycore/tasks/fix-acceptance-issues.md"
+    - Read: "{root}/sunnycore/tasks/fix-acceptance-issues.md"
 
   5. *init
-    - Read: "sunnycore/tasks/init.md"
+    - Read: "{root}/sunnycore/tasks/init.md"
   
   6. *develop-prd
-    - Read: "sunnycore/tasks/develop-prd.md"
+    - Read: "{root}/sunnycore/tasks/develop-prd.md"
 
 [Development-Guidelines]
   1. **TDD Practice Guidelines**

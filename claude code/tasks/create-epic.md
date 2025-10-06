@@ -1,10 +1,10 @@
 [Input]
-  1. "docs/requirements/*.md" --Project functional and non-functional requirements
-  2. "docs/architecture/*.md" --Architecture design and technical specifications
-  3. "sunnycore/templates/tasks-tmpl.yaml" --Task template format
+  1. "{root}/docs/requirements/*.md" --Project functional and non-functional requirements
+  2. "{root}/docs/architecture/*.md" --Architecture design and technical specifications
+  3. "{root}/sunnycore/templates/tasks-tmpl.yaml" --Task template format
 
 [Output]
-  1. "docs/epic.md" --Task list (Markdown format)
+  1. "{root}/docs/epic.md" --Task list (Markdown format)
 
 [Constraints]
   1. Must create atomic, verifiable tasks (≤14 characters, clear outcomes)
@@ -43,7 +43,7 @@
     - if user approves draft then proceed to 4.1, else proceed to 4.2
       
       4.1. Write Final Document
-        - Write approved task list to "docs/epic.md" (Markdown format)
+        - Write approved task list to "{root}/docs/epic.md" (Markdown format)
         - Check all DoD items one by one to ensure they are met
         - Confirm all todo items are completed
       
@@ -56,7 +56,7 @@
   - [ ] All requirement and architecture documents have been read
   - [ ] Research notes are complete, including mapping of functional requirements/non-functional requirements to tasks
   - [ ] User approval has been obtained for task list draft
-  - [ ] File "docs/epic.md" exists and is valid Markdown
+  - [ ] File "{root}/docs/epic.md" exists and is valid Markdown
   - [ ] All tasks comply with template fields
   - [ ] Each task is atomic, outcome-oriented, and verifiable
   - [ ] No file names or key names use spaces; kebab-case is enforced

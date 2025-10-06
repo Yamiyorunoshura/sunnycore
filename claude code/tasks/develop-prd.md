@@ -1,9 +1,9 @@
 [Input]
-  1. "docs/PRD.md" --Product Requirements Document
-  2. "sunnycore/templates/dev-notes-tmpl.yaml" --Development notes template
+  1. "{root}/docs/PRD.md" --Product Requirements Document
+  2. "{root}/sunnycore/templates/dev-notes-tmpl.yaml" --Development notes template
 
 [Output]
-  1. "docs/dev-notes/prd-dev-notes.md" --Complete development notes document
+  1. "{root}/docs/dev-notes/prd-dev-notes.md" --Complete development notes document
   2. High-quality, tested code implementation for all PRD tasks
   3. Complete test coverage and test cases
 
@@ -24,7 +24,7 @@
 
 [Steps]
   1. Preparation Phase
-    - Read "docs/PRD.md" completely
+    - Read "{root}/docs/PRD.md" completely
     - Extract all tasks from the PRD tasks section
     - Understand requirements, architecture, and task dependencies
     - Create todo list based on all tasks, respecting dependency order
@@ -69,7 +69,7 @@
     - Record any deviations from PRD and rationale
     - Document risk considerations and mitigation strategies
     - Include test results and coverage metrics
-    - Generate document to "docs/dev-notes/prd-dev-notes.md"
+    - Generate document to "{root}/docs/dev-notes/prd-dev-notes.md"
 
   5. Finalization Phase
     - Cross-verify implementation against all PRD acceptance criteria

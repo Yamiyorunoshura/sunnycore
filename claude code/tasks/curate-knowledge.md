@@ -1,13 +1,13 @@
 [Input]
-  1. "docs/review-results/*.md" --Review reports
-  2. "docs/dev-notes/*.md" --Development notes
-  3. "docs/knowledge/*.md" --Existing knowledge base(if exist)
-  4. "cutover.md" --Cutover report (required)
-  5. "docs/cutover-dev-notes.md" --Cutover development notes (required)
-  6. "docs/progress.md" --Progress record
+  1. "{root}/docs/review-results/*.md" --Review reports
+  2. "{root}/docs/dev-notes/*.md" --Development notes
+  3. "{root}/docs/knowledge/*.md" --Existing knowledge base(if exist)
+  4. "{root}/cutover.md" --Cutover report (required)
+  5. "{root}/docs/cutover-dev-notes.md" --Cutover development notes (required)
+  6. "{root}/docs/progress.md" --Progress record
 
 [Output]
-  1. "docs/knowledge/*.md" --Knowledge base (create directory first if it does not exist)
+  1. "{root}/docs/knowledge/*.md" --Knowledge base (create directory first if it does not exist)
     - Document organization: May produce "best-practices.md", "errors.md" based on actual content, or subdivide by domain/type
     - Content allocation: One entry per platinum practice, one entry per error case
 
@@ -39,21 +39,21 @@
     - Decide organization structure for best practices and errors
 
   3. Produce Documents Phase
-    - First create "docs/knowledge/" directory (if it does not exist)
+    - First create "{root}/docs/knowledge/" directory (if it does not exist)
     - Produce best practices to corresponding documents by classification (document naming: "best-practices-{domain}.md" or "best-practices.md")
     - Produce error cases to corresponding documents by classification (document naming: "errors-{type}.md" or "errors.md")
     - Document content format: Each knowledge point includes title, description, evidence source, applicable scenarios
     - Annotate evidence source for each knowledge point (annotation format: file path + relevant section, e.g., "docs/dev-notes/feature-x.md" [Error Handling] paragraph)
-    - Archive the "review-results/" and "dev-notes/" files to "docs/archive/{version_name}/"
+    - Archive the "review-results/" and "dev-notes/" files to "{root}/docs/archive/{version_name}/"
 
   4. DoD Verification Phase
     - Check all DoD items one by one to ensure they are met
     - Confirm all todo items are completed
 
 [DoD]
-  - [ ] All files in "docs/review-results/" and "docs/dev-notes/" have been read
+  - [ ] All files in "{root}/docs/review-results/" and "{root}/docs/dev-notes/" have been read
   - [ ] Knowledge base structure and classification method have been conceived
-  - [ ] Knowledge base directory "docs/knowledge/" has been created
+  - [ ] Knowledge base directory "{root}/docs/knowledge/" has been created
   - [ ] All platinum-level best practices have been identified and produced by classification
   - [ ] All errors during development process have been identified and recorded (including type, context, solution)
   - [ ] Each knowledge point has clear evidence source annotation

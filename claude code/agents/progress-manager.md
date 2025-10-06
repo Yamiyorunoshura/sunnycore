@@ -9,8 +9,8 @@ color: red
   1. All the context from the user and the main agent (sunnycore_assistant)
 
 [Output]
-  1. "docs/progress.md" (only critical and important information)
-  2. "docs/knowledge/*.md" (conditionally, for bug fixes and important learnings)
+  1. "{root}/docs/progress.md" (only critical and important information)
+  2. "{root}/docs/knowledge/*.md" (conditionally, for bug fixes and important learnings)
 
 [Role]
   **Progress Recording Manager**, responsible for recording development progress and managing knowledge base

@@ -1,14 +1,14 @@
 [Input]
-  1. "docs/requirements/*.md" --Project requirements
-  2. "docs/architecture/*.md" --Architecture design
-  3. "docs/epic.md" --Task list
-  4. "sunnycore/templates/implementation-plan-tmpl.yaml" --Implementation plan template (including: project information, requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
-  5. "docs/knowledge/*.md" --Project knowledge (if exist)
+  1. "{root}/docs/requirements/*.md" --Project requirements
+  2. "{root}/docs/architecture/*.md" --Architecture design
+  3. "{root}/docs/epic.md" --Task list
+  4. "{root}/sunnycore/templates/implementation-plan-tmpl.yaml" --Implementation plan template (including: project information, requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
+  5. "{root}/docs/knowledge/*.md" --Project knowledge (if exist)
 
 [Output]
-  1. "docs/implementation-plan/{task_id}-plan.md" --Implementation plan (Markdown format)
+  1. "{root}/docs/implementation-plan/{task_id}-plan.md" --Implementation plan (Markdown format)
     - Format: Use ATX headings; numbered lists; explicit requirement/architecture mapping sections
-    - Example: "docs/implementation-plan/1-plan.md"
+    - Example: "{root}/docs/implementation-plan/1-plan.md"
 
 [Constraints]
   1. Must strictly extract tasks from provided documents; do not fabricate requirements
@@ -56,7 +56,7 @@
     - Format the plan using the template: reference template structure to organize content ensuring all necessary sections are included (requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
     - Verify completeness and executability of the plan
     - Check all DoD items one by one to ensure they are met (check each acceptance criterion item by item according to DoD; if any item is not met, return to the corresponding step to supplement or adjust until all are met)
-    - Generate Markdown plan to "docs/implementation-plan/{task_id}-plan.md"
+    - Generate Markdown plan to "{root}/docs/implementation-plan/{task_id}-plan.md"
     - Confirm all todo items are completed
 
 [DoD]
@@ -67,5 +67,5 @@
   - [ ] REFACTOR section: Refactoring and optimization work has been planned, including cross-cutting concerns integration
   - [ ] Plan follows TDD cycle structure: test-first (RED), minimal implementation (GREEN), refactoring optimization (REFACTOR)
   - [ ] Output path and file naming follow specified pattern
-  - [ ] "docs/implementation-plan/{task_id}-plan.md" has been created
+  - [ ] "{root}/docs/implementation-plan/{task_id}-plan.md" has been created
   - [ ] All todo items are completed

@@ -1,11 +1,11 @@
 [Input]
-  1. (Conditional) "docs/PRD.md" --Product Requirements Document (if exists, used as primary requirement source)
-  2. (Conditional) "docs/requirements/*.md" --Requirement documents (required if "PRD.md" does not exist)
-  3. (Conditional) "docs/architecture/*.md" --Architecture documents (required if "PRD.md" does not exist)
-  4. "sunnycore/templates/cutover-report-tmpl.yaml" --Cutover report template (required)
+  1. (Conditional) "{root}/docs/PRD.md" --Product Requirements Document (if exists, used as primary requirement source)
+  2. (Conditional) "{root}/docs/requirements/*.md" --Requirement documents (required if "PRD.md" does not exist)
+  3. (Conditional) "{root}/docs/architecture/*.md" --Architecture documents (required if "PRD.md" does not exist)
+  4. "{root}/sunnycore/templates/cutover-report-tmpl.yaml" --Cutover report template (required)
 
 [Output]
-  1. "docs/cutover.md" --Cutover report (Markdown format)
+  1. "{root}/docs/cutover.md" --Cutover report (Markdown format)
 
 [Constraints]
   1. Must follow cutover report template structure
@@ -24,16 +24,16 @@
 [Steps]
   1. Preparation and Validation Phase
     - Verify existence of all required input files
-    - Check if "docs/PRD.md" exists
+    - Check if "{root}/docs/PRD.md" exists
     - if "PRD.md" exists then 1.1, else 1.2
       1.1. PRD-based Project
-        - Read "docs/PRD.md"
+        - Read "{root}/docs/PRD.md"
         - Extract requirements from PRD requirements section
         - Extract architecture information from PRD architecture section
         - Use PRD as the primary requirement source for acceptance testing
       1.2. Traditional Project Structure
-        - Read all requirement documents from "docs/requirements/*.md"
-        - Read all architecture documents from "docs/architecture/*.md"
+        - Read all requirement documents from "{root}/docs/requirements/*.md"
+        - Read all architecture documents from "{root}/docs/architecture/*.md"
         - If any required files are missing, generate missing list and halt execution
     - Understand business objectives and project structure
     - Create todo list based on actual tasks
@@ -79,7 +79,7 @@
     - Document all test results with evidence
     - List all issues found with details
     - Provide recommendations for fixes or improvements
-    - Save report to "docs/cutover.md"
+    - Save report to "{root}/docs/cutover.md"
     - Check all DoD items one by one to ensure they are met
     - Confirm all todo items are completed
 

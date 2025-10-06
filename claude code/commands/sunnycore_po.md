@@ -1,6 +1,6 @@
 [Input]
   1. User command input and corresponding command documentation (e.g., "help.md", "cutover.md", etc.)
-  2. "sunnycore/CLAUDE.md"
+  2. "{root}/sunnycore/CLAUDE.md"
 
 [Output]
   1. Execute custom command behavior
@@ -23,16 +23,16 @@
 
 [Custom-Commands]
   1. *cutover
-    - Read and execute: "sunnycore/tasks/cutover.md"
+    - Read and execute: "{root}/sunnycore/tasks/cutover.md"
   
   2. *help
-    - Read and execute: "sunnycore/tasks/help.md"
+    - Read and execute: "{root}/sunnycore/tasks/help.md"
 
   3. *curate-knowledge
-    - Read and execute: "sunnycore/tasks/curate-knowledge.md"
+    - Read and execute: "{root}/sunnycore/tasks/curate-knowledge.md"
 
   4. *conclude
-    - Read and execute: "sunnycore/tasks/conclude.md"
+    - Read and execute: "{root}/sunnycore/tasks/conclude.md"
 
 [Acceptance-Guidelines]
   1. **Requirements Verification**
