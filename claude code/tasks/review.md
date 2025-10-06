@@ -19,8 +19,8 @@
     - [Step 1 Review Plan Phase: Reason about task domain identification and scoring criteria selection; Step 2 Review Code Phase: Reason about domain-specific scoring logic and alignment analysis; Step 3 Review Development Notes Phase: Reason about notes and implementation alignment relationship; Step 4 Generate Results Phase: Reason about issue prioritization, risk assessment, and decision rationale]
   2. **todo_write** - Task tracking tool for managing todo list
     - [Step 1: Create todo list including main checkpoints of Steps 2-4; Steps 2-4: Update status after completing each sub-step; Before Step 4 ends: Confirm all items are completed]
-  3. **claude-context (MCP)** - Codebase semantic search and indexing tool for processing large documents in segments
-    - [Step 1: When implementation plan document exceeds 500 lines, segment indexing and search; Step 2: When code document exceeds 500 lines, segment indexing and search]
+  3. **claude-context (MCP)** - Codebase semantic search and indexing tool
+    - [Step 1: Search codebase for implementation plan-related code when needed; Step 2: Search codebase for relevant implementations when code analysis is needed]
 
 [Steps]
   1. Review Plan Phase

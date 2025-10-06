@@ -21,8 +21,8 @@
   2. **sequentialthinking (MCP)**
     - [Step 1: All reasoning tasks; Step 2: Code fix reasoning tasks]
   3. **claude-context (MCP)**
-    - [Step 1: Find relevant code]
-    - [Step 2: Find relevant code]
+    - [Step 1: Search codebase for relevant implementations]
+    - [Step 2: Search codebase for fix-related code]
 
 [Steps]
   1. Preparation Phase

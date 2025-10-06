@@ -1,47 +1,71 @@
 ---
-# Architecture Template - Requirements-driven design
-# 架構模板 - 需求導向設計
+# Universal Architecture Template
+# 通用架構模板 - 實時反映項目真實架構狀態
 
 project-name: ""
 version: ""
-date-created: ""
-status: "Draft|Approved"
+last-updated: ""
+status: "Draft|In Progress|Active"
 
-execution_summary: |
+# ==========================================
+# Executive Summary / 執行摘要
+# ==========================================
+executive_summary: |
   # High-level architecture overview
   # Key design decisions and principles
+  # Current implementation status
 
+# ==========================================
+# Technical Stack / 技術堆疊
+# ==========================================
 technical-stack:
   frontend: ""
   backend: ""
   database: ""
   infrastructure: ""
   external-services: []
+  development-tools: []
 
+# ==========================================
+# System Architecture / 系統架構
+# ==========================================
 system-architecture:
   components:
     - name: ""
       responsibility: ""
+      technology: ""
       interfaces: []
       dependencies: []
   
   data-flow: |
     # Describe how data flows through the system
 
+  integration-points: |
+    # Key integration points between components
+
+# ==========================================
+# Requirements Traceability / 需求追溯
+# ==========================================
 requirements-traceability:
   - req_id: ""  # F-001 or NFR-P-001
     component: ""
-    design_pattern: ""
-    rationale: ""
+    implementation: ""
+    status: "planned|implemented|deferred"
 
+# ==========================================
+# Architecture Decisions / 架構決策
+# ==========================================
 architecture-decisions:
   - id: "ADR-001"
     title: ""
     decision: ""
     rationale: ""
-    alternatives: ""
-    consequences: ""
+    trade-offs: ""
+    status: "active|superseded"
 
+# ==========================================
+# Cross-Cutting Concerns / 橫切關注點
+# ==========================================
 cross-cutting-concerns:
   security:
     authentication: ""
@@ -49,12 +73,46 @@ cross-cutting-concerns:
     data-protection: ""
   
   performance:
-    caching-strategy: ""
-    optimization-approach: ""
+    caching: ""
+    optimization: ""
   
   reliability:
     error-handling: ""
     monitoring: ""
+    logging: ""
+  
+  observability:
+    metrics: ""
+    tracing: ""
+    alerting: ""
 
+# ==========================================
+# Deployment Architecture / 部署架構
+# ==========================================
+deployment:
+  environments: []  # dev, staging, production
+  infrastructure: ""
+  ci-cd: ""
+  scaling-strategy: ""
+
+# ==========================================
+# Architecture Quality / 架構品質
+# ==========================================
+quality-attributes:
+  strengths: []
+  limitations: []
+  technical-debt: []
+
+# ==========================================
+# Architecture Diagram / 架構圖
+# ==========================================
 architecture-diagram: |
   # Include Mermaid diagram or reference to diagram file
+
+# ==========================================
+# Source References / 來源參考
+# ==========================================
+source-references:
+  requirements: []   # Requirement documents
+  code: []          # Key implementation files
+  documentation: [] # Related documentation

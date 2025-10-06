@@ -20,7 +20,7 @@
   2. **sequentialthinking (MCP)**
     - [Step 1: Analyze PRD complexity; Steps 2-4: Reason about implementation strategies for each task]
   3. **claude-context (MCP)**
-    - [Step 1: Process large PRD documents in segments]
+    - [Step 1: Search codebase for PRD-related implementations]
 
 [Steps]
   1. Preparation Phase

@@ -21,7 +21,7 @@
   1. **sequentialthinking (MCP)**
     - [Step 2: Reason about knowledge base organization structure]
   2. **claude-context (MCP)**
-    - [Step 2: Find relevant code]
+    - [Step 2: Search codebase for relevant implementations]
     - Usage scenario: When technical details mentioned in documentation need to be verified or supplemented from code
   3. **todo_write**
     - [Step 2: Create task list; Steps 3-4: Track task progress]
