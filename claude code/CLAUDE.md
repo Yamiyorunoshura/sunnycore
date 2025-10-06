@@ -36,6 +36,11 @@ This section describes tool usage scenarios
   - Build codebase index to support semantic search
   - Find relevant code snippets and implementation details
   - Process large files or file collections in segments
+  
+  Notes:
+  - Always use search_code directly for codebase search
+  - Only use index_codebase when the codebase has not been indexed yet
+  - Check indexing status first before attempting to index
 
 4. **context7 (MCP) - External Reference Tool**
   Purpose:

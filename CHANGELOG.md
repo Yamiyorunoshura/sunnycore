@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [1.13.5] - sunnycore v1.13.5
+
+### Changed
+- 優化 claude-context (MCP) 工具使用指引：在 `CLAUDE.md` 中新增工具使用註記
+  - 新增說明：「Always use search_code directly for codebase search」
+  - 新增說明：「Only use index_codebase when the codebase has not been indexed yet」
+  - 新增說明：「Check indexing status first before attempting to index」
+  - 提升工具使用的正確性與效率，避免重複索引
+
 ## [1.13.4] - sunnycore v1.13.4
 
 ### Changed
