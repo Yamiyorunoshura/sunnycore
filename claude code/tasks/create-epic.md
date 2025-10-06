@@ -18,17 +18,6 @@
   2. **sequentialthinking (MCP)**
     - [Step 1: Analyze requirement complexity and task dependencies; Step 2: Design atomic tasks and logical grouping]
 
-[Tool-Guidelines]
-  1. **todo_write**
-    - Create a todo list during research phase, including all major tasks
-    - Update the status of each completed step to completed
-  2. **sequentialthinking (MCP)**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-
 [Steps]
   1. Research Phase
     - Verify all necessary input files (including templates) exist and are readable. If reading fails, stop responding and explicitly notify the user of missing file paths

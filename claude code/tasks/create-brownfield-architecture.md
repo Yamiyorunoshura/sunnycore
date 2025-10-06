@@ -24,25 +24,6 @@
   3. **claude-context (MCP)**
     - [Step 1: Evaluate existing architecture - handling large document collections]
 
-[Tool-Guidelines]
-  1. **todo_write**
-    - Create a todo list during evaluation phase, including all major tasks
-    - Update the status of each completed step to completed
-    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
-  2. **sequentialthinking (MCP)**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-  3. **claude-context (MCP)**
-    - Usage scenario: When handling large existing architecture document collections
-    - Can be used to read and understand complex architectures in segments
-  4. **context7 (MCP)**
-    - Usage scenario: Finding domain-specific best practices or researching specific technology stacks or design patterns
-    - Used to find high-quality open source project practices that meet user needs, avoiding reinventing the wheel
-    - Can retrieve latest API documentation for libraries and frameworks to ensure architecture design uses current best practices and APIs
-
 [Steps]
   1. Evaluate Existing Architecture Phase
     - Review current architecture under {root}/docs/architecture/*.md

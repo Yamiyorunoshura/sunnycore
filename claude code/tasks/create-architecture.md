@@ -25,22 +25,6 @@
   3. **context7 (MCP)**
     - [Step 2: Obtain external package and architecture pattern references]
 
-[Tool-Guidelines]
-  1. **todo_write**
-    - Create a todo list during requirement analysis phase, including all major tasks
-    - Update the status of each completed step to completed
-    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
-  2. **sequentialthinking**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-  3. **context7**
-    - Usage scenario: Finding domain-specific best practices or researching specific technology stacks or design patterns
-    - Used to find high-quality open source project practices that meet user needs, avoiding reinventing the wheel
-    - Can retrieve latest API documentation for libraries and frameworks to ensure architecture design uses current best practices and APIs
-
 [Steps]
   1. Requirement Analysis Phase
     - Verify the completeness and consistency of all requirements under {root}/docs/requirements/*.md

@@ -19,16 +19,6 @@
   2. **claude-context (MCP)**
     - [Step 2: Build index for codebase]
 
-[Tool-Guidelines]
-  1. **todo_write**
-    - Create a todo list during preparation phase, including all major tasks (Steps 1-4)
-    - Update the status of each completed step to completed
-    - Not used for storing operational actions; tasks remain high-level
-  2. **claude-context (MCP)**
-    - Build index for codebase: index_codebase
-    - Find relevant code: search_code
-    - When producing output, annotate source documents and line numbers for subsequent auditing (corresponding to evidence)
-
 [Steps]
   1. Preparation Phase
     - Read all architecture, requirement, and task documents

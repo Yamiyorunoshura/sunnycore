@@ -26,22 +26,6 @@
   3. **claude-context (MCP)**: Search codebase for relevant code
     - [Step 2: Locate code related to issues]
 
-[Tool-Guidelines]
-  1. **sequentialthinking (MCP)**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-  2. **todo_write**
-    - Create a todo list in preparation phase, including all major tasks
-    - Update the status of each completed step to completed
-    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
-  3. **claude-context (MCP)**
-    - Use to find code related to reported issues
-    - Search for relevant components, functions, or modules
-    - Prerequisite: Codebase has been indexed through index_codebase
-
 [Steps]
   1. Preparation Phase
     - Read cutover report to understand all reported issues

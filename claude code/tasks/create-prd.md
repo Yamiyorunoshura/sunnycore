@@ -24,24 +24,6 @@
   4. **claude-context (MCP)**
     - [Step 1: Process large existing architecture documents if Brownfield]
 
-[Tool-Guidelines]
-  1. **todo_write**
-    - Create a todo list during initialization phase, including all major tasks
-    - Update the status of each completed step to completed
-    - State gate: Ensure only one task is in_progress at any time; upon completing the current task, immediately mark it as completed before marking the next task as in_progress
-  2. **sequentialthinking (MCP)**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-  3. **context7 (MCP)**
-    - Usage scenario: 
-      - Finding domain-specific best practices (e.g., React state management patterns), researching specific technology stacks, or domain-specific design patterns (e.g., e-commerce checkout flow)
-      - Finding the latest API documentation for a specific technology stack
-  4. **claude-context (MCP)**
-    - Usage scenario: When handling large existing architecture document collections in Brownfield projects (>10 files or >50KB); use for indexing and searching large-scale architecture documentation
-
 [Steps]
   1. Initialization and Project Type Detection Phase
     - Read all workflow steps to understand expected work

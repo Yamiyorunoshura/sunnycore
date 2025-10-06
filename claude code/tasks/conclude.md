@@ -29,26 +29,6 @@
     - Prerequisite: Codebase has been indexed through index_codebase
     - Failure handling: If not indexed or search fails, switch to grep tool for keyword search, or annotate "Unable to locate code evidence" and continue execution
 
-[Tool-Guidelines]
-  1. **todo_write**
-    - Create a todo list in preparation phase, including all major tasks
-    - Update the status of each completed step to completed
-  2. **sequentialthinking**
-    - Simple task reasoning: 1-3 totalThoughts
-    - Medium task reasoning: 3-5 totalThoughts
-    - Complex task reasoning: 5-8 totalThoughts
-    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
-    - Must complete all configured reasoning steps
-    - Parameter explanation:
-      * totalThoughts (number): Estimated reasoning steps, can be adjusted according to actual needs
-      * nextThoughtNeeded (boolean): Whether to continue reasoning, set to false after completing all steps
-    - Error handling: If logical errors are found during reasoning, use isRevision=true to correct previous thinking
-  3. **claude-context**
-    - Primary use: Find relevant code snippets (search_code)
-    - Usage timing: When specific implementation details need to be located or technical decisions verified (referring to when review reports or development notes mention specific technical choices but do not annotate evidence in "file path:line number" format)
-    - Query technique: Use natural language to describe the function or pattern to find
-    - Output requirement: Annotate source documents and line numbers (format as "file path:line number", e.g., "src/main.py:L42-L56") for subsequent auditing (corresponding to evidence)
-
 [Steps]
   1. Input Validation Phase
     - Verify existence of all input files (dev-notes, review, template, requirements/*.md, tasks.md)
