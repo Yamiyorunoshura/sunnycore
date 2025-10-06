@@ -10,7 +10,7 @@
 [Constraints]
   1. Must determine project type (Greenfield/Brownfield) by checking "{root}/docs/architecture/" directory existence
   2. Each requirement must be verifiable and measurable; vague or subjective wording is not allowed
-  3. Tasks must be atomic, verifiable (≤50 characters for task names, clear outcomes)
+  3. Tasks must be feature-level, verifiable (clear functional scope and outcomes)
   4. Must exclude operational actions (e.g., git commit, npm install, deployment script execution) unless explicitly requested by the user
   5. Must ensure all file names/paths do not use spaces; prefer kebab-case
   6. If Brownfield, must preserve existing contracts (i.e., public API interfaces, data models, event formats, and other externally visible contracts) and provide impact analysis for changes
@@ -62,13 +62,15 @@
         - Handle cross-cutting concerns (security, observability, performance)
 
   4. Task Generation Phase
-    - Generate atomic, verifiable tasks based on requirements and architecture
-    - Ensure each task conforms to the constraints defined in [Constraints] (atomic, verifiable, ≤50 characters for task names, clear outcomes)
-    - Include brief acceptance hints to ensure verifiability
+    - Generate feature-level tasks based on requirements and architecture
+    - Each task should represent a major feature within a module (e.g., "Implement login functionality", "Implement registration functionality")
+    - Ensure each task conforms to the constraints defined in [Constraints] (feature-level, verifiable, clear outcomes)
+    - Include brief acceptance hints to ensure verifiability at feature level
     - Map each task to specific requirement IDs and architecture components
     - Identify task dependencies and execution order
-    - Logically group tasks, avoid overlap
+    - Logically group tasks by module or feature area, avoid overlap
     - Exclude operational actions (git commit, npm install, etc.) unless explicitly requested
+    - Note: Atomic breakdown of tasks will be handled later in the plan-tasks phase using TDD RED/GREEN/REFACTOR cycles
 
   5. PRD Integration Phase
     - Integrate requirements, architecture, and tasks into PRD template structure
@@ -105,7 +107,7 @@
   - [ ] Architecture design is complete with components, data flows, and technical stack
   - [ ] If Brownfield, impact analysis has been documented
   - [ ] Requirement-to-architecture mapping has been established (100% coverage)
-  - [ ] Atomic tasks have been generated with requirement and architecture traceability
+  - [ ] Feature-level tasks have been generated with requirement and architecture traceability
   - [ ] Task dependencies have been identified
   - [ ] All tasks are verifiable and outcome-oriented
   - [ ] PRD follows template structure and is saved to "{root}/docs/PRD.md"

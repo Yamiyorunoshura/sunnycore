@@ -44,6 +44,32 @@ system-architecture:
     # Key integration points between components
 
 # ==========================================
+# API Documentation / API 文檔
+# ==========================================
+api-documentation:
+  internal-apis:
+    - name: ""
+      endpoint: ""
+      method: ""
+      description: ""
+      parameters: []
+      response: ""
+      authentication: ""
+  
+  external-apis:
+    - service: ""
+      library: ""
+      version: ""
+      documentation-url: ""
+      usage-context: ""
+  
+  api-standards:
+    versioning: ""
+    authentication: ""
+    error-handling: ""
+    rate-limiting: ""
+
+# ==========================================
 # Requirements Traceability / 需求追溯
 # ==========================================
 requirements-traceability:

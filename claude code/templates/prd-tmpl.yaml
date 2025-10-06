@@ -39,11 +39,13 @@ architecture:
     # Describe how data flows through the system
 
 tasks:
+  # Tasks should be at feature-level (e.g., "Implement login functionality")
+  # Atomic breakdown will be handled in plan-tasks phase using TDD RED/GREEN/REFACTOR cycles
   - id: "Task-1"
-    name: ""
+    name: ""  # Feature-level task name
     requirements: []  # F-001, NFR-P-001
     architecture-refs: []  # component names
-    acceptance-hint: ""
+    acceptance-hint: ""  # Feature-level acceptance criteria
     dependencies: []
 
 constraints:

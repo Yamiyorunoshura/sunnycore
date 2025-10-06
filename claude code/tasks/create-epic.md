@@ -7,10 +7,12 @@
   1. "{root}/docs/epic.md" --Task list (Markdown format)
 
 [Constraints]
-  1. Must create atomic, verifiable tasks (≤14 characters, clear outcomes)
-  2. Must exclude operational actions unless explicitly requested by the user
+  1. Must create feature-level tasks representing major features within modules (e.g., "Implement login functionality", "Implement registration functionality")
+  2. Tasks should be verifiable at the feature level with clear functional scope and outcomes
+  3. Must exclude operational actions unless explicitly requested by the user
     - Operational actions refer to execution-level commands such as git commit, npm install, etc., but design, implementation, testing and other development tasks do not fall into this category
-  3. Must ensure all file names/paths do not use spaces; prefer kebab-case
+  4. Must ensure all file names/paths do not use spaces; prefer kebab-case
+  5. Note: Atomic breakdown of tasks will be handled later in the plan-tasks phase using TDD RED/GREEN/REFACTOR cycles
 
 [Tools]
   1. **todo_write**
@@ -27,13 +29,15 @@
     - Create todo list to track subsequent task design work
 
   2. Drafting Phase
-    - Use template to generate atomic tasks
-    - Include brief acceptance hints to ensure verifiability
-    - Logically group tasks, avoid overlap
+    - Use template to generate feature-level tasks
+    - Each task should represent a major feature within a module
+    - Include brief acceptance hints to ensure verifiability at feature level
+    - Logically group tasks by module or feature area, avoid overlap
     - Deliverable: Task draft in Markdown format
 
   3. Review Phase
     - Deduplicate and remove non-actionable items
+    - Ensure each task represents a feature-level scope, not overly atomized
     - Ensure each task is traceable to requirements
     - Verify format complies with template requirements
 
@@ -58,6 +62,6 @@
   - [ ] User approval has been obtained for task list draft
   - [ ] File "{root}/docs/epic.md" exists and is valid Markdown
   - [ ] All tasks comply with template fields
-  - [ ] Each task is atomic, outcome-oriented, and verifiable
+  - [ ] Each task is feature-level, outcome-oriented, and verifiable
   - [ ] No file names or key names use spaces; kebab-case is enforced
   - [ ] All todo items are completed
