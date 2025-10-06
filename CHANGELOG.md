@@ -7,6 +7,13 @@
 
 ## [Unreleased]
 
+## [1.12.8] - sunnycore v1.12.8
+
+### Fixed
+- 修正知識整理任務輸入路徑錯誤：更正 `claude code/tasks/curate-knowledge.md` 中的 cutover 報告路徑引用
+  - 第 4 項輸入：`{root}/cutover.md` → `{root}/docs/cutover.md`
+  - 提升路徑引用的正確性與知識整理流程的可靠性
+
 ## [1.12.7] - sunnycore v1.12.7
 
 ### Fixed

@@ -2,7 +2,7 @@
   1. "{root}/docs/review-results/*.md" --Review reports
   2. "{root}/docs/dev-notes/*.md" --Development notes
   3. "{root}/docs/knowledge/*.md" --Existing knowledge base(if exist)
-  4. "{root}/cutover.md" --Cutover report (required)
+  4. "{root}/docs/cutover.md" --Cutover report (required)
   5. "{root}/docs/cutover-dev-notes.md" --Cutover development notes (required)
   6. "{root}/docs/progress.md" --Progress record
 
