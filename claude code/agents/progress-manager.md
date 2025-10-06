@@ -87,24 +87,93 @@ color: red
   
   **Sample entries**:
   ```
-  2025-10-06:14:30: Fixed authentication bypass vulnerability caused by improper JWT validation [CRITICAL]
-  2025-10-06:15:45: Optimized database query performance by adding composite index on user_id and created_at [IMPORTANT]
+  {YYYY-MM-DD}:{HH:MM}: {描述已修復的關鍵問題及其根本原因} [CRITICAL]
+  {YYYY-MM-DD}:{HH:MM}: {描述已實施的重要優化及其效果} [IMPORTANT]
   ```
   
-  **"knowledge/*.md" format example** ("knowledge/{COMPONENT_NAME}.md"):
+  **"knowledge/*.md" format examples**:
+  
+  **Unified Knowledge Management Architecture**:
+  - Best Practices: `best-practices-{semantic-topic}.md` (platinum 級別的開發實踐)
+  - Errors: `errors-{semantic-topic}.md` (已知錯誤和快速解決方案)
+  - Problem Solving: `problem-solving-{semantic-topic}.md` (複雜問題的完整解決過程)
+  
+  **Semantic Classification Examples**:
+  - Best Practices topics: api-design, error-handling, testing-strategy, code-organization
+  - Errors topics: authentication, database, api-integration, deployment
+  - Problem Solving topics: performance, scalability, security, data-migration
+  
+  **Format 1: best-practices-{topic}.md**
   ```markdown
-  # {TOPIC_TITLE}
+  # {Topic} Best Practices
   
-  ## {ISSUE_TITLE} ({YYYY-MM-DD})
+  ## {Practice Title}
   
-  **Problem**: {PROBLEM_DESCRIPTION}
+  **Description**: {簡述最佳實踐}
   
-  **Root Cause**: {ROOT_CAUSE_ANALYSIS}
+  **Evidence Source**: {evidence_path}
   
-  **Solution**: {SOLUTION_APPROACH}
+  **Applicable Scenarios**: {適用場景}
   
-  **Prevention**: {PREVENTION_MEASURES}
+  **Level**: Platinum
   ```
+  
+  **Format 2: errors-{topic}.md**
+  ```markdown
+  # {Topic} Errors
+  
+  ## {Error Title}
+  
+  **Error Type**: {錯誤類型}
+  
+  **Context**: {發生情境}
+  
+  **Solution**: {解決方案}
+  
+  **Source**: {evidence_path}
+  ```
+  
+  **Format 3: problem-solving-{topic}.md**
+  ```markdown
+  # {Topic} Problem Solving
+  
+  ## {Problem Title} ({YYYY-MM-DD})
+  
+  **Problem**: {問題描述}
+  
+  **Investigation**: {調查過程}
+  
+  **Root Cause**: {根本原因分析}
+  
+  **Solution**: {解決方案}
+  
+  **Decision Rationale**: {決策理由}
+  
+  **Prevention**: {預防措施}
+  
+  **Source**: {evidence_path}
+  ```
+  
+  **Concrete Example (errors-{topic}.md)**:
+  ```markdown
+  # {Topic} Errors
+  
+  ## {Error Title}
+  
+  **Error Type**: {錯誤分類，如 Security Vulnerability / Logic Error / Configuration Error}
+  
+  **Context**: {描述錯誤發生的情境和觸發條件}
+  
+  **Solution**: {描述解決方案的具體步驟或方法}
+  
+  **Source**: {evidence_path}
+  ```
+  
+  **Classification Guidelines**:
+  - 根據語義主題分類，而非技術層或模組
+  - 優先選擇對 LLM 和人類都友好的語義詞彙
+  - Bug fixes 通常記錄到 errors-*.md 或 problem-solving-*.md
+  - Important learnings 記錄到相應的語義主題文檔
 
 [DoD]
   - [ ] All context analyzed and classified by semantic importance

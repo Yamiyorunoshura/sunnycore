@@ -3,7 +3,7 @@
   2. "{root}/sunnycore/templates/dev-notes-tmpl.yaml" --Development notes template
 
 [Output]
-  1. "{root}/docs/dev-notes/prd-dev-notes.md" --Complete development notes document
+  1. "{root}/docs/prd-dev-notes.md" --Complete development notes document
   2. High-quality, tested code implementation for all PRD tasks
   3. Complete test coverage and test cases
 

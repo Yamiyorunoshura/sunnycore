@@ -7,6 +7,28 @@
 
 ## [Unreleased]
 
+## [1.13.1] - sunnycore v1.13.1
+
+### Changed
+- 優化知識整理任務文檔：新增完整的知識管理架構範例與分類指引
+  - 更新 `claude code/tasks/curate-knowledge.md`：新增 [Example] 章節
+    * 文檔類型與命名規範：best-practices-{topic}.md、errors-{topic}.md、problem-solving-{topic}.md
+    * 語義分類範例：詳細列舉各類文檔的主題範例（api-design、error-handling、authentication 等）
+    * 文檔格式模板：提供三種文檔類型的完整格式範本
+    * 具體範例：展示多條目文檔的實際結構
+    * 分類指引：強調語義主題分類原則與文件拆分建議
+- 優化進度管理文檔格式：統一知識庫記錄範例格式
+  - 更新 `claude code/agents/progress-manager.md`：knowledge/*.md 格式範例改進
+    * 中文化範例欄位佔位符（YYYY-MM-DD、描述、錯誤類型等）
+    * 統一文檔格式架構：best-practices、errors、problem-solving 三類文檔
+    * 新增語義分類範例與分類指引
+    * 新增具體範例（errors-{topic}.md 格式）
+
+### Fixed
+- 修正 PRD 開發任務輸出路徑錯誤：更正 `claude code/tasks/develop-prd.md` 中的開發筆記輸出路徑
+  - 輸出路徑：`{root}/docs/dev-notes/prd-dev-notes.md` → `{root}/docs/prd-dev-notes.md`
+  - 提升路徑引用的一致性
+
 ## [1.13.0] - sunnycore v1.13.0
 
 ### Changed
