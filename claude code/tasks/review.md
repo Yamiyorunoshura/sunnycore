@@ -25,21 +25,23 @@
 [Steps]
   1. Review Plan Phase
     - Read the implementation plan and understand its content
-    - **Identify task domain**: Determine which domain the task belongs to based on implementation plan content (backend/frontend/API/database/DevOps/testing/documentation/general)
+    - Identify task domain: Determine which domain the task belongs to based on implementation plan content (backend/frontend/API/database/DevOps/testing/documentation/general)
     - Identify verification methods and success criteria
     - Create todo list to track subsequent review tasks (including main checkpoints of Steps 2-4)
 
   2. Review Code Phase
     - Read all production code and understand its implementation
-    - **Apply domain-specific review criteria**: Based on the task domain identified in Step 1, review according to that domain's scoring dimensions
+    - Apply domain-specific review criteria: Based on the task domain identified in Step 1, review according to that domain's scoring dimensions
     - Execute all tests and record pass/fail status and alignment with plan (if test count >100 or estimated execution time >30 minutes, prioritize critical path tests and affected module tests)
-    - if all tests pass then execute 2.1, else if some tests fail then execute 2.2
-      2.1 Tests Pass Path
+    - if all tests pass then proceed to 2.1, else proceed to 2.2
+      
+      2.1. Tests Pass Path
         - Execute integration tests to confirm implementation does not affect existing code (scope: interface tests between new/modified modules and existing system, and end-to-end tests of critical business flows)
         - Verify test coverage
         - Verify code strictly aligns with architecture/design and acceptance criteria
-        - **Record domain-specific scores**: Score each domain dimension and calculate overall score
-      2.2 Tests Fail Path
+        - Record domain-specific scores: Score each domain dimension and calculate overall score
+      
+      2.2. Tests Fail Path
         - Record failed test details (test name, error message, expected vs actual)
         - Mark review result as Reject or Accept with changes
         - Explicitly list necessary fix items
@@ -53,15 +55,18 @@
     - Create review results using template, including test execution summary
     - Record test results and pass/fail status and alignment with plan; analyze code alignment and specific references
     - Save to "{root}/docs/review-results/{task_id}-review.md"; if file exists, update it
-    - if review result is Accept then execute 4.1, else if review result is Accept with changes then execute 4.2, else execute 4.3
-      4.1 Accept Path
+    - if review result is Accept then proceed to 4.1, else if review result is Accept with changes then proceed to 4.2, else proceed to 4.3
+      
+      4.1. Accept Path
         - Update "epic.md" to mark task as completed
         - Record completion time and final score
-      4.2 Accept with Changes Path
+      
+      4.2. Accept with Changes Path
         - Record improvement suggestions and priorities
         - Update "epic.md" and note items to be improved
         - Mark task as "conditionally completed"
-      4.3 Reject Path
+      
+      4.3. Reject Path
         - Generate detailed review report
         - Do not update "epic.md"
         - Wait for brownfield-tasks to fix then review again

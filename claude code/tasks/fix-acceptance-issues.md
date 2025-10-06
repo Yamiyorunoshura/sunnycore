@@ -35,21 +35,20 @@
 
   2. Root Cause Analysis Phase
     - Check if "{root}/docs/PRD.md" exists
-    - if "PRD.md" exists then 2.1, else 2.2
+    - For each reported issue, analyze error messages and reproduction steps
+    - Locate relevant code using search tools and identify root cause of the issue
+    - Document analysis findings and determine appropriate fix strategy for each issue
+    - if "PRD.md" exists then proceed to 2.1, else proceed to 2.2
+      
       2.1. PRD-based Project
         - Read "{root}/docs/PRD.md"
         - Extract requirements from PRD requirements section
         - Extract architecture information from PRD architecture section
         - Use PRD as the primary context for understanding system design
+      
       2.2. Traditional Project Structure
         - Read requirements from "{root}/docs/requirements/*.md" (if available)
         - Read architecture from "{root}/docs/architecture/*.md" (if available)
-    - For each reported issue:
-      * Analyze error messages and reproduction steps
-      * Locate relevant code using search tools
-      * Identify root cause of the issue
-      * Document analysis findings
-    - Determine appropriate fix strategy for each issue
 
   3. Fix Planning Phase
     - Plan fix approach for each issue

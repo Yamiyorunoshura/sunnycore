@@ -7,6 +7,30 @@
 
 ## [Unreleased]
 
+## [1.13.4] - sunnycore v1.13.4
+
+### Changed
+- 優化任務文檔流程描述：統一 14 個任務文檔的條件分支格式與段落結構
+  - 統一條件分支語法：「if X then Y, else Z」→「if X then proceed to Y, else proceed to Z」
+  - 優化段落結構：改進縮排與空行使用，提升可讀性
+  - 精簡冗餘內容：移除重複描述，合併相關說明
+  - 改進步驟說明：
+    * brownfield-tasks.md：優化測試執行描述與修復流程
+    * conclude.md：合併資訊提取與映射階段，優化步驟編號
+    * create-architecture.md：拆分架構設計步驟說明
+    * create-prd.md：統一條件分支格式，調整任務生成順序
+    * create-requirements.md：優化最終化階段的成功/失敗路徑
+    * curate-knowledge.md：重新命名知識庫設計階段，優化步驟順序
+    * cutover.md：優化階段順序與專案執行驗證
+    * develop-prd.md：重構 TDD 開發階段流程結構
+    * develop-tasks.md：統一條件分支格式
+    * document-project.md：優化架構文檔更新的條件分支
+    * fix-acceptance-issues.md：調整根因分析階段順序
+    * init.md：精簡環境設置與文檔生成階段
+    * plan-tasks.md：合併複雜度評估說明
+    * review.md：統一條件分支格式與審查路徑命名
+  - 提升任務文檔的一致性、可讀性與專業性
+
 ## [1.13.3] - sunnycore v1.13.3
 
 ### Changed

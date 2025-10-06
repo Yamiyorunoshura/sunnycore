@@ -25,18 +25,20 @@
   1. Preparation and Validation Phase
     - Verify existence of all required input files
     - Check if "{root}/docs/PRD.md" exists
-    - if "PRD.md" exists then 1.1, else 1.2
+    - Understand business objectives and project structure
+    - Create todo list based on actual tasks
+    - if "PRD.md" exists then proceed to 1.1, else proceed to 1.2
+      
       1.1. PRD-based Project
         - Read "{root}/docs/PRD.md"
         - Extract requirements from PRD requirements section
         - Extract architecture information from PRD architecture section
         - Use PRD as the primary requirement source for acceptance testing
+      
       1.2. Traditional Project Structure
         - Read all requirement documents from "{root}/docs/requirements/*.md"
         - Read all architecture documents from "{root}/docs/architecture/*.md"
         - If any required files are missing, generate missing list and halt execution
-    - Understand business objectives and project structure
-    - Create todo list based on actual tasks
 
   2. Understanding and Configuration Phase
     - Identify project type (web app, API, CLI tool, library, etc.)
@@ -44,7 +46,6 @@
     - Identify configuration needs (API keys, tokens, database connections, etc.)
     - Read documentation for setup instructions
     - Document all configuration requirements clearly for end users
-    - If configuration is unclear or missing, document specific questions
 
   3. Environment Setup Phase
     - Follow documentation to set up project environment
@@ -52,33 +53,26 @@
     - Apply necessary configurations
     - Document all setup steps performed
     - If setup fails, record error details and potential causes
-    - If external services are required, document what is needed
 
   4. Project Execution Phase
     - Attempt to run the project according to documentation
-    - If project is a web application, verify it starts and is accessible
-    - If project is an API, verify endpoints are reachable
-    - If project is a CLI tool, verify commands execute
+    - Verify project functionality based on project type (web app starts and is accessible, API endpoints are reachable, CLI commands execute)
     - Document success or failure with detailed logs
     - If execution fails, record exact error messages and reproduction steps
 
   5. Acceptance Testing Phase
-    - For each critical business requirement in requirement documents:
-      * Test functionality from end-user perspective
-      * Verify acceptance criteria are met
-      * Document test result (Pass/Fail) with evidence
+    - For each critical business requirement in requirement documents, test functionality from end-user perspective
+    - Verify acceptance criteria are met and document test result (Pass/Fail) with evidence
     - Evaluate user experience and usability
     - Test error handling and edge cases
     - Document all issues found with severity and business impact
-    - Take screenshots or recordings if applicable
 
   6. Report Generation Phase
     - Create cutover report using template structure
     - Document cutover status: Success / Partial Success / Failed
     - List all configuration requirements identified
     - Document all test results with evidence
-    - List all issues found with details
-    - Provide recommendations for fixes or improvements
+    - List all issues found with details and provide recommendations for fixes or improvements
     - Save report to "{root}/docs/cutover.md"
     - Check all DoD items one by one to ensure they are met
     - Confirm all todo items are completed

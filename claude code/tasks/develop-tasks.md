@@ -34,10 +34,12 @@
     - Read the RED phase in the implementation plan and obtain the test cases to be implemented
     - Implement all test cases and check if all are red as expected
     - Execute test suite (such as pytest/npm test) to confirm all newly added test cases have status FAILED and error messages match expectations
-    - if all new tests fail and error messages match expectations then 2.1, else 2.2
-      2.1. Tests fail correctly
+    - if all new tests fail and error messages match expectations then proceed to 2.1, else proceed to 2.2
+      
+      2.1. Tests Fail Correctly
         - Enter GREEN phase
-      2.2. Tests partially pass or no errors
+      
+      2.2. Tests Partially Pass or No Errors
         - Check if test implementation is correct
         - Fix test cases
         - Re-execute validation
@@ -47,10 +49,12 @@
     - Implement minimal code to make tests pass (GREEN phase)
     - Follow architecture mapping specified in the implementation plan
     - Execute all tests
-    - if all tests pass and acceptance criteria are met then 3.1, else 3.2
-      3.1. All tests pass
+    - if all tests pass and acceptance criteria are met then proceed to 3.1, else proceed to 3.2
+      
+      3.1. All Tests Pass
         - Enter REFACTOR phase
-      3.2. Some tests fail
+      
+      3.2. Some Tests Fail
         - Analyze failure reasons
         - Fix code
         - Re-execute tests
@@ -61,11 +65,13 @@
     - Apply planned optimizations and cross-cutting concerns without reducing coverage
     - Improve code quality and maintainability to meet quality goals
     - Execute tests after each refactoring
-    - if all tests still pass then 4.1, else 4.2
-      4.1. Tests pass after refactoring
+    - if all tests still pass then proceed to 4.1, else proceed to 4.2
+      
+      4.1. Tests Pass After Refactoring
         - Continue with next refactoring
         - Or enter validation and documentation phase
-      4.2. Tests fail after refactoring
+      
+      4.2. Tests Fail After Refactoring
         - Immediately rollback refactoring (git reset or manual undo)
         - Re-evaluate refactoring strategy
         - Fix refactoring approach
