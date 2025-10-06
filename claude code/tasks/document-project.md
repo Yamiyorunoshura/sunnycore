@@ -8,24 +8,25 @@
   7. Actual codebase
 
 [Output]
-  1. "{root}/docs/architecture/*.md" --Updated architecture documents (Markdown format)
-  2. "{root}/CLAUDE.md" --Updated project guidance document with refreshed document index
+  1. "{root}/docs/architecture.md" --Integrated architecture document (temporary, will be sharded)
+  2. "{root}/docs/architecture/*.md" --Sharded architecture documents (Markdown format)
+  3. "{root}/CLAUDE.md" --Updated project guidance document with refreshed document index
 
 [Constraints]
   1. Must base updates on actual implementation state from codebase, development notes, and review reports
   2. Every produced document must correspond to at least 1 source reference (source_refs)
   3. Can include architecture diagrams in Markdown documents as fenced code blocks
-  4. All file paths must be under "docs/architecture/" with .md extension
-  5. Must update the Document Index section in "{root}/CLAUDE.md" after updating architecture documents
-  6. Should preserve existing architecture structure while updating with actual implementation details
+  4. All sharded file paths must be under "docs/architecture/" with .md extension
+  5. Must update the Document Index section in "{root}/CLAUDE.md" after sharding architecture documents
+  6. The integrated architecture.md must follow the universal architecture template structure
 
 [Tools]
   1. **todo_write**
-    - [Step 1: Create task list; Steps 2-3: Track task progress]
+    - [Step 1: Create task list; Steps 2-4: Track task progress]
   2. **sequentialthinking (MCP)**
-    - [Step 2: Reasoning tasks for content integration and document writing]
+    - [Step 2: Reasoning tasks for content integration and unified document writing]
   3. **claude-context (MCP)**
-    - [Step 1: Search codebase for actual implementation details]
+    - [Step 1-2: Search codebase for actual implementation details]
   4. **context7 (MCP)**
     - [Step 1-2: Search API documentation of existing architecture's technology stack and libraries]
 
@@ -34,41 +35,39 @@
     - Read all existing architecture documents under "{root}/docs/architecture/*.md"
     - Search codebase to understand actual implementation state
     - Read development notes and review reports to capture implementation details
+    - Read knowledge base for domain context
     - Identify gaps between planned architecture and actual implementation
-    - Create todo list for architecture documents to update
+    - Create todo list for architecture document generation
 
-  2. Update Architecture Documents Phase
-    - if architecture documents are missing or do not exist then proceed to 2.1, else proceed to 2.2
-      
-      2.1. Generate New Architecture Documents
-        - Search codebase to understand actual implementation architecture
-        - Generate architecture documents according to universal architecture template
-        - Run "{root}/sunnycore/scripts/shard-architecture.py" to shard large architecture documents
-        - Ensure all generated documents follow template structure and are in .md format
-      
-      2.2. Update Existing Architecture Documents
-        - For each architecture document in "{root}/docs/architecture/*.md", review existing content and identify sections needing updates
-        - if document structure does not align with universal architecture template fields then restructure the document to match template structure and rename the file if necessary, else proceed with incremental updates
-        - Search codebase for actual implementation details
-        - Integrate information from dev-notes and review-reports
-        - Update document according to universal architecture template structure
+  2. Integration Phase - Create Unified Architecture Document
+    - Search codebase for actual implementation architecture details
+    - Integrate information from [input]
+    - Generate unified "{root}/docs/architecture.md" according to universal architecture template structure
+    - Ensure all content includes proper source references (source_refs)
     - Verify document completeness and internal consistency
-    - Ensure all documents follow template structure and are in .md format
 
-  3. Finalization Phase
+  3. Cleanup and Sharding Phase
+    - Delete all existing architecture documents under "{root}/docs/architecture/*.md"
+    - Run "{root}/sunnycore/scripts/shard-architecture.py" to shard the unified architecture.md
+    - Verify all sharded documents are properly created in .md format
+
+  4. Finalization Phase
     - Update Document Index section in "{root}/CLAUDE.md" with refreshed architecture documents (including path and purpose of each document)
-    - Verify all source references are properly documented
+    - Verify all source references are properly documented across sharded files
     - Check all DoD items one by one to ensure they are met
     - Confirm all todo items are completed
 
 [DoD]
   - [ ] All existing architecture documents have been read
   - [ ] Codebase has been searched to understand actual implementation
-  - [ ] Development notes and review reports have been reviewed
+  - [ ] Development notes, review reports, knowledge base, and progress records have been reviewed
   - [ ] Task list has been created and all items are marked as completed
-  - [ ] All architecture documents have been updated according to universal template
-  - [ ] Each updated document includes actual implementation details with source references
-  - [ ] All file paths are under "docs/architecture/" with .md extension
+  - [ ] All content includes proper source references (source_refs)
+  - [ ] Old architecture documents have been deleted from "docs/architecture/"
+  - [ ] Shard-architecture.py script has been executed successfully
+  - [ ] Sharded architecture documents are properly created in "docs/architecture/" with .md extension
+  - [ ] Original architecture.md has been deleted by the sharding script
+  - [ ] Each sharded document includes actual implementation details with source references
   - [ ] Deviations from original design are documented with rationale
-  - [ ] "{root}/CLAUDE.md" Document Index section has been updated with refreshed architecture documents
+  - [ ] "{root}/CLAUDE.md" Document Index section has been updated with refreshed sharded architecture documents
   - [ ] All todo items are completed
