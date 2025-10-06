@@ -1,12 +1,12 @@
 [Input]
-  1. "{root}/docs/cutover.md" --Cutover report (required)
-  2. (Conditional) "{root}/docs/PRD.md" --Product Requirements Document (if exists, used as primary requirement and architecture source)
-  3. (Conditional) "{root}/docs/requirements/*.md" --Requirement documents (optional, used if "PRD.md" does not exist)
-  4. (Conditional) "{root}/docs/architecture/*.md" --Architecture documents (optional, used if "PRD.md" does not exist)
-  5. "{root}/sunnycore/templates/dev-notes-tmpl.yaml" --Development notes template (required)
+  1. "docs/cutover.md" --Cutover report (required)
+  2. (Conditional) "docs/PRD.md" --Product Requirements Document (if exists, used as primary requirement and architecture source)
+  3. (Conditional) "docs/requirements/*.md" --Requirement documents (optional, used if "PRD.md" does not exist)
+  4. (Conditional) "docs/architecture/*.md" --Architecture documents (optional, used if "PRD.md" does not exist)
+  5. "sunnycore/templates/dev-notes-tmpl.yaml" --Development notes template (required)
 
 [Output]
-  1. "{root}/docs/cutover-fixes-dev-notes.md" --Development notes for fixes
+  1. "docs/cutover-fixes-dev-notes.md" --Development notes for fixes
   2. Fixed code implementation
   3. Updated documentation if needed
 
@@ -34,16 +34,16 @@
     - Create todo list based on issues to fix
 
   2. Root Cause Analysis Phase
-    - Check if "{root}/docs/PRD.md" exists
+    - Check if "docs/PRD.md" exists
     - if "PRD.md" exists then 2.1, else 2.2
       2.1. PRD-based Project
-        - Read "{root}/docs/PRD.md"
+        - Read "docs/PRD.md"
         - Extract requirements from PRD requirements section
         - Extract architecture information from PRD architecture section
         - Use PRD as the primary context for understanding system design
       2.2. Traditional Project Structure
-        - Read requirements from "{root}/docs/requirements/*.md" (if available)
-        - Read architecture from "{root}/docs/architecture/*.md" (if available)
+        - Read requirements from "docs/requirements/*.md" (if available)
+        - Read architecture from "docs/architecture/*.md" (if available)
     - For each reported issue:
       * Analyze error messages and reproduction steps
       * Locate relevant code using search tools
@@ -83,7 +83,7 @@
     - Document each issue fixed with before/after comparison
     - Document technical decisions and rationale
     - Record any risks or follow-up items
-    - Save to "{root}/docs/dev-notes/cutover-fixes-dev-notes.md"
+    - Save to "docs/dev-notes/cutover-fixes-dev-notes.md"
     - Check all DoD items one by one to ensure they are met
     - Confirm all todo items are completed
 

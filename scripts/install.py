@@ -16,6 +16,33 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 
+def safe_input(prompt: str) -> str:
+    """安全的輸入函數，支援管道執行時從 /dev/tty 讀取
+    
+    Args:
+        prompt: 提示信息
+        
+    Returns:
+        str: 用戶輸入的字符串
+        
+    Raises:
+        EOFError: 無法讀取輸入時
+    """
+    # 先嘗試從標準輸入讀取
+    if sys.stdin.isatty():
+        return input(prompt)
+    
+    # 如果標準輸入不是終端（如管道執行），嘗試從 /dev/tty 讀取
+    try:
+        with open('/dev/tty', 'r') as tty:
+            # 輸出提示到標準輸出
+            print(prompt, end='', flush=True)
+            return tty.readline().rstrip('\n')
+    except (OSError, IOError):
+        # 如果無法打開 /dev/tty（例如在完全無終端的環境中）
+        raise EOFError("無法讀取用戶輸入")
+
+
 class SunnycoreInstaller:
     """Sunnycore 安裝器"""
     
@@ -167,14 +194,14 @@ class SunnycoreInstaller:
         
         if claude_dir.exists() or sunnycore_dir.exists():
             if not auto_yes:
-                # 允許互動確認（移除 isatty 檢查）
+                # 使用 safe_input 支援管道執行時的互動
                 try:
-                    response = input(f"\n目錄已存在，是否覆寫? (y/N): ").strip().lower()
+                    response = safe_input(f"\n目錄已存在，是否覆寫? (y/N): ").strip().lower()
                     if response != 'y':
                         print("安裝已取消")
                         return False
                 except EOFError:
-                    # 如果無法讀取輸入（例如在某些管道情況下）
+                    # 如果無法讀取輸入（例如在完全無終端的環境中）
                     print("\n✗ 無法讀取用戶輸入，請使用 -y 參數自動確認覆寫")
                     return False
         
@@ -248,7 +275,7 @@ def main():
   # 互動模式 - 可選擇專案安裝或自訂路徑
   python3 install.py
   
-  # 從管道執行 - 支援互動選擇模式
+  # 從管道執行 - 完整支援互動模式
   curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/install.py | python3
   
   # 非互動模式 - 直接指定路徑
@@ -257,12 +284,16 @@ def main():
   # 非互動模式 - 指定路徑並自動確認覆寫
   python3 install.py -p ~/myproject -y
   
-  # 從管道執行 - 直接指定路徑
+  # 從管道執行 - 直接指定路徑和自動確認
   curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/install.py | python3 - -p ~/myproject -y
 
 模式說明:
   1. 專案安裝: 在當前工作目錄建立 .claude/ 和 sunnycore/ 目錄
   2. 自訂安裝: 在指定路徑建立 .claude/ 和 sunnycore/ 目錄
+  
+特殊支援:
+  腳本支援從管道執行時的互動模式，會自動從 /dev/tty 讀取輸入
+  若在完全無終端環境中執行，請使用 -p 和 -y 參數
         """
     )
     
@@ -320,12 +351,12 @@ def main():
             print("1. 專案安裝 (安裝到當前工作目錄)")
             print("2. 自訂安裝 (自行指定安裝路徑)")
             
-            mode = input("\n請輸入選項 (1/2，預設: 1): ").strip()
+            mode = safe_input("\n請輸入選項 (1/2，預設: 1): ").strip()
             
             if mode == '2':
                 # 自訂安裝模式
                 default_path = os.path.expanduser("~/sunnycore")
-                user_input = input(f"\n請輸入安裝路徑 (預設: {default_path}): ").strip()
+                user_input = safe_input(f"\n請輸入安裝路徑 (預設: {default_path}): ").strip()
                 install_path = Path(os.path.expanduser(user_input) if user_input else default_path)
             else:
                 # 專案安裝模式（預設）
@@ -334,7 +365,7 @@ def main():
                 install_path = Path(current_dir)
                 
         except EOFError:
-            # 如果無法讀取輸入（例如在某些管道情況下）
+            # 如果無法讀取輸入（例如在完全無終端的環境中）
             print("\n✗ 無法讀取用戶輸入，請使用 -p 參數指定安裝路徑")
             sys.exit(1)
     

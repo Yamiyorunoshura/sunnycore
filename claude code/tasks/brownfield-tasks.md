@@ -1,14 +1,14 @@
 [Input]
-  1. "{root}/sunnycore/templates/dev-notes-tmpl.yaml" --Development notes template
-  2. "{root}/docs/dev-notes/{task_id}-dev-notes.md" --Development notes
-  3. "{root}/docs/review-results/{task_id}-review.md" --Review report
-  4. "{root}/docs/architecture/*.md" --Architecture design
-  5. "{root}/docs/knowledge/*.md" --Project knowledge (if exist)
+  1. "sunnycore/templates/dev-notes-tmpl.yaml" --Development notes template
+  2. "docs/dev-notes/{task_id}-dev-notes.md" --Development notes
+  3. "docs/review-results/{task_id}-review.md" --Review report
+  4. "docs/architecture/*.md" --Architecture design
+  5. "docs/knowledge/*.md" --Project knowledge (if exist)
 
 [Output]
   1. Fixed code that runs properly
   2. Fix summary (recommend presenting in MARKDOWN, including: changes, tests, evidence, risk, rollback; suggested format, can be adjusted according to project needs)
-  3. Updated development notes "{root}/docs/dev-notes/{task_id}-dev-notes.md"
+  3. Updated development notes "docs/dev-notes/{task_id}-dev-notes.md"
 
 [Constraints]
   1. Must ensure fixed code runs properly
