@@ -81,7 +81,7 @@
     },
     "taskToAgents": {
       "brownfield-tasks": ["pm", "dev"],
-      "conclude": ["architect"],
+      "conclude": ["po"],
       "create-architecture": ["architect"],
       "create-brownfield-architecture": ["architect"],
       "create-brownfield-requirements": ["po", "pm"],
@@ -101,7 +101,6 @@
     },
     "agentToTasks": {
       "architect": [
-        "conclude",
         "create-architecture",
         "create-brownfield-architecture",
         "curate-knowledge",
@@ -128,6 +127,7 @@
         "review"
       ],
       "po": [
+        "conclude",
         "create-brownfield-requirements",
         "create-requirements",
         "cutover",

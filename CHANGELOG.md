@@ -7,6 +7,32 @@
 
 ## [Unreleased]
 
+## [1.13.0] - sunnycore v1.13.0
+
+### Changed
+- 重構專案總結流程：優化角色職責與工作流程順序
+  - 更新 `claude code/index.json`：將 conclude 任務從 architect 轉移至 po
+    * taskToAgents 映射：conclude 任務由 po 負責
+    * agentToTasks 映射：architect 移除 conclude、po 新增 conclude
+  - 更新 `claude code/README.md`：調整 Greenfield 和 Brownfield 流程階段三步驟順序
+    * Greenfield 流程：步驟 9（document-project）、步驟 10（curate-knowledge）、步驟 11（conclude）
+    * Brownfield 流程：步驟 10（document-project）、步驟 11（curate-knowledge）、步驟 12（conclude）
+    * 原因：先完成技術文檔產出與知識整理，最後由 PO 執行業務總結
+- 增強專案總結任務：大幅擴展 conclude 任務功能與自動化能力
+  - 更新 `claude code/tasks/conclude.md`：全面重構輸入源、輸出項與執行流程
+    * 輸入源擴展：從特定文件改為遞迴掃描整個 `{root}/docs/` 目錄，確保完整資訊收集
+    * 新增版本管理：從 `sunnycore.lock` 自動解析版本號（格式：`version = x.x.x`）
+    * 新增檔案歸檔功能：自動將 docs/ 中的文件移至 `archive/{version}/`，但保留 architecture/、knowledge/、completion-report.md
+    * 新增文檔參考更新：自動更新 architecture/ 和 knowledge/ 中指向已歸檔文件的路徑
+    * 優化執行步驟：新增版本解析階段、檔案歸檔階段、文檔參考更新階段
+    * 更新 DoD：新增版本解析、遞迴掃描、檔案歸檔、路徑更新等檢查項目
+- 擴展完成報告模板：支援版本追蹤與歸檔記錄
+  - 更新 `claude code/templates/completion-report-tmpl.yaml`：新增 version 欄位與 archived_files 區塊
+    * 新增欄位：version（從 sunnycore.lock 讀取）
+    * 新增區塊：archived_files（記錄歸檔位置與項目清單）
+    * 擴展參考來源：新增 cutover_reports、progress_records、other_docs 等參考類型
+- 版本號升級：sunnycore.lock 從 1.12.8 升級至 1.13.0
+
 ## [1.12.8] - sunnycore v1.12.8
 
 ### Fixed

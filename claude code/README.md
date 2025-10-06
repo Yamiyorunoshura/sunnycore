@@ -129,9 +129,9 @@ flowchart TD
 | 步驟 | 命令 | 說明 |
 |------|------|------|
 | 8 | `/sunnycore_po *cutover` | 項目驗收 |
-| 9 | `/sunnycore_po *conclude` | 總結文檔 |
-| 10 | `/sunnycore_po *curate-knowledge` | 整理知識文檔 |
-| 11 | `/sunnycore_architect *document-project` | 產出專案架構文件 |
+| 9 | `/sunnycore_architect *document-project` | 產出專案架構文件 |
+| 10 | `/sunnycore_architect *curate-knowledge` | 整理知識文檔 |
+| 11 | `/sunnycore_po *conclude` | 總結文檔 |
 
 **流程控制：**
 - ✅ **Cutover 通過**：進入總結流程（步驟 9）
@@ -205,9 +205,9 @@ flowchart TD
     
     subgraph Phase3 ["📊 階段三：驗收與總結"]
         C0["8️⃣ /sunnycore_po<br/>*cutover<br/>✅ 項目驗收"]
-        C1["9️⃣ /sunnycore_architect<br/>*conclude<br/>📋 總結文檔"]
+        C1["9️⃣ /sunnycore_architect<br/>*document-project<br/>📖 產出專案文件"]
         C2["🔟 /sunnycore_architect<br/>*curate-knowledge<br/>📚 整理知識"]
-        C3["1️⃣1️⃣ /sunnycore_architect<br/>*document-project<br/>📖 產出專案文件"]
+        C3["1️⃣1️⃣ /sunnycore_po<br/>*conclude<br/>📋 總結文檔"]
         C0 --> C1 --> C2 --> C3
     end
     
@@ -276,9 +276,9 @@ flowchart TD
 | 步驟 | 命令 | 說明 |
 |------|------|------|
 | 9 | `/sunnycore_po *cutover` | 項目驗收 |
-| 10 | `/sunnycore_po *conclude` | 總結文檔 |
-| 11 | `/sunnycore_po *curate-knowledge` | 整理知識文檔 |
-| 12 | `/sunnycore_architect *document-project` | 更新專案架構文件 |
+| 10 | `/sunnycore_architect *document-project` | 更新專案架構文件 |
+| 11 | `/sunnycore_architect *curate-knowledge` | 整理知識文檔 |
+| 12 | `/sunnycore_po *conclude` | 總結文檔 |
 
 **流程控制：**
 - ✅ **Cutover 通過**：進入總結流程（步驟 10）
@@ -312,9 +312,9 @@ flowchart TD
     
     subgraph Phase3 ["📊 階段三：驗收與總結"]
         C0["9️⃣ /sunnycore_po<br/>*cutover<br/>✅ 項目驗收"]
-        C1["🔟 /sunnycore_architect<br/>*conclude<br/>📋 總結文檔"]
+        C1["🔟 /sunnycore_architect<br/>*document-project<br/>📖 更新專案文件"]
         C2["1️⃣1️⃣ /sunnycore_architect<br/>*curate-knowledge<br/>📚 整理知識"]
-        C3["1️⃣2️⃣ /sunnycore_architect<br/>*document-project<br/>📖 更新專案文件"]
+        C3["1️⃣2️⃣ /sunnycore_po<br/>*conclude<br/>📋 總結文檔"]
         C0 --> C1 --> C2 --> C3
     end
     

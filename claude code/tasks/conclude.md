@@ -1,10 +1,7 @@
 [Input]
-  1. "{root}/docs/dev-notes/{task_id}-dev-notes.md" --Development notes (required)
-  2. "{root}/docs/review-results/{task_id}-review.md" --Review report (required)
+  1. "{root}/docs/*.md" --All files in docs/ directory recursively (required)
+  2. "{root}/*.lock" --Version information (required)
   3. "{root}/sunnycore/templates/completion-report-tmpl.yaml" --Completion report template (required)
-  4. "{root}/docs/cutover.md" --Cutover report (required)
-  5. "{root}/docs/cutover-fixes-dev-notes.md" --Cutover development notes (required)
-  6. "{root}/docs/progress.md" --Progress record
 
 [Output]
   1. Completion report: "{root}/docs/completion-report.md" (Markdown format)
@@ -17,8 +14,10 @@
     (3) Problems encountered, root cause analysis, and solutions
     (4) Future recommendations
     (5) DoD verification evidence (format as "file path:line number", e.g., "src/main.py:L42-L56")
-  3. If required input files (dev-notes, review, template) are missing or incorrectly formatted, must generate a missing file list in the terminal and halt execution, waiting for user to provide supplementary files
-  4. If any of the 5 core content items are completely missing from development notes or review report, should annotate "To be supplemented: missing XX item" in the corresponding chapter of the completion report and continue execution
+  3. If required input files (sunnycore.lock, template) are missing or incorrectly formatted, must generate a missing file list in the terminal and halt execution, waiting for user to provide supplementary files
+  4. If any of the 5 core content items are completely missing from source documents, should annotate "To be supplemented: missing XX item" in the corresponding chapter of the completion report and continue execution
+  5. Version name must be parsed from sunnycore.lock file (format: "version = x.x.x")
+  6. When archiving files, must preserve docs/architecture/, docs/knowledge/, and docs/completion-report.md in their original locations
 
 [Tools]
   1. **todo_write**: Create and manage task list
@@ -32,14 +31,17 @@
 
 [Steps]
   1. Input Validation Phase
-    - Verify existence of all input files (dev-notes, review, template, requirements/*.md, tasks.md)
-    - If required input files are missing (dev-notes, review, template), must generate a missing list in the terminal and halt execution; if optional files are missing (requirements, tasks.md), can mark and continue execution
+    - Verify existence of "{root}/sunnycore.lock" and read version number (format: "version = x.x.x")
+    - Parse version name from lock file (e.g., "1.12.8")
+    - Verify existence of completion report template
+    - Recursively scan "{root}/docs/" directory to get all file list (including all subdirectories)
+    - If required input files are missing (sunnycore.lock, template), must generate a missing list in the terminal and halt execution
     - Create todo list based on actual tasks
 
   2. Information Extraction Phase
-    - Read development notes and review report
+    - Read all files from docs/ directory recursively
     - Extract the first 4 core content items from constraint 2 (key decisions and their rationale, technology choices and alternative solution comparisons, problems encountered and solutions, future recommendations)
-    - If key information is missing, handle according to constraint 2
+    - If key information is missing, handle according to constraint 4
 
   3. Structure Mapping Phase
     - Read "completion-report-tmpl.yaml" to understand field structure
@@ -62,20 +64,36 @@
     - Check if all DoD verification evidence is included
     - If deficiencies are found, should return to Step 4 to fix the report (maximum 2 iterations, if still deficient then annotate "To be supplemented" and continue execution)
 
-  6. DoD Verification Phase
+  6. File Archiving Phase
+    - Create "{root}/archive/{version_name}/" directory if it does not exist
+    - Move all files and directories from "{root}/docs/" EXCEPT the following to "{root}/archive/{version_name}/":
+      * architecture/ directory
+      * knowledge/ directory
+      * completion-report.md file
+    - Suggested command: `mkdir -p "{root}/archive/{version_name}" && find "{root}/docs" -mindepth 1 -maxdepth 1 ! -name "architecture" ! -name "knowledge" ! -name "completion-report.md" -exec mv -n {} "{root}/archive/{version_name}/" \;`
+    - If mv -n fails because files already exist, should record a warning and annotate "Files already exist in archive folder", DoD is considered complete
+    - Execute verification command: `ls -la "{root}/docs"` to confirm only architecture/, knowledge/, and completion-report.md remain
+    - Execute verification command: `ls -la "{root}/archive/{version_name}"` to confirm archived files exist in the target folder
+
+  7. Update Document References Phase
+    - Scan all files in "{root}/docs/architecture/" and "{root}/docs/knowledge/" directories
+    - Identify all document references that point to archived files (formats to detect: "docs/xxx/yyy.md", "../xxx/yyy.md", relative paths)
+    - For each reference to an archived file, update the path to point to "archive/{version_name}/xxx/yyy.md" or appropriate relative path from current location
+    - Record the number of files updated and the number of references updated
+    - Use search_replace tool to update references in each file
+    - Verify all updated references are correct by checking if referenced files exist in archive location
+
+  8. DoD Verification Phase
     - Check all DoD items one by one to ensure they are met
     - Attach item-by-item DoD verification results at the end of the report
     - Confirm all todo items are completed
 
-  7. File Archiving Phase
-    - Verify existence of "requirements/", "epic.md" and "implementation-plan/"
-    - Use terminal commands to move the above files to "{root}/docs/archive/{version_name}/" (if folder does not exist, create it first)
-    - Suggested command: `mkdir -p "{root}/docs/archive/{version_name}" && mv -n {files} "{root}/docs/archive/{version_name}/"` (use -n parameter to avoid overwriting existing files)
-    - If mv -n fails because files already exist, should record a warning and annotate "Files already exist in archive folder", DoD is considered complete
-    - Execute verification command: `ls "{root}/docs/archive/{version_name}"` to confirm files exist in the target folder, if expected files are missing from the target folder, generate an error message and annotate DoD as incomplete, waiting for user to handle
-
 [DoD]
+  - [ ] sunnycore.lock file has been read and version number has been parsed successfully
+  - [ ] All files in docs/ directory have been scanned recursively
   - [ ] Completion report has been generated and complies with template structure (including all necessary sections in the template)
   - [ ] Completion report content fully covers the 5 core content items listed in constraint 2
-  - [ ] If "requirements/", "epic.md" and "implementation-plan/" exist, they have been safely moved to the archive folder; if they do not exist, this has been recorded in the report
-  - [ ] All todo items are completed (including: input validation, information extraction, structure mapping, write report, quality check, DoD verification, file archiving)
+  - [ ] All files and directories in docs/ EXCEPT architecture/, knowledge/, and completion-report.md have been moved to archive/{version_name}/
+  - [ ] Only architecture/, knowledge/, and completion-report.md remain in docs/ directory
+  - [ ] Document references in architecture/ and knowledge/ have been updated to point to correct archive paths
+  - [ ] All todo items are completed (including: input validation, information extraction, structure mapping, write report, quality check, DoD verification, file archiving, update references)
