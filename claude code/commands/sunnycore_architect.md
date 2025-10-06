@@ -1,6 +1,6 @@
 [Input]
-  1. User command input and corresponding command documentation (e.g., help.md, conclude.md, document-project.md, etc.)
-  2. {root}/sunnycore/CLAUDE.md
+  1. User command input and corresponding command documentation (e.g., "help.md", "conclude.md", "document-project.md", etc.)
+  2. "{root}/sunnycore/CLAUDE.md"
 
 [Output]
   1. Execute custom command behavior
@@ -23,22 +23,22 @@
 
 [Custom-Commands]
   1. *conclude
-    - Read and execute: {root}/sunnycore/tasks/conclude.md
+    - Read and execute: "{root}/sunnycore/tasks/conclude.md"
   
   2. *curate-knowledge
-    - Read and execute: {root}/sunnycore/tasks/curate-knowledge.md
+    - Read and execute: "{root}/sunnycore/tasks/curate-knowledge.md"
   
   3. *document-project
-    - Read and execute: {root}/sunnycore/tasks/document-project.md
+    - Read and execute: "{root}/sunnycore/tasks/document-project.md"
   
   4. *help
-    - Read and execute: {root}/sunnycore/tasks/help.md
+    - Read and execute: "{root}/sunnycore/tasks/help.md"
   
   5. *create-architecture
-    - Read and execute: {root}/sunnycore/tasks/create-architecture.md
+    - Read and execute: "{root}/sunnycore/tasks/create-architecture.md"
   
   6. *create-brownfield-architecture
-    - Read and execute: {root}/sunnycore/tasks/create-brownfield-architecture.md
+    - Read and execute: "{root}/sunnycore/tasks/create-brownfield-architecture.md"
 
 [Project-Summary-Guidelines]
   1. **Decision Transparency and Traceability**

@@ -1,6 +1,6 @@
 [Input]
-  1. User command input and corresponding command documentation (e.g., help.md, plan-tasks.md, create-requirements.md, etc.)
-  2. {root}/sunnycore/CLAUDE.md
+  1. User command input and corresponding command documentation (e.g., "help.md", "plan-tasks.md", "create-requirements.md", etc.)
+  2. "{root}/sunnycore/CLAUDE.md"
 
 [Output]
   1. Execute custom command behavior
@@ -21,19 +21,19 @@
 
 [Custom-Commands]
   1. *help
-    - Read: {root}/sunnycore/tasks/help.md
+    - Read: "{root}/sunnycore/tasks/help.md"
   
   2. *plan-tasks {task_id}
-    - Read: {root}/sunnycore/tasks/plan-tasks.md
+    - Read: "{root}/sunnycore/tasks/plan-tasks.md"
   
   3. *create-requirements
-    - Read: {root}/sunnycore/tasks/create-requirements.md
+    - Read: "{root}/sunnycore/tasks/create-requirements.md"
   
   4. *create-epic
-    - Read: {root}/sunnycore/tasks/create-epic.md
+    - Read: "{root}/sunnycore/tasks/create-epic.md"
   
   5. *create-prd
-    - Read: {root}/sunnycore/tasks/create-prd.md
+    - Read: "{root}/sunnycore/tasks/create-prd.md"
 
 [Requirements-Analysis-Guidelines]
   1. **Requirements Verifiability Principle**

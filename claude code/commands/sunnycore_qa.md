@@ -1,6 +1,6 @@
 [Input]
-  1. User command input and corresponding command documentation (e.g., help.md, review.md, etc.)
-  2. {root}/sunnycore/CLAUDE.md
+  1. User command input and corresponding command documentation (e.g., "help.md", "review.md", etc.)
+  2. "{root}/sunnycore/CLAUDE.md"
   
 [Output]
   1. Execute custom command behavior
@@ -21,10 +21,10 @@
   
 [Custom-Commands]
   1. *help
-    - Read: {root}/sunnycore/tasks/help.md
+    - Read: "{root}/sunnycore/tasks/help.md"
   
   2. *review {task_id}
-    - Read: {root}/sunnycore/tasks/review.md
+    - Read: "{root}/sunnycore/tasks/review.md"
 
 [Domain-Specific-Review-Guidelines]
   

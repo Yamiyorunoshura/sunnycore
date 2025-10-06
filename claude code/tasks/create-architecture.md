@@ -1,21 +1,21 @@
 [Input]
-  1. {root}/docs/requirements/*.md --Authoritative project requirements
-  2. {root}/sunnycore/scripts/shard-architecture.py --Architecture sharding script
-  3. {root}/sunnycore/templates/architecture-tmpl.yaml --Standardized architecture template
+  1. "{root}/docs/requirements/*.md" --Authoritative project requirements
+  2. "{root}/sunnycore/scripts/shard-architecture.py" --Architecture sharding script
+  3. "{root}/sunnycore/templates/architecture-tmpl.yaml" --Standardized architecture template
 
 [Output]
-  1. Architecture document collection under {root}/docs/architecture/ directory (*.md format)
+  1. Architecture document collection under "{root}/docs/architecture/" directory (*.md format)
   2. Minimum expected files example (more classification files can be produced based on project complexity):
-    - {root}/docs/architecture/overview.md
-    - {root}/docs/architecture/components.md
-    - {root}/docs/architecture/traceability_matrix.md
+    - "{root}/docs/architecture/overview.md"
+    - "{root}/docs/architecture/components.md"
+    - "{root}/docs/architecture/traceability_matrix.md"
 
 [Constraints]
-  1. Must verify that {root}/docs/requirements/*.md exists and is complete before architecture design; if requirements are incomplete or contain conflicts, record the issues and confirm with requirement authors, do not make assumptions
+  1. Must verify that "{root}/docs/requirements/*.md" exists and is complete before architecture design; if requirements are incomplete or contain conflicts, record the issues and confirm with requirement authors, do not make assumptions
   2. Must create explicit requirement-to-architecture mapping relationships covering functional and non-functional requirements (mapping means requirement ID explicitly links to specific component names or design decision numbers)
   3. Must verify that each requirement has corresponding architecture components or design decisions
-  4. Must use the standardized template to write {root}/docs/architecture.md; strictly preserve section order and 2-space indentation; do not introduce non-existent paths
-  5. After drafting is complete, must execute 'uv run {root}/sunnycore/scripts/shard-architecture.py' and verify output appears under {root}/docs/architecture/
+  4. Must use the standardized template to write "{root}/docs/architecture.md"; strictly preserve section order and 2-space indentation; do not introduce non-existent paths
+  5. After drafting is complete, must execute 'uv run "{root}/sunnycore/scripts/shard-architecture.py"' and verify output appears under "{root}/docs/architecture/"
   6. Architecture design required external API call must use context7 (MCP) to search for library documentation and API references
 
 [Tools]
@@ -28,7 +28,7 @@
 
 [Steps]
   1. Requirement Analysis Phase
-    - Verify the completeness and consistency of all requirements under {root}/docs/requirements/*.md
+    - Verify the completeness and consistency of all requirements under "{root}/docs/requirements/*.md"
     - Extract functional/non-functional requirements and convert non-functional requirements into architecture constraints
     - Create mapping matrix (requirement ID → component/decision) and identify gaps or conflicts
     - Create todo list to track subsequent architecture design tasks
@@ -39,16 +39,16 @@
     - Record decisions (recommend ADR format or table format) and include requirement traceability, handle cross-cutting concerns (security, observability, performance)
 
   3. Writing Phase
-    - Use {root}/sunnycore/templates/architecture-tmpl.yaml to draft {root}/docs/architecture.md content
+    - Use "{root}/sunnycore/templates/architecture-tmpl.yaml" to draft "{root}/docs/architecture.md" content
     - Include requirement traceability matrix and ensure each mapping relationship has been handled
     - Present draft content to user showing key sections (overview, components, traceability matrix, design decisions)
     - if user approves draft then proceed to 3.1, else proceed to 3.2
       
       3.1. Write Final Documents
-        - Write approved content to {root}/docs/architecture.md
-        - Execute uv run {root}/sunnycore/scripts/shard-architecture.py
-        - Verify output appears under {root}/docs/architecture/
-        - if execution succeeds then proceed to Step 4, else check if architecture.md format complies with template specifications, fix and re-execute
+        - Write approved content to "{root}/docs/architecture.md"
+        - Execute uv run "{root}/sunnycore/scripts/shard-architecture.py"
+        - Verify output appears under "{root}/docs/architecture/"
+        - if execution succeeds then proceed to Step 4, else check if "architecture.md" format complies with template specifications, fix and re-execute
       
       3.2. Revise Based on Feedback
         - Collect user feedback on what needs to be changed
@@ -63,16 +63,16 @@
     - Confirm all todo items are completed
 
 [Error-Handling]
-  1. shard-architecture.py execution failure: Check if architecture.md format complies with template specifications, fix and re-execute
+  1. "shard-architecture.py" execution failure: Check if "architecture.md" format complies with template specifications, fix and re-execute
   2. Unresolvable requirement conflicts: Record conflicts and confirm with requirement authors, do not make assumptions
   3. Architecture design infeasibility: Record technical limitations and propose alternative solutions
 
 [DoD]
-  - [ ] Verified that {root}/docs/requirements/*.md exists and is complete
+  - [ ] Verified that "{root}/docs/requirements/*.md" exists and is complete
   - [ ] Created requirement-to-architecture mapping matrix (requirement ID → component/decision), complete and accurate (100% coverage, no omissions or incorrect mappings)
   - [ ] All functional requirements have been mapped to specific architecture components
   - [ ] Non-functional requirements have been converted to measurable architecture constraints
   - [ ] User approval has been obtained for architecture draft
-  - [ ] {root}/docs/architecture.md exists and follows the template
-  - [ ] shard-architecture.py has been executed and shard file generation has been verified
+  - [ ] "{root}/docs/architecture.md" exists and follows the template
+  - [ ] "shard-architecture.py" has been executed and shard file generation has been verified
   - [ ] All todo items are completed
