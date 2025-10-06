@@ -1,7 +1,8 @@
 [Input]
-  1. {root}/docs/requirements/*.md --Requirement documents (required)
-  2. {root}/docs/architecture/*.md --Architecture documents (required)
-  3. {root}/sunnycore/templates/cutover-report-tmpl.yaml --Cutover report template (required)
+  1. (Conditional) {root}/docs/PRD.md --Product Requirements Document (if exists, used as primary requirement source)
+  2. (Conditional) {root}/docs/requirements/*.md --Requirement documents (required if PRD.md does not exist)
+  3. (Conditional) {root}/docs/architecture/*.md --Architecture documents (required if PRD.md does not exist)
+  4. {root}/sunnycore/templates/cutover-report-tmpl.yaml --Cutover report template (required)
 
 [Output]
   1. {root}/docs/cutover.md --Cutover report (Markdown format)
@@ -35,9 +36,18 @@
 [Steps]
   1. Preparation and Validation Phase
     - Verify existence of all required input files
-    - If any required files are missing, generate missing list and halt execution
-    - Read all requirement documents to understand business objectives
-    - Read all architecture documents to understand project structure
+    - Check if {root}/docs/PRD.md exists
+    - if PRD.md exists then 1.1, else 1.2
+      1.1. PRD-based Project
+        - Read {root}/docs/PRD.md
+        - Extract requirements from PRD requirements section
+        - Extract architecture information from PRD architecture section
+        - Use PRD as the primary requirement source for acceptance testing
+      1.2. Traditional Project Structure
+        - Read all requirement documents from {root}/docs/requirements/*.md
+        - Read all architecture documents from {root}/docs/architecture/*.md
+        - If any required files are missing, generate missing list and halt execution
+    - Understand business objectives and project structure
     - Create todo list based on actual tasks
 
   2. Understanding and Configuration Phase

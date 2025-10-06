@@ -38,6 +38,9 @@
 
   5. *init
     - Read: {root}/sunnycore/tasks/init.md
+  
+  6. *develop-prd
+    - Read: {root}/sunnycore/tasks/develop-prd.md
 
 [Development-Guidelines]
   1. **TDD Practice Guidelines**

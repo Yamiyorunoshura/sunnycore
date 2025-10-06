@@ -72,44 +72,6 @@
 - **Documentation**: 內容完整性、範例有效性、格式標準、版本同步、可讀性、準確性
 - **General**: 功能需求合規、程式碼品質、測試完整性、文檔完整性（備案）
 
-## 安裝方法
-
-### Multi-Stage Testing Framework 安裝
-
-#### 系統需求
-- Python 3.9+
-- Node.js 18+
-- UV package manager (可選，但推薦)
-- Git（必須已安裝）
-
-#### Python 依賴安裝
-```bash
-# 克隆倉庫
-git clone <repository-url>
-cd multi-stage-testing-framework
-
-# 使用 UV (推薦)
-uv pip install -e .
-
-# 或使用 pip
-pip install -e .
-```
-
-#### Node.js 依賴安裝
-```bash
-# 安裝 Promptfoo CLI 工具
-npm install -g promptfoo
-```
-
-#### 驗證安裝
-```bash
-# 驗證 Python 依賴
-python -c "import yaml, deepeval, jsonschema; print('Python dependencies OK')"
-
-# 驗證 Node.js 依賴
-promptfoo --version
-```
-
 ### Sunnycore 自動安裝腳本
 
 Sunnycore 提供了自動化安裝腳本 `scripts/sunnycore.sh`，可快速安裝不同版本到本機。
@@ -161,49 +123,9 @@ bash scripts/sunnycore.sh -v warp-code -p ~/sunnycore -y
 
 ## 快速開始
 
-### Greenfield 專案（從零開始）
+### Claude code version
 
-1. **安裝 Sunnycore**
-   ```bash
-   curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash
-   ```
-
-2. **執行階段一：需求與架構**
-   - `/sunnycore_po *create-requirements` - 創建需求文檔
-   - `/sunnycore_pm *create-architecture` - 創建架構設計
-   - `/sunnycore_pm *create-epic` - 創建任務清單
-
-3. **執行階段二：開發迭代**
-   - `/sunnycore_dev *init` - 初始化開發環境（新功能！）
-   - `/sunnycore_pm *plan-tasks {task_id}` - 規劃任務
-   - `/sunnycore_dev *develop-tasks {task_id}` - 開發實作
-   - `/sunnycore_qa *review {task_id}` - 審查文檔
-
-4. **執行階段三：總結**
-   - `/sunnycore_po *conclude` - 總結文檔
-   - `/sunnycore_po *curate-knowledge` - 整理知識
-   - `/sunnycore_po *document-project` - 產出專案文件
-
-### Brownfield 專案（既有專案）
-
-1. **安裝 Sunnycore**（同上）
-
-2. **執行階段一：了解現有架構**
-   - `/sunnycore_po *create-requirements` - 創建新需求文檔
-   - `/sunnycore_pm *create-brownfield-architecture` - 分析現有架構
-   - `/sunnycore_pm *create-epic` - 創建任務清單
-
-3. **執行階段二：開發迭代**
-   - `/sunnycore_dev *init` - 初始化開發環境（新功能！）
-   - 後續步驟與 Greenfield 相同
-
-## 技術特色
-
-- **Sequential Thinking**: 深度分析和規劃能力
-- **Template System**: 標準化的開發模板和文檔
-- **Multi-platform Support**: 支援不同開發環境和需求
-- **Quality Assurance**: 內建品質保證和最佳實踐
-- **Workflow Automation**: 自動化的開發流程管理
+閱讀[`claude code/README.md`](claude code/README.md)
 
 ## 貢獻指南
 
@@ -214,4 +136,4 @@ bash scripts/sunnycore.sh -v warp-code -p ~/sunnycore -y
 
 ## 授權
 
-本專案採用 MIT 授權條款。
+本專案採用 Apache 2.0 授權條款。

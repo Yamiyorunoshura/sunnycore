@@ -33,6 +33,12 @@
   
   4. *help
     - Read and execute: {root}/sunnycore/tasks/help.md
+  
+  5. *create-architecture
+    - Read and execute: {root}/sunnycore/tasks/create-architecture.md
+  
+  6. *create-brownfield-architecture
+    - Read and execute: {root}/sunnycore/tasks/create-brownfield-architecture.md
 
 [Project-Summary-Guidelines]
   1. **Decision Transparency and Traceability**
