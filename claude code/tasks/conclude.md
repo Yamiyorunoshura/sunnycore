@@ -1,9 +1,10 @@
 [Input]
   1. "{root}/docs/dev-notes/{task_id}-dev-notes.md" --Development notes (required)
   2. "{root}/docs/review-results/{task_id}-review.md" --Review report (required)
-  3. "{root}/claude code/templates/completion-report-tmpl.yaml" --Completion report template (required)
-  4. "{root}/docs/requirements/*.md" --Requirement documents (optional)
-  5. "{root}/docs/epic.md" --Task list (optional)
+  3. "{root}/sunnycore/templates/completion-report-tmpl.yaml" --Completion report template (required)
+  4. "{root}/cutover.md" --Cutover report (required)
+  5. "{root}/docs/cutover-dev-notes.md" --Cutover development notes (required)
+  6. "{root}/docs/progress.md" --Progress record
 
 [Output]
   1. Completion report: "{root}/docs/completion-report.md" (Markdown format)
@@ -67,8 +68,8 @@
     - Confirm all todo items are completed
 
   7. File Archiving Phase
-    - Verify existence of "requirements/" and "epic.md"
-    - Use terminal commands to move files to "{root}/docs/archive/{version_name}/" (if folder does not exist, create it first)
+    - Verify existence of "requirements/", "epic.md" and "implementation-plan/"
+    - Use terminal commands to move the above files to "{root}/docs/archive/{version_name}/" (if folder does not exist, create it first)
     - Suggested command: `mkdir -p "{root}/docs/archive/{version_name}" && mv -n {files} "{root}/docs/archive/{version_name}/"` (use -n parameter to avoid overwriting existing files)
     - If mv -n fails because files already exist, should record a warning and annotate "Files already exist in archive folder", DoD is considered complete
     - Execute verification command: `ls "{root}/docs/archive/{version_name}"` to confirm files exist in the target folder, if expected files are missing from the target folder, generate an error message and annotate DoD as incomplete, waiting for user to handle
@@ -76,5 +77,5 @@
 [DoD]
   - [ ] Completion report has been generated and complies with template structure (including all necessary sections in the template)
   - [ ] Completion report content fully covers the 5 core content items listed in constraint 2
-  - [ ] If "requirements/" and "epic.md" exist, they have been safely moved to the archive folder; if they do not exist, this has been recorded in the report
+  - [ ] If "requirements/", "epic.md" and "implementation-plan/" exist, they have been safely moved to the archive folder; if they do not exist, this has been recorded in the report
   - [ ] All todo items are completed (including: input validation, information extraction, structure mapping, write report, quality check, DoD verification, file archiving)

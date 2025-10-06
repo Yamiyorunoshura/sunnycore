@@ -2,6 +2,9 @@
   1. "{root}/docs/review-results/*.md" --Review reports
   2. "{root}/docs/dev-notes/*.md" --Development notes
   3. "{root}/docs/knowledge/*.md" --Existing knowledge base(if exist)
+  4. "{root}/cutover.md" --Cutover report (required)
+  5. "{root}/docs/cutover-dev-notes.md" --Cutover development notes (required)
+  6. "{root}/docs/progress.md" --Progress record
 
 [Output]
   1. "{root}/docs/knowledge/*.md" --Knowledge base (create directory first if it does not exist)
@@ -41,6 +44,7 @@
     - Produce error cases to corresponding documents by classification (document naming: "errors-{type}.md" or "errors.md")
     - Document content format: Each knowledge point includes title, description, evidence source, applicable scenarios
     - Annotate evidence source for each knowledge point (annotation format: file path + relevant section, e.g., "docs/dev-notes/feature-x.md" [Error Handling] paragraph)
+    - Archive the "review-results/" and "dev-notes/" files to "{root}/docs/archive/{version_name}/"
 
   4. DoD Verification Phase
     - Check all DoD items one by one to ensure they are met

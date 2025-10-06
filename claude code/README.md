@@ -129,8 +129,8 @@ flowchart TD
 | 步驟 | 命令 | 說明 |
 |------|------|------|
 | 8 | `/sunnycore_po *cutover` | 項目驗收 |
-| 9 | `/sunnycore_architect *conclude` | 總結文檔 |
-| 10 | `/sunnycore_architect *curate-knowledge` | 整理知識文檔 |
+| 9 | `/sunnycore_po *conclude` | 總結文檔 |
+| 10 | `/sunnycore_po *curate-knowledge` | 整理知識文檔 |
 | 11 | `/sunnycore_architect *document-project` | 產出專案架構文件 |
 
 **流程控制：**
@@ -276,8 +276,8 @@ flowchart TD
 | 步驟 | 命令 | 說明 |
 |------|------|------|
 | 9 | `/sunnycore_po *cutover` | 項目驗收 |
-| 10 | `/sunnycore_architect *conclude` | 總結文檔 |
-| 11 | `/sunnycore_architect *curate-knowledge` | 整理知識文檔 |
+| 10 | `/sunnycore_po *conclude` | 總結文檔 |
+| 11 | `/sunnycore_po *curate-knowledge` | 整理知識文檔 |
 | 12 | `/sunnycore_architect *document-project` | 更新專案架構文件 |
 
 **流程控制：**
