@@ -1,5 +1,71 @@
 # 開發流程
 
+## 🚀 PRD 流程（推薦用於小型變更）
+
+> 適用於小型變更和快速迭代，將需求、架構、任務整合在單一 PRD 文檔中
+
+### 📋 完整流程
+
+| 步驟 | 命令 | 說明 |
+|------|------|------|
+| 1 | `/sunnycore_architect *document-project` | （可選）若為 Brownfield 專案，先更新架構文檔 |
+| 2 | `/sunnycore_pm *create-prd` | 創建 PRD（產品需求文檔），包含需求、架構、任務 |
+| 3 | `/sunnycore_dev *develop-prd` | 基於 PRD 一次性完成所有開發任務 |
+| 4 | `/sunnycore_po *cutover` | 項目驗收 |
+| 5 | `/sunnycore_architect *document-project` | 更新專案架構文檔 |
+
+**特點：**
+- ✅ **簡化流程**：合併需求、架構、任務為單一文檔
+- ✅ **快速迭代**：一次性完成所有 PRD 任務
+- ✅ **自動判斷**：自動識別 Greenfield/Brownfield 專案類型
+- ✅ **適用場景**：小型功能開發、Bug 修復、技術改進
+
+### 🔄 流程圖
+
+```mermaid
+flowchart TD
+    Start([開始 PRD 流程]) --> A0
+    
+    subgraph Phase1 ["📋 PRD 創建階段"]
+        A0["1️⃣ /sunnycore_architect<br/>*document-project<br/>📖 更新專案文件（可選）"]
+        A1["2️⃣ /sunnycore_pm<br/>*create-prd<br/>📝 創建 PRD"]
+        A0 -.->|"Brownfield"| A1
+        Start -.->|"Greenfield"| A1
+    end
+    
+    subgraph Phase2 ["💻 開發階段"]
+        B1["3️⃣ /sunnycore_dev<br/>*develop-prd<br/>⚙️ 完成所有開發任務"]
+    end
+    
+    subgraph Phase3 ["📊 驗收與總結階段"]
+        C0["4️⃣ /sunnycore_po<br/>*cutover<br/>✅ 項目驗收"]
+        C1["5️⃣ /sunnycore_architect<br/>*document-project<br/>📖 更新專案文件"]
+    end
+    
+    D1{"✅ Cutover<br/>通過?"}
+    R1["🔧 /sunnycore_dev<br/>*fix-acceptance-issues<br/>修復問題"]
+    
+    Done([✨ 完成])
+    
+    A1 --> B1
+    B1 --> C0
+    C0 --> D1
+    D1 -->|"❌ 否"| R1
+    R1 --> C0
+    D1 -->|"✅ 是"| C1
+    C1 --> Done
+    
+    style Start fill:#e1f5e1
+    style Done fill:#e1f5e1
+    style D1 fill:#fff4e6
+    style R1 fill:#ffe6e6
+    style Phase1 fill:#f0f8ff
+    style Phase2 fill:#f5f0ff
+    style Phase3 fill:#fff0f5
+```
+
+---
+
 ## 🌱 Greenfield 專案流程
 
 > 適用於從零開始的新專案開發
@@ -255,16 +321,19 @@ flowchart TD
 
 ## 📝 流程說明
 
-### 🌱 Greenfield vs 🏗️ Brownfield
+### 🚀 PRD vs 🌱 Greenfield vs 🏗️ Brownfield
 
-| 特性 | Greenfield | Brownfield |
-|------|-----------|------------|
-| **適用場景** | 全新專案 | 現有專案擴展/維護 |
-| **起始步驟** | 直接建立需求 | 先更新專案文件 |
-| **需求命令** | `*create-requirements` | `*create-brownfield-requirements` |
-| **架構命令** | `*create-architecture` | `*create-brownfield-architecture` |
-| **任務命令** | `*create-epic` |
-| **總步驟數** | 11 步 | 12 步 |
+| 特性 | PRD 流程 | Greenfield | Brownfield |
+|------|---------|-----------|------------|
+| **適用場景** | 小型變更、快速迭代 | 全新專案 | 現有專案擴展/維護 |
+| **文檔結構** | 單一 PRD 文檔 | 分離的需求、架構、任務文檔 | 分離的需求、架構、任務文檔 |
+| **起始步驟** | 創建 PRD | 直接建立需求 | 先更新專案文件 |
+| **需求命令** | `*create-prd` | `*create-requirements` | `*create-brownfield-requirements` |
+| **架構命令** | 內建於 PRD | `*create-architecture` | `*create-brownfield-architecture` |
+| **任務命令** | 內建於 PRD | `*create-epic` | `*create-epic` |
+| **開發命令** | `*develop-prd`（一次性） | `*develop-tasks`（逐個） | `*develop-tasks`（逐個） |
+| **總步驟數** | 5 步 | 11 步 | 12 步 |
+| **適合規模** | 小型（1-5 個任務） | 中大型（5+ 個任務） | 中大型（5+ 個任務） |
 
 ### 🎯 關鍵決策點
 
@@ -289,9 +358,9 @@ flowchart TD
 
 | 角色 | 職責 | 關鍵命令 |
 |------|------|----------|
-| **Architect** | 技術架構設計、知識管理、技術決策支持 | *conclude, *curate-knowledge, *document-project |
-| **Developer** | 開發實作、技術實現、問題修復 | *init, *develop-tasks, *fix-acceptance-issues |
-| **PM** | 需求分析、任務規劃、架構設計 | *create-requirements, *create-architecture, *plan-tasks |
+| **Architect** | 技術架構設計、知識管理、技術決策支持 | *create-architecture, *create-brownfield-architecture, *conclude, *curate-knowledge, *document-project |
+| **Developer** | 開發實作、技術實現、問題修復 | *init, *develop-tasks, *develop-prd, *fix-acceptance-issues |
+| **PM** | 產品需求管理、任務規劃、PRD 創建 | *create-requirements, *create-prd, *create-epic, *plan-tasks |
 | **PO** | 業務驗收、需求確認、項目交付 | *cutover |
 | **QA** | 代碼審查、質量保證 | *review |
 

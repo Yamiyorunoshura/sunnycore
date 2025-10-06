@@ -7,6 +7,57 @@
 
 ## [Unreleased]
 
+## [1.10.0] - Claude code v1.10.0
+
+### Added
+- 新增 PRD 工作流程：提供小型變更與快速迭代的輕量化開發流程
+  - 新增 `claude code/tasks/create-prd.md`：定義 PRD（產品需求文檔）創建任務
+    * 自動偵測專案類型（Greenfield/Brownfield）
+    * 整合需求、架構、任務於單一文檔
+    * 支援需求可追溯性（requirement-to-architecture-to-task）
+  - 新增 `claude code/tasks/develop-prd.md`：定義 PRD 開發任務
+    * 一次性完成所有 PRD 任務
+    * 遵循 TDD 開發流程（RED-GREEN-REFACTOR）
+    * 自動產生統一開發筆記 `prd-dev-notes.md`
+  - 新增 `claude code/templates/prd-tmpl.yaml`：PRD 模板
+    * 包含需求、架構、任務三大區塊
+    * 支援功能與非功能需求定義
+    * 提供技術棧與資料流程描述結構
+- 新增 Architect 角色架構設計命令：在 `sunnycore_architect.md` 中新增架構設計職責
+  - 新增第 5 項命令：`*create-architecture` - 創建 Greenfield 架構
+  - 新增第 6 項命令：`*create-brownfield-architecture` - 創建 Brownfield 架構
+  - 強化 Architect 技術決策支援能力
+
+### Changed
+- 重構角色職責分配：優化 PM、Architect、Dev 三個角色的職責邊界
+  - PM (`sunnycore_pm.md`)：專注於產品需求管理與 PRD 創建
+    * 移除 `*create-architecture` 與 `*create-brownfield-architecture` 命令
+    * 新增 `*create-prd` 命令（第 5 項）
+  - Architect (`sunnycore_architect.md`)：接管所有架構設計任務
+    * 新增 `*create-architecture` 和 `*create-brownfield-architecture` 命令
+  - Dev (`sunnycore_dev.md`)：新增 PRD 開發能力
+    * 新增 `*develop-prd` 命令（第 6 項）
+- 優化現有任務以支援 PRD 流程：更新驗收與修復任務以支援 PRD 作為輸入源
+  - `cutover.md`：新增條件分支支援 PRD.md 作為主要需求來源
+    * 優先從 PRD.md 讀取需求與架構（若存在）
+    * 回退至傳統 requirements/*.md 與 architecture/*.md（若 PRD.md 不存在）
+  - `fix-acceptance-issues.md`：新增條件分支支援 PRD.md 作為需求與架構來源
+    * 輸出路徑調整為 `{root}/docs/cutover-fixes-dev-notes.md`
+- 更新開發流程文檔：在 `claude code/README.md` 中新增 PRD 流程說明與比較表
+  - 新增「PRD 流程」章節：完整的 5 步驟工作流程與 Mermaid 流程圖
+  - 更新「流程說明」章節：新增 PRD vs Greenfield vs Brownfield 比較表
+  - 更新「角色職責」章節：反映新的角色分工（Architect 負責架構設計、PM 負責 PRD 創建）
+- 簡化根目錄 README：優化內容結構與可讀性
+  - 移除重複的安裝方法與快速開始章節
+  - 改為引用 `claude code/README.md` 作為 Claude code 版本的使用指引
+  - 更新授權條款說明（從 MIT 改為 Apache 2.0）
+- 更新配置檔案：`claude code/index.json` 反映新的任務與角色關聯
+  - 新增 create-prd、develop-prd 任務註冊
+  - 新增 prd-tmpl 模板註冊
+  - 更新任務與代理的對應關係（architect 接管架構任務、pm 負責 PRD 創建）
+  - 更新任務與模板的依賴關係
+- 版本號升級：claude-code.lock 從 1.9.1 升級至 1.10.0
+
 ## [1.9.1] - Claude code v1.9.1
 
 ### Added

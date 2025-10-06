@@ -29,14 +29,11 @@
   3. *create-requirements
     - Read: {root}/sunnycore/tasks/create-requirements.md
   
-  4. *create-architecture
-    - Read: {root}/sunnycore/tasks/create-architecture.md
-  
-  5. *create-epic
+  4. *create-epic
     - Read: {root}/sunnycore/tasks/create-epic.md
   
-  6. *create-brownfield-architecture
-    - Read: {root}/sunnycore/tasks/create-brownfield-architecture.md
+  5. *create-prd
+    - Read: {root}/sunnycore/tasks/create-prd.md
 
 [Requirements-Analysis-Guidelines]
   1. **Requirements Verifiability Principle**

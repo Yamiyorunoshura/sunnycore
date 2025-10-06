@@ -24,6 +24,7 @@
     { "id": "cutover-report-tmpl", "path": "claude code/templates/cutover-report-tmpl.yaml" },
     { "id": "dev-notes-tmpl", "path": "claude code/templates/dev-notes-tmpl.yaml" },
     { "id": "implementation-plan-tmpl", "path": "claude code/templates/implementation-plan-tmpl.yaml" },
+    { "id": "prd-tmpl", "path": "claude code/templates/prd-tmpl.yaml" },
     { "id": "project-knowledge-tmpl", "path": "claude code/templates/project-knowledge-tmpl.yaml" },
     { "id": "requirement-tmpl", "path": "claude code/templates/requirement-tmpl.yaml" },
     { "id": "review-tmpl", "path": "claude code/templates/review-tmpl.yaml" },
@@ -36,9 +37,11 @@
     { "id": "create-brownfield-architecture", "path": "claude code/tasks/create-brownfield-architecture.md" },
     { "id": "create-brownfield-requirements", "path": "claude code/tasks/create-brownfield-requirements.md" },
     { "id": "create-epic", "path": "claude code/tasks/create-epic.md" },
+    { "id": "create-prd", "path": "claude code/tasks/create-prd.md" },
     { "id": "create-requirements", "path": "claude code/tasks/create-requirements.md" },
     { "id": "curate-knowledge", "path": "claude code/tasks/curate-knowledge.md" },
     { "id": "cutover", "path": "claude code/tasks/cutover.md" },
+    { "id": "develop-prd", "path": "claude code/tasks/develop-prd.md" },
     { "id": "develop-tasks", "path": "claude code/tasks/develop-tasks.md" },
     { "id": "document-project", "path": "claude code/tasks/document-project.md" },
     { "id": "fix-acceptance-issues", "path": "claude code/tasks/fix-acceptance-issues.md" },
@@ -55,9 +58,11 @@
       "create-brownfield-architecture": ["architecture-tmpl"],
       "create-brownfield-requirements": ["requirement-tmpl"],
       "create-epic": ["tasks-tmpl"],
+      "create-prd": ["prd-tmpl"],
       "create-requirements": ["requirement-tmpl"],
       "curate-knowledge": ["project-knowledge-tmpl"],
       "cutover": ["cutover-report-tmpl"],
+      "develop-prd": ["dev-notes-tmpl"],
       "develop-tasks": ["dev-notes-tmpl"],
       "document-project": ["concluded-architecture-tmpl"],
       "fix-acceptance-issues": ["dev-notes-tmpl"],
@@ -75,13 +80,15 @@
     "taskToAgents": {
       "brownfield-tasks": ["pm", "dev"],
       "conclude": ["architect"],
-      "create-architecture": ["dev", "pm"],
-      "create-brownfield-architecture": ["dev", "pm"],
+      "create-architecture": ["architect"],
+      "create-brownfield-architecture": ["architect"],
       "create-brownfield-requirements": ["po", "pm"],
       "create-epic": ["pm"],
+      "create-prd": ["pm"],
       "create-requirements": ["po", "pm"],
       "curate-knowledge": ["architect"],
       "cutover": ["po"],
+      "develop-prd": ["dev"],
       "develop-tasks": ["dev"],
       "document-project": ["architect"],
       "fix-acceptance-issues": ["dev"],
@@ -93,14 +100,15 @@
     "agentToTasks": {
       "architect": [
         "conclude",
+        "create-architecture",
+        "create-brownfield-architecture",
         "curate-knowledge",
         "document-project",
         "help"
       ],
       "dev": [
         "brownfield-tasks",
-        "create-architecture",
-        "create-brownfield-architecture",
+        "develop-prd",
         "develop-tasks",
         "fix-acceptance-issues",
         "init",
@@ -108,10 +116,9 @@
       ],
       "pm": [
         "brownfield-tasks",
-        "create-architecture",
-        "create-brownfield-architecture",
         "create-brownfield-requirements",
         "create-epic",
+        "create-prd",
         "create-requirements",
         "help",
         "plan-tasks",
@@ -154,11 +161,15 @@
       ],
       "dev-notes-tmpl": [
         "brownfield-tasks",
+        "develop-prd",
         "develop-tasks",
         "fix-acceptance-issues"
       ],
       "implementation-plan-tmpl": [
         "plan-tasks"
+      ],
+      "prd-tmpl": [
+        "create-prd"
       ],
       "project-knowledge-tmpl": [
         "curate-knowledge"
