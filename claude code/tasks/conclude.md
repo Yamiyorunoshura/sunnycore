@@ -1,6 +1,6 @@
 [Input]
   1. {root}/docs/dev-notes/{task_id}-dev-notes.md --Development notes (required)
-  2. {root}/docs/review_results/{task_id}-review.md --Review report (required)
+  2. {root}/docs/review-results/{task_id}-review.md --Review report (required)
   3. {root}/claude code/templates/completion-report-tmpl.yaml --Completion report template (required)
   4. {root}/docs/requirements/*.md --Requirement documents (optional)
   5. {root}/docs/epic.md --Task list (optional)

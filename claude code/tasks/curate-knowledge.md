@@ -1,6 +1,7 @@
 [Input]
   1. {root}/docs/review-results/*.md --Review reports
   2. {root}/docs/dev-notes/*.md --Development notes
+  3. {root}/docs/knowledge/*.md --Existing knowledge base(if exist)
 
 [Output]
   1. {root}/docs/knowledge/*.md --Knowledge base (create directory first if it does not exist)

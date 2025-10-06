@@ -3,6 +3,7 @@
   2. {root}/docs/architecture/*.md --Existing architecture document collection
   3. {root}/sunnycore/scripts/shard-architecture.py --Architecture sharding script
   4. {root}/sunnycore/templates/architecture-tmpl.yaml --Architecture template
+  5. {root}/docs/knowledge/*.md --Project knowledge
 
 [Output]
   1. {root}/docs/architecture/*.md --Updated architecture document collection (*.md format)
@@ -39,10 +40,21 @@
     - Write "Impact Analysis" for all proposed changes to explain potential impact on existing system
 
   3. Writing and Sharding Phase
-    - Use architecture template to draft {root}/docs/architecture.md in Markdown format
+    - Use architecture template to draft {root}/docs/architecture.md content in Markdown format
     - Ensure sections emphasize new module and integration impact
-    - Execute sharding script to split documents: uv run {root}/sunnycore/scripts/shard-architecture.py
-    - Verify documents appear under {root}/docs/architecture/
+    - Present draft content to user showing key sections (new module design, integration points, impact analysis)
+    - if user approves draft then proceed to 3.1, else proceed to 3.2
+      
+      3.1. Write Final Documents
+        - Write approved content to {root}/docs/architecture.md
+        - Execute sharding script: uv run {root}/sunnycore/scripts/shard-architecture.py
+        - Verify documents appear under {root}/docs/architecture/
+        - if execution succeeds then proceed to Step 4, else check format compliance and re-execute
+      
+      3.2. Revise Based on Feedback
+        - Collect user feedback on what needs to be changed
+        - Revise the draft content according to feedback
+        - Return to present revised draft and request approval again
 
   4. Finalization Phase
     - Cross-check against constraints and guidance questions; fix gaps and inconsistencies
@@ -57,6 +69,7 @@
   - [ ] New module has documented boundaries, interfaces, and data flows
   - [ ] All proposed changes include explicit "Impact Analysis" subsections
   - [ ] Compatibility with existing contracts has been clarified (no breaking changes)
+  - [ ] User approval has been obtained for architecture draft
   - [ ] {root}/docs/architecture.md exists and follows the template
   - [ ] shard-architecture.py has been executed and shard file generation has been verified
   - [ ] All todo items are completed

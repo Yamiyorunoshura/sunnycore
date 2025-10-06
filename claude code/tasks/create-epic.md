@@ -38,14 +38,24 @@
     - Verify format complies with template requirements
 
   4. Finalization Phase
-    - Write tasks to {root}/docs/epic.md (Markdown format)
-    - Include brief introduction explaining grouping and scope
-    - Check all DoD items one by one to ensure they are met
-    - Confirm all todo items are completed
+    - Prepare draft task list in Markdown format with brief introduction explaining grouping and scope
+    - Present draft content to user showing all task groups and individual tasks
+    - if user approves draft then proceed to 4.1, else proceed to 4.2
+      
+      4.1. Write Final Document
+        - Write approved task list to {root}/docs/epic.md (Markdown format)
+        - Check all DoD items one by one to ensure they are met
+        - Confirm all todo items are completed
+      
+      4.2. Revise Based on Feedback
+        - Collect user feedback on what needs to be changed (e.g., task granularity, grouping, acceptance criteria)
+        - Revise the task list according to feedback
+        - Return to present revised draft and request approval again
 
 [DoD]
   - [ ] All requirement and architecture documents have been read
   - [ ] Research notes are complete, including mapping of functional requirements/non-functional requirements to tasks
+  - [ ] User approval has been obtained for task list draft
   - [ ] File {root}/docs/epic.md exists and is valid Markdown
   - [ ] All tasks comply with template fields
   - [ ] Each task is atomic, outcome-oriented, and verifiable
