@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [1.12.7] - sunnycore v1.12.7
+
+### Fixed
+- 修正總結任務輸入路徑錯誤：更正 `claude code/tasks/conclude.md` 中的兩個文檔路徑引用
+  - 第 5 項輸入：`{root}/cutover.md` → `{root}/docs/cutover.md`
+  - 第 6 項輸入：`{root}/docs/cutover-dev-notes.md` → `{root}/docs/cutover-fixes-dev-notes.md`
+  - 提升路徑引用的正確性與專案總結流程的可靠性
+
 ## [1.12.6] - sunnycore v1.12.6
 
 ### Changed
