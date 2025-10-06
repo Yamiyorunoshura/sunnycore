@@ -98,49 +98,51 @@
 
 ### Sunnycore 自動安裝腳本
 
-Sunnycore 提供了自動化安裝腳本 `scripts/sunnycore.sh`，可快速安裝到本機。
+Sunnycore 提供了自動化安裝腳本 `scripts/install.py`，可快速安裝到本機。
 
 #### 系統需求
-- macOS 或 Linux 系統
-- Git（必須已安裝）
-- Bash shell
+- macOS、Linux 或 Windows 系統
+- Python 3.6+
 - 網路連線
 
 #### 以 curl 一行安裝（推薦）
 
 互動模式（不帶參數會在終端互動選擇安裝路徑）：
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/install.py | python3
 ```
 
 非互動模式（直接指定路徑並自動確認）：
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash -s -- -v claude-code -p ~/sunnycore -y
+curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/install.py | python3 - -v claude-code -p ~/myproject -y
 ```
 
 可選參數：
 - `-v, --version`：指定版本（目前僅支援 `claude-code`）
-- `-p, --path`：安裝基礎路徑（會在該路徑下建立 `sunnycore/`）
+- `-p, --path`：安裝路徑（支援 `~/` 展開）
 - `-y, --yes`：自動同意覆寫與操作
-- `--repo`、`--branch`、`--remote-name`：進階 Git 來源/分支控制
+- `--repo`：GitHub 倉庫（預設：Yamiyorunoshura/sunnycore）
+- `--branch`：分支名稱（預設：master）
 
 #### 從本地倉庫執行
 
 若已經克隆本倉庫，可直接執行腳本：
 ```bash
-bash scripts/sunnycore.sh -v claude-code -p ~/sunnycore -y
+python3 scripts/install.py -v claude-code -p ~/myproject -y
 ```
 
 #### 安裝結果
 安裝完成後，目標路徑將包含：
 ```
-目標路徑/
-├── claude code/         # Claude Code 版本系統檔案
+工作目錄/
+├── .claude/              # Claude 專用配置
+│   ├── agents/          # Agent 定義
+│   └── commands/        # 角色命令定義
+├── sunnycore/           # Sunnycore 系統檔案
 │   ├── config.yaml     # 配置檔案
-│   ├── commands/       # 角色命令定義
-│   ├── agents/         # Agent 定義
 │   ├── tasks/          # 任務模板
-│   └── templates/      # 文檔模板
+│   ├── templates/      # 文檔模板
+│   └── scripts/        # 輔助腳本
 └── CLAUDE.md           # Claude Code 專案指引
 ```
 
