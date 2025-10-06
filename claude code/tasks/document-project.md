@@ -36,7 +36,6 @@
     - Search codebase to understand actual implementation state
     - Read development notes and review reports to capture implementation details
     - Read knowledge base for domain context
-    - Identify gaps between planned architecture and actual implementation
     - Create todo list for architecture document generation
 
   2. Integration Phase - Create Unified Architecture Document
