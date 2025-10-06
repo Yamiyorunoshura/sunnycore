@@ -1,0 +1,100 @@
+[Input]
+  1. {root}/docs/requirements/*.md --Requirement documents (required)
+  2. {root}/docs/architecture/*.md --Architecture documents (required)
+  3. {root}/sunnycore/templates/cutover-report-tmpl.yaml --Cutover report template (required)
+
+[Output]
+  1. {root}/docs/cutover.md --Cutover report (Markdown format)
+
+[Constraints]
+  1. Must follow cutover report template structure
+  2. Must test project functionality from end-user perspective, not technical testing
+  3. If required configuration is missing or unclear, must document specific needs
+  4. If project fails to run, must record detailed error information and reproduction steps
+  5. Must verify all critical business requirements stated in requirement documents
+  6. If any required input files are missing, must generate a missing file list and halt execution
+
+[Tools]
+  1. **todo_write**: Create and manage task list
+    - [Step 1: Create todo list; Steps 2-6: Track task progress]
+  2. **sequentialthinking (MCP)**: Perform structured reasoning and verification
+    - [Step 2: Reason about configuration needs; Step 4: Analyze acceptance test results]
+
+[Tool-Guidelines]
+  1. **todo_write**
+    - Create a todo list in preparation phase, including all major tasks
+    - Update the status of each completed step to completed
+    - State gate: Only allow a single task to be in_progress; mark completed immediately after completion
+  2. **sequentialthinking**
+    - Simple task reasoning: 1-3 totalThoughts
+    - Medium task reasoning: 3-5 totalThoughts
+    - Complex task reasoning: 5-8 totalThoughts
+    - If still uncertain after completing the original reasoning steps: nextThoughtNeeded = true
+    - Must complete all configured reasoning steps
+
+[Steps]
+  1. Preparation and Validation Phase
+    - Verify existence of all required input files
+    - If any required files are missing, generate missing list and halt execution
+    - Read all requirement documents to understand business objectives
+    - Read all architecture documents to understand project structure
+    - Create todo list based on actual tasks
+
+  2. Understanding and Configuration Phase
+    - Identify project type (web app, API, CLI tool, library, etc.)
+    - Identify required dependencies and environment setup
+    - Identify configuration needs (API keys, tokens, database connections, etc.)
+    - Read documentation for setup instructions
+    - Document all configuration requirements clearly for end users
+    - If configuration is unclear or missing, document specific questions
+
+  3. Environment Setup Phase
+    - Follow documentation to set up project environment
+    - Install all required dependencies
+    - Apply necessary configurations
+    - Document all setup steps performed
+    - If setup fails, record error details and potential causes
+    - If external services are required, document what is needed
+
+  4. Project Execution Phase
+    - Attempt to run the project according to documentation
+    - If project is a web application, verify it starts and is accessible
+    - If project is an API, verify endpoints are reachable
+    - If project is a CLI tool, verify commands execute
+    - Document success or failure with detailed logs
+    - If execution fails, record exact error messages and reproduction steps
+
+  5. Acceptance Testing Phase
+    - For each critical business requirement in requirement documents:
+      * Test functionality from end-user perspective
+      * Verify acceptance criteria are met
+      * Document test result (Pass/Fail) with evidence
+    - Evaluate user experience and usability
+    - Test error handling and edge cases
+    - Document all issues found with severity and business impact
+    - Take screenshots or recordings if applicable
+
+  6. Report Generation Phase
+    - Create cutover report using template structure
+    - Document cutover status: Success / Partial Success / Failed
+    - List all configuration requirements identified
+    - Document all test results with evidence
+    - List all issues found with details
+    - Provide recommendations for fixes or improvements
+    - Save report to {root}/docs/cutover.md
+    - Check all DoD items one by one to ensure they are met
+    - Confirm all todo items are completed
+
+[DoD]
+  - [ ] All required input files have been read
+  - [ ] Project type and configuration needs have been identified
+  - [ ] Environment setup has been attempted and documented
+  - [ ] Project execution has been attempted and results documented
+  - [ ] All critical business requirements have been tested
+  - [ ] Cutover report has been generated and complies with template structure
+  - [ ] Cutover status (Success/Partial Success/Failed) has been determined
+  - [ ] All configuration requirements have been documented
+  - [ ] All test results have been recorded with evidence
+  - [ ] All issues have been documented with severity and reproduction steps
+  - [ ] All todo items are completed
+

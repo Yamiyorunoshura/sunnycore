@@ -27,13 +27,18 @@
   - 無任務 → 進入階段三
 - ❌ **Review 未通過**：使用 `/sunnycore_dev *brownfield-tasks {task_id}` 進行重開發，回到步驟 6
 
-### 📊 階段三：總結與文檔化
+### 📊 階段三：驗收與總結
 
 | 步驟 | 命令 | 說明 |
 |------|------|------|
-| 8 | `/sunnycore_po *conclude` | 總結文檔 |
-| 9 | `/sunnycore_po *curate-knowledge` | 整理知識文檔 |
-| 10 | `/sunnycore_po *document-project` | 產出專案架構文件 |
+| 8 | `/sunnycore_po *cutover` | 項目驗收 |
+| 9 | `/sunnycore_architect *conclude` | 總結文檔 |
+| 10 | `/sunnycore_architect *curate-knowledge` | 整理知識文檔 |
+| 11 | `/sunnycore_architect *document-project` | 產出專案架構文件 |
+
+**流程控制：**
+- ✅ **Cutover 通過**：進入總結流程（步驟 9）
+- ❌ **Cutover 未通過**：使用 `/sunnycore_dev *fix-acceptance-issues` 進行修復，回到步驟 8
 
 ## ⚙️ 配置說明
 
@@ -101,12 +106,16 @@ flowchart TD
     D2{"📝 還有<br/>任務?"}
     R1["🔄 /sunnycore_dev<br/>*brownfield-tasks<br/>重新開發"]
     
-    subgraph Phase3 ["📊 階段三：總結"]
-        C1["8️⃣ /sunnycore_po<br/>*conclude<br/>📋 總結文檔"]
-        C2["9️⃣ /sunnycore_po<br/>*curate-knowledge<br/>📚 整理知識"]
-        C3["🔟 /sunnycore_po<br/>*document-project<br/>📖 產出專案文件"]
-        C1 --> C2 --> C3
+    subgraph Phase3 ["📊 階段三：驗收與總結"]
+        C0["8️⃣ /sunnycore_po<br/>*cutover<br/>✅ 項目驗收"]
+        C1["9️⃣ /sunnycore_architect<br/>*conclude<br/>📋 總結文檔"]
+        C2["🔟 /sunnycore_architect<br/>*curate-knowledge<br/>📚 整理知識"]
+        C3["1️⃣1️⃣ /sunnycore_architect<br/>*document-project<br/>📖 產出專案文件"]
+        C0 --> C1 --> C2 --> C3
     end
+    
+    D3{"✅ Cutover<br/>通過?"}
+    R2["🔧 /sunnycore_dev<br/>*fix-acceptance-issues<br/>修復問題"]
     
     Done([✨ 完成開發 Cycle])
     
@@ -116,14 +125,20 @@ flowchart TD
     R1 --> B2
     D1 -->|"✅ 是"| D2
     D2 -->|"📝 是"| B1
-    D2 -->|"✅ 否"| C1
+    D2 -->|"✅ 否"| C0
+    C0 --> D3
+    D3 -->|"❌ 否"| R2
+    R2 --> C0
+    D3 -->|"✅ 是"| C1
     C3 --> Done
     
     style Start fill:#e1f5e1
     style Done fill:#e1f5e1
     style D1 fill:#fff4e6
     style D2 fill:#fff4e6
+    style D3 fill:#fff4e6
     style R1 fill:#ffe6e6
+    style R2 fill:#ffe6e6
     style Phase1 fill:#f0f8ff
     style Phase2 fill:#f5f0ff
     style Phase3 fill:#fff0f5
@@ -139,7 +154,7 @@ flowchart TD
 
 | 步驟 | 命令 | 說明 |
 |------|------|------|
-| 1 | `/sunnycore_po *document-project` | 確保專案架構文件是最新的 |
+| 1 | `/sunnycore_architect *document-project` | 確保專案架構文件是最新的 |
 | 2 | `/sunnycore_pm *create-brownfield-requirements` | 互動式創建需求文檔 |
 | 3 | `/sunnycore_pm *create-brownfield-architecture` | 互動式創建架構文檔 |
 | 4 | `/sunnycore_pm *create-epic` | 互動式創建任務文檔 |
@@ -159,13 +174,18 @@ flowchart TD
   - 無任務 → 進入階段三
 - ❌ **Review 未通過**：使用 `/sunnycore_dev *brownfield-tasks {task_id}` 進行重開發，回到步驟 7
 
-### 📊 階段三：總結與文檔化
+### 📊 階段三：驗收與總結
 
 | 步驟 | 命令 | 說明 |
 |------|------|------|
-| 9 | `/sunnycore_po *conclude` | 總結文檔 |
-| 10 | `/sunnycore_po *curate-knowledge` | 整理知識文檔 |
-| 11 | `/sunnycore_po *document-project` | 更新專案架構文件 |
+| 9 | `/sunnycore_po *cutover` | 項目驗收 |
+| 10 | `/sunnycore_architect *conclude` | 總結文檔 |
+| 11 | `/sunnycore_architect *curate-knowledge` | 整理知識文檔 |
+| 12 | `/sunnycore_architect *document-project` | 更新專案架構文件 |
+
+**流程控制：**
+- ✅ **Cutover 通過**：進入總結流程（步驟 10）
+- ❌ **Cutover 未通過**：使用 `/sunnycore_dev *fix-acceptance-issues` 進行修復，回到步驟 9
 
 ### 🔄 流程圖
 
@@ -174,7 +194,7 @@ flowchart TD
     Start([開始 Brownfield 專案]) --> A0
     
     subgraph Phase1 ["📋 階段一：需求分析"]
-        A0["1️⃣ /sunnycore_po<br/>*document-project<br/>📖 更新專案文件"]
+        A0["1️⃣ /sunnycore_architect<br/>*document-project<br/>📖 更新專案文件"]
         A1["2️⃣ /sunnycore_pm<br/>*create-brownfield-requirements<br/>📝 建立需求"]
         A2["3️⃣ /sunnycore_pm<br/>*create-brownfield-architecture<br/>🏗️ 建立架構"]
         A3["4️⃣ /sunnycore_pm<br/>*create-epic<br/>📌 建立任務"]
@@ -193,12 +213,16 @@ flowchart TD
     D2{"📝 還有<br/>任務?"}
     R1["🔄 /sunnycore_dev<br/>*brownfield-tasks<br/>重新開發"]
     
-    subgraph Phase3 ["📊 階段三：總結"]
-        C1["9️⃣ /sunnycore_po<br/>*conclude<br/>📋 總結文檔"]
-        C2["🔟 /sunnycore_po<br/>*curate-knowledge<br/>📚 整理知識"]
-        C3["1️⃣1️⃣ /sunnycore_po<br/>*document-project<br/>📖 更新專案文件"]
-        C1 --> C2 --> C3
+    subgraph Phase3 ["📊 階段三：驗收與總結"]
+        C0["9️⃣ /sunnycore_po<br/>*cutover<br/>✅ 項目驗收"]
+        C1["🔟 /sunnycore_architect<br/>*conclude<br/>📋 總結文檔"]
+        C2["1️⃣1️⃣ /sunnycore_architect<br/>*curate-knowledge<br/>📚 整理知識"]
+        C3["1️⃣2️⃣ /sunnycore_architect<br/>*document-project<br/>📖 更新專案文件"]
+        C0 --> C1 --> C2 --> C3
     end
+    
+    D3{"✅ Cutover<br/>通過?"}
+    R2["🔧 /sunnycore_dev<br/>*fix-acceptance-issues<br/>修復問題"]
     
     Done([✨ 完成開發 Cycle])
     
@@ -208,14 +232,20 @@ flowchart TD
     R1 --> B2
     D1 -->|"✅ 是"| D2
     D2 -->|"📝 是"| B1
-    D2 -->|"✅ 否"| C1
+    D2 -->|"✅ 否"| C0
+    C0 --> D3
+    D3 -->|"❌ 否"| R2
+    R2 --> C0
+    D3 -->|"✅ 是"| C1
     C3 --> Done
     
     style Start fill:#e1f5e1
     style Done fill:#e1f5e1
     style D1 fill:#fff4e6
     style D2 fill:#fff4e6
+    style D3 fill:#fff4e6
     style R1 fill:#ffe6e6
+    style R2 fill:#ffe6e6
     style Phase1 fill:#f0f8ff
     style Phase2 fill:#f5f0ff
     style Phase3 fill:#fff0f5
@@ -234,7 +264,7 @@ flowchart TD
 | **需求命令** | `*create-requirements` | `*create-brownfield-requirements` |
 | **架構命令** | `*create-architecture` | `*create-brownfield-architecture` |
 | **任務命令** | `*create-epic` |
-| **總步驟數** | 9 步 | 10 步 |
+| **總步驟數** | 11 步 | 12 步 |
 
 ### 🎯 關鍵決策點
 
@@ -243,12 +273,27 @@ flowchart TD
    - 確保代碼質量和符合需求
 
 2. **任務迭代**
-   - Review 通過：繼續下一個任務或進入總結階段
+   - Review 通過：繼續下一個任務或進入驗收階段
    - Review 未通過：使用 brownfield-tasks 命令重新開發
 
-3. **文檔更新**
+3. **Cutover 驗收檢查點** ⭐ 新增
+   - 從業務和用戶角度驗收項目交付
+   - Cutover 通過：進入總結和文檔化階段
+   - Cutover 未通過：使用 fix-acceptance-issues 命令修復問題
+
+4. **文檔更新**
    - Greenfield：結束時產出專案文件
    - Brownfield：開始前和結束時都要更新專案文件
+
+### 👥 角色職責
+
+| 角色 | 職責 | 關鍵命令 |
+|------|------|----------|
+| **Architect** | 技術架構設計、知識管理、技術決策支持 | *conclude, *curate-knowledge, *document-project |
+| **Developer** | 開發實作、技術實現、問題修復 | *init, *develop-tasks, *fix-acceptance-issues |
+| **PM** | 需求分析、任務規劃、架構設計 | *create-requirements, *create-architecture, *plan-tasks |
+| **PO** | 業務驗收、需求確認、項目交付 | *cutover |
+| **QA** | 代碼審查、質量保證 | *review |
 
 ### 💡 最佳實踐
 

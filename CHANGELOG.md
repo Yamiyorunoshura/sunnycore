@@ -7,6 +7,46 @@
 
 ## [Unreleased]
 
+## [1.9.0] - Claude code v1.9.0
+
+### Added
+- 新增 Technical Architect 角色：專注於技術架構設計、知識管理和文檔化
+  - 新增 `claude code/commands/sunnycore_architect.md` 定義 Architect 角色職責與技能
+  - 核心職責：技術架構設計、技術決策支援、架構文檔管理、跨領域關注（安全性、效能、擴展性）
+  - 管理命令：*conclude、*curate-knowledge、*document-project
+- 新增項目驗收流程（Cutover）：在總結階段前增加業務驗收環節
+  - 新增 `claude code/tasks/cutover.md` 定義驗收任務流程
+  - 新增 `claude code/tasks/fix-acceptance-issues.md` 定義驗收問題修復流程
+  - 新增 `claude code/templates/cutover-report-tmpl.yaml` 驗收報告模板
+  - 驗收內容：需求驗證、用戶體驗評估、配置驗證、問題記錄、業務價值確認
+
+### Changed
+- 重構 Product Owner 角色定位：從技術型 PO 轉變為業務導向 PO
+  - 更新 `claude code/commands/sunnycore_po.md`，移除技術架構相關職責
+  - PO 專注於：業務需求分析、用戶驗收測試、利害關係人管理、項目交付驗收
+  - 移除命令：*conclude、*curate-knowledge、*document-project（轉移至 Architect）
+  - 新增命令：*cutover（業務驗收）
+- 優化開發工作流程：重新定義階段三為「驗收與總結」
+  - 更新 `claude code/README.md` Greenfield 和 Brownfield 流程
+  - 階段三步驟調整：
+    * 步驟 8/9：`/sunnycore_po *cutover` - 項目驗收
+    * 步驟 9/10：`/sunnycore_architect *conclude` - 總結文檔
+    * 步驟 10/11：`/sunnycore_architect *curate-knowledge` - 整理知識
+    * 步驟 11/12：`/sunnycore_architect *document-project` - 產出專案文件
+  - 新增驗收失敗處理分支：`/sunnycore_dev *fix-acceptance-issues` 修復驗收問題
+  - 總步驟數從 10/11 步增加至 11/12 步
+- 角色職責表更新：在 README 中新增明確的角色職責對照表
+  - Architect：技術架構設計、知識管理、技術決策支持
+  - Developer：開發實作、技術實現、問題修復
+  - PM：需求分析、任務規劃、架構設計
+  - PO：業務驗收、需求確認、項目交付
+  - QA：代碼審查、質量保證
+- 更新配置檔案：`claude code/index.json` 反映新的角色分工與任務關聯
+  - 新增 architect agent 定義
+  - 更新任務與角色的對應關係
+  - 新增 cutover 和 fix-acceptance-issues 任務註冊
+- 版本號升級：claude-code.lock 從 1.8.7 升級至 1.9.0
+
 ## [1.8.7] - Claude code v1.8.7
 
 ### Changed
