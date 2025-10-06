@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [1.9.1] - Claude code v1.9.1
+
+### Added
+- 新增開發者指令快捷方式：在 `claude code/commands/sunnycore_dev.md` 中新增 `*fix-acceptance-issues` 指令
+  - 新增第 4 項自訂指令：`*fix-acceptance-issues` - 讀取 `{root}/sunnycore/tasks/fix-acceptance-issues.md`
+  - 原第 4 項 `*init` 指令順延為第 5 項
+  - 完善驗收失敗後的修復流程可訪問性
+
+### Changed
+- 版本號升級：claude-code.lock 從 1.9.0 升級至 1.9.1
+
 ## [1.9.0] - Claude code v1.9.0
 
 ### Added
