@@ -13,6 +13,7 @@
   3. Must fully comply with {root}/sunnycore/templates/architecture-tmpl.yaml structure and section order
   4. Must draft to {root}/docs/architecture.md, then execute: uv run {root}/sunnycore/scripts/shard-architecture.py to perform sharding
   5. Should use clear, concise English with 2-space indentation throughout
+  6. Architecture design required external API call must use context7 (MCP) to search for library documentation and API references
 
 [Tools]
   1. **todo_write**

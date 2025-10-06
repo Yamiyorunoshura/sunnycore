@@ -3,6 +3,7 @@
   2. {root}/docs/architecture/*.md --Architecture design
   3. {root}/docs/epic.md --Task list
   4. {root}/sunnycore/templates/implementation-plan-tmpl.yaml --Implementation plan template (including: project information, requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
+  5. {root}/docs/knowledge/*.md --Project knowledge (if exist)
 
 [Output]
   1. {root}/docs/implementation-plan/{task_id}-plan.md --Implementation plan (Markdown format)

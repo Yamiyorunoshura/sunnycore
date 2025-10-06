@@ -2,6 +2,7 @@
   1. User-provided requirement description and context
   2. {root}/sunnycore/templates/prd-tmpl.yaml --PRD template
   3. (Conditional) {root}/docs/architecture/*.md --Existing architecture (if Brownfield)
+  4. {root}/docs/knowledge/*.md --Project knowledge (if exist)
 
 [Output]
   1. {root}/docs/PRD.md --Complete Product Requirements Document
