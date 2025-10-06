@@ -10,10 +10,6 @@
 ## [1.12.6] - sunnycore v1.12.6
 
 ### Changed
-- 標準化文檔路徑格式：移除所有文檔中的 `{root}/` 前綴,統一使用相對路徑
-  - 影響範圍：`claude code/agents/`, `claude code/commands/`, `claude code/tasks/` 目錄下所有文檔
-  - 格式變更：`"{root}/docs/..."` → `"docs/..."`、`"{root}/sunnycore/..."` → `"sunnycore/..."`
-  - 提升路徑引用的簡潔性與一致性,減少冗餘符號
 - 增強安裝腳本管道執行支援：優化 `scripts/install.py` 的互動體驗（`scripts/install.py`）
   - 新增 `safe_input()` 函數：支援管道執行時從 `/dev/tty` 讀取用戶輸入
   - 改進錯誤處理：當無法讀取輸入時提供更清晰的提示信息
