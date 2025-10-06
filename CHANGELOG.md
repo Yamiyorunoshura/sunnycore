@@ -7,6 +7,28 @@
 
 ## [Unreleased]
 
+## [1.12.0] - Claude code v1.12.0
+
+### Removed
+- 移除 Warp Code 版本：完全刪除 `warp code/` 目錄及其所有內容
+  - 刪除 agents (dev.md, pm.md, po.md, qa.md)
+  - 刪除 scripts (shard-architecture.py, shard-requirements.py)
+  - 刪除 tasks (14 個任務文檔)
+  - 刪除 templates (8 個模板文件)
+  - 刪除配置文件 (index.json, warp-code.lock)
+- 移除 Codex 版本：完全刪除 `codex/` 目錄及其所有內容
+  - 刪除 agents (dev.md, pm.md, po.md, qa.md)
+  - 刪除 scripts (shard-architecture.sh, shard-requirements.sh)
+  - 刪除 tasks (11 個任務文檔)
+  - 刪除 templates (8 個模板文件)
+  - 刪除配置文件 (index.json, AGENTS.md, DEPENDENCIES.md, README.md)
+
+### Changed
+- 專案架構簡化：統一使用 Claude Code 作為唯一支援版本
+  - 保留 `claude code/` 作為主要開發版本
+  - 簡化維護成本與版本管理複雜度
+  - 優化專案結構清晰度
+
 ## [1.11.0] - Claude code v1.11.0
 
 ### Added

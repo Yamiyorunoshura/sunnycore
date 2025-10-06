@@ -3,6 +3,7 @@
   2. {root}/docs/dev-notes/{task_id}-dev-notes.md --Development notes
   3. {root}/docs/review-results/{task_id}-review.md --Review report
   4. {root}/docs/architecture/*.md --Architecture design
+  5. {root}/docs/knowledge/*.md --Project knowledge (if exist)
 
 [Output]
   1. Fixed code that runs properly

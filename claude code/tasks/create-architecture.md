@@ -16,6 +16,7 @@
   3. Must verify that each requirement has corresponding architecture components or design decisions
   4. Must use the standardized template to write {root}/docs/architecture.md; strictly preserve section order and 2-space indentation; do not introduce non-existent paths
   5. After drafting is complete, must execute 'uv run {root}/sunnycore/scripts/shard-architecture.py' and verify output appears under {root}/docs/architecture/
+  6. Architecture design required external API call must use context7 (MCP) to search for library documentation and API references
 
 [Tools]
   1. **todo_write**

@@ -19,12 +19,14 @@ VERSION="0.3.0"
 DRY_RUN=0
 AUTO_YES=0
 INSTALL_BASE=""
+INSTALL_TYPE=""  # 安裝類型：project（專案安裝）或 custom（指定路徑安裝）
 SELECTED_VERSION=""
 REPO_URL="https://github.com/Yamiyorunoshura/sunnycore.git"   # 預設為本倉庫 URL；可被 --repo 覆蓋或自動偵測
 BRANCH=""     # 允許以 --branch 指定；未指定時自動偵測
 REMOTE_NAME_INPUT=""   # 允許以 --remote-name 指定
 TMP_CLONE_DIR=""
 INTERACTIVE_MODE=0  # 互動模式標誌
+QUIET_MODE=0  # 靜默模式：減少詳細日誌輸出
 
 # 輔助函式：遠程檢測
 detect_remote_name() {
@@ -165,8 +167,7 @@ usage() {
   curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash -s -- [選項]
 
 選項：
-  -v, --version <名稱>   指定要安裝的版本（支援：warp-code, codex, claude-code）
-  -p, --path <路徑>       指定安裝路徑（會在該路徑下建立/使用 sunnycore 資料夾）
+  -p, --path <路徑>       指定安裝路徑（自訂安裝位置）
       --repo <URL>        指定 Git 倉庫 URL（若本機無來源時可用來拉取）
       --branch <名稱>     指定 Git 分支（預設自動偵測遠程 HEAD）
       --remote-name <名稱> 指定 Git 遠程名（預設自動偵測）
@@ -175,16 +176,33 @@ usage() {
   -i, --interactive       強制啟用互動模式（curl 使用時建議使用）
   -h, --help              顯示此說明
 
+安裝方式：
+  1. 專案安裝（預設）：
+     - 安裝到當前專案目錄的 .claude/ 資料夾
+     - 適合將 Sunnycore 整合到現有專案中
+     - 只安裝 commands/ 和 agents/ 到 .claude/
+
+  2. 指定路徑安裝：
+     - 使用 -p 參數指定自訂安裝位置
+     - 會在指定路徑下建立 sunnycore/ 和 .claude/ 資料夾
+     - 適合獨立安裝或多專案共用
+
 說明：
-  - 可安裝 warp-code、codex 與 claude code。
-  - 若未提供 --version 與 --path，腳本會以互動方式詢問。
+  - 此腳本會安裝 Claude Code 版本的 Sunnycore。
+  - 互動模式下會詢問安裝方式（專案安裝或指定路徑安裝）。
   - 若專案本地來源資料夾不存在，可搭配 --repo 或自動偵測本機 git origin 進行拉取。
-  - 使用 curl 時建議加上 -i 參數啟用互動模式，或直接使用互動式安裝：
+  - 使用 curl 快速安裝到當前專案：
     curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash
+  - 使用 curl 安裝到指定路徑：
+    curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash -s -- -p ~/my-path
 EOF
 }
 
-log() { printf '[%s] %s\n' "$(date '+%H:%M:%S')" "$*"; }
+log() { 
+  # 在靜默模式下不輸出詳細日誌
+  [[ $QUIET_MODE -eq 1 ]] && return 0
+  printf '[%s] %s\n' "$(date '+%H:%M:%S')" "$*"
+}
 info() { printf 'INFO  %s\n' "$*"; }
 warn() { printf '警告  %s\n' "$*"; }
 error() { printf '錯誤  %s\n' "$*" 1>&2; }
@@ -215,12 +233,6 @@ run() {
 
 normalize_version() {
   case "${1:-}" in
-    warp|warp-code|warp_code)
-      printf 'warp-code'
-      ;;
-    codex)
-      printf 'codex'
-      ;;
     claude|claude-code|claude_code)
       printf 'claude-code'
       ;;
@@ -291,11 +303,6 @@ expand_path() {
 parse_args() {
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      -v|--version)
-        [[ $# -ge 2 ]] || { error "--version 需要參數"; exit 1; }
-        SELECTED_VERSION="$2"
-        shift 2
-        ;;
       -p|--path)
         [[ $# -ge 2 ]] || { error "--path 需要參數"; exit 1; }
         INSTALL_BASE="$2"
@@ -341,21 +348,17 @@ parse_args() {
   done
 
   # 檢測是否為 curl 方式執行，如果沒有提供任何參數則自動啟用互動模式
-  if [[ $INTERACTIVE_MODE -eq 0 && -z "${SELECTED_VERSION:-}" && -z "${INSTALL_BASE:-}" ]]; then
+  if [[ $INTERACTIVE_MODE -eq 0 && -z "${INSTALL_BASE:-}" ]]; then
     # 檢查腳本是否從 stdin 讀取（curl 方式）
     if [[ ! -t 0 ]]; then
-      info "檢測到從管道執行，自動啟用互動模式"
+      info "檢測到從管道執行，自動啟用互動與靜默模式"
       INTERACTIVE_MODE=1
-      warn "注意：在管道模式下互動可能受限。建議使用以下方式之一："
-      warn "1. 下載腳本後執行：curl -fsSL URL -o install.sh && bash install.sh"
-      warn "2. 使用參數指定選項：curl -fsSL URL | bash -s -- -v claude-code -p ~/install-path"
-      warn "3. 使用強制互動模式：curl -fsSL URL | bash -s -- -i"
-
+      QUIET_MODE=1  # 自動啟用靜默模式以減少冗長輸出
+      
       # 嘗試重新定向到終端，如果失敗則使用預設值
       if [[ -t 1 ]] && [[ -c /dev/tty ]]; then
         exec < /dev/tty 2>/dev/null || {
           warn "無法重定向到終端，將使用預設設置"
-          SELECTED_VERSION="claude-code"
           INSTALL_BASE="${HOME:-$(pwd -P)}"
         }
       fi
@@ -394,14 +397,27 @@ prompt_select_version() {
     return
   fi
 
+  # 由於只支援 claude-code，直接設定為預設值
+  SELECTED_VERSION="claude-code"
+  
+  # 在互動模式下顯示將要安裝的版本
+  if [[ $INTERACTIVE_MODE -eq 1 ]]; then
+    info "將安裝 Claude Code 版本"
+  fi
+}
+
+prompt_install_type() {
+  if [[ -n "${INSTALL_TYPE:-}" ]]; then
+    return
+  fi
+
   # 在互動模式下才詢問
   if [[ $INTERACTIVE_MODE -eq 1 ]]; then
-    echo "請選擇要安裝的版本："
-    echo "  1) warp-code"
-    echo "  2) codex"
-    echo "  3) claude code"
+    echo ""
+    echo "請選擇安裝方式："
+    echo "  1) 專案安裝（安裝到當前專案目錄）"
+    echo "  2) 指定路徑安裝（自訂安裝位置）"
 
-    # 確保可以從終端讀取輸入
     local input_choice=""
     local read_attempts=0
     local max_attempts=3
@@ -409,57 +425,55 @@ prompt_select_version() {
     while [[ -z "$input_choice" ]] && [[ $read_attempts -lt $max_attempts ]]; do
       read_attempts=$((read_attempts + 1))
 
-      # 臨時禁用嚴格模式以防止 read 失敗導致腳本退出
       set +e
       if [[ -t 0 ]] && [[ -c /dev/tty ]]; then
-        # 嘗試從終端讀取
-        read -r -p "輸入選項 [1-3]: " input_choice < /dev/tty 2>/dev/null
+        read -r -p "輸入選項 [1-2]（預設：1）: " input_choice < /dev/tty 2>/dev/null
         local read_result=$?
       else
-        # 直接讀取
-        read -r -p "輸入選項 [1-3]: " input_choice
+        read -r -p "輸入選項 [1-2]（預設：1）: " input_choice
         local read_result=$?
       fi
-      set -e  # 重新啟用嚴格模式
+      set -e
 
-      # 檢查 read 是否成功
       if [[ $read_result -ne 0 ]]; then
-        # 讀取失敗，使用預設值
-        warn "無法讀取用戶輸入，使用預設版本：claude-code"
-        SELECTED_VERSION="claude-code"
+        info "使用預設選項：專案安裝"
+        INSTALL_TYPE="project"
         return
+      fi
+
+      # 如果用戶直接按 Enter，使用預設值
+      if [[ -z "$input_choice" ]]; then
+        input_choice="1"
       fi
 
       case "$input_choice" in
         1)
-          SELECTED_VERSION="warp-code"
+          INSTALL_TYPE="project"
+          info "選擇：專案安裝"
           ;;
         2)
-          SELECTED_VERSION="codex"
-          ;;
-        3)
-          SELECTED_VERSION="claude-code"
+          INSTALL_TYPE="custom"
+          info "選擇：指定路徑安裝"
           ;;
         *)
           if [[ $read_attempts -lt $max_attempts ]]; then
-            if [[ -n "$input_choice" ]]; then
-              echo "無效的選項：$input_choice，請輸入 1、2 或 3"
-            else
-              echo "無效的選項，請輸入 1、2 或 3"
-            fi
+            echo "無效的選項：$input_choice，請輸入 1 或 2"
             input_choice=""
           else
-            warn "超過最大嘗試次數，使用預設版本：claude-code"
-            SELECTED_VERSION="claude-code"
+            warn "超過最大嘗試次數，使用預設選項：專案安裝"
+            INSTALL_TYPE="project"
             return
           fi
           ;;
       esac
     done
   else
-    # 非互動模式且未指定版本，使用預設值
-    warn "未指定安裝版本，使用預設版本：claude-code"
-    SELECTED_VERSION="claude-code"
+    # 非互動模式，檢查是否有指定路徑
+    if [[ -n "${INSTALL_BASE:-}" ]]; then
+      INSTALL_TYPE="custom"
+    else
+      INSTALL_TYPE="project"
+    fi
   fi
 }
 
@@ -468,32 +482,34 @@ prompt_install_path() {
     return
   fi
 
-  # 在互動模式下才詢問
+  # 根據安裝類型決定安裝路徑
+  if [[ "${INSTALL_TYPE:-}" == "project" ]]; then
+    # 專案安裝：使用當前工作目錄
+    INSTALL_BASE="$(pwd -P)"
+    info "專案安裝模式：將安裝到 ${INSTALL_BASE}/.claude"
+    return
+  fi
+
+  # 指定路徑安裝：詢問用戶路徑
   if [[ $INTERACTIVE_MODE -eq 1 ]]; then
     local default_path
-    # 在 set -u 環境下安全讀取 HOME，若不存在則退回當前工作目錄
     default_path="${HOME:-$(pwd -P)}"
-    echo "將在安裝路徑下建立/使用 sunnycore 資料夾。"
+    echo ""
+    echo "指定路徑安裝模式："
 
-    # 確保可以從終端讀取輸入
     local input_path=""
 
-    # 臨時禁用嚴格模式以防止 read 失敗導致腳本退出
     set +e
     if [[ -t 0 ]] && [[ -c /dev/tty ]]; then
-      # 嘗試從終端讀取
       read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path < /dev/tty 2>/dev/null
       local read_result=$?
     else
-      # 直接讀取
       read -r -p "請輸入安裝路徑（預設：${default_path}）：" input_path
       local read_result=$?
     fi
-    set -e  # 重新啟用嚴格模式
+    set -e
 
-    # 檢查 read 是否成功
     if [[ $read_result -ne 0 ]]; then
-      # 讀取失敗，使用預設值
       warn "無法讀取用戶輸入，使用預設路徑：${default_path}"
       INSTALL_BASE="$default_path"
       return
@@ -574,451 +590,9 @@ confirm_overwrite_if_needed() {
   fi
 }
 
-install_warp_code() {
-  local src dst use_local=0
-  
-  log "開始 warp-code 安裝程序"
-  log "腳本目錄: $SCRIPT_DIR"
-  
-  # 優先嘗試從遠端倉庫拉取，除非明確指定使用本地版本或遠端不可用
-  log "嘗試從遠端倉庫拉取來源..."
-  # 先嘗試自動偵測當前倉庫的遠程 URL
-  log "當前 REPO_URL: ${REPO_URL:-未設定}"
-  if [[ -z "${REPO_URL:-}" ]]; then
-    log "嘗試自動偵測 git 倉庫資訊..."
-    if command -v git >/dev/null 2>&1; then
-      log "git 命令可用"
-      if git -C "$SCRIPT_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        log "當前目錄位於 git 工作樹中"
-        local detected_remote
-        if detected_remote="$(detect_remote_name "$SCRIPT_DIR" "" "${REMOTE_NAME_INPUT:-}")" 2>/dev/null; then
-          REPO_URL="$(git -C "$SCRIPT_DIR" remote get-url "$detected_remote" 2>/dev/null || true)"
-          info "偵測到遠程倉庫：$REPO_URL (遠程：$detected_remote)"
-        else
-          warn "無法偵測到遠程倉庫"
-        fi
-      else
-        warn "當前目錄不在 git 工作樹中"
-      fi
-    else
-      warn "git 命令不可用"
-    fi
-  fi
-
-  # 嘗試從遠端拉取
-  if [[ -n "${REPO_URL:-}" ]] && command -v git >/dev/null 2>&1; then
-    log "開始從遠端倉庫拉取..."
-
-    require_cmd git
-    TMP_CLONE_DIR="$(mktemp -d 2>/dev/null || mktemp -d -t sunnycore)"
-    log "建立暫存目錄: $TMP_CLONE_DIR"
-    info "以 git 拉取來源：$REPO_URL"
-    
-    # 決定要使用的分支
-    local target_branch="${BRANCH:-}"
-    log "指定分支: ${BRANCH:-未指定}"
-    log "目標分支: ${target_branch:-將自動偵測}"
-    
-    # 確保 target_branch 不為空字符串但有值時正確設置
-    if [[ -n "${BRANCH:-}" ]]; then
-      target_branch="$BRANCH"
-      log "使用指定分支: $target_branch"
-    fi
-    
-    local clone_success=0
-    if [[ $DRY_RUN -eq 1 ]]; then
-      # dry-run 模式：僅模擬操作
-      if [[ -z "$target_branch" ]]; then
-        info "偵測遠程預設分支..."
-        run_cmd git clone --depth=1 "$REPO_URL" "$TMP_CLONE_DIR"
-        target_branch="master"  # dry-run 預設使用 master
-        info "dry-run: 假設預設分支為 $target_branch"
-      else
-        run_cmd git clone --depth=1 --branch "$target_branch" --single-branch "$REPO_URL" "$TMP_CLONE_DIR"
-        info "dry-run: 使用指定分支 $target_branch"
-      fi
-      clone_success=1
-    else
-      # 實際模式：執行真正的操作
-      if [[ -z "$target_branch" ]]; then
-        # 嘗試偵測預設分支（先做一個淺層克隆）
-        info "偵測遠程預設分支..."
-        log "執行: git clone --depth=1 $REPO_URL $TMP_CLONE_DIR"
-        if git clone --depth=1 "$REPO_URL" "$TMP_CLONE_DIR"; then
-          log "git clone 成功"
-          if target_branch="$(detect_default_branch "$TMP_CLONE_DIR")"; then
-          info "偵測到預設分支：$target_branch"
-        else
-          target_branch="master"  # fallback
-          warn "無法偵測預設分支，使用 master"
-        fi
-        # 確保 target_branch 不為空
-        if [[ -z "$target_branch" ]]; then
-          target_branch="master"
-          warn "target_branch 為空，強制設為 master"
-        fi
-          clone_success=1
-        else
-          warn "git clone 失敗，將嘗試使用本地來源"
-          clone_success=0
-        fi
-      else
-        info "使用指定分支：$target_branch"
-        log "執行: git clone --depth=1 --branch $target_branch --single-branch $REPO_URL $TMP_CLONE_DIR"
-        if git clone --depth=1 --branch "$target_branch" --single-branch "$REPO_URL" "$TMP_CLONE_DIR"; then
-          log "git clone 成功"
-          clone_success=1
-        else
-          warn "git clone 失敗（分支：$target_branch）"
-          # 如果指定的分支不存在，嘗試使用最新的 warp-code 版本分支
-          if [[ "$target_branch" == "warp-code" ]]; then
-            log "嘗試使用最新的 warp-code 版本分支..."
-            local latest_warp_branch="warp-code/v1.0.1"
-            info "嘗試使用分支：$latest_warp_branch"
-            log "執行: git clone --depth=1 --branch $latest_warp_branch --single-branch $REPO_URL $TMP_CLONE_DIR"
-            if git clone --depth=1 --branch "$latest_warp_branch" --single-branch "$REPO_URL" "$TMP_CLONE_DIR"; then
-              log "git clone 成功（使用 $latest_warp_branch）"
-              clone_success=1
-            else
-              warn "git clone 失敗（分支：$latest_warp_branch），將嘗試使用本地來源"
-              clone_success=0
-            fi
-          else
-            warn "將嘗試使用本地來源"
-            clone_success=0
-          fi
-        fi
-      fi
-    fi
-
-    if [[ $clone_success -eq 1 ]]; then
-      if [[ $DRY_RUN -eq 1 ]]; then
-        src="$TMP_CLONE_DIR/warp code"
-        info "dry-run: 假設來源目錄存在於 $src"
-        # 在 dry-run 模式下，我們需要創建假的目錄結構以便後續檢查
-        run_cmd mkdir -p "$src"
-        run_cmd touch "$src/WARP.md"
-      else
-        log "檢查克隆目錄內容..."
-        log "暫存目錄內容:"
-        ls -la "$TMP_CLONE_DIR" || true
-        if [[ -d "$TMP_CLONE_DIR/warp code" ]]; then
-          src="$TMP_CLONE_DIR/warp code"
-          log "找到 warp code 目錄: $src"
-          info "成功從遠端倉庫獲取來源"
-        else
-          warn "遠端倉庫中找不到 'warp code' 來源資料夾，將嘗試使用本地來源"
-          log "可用的目錄:"
-          find "$TMP_CLONE_DIR" -type d -maxdepth 2 || true
-          clone_success=0
-        fi
-      fi
-    fi
-  else
-    log "無法從遠端拉取（REPO_URL 未設定或 git 不可用），將嘗試使用本地來源"
-    clone_success=0
-  fi
-  
-  # 如果遠端拉取失敗，回退到本地來源
-  if [[ $clone_success -eq 0 ]]; then
-    local local_src="${SCRIPT_DIR}/warp code"
-    log "嘗試使用本地來源: $local_src"
-    if [[ -d "$local_src" ]]; then
-      src="$local_src"
-      log "本地來源目錄存在: $src"
-      info "使用本地來源進行安裝"
-    else
-      error "無法從遠端拉取，且本地來源不存在：$local_src"
-      error "請確認網路連線或使用 --repo 參數指定正確的倉庫 URL"
-      exit 1
-    fi
-  fi
-
-  dst="${INSTALL_BASE%/}/sunnycore"
-  log "設定目標目錄"
-  log "安裝基礎路徑: $INSTALL_BASE"
-  log "目標目錄: $dst"
-  
-  info "安裝版本：warp-code"
-  info "來源：$src"
-  info "目標：$dst"
-  
-  log "檢查來源目錄內容..."
-  if [[ $DRY_RUN -eq 1 ]]; then
-    log "dry-run: 跳過來源目錄實際檢查"
-    info "dry-run: 假設來源目錄包含必要檔案"
-  elif [[ -d "$src" ]]; then
-    log "來源目錄存在，內容:"
-    ls -la "$src" | head -10 || true
-    log "來源目錄檔案數量: $(find "$src" -type f | wc -l)"
-  else
-    error "來源目錄不存在: $src"
-    exit 1
-  fi
-
-  require_cmd mkdir
-  require_cmd cp
-  require_cmd rm
-  require_cmd find
-
-  log "檢查目標目錄狀態..."
-  if [[ -d "$dst" ]]; then
-    log "目標目錄已存在: $dst"
-    log "目標目錄內容:"
-    ls -la "$dst" | head -5 || true
-  else
-    log "目標目錄不存在，將建立: $dst"
-  fi
-  
-  confirm_overwrite_if_needed "$dst"
-  run_cmd mkdir -p "$dst"
-
-  # 拷貝來源內容（包含隱藏檔）到目標資料夾
-  info "開始拷貝檔案…"
-  log "執行拷貝命令: cp -a $src/. $dst/"
-  run_cmd cp -a "$src/." "$dst/"
-
-  # 安裝後驗證：目標不應為空（仅在非 dry-run 模式下執行）
-  log "開始安裝後驗證..."
-  if [[ $DRY_RUN -eq 1 ]]; then
-    info "dry-run: 將於 $dst 執行安裝後檢查"
-  else
-    if [[ -d "$dst" ]]; then
-      log "檢查目標目錄: $dst"
-      local file_count
-      file_count=$(find "$dst" -type f | wc -l)
-      log "目標目錄檔案數量: $file_count"
-      
-      if [[ $file_count -eq 0 ]]; then
-        error "拷貝後目標目錄為空：$dst"
-        log "目標目錄內容:"
-        ls -la "$dst" || true
-        exit 1
-      else
-        log "驗證成功，目標目錄包含 $file_count 個檔案"
-        log "目標目錄頂層內容:"
-        ls -la "$dst" | head -10 || true
-      fi
-    else
-      warn "安裝目錄不存在：$dst，略過檢查"
-    fi
-  fi
-
-  ok "已完成拷貝到：$dst"
-}
-
-install_codex() {
-  local src dst use_local=0
-  
-  log "開始 codex 安裝程序"
-  log "腳本目錄: $SCRIPT_DIR"
-  
-  # 優先嘗試從遠端倉庫拉取，除非明確指定使用本地版本或遠端不可用
-  log "嘗試從遠端倉庫拉取來源..."
-  # 先嘗試自動偵測當前倉庫的遠程 URL（若 REPO_URL 未設定）
-  log "當前 REPO_URL: ${REPO_URL:-未設定}"
-  if [[ -z "${REPO_URL:-}" ]]; then
-    log "嘗試自動偵測 git 倉庫資訊..."
-    if command -v git >/dev/null 2>&1; then
-      log "git 命令可用"
-      if git -C "$SCRIPT_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        log "當前目錄位於 git 工作樹中"
-        local detected_remote
-        if detected_remote="$(detect_remote_name "$SCRIPT_DIR" "" "${REMOTE_NAME_INPUT:-}")" 2>/dev/null; then
-          REPO_URL="$(git -C "$SCRIPT_DIR" remote get-url "$detected_remote" 2>/dev/null || true)"
-          info "偵測到遠程倉庫：$REPO_URL (遠程：$detected_remote)"
-        else
-          warn "無法偵測到遠程倉庫"
-        fi
-      else
-        warn "當前目錄不在 git 工作樹中"
-      fi
-    else
-      warn "git 命令不可用"
-    fi
-  fi
-  
-  # 嘗試從遠端拉取
-  local clone_success=0
-  if [[ -n "${REPO_URL:-}" ]] && command -v git >/dev/null 2>&1; then
-    log "開始從遠端倉庫拉取..."
-    
-    require_cmd git
-    TMP_CLONE_DIR="$(mktemp -d 2>/dev/null || mktemp -d -t sunnycore)"
-    log "建立暫存目錄: $TMP_CLONE_DIR"
-    info "以 git 拉取來源：$REPO_URL"
-    
-    local target_branch="${BRANCH:-}"
-    log "指定分支: ${BRANCH:-未指定}"
-    log "目標分支: ${target_branch:-將自動偵測}"
-    
-    if [[ -n "${BRANCH:-}" ]]; then
-      target_branch="$BRANCH"
-      log "使用指定分支: $target_branch"
-    fi
-    
-    if [[ $DRY_RUN -eq 1 ]]; then
-      if [[ -z "$target_branch" ]]; then
-        info "偵測遠程預設分支..."
-        run_cmd git clone --depth=1 "$REPO_URL" "$TMP_CLONE_DIR"
-        target_branch="master"
-        info "dry-run: 假設預設分支為 $target_branch"
-      else
-        run_cmd git clone --depth=1 --branch "$target_branch" --single-branch "$REPO_URL" "$TMP_CLONE_DIR"
-        info "dry-run: 使用指定分支 $target_branch"
-      fi
-      clone_success=1
-    else
-      if [[ -z "$target_branch" ]]; then
-        info "偵測遠程預設分支..."
-        log "執行: git clone --depth=1 $REPO_URL $TMP_CLONE_DIR"
-        if git clone --depth=1 "$REPO_URL" "$TMP_CLONE_DIR"; then
-          log "git clone 成功"
-          if target_branch="$(detect_default_branch "$TMP_CLONE_DIR")"; then
-            info "偵測到預設分支：$target_branch"
-          else
-            target_branch="master"
-            warn "無法偵測預設分支，使用 master"
-          fi
-          if [[ -z "$target_branch" ]]; then
-            target_branch="master"
-            warn "target_branch 為空，強制設為 master"
-          fi
-          clone_success=1
-        else
-          warn "git clone 失敗，將嘗試使用本地來源"
-          clone_success=0
-        fi
-      else
-        info "使用指定分支：$target_branch"
-        log "執行: git clone --depth=1 --branch $target_branch --single-branch $REPO_URL $TMP_CLONE_DIR"
-        if git clone --depth=1 --branch "$target_branch" --single-branch "$REPO_URL" "$TMP_CLONE_DIR"; then
-          log "git clone 成功"
-          clone_success=1
-        else
-          warn "git clone 失敗（分支：$target_branch）"
-          clone_success=0
-        fi
-      fi
-    fi
-    
-    if [[ $clone_success -eq 1 ]]; then
-      if [[ $DRY_RUN -eq 1 ]]; then
-        src="$TMP_CLONE_DIR/codex"
-        info "dry-run: 假設來源目錄存在於 $src"
-        run_cmd mkdir -p "$src"
-        run_cmd touch "$src/README.md"
-      else
-        log "檢查克隆目錄內容..."
-        log "暫存目錄內容:"
-        ls -la "$TMP_CLONE_DIR" || true
-        if [[ -d "$TMP_CLONE_DIR/codex" ]]; then
-          src="$TMP_CLONE_DIR/codex"
-          log "找到 codex 目錄: $src"
-          info "成功從遠端倉庫獲取來源"
-        else
-          warn "遠端倉庫中找不到 'codex' 來源資料夾，將嘗試使用本地來源"
-          log "可用的目錄:"
-          find "$TMP_CLONE_DIR" -type d -maxdepth 2 || true
-          clone_success=0
-        fi
-      fi
-    fi
-  else
-    log "無法從遠端拉取（REPO_URL 未設定或 git 不可用），將嘗試使用本地來源"
-    clone_success=0
-  fi
-  
-  # 如果遠端拉取失敗，回退到本地來源
-  if [[ $clone_success -eq 0 ]]; then
-    local local_src="${SCRIPT_DIR}/codex"
-    log "嘗試使用本地來源: $local_src"
-    if [[ -d "$local_src" ]]; then
-      src="$local_src"
-      log "本地來源目錄存在: $src"
-      info "使用本地來源進行安裝"
-    else
-      error "無法從遠端拉取，且本地來源不存在：$local_src"
-      error "請確認網路連線或使用 --repo 參數指定正確的倉庫 URL"
-      exit 1
-    fi
-  fi
-  
-  dst="${INSTALL_BASE%/}/sunnycore"
-  log "設定目標目錄"
-  log "安裝基礎路徑: $INSTALL_BASE"
-  log "目標目錄: $dst"
-  
-  info "安裝版本：codex"
-  info "來源：$src"
-  info "目標：$dst"
-  
-  log "檢查來源目錄內容..."
-  if [[ $DRY_RUN -eq 1 ]]; then
-    log "dry-run: 跳過來源目錄實際檢查"
-    info "dry-run: 假設來源目錄包含必要檔案"
-  elif [[ -d "$src" ]]; then
-    log "來源目錄存在，內容:"
-    ls -la "$src" | head -10 || true
-    log "來源目錄檔案數量: $(find "$src" -type f | wc -l)"
-  else
-    error "來源目錄不存在: $src"
-    exit 1
-  fi
-  
-  require_cmd mkdir
-  require_cmd cp
-  require_cmd rm
-  require_cmd find
-  
-  log "檢查目標目錄狀態..."
-  if [[ -d "$dst" ]]; then
-    log "目標目錄已存在: $dst"
-    log "目標目錄內容:"
-    ls -la "$dst" | head -5 || true
-  else
-    log "目標目錄不存在，將建立: $dst"
-  fi
-  
-  confirm_overwrite_if_needed "$dst"
-  run_cmd mkdir -p "$dst"
-  
-  # 拷貝來源內容（包含隱藏檔）到目標資料夾
-  info "開始拷貝檔案…"
-  log "執行拷貝命令: cp -a $src/. $dst/"
-  run_cmd cp -a "$src/." "$dst/"
-  
-  # 安裝後驗證：目標不應為空（於非 dry-run 模式）
-  log "開始安裝後驗證..."
-  if [[ $DRY_RUN -eq 1 ]]; then
-    info "dry-run: 將於 $dst 執行安裝後檢查"
-  else
-    if [[ -d "$dst" ]]; then
-      log "檢查目標目錄: $dst"
-      local file_count
-      file_count=$(find "$dst" -type f | wc -l)
-      log "目標目錄檔案數量: $file_count"
-      
-      if [[ $file_count -eq 0 ]]; then
-        error "拷貝後目標目錄為空：$dst"
-        log "目標目錄內容:"
-        ls -la "$dst" || true
-        exit 1
-      else
-        log "驗證成功，目標目錄包含 $file_count 個檔案"
-        log "目標目錄頂層內容:"
-        ls -la "$dst" | head -10 || true
-      fi
-    else
-      warn "安裝目錄不存在：$dst，略過檢查"
-    fi
-  fi
-  
-  ok "已完成拷貝到：$dst"
-}
 
 install_claude_code() {
-  local src dst_sunnycore dst_claude commands_dst settings_dst use_local=0
+  local src dst_sunnycore dst_claude commands_dst agents_dst settings_dst use_local=0
 
   log "開始 claude code 安裝程序"
   log "腳本目錄: $SCRIPT_DIR"
@@ -1115,21 +689,27 @@ install_claude_code() {
         info "dry-run: 假設來源目錄存在於 $src"
         run_cmd mkdir -p "$src"
         run_cmd mkdir -p "$src/commands"
+        run_cmd mkdir -p "$src/agents"
         run_cmd touch "$src/README.md"
         run_cmd touch "$src/commands/example.json"
+        run_cmd touch "$src/agents/example.md"
         run_cmd touch "$src/settings.local.json"
       else
         log "檢查克隆目錄內容..."
-        log "暫存目錄內容:"
-        ls -la "$TMP_CLONE_DIR" || true
+        if [[ $QUIET_MODE -eq 0 ]]; then
+          log "暫存目錄內容:"
+          ls -la "$TMP_CLONE_DIR" || true
+        fi
         if [[ -d "$TMP_CLONE_DIR/claude code" ]]; then
           src="$TMP_CLONE_DIR/claude code"
           log "找到 claude code 目錄: $src"
           info "成功從遠端倉庫獲取來源"
         else
           warn "遠端倉庫中找不到 'claude code' 來源資料夾，將嘗試使用本地來源"
-          log "可用的目錄:"
-          find "$TMP_CLONE_DIR" -type d -maxdepth 2 || true
+          if [[ $QUIET_MODE -eq 0 ]]; then
+            log "可用的目錄:"
+            find "$TMP_CLONE_DIR" -type d -maxdepth 2 || true
+          fi
           clone_success=0
         fi
       fi
@@ -1155,38 +735,62 @@ install_claude_code() {
   fi
 
   local commands_src="$src/commands"
+  local agents_src="$src/agents"
   local settings_src="$src/settings.local.json"
   if [[ $DRY_RUN -eq 1 ]]; then
     info "dry-run: 假設 commands 來源目錄存在於 $commands_src"
+    info "dry-run: 假設 agents 來源目錄存在於 $agents_src"
     info "dry-run: 假設 settings.local.json 檔案存在於 $settings_src"
   elif [[ ! -d "$commands_src" ]]; then
     error "來源目錄缺少 commands 子目錄：$commands_src"
     exit 1
   fi
 
-  dst_sunnycore="${INSTALL_BASE%/}/sunnycore"
-  dst_claude="${INSTALL_BASE%/}/.claude"
+  # 根據安裝類型設定目標目錄
+  local install_sunnycore=1
+  if [[ "${INSTALL_TYPE:-}" == "project" ]]; then
+    # 專案安裝：只安裝 .claude 目錄
+    install_sunnycore=0
+    dst_sunnycore=""
+    dst_claude="${INSTALL_BASE%/}/.claude"
+  else
+    # 指定路徑安裝：安裝 sunnycore 和 .claude 目錄
+    install_sunnycore=1
+    dst_sunnycore="${INSTALL_BASE%/}/sunnycore"
+    dst_claude="${INSTALL_BASE%/}/.claude"
+  fi
+  
   commands_dst="${dst_claude%/}/commands"
+  agents_dst="${dst_claude%/}/agents"
   settings_dst="${dst_claude%/}/settings.local.json"
 
   log "設定目標目錄"
   log "安裝基礎路徑: $INSTALL_BASE"
-  log "Sunnycore 目標目錄: $dst_sunnycore"
+  log "安裝類型: ${INSTALL_TYPE:-custom}"
+  if [[ $install_sunnycore -eq 1 ]]; then
+    log "Sunnycore 目標目錄: $dst_sunnycore"
+  fi
   log "Claude commands 目標目錄: $commands_dst"
+  log "Claude agents 目標目錄: $agents_dst"
   log "Claude settings.local.json 目標：$settings_dst"
 
   info "安裝版本：claude code"
   info "來源：$src"
-  info "Sunnycore 目標：$dst_sunnycore"
+  if [[ $install_sunnycore -eq 1 ]]; then
+    info "Sunnycore 目標：$dst_sunnycore"
+  fi
   info "Claude commands 目標：$commands_dst"
+  info "Claude agents 目標：$agents_dst"
   info "Claude settings.local.json 目標：$settings_dst"
 
   if [[ $DRY_RUN -eq 1 ]]; then
     log "dry-run: 跳過來源目錄實際檢查"
     info "dry-run: 假設來源目錄包含必要檔案"
   elif [[ -d "$src" ]]; then
-    log "來源目錄存在，內容:"
-    ls -la "$src" | head -10 || true
+    if [[ $QUIET_MODE -eq 0 ]]; then
+      log "來源目錄存在，內容:"
+      ls -la "$src" | head -10 || true
+    fi
     log "來源目錄檔案數量: $(find "$src" -type f | wc -l)"
   else
     error "來源目錄不存在: $src"
@@ -1198,18 +802,40 @@ install_claude_code() {
   require_cmd rm
   require_cmd find
 
-  confirm_overwrite_if_needed "$dst_sunnycore"
+  # 根據安裝類型確認是否需要覆寫
+  if [[ $install_sunnycore -eq 1 ]]; then
+    confirm_overwrite_if_needed "$dst_sunnycore"
+  fi
   confirm_overwrite_if_needed "$commands_dst"
-  run_cmd mkdir -p "$dst_sunnycore"
+  
+  # 創建必要的目錄
+  if [[ $install_sunnycore -eq 1 ]]; then
+    run_cmd mkdir -p "$dst_sunnycore"
+  fi
   run_cmd mkdir -p "$dst_claude"
 
-  info "開始拷貝 Sunnycore 檔案…"
-  log "執行拷貝命令: cp -a $src/. $dst_sunnycore/"
-  run_cmd cp -a "$src/." "$dst_sunnycore/"
+  # 只在指定路徑安裝時拷貝 Sunnycore 檔案
+  if [[ $install_sunnycore -eq 1 ]]; then
+    info "開始拷貝 Sunnycore 檔案…"
+    log "執行拷貝命令: cp -a $src/. $dst_sunnycore/"
+    run_cmd cp -a "$src/." "$dst_sunnycore/"
+  fi
 
   info "開始拷貝 commands 檔案至 .claude…"
   log "執行拷貝命令: cp -a $commands_src $dst_claude/"
   run_cmd cp -a "$commands_src" "$dst_claude/"
+
+  # 拷貝 agents 目錄（如果存在）
+  if [[ $DRY_RUN -eq 1 ]]; then
+    info "dry-run: 拷貝 agents 至 .claude…"
+    log "dry-run: cp -a $agents_src $dst_claude/"
+  elif [[ -d "$agents_src" ]]; then
+    info "開始拷貝 agents 檔案至 .claude…"
+    log "執行拷貝命令: cp -a $agents_src $dst_claude/"
+    run_cmd cp -a "$agents_src" "$dst_claude/"
+  else
+    log "agents 目錄不存在於來源目錄，跳過拷貝"
+  fi
 
   # 拷貝 settings.local.json 檔案（如果存在）
   if [[ $DRY_RUN -eq 1 ]]; then
@@ -1223,52 +849,75 @@ install_claude_code() {
     log "settings.local.json 檔案不存在於來源目錄，跳過拷貝"
   fi
 
-  info "移除 Sunnycore 目錄中的 commands 目錄"
-  log "執行移除命令: rm -rf $dst_sunnycore/commands"
-  run_cmd rm -rf "$dst_sunnycore/commands"
+  # 只在指定路徑安裝時才需要清理 sunnycore 目錄
+  if [[ $install_sunnycore -eq 1 ]]; then
+    info "移除 Sunnycore 目錄中的 commands 目錄"
+    log "執行移除命令: rm -rf $dst_sunnycore/commands"
+    run_cmd rm -rf "$dst_sunnycore/commands"
 
-  # 移除 Sunnycore 目錄中的 settings.local.json（如果存在）
-  if [[ $DRY_RUN -eq 1 ]]; then
-    info "dry-run: 移除 Sunnycore 目錄中的 settings.local.json"
-    log "dry-run: rm -f $dst_sunnycore/settings.local.json"
-  elif [[ -f "$dst_sunnycore/settings.local.json" ]]; then
-    info "移除 Sunnycore 目錄中的 settings.local.json"
-    log "執行移除命令: rm -f $dst_sunnycore/settings.local.json"
-    run_cmd rm -f "$dst_sunnycore/settings.local.json"
+    # 移除 Sunnycore 目錄中的 agents 目錄（如果存在）
+    if [[ $DRY_RUN -eq 1 ]]; then
+      info "dry-run: 移除 Sunnycore 目錄中的 agents 目錄"
+      log "dry-run: rm -rf $dst_sunnycore/agents"
+    elif [[ -d "$dst_sunnycore/agents" ]]; then
+      info "移除 Sunnycore 目錄中的 agents 目錄"
+      log "執行移除命令: rm -rf $dst_sunnycore/agents"
+      run_cmd rm -rf "$dst_sunnycore/agents"
+    fi
+
+    # 移除 Sunnycore 目錄中的 settings.local.json（如果存在）
+    if [[ $DRY_RUN -eq 1 ]]; then
+      info "dry-run: 移除 Sunnycore 目錄中的 settings.local.json"
+      log "dry-run: rm -f $dst_sunnycore/settings.local.json"
+    elif [[ -f "$dst_sunnycore/settings.local.json" ]]; then
+      info "移除 Sunnycore 目錄中的 settings.local.json"
+      log "執行移除命令: rm -f $dst_sunnycore/settings.local.json"
+      run_cmd rm -f "$dst_sunnycore/settings.local.json"
+    fi
   fi
 
-  log "開始安裝後驗證 (sunnycore)…"
-  if [[ $DRY_RUN -eq 1 ]]; then
-    info "dry-run: 將於 $dst_sunnycore 執行安裝後檢查"
-  else
-    if [[ -d "$dst_sunnycore" ]]; then
-      log "檢查 Sunnycore 目錄: $dst_sunnycore"
-      local sunnycore_file_count
-      sunnycore_file_count=$(find "$dst_sunnycore" -type f | wc -l)
-      log "Sunnycore 目標目錄檔案數量: $sunnycore_file_count"
-
-      if [[ -d "$dst_sunnycore/commands" ]]; then
-        warn "Sunnycore 目錄中仍存在 commands 目錄，將移除"
-        run_cmd rm -rf "$dst_sunnycore/commands"
-      fi
-
-      if [[ -f "$dst_sunnycore/settings.local.json" ]]; then
-        warn "Sunnycore 目錄中仍存在 settings.local.json 檔案，將移除"
-        run_cmd rm -f "$dst_sunnycore/settings.local.json"
-      fi
-
-      if [[ $sunnycore_file_count -eq 0 ]]; then
-        error "拷貝後 Sunnycore 目標目錄為空：$dst_sunnycore"
-        log "Sunnycore 目標目錄內容:"
-        ls -la "$dst_sunnycore" || true
-        exit 1
-      else
-        log "Sunnycore 驗證成功，目標目錄包含 $sunnycore_file_count 個檔案"
-        log "Sunnycore 目標目錄頂層內容:"
-        ls -la "$dst_sunnycore" | head -10 || true
-      fi
+  # 只在指定路徑安裝時驗證 sunnycore 目錄
+  if [[ $install_sunnycore -eq 1 ]]; then
+    log "開始安裝後驗證 (sunnycore)…"
+    if [[ $DRY_RUN -eq 1 ]]; then
+      info "dry-run: 將於 $dst_sunnycore 執行安裝後檢查"
     else
-      warn "Sunnycore 安裝目錄不存在：$dst_sunnycore，略過檢查"
+      if [[ -d "$dst_sunnycore" ]]; then
+        log "檢查 Sunnycore 目錄: $dst_sunnycore"
+        local sunnycore_file_count
+        sunnycore_file_count=$(find "$dst_sunnycore" -type f | wc -l)
+        log "Sunnycore 目標目錄檔案數量: $sunnycore_file_count"
+
+        if [[ -d "$dst_sunnycore/commands" ]]; then
+          warn "Sunnycore 目錄中仍存在 commands 目錄，將移除"
+          run_cmd rm -rf "$dst_sunnycore/commands"
+        fi
+
+        if [[ -d "$dst_sunnycore/agents" ]]; then
+          warn "Sunnycore 目錄中仍存在 agents 目錄，將移除"
+          run_cmd rm -rf "$dst_sunnycore/agents"
+        fi
+
+        if [[ -f "$dst_sunnycore/settings.local.json" ]]; then
+          warn "Sunnycore 目錄中仍存在 settings.local.json 檔案，將移除"
+          run_cmd rm -f "$dst_sunnycore/settings.local.json"
+        fi
+
+        if [[ $sunnycore_file_count -eq 0 ]]; then
+          error "拷貝後 Sunnycore 目標目錄為空：$dst_sunnycore"
+          log "Sunnycore 目標目錄內容:"
+          ls -la "$dst_sunnycore" || true
+          exit 1
+        else
+          log "Sunnycore 驗證成功，目標目錄包含 $sunnycore_file_count 個檔案"
+          if [[ $QUIET_MODE -eq 0 ]]; then
+            log "Sunnycore 目標目錄頂層內容:"
+            ls -la "$dst_sunnycore" | head -10 || true
+          fi
+        fi
+      else
+        warn "Sunnycore 安裝目錄不存在：$dst_sunnycore，略過檢查"
+      fi
     fi
   fi
 
@@ -1289,8 +938,10 @@ install_claude_code() {
         exit 1
       else
         log "commands 驗證成功，目錄包含 $commands_file_count 個檔案"
-        log "commands 目錄頂層內容:"
-        ls -la "$commands_dst" | head -10 || true
+        if [[ $QUIET_MODE -eq 0 ]]; then
+          log "commands 目錄頂層內容:"
+          ls -la "$commands_dst" | head -10 || true
+        fi
       fi
     else
       error ".claude/commands 目錄不存在：$commands_dst"
@@ -1298,7 +949,36 @@ install_claude_code() {
     fi
   fi
 
-  ok "Claude code installation completed: $dst_sunnycore, $commands_dst and $settings_dst"
+  log "開始安裝後驗證 (.claude/agents)…"
+  if [[ $DRY_RUN -eq 1 ]]; then
+    info "dry-run: 將於 $agents_dst 執行安裝後檢查"
+  else
+    if [[ -d "$agents_dst" ]]; then
+      log "檢查 agents 目錄: $agents_dst"
+      local agents_file_count
+      agents_file_count=$(find "$agents_dst" -type f | wc -l)
+      log "agents 目錄檔案數量: $agents_file_count"
+      
+      if [[ $agents_file_count -eq 0 ]]; then
+        warn ".claude/agents 目錄為空：$agents_dst"
+      else
+        log "agents 驗證成功，目錄包含 $agents_file_count 個檔案"
+        if [[ $QUIET_MODE -eq 0 ]]; then
+          log "agents 目錄頂層內容:"
+          ls -la "$agents_dst" | head -10 || true
+        fi
+      fi
+    else
+      log ".claude/agents 目錄不存在，略過檢查"
+    fi
+  fi
+
+  # 根據安裝類型顯示不同的成功訊息
+  if [[ $install_sunnycore -eq 1 ]]; then
+    ok "Claude code installation completed: $dst_sunnycore, $commands_dst, $agents_dst and $settings_dst"
+  else
+    ok "Claude code installation completed: $commands_dst, $agents_dst and $settings_dst"
+  fi
 }
 
 main() {
@@ -1323,20 +1003,13 @@ main() {
   prompt_select_version
   log "選擇的版本: $SELECTED_VERSION"
   
+  prompt_install_type
+  log "安裝類型: $INSTALL_TYPE"
+  
   prompt_install_path
   log "安裝路徑: $INSTALL_BASE"
 
   case "$SELECTED_VERSION" in
-    warp-code)
-      log "開始安裝 warp-code 版本"
-      install_warp_code
-      log "warp-code 安裝完成"
-      ;;
-    codex)
-      log "開始安裝 codex 版本"
-      install_codex
-      log "codex 安裝完成"
-      ;;
     claude-code)
       log "開始安裝 claude code 版本"
       install_claude_code

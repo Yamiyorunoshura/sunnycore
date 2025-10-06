@@ -98,7 +98,7 @@
 
 ### Sunnycore 自動安裝腳本
 
-Sunnycore 提供了自動化安裝腳本 `scripts/sunnycore.sh`，可快速安裝不同版本到本機。
+Sunnycore 提供了自動化安裝腳本 `scripts/sunnycore.sh`，可快速安裝到本機。
 
 #### 系統需求
 - macOS 或 Linux 系統
@@ -108,20 +108,18 @@ Sunnycore 提供了自動化安裝腳本 `scripts/sunnycore.sh`，可快速安�
 
 #### 以 curl 一行安裝（推薦）
 
-互動模式（不帶參數會在終端互動選擇版本與安裝路徑）：
+互動模式（不帶參數會在終端互動選擇安裝路徑）：
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash
 ```
 
-非互動模式（直接指定版本與路徑，並自動確認）：
+非互動模式（直接指定路徑並自動確認）：
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash -s -- -v warp-code -p ~/sunnycore -y
+curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/sunnycore.sh | bash -s -- -v claude-code -p ~/sunnycore -y
 ```
 
-可用版本代號：`warp-code`、`codex`、`claude-code`
-
 可選參數：
-- `-v, --version`：指定版本（如 `warp-code`）
+- `-v, --version`：指定版本（目前僅支援 `claude-code`）
 - `-p, --path`：安裝基礎路徑（會在該路徑下建立 `sunnycore/`）
 - `-y, --yes`：自動同意覆寫與操作
 - `--repo`、`--branch`、`--remote-name`：進階 Git 來源/分支控制
@@ -130,19 +128,20 @@ curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/sc
 
 若已經克隆本倉庫，可直接執行腳本：
 ```bash
-bash scripts/sunnycore.sh -v warp-code -p ~/sunnycore -y
+bash scripts/sunnycore.sh -v claude-code -p ~/sunnycore -y
 ```
 
 #### 安裝結果
 安裝完成後，目標路徑將包含：
 ```
 目標路徑/
-├── sunnycore/           # 主要系統檔案
+├── claude code/         # Claude Code 版本系統檔案
 │   ├── config.yaml     # 配置檔案
+│   ├── commands/       # 角色命令定義
 │   ├── agents/         # Agent 定義
 │   ├── tasks/          # 任務模板
 │   └── templates/      # 文檔模板
-└── [VERSION].md        # 版本特定文檔
+└── CLAUDE.md           # Claude Code 專案指引
 ```
 
 ## 快速開始

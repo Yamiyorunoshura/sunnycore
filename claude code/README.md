@@ -252,7 +252,7 @@ flowchart TD
 | 步驟 | 命令 | 說明 |
 |------|------|------|
 | 1 | `/sunnycore_architect *document-project` | 確保專案架構文件是最新的 |
-| 2 | `/sunnycore_pm *create-brownfield-requirements` | 互動式創建需求文檔 |
+| 2 | `/sunnycore_pm *create-requirements` | 互動式創建需求文檔 |
 | 3 | `/sunnycore_pm *create-brownfield-architecture` | 互動式創建架構文檔 |
 | 4 | `/sunnycore_pm *create-epic` | 互動式創建任務文檔 |
 
@@ -292,7 +292,7 @@ flowchart TD
     
     subgraph Phase1 ["📋 階段一：需求分析"]
         A0["1️⃣ /sunnycore_architect<br/>*document-project<br/>📖 更新專案文件"]
-        A1["2️⃣ /sunnycore_pm<br/>*create-brownfield-requirements<br/>📝 建立需求"]
+        A1["2️⃣ /sunnycore_pm<br/>*create-requirements<br/>📝 建立需求"]
         A2["3️⃣ /sunnycore_pm<br/>*create-brownfield-architecture<br/>🏗️ 建立架構"]
         A3["4️⃣ /sunnycore_pm<br/>*create-epic<br/>📌 建立任務"]
         A0 --> A1 --> A2 --> A3
@@ -359,7 +359,7 @@ flowchart TD
 | **適用場景** | 小型變更、快速迭代 | 全新專案 | 現有專案擴展/維護 |
 | **文檔結構** | 單一 PRD 文檔 | 分離的需求、架構、任務文檔 | 分離的需求、架構、任務文檔 |
 | **起始步驟** | 創建 PRD | 直接建立需求 | 先更新專案文件 |
-| **需求命令** | `*create-prd` | `*create-requirements` | `*create-brownfield-requirements` |
+| **需求命令** | `*create-prd` | `*create-requirements` | `*create-requirements` |
 | **架構命令** | 內建於 PRD | `*create-architecture` | `*create-brownfield-architecture` |
 | **任務命令** | 內建於 PRD | `*create-epic` | `*create-epic` |
 | **開發命令** | `*develop-prd`（一次性） | `*develop-tasks`（逐個） | `*develop-tasks`（逐個） |
