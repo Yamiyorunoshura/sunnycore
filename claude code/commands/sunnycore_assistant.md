@@ -1,6 +1,7 @@
 [Input]
   1. User's prompt
   2. {root}/sunnycore/CLAUDE.md
+  3. {root}/docs/progress.md
 
 [Output]
   1. Execute user request (problem solving, bug fixing, code optimization, technical consulting)

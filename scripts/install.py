@@ -116,6 +116,10 @@ class SunnycoreInstaller:
         
         if claude_dir.exists() or sunnycore_dir.exists():
             if not auto_yes:
+                # 檢查是否可以進行互動
+                if not sys.stdin.isatty():
+                    print("\n✗ 目錄已存在，請使用 -y 參數自動確認覆寫，或手動刪除現有目錄")
+                    return False
                 response = input(f"\n目錄已存在，是否覆寫? (y/N): ").strip().lower()
                 if response != 'y':
                     print("安裝已取消")
@@ -184,14 +188,17 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 範例:
-  # 互動模式
+  # 互動模式（終端執行）
   python3 install.py
   
-  # 非互動模式
+  # 非互動模式（指定路徑和自動確認）
   python3 install.py -v claude-code -p ~/myproject -y
   
-  # 從管道執行
+  # 從管道執行（自動使用預設路徑 ~/sunnycore）
   curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/install.py | python3
+  
+  # 從管道執行（指定路徑）
+  curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/install.py | python3 - -p ~/myproject -y
         """
     )
     
@@ -236,8 +243,15 @@ def main():
         print("Sunnycore 安裝程式")
         print("=" * 60)
         default_path = os.path.expanduser("~/sunnycore")
-        user_input = input(f"請輸入安裝路徑 (預設: {default_path}): ").strip()
-        install_path = Path(os.path.expanduser(user_input) if user_input else default_path)
+        
+        # 檢查是否可以進行互動
+        if not sys.stdin.isatty():
+            print(f"\n✓ 使用預設安裝路徑: {default_path}")
+            print("  (通過管道執行時自動使用預設值，或使用 -p 參數指定路徑)")
+            install_path = Path(default_path)
+        else:
+            user_input = input(f"請輸入安裝路徑 (預設: {default_path}): ").strip()
+            install_path = Path(os.path.expanduser(user_input) if user_input else default_path)
     
     # 創建安裝器
     installer = SunnycoreInstaller(repo=args.repo, branch=args.branch)
