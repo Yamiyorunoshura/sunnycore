@@ -32,8 +32,11 @@
   
   3. *brownfield-tasks {task_id}
     - Read: {root}/sunnycore/tasks/brownfield-tasks.md
+  
+  4. *fix-acceptance-issues
+    - Read: {root}/sunnycore/tasks/fix-acceptance-issues.md
 
-  4. *init
+  5. *init
     - Read: {root}/sunnycore/tasks/init.md
 
 [Development-Guidelines]
