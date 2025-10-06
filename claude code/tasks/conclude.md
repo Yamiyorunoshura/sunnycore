@@ -1,13 +1,13 @@
 [Input]
-  1. "{root}/docs/dev-notes/{task_id}-dev-notes.md" --Development notes (required)
-  2. "{root}/docs/review-results/{task_id}-review.md" --Review report (required)
-  3. "{root}/sunnycore/templates/completion-report-tmpl.yaml" --Completion report template (required)
-  4. "{root}/cutover.md" --Cutover report (required)
-  5. "{root}/docs/cutover-dev-notes.md" --Cutover development notes (required)
-  6. "{root}/docs/progress.md" --Progress record
+  1. "docs/dev-notes/{task_id}-dev-notes.md" --Development notes (required)
+  2. "docs/review-results/{task_id}-review.md" --Review report (required)
+  3. "sunnycore/templates/completion-report-tmpl.yaml" --Completion report template (required)
+  4. "cutover.md" --Cutover report (required)
+  5. "docs/cutover-dev-notes.md" --Cutover development notes (required)
+  6. "docs/progress.md" --Progress record
 
 [Output]
-  1. Completion report: "{root}/docs/completion-report.md" (Markdown format)
+  1. Completion report: "docs/completion-report.md" (Markdown format)
 
 [Constraints]
   1. Must ensure completion report complies with template requirements
@@ -54,7 +54,7 @@
   4. Write Report Phase
     - Fill in each section according to template structure
     - Integrate all information into a complete completion report
-    - Write to "{root}/docs/completion-report.md"
+    - Write to "docs/completion-report.md"
 
   5. Quality Check Phase
     - Verify report complies with template requirements (structure is complete)
@@ -69,10 +69,10 @@
 
   7. File Archiving Phase
     - Verify existence of "requirements/", "epic.md" and "implementation-plan/"
-    - Use terminal commands to move the above files to "{root}/docs/archive/{version_name}/" (if folder does not exist, create it first)
-    - Suggested command: `mkdir -p "{root}/docs/archive/{version_name}" && mv -n {files} "{root}/docs/archive/{version_name}/"` (use -n parameter to avoid overwriting existing files)
+    - Use terminal commands to move the above files to "docs/archive/{version_name}/" (if folder does not exist, create it first)
+    - Suggested command: `mkdir -p "docs/archive/{version_name}" && mv -n {files} "docs/archive/{version_name}/"` (use -n parameter to avoid overwriting existing files)
     - If mv -n fails because files already exist, should record a warning and annotate "Files already exist in archive folder", DoD is considered complete
-    - Execute verification command: `ls "{root}/docs/archive/{version_name}"` to confirm files exist in the target folder, if expected files are missing from the target folder, generate an error message and annotate DoD as incomplete, waiting for user to handle
+    - Execute verification command: `ls "docs/archive/{version_name}"` to confirm files exist in the target folder, if expected files are missing from the target folder, generate an error message and annotate DoD as incomplete, waiting for user to handle
 
 [DoD]
   - [ ] Completion report has been generated and complies with template structure (including all necessary sections in the template)

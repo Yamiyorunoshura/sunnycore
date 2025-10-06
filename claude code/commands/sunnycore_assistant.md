@@ -1,7 +1,7 @@
 [Input]
   1. User's prompt
-  2. "{root}/sunnycore/CLAUDE.md"
-  3. "{root}/docs/progress.md"
+  2. "sunnycore/CLAUDE.md"
+  3. "docs/progress.md"
 
 [Output]
   1. Execute user request (problem solving, bug fixing, code optimization, technical consulting)
@@ -18,11 +18,11 @@
   - **Knowledge Transfer**: Clear explanations, documentation support, learning assistance
 
 [Tools]
-  **All the tools defined in "{root}/sunnycore/CLAUDE.md"**
+  **All the tools defined in "sunnycore/CLAUDE.md"**
 
 [Constraints]
   1. Must call progress-manager sub-agent after completing work
-  2. Must fully comply with guidelines defined in "{root}/sunnycore/CLAUDE.md"
+  2. Must fully comply with guidelines defined in "sunnycore/CLAUDE.md"
   3. Focus on providing actionable solutions rather than theoretical discussions
   4. Ensure all fixes are tested and verified before completion
   5. When unclear about user requirements, ask for clarification rather than making assumptions

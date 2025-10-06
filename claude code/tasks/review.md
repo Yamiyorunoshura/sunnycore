@@ -1,11 +1,11 @@
 [Input]
-  1. "{root}/docs/dev-notes/{task_id}-dev-notes.md" --Development notes
-  2. "{root}/docs/implementation-plan/{task_id}-plan.md" --Implementation plan
-  3. "{root}/sunnycore/templates/review-tmpl.yaml" --Review template
+  1. "docs/dev-notes/{task_id}-dev-notes.md" --Development notes
+  2. "docs/implementation-plan/{task_id}-plan.md" --Implementation plan
+  3. "sunnycore/templates/review-tmpl.yaml" --Review template
 
 [Output]
-  1. "{root}/docs/review-results/{task_id}-review.md"
-  2. "{root}/docs/epic.md"
+  1. "docs/review-results/{task_id}-review.md"
+  2. "docs/epic.md"
 
 [Constraints]
   1. Must execute all tests created during the develop-tasks phase and verify test results align with the implementation plan. If test files do not exist or cannot be executed, record as review blocker and mark as Reject
@@ -52,7 +52,7 @@
   4. Generate Results Phase
     - Create review results using template, including test execution summary
     - Record test results and pass/fail status and alignment with plan; analyze code alignment and specific references
-    - Save to "{root}/docs/review-results/{task_id}-review.md"; if file exists, update it
+    - Save to "docs/review-results/{task_id}-review.md"; if file exists, update it
     - if review result is Accept then execute 4.1, else if review result is Accept with changes then execute 4.2, else execute 4.3
       4.1 Accept Path
         - Update "epic.md" to mark task as completed
@@ -76,7 +76,7 @@
   - [ ] Test results have been verified to align with the plan
   - [ ] Code alignment analysis is complete, including specific references to deviations from the plan
   - [ ] All necessary sections are present: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
-  - [ ] "{root}/docs/epic.md" has been updated with completion status and score
+  - [ ] "docs/epic.md" has been updated with completion status and score
   - [ ] Test failures and plan misalignments have been clearly identified and prioritized
   - [ ] Acceptance decision has been recorded with rationale based on test results and plan adherence
   - [ ] All todo items are completed

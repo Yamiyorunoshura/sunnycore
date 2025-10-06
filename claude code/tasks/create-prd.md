@@ -1,14 +1,14 @@
 [Input]
   1. User-provided requirement description and context
-  2. "{root}/sunnycore/templates/prd-tmpl.yaml" --PRD template
-  3. (Conditional) "{root}/docs/architecture/*.md" --Existing architecture (if Brownfield)
-  4. "{root}/docs/knowledge/*.md" --Project knowledge (if exist)
+  2. "sunnycore/templates/prd-tmpl.yaml" --PRD template
+  3. (Conditional) "docs/architecture/*.md" --Existing architecture (if Brownfield)
+  4. "docs/knowledge/*.md" --Project knowledge (if exist)
 
 [Output]
-  1. "{root}/docs/PRD.md" --Complete Product Requirements Document
+  1. "docs/PRD.md" --Complete Product Requirements Document
 
 [Constraints]
-  1. Must determine project type (Greenfield/Brownfield) by checking "{root}/docs/architecture/" directory existence
+  1. Must determine project type (Greenfield/Brownfield) by checking "docs/architecture/" directory existence
   2. Each requirement must be verifiable and measurable; vague or subjective wording is not allowed
   3. Tasks must be atomic, verifiable (≤50 characters for task names, clear outcomes)
   4. Must exclude operational actions (e.g., git commit, npm install, deployment script execution) unless explicitly requested by the user
@@ -28,10 +28,10 @@
 [Steps]
   1. Initialization and Project Type Detection Phase
     - Read all workflow steps to understand expected work
-    - Check if "{root}/docs/architecture/" directory exists
+    - Check if "docs/architecture/" directory exists
     - If the directory exists, execute the Brownfield flow (1.1); otherwise, execute the Greenfield flow (1.2)
       1.1. Brownfield Project
-        - Read all existing architecture documents from "{root}/docs/architecture/*.md"
+        - Read all existing architecture documents from "docs/architecture/*.md"
         - Identify extension points, constraints, and shared services
         - Create todo list for Brownfield PRD creation
       1.2. Greenfield Project
@@ -81,7 +81,7 @@
     - Cross-verify PRD completeness and consistency
     - Ensure all requirements have corresponding architecture elements and tasks
     - Verify task set completely covers all requirements
-    - Write PRD to "{root}/docs/PRD.md" in Markdown format
+    - Write PRD to "docs/PRD.md" in Markdown format
     - Present the complete PRD to the user and request confirmation or modification suggestions
     - Check all DoD items one by one to ensure they are met
     - Confirm all todo items are completed
@@ -108,7 +108,7 @@
   - [ ] Atomic tasks have been generated with requirement and architecture traceability
   - [ ] Task dependencies have been identified
   - [ ] All tasks are verifiable and outcome-oriented
-  - [ ] PRD follows template structure and is saved to "{root}/docs/PRD.md"
+  - [ ] PRD follows template structure and is saved to "docs/PRD.md"
   - [ ] User confirmation of the final PRD has been obtained
   - [ ] All todo items are completed
 
