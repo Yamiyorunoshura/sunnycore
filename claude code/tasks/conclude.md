@@ -2,8 +2,8 @@
   1. "{root}/docs/dev-notes/{task_id}-dev-notes.md" --Development notes (required)
   2. "{root}/docs/review-results/{task_id}-review.md" --Review report (required)
   3. "{root}/sunnycore/templates/completion-report-tmpl.yaml" --Completion report template (required)
-  4. "{root}/cutover.md" --Cutover report (required)
-  5. "{root}/docs/cutover-dev-notes.md" --Cutover development notes (required)
+  4. "{root}/docs/cutover.md" --Cutover report (required)
+  5. "{root}/docs/cutover-fixes-dev-notes.md" --Cutover development notes (required)
   6. "{root}/docs/progress.md" --Progress record
 
 [Output]
