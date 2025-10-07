@@ -1,6 +1,16 @@
 [Path-Variables]
   {C} = {root}/sunnycore/CLAUDE.md
   {T} = {root}/sunnycore/tasks
+  {REQ} = {root}/docs/requirements
+  {ARCH} = {root}/docs/architecture
+  {TMPL} = {root}/sunnycore/templates
+  {SCRIPTS} = {root}/sunnycore/scripts
+  {KNOWLEDGE} = {root}/docs/knowledge
+  {PLAN} = {root}/docs/implementation-plan
+  {DEVNOTES} = {root}/docs/dev-notes
+  {REVIEW} = {root}/docs/review-results
+  {PRD} = {root}/docs/PRD.md
+  {EPIC} = {root}/docs/epic.md
 
 [Input]
   1. User command input and task doc

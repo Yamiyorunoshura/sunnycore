@@ -1,7 +1,7 @@
 [Input]
   1. "{root}/docs/*.md" --All files in docs/ directory recursively (required)
-  2. "{root}/*.lock" --Version information (required)
-  3. "{root}/sunnycore/templates/completion-report-tmpl.yaml" --Completion report template (required)
+  2. "{LOCK}" --Version information (required)
+  3. "{TMPL}/completion-report-tmpl.yaml" --Completion report template (required)
 
 [Output]
   1. Completion report: "{root}/docs/completion-report.md" (Markdown format)
@@ -31,7 +31,7 @@
 
 [Steps]
   1. Input Validation Phase
-    - Verify existence of "{root}/sunnycore.lock" and read version number (format: "version = x.x.x")
+    - Verify existence of "{LOCK}" and read version number (format: "version = x.x.x")
     - Parse version name from lock file (e.g., "1.12.8")
     - Verify existence of completion report template
     - Recursively scan "{root}/docs/" directory to get all file list (including all subdirectories)
@@ -57,18 +57,19 @@
     - If deficiencies are found, should return to Step 3 to fix the report (maximum 2 iterations, if still deficient then annotate "To be supplemented" and continue execution)
 
   5. Create Archive Directory Phase
-    - Create "{root}/archive/{version_name}/" directory if it does not exist
+    - Create "{ARCHIVE}/{version_name}/" directory if it does not exist
     - Verify directory creation was successful
 
   6. Move Files to Archive Phase
-    - Move all files and directories from "{root}/docs/" EXCEPT architecture/, knowledge/, and completion-report.md to "{root}/archive/{version_name}/"
-    - Suggested command: `find "{root}/docs" -mindepth 1 -maxdepth 1 ! -name "architecture" ! -name "knowledge" ! -name "completion-report.md" -exec mv -n {} "{root}/archive/{version_name}/" \;`
+    - For both Traditional and PRD workflows:
+      * Move all files and directories from "{root}/docs/" EXCEPT architecture/, knowledge/, and completion-report.md to "{ARCHIVE}/{version_name}/"
+    - Suggested command: `find "{root}/docs" -mindepth 1 -maxdepth 1 ! -name "architecture" ! -name "knowledge" ! -name "completion-report.md" -exec mv -n {} "{ARCHIVE}/{version_name}/" \;`
     - If mv -n fails because files already exist, record a warning and annotate "Files already exist in archive folder"
     - Execute verification command: `ls -la "{root}/docs"` to confirm only architecture/, knowledge/, and completion-report.md remain
-    - Execute verification command: `ls -la "{root}/archive/{version_name}"` to confirm archived files exist in the target folder
+    - Execute verification command: `ls -la "{ARCHIVE}/{version_name}"` to confirm archived files exist in the target folder
 
   7. Update Document References Phase
-    - Scan all files in "{root}/docs/architecture/" and "{root}/docs/knowledge/" directories
+    - Scan all files in "{ARCH}/" and "{KNOWLEDGE}/" directories
     - Identify all document references that point to archived files (formats to detect: "docs/xxx/yyy.md", "../xxx/yyy.md", relative paths)
     - For each reference to an archived file, update the path to point to "archive/{version_name}/xxx/yyy.md" or appropriate relative path from current location
     - Use search_replace tool to update references in each file
@@ -76,9 +77,10 @@
 
 [DoD]
   - [ ] *.lock file has been read and version number has been parsed successfully
+  - [ ] Workflow type (Traditional/PRD) has been determined
   - [ ] All files in docs/ directory have been scanned recursively
   - [ ] Completion report has been generated and complies with template structure (including all necessary sections in the template)
   - [ ] Completion report content fully covers the 5 core content items listed in constraint 2
-  - [ ] All files and directories in docs/ EXCEPT architecture/, knowledge/, and completion-report.md have been moved to archive/{version_name}/
+  - [ ] All files and directories in docs/ EXCEPT architecture/, knowledge/, and completion-report.md have been moved to {ARCHIVE}/{version_name}/
   - [ ] Only architecture/, knowledge/, and completion-report.md remain in docs/ directory
   - [ ] Document references in architecture/ and knowledge/ have been updated to point to correct archive paths

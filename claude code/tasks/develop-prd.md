@@ -1,6 +1,6 @@
 [Input]
-  1. "{root}/docs/PRD.md" --Product Requirements Document
-  2. "{root}/sunnycore/templates/dev-notes-tmpl.yaml" --Development notes template
+  1. "{PRD}" --Product Requirements Document
+  2. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template
 
 [Output]
   1. "{root}/docs/prd-dev-notes.md" --Complete development notes document
@@ -24,7 +24,7 @@
 
 [Steps]
   1. Preparation Phase
-    - Read "{root}/docs/PRD.md" completely
+    - Read "{PRD}" completely
     - Understand requirements and architecture
     - Plan the TDD implementation strategy to fulfil all the funcitonla and non-functional requirements:
       * Identify test cases needed (unit tests, integration tests)

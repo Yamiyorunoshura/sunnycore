@@ -1,14 +1,14 @@
 [Input]
   1. User-provided requirement description and context
-  2. "{root}/sunnycore/templates/prd-tmpl.yaml" --PRD template
-  3. (Conditional) "{root}/docs/architecture/*.md" --Existing architecture (if Brownfield)
-  4. "{root}/docs/knowledge/*.md" --Project knowledge (if exist)
+  2. "{TMPL}/prd-tmpl.yaml" --PRD template
+  3. (Conditional) "{ARCH}/*.md" --Existing architecture (if Brownfield)
+  4. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
 
 [Output]
-  1. "{root}/docs/PRD.md" --Complete Product Requirements Document
+  1. "{PRD}" --Complete Product Requirements Document
 
 [Constraints]
-  1. Must determine project type (Greenfield/Brownfield) by checking "{root}/docs/architecture/" directory existence
+  1. Must determine project type (Greenfield/Brownfield) by checking "{ARCH}/" directory existence
   2. Each requirement must be verifiable and measurable; vague or subjective wording is not allowed
   3. Tasks must be feature-level, verifiable (clear functional scope and outcomes)
   4. Must exclude operational actions (e.g., git commit, npm install, deployment script execution) unless explicitly requested by the user
@@ -28,11 +28,11 @@
 [Steps]
   1. Initialization and Project Type Detection Phase
     - Read all workflow steps to understand expected work
-    - Check if "{root}/docs/architecture/" directory exists
+    - Check if "{ARCH}/" directory exists
     - if directory exists then proceed to 1.1, else proceed to 1.2
       
       1.1. Brownfield Project
-        - Read all existing architecture documents from "{root}/docs/architecture/*.md"
+        - Read all existing architecture documents from "{ARCH}/*.md"
         - Identify extension points, constraints, and shared services
         - Create todo list for Brownfield PRD creation
       
@@ -74,7 +74,7 @@
   5. Finalization Phase
     - Cross-verify PRD completeness and consistency
     - Ensure all requirements have corresponding architecture elements
-    - Write PRD to "{root}/docs/PRD.md" in Markdown format
+    - Write PRD to "{PRD}" in Markdown format
     - Present the complete PRD to the user and request confirmation or modification suggestions`
 
 [Error-Handling]
@@ -97,6 +97,6 @@
   - [ ] Requirement-to-architecture mapping has been established (100% coverage)
   - [ ] Requirement dependencies have been identified
   - [ ] All requirements are verifiable and outcome-oriented
-  - [ ] PRD follows template structure and is saved to "{root}/docs/PRD.md"
+  - [ ] PRD follows template structure and is saved to "{PRD}"
   - [ ] User confirmation of the final PRD has been obtained
 

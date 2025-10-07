@@ -44,6 +44,7 @@
 | 3 | `/sunnycore_dev *develop-prd` | 基於 PRD 一次性完成所有開發任務 |
 | 4 | `/sunnycore_po *cutover` | 項目驗收 |
 | 5 | `/sunnycore_architect *document-project` | 更新專案架構文檔 |
+| 6 | `/sunnycore_po *conclude` | 總結文檔並歸檔 |
 
 **特點：**
 - ✅ **簡化流程**：合併需求、架構、任務為單一文檔
@@ -71,6 +72,7 @@ flowchart TD
     subgraph Phase3 ["📊 驗收與總結階段"]
         C0["4️⃣ /sunnycore_po<br/>*cutover<br/>✅ 項目驗收"]
         C1["5️⃣ /sunnycore_architect<br/>*document-project<br/>📖 更新專案文件"]
+        C2["6️⃣ /sunnycore_po<br/>*conclude<br/>📋 總結文檔並歸檔"]
     end
     
     D1{"✅ Cutover<br/>通過?"}
@@ -84,7 +86,8 @@ flowchart TD
     D1 -->|"❌ 否"| R1
     R1 --> C0
     D1 -->|"✅ 是"| C1
-    C1 --> Done
+    C1 --> C2
+    C2 --> Done
     
     style Start fill:#e1f5e1
     style Done fill:#e1f5e1
@@ -363,7 +366,7 @@ flowchart TD
 | **架構命令** | 內建於 PRD | `*create-architecture` | `*create-brownfield-architecture` |
 | **任務命令** | 內建於 PRD | `*create-epic` | `*create-epic` |
 | **開發命令** | `*develop-prd`（一次性） | `*develop-tasks`（逐個） | `*develop-tasks`（逐個） |
-| **總步驟數** | 5 步 | 11 步 | 12 步 |
+| **總步驟數** | 6 步 | 11 步 | 12 步 |
 | **適合規模** | 小型（1-5 個任務） | 中大型（5+ 個任務） | 中大型（5+ 個任務） |
 
 ### 🎯 關鍵決策點

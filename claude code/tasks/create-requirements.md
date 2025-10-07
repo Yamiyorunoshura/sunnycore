@@ -1,9 +1,9 @@
 [Input]
-  1. "{root}/sunnycore/templates/requirement-tmpl.yaml" --Requirement template
+  1. "{TMPL}/requirement-tmpl.yaml" --Requirement template
   2. User-provided initial ideas and requirement descriptions
 
 [Output]
-  1. "{root}/docs/requirements/*.md" --Complete requirement specifications (including functional requirements, non-functional requirements, and acceptance criteria)
+  1. "{REQ}/*.md" --Complete requirement specifications (including functional requirements, non-functional requirements, and acceptance criteria)
 
 [Constraints]
   1. Each requirement must be verifiable and measurable; vague or subjective wording is not allowed
@@ -50,7 +50,7 @@
       
       5.1. Write Final Documents
         - Write approved content to "{root}/docs/requirements.md"
-        - Execute uv run "{root}/sunnycore/scripts/shard-requirements.py"
+        - Execute uv run "{SCRIPTS}/shard-requirements.py"
         - if execution succeeds then proceed to 5.1.1, else proceed to 5.1.2
           
           5.1.1. Execution Success Path

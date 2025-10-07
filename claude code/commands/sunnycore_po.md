@@ -1,6 +1,18 @@
 [Path-Variables]
   {C} = {root}/sunnycore/CLAUDE.md
   {T} = {root}/sunnycore/tasks
+  {REQ} = {root}/docs/requirements
+  {ARCH} = {root}/docs/architecture
+  {TMPL} = {root}/sunnycore/templates
+  {SCRIPTS} = {root}/sunnycore/scripts
+  {KNOWLEDGE} = {root}/docs/knowledge
+  {DEVNOTES} = {root}/docs/dev-notes
+  {REVIEW} = {root}/docs/review-results
+  {PROGRESS} = {root}/docs/progress.md
+  {PRD} = {root}/docs/PRD.md
+  {CUTOVER} = {root}/docs/cutover.md
+  {ARCHIVE} = {root}/archive
+  {LOCK} = {root}/sunnycore.lock
 
 [Input]
   1. User command input and task doc

@@ -1,11 +1,11 @@
 [Input]
-  1. (Conditional) "{root}/docs/PRD.md" --Product Requirements Document (if exists, used as primary requirement source)
-  2. (Conditional) "{root}/docs/requirements/*.md" --Requirement documents (required if "PRD.md" does not exist)
-  3. (Conditional) "{root}/docs/architecture/*.md" --Architecture documents (required if "PRD.md" does not exist)
-  4. "{root}/sunnycore/templates/cutover-report-tmpl.yaml" --Cutover report template (required)
+  1. (Conditional) "{PRD}" --Product Requirements Document (if exists, used as primary requirement source)
+  2. (Conditional) "{REQ}/*.md" --Requirement documents (required if "PRD.md" does not exist)
+  3. (Conditional) "{ARCH}/*.md" --Architecture documents (required if "PRD.md" does not exist)
+  4. "{TMPL}/cutover-report-tmpl.yaml" --Cutover report template (required)
 
 [Output]
-  1. "{root}/docs/cutover.md" --Cutover report (Markdown format)
+  1. "{CUTOVER}" --Cutover report (Markdown format)
 
 [Constraints]
   1. Must follow cutover report template structure
@@ -24,20 +24,20 @@
 [Steps]
   1. Preparation and Validation Phase
     - Verify existence of all required input files
-    - Check if "{root}/docs/PRD.md" exists
+    - Check if "{PRD}" exists
     - Understand business objectives and project structure
     - Create todo list based on actual tasks
     - if "PRD.md" exists then proceed to 1.1, else proceed to 1.2
       
       1.1. PRD-based Project
-        - Read "{root}/docs/PRD.md"
+        - Read "{PRD}"
         - Extract requirements from PRD requirements section
         - Extract architecture information from PRD architecture section
         - Use PRD as the primary requirement source for acceptance testing
       
       1.2. Traditional Project Structure
-        - Read all requirement documents from "{root}/docs/requirements/*.md"
-        - Read all architecture documents from "{root}/docs/architecture/*.md"
+        - Read all requirement documents from "{REQ}/*.md"
+        - Read all architecture documents from "{ARCH}/*.md"
         - If any required files are missing, generate missing list and halt execution
 
   2. Understanding and Configuration Phase
@@ -73,7 +73,7 @@
     - List all configuration requirements identified
     - Document all test results with evidence
     - List all issues found with details and provide recommendations for fixes or improvements
-    - Save report to "{root}/docs/cutover.md"
+    - Save report to "{CUTOVER}"
 
 [DoD]
   - [ ] All required input files have been read
