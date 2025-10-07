@@ -1,20 +1,20 @@
-[Input]
+## [Input]
   1. "{DEVNOTES}/{task_id}-dev-notes.md" --Development notes
   2. "{PLAN}/{task_id}-plan.md" --Implementation plan
   3. "{TMPL}/review-tmpl.yaml" --Review template
 
-[Output]
+## [Output]
   1. "{REVIEW}/{task_id}-review.md"
   2. "{EPIC}"
 
-[Constraints]
+## [Constraints]
   1. Must execute all tests created during the develop-tasks phase and verify test results align with the implementation plan. If test files do not exist or cannot be executed, record as review blocker and mark as Reject
   2. Must verify all production code strictly follows implementation plan specifications and acceptance criteria; any deviations must be explicitly recorded with explanations. "Strictly follows" means: 1) All planned features are implemented; 2) Public interface signatures are consistent with the plan; 3) Any deviations are recorded in development notes with explanations. Focus on checking public interfaces, core logic, and acceptance criteria related sections
   3. Must produce machine-checkable Markdown (including structured heading hierarchy H1-H3, list items, code blocks, and using consistent markup format), containing sections: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
   4. Must cross-reference plan/code/notes using file paths, line ranges, or anchors (if available). Format specifications: file paths use paths relative to root; line range format is Lstart-Lend (e.g., L10-L20); anchor format is #anchor-id
   5. Must record acceptance decision and rationale: Accept / Accept with changes / Reject
 
-[Tools]
+## [Tools]
   1. **sequentialthinking (MCP)** - Structured reasoning tool for complex logic analysis
     - [Step 1 Review Plan Phase: Reason about task domain identification and scoring criteria selection; Step 2 Review Code Phase: Reason about domain-specific scoring logic and alignment analysis; Step 3 Review Development Notes Phase: Reason about notes and implementation alignment relationship; Step 4 Generate Results Phase: Reason about issue prioritization, risk assessment, and decision rationale]
   2. **todo_write** - Task tracking tool for managing todo list
@@ -22,7 +22,7 @@
   3. **claude-context (MCP)** - Codebase semantic search and indexing tool
     - [Step 1: Search codebase for implementation plan-related code when needed; Step 2: Search codebase for relevant implementations when code analysis is needed]
 
-[Steps]
+## [Steps]
   1. Review Plan Phase
     - Read the implementation plan and understand its content
     - Identify task domain: Determine which domain the task belongs to based on implementation plan content (backend/frontend/API/database/DevOps/testing/documentation/general)
@@ -71,7 +71,7 @@
         - Do not update "{EPIC}"
         - Wait for brownfield-tasks to fix then review again
 
-[DoD]
+## [DoD]
   - [ ] Task domain has been identified and corresponding domain-specific review criteria have been applied
   - [ ] Scoring has been performed according to domain-specific scoring dimensions
   - [ ] All tests have been executed and results recorded

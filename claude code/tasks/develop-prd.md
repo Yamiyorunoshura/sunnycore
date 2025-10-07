@@ -1,20 +1,20 @@
-[Input]
+## [Input]
   1. "{PRD}" --Product Requirements Document
   2. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template
 
-[Output]
+## [Output]
   1. "{root}/docs/prd-dev-notes.md" --Complete development notes document
   2. High-quality, tested code implementation for all PRD tasks
   3. Complete test coverage and test cases
 
-[Constraints]
+## [Constraints]
   1. Must complete all tasks defined in the PRD in a single execution
   2. **Must use TDD methodology for development**: Follow the TDD practice guidelines detailed in [Development-Guidelines] section
   3. Development notes must preserve the indentation and numbering style used in the template
   4. Must comply with acceptance criteria and architecture mapping defined in the PRD
   5. If modification of files outside the PRD scope is needed, must record in development notes and explain the reason
 
-[Tools]
+## [Tools]
   1. **todo_write**
     - [Step 1: Create task list from PRD; Step 2: Track TDD phase progress; Steps 3-4: Track implementation progress]
   2. **sequentialthinking (MCP)**
@@ -22,7 +22,7 @@
   3. **claude-context (MCP)**
     - [Step 1: Search codebase to prepare for PRD implementation - understand existing code structure, related modules, dependencies, and implementation patterns]
 
-[Steps]
+## [Steps]
   1. Preparation Phase
     - Read "{PRD}" completely
     - Understand requirements and architecture
@@ -66,14 +66,14 @@
     - Verify code quality meets standards (SOLID principles, DRY, etc.)
     - Confirm test coverage meets minimum requirements (≥80%)
 
-[Error-Handling]
+## [Error-Handling]
   1. PRD file not found: Report error and halt execution
   2. Test failures in RED phase that don't fail correctly: Fix test logic and retry
   3. Test failures in GREEN phase: Analyze failure, fix implementation, retry
   4. Test failures in REFACTOR phase: Rollback refactoring, re-evaluate strategy
   5. Integration test failures: Identify root cause, fix specific implementation, re-run integration tests
 
-[DoD]
+## [DoD]
   - [ ] PRD has been read and all requirements extracted
   - [ ] Todo list has been created with all requirements in dependency order
   - [ ] All requirements have been implemented following TDD cycle (RED → GREEN → REFACTOR)

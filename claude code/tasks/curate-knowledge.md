@@ -1,4 +1,4 @@
-[Input]
+## [Input]
   1. "{REVIEW}/*.md" --Review reports
   2. "{DEVNOTES}/*.md" --Development notes
   3. "{KNOWLEDGE}/*.md" --Existing knowledge base(if exist)
@@ -6,18 +6,18 @@
   5. "{root}/docs/cutover-dev-notes.md" --Cutover development notes (required)
   6. "{PROGRESS}" --Progress record
 
-[Output]
+## [Output]
   1. "{KNOWLEDGE}/*.md" --Knowledge base (create directory first if it does not exist)
     - Document organization: May produce "best-practices.md", "errors.md" based on actual content, or subdivide by domain/type
     - Content allocation: One entry per platinum practice, one entry per error case
 
-[Rules]
+## [Rules]
   1. Must identify all practices and errors during development, but only define platinum-level practices as best practices and produce them
   2. Platinum level will be marked in review reports, only need to read marks without making own judgment
   3. If no platinum-level practices are found, should record "No sufficiently validated best practices in this phase" in the knowledge base and explain the reason
   4. If contradictory practice recommendations are found, should annotate conflicts and preserve all evidence sources for subsequent decision-making
 
-[Tools]
+## [Tools]
   1. **sequentialthinking (MCP)**
     - [Step 2: Reason about knowledge base organization structure]
   2. **claude-context (MCP)**
@@ -27,7 +27,7 @@
     - [Step 2: Create task list; Steps 3-4: Track task progress]
     - Usage scenario: Create todo list in preparation phase, track task progress
 
-[Steps]
+## [Steps]
   1. Preparation Phase
     - Read all development notes and review reports
     - Identify best practices marked as platinum level and record in temporary list
@@ -50,7 +50,7 @@
   4. Finalization Phase
     - Archive the "review-results/" and "dev-notes/" files to "{ARCHIVE}/{version_name}/"
 
-[DoD]
+## [DoD]
   - [ ] All files in "{REVIEW}/" and "{DEVNOTES}/" have been read
   - [ ] Knowledge base structure and classification method have been conceived
   - [ ] Knowledge base directory "{KNOWLEDGE}/" has been created
@@ -58,7 +58,7 @@
   - [ ] All errors during development process have been identified and recorded (including type, context, solution)
   - [ ] Each knowledge point has clear evidence source annotation
 
-[Example]
+## [Example]
   **Knowledge Management Architecture**:
   
   1. **Document Types & Naming Convention**:

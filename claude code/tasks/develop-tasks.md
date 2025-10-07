@@ -1,22 +1,22 @@
-[Input]
+## [Input]
   1. "{PLAN}/{task_id}-plan.md" --Implementation plan
   2. "{ARCH}/*.md" --Architecture design
   3. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template
 
-[Output]
+## [Output]
   1. "{DEVNOTES}/{task_id}-dev-notes.md" --Complete development notes document
   2. High-quality, tested code implementation
   3. Complete test coverage and test cases
   4. Refactored code following best practices
 
-[Constraints]
+## [Constraints]
   1. Must comply with acceptance criteria and architecture mapping defined in the implementation plan
   2. **Must use TDD methodology for development**: Follow the TDD practice guidelines detailed in [Development-Guidelines] section
   3. Development notes must preserve the indentation and numbering style used in the template
   4. Allowed to modify modules specified in the implementation plan and their test files, as well as necessary configuration files; if modification of files outside the plan is needed (referring to files not explicitly listed for modification in the implementation plan, including but not limited to: shared utility classes, configuration files, dependency injection settings, etc.), must record in development notes and explain the reason
   5. Development notes must include: implementation summary, technical decisions, risk considerations, test results, and other complete sections (refer to template)
 
-[Tools]
+## [Tools]
   1. **sequentialthinking (MCP)**
     - [Step 1: Analyze implementation plan complexity; Steps 2-4: Reason about implementation strategies for each TDD phase; Step 5: Evaluate validation results]
   2. **todo_write**
@@ -24,7 +24,7 @@
   3. **claude-context (MCP)**
     - [Step 1: Search codebase for implementation plan-related code]
 
-[Steps]
+## [Steps]
   1. Preparation Phase
     - Read the TDD-based implementation plan produced in the plan-tasks phase
     - Extract the implementation steps for RED, GREEN, REFACTOR three phases
@@ -51,7 +51,7 @@
     - Generate development notes according to template structure, including implementation summary, technical decisions, risk considerations, test results, and other sections
     - Generate document to "{DEVNOTES}/{task_id}-dev-notes.md"
 
-[DoD]
+## [DoD]
   - [ ] All acceptance criteria in the implementation plan have been met
   - [ ] Tests cover all verification methods specified in the plan
   - [ ] Implementation follows TDD cycle: RED → GREEN → REFACTOR

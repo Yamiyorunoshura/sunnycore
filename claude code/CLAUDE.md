@@ -1,4 +1,8 @@
-[Constraints]
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## [Constraints]
 1. Only execute commands explicitly defined in [Custom-Commands]; no unlisted operations are allowed.
 2. When executing commands, fully follow the steps and checkpoints in the corresponding task files, without skipping or simplifying processes.
 3. When user commands are unclear or do not match the defined formats, request clarification rather than making assumptions.
@@ -19,7 +23,7 @@
     - blocked: there are external dependencies or permission/resource issues. Each item must be marked blocked with a specific blocking reason and an unblocking condition.
     - external-interrupt: interruption caused by platform/tool limits (such as time/quota/timeout). Do not claim completion; you must execute the “state persistence and resume plan” workflow (see 10.6).
 
-[Tool-Guidelines]
+## [Tool-Guidelines]
 This section describes tool usage scenarios.
 
 1. **todo_write — Task Tracking Tool**
@@ -63,14 +67,14 @@ This section describes tool usage scenarios.
   Notes:
   - Avoid including sensitive or proprietary information
 
-[Template-Usage-Guidelines]
+## [Template-Usage-Guidelines]
 1. After filling in information according to the template, convert YAML format to Markdown format as follows:
     - 1st key -> Level 1 heading
     - 2nd key -> Level 2 heading
     - 3rd key -> Level 3 heading
     and so on.
 
-[Summary-Instructions]
+## [Summary-Instructions]
 When performing auto-compact (automatic conversation compression), follow these rules:
 
 1. Content that MUST be preserved:

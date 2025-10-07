@@ -1,13 +1,13 @@
-[Input]
+## [Input]
   1. User-provided requirement description and context
   2. "{TMPL}/prd-tmpl.yaml" --PRD template
   3. (Conditional) "{ARCH}/*.md" --Existing architecture (if Brownfield)
   4. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
 
-[Output]
+## [Output]
   1. "{PRD}" --Complete Product Requirements Document
 
-[Constraints]
+## [Constraints]
   1. Must determine project type (Greenfield/Brownfield) by checking "{ARCH}/" directory existence
   2. Each requirement must be verifiable and measurable; vague or subjective wording is not allowed
   3. Tasks must be feature-level, verifiable (clear functional scope and outcomes)
@@ -15,7 +15,7 @@
   5. Must ensure all file names/paths do not use spaces; prefer kebab-case
   6. If Brownfield, must preserve existing contracts (i.e., public API interfaces, data models, event formats, and other externally visible contracts) and provide impact analysis for changes
 
-[Tools]
+## [Tools]
   1. **todo_write**
     - [Step 1: Create todo list; Steps 2-6: Track working progress]
   2. **sequentialthinking (MCP)**
@@ -25,7 +25,7 @@
   4. **claude-context (MCP)**
     - [Step 1: Search codebase for existing architecture implementations if Brownfield]
 
-[Steps]
+## [Steps]
   1. Initialization and Project Type Detection Phase
     - Read all workflow steps to understand expected work
     - Check if "{ARCH}/" directory exists
@@ -77,7 +77,7 @@
     - Write PRD to "{PRD}" in Markdown format
     - Present the complete PRD to the user and request confirmation or modification suggestions`
 
-[Error-Handling]
+## [Error-Handling]
   1. Directory check failure: Log error and proceed as Greenfield
   2. Existing architecture read failure: Record issue and request user clarification
   3. Requirement conflicts: Record conflicts and request user clarification
@@ -86,7 +86,7 @@
   6. Architecture design incompatible with non-functional requirements: Document incompatibility and request user guidance on trade-offs
   7. User rejects final PRD: Record rejection reasons and iterate on requirements/architecture based on feedback
 
-[DoD]
+## [DoD]
   - [ ] Project type (Greenfield/Brownfield) has been determined
   - [ ] If Brownfield, existing architecture has been reviewed
   - [ ] Functional requirements have been extracted, deduplicated, and atomized

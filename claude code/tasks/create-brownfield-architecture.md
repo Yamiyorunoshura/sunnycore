@@ -1,14 +1,14 @@
-[Input]
+## [Input]
   1. "{REQ}" --Standardized requirement source
   2. "{ARCH}/*.md" --Existing architecture document collection
   3. "{SCRIPTS}/shard-architecture.py" --Architecture sharding script
   4. "{TMPL}/architecture-tmpl.yaml" --Architecture template
   5. "{KNOWLEDGE}/*.md" --Project knowledge
 
-[Output]
+## [Output]
   1. "{ARCH}/*.md" --Updated architecture document collection (*.md format)
 
-[Constraints]
+## [Constraints]
   1. Must thoroughly review "{REQ}" and "{ARCH}/*.md" before proposing design (evidence: reference reviewed content in architecture draft using `Reference: {file path}#{section heading}` format)
   2. Must preserve existing contracts; any proposed changes must include explicit "Impact Analysis" subsection
   3. Must fully comply with "{TMPL}/architecture-tmpl.yaml" structure and section order
@@ -16,7 +16,7 @@
   5. Should use clear, concise English with 2-space indentation throughout
   6. Architecture design required external API call must use context7 (MCP) to search for library documentation and API references
 
-[Tools]
+## [Tools]
   1. **todo_write**
     - [Step 1: Track tasks; Steps 2-4: Track task status]
   2. **sequentialthinking (MCP)**
@@ -26,7 +26,7 @@
   3. **claude-context (MCP)**
     - [Step 1: Search codebase for existing architecture implementations]
 
-[Steps]
+## [Steps]
   1. Evaluate Existing Architecture Phase
     - Review current architecture under "{ARCH}/*.md"
     - Identify extension points, constraints, and shared services
@@ -61,7 +61,7 @@
     - Confirm all impact analyses are included and complete
     - Verify compatibility between new and old modules
 
-[DoD]
+## [DoD]
   - [ ] "{REQ}" and "{ARCH}/*.md" have been thoroughly reviewed
   - [ ] Extension points, constraints, and affected domains have been identified
   - [ ] New module has documented boundaries, interfaces, and data flows

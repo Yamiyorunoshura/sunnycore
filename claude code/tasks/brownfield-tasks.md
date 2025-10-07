@@ -1,21 +1,21 @@
-[Input]
+## [Input]
   1. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template
   2. "{DEVNOTES}/{task_id}-dev-notes.md" --Development notes
   3. "{REVIEW}/{task_id}-review.md" --Review report
   4. "{ARCH}/*.md" --Architecture design
   5. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
 
-[Output]
+## [Output]
   1. Fixed code that runs properly
   2. Fix summary (recommend presenting in MARKDOWN, including: changes, tests, evidence, risk, rollback; suggested format, can be adjusted according to project needs)
   3. Updated development notes "{DEVNOTES}/{task_id}-dev-notes.md"
 
-[Constraints]
+## [Constraints]
   1. Must ensure fixed code runs properly
   2. Must ensure fixed code complies with architecture design
   3. Must ensure fixed code does not break existing functionality
 
-[Tools]
+## [Tools]
   1. **todo_write**
     - [Steps 2-4: Track task progress] (see Tool Guidelines for details)
   2. **sequentialthinking (MCP)**
@@ -24,7 +24,7 @@
     - [Step 1: Search codebase for relevant implementations]
     - [Step 2: Search codebase for fix-related code]
 
-[Steps]
+## [Steps]
   1. Preparation Phase
     - Read review report and understand the issues
     - Read architecture design to align with overall direction
@@ -51,7 +51,7 @@
     - Summarize the fix process and results (should include document paths and line numbers/paragraph IDs as evidence; for version control projects, should include PR/commit links; corresponding to the evidence field of "Fix Summary" for auditing purposes)
     - Write or update the summary to the corresponding development notes according to the template
 
-[DoD]
+## [DoD]
   - [ ] All unit tests have passed
   - [ ] All integration tests have passed
   - [ ] Fix summary has been generated and includes changes/tests/evidence/risk/rollback

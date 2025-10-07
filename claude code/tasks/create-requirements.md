@@ -1,18 +1,18 @@
-[Input]
+## [Input]
   1. "{TMPL}/requirement-tmpl.yaml" --Requirement template
   2. User-provided initial ideas and requirement descriptions
 
-[Output]
+## [Output]
   1. "{REQ}/*.md" --Complete requirement specifications (including functional requirements, non-functional requirements, and acceptance criteria)
 
-[Constraints]
+## [Constraints]
   1. Each requirement must be verifiable and measurable; vague or subjective wording is not allowed
   2. Section and field names must align exactly with the requirement template
   3. Examples must not contain sensitive or personal data
   4. This workflow transforms initial ideas into complete, testable requirements through structured interaction
   5. Use standardized requirement templates to ensure consistency and verifiability
 
-[Tools]
+## [Tools]
   1. **todo_write**
     - [Step 1: Create task list; Steps 2-4: Track task progress]
   2. **sequentialthinking (MCP)**
@@ -22,7 +22,7 @@
   4. **claude-context (MCP)**
     - [Step 3: Search codebase for requirement-related implementations]
 
-[Steps]
+## [Steps]
   1. Initialization Phase
     - Read all workflow steps to understand expected work
     - Create todo list to track subsequent requirement extraction and writing tasks
@@ -66,7 +66,7 @@
         - Revise functional requirements, non-functional requirements, or acceptance criteria according to feedback
         - Return to present revised draft and request approval again
 
-[DoD]
+## [DoD]
   - [ ] Functional requirements have been extracted, deduplicated, and atomized
   - [ ] Non-functional requirements have been identified and quantified (including performance, security, reliability, etc.)
   - [ ] Each requirement has corresponding acceptance criteria (using Given-When-Then structure)
