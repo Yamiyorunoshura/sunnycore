@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [1.15.5] - sunnycore v1.15.5
+
+### Changed
+- 簡化模板轉換規則：優化 `CLAUDE.md` 中的 YAML to Markdown 轉換規則編號
+  - 移除第 1 項「YAML Front Matter」規則（該規則已不再適用於最小化模板設計）
+  - 重新編號原本的規則 2-8 為 1-7，保持規則連續性
+  - 提升模板使用指引的簡潔度與準確性
+
 ## [1.15.4] - sunnycore v1.15.4
 
 ### Changed
