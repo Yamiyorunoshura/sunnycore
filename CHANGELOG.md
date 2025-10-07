@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [1.13.15] - sunnycore v1.13.15
+
+### Changed
+- 優化 PRD 開發任務的工具使用說明：擴展 claude-context (MCP) 工具的使用描述
+  - 更新 `claude code/tasks/develop-prd.md`：改進準備階段的 claude-context 工具說明
+    * 從「搜尋程式碼庫以找到 PRD 相關實作」改為「搜尋程式碼庫以準備 PRD 實作 - 理解現有程式碼結構、相關模組、依賴關係和實作模式」
+    * 提供更具體的工具使用目的與範圍說明
+  - 提升 PRD 開發流程的清晰度與工具使用指引
+
 ## [1.13.14] - sunnycore v1.13.14
 
 ### Changed
