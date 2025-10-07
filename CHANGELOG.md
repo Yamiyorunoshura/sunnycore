@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [1.13.13] - sunnycore v1.13.13
+
+### Changed
+- 重構 PRD 開發任務的 TDD 流程說明：將迭代式 TDD 改為批次式 RED → GREEN → REFACTOR 流程
+  - 更新 `claude code/tasks/develop-prd.md`：調整 TDD 開發階段（步驟 2）為批次執行模式
+    * RED 階段：先為所有需求撰寫測試案例（單元測試、整合測試），確認測試如預期失敗
+    * GREEN 階段：依依賴順序實作所有功能，確保所有測試通過
+    * REFACTOR 階段：對所有實作套用程式碼品質標準（SOLID、DRY），重新執行測試驗證重構
+  - 優化工具使用說明：todo_write 從「追蹤實作進度」改為「追蹤 TDD 階段進度」，sequentialthinking 從「推理實作策略」改為「推理需求實作策略」
+  - 提升 TDD 流程的清晰度與執行效率
+
 ## [1.13.12] - sunnycore v1.13.12
 
 ### Added

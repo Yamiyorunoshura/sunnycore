@@ -16,9 +16,9 @@
 
 [Tools]
   1. **todo_write**
-    - [Step 1: Create task list from PRD; Steps 2-4: Track implementation progress]
+    - [Step 1: Create task list from PRD; Step 2: Track TDD phase progress; Steps 3-4: Track implementation progress]
   2. **sequentialthinking (MCP)**
-    - [Step 1: Analyze PRD complexity; Steps 2-4: Reason about implementation strategies for each task]
+    - [Step 1: Analyze PRD complexity; Step 2-4: Reason about implementation strategies for each requirement]
   3. **claude-context (MCP)**
     - [Step 1: Search codebase for PRD-related implementations]
 
@@ -33,13 +33,18 @@
     - Create todo list based on all tasks, respecting dependency order
     - Plan execution sequence considering task dependencies
 
-  2. Iterative TDD Development Phase (For each task in dependency order)
-    - Read acceptance criteria of each requirement
-    - Develop each task following the TDD cycle: RED → GREEN → REFACTOR
-    - Follow architecture mapping specified in the PRD
-    - Execute tests to verify implementation
-    - Mark implementation completed when all tests pass and acceptance criteria are met
-    - Repeat for all tasks until all PRD tasks are completed
+  2. TDD Development Phase (Batch RED → GREEN → REFACTOR for all requirements)
+    - RED Phase: Write test cases for all requirements
+      * Read acceptance criteria for all requirements
+      * Write all test cases (unit tests, integration tests) following architecture mapping in the PRD
+      * Verify all tests fail as expected
+    - GREEN Phase: Implement all functionality
+      * Implement code for all requirements in dependency order following architecture mapping in the PRD
+      * Ensure all tests pass
+    - REFACTOR Phase: Refactor all implementations
+      * Apply code quality standards (SOLID, DRY) to all implementations
+      * Re-run all tests to verify refactoring
+      * Mark all implementations completed when tests pass
 
   3. Integration Testing Phase
     - Execute complete test suite for all implementations
