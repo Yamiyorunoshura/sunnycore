@@ -81,8 +81,6 @@
     - Validate implementation against all acceptance criteria and planned test conditions
     - Generate development notes according to template structure, including implementation summary, technical decisions, risk considerations, test results, and other sections
     - Generate document to "{root}/docs/dev-notes/{task_id}-dev-notes.md"
-    - Check all DoD items one by one to ensure they are met
-    - Confirm all todo items are completed
 
 [DoD]
   - [ ] All acceptance criteria in the implementation plan have been met
@@ -90,4 +88,3 @@
   - [ ] Implementation follows TDD cycle: RED → GREEN → REFACTOR
   - [ ] Code corresponds to planned architecture components
   - [ ] All outputs in [Output] have been generated and are consistent
-  - [ ] All todo items are completed

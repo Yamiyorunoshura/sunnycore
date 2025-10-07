@@ -49,8 +49,6 @@
 
   4. Finalization Phase
     - Archive the "review-results/" and "dev-notes/" files to "{root}/docs/archive/{version_name}/"
-    - Check all DoD items one by one to ensure they are met
-    - Confirm all todo items are completed
 
 [DoD]
   - [ ] All files in "{root}/docs/review-results/" and "{root}/docs/dev-notes/" have been read
@@ -59,7 +57,6 @@
   - [ ] All platinum-level best practices have been identified and produced by classification
   - [ ] All errors during development process have been identified and recorded (including type, context, solution)
   - [ ] Each knowledge point has clear evidence source annotation
-  - [ ] Todo list has been created and all items are marked as completed
 
 [Example]
   **Knowledge Management Architecture**:

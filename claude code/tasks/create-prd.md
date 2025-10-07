@@ -83,9 +83,7 @@
     - Ensure all requirements have corresponding architecture elements and tasks
     - Verify task set completely covers all requirements
     - Write PRD to "{root}/docs/PRD.md" in Markdown format
-    - Present the complete PRD to the user and request confirmation or modification suggestions
-    - Check all DoD items one by one to ensure they are met
-    - Confirm all todo items are completed
+    - Present the complete PRD to the user and request confirmation or modification suggestions`
 
 [Error-Handling]
   1. Directory check failure: Log error and proceed as Greenfield
@@ -111,5 +109,4 @@
   - [ ] All tasks are verifiable and outcome-oriented
   - [ ] PRD follows template structure and is saved to "{root}/docs/PRD.md"
   - [ ] User confirmation of the final PRD has been obtained
-  - [ ] All todo items are completed
 

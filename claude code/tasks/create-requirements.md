@@ -54,14 +54,12 @@
         - if execution succeeds then proceed to 5.1.1, else proceed to 5.1.2
           
           5.1.1. Execution Success Path
-            - Check all DoD items one by one to ensure they are met
-            - Confirm all todo items are completed
+            - Summarize the tasks completed
           
           5.1.2. Execution Failure Path
-            - Log error to "{root}/logs/errors.log" (including timestamp, error type, failure reason, impact scope)
-            - Notify the user of execution failure
-            - Check all DoD items one by one to ensure they are met
-            - Confirm all todo items are completed
+            - Check if the requirement document follow the templates structure and fulfil the requirements of the template and the scripts
+            - Fix the requirement document if it does not follow the structure required by the scripts and templates
+            - Re-execute the script
       
       5.2. Revise Based on Feedback
         - Collect user feedback on what needs to be changed
@@ -76,4 +74,3 @@
   - [ ] Each requirement is measurable and verifiable
   - [ ] "shard-requirements.py" has been executed or errors have been logged to "{root}/logs/errors.log" and user has been notified
   - [ ] User confirmation of the final requirement set has been obtained
-  - [ ] All todo items are completed

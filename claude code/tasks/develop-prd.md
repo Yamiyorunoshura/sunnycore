@@ -79,8 +79,6 @@
     - Ensure all requirements have been satisfied
     - Verify code quality meets standards (SOLID principles, DRY, etc.)
     - Confirm test coverage meets minimum requirements (≥80%)
-    - Check all DoD items one by one to ensure they are met
-    - Confirm all todo items are completed
 
 [Error-Handling]
   1. PRD file not found: Report error and halt execution
@@ -100,5 +98,4 @@
   - [ ] Test coverage meets minimum requirements (≥80%)
   - [ ] Development notes document has been generated
   - [ ] All outputs in [Output] have been generated and are consistent
-  - [ ] All todo items are completed
 

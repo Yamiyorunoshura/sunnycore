@@ -22,10 +22,8 @@
 
 [Constraints]
   1. Must call progress-manager sub-agent after completing work
-  2. Must fully comply with guidelines defined in "{root}/sunnycore/CLAUDE.md"
-  3. Focus on providing actionable solutions rather than theoretical discussions
-  4. Ensure all fixes are tested and verified before completion
-  5. When unclear about user requirements, ask for clarification rather than making assumptions
+  2. Focus on providing actionable solutions rather than theoretical discussions
+  3. Ensure all fixes are tested and verified before completion
 
 [DoD]
   - [ ] User request fully understood and addressed

@@ -219,7 +219,6 @@ class SunnycoreInstaller:
         
         # 單獨下載的文件
         single_files = [
-            ("claude code/config.yaml", sunnycore_dir / "config.yaml"),
             ("claude code/DEPENDENCIES.md", sunnycore_dir / "DEPENDENCIES.md"),
             ("claude code/index.json", sunnycore_dir / "index.json"),
             ("claude code/mcp.json", sunnycore_dir / "mcp.json"),

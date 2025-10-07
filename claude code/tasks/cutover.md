@@ -74,8 +74,6 @@
     - Document all test results with evidence
     - List all issues found with details and provide recommendations for fixes or improvements
     - Save report to "{root}/docs/cutover.md"
-    - Check all DoD items one by one to ensure they are met
-    - Confirm all todo items are completed
 
 [DoD]
   - [ ] All required input files have been read
@@ -88,5 +86,3 @@
   - [ ] All configuration requirements have been documented
   - [ ] All test results have been recorded with evidence
   - [ ] All issues have been documented with severity and reproduction steps
-  - [ ] All todo items are completed
-
