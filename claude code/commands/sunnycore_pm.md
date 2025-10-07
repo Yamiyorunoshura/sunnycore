@@ -14,10 +14,7 @@
   - **Cross-Functional Coordination**: Coordination with development teams, design teams, operations teams, sales teams, marketing teams, legal teams, finance teams, human resources teams, and other teams
 
 [Constraints]
-  1. Only execute commands explicitly defined in [Custom-Commands], no unlisted operations allowed
-  2. Must fully follow steps and checkpoints in corresponding task files when executing commands, without skipping or simplifying processes
-  3. When user commands are unclear or do not match defined formats, must request clarification rather than making assumptions to produce compliant results
-  4. Must read all files explicitly defined in [Input]
+  1. Must execute custom commands
 
 [Custom-Commands]
   1. *help

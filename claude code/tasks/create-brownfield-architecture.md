@@ -60,8 +60,6 @@
     - Cross-check against constraints and guidance questions; fix gaps and inconsistencies
     - Confirm all impact analyses are included and complete
     - Verify compatibility between new and old modules
-    - Check all DoD items one by one to ensure they are met
-    - Confirm all todo items are completed
 
 [DoD]
   - [ ] "{root}/docs/requirements" and "{root}/docs/architecture/*.md" have been thoroughly reviewed
@@ -72,4 +70,3 @@
   - [ ] User approval has been obtained for architecture draft
   - [ ] "{root}/docs/architecture.md" exists and follows the template
   - [ ] "shard-architecture.py" has been executed and shard file generation has been verified
-  - [ ] All todo items are completed

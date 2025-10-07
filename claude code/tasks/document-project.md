@@ -53,14 +53,11 @@
   4. Finalization Phase
     - Update Document Index section in "{root}/CLAUDE.md" with refreshed architecture documents (including path and purpose of each document)
     - Verify all source references are properly documented across sharded files
-    - Check all DoD items one by one to ensure they are met
-    - Confirm all todo items are completed
 
 [DoD]
   - [ ] All existing architecture documents have been read
   - [ ] Codebase has been searched to understand actual implementation
   - [ ] Development notes, review reports, knowledge base, and progress records have been reviewed
-  - [ ] Task list has been created and all items are marked as completed
   - [ ] All content includes proper source references (source_refs)
   - [ ] Old architecture documents have been deleted from "docs/architecture/"
   - [ ] Shard-architecture.py script has been executed successfully
@@ -69,4 +66,3 @@
   - [ ] Each sharded document includes actual implementation details with source references
   - [ ] Deviations from original design are documented with rationale
   - [ ] "{root}/CLAUDE.md" Document Index section has been updated with refreshed sharded architecture documents
-  - [ ] All todo items are completed

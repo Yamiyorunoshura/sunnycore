@@ -70,8 +70,6 @@
         - Generate detailed review report
         - Do not update "epic.md"
         - Wait for brownfield-tasks to fix then review again
-    - Check all DoD items one by one to ensure they are met
-    - Confirm all todo items are completed
 
 [DoD]
   - [ ] Task domain has been identified and corresponding domain-specific review criteria have been applied
@@ -84,4 +82,3 @@
   - [ ] "{root}/docs/epic.md" has been updated with completion status and score
   - [ ] Test failures and plan misalignments have been clearly identified and prioritized
   - [ ] Acceptance decision has been recorded with rationale based on test results and plan adherence
-  - [ ] All todo items are completed

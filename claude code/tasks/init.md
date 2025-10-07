@@ -41,12 +41,9 @@
   4. Verification Phase
     - Confirm development environment has been successfully initialized and is usable
     - Verify "{root}/CLAUDE.md" has been created and contains complete information
-    - Check all DoD items one by one to ensure they are met
-    - Confirm all todo items are completed
 
 [DoD]
   - [ ] All architecture, requirement, and task documents have been read
   - [ ] Development environment has been initialized and is usable (all necessary tools are installed and configured correctly)
   - [ ] Codebase index has been built
   - [ ] "{root}/CLAUDE.md" has been created and includes all required sections
-  - [ ] All todo items are completed

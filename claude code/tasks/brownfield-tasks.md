@@ -51,14 +51,9 @@
     - Summarize the fix process and results (should include document paths and line numbers/paragraph IDs as evidence; for version control projects, should include PR/commit links; corresponding to the evidence field of "Fix Summary" for auditing purposes)
     - Write or update the summary to the corresponding development notes according to the template
 
-  4. DoD Verification Phase
-    - Check all DoD items one by one to ensure they are met
-    - Confirm all todo items are completed
-
 [DoD]
   - [ ] All unit tests have passed
   - [ ] All integration tests have passed
   - [ ] Fix summary has been generated and includes changes/tests/evidence/risk/rollback
   - [ ] Fixed code complies with architecture design
   - [ ] Development notes have been updated and generated
-  - [ ] All todo items are completed

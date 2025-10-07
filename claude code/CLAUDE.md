@@ -1,16 +1,17 @@
-[General-Guidelines]
-1. Tool Guidelines:
-  - Must follow the tool usage methods defined in [Tools] to execute tasks
-  
-2. Constraint Guidelines
-  - Must comply with all constraints defined in [Constraints]
-  - If there are conflicts between [Constraints], handle them according to the following priority:
-    - Highest priority: commands[Constraints]
-    - Second highest priority: tasks[Constraints]
-
-3. Task Guidelines
-  - Must complete all to-do items
-  - Must complete all [DoD]
+[Constraints]
+1. Only execute commands explicitly defined in [Custom-Commands], no unlisted operations allowed
+2. When executing commands, must fully follow steps and checkpoints in corresponding task files, without skipping or simplifying processes
+3. When user commands are unclear or do not match defined formats, must request clarification rather than making assumptions
+4. Must read all files explicitly defined in task [Input]
+5. Must follow the tool usage methods defined in [Tools] to assist the execution of tasks
+6. Must comply with all constraints defined in [Constraints]
+  6.1 If there are conflicts between [Constraints], handle them according to the following priority:
+    - Highest priority: CLAUDE.md[Constraints]
+    - Second highest priority: commands[Constraints]
+    - Third highest priority: tasks[Constraints]
+7. Must complete all to-do items in the todo list
+8. Must verify the completion of all [DoD]
+9. Read and complete the tasks based on the relevant guidelines stated in [xxx-Guidelines]
 
 [Tool-Guidelines]
 This section describes tool usage scenarios

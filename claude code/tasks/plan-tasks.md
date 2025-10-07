@@ -60,9 +60,7 @@
     - Integrate content from Steps 2-4 into a complete implementation plan document
     - Format the plan using the template: reference template structure to organize content ensuring all necessary sections are included (requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
     - Verify completeness and executability of the plan
-    - Check all DoD items one by one to ensure they are met (check each acceptance criterion item by item according to DoD; if any item is not met, return to the corresponding step to supplement or adjust until all are met)
     - Generate Markdown plan to "{root}/docs/implementation-plan/{task_id}-plan.md"
-    - Confirm all todo items are completed
 
 [DoD]
   - [ ] All requirement, architecture, and task documents have been read
@@ -73,4 +71,3 @@
   - [ ] Plan follows TDD cycle structure: test-first (RED), minimal implementation (GREEN), refactoring optimization (REFACTOR)
   - [ ] Output path and file naming follow specified pattern
   - [ ] "{root}/docs/implementation-plan/{task_id}-plan.md" has been created
-  - [ ] All todo items are completed

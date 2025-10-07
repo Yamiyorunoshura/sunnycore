@@ -83,8 +83,6 @@
     - Document technical decisions and rationale
     - Record any risks or follow-up items
     - Save to "{root}/docs/dev-notes/cutover-fixes-dev-notes.md"
-    - Check all DoD items one by one to ensure they are met
-    - Confirm all todo items are completed
 
 [DoD]
   - [ ] Cutover report has been read and all issues identified
@@ -96,5 +94,4 @@
   - [ ] Full test suite passes with no regressions
   - [ ] Acceptance tests re-run and all issues resolved
   - [ ] Development notes generated with complete documentation
-  - [ ] All todo items are completed
 

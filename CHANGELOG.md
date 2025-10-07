@@ -7,6 +7,27 @@
 
 ## [Unreleased]
 
+## [1.13.8] - sunnycore v1.13.8
+
+### Changed
+- 重構約束管理機制：整合分散在各文件中的約束條款到 `CLAUDE.md` 頂層
+  - 更新 `claude code/CLAUDE.md`：將約束條款提升至 [Constraints] 章節
+    * 建立三級優先級機制：CLAUDE.md[Constraints] > commands[Constraints] > tasks[Constraints]
+    * 整合通用約束：自訂指令執行、任務步驟遵循、輸入文件讀取、工具使用方法、todo 完成、DoD 驗證
+    * 新增指引參考約束：讀取並遵循相關指引章節（如 [xxx-Guidelines]）
+  - 簡化 6 個角色命令文件的約束條款：
+    * `sunnycore_architect.md`、`sunnycore_dev.md`、`sunnycore_pm.md`、`sunnycore_po.md`：約束從 4 條簡化為 1 條（「必須執行自訂指令」）
+    * `sunnycore_assistant.md`：約束從 5 條簡化為 3 條（移除重複的「遵循 CLAUDE.md 指引」和「不明確時請求澄清」）
+    * `sunnycore_qa.md`：約束從 4 條簡化為 1 條（「必須執行自訂指令」）
+  - 優化 14 個任務文件的 DoD 驗證流程：
+    * 移除重複的「DoD 驗證階段」步驟描述
+    * 移除「確認所有 todo 項目完成」的冗餘檢查項
+    * 涵蓋任務：brownfield-tasks、conclude、create-architecture、create-brownfield-architecture、create-epic、create-prd、create-requirements、curate-knowledge、cutover、develop-prd、develop-tasks、document-project、fix-acceptance-issues、plan-tasks、review
+  - 提升約束管理的系統性與可維護性
+- 簡化安裝腳本下載清單：移除 `scripts/install.py` 中的 config.yaml 下載項目
+  - 原因：config.yaml 已在先前版本中移除
+  - 保持下載清單與實際文件結構一致
+
 ## [1.13.7] - sunnycore v1.13.7
 
 ### Changed

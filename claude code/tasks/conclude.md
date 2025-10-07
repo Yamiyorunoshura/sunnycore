@@ -74,17 +74,11 @@
     - Use search_replace tool to update references in each file
     - Verify all updated references are correct by checking if referenced files exist in archive location
 
-  8. DoD Verification Phase
-    - Check all DoD items one by one to ensure they are met
-    - Attach item-by-item DoD verification results at the end of the report
-    - Confirm all todo items are completed
-
 [DoD]
-  - [ ] sunnycore.lock file has been read and version number has been parsed successfully
+  - [ ] *.lock file has been read and version number has been parsed successfully
   - [ ] All files in docs/ directory have been scanned recursively
   - [ ] Completion report has been generated and complies with template structure (including all necessary sections in the template)
   - [ ] Completion report content fully covers the 5 core content items listed in constraint 2
   - [ ] All files and directories in docs/ EXCEPT architecture/, knowledge/, and completion-report.md have been moved to archive/{version_name}/
   - [ ] Only architecture/, knowledge/, and completion-report.md remain in docs/ directory
   - [ ] Document references in architecture/ and knowledge/ have been updated to point to correct archive paths
-  - [ ] All todo items are completed (including: input validation, information extraction, structure mapping, write report, quality check, DoD verification, file archiving, update references)

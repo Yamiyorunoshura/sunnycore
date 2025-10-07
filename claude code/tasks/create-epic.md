@@ -48,8 +48,6 @@
       
       4.1. Write Final Document
         - Write approved task list to "{root}/docs/epic.md" (Markdown format)
-        - Check all DoD items one by one to ensure they are met
-        - Confirm all todo items are completed
       
       4.2. Revise Based on Feedback
         - Collect user feedback on what needs to be changed (e.g., task granularity, grouping, acceptance criteria)
@@ -64,4 +62,3 @@
   - [ ] All tasks comply with template fields
   - [ ] Each task is feature-level, outcome-oriented, and verifiable
   - [ ] No file names or key names use spaces; kebab-case is enforced
-  - [ ] All todo items are completed
