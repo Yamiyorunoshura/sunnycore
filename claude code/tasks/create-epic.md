@@ -1,12 +1,12 @@
-[Input]
+## [Input]
   1. "{REQ}/*.md" --Project functional and non-functional requirements
   2. "{ARCH}/*.md" --Architecture design and technical specifications
   3. "{TMPL}/tasks-tmpl.yaml" --Task template format
 
-[Output]
+## [Output]
   1. "{EPIC}" --Task list (Markdown format)
 
-[Constraints]
+## [Constraints]
   1. Must create feature-level tasks representing major features within modules (e.g., "Implement login functionality", "Implement registration functionality")
   2. Tasks should be verifiable at the feature level with clear functional scope and outcomes
   3. Must exclude operational actions unless explicitly requested by the user
@@ -14,13 +14,13 @@
   4. Must ensure all file names/paths do not use spaces; prefer kebab-case
   5. Note: Atomic breakdown of tasks will be handled later in the plan-tasks phase using TDD RED/GREEN/REFACTOR cycles
 
-[Tools]
+## [Tools]
   1. **todo_write**
     - [Step 1: Create task list; Steps 2-4: Track task progress]
   2. **sequentialthinking (MCP)**
     - [Step 1: Analyze requirement complexity and task dependencies; Step 2: Design atomic tasks and logical grouping]
 
-[Steps]
+## [Steps]
   1. Research Phase
     - Verify all necessary input files (including templates) exist and are readable. If reading fails, stop responding and explicitly notify the user of missing file paths
     - Read requirement and architecture source documents
@@ -54,7 +54,7 @@
         - Revise the task list according to feedback
         - Return to present revised draft and request approval again
 
-[DoD]
+## [DoD]
   - [ ] All requirement and architecture documents have been read
   - [ ] Research notes are complete, including mapping of functional requirements/non-functional requirements to tasks
   - [ ] User approval has been obtained for task list draft

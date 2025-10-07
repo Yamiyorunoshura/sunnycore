@@ -1,4 +1,4 @@
-[Input]
+## [Input]
   1. "{ARCH}/*.md" --Existing architecture documents
   2. "{TMPL}/architecture-tmpl.yaml" --Universal architecture document template
   3. "{KNOWLEDGE}/*.md" --Knowledge base
@@ -7,12 +7,12 @@
   6. "{REVIEW}/*.md" --Review reports
   7. Actual codebase
 
-[Output]
+## [Output]
   1. "{root}/docs/architecture.md" --Integrated architecture document (temporary, will be sharded)
   2. "{ARCH}/*.md" --Sharded architecture documents (Markdown format)
   3. "{root}/CLAUDE.md" --Updated project guidance document with refreshed document index
 
-[Constraints]
+## [Constraints]
   1. Must base updates on actual implementation state from codebase, development notes, and review reports
   2. Every produced document must correspond to at least 1 source reference (source_refs)
   3. Can include architecture diagrams in Markdown documents as fenced code blocks
@@ -20,7 +20,7 @@
   5. Must update the Document Index section in "{root}/CLAUDE.md" after sharding architecture documents
   6. The integrated architecture.md must follow the universal architecture template structure
 
-[Tools]
+## [Tools]
   1. **todo_write**
     - [Step 1: Create task list; Steps 2-4: Track task progress]
   2. **sequentialthinking (MCP)**
@@ -30,7 +30,7 @@
   4. **context7 (MCP)**
     - [Step 1-2: Search API documentation of existing architecture's technology stack and libraries]
 
-[Steps]
+## [Steps]
   1. Analysis and Planning Phase
     - Read all existing architecture documents under "{ARCH}/*.md"
     - Search codebase to understand actual implementation state
@@ -54,7 +54,7 @@
     - Update Document Index section in "{root}/CLAUDE.md" with refreshed architecture documents (including path and purpose of each document)
     - Verify all source references are properly documented across sharded files
 
-[DoD]
+## [DoD]
   - [ ] All existing architecture documents have been read
   - [ ] Codebase has been searched to understand actual implementation
   - [ ] Development notes, review reports, knowledge base, and progress records have been reviewed

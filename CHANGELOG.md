@@ -7,6 +7,27 @@
 
 ## [Unreleased]
 
+## [1.13.16] - sunnycore v1.13.16
+
+### Changed
+- 統一文檔格式：將所有任務與命令文件的章節標題改為 Markdown heading 格式
+  - 更新 `claude code/CLAUDE.md`：所有 `[章節名稱]` 改為 `## [章節名稱]`
+    * 涵蓋章節：[Constraints]、[Tool-Guidelines]、[Template-Usage-Guidelines]、[Summary-Instructions]
+  - 更新 `claude code/agents/progress-manager.md`：所有章節標題改為 heading 格式
+    * 涵蓋章節：[Input]、[Output]、[Role]、[Skills]、[Constraints]、[Classification-Guidelines]、[Output-Guidelines]、[Example]
+  - 更新 6 個命令文件：統一章節標題格式為 Markdown heading
+    * `sunnycore_architect.md`：[Path-Variables]、[Input]、[Output]、[Role]、[Skills]、[Constraints]、[Custom-Commands]、[Project-Summary-Guidelines]、[Knowledge-Management_Guidelines]、[Architecture-Management-Guidelines]、[DoD]
+    * `sunnycore_assistant.md`：[Path-Variables]、[Input]、[Output]、[Role]、[Skills]、[Tools]、[Constraints]、[DoD]
+    * `sunnycore_dev.md`：[Path-Variables]、[Input]、[Output]、[Role]、[Skills]、[Constraints]、[Custom-Commands]、[Development-Guidelines]、[DoD]
+    * `sunnycore_pm.md`：[Path-Variables]、[Input]、[Output]、[Role]、[Skills]、[Constraints]、[Custom-Commands]、[Requirements-Analysis-Guidelines]、[Architecture-Design-Guidelines]、[Task-Management-Guidelines]、[DoD]
+    * `sunnycore_po.md`：[Path-Variables]、[Input]、[Output]、[Role]、[Skills]、[Constraints]、[Custom-Commands]、[Acceptance-Guidelines]、[DoD]
+    * `sunnycore_qa.md`：[Path-Variables]、[Input]、[Output]、[Role]、[Skills]、[Constraints]、[Custom-Commands]、[Domain-Specific-Review-Guidelines]、[DoD]
+  - 更新 25 個任務文件：統一章節標題格式為 Markdown heading
+    * 涵蓋任務：brownfield-tasks、conclude、create-architecture、create-brownfield-architecture、create-epic、create-prd、create-requirements、curate-knowledge、cutover、develop-prd、develop-tasks、document-project、fix-acceptance-issues、help、init、plan-tasks、review
+    * 涵蓋章節：[Input]、[Output]、[Constraints]、[Tools]、[Steps]、[DoD]、[Error-Handling]、[Example]、[Rules] 等
+  - 優化 `sunnycore_qa.md` 中的領域審查指引格式：將所有子章節改為 heading 格式（Overview、Unified Scoring System、Score Calculation、Decision Rules、Risk Assessment Criteria、Common Issues & Anti-patterns）
+  - 提升文檔可讀性與 Markdown 渲染效果
+
 ## [1.13.15] - sunnycore v1.13.15
 
 ### Changed

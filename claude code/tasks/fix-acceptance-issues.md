@@ -1,16 +1,16 @@
-[Input]
+## [Input]
   1. "{CUTOVER}" --Cutover report (required)
   2. (Conditional) "{PRD}" --Product Requirements Document (if exists, used as primary requirement and architecture source)
   3. (Conditional) "{REQ}/*.md" --Requirement documents (optional, used if "PRD.md" does not exist)
   4. (Conditional) "{ARCH}/*.md" --Architecture documents (optional, used if "PRD.md" does not exist)
   5. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template (required)
 
-[Output]
+## [Output]
   1. "{root}/docs/cutover-fixes-dev-notes.md" --Development notes for fixes
   2. Fixed code implementation
   3. Updated documentation if needed
 
-[Constraints]
+## [Constraints]
   1. Must address all issues documented in cutover report
   2. Must follow TDD cycle for fixes: write/update tests first (RED), implement fix (GREEN), then refactor (REFACTOR)
   3. Must verify fixes resolve the reported issues
@@ -18,7 +18,7 @@
   5. Must re-run acceptance tests after fixes to ensure issues are resolved
   6. Must not introduce new issues or break existing functionality
 
-[Tools]
+## [Tools]
   1. **sequentialthinking (MCP)**: Perform structured reasoning and analysis
     - [Step 2: Analyze root causes; Step 3: Plan fix strategies; Step 6: Evaluate fix results]
   2. **todo_write**: Create and manage task list
@@ -26,7 +26,7 @@
   3. **claude-context (MCP)**: Search codebase for relevant code
     - [Step 2: Locate code related to issues]
 
-[Steps]
+## [Steps]
   1. Preparation Phase
     - Read cutover report to understand all reported issues
     - Verify existence of required input files
@@ -84,7 +84,7 @@
     - Record any risks or follow-up items
     - Save to "{root}/docs/dev-notes/cutover-fixes-dev-notes.md"
 
-[DoD]
+## [DoD]
   - [ ] Cutover report has been read and all issues identified
   - [ ] Root cause analysis completed for all issues
   - [ ] Fix strategy planned for each issue

@@ -1,17 +1,17 @@
-[Input]
+## [Input]
   1. "{REQ}/*.md" --Project requirements
   2. "{ARCH}/*.md" --Architecture design
   3. "{EPIC}" --Feature-level task list
   4. "{TMPL}/implementation-plan-tmpl.yaml" --Implementation plan template (including: project information, requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
   5. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
 
-[Output]
+## [Output]
   1. "{PLAN}/{task_id}-plan.md" --Implementation plan (Markdown format)
     - Format: Use ATX headings; numbered lists; explicit requirement/architecture mapping sections
     - Content: Breaks down feature-level tasks into atomic implementation steps across TDD RED/GREEN/REFACTOR phases
     - Example: "{PLAN}/1-plan.md"
 
-[Constraints]
+## [Constraints]
   1. Must strictly extract tasks from provided documents; do not fabricate requirements
   2. Must map each plan item to requirement ID and architecture section
   3. Must use Markdown format (ATX headings and numbered lists)
@@ -21,7 +21,7 @@
   7. Must break down feature-level tasks (from epic.md) into atomic, executable steps within each TDD phase
   8. Each atomic step in GREEN phase should be minimal and directly traceable to a specific acceptance criterion in RED phase
 
-[Tools]
+## [Tools]
   1. **todo_write**
     - [Step 1 (Setup Phase): Create todo list; Steps 2-4: Track task progress]
   2. **sequentialthinking (MCP)**
@@ -29,7 +29,7 @@
   3. **claude-context (MCP)**
     - [Step 1: Search codebase for relevant implementations if needed]
 
-[Steps]
+## [Steps]
   1. Setup Phase
     - Read all workflow steps and requirement documents
     - Understand the scope and complexity of the target feature-level task (identify number of requirements, architecture components, and cross-system dependencies)
@@ -59,7 +59,7 @@
     - Verify completeness and executability of the plan
     - Generate Markdown plan to "{PLAN}/{task_id}-plan.md"
 
-[DoD]
+## [DoD]
   - [ ] All requirement, architecture, and task documents have been read
   - [ ] Plan document includes TDD three-phase structure (RED/GREEN/REFACTOR sections)
   - [ ] RED section: Each requirement has corresponding acceptance criteria and test conditions

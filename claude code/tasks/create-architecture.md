@@ -1,16 +1,16 @@
-[Input]
+## [Input]
   1. "{REQ}/*.md" --Authoritative project requirements
   2. "{SCRIPTS}/shard-architecture.py" --Architecture sharding script
   3. "{TMPL}/architecture-tmpl.yaml" --Standardized architecture template
 
-[Output]
+## [Output]
   1. Architecture document collection under "{ARCH}/" directory (*.md format)
   2. Minimum expected files example (more classification files can be produced based on project complexity):
     - "{ARCH}/overview.md"
     - "{ARCH}/components.md"
     - "{ARCH}/traceability_matrix.md"
 
-[Constraints]
+## [Constraints]
   1. Must verify that "{REQ}/*.md" exists and is complete before architecture design; if requirements are incomplete or contain conflicts, record the issues and confirm with requirement authors, do not make assumptions
   2. Must create explicit requirement-to-architecture mapping relationships covering functional and non-functional requirements (mapping means requirement ID explicitly links to specific component names or design decision numbers)
   3. Must verify that each requirement has corresponding architecture components or design decisions
@@ -18,7 +18,7 @@
   5. After drafting is complete, must execute 'uv run "{SCRIPTS}/shard-architecture.py"' and verify output appears under "{ARCH}/"
   6. Architecture design required external API call must use context7 (MCP) to search for library documentation and API references
 
-[Tools]
+## [Tools]
   1. **todo_write**
     - [Step 1: Track and update execution tasks; Steps 2-4: Track writing progress and results]
   2. **sequentialthinking (MCP)**
@@ -26,7 +26,7 @@
   3. **context7 (MCP)**
     - [Step 2: Obtain external package and architecture pattern references]
 
-[Steps]
+## [Steps]
   1. Requirement Analysis Phase
     - Verify the completeness and consistency of all requirements under "{REQ}/*.md"
     - Extract functional/non-functional requirements and convert non-functional requirements into architecture constraints
@@ -61,12 +61,12 @@
     - Fix typographical errors and standardize terminology
     - Confirm architecture decisions are justified by requirements
 
-[Error-Handling]
+## [Error-Handling]
   1. "shard-architecture.py" execution failure: Check if "architecture.md" format complies with template specifications, fix and re-execute
   2. Unresolvable requirement conflicts: Record conflicts and confirm with requirement authors, do not make assumptions
   3. Architecture design infeasibility: Record technical limitations and propose alternative solutions
 
-[DoD]
+## [DoD]
   - [ ] Verified that "{REQ}/*.md" exists and is complete
   - [ ] Created requirement-to-architecture mapping matrix (requirement ID → component/decision), complete and accurate (100% coverage, no omissions or incorrect mappings)
   - [ ] All functional requirements have been mapped to specific architecture components

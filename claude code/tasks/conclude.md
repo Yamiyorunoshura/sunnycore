@@ -1,12 +1,12 @@
-[Input]
+## [Input]
   1. "{root}/docs/*.md" --All files in docs/ directory recursively (required)
   2. "{LOCK}" --Version information (required)
   3. "{TMPL}/completion-report-tmpl.yaml" --Completion report template (required)
 
-[Output]
+## [Output]
   1. Completion report: "{root}/docs/completion-report.md" (Markdown format)
 
-[Constraints]
+## [Constraints]
   1. Must ensure completion report complies with template requirements
   2. Completion report must include the following core content:
     (1) All key decisions and their rationale
@@ -19,7 +19,7 @@
   5. Version name must be parsed from sunnycore.lock file (format: "version = x.x.x")
   6. When archiving files, must preserve docs/architecture/, docs/knowledge/, and docs/completion-report.md in their original locations
 
-[Tools]
+## [Tools]
   1. **todo_write**: Create and manage task list
     - [Step 1: Create todo list; Steps 2-7: Track task progress]
   2. **sequentialthinking (MCP)**: Perform structured reasoning and verification
@@ -29,7 +29,7 @@
     - Prerequisite: Codebase has been indexed through index_codebase
     - Failure handling: If not indexed or search fails, switch to grep tool for keyword search, or annotate "Unable to locate code evidence" and continue execution
 
-[Steps]
+## [Steps]
   1. Input Validation Phase
     - Verify existence of "{LOCK}" and read version number (format: "version = x.x.x")
     - Parse version name from lock file (e.g., "1.12.8")
@@ -75,7 +75,7 @@
     - Use search_replace tool to update references in each file
     - Verify all updated references are correct by checking if referenced files exist in archive location
 
-[DoD]
+## [DoD]
   - [ ] *.lock file has been read and version number has been parsed successfully
   - [ ] Workflow type (Traditional/PRD) has been determined
   - [ ] All files in docs/ directory have been scanned recursively

@@ -1,13 +1,13 @@
-[Input]
+## [Input]
   1. (Conditional) "{PRD}" --Product Requirements Document (if exists, used as primary requirement source)
   2. (Conditional) "{REQ}/*.md" --Requirement documents (required if "PRD.md" does not exist)
   3. (Conditional) "{ARCH}/*.md" --Architecture documents (required if "PRD.md" does not exist)
   4. "{TMPL}/cutover-report-tmpl.yaml" --Cutover report template (required)
 
-[Output]
+## [Output]
   1. "{CUTOVER}" --Cutover report (Markdown format)
 
-[Constraints]
+## [Constraints]
   1. Must follow cutover report template structure
   2. Must test project functionality from end-user perspective, not technical testing
   3. If required configuration is missing or unclear, must document specific needs
@@ -15,13 +15,13 @@
   5. Must verify all critical business requirements stated in requirement documents
   6. If any required input files are missing, must generate a missing file list and halt execution
 
-[Tools]
+## [Tools]
   1. **todo_write**: Create and manage task list
     - [Step 1: Create todo list; Steps 2-6: Track task progress]
   2. **sequentialthinking (MCP)**: Perform structured reasoning and verification
     - [Step 2: Reason about configuration needs; Step 4: Analyze acceptance test results]
 
-[Steps]
+## [Steps]
   1. Preparation and Validation Phase
     - Verify existence of all required input files
     - Check if "{PRD}" exists
@@ -75,7 +75,7 @@
     - List all issues found with details and provide recommendations for fixes or improvements
     - Save report to "{CUTOVER}"
 
-[DoD]
+## [DoD]
   - [ ] All required input files have been read
   - [ ] Project type and configuration needs have been identified
   - [ ] Environment setup has been attempted and documented
