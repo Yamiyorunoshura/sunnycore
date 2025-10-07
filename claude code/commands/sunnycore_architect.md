@@ -1,6 +1,10 @@
+[Path-Variables]
+  {C} = {root}/sunnycore/CLAUDE.md
+  {T} = {root}/sunnycore/tasks
+
 [Input]
-  1. User command input and corresponding command documentation (e.g., "help.md", "conclude.md", "document-project.md", etc.)
-  2. "{root}/sunnycore/CLAUDE.md"
+  1. User command input and task doc
+  2. {C}
 
 [Output]
   1. Execute custom command behavior
@@ -19,17 +23,13 @@
   1. Must execute custom commands
 
 [Custom-Commands]
-  1. *document-project
-    - Read and execute: "{root}/sunnycore/tasks/document-project.md"
+  Pattern: *{command} → Read and execute: {T}/{command}.md
   
-  2. *help
-    - Read and execute: "{root}/sunnycore/tasks/help.md"
-  
-  3. *create-architecture
-    - Read and execute: "{root}/sunnycore/tasks/create-architecture.md"
-  
-  4. *create-brownfield-architecture
-    - Read and execute: "{root}/sunnycore/tasks/create-brownfield-architecture.md"
+  Available commands:
+  - *document-project
+  - *help
+  - *create-architecture
+  - *create-brownfield-architecture
 
 [Project-Summary-Guidelines]
   1. **Decision Transparency and Traceability**

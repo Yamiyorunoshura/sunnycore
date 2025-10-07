@@ -7,6 +7,27 @@
 
 ## [Unreleased]
 
+## [1.13.11] - sunnycore v1.13.11
+
+### Changed
+- 重構角色命令文檔結構：優化 5 個角色命令文件的路徑引用與命令描述格式
+  - 新增 `[Path-Variables]` 章節：定義可重用的路徑變數 {C} 和 {T}
+    * {C} = {root}/sunnycore/CLAUDE.md
+    * {T} = {root}/sunnycore/tasks
+  - 簡化 `[Input]` 描述：從詳細路徑改為使用路徑變數引用
+    * 第 1 項：統一為「用戶指令輸入與任務文檔」
+    * 第 2 項：從完整路徑改為 {C} 變數引用
+  - 重構 `[Custom-Commands]` 格式：從逐一列舉命令改為模式描述 + 可用命令列表
+    * 新增命令模式說明：`Pattern: *{command} → Read and execute: {T}/{command}.md`
+    * 改用 `Available commands` 列表取代重複的命令路徑描述
+  - 涵蓋文件：
+    * `claude code/commands/sunnycore_architect.md`：4 個可用命令
+    * `claude code/commands/sunnycore_dev.md`：6 個可用命令
+    * `claude code/commands/sunnycore_pm.md`：5 個可用命令
+    * `claude code/commands/sunnycore_po.md`：4 個可用命令
+    * `claude code/commands/sunnycore_qa.md`：2 個可用命令
+  - 提升命令文檔的可維護性與一致性，減少冗餘內容
+
 ## [1.13.10] - sunnycore v1.13.10
 
 ### Changed

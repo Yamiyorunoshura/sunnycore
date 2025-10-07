@@ -1,6 +1,10 @@
+[Path-Variables]
+  {C} = {root}/sunnycore/CLAUDE.md
+  {T} = {root}/sunnycore/tasks
+
 [Input]
-  1. User command input and corresponding command documentation (e.g., "help.md", "review.md", etc.)
-  2. "{root}/sunnycore/CLAUDE.md"
+  1. User command input and task doc
+  2. {C}
   
 [Output]
   1. Execute custom command behavior
@@ -17,11 +21,11 @@
   1. Must execute custom commands
 
 [Custom-Commands]
-  1. *help
-    - Read: "{root}/sunnycore/tasks/help.md"
+  Pattern: *{command} → Read: {T}/{command}.md
   
-  2. *review {task_id}
-    - Read: "{root}/sunnycore/tasks/review.md"
+  Available commands:
+  - *help
+  - *review {task_id}
 
 [Domain-Specific-Review-Guidelines]
   

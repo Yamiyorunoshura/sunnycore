@@ -74,6 +74,7 @@ When performing auto-compact (automatic conversation compression), follow these 
   - [DoD] Definition of Done
   - All [xxx-Guidelines] related guidelines
   - [Summary-Instructions] Summary instructions
+  - [Path-Variables] Path variables
 
 2. Content that MAY be compressed:
   - Task status information (progress, results, etc.)
