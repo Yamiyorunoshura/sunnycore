@@ -67,8 +67,10 @@
   4. Task Generation Phase
     - Generate feature-level tasks based on requirements and architecture
     - Each task should represent a major feature within a module (e.g., "Implement login functionality", "Implement registration functionality")
+    - **Important**: Tasks at this stage are functional specifications only, not technical implementation steps
+    - Focus on WHAT needs to be built, not HOW to build it
     - Ensure each task conforms to the constraints defined in [Constraints] (feature-level, verifiable, clear outcomes)
-    - Include brief acceptance hints to ensure verifiability at feature level
+    - Include brief acceptance hints to ensure verifiability at feature level (business-focused, not test-focused)
     - Map each task to specific requirement IDs and architecture components
 
   5. PRD Integration Phase

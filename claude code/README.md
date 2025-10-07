@@ -114,7 +114,7 @@ flowchart TD
 | 步驟 | 命令 | 說明 |
 |------|------|------|
 | 4 | `/sunnycore_dev *init` | 初始化開發環境與專案文檔 |
-| 5 | `/sunnycore_pm *plan-tasks {task_id}` | 創建特定 task 的計劃文檔 |
+| 5 | `/sunnycore_dev *plan-tasks {task_id}` | 創建特定 task 的計劃文檔 |
 | 6 | `/sunnycore_dev *develop-tasks {task_id}` | 創建特定 task 的開發文檔 |
 | 7 | `/sunnycore_qa *review {task_id}` | 審查特定 task 的文檔 |
 
@@ -193,7 +193,7 @@ flowchart TD
     
     subgraph Phase2 ["💻 階段二：開發迭代"]
         B0["4️⃣ /sunnycore_dev<br/>*init<br/>⚙️ 初始化專案"]
-        B1["5️⃣ /sunnycore_pm<br/>*plan-tasks<br/>🗓️ 規劃任務"]
+        B1["5️⃣ /sunnycore_dev<br/>*plan-tasks<br/>🗓️ 規劃任務"]
         B2["6️⃣ /sunnycore_dev<br/>*develop-tasks<br/>⚙️ 開發實作"]
         B3["7️⃣ /sunnycore_qa<br/>*review<br/>🔍 文件審查"]
         B0 --> B1 --> B2 --> B3
@@ -261,7 +261,7 @@ flowchart TD
 | 步驟 | 命令 | 說明 |
 |------|------|------|
 | 5 | `/sunnycore_dev *init` | 初始化開發環境與專案文檔 |
-| 6 | `/sunnycore_pm *plan-tasks {task_id}` | 創建特定 task 的計劃文檔 |
+| 6 | `/sunnycore_dev *plan-tasks {task_id}` | 創建特定 task 的計劃文檔 |
 | 7 | `/sunnycore_dev *develop-tasks {task_id}` | 創建特定 task 的開發文檔 |
 | 8 | `/sunnycore_qa *review {task_id}` | 審查特定 task 的文檔 |
 
@@ -300,7 +300,7 @@ flowchart TD
     
     subgraph Phase2 ["💻 階段二：開發迭代"]
         B0["5️⃣ /sunnycore_dev<br/>*init<br/>⚙️ 初始化專案"]
-        B1["6️⃣ /sunnycore_pm<br/>*plan-tasks<br/>🗓️ 規劃任務"]
+        B1["6️⃣ /sunnycore_dev<br/>*plan-tasks<br/>🗓️ 規劃任務"]
         B2["7️⃣ /sunnycore_dev<br/>*develop-tasks<br/>⚙️ 開發實作"]
         B3["8️⃣ /sunnycore_qa<br/>*review<br/>🔍 文件審查"]
         B0 --> B1 --> B2 --> B3
@@ -390,8 +390,8 @@ flowchart TD
 | 角色 | 職責 | 關鍵命令 |
 |------|------|----------|
 | **Architect** | 技術架構設計、知識管理、技術決策支持 | *create-architecture, *create-brownfield-architecture, *conclude, *curate-knowledge, *document-project |
-| **Developer** | 開發實作、技術實現、問題修復 | *init, *develop-tasks, *develop-prd, *fix-acceptance-issues |
-| **PM** | 產品需求管理、任務規劃、PRD 創建 | *create-requirements, *create-prd, *create-epic, *plan-tasks |
+| **Developer** | 開發實作、任務規劃、技術實現、問題修復 | *init, *plan-tasks, *develop-tasks, *develop-prd, *fix-acceptance-issues |
+| **PM** | 產品需求管理、PRD 創建 | *create-requirements, *create-prd, *create-epic |
 | **PO** | 業務驗收、需求確認、項目交付 | *cutover |
 | **QA** | 代碼審查、質量保證 | *review |
 
