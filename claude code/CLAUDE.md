@@ -68,11 +68,60 @@ This section describes tool usage scenarios.
   - Avoid including sensitive or proprietary information
 
 ## [Template-Usage-Guidelines]
-1. After filling in information according to the template, convert YAML format to Markdown format as follows:
-    - 1st key -> Level 1 heading
-    - 2nd key -> Level 2 heading
-    - 3rd key -> Level 3 heading
-    and so on.
+
+### Template Philosophy
+
+All templates are minimal structural frameworks using placeholders (`""`, `[]`, `{}`). When using templates:
+1. Read the template to understand the expected structure
+2. Fill in only the fields relevant to your project
+3. Add additional fields as needed for your specific context
+4. After filling, convert YAML to Markdown using the rules below
+
+### YAML to Markdown Conversion Rules
+
+1. **YAML Front Matter**
+   - Preserve the `---` delimited front matter block at the start of the file
+   - Front matter contains metadata (not displayed in rendered Markdown body)
+   - Common metadata: project name, version, date, status, etc.
+
+2. **Heading Level Conversion**
+   - 1st level key → h1 (`#`)
+   - 2nd level key → h2 (`##`)
+   - 3rd level key → h3 (`###`)
+   - 4th level and deeper → h4 (`####`)
+   - Avoid using h5 and h6 to maintain clear hierarchy
+
+3. **Value Type Conversion**
+   - **Simple string values**: Render as paragraph text below the heading
+   - **Nested object values**: Each key-value pair as `**Key**: Value` format
+   - **Multi-line text** (using `|` or `>`): Convert to paragraph text, preserving line breaks
+   - **Numbers and booleans**: Display as plain text
+
+4. **List Conversion**
+   - **Simple lists**: Convert to Markdown unordered list using `-`
+   - **Empty lists**: Omit the section (assume no content to display)
+
+5. **Object Array Conversion**
+   - Each object in the array becomes a subsection
+   - First property (typically `id`, `name`, or `title`) becomes h4 heading
+   - Remaining properties formatted as `**Property**: Value` below the heading
+   - If objects have no natural heading property, use numeric subsections
+
+6. **Empty Value Handling** (Critical for minimal templates)
+   - **Empty strings** (`""`): Omit the section entirely
+   - **Empty lists** (`[]`): Omit the section entirely
+   - **Empty objects** (`{}`): Omit the section entirely
+   - **Only display sections with actual content**
+
+7. **Special Markers**
+   - **YAML comments** (`# comment`): Remove during conversion (used only as template guidance)
+   - **Inline code/references**: Preserve in backticks when appropriate
+
+8. **Formatting Best Practices**
+   - Use bold (`**text**`) for property labels and important terms
+   - Use code formatting (`` `text` ``) for technical terms, file paths, IDs, and identifiers
+   - Add blank lines between sections for readability
+   - Preserve the hierarchical structure from YAML in the Markdown output
 
 ## [Summary-Instructions]
 When performing auto-compact (automatic conversation compression), follow these rules:

@@ -1,24 +1,15 @@
 ---
-# Universal Architecture Template
-# 通用架構模板 - 實時反映項目真實架構狀態
+# Architecture Document Template
+# 架構文檔模板
 
-project-metadata:
-  - project-name: ""
-  - version: ""
-  - last-updated: ""
-  - status: "Draft|In Progress|Active"
+title: ""
+version: ""
+last_updated: ""
+status: ""
+---
 
-# ==========================================
-# Executive Summary / 執行摘要
-# ==========================================
-executive_summary: |
-  # High-level architecture overview
-  # Key design decisions and principles
-  # Current implementation status
+executive-summary: ""
 
-# ==========================================
-# Technical Stack / 技術堆疊
-# ==========================================
 technical-stack:
   frontend: ""
   backend: ""
@@ -27,119 +18,40 @@ technical-stack:
   external-services: []
   development-tools: []
 
-# ==========================================
-# System Architecture / 系統架構
-# ==========================================
 system-architecture:
-  components:
-    - name: ""
-      responsibility: ""
-      technology: ""
-      interfaces: []
-      dependencies: []
-  
-  data-flow: |
-    # Describe how data flows through the system
+  components: []
+  data-flow: ""
+  integration-points: ""
 
-  integration-points: |
-    # Key integration points between components
-
-# ==========================================
-# API Documentation / API 文檔
-# ==========================================
 api-documentation:
-  internal-apis:
-    - name: ""
-      endpoint: ""
-      method: ""
-      description: ""
-      parameters: []
-      response: ""
-      authentication: ""
-  
-  external-apis:
-    - service: ""
-      library: ""
-      version: ""
-      documentation-url: ""
-      usage-context: ""
-  
-  api-standards:
-    versioning: ""
-    authentication: ""
-    error-handling: ""
-    rate-limiting: ""
+  internal-apis: []
+  external-apis: []
+  api-standards: {}
 
-# ==========================================
-# Requirements Traceability / 需求追溯
-# ==========================================
-requirements-traceability:
-  - req_id: ""  # F-001 or NFR-P-001
-    component: ""
-    implementation: ""
-    status: "planned|implemented|deferred"
+requirements-traceability: []
 
-# ==========================================
-# Architecture Decisions / 架構決策
-# ==========================================
-architecture-decisions:
-  - id: "ADR-001"
-    title: ""
-    decision: ""
-    rationale: ""
-    trade-offs: ""
-    status: "active|superseded"
+architecture-decisions: []
 
-# ==========================================
-# Cross-Cutting Concerns / 橫切關注點
-# ==========================================
 cross-cutting-concerns:
-  security:
-    authentication: ""
-    authorization: ""
-    data-protection: ""
-  
-  performance:
-    caching: ""
-    optimization: ""
-  
-  reliability:
-    error-handling: ""
-    monitoring: ""
-    logging: ""
-  
-  observability:
-    metrics: ""
-    tracing: ""
-    alerting: ""
+  security: {}
+  performance: {}
+  reliability: {}
+  observability: {}
 
-# ==========================================
-# Deployment Architecture / 部署架構
-# ==========================================
 deployment:
-  environments: []  # dev, staging, production
+  environments: []
   infrastructure: ""
   ci-cd: ""
   scaling-strategy: ""
 
-# ==========================================
-# Architecture Quality / 架構品質
-# ==========================================
 quality-attributes:
   strengths: []
   limitations: []
   technical-debt: []
 
-# ==========================================
-# Architecture Diagram / 架構圖
-# ==========================================
-architecture-diagram: |
-  # Include Mermaid diagram or reference to diagram file
+architecture-diagram: ""
 
-# ==========================================
-# Source References / 來源參考
-# ==========================================
 source-references:
-  requirements: []   # Requirement documents
-  code: []          # Key implementation files
-  documentation: [] # Related documentation
+  requirements: []
+  code: []
+  documentation: []
