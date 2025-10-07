@@ -70,7 +70,7 @@
 
   7. Update Document References Phase
     - Scan all files in "{ARCH}/" and "{KNOWLEDGE}/" directories
-    - Identify all document references that point to archived files (formats to detect: "docs/xxx/yyy.md", "../xxx/yyy.md", relative paths)
+    - Identify all document (including completion-report.md) references that point to archived files (must not edit the document reference pointing the previous archived files(e.g. "archive/1.14.4/xxx/yyy.md"))
     - For each reference to an archived file, update the path to point to "archive/{version_name}/xxx/yyy.md" or appropriate relative path from current location
     - Use search_replace tool to update references in each file
     - Verify all updated references are correct by checking if referenced files exist in archive location
