@@ -41,24 +41,32 @@
 
 [Development-Guidelines]
   1. **TDD Practice Guidelines**
-    Every development task must strictly follow the test-driven development cycle:
+    Test-Driven Development (TDD) is a software development methodology where tests are written before implementation code. Every development task must strictly follow the test-driven development cycle:
 
     (1) RED Phase: Test First
-    - Write failing test cases based on acceptance criteria
-    - Ensure tests fail as expected, verifying test logic correctness
+    - Write failing test cases based on acceptance criteria before any implementation
+    - Ensure tests fail as expected (showing "red" status), verifying test logic correctness
     - Cover normal scenarios, edge cases, and error handling
+    - Tests should define the expected behavior and API contracts
+    - The goal is to see the test fail for the right reason (feature not yet implemented)
 
     (2) GREEN Phase: Minimal Implementation
-    - Implement minimal code to make all tests pass
+    - Implement the simplest code possible to make all tests pass (showing "green" status)
     - Follow architecture mapping in implementation plan
+    - Focus on making tests pass, not on perfect code quality yet
     - Ensure exit code is 0, all tests transition from RED to GREEN
+    - Avoid over-engineering or implementing features not covered by current tests
 
-    (3) REFACTOR Phase: Quality Enhancement
-    - Refactor while keeping tests green
+    (3) REFACTOR Phase: Quality Enhancement and Integration
+    - Refactor code while keeping all tests green (passing)
     - Apply design patterns and best practices to improve code quality
-    - If refactoring causes test failures, immediately rollback and reassess strategy
+    - Eliminate code duplication and improve readability
+    - **Important**: Integrate with real external APIs, databases, or services if required by the feature
+    - Replace any mock implementations with actual integrations where needed
+    - Ensure all refactoring maintains test success; if tests fail, immediately rollback and reassess strategy
+    - Performance optimization and architectural improvements happen here
 
-    **TDD Iteration Cycle**: Repeat RED-GREEN-REFACTOR cycle until functionality is fully implemented and meets all acceptance criteria
+    **TDD Iteration Cycle**: Repeat RED-GREEN-REFACTOR cycle until functionality is fully implemented and meets all acceptance criteria. Each iteration should be small and focused, building up the complete feature incrementally.
 
   2. **Code Quality Standards**
     All code must meet the following quality requirements:

@@ -11,7 +11,7 @@
 
 [Constraints]
   1. Must comply with acceptance criteria and architecture mapping defined in the implementation plan
-  2. Must follow TDD cycle: implement tests first (RED), minimal code (GREEN), then refactor (REFACTOR)
+  2. **Must use TDD methodology for development**: Follow the TDD practice guidelines detailed in [Development-Guidelines] section
   3. Development notes must preserve the indentation and numbering style used in the template
   4. Allowed to modify modules specified in the implementation plan and their test files, as well as necessary configuration files; if modification of files outside the plan is needed (referring to files not explicitly listed for modification in the implementation plan, including but not limited to: shared utility classes, configuration files, dependency injection settings, etc.), must record in development notes and explain the reason
   5. Development notes must include: implementation summary, technical decisions, risk considerations, test results, and other complete sections (refer to template)
@@ -32,50 +32,19 @@
 
   2. RED Phase: Implement Tests
     - Read the RED phase in the implementation plan and obtain the test cases to be implemented
-    - Implement all test cases and check if all are red as expected
-    - Execute test suite (such as pytest/npm test) to confirm all newly added test cases have status FAILED and error messages match expectations
-    - if all new tests fail and error messages match expectations then proceed to 2.1, else proceed to 2.2
-      
-      2.1. Tests Fail Correctly
-        - Enter GREEN phase
-      
-      2.2. Tests Partially Pass or No Errors
-        - Check if test implementation is correct
-        - Fix test cases
-        - Re-execute validation
-        - Repeat this process until all tests fail correctly
+    - Implement all test cases following the implementation plan
+    - Execute test suite to confirm all newly added test cases have status FAILED with expected error messages
 
   3. GREEN Phase: Minimal Implementation
-    - Implement minimal code to make tests pass (GREEN phase)
+    - Implement minimal code to make all tests pass
     - Follow architecture mapping specified in the implementation plan
-    - Execute all tests
-    - if all tests pass and acceptance criteria are met then proceed to 3.1, else proceed to 3.2
-      
-      3.1. All Tests Pass
-        - Enter REFACTOR phase
-      
-      3.2. Some Tests Fail
-        - Analyze failure reasons
-        - Fix code
-        - Re-execute tests
-        - Repeat this process until tests pass
+    - Execute all tests to verify implementation
 
   4. REFACTOR Phase: Refactoring and Optimization
-    - Perform refactoring while keeping all tests green (REFACTOR phase)
-    - Apply planned optimizations and cross-cutting concerns without reducing coverage
+    - Perform refactoring while keeping all tests green
+    - Apply planned optimizations and cross-cutting concerns
     - Improve code quality and maintainability to meet quality goals
-    - Execute tests after each refactoring
-    - if all tests still pass then proceed to 4.1, else proceed to 4.2
-      
-      4.1. Tests Pass After Refactoring
-        - Continue with next refactoring
-        - Or enter validation and documentation phase
-      
-      4.2. Tests Fail After Refactoring
-        - Immediately rollback refactoring (git reset or manual undo)
-        - Re-evaluate refactoring strategy
-        - Fix refactoring approach
-        - Repeat this process until refactoring is complete and tests pass
+    - Execute tests after each refactoring to ensure no regressions
 
   5. Validation and Documentation Phase
     - Validate implementation against all acceptance criteria and planned test conditions

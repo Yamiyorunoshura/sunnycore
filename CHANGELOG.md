@@ -7,6 +7,41 @@
 
 ## [Unreleased]
 
+## [1.13.9] - sunnycore v1.13.9
+
+### Changed
+- 重構角色職責分配：將任務規劃職責從 PM 轉移至 Developer
+  - 更新 `claude code/README.md`：修正命令參考與流程圖
+    * 步驟 5/6：`/sunnycore_pm *plan-tasks` → `/sunnycore_dev *plan-tasks`
+    * 角色職責表：Developer 新增「任務規劃」職責、PM 移除「任務規劃」職責
+  - 更新 `claude code/index.json`：調整任務與代理映射關係
+    * taskToAgents：plan-tasks 從 `["pm", "dev"]` 改為 `["dev"]`
+    * agentToTasks：pm 移除 plan-tasks 任務
+  - 優化角色定位：Developer 負責技術實作與任務拆分、PM 專注於產品需求管理
+- 擴展 TDD 開發指引：在 `sunnycore_dev.md` 中新增詳細的 TDD 實踐準則
+  - 新增 TDD 定義說明：「測試驅動開發是先寫測試再寫實作代碼的軟件開發方法論」
+  - 擴展 RED 階段說明：強調測試應定義預期行為和 API 契約、目標是看到測試因正確原因失敗
+  - 擴展 GREEN 階段說明：強調實作最簡單代碼使測試通過、避免過度工程化
+  - 擴展 REFACTOR 階段說明：
+    * 新增「整合真實外部 API、資料庫或服務」要求
+    * 新增「替換 mock 實作為實際整合」指引
+    * 新增「效能優化與架構改進」說明
+  - 新增 TDD 迭代週期說明：「每次迭代應該小而專注，逐步構建完整功能」
+- 優化任務文檔清晰度：簡化 4 個任務文檔的 TDD 流程描述
+  - `create-prd.md`：新增任務粒度說明
+    * 強調任務為功能規格（WHAT），非技術實作步驟（HOW）
+    * 驗收提示應為業務導向，非測試導向
+  - `develop-prd.md`：簡化 TDD 開發階段流程
+    * 移除詳細的 2.1-2.4 子步驟（RED/Fix/GREEN/REFACTOR 路徑）
+    * 改為引用 Development-Guidelines 中的 TDD 實踐準則
+    * 新增準備階段的 TDD 實作策略規劃說明
+  - `develop-tasks.md`：簡化 RED、GREEN、REFACTOR 階段描述
+    * 移除詳細的條件分支子步驟（2.1/2.2、3.1/3.2、4.1/4.2）
+    * 保留核心流程說明與架構映射要求
+  - `plan-tasks.md`：優化約束與步驟說明
+    * 約束第 5 條：改為引用 Development-Guidelines 中的 TDD 方法論
+    * 簡化 RED、GREEN、REFACTOR 階段的規劃步驟描述
+
 ## [1.13.8] - sunnycore v1.13.8
 
 ### Changed

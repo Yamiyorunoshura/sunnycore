@@ -9,7 +9,7 @@
 
 [Constraints]
   1. Must complete all tasks defined in the PRD in a single execution
-  2. Must follow TDD cycle for each task: implement tests first (RED), minimal code (GREEN), then refactor (REFACTOR)
+  2. **Must use TDD methodology for development**: Follow the TDD practice guidelines detailed in [Development-Guidelines] section
   3. Development notes must preserve the indentation and numbering style used in the template
   4. Must comply with acceptance criteria and architecture mapping defined in the PRD
   5. If modification of files outside the PRD scope is needed, must record in development notes and explain the reason
@@ -26,39 +26,22 @@
   1. Preparation Phase
     - Read "{root}/docs/PRD.md" completely
     - Extract all tasks from the PRD tasks section
+    - **Note**: PRD tasks are feature-level functional specifications without implementation details
     - Understand requirements, architecture, and task dependencies
+    - For each task, plan the TDD implementation strategy:
+      * Identify test cases needed (unit tests, integration tests)
+      * Determine test structure and test data requirements
+      * Plan implementation approach following architecture mapping
     - Create todo list based on all tasks, respecting dependency order
     - Plan execution sequence considering task dependencies
 
   2. Iterative TDD Development Phase (For each task in dependency order)
     - Read task's acceptance criteria and requirements
-    - Follow TDD cycle through RED/GREEN/REFACTOR phases
-    - Mark task completed when all phases pass
+    - Develop each task following the TDD cycle: RED → GREEN → REFACTOR
+    - Follow architecture mapping specified in the PRD
+    - Execute tests to verify implementation
+    - Mark task completed when all tests pass and acceptance criteria are met
     - Repeat for all tasks until all PRD tasks are completed
-    - if all new tests fail correctly then proceed to 2.1, else proceed to 2.2
-      
-      2.1. RED Phase: Implement Tests
-        - Implement all test cases for the task
-        - Execute test suite to confirm all newly added test cases have status FAILED
-        - Verify error messages match expectations
-        - if all new tests fail correctly then proceed to 2.3, else proceed to 2.2
-      
-      2.2. Fix Tests Path
-        - Fix test implementation
-        - Re-execute test suite
-        - Return to 2.1 to verify tests fail correctly
-      
-      2.3. GREEN Phase: Minimal Implementation
-        - Implement minimal code to make tests pass
-        - Follow architecture mapping specified in the PRD
-        - Execute all tests
-        - if all tests pass then proceed to 2.4, else fix code and retry
-      
-      2.4. REFACTOR Phase: Refactoring and Optimization
-        - Perform refactoring while keeping all tests green
-        - Apply best practices and improve code quality
-        - Execute tests after each refactoring
-        - if tests fail after refactoring then rollback and re-evaluate, else mark task completed and proceed to next task
 
   3. Integration Testing Phase
     - Execute complete test suite for all implemented tasks

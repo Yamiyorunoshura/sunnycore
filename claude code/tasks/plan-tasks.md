@@ -16,7 +16,7 @@
   2. Must map each plan item to requirement ID and architecture section
   3. Must use Markdown format (ATX headings and numbered lists)
   4. Must produce exactly one file at the specified output path
-  5. The produced implementation plan must ensure logical coherence of TDD three phases: RED phase acceptance criteria must be traceable to requirements; GREEN phase implementation steps must correspond to RED acceptance criteria; REFACTOR phase optimizations must not break acceptance criteria
+  5. The produced implementation plan must ensure logical coherence of TDD three phases (refer to [Development-Guidelines] section for TDD methodology)
   6. If requirement-architecture conflicts, unclear requirements, or missing necessary files are found, must record issues and request user clarification, do not make assumptions or skip
   7. Must break down feature-level tasks (from epic.md) into atomic, executable steps within each TDD phase
   8. Each atomic step in GREEN phase should be minimal and directly traceable to a specific acceptance criterion in RED phase
@@ -38,23 +38,20 @@
     - Create todo list to track execution progress of Steps 2-5
 
   2. Planning RED Phase Content: Define Tests and Acceptance
-    - Write the "RED Phase" section for the plan: break down the feature-level task into specific acceptance criteria and test conditions
+    - Write the "RED Phase" section: break down the feature-level task into specific acceptance criteria and test conditions
     - Map requirements to testable outcomes and verification methods
     - Define measurable success metrics, failure conditions, and edge cases
-    - Each acceptance criterion should be atomic and directly verifiable
 
   3. Planning GREEN Phase Content: Minimal Implementation Steps
-    - Write the "GREEN Phase" section for the plan: break down the feature into atomic, minimal implementation steps that satisfy RED phase acceptance criteria
+    - Write the "GREEN Phase" section: break down the feature into atomic, minimal implementation steps
     - Map each acceptance criterion to specific architecture components, files, and concrete development tasks
-    - Each implementation step should be atomic, executable, and clearly point to at least one test condition
-    - Prioritize the simplest implementation approach
-    - Steps should be granular enough for straightforward TDD implementation (e.g., "Create User model", "Add login endpoint", "Implement password validation")
+    - Each implementation step should be atomic, executable, and traceable to test conditions
+    - Steps should be granular enough for straightforward implementation (e.g., "Create User model", "Add login endpoint", "Implement password validation")
 
   4. Planning REFACTOR Phase Content: Refactoring and Optimization Steps
-    - Write the "REFACTOR Phase" section for the plan: list refactoring and optimization work after GREEN phase completion
+    - Write the "REFACTOR Phase" section: list refactoring and optimization work after GREEN phase completion
     - Identify and integrate duplicate code, cross-cutting concerns (authentication, logging, error handling, etc.)
     - Plan performance optimizations, code quality improvements, and architecture enhancement steps
-    - Ensure refactoring steps do not break acceptance criteria defined in RED phase
 
   5. Finalization Phase
     - Integrate content from Steps 2-4 into a complete implementation plan document
