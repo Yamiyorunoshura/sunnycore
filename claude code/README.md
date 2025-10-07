@@ -1,5 +1,41 @@
 # 開發流程
 
+## 🤔 如何選擇開發流程？
+
+> **不確定用哪個流程？使用 `/sunnycore_pm *consult` 讓 AI 為您分析和建議！**
+
+### 📊 流程選擇指引
+
+| 需求特徵 | 建議流程 | 命令 |
+|---------|---------|------|
+| 🆕 新增系統組件或模塊 | 完整開發流程 | `*create-requirements` |
+| 🏗️ 改變核心架構模式 | 完整開發流程 | `*create-requirements` |
+| 🔧 新增技術棧或框架 | 完整開發流程 | `*create-requirements` |
+| 🔌 新增外部整合或服務 | 完整開發流程 | `*create-requirements` |
+| 📦 修改組件邊界或職責 | 完整開發流程 | `*create-requirements` |
+| 🛡️ 重大橫切關注點變更 | 完整開發流程 | `*create-requirements` |
+| ✏️ 現有組件內的修改 | PRD 流程 | `*create-prd` |
+| ✨ 使用現有架構的功能增強 | PRD 流程 | `*create-prd` |
+| 🐛 Bug 修復或技術改進 | PRD 流程 | `*create-prd` |
+| 🎨 UI/UX 變更（無後端架構變更） | PRD 流程 | `*create-prd` |
+| 🔍 小到中型範圍（1-5 個任務） | PRD 流程 | `*create-prd` |
+
+### 🎯 使用 *consult 指令
+
+**步驟：**
+1. 執行 `/sunnycore_pm *consult`
+2. 描述您的需求
+3. AI 會自動分析現有架構（如果是 Brownfield 專案）
+4. 獲得明確的流程建議和下一步指令
+
+**優勢：**
+- ✅ 自動檢測專案類型（Greenfield/Brownfield）
+- ✅ 智能分析需求範圍和影響
+- ✅ 提供精準的流程建議
+- ✅ 節省決策時間
+
+---
+
 ## 🛠️ 技術支援流程（新增）
 
 > 適用於問題解答、Bug 修復、程式碼優化等日常技術支援
