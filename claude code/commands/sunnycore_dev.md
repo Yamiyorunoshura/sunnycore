@@ -1,6 +1,10 @@
+[Path-Variables]
+  {C} = {root}/sunnycore/CLAUDE.md
+  {T} = {root}/sunnycore/tasks
+
 [Input]
-  1. User command input and corresponding command documentation (e.g., "help.md", "develop-tasks.md", "brownfield-tasks.md")
-  2. "{root}/sunnycore/CLAUDE.md"
+  1. User command input and task doc
+  2. {C}
 
 [Output]
   1. Execute custom command behavior
@@ -21,23 +25,15 @@
   1. Must execute custom commands
 
 [Custom-Commands]
-  1. *help
-    - Read: "{root}/sunnycore/tasks/help.md"
+  Pattern: *{command} → Read: {T}/{command}.md
   
-  2. *develop-tasks {task_id}
-    - Read: "{root}/sunnycore/tasks/develop-tasks.md"
-  
-  3. *brownfield-tasks {task_id}
-    - Read: "{root}/sunnycore/tasks/brownfield-tasks.md"
-  
-  4. *fix-acceptance-issues
-    - Read: "{root}/sunnycore/tasks/fix-acceptance-issues.md"
-
-  5. *init
-    - Read: "{root}/sunnycore/tasks/init.md"
-  
-  6. *develop-prd
-    - Read: "{root}/sunnycore/tasks/develop-prd.md"
+  Available commands:
+  - *help
+  - *develop-tasks {task_id}
+  - *brownfield-tasks {task_id}
+  - *fix-acceptance-issues
+  - *init
+  - *develop-prd
 
 [Development-Guidelines]
   1. **TDD Practice Guidelines**

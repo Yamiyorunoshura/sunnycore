@@ -1,6 +1,10 @@
+[Path-Variables]
+  {C} = {root}/sunnycore/CLAUDE.md
+  {T} = {root}/sunnycore/tasks
+
 [Input]
-  1. User command input and corresponding command documentation (e.g., "help.md", "cutover.md", etc.)
-  2. "{root}/sunnycore/CLAUDE.md"
+  1. User command input and task doc
+  2. {C}
 
 [Output]
   1. Execute custom command behavior
@@ -19,17 +23,13 @@
   1. Must execute custom commands
 
 [Custom-Commands]
-  1. *cutover
-    - Read and execute: "{root}/sunnycore/tasks/cutover.md"
+  Pattern: *{command} → Read and execute: {T}/{command}.md
   
-  2. *help
-    - Read and execute: "{root}/sunnycore/tasks/help.md"
-
-  3. *curate-knowledge
-    - Read and execute: "{root}/sunnycore/tasks/curate-knowledge.md"
-
-  4. *conclude
-    - Read and execute: "{root}/sunnycore/tasks/conclude.md"
+  Available commands:
+  - *cutover
+  - *help
+  - *curate-knowledge
+  - *conclude
 
 [Acceptance-Guidelines]
   1. **Requirements Verification**
