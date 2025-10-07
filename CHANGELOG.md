@@ -7,6 +7,41 @@
 
 ## [Unreleased]
 
+## [1.13.12] - sunnycore v1.13.12
+
+### Added
+- 新增任務完成守門機制：在 `CLAUDE.md` 中新增 `[Wrap-Up-Gatekeeper]` 約束與指引
+  - 新增約束第 10 條：禁止在 ToDo 未完成時輸出「完成」、「總結」等結束語
+  - 新增三種合法結束狀態：completed（全部完成）、blocked（外部依賴）、external-interrupt（平台限制）
+  - 新增完成前驗證機制：任何標記為 completed 的 ToDo 必須先執行對應驗證步驟並附上證據摘要
+  - 新增最終檢查機制：輸出總結前必須重新檢查 ToDo 狀態，若有未完成項目則立即返回執行
+  - 新增中斷處理流程：平台限制時生成 `docs/RESUME_PLAN.md` 並提供可立即執行的恢復指令
+  - 新增一致性檢查：禁止輸出與實際狀態不符的陳述（如「大部分測試完成」但實際未完成）
+- 新增 `[Wrap-Up-Gatekeeper_Guidelines]` 章節：定義 ToDo 狀態模型、任務循環、驗證證據、中斷處理、文檔產出規範
+
+### Changed
+- 重構路徑引用系統：在所有命令與任務文件中引入可重用路徑變數，提升可維護性
+  - 新增 `[Path-Variables]` 章節至 6 個命令文件（sunnycore_architect.md、sunnycore_assistant.md、sunnycore_dev.md、sunnycore_pm.md、sunnycore_po.md、sunnycore_qa.md）
+    * 定義通用路徑變數：{C}（CLAUDE.md）、{T}（tasks/）
+    * 定義文檔路徑變數：{REQ}（requirements/）、{ARCH}（architecture/）、{PRD}（PRD.md）、{EPIC}（epic.md）
+    * 定義模板與腳本變數：{TMPL}（templates/）、{SCRIPTS}（scripts/）
+    * 定義執行產出變數：{PLAN}（implementation-plan/）、{DEVNOTES}（dev-notes/）、{REVIEW}（review-results/）
+    * 定義知識管理變數：{KNOWLEDGE}（knowledge/）、{PROGRESS}（progress.md）
+    * 定義交付產出變數：{CUTOVER}（cutover.md）、{ARCHIVE}（archive/）、{LOCK}（sunnycore.lock）
+  - 更新 25 個任務文件的路徑引用：將硬編碼路徑（如 `{root}/docs/requirements/*.md`）改為路徑變數（如 `{REQ}/*.md`）
+    * 涵蓋任務：brownfield-tasks、conclude、create-architecture、create-brownfield-architecture、create-epic、create-prd、create-requirements、curate-knowledge、cutover、develop-prd、develop-tasks、document-project、fix-acceptance-issues、init、plan-tasks、review
+  - 優化 `conclude.md` 任務流程：明確區分 Traditional 與 PRD 工作流程的歸檔邏輯（兩者皆保留 architecture/、knowledge/、completion-report.md）
+- 優化 `CLAUDE.md` 文檔格式與語言風格：提升專業性與可讀性
+  - 統一標點符號使用：句號改為句點、冒號後空格統一、列表項結尾加句點
+  - 統一術語翻譯：「perform」→「conduct」、「Retrieve」→「retrieve the」、「Obtain」→「obtain」
+  - 統一章節標題格式：使用 em dash（—）取代連字符（-）
+  - 優化工具描述：改進 Tool-Guidelines 中各工具的功能說明語句
+- 優化 `README.md` 流程圖與步驟說明：新增 conclude 任務至驗收與總結階段
+  - 階段三流程更新：新增步驟 6（`/sunnycore_po *conclude`）- 總結文檔並歸檔
+  - Greenfield 流程：總步驟數從 5 步增加至 6 步
+  - 流程圖更新：cutover → document-project → conclude → Done
+  - 流程對比表更新：PRD 流程總步驟數從 5 步更新為 6 步
+
 ## [1.13.11] - sunnycore v1.13.11
 
 ### Changed

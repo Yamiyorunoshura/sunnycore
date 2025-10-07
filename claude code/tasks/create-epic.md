@@ -1,10 +1,10 @@
 [Input]
-  1. "{root}/docs/requirements/*.md" --Project functional and non-functional requirements
-  2. "{root}/docs/architecture/*.md" --Architecture design and technical specifications
-  3. "{root}/sunnycore/templates/tasks-tmpl.yaml" --Task template format
+  1. "{REQ}/*.md" --Project functional and non-functional requirements
+  2. "{ARCH}/*.md" --Architecture design and technical specifications
+  3. "{TMPL}/tasks-tmpl.yaml" --Task template format
 
 [Output]
-  1. "{root}/docs/epic.md" --Task list (Markdown format)
+  1. "{EPIC}" --Task list (Markdown format)
 
 [Constraints]
   1. Must create feature-level tasks representing major features within modules (e.g., "Implement login functionality", "Implement registration functionality")
@@ -47,7 +47,7 @@
     - if user approves draft then proceed to 4.1, else proceed to 4.2
       
       4.1. Write Final Document
-        - Write approved task list to "{root}/docs/epic.md" (Markdown format)
+        - Write approved task list to "{EPIC}" (Markdown format)
       
       4.2. Revise Based on Feedback
         - Collect user feedback on what needs to be changed (e.g., task granularity, grouping, acceptance criteria)
@@ -58,7 +58,7 @@
   - [ ] All requirement and architecture documents have been read
   - [ ] Research notes are complete, including mapping of functional requirements/non-functional requirements to tasks
   - [ ] User approval has been obtained for task list draft
-  - [ ] File "{root}/docs/epic.md" exists and is valid Markdown
+  - [ ] File "{EPIC}" exists and is valid Markdown
   - [ ] All tasks comply with template fields
   - [ ] Each task is feature-level, outcome-oriented, and verifiable
   - [ ] No file names or key names use spaces; kebab-case is enforced

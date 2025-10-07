@@ -1,18 +1,18 @@
 [Input]
-  1. "{root}/docs/requirements" --Standardized requirement source
-  2. "{root}/docs/architecture/*.md" --Existing architecture document collection
-  3. "{root}/sunnycore/scripts/shard-architecture.py" --Architecture sharding script
-  4. "{root}/sunnycore/templates/architecture-tmpl.yaml" --Architecture template
-  5. "{root}/docs/knowledge/*.md" --Project knowledge
+  1. "{REQ}" --Standardized requirement source
+  2. "{ARCH}/*.md" --Existing architecture document collection
+  3. "{SCRIPTS}/shard-architecture.py" --Architecture sharding script
+  4. "{TMPL}/architecture-tmpl.yaml" --Architecture template
+  5. "{KNOWLEDGE}/*.md" --Project knowledge
 
 [Output]
-  1. "{root}/docs/architecture/*.md" --Updated architecture document collection (*.md format)
+  1. "{ARCH}/*.md" --Updated architecture document collection (*.md format)
 
 [Constraints]
-  1. Must thoroughly review "{root}/docs/requirements" and "{root}/docs/architecture/*.md" before proposing design (evidence: reference reviewed content in architecture draft using `Reference: {file path}#{section heading}` format)
+  1. Must thoroughly review "{REQ}" and "{ARCH}/*.md" before proposing design (evidence: reference reviewed content in architecture draft using `Reference: {file path}#{section heading}` format)
   2. Must preserve existing contracts; any proposed changes must include explicit "Impact Analysis" subsection
-  3. Must fully comply with "{root}/sunnycore/templates/architecture-tmpl.yaml" structure and section order
-  4. Must draft to "{root}/docs/architecture.md", then execute: uv run "{root}/sunnycore/scripts/shard-architecture.py" to perform sharding
+  3. Must fully comply with "{TMPL}/architecture-tmpl.yaml" structure and section order
+  4. Must draft to "{root}/docs/architecture.md", then execute: uv run "{SCRIPTS}/shard-architecture.py" to perform sharding
   5. Should use clear, concise English with 2-space indentation throughout
   6. Architecture design required external API call must use context7 (MCP) to search for library documentation and API references
 
@@ -28,7 +28,7 @@
 
 [Steps]
   1. Evaluate Existing Architecture Phase
-    - Review current architecture under "{root}/docs/architecture/*.md"
+    - Review current architecture under "{ARCH}/*.md"
     - Identify extension points, constraints, and shared services
     - Map affected domains, bounded contexts, and dependencies
     - Create todo list to track subsequent design and writing tasks
@@ -47,8 +47,8 @@
       
       3.1. Write Final Documents
         - Write approved content to "{root}/docs/architecture.md"
-        - Execute sharding script: uv run "{root}/sunnycore/scripts/shard-architecture.py"
-        - Verify documents appear under "{root}/docs/architecture/"
+        - Execute sharding script: uv run "{SCRIPTS}/shard-architecture.py"
+        - Verify documents appear under "{ARCH}/"
         - if execution succeeds then proceed to Step 4, else check format compliance and re-execute
       
       3.2. Revise Based on Feedback
@@ -62,7 +62,7 @@
     - Verify compatibility between new and old modules
 
 [DoD]
-  - [ ] "{root}/docs/requirements" and "{root}/docs/architecture/*.md" have been thoroughly reviewed
+  - [ ] "{REQ}" and "{ARCH}/*.md" have been thoroughly reviewed
   - [ ] Extension points, constraints, and affected domains have been identified
   - [ ] New module has documented boundaries, interfaces, and data flows
   - [ ] All proposed changes include explicit "Impact Analysis" subsections

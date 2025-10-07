@@ -1,11 +1,11 @@
 [Input]
-  1. "{root}/docs/dev-notes/{task_id}-dev-notes.md" --Development notes
-  2. "{root}/docs/implementation-plan/{task_id}-plan.md" --Implementation plan
-  3. "{root}/sunnycore/templates/review-tmpl.yaml" --Review template
+  1. "{DEVNOTES}/{task_id}-dev-notes.md" --Development notes
+  2. "{PLAN}/{task_id}-plan.md" --Implementation plan
+  3. "{TMPL}/review-tmpl.yaml" --Review template
 
 [Output]
-  1. "{root}/docs/review-results/{task_id}-review.md"
-  2. "{root}/docs/epic.md"
+  1. "{REVIEW}/{task_id}-review.md"
+  2. "{EPIC}"
 
 [Constraints]
   1. Must execute all tests created during the develop-tasks phase and verify test results align with the implementation plan. If test files do not exist or cannot be executed, record as review blocker and mark as Reject
@@ -54,21 +54,21 @@
   4. Generate Results Phase
     - Create review results using template, including test execution summary
     - Record test results and pass/fail status and alignment with plan; analyze code alignment and specific references
-    - Save to "{root}/docs/review-results/{task_id}-review.md"; if file exists, update it
+    - Save to "{REVIEW}/{task_id}-review.md"; if file exists, update it
     - if review result is Accept then proceed to 4.1, else if review result is Accept with changes then proceed to 4.2, else proceed to 4.3
       
       4.1. Accept Path
-        - Update "epic.md" to mark task as completed
+        - Update "{EPIC}" to mark task as completed
         - Record completion time and final score
       
       4.2. Accept with Changes Path
         - Record improvement suggestions and priorities
-        - Update "epic.md" and note items to be improved
+        - Update "{EPIC}" and note items to be improved
         - Mark task as "conditionally completed"
       
       4.3. Reject Path
         - Generate detailed review report
-        - Do not update "epic.md"
+        - Do not update "{EPIC}"
         - Wait for brownfield-tasks to fix then review again
 
 [DoD]
@@ -79,6 +79,6 @@
   - [ ] Test results have been verified to align with the plan
   - [ ] Code alignment analysis is complete, including specific references to deviations from the plan
   - [ ] All necessary sections are present: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
-  - [ ] "{root}/docs/epic.md" has been updated with completion status and score
+  - [ ] "{EPIC}" has been updated with completion status and score
   - [ ] Test failures and plan misalignments have been clearly identified and prioritized
   - [ ] Acceptance decision has been recorded with rationale based on test results and plan adherence

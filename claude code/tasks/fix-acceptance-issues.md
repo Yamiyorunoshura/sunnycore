@@ -1,9 +1,9 @@
 [Input]
-  1. "{root}/docs/cutover.md" --Cutover report (required)
-  2. (Conditional) "{root}/docs/PRD.md" --Product Requirements Document (if exists, used as primary requirement and architecture source)
-  3. (Conditional) "{root}/docs/requirements/*.md" --Requirement documents (optional, used if "PRD.md" does not exist)
-  4. (Conditional) "{root}/docs/architecture/*.md" --Architecture documents (optional, used if "PRD.md" does not exist)
-  5. "{root}/sunnycore/templates/dev-notes-tmpl.yaml" --Development notes template (required)
+  1. "{CUTOVER}" --Cutover report (required)
+  2. (Conditional) "{PRD}" --Product Requirements Document (if exists, used as primary requirement and architecture source)
+  3. (Conditional) "{REQ}/*.md" --Requirement documents (optional, used if "PRD.md" does not exist)
+  4. (Conditional) "{ARCH}/*.md" --Architecture documents (optional, used if "PRD.md" does not exist)
+  5. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template (required)
 
 [Output]
   1. "{root}/docs/cutover-fixes-dev-notes.md" --Development notes for fixes
@@ -34,21 +34,21 @@
     - Create todo list based on issues to fix
 
   2. Root Cause Analysis Phase
-    - Check if "{root}/docs/PRD.md" exists
+    - Check if "{PRD}" exists
     - For each reported issue, analyze error messages and reproduction steps
     - Locate relevant code using search tools and identify root cause of the issue
     - Document analysis findings and determine appropriate fix strategy for each issue
     - if "PRD.md" exists then proceed to 2.1, else proceed to 2.2
       
       2.1. PRD-based Project
-        - Read "{root}/docs/PRD.md"
+        - Read "{PRD}"
         - Extract requirements from PRD requirements section
         - Extract architecture information from PRD architecture section
         - Use PRD as the primary context for understanding system design
       
       2.2. Traditional Project Structure
-        - Read requirements from "{root}/docs/requirements/*.md" (if available)
-        - Read architecture from "{root}/docs/architecture/*.md" (if available)
+        - Read requirements from "{REQ}/*.md" (if available)
+        - Read architecture from "{ARCH}/*.md" (if available)
 
   3. Fix Planning Phase
     - Plan fix approach for each issue

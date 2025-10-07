@@ -1,7 +1,7 @@
 [Input]
-  1. "{root}/docs/architecture/*.md" --Architecture design documents (extract technology stack, development environment requirements)
-  2. "{root}/docs/requirements/*.md" --Project requirement documents
-  3. "{root}/docs/epic.md" --Task list
+  1. "{ARCH}/*.md" --Architecture design documents (extract technology stack, development environment requirements)
+  2. "{REQ}/*.md" --Project requirement documents
+  3. "{EPIC}" --Task list
 
 [Output]
   1. "{root}/CLAUDE.md" --Project guidance document (including technology stack, development standards, requirement overview, project goals, document index)

@@ -1,15 +1,15 @@
 [Input]
-  1. "{root}/docs/requirements/*.md" --Project requirements
-  2. "{root}/docs/architecture/*.md" --Architecture design
-  3. "{root}/docs/epic.md" --Feature-level task list
-  4. "{root}/sunnycore/templates/implementation-plan-tmpl.yaml" --Implementation plan template (including: project information, requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
-  5. "{root}/docs/knowledge/*.md" --Project knowledge (if exist)
+  1. "{REQ}/*.md" --Project requirements
+  2. "{ARCH}/*.md" --Architecture design
+  3. "{EPIC}" --Feature-level task list
+  4. "{TMPL}/implementation-plan-tmpl.yaml" --Implementation plan template (including: project information, requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
+  5. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
 
 [Output]
-  1. "{root}/docs/implementation-plan/{task_id}-plan.md" --Implementation plan (Markdown format)
+  1. "{PLAN}/{task_id}-plan.md" --Implementation plan (Markdown format)
     - Format: Use ATX headings; numbered lists; explicit requirement/architecture mapping sections
     - Content: Breaks down feature-level tasks into atomic implementation steps across TDD RED/GREEN/REFACTOR phases
-    - Example: "{root}/docs/implementation-plan/1-plan.md"
+    - Example: "{PLAN}/1-plan.md"
 
 [Constraints]
   1. Must strictly extract tasks from provided documents; do not fabricate requirements
@@ -57,7 +57,7 @@
     - Integrate content from Steps 2-4 into a complete implementation plan document
     - Format the plan using the template: reference template structure to organize content ensuring all necessary sections are included (requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
     - Verify completeness and executability of the plan
-    - Generate Markdown plan to "{root}/docs/implementation-plan/{task_id}-plan.md"
+    - Generate Markdown plan to "{PLAN}/{task_id}-plan.md"
 
 [DoD]
   - [ ] All requirement, architecture, and task documents have been read
@@ -67,4 +67,4 @@
   - [ ] REFACTOR section: Refactoring and optimization work has been planned, including cross-cutting concerns integration
   - [ ] Plan follows TDD cycle structure: test-first (RED), minimal implementation (GREEN), refactoring optimization (REFACTOR)
   - [ ] Output path and file naming follow specified pattern
-  - [ ] "{root}/docs/implementation-plan/{task_id}-plan.md" has been created
+  - [ ] "{PLAN}/{task_id}-plan.md" has been created

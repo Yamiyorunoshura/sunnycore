@@ -1,3 +1,12 @@
+[Path-Variables]
+  {C} = {root}/sunnycore/CLAUDE.md
+  {REQ} = {root}/docs/requirements
+  {ARCH} = {root}/docs/architecture
+  {TMPL} = {root}/sunnycore/templates
+  {SCRIPTS} = {root}/sunnycore/scripts
+  {KNOWLEDGE} = {root}/docs/knowledge
+  {PROGRESS} = {root}/docs/progress.md
+
 [Input]
   1. User's prompt
   2. "{root}/sunnycore/CLAUDE.md"

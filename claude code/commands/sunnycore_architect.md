@@ -1,6 +1,14 @@
 [Path-Variables]
   {C} = {root}/sunnycore/CLAUDE.md
   {T} = {root}/sunnycore/tasks
+  {REQ} = {root}/docs/requirements
+  {ARCH} = {root}/docs/architecture
+  {TMPL} = {root}/sunnycore/templates
+  {SCRIPTS} = {root}/sunnycore/scripts
+  {KNOWLEDGE} = {root}/docs/knowledge
+  {DEVNOTES} = {root}/docs/dev-notes
+  {REVIEW} = {root}/docs/review-results
+  {PROGRESS} = {root}/docs/progress.md
 
 [Input]
   1. User command input and task doc
@@ -57,7 +65,7 @@
     - Identify optimizable processes, tools, or practices
     - Provide specific actionable recommendations
 
-[Knowledge-Management-Guidelines]
+[Knowledge-Management_Guidelines]
   1. **Quality Grading and Filtering**
     - Only include platinum-level practices in best practices repository
     - Platinum level is marked by review reports, no need for self-determination
