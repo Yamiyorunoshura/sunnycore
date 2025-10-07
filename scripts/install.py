@@ -11,9 +11,93 @@ import urllib.request
 import urllib.parse
 import json
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+
+
+class ProgressBar:
+    """簡單的進度條顯示器"""
+    
+    def __init__(self, total: int, width: int = 50, prefix: str = "下載進度"):
+        """初始化進度條
+        
+        Args:
+            total: 總任務數
+            width: 進度條寬度
+            prefix: 進度條前綴文字
+        """
+        self.total = total
+        self.width = width
+        self.prefix = prefix
+        self.current = 0
+        self.failed = 0
+        self.lock = threading.Lock()
+        self.start_time = time.time()
+        
+    def update(self, increment: int = 1, failed: bool = False):
+        """更新進度
+        
+        Args:
+            increment: 增量
+            failed: 是否失敗
+        """
+        with self.lock:
+            self.current += increment
+            if failed:
+                self.failed += increment
+            self._display()
+    
+    def _display(self):
+        """顯示進度條"""
+        percent = self.current / self.total if self.total > 0 else 0
+        filled = int(self.width * percent)
+        bar = '█' * filled + '░' * (self.width - filled)
+        
+        # 計算速度和預估剩餘時間
+        elapsed = time.time() - self.start_time
+        speed = self.current / elapsed if elapsed > 0 else 0
+        remaining = (self.total - self.current) / speed if speed > 0 else 0
+        
+        # 格式化時間
+        elapsed_str = self._format_time(elapsed)
+        remaining_str = self._format_time(remaining) if remaining > 0 else "計算中..."
+        
+        # 顯示進度條
+        status = f"✓ {self.current - self.failed}"
+        if self.failed > 0:
+            status += f" | ✗ {self.failed}"
+        
+        print(f"\r{self.prefix}: [{bar}] {percent*100:.1f}% ({status}/{self.total}) | "
+              f"速度: {speed:.1f} 檔/秒 | 已用: {elapsed_str} | 預估剩餘: {remaining_str}  ",
+              end='', flush=True)
+    
+    def _format_time(self, seconds: float) -> str:
+        """格式化時間顯示
+        
+        Args:
+            seconds: 秒數
+            
+        Returns:
+            str: 格式化的時間字符串
+        """
+        if seconds < 60:
+            return f"{seconds:.0f}秒"
+        elif seconds < 3600:
+            return f"{seconds/60:.1f}分"
+        else:
+            return f"{seconds/3600:.1f}小時"
+    
+    def finish(self):
+        """完成進度條顯示"""
+        with self.lock:
+            print()  # 換行
+            elapsed = time.time() - self.start_time
+            if self.failed > 0:
+                print(f"✓ 完成: {self.current - self.failed} 個文件成功, {self.failed} 個失敗 (總耗時: {self._format_time(elapsed)})")
+            else:
+                print(f"✓ 全部完成: {self.current} 個文件下載成功！(總耗時: {self._format_time(elapsed)})")
 
 
 def safe_input(prompt: str) -> str:
@@ -46,24 +130,20 @@ def safe_input(prompt: str) -> str:
 class SunnycoreInstaller:
     """Sunnycore 安裝器"""
     
-    def __init__(self, repo: str = "Yamiyorunoshura/sunnycore", branch: str = "master", max_workers: int = 10):
+    def __init__(self, repo: str = "Yamiyorunoshura/sunnycore", branch: str = "master", max_workers: int = 0):
         self.repo = repo
         self.branch = branch
         self.base_raw_url = f"https://raw.githubusercontent.com/{repo}/{branch}"
         self.base_api_url = f"https://api.github.com/repos/{repo}/contents"
         self.max_workers = max_workers
-        self.lock = threading.Lock()
-        self.total_files = 0
-        self.completed_files = 0
-        self.failed_files = 0
+        self.progress_bar = None
         
-    def download_file(self, file_path: str, target_path: Path, show_progress: bool = True) -> bool:
+    def download_file(self, file_path: str, target_path: Path) -> bool:
         """下載單一文件
         
         Args:
             file_path: GitHub 倉庫中的文件路徑
             target_path: 本地目標路徑
-            show_progress: 是否顯示進度
             
         Returns:
             bool: 下載是否成功
@@ -79,17 +159,14 @@ class SunnycoreInstaller:
                 with open(target_path, 'wb') as f:
                     f.write(content)
             
-            with self.lock:
-                self.completed_files += 1
-                if show_progress:
-                    print(f"  [{self.completed_files}/{self.total_files}] ✓ {file_path}")
+            # 更新進度條
+            if self.progress_bar:
+                self.progress_bar.update(1, failed=False)
             return True
         except Exception as e:
-            with self.lock:
-                self.failed_files += 1
-                self.completed_files += 1
-                if show_progress:
-                    print(f"  [{self.completed_files}/{self.total_files}] ✗ {file_path} - {e}")
+            # 更新進度條（標記為失敗）
+            if self.progress_bar:
+                self.progress_bar.update(1, failed=True)
             return False
     
     def get_directory_contents(self, dir_path: str) -> List[Dict]:
@@ -150,13 +227,23 @@ class SunnycoreInstaller:
         if not file_list:
             return True
         
-        self.total_files = len(file_list)
-        self.completed_files = 0
-        self.failed_files = 0
+        total = len(file_list)
         
-        print(f"\n開始並行下載 {self.total_files} 個文件 (最多 {self.max_workers} 個並行任務)...")
+        # 動態調整並行數量：如果 max_workers 為 None 或 0，則使用文件總數
+        # 否則使用指定的 max_workers，但至少使用文件總數（不設上限）
+        if self.max_workers is None or self.max_workers <= 0:
+            workers = total
+        else:
+            # 使用 max(self.max_workers, total) 確保能充分利用並行
+            # 但設置一個合理的上限（200）避免資源耗盡
+            workers = min(max(self.max_workers, total), 200)
         
-        with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+        print(f"\n開始並行下載 {total} 個文件 ({workers} 個並行任務)...")
+        
+        # 創建進度條
+        self.progress_bar = ProgressBar(total=total, prefix="下載進度")
+        
+        with ThreadPoolExecutor(max_workers=workers) as executor:
             # 提交所有下載任務
             futures = {
                 executor.submit(self.download_file, source, target): (source, target)
@@ -167,12 +254,10 @@ class SunnycoreInstaller:
             for future in as_completed(futures):
                 future.result()  # 獲取結果，觸發異常（如果有）
         
-        success = self.failed_files == 0
-        if success:
-            print(f"\n✓ 所有文件下載完成！")
-        else:
-            print(f"\n✗ {self.failed_files} 個文件下載失敗")
+        # 完成進度條
+        self.progress_bar.finish()
         
+        success = self.progress_bar.failed == 0
         return success
     
     def install_claude_code(self, work_dir: Path, auto_yes: bool = False) -> bool:
@@ -285,10 +370,17 @@ def main():
   
   # 從管道執行 - 直接指定路徑和自動確認
   curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/install.py | python3 - -p ~/myproject -y
+  
+  # 限制並行數量（例如：限制為 20 個並行任務）
+  python3 install.py -p ~/myproject --max-workers 20
 
 模式說明:
   1. 專案安裝: 在當前工作目錄建立 .claude/ 和 sunnycore/ 目錄
   2. 自訂安裝: 在指定路徑建立 .claude/ 和 sunnycore/ 目錄
+  
+並行下載:
+  預設會根據文件數量自動調整並行數（上限 200），實現最快速度
+  使用 --max-workers 可以限制並行數量（如網路環境有限制時）
   
 特殊支援:
   腳本支援從管道執行時的互動模式，會自動從 /dev/tty 讀取輸入
@@ -330,8 +422,8 @@ def main():
     parser.add_argument(
         '--max-workers',
         type=int,
-        default=10,
-        help='最大並行下載數 (預設: 10)'
+        default=0,
+        help='最大並行下載數 (預設: 0 = 自動根據文件數量調整，上限 200)'
     )
     
     args = parser.parse_args()

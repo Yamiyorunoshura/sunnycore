@@ -51,7 +51,7 @@
     - Verify all sharded documents are properly created in .md format
 
   4. Finalization Phase
-    - Update Document Index section in "{root}/CLAUDE.md" with refreshed architecture documents (including path and purpose of each document)
+    - Update Document Index section and any other sections that are related to architecture in "{root}/CLAUDE.md" with refreshed architecture documents (including path and purpose of each document)
     - Verify all source references are properly documented across sharded files
 
 ## [DoD]
@@ -65,4 +65,4 @@
   - [ ] Original architecture.md has been deleted by the sharding script
   - [ ] Each sharded document includes actual implementation details with source references
   - [ ] Deviations from original design are documented with rationale
-  - [ ] "{root}/CLAUDE.md" Document Index section has been updated with refreshed sharded architecture documents
+  - [ ] "{root}/CLAUDE.md" Document Index section and any other sections that are related to architecture have been updated with refreshed sharded architecture documents
