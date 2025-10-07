@@ -80,8 +80,7 @@ All templates are minimal structural frameworks using placeholders (`""`, `[]`, 
 ### YAML to Markdown Conversion Rules
 
 1. **YAML Front Matter**
-   - Preserve the `---` delimited front matter block at the start of the file
-   - Front matter contains metadata (not displayed in rendered Markdown body)
+   - Front matter contains metadata in markdown format
    - Common metadata: project name, version, date, status, etc.
 
 2. **Heading Level Conversion**
