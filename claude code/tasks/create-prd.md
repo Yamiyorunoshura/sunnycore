@@ -17,9 +17,9 @@
 
 [Tools]
   1. **todo_write**
-    - [Step 1: Create task list; Steps 2-6: Track task progress]
+    - [Step 1: Create todo list; Steps 2-6: Track working progress]
   2. **sequentialthinking (MCP)**
-    - [Step 1: Analyze project type and complexity; Step 2: Design requirements; Step 3: Design architecture; Step 4: Design tasks]
+    - [Step 1: Analyze project type and complexity; Step 2: Design requirements; Step 3: Design architecture]
   3. **context7 (MCP)**
     - [Step 3: Obtain external package and architecture pattern references when needed]
   4. **claude-context (MCP)**
@@ -64,26 +64,16 @@
         - Record architecture decisions and rationale
         - Handle cross-cutting concerns (security, observability, performance)
 
-  4. Task Generation Phase
-    - Generate feature-level tasks based on requirements and architecture
-    - Each task should represent a major feature within a module (e.g., "Implement login functionality", "Implement registration functionality")
-    - **Important**: Tasks at this stage are functional specifications only, not technical implementation steps
-    - Focus on WHAT needs to be built, not HOW to build it
-    - Ensure each task conforms to the constraints defined in [Constraints] (feature-level, verifiable, clear outcomes)
-    - Include brief acceptance hints to ensure verifiability at feature level (business-focused, not test-focused)
-    - Map each task to specific requirement IDs and architecture components
-
-  5. PRD Integration Phase
+  4. PRD Integration Phase
     - Integrate requirements, architecture, and tasks into PRD template structure
     - Set project-info.type to "greenfield" or "brownfield" based on Step 1 determination
     - Include requirement-to-architecture-to-task traceability
-    - Identify task dependencies and execution order
+    - Identify requirement dependencies and execution order
     - Add constraints, assumptions, and risks sections
 
-  6. Finalization Phase
+  5. Finalization Phase
     - Cross-verify PRD completeness and consistency
-    - Ensure all requirements have corresponding architecture elements and tasks
-    - Verify task set completely covers all requirements
+    - Ensure all requirements have corresponding architecture elements
     - Write PRD to "{root}/docs/PRD.md" in Markdown format
     - Present the complete PRD to the user and request confirmation or modification suggestions`
 
@@ -94,8 +84,7 @@
   4. Requirement conflicts cannot be automatically resolved: Document conflicting requirements and request user prioritization
   5. Architecture design infeasibility: Record technical limitations and propose alternatives
   6. Architecture design incompatible with non-functional requirements: Document incompatibility and request user guidance on trade-offs
-  7. Task generation coverage insufficient (<80% requirements): Identify missing requirements and regenerate tasks
-  8. User rejects final PRD: Record rejection reasons and iterate on requirements/architecture/tasks based on feedback
+  7. User rejects final PRD: Record rejection reasons and iterate on requirements/architecture based on feedback
 
 [DoD]
   - [ ] Project type (Greenfield/Brownfield) has been determined
@@ -106,9 +95,8 @@
   - [ ] Architecture design is complete with components, data flows, and technical stack
   - [ ] If Brownfield, impact analysis has been documented
   - [ ] Requirement-to-architecture mapping has been established (100% coverage)
-  - [ ] Feature-level tasks have been generated with requirement and architecture traceability
-  - [ ] Task dependencies have been identified
-  - [ ] All tasks are verifiable and outcome-oriented
+  - [ ] Requirement dependencies have been identified
+  - [ ] All requirements are verifiable and outcome-oriented
   - [ ] PRD follows template structure and is saved to "{root}/docs/PRD.md"
   - [ ] User confirmation of the final PRD has been obtained
 
