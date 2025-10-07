@@ -25,10 +25,8 @@
 [Steps]
   1. Preparation Phase
     - Read "{root}/docs/PRD.md" completely
-    - Extract all tasks from the PRD tasks section
-    - **Note**: PRD tasks are feature-level functional specifications without implementation details
-    - Understand requirements, architecture, and task dependencies
-    - For each task, plan the TDD implementation strategy:
+    - Understand requirements and architecture
+    - Plan the TDD implementation strategy to fulfil all the funcitonla and non-functional requirements:
       * Identify test cases needed (unit tests, integration tests)
       * Determine test structure and test data requirements
       * Plan implementation approach following architecture mapping
@@ -36,23 +34,23 @@
     - Plan execution sequence considering task dependencies
 
   2. Iterative TDD Development Phase (For each task in dependency order)
-    - Read task's acceptance criteria and requirements
+    - Read acceptance criteria of each requirement
     - Develop each task following the TDD cycle: RED → GREEN → REFACTOR
     - Follow architecture mapping specified in the PRD
     - Execute tests to verify implementation
-    - Mark task completed when all tests pass and acceptance criteria are met
+    - Mark implementation completed when all tests pass and acceptance criteria are met
     - Repeat for all tasks until all PRD tasks are completed
 
   3. Integration Testing Phase
-    - Execute complete test suite for all implemented tasks
+    - Execute complete test suite for all implementations
     - Verify all acceptance criteria from PRD are met
-    - Test integration points between tasks
+    - Test integration points between implementations
     - Ensure all functional and non-functional requirements are satisfied
-    - if any tests fail then identify failing task and return to Step 2 for that task
+    - if any tests fail then identify failing implementation and return to Step 2 for that implementation
 
   4. Documentation Phase
     - Generate comprehensive development notes according to template structure
-    - Include implementation summary for all tasks
+    - Include implementation summary for all implementations
     - Document technical decisions made during development
     - Record any deviations from PRD and rationale
     - Document risk considerations and mitigation strategies
@@ -68,13 +66,13 @@
   2. Test failures in RED phase that don't fail correctly: Fix test logic and retry
   3. Test failures in GREEN phase: Analyze failure, fix implementation, retry
   4. Test failures in REFACTOR phase: Rollback refactoring, re-evaluate strategy
-  5. Integration test failures: Identify root cause, fix specific task, re-run integration tests
+  5. Integration test failures: Identify root cause, fix specific implementation, re-run integration tests
 
 [DoD]
-  - [ ] PRD has been read and all tasks extracted
-  - [ ] Todo list has been created with all tasks in dependency order
-  - [ ] All tasks have been implemented following TDD cycle (RED → GREEN → REFACTOR)
-  - [ ] All tests pass for all tasks
+  - [ ] PRD has been read and all requirements extracted
+  - [ ] Todo list has been created with all requirements in dependency order
+  - [ ] All requirements have been implemented following TDD cycle (RED → GREEN → REFACTOR)
+  - [ ] All tests pass for all implementations
   - [ ] All acceptance criteria in the PRD have been met
   - [ ] Integration testing completed successfully
   - [ ] Code quality meets standards (SOLID, DRY, readability)
