@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [1.14.3] - sunnycore v1.14.3
+
+### Changed
+- 優化 Technical Assistant 命令文檔結構：簡化 `sunnycore_assistant.md` 格式並增強輸入來源
+  - 移除 `[Path-Variables]` 章節：減少冗餘內容，簡化文檔結構
+  - 工具定義明確化：從引用 `CLAUDE.md` 改為直接列出 4 個核心工具（todo_write、sequentialthinking、claude-context、context7）
+  - 新增輸入源：新增 `"{root}/docs/knowledge"` 知識庫目錄作為輸入，提供更好的上下文支援
+  - 提升命令文檔的自包含性與可讀性
+
 ## [1.14.2] - sunnycore v1.14.2
 
 ### Added
