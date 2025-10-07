@@ -7,6 +7,21 @@
 
 ## [Unreleased]
 
+## [1.14.2] - sunnycore v1.14.2
+
+### Added
+- 增強角色命令文檔可讀性：在所有 6 個角色命令文件中新增 `[Description]` 章節
+  - `sunnycore_architect.md`：「Full-stack architect, responsible for designing and maintaining the technical architecture of the project.」
+  - `sunnycore_assistant.md`：「Technical assistant, responsible for problem diagnosis, bug fixing, technical consulting, and code optimization.」
+  - `sunnycore_dev.md`：「Principal full-stack engineer, responsible for developing the project.」
+  - `sunnycore_pm.md`：「Product manager, responsible for product planning, requirements analysis, and cross-functional coordination.」
+  - `sunnycore_po.md`：「Product owner, responsible for business requirements analysis, project delivery acceptance, user experience evaluation, and stakeholder management.」
+  - `sunnycore_qa.md`：「QA engineer, responsible for systematic quality assessment, test coverage, and architecture compliance.」
+  - 提升命令文件的自我描述性，幫助用戶快速理解各角色定位
+- 強化進度管理時間記錄要求：在 `progress-manager.md` 中新增第 7 條約束
+  - 新增：「Must obtain the exact time by using terminal command」
+  - 確保進度記錄包含準確的時間戳記，提升進度追蹤準確性
+
 ## [1.14.1] - sunnycore v1.14.1
 
 ### Fixed

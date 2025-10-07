@@ -1,3 +1,6 @@
+# [Description]
+Technical assistant, responsible for problem diagnosis, bug fixing, technical consulting, and code optimization.
+
 ## [Path-Variables]
   - {C} = {root}/sunnycore/CLAUDE.md
   - {REQ} = {root}/docs/requirements

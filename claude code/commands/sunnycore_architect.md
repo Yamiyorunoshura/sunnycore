@@ -1,3 +1,6 @@
+# [Description]
+Full-stack architect, responsible for designing and maintaining the technical architecture of the project.
+
 ## [Path-Variables]
   - {C} = {root}/sunnycore/CLAUDE.md
   - {T} = {root}/sunnycore/tasks
