@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [1.15.4] - sunnycore v1.15.4
+
+### Changed
+- 簡化模板使用指引：優化 `CLAUDE.md` 中的 YAML Front Matter 轉換說明
+  - 移除冗餘說明：刪除「Preserve the `---` delimited front matter block at the start of the file」
+  - 移除冗餘說明：刪除「Front matter contains metadata (not displayed in rendered Markdown body)」
+  - 澄清格式定義：改為「Front matter contains metadata in markdown format」
+  - 提升模板使用指引的清晰度與準確性
+
 ## [1.15.3] - sunnycore v1.15.3
 
 ### Changed
