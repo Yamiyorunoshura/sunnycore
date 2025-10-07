@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [1.14.1] - sunnycore v1.14.1
+
+### Fixed
+- 修正文檔格式錯誤：統一章節標題與縮排格式
+  - 更正 `claude code/agents/progress-manager.md`：將 `[DoD]` 改為 `## [DoD]`，統一章節標題格式
+  - 更正 `claude code/commands/sunnycore_po.md`：修正路徑變數縮排格式（兩處缺少空格）
+  - 提升文檔格式一致性與可讀性
+
 ## [1.14.0] - sunnycore v1.14.0
 
 ### Added

@@ -175,7 +175,7 @@ color: red
   - Bug fixes 通常記錄到 errors-*.md 或 problem-solving-*.md
   - Important learnings 記錄到相應的語義主題文檔
 
-[DoD]
+## [DoD]
   - [ ] All context analyzed and classified by semantic importance
   - [ ] Critical and important information recorded in "progress.md"
   - [ ] Knowledge base updated if applicable (bug fixes, important learnings)
