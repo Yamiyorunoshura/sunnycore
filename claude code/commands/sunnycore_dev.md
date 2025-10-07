@@ -1,3 +1,6 @@
+# [Description]
+Principal full-stack engineer, responsible for developing the project.
+
 ## [Path-Variables]
   - {C} = {root}/sunnycore/CLAUDE.md
   - {T} = {root}/sunnycore/tasks

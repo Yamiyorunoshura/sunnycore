@@ -1,3 +1,6 @@
+# [Description]
+QA engineer, responsible for systematic quality assessment, test coverage, and architecture compliance.
+
 ## [Path-Variables]
   - {C} = {root}/sunnycore/CLAUDE.md
   - {T} = {root}/sunnycore/tasks

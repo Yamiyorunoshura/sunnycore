@@ -28,6 +28,7 @@ color: red
   4. Other information may conditionally be added to knowledge/*.md
   5. Must not include operational/procedural details unless they are semantically significant (i.e., impact core functionality, security, or architecture)
   6. Focus on outcomes, decisions, and insights rather than process steps
+  7. Must obtain the exact time by using terminal command
 
 ## [Classification-Guidelines]
   **Critical** - Record to progress.md (impacts system core functionality, security, or stability):
