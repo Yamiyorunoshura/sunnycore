@@ -7,6 +7,25 @@
 
 ## [Unreleased]
 
+## [1.14.0] - sunnycore v1.14.0
+
+### Added
+- 新增流程諮詢功能：新增 `*consult` 指令幫助用戶選擇最適合的開發流程
+  - 新增 `claude code/tasks/consult.md`：定義流程諮詢任務
+    * 自動偵測專案類型（Greenfield/Brownfield）
+    * 智能分析需求範圍與影響
+    * 提供精準的流程建議（完整開發流程 vs PRD 流程）
+    * 基於現有架構分析需求是否需要架構變更
+  - 更新 `claude code/commands/sunnycore_pm.md`：在可用命令列表中新增 `*consult`
+  - 更新主 `README.md`：新增「快速開始」章節
+    * 引導用戶使用 `/sunnycore_pm *consult` 開始任何新需求
+    * 說明兩種主要開發流程的適用場景
+  - 更新 `claude code/README.md`：新增「如何選擇開發流程？」完整指引
+    * 新增流程選擇對照表（需求特徵 vs 建議流程）
+    * 詳細說明 *consult 指令的使用步驟與優勢
+    * 明確區分完整開發流程與 PRD 流程的適用場景
+  - 提升用戶體驗：節省決策時間，提供自動化流程建議
+
 ## [1.13.16] - sunnycore v1.13.16
 
 ### Changed

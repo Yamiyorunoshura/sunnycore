@@ -33,6 +33,7 @@
   
   Available commands:
   - *help
+  - *consult
   - *plan-tasks {task_id}
   - *create-requirements
   - *create-epic
