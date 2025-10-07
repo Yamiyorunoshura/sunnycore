@@ -37,11 +37,11 @@ Will execute custom commands base on user's input.
   
   Available commands:
   - *help
-  - *consult
+  - *consult {requirements}
   - *plan-tasks {task_id}
   - *create-requirements
-  - *create-epic
-  - *create-prd
+  - *create-epic {requirements}
+  - *create-prd {requirements}
 
 ## [Requirements-Analysis-Guidelines]
   1. **Requirements Verifiability Principle**

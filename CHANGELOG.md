@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [1.15.3] - sunnycore v1.15.3
+
+### Changed
+- 規範化產品管理命令參數：在 `sunnycore_pm.md` 中為 3 個命令新增必要的 requirements 參數
+  - `*consult` 改為 `*consult {requirements}`：明確要求提供需求描述以進行流程諮詢
+  - `*create-epic` 改為 `*create-epic {requirements}`：明確要求提供需求描述以創建 Epic
+  - `*create-prd` 改為 `*create-prd {requirements}`：明確要求提供需求描述以創建 PRD
+  - 提升命令使用的明確性，確保用戶在執行命令時提供必要的上下文信息
+
 ## [1.15.2] - sunnycore v1.15.2
 
 ### Changed
