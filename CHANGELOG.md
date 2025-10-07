@@ -7,6 +7,62 @@
 
 ## [Unreleased]
 
+## [1.14.5] - sunnycore v1.14.5
+
+### Changed
+- 重構模板系統：將所有模板簡化為最小化框架結構，提升靈活性與 token 使用效率
+  - 更新 `claude code/CLAUDE.md`：大幅擴展 `[Template-Usage-Guidelines]` 章節
+    * 新增「Template Philosophy」說明：強調最小化框架設計理念（使用佔位符 `""`, `[]`, `{}`）
+    * 新增「YAML to Markdown Conversion Rules」：8 條詳細轉換規則
+      - YAML Front Matter 處理規則
+      - Heading Level 轉換規則（h1-h4，避免 h5/h6）
+      - Value Type 轉換規則（字串、巢狀物件、多行文字、數字/布林值）
+      - List 轉換規則
+      - Object Array 轉換規則
+      - Empty Value 處理規則（關鍵：空值完全省略，僅顯示有內容的區塊）
+      - Special Markers 處理規則
+      - Formatting Best Practices
+  - 更新 `claude code/templates/architecture-tmpl.yaml`：從詳細結構簡化為最小化框架
+    * 移除冗長的註釋與範例說明
+    * 所有欄位改為佔位符（空字串、空陣列、空物件）
+    * 保留核心結構：executive-summary、technical-stack、system-architecture、api-documentation、requirements-traceability、architecture-decisions、cross-cutting-concerns、deployment、quality-attributes、architecture-diagram、source-references
+  - 更新 `claude code/templates/completion-report-tmpl.yaml`：擴展專案完成報告結構
+    * 新增欄位：project_duration、team_size
+    * 擴展 development-summary：新增 objectives_partial、objectives_deferred
+    * 新增區塊：delivery-metrics（計劃與實際功能數、工作量差異）
+    * 擴展 quality-summary：新增 defect-metrics、review-scores
+    * 新增區塊：technical-debt、risks-realized、team-performance、knowledge-transfer
+  - 更新 `claude code/templates/cutover-report-tmpl.yaml`：擴展驗收報告結構
+    * 新增欄位：version、pass_rate、setup_time、startup_time、performance
+    * 新增區塊：functional-verification、non-functional-verification
+    * 擴展 deployment-readiness：新增 monitoring_configured、backup_strategy_documented
+    * 擴展 sign-off：新增 deployment_date
+  - 更新 `claude code/templates/dev-notes-tmpl.yaml`：擴展開發筆記結構
+    * 新增欄位：task_name、developer、start_date、completion_date、actual_duration
+    * 重構區塊結構：technical-decisions、implementation-details、testing、quality-metrics、risks-and-maintenance
+    * 新增區塊：deviations-from-plan、known-issues、technical-debt、documentation-updates、lessons-learned、next-steps、references
+  - 更新 `claude code/templates/implementation-plan-tmpl.yaml`：重構 TDD 實作計劃結構
+    * 新增欄位：plan_version、created_by、estimated_duration
+    * 新增區塊：task-context（summary、requirements-mapping、architecture-context）
+    * 重構 tdd-phases：統一 objective、test-cases、implementation-steps、files、dependencies、refactoring-targets、quality-improvements、checklist
+    * 新增區塊：additional-details、risk-management、validation-checklist、notes
+  - 更新 `claude code/templates/prd-tmpl.yaml`：簡化 PRD 模板結構
+    * 所有陣列欄位改為空陣列佔位符
+    * 移除詳細的範例結構說明
+  - 更新 `claude code/templates/project-knowledge-tmpl.yaml`：擴展知識庫模板結構
+    * 新增欄位：title、project_name、version
+    * 新增區塊：design-patterns、architecture-insights、performance-optimizations、security-practices、testing-strategies、code-snippets、tools-and-libraries、process-improvements、metrics-and-kpis、team-learnings、external-resources
+  - 更新 `claude code/templates/requirement-tmpl.yaml`：擴展需求文檔模板
+    * 新增欄位：title、version、created_date、last_updated、status
+    * 新增區塊：project-overview、user-stories、glossary、appendix
+  - 更新 `claude code/templates/review-tmpl.yaml`：擴展審查報告模板
+    * 新增區塊：compliance-check、code-review、security-review、performance-review、documentation-review
+    * 擴展 findings、test-summary、source-references
+  - 更新 `claude code/templates/tasks-tmpl.yaml`：擴展任務文檔模板
+    * 新增欄位：title、version、created_date、last_updated、total_tasks、completed_tasks
+    * 新增區塊：task-overview、infrastructure-tasks、documentation-tasks、milestones、progress-summary、notes
+- 提升模板系統的一致性、靈活性與使用者體驗，減少 token 消耗同時保持結構清晰
+
 ## [1.14.4] - sunnycore v1.14.4
 
 ### Added
