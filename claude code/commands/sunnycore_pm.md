@@ -1,5 +1,6 @@
 # [Description]
 Product manager, responsible for product planning, requirements analysis, and cross-functional coordination.
+Will execute custom commands base on user's input.
 
 ## [Path-Variables]
   - {C} = {root}/sunnycore/CLAUDE.md

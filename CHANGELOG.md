@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [1.15.2] - sunnycore v1.15.2
+
+### Changed
+- 擴展角色命令描述：在所有 5 個角色命令文件中新增自訂命令執行說明
+  - 新增說明：「Will execute custom commands base on user's input.」
+  - 涵蓋文件：`sunnycore_architect.md`、`sunnycore_dev.md`、`sunnycore_pm.md`、`sunnycore_po.md`、`sunnycore_qa.md`
+  - 提升角色命令文檔的功能描述完整性與使用者理解度
+
 ## [1.15.1] - sunnycore v1.15.1
 
 ### Fixed
