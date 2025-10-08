@@ -24,10 +24,12 @@
 ## [Tools]
   1. **todo_write**
     - [Step 1: Create todo list with all issues to fix; Steps 2-4: Track fix progress]
-  2. **sequentialthinking (MCP)**
-    - [Step 1: Analyze issues and determine fix strategies; Step 2-3: Reason about conflict resolution and consistency maintenance]
+  2. **sequential-thinking (MCP)**
+    - [Step 1: Analyze issues and determine fix strategies]
+    - [Step 2-3: Reason about conflict resolution approaches and evaluate impact scope]
+    - When to use: When need to evaluate multiple fix approaches or analyze cross-document consistency
   3. **claude-context (MCP)**
-    - [Step 2: Search codebase when verifying fixes impact existing code]
+    - [Step 2: Verify impact of fixes on existing code]
 
 ## [Steps]
   1. Analysis Phase

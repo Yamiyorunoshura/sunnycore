@@ -24,10 +24,13 @@
 ## [Tools]
   1. **todo_write**
     - [Step 1: Create todo list; Steps 2-5: Track validation progress]
-  2. **sequentialthinking (MCP)**
-    - [Step 1: Analyze workflow and scope; Step 2-4: Reason about validation logic and issue prioritization]
+  2. **sequential-thinking (MCP)**
+    - [Step 1: Analyze workflow type and validation scope]
+    - [Step 2-4: Reason about validation logic and issue priority ranking]
+    - When to use: When need complex bidirectional validation logic or conflict impact analysis
   3. **claude-context (MCP)**
-    - [Step 2: Search codebase for referenced components to verify existence]
+    - [Step 2: Verify whether components referenced in documents exist in the codebase]
+    - Query examples: "Does component X exist?" "Where is requirement Y implemented?"
 
 ## [Steps]
   1. Initialization Phase

@@ -19,8 +19,10 @@
 ## [Tools]
   1. **todo_write**
     - [Step 1: Create task list; Steps 2-4: Track task progress]
-  2. **sequentialthinking (MCP)**
-    - [Step 1: Analyze requirement complexity and task dependencies; Step 2: Design atomic tasks and logical grouping]
+  2. **sequential-thinking (MCP)**
+    - [Step 1: Analyze requirement complexity and task dependencies]
+    - [Step 2: Design feature-level tasks with logical grouping]
+    - When to use: When need to decompose complex requirements or identify task dependencies
 
 ## [Steps]
   1. Research Phase

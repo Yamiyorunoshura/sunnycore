@@ -24,12 +24,14 @@
 ## [Tools]
   1. **todo_write**: Create and manage task list
     - [Step 1: Create todo list; Steps 2-7: Track task progress]
-  2. **sequentialthinking (MCP)**: Perform structured reasoning and verification
-    - [Step 2: Reasoning tasks for conceiving the report; Step 3: Verify if DoD is satisfied]
+  2. **sequential-thinking (MCP)**: Perform structured reasoning and verification
+    - [Step 2: Reason about report conception and content organization]
+    - [Step 3: Verify if DoD is satisfied]
+    - When to use: When need to structure complex completion report or validate completeness
   3. **claude-context (MCP)**: Search codebase to locate implementation details
-    - [Step 2: Find relevant code; Step 3: Precise keyword search]
-    - Prerequisite: Codebase has been indexed through index_codebase
-    - Failure handling: If not indexed or search fails, switch to grep tool for keyword search, or annotate "Unable to locate code evidence" and continue execution
+    - [Step 2: Find relevant code for evidence]
+    - [Step 3: Precise keyword search for implementation verification]
+    - Note: If not indexed or search fails, switch to grep tool for keyword search, or annotate "Unable to locate code evidence" and continue
 
 ## [Steps]
   1. Input Validation Phase

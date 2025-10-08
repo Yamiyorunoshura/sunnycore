@@ -19,7 +19,12 @@
   1. **todo_write**
     - [Step 1: Create todo list; Steps 2-4: Track execution progress]
   2. **claude-context (MCP)**
-    - [Step 2: Search codebase and build index for existing implementations]
+    - [Step 2: When project is Brownfield, execute codebase indexing]
+    - [Step 2: Semantic search existing architecture implementations to understand tech stack, module structure, and dependencies]
+    - Query examples: "Where is the tech stack configured?" "How are main modules organized?" "How is the development environment set up?"
+  3. **context7 (MCP)**
+    - [Step 2: Query official documentation for tech stack mentioned in architecture documents and environment setup guides]
+    - When to use: After extracting tech stack from {ARCH}/*.md, query official installation and configuration docs for corresponding versions
 
 ## [Steps]
   1. Preparation Phase

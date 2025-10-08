@@ -7,6 +7,29 @@
 
 ## [Unreleased]
 
+## [3.1.0] - sunnycore v3.1.0
+
+### Changed
+- 優化 MCP 工具使用說明：修正並增強所有任務文檔中的 MCP 工具使用指引
+  - 工具名稱修正：將 `sequentialthinking` 統一改為 `sequential-thinking` (MCP)
+  - 增強使用情境說明：為每個工具添加詳細的「何時使用」(When to use) 說明
+  - 優化 `sequential-thinking` 工具描述：
+    * 明確各任務階段的推理目標（需求分解、架構評估、設計驗證等）
+    * 添加具體使用場景（複雜問題評估、多方案比較、影響分析等）
+  - 優化 `claude-context` 工具描述：
+    * 提供具體查詢示例（"What is the existing implementation?" "How to integrate with existing system?"）
+    * 明確搜尋目標（現有架構邊界、公開契約、整合點等）
+  - 優化 `context7` 工具描述：
+    * 明確查詢官方文檔和 API 參考的使用情境
+    * 添加版本兼容性驗證和架構指引查找的說明
+  - 優化 `playwright` 工具描述：
+    * 明確網頁研究的具體使用場景（競品分析、UI 流程範例收集等）
+  - 涵蓋任務：brownfield-tasks、conclude、consult、create-architecture、create-brownfield-architecture、create-epic、create-plan、create-prd、create-requirements、curate-knowledge、cutover、develop-plan、develop-prd、document-project、fix-acceptance-issues、fix-design-conflicts、init、review、validate-design
+- 精簡核心指引文檔：移除 `CLAUDE.md` 中的 [Tool-Guidelines] 章節
+  - 原因：工具使用指引已整合至各任務文檔的 [Tools] 章節中
+  - 避免指引重複，提升維護效率
+  - 減少 token 使用量
+
 ## [3.0.0] - sunnycore v3.0.0
 
 ### Changed

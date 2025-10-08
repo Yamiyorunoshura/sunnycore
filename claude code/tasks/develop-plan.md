@@ -19,12 +19,17 @@
   5. Development notes must include: implementation summary, technical decisions, risk considerations, test results, and other complete sections (refer to template)
 
 ## [Tools]
-  1. **sequentialthinking (MCP)**
-    - [Step 1: Analyze implementation plan complexity; Steps 2-4: Reason about implementation strategies for each TDD phase; Step 5: Evaluate validation results]
+  1. **sequential-thinking (MCP)**
+    - [Step 1: Analyze implementation plan complexity]
+    - [Steps 2-4: Reason about implementation strategies and technical decisions for each TDD phase]
+    - When to use: When need to evaluate implementation approaches or handle technical challenges
   2. **todo_write**
     - [Step 1: Create TDD phase todo list; Steps 2-5: Track implementation progress for each phase]
   3. **claude-context (MCP)**
-    - [Step 1: Search codebase for implementation plan-related code]
+    - [Step 1: Search codebase for implementation plan-related code, modules, and test cases]
+    - Query examples: "Where is the related implementation?" "How to test this?" "What modules does this depend on?"
+  4. **context7 (MCP)**
+    - [Steps 2-4: When need external API calls, query official documentation and examples]
 
 ## [Steps]
   1. Preparation Phase

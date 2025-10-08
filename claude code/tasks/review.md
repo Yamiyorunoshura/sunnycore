@@ -17,12 +17,15 @@
   5. Must record acceptance decision and rationale: Accept / Accept with changes / Reject
 
 ## [Tools]
-  1. **sequentialthinking (MCP)** - Structured reasoning tool for complex logic analysis
-    - [Step 1 Review Plan Phase: Reason about task domain identification and scoring criteria selection; Step 2 Review Code Phase: Reason about domain-specific scoring logic and alignment analysis; Step 3 Review Development Notes Phase: Reason about notes and implementation alignment relationship; Step 4 Generate Results Phase: Reason about issue prioritization, risk assessment, and decision rationale]
+  1. **sequential-thinking (MCP)** - Structured reasoning tool for complex logic analysis
+    - [Step 1: Identify task domain and select review criteria]
+    - [Step 2-4: Reason about domain-specific scoring logic, issue prioritization, and decision rationale]
+    - When to use: When need complex code quality assessment or architecture alignment analysis
   2. **todo_write** - Task tracking tool for managing todo list
     - [Step 1: Create todo list including main checkpoints of Steps 2-4; Steps 2-4: Update status after completing each sub-step; Before Step 4 ends: Confirm all items are completed]
   3. **claude-context (MCP)** - Codebase semantic search and indexing tool
-    - [Step 1: Search codebase for implementation plan-related code when needed; Step 2: Search codebase for relevant implementations when code analysis is needed]
+    - [Step 1-2: Search codebase for implementation plan-related code (if needed)]
+    - [Step 2: Search for relevant test cases and implementation patterns]
 
 ## [Steps]
   1. Review Planning Phase
