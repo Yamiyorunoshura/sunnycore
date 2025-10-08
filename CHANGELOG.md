@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [1.15.7] - sunnycore v1.15.7
+
+### Changed
+- 優化文檔化任務使用建議：在 `claude code/README.md` 中為 `*document-project` 命令新增驗收提示
+  - 在三個工作流程中（PRD 流程、Greenfield 流程、Brownfield 流程）新增說明：「建議先親身驗收項目，如發現問題可使用 `/sunnycore_assistant` 協助解決」
+  - 提升用戶在文檔化前的驗收意識，減少文檔與實際實作不符的風險
+  - 強調 Technical Assistant 在問題解決中的支援角色
+
 ## [1.15.6] - sunnycore v1.15.6
 
 ### Changed
