@@ -28,30 +28,39 @@
 
 ## [Steps]
   1. Preparation Phase
-    - Read review report and understand the issues
-    - Read architecture design to align with overall direction
-    - Read development notes and actual code to think about where the issues are
-    - Combine architecture and code to formulate atomic fix tasks
+    - Understand the issues from review report and architecture context
+    - Formulate atomic fix tasks based on analysis
 
   2. Fix Phase
-    - Create todo list to track fix progress (update according to state gate, see Tool Guidelines for details)
-    - After each code fix, execute tests to ensure no new issues are introduced (e.g., pytest -q or make test; all must pass)
-    - if tests pass (exit code=0) then proceed to 2.1, else proceed to 2.2
-      
-      2.1. Tests Pass Path
-        - Continue with next fix task
-        - Or enter integration testing
-      
-      2.2. Tests Fail Path
-        - Use git reset or manually undo recent changes
-        - Re-analyze failure reasons
-        - Fix and re-execute tests
-        - Repeat this process until tests pass
-    - After completing all fixes, execute integration tests (such as: pytest tests/integration, make test-integration, or integration test commands for other programming languages or projects; all tests must also pass)
+    - Establish progress tracking mechanism for fixes
+    - Ensure proper handling of both passing and failing test scenarios
+    - Achieve all unit tests and integration tests passing
 
   3. Summary Phase
-    - Summarize the fix process and results (should include document paths and line numbers/paragraph IDs as evidence; for version control projects, should include PR/commit links; corresponding to the evidence field of "Fix Summary" for auditing purposes)
-    - Write or update the summary to the corresponding development notes according to the template
+    - Achieve comprehensive fix summary with proper evidence
+    - Ensure development notes are updated according to template
+
+## [Development-Guidelines]
+  1. **TDD Practice (Mandatory)**
+    - **RED Phase**: Write failing tests from acceptance criteria before any code; verify tests fail for the right reason
+    - **GREEN Phase**: Implement minimal code to pass tests (exit code 0); follow architecture mapping strictly
+    - **REFACTOR Phase**: Improve code quality while maintaining green tests; integrate real APIs/services; apply patterns and eliminate duplication
+    - Iterate RED→GREEN→REFACTOR until all acceptance criteria met; rollback immediately if tests fail during refactoring
+  
+  2. **Code Quality Standards**
+    - Apply SOLID principles (Single Responsibility, Open-Closed, Dependency Inversion)
+    - Use meaningful names; keep functions ≤50 lines; avoid duplication (DRY)
+    - Statically typed languages must compile successfully
+  
+  3. **Testing Requirements**
+    - Minimum 80% coverage; critical logic requires 100%
+    - Cover unit, integration, and E2E levels appropriately
+    - Execute full test suite after every change; rollback on failures (exit code ≠ 0)
+  
+  4. **Documentation & Risk Management**
+    - Record technical decisions, deviations, and rationale in dev notes
+    - Link requirement IDs and architecture references
+    - Identify risks (technical, dependency, timeline); document mitigation and rollback strategies
 
 ## [DoD]
   - [ ] All unit tests have passed
@@ -59,3 +68,37 @@
   - [ ] Fix summary has been generated and includes changes/tests/evidence/risk/rollback
   - [ ] Fixed code complies with architecture design
   - [ ] Development notes have been updated and generated
+
+## [Example]
+
+### Example 1: Failed Authentication Logic
+[Input]
+- Review report: docs/review/1-review.md (Reject: token validation fails for expired tokens)
+- Dev notes: docs/dev-notes/1-dev-notes.md (original implementation)
+- Architecture: JWT authentication with Redis token store
+
+[Decision]
+- Issue: Token expiry check missing (test_expired_token_rejection failed)
+- Fix: Add token expiry validation before Redis lookup
+- TDD: RED (write test for expiry check) → GREEN (add expiry logic) → REFACTOR (optimize Redis queries)
+
+[Expected Outcome]
+- Fixed code: src/auth/TokenValidator.js with expiry check (L25-L30)
+- Fix summary: Changes (added expiry validation), Tests (test_expired_token_rejection now passes), Evidence (all auth tests pass), Risk (low), Rollback (revert commit abc123)
+- Updated docs/dev-notes/1-dev-notes.md with fix details
+
+### Example 2: Performance Issue in Query
+[Input]
+- Review report: docs/review/3-review.md (Accept with changes: NFR-001 violated, query takes 3s instead of < 500ms)
+- Dev notes: docs/dev-notes/3-dev-notes.md (missing database index)
+- Architecture: PostgreSQL with search functionality
+
+[Decision]
+- Issue: Missing index on search column (performance test failed)
+- Fix: Add index on products.name column, optimize query
+- TDD: RED (performance test < 500ms fails) → GREEN (add index, query passes) → REFACTOR (add query explain logging)
+
+[Expected Outcome]
+- Fixed code: migrations/add_product_name_index.sql, src/repositories/ProductRepository.js (optimized query)
+- Fix summary: Changes (added index, rewrote query), Tests (performance test now passes at 120ms), Evidence (test output shows timing), Risk (medium - index creation on large table), Rollback (drop index migration)
+- Updated docs/dev-notes/3-dev-notes.md

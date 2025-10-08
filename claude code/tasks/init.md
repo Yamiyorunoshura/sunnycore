@@ -23,29 +23,93 @@
 
 ## [Steps]
   1. Preparation Phase
-    - Read all architecture, requirement, and task documents
-    - Identify required technology stack and development environment configuration
-    - Create todo list to track execution progress of Steps 2-4
+    - Understand the project's technology stack, environment requirements, and goals
+    - Establish progress tracking mechanism for initialization tasks
 
   2. Environment Setup Phase
-    - Set up development environment according to architecture documents (create virtual environment, install toolchain, configure databases)
-    - Install project dependencies and verify environment configuration correctness
-    - Record any environment configuration issues or dependency conflicts
-    - Build index for codebase
+    - Achieve fully configured and operational development environment
+    - Ensure all dependencies are installed and verified
+    - Achieve indexed codebase for efficient searching
 
   3. Document Generation Phase
-    - Create "{root}/CLAUDE.md" project guidance document with required sections (Technology Stack, Development Standards, Requirement Overview, Project Goals, Document Index)
-    - Extract technology selections from architecture documents for Technology Stack section
-    - Extract core requirement summary from requirement documents for Requirement Overview section
-    - List locations and purposes of all architecture and requirement documents in Document Index section
-    - Ensure document format is clear and readable
+    - Achieve complete project guidance document at "{root}/CLAUDE.md"
+    - Ensure all required sections are included with accurate information
+    - Ensure clear document index for easy navigation
 
   4. Verification Phase
-    - Confirm development environment has been successfully initialized and is usable
-    - Verify "{root}/CLAUDE.md" has been created and contains complete information
+    - Ensure development environment is successfully initialized and usable
+    - Ensure "{root}/CLAUDE.md" contains complete and accurate information
+
+## [Initialization-Guidelines]
+  1. **Extract from Architecture**
+    - Identify all technology stack, tools, and environment requirements explicitly stated in architecture docs
+    - Do not add undefined tools or configurations
+    - Set up only what's documented in requirements and architecture
+  
+  2. **CLAUDE.md Structure**
+    - Include: technology stack, development standards, requirement overview, project goals, document index
+    - Create comprehensive document index for architecture and requirement documents
+    - Enable easy navigation for subsequent development tasks
+  
+  3. **Codebase Indexing**
+    - Build searchable index of existing codebase (if Brownfield)
+    - Enable efficient searching during development phases
 
 ## [DoD]
   - [ ] All architecture, requirement, and task documents have been read
   - [ ] Development environment has been initialized and is usable (all necessary tools are installed and configured correctly)
   - [ ] Codebase index has been built
   - [ ] "{root}/CLAUDE.md" has been created and includes all required sections
+
+## [Example]
+
+### Example 1: Microservices Platform with Docker
+[Input]
+- Architecture: docs/architecture/tech-stack.md specifies Node.js, PostgreSQL, Redis, Docker
+- Requirements: docs/requirements/*.md (3 services to implement)
+- Epic: docs/epic.md (5 tasks)
+
+[Decision]
+- Environment setup: Install Docker, docker-compose, Node.js v18, PostgreSQL client
+- Initialize: Create docker-compose.yml with services (postgres, redis, api)
+- Index codebase: Run claude-context index for existing shared libraries
+- CLAUDE.md: Include tech stack, document index, development commands
+
+[Expected Outcome]
+- Working environment: docker-compose up runs all services
+- Codebase indexed for semantic search
+- CLAUDE.md with: tech stack (Node.js, Docker), document index (architecture/*, requirements/*), dev standards (TDD, SOLID)
+
+### Example 2: Python Data Pipeline
+[Input]
+- Architecture: docs/architecture/*.md specifies Python 3.11, Airflow, Spark, S3
+- Requirements: docs/requirements/*.md (ETL pipeline requirements)
+- Epic: docs/epic.md (4 data processing tasks)
+
+[Decision]
+- Environment: Setup Python venv, install Airflow, PySpark, AWS CLI
+- Initialize: Configure Airflow DAGs folder, S3 bucket connections
+- Index: Build codebase index for existing data transformers
+- CLAUDE.md: Document Airflow setup, data flow diagrams, S3 bucket structure
+
+[Expected Outcome]
+- Airflow webserver accessible at localhost:8080
+- S3 connections configured and tested
+- CLAUDE.md with: Python stack, Airflow DAG index, data pipeline overview, testing approach
+
+### Example 3: React Native Mobile App
+[Input]
+- Architecture: docs/architecture/*.md specifies React Native, Expo, Firebase
+- Requirements: docs/requirements/*.md (mobile app features)
+- Epic: docs/epic.md (6 screen implementation tasks)
+
+[Decision]
+- Environment: Install Node.js, Expo CLI, Android Studio, Xcode (macOS)
+- Initialize: expo init, Firebase project setup, configure app.json
+- Index: Index existing component library and navigation structure
+- CLAUDE.md: Document app structure, navigation flow, Firebase config, testing setup
+
+[Expected Outcome]
+- App runs on iOS/Android simulators via expo start
+- Firebase connected (auth, firestore configured)
+- CLAUDE.md with: React Native stack, screen navigation index, component library docs, Firebase setup guide

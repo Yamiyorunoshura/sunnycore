@@ -28,56 +28,30 @@
     - [Step 1: Search codebase for existing architecture implementations if Brownfield]
 
 ## [Steps]
-  1. Initialization and Project Type Detection Phase
-    - Read all workflow steps to understand expected work
-    - Check if "{ARCH}/" directory exists
-    - if directory exists then proceed to 1.1, else proceed to 1.2
-      
-      1.1. Brownfield Project
-        - Read all existing architecture documents from "{ARCH}/*.md"
-        - Identify extension points, constraints, and shared services
-        - Create todo list for Brownfield PRD creation
-      
-      1.2. Greenfield Project
-        - No existing architecture to consider
-        - Create todo list for Greenfield PRD creation
+  1. Initialization and Context Understanding Phase
+    - Understand the project context and determine project type (Greenfield/Brownfield)
+    - Ensure both project types are properly handled with appropriate context gathering
+    - Establish progress tracking mechanism for PRD creation
 
-  2. Requirements Phase
-    - Extract functional requirements from user input and context
-    - Deduplicate and atomize statements (single testable condition)
-    - Identify non-functional requirements across performance, reliability, security, compliance
-    - Quantify targets (e.g., P95 latency, uptime SLO) and constraints
-    - Define acceptance criteria for each requirement using Given-When-Then structure
+  2. Requirements Definition Phase
+    - Achieve complete functional requirements that are verifiable and measurable
+    - Achieve quantified non-functional requirements with clear targets
+    - Ensure all requirements have well-defined acceptance criteria in Given-When-Then format
 
   3. Architecture Design Phase
-    - if Brownfield then proceed to 3.1, else proceed to 3.2
-      
-      3.1. Brownfield Architecture Design
-        - Define new module responsibilities, boundaries, and interfaces
-        - Specify data flows and interaction methods with existing components
-        - Assess non-functional requirements compatibility
-        - Write "Impact Analysis" for all proposed changes
-        - Ensure compatibility with existing contracts
-      
-      3.2. Greenfield Architecture Design
-        - Define components, boundaries, and specify data flows based on requirements
-        - Ensure each requirement maps to an architecture element
-        - Define interaction contracts and data schemas
-        - Record architecture decisions and rationale
-        - Handle cross-cutting concerns (security, observability, performance)
+    - Ensure architecture design aligns with all requirements
+    - Ensure proper handling of both Greenfield (new design) and Brownfield (extending existing) scenarios
+    - Achieve complete architecture documentation with components, data flows, and contracts
+    - Ensure impact analysis is documented for all changes in Brownfield projects
 
   4. PRD Integration Phase
-    - Integrate requirements, architecture, and tasks into PRD template structure
-    - Set project-info.type to "greenfield" or "brownfield" based on Step 1 determination
-    - Include requirement-to-architecture-to-task traceability
-    - Identify requirement dependencies and execution order
-    - Add constraints, assumptions, and risks sections
+    - Achieve integrated PRD document with complete traceability
+    - Ensure proper mapping between requirements, architecture elements, and tasks
+    - Ensure dependencies and execution order are clearly identified
 
   5. Finalization Phase
-    - Cross-verify PRD completeness and consistency
-    - Ensure all requirements have corresponding architecture elements
-    - Write PRD to "{PRD}" in Markdown format
-    - Present the complete PRD to the user and request confirmation or modification suggestions`
+    - Achieve complete, consistent PRD document saved to "{PRD}"
+    - Ensure user confirmation is obtained for the final PRD
 
 ## [Error-Handling]
   1. Directory check failure: Log error and proceed as Greenfield
@@ -87,6 +61,26 @@
   5. Architecture design infeasibility: Record technical limitations and propose alternatives
   6. Architecture design incompatible with non-functional requirements: Document incompatibility and request user guidance on trade-offs
   7. User rejects final PRD: Record rejection reasons and iterate on requirements/architecture based on feedback
+
+## [PRD-Design-Guidelines]
+  1. **Requirements: Verifiable & Quantified**
+    - All requirements must be testable with clear success/failure criteria
+    - Use Given-When-Then format; quantify non-functional requirements (e.g., "P95 < 200ms")
+    - Map dependencies and priorities between requirements
+  
+  2. **Architecture: Mapped & Justified**
+    - Establish 100% bidirectional mapping: requirements ↔ architecture components
+    - Record key decisions using ADR format (context, rationale, trade-offs)
+    - Address cross-cutting concerns (security, logging, error handling) systematically
+  
+  3. **Integration: Impact Analysis Required**
+    - For Brownfield: analyze impact on existing system, preserve contracts
+    - Identify extension points and shared services
+    - Clearly document any breaking changes with migration path
+  
+  4. **Tasks: Feature-Level & Traceable**
+    - Break requirements into feature-level tasks (clear scope, verifiable outcomes)
+    - Ensure complete traceability: requirements → architecture → tasks
 
 ## [DoD]
   - [ ] Project type (Greenfield/Brownfield) has been determined
@@ -101,4 +95,59 @@
   - [ ] All requirements are verifiable and outcome-oriented
   - [ ] PRD follows template structure and is saved to "{PRD}"
   - [ ] User confirmation of the final PRD has been obtained
+
+## [Example]
+
+### Example 1: Add Export Feature to Dashboard (Brownfield)
+[Input]
+- User requirement: "Users need to export dashboard data to CSV and PDF"
+- Existing architecture: Dashboard Service (React), Analytics API (Node.js), PostgreSQL
+- Template: prd-tmpl.yaml
+
+[Decision]
+- Project type: Brownfield (docs/architecture/ exists)
+- Requirements: REQ-001 (CSV export), REQ-002 (PDF export), NFR-001 (export < 5s for 10K rows)
+- Architecture: Add Export Service using existing Analytics API data
+- Tasks: Task-1 (CSV export), Task-2 (PDF export)
+- Impact: No breaking changes, new API endpoints only
+
+[Expected Outcome]
+- docs/PRD.md with requirements, architecture, and tasks in one document
+- Impact analysis showing compatibility with existing Dashboard Service
+- 100% requirement-to-architecture-to-task mapping
+
+### Example 2: Two-Factor Authentication (Greenfield Module)
+[Input]
+- User requirement: "Add 2FA support for user login"
+- No existing architecture (new project)
+- Template: prd-tmpl.yaml
+
+[Decision]
+- Project type: Greenfield (no docs/architecture/)
+- Requirements: REQ-001 (TOTP generation), REQ-002 (verify code), NFR-001 (TOTP standard compliance)
+- Architecture: Auth Service (Python FastAPI), Redis (TOTP storage), User DB (PostgreSQL)
+- Tasks: Task-1 (TOTP setup), Task-2 (login verification), Task-3 (backup codes)
+
+[Expected Outcome]
+- docs/PRD.md with complete design for new 2FA module
+- Architecture section with component diagrams and data flows
+- Tasks with clear DoD and acceptance criteria
+
+### Example 3: Add Caching Layer to API (Brownfield)
+[Input]
+- User requirement: "Improve API response time by adding caching"
+- Existing: REST API (Express.js), MongoDB
+- Template: prd-tmpl.yaml
+
+[Decision]
+- Project type: Brownfield
+- Requirements: REQ-001 (cache GET endpoints), NFR-001 (P95 latency < 100ms), NFR-002 (cache hit rate > 80%)
+- Architecture: Add Redis cache layer, preserve existing API contracts
+- Tasks: Task-1 (cache middleware), Task-2 (cache invalidation), Task-3 (monitoring)
+- Impact: Middleware addition, no API signature changes
+
+[Expected Outcome]
+- docs/PRD.md with caching design integrated into existing architecture
+- Impact analysis documenting backward compatibility
+- Performance metrics and acceptance criteria clearly defined
 

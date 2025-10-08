@@ -33,49 +33,52 @@
 
 ## [Steps]
   1. Input Validation Phase
-    - Verify existence of "{LOCK}" and read version number (format: "version = x.x.x")
-    - Parse version name from lock file (e.g., "1.12.8")
-    - Verify existence of completion report template
-    - Recursively scan "{root}/docs/" directory to get all file list (including all subdirectories)
-    - If required input files are missing (sunnycore.lock, template), must generate a missing list in the terminal and halt execution
-    - Create todo list based on actual tasks
+    - Ensure version number is parsed from lock file
+    - Ensure all required input files exist and are valid
+    - Establish progress tracking mechanism for conclusion tasks
 
   2. Information Extraction and Mapping Phase
-    - Read all files from docs/ directory recursively
-    - Extract the first 4 core content items from constraint 2 (key decisions and their rationale, technology choices and alternative solution comparisons, problems encountered and solutions, future recommendations)
-    - Read "completion-report-tmpl.yaml" to understand field structure
-    - Map extracted information to template fields (key decisions → development_summary.key_decisions, technology choices → development_summary.technologies_used, problems → development_summary.challenges_encountered, future recommendations → recommendations.future_improvements, DoD evidence → Verification results section)
-    - Use claude-context to search code to supplement implementation details (when the report mentions specific technical choices but does not annotate evidence in "file path:line number" format)
+    - Achieve complete extraction of all 5 core content items
+    - Ensure proper mapping to template fields
+    - Ensure code evidence is supplemented where needed
 
   3. Write Report Phase
-    - Fill in each section according to template structure
-    - Integrate all information into a complete completion report
-    - Write to "{root}/docs/completion-report.md"
+    - Achieve complete completion report at "{root}/docs/completion-report.md"
+    - Ensure all sections follow template structure
 
   4. Quality Check Phase
-    - Verify report complies with template requirements (structure is complete)
-    - Verify report content is complete (check item by item whether the 5 core content items required by constraint 2 are clearly presented in the report and annotate corresponding sections)
-    - Check if all DoD verification evidence is included
-    - If deficiencies are found, should return to Step 3 to fix the report (maximum 2 iterations, if still deficient then annotate "To be supplemented" and continue execution)
+    - Ensure report meets template requirements with complete structure
+    - Ensure all 5 core content items are clearly presented
+    - Ensure proper handling of deficiencies with iterative fixes
 
   5. Create Archive Directory Phase
-    - Create "{ARCHIVE}/{version_name}/" directory if it does not exist
-    - Verify directory creation was successful
+    - Ensure archive directory "{ARCHIVE}/{version_name}/" is created and verified
 
   6. Move Files to Archive Phase
-    - For both Traditional and PRD workflows:
-      * Move all files and directories from "{root}/docs/" EXCEPT architecture/, knowledge/, and completion-report.md to "{ARCHIVE}/{version_name}/"
-    - Suggested command: `find "{root}/docs" -mindepth 1 -maxdepth 1 ! -name "architecture" ! -name "knowledge" ! -name "completion-report.md" -exec mv -n {} "{ARCHIVE}/{version_name}/" \;`
-    - If mv -n fails because files already exist, record a warning and annotate "Files already exist in archive folder"
-    - Execute verification command: `ls -la "{root}/docs"` to confirm only architecture/, knowledge/, and completion-report.md remain
-    - Execute verification command: `ls -la "{ARCHIVE}/{version_name}"` to confirm archived files exist in the target folder
+    - Ensure proper file archiving with architecture/, knowledge/, and completion-report.md preserved
+    - Ensure verification of archive operations with proper error handling
 
   7. Update Document References Phase
-    - Scan all files in "{ARCH}/" and "{KNOWLEDGE}/" directories
-    - Identify all document (including completion-report.md) references that point to archived files (must not edit the document reference pointing the previous archived files(e.g. "archive/1.14.4/xxx/yyy.md"))
-    - For each reference to an archived file, update the path to point to "archive/{version_name}/xxx/yyy.md" or appropriate relative path from current location
-    - Use search_replace tool to update references in each file
-    - Verify all updated references are correct by checking if referenced files exist in archive location
+    - Ensure all document references are updated to point to correct archive paths
+    - Ensure reference updates are verified for correctness
+
+## [Completion-Report-Guidelines]
+  1. **Core Content (5 Required Items)**
+    - **Decisions**: Key decisions with rationale, context, and trade-offs
+    - **Technical Choices**: Technology selection with pros/cons and alternatives
+    - **Issues & Solutions**: Problems encountered, root cause, solutions, preventive measures
+    - **Evidence**: Verifiable evidence for all statements (format: file_path:line_number)
+    - **Recommendations**: Future improvements and optimization directions
+  
+  2. **Traceability & Verification**
+    - Link all statements to actual code, test results, or document sections
+    - Use DoD verification evidence format: "file_path:Lstart-Lend"
+    - If any core item missing from sources, annotate "To be supplemented: missing XX item"
+  
+  3. **Version & Archiving**
+    - Parse version from sunnycore.lock file (format: "version = x.x.x")
+    - Archive all docs to "{ARCHIVE}/{version_name}/" except architecture/, knowledge/, completion-report.md
+    - Update references in preserved docs to point to archive paths
 
 ## [DoD]
   - [ ] *.lock file has been read and version number has been parsed successfully
@@ -86,3 +89,41 @@
   - [ ] All files and directories in docs/ EXCEPT architecture/, knowledge/, and completion-report.md have been moved to {ARCHIVE}/{version_name}/
   - [ ] Only architecture/, knowledge/, and completion-report.md remain in docs/ directory
   - [ ] Document references in architecture/ and knowledge/ have been updated to point to correct archive paths
+
+## [Example]
+
+### Example 1: E-commerce Feature Completion
+[Input]
+- Lock file: sunnycore.lock (version = 1.2.0)
+- Documents: docs/PRD.md, docs/prd-dev-notes.md, docs/cutover-report.md
+- Template: completion-report-tmpl.yaml
+
+[Decision]
+- Version: 1.2.0 (parsed from lock file)
+- Workflow: PRD (PRD.md exists)
+- Extract: Key decisions (async payment processing - ADR-003), tech choices (Stripe over PayPal), issues (rate limit bug fixed), evidence (src/services/PaymentService.js:L42-L56)
+- Archive: Move PRD.md, prd-dev-notes.md, cutover-report.md to docs/archive/1.2.0/
+
+[Expected Outcome]
+- docs/completion-report.md with all 5 core items (decisions, tech choices, issues/solutions, evidence, recommendations)
+- docs/archive/1.2.0/ contains PRD.md, dev-notes, cutover-report.md
+- docs/ only has architecture/, knowledge/, completion-report.md
+- References updated: knowledge/best-practices.md now references docs/archive/1.2.0/prd-dev-notes.md
+
+### Example 2: Microservices Migration Project
+[Input]
+- Lock file: sunnycore.lock (version = 2.0.0)
+- Documents: docs/requirements/*.md, docs/architecture/*.md, docs/epic.md, docs/plans/*.md, docs/dev-notes/*.md (8 tasks), docs/review/*.md
+- Template: completion-report-tmpl.yaml
+
+[Decision]
+- Version: 2.0.0 (major version, architecture change)
+- Workflow: Traditional/Full (epic.md, plans/ exist)
+- Extract: Decisions (strangler fig pattern - ADR-001), tech choices (gRPC for inter-service communication), issues (data migration challenges), evidence (src/services/OrderService/server.js:L10-L80)
+- Archive: Move requirements/, plans/, dev-notes/, review/, epic.md to docs/archive/2.0.0/
+
+[Expected Outcome]
+- docs/completion-report.md documenting microservices migration journey
+- All 5 core items covered with detailed evidence from codebase
+- docs/archive/2.0.0/ contains all project artifacts except architecture/ and knowledge/
+- architecture/components.md references updated to point to archive for historical decisions

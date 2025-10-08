@@ -30,38 +30,44 @@
 
 ## [Steps]
   1. Evaluate Existing Architecture Phase
-    - Review current architecture under "{ARCH}/*.md"
-    - Identify extension points, constraints, and shared services
-    - Map affected domains, bounded contexts, and dependencies
-    - Create todo list to track subsequent design and writing tasks
+    - Understand current architecture, extension points, and constraints
+    - Identify affected domains and dependencies
+    - Establish progress tracking mechanism for design tasks
 
   2. Design New Module Phase
-    - Define responsibilities, boundaries, and interfaces of new module
-    - Specify data flows and interaction methods with existing components
-    - Assess non-functional requirements (security, observability, performance) and compatibility
-    - Write "Impact Analysis" for all proposed changes to explain potential impact on existing system
+    - Achieve complete new module design with clear boundaries and interfaces
+    - Ensure proper integration with existing components
+    - Ensure comprehensive impact analysis for all proposed changes
 
-  3. Writing and Sharding Phase
-    - Use architecture template to draft "{root}/docs/architecture.md" content in Markdown format
-    - Ensure sections emphasize new module and integration impact
-    - Present draft content to user showing key sections (new module design, integration points, impact analysis)
-    - if user approves draft then proceed to 3.1, else proceed to 3.2
-      
-      3.1. Write Final Documents
-        - Write approved content to "{root}/docs/architecture.md"
-        - Execute sharding script: uv run "{SCRIPTS}/shard-architecture.py"
-        - Verify documents appear under "{ARCH}/"
-        - if execution succeeds then proceed to Step 4, else check format compliance and re-execute
-      
-      3.2. Revise Based on Feedback
-        - Collect user feedback on what needs to be changed
-        - Revise the draft content according to feedback
-        - Return to present revised draft and request approval again
+  3. Documentation and Approval Phase
+    - Achieve compliant architecture draft following template structure
+    - Ensure user approval is obtained with proper feedback integration
+    - Achieve successful architecture sharding with verified output under "{ARCH}/"
 
   4. Finalization Phase
-    - Cross-check against constraints and guidance questions; fix gaps and inconsistencies
-    - Confirm all impact analyses are included and complete
-    - Verify compatibility between new and old modules
+    - Ensure all impact analyses are complete and accurate
+    - Ensure compatibility between new and existing modules is verified
+
+## [Brownfield-Architecture-Guidelines]
+  1. **Preserve Existing Contracts**
+    - Maintain all public API interfaces, data models, and event formats
+    - Any breaking changes must include explicit "Impact Analysis" section
+    - Document migration path and backward compatibility strategy
+  
+  2. **Extension Point Analysis**
+    - Identify where new functionality integrates with existing system
+    - Map dependencies on shared services and constraints
+    - Verify compatibility with existing technical stack
+  
+  3. **Template Compliance & Mapping**
+    - Follow template structure; include all sections from existing architecture
+    - Establish mapping: new requirements → new/modified components → existing system
+    - Use `Reference: {file path}#{section}` format for all reviewed content
+  
+  4. **Decision Records for Changes**
+    - Document why changes are needed with context and rationale
+    - Explain integration approach and trade-offs
+    - Annotate source references (source_refs) for all architecture statements
 
 ## [DoD]
   - [ ] "{REQ}" and "{ARCH}/*.md" have been thoroughly reviewed
@@ -74,6 +80,54 @@
   - [ ] "shard-architecture.py" has been executed and shard file generation has been verified
 
 ## [Example]
+
+### Example 1: Add OAuth2 to Existing REST API
+[Input]
+- Requirements: REQ-001 (OAuth2 authentication)
+- Existing architecture: REST API with basic auth, User Service, PostgreSQL
+- Template: architecture-tmpl.yaml
+
+[Decision]
+- New component: OAuth2 Server (integrate with existing User Service)
+- Preserve existing API contracts (add Authorization header only)
+- Impact Analysis: All API endpoints need authentication middleware update
+
+[Expected Outcome]
+- docs/architecture.md with OAuth2 Server component and integration points
+- Impact Analysis section documenting changes to existing API Gateway
+- Reference: docs/architecture/components.md#user-service for integration context
+
+### Example 2: Add Analytics Module to CMS
+[Input]
+- Requirements: REQ-001 (page view tracking), REQ-002 (user behavior analytics)
+- Existing: Content Management System with PostgreSQL, Redis cache
+- Knowledge base: best-practices-caching.md
+
+[Decision]
+- New components: Analytics Collector (async), Analytics DB (ClickHouse)
+- Extension point: Event bus (existing) for analytics events
+- No breaking changes: Analytics operates independently via event subscription
+
+[Expected Outcome]
+- docs/architecture.md showing Analytics module integrated via event bus
+- Compatibility verification: existing components unchanged
+- Updated architecture documents showing clear module boundaries
+
+### Example 3: Migrate Monolith Order Service to Microservice
+[Input]
+- Requirements: REQ-001 (extract order processing to separate service)
+- Existing: Monolithic e-commerce app, shared PostgreSQL database
+- Constraints: Zero downtime migration required
+
+[Decision]
+- New component: Order Microservice with dedicated database
+- Migration strategy: Strangler Fig pattern with API Gateway routing
+- Impact Analysis: Database schema split, API contract evolution
+
+[Expected Outcome]
+- docs/architecture.md with migration phases and dual-write strategy
+- Impact Analysis documenting breaking changes and migration path
+- ADRs explaining Strangler Fig pattern choice and trade-offs
 
 Work directory structure example:
 

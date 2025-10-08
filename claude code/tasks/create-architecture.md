@@ -30,43 +30,49 @@
 
 ## [Steps]
   1. Requirement Analysis Phase
-    - Verify the completeness and consistency of all requirements under "{REQ}/*.md"
-    - Extract functional/non-functional requirements and convert non-functional requirements into architecture constraints
-    - Create mapping matrix (requirement ID → component/decision) and identify gaps or conflicts
-    - Create todo list to track subsequent architecture design tasks
+    - Ensure complete understanding of all requirements and their implications
+    - Achieve complete requirement-to-architecture mapping matrix with 100% coverage
+    - Establish progress tracking mechanism for architecture design tasks
 
   2. Architecture Design Phase
-    - Define components, boundaries, and specify data flows based on requirement analysis
-    - Ensure each requirement maps to an architecture element; define interaction contracts and data schemas
-    - Record decisions (recommend ADR format or table format) and include requirement traceability
-    - Handle cross-cutting concerns (security, observability, performance)
+    - Achieve comprehensive architecture design with all components and boundaries defined
+    - Ensure every requirement maps to specific architecture elements
+    - Ensure all cross-cutting concerns are properly addressed
 
-  3. Writing Phase
-    - Use "{TMPL}/architecture-tmpl.yaml" to draft "{root}/docs/architecture.md" content
-    - Include requirement traceability matrix and ensure each mapping relationship has been handled
-    - Present draft content to user showing key sections (overview, components, traceability matrix, design decisions)
-    - if user approves draft then proceed to 3.1, else proceed to 3.2
-      
-      3.1. Write Final Documents
-        - Write approved content to "{root}/docs/architecture.md"
-        - Execute uv run "{SCRIPTS}/shard-architecture.py"
-        - Verify output appears under "{ARCH}/"
-        - if execution succeeds then proceed to Step 4, else check if "architecture.md" format complies with template specifications, fix and re-execute
-      
-      3.2. Revise Based on Feedback
-        - Collect user feedback on what needs to be changed
-        - Revise the draft content according to feedback
-        - Return to present revised draft and request approval again
+  3. Documentation and Approval Phase
+    - Achieve compliant architecture draft following template structure
+    - Ensure user approval is obtained with proper feedback integration
+    - Achieve successful architecture sharding with verified output under "{ARCH}/"
 
   4. Final Verification Phase
-    - Cross-verify through mapping matrix whether architecture satisfies all requirements
-    - Fix typographical errors and standardize terminology
-    - Confirm architecture decisions are justified by requirements
+    - Ensure architecture satisfies all requirements through mapping verification
+    - Achieve consistent and justified architecture decisions
 
 ## [Error-Handling]
   1. "shard-architecture.py" execution failure: Check if "architecture.md" format complies with template specifications, fix and re-execute
   2. Unresolvable requirement conflicts: Record conflicts and confirm with requirement authors, do not make assumptions
   3. Architecture design infeasibility: Record technical limitations and propose alternative solutions
+
+## [Architecture-Design-Guidelines]
+  1. **Template Compliance & Complete Mapping**
+    - Follow template structure strictly (overview, components, data flows, ADRs)
+    - Establish 100% bidirectional mapping: requirements ↔ architecture elements
+    - Verify all functional and non-functional requirements have corresponding architecture design
+  
+  2. **Decision Records (ADR)**
+    - Document key decisions with context, rationale, alternatives, and trade-offs
+    - Explain why this approach was chosen over others
+    - Include expected impact and potential technical debt
+  
+  3. **Cross-Cutting Concerns**
+    - Address security, observability, performance, reliability systematically
+    - Define consistency mechanisms (authentication, logging, error handling) across components
+    - Transform non-functional requirements into concrete architecture constraints
+  
+  4. **Traceability & Justification**
+    - Annotate source references for all architecture statements
+    - Ensure every decision is justified by requirements or business drivers
+    - Use clear terminology consistently throughout documentation
 
 ## [DoD]
   - [ ] Verified that "{REQ}/*.md" exists and is complete
@@ -78,6 +84,51 @@
   - [ ] "shard-architecture.py" has been executed and shard file generation has been verified
 
 ## [Example]
+
+### Example 1: Real-time Chat Application
+[Input]
+- Requirements: REQ-001 (WebSocket messaging), REQ-002 (message persistence), NFR-001 (< 100ms latency)
+- Template: architecture-tmpl.yaml
+
+[Decision]
+- Components: WebSocket Gateway, Message Broker (Redis), Message Store (MongoDB)
+- ADR-001: Choose WebSocket over HTTP polling for real-time performance
+- Mapping: REQ-001 → WebSocket Gateway, REQ-002 → Message Store
+
+[Expected Outcome]
+- docs/architecture.md with components, data flows, ADRs
+- docs/architecture/overview.md, components.md, traceability_matrix.md (after sharding)
+- 100% requirement-to-architecture mapping verified
+
+### Example 2: IoT Device Management Platform
+[Input]
+- Requirements: REQ-001 (device registration), REQ-002 (telemetry ingestion), NFR-001 (handle 10K devices)
+- Template: architecture-tmpl.yaml
+
+[Decision]
+- Components: Device Registry (PostgreSQL), Telemetry Ingester (Kafka), Time-Series DB (InfluxDB)
+- ADR-001: Event-driven architecture for scalability
+- Cross-cutting: Authentication (JWT), Monitoring (Prometheus)
+
+[Expected Outcome]
+- docs/architecture.md with event-driven design and scalability considerations
+- Sharded files showing clear component boundaries and data flows
+- Traceability matrix linking all requirements to architecture elements
+
+### Example 3: Financial Transaction Processing
+[Input]
+- Requirements: REQ-001 (payment processing), REQ-002 (fraud detection), NFR-001 (ACID compliance)
+- Template: architecture-tmpl.yaml
+
+[Decision]
+- Components: Payment Gateway, Fraud Analyzer (ML service), Transaction DB (PostgreSQL)
+- ADR-001: Synchronous processing for ACID guarantees
+- ADR-002: Two-phase commit for distributed transactions
+
+[Expected Outcome]
+- docs/architecture.md emphasizing reliability and data consistency
+- Architecture documents with detailed ADRs explaining transaction guarantees
+- Complete mapping of functional and non-functional requirements
 
 Work directory structure example:
 

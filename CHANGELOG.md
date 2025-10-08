@@ -7,6 +7,35 @@
 
 ## [Unreleased]
 
+## [3.0.0] - sunnycore v3.0.0
+
+### Changed
+- 重構文檔架構：將指導方針從角色命令文件遷移至任務文件，提升文檔組織性與可維護性 (**破壞性變更**)
+  - 從 5 個角色命令文件中移除大量指導方針章節（約 700 行）
+    * `sunnycore_architect.md`：移除 Project-Summary-Guidelines、Knowledge-Management-Guidelines、Architecture-Management-Guidelines
+    * `sunnycore_dev.md`：移除 Development-Guidelines
+    * `sunnycore_pm.md`：移除 Requirements-Analysis-Guidelines、Architecture-Design-Guidelines、Task-Management-Guidelines
+    * `sunnycore_po.md`：移除部分指導方針內容
+    * `sunnycore_qa.md`：移除大量審查指導方針
+  - 將指導方針整合至對應的任務文件中（約 1500 行新增內容）
+    * 在 `brownfield-tasks.md` 中新增 Development-Guidelines（TDD 實踐、程式碼品質標準、測試要求、文檔與風險管理）
+    * 在 `create-architecture.md` 中新增 Architecture-Design-Guidelines（模板合規、決策記錄、橫切關注點、可追溯性與正當性）
+    * 在所有任務文件中增強結構：新增詳細的步驟說明、完整的示例章節、明確的目標描述
+  - 優化任務文件可讀性：
+    * 簡化步驟描述，將原本的詳細子步驟改為結果導向的目標描述
+    * 統一步驟命名格式，提升文檔一致性
+    * 移除冗餘的條件分支說明，專注於核心流程
+  - 提升系統可維護性：將通用指導方針集中管理，減少角色文件的複雜度，使任務執行更加聚焦
+
+### BREAKING CHANGES
+- **文檔結構變更**：
+  - 角色命令文件不再包含詳細的指導方針章節，僅保留核心職責與命令定義
+  - 所有詳細的執行指導方針現在位於對應的任務文件中
+  - 任務文件的步驟描述從詳細的操作步驟改為結果導向的目標描述
+- **影響範圍**：
+  - 需要更新任何直接引用舊指導方針章節的外部文檔或腳本
+  - 任務執行流程保持不變，僅文檔組織結構發生變化
+
 ## [2.1.1] - sunnycore v2.1.1
 
 ### Changed

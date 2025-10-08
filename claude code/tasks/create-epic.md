@@ -24,37 +24,40 @@
 
 ## [Steps]
   1. Research Phase
-    - Verify all necessary input files (including templates) exist and are readable. If reading fails, stop responding and explicitly notify the user of missing file paths
-    - Read requirement and architecture source documents
-    - Identify scope, success criteria, and constraints to drive task design
-    - Map non-functional requirements to cross-cutting tasks
-    - Create todo list to track subsequent task design work
+    - Understand requirements, architecture, and project scope
+    - Identify success criteria and constraints for task design
+    - Establish progress tracking mechanism for task design work
 
   2. Drafting Phase
-    - Use template to generate feature-level tasks
-    - Each task should represent a major feature within a module
-    - Include brief acceptance hints to ensure verifiability at feature level
-    - Logically group tasks by module or feature area, avoid overlap
-    - Deliverable: Task draft in Markdown format
+    - Achieve feature-level task breakdown with proper grouping
+    - Ensure each task represents a verifiable feature with clear scope
+    - Ensure tasks are logically organized without overlap
 
   3. Review Phase
-    - Deduplicate and remove non-actionable items
-    - Ensure each task represents a feature-level scope, not overly atomized
-    - Ensure each task is traceable to requirements
-    - Verify format complies with template requirements
+    - Ensure tasks are deduplicated and actionable
+    - Ensure proper feature-level granularity and requirement traceability
+    - Ensure format compliance with template requirements
 
   4. Finalization Phase
-    - Prepare draft task list in Markdown format with brief introduction explaining grouping and scope
-    - Present draft content to user showing all task groups and individual tasks
-    - if user approves draft then proceed to 4.1, else proceed to 4.2
-      
-      4.1. Write Final Document
-        - Write approved task list to "{EPIC}" (Markdown format)
-      
-      4.2. Revise Based on Feedback
-        - Collect user feedback on what needs to be changed (e.g., task granularity, grouping, acceptance criteria)
-        - Revise the task list according to feedback
-        - Return to present revised draft and request approval again
+    - Achieve complete task list draft with clear introduction
+    - Ensure user approval is obtained with proper feedback integration
+    - Achieve final epic document saved to "{EPIC}"
+
+## [Task-Design-Guidelines]
+  1. **Feature-Level Tasks**
+    - Each task represents a major feature (e.g., "Implement login", "Add export function")
+    - Tasks should be completable within reasonable scope; description ≤ 14 characters
+    - Clear and verifiable outcomes with specific DoD
+  
+  2. **Complete Traceability**
+    - Map each task to specific requirement IDs and architecture components
+    - Ensure 100% requirement coverage across all tasks
+    - Identify and document dependencies between tasks
+  
+  3. **Results-Oriented**
+    - Focus on deliverables and acceptance criteria, not implementation steps
+    - Exclude operational actions (git commit, npm install) unless explicitly requested
+    - Atomic breakdown will happen later in create-plan phase using TDD cycles
 
 ## [DoD]
   - [ ] All requirement and architecture documents have been read
@@ -66,6 +69,56 @@
   - [ ] No file names or key names use spaces; kebab-case is enforced
 
 ## [Example]
+
+### Example 1: Data Analytics Pipeline
+[Input]
+- Requirements: REQ-001 (data ingestion), REQ-002 (transformation), REQ-003 (visualization)
+- Architecture: Kafka, Spark, Dashboard Service
+- Template: epic-tmpl.yaml
+
+[Decision]
+- Task-1: Implement data ingestion (maps to REQ-001, Kafka Consumer)
+- Task-2: Implement ETL pipeline (maps to REQ-002, Spark Jobs)
+- Task-3: Build analytics dashboard (maps to REQ-003, Dashboard Service)
+
+[Expected Outcome]
+- docs/epic.md with 3 feature-level tasks
+- Each task has clear DoD and requirement traceability
+- Tasks are logically ordered: ingestion → transformation → visualization
+
+### Example 2: Booking System
+[Input]
+- Requirements: REQ-001 (search availability), REQ-002 (create reservation), REQ-003 (payment processing)
+- Architecture: Search API, Booking Service, Payment Gateway
+- Template: epic-tmpl.yaml
+
+[Decision]
+- Task-1: Implement availability search (REQ-001 → Search API)
+- Task-2: Implement booking creation (REQ-002 → Booking Service)
+- Task-3: Integrate payment (REQ-003 → Payment Gateway)
+- Dependencies: Task-3 depends on Task-2
+
+[Expected Outcome]
+- docs/epic.md with tasks ordered by dependencies
+- Each task has requirement mapping and architecture component references
+- No operational actions (git commit, npm install) included
+
+### Example 3: Inventory Management
+[Input]
+- Requirements: REQ-001 (product CRUD), REQ-002 (stock tracking), REQ-003 (low stock alerts), REQ-004 (reporting)
+- Architecture: Product Service, Inventory Service, Notification Service
+- Template: epic-tmpl.yaml
+
+[Decision]
+- Task-1: Implement product management (REQ-001 → Product Service)
+- Task-2: Implement stock tracking (REQ-002 → Inventory Service)
+- Task-3: Build alert system (REQ-003 → Notification Service)
+- Task-4: Create reports (REQ-004 → Inventory Service)
+
+[Expected Outcome]
+- docs/epic.md with 4 feature-level tasks
+- 100% requirement coverage across tasks
+- Each task description ≤14 characters, clear and actionable
 
 Epic format with checkboxes:
 

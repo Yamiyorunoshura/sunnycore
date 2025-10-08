@@ -31,26 +31,41 @@
 
 ## [Steps]
   1. Preparation Phase
-    - Read all development notes and review reports
-    - Identify best practices marked as platinum level and record in temporary list
-    - Identify all errors encountered during development process (including error type, occurrence context, solution) and record in temporary list
-    - Create todo list to track subsequent knowledge base conception and production tasks
+    - Identify all platinum-level best practices and development errors
+    - Establish progress tracking mechanism for knowledge curation tasks
 
   2. Knowledge Base Design Phase
-    - Conceive the structure and classification method of project knowledge base (classify by technical domain/error type/development phase based on actual content)
-    - Evaluate consideration factors including content volume, technical domain distribution, and error type diversity
-    - Decide organization structure for best practices and errors (e.g., API design/error handling/testing strategy)
-    - Plan document naming conventions and semantic classification approach
+    - Achieve well-structured knowledge base organization scheme
+    - Ensure proper semantic classification for best practices and errors
 
-  3. Produce Documents Phase
-    - Create "{KNOWLEDGE}/" directory if it does not exist
-    - Produce best practices to corresponding documents by classification (document naming: "best-practices-{domain}.md" or "best-practices.md")
-    - Produce error cases to corresponding documents by classification (document naming: "errors-{type}.md" or "errors.md")
-    - Document content format: Each knowledge point includes title, description, evidence source, applicable scenarios
-    - Annotate evidence source for each knowledge point (annotation format: file path + relevant section, e.g., "docs/dev-notes/feature-x.md" [Error Handling] paragraph)
+  3. Document Production Phase
+    - Achieve complete knowledge base documents under "{KNOWLEDGE}/"
+    - Ensure all knowledge points have proper evidence sources and annotations
+    - Ensure proper classification with semantic naming conventions
 
   4. Finalization Phase
-    - Archive the "review-results/" and "dev-notes/" files to "{ARCHIVE}/{version_name}/"
+    - Ensure review and development notes are archived to "{ARCHIVE}/{version_name}/"
+
+## [Knowledge-Curation-Guidelines]
+  1. **Platinum-Level Practices Only**
+    - Include only platinum-level practices marked in review reports (no self-judgment needed)
+    - If none exist, record "No sufficiently validated best practices at this stage" with explanation
+    - Each practice must include: title, description, applicable scenarios, evidence source
+  
+  2. **Error Documentation**
+    - Record all development errors with: type, context, solution, prevention
+    - Each error case must be reproducible and verifiable
+    - Annotate evidence sources (format: "file_path [Section Name]")
+  
+  3. **Semantic Organization**
+    - Classify by semantic topics (e.g., api-design, error-handling, authentication)
+    - Use semantic naming: best-practices-{topic}.md, errors-{topic}.md, problem-solving-{topic}.md
+    - Ensure clear structure for easy search and maintenance
+  
+  4. **Conflict Handling**
+    - When contradictory practices found, preserve all evidence without forcing choices
+    - Annotate conflict points and applicable scenarios for each approach
+    - Support context-based decision-making with complete information
 
 ## [DoD]
   - [ ] All files in "{REVIEW}/" and "{DEVNOTES}/" have been read
@@ -59,6 +74,42 @@
   - [ ] All platinum-level best practices have been identified and produced by classification
   - [ ] All errors during development process have been identified and recorded (including type, context, solution)
   - [ ] Each knowledge point has clear evidence source annotation
+
+## [Example]
+
+### Example 1: API Development Project
+[Input]
+- Review reports: docs/review/1-review.md (platinum: JWT rotation pattern), docs/review/3-review.md (platinum: circuit breaker)
+- Dev notes: docs/dev-notes/2-dev-notes.md (error: race condition in cache), docs/dev-notes/4-dev-notes.md (error: SQL injection vulnerability)
+- Cutover report: docs/cutover-report.md (best practice: API versioning strategy)
+
+[Decision]
+- Platinum practices found: 3 (JWT rotation, circuit breaker, API versioning)
+- Errors found: 2 (race condition, SQL injection)
+- Classify by semantic topics: best-practices-security.md, best-practices-api-design.md, errors-concurrency.md, errors-security.md
+
+[Expected Outcome]
+- docs/knowledge/best-practices-security.md (JWT rotation with evidence source: docs/review/1-review.md)
+- docs/knowledge/best-practices-api-design.md (circuit breaker, API versioning)
+- docs/knowledge/errors-concurrency.md (race condition case with solution)
+- docs/knowledge/errors-security.md (SQL injection case with prevention)
+
+### Example 2: Data Pipeline Development
+[Input]
+- Review reports: docs/review/2-review.md (gold: error handling, not platinum), docs/review/5-review.md (platinum: idempotent data processing)
+- Dev notes: docs/dev-notes/1-dev-notes.md (error: memory leak in streaming), docs/dev-notes/3-dev-notes.md (platinum: backpressure handling)
+- Progress: docs/progress.md (critical decision: Kafka vs RabbitMQ)
+
+[Decision]
+- Platinum practices: 2 (idempotent processing, backpressure handling)
+- Gold practices: Excluded (not platinum level)
+- Errors: 1 (memory leak)
+- Classification: best-practices-data-processing.md, errors-performance.md
+
+[Expected Outcome]
+- docs/knowledge/best-practices-data-processing.md (2 entries: idempotent processing from review/5, backpressure handling from dev-notes/3)
+- docs/knowledge/errors-performance.md (memory leak case with investigation and solution)
+- Each entry has evidence source annotation (file_path [Section Name])
 
 ## [Example]
   **Knowledge Management Architecture**:

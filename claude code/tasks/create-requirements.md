@@ -26,47 +26,42 @@
 
 ## [Steps]
   1. Initialization Phase
-    - Read all workflow steps to understand expected work
-    - Create todo list to track subsequent requirement extraction and writing tasks
+    - Understand the expected workflow and requirements gathering scope
+    - Establish progress tracking mechanism for requirement extraction tasks
 
   2. Functional Requirements Phase
-    - Extract functional requirements from user input and context
-    - Deduplicate and atomize statements (single testable condition)
-    - Organize by user stories or system capabilities
+    - Achieve complete, deduplicated, and atomized functional requirements
+    - Ensure requirements are organized by user stories or system capabilities
 
   3. Non-Functional Requirements Phase
-    - Identify non-functional requirements across performance, reliability, security, compliance, and operability
-    - Quantify targets (e.g., P95 latency, uptime SLO, RTO/RPO) and constraints
-    - Map non-functional requirements to monitoring/observability signals (if relevant)
+    - Achieve quantified non-functional requirements across all quality attributes
+    - Ensure requirements have clear targets and measurable constraints
 
   4. Acceptance Criteria Phase
-    - Define acceptance criteria for each requirement; ensure deterministic and testable
-    - Use Given-When-Then structure, including inputs, preconditions, and pass/fail outcomes
-    - Verify each criterion can be automated or manually verified with binary results
+    - Achieve deterministic and testable acceptance criteria for all requirements
+    - Ensure all criteria use Given-When-Then structure with binary outcomes
 
   5. Finalization Phase
-    - Cross-check functional requirements, non-functional requirements, and acceptance criteria for consistency
-    - Populate requirement template and prepare draft content for "{root}/docs/requirements.md"
-    - Present draft content to user showing all sections (functional requirements, non-functional requirements, acceptance criteria)
-    - if user approves draft then proceed to 5.1, else proceed to 5.2
-      
-      5.1. Write Final Documents
-        - Write approved content to "{root}/docs/requirements.md"
-        - Execute uv run "{SCRIPTS}/shard-requirements.py"
-        - if execution succeeds then proceed to 5.1.1, else proceed to 5.1.2
-          
-          5.1.1. Execution Success Path
-            - Summarize the tasks completed
-          
-          5.1.2. Execution Failure Path
-            - Check if the requirement document follow the templates structure and fulfil the requirements of the template and the scripts
-            - Fix the requirement document if it does not follow the structure required by the scripts and templates
-            - Re-execute the script
-      
-      5.2. Revise Based on Feedback
-        - Collect user feedback on what needs to be changed
-        - Revise functional requirements, non-functional requirements, or acceptance criteria according to feedback
-        - Return to present revised draft and request approval again
+    - Ensure consistency across all requirement types
+    - Ensure user approval is obtained with proper feedback integration
+    - Achieve successful requirement sharding with verified output under "{REQ}/"
+
+## [Requirements-Analysis-Guidelines]
+  1. **Verifiability First**
+    - Each requirement must be testable and measurable with clear success/failure criteria
+    - Avoid vague wording; use concrete, quantifiable metrics
+  
+  2. **Structured Classification**
+    - Separate functional (what system does) from non-functional (quality attributes: performance, security, reliability)
+    - Use Given-When-Then format for all acceptance criteria
+  
+  3. **Quantify Quality Attributes**
+    - Non-functional requirements need specific metrics (e.g., "P95 latency < 200ms" not "fast response")
+    - Transform abstract qualities into monitorable signals
+  
+  4. **Traceability & Dependencies**
+    - Map requirement relationships and priorities
+    - Identify preconditions and impact scope for each requirement
 
 ## [DoD]
   - [ ] Functional requirements have been extracted, deduplicated, and atomized
@@ -76,3 +71,47 @@
   - [ ] Each requirement is measurable and verifiable
   - [ ] "shard-requirements.py" has been executed or errors have been logged to "{root}/logs/errors.log" and user has been notified
   - [ ] User confirmation of the final requirement set has been obtained
+
+## [Example]
+
+### Example 1: E-commerce Product Search
+[Input]
+User idea: "I want customers to search products by category, price range, and ratings"
+
+[Decision]
+- Extract 3 functional requirements: REQ-001 (category filter), REQ-002 (price range filter), REQ-003 (rating filter)
+- Define non-functional requirement: NFR-001 (search response time < 500ms)
+- Create Given-When-Then acceptance criteria for each
+
+[Expected Outcome]
+- docs/requirements/functional.md with REQ-001, REQ-002, REQ-003
+- docs/requirements/non-functional.md with NFR-001 (performance target)
+- Each requirement has measurable acceptance criteria
+
+### Example 2: Mobile Push Notification System
+[Input]
+User idea: "Send real-time notifications to users on iOS and Android when events occur"
+
+[Decision]
+- Functional requirements: REQ-001 (event subscription), REQ-002 (cross-platform delivery), REQ-003 (notification templates)
+- Non-functional: NFR-001 (delivery latency < 2s), NFR-002 (99.9% delivery success rate)
+- Acceptance criteria with specific metrics
+
+[Expected Outcome]
+- docs/requirements/functional.md with event-based notification requirements
+- docs/requirements/non-functional.md with quantified reliability and performance targets
+- Verifiable acceptance criteria using Given-When-Then format
+
+### Example 3: Healthcare Patient Record Access
+[Input]
+User idea: "Doctors need secure access to patient medical history with audit trails"
+
+[Decision]
+- Functional: REQ-001 (role-based access), REQ-002 (audit logging), REQ-003 (search patient records)
+- Non-functional: NFR-001 (HIPAA compliance), NFR-002 (audit log retention 7 years)
+- Security-focused acceptance criteria
+
+[Expected Outcome]
+- docs/requirements/functional.md with access control and audit requirements
+- docs/requirements/non-functional.md with compliance and data retention policies
+- Acceptance criteria aligned with healthcare regulations
