@@ -7,10 +7,7 @@
 
 ## [Output]
   1. Architecture document collection under "{ARCH}/" directory (*.md format)
-  2. Minimum expected files example (more classification files can be produced based on project complexity):
-    - "{ARCH}/overview.md"
-    - "{ARCH}/components.md"
-    - "{ARCH}/traceability_matrix.md"
+  2. "{root}/docs/architecture.md" (temporary architecture file. Will be sharded after running "shard-architecture.py")
 
 ## [Constraints]
   1. Must verify that "{REQ}/*.md" exists and is complete before architecture design; if requirements are incomplete or contain conflicts, record the issues and confirm with requirement authors, do not make assumptions
@@ -47,7 +44,7 @@
   3. Documentation and Approval Phase
     - Achieve compliant architecture draft following template structure
     - Ensure user approval is obtained with proper feedback integration
-    - Achieve successful architecture sharding with verified output under "{ARCH}/"
+    - Achieve successful architecture sharding by running the "shard-architecture.py" script with verified output under "{ARCH}/"
 
   4. Final Verification Phase
     - Ensure architecture satisfies all requirements through mapping verification

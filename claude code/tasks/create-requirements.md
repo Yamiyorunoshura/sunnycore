@@ -5,7 +5,8 @@
   2. User-provided initial ideas and requirement descriptions
 
 ## [Output]
-  1. "{REQ}/*.md" --Complete requirement specifications (including functional requirements, non-functional requirements, and acceptance criteria)
+  1. "{root}/docs/requirements.md" (temporary requiremenmt file. Will be sharded after running "shard-requirements.py")
+  2. "{REQ}/*.md" --Complete requirement specifications (including functional requirements, non-functional requirements, and acceptance criteria)
 
 ## [Constraints]
   1. Each requirement must be verifiable and measurable; vague or subjective wording is not allowed
@@ -49,7 +50,7 @@
   5. Finalization Phase
     - Ensure consistency across all requirement types
     - Ensure user approval is obtained with proper feedback integration
-    - Achieve successful requirement sharding with verified output under "{REQ}/"
+    - Achieve successful requirement sharding by running the "shard-requirements.py" script with verified output under "{REQ}/"
 
 ## [Requirements-Analysis-Guidelines]
   1. **Verifiability First**

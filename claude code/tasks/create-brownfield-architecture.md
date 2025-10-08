@@ -8,7 +8,8 @@
   5. "{KNOWLEDGE}/*.md" --Project knowledge
 
 ## [Output]
-  1. "{ARCH}/*.md" --Updated architecture document collection (*.md format)
+  1. "{root}/docs/architecture.md" (temporary architecture file. Will be sharded after running "shard-architecture.py")
+  2. "{ARCH}/*.md" --Updated architecture document collection (*.md format)
 
 ## [Constraints]
   1. Must thoroughly review "{REQ}" and "{ARCH}/*.md" before proposing design (evidence: reference reviewed content in architecture draft using `Reference: {file path}#{section heading}` format)
@@ -46,7 +47,7 @@
   3. Documentation and Approval Phase
     - Achieve compliant architecture draft following template structure
     - Ensure user approval is obtained with proper feedback integration
-    - Achieve successful architecture sharding with verified output under "{ARCH}/"
+    - Achieve successful architecture sharding by running the "shard-architecture.py" script with verified output under "{ARCH}/"
 
   4. Finalization Phase
     - Ensure all impact analyses are complete and accurate

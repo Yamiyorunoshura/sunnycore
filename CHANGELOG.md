@@ -7,6 +7,16 @@
 
 ## [Unreleased]
 
+## [3.1.1] - sunnycore v3.1.1
+
+### Changed
+- 優化任務文檔輸出說明：更新 create-architecture、create-brownfield-architecture、create-requirements 任務的輸出流程
+  - 統一輸出格式：先生成單一臨時文件（architecture.md 或 requirements.md），再執行分片腳本
+  - `create-architecture.md`：簡化輸出說明，改為生成臨時 architecture.md 並說明需執行 shard-architecture.py 腳本
+  - `create-brownfield-architecture.md`：新增臨時 architecture.md 輸出項，明確說明分片腳本執行流程
+  - `create-requirements.md`：新增臨時 requirements.md 輸出項，明確說明分片腳本執行流程
+  - 提升任務輸出流程的清晰度與一致性
+
 ## [3.1.0] - sunnycore v3.1.0
 
 ### Changed
