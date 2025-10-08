@@ -1,3 +1,5 @@
+**GOAL**: Re-develop tasks that failed review based on review feedback.
+
 ## [Input]
   1. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template
   2. "{DEVNOTES}/{task_id}-dev-notes.md" --Development notes

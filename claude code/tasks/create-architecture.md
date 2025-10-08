@@ -1,3 +1,5 @@
+**GOAL**: Create comprehensive technical architecture documentation for Greenfield projects.
+
 ## [Input]
   1. "{REQ}/*.md" --Authoritative project requirements
   2. "{SCRIPTS}/shard-architecture.py" --Architecture sharding script
@@ -74,3 +76,27 @@
   - [ ] User approval has been obtained for architecture draft
   - [ ] "{root}/docs/architecture.md" exists and follows the template
   - [ ] "shard-architecture.py" has been executed and shard file generation has been verified
+
+## [Example]
+
+Work directory structure example:
+
+```
+{project_root}/
+├── {config_dir}/                # {config_description}
+│   ├── {settings_dir}/         # {settings_description}
+│   └── {constants_dir}/        # {constants_description}
+├── {src_dir}/                  # {src_description}
+│   ├── {core_dir}/            # {core_description}
+│   ├── {api_dir}/             # {api_description}
+│   ├── {models_dir}/          # {models_description}
+│   └── {utils_dir}/           # {utils_description}
+├── {tests_dir}/               # {tests_description}
+│   ├── {unit_dir}/           # {unit_description}
+│   └── {integration_dir}/    # {integration_description}
+├── {docs_dir}/               # {docs_description}
+│   ├── {requirements_dir}/   # {requirements_description}
+│   ├── {architecture_dir}/   # {architecture_description}
+│   └── {guides_dir}/         # {guides_description}
+└── {readme_file}             # {readme_description}
+```

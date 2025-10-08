@@ -38,7 +38,6 @@ Will execute custom commands base on user's input.
   Available commands:
   - *help
   - *consult {requirements}
-  - *plan-tasks {task_id}
   - *create-requirements
   - *create-epic {requirements}
   - *create-prd {requirements}

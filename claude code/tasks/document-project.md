@@ -1,3 +1,5 @@
+**GOAL**: Update or create comprehensive project architecture documentation.
+
 ## [Input]
   1. "{ARCH}/*.md" --Existing architecture documents
   2. "{TMPL}/architecture-tmpl.yaml" --Universal architecture document template
@@ -66,3 +68,27 @@
   - [ ] Each sharded document includes actual implementation details with source references
   - [ ] Deviations from original design are documented with rationale
   - [ ] "{root}/CLAUDE.md" Document Index section and any other sections that are related to architecture have been updated with refreshed sharded architecture documents
+
+## [Example]
+
+Work directory structure example:
+
+```
+{project_root}/
+├── {config_dir}/                # {config_description}
+│   ├── {settings_dir}/         # {settings_description}
+│   └── {constants_dir}/        # {constants_description}
+├── {src_dir}/                  # {src_description}
+│   ├── {core_dir}/            # {core_description}
+│   ├── {api_dir}/             # {api_description}
+│   ├── {models_dir}/          # {models_description}
+│   └── {utils_dir}/           # {utils_description}
+├── {tests_dir}/               # {tests_description}
+│   ├── {unit_dir}/           # {unit_description}
+│   └── {integration_dir}/    # {integration_description}
+├── {docs_dir}/               # {docs_description}
+│   ├── {requirements_dir}/   # {requirements_description}
+│   ├── {architecture_dir}/   # {architecture_description}
+│   └── {guides_dir}/         # {guides_description}
+└── {readme_file}             # {readme_description}
+```

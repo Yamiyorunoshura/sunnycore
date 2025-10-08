@@ -1,3 +1,5 @@
+**GOAL**: Create Product Requirements Document (PRD), integrating requirements, architecture, and tasks into a single document.
+
 ## [Input]
   1. User-provided requirement description and context
   2. "{TMPL}/prd-tmpl.yaml" --PRD template

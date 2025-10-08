@@ -7,6 +7,67 @@
 
 ## [Unreleased]
 
+## [2.0.0] - sunnycore v2.0.0
+
+### Added
+- 新增設計驗證與修復系統:提供設計文檔一致性檢查與自動修復能力
+  - 新增 `validate-design` 任務:支援 PRD 和完整流程的設計驗證
+    * PRD 驗證:檢查 PRD 內部一致性、與現有架構對齊、內容真實性
+    * 完整驗證:檢查需求-架構-任務-計劃的雙向引用、覆蓋率、一致性
+    * 輸出驗證報告至 `docs/design-validation.md`
+  - 新增 `fix-design-conflicts` 任務:自動修復設計驗證中發現的問題
+    * 支援修復捏造內容、破損引用、衝突、不一致性、覆蓋率缺口
+    * 提供互動式修復策略確認
+    * 修復完成後自動清理驗證報告
+  - 更新 PO 角色:新增設計驗證與修復職責
+
+### Changed
+- 重構任務命名與工作流程:優化計劃創建與開發流程 (**破壞性變更**)
+  - `plan-tasks` → `create-plan`:改為批量創建所有任務的實作計劃
+    * 支援為 epic 中所有任務一次性創建 TDD 計劃
+    * 整合知識庫最佳實踐至計劃創建流程
+    * 輸出格式:`{PLAN}/1-plan.md`, `{PLAN}/2-plan.md`, etc.
+  - `develop-tasks` → `develop-plan`:基於計劃執行開發
+    * 強調基於預先創建的計劃進行 TDD 開發
+    * 明確引用 create-plan 階段產生的計劃文檔
+  - `tasks-tmpl` → `epic-tmpl`:任務清單模板重命名，更符合敏捷術語
+
+- 提升文檔品質與可維護性:所有任務文件新增 GOAL 說明
+  - 在 17 個任務文件開頭新增簡潔的 GOAL 說明
+  - 涵蓋任務:brownfield-tasks、conclude、consult、create-architecture、create-brownfield-architecture、create-epic、create-plan、create-prd、create-requirements、curate-knowledge、cutover、develop-plan、develop-prd、document-project、fix-acceptance-issues、init、review
+  - 提升任務文檔的自我描述性與目標明確性
+
+- 優化架構文檔指引:新增工作目錄結構範例
+  - 在 `create-architecture.md`、`create-brownfield-architecture.md`、`document-project.md` 中新增 [Example] 章節
+  - 提供工作目錄結構的具體範例與描述
+  - 改善架構設計階段的實用性指引
+
+- 優化任務規劃流程:`create-plan` 改為批量創建模式
+  - 從「為單個任務創建計劃」改為「為所有任務批量創建計劃」
+  - 新增知識庫整合:計劃創建時自動參考最佳實踐與經驗教訓
+  - 提升計劃創建效率與知識復用
+
+- 更新工作流程文檔:整合設計驗證階段
+  - 在 PRD 流程中新增可選的設計驗證步驟 (步驟 2.5)
+  - 在完整開發流程中新增可選的設計驗證步驟 (步驟 5)
+  - 新增設計驗證與修復流程圖與使用指引
+  - 更新流程對比表與角色職責表
+
+### Removed
+- 刪除未使用模板:移除 `project-knowledge-tmpl.yaml`
+  - 知識庫文檔改為採用語義分類方式管理 (best-practices、errors、problem-solving)
+  - 簡化模板系統複雜度
+
+### BREAKING CHANGES
+- **任務命名變更**:
+  - `/sunnycore_dev *plan-tasks {task_id}` → `/sunnycore_dev *create-plan`
+  - `/sunnycore_dev *develop-tasks {task_id}` → `/sunnycore_dev *develop-plan {task_id}`
+- **模板命名變更**:
+  - `tasks-tmpl.yaml` → `epic-tmpl.yaml`
+- **工作流程調整**:
+  - create-plan 現在為批量操作，一次性為所有任務創建計劃
+  - 步驟編號調整:Greenfield 和 Brownfield 流程中的步驟編號均有變化
+
 ## [1.15.7] - sunnycore v1.15.7
 
 ### Changed

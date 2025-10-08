@@ -1,3 +1,5 @@
+**GOAL**: Initialize development environment and project documentation structure.
+
 ## [Input]
   1. "{ARCH}/*.md" --Architecture design documents (extract technology stack, development environment requirements)
   2. "{REQ}/*.md" --Project requirement documents

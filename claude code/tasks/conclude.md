@@ -1,3 +1,5 @@
+**GOAL**: Summarize project development outcomes and generate comprehensive delivery report.
+
 ## [Input]
   1. "{root}/docs/*.md" --All files in docs/ directory recursively (required)
   2. "{LOCK}" --Version information (required)

@@ -46,6 +46,8 @@ Will execute custom commands base on user's input.
   - *help
   - *curate-knowledge
   - *conclude
+  - *validate-design {workflow}
+  - *fix-design-conflicts
 
 ## [Acceptance-Guidelines]
   1. **Requirements Verification**

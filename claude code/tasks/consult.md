@@ -1,3 +1,5 @@
+**GOAL**: Analyze requirements and recommend the most suitable development workflow (full development workflow or PRD workflow).
+
 ## [Input]
   1. User requirement description
   2. (Conditional) "{ARCH}/*.md" --Existing architecture documents (if exist)

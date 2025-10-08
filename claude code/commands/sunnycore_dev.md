@@ -43,7 +43,8 @@ Will execute custom commands base on user's input.
   
   Available commands:
   - *help
-  - *develop-tasks {task_id}
+  - *create-plan
+  - *develop-plan {task_id}
   - *brownfield-tasks {task_id}
   - *fix-acceptance-issues
   - *init

@@ -1,3 +1,5 @@
+**GOAL**: Organize project knowledge accumulated during development, including best practices, lessons learned, and bug fix records.
+
 ## [Input]
   1. "{REVIEW}/*.md" --Review reports
   2. "{DEVNOTES}/*.md" --Development notes
