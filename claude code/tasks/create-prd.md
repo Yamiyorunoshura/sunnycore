@@ -20,12 +20,17 @@
 ## [Tools]
   1. **todo_write**
     - [Step 1: Create todo list; Steps 2-6: Track working progress]
-  2. **sequentialthinking (MCP)**
-    - [Step 1: Analyze project type and complexity; Step 2: Design requirements; Step 3: Design architecture]
+  2. **sequential-thinking (MCP)**
+    - [Step 1: Analyze project type (Greenfield/Brownfield) and complexity]
+    - [Step 2: Structured requirement design, establish dependencies and priorities between requirements]
+    - [Step 3: Evaluate pros and cons of architecture design options]
+    - When to use: When need to compare multiple technical solutions or assess architecture decision impacts
   3. **context7 (MCP)**
-    - [Step 3: Obtain external package and architecture pattern references when needed]
+    - [Step 3: Query latest API documentation and architecture pattern examples for external packages and frameworks]
+    - When to use: When architecture design involves new tech stack or need to verify package version compatibility
   4. **claude-context (MCP)**
-    - [Step 1: Search codebase for existing architecture implementations if Brownfield]
+    - [Step 1: When Brownfield, search existing architecture implementations and data models]
+    - Query examples: "How is authentication implemented?" "Where are data models defined?" "What are existing service boundaries?"
 
 ## [Steps]
   1. Initialization and Context Understanding Phase

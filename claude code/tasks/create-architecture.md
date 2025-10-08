@@ -23,10 +23,15 @@
 ## [Tools]
   1. **todo_write**
     - [Step 1: Track and update execution tasks; Steps 2-4: Track writing progress and results]
-  2. **sequentialthinking (MCP)**
-    - [Step 1: Decompose requirements and identify architecture patterns; Step 2: Architect system components and verify design decisions; Step 3: Structured drafting and verification steps; Step 4: Execute final verification sequence]
+  2. **sequential-thinking (MCP)**
+    - [Step 1: Decompose requirements and identify applicable architecture patterns]
+    - [Step 2: Design system components and boundaries, verify design decisions]
+    - When to use: When need to evaluate multiple architecture options or perform pros/cons analysis
+    - [Step 3: Structured drafting of architecture document, ensure logical consistency across sections]
+    - [Step 4: Verify requirement-to-architecture mapping coverage]
   3. **context7 (MCP)**
-    - [Step 2: Obtain external package and architecture pattern references]
+    - [Step 2: Query official documentation for external packages and architecture pattern best practices]
+    - When to use: When need to verify tech stack version compatibility or find official architecture guidance
 
 ## [Steps]
   1. Requirement Analysis Phase

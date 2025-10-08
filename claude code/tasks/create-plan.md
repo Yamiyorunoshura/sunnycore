@@ -27,10 +27,14 @@
 ## [Tools]
   1. **todo_write**
     - [Step 1 (Setup Phase): Create todo list; Steps 2-4: Track task progress]
-  2. **sequentialthinking (MCP)**
-    - [Step 1: Analyze requirement and task complexity; Step 2: Plan RED phase content (test and acceptance criteria design); Step 3: Plan GREEN phase content (minimal implementation step design); Step 4: Plan REFACTOR phase content (refactoring and optimization work identification)]
+  2. **sequential-thinking (MCP)**
+    - [Step 1: Analyze requirements and task complexity]
+    - [Step 2: Plan RED phase - test and acceptance criteria design]
+    - [Step 3: Plan GREEN phase - minimal implementation step design]
+    - [Step 4: Plan REFACTOR phase - refactoring and optimization work identification]
+    - When to use: When need to decompose complex tasks or design TDD workflow
   3. **claude-context (MCP)**
-    - [Step 1: Search codebase for relevant implementations if needed]
+    - [Step 1: Search for relevant implementation references (if needed)]
 
 ## [Steps]
   1. Setup Phase

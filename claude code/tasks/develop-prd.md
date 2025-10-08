@@ -19,10 +19,16 @@
 ## [Tools]
   1. **todo_write**
     - [Step 1: Create task list from PRD; Step 2: Track TDD phase progress; Steps 3-4: Track implementation progress]
-  2. **sequentialthinking (MCP)**
-    - [Step 1: Analyze PRD complexity; Step 2-4: Reason about implementation strategies for each requirement]
+  2. **sequential-thinking (MCP)**
+    - [Step 1: Analyze PRD complexity, identify dependencies and risks]
+    - [Step 2-4: Reason about implementation strategies for each TDD phase (RED/GREEN/REFACTOR)]
+    - When to use: When need to decompose complex features or evaluate refactoring approaches
   3. **claude-context (MCP)**
-    - [Step 1: Search codebase to prepare for PRD implementation - understand existing code structure, related modules, dependencies, and implementation patterns]
+    - [Step 1: Search codebase for related modules, dependencies, implementation patterns, and test examples]
+    - Query examples: "Where are related modules?" "How is similar functionality implemented?" "What are the test patterns?"
+    - [TDD phases: Query reference implementations and test cases for each phase]
+  4. **context7 (MCP)**
+    - [Step 2-4: When need to call external APIs, query official SDK usage examples]
 
 ## [Steps]
   1. Preparation Phase

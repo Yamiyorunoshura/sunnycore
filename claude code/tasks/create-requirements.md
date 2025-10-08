@@ -17,12 +17,17 @@
 ## [Tools]
   1. **todo_write**
     - [Step 1: Create task list; Steps 2-4: Track task progress]
-  2. **sequentialthinking (MCP)**
-    - [Step 1: Structured decomposition and reflective reasoning; Step 2: Systematically decompose complex functional requirements; Step 3: Cross-domain systematic non-functional requirement analysis; Step 4: Structured Given-When-Then and verification logic]
-  3. **playwright_browser (MCP)**
-    - [Step 2: Conduct web research when needed to obtain requirement examples]
+  2. **sequential-thinking (MCP)**
+    - [Step 1: Structured decomposition of user stories and system capabilities]
+    - [Step 2: Systematically decompose complex functional requirements into atomic requirements]
+    - [Step 3: Transform abstract quality attributes into quantifiable non-functional requirements]
+    - [Step 4: Validate logical completeness of Given-When-Then acceptance criteria]
+  3. **playwright (MCP)**
+    - [Step 2: When need to research competitor features or collect UI flow examples]
+    - Use scenarios: Crawl competitor website feature flows, error handling approaches, UX design references
   4. **claude-context (MCP)**
-    - [Step 3: Search codebase for requirement-related implementations]
+    - [Step 3: Search codebase for similar requirement implementations and related modules]
+    - Query examples: "How is similar functionality implemented?" "What are the related modules?"
 
 ## [Steps]
   1. Initialization Phase

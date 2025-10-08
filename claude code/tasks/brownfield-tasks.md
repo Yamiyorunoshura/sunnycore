@@ -19,12 +19,14 @@
 
 ## [Tools]
   1. **todo_write**
-    - [Steps 2-4: Track task progress] (see Tool Guidelines for details)
-  2. **sequentialthinking (MCP)**
-    - [Step 1: All reasoning tasks; Step 2: Code fix reasoning tasks]
+    - [Steps 2-4: Track task progress]
+  2. **sequential-thinking (MCP)**
+    - [Step 1: Analyze problems and architecture context]
+    - [Step 2: Reason about code fix strategies]
   3. **claude-context (MCP)**
-    - [Step 1: Search codebase for relevant implementations]
-    - [Step 2: Search codebase for fix-related code]
+    - [Step 1: Search existing implementations to understand codebase structure]
+    - [Step 2: Search fix-related code]
+    - Query examples: "What is the existing implementation?" "How to integrate with existing system?"
 
 ## [Steps]
   1. Preparation Phase

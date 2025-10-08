@@ -20,14 +20,14 @@
   4. If contradictory practice recommendations are found, should annotate conflicts and preserve all evidence sources for subsequent decision-making
 
 ## [Tools]
-  1. **sequentialthinking (MCP)**
-    - [Step 2: Reason about knowledge base organization structure]
+  1. **sequential-thinking (MCP)**
+    - [Step 2: Reason about knowledge base organization structure and semantic classification]
+    - When to use: When need to design knowledge categorization scheme or resolve conflicting practices
   2. **claude-context (MCP)**
     - [Step 2: Search codebase for relevant implementations]
-    - Usage scenario: When technical details mentioned in documentation need to be verified or supplemented from code
+    - When to use: When technical details mentioned in documentation need to be verified or supplemented from code
   3. **todo_write**
     - [Step 2: Create task list; Steps 3-4: Track task progress]
-    - Usage scenario: Create todo list in preparation phase, track task progress
 
 ## [Steps]
   1. Preparation Phase

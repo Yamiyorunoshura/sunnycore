@@ -16,10 +16,14 @@
 ## [Tools]
   1. **todo_write**
     - [Step 1: Create task list; Steps 2-4: Track progress]
-  2. **sequentialthinking (MCP)**
-    - [Step 2: Analyze requirement scope and impact; Step 3: Determine workflow recommendation]
+  2. **sequential-thinking (MCP)**
+    - [Step 2: Systematically decompose requirement scope and impact surface]
+    - When to use: When need to assess requirement impact on existing system and estimate task complexity
+    - [Step 3: Branch reasoning for PRD workflow vs Full workflow applicability]
+    - When to use: When requirement scope is unclear or difficult to determine if architecture changes are needed
   3. **claude-context (MCP)**
-    - [Step 2: Search codebase for existing architecture when Brownfield]
+    - [Step 2: When project is Brownfield, search existing architecture boundaries and public contracts]
+    - Query examples: "What are the public API interfaces?" "Where are the integration points?" "How are module boundaries defined?"
 
 ## [Steps]
   1. Initialization Phase

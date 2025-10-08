@@ -21,12 +21,15 @@
   6. Must not introduce new issues or break existing functionality
 
 ## [Tools]
-  1. **sequentialthinking (MCP)**: Perform structured reasoning and analysis
-    - [Step 2: Analyze root causes; Step 3: Plan fix strategies; Step 6: Evaluate fix results]
+  1. **sequential-thinking (MCP)**: Perform structured reasoning and analysis
+    - [Step 1: Structured analysis of problem root causes]
+    - [Step 2: Reason about fix strategies and evaluate multiple approaches]
+    - When to use: When problems are complex or need to evaluate different fix approaches
   2. **todo_write**: Create and manage task list
     - [Step 1: Create todo list; Steps 2-7: Track task progress]
   3. **claude-context (MCP)**: Search codebase for relevant code
-    - [Step 2: Locate code related to issues]
+    - [Step 2: Search code and dependencies related to failing functionality]
+    - Query examples: "Where is the failing functionality?" "What are the dependencies?"
 
 ## [Steps]
   1. Preparation Phase
