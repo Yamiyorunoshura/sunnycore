@@ -30,61 +30,52 @@
 
 ## [Steps]
   1. Preparation Phase
-    - Read cutover report to understand all reported issues
-    - Verify existence of required input files
-    - Prioritize issues by severity and business impact
-    - Create todo list based on issues to fix
+    - Understand all reported issues from cutover report
+    - Ensure issues are prioritized by severity and business impact
+    - Establish progress tracking mechanism for fixes
 
   2. Root Cause Analysis Phase
-    - Check if "{PRD}" exists
-    - For each reported issue, analyze error messages and reproduction steps
-    - Locate relevant code using search tools and identify root cause of the issue
-    - Document analysis findings and determine appropriate fix strategy for each issue
-    - if "PRD.md" exists then proceed to 2.1, else proceed to 2.2
-      
-      2.1. PRD-based Project
-        - Read "{PRD}"
-        - Extract requirements from PRD requirements section
-        - Extract architecture information from PRD architecture section
-        - Use PRD as the primary context for understanding system design
-      
-      2.2. Traditional Project Structure
-        - Read requirements from "{REQ}/*.md" (if available)
-        - Read architecture from "{ARCH}/*.md" (if available)
+    - Ensure proper handling of both PRD-based and Traditional project structures
+    - Achieve complete root cause analysis for all issues
+    - Achieve documented fix strategies for each issue
 
   3. Fix Planning Phase
-    - Plan fix approach for each issue
-    - Identify which components need to be modified
-    - Determine if new tests are needed
-    - Assess risk of fixes and potential side effects
-    - Document planned changes
+    - Achieve comprehensive fix plan for all issues
+    - Ensure risk assessment and component identification are complete
 
   4. RED Phase: Test First
-    - For each issue, write or update tests to reproduce the problem
-    - Ensure tests fail as expected, verifying the issue exists
-    - Execute test suite to confirm RED status
-    - If tests don't fail, refine tests until they properly catch the issue
+    - Achieve failing tests that properly reproduce all issues
+    - Ensure RED status is confirmed through test execution
 
   5. GREEN Phase: Implement Fixes
-    - Implement minimal code changes to fix each issue
-    - Follow architecture patterns and coding standards
-    - Execute tests to verify fixes work
-    - If tests still fail, analyze and adjust fix
-    - Repeat until all tests pass
+    - Achieve passing tests through minimal code changes
+    - Ensure all fixes follow architecture patterns and standards
 
   6. REFACTOR Phase: Improve and Verify
-    - Refactor code while keeping tests green
-    - Improve code quality and maintainability
-    - Execute full test suite to ensure no regressions
-    - Re-run acceptance tests from cutover to verify issues are resolved
-    - If any tests fail, rollback and reassess
+    - Achieve improved code quality while maintaining green tests
+    - Ensure acceptance tests confirm all issues are resolved
 
   7. Documentation Phase
-    - Generate development notes according to template structure
-    - Document each issue fixed with before/after comparison
-    - Document technical decisions and rationale
-    - Record any risks or follow-up items
-    - Save to "{root}/docs/dev-notes/cutover-fixes-dev-notes.md"
+    - Achieve complete development notes at "{root}/docs/cutover-fixes-dev-notes.md"
+    - Ensure all fixes, decisions, and risks are documented
+
+## [Fix-Development-Guidelines]
+  1. **TDD Fix Cycle (Mandatory)**
+    - **RED Phase**: Write/update tests to reproduce each reported issue; verify tests fail correctly
+    - **GREEN Phase**: Implement minimal fixes to pass tests (exit code 0); follow architecture patterns
+    - **REFACTOR Phase**: Improve code quality while maintaining green tests; ensure no regressions
+    - Rollback immediately if tests fail during refactoring; re-run acceptance tests after all fixes
+  
+  2. **Root Cause Analysis First**
+    - Identify root cause for each issue before implementing fixes
+    - Document fix strategy and risk assessment
+    - Prioritize fixes by severity and business impact
+  
+  3. **Testing & Verification**
+    - Minimum 80% coverage; critical logic requires 100%
+    - Execute full test suite after every change; rollback on failures
+    - Re-run all acceptance tests to confirm issues resolved
+    - Ensure no new issues or regressions introduced
 
 ## [DoD]
   - [ ] Cutover report has been read and all issues identified
@@ -96,4 +87,43 @@
   - [ ] Full test suite passes with no regressions
   - [ ] Acceptance tests re-run and all issues resolved
   - [ ] Development notes generated with complete documentation
+
+## [Example]
+
+### Example 1: Push Notification Failure
+[Input]
+- Cutover report: docs/cutover-report.md (Critical: push notifications fail, missing FCM server key)
+- PRD: docs/PRD.md (REQ-002: push notification delivery)
+- Template: dev-notes-tmpl.yaml
+
+[Decision]
+- Root cause: Firebase config incomplete (no server key in .env)
+- Fix strategy: Add FCM_SERVER_KEY to .env, update notification service
+- RED: Write test for notification delivery (test_send_notification fails)
+- GREEN: Add FCM config, implement send logic (test passes)
+- REFACTOR: Add error handling, retry mechanism
+
+[Expected Outcome]
+- Fixed code: src/services/NotificationService.js with FCM integration, .env.example with FCM_SERVER_KEY
+- docs/cutover-fixes-dev-notes.md documenting root cause, fix, test results
+- Re-run acceptance test: Push notifications now work (✓)
+
+### Example 2: Data Export Timeout
+[Input]
+- Cutover report: docs/cutover-report.md (High: CSV export times out for > 1000 rows)
+- Requirements: docs/requirements/functional.md (REQ-003: export up to 10K rows)
+- Architecture: docs/architecture/components.md (Export Service with in-memory processing)
+- Template: dev-notes-tmpl.yaml
+
+[Decision]
+- Root cause: In-memory processing causes timeout for large datasets
+- Fix strategy: Implement streaming export instead of loading all data
+- RED: Write test for 10K row export with < 30s timeout (test fails)
+- GREEN: Implement streaming CSV writer (test passes at 12s)
+- REFACTOR: Add progress indicator, optimize database query
+
+[Expected Outcome]
+- Fixed code: src/services/ExportService.js with streaming implementation
+- docs/cutover-fixes-dev-notes.md with performance comparison (before: timeout, after: 12s)
+- Re-run acceptance: Export 10K rows successfully (✓)
 

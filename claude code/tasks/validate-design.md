@@ -31,132 +31,29 @@
 
 ## [Steps]
   1. Initialization Phase
-    - Read all workflow steps to understand expected work
-    - Validate workflow parameter (must be "prd" or "full")
-    - if workflow == "prd" then proceed to 1.1, else proceed to 1.2
-      
-      1.1. PRD Workflow Initialization
-        - Verify "{PRD}" exists and is readable
-        - Check if "{ARCH}/" directory exists for alignment validation
-        - Create todo list for PRD validation tasks
-      
-      1.2. Full Workflow Initialization
-        - Verify all required directories and files exist
-        - Index all requirements, architecture, epic, and plan files
-        - Create todo list for full validation tasks
+    - Validate workflow parameter and determine validation scope
+    - Ensure proper handling of both PRD and Full workflow types
+    - Establish progress tracking mechanism for validation tasks
 
   2. Content Extraction and Indexing Phase
-    - if workflow == "prd" then proceed to 2.1, else proceed to 2.2
-      
-      2.1. Extract PRD Content
-        - Parse PRD structure and extract:
-          - All requirement IDs and descriptions
-          - All architecture components and technical stack
-          - All tasks and their details
-        - Build internal index of PRD entities
-        - If existing architecture exists, parse and index architecture components
-      
-      2.2. Extract Full Workflow Content
-        - Parse all requirements files and extract requirement IDs
-        - Parse all architecture files and extract components, modules, interfaces
-        - Parse epic and extract all task IDs and descriptions
-        - Parse all implementation plans and extract referenced requirements/components
-        - Build comprehensive internal index of all entities
+    - Ensure appropriate content extraction for workflow type
+    - Achieve comprehensive internal index of all entities
+    - Ensure proper handling of both workflow-specific extraction paths
 
   3. Validation Phase
-    - if workflow == "prd" then proceed to 3.1, else proceed to 3.2
-      
-      3.1. PRD Validation
-        - 3.1.1. Internal Consistency Check
-          - Verify all requirements referenced in architecture section actually exist in requirements section
-          - Verify all architecture components referenced in tasks actually exist in architecture section
-          - Verify all tasks reference valid requirements and architecture components
-          - Check for circular dependencies or logical conflicts
-        
-        - 3.1.2. Terminology and Naming Consistency
-          - Identify all technical terms, component names, API names across PRD
-          - Flag inconsistent naming (e.g., "UserService" vs "User Service" vs "userService")
-          - Verify interface definitions are consistent across sections
-        
-        - 3.1.3. Coverage Analysis
-          - Check if all requirements map to at least one architecture component
-          - Check if all architecture components map to at least one task
-          - Identify orphaned requirements, components, or tasks
-        
-        - 3.1.4. Alignment with Existing Architecture (if applicable)
-          - Compare PRD architecture against existing architecture documents
-          - Identify breaking changes to existing contracts (APIs, data models, events)
-          - Verify integration points are correctly referenced
-          - Flag potential conflicts with existing system
-        
-        - 3.1.5. Content Authenticity Check
-          - Verify all file paths, module names, and external references are concrete (not placeholders)
-          - Flag vague or unverifiable statements
-          - Ensure all technical specifications are precise and measurable
-      
-      3.2. Full Workflow Validation
-        - 3.2.1. Bidirectional Reference Validation
-          - Forward: Requirements → Architecture → Epic → Plans
-            - Verify each requirement is referenced by at least one architecture component
-            - Verify each architecture component is referenced by at least one task
-            - Verify each task has a corresponding implementation plan
-          - Backward: Plans → Epic → Architecture → Requirements
-            - Verify all requirements referenced in plans exist in requirements files
-            - Verify all architecture components referenced in plans exist in architecture files
-            - Verify all tasks in plans exist in epic
-        
-        - 3.2.2. Completeness and Coverage
-          - Calculate requirement coverage: % of requirements mapped to architecture
-          - Calculate architecture coverage: % of components mapped to tasks
-          - Calculate task coverage: % of tasks with implementation plans
-          - Identify gaps and orphaned entities
-        
-        - 3.2.3. Consistency Across Documents
-          - Compare terminology and naming across all documents
-          - Verify interface definitions are identical across documents
-          - Check data model consistency (field names, types, constraints)
-          - Validate technical stack consistency
-        
-        - 3.2.4. Conflict Detection
-          - Identify contradictory requirements
-          - Detect conflicting architecture decisions
-          - Find duplicate or overlapping tasks
-          - Flag incompatible technical specifications
-        
-        - 3.2.5. Content Authenticity Check
-          - Verify all referenced entities actually exist
-          - Flag fabricated requirement IDs, component names, or file paths
-          - Ensure all cross-references are valid and resolvable
-          - Validate that implementation plans reference actual requirements and architecture
+    - Ensure workflow-appropriate validation checks are performed
+    - Achieve complete validation coverage across all criteria
+    - Ensure proper detection of all issue types (consistency, coverage, conflicts, authenticity)
 
   4. Report Generation Phase
-    - Categorize all issues by severity:
-      - Critical: Fabricated content, broken references, major conflicts
-      - High: Missing mappings, inconsistent naming, coverage gaps
-      - Medium: Terminology inconsistencies, minor conflicts
-      - Low: Recommendations for improvement
-    
-    - Structure the report:
-      - Executive Summary (overall status, critical issues count)
-      - Validation Scope (workflow type, files analyzed)
-      - Coverage Metrics (percentages and statistics)
-      - Issues by Category (grouped by severity)
-      - Detailed Findings (with file references and line numbers if available)
-      - Actionable Recommendations (prioritized fix list)
-    
-    - Generate report to "{root}/docs/design-validation.md"
+    - Achieve comprehensive validation report at "{root}/docs/design-validation.md"
+    - Ensure issues are properly categorized by severity
+    - Ensure report structure includes all required sections
 
   5. Finalization Phase
-    - Present validation summary to user
-    - if critical or high severity issues found then proceed to 5.1, else proceed to 5.2
-      
-      5.1. Issues Found
-        - Recommend running `/sunnycore_po *fix-design-conflicts` to address issues
-        - Highlight top 3-5 critical issues requiring immediate attention
-      
-      5.2. No Major Issues
-        - Confirm design is validated and consistent
-        - Provide quality score or confidence level
+    - Ensure validation summary is presented to user
+    - Ensure appropriate recommendations based on findings
+    - Ensure proper guidance for next steps
 
 ## [Validation-Criteria]
 
@@ -203,6 +100,28 @@
   3. Parse errors: Document which files failed to parse and continue with available data
   4. No issues found: Generate clean report confirming validation passed
 
+## [Validation-Focus-Areas]
+  1. **Bidirectional Integrity**
+    - Verify forward references (requirements → architecture → tasks → plans)
+    - Verify backward references (plans → tasks → architecture → requirements)
+    - Detect broken links and fabricated content
+  
+  2. **100% Coverage Requirement**
+    - All requirements must map to architecture components
+    - All architecture components must map to tasks
+    - All tasks must have implementation plans (if full workflow)
+    - No orphaned entities in any document
+  
+  3. **Consistency Checks**
+    - Terminology uniformity across all documents
+    - Technical specifications match between documents
+    - No contradictory statements or conflicts
+  
+  4. **Authenticity Verification**
+    - All references must point to existing entities
+    - No fabricated requirement IDs, component names, or file paths
+    - Cross-check entity existence in actual documents
+
 ## [DoD]
   - [ ] Workflow parameter has been validated
   - [ ] All required documents have been read and indexed
@@ -214,4 +133,47 @@
   - [ ] All issues are categorized by severity
   - [ ] Validation report has been generated to "{root}/docs/design-validation.md"
   - [ ] User has been informed of validation results and next steps
+
+## [Example]
+
+### Example 1: PRD Workflow Validation - Success
+[Input]
+- Workflow: "prd"
+- PRD: docs/PRD.md (3 requirements, 2 architecture components, 3 tasks)
+- Existing architecture: docs/architecture/*.md (API Gateway, Database)
+
+[Decision]
+- Internal consistency: All REQ-001, REQ-002, REQ-003 referenced correctly ✓
+- External alignment: New API endpoints compatible with existing API Gateway ✓
+- Completeness: All requirements → architecture (100%), all architecture → tasks (100%) ✓
+- Authenticity: All components exist, no fabricated references ✓
+- Result: Validation passed, no issues found
+
+[Expected Outcome]
+- docs/design-validation.md with status: PASS
+- Summary: "All validation checks passed. PRD is internally consistent and aligns with existing architecture."
+- Recommendation: "Proceed with development using `/sunnycore_dev *develop-prd`"
+
+### Example 2: Full Workflow Validation - Issues Found
+[Input]
+- Workflow: "full"
+- Requirements: docs/requirements/*.md (5 requirements)
+- Architecture: docs/architecture/*.md (3 components)
+- Epic: docs/epic.md (4 tasks)
+- Plans: docs/plans/*.md (3 plans, missing plan for Task-4)
+
+[Decision]
+- Bidirectional integrity: REQ-005 referenced in arch but doesn't exist ✗ (Critical)
+- Coverage: REQ-002 not mapped to any architecture component ✗ (High)
+- Coverage: Task-4 exists but no implementation plan ✗ (High)
+- Consistency: "UserService" named "User Service" in architecture ✗ (Medium)
+- Issues: 1 Critical, 2 High, 1 Medium
+
+[Expected Outcome]
+- docs/design-validation.md with detailed issues:
+  - Critical: Fabricated REQ-005 reference in docs/architecture/components.md
+  - High: Coverage gap - REQ-002 unmapped
+  - High: Missing plan - docs/plans/4-plan.md doesn't exist
+  - Medium: Inconsistent naming - "UserService" vs "User Service"
+- Recommendation: "Fix issues using `/sunnycore_po *fix-design-conflicts` before proceeding with development"
 

@@ -31,71 +31,29 @@
 
 ## [Steps]
   1. Analysis Phase
-    - Read all workflow steps to understand expected work
-    - Verify "{root}/docs/design-validation.md" exists
-    - Parse validation report and extract all issues with:
-      - Issue ID/number
-      - Severity level
-      - Issue type (fabricated content, broken reference, conflict, inconsistency, coverage gap)
-      - Affected documents and locations
-      - Description and impact
-    - Group issues by severity and type
-    - Create todo list with all issues to be fixed, ordered by severity
+    - Understand all issues from validation report
+    - Ensure issues are properly extracted, grouped, and prioritized
+    - Establish progress tracking mechanism for fixes
 
   2. Fix Planning Phase
-    - For each issue (starting with Critical, then High, Medium, Low):
-      - 2.1. Analyze Issue Context
-        - Identify root cause of the issue
-        - Determine which documents need to be modified
-        - Assess impact of potential fixes on other documents
-      
-      - 2.2. Present Fix Options to User
-        - Explain the issue clearly with context
-        - Propose 2-3 fix strategies (if multiple approaches exist)
-        - Highlight recommended approach and rationale
-        - Show affected files and approximate changes needed
-      
-      - 2.3. Get User Confirmation
-        - Wait for user to select fix strategy or provide custom approach
-        - Clarify any ambiguities before proceeding
-        - if user approves then proceed to 2.4, else revise proposal
-
-      - 2.4. Record Fix Plan
-        - Document selected fix strategy
-        - List all files to be modified
-        - Note any dependencies on other fixes
+    - Achieve comprehensive fix plans for all issues
+    - Ensure user confirmation is obtained for each fix strategy
+    - Ensure proper handling of user feedback and revisions
 
   3. Fix Execution Phase
-    - For each approved fix (in priority order):
-      - 3.1. Apply Document Changes
-        - Read affected documents
-        - Apply fixes according to selected strategy
-        - Ensure consistency with related documents
-        - Preserve formatting and structure
-      
-      - 3.2. Cross-Document Consistency Check
-        - if fix involves terminology change, update all occurrences across all documents
-        - if fix involves adding/removing entities, update all references
-        - if fix involves architecture change, propagate to tasks and plans
-      
-      - 3.3. Verify Fix Completeness
-        - Confirm the specific issue is resolved
-        - Check for any new issues introduced by the fix
-        - Update todo list to mark issue as fixed
+    - Achieve resolution of all approved fixes in priority order
+    - Ensure cross-document consistency is maintained
+    - Ensure fix completeness is verified for each issue
 
   4. Validation Phase
-    - Review all changes made
-    - Perform quick consistency check across modified documents
-    - Verify no new conflicts or issues were introduced
-    - Present summary of all fixes to user
-    - Request user confirmation that all issues are addressed
+    - Ensure all changes are reviewed and validated
+    - Ensure no new conflicts or issues are introduced
+    - Ensure user confirmation is obtained for all fixes
 
   5. Cleanup Phase
-    - Delete "{root}/docs/design-validation.md"
-    - Recommend user to re-run validation to confirm fixes:
-      - if PRD workflow: `/sunnycore_po *validate-design prd`
-      - if full workflow: `/sunnycore_po *validate-design full`
-    - Provide summary of changes made and files modified
+    - Ensure validation report is deleted after successful fixes
+    - Ensure user is guided to re-run validation for confirmation
+    - Ensure comprehensive summary of changes is provided
 
 ## [Fix-Strategies]
 
@@ -136,6 +94,27 @@
   4. Fix introduces new conflicts: Revert changes and propose alternative approach
   5. Critical files cannot be modified: Report error and list problematic files
 
+## [Conflict-Resolution-Guidelines]
+  1. **Prioritize by Severity**
+    - Fix in order: Critical → High → Medium → Low
+    - Focus on issues that block development or cause cascading problems
+    - Obtain user confirmation for each fix strategy before execution
+  
+  2. **Maintain Consistency**
+    - When fixing references, update all related documents simultaneously
+    - Establish canonical source of truth (usually requirements for functional specs)
+    - Use consistent terminology and naming conventions across fixes
+  
+  3. **Preserve Traceability**
+    - Ensure 100% bidirectional mapping after fixes: requirements ↔ architecture ↔ tasks ↔ plans
+    - Verify no new orphaned entities or broken references introduced
+    - Document rationale for each resolution decision
+  
+  4. **Validation After Fixes**
+    - Recommend re-running validate-design after all fixes complete
+    - Verify cross-document consistency maintained
+    - Ensure no new conflicts introduced during fix process
+
 ## [DoD]
   - [ ] Design validation report has been read and parsed
   - [ ] All issues have been extracted and categorized
@@ -147,4 +126,43 @@
   - [ ] User confirmation obtained for all changes
   - [ ] "{root}/docs/design-validation.md" has been deleted
   - [ ] User has been advised to re-run validate-design for confirmation
+
+## [Example]
+
+### Example 1: Broken References in PRD
+[Input]
+- Validation report: docs/design-validation.md (3 critical issues: REQ-005 doesn't exist, Component "EmailService" fabricated, Task-4 references non-existent REQ-006)
+
+[Decision]
+- Issue 1: REQ-005 referenced but doesn't exist in PRD requirements section
+  - Fix: Remove REQ-005 reference, map to existing REQ-003 instead
+- Issue 2: Architecture mentions "EmailService" but no such component defined
+  - Fix: Add EmailService to architecture components section with proper definition
+- Issue 3: Task-4 maps to REQ-006 which doesn't exist
+  - Fix: Update Task-4 to map to REQ-004 (notification requirements)
+
+[Expected Outcome]
+- Updated docs/PRD.md with fixes: REQ-005 → REQ-003, EmailService added to architecture, Task-4 → REQ-004
+- Cross-document consistency verified (all references valid)
+- docs/design-validation.md deleted
+- Recommendation: Re-run `/sunnycore_po *validate-design prd` to confirm
+
+### Example 2: Coverage Gaps in Full Workflow
+[Input]
+- Validation report: docs/design-validation.md (Coverage: REQ-001 has no architecture mapping, COMP-003 not mapped to any task, Task-2 has no implementation plan)
+
+[Decision]
+- Gap 1: REQ-001 (user authentication) missing architecture component
+  - Fix: Add "AuthService" component to docs/architecture/components.md, map to REQ-001
+- Gap 2: COMP-003 (Cache Layer) exists but no task implements it
+  - Fix: Add Task-5 "Implement caching" to docs/epic.md, map to COMP-003
+- Gap 3: Task-2 in epic but no plan file
+  - Fix: Create docs/plans/2-plan.md with TDD structure for Task-2
+
+[Expected Outcome]
+- docs/architecture/components.md: Added AuthService with REQ-001 mapping
+- docs/epic.md: Added Task-5 for Cache Layer implementation
+- docs/plans/2-plan.md: Created implementation plan for Task-2
+- 100% coverage achieved: requirements → architecture → tasks → plans
+- docs/design-validation.md deleted after user confirmation
 
