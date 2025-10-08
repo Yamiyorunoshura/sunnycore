@@ -7,6 +7,21 @@
 
 ## [Unreleased]
 
+## [2.1.0] - sunnycore v2.1.0
+
+### Added
+- 新增任務規劃代理：新增 planner sub-agent 提供執行前的高層次規劃能力
+  - 新增 `claude code/agents/planner.md`：定義 planner 角色職責與規劃框架
+    * 核心能力：任務分析與拆解、技術方案評估、風險識別、依賴分析、策略規劃
+    * 輸出規劃：步驟概覽、關鍵決策點、預期成果、風險與依賴、成功標準
+    * 約束：僅使用唯讀工具（read_file、grep、codebase_search、list_dir、sequentialthinking）
+    * 輸出方式：僅在對話中顯示，不保存至文件
+  - 更新 `claude code/commands/sunnycore_assistant.md`：強制要求先調用 planner 生成執行計劃
+    * 新增約束第 1-2 條：必須先調用 planner sub-agent、必須遵循 planner 生成的計劃
+    * 新增 DoD 檢查項：執行計劃已通過 planner sub-agent 生成
+    * 優化約束順序：將 planner 相關約束提至 [Constraints] 開頭
+  - 提升技術支援工作流程的規劃性與執行品質
+
 ## [2.0.0] - sunnycore v2.0.0
 
 ### Added
