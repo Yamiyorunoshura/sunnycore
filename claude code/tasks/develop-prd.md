@@ -1,3 +1,5 @@
+**GOAl**: Complete all development tasks based on PRD document in one iteration.
+
 ## [Input]
   1. "{PRD}" --Product Requirements Document
   2. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template

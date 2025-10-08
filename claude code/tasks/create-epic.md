@@ -1,7 +1,9 @@
+**GOAL**: Create feature-level task list (epic), breaking down requirements into executable tasks.
+
 ## [Input]
   1. "{REQ}/*.md" --Project functional and non-functional requirements
   2. "{ARCH}/*.md" --Architecture design and technical specifications
-  3. "{TMPL}/tasks-tmpl.yaml" --Task template format
+  3. "{TMPL}/epic-tmpl.yaml" --Epic template format
 
 ## [Output]
   1. "{EPIC}" --Task list (Markdown format)
@@ -12,7 +14,7 @@
   3. Must exclude operational actions unless explicitly requested by the user
     - Operational actions refer to execution-level commands such as git commit, npm install, etc., but design, implementation, testing and other development tasks do not fall into this category
   4. Must ensure all file names/paths do not use spaces; prefer kebab-case
-  5. Note: Atomic breakdown of tasks will be handled later in the plan-tasks phase using TDD RED/GREEN/REFACTOR cycles
+  5. Note: Atomic breakdown of tasks will be handled later in the create-plan phase using TDD RED/GREEN/REFACTOR cycles
 
 ## [Tools]
   1. **todo_write**
@@ -62,3 +64,14 @@
   - [ ] All tasks comply with template fields
   - [ ] Each task is feature-level, outcome-oriented, and verifiable
   - [ ] No file names or key names use spaces; kebab-case is enforced
+
+## [Example]
+
+Epic format with checkboxes:
+
+- [ ] Task-{task_id}
+  - {description of the task}
+- [ ] Task-{task_id}
+  - {description of the task}
+- [ ] Task-{task_id}
+  - {description of the task}

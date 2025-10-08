@@ -1,3 +1,5 @@
+**GOAL**: Execute TDD development based on implementation plan, completing single task implementation.
+
 ## [Input]
   1. "{PLAN}/{task_id}-plan.md" --Implementation plan
   2. "{ARCH}/*.md" --Architecture design
@@ -26,7 +28,7 @@
 
 ## [Steps]
   1. Preparation Phase
-    - Read the TDD-based implementation plan produced in the plan-tasks phase
+    - Read the TDD-based implementation plan produced in the create-plan phase
     - Extract the implementation steps for RED, GREEN, REFACTOR three phases
     - Create todo list based on implementation steps
 

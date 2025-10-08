@@ -1,3 +1,5 @@
+**GOAL**: Execute project acceptance, validating deliverables from business and user perspectives.
+
 ## [Input]
   1. (Conditional) "{PRD}" --Product Requirements Document (if exists, used as primary requirement source)
   2. (Conditional) "{REQ}/*.md" --Requirement documents (required if "PRD.md" does not exist)

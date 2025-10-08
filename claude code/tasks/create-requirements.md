@@ -1,3 +1,5 @@
+**GOAL**: Create detailed functional and non-functional requirements documentation.
+
 ## [Input]
   1. "{TMPL}/requirement-tmpl.yaml" --Requirement template
   2. User-provided initial ideas and requirement descriptions

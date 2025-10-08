@@ -1,3 +1,5 @@
+**GOAL**: Fix issues identified during acceptance phase.
+
 ## [Input]
   1. "{CUTOVER}" --Cutover report (required)
   2. (Conditional) "{PRD}" --Product Requirements Document (if exists, used as primary requirement and architecture source)
