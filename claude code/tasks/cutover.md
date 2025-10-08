@@ -50,7 +50,7 @@
   3. Environment Setup Phase
     - Follow documentation to set up project environment
     - Install all required dependencies
-    - Apply necessary configurations
+    - Apply necessary configurations. You must read the exisiting ".env" to avoid overwriting existing configurations
     - Document all setup steps performed
     - If setup fails, record error details and potential causes
 
