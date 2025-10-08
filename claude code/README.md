@@ -79,7 +79,7 @@
 | 2 | `/sunnycore_pm *create-prd` | 創建 PRD（產品需求文檔），包含需求、架構、任務 |
 | 3 | `/sunnycore_dev *develop-prd` | 基於 PRD 一次性完成所有開發任務 |
 | 4 | `/sunnycore_po *cutover` | 項目驗收 |
-| 5 | `/sunnycore_architect *document-project` | 更新專案架構文檔 |
+| 5 | `/sunnycore_architect *document-project` | 更新專案架構文檔（建議先親身驗收項目，如發現問題可使用 `/sunnycore_assistant` 協助解決） |
 | 6 | `/sunnycore_po *conclude` | 總結文檔並歸檔 |
 
 **特點：**
@@ -145,7 +145,7 @@ flowchart TD
 | 步驟 | 命令 | 說明 |
 |------|------|------|
 | 1 | `/sunnycore_pm *create-requirements` | 互動式創建需求文檔 |
-| 2 | `/sunnycore_pm *create-architecture` | 互動式創建架構文檔 |
+| 2 | `/sunnycore_architect *create-architecture` | 互動式創建架構文檔 |
 | 3 | `/sunnycore_pm *create-epic` | 互動式創建任務文檔 |
 
 ### 💻 階段二：開發迭代
@@ -168,7 +168,7 @@ flowchart TD
 | 步驟 | 命令 | 說明 |
 |------|------|------|
 | 8 | `/sunnycore_po *cutover` | 項目驗收 |
-| 9 | `/sunnycore_architect *document-project` | 產出專案架構文件 |
+| 9 | `/sunnycore_architect *document-project` | 產出專案架構文件（建議先親身驗收項目，如發現問題可使用 `/sunnycore_assistant` 協助解決） |
 | 10 | `/sunnycore_architect *curate-knowledge` | 整理知識文檔 |
 | 11 | `/sunnycore_po *conclude` | 總結文檔 |
 
@@ -315,7 +315,7 @@ flowchart TD
 | 步驟 | 命令 | 說明 |
 |------|------|------|
 | 9 | `/sunnycore_po *cutover` | 項目驗收 |
-| 10 | `/sunnycore_architect *document-project` | 更新專案架構文件 |
+| 10 | `/sunnycore_architect *document-project` | 更新專案架構文件（建議先親身驗收項目，如發現問題可使用 `/sunnycore_assistant` 協助解決） |
 | 11 | `/sunnycore_architect *curate-knowledge` | 整理知識文檔 |
 | 12 | `/sunnycore_po *conclude` | 總結文檔 |
 
