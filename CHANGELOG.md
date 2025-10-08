@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [2.1.1] - sunnycore v2.1.1
+
+### Changed
+- 優化 Technical Assistant 約束說明：在 `sunnycore_assistant.md` 中補充 progress-manager 的用途描述
+  - 第 3 條約束：從「Must call progress-manager sub-agent after completing work」擴展為「Must call progress-manager sub-agent after completing work for recording progress and curating knowledge」
+  - 明確 progress-manager 的兩大核心功能：記錄進度與整理知識
+  - 提升文檔說明的完整性與清晰度
+
 ## [2.1.0] - sunnycore v2.1.0
 
 ### Added
