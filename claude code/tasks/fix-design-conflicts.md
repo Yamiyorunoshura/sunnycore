@@ -13,13 +13,10 @@
   2. Deleted: "{root}/docs/design-validation.md" (after successful fixes)
 
 ## [Constraints]
-  1. Must read and parse design-validation.md to extract all issues
-  2. Must prioritize fixes by severity (Critical → High → Medium → Low)
-  3. Must interact with user to confirm fix strategy for each issue
-  4. Must preserve document structure and formatting
-  5. Must maintain consistency across all modified documents
-  6. Must delete design-validation.md only after all fixes are complete
-  7. Must recommend re-running validate-design to confirm fixes
+  1. Do not fix issues out of severity order (Critical → High → Medium → Low)
+  2. Do not apply fixes without user confirmation of strategy
+  3. Do not introduce new conflicts or inconsistencies during fixes
+  4. Do not delete validation report before all fixes are complete
 
 ## [Tools]
   1. **todo_write**

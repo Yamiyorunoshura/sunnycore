@@ -10,11 +10,10 @@
   3. Complete test coverage and test cases
 
 ## [Constraints]
-  1. Must complete all tasks defined in the PRD in a single execution
-  2. **Must use TDD methodology for development**: Follow the TDD practice guidelines detailed in [Development-Guidelines] section
-  3. Development notes must preserve the indentation and numbering style used in the template
-  4. Must comply with acceptance criteria and architecture mapping defined in the PRD
-  5. If modification of files outside the PRD scope is needed, must record in development notes and explain the reason
+  1. Do not leave any PRD tasks incomplete
+  2. Do not skip TDD cycle (RED → GREEN → REFACTOR)
+  3. Do not modify files outside PRD scope without recording rationale in dev notes
+  4. Do not deliver with failing tests (exit code must be 0)
 
 ## [Tools]
   1. **todo_write**

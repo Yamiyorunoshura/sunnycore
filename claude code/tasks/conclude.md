@@ -9,17 +9,10 @@
   1. Completion report: "{root}/docs/completion-report.md" (Markdown format)
 
 ## [Constraints]
-  1. Must ensure completion report complies with template requirements
-  2. Completion report must include the following core content:
-    (1) All key decisions and their rationale
-    (2) Technology choices and alternative solution comparisons
-    (3) Problems encountered, root cause analysis, and solutions
-    (4) Future recommendations
-    (5) DoD verification evidence (format as "file path:line number", e.g., "src/main.py:L42-L56")
-  3. If required input files (*.lock, template) are missing or incorrectly formatted, must generate a missing file list in the terminal and halt execution, waiting for user to provide supplementary files
-  4. If any of the 5 core content items are completely missing from source documents, should annotate "To be supplemented: missing XX item" in the corresponding chapter of the completion report and continue execution
-  5. Version name must be parsed from *.lock file (format: "version = x.x.x")
-  6. When archiving files, must preserve docs/architecture/, docs/knowledge/, and docs/completion-report.md in their original locations
+  1. Do not omit any of the 5 core content items (decisions, tech choices, issues/solutions, evidence, recommendations)
+  2. Do not incorrectly parse or miss version number from lock file
+  3. Do not move architecture/, knowledge/, or completion-report.md during archiving
+  4. Do not proceed if required input files are missing (must list missing files and halt)
 
 ## [Tools]
   1. **todo_write**: Create and manage task list

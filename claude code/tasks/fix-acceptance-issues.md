@@ -13,12 +13,10 @@
   3. Updated documentation if needed
 
 ## [Constraints]
-  1. Must address all issues documented in cutover report
-  2. Must follow TDD cycle for fixes: write/update tests first (RED), implement fix (GREEN), then refactor (REFACTOR)
-  3. Must verify fixes resolve the reported issues
-  4. Development notes must preserve the indentation and numbering style used in the template
-  5. Must re-run acceptance tests after fixes to ensure issues are resolved
-  6. Must not introduce new issues or break existing functionality
+  1. Do not leave any cutover issues unaddressed
+  2. Do not skip TDD cycle for fixes (RED → GREEN → REFACTOR)
+  3. Do not skip re-running acceptance tests after fixes
+  4. Do not introduce new issues or break existing functionality
 
 ## [Tools]
   1. **sequential-thinking (MCP)**: Perform structured reasoning and analysis

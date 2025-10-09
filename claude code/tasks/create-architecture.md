@@ -10,12 +10,10 @@
   2. "{root}/docs/architecture.md" (temporary architecture file. Will be sharded after running "shard-architecture.py")
 
 ## [Constraints]
-  1. Must verify that "{REQ}/*.md" exists and is complete before architecture design; if requirements are incomplete or contain conflicts, record the issues and confirm with requirement authors, do not make assumptions
-  2. Must create explicit requirement-to-architecture mapping relationships covering functional and non-functional requirements (mapping means requirement ID explicitly links to specific component names or design decision numbers)
-  3. Must verify that each requirement has corresponding architecture components or design decisions
-  4. Must use the standardized template to write "{root}/docs/architecture.md"; strictly preserve section order and 2-space indentation; do not introduce non-existent paths
-  5. After drafting is complete, must execute 'uv run "{SCRIPTS}/shard-architecture.py"' and verify output appears under "{ARCH}/"
-  6. Architecture design required external API call must use context7 (MCP) to search for library documentation and API references
+  1. Do not make assumptions when requirements are incomplete or conflicting (must record issues and confirm)
+  2. Do not produce architecture that lacks 100% requirement coverage
+  3. Do not deviate from template structure or introduce non-existent paths
+  4. Do not skip executing shard-architecture.py
 
 ## [Tools]
   1. **todo_write**

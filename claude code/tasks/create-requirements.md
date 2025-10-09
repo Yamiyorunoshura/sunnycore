@@ -9,11 +9,10 @@
   2. "{REQ}/*.md" --Complete requirement specifications (including functional requirements, non-functional requirements, and acceptance criteria)
 
 ## [Constraints]
-  1. Each requirement must be verifiable and measurable; vague or subjective wording is not allowed
-  2. Section and field names must align exactly with the requirement template
-  3. Examples must not contain sensitive or personal data
-  4. This workflow transforms initial ideas into complete, testable requirements through structured interaction
-  5. Use standardized requirement templates to ensure consistency and verifiability
+  1. Do not create vague or unmeasurable requirements
+  2. Do not deviate from template structure and field names
+  3. Do not include sensitive or personal data in examples
+  4. Do not skip executing shard-requirements.py
 
 ## [Tools]
   1. **todo_write**
