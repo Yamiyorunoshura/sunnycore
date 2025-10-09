@@ -27,4 +27,4 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 <!-- When executing conversation compression, preserve all structural definitions (Constraints, Tools, Output, DoD, Guidelines), may compress status info, may discard completed task outputs -->
 
 ## GUIDANCE 9
-<!-- All the todo items created must be atomic and actionable -->
+<!-- Break down tasks into low-complexity, granular todos that are easy to complete, and dynamically update todo list during implementation to reflect new issues or required fixes -->
