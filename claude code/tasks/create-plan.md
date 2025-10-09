@@ -35,25 +35,30 @@
     - When to use: When implementation involves external SDK integration or need to verify package compatibility
 
 ## [Steps]
-  1. Setup
-  - Task: Understand all requirements, architecture, and task scope
-  - Expected outcome: Project-specific best practices and lessons learned identified
+  1. Setup Phase
+    - Understand all requirements, architecture, and task scope
+    - Identify project-specific best practices and lessons learned
+    - Establish progress tracking mechanism for plan creation work
 
-  2. Plan RED Phase (For Each Task)
-  - Task: Plan test cases with acceptance criteria and test conditions
-  - Expected outcome: Complete test planning with measurable success metrics and edge cases defined
+  2. For Each Task: Planning RED Phase Content
+    - Achieve complete test planning with acceptance criteria and test conditions
+    - Ensure measurable success metrics and edge cases are defined
+    - Ensure alignment with testing best practices from knowledge base
 
-  3. Plan GREEN Phase (For Each Task)
-  - Task: Design atomic implementation steps for minimal code
-  - Expected outcome: Executable steps mapped to architecture components and test conditions
+  3. For Each Task: Planning GREEN Phase Content
+    - Achieve atomic, executable implementation steps for minimal code
+    - Ensure proper mapping to architecture components and test conditions
+    - Ensure application of lessons learned to avoid known issues
 
-  4. Plan REFACTOR Phase (For Each Task)
-  - Task: Plan refactoring and optimization work
-  - Expected outcome: Comprehensive improvement plan with cross-cutting concerns and quality improvements identified
+  4. For Each Task: Planning REFACTOR Phase Content
+    - Achieve comprehensive refactoring and optimization plan
+    - Ensure identification of cross-cutting concerns and quality improvements
+    - Ensure incorporation of best practices from knowledge base
 
-  5. Finalization
-  - Task: Generate all implementation plan files
-  - Expected outcome: Complete plans for all tasks at "{PLAN}/{task_id}-plan.md" following template structure
+  5. Finalization Phase
+    - Achieve complete implementation plans for all tasks
+    - Ensure all plans follow template structure and are executable
+    - Ensure all plan files are generated at "{PLAN}/{task_id}-plan.md"
 
 ## [TDD-Planning-Guidelines]
   1. **TDD Three-Phase Structure**

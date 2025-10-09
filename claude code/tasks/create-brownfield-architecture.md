@@ -35,21 +35,24 @@
     - When to use: When need to study how similar systems evolved their architecture or integrated new components
 
 ## [Steps]
-  1. Evaluate Existing Architecture
-  - Task: Understand current architecture, extension points, and constraints
-  - Expected outcome: Affected domains and dependencies identified
+  1. Evaluate Existing Architecture Phase
+    - Understand current architecture, extension points, and constraints
+    - Identify affected domains and dependencies
+    - Establish progress tracking mechanism for design tasks
 
-  2. Design New Module
-  - Task: Design new module with clear boundaries and interfaces
-  - Expected outcome: Complete module design with comprehensive impact analysis
+  2. Design New Module Phase
+    - Achieve complete new module design with clear boundaries and interfaces
+    - Ensure proper integration with existing components
+    - Ensure comprehensive impact analysis for all proposed changes
 
-  3. Documentation and Approval
-  - Task: Write architecture document and obtain user approval
-  - Expected outcome: Compliant draft approved and successfully sharded using shard-architecture.py
+  3. Documentation and Approval Phase
+    - Achieve compliant architecture draft following template structure
+    - Ensure user approval is obtained with proper feedback integration
+    - Achieve successful architecture sharding by running the "shard-architecture.py" script with verified output under "{ARCH}/"
 
-  4. Finalization
-  - Task: Verify impact analyses and compatibility
-  - Expected outcome: All impact analyses complete and new-existing module compatibility verified
+  4. Finalization Phase
+    - Ensure all impact analyses are complete and accurate
+    - Ensure compatibility between new and existing modules is verified
 
 ## [Brownfield-Architecture-Guidelines]
   1. **Preserve Existing Contracts**

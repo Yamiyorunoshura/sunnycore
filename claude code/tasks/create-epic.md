@@ -22,21 +22,25 @@
     - When to use: When need to decompose complex requirements or identify task dependencies
 
 ## [Steps]
-  1. Research
-  - Task: Understand requirements, architecture, and project scope
-  - Expected outcome: Success criteria and constraints for task design identified
+  1. Research Phase
+    - Understand requirements, architecture, and project scope
+    - Identify success criteria and constraints for task design
+    - Establish progress tracking mechanism for task design work
 
-  2. Drafting
-  - Task: Break down requirements into feature-level tasks
-  - Expected outcome: Feature-level task breakdown with proper grouping and clear scope
+  2. Drafting Phase
+    - Achieve feature-level task breakdown with proper grouping
+    - Ensure each task represents a verifiable feature with clear scope
+    - Ensure tasks are logically organized without overlap
 
-  3. Review
-  - Task: Deduplicate and verify tasks
-  - Expected outcome: Tasks are actionable with proper granularity and requirement traceability
+  3. Review Phase
+    - Ensure tasks are deduplicated and actionable
+    - Ensure proper feature-level granularity and requirement traceability
+    - Ensure format compliance with template requirements
 
-  4. Finalization
-  - Task: Obtain user approval and save epic document
-  - Expected outcome: Final epic document saved to "{EPIC}" and approved by user
+  4. Finalization Phase
+    - Achieve complete task list draft with clear introduction
+    - Ensure user approval is obtained with proper feedback integration
+    - Achieve final epic document saved to "{EPIC}"
 
 ## [Task-Design-Guidelines]
   1. **Feature-Level Tasks**

@@ -36,21 +36,24 @@
     - When to use: When need to study how successful projects document their architecture and design decisions
 
 ## [Steps]
-  1. Analysis and Planning
-  - Task: Understand existing architecture and actual implementation state
-  - Expected outcome: Comprehensive context gathered from all documentation sources
+  1. Analysis and Planning Phase
+    - Understand existing architecture and actual implementation state
+    - Gather comprehensive context from all documentation sources
+    - Establish progress tracking mechanism for documentation tasks
 
-  2. Integration
-  - Task: Create unified architecture document with source references
-  - Expected outcome: Complete architecture document at "{root}/docs/architecture.md" with proper source_refs
+  2. Integration Phase
+    - Achieve unified architecture document at "{root}/docs/architecture.md"
+    - Ensure all content includes proper source references (source_refs)
+    - Ensure completeness and internal consistency
 
-  3. Cleanup and Sharding
-  - Task: Remove old documents and shard architecture
-  - Expected outcome: Successfully sharded architecture in "{ARCH}/" with verified output files
+  3. Cleanup and Sharding Phase
+    - Ensure old architecture documents are removed from "{ARCH}/"
+    - Achieve successful architecture sharding with verified output
+    - Ensure all sharded documents are properly created in .md format
 
-  4. Finalization
-  - Task: Update CLAUDE.md with refreshed architecture index
-  - Expected outcome: CLAUDE.md updated with current architecture document index
+  4. Finalization Phase
+    - Ensure "{root}/CLAUDE.md" is updated with refreshed architecture index
+    - Ensure all source references are properly documented
 
 ## [Documentation-Guidelines]
   1. **Base on Actual Implementation**

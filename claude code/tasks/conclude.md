@@ -27,33 +27,35 @@
     - Note: If not indexed or search fails, switch to grep tool for keyword search, or annotate "Unable to locate code evidence" and continue
 
 ## [Steps]
-  1. Input Validation
-  - Task: Parse version number and validate required input files
-  - Expected outcome: Version number extracted from lock file, all required files verified
+  1. Input Validation Phase
+    - Ensure version number is parsed from lock file
+    - Ensure all required input files exist and are valid
+    - Establish progress tracking mechanism for conclusion tasks
 
-  2. Information Extraction and Mapping
-  - Task: Extract all 5 core content items and map to template fields
-  - Expected outcome: Complete extraction with code evidence supplemented where needed
+  2. Information Extraction and Mapping Phase
+    - Achieve complete extraction of all 5 core content items
+    - Ensure proper mapping to template fields
+    - Ensure code evidence is supplemented where needed
 
-  3. Write Report
-  - Task: Generate completion report at "{root}/docs/completion-report.md"
-  - Expected outcome: Complete report following template structure with all 5 core items
+  3. Write Report Phase
+    - Achieve complete completion report at "{root}/docs/completion-report.md"
+    - Ensure all sections follow template structure
 
-  4. Quality Check
-  - Task: Verify report completeness and quality
-  - Expected outcome: Report meets template requirements with all core items clearly presented
+  4. Quality Check Phase
+    - Ensure report meets template requirements with complete structure
+    - Ensure all 5 core content items are clearly presented
+    - Ensure proper handling of deficiencies with iterative fixes
 
-  5. Create Archive
-  - Task: Create archive directory at "{ARCHIVE}/{version_name}/"
-  - Expected outcome: Archive directory created and verified
+  5. Create Archive Directory Phase
+    - Ensure archive directory "{ARCHIVE}/{version_name}/" is created and verified
 
-  6. Move Files to Archive
-  - Task: Archive files while preserving architecture/, knowledge/, and completion-report.md
-  - Expected outcome: Files properly archived with verification complete
+  6. Move Files to Archive Phase
+    - Ensure proper file archiving with architecture/, knowledge/, and completion-report.md preserved
+    - Ensure verification of archive operations with proper error handling
 
-  7. Update Document References
-  - Task: Update document references to point to archive paths
-  - Expected outcome: All references updated and verified for correctness
+  7. Update Document References Phase
+    - Ensure all document references are updated to point to correct archive paths
+    - Ensure reference updates are verified for correctness
 
 ## [Completion-Report-Guidelines]
   1. **Core Content (5 Required Items)**

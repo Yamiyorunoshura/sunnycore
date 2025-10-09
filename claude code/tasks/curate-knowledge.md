@@ -32,21 +32,21 @@
     - When to use: When validating best practices against official documentation
 
 ## [Steps]
-  1. Preparation
-  - Task: Identify all platinum-level best practices and development errors
-  - Expected outcome: Progress tracking established for knowledge curation
+  1. Preparation Phase
+    - Identify all platinum-level best practices and development errors
+    - Establish progress tracking mechanism for knowledge curation tasks
 
-  2. Knowledge Base Design
-  - Task: Design knowledge base organization and semantic classification
-  - Expected outcome: Well-structured organization scheme with proper semantic classification
+  2. Knowledge Base Design Phase
+    - Achieve well-structured knowledge base organization scheme
+    - Ensure proper semantic classification for best practices and errors
 
-  3. Document Production
-  - Task: Generate knowledge base documents under "{KNOWLEDGE}/"
-  - Expected outcome: Complete documents with proper evidence sources and semantic naming
+  3. Document Production Phase
+    - Achieve complete knowledge base documents under "{KNOWLEDGE}/"
+    - Ensure all knowledge points have proper evidence sources and annotations
+    - Ensure proper classification with semantic naming conventions
 
-  4. Finalization
-  - Task: Archive review and development notes
-  - Expected outcome: Documents archived to "{ARCHIVE}/{version_name}/"
+  4. Finalization Phase
+    - Ensure review and development notes are archived to "{ARCHIVE}/{version_name}/"
 
 ## [Knowledge-Curation-Guidelines]
   1. **Platinum-Level Practices Only**

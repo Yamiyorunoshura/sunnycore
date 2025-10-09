@@ -25,29 +25,32 @@
     - [Step 2: Query official documentation related to deployment configuration]
 
 ## [Steps]
-  1. Preparation and Validation
-  - Task: Understand business objectives and project structure
-  - Expected outcome: Progress tracking established for acceptance tasks
+  1. Preparation and Validation Phase
+    - Understand business objectives and project structure
+    - Ensure proper handling of both PRD-based and Traditional project structures
+    - Establish progress tracking mechanism for acceptance tasks
 
-  2. Understanding and Configuration
-  - Task: Identify project type and configuration needs
-  - Expected outcome: All configuration requirements clearly documented
+  2. Understanding and Configuration Phase
+    - Identify project type and configuration needs
+    - Achieve clear documentation of all configuration requirements
 
-  3. Environment Setup
-  - Task: Configure project environment following documentation
-  - Expected outcome: Fully configured environment with all setup steps documented
+  3. Environment Setup Phase
+    - Achieve fully configured project environment following documentation
+    - Ensure all setup steps and any failures are documented
 
-  4. Project Execution
-  - Task: Run project and verify functionality
-  - Expected outcome: Running project with execution results and detailed logs documented
+  4. Project Execution Phase
+    - Achieve running project with verified functionality
+    - Ensure execution results are documented with detailed logs
 
-  5. Acceptance Testing
-  - Task: Test all critical business requirements from end-user perspective
-  - Expected outcome: Comprehensive test results with evidence and all issues documented with severity
+  5. Acceptance Testing Phase
+    - Ensure all critical business requirements are tested from end-user perspective
+    - Achieve comprehensive test results with evidence for each requirement
+    - Ensure all issues are documented with severity and impact
 
-  6. Report Generation
-  - Task: Generate cutover report and determine status
-  - Expected outcome: Complete cutover report at "{CUTOVER}" with status (Success/Partial Success/Failed)
+  6. Report Generation Phase
+    - Achieve complete cutover report saved to "{CUTOVER}"
+    - Ensure cutover status determination (Success/Partial Success/Failed)
+    - Ensure all findings and recommendations are documented
 
 ## [Acceptance-Testing-Guidelines]
   1. **End-User Perspective Testing**

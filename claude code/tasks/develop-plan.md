@@ -30,25 +30,25 @@
     - [Steps 2-4: When need external API calls, query official documentation and examples]
 
 ## [Steps]
-  1. Preparation
-  - Task: Understand the TDD implementation plan and its three phases
-  - Expected outcome: Progress tracking mechanism established for TDD cycle execution
+  1. Preparation Phase
+    - Understand the TDD implementation plan and its three phases
+    - Establish progress tracking mechanism for TDD cycle execution
 
-  2. RED Phase - Test Implementation
-  - Task: Implement all planned test cases
-  - Expected outcome: Complete test coverage with tests failing with expected error messages (RED status confirmed)
+  2. RED Phase: Test Implementation
+    - Achieve complete test coverage with all planned test cases implemented
+    - Ensure all tests fail with expected error messages instead of unexpected erorrs(e.g could not compile, syntax error, etc.)(RED status confirmed)
 
-  3. GREEN Phase - Minimal Implementation
-  - Task: Implement minimal code to pass tests
-  - Expected outcome: All tests passing with implementation aligned to architecture mapping
+  3. GREEN Phase: Minimal Implementation
+    - Achieve passing tests with minimal code implementation
+    - Ensure implementation aligns with architecture mapping from the plan
 
-  4. REFACTOR Phase - Code Quality Enhancement
-  - Task: Improve code quality while maintaining green tests
-  - Expected outcome: All planned optimizations and cross-cutting concerns applied
+  4. REFACTOR Phase: Code Quality Enhancement
+    - Achieve improved code quality while maintaining green tests
+    - Ensure all planned optimizations and cross-cutting concerns are applied
 
-  5. Validation and Documentation
-  - Task: Validate all acceptance criteria and generate development notes
-  - Expected outcome: Complete development notes document at "{DEVNOTES}/{task_id}-dev-notes.md"
+  5. Validation and Documentation Phase
+    - Ensure all acceptance criteria are validated and met
+    - Achieve complete development notes document at "{DEVNOTES}/{task_id}-dev-notes.md"
 
 ## [Development-Guidelines]
   1. **TDD Practice (Mandatory)**

@@ -32,21 +32,25 @@
     - When to use: When need to study how similar features are implemented in existing products
 
 ## [Steps]
-  1. Initialization
-  - Task: Determine project type (Greenfield/Brownfield) and gather context
-  - Expected outcome: Project type correctly identified with appropriate context
+  1. Initialization Phase
+    - Determine project type (Greenfield/Brownfield)
+    - Ensure proper context gathering for both project types
+    - Establish progress tracking mechanism for analysis
 
-  2. Requirement Analysis
-  - Task: Understand requirement scope and architectural impact
-  - Expected outcome: Requirement complexity and workflow depth assessed
+  2. Requirement Analysis Phase
+    - Understand requirement scope and architectural impact
+    - Ensure proper analysis for both Greenfield and Brownfield contexts
+    - Assess requirement complexity and necessary workflow depth
 
-  3. Recommendation
-  - Task: Provide clear workflow recommendation based on analysis
-  - Expected outcome: Workflow recommendation with rationale based on decision criteria
+  3. Recommendation Phase
+    - Achieve clear workflow recommendation based on analysis
+    - Ensure rationale is provided with decision criteria
+    - Ensure appropriate guidance for Brownfield projects when needed
 
-  4. Finalization
-  - Task: Provide concise, actionable recommendation with next step command
-  - Expected outcome: User understands which workflow to use and why
+  4. Finalization Phase
+    - Ensure concise, actionable recommendation is provided
+    - Ensure next step command is specified
+    - Ensure proper handling of user requests for additional details
 
 ## [Decision-Criteria]
   **Recommend Full Workflow (*create-requirements) when:**

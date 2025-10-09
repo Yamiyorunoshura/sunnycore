@@ -29,25 +29,30 @@
     - Query examples: "Does component X exist?" "Where is requirement Y implemented?"
 
 ## [Steps]
-  1. Initialization
-  - Task: Validate workflow parameter and determine validation scope
-  - Expected outcome: Validation scope determined for PRD or Full workflow
+  1. Initialization Phase
+    - Validate workflow parameter and determine validation scope
+    - Ensure proper handling of both PRD and Full workflow types
+    - Establish progress tracking mechanism for validation tasks
 
-  2. Content Extraction and Indexing
-  - Task: Extract content and build internal index of all entities
-  - Expected outcome: Comprehensive internal index for workflow-appropriate validation
+  2. Content Extraction and Indexing Phase
+    - Ensure appropriate content extraction for workflow type
+    - Achieve comprehensive internal index of all entities
+    - Ensure proper handling of both workflow-specific extraction paths
 
-  3. Validation
-  - Task: Perform workflow-appropriate validation checks
-  - Expected outcome: Complete validation coverage with all issue types detected
+  3. Validation Phase
+    - Ensure workflow-appropriate validation checks are performed
+    - Achieve complete validation coverage across all criteria
+    - Ensure proper detection of all issue types (consistency, coverage, conflicts, authenticity)
 
-  4. Report Generation
-  - Task: Generate validation report with issues categorized by severity
-  - Expected outcome: Comprehensive validation report at "{root}/docs/design-validation.md"
+  4. Report Generation Phase
+    - Achieve comprehensive validation report at "{root}/docs/design-validation.md"
+    - Ensure issues are properly categorized by severity
+    - Ensure report structure includes all required sections
 
-  5. Finalization
-  - Task: Present validation summary with recommendations
-  - Expected outcome: User informed of validation results with clear guidance for next steps
+  5. Finalization Phase
+    - Ensure validation summary is presented to user
+    - Ensure appropriate recommendations based on findings
+    - Ensure proper guidance for next steps
 
 ## [Validation-Criteria]
 

@@ -30,25 +30,26 @@
     - Query examples: "How is similar functionality implemented?" "What are the related modules?"
 
 ## [Steps]
-  1. Initialization
-  - Task: Understand workflow and requirements gathering scope
-  - Expected outcome: Progress tracking mechanism established
+  1. Initialization Phase
+    - Understand the expected workflow and requirements gathering scope
+    - Establish progress tracking mechanism for requirement extraction tasks
 
-  2. Functional Requirements
-  - Task: Extract and organize functional requirements
-  - Expected outcome: Complete, deduplicated, atomic functional requirements organized by user stories
+  2. Functional Requirements Phase
+    - Achieve complete, deduplicated, and atomized functional requirements
+    - Ensure requirements are organized by user stories or system capabilities
 
-  3. Non-Functional Requirements
-  - Task: Define quantified non-functional requirements
-  - Expected outcome: Measurable requirements across all quality attributes with clear targets
+  3. Non-Functional Requirements Phase
+    - Achieve quantified non-functional requirements across all quality attributes
+    - Ensure requirements have clear targets and measurable constraints
 
-  4. Acceptance Criteria
-  - Task: Create testable acceptance criteria for all requirements
-  - Expected outcome: All requirements have Given-When-Then acceptance criteria with binary outcomes
+  4. Acceptance Criteria Phase
+    - Achieve deterministic and testable acceptance criteria for all requirements
+    - Ensure all criteria use Given-When-Then structure with binary outcomes
 
-  5. Finalization
-  - Task: Obtain user approval and shard requirements
-  - Expected outcome: Requirements approved and successfully sharded to "{REQ}/" using shard-requirements.py
+  5. Finalization Phase
+    - Ensure consistency across all requirement types
+    - Ensure user approval is obtained with proper feedback integration
+    - Achieve successful requirement sharding by running the "shard-requirements.py" script with verified output under "{REQ}/"
 
 ## [Requirements-Analysis-Guidelines]
   1. **Verifiability First**

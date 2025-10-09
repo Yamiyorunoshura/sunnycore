@@ -30,21 +30,24 @@
     - When to use: When reviewing code that integrates with external services or SDKs
 
 ## [Steps]
-  1. Review Planning
-  - Task: Understand implementation plan and identify task domain
-  - Expected outcome: Domain-specific review criteria determined with progress tracking established
+  1. Review Planning Phase
+    - Understand the implementation plan and identify task domain
+    - Determine appropriate domain-specific review criteria and success criteria
+    - Establish progress tracking mechanism for review checkpoints
 
-  2. Code and Test Review
-  - Task: Execute all tests and apply domain-specific scoring criteria
-  - Expected outcome: Test results recorded, test coverage and code alignment verified
+  2. Code and Test Review Phase
+    - Ensure all tests are executed with results properly recorded
+    - Ensure domain-specific scoring criteria are applied appropriately
+    - Ensure proper handling of both passing and failing test scenarios
+    - Achieve verification of test coverage and code alignment with plan
 
-  3. Development Notes Review
-  - Task: Review development notes alignment with implementation
-  - Expected outcome: Notes verified against actual implementation
+  3. Development Notes Review Phase
+    - Ensure alignment between development notes and actual implementation
 
-  4. Results Generation and Decision
-  - Task: Generate review report and make acceptance decision
-  - Expected outcome: Complete review report at "{REVIEW}/{task_id}-review.md" with decision and "{EPIC}" updated
+  4. Results Generation and Decision Phase
+    - Achieve complete review report saved to "{REVIEW}/{task_id}-review.md"
+    - Ensure appropriate acceptance decision (Accept/Accept with changes/Reject) with clear rationale
+    - Ensure "{EPIC}" is updated correctly based on review outcome
 
 ## [Domain-Specific-Review-Guidelines]
   

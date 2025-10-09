@@ -30,25 +30,28 @@
     - [Step 2-4: When need to call external APIs, query official SDK usage examples]
 
 ## [Steps]
-  1. Preparation
-  - Task: Understand all PRD requirements and architecture completely
-  - Expected outcome: Comprehensive TDD implementation strategy with progress tracking established
+  1. Preparation Phase
+    - Understand all PRD requirements and architecture completely
+    - Achieve comprehensive TDD implementation strategy for all requirements
+    - Establish progress tracking mechanism respecting task dependencies
 
-  2. TDD Development
-  - Task: Implement all requirements through RED → GREEN → REFACTOR cycle
-  - Expected outcome: Complete test coverage with all tests passing and code quality standards applied
+  2. TDD Development Phase
+    - Achieve complete test coverage through RED phase (all tests written and failing with expected errors instead of expected ones(e.g could not compile, syntax error, etc.))
+    - Achieve passing implementation through GREEN phase (all tests passing)
+    - Achieve improved code quality through REFACTOR phase (standards applied)
 
-  3. Integration Testing
-  - Task: Execute complete test suite and validate acceptance criteria
-  - Expected outcome: All tests passing with all PRD acceptance criteria validated
+  3. Integration Testing Phase
+    - Ensure complete test suite execution with all tests passing
+    - Ensure all acceptance criteria from PRD are validated and met
+    - Ensure proper handling of test failures with iterative fixes
 
-  4. Documentation
-  - Task: Generate comprehensive development notes document
-  - Expected outcome: All technical decisions and deviations documented
+  4. Documentation Phase
+    - Achieve comprehensive development notes document
+    - Ensure all technical decisions and deviations are documented
 
-  5. Finalization
-  - Task: Verify all requirements satisfied with code quality standards met
-  - Expected outcome: All requirements implemented with coverage ≥80%
+  5. Finalization Phase
+    - Ensure all requirements are satisfied with verified implementation
+    - Ensure code quality and test coverage standards are met (≥80%)
 
 ## [Error-Handling]
   1. PRD file not found: Report error and halt execution

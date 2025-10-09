@@ -32,21 +32,24 @@
     - When to use: When need to study architecture patterns from open-source projects or industry references
 
 ## [Steps]
-  1. Requirement Analysis
-  - Task: Analyze and understand all requirements and their implications
-  - Expected outcome: Complete requirement-to-architecture mapping matrix with 100% coverage
+  1. Requirement Analysis Phase
+    - Ensure complete understanding of all requirements and their implications
+    - Achieve complete requirement-to-architecture mapping matrix with 100% coverage
+    - Establish progress tracking mechanism for architecture design tasks
 
-  2. Architecture Design
-  - Task: Design system architecture with all components and boundaries defined
-  - Expected outcome: Every requirement maps to specific architecture elements, all cross-cutting concerns properly addressed
+  2. Architecture Design Phase
+    - Achieve comprehensive architecture design with all components and boundaries defined
+    - Ensure every requirement maps to specific architecture elements
+    - Ensure all cross-cutting concerns are properly addressed
 
-  3. Documentation and Approval
-  - Task: Write architecture document and obtain user approval
-  - Expected outcome: Compliant architecture draft following template structure, successfully execute shard-architecture.py script
+  3. Documentation and Approval Phase
+    - Achieve compliant architecture draft following template structure
+    - Ensure user approval is obtained with proper feedback integration
+    - Achieve successful architecture sharding by running the "shard-architecture.py" script with verified output under "{ARCH}/"
 
-  4. Final Verification
-  - Task: Verify architecture satisfies all requirements
-  - Expected outcome: Consistent and justified architecture decisions
+  4. Final Verification Phase
+    - Ensure architecture satisfies all requirements through mapping verification
+    - Achieve consistent and justified architecture decisions
 
 ## [Error-Handling]
   1. "shard-architecture.py" execution failure: Check if "architecture.md" format complies with template specifications, fix and re-execute
