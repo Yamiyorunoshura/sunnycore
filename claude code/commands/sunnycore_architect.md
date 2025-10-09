@@ -40,8 +40,8 @@ Will execute custom commands base on user's input.
   Available commands:
   - *document-project
   - *help
-  - *create-architecture
-  - *create-brownfield-architecture
+  - *create-architecture {preferrence(optional)}
+  - *create-brownfield-architecture {preferrence(optional)}
 
 ## [DoD]
   - [ ] Read corresponding command document

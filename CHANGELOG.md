@@ -7,6 +7,18 @@
 
 ## [Unreleased]
 
+## [3.2.4] - sunnycore v3.2.4
+
+### Changed
+- 優化架構設計命令參數說明：在 `sunnycore_architect.md` 中為架構設計命令新增可選參數提示
+  - `*create-architecture` 改為 `*create-architecture {preferrence(optional)}`：允許用戶提供架構設計偏好
+  - `*create-brownfield-architecture` 改為 `*create-brownfield-architecture {preferrence(optional)}`：允許用戶提供遷移架構偏好
+  - 提升命令使用的靈活性與用戶自主性
+- 優化 TDD 流程說明：澄清 `develop-plan.md` 和 `develop-prd.md` 中的測試失敗預期
+  - RED Phase：從「確保所有測試如預期失敗」改為「確保所有測試失敗於預期錯誤而非意外錯誤（如無法編譯、語法錯誤等）」
+  - TDD Development Phase：同步優化測試失敗描述，強調預期錯誤與意外錯誤的區別
+  - 提升 TDD 實踐指引的準確性與可理解性
+
 ## [3.2.3] - sunnycore v3.2.3
 
 ### Changed
