@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [3.2.10] - sunnycore v3.2.10
+
+### Changed
+- 強化任務管理指引：在 `claude code/CLAUDE.md` 中新增 GUIDANCE 9 - 要求所有 todo 項目必須是原子性且可操作的
+  - 新增指引：「All the todo items created must be atomic and actionable」
+  - 確保任務拆分符合最佳實踐，提升執行效率與追蹤精確度
+  - 提升專案管理品質與任務可執行性
+
 ## [3.2.9] - sunnycore v3.2.9
 
 ### Changed
