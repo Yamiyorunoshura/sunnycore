@@ -37,7 +37,7 @@
 
   2. RED Phase: Test Implementation
     - Achieve complete test coverage with all planned test cases implemented
-    - Ensure all tests fail with expected error messages (RED status confirmed)
+    - Ensure all tests fail with expected error messages instead of unexpected erorrs(e.g could not compile, syntax error, etc.)(RED status confirmed)
 
   3. GREEN Phase: Minimal Implementation
     - Achieve passing tests with minimal code implementation

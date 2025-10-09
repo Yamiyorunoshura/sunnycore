@@ -37,7 +37,7 @@
     - Establish progress tracking mechanism respecting task dependencies
 
   2. TDD Development Phase
-    - Achieve complete test coverage through RED phase (all tests written and failing)
+    - Achieve complete test coverage through RED phase (all tests written and failing with expected errors instead of expected ones(e.g could not compile, syntax error, etc.))
     - Achieve passing implementation through GREEN phase (all tests passing)
     - Achieve improved code quality through REFACTOR phase (standards applied)
 
