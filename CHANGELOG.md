@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [3.2.7] - sunnycore v3.2.7
+
+### Changed
+- 強化任務完成指引：優化 `CLAUDE.md` 中的 todo 完成規則，明確要求逐一完成且不得跳過任何項目
+  - 第 7 條規則：從「Complete all to-do items in the todo list」擴展為「Complete all to-do items one-by-one in the todo list. Never stops when remaining to-do items still exist. Never skip any todo items.」
+  - 明確禁止跳過任何 todo 項目，確保任務執行的完整性與連續性
+  - 提升任務執行品質與流程遵循度
+
 ## [3.2.6] - sunnycore v3.2.6
 
 ### Changed

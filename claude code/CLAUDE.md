@@ -13,7 +13,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
     - Highest priority: CLAUDE.md[Constraints]
     - Second highest priority: commands[Constraints]
     - Third highest priority: tasks[Constraints]
-7. Complete all to-do items in the todo list. Never stops when remaining to-do items still exist.
+7. Complete all to-do items one-by-one in the todo list. Never stops when remaining to-do items still exist. Never skip any todo items.
 8. Verify the completion of all [DoD].
 9. Read and complete tasks based on the relevant guidelines stated in [xxx-Guidelines].
 
