@@ -1,0 +1,71 @@
+---
+# Completion Report Template
+# 專案完成報告模板
+
+project_name: ""
+version: ""
+completion_date: ""
+project_duration: ""
+team_size: 0
+---
+
+development-summary:
+  objectives_met: []
+  objectives_partial: []
+  objectives_deferred: []
+  achievements: []
+  challenges-and-solutions: []
+  technologies-used: []
+
+delivery-metrics:
+  planned_features: 0
+  delivered_features: 0
+  deferred_features: 0
+  estimated_effort: ""
+  actual_effort: ""
+  variance: ""
+
+quality-summary:
+  overall_score: ""
+  test_coverage: ""
+  code_quality_metrics: {}
+  defect-metrics: {}
+  review-scores: {}
+
+key-decisions: []
+
+technical-debt:
+  items_added: []
+  items_resolved: []
+  items_remaining: []
+
+risks-realized: []
+
+team-performance:
+  productivity: ""
+  collaboration: ""
+  skill_development: []
+  challenges: []
+
+recommendations:
+  immediate-actions: []
+  future-improvements: []
+  process-improvements: []
+
+knowledge-transfer:
+  documentation_completed: []
+  documentation_pending: []
+  training_provided: []
+  training_needed: []
+
+source-references:
+  dev_notes: []
+  review_reports: []
+  architecture_docs: []
+  cutover_reports: []
+  progress_records: []
+  other_docs: []
+
+archived-files:
+  archive_location: ""
+  archived_items: []

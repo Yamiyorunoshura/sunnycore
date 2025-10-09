@@ -132,7 +132,7 @@ curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/sc
 ```
 
 可選參數：
-- `-v, --version`：指定版本（目前僅支援 `claude-code`）
+- `-v, --version`：指定版本（支援 `claude-code` 或 `cursor`）
 - `-p, --path`：安裝路徑（支援 `~/` 展開）
 - `-y, --yes`：自動同意覆寫與操作
 - `--repo`：GitHub 倉庫（預設：Yamiyorunoshura/sunnycore）
@@ -141,30 +141,52 @@ curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/sc
 #### 從本地倉庫執行
 
 若已經克隆本倉庫，可直接執行腳本：
+
+**安裝 Claude Code 版本：**
 ```bash
 python3 scripts/install.py -v claude-code -p ~/myproject -y
 ```
 
+**安裝 Cursor 版本：**
+```bash
+python3 scripts/install.py -v cursor -p ~/myproject -y
+```
+
 #### 安裝結果
-安裝完成後，目標路徑將包含：
+
+**Claude Code 版本**安裝完成後，目標路徑將包含：
 ```
 工作目錄/
 ├── .claude/              # Claude 專用配置
 │   ├── agents/          # Agent 定義
 │   └── commands/        # 角色命令定義
 ├── sunnycore/           # Sunnycore 系統檔案
-│   ├── config.yaml     # 配置檔案
 │   ├── tasks/          # 任務模板
 │   ├── templates/      # 文檔模板
 │   └── scripts/        # 輔助腳本
 └── CLAUDE.md           # Claude Code 專案指引
 ```
 
+**Cursor 版本**安裝完成後，目標路徑將包含：
+```
+工作目錄/
+├── .cursorrules         # Cursor 專用配置
+├── sunnycore/           # Sunnycore 系統檔案
+│   ├── commands/       # 角色命令定義
+│   ├── tasks/          # 任務模板
+│   ├── templates/      # 文檔模板
+│   └── scripts/        # 輔助腳本
+```
+
 ## 快速開始
 
-### Claude code version
+### Claude Code 版本
 
 閱讀[`claude code/README.md`](claude code/README.md)
+
+### Cursor 版本
+
+閱讀[`cursor/README.md`](cursor/README.md)
 
 ## 貢獻指南
 

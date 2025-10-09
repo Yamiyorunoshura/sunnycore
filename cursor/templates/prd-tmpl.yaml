@@ -1,0 +1,29 @@
+---
+# PRD Template - Product Requirements Document
+# PRD 模板 - 產品需求文檔
+
+project-info:
+  name: ""
+  description: ""
+  type: ""
+
+requirements:
+  functional: []
+  non-functional: []
+
+architecture:
+  components: []
+  technical-stack:
+    frontend: ""
+    backend: ""
+    database: ""
+    infrastructure: ""
+  data-flow: ""
+
+constraints:
+  technical: []
+  business: []
+
+assumptions-and-risks:
+  assumptions: []
+  risks: []

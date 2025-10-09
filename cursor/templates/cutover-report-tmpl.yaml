@@ -1,0 +1,81 @@
+---
+# Cutover Report Template
+# 專案驗收報告模板
+
+project_name: ""
+cutover_date: ""
+tested_by: ""
+project_type: ""
+version: ""
+---
+
+cutover-status: ""
+
+executive-summary:
+  overall_assessment: ""
+  critical_issues_count: 0
+  major_issues_count: 0
+  minor_issues_count: 0
+  requirements_tested: 0
+  requirements_passed: 0
+  pass_rate: ""
+
+configuration-required: []
+
+environment-setup:
+  setup_steps_documented: true
+  setup_successful: true
+  dependencies_installed: true
+  setup_time: ""
+  issues_encountered: []
+
+project-execution:
+  execution_successful: true
+  startup_method: ""
+  startup_time: ""
+  access_information: ""
+  errors_encountered: []
+
+acceptance-test-results: []
+
+user-experience-assessment:
+  ease_of_use: ""
+  interface_clarity: ""
+  error_messaging: ""
+  documentation_quality: ""
+  performance: ""
+  overall_comments: ""
+
+issues-found: []
+
+functional-verification:
+  features_tested: []
+  features_passed: []
+  features_failed: []
+  features_not_tested: []
+
+non-functional-verification:
+  performance_targets_met: []
+  performance_targets_missed: []
+  security_checks_passed: []
+  security_concerns: []
+  usability_score: ""
+
+recommendations:
+  immediate-actions: []
+  future-improvements: []
+
+deployment-readiness:
+  ready_for_production: true
+  blockers: []
+  prerequisites: []
+  rollback_plan_documented: true
+  monitoring_configured: true
+  backup_strategy_documented: true
+
+sign-off:
+  product_owner_approval: ""
+  conditions_for_approval: []
+  sign_off_date: ""
+  next_steps: []
+  deployment_date: ""
