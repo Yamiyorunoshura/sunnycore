@@ -71,7 +71,7 @@
     - If any core item missing from sources, annotate "To be supplemented: missing XX item"
   
   3. **Version & Archiving**
-    - Parse version from sunnycore.lock file (format: "version = x.x.x")
+    - Parse version from *.lock file (format: "version = x.x.x")
     - Archive all docs to "{ARCHIVE}/{version_name}/" except architecture/, knowledge/, completion-report.md
     - Update references in preserved docs to point to archive paths
 
