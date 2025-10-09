@@ -35,30 +35,35 @@
     - When to use: When implementation involves external SDK integration or need to verify package compatibility
 
 ## [Steps]
-  1. Setup Phase
+  1. Setup & Context Understanding
     - Understand all requirements, architecture, and task scope
     - Identify project-specific best practices and lessons learned
-    - Establish progress tracking mechanism for plan creation work
+    - Establish progress tracking mechanism
+    - Outcome: Complete context and planning criteria established
 
-  2. For Each Task: Planning RED Phase Content
-    - Achieve complete test planning with acceptance criteria and test conditions
-    - Ensure measurable success metrics and edge cases are defined
-    - Ensure alignment with testing best practices from knowledge base
+  2. RED Phase Planning (For Each Task)
+    - Plan complete test coverage with acceptance criteria
+    - Define measurable success metrics and edge cases
+    - Align with testing best practices from knowledge base
+    - Outcome: Comprehensive test plan for each task
 
-  3. For Each Task: Planning GREEN Phase Content
-    - Achieve atomic, executable implementation steps for minimal code
-    - Ensure proper mapping to architecture components and test conditions
-    - Ensure application of lessons learned to avoid known issues
+  3. GREEN Phase Planning (For Each Task)
+    - Design atomic, executable implementation steps for minimal code
+    - Map steps to architecture components and test conditions
+    - Apply lessons learned to avoid known issues
+    - Outcome: Clear minimal implementation roadmap
 
-  4. For Each Task: Planning REFACTOR Phase Content
-    - Achieve comprehensive refactoring and optimization plan
-    - Ensure identification of cross-cutting concerns and quality improvements
-    - Ensure incorporation of best practices from knowledge base
+  4. REFACTOR Phase Planning (For Each Task)
+    - Plan refactoring and optimization activities
+    - Identify cross-cutting concerns and quality improvements
+    - Incorporate best practices from knowledge base
+    - Outcome: Quality improvement plan defined
 
-  5. Finalization Phase
-    - Achieve complete implementation plans for all tasks
-    - Ensure all plans follow template structure and are executable
-    - Ensure all plan files are generated at "{PLAN}/{task_id}-plan.md"
+  5. Finalization & Generation
+    - Complete implementation plans for all tasks
+    - Ensure plans follow template structure and are executable
+    - Generate all plan files at "{PLAN}/{task_id}-plan.md"
+    - Outcome: All implementation plans created and validated
 
 ## [TDD-Planning-Guidelines]
   1. **TDD Three-Phase Structure**

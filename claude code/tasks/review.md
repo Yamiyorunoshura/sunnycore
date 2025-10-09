@@ -30,24 +30,28 @@
     - When to use: When reviewing code that integrates with external services or SDKs
 
 ## [Steps]
-  1. Review Planning Phase
-    - Understand the implementation plan and identify task domain
-    - Determine appropriate domain-specific review criteria and success criteria
-    - Establish progress tracking mechanism for review checkpoints
+  1. Review Planning & Domain Identification
+    - Understand implementation plan and identify task domain
+    - Determine domain-specific review criteria and success criteria
+    - Establish progress tracking mechanism
+    - Outcome: Review criteria and approach determined
 
-  2. Code and Test Review Phase
-    - Ensure all tests are executed with results properly recorded
-    - Ensure domain-specific scoring criteria are applied appropriately
-    - Ensure proper handling of both passing and failing test scenarios
-    - Achieve verification of test coverage and code alignment with plan
+  2. Code & Test Execution Review
+    - Execute all tests and record results properly
+    - Apply domain-specific scoring criteria appropriately
+    - Verify test coverage and code alignment with plan
+    - Outcome: Test results recorded and code alignment verified
 
-  3. Development Notes Review Phase
-    - Ensure alignment between development notes and actual implementation
+  3. Development Notes Validation
+    - Review development notes for alignment with implementation
+    - Verify all technical decisions documented
+    - Outcome: Dev notes alignment confirmed
 
-  4. Results Generation and Decision Phase
-    - Achieve complete review report saved to "{REVIEW}/{task_id}-review.md"
-    - Ensure appropriate acceptance decision (Accept/Accept with changes/Reject) with clear rationale
-    - Ensure "{EPIC}" is updated correctly based on review outcome
+  4. Report Generation & Decision
+    - Create complete review report at "{REVIEW}/{task_id}-review.md"
+    - Make acceptance decision (Accept/Accept with changes/Reject) with rationale
+    - Update "{EPIC}" based on review outcome
+    - Outcome: Review report completed and epic updated
 
 ## [Domain-Specific-Review-Guidelines]
   

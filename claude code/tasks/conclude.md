@@ -27,35 +27,34 @@
     - Note: If not indexed or search fails, switch to grep tool for keyword search, or annotate "Unable to locate code evidence" and continue
 
 ## [Steps]
-  1. Input Validation Phase
-    - Ensure version number is parsed from lock file
-    - Ensure all required input files exist and are valid
-    - Establish progress tracking mechanism for conclusion tasks
+  1. Input Validation & Setup
+    - Parse version number from lock file
+    - Validate all required input files exist
+    - Establish progress tracking mechanism
+    - Outcome: All inputs validated and version identified
 
-  2. Information Extraction and Mapping Phase
-    - Achieve complete extraction of all 5 core content items
-    - Ensure proper mapping to template fields
-    - Ensure code evidence is supplemented where needed
+  2. Information Extraction & Mapping
+    - Extract all 5 core content items (decisions, tech choices, issues/solutions, evidence, recommendations)
+    - Map extracted information to template fields
+    - Supplement code evidence where needed
+    - Outcome: Complete information extraction with proper mapping
 
-  3. Write Report Phase
-    - Achieve complete completion report at "{root}/docs/completion-report.md"
-    - Ensure all sections follow template structure
-
-  4. Quality Check Phase
-    - Ensure report meets template requirements with complete structure
+  3. Report Generation & Quality Check
+    - Write complete completion report at "{root}/docs/completion-report.md"
+    - Verify report meets template requirements
     - Ensure all 5 core content items are clearly presented
-    - Ensure proper handling of deficiencies with iterative fixes
+    - Outcome: High-quality completion report generated
 
-  5. Create Archive Directory Phase
-    - Ensure archive directory "{ARCHIVE}/{version_name}/" is created and verified
+  4. Archive Preparation
+    - Create archive directory "{ARCHIVE}/{version_name}/"
+    - Verify directory creation successful
+    - Outcome: Archive directory ready for file migration
 
-  6. Move Files to Archive Phase
-    - Ensure proper file archiving with architecture/, knowledge/, and completion-report.md preserved
-    - Ensure verification of archive operations with proper error handling
-
-  7. Update Document References Phase
-    - Ensure all document references are updated to point to correct archive paths
-    - Ensure reference updates are verified for correctness
+  5. File Archiving & Reference Updates
+    - Move files to archive (preserve architecture/, knowledge/, completion-report.md)
+    - Update document references to point to archive paths
+    - Verify all operations successful
+    - Outcome: Files archived and references updated correctly
 
 ## [Completion-Report-Guidelines]
   1. **Core Content (5 Required Items)**

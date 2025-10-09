@@ -26,23 +26,27 @@
     - When to use: After extracting tech stack from {ARCH}/*.md, query official installation and configuration docs for corresponding versions
 
 ## [Steps]
-  1. Preparation Phase
-    - Understand the project's technology stack, environment requirements, and goals
-    - Establish progress tracking mechanism for initialization tasks
+  1. Preparation & Analysis
+    - Understand project's technology stack, environment requirements, and goals
+    - Establish progress tracking mechanism
+    - Outcome: Project requirements and stack understood
 
-  2. Environment Setup Phase
-    - Achieve fully configured and operational development environment
-    - Ensure all dependencies are installed and verified
-    - Achieve indexed codebase for efficient searching
+  2. Environment Setup & Indexing
+    - Configure fully operational development environment
+    - Install and verify all dependencies
+    - Index codebase for efficient searching (if Brownfield)
+    - Outcome: Development environment ready and codebase indexed
 
-  3. Document Generation Phase
-    - Achieve complete project guidance document at "{root}/CLAUDE.md"
-    - Ensure all required sections are included with accurate information
-    - Ensure clear document index for easy navigation
+  3. Documentation Generation
+    - Create complete project guidance document at "{root}/CLAUDE.md"
+    - Include all required sections with accurate information
+    - Create clear document index for navigation
+    - Outcome: CLAUDE.md created with complete project guidance
 
-  4. Verification Phase
-    - Ensure development environment is successfully initialized and usable
-    - Ensure "{root}/CLAUDE.md" contains complete and accurate information
+  4. Verification
+    - Verify development environment successfully initialized and usable
+    - Verify "{root}/CLAUDE.md" contains complete and accurate information
+    - Outcome: Environment and documentation verified
 
 ## [Initialization-Guidelines]
   1. **Extract from Architecture**

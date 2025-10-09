@@ -32,18 +32,20 @@
     - When to use: When need to verify correct API usage or find official troubleshooting guides
 
 ## [Steps]
-  1. Preparation Phase
-    - Understand the issues from review report and architecture context
+  1. Issue Analysis & Planning
+    - Understand issues from review report and architecture context
     - Formulate atomic fix tasks based on analysis
+    - Outcome: Clear understanding of issues and fix plan created
 
-  2. Fix Phase
-    - Establish progress tracking mechanism for fixes
-    - Ensure proper handling of both passing and failing test scenarios
-    - Achieve all unit tests and integration tests passing
+  2. Test-Driven Fix Implementation
+    - Establish progress tracking for fixes
+    - Implement fixes ensuring all tests pass (RED → GREEN → REFACTOR)
+    - Outcome: All unit tests and integration tests passing
 
-  3. Summary Phase
-    - Achieve comprehensive fix summary with proper evidence
-    - Ensure development notes are updated according to template
+  3. Documentation & Summary
+    - Create comprehensive fix summary with evidence
+    - Update development notes according to template
+    - Outcome: Fix summary completed and development notes updated
 
 ## [Development-Guidelines]
   1. **TDD Practice (Mandatory)**

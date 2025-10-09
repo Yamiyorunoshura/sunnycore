@@ -30,28 +30,33 @@
     - [Step 2-4: When need to call external APIs, query official SDK usage examples]
 
 ## [Steps]
-  1. Preparation Phase
+  1. Preparation & Strategy
     - Understand all PRD requirements and architecture completely
-    - Achieve comprehensive TDD implementation strategy for all requirements
-    - Establish progress tracking mechanism respecting task dependencies
+    - Develop comprehensive TDD implementation strategy
+    - Establish progress tracking respecting task dependencies
+    - Outcome: Complete strategy and tracking established
 
-  2. TDD Development Phase
-    - Achieve complete test coverage through RED phase (all tests written and failing with expected errors instead of expected ones(e.g could not compile, syntax error, etc.))
-    - Achieve passing implementation through GREEN phase (all tests passing)
-    - Achieve improved code quality through REFACTOR phase (standards applied)
+  2. TDD Development Cycle
+    - RED: Write all tests, ensure they fail with expected errors
+    - GREEN: Implement minimal code to pass all tests
+    - REFACTOR: Improve code quality while maintaining green tests
+    - Outcome: All PRD features implemented with high quality
 
-  3. Integration Testing Phase
-    - Ensure complete test suite execution with all tests passing
-    - Ensure all acceptance criteria from PRD are validated and met
-    - Ensure proper handling of test failures with iterative fixes
+  3. Integration Testing & Validation
+    - Execute complete test suite with all tests passing
+    - Validate all PRD acceptance criteria met
+    - Handle test failures with iterative fixes
+    - Outcome: Full integration verified and acceptance criteria met
 
-  4. Documentation Phase
-    - Achieve comprehensive development notes document
-    - Ensure all technical decisions and deviations are documented
+  4. Documentation
+    - Create comprehensive development notes document
+    - Document all technical decisions and deviations
+    - Outcome: Complete dev notes at "{root}/docs/prd-dev-notes.md"
 
-  5. Finalization Phase
-    - Ensure all requirements are satisfied with verified implementation
-    - Ensure code quality and test coverage standards are met (≥80%)
+  5. Final Verification
+    - Verify all requirements satisfied with implementation
+    - Confirm code quality and test coverage standards met (≥80%)
+    - Outcome: All requirements delivered with quality standards met
 
 ## [Error-Handling]
   1. PRD file not found: Report error and halt execution

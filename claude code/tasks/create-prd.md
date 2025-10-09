@@ -31,30 +31,35 @@
     - Query examples: "How is authentication implemented?" "Where are data models defined?" "What are existing service boundaries?"
 
 ## [Steps]
-  1. Initialization and Context Understanding Phase
-    - Understand the project context and determine project type (Greenfield/Brownfield)
-    - Ensure both project types are properly handled with appropriate context gathering
-    - Establish progress tracking mechanism for PRD creation
+  1. Initialization & Context Understanding
+    - Determine project type (Greenfield/Brownfield)
+    - Gather appropriate context for project type
+    - Establish progress tracking mechanism
+    - Outcome: Project type determined and context gathered
 
-  2. Requirements Definition Phase
-    - Achieve complete functional requirements that are verifiable and measurable
-    - Achieve quantified non-functional requirements with clear targets
-    - Ensure all requirements have well-defined acceptance criteria in Given-When-Then format
+  2. Requirements Definition
+    - Define complete, verifiable, measurable functional requirements
+    - Define quantified non-functional requirements with clear targets
+    - Create acceptance criteria in Given-When-Then format
+    - Outcome: Complete requirements with clear acceptance criteria
 
-  3. Architecture Design Phase
-    - Ensure architecture design aligns with all requirements
-    - Ensure proper handling of both Greenfield (new design) and Brownfield (extending existing) scenarios
-    - Achieve complete architecture documentation with components, data flows, and contracts
-    - Ensure impact analysis is documented for all changes in Brownfield projects
+  3. Architecture Design
+    - Design architecture aligned with all requirements
+    - Handle Greenfield (new) or Brownfield (extending) scenarios appropriately
+    - Document components, data flows, contracts, and impact analysis (if Brownfield)
+    - Outcome: Complete architecture documentation
 
-  4. PRD Integration Phase
-    - Achieve integrated PRD document with complete traceability
-    - Ensure proper mapping between requirements, architecture elements, and tasks
-    - Ensure dependencies and execution order are clearly identified
+  4. PRD Integration & Mapping
+    - Integrate requirements, architecture, and tasks into unified PRD
+    - Ensure complete traceability and proper mapping
+    - Identify dependencies and execution order
+    - Outcome: Integrated PRD with full traceability
 
-  5. Finalization Phase
-    - Achieve complete, consistent PRD document saved to "{PRD}"
-    - Ensure user confirmation is obtained for the final PRD
+  5. Finalization & Approval
+    - Complete consistent PRD document
+    - Save to "{PRD}"
+    - Obtain user confirmation
+    - Outcome: Approved PRD document created
 
 ## [Error-Handling]
   1. Directory check failure: Log error and proceed as Greenfield
