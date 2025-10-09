@@ -29,30 +29,25 @@
     - Query examples: "Does component X exist?" "Where is requirement Y implemented?"
 
 ## [Steps]
-  1. Initialization Phase
-    - Validate workflow parameter and determine validation scope
-    - Ensure proper handling of both PRD and Full workflow types
-    - Establish progress tracking mechanism for validation tasks
+  1. Initialization
+  - Task: Validate workflow parameter and determine validation scope
+  - Expected outcome: Validation scope determined for PRD or Full workflow
 
-  2. Content Extraction and Indexing Phase
-    - Ensure appropriate content extraction for workflow type
-    - Achieve comprehensive internal index of all entities
-    - Ensure proper handling of both workflow-specific extraction paths
+  2. Content Extraction and Indexing
+  - Task: Extract content and build internal index of all entities
+  - Expected outcome: Comprehensive internal index for workflow-appropriate validation
 
-  3. Validation Phase
-    - Ensure workflow-appropriate validation checks are performed
-    - Achieve complete validation coverage across all criteria
-    - Ensure proper detection of all issue types (consistency, coverage, conflicts, authenticity)
+  3. Validation
+  - Task: Perform workflow-appropriate validation checks
+  - Expected outcome: Complete validation coverage with all issue types detected
 
-  4. Report Generation Phase
-    - Achieve comprehensive validation report at "{root}/docs/design-validation.md"
-    - Ensure issues are properly categorized by severity
-    - Ensure report structure includes all required sections
+  4. Report Generation
+  - Task: Generate validation report with issues categorized by severity
+  - Expected outcome: Comprehensive validation report at "{root}/docs/design-validation.md"
 
-  5. Finalization Phase
-    - Ensure validation summary is presented to user
-    - Ensure appropriate recommendations based on findings
-    - Ensure proper guidance for next steps
+  5. Finalization
+  - Task: Present validation summary with recommendations
+  - Expected outcome: User informed of validation results with clear guidance for next steps
 
 ## [Validation-Criteria]
 
@@ -122,16 +117,9 @@
     - Cross-check entity existence in actual documents
 
 ## [DoD]
-  - [ ] Workflow parameter is validated as "prd" or "full"
-  - [ ] All required documents are fully understood and indexed
-  - [ ] Bidirectional reference validation is complete (forward and backward references verified)
-  - [ ] Coverage analysis is complete with all metrics calculated (100% requirement coverage verified)
-  - [ ] Consistency checks across all documents are complete
-  - [ ] Content authenticity verification is complete (no fabricated references)
-  - [ ] Conflict detection is complete across all document types
-  - [ ] All identified issues are categorized by severity (Critical/High/Medium/Low)
-  - [ ] Complete validation report exists at "{root}/docs/design-validation.md" with findings and recommendations
-  - [ ] User is informed of validation results with clear guidance on next steps
+  - [ ] Bidirectional validation complete with 100% coverage verification and no fabricated references
+  - [ ] Complete validation report at "{root}/docs/design-validation.md" with issues categorized by severity
+  - [ ] User informed of results with clear guidance for next steps
 
 ## [Example]
 

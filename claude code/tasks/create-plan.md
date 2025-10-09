@@ -35,30 +35,25 @@
     - When to use: When implementation involves external SDK integration or need to verify package compatibility
 
 ## [Steps]
-  1. Setup Phase
-    - Understand all requirements, architecture, and task scope
-    - Identify project-specific best practices and lessons learned
-    - Establish progress tracking mechanism for plan creation work
+  1. Setup
+  - Task: Understand all requirements, architecture, and task scope
+  - Expected outcome: Project-specific best practices and lessons learned identified
 
-  2. For Each Task: Planning RED Phase Content
-    - Achieve complete test planning with acceptance criteria and test conditions
-    - Ensure measurable success metrics and edge cases are defined
-    - Ensure alignment with testing best practices from knowledge base
+  2. Plan RED Phase (For Each Task)
+  - Task: Plan test cases with acceptance criteria and test conditions
+  - Expected outcome: Complete test planning with measurable success metrics and edge cases defined
 
-  3. For Each Task: Planning GREEN Phase Content
-    - Achieve atomic, executable implementation steps for minimal code
-    - Ensure proper mapping to architecture components and test conditions
-    - Ensure application of lessons learned to avoid known issues
+  3. Plan GREEN Phase (For Each Task)
+  - Task: Design atomic implementation steps for minimal code
+  - Expected outcome: Executable steps mapped to architecture components and test conditions
 
-  4. For Each Task: Planning REFACTOR Phase Content
-    - Achieve comprehensive refactoring and optimization plan
-    - Ensure identification of cross-cutting concerns and quality improvements
-    - Ensure incorporation of best practices from knowledge base
+  4. Plan REFACTOR Phase (For Each Task)
+  - Task: Plan refactoring and optimization work
+  - Expected outcome: Comprehensive improvement plan with cross-cutting concerns and quality improvements identified
 
-  5. Finalization Phase
-    - Achieve complete implementation plans for all tasks
-    - Ensure all plans follow template structure and are executable
-    - Ensure all plan files are generated at "{PLAN}/{task_id}-plan.md"
+  5. Finalization
+  - Task: Generate all implementation plan files
+  - Expected outcome: Complete plans for all tasks at "{PLAN}/{task_id}-plan.md" following template structure
 
 ## [TDD-Planning-Guidelines]
   1. **TDD Three-Phase Structure**
@@ -82,14 +77,9 @@
     - Exclude operational actions (git, npm) unless explicitly requested
 
 ## [DoD]
-  - [ ] All requirement, architecture, and task documents are fully understood
-  - [ ] All tasks from epic are identified and analyzed
   - [ ] Implementation plan exists for each task with complete TDD three-phase structure (RED/GREEN/REFACTOR sections)
-  - [ ] RED section is complete: All requirements have corresponding acceptance criteria and test conditions
-  - [ ] GREEN section is complete: All implementation steps correspond to specific acceptance criteria with architecture/file references
-  - [ ] REFACTOR section is complete: Refactoring and optimization work is planned, including cross-cutting concerns integration
-  - [ ] All plans follow proper TDD cycle structure: test-first (RED), minimal implementation (GREEN), refactoring optimization (REFACTOR)
-  - [ ] All plan files are created at "{PLAN}/{task_id}-plan.md" following naming pattern
+  - [ ] All plans have proper requirement-architecture-test mapping with specific file references
+  - [ ] All plan files created at "{PLAN}/{task_id}-plan.md" following template structure
 
 ## [Example]
 

@@ -32,18 +32,17 @@
     - When to use: When need to verify correct API usage or find official troubleshooting guides
 
 ## [Steps]
-  1. Preparation Phase
-    - Understand the issues from review report and architecture context
-    - Formulate atomic fix tasks based on analysis
+  1. Preparation
+  - Task: Understand issues from review report and architecture context
+  - Expected outcome: Atomic fix tasks formulated based on analysis
 
-  2. Fix Phase
-    - Establish progress tracking mechanism for fixes
-    - Ensure proper handling of both passing and failing test scenarios
-    - Achieve all unit tests and integration tests passing
+  2. Fix Implementation
+  - Task: Implement fixes following TDD cycle (RED → GREEN → REFACTOR)
+  - Expected outcome: All unit tests and integration tests passing
 
-  3. Summary Phase
-    - Achieve comprehensive fix summary with proper evidence
-    - Ensure development notes are updated according to template
+  3. Summary
+  - Task: Generate fix summary and update development notes
+  - Expected outcome: Comprehensive fix summary with evidence and updated dev notes
 
 ## [Development-Guidelines]
   1. **TDD Practice (Mandatory)**
@@ -68,11 +67,9 @@
     - Identify risks (technical, dependency, timeline); document mitigation and rollback strategies
 
 ## [DoD]
-  - [ ] All unit tests have passed
-  - [ ] All integration tests have passed
-  - [ ] Fix summary has been generated and includes changes/tests/evidence/risk/rollback
-  - [ ] Fixed code complies with architecture design
-  - [ ] Development notes have been updated and generated
+  - [ ] All unit and integration tests passed
+  - [ ] Fix summary generated with changes/tests/evidence/risk/rollback sections
+  - [ ] Development notes updated
 
 ## [Example]
 

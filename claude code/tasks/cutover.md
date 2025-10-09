@@ -25,32 +25,29 @@
     - [Step 2: Query official documentation related to deployment configuration]
 
 ## [Steps]
-  1. Preparation and Validation Phase
-    - Understand business objectives and project structure
-    - Ensure proper handling of both PRD-based and Traditional project structures
-    - Establish progress tracking mechanism for acceptance tasks
+  1. Preparation and Validation
+  - Task: Understand business objectives and project structure
+  - Expected outcome: Progress tracking established for acceptance tasks
 
-  2. Understanding and Configuration Phase
-    - Identify project type and configuration needs
-    - Achieve clear documentation of all configuration requirements
+  2. Understanding and Configuration
+  - Task: Identify project type and configuration needs
+  - Expected outcome: All configuration requirements clearly documented
 
-  3. Environment Setup Phase
-    - Achieve fully configured project environment following documentation
-    - Ensure all setup steps and any failures are documented
+  3. Environment Setup
+  - Task: Configure project environment following documentation
+  - Expected outcome: Fully configured environment with all setup steps documented
 
-  4. Project Execution Phase
-    - Achieve running project with verified functionality
-    - Ensure execution results are documented with detailed logs
+  4. Project Execution
+  - Task: Run project and verify functionality
+  - Expected outcome: Running project with execution results and detailed logs documented
 
-  5. Acceptance Testing Phase
-    - Ensure all critical business requirements are tested from end-user perspective
-    - Achieve comprehensive test results with evidence for each requirement
-    - Ensure all issues are documented with severity and impact
+  5. Acceptance Testing
+  - Task: Test all critical business requirements from end-user perspective
+  - Expected outcome: Comprehensive test results with evidence and all issues documented with severity
 
-  6. Report Generation Phase
-    - Achieve complete cutover report saved to "{CUTOVER}"
-    - Ensure cutover status determination (Success/Partial Success/Failed)
-    - Ensure all findings and recommendations are documented
+  6. Report Generation
+  - Task: Generate cutover report and determine status
+  - Expected outcome: Complete cutover report at "{CUTOVER}" with status (Success/Partial Success/Failed)
 
 ## [Acceptance-Testing-Guidelines]
   1. **End-User Perspective Testing**
@@ -74,16 +71,9 @@
     - Assess production deployment readiness and risk
 
 ## [DoD]
-  - [ ] Project context is fully understood from all requirement and architecture documents
-  - [ ] Project type and all configuration requirements are clearly identified and documented
-  - [ ] Environment setup is complete with all steps and any failures documented
-  - [ ] Project execution is complete with results properly documented
-  - [ ] All critical business requirements are tested from end-user perspective with results recorded
-  - [ ] Complete cutover report exists at "{CUTOVER}" following template structure
-  - [ ] Cutover status (Success/Partial Success/Failed) is determined with clear rationale
-  - [ ] All configuration requirements are documented with specific details
-  - [ ] All test results are recorded with supporting evidence
-  - [ ] All issues are documented with severity classification and clear reproduction steps
+  - [ ] All critical business requirements tested from end-user perspective with results recorded
+  - [ ] Complete cutover report at "{CUTOVER}" with status (Success/Partial Success/Failed) and clear rationale
+  - [ ] All issues documented with severity classification and reproduction steps
 
 ## [Example]
 

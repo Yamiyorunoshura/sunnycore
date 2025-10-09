@@ -30,24 +30,21 @@
     - When to use: When reviewing code that integrates with external services or SDKs
 
 ## [Steps]
-  1. Review Planning Phase
-    - Understand the implementation plan and identify task domain
-    - Determine appropriate domain-specific review criteria and success criteria
-    - Establish progress tracking mechanism for review checkpoints
+  1. Review Planning
+  - Task: Understand implementation plan and identify task domain
+  - Expected outcome: Domain-specific review criteria determined with progress tracking established
 
-  2. Code and Test Review Phase
-    - Ensure all tests are executed with results properly recorded
-    - Ensure domain-specific scoring criteria are applied appropriately
-    - Ensure proper handling of both passing and failing test scenarios
-    - Achieve verification of test coverage and code alignment with plan
+  2. Code and Test Review
+  - Task: Execute all tests and apply domain-specific scoring criteria
+  - Expected outcome: Test results recorded, test coverage and code alignment verified
 
-  3. Development Notes Review Phase
-    - Ensure alignment between development notes and actual implementation
+  3. Development Notes Review
+  - Task: Review development notes alignment with implementation
+  - Expected outcome: Notes verified against actual implementation
 
-  4. Results Generation and Decision Phase
-    - Achieve complete review report saved to "{REVIEW}/{task_id}-review.md"
-    - Ensure appropriate acceptance decision (Accept/Accept with changes/Reject) with clear rationale
-    - Ensure "{EPIC}" is updated correctly based on review outcome
+  4. Results Generation and Decision
+  - Task: Generate review report and make acceptance decision
+  - Expected outcome: Complete review report at "{REVIEW}/{task_id}-review.md" with decision and "{EPIC}" updated
 
 ## [Domain-Specific-Review-Guidelines]
   
@@ -68,16 +65,9 @@
   - **Risk**: Low (all ≥2.5), Medium (1-2 between 2.0-2.4), High (any <2.0 or security issues)
 
 ## [DoD]
-  - [ ] Task domain is correctly identified with appropriate domain-specific review criteria applied
-  - [ ] Scoring is complete according to domain-specific scoring dimensions
-  - [ ] All tests are executed with results properly recorded
-  - [ ] Integration tests are executed confirming implementation does not affect existing code, with results recorded
-  - [ ] Test results are verified to align with implementation plan
-  - [ ] Code alignment analysis is complete with specific references to any deviations from the plan
-  - [ ] Complete review report exists at "{REVIEW}/{task_id}-review.md" with all required sections: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
-  - [ ] "{EPIC}" is updated with task completion status and score
-  - [ ] All test failures and plan misalignments are clearly identified and prioritized
-  - [ ] Acceptance decision (Accept/Accept with changes/Reject) is recorded with clear rationale based on test results and plan adherence
+  - [ ] All tests executed with results recorded and verified against implementation plan
+  - [ ] Complete review report exists at "{REVIEW}/{task_id}-review.md" with scoring and acceptance decision
+  - [ ] "{EPIC}" updated with task completion status and score
 
 ## [Example]
 

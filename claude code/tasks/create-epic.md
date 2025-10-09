@@ -22,25 +22,21 @@
     - When to use: When need to decompose complex requirements or identify task dependencies
 
 ## [Steps]
-  1. Research Phase
-    - Understand requirements, architecture, and project scope
-    - Identify success criteria and constraints for task design
-    - Establish progress tracking mechanism for task design work
+  1. Research
+  - Task: Understand requirements, architecture, and project scope
+  - Expected outcome: Success criteria and constraints for task design identified
 
-  2. Drafting Phase
-    - Achieve feature-level task breakdown with proper grouping
-    - Ensure each task represents a verifiable feature with clear scope
-    - Ensure tasks are logically organized without overlap
+  2. Drafting
+  - Task: Break down requirements into feature-level tasks
+  - Expected outcome: Feature-level task breakdown with proper grouping and clear scope
 
-  3. Review Phase
-    - Ensure tasks are deduplicated and actionable
-    - Ensure proper feature-level granularity and requirement traceability
-    - Ensure format compliance with template requirements
+  3. Review
+  - Task: Deduplicate and verify tasks
+  - Expected outcome: Tasks are actionable with proper granularity and requirement traceability
 
-  4. Finalization Phase
-    - Achieve complete task list draft with clear introduction
-    - Ensure user approval is obtained with proper feedback integration
-    - Achieve final epic document saved to "{EPIC}"
+  4. Finalization
+  - Task: Obtain user approval and save epic document
+  - Expected outcome: Final epic document saved to "{EPIC}" and approved by user
 
 ## [Task-Design-Guidelines]
   1. **Feature-Level Tasks**
@@ -59,13 +55,9 @@
     - Atomic breakdown will happen later in create-plan phase using TDD cycles
 
 ## [DoD]
-  - [ ] All requirement and architecture documents are fully understood
-  - [ ] Complete research notes exist, including comprehensive mapping of functional/non-functional requirements to tasks
-  - [ ] Task list draft is approved by user
-  - [ ] Epic file exists at "{EPIC}" in valid Markdown format
-  - [ ] All tasks conform to template fields with proper structure
-  - [ ] Each task is feature-level, outcome-oriented, and has clear verification criteria
-  - [ ] All file names and key names use kebab-case (no spaces)
+  - [ ] Epic file exists at "{EPIC}" with all tasks feature-level, outcome-oriented, and properly mapped to requirements
+  - [ ] Task list approved by user with 100% requirement coverage
+  - [ ] All file names use kebab-case (no spaces)
 
 ## [Example]
 

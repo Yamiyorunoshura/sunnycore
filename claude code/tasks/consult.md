@@ -32,25 +32,21 @@
     - When to use: When need to study how similar features are implemented in existing products
 
 ## [Steps]
-  1. Initialization Phase
-    - Determine project type (Greenfield/Brownfield)
-    - Ensure proper context gathering for both project types
-    - Establish progress tracking mechanism for analysis
+  1. Initialization
+  - Task: Determine project type (Greenfield/Brownfield) and gather context
+  - Expected outcome: Project type correctly identified with appropriate context
 
-  2. Requirement Analysis Phase
-    - Understand requirement scope and architectural impact
-    - Ensure proper analysis for both Greenfield and Brownfield contexts
-    - Assess requirement complexity and necessary workflow depth
+  2. Requirement Analysis
+  - Task: Understand requirement scope and architectural impact
+  - Expected outcome: Requirement complexity and workflow depth assessed
 
-  3. Recommendation Phase
-    - Achieve clear workflow recommendation based on analysis
-    - Ensure rationale is provided with decision criteria
-    - Ensure appropriate guidance for Brownfield projects when needed
+  3. Recommendation
+  - Task: Provide clear workflow recommendation based on analysis
+  - Expected outcome: Workflow recommendation with rationale based on decision criteria
 
-  4. Finalization Phase
-    - Ensure concise, actionable recommendation is provided
-    - Ensure next step command is specified
-    - Ensure proper handling of user requests for additional details
+  4. Finalization
+  - Task: Provide concise, actionable recommendation with next step command
+  - Expected outcome: User understands which workflow to use and why
 
 ## [Decision-Criteria]
   **Recommend Full Workflow (*create-requirements) when:**
@@ -84,12 +80,9 @@
     - PRD workflow: within existing boundaries, 1-5 tasks, no new patterns
 
 ## [DoD]
-  - [ ] Project type (Greenfield/Brownfield) is correctly determined
-  - [ ] For Brownfield projects, existing architecture documents are fully understood
-  - [ ] Requirement scope and impact are comprehensively analyzed
-  - [ ] Clear workflow recommendation is provided with specific command
-  - [ ] Next step command is specified (either *create-requirements or *create-prd)
-  - [ ] User understands which workflow to use and the rationale behind the recommendation
+  - [ ] Project type correctly determined with requirement scope and impact analyzed
+  - [ ] Clear workflow recommendation provided with specific command (*create-requirements or *create-prd)
+  - [ ] User understands workflow recommendation and rationale
 
 ## [Example]
 

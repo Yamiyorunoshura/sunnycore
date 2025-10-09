@@ -36,24 +36,21 @@
     - When to use: When need to study how successful projects document their architecture and design decisions
 
 ## [Steps]
-  1. Analysis and Planning Phase
-    - Understand existing architecture and actual implementation state
-    - Gather comprehensive context from all documentation sources
-    - Establish progress tracking mechanism for documentation tasks
+  1. Analysis and Planning
+  - Task: Understand existing architecture and actual implementation state
+  - Expected outcome: Comprehensive context gathered from all documentation sources
 
-  2. Integration Phase
-    - Achieve unified architecture document at "{root}/docs/architecture.md"
-    - Ensure all content includes proper source references (source_refs)
-    - Ensure completeness and internal consistency
+  2. Integration
+  - Task: Create unified architecture document with source references
+  - Expected outcome: Complete architecture document at "{root}/docs/architecture.md" with proper source_refs
 
-  3. Cleanup and Sharding Phase
-    - Ensure old architecture documents are removed from "{ARCH}/"
-    - Achieve successful architecture sharding with verified output
-    - Ensure all sharded documents are properly created in .md format
+  3. Cleanup and Sharding
+  - Task: Remove old documents and shard architecture
+  - Expected outcome: Successfully sharded architecture in "{ARCH}/" with verified output files
 
-  4. Finalization Phase
-    - Ensure "{root}/CLAUDE.md" is updated with refreshed architecture index
-    - Ensure all source references are properly documented
+  4. Finalization
+  - Task: Update CLAUDE.md with refreshed architecture index
+  - Expected outcome: CLAUDE.md updated with current architecture document index
 
 ## [Documentation-Guidelines]
   1. **Base on Actual Implementation**
@@ -77,16 +74,9 @@
     - Update CLAUDE.md document index after sharding
 
 ## [DoD]
-  - [ ] All existing architecture documents and actual codebase implementation are fully understood
-  - [ ] Development notes, review reports, knowledge base, and progress records are fully analyzed
-  - [ ] All documentation content includes proper source references (source_refs format: file_path:line_number)
-  - [ ] Old architecture documents are removed from "{ARCH}/"
-  - [ ] Shard-architecture.py script is successfully executed
-  - [ ] Complete set of sharded architecture documents exists in "{ARCH}/" with .md extension
-  - [ ] Original architecture.md is removed (deleted by sharding script)
-  - [ ] All sharded documents include actual implementation details with source references
-  - [ ] All deviations from original design are documented with clear rationale
-  - [ ] "{root}/CLAUDE.md" Document Index section and architecture-related sections are updated with current sharded architecture documents
+  - [ ] Architecture successfully sharded to "{ARCH}/" with all content including source references (format: file_path:line_number)
+  - [ ] All deviations from original design documented with clear rationale
+  - [ ] CLAUDE.md updated with current architecture document index
 
 ## [Example]
 
