@@ -43,7 +43,7 @@
   1. Setup Phase
     - Understand all requirements, architecture, and task scope
     - Identify project-specific best practices and lessons learned
-    - Establish progress tracking mechanism for all tasks
+    - Establish progress tracking mechanism for plan creation work
 
   2. For Each Task: Planning RED Phase Content
     - Achieve complete test planning with acceptance criteria and test conditions

@@ -7,6 +7,13 @@
 
 ## [Unreleased]
 
+## [3.2.1] - sunnycore v3.2.1
+
+### Changed
+- 優化任務規劃流程說明：精確化 `claude code/tasks/create-plan.md` 中的進度追蹤範圍描述
+  - Setup Phase：將「所有任務」改為「計劃創建工作」，明確進度追蹤的具體範圍
+  - 提升任務說明的精確度與可理解性
+
 ## [3.2.0] - sunnycore v3.2.0
 
 ### Added
