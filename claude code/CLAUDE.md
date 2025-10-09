@@ -13,15 +13,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
     - Highest priority: CLAUDE.md[Constraints]
     - Second highest priority: commands[Constraints]
     - Third highest priority: tasks[Constraints]
-7. Complete all to-do items in the todo list.
+7. Complete all to-do items in the todo list. Never stops when remaining to-do items still exist.
 8. Verify the completion of all [DoD].
 9. Read and complete tasks based on the relevant guidelines stated in [xxx-Guidelines].
-10. Wrap-Up Gatekeeper — do not wrap up before completion
-  10.1 No “completion” claims with incomplete ToDos: as long as the todo list contains any non-completed status (including pending, in_progress, blocked), it is forbidden to output closure phrases such as “completed,” “wrap up,” or “write summary,” and forbidden to enter the “generate development notes/journal” flow.
-  10.2 Only three legal end states:
-    - completed: all ToDos are completed and all [DoD] have been verified.
-    - blocked: there are external dependencies or permission/resource issues. Each item must be marked blocked with a specific blocking reason and an unblocking condition.
-    - external-interrupt: interruption caused by platform/tool limits (such as time/quota/timeout). Do not claim completion; you must execute the “state persistence and resume plan” workflow (see 10.6).
 
 ## [Template-Usage-Guidelines]
 
