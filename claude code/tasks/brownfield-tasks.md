@@ -27,6 +27,9 @@
     - [Step 1: Search existing implementations to understand codebase structure]
     - [Step 2: Search fix-related code]
     - Query examples: "What is the existing implementation?" "How to integrate with existing system?"
+  4. **context7 (MCP)**
+    - [Step 2: Fix Phase - When fixes involve external API calls or integration issues]
+    - When to use: When need to verify correct API usage or find official troubleshooting guides
 
 ## [Steps]
   1. Preparation Phase

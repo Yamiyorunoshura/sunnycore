@@ -35,6 +35,9 @@
     - When to use: When need to decompose complex tasks or design TDD workflow
   3. **claude-context (MCP)**
     - [Step 1: Search for relevant implementation references (if needed)]
+  4. **context7 (MCP)**
+    - [Step 3: Plan GREEN phase - When need to query official API usage and examples for external packages]
+    - When to use: When implementation involves external SDK integration or need to verify package compatibility
 
 ## [Steps]
   1. Setup Phase

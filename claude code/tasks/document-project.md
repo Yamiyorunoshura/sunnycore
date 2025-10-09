@@ -33,6 +33,9 @@
     - Query examples: "What is the actual implementation?" "Where are the key components?" "What are the architecture decisions?"
   4. **context7 (MCP)**
     - [Step 1-2: Query latest official documentation and API changes for tech stack]
+  5. **playwright (MCP)**
+    - [Step 1-2: Research architecture documentation structure and presentation from exemplary open-source projects]
+    - When to use: When need to study how successful projects document their architecture and design decisions
 
 ## [Steps]
   1. Analysis and Planning Phase

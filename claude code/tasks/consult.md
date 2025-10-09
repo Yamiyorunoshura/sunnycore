@@ -24,6 +24,12 @@
   3. **claude-context (MCP)**
     - [Step 2: When project is Brownfield, search existing architecture boundaries and public contracts]
     - Query examples: "What are the public API interfaces?" "Where are the integration points?" "How are module boundaries defined?"
+  4. **context7 (MCP)**
+    - [Step 2: Requirement Analysis Phase - Query API documentation when assessing technical feasibility]
+    - When to use: When need to verify if external APIs support required functionality
+  5. **playwright (MCP)**
+    - [Step 2: Requirement Analysis Phase - Research competitor product implementations]
+    - When to use: When need to study how similar features are implemented in existing products
 
 ## [Steps]
   1. Initialization Phase

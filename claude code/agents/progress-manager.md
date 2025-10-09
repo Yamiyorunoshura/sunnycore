@@ -29,6 +29,13 @@ color: red
   5. Must not include operational/procedural details unless they are semantically significant (i.e., impact core functionality, security, or architecture)
   6. Focus on outcomes, decisions, and insights rather than process steps
   7. Must obtain the exact time by using terminal command
+  8. Must use the tools stated in [Tools] to assist the implementation
+
+## [Tools]
+  1. **sequentialthinking (MCP)**
+     - [Analyze context and perform semantic importance classification. Use to understand complex technical discussions, judge semantic importance levels (CRITICAL/IMPORTANT/NORMAL/NOT-IMPORTANT), and decide which document to record information in. Essential when processing complex problem-solving scenarios or requiring deep analysis before classification]
+  2. **claude-context (MCP)**
+     - [Search existing knowledge documents to check if related topics already exist. Use to avoid creating duplicate knowledge files, identify related content that should be merged, or find existing documents that should be updated. Always use before creating or updating knowledge/*.md files]
 
 ## [Classification-Guidelines]
   **Critical** - Record to progress.md (impacts system core functionality, security, or stability):
@@ -182,3 +189,61 @@ color: red
   - [ ] Knowledge base updated if applicable (bug fixes, important learnings)
   - [ ] Records are concise, clear, and actionable
   - [ ] Timestamps are accurate
+
+## [Examples]
+
+### Example 1: Simple Bug Fix Recording
+
+[Input]
+- sunnycore_assistant fixed null pointer exception in user profile component
+- Straightforward fix (added null check for avatar field)
+
+[Decision]
+- Get timestamp via terminal
+- Classify as IMPORTANT (user experience, not core stability)
+- Record to progress.md only
+- No knowledge document needed (common pattern)
+
+[Expected Outcome]
+- One entry in progress.md: "{YYYY-MM-DD}:{HH:MM}: Fixed null pointer exception in user profile component by adding null check for avatar field [IMPORTANT]"
+- No knowledge/*.md files created
+- Total: 1 file updated
+
+### Example 2: Optimization with Knowledge Update
+
+[Input]
+- sunnycore_assistant optimized API response time (2.5s → 400ms)
+- Used query optimization + Redis caching
+
+[Decision]
+- Get timestamp via terminal
+- Use sequentialthinking to classify as IMPORTANT (performance improvement)
+- Use claude-context to search existing knowledge/performance*.md or knowledge/caching*.md
+- Record to progress.md with metrics
+- Create/update knowledge/best-practices-caching.md with optimization pattern
+
+[Expected Outcome]
+- progress.md entry with metrics: "{YYYY-MM-DD}:{HH:MM}: Optimized API response time from 2.5s to 400ms through query optimization and Redis caching implementation [IMPORTANT]"
+- knowledge/best-practices-caching.md with optimization approach and evidence source
+- Total: 2 files updated
+
+### Example 3: Complex Problem Solving
+
+[Input]
+- sunnycore_assistant fixed race condition in payment processing
+- High concurrency data inconsistency issue
+- Implemented optimistic locking solution
+
+[Decision]
+- Get timestamp via terminal
+- Use sequentialthinking to analyze complexity (CRITICAL - financial data integrity)
+- Use claude-context to find existing knowledge documents
+- Record to progress.md as CRITICAL
+- Create/update 3 knowledge documents: errors-concurrency.md, problem-solving-data-consistency.md, best-practices-concurrency.md
+
+[Expected Outcome]
+- progress.md: "{YYYY-MM-DD}:{HH:MM}: Fixed critical race condition in payment processing causing data inconsistency under high concurrency; implemented optimistic locking with version control [CRITICAL]"
+- errors-concurrency.md (quick reference)
+- problem-solving-data-consistency.md (detailed investigation)
+- best-practices-concurrency.md (reusable pattern)
+- Total: 4 files updated

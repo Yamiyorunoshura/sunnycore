@@ -29,6 +29,9 @@
   3. **context7 (MCP)**
     - [Step 2: Query official documentation for external packages and architecture pattern best practices]
     - When to use: When need to verify tech stack version compatibility or find official architecture guidance
+  4. **playwright (MCP)**
+    - [Step 1-2: Research similar system architecture designs and implementation cases]
+    - When to use: When need to study architecture patterns from open-source projects or industry references
 
 ## [Steps]
   1. Requirement Analysis Phase

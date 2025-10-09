@@ -32,6 +32,9 @@
     - Query examples: "What are the existing system boundaries?" "How is data flow implemented?" "What are the shared services?"
   4. **context7 (MCP)**
     - [Step 2: Query official API documentation and integration guidance for new integration technologies]
+  5. **playwright (MCP)**
+    - [Step 1-2: Research architecture migration patterns and integration cases]
+    - When to use: When need to study how similar systems evolved their architecture or integrated new components
 
 ## [Steps]
   1. Evaluate Existing Architecture Phase
