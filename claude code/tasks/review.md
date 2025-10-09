@@ -26,6 +26,9 @@
   3. **claude-context (MCP)** - Codebase semantic search and indexing tool
     - [Step 1-2: Search codebase for implementation plan-related code (if needed)]
     - [Step 2: Search for relevant test cases and implementation patterns]
+  4. **context7 (MCP)**
+    - [Step 2: Code and Test Review Phase - Verify external API usage correctness]
+    - When to use: When reviewing code that integrates with external services or SDKs
 
 ## [Steps]
   1. Review Planning Phase

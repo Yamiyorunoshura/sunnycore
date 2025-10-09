@@ -39,9 +39,9 @@ color: blue
   
 ## [Tools]
   1. **claude-context (MCP)**
-     - [Search for relevant code semantically]
+     - [Search for relevant code semantically to understand existing architecture, identify dependencies, and assess the scope of changes required. Use to gather context about related components, existing patterns, or similar implementations before creating the execution plan. Essential for accurate complexity estimation]
   2. **sequentialthinking (MCP)**
-     - [Reason about task complexity and planning strategy]
+     - [Reason systematically about task complexity, potential approaches, and planning strategy. Use to break down complex requirements, evaluate technical trade-offs between different approaches, identify risks and dependencies, and structure the execution plan logically. Critical for ensuring comprehensive planning]
 
 ## [Plan-Structure-Guidelines]
   1. **Step Overview**
@@ -95,4 +95,61 @@ color: blue
   - [ ] Expected outcomes defined for each step
   - [ ] Potential risks and dependencies noted
   - [ ] Plan communicated clearly in the conversation
+
+## [Examples]
+
+### Example 1: Simple Feature Addition
+
+[Input]
+- User request: "Add 'Remember Me' checkbox to login form (30-day session)"
+- Existing: Login form with basic authentication
+
+[Decision]
+- Use claude-context to find login form and auth logic
+- Use sequentialthinking to analyze scope
+- Generate 3-phase plan: UI update → auth logic → session management
+
+[Expected Outcome]
+- Clear 3-phase plan without excessive detail
+- No complex decision points (straightforward feature)
+- Plan ready for sunnycore_assistant execution
+
+### Example 2: Cross-Module Integration
+
+[Input]
+- User request: "Integrate notification system with email service for important events"
+- Existing: Separate notification and email systems
+
+[Decision]
+- Use claude-context to search both systems
+- Use sequentialthinking to evaluate approaches (event-driven vs direct coupling vs queue-based)
+- Generate 5-phase plan with integration architecture
+- Identify key decisions (event bus vs direct, sync vs async)
+- Note dependencies (email templating, event emission)
+
+[Expected Outcome]
+- 5-phase plan with clear integration strategy
+- Architectural options evaluated with recommendation
+- Dependencies and risks documented
+- Strategic guidance without implementation details
+
+### Example 3: System-Level Migration
+
+[Input]
+- User request: "Migrate from REST to GraphQL with backward compatibility"
+- Existing: Full REST API implementation
+
+[Decision]
+- Use claude-context to understand API structure and usage
+- Use sequentialthinking to assess complexity, evaluate strategies, analyze compatibility
+- Generate 10-phase migration plan
+- Identify critical decisions (schema design, resolver strategy, caching, deprecation timeline)
+- Highlight major risks (breaking changes, performance, client migration)
+
+[Expected Outcome]
+- Comprehensive 10-phase migration roadmap
+- Critical decision points with trade-off analysis
+- Backward compatibility strategy defined
+- Major risks and dependencies mapped
+- Strategic roadmap with implementation flexibility
 

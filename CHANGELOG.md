@@ -7,6 +7,51 @@
 
 ## [Unreleased]
 
+## [3.2.0] - sunnycore v3.2.0
+
+### Added
+- 新增使用範例章節：為核心代理和命令文件新增完整的實戰範例，提升可用性
+  - 新增 `claude code/agents/planner.md` 的 [Examples] 章節：3 個規劃範例
+    * Example 1: Simple Feature Addition - 簡單功能新增的規劃方法
+    * Example 2: Cross-Module Integration - 跨模組整合的規劃策略
+    * Example 3: System-Level Migration - 系統級遷移的規劃路線圖
+  - 新增 `claude code/agents/progress-manager.md` 的 [Examples] 章節：3 個記錄範例
+    * Example 1: Simple Bug Fix Recording - 簡單 bug 修復的記錄策略
+    * Example 2: Optimization with Knowledge Update - 優化工作的進度與知識記錄
+    * Example 3: Complex Problem Solving - 複雜問題的多文件記錄策略
+  - 新增 `claude code/commands/sunnycore_assistant.md` 的 [Examples] 章節：3 個技術支援範例
+    * Example 1: Simple Bug Fix - 簡單 bug 的診斷與修復流程
+    * Example 2: Performance Optimization - 效能優化的調查與實施流程
+    * Example 3: Architecture Refactoring - 架構重構的規劃與執行流程
+
+### Changed
+- 優化工具使用說明：增強核心代理和任務文件中的 MCP 工具描述，提升工具使用指引的清晰度
+  - 優化 `claude code/agents/planner.md` 工具說明：
+    * claude-context (MCP)：新增「理解現有架構、識別依賴、評估變更範圍」等具體使用場景
+    * sequentialthinking (MCP)：新增「系統性推理、評估技術權衡、識別風險與依賴」等使用說明
+  - 優化 `claude code/agents/progress-manager.md` 工具說明：
+    * 新增 [Tools] 章節，明確定義 sequentialthinking 和 claude-context 的使用場景
+    * sequentialthinking：用於分析上下文並進行語意重要性分類
+    * claude-context：用於搜尋現有知識文件以避免重複創建
+  - 優化 `claude code/commands/sunnycore_assistant.md` 工具說明：
+    * todo_write：從「追蹤工作進度」擴展為「創建和更新任務清單以組織工作階段」
+    * sequentialthinking：從「推理問題和解決方案」擴展為「系統性推理根因分析、評估解決方案、理解技術權衡」
+    * claude-context：從「搜尋相關代碼」擴展為「語意搜尋理解現有實作、識別需修改的文件、尋找參考範例」
+    * context7：從「搜尋相關 API 文檔」擴展為「搜尋 API 文檔和庫使用範例，確保正確使用模式」
+- 擴展任務工具支援：在 9 個任務文件中新增 context7 和 playwright 工具的使用說明
+  - 新增 context7 (MCP) 工具至 7 個任務：
+    * `brownfield-tasks.md`：Step 2 修復階段 - 驗證 API 使用或查找官方疑難排解指南
+    * `consult.md`：Step 2 需求分析階段 - 評估技術可行性時查詢 API 文檔
+    * `create-plan.md`：Step 3 GREEN 階段規劃 - 查詢外部套件的官方 API 使用方式
+    * `curate-knowledge.md`：Step 2 知識庫設計階段 - 驗證最佳實踐是否符合官方指引
+    * `fix-acceptance-issues.md`：Step 2-6 - 修復涉及外部服務整合或配置時查詢官方文檔
+    * `review.md`：Step 2 代碼和測試審查階段 - 驗證外部 API 使用正確性
+  - 新增 playwright (MCP) 工具至 4 個任務：
+    * `consult.md`：Step 2 需求分析階段 - 研究競品產品實作方式
+    * `create-architecture.md`：Step 1-2 - 研究類似系統架構設計和實作案例
+    * `create-brownfield-architecture.md`：Step 1-2 - 研究架構遷移模式和整合案例
+    * `document-project.md`：Step 1-2 - 研究開源專案的架構文檔結構和呈現方式
+
 ## [3.1.1] - sunnycore v3.1.1
 
 ### Changed

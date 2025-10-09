@@ -30,6 +30,9 @@
   3. **claude-context (MCP)**: Search codebase for relevant code
     - [Step 2: Search code and dependencies related to failing functionality]
     - Query examples: "Where is the failing functionality?" "What are the dependencies?"
+  4. **context7 (MCP)**
+    - [Step 2-6: When fixes involve external service integration or configuration]
+    - When to use: When need official documentation for service configuration or API troubleshooting
 
 ## [Steps]
   1. Preparation Phase

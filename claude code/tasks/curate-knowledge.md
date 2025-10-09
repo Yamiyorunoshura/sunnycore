@@ -28,6 +28,9 @@
     - When to use: When technical details mentioned in documentation need to be verified or supplemented from code
   3. **todo_write**
     - [Step 2: Create task list; Steps 3-4: Track task progress]
+  4. **context7 (MCP)**
+    - [Step 2: Knowledge Base Design Phase - Verify if practices align with official guidelines]
+    - When to use: When validating best practices against official documentation
 
 ## [Steps]
   1. Preparation Phase
