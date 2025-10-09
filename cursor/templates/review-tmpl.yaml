@@ -1,0 +1,65 @@
+---
+# Review Report Template
+# 審查報告模板
+
+task_id: ""
+reviewer: ""
+date: ""
+review_type: ""
+---
+
+acceptance-decision: ""
+
+rationale: ""
+
+quality-scores:
+  functional_compliance: 0
+  code_quality: 0
+  security_performance: 0
+  test_coverage: 0
+  architecture_alignment: 0
+  documentation: 0
+  deployment_readiness: 0
+  overall_score: 0.0
+  maturity_level: ""
+
+scoring-guide: ""
+
+findings: []
+
+test-summary:
+  coverage_percentage: ""
+  all_passed: true
+  test_output: ""
+  missing_tests: []
+
+compliance-check:
+  requirements_fulfilled: []
+  requirements_partial: []
+  requirements_missing: []
+
+code-review:
+  strengths: []
+  improvements_needed: []
+  style_violations: []
+
+security-review:
+  vulnerabilities: []
+  best_practices_followed: []
+  concerns: []
+
+performance-review:
+  benchmarks_met: []
+  bottlenecks: []
+  optimization_suggestions: []
+
+documentation-review:
+  completeness: ""
+  clarity: ""
+  missing_sections: []
+
+source-references:
+  plan_path: ""
+  dev_notes_path: ""
+  code_paths: []
+  test_paths: []

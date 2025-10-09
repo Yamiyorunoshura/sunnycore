@@ -1,0 +1,51 @@
+---
+# Implementation Plan Template - TDD-aligned
+# 實作計畫模板 - 對齊 TDD 流程
+
+task_id: ""
+task_name: ""
+plan_version: ""
+created_date: ""
+created_by: ""
+estimated_duration: ""
+---
+
+task-context:
+  summary: ""
+  requirements-mapping:
+    functional_ids: []
+    non_functional_ids: []
+  architecture-context:
+    components: []
+    integration_points: []
+
+tdd-phases:
+  red-phase:
+    objective: ""
+    acceptance-to-tests: []
+    test-cases: []
+    test-files: []
+  
+  green-phase:
+    objective: ""
+    implementation-steps: []
+    files: []
+    dependencies: []
+  
+  refactor-phase:
+    objective: ""
+    refactoring-targets: []
+    quality-improvements: []
+    checklist: []
+
+additional-details:
+  configuration-changes: []
+  database-migrations: []
+  api-documentation: []
+  security-considerations: []
+
+risk-management: []
+
+validation-checklist: []
+
+notes: ""

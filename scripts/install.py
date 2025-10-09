@@ -18,9 +18,12 @@ from typing import Dict, List, Optional, Tuple
 
 
 class ProgressBar:
-    """簡單的進度條顯示器"""
+    """帶動畫效果的進度條顯示器"""
     
-    def __init__(self, total: int, width: int = 50, prefix: str = "下載進度"):
+    # 旋轉動畫符號
+    SPINNERS = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+    
+    def __init__(self, total: int, width: int = 40, prefix: str = "下載進度"):
         """初始化進度條
         
         Args:
@@ -35,6 +38,9 @@ class ProgressBar:
         self.failed = 0
         self.lock = threading.Lock()
         self.start_time = time.time()
+        self.spinner_index = 0
+        self.last_update_time = 0
+        self.update_interval = 0.1  # 最小更新間隔（秒）
         
     def update(self, increment: int = 1, failed: bool = False):
         """更新進度
@@ -47,13 +53,26 @@ class ProgressBar:
             self.current += increment
             if failed:
                 self.failed += increment
-            self._display()
+            
+            # 控制更新頻率，避免刷新太快
+            current_time = time.time()
+            if current_time - self.last_update_time >= self.update_interval or self.current == self.total:
+                self._display()
+                self.last_update_time = current_time
     
     def _display(self):
-        """顯示進度條"""
+        """顯示進度條（帶動畫效果）"""
         percent = self.current / self.total if self.total > 0 else 0
         filled = int(self.width * percent)
-        bar = '█' * filled + '░' * (self.width - filled)
+        
+        # 使用漸變效果的進度條
+        if filled > 0:
+            if filled == self.width:
+                bar = '█' * self.width
+            else:
+                bar = '█' * (filled - 1) + '▓' + '░' * (self.width - filled)
+        else:
+            bar = '░' * self.width
         
         # 計算速度和預估剩餘時間
         elapsed = time.time() - self.start_time
@@ -62,15 +81,20 @@ class ProgressBar:
         
         # 格式化時間
         elapsed_str = self._format_time(elapsed)
-        remaining_str = self._format_time(remaining) if remaining > 0 else "計算中..."
+        remaining_str = self._format_time(remaining) if remaining > 0 and self.current < self.total else "完成"
         
-        # 顯示進度條
+        # 旋轉動畫符號（只在未完成時顯示）
+        spinner = self.SPINNERS[self.spinner_index % len(self.SPINNERS)] if self.current < self.total else '✓'
+        self.spinner_index += 1
+        
+        # 顯示狀態
         status = f"✓ {self.current - self.failed}"
         if self.failed > 0:
-            status += f" | ✗ {self.failed}"
+            status += f" ✗ {self.failed}"
         
-        print(f"\r{self.prefix}: [{bar}] {percent*100:.1f}% ({status}/{self.total}) | "
-              f"速度: {speed:.1f} 檔/秒 | 已用: {elapsed_str} | 預估剩餘: {remaining_str}  ",
+        # 顯示進度條（緊湊格式）
+        print(f"\r{spinner} {self.prefix}: [{bar}] {percent*100:.1f}% ({status}/{self.total}) "
+              f"| {speed:.1f} 檔/秒 | {elapsed_str} / {remaining_str}   ",
               end='', flush=True)
     
     def _format_time(self, seconds: float) -> str:
@@ -347,6 +371,92 @@ class SunnycoreInstaller:
             print("\n✗ 安裝過程中出現錯誤")
         
         return success
+    
+    def install_cursor(self, work_dir: Path, auto_yes: bool = False) -> bool:
+        """安裝 cursor 版本
+        
+        Args:
+            work_dir: 工作目錄
+            auto_yes: 自動確認模式
+            
+        Returns:
+            bool: 安裝是否成功
+        """
+        print(f"\n開始安裝 Sunnycore (cursor 版本) 到: {work_dir}")
+        print("=" * 60)
+        
+        # 檢查目錄是否存在
+        cursor_dir = work_dir / ".cursor"
+        sunnycore_dir = work_dir / "sunnycore"
+        
+        if cursor_dir.exists() or sunnycore_dir.exists():
+            if not auto_yes:
+                # 使用 safe_input 支援管道執行時的互動
+                try:
+                    response = safe_input(f"\n目錄已存在，是否覆寫? (y/N): ").strip().lower()
+                    if response != 'y':
+                        print("安裝已取消")
+                        return False
+                except EOFError:
+                    # 如果無法讀取輸入（例如在完全無終端的環境中）
+                    print("\n✗ 無法讀取用戶輸入，請使用 -y 參數自動確認覆寫")
+                    return False
+        
+        # 定義要下載的目錄和目標
+        directories = [
+            # .cursor/ 目錄內容
+            ("cursor/commands", cursor_dir / "commands"),
+            
+            # sunnycore/ 目錄內容
+            ("cursor/tasks", sunnycore_dir / "tasks"),
+            ("cursor/templates", sunnycore_dir / "templates"),
+            ("cursor/scripts", sunnycore_dir / "scripts"),
+        ]
+        
+        # 單獨下載的文件
+        single_files = [
+            ("cursor/DEPENDENCIES.md", sunnycore_dir / "DEPENDENCIES.md"),
+            ("cursor/index.json", sunnycore_dir / "index.json"),
+            ("cursor/mcp.json", sunnycore_dir / "mcp.json"),
+            ("cursor/README.md", sunnycore_dir / "README.md"),
+            ("cursor/cursor.mdc", sunnycore_dir / "cursor.mdc"),
+        ]
+        
+        # 收集所有要下載的文件
+        print("\n正在掃描目錄結構...")
+        all_files = []
+        
+        # 收集目錄中的所有文件
+        for source_dir, target_dir in directories:
+            print(f"  掃描: {source_dir}")
+            if not self.collect_directory_files(source_dir, target_dir, all_files):
+                print(f"  ✗ 無法掃描目錄: {source_dir}")
+                return False
+        
+        # 添加單獨的配置文件
+        all_files.extend(single_files)
+        
+        # 並行下載所有文件
+        success = self.download_files_parallel(all_files)
+        
+        if success:
+            print("\n" + "=" * 60)
+            print("✓ 安裝完成!")
+            print(f"\n安裝結構:")
+            print(f"{work_dir}/")
+            print(f"├── .cursor/              # Cursor 專用配置")
+            print(f"│   └── commands/        # 角色命令定義")
+            print(f"└── sunnycore/           # Sunnycore 系統檔案")
+            print(f"    ├── cursor.mdc     # Cursor 專案指引")
+            print(f"    ├── config.yaml")
+            print(f"    ├── tasks/")
+            print(f"    ├── templates/")
+            print(f"    └── ...")
+            print("\n請查看 sunnycore/cursor.mdc 開始使用 Sunnycore!")
+        else:
+            print("\n✗ 安裝過程中出現錯誤")
+        
+        return success
 
 
 def main():
@@ -356,27 +466,31 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 範例:
-  # 互動模式 - 可選擇專案安裝或自訂路徑
+  # 互動模式 - 可選擇專案安裝或自訂路徑（預設 claude-code 版本）
   python3 install.py
+  
+  # 安裝 cursor 版本
+  python3 install.py -v cursor -p ~/myproject
   
   # 從管道執行 - 完整支援互動模式
   curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/install.py | python3
   
-  # 非互動模式 - 直接指定路徑
-  python3 install.py -p ~/myproject
+  # 非互動模式 - 直接指定路徑和版本
+  python3 install.py -v cursor -p ~/myproject -y
   
-  # 非互動模式 - 指定路徑並自動確認覆寫
-  python3 install.py -p ~/myproject -y
-  
-  # 從管道執行 - 直接指定路徑和自動確認
-  curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/install.py | python3 - -p ~/myproject -y
+  # 從管道執行 - 安裝 cursor 版本
+  curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/scripts/install.py | python3 - -v cursor -p ~/myproject -y
   
   # 限制並行數量（例如：限制為 20 個並行任務）
-  python3 install.py -p ~/myproject --max-workers 20
+  python3 install.py -v cursor -p ~/myproject --max-workers 20
+
+版本說明:
+  1. claude-code: 適用於 Claude Code，安裝 .claude/ 和 sunnycore/ 目錄
+  2. cursor: 適用於 Cursor 編輯器，安裝 .cursor/ 和 sunnycore/ 目錄
 
 模式說明:
-  1. 專案安裝: 在當前工作目錄建立 .claude/ 和 sunnycore/ 目錄
-  2. 自訂安裝: 在指定路徑建立 .claude/ 和 sunnycore/ 目錄
+  1. 專案安裝: 在當前工作目錄建立版本對應的目錄結構
+  2. 自訂安裝: 在指定路徑建立版本對應的目錄結構
   
 並行下載:
   預設會根據文件數量自動調整並行數（上限 200），實現最快速度
@@ -390,9 +504,9 @@ def main():
     
     parser.add_argument(
         '-v', '--version',
-        choices=['claude-code'],
+        choices=['claude-code', 'cursor'],
         default='claude-code',
-        help='版本選擇 (目前僅支援 claude-code)'
+        help='版本選擇 (claude-code 或 cursor)'
     )
     
     parser.add_argument(
@@ -428,15 +542,25 @@ def main():
     
     args = parser.parse_args()
     
-    # 獲取安裝路徑
-    if args.path:
-        install_path = Path(os.path.expanduser(args.path))
-    else:
-        # 互動模式
+    # 互動模式 - 當沒有指定路徑時進入互動模式
+    if not args.path:
         print("Sunnycore 安裝程式")
         print("=" * 60)
         
         try:
+            # 版本選擇（如果未通過參數指定）
+            if not any(arg in sys.argv for arg in ['-v', '--version']):
+                print("\n請選擇安裝版本:")
+                print("1. claude-code (適用於 Claude Code)")
+                print("2. cursor (適用於 Cursor 編輯器)")
+                
+                version_choice = safe_input("\n請輸入選項 (1/2，預設: 1): ").strip()
+                
+                if version_choice == '2':
+                    args.version = 'cursor'
+                else:
+                    args.version = 'claude-code'
+            
             # 模式選擇
             print("\n請選擇安裝模式:")
             print("1. 專案安裝 (安裝到當前工作目錄)")
@@ -457,8 +581,11 @@ def main():
                 
         except EOFError:
             # 如果無法讀取輸入（例如在完全無終端的環境中）
-            print("\n✗ 無法讀取用戶輸入，請使用 -p 參數指定安裝路徑")
+            print("\n✗ 無法讀取用戶輸入，請使用 -p 和 -v 參數指定安裝路徑和版本")
             sys.exit(1)
+    else:
+        # 獲取安裝路徑
+        install_path = Path(os.path.expanduser(args.path))
     
     # 創建安裝器
     installer = SunnycoreInstaller(repo=args.repo, branch=args.branch, max_workers=args.max_workers)
@@ -467,6 +594,9 @@ def main():
     try:
         if args.version == 'claude-code':
             success = installer.install_claude_code(install_path, auto_yes=args.yes)
+            sys.exit(0 if success else 1)
+        elif args.version == 'cursor':
+            success = installer.install_cursor(install_path, auto_yes=args.yes)
             sys.exit(0 if success else 1)
         else:
             print(f"✗ 不支援的版本: {args.version}")

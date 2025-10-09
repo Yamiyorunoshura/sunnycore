@@ -1,0 +1,36 @@
+---
+# Requirements Document Template
+# 需求文檔模板
+
+title: ""
+version: ""
+created_date: ""
+last_updated: ""
+status: ""
+---
+
+project-overview:
+  name: ""
+  description: ""
+  type: ""
+
+functional-requirements: []
+
+non-functional-requirements: []
+
+constraints:
+  technical: []
+  business: []
+  regulatory: []
+
+assumptions-and-risks:
+  assumptions: []
+  risks: []
+
+user-stories: []
+
+glossary: []
+
+appendix:
+  references: []
+  change_log: []

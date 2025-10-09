@@ -7,6 +7,30 @@
 
 ## [Unreleased]
 
+## [3.3.0] - sunnycore v3.3.0
+
+### Added
+- 新增 Cursor 編輯器支援：完整移植 Claude Code 版本至 Cursor 平台
+  - 新增 `cursor/` 目錄結構：包含所有 Cursor 專用配置與文檔
+    * `cursor/commands/`：6 個角色命令文件（sunnycore_architect、sunnycore_assistant、sunnycore_dev、sunnycore_pm、sunnycore_po、sunnycore_qa）
+    * `cursor/tasks/`：33 個任務文件（涵蓋完整開發工作流程）
+    * `cursor/templates/`：9 個 YAML 模板（架構、需求、PRD、任務、計劃、審查、開發筆記、驗收、完成報告）
+    * `cursor/scripts/`：2 個文檔拆分腳本（shard-architecture.py、shard-requirements.py）
+    * 配置文件：cursor.mdc、index.json、mcp.json、DEPENDENCIES.md、README.md
+  - 新增 Cursor 版本的完整工作流程文檔：
+    * 技術支援流程（sunnycore_assistant）
+    * PRD 流程（適用於小型變更）
+    * Greenfield 專案流程（從零開始）
+    * Brownfield 專案流程（現有專案改進）
+  - 支援 MCP 伺服器整合：context7、sequential-thinking、playwright
+
+### Changed
+- 增強安裝腳本功能：改進 `scripts/install.py` 用戶體驗
+  - 優化進度條顯示：新增旋轉動畫符號、漸變效果、緊湊格式輸出
+  - 改進時間顯示：優化速度計算、剩餘時間預估、完成狀態提示
+  - 新增 `install_cursor()` 方法：支援 Cursor 版本安裝
+  - 控制更新頻率：避免過度刷新，提升終端顯示穩定性
+
 ## [3.2.11] - sunnycore v3.2.11
 
 ### Changed

@@ -1,0 +1,59 @@
+---
+# Architecture Document Template
+# 架構文檔模板
+
+title: ""
+version: ""
+last_updated: ""
+status: ""
+---
+
+executive-summary: ""
+
+work-directory-structure: ""
+
+technical-stack:
+  frontend: ""
+  backend: ""
+  database: ""
+  infrastructure: ""
+  external-services: []
+  development-tools: []
+
+system-architecture:
+  components: []
+  data-flow: ""
+  integration-points: ""
+
+api-documentation:
+  internal-apis: []
+  external-apis: []
+  api-standards: {}
+
+requirements-traceability: []
+
+architecture-decisions: []
+
+cross-cutting-concerns:
+  security: {}
+  performance: {}
+  reliability: {}
+  observability: {}
+
+deployment:
+  environments: []
+  infrastructure: ""
+  ci-cd: ""
+  scaling-strategy: ""
+
+quality-attributes:
+  strengths: []
+  limitations: []
+  technical-debt: []
+
+architecture-diagram: ""
+
+source-references:
+  requirements: []
+  code: []
+  documentation: []
