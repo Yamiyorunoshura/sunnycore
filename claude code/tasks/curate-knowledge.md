@@ -32,21 +32,21 @@
     - When to use: When validating best practices against official documentation
 
 ## [Steps]
-  1. Preparation Phase
-    - Identify all platinum-level best practices and development errors
-    - Establish progress tracking mechanism for knowledge curation tasks
+  1. Preparation
+  - Task: Identify all platinum-level best practices and development errors
+  - Expected outcome: Progress tracking established for knowledge curation
 
-  2. Knowledge Base Design Phase
-    - Achieve well-structured knowledge base organization scheme
-    - Ensure proper semantic classification for best practices and errors
+  2. Knowledge Base Design
+  - Task: Design knowledge base organization and semantic classification
+  - Expected outcome: Well-structured organization scheme with proper semantic classification
 
-  3. Document Production Phase
-    - Achieve complete knowledge base documents under "{KNOWLEDGE}/"
-    - Ensure all knowledge points have proper evidence sources and annotations
-    - Ensure proper classification with semantic naming conventions
+  3. Document Production
+  - Task: Generate knowledge base documents under "{KNOWLEDGE}/"
+  - Expected outcome: Complete documents with proper evidence sources and semantic naming
 
-  4. Finalization Phase
-    - Ensure review and development notes are archived to "{ARCHIVE}/{version_name}/"
+  4. Finalization
+  - Task: Archive review and development notes
+  - Expected outcome: Documents archived to "{ARCHIVE}/{version_name}/"
 
 ## [Knowledge-Curation-Guidelines]
   1. **Platinum-Level Practices Only**
@@ -70,13 +70,9 @@
     - Support context-based decision-making with complete information
 
 ## [DoD]
-  - [ ] All files in "{REVIEW}/", "{DEVNOTES}/", "{CUTOVER}", "{root}/docs/cutover-dev-notes.md", and "{PROGRESS}" are fully analyzed
-  - [ ] Knowledge base structure and semantic classification method are designed
-  - [ ] Knowledge base directory "{KNOWLEDGE}/" exists with organized content
-  - [ ] All platinum-level best practices are identified and documented by semantic classification
-  - [ ] All development errors are identified and recorded with type, context, and solution
-  - [ ] Each knowledge point has clear evidence source annotation (format: file_path [Section Name])
-  - [ ] Review and development notes are archived to "{ARCHIVE}/{version_name}/"
+  - [ ] Knowledge base exists at "{KNOWLEDGE}/" with platinum-level best practices and errors documented
+  - [ ] All knowledge points have evidence source annotations (format: file_path [Section Name])
+  - [ ] Review and development notes archived to "{ARCHIVE}/{version_name}/"
 
 ## [Example]
 

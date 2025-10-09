@@ -26,23 +26,21 @@
     - When to use: After extracting tech stack from {ARCH}/*.md, query official installation and configuration docs for corresponding versions
 
 ## [Steps]
-  1. Preparation Phase
-    - Understand the project's technology stack, environment requirements, and goals
-    - Establish progress tracking mechanism for initialization tasks
+  1. Preparation
+  - Task: Understand project's technology stack, environment requirements, and goals
+  - Expected outcome: Progress tracking mechanism established for initialization tasks
 
-  2. Environment Setup Phase
-    - Achieve fully configured and operational development environment
-    - Ensure all dependencies are installed and verified
-    - Achieve indexed codebase for efficient searching
+  2. Environment Setup
+  - Task: Configure development environment and dependencies
+  - Expected outcome: Fully operational environment with indexed codebase for efficient searching
 
-  3. Document Generation Phase
-    - Achieve complete project guidance document at "{root}/CLAUDE.md"
-    - Ensure all required sections are included with accurate information
-    - Ensure clear document index for easy navigation
+  3. Document Generation
+  - Task: Generate project guidance document at "{root}/CLAUDE.md"
+  - Expected outcome: Complete CLAUDE.md with all required sections and clear document index
 
-  4. Verification Phase
-    - Ensure development environment is successfully initialized and usable
-    - Ensure "{root}/CLAUDE.md" contains complete and accurate information
+  4. Verification
+  - Task: Verify development environment and documentation
+  - Expected outcome: Environment successfully initialized and CLAUDE.md contains complete information
 
 ## [Initialization-Guidelines]
   1. **Extract from Architecture**
@@ -60,10 +58,9 @@
     - Enable efficient searching during development phases
 
 ## [DoD]
-  - [ ] All architecture, requirement, and task documents are fully understood
-  - [ ] Development environment is fully initialized and operational (all necessary tools are installed, configured, and verified working)
-  - [ ] Codebase index is built and ready for semantic search
-  - [ ] Complete project guidance document exists at "{root}/CLAUDE.md" with all required sections (technology stack, development standards, requirement overview, project goals, document index)
+  - [ ] Development environment fully initialized and operational with all tools installed and verified
+  - [ ] Codebase indexed and ready for semantic search (if Brownfield)
+  - [ ] Complete CLAUDE.md exists with all required sections (tech stack, standards, requirements overview, document index)
 
 ## [Example]
 

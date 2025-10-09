@@ -29,30 +29,25 @@
     - [Step 2: Verify impact of fixes on existing code]
 
 ## [Steps]
-  1. Analysis Phase
-    - Understand all issues from validation report
-    - Ensure issues are properly extracted, grouped, and prioritized
-    - Establish progress tracking mechanism for fixes
+  1. Analysis
+  - Task: Understand all issues from validation report
+  - Expected outcome: Issues extracted, grouped, and prioritized
 
-  2. Fix Planning Phase
-    - Achieve comprehensive fix plans for all issues
-    - Ensure user confirmation is obtained for each fix strategy
-    - Ensure proper handling of user feedback and revisions
+  2. Fix Planning
+  - Task: Create comprehensive fix plans for all issues
+  - Expected outcome: Fix plans approved by user for each issue
 
-  3. Fix Execution Phase
-    - Achieve resolution of all approved fixes in priority order
-    - Ensure cross-document consistency is maintained
-    - Ensure fix completeness is verified for each issue
+  3. Fix Execution
+  - Task: Resolve all approved fixes in priority order
+  - Expected outcome: All fixes applied with cross-document consistency maintained
 
-  4. Validation Phase
-    - Ensure all changes are reviewed and validated
-    - Ensure no new conflicts or issues are introduced
-    - Ensure user confirmation is obtained for all fixes
+  4. Validation
+  - Task: Review and validate all changes
+  - Expected outcome: All changes validated with no new conflicts introduced
 
-  5. Cleanup Phase
-    - Ensure validation report is deleted after successful fixes
-    - Ensure user is guided to re-run validation for confirmation
-    - Ensure comprehensive summary of changes is provided
+  5. Cleanup
+  - Task: Delete validation report and provide summary
+  - Expected outcome: Validation report deleted, user guided to re-run validation for confirmation
 
 ## [Fix-Strategies]
 
@@ -115,15 +110,9 @@
     - Ensure no new conflicts introduced during fix process
 
 ## [DoD]
-  - [ ] Design validation report is fully understood with all issues extracted and categorized
-  - [ ] Fix strategies are proposed for all issues with clear approach
-  - [ ] All fix strategies are approved by user
-  - [ ] All approved fixes are successfully applied to affected documents
-  - [ ] Cross-document consistency is verified with no conflicts remaining
-  - [ ] No new issues are introduced during fix process
-  - [ ] All changes are confirmed by user
-  - [ ] Validation report "{root}/docs/design-validation.md" is deleted
-  - [ ] User is advised to re-run validate-design for confirmation of fixes
+  - [ ] All approved fixes successfully applied with cross-document consistency verified
+  - [ ] No new issues introduced and all changes confirmed by user
+  - [ ] Validation report "{root}/docs/design-validation.md" deleted
 
 ## [Example]
 

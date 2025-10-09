@@ -30,26 +30,25 @@
     - Query examples: "How is similar functionality implemented?" "What are the related modules?"
 
 ## [Steps]
-  1. Initialization Phase
-    - Understand the expected workflow and requirements gathering scope
-    - Establish progress tracking mechanism for requirement extraction tasks
+  1. Initialization
+  - Task: Understand workflow and requirements gathering scope
+  - Expected outcome: Progress tracking mechanism established
 
-  2. Functional Requirements Phase
-    - Achieve complete, deduplicated, and atomized functional requirements
-    - Ensure requirements are organized by user stories or system capabilities
+  2. Functional Requirements
+  - Task: Extract and organize functional requirements
+  - Expected outcome: Complete, deduplicated, atomic functional requirements organized by user stories
 
-  3. Non-Functional Requirements Phase
-    - Achieve quantified non-functional requirements across all quality attributes
-    - Ensure requirements have clear targets and measurable constraints
+  3. Non-Functional Requirements
+  - Task: Define quantified non-functional requirements
+  - Expected outcome: Measurable requirements across all quality attributes with clear targets
 
-  4. Acceptance Criteria Phase
-    - Achieve deterministic and testable acceptance criteria for all requirements
-    - Ensure all criteria use Given-When-Then structure with binary outcomes
+  4. Acceptance Criteria
+  - Task: Create testable acceptance criteria for all requirements
+  - Expected outcome: All requirements have Given-When-Then acceptance criteria with binary outcomes
 
-  5. Finalization Phase
-    - Ensure consistency across all requirement types
-    - Ensure user approval is obtained with proper feedback integration
-    - Achieve successful requirement sharding by running the "shard-requirements.py" script with verified output under "{REQ}/"
+  5. Finalization
+  - Task: Obtain user approval and shard requirements
+  - Expected outcome: Requirements approved and successfully sharded to "{REQ}/" using shard-requirements.py
 
 ## [Requirements-Analysis-Guidelines]
   1. **Verifiability First**
@@ -69,11 +68,9 @@
     - Identify preconditions and impact scope for each requirement
 
 ## [DoD]
-  - [ ] Complete set of functional requirements exists, with all requirements being atomic, unique, and measurable
-  - [ ] All non-functional requirements are identified with specific quantified metrics (including performance, security, reliability, etc.)
-  - [ ] All requirements have clear acceptance criteria in Given-When-Then format
-  - [ ] Requirements are successfully sharded into "{REQ}/*.md" files, or errors are logged to "{root}/logs/errors.log" and user is notified
-  - [ ] Final requirement set is approved by user
+  - [ ] Complete functional and non-functional requirements with quantified metrics and Given-When-Then acceptance criteria
+  - [ ] Requirements successfully sharded to "{REQ}/*.md" files using shard-requirements.py
+  - [ ] Final requirement set approved by user
 
 ## [Example]
 
