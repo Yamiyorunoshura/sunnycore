@@ -70,13 +70,11 @@
     - Identify preconditions and impact scope for each requirement
 
 ## [DoD]
-  - [ ] Functional requirements have been extracted, deduplicated, and atomized
-  - [ ] Non-functional requirements have been identified and quantified (including performance, security, reliability, etc.)
-  - [ ] Each requirement has corresponding acceptance criteria (using Given-When-Then structure)
-  - [ ] Content is in English and uses numbered lists
-  - [ ] Each requirement is measurable and verifiable
-  - [ ] "shard-requirements.py" has been executed or errors have been logged to "{root}/logs/errors.log" and user has been notified
-  - [ ] User confirmation of the final requirement set has been obtained
+  - [ ] Complete set of functional requirements exists, with all requirements being atomic, unique, and measurable
+  - [ ] All non-functional requirements are identified with specific quantified metrics (including performance, security, reliability, etc.)
+  - [ ] All requirements have clear acceptance criteria in Given-When-Then format
+  - [ ] Requirements are successfully sharded into "{REQ}/*.md" files, or errors are logged to "{root}/logs/errors.log" and user is notified
+  - [ ] Final requirement set is approved by user
 
 ## [Example]
 

@@ -3,4 +3,4 @@
     - Ensure available custom commands are displayed to user
 
 ## [DoD]
-  - [ ] Available custom command list has been displayed
+  - [ ] Complete list of available custom commands is displayed to user with clear descriptions

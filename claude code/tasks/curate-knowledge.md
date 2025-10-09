@@ -71,12 +71,13 @@
     - Support context-based decision-making with complete information
 
 ## [DoD]
-  - [ ] All files in "{REVIEW}/" and "{DEVNOTES}/" have been read
-  - [ ] Knowledge base structure and classification method have been conceived
-  - [ ] Knowledge base directory "{KNOWLEDGE}/" has been created
-  - [ ] All platinum-level best practices have been identified and produced by classification
-  - [ ] All errors during development process have been identified and recorded (including type, context, solution)
-  - [ ] Each knowledge point has clear evidence source annotation
+  - [ ] All files in "{REVIEW}/", "{DEVNOTES}/", "{CUTOVER}", "{root}/docs/cutover-dev-notes.md", and "{PROGRESS}" are fully analyzed
+  - [ ] Knowledge base structure and semantic classification method are designed
+  - [ ] Knowledge base directory "{KNOWLEDGE}/" exists with organized content
+  - [ ] All platinum-level best practices are identified and documented by semantic classification
+  - [ ] All development errors are identified and recorded with type, context, and solution
+  - [ ] Each knowledge point has clear evidence source annotation (format: file_path [Section Name])
+  - [ ] Review and development notes are archived to "{ARCHIVE}/{version_name}/"
 
 ## [Example]
 

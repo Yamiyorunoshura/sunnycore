@@ -61,10 +61,10 @@
     - Enable efficient searching during development phases
 
 ## [DoD]
-  - [ ] All architecture, requirement, and task documents have been read
-  - [ ] Development environment has been initialized and is usable (all necessary tools are installed and configured correctly)
-  - [ ] Codebase index has been built
-  - [ ] "{root}/CLAUDE.md" has been created and includes all required sections
+  - [ ] All architecture, requirement, and task documents are fully understood
+  - [ ] Development environment is fully initialized and operational (all necessary tools are installed, configured, and verified working)
+  - [ ] Codebase index is built and ready for semantic search
+  - [ ] Complete project guidance document exists at "{root}/CLAUDE.md" with all required sections (technology stack, development standards, requirement overview, project goals, document index)
 
 ## [Example]
 

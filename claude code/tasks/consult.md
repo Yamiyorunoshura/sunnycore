@@ -84,12 +84,12 @@
     - PRD workflow: within existing boundaries, 1-5 tasks, no new patterns
 
 ## [DoD]
-  - [ ] Project type (Greenfield/Brownfield) has been determined
-  - [ ] If Brownfield, existing architecture documents have been reviewed
-  - [ ] Requirement scope and impact have been analyzed
-  - [ ] Clear workflow recommendation has been provided
-  - [ ] Next step command has been specified
-  - [ ] User understands which workflow to use and why
+  - [ ] Project type (Greenfield/Brownfield) is correctly determined
+  - [ ] For Brownfield projects, existing architecture documents are fully understood
+  - [ ] Requirement scope and impact are comprehensively analyzed
+  - [ ] Clear workflow recommendation is provided with specific command
+  - [ ] Next step command is specified (either *create-requirements or *create-prd)
+  - [ ] User understands which workflow to use and the rationale behind the recommendation
 
 ## [Example]
 

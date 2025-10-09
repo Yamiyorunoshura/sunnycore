@@ -78,14 +78,14 @@
     - Annotate source references (source_refs) for all architecture statements
 
 ## [DoD]
-  - [ ] "{REQ}" and "{ARCH}/*.md" have been thoroughly reviewed
-  - [ ] Extension points, constraints, and affected domains have been identified
-  - [ ] New module has documented boundaries, interfaces, and data flows
+  - [ ] All requirements from "{REQ}" and existing architecture from "{ARCH}/*.md" are fully understood
+  - [ ] Extension points, constraints, and affected domains are clearly identified and documented
+  - [ ] New module design is complete with documented boundaries, interfaces, and data flows
   - [ ] All proposed changes include explicit "Impact Analysis" subsections
-  - [ ] Compatibility with existing contracts has been clarified (no breaking changes)
-  - [ ] User approval has been obtained for architecture draft
-  - [ ] "{root}/docs/architecture.md" exists and follows the template
-  - [ ] "shard-architecture.py" has been executed and shard file generation has been verified
+  - [ ] Compatibility with existing contracts is verified (no breaking changes or migration path provided)
+  - [ ] Architecture draft is approved by user
+  - [ ] Complete architecture document exists at "{root}/docs/architecture.md" following template structure
+  - [ ] Architecture is successfully sharded with verified output files in "{ARCH}/"
 
 ## [Example]
 

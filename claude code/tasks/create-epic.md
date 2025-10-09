@@ -62,13 +62,13 @@
     - Atomic breakdown will happen later in create-plan phase using TDD cycles
 
 ## [DoD]
-  - [ ] All requirement and architecture documents have been read
-  - [ ] Research notes are complete, including mapping of functional requirements/non-functional requirements to tasks
-  - [ ] User approval has been obtained for task list draft
-  - [ ] File "{EPIC}" exists and is valid Markdown
-  - [ ] All tasks comply with template fields
-  - [ ] Each task is feature-level, outcome-oriented, and verifiable
-  - [ ] No file names or key names use spaces; kebab-case is enforced
+  - [ ] All requirement and architecture documents are fully understood
+  - [ ] Complete research notes exist, including comprehensive mapping of functional/non-functional requirements to tasks
+  - [ ] Task list draft is approved by user
+  - [ ] Epic file exists at "{EPIC}" in valid Markdown format
+  - [ ] All tasks conform to template fields with proper structure
+  - [ ] Each task is feature-level, outcome-oriented, and has clear verification criteria
+  - [ ] All file names and key names use kebab-case (no spaces)
 
 ## [Example]
 

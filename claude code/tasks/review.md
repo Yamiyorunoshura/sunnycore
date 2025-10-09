@@ -69,16 +69,16 @@
   - **Risk**: Low (all ≥2.5), Medium (1-2 between 2.0-2.4), High (any <2.0 or security issues)
 
 ## [DoD]
-  - [ ] Task domain has been identified and corresponding domain-specific review criteria have been applied
-  - [ ] Scoring has been performed according to domain-specific scoring dimensions
-  - [ ] All tests have been executed and results recorded
-  - [ ] Integration tests have been executed to confirm implementation does not affect existing code and results recorded
-  - [ ] Test results have been verified to align with the plan
-  - [ ] Code alignment analysis is complete, including specific references to deviations from the plan
-  - [ ] All necessary sections are present: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
-  - [ ] "{EPIC}" has been updated with completion status and score
-  - [ ] Test failures and plan misalignments have been clearly identified and prioritized
-  - [ ] Acceptance decision has been recorded with rationale based on test results and plan adherence
+  - [ ] Task domain is correctly identified with appropriate domain-specific review criteria applied
+  - [ ] Scoring is complete according to domain-specific scoring dimensions
+  - [ ] All tests are executed with results properly recorded
+  - [ ] Integration tests are executed confirming implementation does not affect existing code, with results recorded
+  - [ ] Test results are verified to align with implementation plan
+  - [ ] Code alignment analysis is complete with specific references to any deviations from the plan
+  - [ ] Complete review report exists at "{REVIEW}/{task_id}-review.md" with all required sections: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
+  - [ ] "{EPIC}" is updated with task completion status and score
+  - [ ] All test failures and plan misalignments are clearly identified and prioritized
+  - [ ] Acceptance decision (Accept/Accept with changes/Reject) is recorded with clear rationale based on test results and plan adherence
 
 ## [Example]
 

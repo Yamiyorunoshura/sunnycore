@@ -76,16 +76,16 @@
     - Assess production deployment readiness and risk
 
 ## [DoD]
-  - [ ] All required input files have been read
-  - [ ] Project type and configuration needs have been identified
-  - [ ] Environment setup has been attempted and documented
-  - [ ] Project execution has been attempted and results documented
-  - [ ] All critical business requirements have been tested
-  - [ ] Cutover report has been generated and complies with template structure
-  - [ ] Cutover status (Success/Partial Success/Failed) has been determined
-  - [ ] All configuration requirements have been documented
-  - [ ] All test results have been recorded with evidence
-  - [ ] All issues have been documented with severity and reproduction steps
+  - [ ] Project context is fully understood from all requirement and architecture documents
+  - [ ] Project type and all configuration requirements are clearly identified and documented
+  - [ ] Environment setup is complete with all steps and any failures documented
+  - [ ] Project execution is complete with results properly documented
+  - [ ] All critical business requirements are tested from end-user perspective with results recorded
+  - [ ] Complete cutover report exists at "{CUTOVER}" following template structure
+  - [ ] Cutover status (Success/Partial Success/Failed) is determined with clear rationale
+  - [ ] All configuration requirements are documented with specific details
+  - [ ] All test results are recorded with supporting evidence
+  - [ ] All issues are documented with severity classification and clear reproduction steps
 
 ## [Example]
 
