@@ -6,7 +6,7 @@
 
 ## [Output]
   1. "{root}/docs/prd-dev-notes.md" --Complete development notes document
-  2. High-quality, tested code implementation for all PRD tasks
+  2. High-quality, tested, refactored code implementation for all PRD tasks highly allign with the architecture design stated
   3. Complete test coverage and test cases
 
 ## [Constraints]
