@@ -15,12 +15,10 @@
   3. "{root}/CLAUDE.md" --Updated project guidance document with refreshed document index
 
 ## [Constraints]
-  1. Must base updates on actual implementation state from codebase, development notes, and review reports
-  2. Every produced document must correspond to at least 1 source reference (source_refs)
-  3. Can include architecture diagrams in Markdown documents as fenced code blocks
-  4. All sharded file paths must be under "{ARCH}/" with .md extension
-  5. Must update the Document Index section in "{root}/CLAUDE.md" after sharding architecture documents
-  6. The integrated architecture.md must follow the universal architecture template structure
+  1. Do not base updates on original design (must use actual implementation state)
+  2. Do not produce content without source references (source_refs)
+  3. Do not skip deleting old architecture documents before sharding
+  4. Do not skip updating CLAUDE.md Document Index after sharding
 
 ## [Tools]
   1. **todo_write**

@@ -13,9 +13,9 @@
   3. Updated development notes "{DEVNOTES}/{task_id}-dev-notes.md"
 
 ## [Constraints]
-  1. Must ensure fixed code runs properly
-  2. Must ensure fixed code complies with architecture design
-  3. Must ensure fixed code does not break existing functionality
+  1. Do not deliver fixes that fail to run properly
+  2. Do not deviate from architecture design specifications
+  3. Do not break existing functionality during fixes
 
 ## [Tools]
   1. **todo_write**

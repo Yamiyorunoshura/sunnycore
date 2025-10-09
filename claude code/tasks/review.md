@@ -10,11 +10,10 @@
   2. "{EPIC}"
 
 ## [Constraints]
-  1. Must execute all tests created during the develop-plan phase and verify test results align with the implementation plan. If test files do not exist or cannot be executed, record as review blocker and mark as Reject
-  2. Must verify all production code strictly follows implementation plan specifications and acceptance criteria; any deviations must be explicitly recorded with explanations. "Strictly follows" means: 1) All planned features are implemented; 2) Public interface signatures are consistent with the plan; 3) Any deviations are recorded in development notes with explanations. Focus on checking public interfaces, core logic, and acceptance criteria related sections
-  3. Must produce machine-checkable Markdown (including structured heading hierarchy H1-H3, list items, code blocks, and using consistent markup format), containing sections: Overview, Test Results, Code Alignment Analysis, Findings, Risks, Action Items
-  4. Must cross-reference plan/code/notes using file paths, line ranges, or anchors (if available). Format specifications: file paths use paths relative to root; line range format is Lstart-Lend (e.g., L10-L20); anchor format is #anchor-id
-  5. Must record acceptance decision and rationale: Accept / Accept with changes / Reject
+  1. Do not skip test execution (if tests missing or fail to run, mark as Reject)
+  2. Do not omit acceptance decision (Accept/Accept with changes/Reject)
+  3. Do not produce review report that deviates from template structure
+  4. Do not update epic with incorrect status or score
 
 ## [Tools]
   1. **sequential-thinking (MCP)** - Structured reasoning tool for complex logic analysis

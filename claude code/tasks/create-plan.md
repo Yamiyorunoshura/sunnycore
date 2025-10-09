@@ -14,15 +14,10 @@
     - Example: "{PLAN}/1-plan.md", "{PLAN}/2-plan.md", "{PLAN}/3-plan.md", etc.
 
 ## [Constraints]
-  1. Must strictly extract tasks from provided documents; do not fabricate requirements
-  2. Must map each plan item to requirement ID and architecture section
-  3. Must use Markdown format (ATX headings and numbered lists)
-  4. Must produce exactly one file at the specified output path
-  5. The produced implementation plan must ensure logical coherence of TDD three phases (refer to [Development-Guidelines] section for TDD methodology)
-  6. If requirement-architecture conflicts, unclear requirements, or missing necessary files are found, must record issues and request user clarification, do not make assumptions or skip
-  7. Must break down feature-level tasks (from epic.md) into atomic, executable steps within each TDD phase
-  8. Each atomic step in GREEN phase should be minimal and directly traceable to a specific acceptance criterion in RED phase
-  9. Must leverage knowledge base to apply best practices and avoid repeated mistakes when planning implementation steps
+  1. Do not fabricate requirements or tasks not in source documents
+  2. Do not create plans without complete requirement-architecture mapping
+  3. Do not proceed if conflicts or missing files are found (must record and request clarification)
+  4. Do not ignore knowledge base best practices when planning
 
 ## [Tools]
   1. **todo_write**

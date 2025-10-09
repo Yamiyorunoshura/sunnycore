@@ -12,12 +12,10 @@
   2. "{ARCH}/*.md" --Updated architecture document collection (*.md format)
 
 ## [Constraints]
-  1. Must thoroughly review "{REQ}" and "{ARCH}/*.md" before proposing design (evidence: reference reviewed content in architecture draft using `Reference: {file path}#{section heading}` format)
-  2. Must preserve existing contracts; any proposed changes must include explicit "Impact Analysis" subsection
-  3. Must fully comply with "{TMPL}/architecture-tmpl.yaml" structure and section order
-  4. Must draft to "{root}/docs/architecture.md", then execute: uv run "{SCRIPTS}/shard-architecture.py" to perform sharding
-  5. Should use clear, concise English with 2-space indentation throughout
-  6. Architecture design required external API call must use context7 (MCP) to search for library documentation and API references
+  1. Do not propose design without reviewing existing requirements and architecture
+  2. Do not break existing contracts (any changes must include explicit Impact Analysis)
+  3. Do not deviate from template structure
+  4. Do not skip executing shard-architecture.py
 
 ## [Tools]
   1. **todo_write**

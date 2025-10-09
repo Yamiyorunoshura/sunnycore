@@ -10,12 +10,10 @@
   1. "{PRD}" --Complete Product Requirements Document
 
 ## [Constraints]
-  1. Must determine project type (Greenfield/Brownfield) by checking "{ARCH}/" directory existence
-  2. Each requirement must be verifiable and measurable; vague or subjective wording is not allowed
-  3. Tasks must be feature-level, verifiable (clear functional scope and outcomes)
-  4. Must exclude operational actions (e.g., git commit, npm install, deployment script execution) unless explicitly requested by the user
-  5. Must ensure all file names/paths do not use spaces; prefer kebab-case
-  6. If Brownfield, must preserve existing contracts (i.e., public API interfaces, data models, event formats, and other externally visible contracts) and provide impact analysis for changes
+  1. Do not misidentify project type (Greenfield/Brownfield)
+  2. Do not create vague or unmeasurable requirements
+  3. Do not include operational actions unless explicitly requested
+  4. Do not break existing contracts for Brownfield projects (must provide impact analysis for changes)
 
 ## [Tools]
   1. **todo_write**

@@ -11,11 +11,10 @@
   3. Complete test coverage and test cases allign with the implementation plans
 
 ## [Constraints]
-  1. Must comply with acceptance criteria and architecture mapping defined in the implementation plan
-  2. **Must use TDD methodology for development**: Follow the TDD practice guidelines detailed in [Development-Guidelines] section
-  3. Development notes must preserve the indentation and numbering style used in the template
-  4. Allowed to modify modules specified in the implementation plan and their test files, as well as necessary configuration files; if modification of files outside the plan is needed (referring to files not explicitly listed for modification in the implementation plan, including but not limited to: shared utility classes, configuration files, dependency injection settings, etc.), must record in development notes and explain the reason
-  5. Development notes must include: implementation summary, technical decisions, risk considerations, test results, and other complete sections (refer to template)
+  1. Do not deviate from implementation plan's acceptance criteria and architecture mapping
+  2. Do not skip TDD cycle (RED → GREEN → REFACTOR)
+  3. Do not modify files outside plan scope without recording rationale in dev notes
+  4. Do not deliver with failing tests (exit code must be 0)
 
 ## [Tools]
   1. **sequential-thinking (MCP)**

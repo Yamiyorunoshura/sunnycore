@@ -13,13 +13,9 @@
   1. "{root}/docs/design-validation.md" --Comprehensive validation report
 
 ## [Constraints]
-  1. Must support two workflows: "prd" and "full"
-  2. Must perform bidirectional validation (forward and backward references)
-  3. Must detect fabricated content (references to non-existent requirements, components, or files)
-  4. Must identify conflicts and inconsistencies across documents
-  5. Must calculate coverage metrics for completeness analysis
-  6. Must categorize issues by severity: Critical, High, Medium, Low
-  7. Must provide actionable recommendations for each issue
+  1. Do not process workflow parameters other than "prd" or "full"
+  2. Do not skip any validation check type (fabrication, conflicts, coverage, consistency)
+  3. Do not produce validation report without severity categorization
 
 ## [Tools]
   1. **todo_write**

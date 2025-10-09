@@ -8,10 +8,10 @@
   1. Simple workflow recommendation (which command to use)
 
 ## [Constraints]
-  1. Must check "{ARCH}/" directory existence to determine project type
-  2. If Brownfield, must read and analyze existing architecture documents
-  3. Output must be concise and actionable (recommend specific command only)
-  4. Must not provide detailed analysis unless user explicitly requests it
+  1. Do not misidentify project type (Greenfield/Brownfield)
+  2. Do not skip existing architecture analysis for Brownfield projects
+  3. Do not provide verbose analysis unless explicitly requested
+  4. Do not recommend workflows that violate Decision-Criteria
 
 ## [Tools]
   1. **todo_write**

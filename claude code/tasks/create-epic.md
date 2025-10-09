@@ -9,12 +9,9 @@
   1. "{EPIC}" --Task list (Markdown format)
 
 ## [Constraints]
-  1. Must create feature-level tasks representing major features within modules (e.g., "Implement login functionality", "Implement registration functionality")
-  2. Tasks should be verifiable at the feature level with clear functional scope and outcomes
-  3. Must exclude operational actions unless explicitly requested by the user
-    - Operational actions refer to execution-level commands such as git commit, npm install, etc., but design, implementation, testing and other development tasks do not fall into this category
-  4. Must ensure all file names/paths do not use spaces; prefer kebab-case
-  5. Note: Atomic breakdown of tasks will be handled later in the create-plan phase using TDD RED/GREEN/REFACTOR cycles
+  1. Do not create tasks below feature-level granularity
+  2. Do not include operational actions unless explicitly requested
+  3. Do not use spaces in file names/paths (use kebab-case)
 
 ## [Tools]
   1. **todo_write**
@@ -122,7 +119,7 @@
 - 100% requirement coverage across tasks
 - Each task description ≤14 characters, clear and actionable
 
-Epic format with checkboxes:
+Format of tasks in the epic with checkboxes:
 
 - [ ] Task-{task_id}
   - {description of the task}

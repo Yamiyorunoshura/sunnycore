@@ -13,11 +13,10 @@
     - Document organization: May produce "best-practices.md", "errors.md" based on actual content, or subdivide by domain/type
     - Content allocation: One entry per platinum practice, one entry per error case
 
-## [Rules]
-  1. Must identify all practices and errors during development, but only define platinum-level practices as best practices and produce them
-  2. Platinum level will be marked in review reports, only need to read marks without making own judgment
-  3. If no platinum-level practices are found, should record "No sufficiently validated best practices in this phase" in the knowledge base and explain the reason
-  4. If contradictory practice recommendations are found, should annotate conflicts and preserve all evidence sources for subsequent decision-making
+## [Constraints]
+  1. Do not include non-platinum practices as best practices (only use marked platinum from reviews)
+  2. Do not make independent judgments on practice levels (trust review markings)
+  3. Do not force resolution of conflicting practices (preserve all evidence for context-based decisions)
 
 ## [Tools]
   1. **sequential-thinking (MCP)**

@@ -10,12 +10,10 @@
   1. "{CUTOVER}" --Cutover report (Markdown format)
 
 ## [Constraints]
-  1. Must follow cutover report template structure
-  2. Must test project functionality from end-user perspective, not technical testing
-  3. If required configuration is missing or unclear, must document specific needs
-  4. If project fails to run, must record detailed error information and reproduction steps
-  5. Must verify all critical business requirements stated in requirement documents
-  6. If any required input files are missing, must generate a missing file list and halt execution
+  1. Do not perform technical testing (must test from end-user perspective)
+  2. Do not proceed if required input files are missing (must list and halt)
+  3. Do not skip testing any critical business requirements
+  4. Do not deviate from template structure
 
 ## [Tools]
   1. **todo_write**: Create and manage task list

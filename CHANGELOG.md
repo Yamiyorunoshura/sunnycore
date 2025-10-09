@@ -7,6 +7,30 @@
 
 ## [Unreleased]
 
+## [3.2.8] - sunnycore v3.2.8
+
+### Changed
+- 重構文檔指引系統：簡化 `CLAUDE.md` 核心指引，提升可讀性與記憶性
+  - 將詳細的 Constraints、Template-Usage-Guidelines、Summary-Instructions 等章節（約 88 行）簡化為 8 個簡潔的 GUIDANCE 段落
+  - 採用 HTML 註解格式（`<!-- ... -->`）包裹指引內容，保持結構清晰
+  - GUIDANCE 1：強調任務執行的完整性與流程遵循
+  - GUIDANCE 2：要求主動請求澄清而非猜測
+  - GUIDANCE 3：確保讀取所有必要輸入文件
+  - GUIDANCE 4：定義約束衝突處理優先級（CLAUDE.md > commands > tasks）
+  - GUIDANCE 5：強制完成所有 todo 項目並驗證 DoD
+  - GUIDANCE 6：簡化模板使用說明
+  - GUIDANCE 7：簡化 YAML 轉 Markdown 規則說明
+  - GUIDANCE 8：精簡對話壓縮指引
+  - 減少約 80% 的指引文字量，提升閱讀效率
+- 優化任務約束表達方式：在 24 個任務文件中將約束從正面指令改為負面禁止，提升規範清晰度
+  - 表達方式轉換：「Must do X」→「Do not fail to do X」或「Do not do Y」
+  - 涵蓋任務：brownfield-tasks、conclude、consult、create-architecture、create-brownfield-architecture、create-epic、create-plan、create-prd、create-requirements、curate-knowledge、cutover、develop-plan、develop-prd、document-project、fix-acceptance-issues、fix-design-conflicts、init、review、validate-design
+  - 範例轉換：
+    * 「Must ensure fixed code runs properly」→「Do not deliver fixes that fail to run properly」
+    * 「Must verify all requirements」→「Do not skip requirement verification」
+  - 提升約束的明確性與違規行為的識別度
+- 精簡命令文檔格式：移除 `sunnycore_architect.md`、`sunnycore_assistant.md`、`sunnycore_po.md` 中的多餘空白行，提升文檔簡潔度
+
 ## [3.2.7] - sunnycore v3.2.7
 
 ### Changed
