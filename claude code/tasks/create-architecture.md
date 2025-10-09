@@ -80,13 +80,13 @@
     - Use clear terminology consistently throughout documentation
 
 ## [DoD]
-  - [ ] Verified that "{REQ}/*.md" exists and is complete
-  - [ ] Created requirement-to-architecture mapping matrix (requirement ID → component/decision), complete and accurate (100% coverage, no omissions or incorrect mappings)
-  - [ ] All functional requirements have been mapped to specific architecture components
-  - [ ] Non-functional requirements have been converted to measurable architecture constraints
-  - [ ] User approval has been obtained for architecture draft
-  - [ ] "{root}/docs/architecture.md" exists and follows the template
-  - [ ] "shard-architecture.py" has been executed and shard file generation has been verified
+  - [ ] All requirements from "{REQ}/*.md" are fully understood and verified as complete
+  - [ ] Complete requirement-to-architecture mapping matrix exists with 100% coverage (requirement ID → component/decision), accurate with no omissions or incorrect mappings
+  - [ ] All functional requirements are mapped to specific architecture components
+  - [ ] All non-functional requirements are transformed into measurable architecture constraints
+  - [ ] Architecture draft is approved by user
+  - [ ] Complete architecture document exists at "{root}/docs/architecture.md" following template structure
+  - [ ] Architecture is successfully sharded with verified output files in "{ARCH}/"
 
 ## [Example]
 

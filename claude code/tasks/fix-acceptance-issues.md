@@ -84,15 +84,15 @@
     - Ensure no new issues or regressions introduced
 
 ## [DoD]
-  - [ ] Cutover report has been read and all issues identified
-  - [ ] Root cause analysis completed for all issues
-  - [ ] Fix strategy planned for each issue
-  - [ ] Tests written/updated to catch all issues (RED phase)
-  - [ ] All issues fixed and tests pass (GREEN phase)
-  - [ ] Code refactored and quality improved (REFACTOR phase)
-  - [ ] Full test suite passes with no regressions
-  - [ ] Acceptance tests re-run and all issues resolved
-  - [ ] Development notes generated with complete documentation
+  - [ ] All issues from cutover report are fully understood and prioritized
+  - [ ] Root cause analysis is complete for all issues with documented findings
+  - [ ] Fix strategy is defined for each issue with clear approach
+  - [ ] Tests are written/updated to reproduce all issues with confirmed RED status
+  - [ ] All issues are resolved with tests passing (GREEN phase complete)
+  - [ ] Code is refactored with improved quality while maintaining green tests (REFACTOR phase complete)
+  - [ ] Full test suite passes with no regressions introduced
+  - [ ] Acceptance tests are re-executed with all issues confirmed resolved
+  - [ ] Complete development notes document exists at "{root}/docs/cutover-fixes-dev-notes.md"
 
 ## [Example]
 

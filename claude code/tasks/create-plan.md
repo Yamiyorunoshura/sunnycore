@@ -87,15 +87,14 @@
     - Exclude operational actions (git, npm) unless explicitly requested
 
 ## [DoD]
-  - [ ] All requirement, architecture, and task documents have been read
-  - [ ] Epic has been parsed and all tasks identified
-  - [ ] For each task, a plan document has been created with TDD three-phase structure (RED/GREEN/REFACTOR sections)
-  - [ ] RED section: Each requirement has corresponding acceptance criteria and test conditions
-  - [ ] GREEN section: All implementation steps correspond to specific acceptance criteria and include architecture/file references
-  - [ ] REFACTOR section: Refactoring and optimization work has been planned, including cross-cutting concerns integration
-  - [ ] All plans follow TDD cycle structure: test-first (RED), minimal implementation (GREEN), refactoring optimization (REFACTOR)
-  - [ ] Output path and file naming follow specified pattern
-  - [ ] Implementation plan files have been created for all tasks (e.g., "{PLAN}/1-plan.md", "{PLAN}/2-plan.md", "{PLAN}/3-plan.md", etc.)
+  - [ ] All requirement, architecture, and task documents are fully understood
+  - [ ] All tasks from epic are identified and analyzed
+  - [ ] Implementation plan exists for each task with complete TDD three-phase structure (RED/GREEN/REFACTOR sections)
+  - [ ] RED section is complete: All requirements have corresponding acceptance criteria and test conditions
+  - [ ] GREEN section is complete: All implementation steps correspond to specific acceptance criteria with architecture/file references
+  - [ ] REFACTOR section is complete: Refactoring and optimization work is planned, including cross-cutting concerns integration
+  - [ ] All plans follow proper TDD cycle structure: test-first (RED), minimal implementation (GREEN), refactoring optimization (REFACTOR)
+  - [ ] All plan files are created at "{PLAN}/{task_id}-plan.md" following naming pattern
 
 ## [Example]
 

@@ -84,16 +84,16 @@
     - Identify risks (technical, dependency, timeline); document mitigation and rollback strategies
 
 ## [DoD]
-  - [ ] PRD has been read and all requirements extracted
-  - [ ] Todo list has been created with all requirements in dependency order
-  - [ ] All requirements have been implemented following TDD cycle (RED → GREEN → REFACTOR)
-  - [ ] All tests pass for all implementations
-  - [ ] All acceptance criteria in the PRD have been met
-  - [ ] Integration testing completed successfully
-  - [ ] Code quality meets standards (SOLID, DRY, readability)
-  - [ ] Test coverage meets minimum requirements (≥80%)
-  - [ ] Development notes document has been generated
-  - [ ] All outputs in [Output] have been generated and are consistent
+  - [ ] All requirements from PRD are fully understood and extracted
+  - [ ] Complete todo list exists with all requirements organized in dependency order
+  - [ ] All requirements are implemented through full TDD cycle (RED → GREEN → REFACTOR)
+  - [ ] All tests pass successfully for all implementations
+  - [ ] All acceptance criteria in the PRD are satisfied and verified
+  - [ ] Integration testing is complete with all tests passing
+  - [ ] Code quality meets standards (SOLID, DRY, readability, functions ≤50 lines)
+  - [ ] Test coverage meets minimum requirements (≥80%, critical logic at 100%)
+  - [ ] Complete development notes document exists at "{root}/docs/prd-dev-notes.md"
+  - [ ] All outputs specified in [Output] are generated and consistent
 
 ## [Example]
 

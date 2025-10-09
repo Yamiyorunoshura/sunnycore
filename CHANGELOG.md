@@ -7,6 +7,16 @@
 
 ## [Unreleased]
 
+## [3.2.6] - sunnycore v3.2.6
+
+### Changed
+- 優化任務文檔驗收標準措辭：改進 18 個任務文件的 DoD (Definition of Done) 條目，使其更清晰、更具操作性
+  - 將被動語態改為主動語態（如「has been」→「is」、「have been」→「are」）
+  - 增強完整性描述（如「已讀取」→「fully understood」、「已創建」→「exists」）
+  - 明確狀態驗證（如「已完成」→「is complete」、「已通過」→「passing」）
+  - 涵蓋任務：consult、create-architecture、create-brownfield-architecture、create-epic、create-plan、create-prd、create-requirements、curate-knowledge、cutover、develop-plan、develop-prd、document-project、fix-acceptance-issues、fix-design-conflicts、help、init、review、validate-design
+  - 提升驗收標準的明確性與可驗證性
+
 ## [3.2.5] - sunnycore v3.2.5
 
 ### Changed

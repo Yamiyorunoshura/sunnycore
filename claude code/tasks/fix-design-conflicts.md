@@ -118,16 +118,15 @@
     - Ensure no new conflicts introduced during fix process
 
 ## [DoD]
-  - [ ] Design validation report has been read and parsed
-  - [ ] All issues have been extracted and categorized
-  - [ ] Fix strategies have been proposed for all issues
-  - [ ] User has approved fix strategies
-  - [ ] All approved fixes have been applied
-  - [ ] Cross-document consistency has been verified
-  - [ ] No new issues have been introduced
-  - [ ] User confirmation obtained for all changes
-  - [ ] "{root}/docs/design-validation.md" has been deleted
-  - [ ] User has been advised to re-run validate-design for confirmation
+  - [ ] Design validation report is fully understood with all issues extracted and categorized
+  - [ ] Fix strategies are proposed for all issues with clear approach
+  - [ ] All fix strategies are approved by user
+  - [ ] All approved fixes are successfully applied to affected documents
+  - [ ] Cross-document consistency is verified with no conflicts remaining
+  - [ ] No new issues are introduced during fix process
+  - [ ] All changes are confirmed by user
+  - [ ] Validation report "{root}/docs/design-validation.md" is deleted
+  - [ ] User is advised to re-run validate-design for confirmation of fixes
 
 ## [Example]
 

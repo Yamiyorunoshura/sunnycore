@@ -74,11 +74,13 @@
     - Identify risks (technical, dependency, timeline); document mitigation and rollback strategies
 
 ## [DoD]
-  - [ ] All acceptance criteria in the implementation plan have been met
-  - [ ] Tests cover all verification methods specified in the plan
-  - [ ] Implementation follows TDD cycle: RED → GREEN → REFACTOR
-  - [ ] Code corresponds to planned architecture components
-  - [ ] All outputs in [Output] have been generated and are consistent
+  - [ ] All acceptance criteria from implementation plan are satisfied and verified
+  - [ ] Test coverage is complete, covering all verification methods specified in the plan
+  - [ ] Implementation is complete through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing
+  - [ ] Code implementation aligns with planned architecture components
+  - [ ] Code quality meets standards (SOLID, DRY, functions ≤50 lines)
+  - [ ] Complete development notes document exists at "{DEVNOTES}/{task_id}-dev-notes.md"
+  - [ ] All outputs specified in [Output] are generated and consistent
 
 ## [Example]
 

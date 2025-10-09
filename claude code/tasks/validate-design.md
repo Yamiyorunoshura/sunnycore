@@ -126,16 +126,16 @@
     - Cross-check entity existence in actual documents
 
 ## [DoD]
-  - [ ] Workflow parameter has been validated
-  - [ ] All required documents have been read and indexed
-  - [ ] Bidirectional reference validation is complete
-  - [ ] Coverage analysis is complete with metrics calculated
-  - [ ] Consistency checks across documents are complete
-  - [ ] Content authenticity verification is complete
-  - [ ] Conflict detection is complete
-  - [ ] All issues are categorized by severity
-  - [ ] Validation report has been generated to "{root}/docs/design-validation.md"
-  - [ ] User has been informed of validation results and next steps
+  - [ ] Workflow parameter is validated as "prd" or "full"
+  - [ ] All required documents are fully understood and indexed
+  - [ ] Bidirectional reference validation is complete (forward and backward references verified)
+  - [ ] Coverage analysis is complete with all metrics calculated (100% requirement coverage verified)
+  - [ ] Consistency checks across all documents are complete
+  - [ ] Content authenticity verification is complete (no fabricated references)
+  - [ ] Conflict detection is complete across all document types
+  - [ ] All identified issues are categorized by severity (Critical/High/Medium/Low)
+  - [ ] Complete validation report exists at "{root}/docs/design-validation.md" with findings and recommendations
+  - [ ] User is informed of validation results with clear guidance on next steps
 
 ## [Example]
 

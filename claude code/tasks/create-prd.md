@@ -88,18 +88,18 @@
     - Ensure complete traceability: requirements → architecture → tasks
 
 ## [DoD]
-  - [ ] Project type (Greenfield/Brownfield) has been determined
-  - [ ] If Brownfield, existing architecture has been reviewed
-  - [ ] Functional requirements have been extracted, deduplicated, and atomized
-  - [ ] Non-functional requirements have been identified and quantified
-  - [ ] Each requirement has corresponding acceptance criteria (using Given-When-Then structure)
-  - [ ] Architecture design is complete with components, data flows, and technical stack
-  - [ ] If Brownfield, impact analysis has been documented
-  - [ ] Requirement-to-architecture mapping has been established (100% coverage)
-  - [ ] Requirement dependencies have been identified
+  - [ ] Project type (Greenfield/Brownfield) is correctly determined
+  - [ ] For Brownfield projects, existing architecture is fully understood and analyzed
+  - [ ] Complete set of functional requirements exists, with all requirements being atomic, unique, and measurable
+  - [ ] All non-functional requirements are identified with specific quantified metrics
+  - [ ] All requirements have clear acceptance criteria in Given-When-Then format
+  - [ ] Architecture design is complete with all components, data flows, and technical stack documented
+  - [ ] For Brownfield projects, impact analysis is complete and documented
+  - [ ] Complete requirement-to-architecture mapping exists with 100% coverage
+  - [ ] All requirement dependencies are identified and documented
   - [ ] All requirements are verifiable and outcome-oriented
-  - [ ] PRD follows template structure and is saved to "{PRD}"
-  - [ ] User confirmation of the final PRD has been obtained
+  - [ ] PRD document exists at "{PRD}" following template structure
+  - [ ] Final PRD is approved by user
 
 ## [Example]
 

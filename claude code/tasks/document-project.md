@@ -79,17 +79,16 @@
     - Update CLAUDE.md document index after sharding
 
 ## [DoD]
-  - [ ] All existing architecture documents have been read
-  - [ ] Codebase has been searched to understand actual implementation
-  - [ ] Development notes, review reports, knowledge base, and progress records have been reviewed
-  - [ ] All content includes proper source references (source_refs)
-  - [ ] Old architecture documents have been deleted from "{ARCH}/"
-  - [ ] Shard-architecture.py script has been executed successfully
-  - [ ] Sharded architecture documents are properly created in "{ARCH}/" with .md extension
-  - [ ] Original architecture.md has been deleted by the sharding script
-  - [ ] Each sharded document includes actual implementation details with source references
-  - [ ] Deviations from original design are documented with rationale
-  - [ ] "{root}/CLAUDE.md" Document Index section and any other sections that are related to architecture have been updated with refreshed sharded architecture documents
+  - [ ] All existing architecture documents and actual codebase implementation are fully understood
+  - [ ] Development notes, review reports, knowledge base, and progress records are fully analyzed
+  - [ ] All documentation content includes proper source references (source_refs format: file_path:line_number)
+  - [ ] Old architecture documents are removed from "{ARCH}/"
+  - [ ] Shard-architecture.py script is successfully executed
+  - [ ] Complete set of sharded architecture documents exists in "{ARCH}/" with .md extension
+  - [ ] Original architecture.md is removed (deleted by sharding script)
+  - [ ] All sharded documents include actual implementation details with source references
+  - [ ] All deviations from original design are documented with clear rationale
+  - [ ] "{root}/CLAUDE.md" Document Index section and architecture-related sections are updated with current sharded architecture documents
 
 ## [Example]
 
