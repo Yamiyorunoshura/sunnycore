@@ -16,9 +16,9 @@
     (3) Problems encountered, root cause analysis, and solutions
     (4) Future recommendations
     (5) DoD verification evidence (format as "file path:line number", e.g., "src/main.py:L42-L56")
-  3. If required input files (sunnycore.lock, template) are missing or incorrectly formatted, must generate a missing file list in the terminal and halt execution, waiting for user to provide supplementary files
+  3. If required input files (*.lock, template) are missing or incorrectly formatted, must generate a missing file list in the terminal and halt execution, waiting for user to provide supplementary files
   4. If any of the 5 core content items are completely missing from source documents, should annotate "To be supplemented: missing XX item" in the corresponding chapter of the completion report and continue execution
-  5. Version name must be parsed from sunnycore.lock file (format: "version = x.x.x")
+  5. Version name must be parsed from *.lock file (format: "version = x.x.x")
   6. When archiving files, must preserve docs/architecture/, docs/knowledge/, and docs/completion-report.md in their original locations
 
 ## [Tools]
@@ -83,13 +83,9 @@
     - Update references in preserved docs to point to archive paths
 
 ## [DoD]
-  - [ ] *.lock file has been read and version number has been parsed successfully
-  - [ ] Workflow type (Traditional/PRD) has been determined
   - [ ] All files in docs/ directory have been scanned recursively
   - [ ] Completion report has been generated and complies with template structure (including all necessary sections in the template)
-  - [ ] Completion report content fully covers the 5 core content items listed in constraint 2
   - [ ] All files and directories in docs/ EXCEPT architecture/, knowledge/, and completion-report.md have been moved to {ARCHIVE}/{version_name}/
-  - [ ] Only architecture/, knowledge/, and completion-report.md remain in docs/ directory
   - [ ] Document references in architecture/ and knowledge/ have been updated to point to correct archive paths
 
 ## [Example]
