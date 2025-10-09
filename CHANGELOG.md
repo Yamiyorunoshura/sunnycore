@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [3.2.11] - sunnycore v3.2.11
+
+### Changed
+- 優化任務文檔步驟格式：重構 19 個任務文件的 Steps 部分，採用目標導向結構，提升可讀性與執行清晰度
+  - 步驟格式優化：將 "Phase" 風格步驟改為 "目標任務 + 預期成果（Outcome）" 結構
+    * 步驟名稱簡化並聚焦行動目標（如 "Preparation Phase" → "Preparation & Analysis"）
+    * 每個步驟明確定義核心任務與預期成果（Outcome）
+    * 改善步驟描述的目標導向性，使執行者清楚理解每步驟的交付成果
+  - 涵蓋任務：brownfield-tasks、conclude、consult、create-architecture、create-brownfield-architecture、create-epic、create-plan、create-prd、create-requirements、curate-knowledge、cutover、develop-plan、develop-prd、document-project、fix-acceptance-issues、fix-design-conflicts、init、review、validate-design
+  - 提升任務文檔的執行清晰度、成果可驗證性與專業性
+
 ## [3.2.10] - sunnycore v3.2.10
 
 ### Changed

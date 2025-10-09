@@ -35,24 +35,28 @@
     - When to use: When need to study how similar systems evolved their architecture or integrated new components
 
 ## [Steps]
-  1. Evaluate Existing Architecture Phase
+  1. Existing Architecture Evaluation
     - Understand current architecture, extension points, and constraints
     - Identify affected domains and dependencies
-    - Establish progress tracking mechanism for design tasks
+    - Establish progress tracking mechanism
+    - Outcome: Complete understanding of existing architecture and extension points
 
-  2. Design New Module Phase
-    - Achieve complete new module design with clear boundaries and interfaces
-    - Ensure proper integration with existing components
-    - Ensure comprehensive impact analysis for all proposed changes
+  2. New Module Design & Impact Analysis
+    - Design new module with clear boundaries and interfaces
+    - Plan integration with existing components
+    - Conduct comprehensive impact analysis for all changes
+    - Outcome: Complete new module design with impact analysis
 
-  3. Documentation and Approval Phase
-    - Achieve compliant architecture draft following template structure
-    - Ensure user approval is obtained with proper feedback integration
-    - Achieve successful architecture sharding by running the "shard-architecture.py" script with verified output under "{ARCH}/"
+  3. Documentation, Approval & Sharding
+    - Create compliant architecture draft following template
+    - Obtain user approval and integrate feedback
+    - Run "shard-architecture.py" to update "{ARCH}/*.md" files
+    - Outcome: Approved architecture changes successfully sharded
 
-  4. Finalization Phase
-    - Ensure all impact analyses are complete and accurate
-    - Ensure compatibility between new and existing modules is verified
+  4. Compatibility Verification
+    - Verify all impact analyses are complete and accurate
+    - Validate compatibility between new and existing modules
+    - Outcome: New and existing modules verified as compatible
 
 ## [Brownfield-Architecture-Guidelines]
   1. **Preserve Existing Contracts**

@@ -30,25 +30,30 @@
     - [Steps 2-4: When need external API calls, query official documentation and examples]
 
 ## [Steps]
-  1. Preparation Phase
-    - Understand the TDD implementation plan and its three phases
-    - Establish progress tracking mechanism for TDD cycle execution
+  1. Preparation & Planning
+    - Understand TDD implementation plan and three phases
+    - Establish progress tracking mechanism
+    - Outcome: Implementation plan understood and tracking established
 
   2. RED Phase: Test Implementation
-    - Achieve complete test coverage with all planned test cases implemented
-    - Ensure all tests fail with expected error messages instead of unexpected erorrs(e.g could not compile, syntax error, etc.)(RED status confirmed)
+    - Implement complete test coverage with all planned test cases
+    - Ensure tests fail with expected errors (confirm RED status)
+    - Outcome: All tests implemented and failing correctly
 
   3. GREEN Phase: Minimal Implementation
-    - Achieve passing tests with minimal code implementation
-    - Ensure implementation aligns with architecture mapping from the plan
+    - Implement minimal code to pass all tests
+    - Align implementation with architecture mapping from plan
+    - Outcome: All tests passing with minimal implementation
 
   4. REFACTOR Phase: Code Quality Enhancement
-    - Achieve improved code quality while maintaining green tests
-    - Ensure all planned optimizations and cross-cutting concerns are applied
+    - Improve code quality while maintaining green tests
+    - Apply all planned optimizations and cross-cutting concerns
+    - Outcome: High-quality code with all tests still passing
 
-  5. Validation and Documentation Phase
-    - Ensure all acceptance criteria are validated and met
-    - Achieve complete development notes document at "{DEVNOTES}/{task_id}-dev-notes.md"
+  5. Validation & Documentation
+    - Validate all acceptance criteria are met
+    - Create complete development notes at "{DEVNOTES}/{task_id}-dev-notes.md"
+    - Outcome: Acceptance criteria met and dev notes completed
 
 ## [Development-Guidelines]
   1. **TDD Practice (Mandatory)**

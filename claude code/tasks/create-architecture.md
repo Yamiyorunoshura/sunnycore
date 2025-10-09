@@ -32,24 +32,28 @@
     - When to use: When need to study architecture patterns from open-source projects or industry references
 
 ## [Steps]
-  1. Requirement Analysis Phase
-    - Ensure complete understanding of all requirements and their implications
-    - Achieve complete requirement-to-architecture mapping matrix with 100% coverage
-    - Establish progress tracking mechanism for architecture design tasks
+  1. Requirement Analysis & Mapping
+    - Understand all requirements and their implications
+    - Create complete requirement-to-architecture mapping matrix (100% coverage)
+    - Establish progress tracking mechanism
+    - Outcome: Complete understanding and requirement mapping matrix created
 
-  2. Architecture Design Phase
-    - Achieve comprehensive architecture design with all components and boundaries defined
-    - Ensure every requirement maps to specific architecture elements
-    - Ensure all cross-cutting concerns are properly addressed
+  2. Architecture Design
+    - Design comprehensive architecture with all components and boundaries
+    - Map every requirement to specific architecture elements
+    - Address all cross-cutting concerns
+    - Outcome: Complete architecture design with full requirement coverage
 
-  3. Documentation and Approval Phase
-    - Achieve compliant architecture draft following template structure
-    - Ensure user approval is obtained with proper feedback integration
-    - Achieve successful architecture sharding by running the "shard-architecture.py" script with verified output under "{ARCH}/"
+  3. Documentation, Approval & Sharding
+    - Create compliant architecture draft following template structure
+    - Obtain user approval and integrate feedback
+    - Run "shard-architecture.py" script to generate "{ARCH}/*.md" files
+    - Outcome: Approved architecture document successfully sharded
 
-  4. Final Verification Phase
-    - Ensure architecture satisfies all requirements through mapping verification
-    - Achieve consistent and justified architecture decisions
+  4. Final Verification
+    - Verify architecture satisfies all requirements through mapping
+    - Ensure consistency and justification of architecture decisions
+    - Outcome: Architecture verified and validated
 
 ## [Error-Handling]
   1. "shard-architecture.py" execution failure: Check if "architecture.md" format complies with template specifications, fix and re-execute

@@ -29,30 +29,35 @@
     - Query examples: "Does component X exist?" "Where is requirement Y implemented?"
 
 ## [Steps]
-  1. Initialization Phase
-    - Validate workflow parameter and determine validation scope
-    - Ensure proper handling of both PRD and Full workflow types
-    - Establish progress tracking mechanism for validation tasks
+  1. Initialization & Scope Determination
+    - Validate workflow parameter (prd or full)
+    - Determine validation scope for workflow type
+    - Establish progress tracking mechanism
+    - Outcome: Validation scope and workflow determined
 
-  2. Content Extraction and Indexing Phase
-    - Ensure appropriate content extraction for workflow type
-    - Achieve comprehensive internal index of all entities
-    - Ensure proper handling of both workflow-specific extraction paths
+  2. Content Extraction & Indexing
+    - Extract content appropriate for workflow type
+    - Create comprehensive internal index of all entities
+    - Handle workflow-specific extraction paths
+    - Outcome: All entities extracted and indexed
 
-  3. Validation Phase
-    - Ensure workflow-appropriate validation checks are performed
+  3. Validation Execution
+    - Perform workflow-appropriate validation checks
     - Achieve complete validation coverage across all criteria
-    - Ensure proper detection of all issue types (consistency, coverage, conflicts, authenticity)
+    - Detect all issue types (consistency, coverage, conflicts, authenticity)
+    - Outcome: Complete validation performed with all issues identified
 
-  4. Report Generation Phase
-    - Achieve comprehensive validation report at "{root}/docs/design-validation.md"
-    - Ensure issues are properly categorized by severity
-    - Ensure report structure includes all required sections
+  4. Report Generation & Categorization
+    - Create comprehensive validation report at "{root}/docs/design-validation.md"
+    - Categorize issues properly by severity
+    - Include all required report sections
+    - Outcome: Detailed validation report with categorized issues
 
-  5. Finalization Phase
-    - Ensure validation summary is presented to user
-    - Ensure appropriate recommendations based on findings
-    - Ensure proper guidance for next steps
+  5. Summary & Recommendations
+    - Present validation summary to user
+    - Provide appropriate recommendations based on findings
+    - Guide user on next steps
+    - Outcome: User informed with clear next-step guidance
 
 ## [Validation-Criteria]
 

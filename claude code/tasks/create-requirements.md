@@ -30,26 +30,31 @@
     - Query examples: "How is similar functionality implemented?" "What are the related modules?"
 
 ## [Steps]
-  1. Initialization Phase
-    - Understand the expected workflow and requirements gathering scope
-    - Establish progress tracking mechanism for requirement extraction tasks
+  1. Initialization & Scope Definition
+    - Understand expected workflow and requirements gathering scope
+    - Establish progress tracking mechanism
+    - Outcome: Requirements gathering scope clearly defined
 
-  2. Functional Requirements Phase
-    - Achieve complete, deduplicated, and atomized functional requirements
-    - Ensure requirements are organized by user stories or system capabilities
+  2. Functional Requirements Extraction
+    - Extract complete, deduplicated, atomized functional requirements
+    - Organize by user stories or system capabilities
+    - Outcome: Complete functional requirements documented
 
-  3. Non-Functional Requirements Phase
-    - Achieve quantified non-functional requirements across all quality attributes
-    - Ensure requirements have clear targets and measurable constraints
+  3. Non-Functional Requirements Definition
+    - Define quantified non-functional requirements across quality attributes
+    - Ensure clear targets and measurable constraints
+    - Outcome: Quantified non-functional requirements established
 
-  4. Acceptance Criteria Phase
-    - Achieve deterministic and testable acceptance criteria for all requirements
-    - Ensure all criteria use Given-When-Then structure with binary outcomes
+  4. Acceptance Criteria Creation
+    - Create deterministic, testable acceptance criteria for all requirements
+    - Use Given-When-Then structure with binary outcomes
+    - Outcome: All requirements have clear acceptance criteria
 
-  5. Finalization Phase
+  5. Finalization, Approval & Sharding
     - Ensure consistency across all requirement types
-    - Ensure user approval is obtained with proper feedback integration
-    - Achieve successful requirement sharding by running the "shard-requirements.py" script with verified output under "{REQ}/"
+    - Obtain user approval and integrate feedback
+    - Run "shard-requirements.py" to generate "{REQ}/*.md" files
+    - Outcome: Approved requirements successfully sharded
 
 ## [Requirements-Analysis-Guidelines]
   1. **Verifiability First**
