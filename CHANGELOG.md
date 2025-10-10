@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [3.3.24] - 2025-10-10
+
+### Changed
+- 精簡 brownfield-plan 任務 DoD 檢查清單：移除「Fix summary generated」檢查項目
+  - 移除 DoD 項目：「Fix summary generated with changes/tests/evidence/risk/rollback sections」
+  - 原因：修復摘要已整合至開發筆記中，不再需要單獨檢查項目
+  - 提升 DoD 清單的簡潔性與聚焦度
+
 ## [3.3.23] - 2025-10-10
 
 ### Changed

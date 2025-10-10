@@ -68,7 +68,6 @@
 
 ## [DoD]
   - [ ] All unit and integration tests passed
-  - [ ] Fix summary generated with changes/tests/evidence/risk/rollback sections
   - [ ] Development notes updated
 
 ## [Example]
