@@ -7,6 +7,67 @@
 
 ## [Unreleased]
 
+## [3.3.10] - 2025-10-10
+
+### Changed
+- 優化專案模板結構：重構 9 個核心模板文件，提升清晰度與可用性
+  - **architecture-tmpl.yaml**：擴展外部 API 文檔結構
+    * 新增詳細的 external-apis 結構：包含 API 名稱、提供者、版本、base-url、認證方法、端點資訊、速率限制、錯誤處理、回退策略等欄位
+    * 新增結構化的 requirements-traceability：包含需求 ID、標題、架構元素、實作備註、理由等欄位
+  - **completion-report-tmpl.yaml**：重構為以核心可交付成果為中心的結構
+    * 新增 5 個核心可交付成果區塊：Key Decisions、Technical Choices、Issues and Solutions、Evidence References、Recommendations
+    * 移除冗餘欄位：project_duration、team_size、risks-realized、team-performance、knowledge-transfer、source-references
+    * 優化 recommendations 結構：新增 immediate-actions 和 future-improvements 的詳細欄位
+  - **cutover-report-tmpl.yaml**：簡化並結構化驗收報告格式
+    * 將 executive-summary 改為 overall-assessment（單一多行文字欄位）
+    * 擴展 configuration-required：新增 config_item、description、location、default_value、notes 等欄位
+    * 擴展 acceptance-test-results：新增 requirement_id、test_scenario、expected_result、actual_result、status、evidence 等欄位
+    * 擴展 issues-found：新增 severity、category、reproduction_steps、business_impact 等欄位
+    * 簡化 sign-off：從多個欄位合併為 approved 和 conditions_for_approval
+  - **dev-notes-tmpl.yaml**：重組為更清晰的開發筆記結構
+    * 將 implementation-summary 改為多行文字格式並新增高層次摘要指引
+    * 重構 technical-decisions：新增 context、rationale、alternatives_considered、impact 等欄位
+    * 重構 challenges-and-solutions：新增 context、solution、lessons_learned 等欄位
+    * 重構 deviations-from-plan：新增 original_plan、actual_implementation、rationale、impact 等欄位
+    * 擴展 testing：新增 tdd-cycle-summary、coverage 詳細欄位、results 分類（unit/integration/e2e）
+    * 重構 known-issues 和 technical-debt：新增結構化欄位（severity、workaround、tracking、mitigation_plan 等）
+  - **epic-tmpl.yaml**：從分類任務改為統一的任務列表結構
+    * 移除 task-overview、functional-tasks、non-functional-tasks、infrastructure-tasks、documentation-tasks、progress-summary 等區塊
+    * 新增統一的 tasks 陣列：包含 id、name、description、requirement-mapping、architecture-mapping、dependencies、dod、estimated-duration、status、score 等欄位
+    * 重構 task-dependencies：新增 task-id、depends-on、dependency-type 等欄位
+    * 擴展 milestones：新增 name、tasks、target-date 等欄位
+  - **implementation-plan-tmpl.yaml**：增強 TDD 階段說明與結構
+    * 優化 red-phase：新增 objective 說明、擴展 acceptance-to-tests 結構、新增 test-cases 欄位（name、type、scenario、expected_failure）
+    * 優化 green-phase：新增 objective 說明、擴展 implementation-steps 結構（step、description、files_affected、architecture_component、test_coverage）、擴展 files 欄位（path、purpose、key_functions）
+    * 優化 refactor-phase：新增 objective 說明、擴展 refactoring-targets 結構（target、improvement_type、rationale、tests_affected）
+    * 更新 additional-details：將 api-documentation 改為 api-integrations
+    * 重構 risk-management：新增 risk、probability、impact、mitigation、rollback 等欄位
+  - **prd-tmpl.yaml**：添加詳細的結構定義與欄位
+    * 擴展 requirements：新增 functional 和 non-functional 的詳細結構（id、title、description、acceptance-criteria、priority、category、target-metric、measurement-method）
+    * 擴展 architecture：新增 components 詳細結構、decisions 區塊、requirements-mapping、impact-analysis（針對 Brownfield 專案）
+    * 新增 tasks 區塊：包含 id、name、description、requirement-mapping、architecture-mapping、dependencies、dod、status 等欄位
+  - **requirement-tmpl.yaml**：移除冗餘章節並添加結構定義
+    * 擴展 functional-requirements：新增詳細結構（id、title、description、acceptance-criteria、priority、dependencies）
+    * 擴展 non-functional-requirements：新增詳細結構（id、category、requirement、target-metric、measurement-method、priority）
+    * 移除冗餘章節：user-stories、glossary、appendix
+  - **review-tmpl.yaml**：重構為領域特定的評分系統
+    * 新增 task_name 和 domain 欄位（backend/frontend/database/integration/infrastructure）
+    * 重構 quality-scores：改為動態的 dimensions 結構（基於領域的維度）
+    * 重構 test-summary：將 all_passed 改為 all_tests_passed、test_output 改為 test_execution_output、新增 performance_metrics
+    * 重構 findings：整合 code-review、security-review、performance-review、documentation-review 為統一的 findings 陣列（severity、category、description、location、evidence、recommendation、action_required）
+    * 新增 alignment-verification：整合 compliance-check 內容（requirements_fulfilled、requirements_partial、requirements_missing、architecture_alignment、plan_adherence）
+    * 新增 risk-assessment 欄位
+- 擴展架構設計指引：在 `create-architecture.md` 和 `create-brownfield-architecture.md` 中新增外部 API 文檔步驟
+  - 新增「External API Documentation」步驟（步驟 4）：要求詳細記錄每個外部 API 整合
+    * API 基本資訊：名稱與提供者、完整端點 URL、base paths、版本
+    * 認證與安全：認證方法、憑證管理方式
+    * 請求/回應規範：JSON schema、資料類型、必要欄位、API 呼叫方法（REST/GraphQL/RPC）
+    * 技術細節：速率限制與重試策略、錯誤處理模式與錯誤碼、版本控制策略、SLA 要求
+    * 整合策略：功能描述、系統內整合點、API 不可用時的備援策略
+  - `create-brownfield-architecture.md` 額外要求：驗證現有外部 API 整合的持續相容性或記錄所需變更
+  - 原「Traceability & Justification」步驟從步驟 4 順延為步驟 5
+- 提升模板與任務文檔的一致性、可用性與維護性
+
 ## [3.3.9] - 2025-10-10
 
 ### Changed

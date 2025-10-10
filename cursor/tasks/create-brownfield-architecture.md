@@ -71,7 +71,24 @@
     - Establish mapping: new requirements → new/modified components → existing system
     - Use `Reference: {file path}#{section}` format for all reviewed content
   
-  4. **Decision Records for Changes**
+  4. **External API Documentation**
+    - Document every external API integration (new or modified) in detail within the api-documentation section
+    - For each external API, include:
+      * API name and provider (e.g., "Stripe Payment API v1")
+      * Complete API endpoint URLs and base paths
+      * Authentication method and credential management approach
+      * Request/response format specifications (JSON schema, data types, required fields)
+      * API call methods (REST verbs, GraphQL queries, RPC methods)
+      * Rate limits, quotas, and retry strategies
+      * Error handling patterns and expected error codes
+      * Purpose and functionality description
+      * Integration points within the system architecture
+      * Fallback strategies for API unavailability
+    - Include versioning strategy for external API dependencies
+    - Document any API contract assumptions or SLA requirements
+    - For existing external API integrations: verify continued compatibility or document required changes
+  
+  5. **Decision Records for Changes**
     - Document why changes are needed with context and rationale
     - Explain integration approach and trade-offs
     - Annotate source references (source_refs) for all architecture statements

@@ -3,60 +3,53 @@
 # 審查報告模板
 
 task_id: ""
+task_name: ""
 reviewer: ""
 date: ""
-review_type: ""
+domain: ""  # backend/frontend/database/integration/infrastructure
 ---
 
-acceptance-decision: ""
+acceptance-decision: ""  # Accept/Accept with changes/Reject
 
 rationale: ""
 
+# Domain-specific quality scores (dimensions vary by domain)
 quality-scores:
-  functional_compliance: 0
-  code_quality: 0
-  security_performance: 0
-  test_coverage: 0
-  architecture_alignment: 0
-  documentation: 0
-  deployment_readiness: 0
+  dimensions: {}  # Dynamic based on domain (e.g., api-design, security, error-handling for backend)
   overall_score: 0.0
-  maturity_level: ""
+  maturity_level: ""  # Platinum (4.0)/Gold (3.0)/Silver (2.0)/Bronze (1.0)
 
-scoring-guide: ""
-
-findings: []
+scoring-guide: |
+  Platinum (4.0): Fully compliant, no issues
+  Gold (3.0): Meets standards, 1-2 minor issues
+  Silver (2.0): Minimum standards, 3-4 issues needing improvement
+  Bronze (1.0): Below standards, serious issues or critical gaps
 
 test-summary:
+  all_tests_passed: true
   coverage_percentage: ""
-  all_passed: true
-  test_output: ""
+  test_execution_output: ""
   missing_tests: []
+  performance_metrics: []
 
-compliance-check:
+# Consolidated findings (replaces separate code/security/performance/documentation reviews)
+findings:
+  - severity: ""  # critical/high/medium/low
+    category: ""  # code-quality/security/performance/testing/documentation/architecture
+    description: ""
+    location: ""  # file_path:line_number
+    evidence: ""
+    recommendation: ""
+    action_required: ""
+
+alignment-verification:
   requirements_fulfilled: []
   requirements_partial: []
   requirements_missing: []
+  architecture_alignment: ""
+  plan_adherence: ""
 
-code-review:
-  strengths: []
-  improvements_needed: []
-  style_violations: []
-
-security-review:
-  vulnerabilities: []
-  best_practices_followed: []
-  concerns: []
-
-performance-review:
-  benchmarks_met: []
-  bottlenecks: []
-  optimization_suggestions: []
-
-documentation-review:
-  completeness: ""
-  clarity: ""
-  missing_sections: []
+risk-assessment: ""  # Low/Medium/High
 
 source-references:
   plan_path: ""

@@ -21,31 +21,52 @@ task-context:
 
 tdd-phases:
   red-phase:
-    objective: ""
-    acceptance-to-tests: []
-    test-cases: []
+    objective: "Write failing tests from acceptance criteria before any code; verify tests fail for the right reason"
+    acceptance-to-tests:
+      - acceptance_criterion_id: ""
+        acceptance_criterion: ""
+        test_cases: []
+    test-cases:
+      - name: ""
+        type: ""  # unit/integration/e2e
+        scenario: ""
+        expected_failure: ""
     test-files: []
   
   green-phase:
-    objective: ""
-    implementation-steps: []
-    files: []
+    objective: "Implement minimal code to pass tests (exit code 0); follow architecture mapping strictly"
+    implementation-steps:
+      - step: ""
+        description: ""
+        files_affected: []
+        architecture_component: ""
+        test_coverage: []
+    files:
+      - path: ""
+        purpose: ""
+        key_functions: []
     dependencies: []
   
   refactor-phase:
-    objective: ""
-    refactoring-targets: []
+    objective: "Improve code quality while maintaining green tests; integrate real APIs/services; apply patterns and eliminate duplication"
+    refactoring-targets:
+      - target: ""
+        improvement_type: ""  # SOLID/DRY/performance/integration
+        rationale: ""
+        tests_affected: []
     quality-improvements: []
-    checklist: []
 
 additional-details:
   configuration-changes: []
   database-migrations: []
-  api-documentation: []
+  api-integrations: []
   security-considerations: []
 
-risk-management: []
-
-validation-checklist: []
+risk-management:
+  - risk: ""
+    probability: ""  # high/medium/low
+    impact: ""  # high/medium/low
+    mitigation: ""
+    rollback: ""
 
 notes: ""

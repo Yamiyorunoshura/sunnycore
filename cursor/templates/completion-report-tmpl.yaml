@@ -3,69 +3,65 @@
 # 專案完成報告模板
 
 project_name: ""
-version: ""
+version: ""  # Parsed from *.lock file
 completion_date: ""
-project_duration: ""
-team_size: 0
+workflow_type: ""  # PRD/Traditional/Full
 ---
 
-development-summary:
-  objectives_met: []
-  objectives_partial: []
-  objectives_deferred: []
-  achievements: []
-  challenges-and-solutions: []
-  technologies-used: []
+# Core Deliverable 1: Key Decisions
+decisions:
+  - context: ""
+    decision: ""
+    rationale: ""
+    tradeoffs: ""
+    alternatives_considered: []
+    evidence: ""  # Format: file_path:line_number
 
-delivery-metrics:
-  planned_features: 0
-  delivered_features: 0
-  deferred_features: 0
-  estimated_effort: ""
-  actual_effort: ""
-  variance: ""
+# Core Deliverable 2: Technical Choices
+technical-choices:
+  - choice: ""
+    category: ""  # architecture/technology/pattern/integration
+    alternatives: []
+    pros: []
+    cons: []
+    rationale: ""
+    evidence: ""  # Format: file_path:line_number
 
-quality-summary:
-  overall_score: ""
-  test_coverage: ""
-  code_quality_metrics: {}
-  defect-metrics: {}
-  review-scores: {}
+# Core Deliverable 3: Issues and Solutions
+issues-and-solutions:
+  - issue: ""
+    severity: ""  # critical/high/medium/low
+    context: ""
+    root-cause: ""
+    solution: ""
+    prevention-measures: []
+    evidence: ""  # Format: file_path:line_number
 
-key-decisions: []
+# Core Deliverable 4: Evidence References (Consolidated)
+evidence-summary:
+  code-references: []  # file_path:Lstart-Lend
+  document-references: []  # file_path#section
+  test-results: []
+  verification-notes: ""
+
+# Core Deliverable 5: Recommendations
+recommendations:
+  immediate-actions:
+    - action: ""
+      priority: ""  # critical/high/medium/low
+      rationale: ""
+  future-improvements:
+    - improvement: ""
+      category: ""  # performance/security/maintainability/scalability
+      expected-benefit: ""
+  lessons-learned: []
 
 technical-debt:
   items_added: []
   items_resolved: []
   items_remaining: []
 
-risks-realized: []
-
-team-performance:
-  productivity: ""
-  collaboration: ""
-  skill_development: []
-  challenges: []
-
-recommendations:
-  immediate-actions: []
-  future-improvements: []
-  process-improvements: []
-
-knowledge-transfer:
-  documentation_completed: []
-  documentation_pending: []
-  training_provided: []
-  training_needed: []
-
-source-references:
-  dev_notes: []
-  review_reports: []
-  architecture_docs: []
-  cutover_reports: []
-  progress_records: []
-  other_docs: []
-
-archived-files:
+archive-information:
   archive_location: ""
   archived_items: []
+  preserved_items: []  # architecture/, knowledge/, completion-report.md

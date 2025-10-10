@@ -27,10 +27,39 @@ system-architecture:
 
 api-documentation:
   internal-apis: []
-  external-apis: []
+  external-apis:
+    - name: ""
+      provider: ""
+      version: ""
+      base-url: ""
+      authentication:
+        method: ""
+        credential-management: ""
+      endpoints:
+        - path: ""
+          method: ""
+          purpose: ""
+          request-format: ""
+          response-format: ""
+          required-fields: []
+      rate-limits:
+        limit: ""
+        retry-strategy: ""
+      error-handling:
+        patterns: ""
+        error-codes: []
+      purpose: ""
+      integration-points: []
+      fallback-strategy: ""
+      sla-requirements: ""
   api-standards: {}
 
-requirements-traceability: []
+requirements-traceability:
+  - requirement-id: ""
+    requirement-title: ""
+    architecture-elements: []
+    implementation-notes: ""
+    rationale: ""
 
 architecture-decisions: []
 
