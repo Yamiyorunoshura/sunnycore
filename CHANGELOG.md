@@ -7,6 +7,19 @@
 
 ## [Unreleased]
 
+## [3.3.2] - 2025-10-10
+
+### Changed
+- 優化文檔指引格式：將 `claude code/CLAUDE.md` 和 `cursor/cursor.mdc` 中所有 GUIDANCE (1-9) 從 HTML 註解格式改為強調格式
+  - 格式變更：`<!-- ... -->` → `**MUST** ... **MUST NOT** ...`
+  - 新增負面約束說明，明確禁止的行為
+  - 提升指引的可讀性與強制性表達
+- 新增任務結論指引：在兩個文檔中新增 GUIDANCE 10
+  - 要求每個任務完成後提供簡短結論
+  - 結論格式：「I have completed {task_name}. To {purpose}, I am going to {next_task}」
+  - 提升任務執行的連貫性與可追蹤性
+- 清理 `cursor/cursor.mdc` 中的重複內容：移除文件末尾重複的 GUIDANCE 1-9 段落
+
 ## [3.3.0] - sunnycore v3.3.0
 
 ### Added
