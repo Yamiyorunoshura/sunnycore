@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [3.3.25] - 2025-10-10
+
+### Changed
+- 精簡命令文檔約束條款：在 5 個角色命令文件中移除冗餘的步驟完成約束描述
+  - 移除約束條款：「Must complete all steps without stopping; do not pause between sub-phases undeer [Steps] unless defined blocking conditions occur or the prompt clearly stated that user's confirmations is needed.」
+  - 涵蓋文件：sunnycore_architect.md、sunnycore_dev.md、sunnycore_pm.md、sunnycore_po.md、sunnycore_qa.md
+  - 原因：該約束已整合至 CLAUDE.md 核心指引中，無需在各角色文件中重複定義
+  - 提升命令文檔的簡潔性與可維護性
+
 ## [3.3.24] - 2025-10-10
 
 ### Changed
