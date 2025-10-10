@@ -61,3 +61,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## GUIDANCE 20: [blocking-conditions] Tag
 **MUST** pause and request user intervention only when blocking conditions occur, **MUST NOT** stop execution for non-blocking situations or pause between normal steps
+
+## GUIDANCE 21
+**MUST** update existing output files based on actual situation when they already exist, **MUST NOT** ignore the output requirements.
