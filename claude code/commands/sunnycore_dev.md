@@ -47,7 +47,7 @@ Will execute custom commands base on user's input.
   - *help
   - *create-plan
   - *develop-plan {task_id}
-  - *brownfield-tasks {task_id}
+  - *brownfield-plan {task_id}
   - *fix-acceptance-issues
   - *init
   - *develop-prd

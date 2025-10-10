@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [3.3.8] - 2025-10-10
+
+### Changed
+- 重命名任務：將 `brownfield-tasks` 重命名為 `brownfield-plan`，更準確反映任務目的
+  - 任務文件：`claude code/tasks/brownfield-tasks.md` → `claude code/tasks/brownfield-plan.md`
+  - 更新 GOAL：從「Re-develop tasks that failed review」改為「Re-develop plan that failed review」
+  - 更新命令參考：`sunnycore_dev.md` 中的命令從 `*brownfield-tasks` 改為 `*brownfield-plan`
+  - 更新文檔引用：在 `README.md` 中更新所有流程說明中的命令參考（4 處）
+  - 更新配置文件：在 `index.json` 中更新任務 ID、路徑、關聯關係（7 處）
+  - 提升任務命名的語義清晰度與一致性
+
 ## [3.3.7] - 2025-10-10
 
 ### Changed
