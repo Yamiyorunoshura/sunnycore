@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [3.3.4] - 2025-10-10
+
+### Changed
+- 強化任務執行完整性：在所有 5 個角色命令文件中新增完成度約束
+  - 新增約束條款：「Must complete all the steps without stopping unless you need to ask user for confirmation.」
+  - 涵蓋文件：`sunnycore_architect.md`、`sunnycore_dev.md`、`sunnycore_pm.md`、`sunnycore_po.md`、`sunnycore_qa.md`
+  - 確保所有角色命令執行時完成所有步驟,除非需要用戶確認
+  - 提升命令執行的完整性與可靠性
+
 ## [3.3.3] - 2025-10-10
 
 ### Changed
