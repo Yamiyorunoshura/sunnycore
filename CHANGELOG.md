@@ -7,6 +7,25 @@
 
 ## [Unreleased]
 
+## [3.3.5] - 2025-10-10
+
+### Changed
+- 強化任務執行連續性：優化任務結論訊息處理機制，確保執行流程不中斷
+  - 更新 `claude code/CLAUDE.md`：在 GUIDANCE 10 中新增澄清說明
+    * 明確任務結論訊息為微更新，不應導致執行暫停
+    * 強調除非存在阻塞條件，否則應立即進行下一步驟
+  - 涵蓋文件：`sunnycore_architect.md`、`sunnycore_dev.md`、`sunnycore_pm.md`、`sunnycore_po.md`、`sunnycore_qa.md`
+- 精確化約束條件：在 5 個角色命令文件中更新步驟完成要求
+  - 更新約束條款 3：從「Must complete all the steps without stopping unless you need to ask user for confirmation」改為「Must complete all steps without stopping; do not pause between sub-phases under [Steps] unless defined blocking conditions occur or the prompt clearly stated that user's confirmations is needed」
+  - 明確定義阻塞條件：缺少關鍵輸入、意外測試失敗、需要用戶批准的風險操作、工具缺少非互動標誌
+  - 提升命令執行的連續性與可預測性
+- 增強開發計劃任務指引：在 `develop-plan.md` 中新增執行流程說明與範例
+  - 新增 [Execution] 章節：明確連續節奏、微更新處理、阻塞條件定義
+  - 新增 [Status-Update-Templates] 章節：提供 RED、GREEN、REFACTOR 階段的標準更新模板
+  - 新增 [Driver-Pseudocode] 章節：提供 TDD 循環的偽代碼示範
+  - 優化 TDD Development Phase 步驟說明：強調不間斷節奏，發出微更新後立即繼續
+  - 提升開發任務執行的清晰度與一致性
+
 ## [3.3.4] - 2025-10-10
 
 ### Changed
