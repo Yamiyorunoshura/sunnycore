@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [3.3.3] - 2025-10-10
+
+### Changed
+- 強化命令約束：在所有 6 個角色命令文件中新增 GUIDANCE 遵循要求
+  - 新增約束條款："Must follow all the GUIDANCE in {C}"
+  - 涵蓋文件：`sunnycore_architect.md`、`sunnycore_assistant.md`、`sunnycore_dev.md`、`sunnycore_pm.md`、`sunnycore_po.md`、`sunnycore_qa.md`
+  - 確保所有角色命令執行時遵循 CLAUDE.md 中定義的核心指引
+  - 提升命令執行的一致性與規範性
+
 ## [3.3.2] - 2025-10-10
 
 ### Changed
