@@ -7,58 +7,31 @@ alwaysApply: false
 This file provides guidance when working with code in this repository.
 
 ## GUIDANCE 1
-<!-- When executing tasks, only execute explicitly defined commands, fully follow all steps and checkpoints, do not skip or simplify processes -->
+**MUST** execute only explicitly defined commands and follow all steps, **MUST NOT** skip or simplify processes
 
 ## GUIDANCE 2
-<!-- When encountering unclear instructions, proactively request clarification rather than making assumptions or guesses -->
+**MUST** proactively request clarification when instructions are unclear, **MUST NOT** make assumptions or guesses
 
 ## GUIDANCE 3
-<!-- Read all required input files and context to ensure complete information before executing tasks -->
+**MUST** read all required input files and context before executing tasks, **MUST NOT** proceed without complete information
 
 ## GUIDANCE 4
-<!-- When constraints conflict, handle by priority: CLAUDE.md > commands > tasks -->
+**MUST** handle conflicts by priority: CLAUDE.md > commands > tasks, **MUST NOT** ignore priority hierarchy
 
 ## GUIDANCE 5
-<!-- Must complete all todo items one-by-one without skipping, and verify all DoD conditions -->
+**MUST** complete all todo items one-by-one and verify all DoD conditions, **MUST NOT** skip todo items or DoD verification
 
 ## GUIDANCE 6
-<!-- When using templates, only fill relevant fields to keep minimal, extend as needed, convert to Markdown when complete -->
+**MUST** fill only relevant template fields, extend as needed, convert to Markdown when complete, **MUST NOT** fill unnecessary fields or leave in YAML format
 
 ## GUIDANCE 7
-<!-- When converting YAML to Markdown, maintain level mapping (1-4 level keys to h1-h4), omit all empty value content -->
+**MUST** maintain level mapping (1-4 level keys to h1-h4) and omit empty value content, **MUST NOT** include empty values or break level hierarchy
 
 ## GUIDANCE 8
-<!-- When executing conversation compression, preserve all structural definitions (Constraints, Tools, Output, DoD, Guidelines), may compress status info, may discard completed task outputs -->
+**MUST** preserve all structural definitions and all the guidance during conversation compression, **MUST NOT** discard structural definitions (Constraints, Tools, Output, DoD, Guidelines)
 
 ## GUIDANCE 9
-<!-- Break down tasks into low-complexity, granular todos that are easy to complete, and dynamically update todo list during implementation to reflect new issues or required fixes -->
-# cursor.mdc
+**MUST** break down tasks into granular todos and dynamically update todo list, **MUST NOT** create overly complex todos or leave todo list static
 
-This file provides guidance when working with code in this repository.
-
-## GUIDANCE 1
-<!-- When executing tasks, only execute explicitly defined commands, fully follow all steps and checkpoints, do not skip or simplify processes -->
-
-## GUIDANCE 2
-<!-- When encountering unclear instructions, proactively request clarification rather than making assumptions or guesses -->
-
-## GUIDANCE 3
-<!-- Read all required input files and context to ensure complete information before executing tasks -->
-
-## GUIDANCE 4
-<!-- When constraints conflict, handle by priority: CLAUDE.md > commands > tasks -->
-
-## GUIDANCE 5
-<!-- Must complete all todo items one-by-one without skipping, and verify all DoD conditions -->
-
-## GUIDANCE 6
-<!-- When using templates, only fill relevant fields to keep minimal, extend as needed, convert to Markdown when complete -->
-
-## GUIDANCE 7
-<!-- When converting YAML to Markdown, maintain level mapping (1-4 level keys to h1-h4), omit all empty value content -->
-
-## GUIDANCE 8
-<!-- When executing conversation compression, preserve all structural definitions (Constraints, Tools, Output, DoD, Guidelines), may compress status info, may discard completed task outputs -->
-
-## GUIDANCE 9
-<!-- Break down tasks into low-complexity, granular todos that are easy to complete, and dynamically update todo list during implementation to reflect new issues or required fixes -->
+## GUIDANCE 10
+**MUST** provide brief conclusion after each task using format "I have completed {task_name}. To {purpose}, I am going to {next_task}", **MUST NOT** skip task conclusions or conclude with incorrect format
