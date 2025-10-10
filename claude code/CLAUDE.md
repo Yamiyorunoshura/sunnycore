@@ -18,7 +18,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **MUST** complete all todo items one-by-one and verify all DoD conditions, **MUST NOT** skip todo items or DoD verification
 
 ## GUIDANCE 6
-**MUST** reorganize content based on semantic meaning while following template structure, extend sections as needed, complete in Markdown format, **MUST NOT** fill unnecessary fields or leave in YAML format
+**MUST** reorganize content based on semantic meaning while following template structure, use markdown unordered lists, ordered lists, and body text to organize content appropriately, extend sections as needed, complete in Markdown format, **MUST NOT** fill unnecessary fields or leave in YAML format
 
 ## GUIDANCE 7
 **MUST** maintain template structure hierarchy (1-4 level keys to h1-h4) and reorganize content semantically within each section, **MUST NOT** break level hierarchy or ignore semantic relationships

@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [3.3.15] - 2025-10-10
+
+### Changed
+- 增強內容組織指引：在 `claude code/CLAUDE.md` 中優化 GUIDANCE 6，明確 Markdown 格式使用規範
+  - 新增說明：「use markdown unordered lists, ordered lists, and body text to organize content appropriately」
+  - 要求在組織內容時適當使用 Markdown 的無序列表、有序列表和正文
+  - 提升模板內容呈現的結構化與可讀性
+
 ## [3.3.14] - 2025-10-10
 
 ### Added
