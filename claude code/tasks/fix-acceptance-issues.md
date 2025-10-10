@@ -8,7 +8,7 @@
   5. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template (required)
 
 ## [Output]
-  1. "{root}/docs/cutover-fixes-dev-notes.md" --Development notes for fixes
+  1. "{root}/docs/cutover-fixes-dev-notes.md" --Development notes for fixes (Markdown format)
   2. Fixed code implementation
   3. Updated documentation if needed
 

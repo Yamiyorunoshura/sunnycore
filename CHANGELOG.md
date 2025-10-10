@@ -7,6 +7,24 @@
 
 ## [Unreleased]
 
+## [3.3.11] - 2025-10-10
+
+### Changed
+- 優化任務文檔輸出格式說明：在 10 個任務文件中明確標註輸出為 Markdown 格式，提升文檔清晰度
+  - 更新 `claude code/tasks/brownfield-plan.md`：輸出 2 和 3 添加格式標註
+    * 修復摘要：從「建議以 MARKDOWN 呈現」改為「Fix summary（無指定格式）」
+    * 開發筆記：明確標註「"{DEVNOTES}/{task_id}-dev-notes.md" (Markdown format)」
+  - 更新 `claude code/tasks/create-architecture.md`：輸出 2 添加「(Markdown format)」標註
+  - 更新 `claude code/tasks/create-brownfield-architecture.md`：輸出 1 添加「(Markdown format)」標註
+  - 更新 `claude code/tasks/create-prd.md`：輸出 1 添加「(Markdown format)」標註
+  - 更新 `claude code/tasks/create-requirements.md`：輸出 1 添加「(Markdown format)」標註
+  - 更新 `claude code/tasks/develop-plan.md`：輸出 1 添加「(Markdown format)」標註
+  - 更新 `claude code/tasks/develop-prd.md`：輸出 1 添加「(Markdown format)」標註
+  - 更新 `claude code/tasks/document-project.md`：輸出 1 添加「(Markdown format)」標註
+  - 更新 `claude code/tasks/fix-acceptance-issues.md`：輸出 1 添加「(Markdown format)」標註
+  - 更新 `claude code/tasks/review.md`：輸出 1 添加「(Markdown format)」標註
+  - 提升任務文檔的格式規範性與一致性
+
 ## [3.3.10] - 2025-10-10
 
 ### Changed

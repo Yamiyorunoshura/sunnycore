@@ -10,7 +10,7 @@
   7. Actual codebase
 
 ## [Output]
-  1. "{root}/docs/architecture.md" --Integrated architecture document (temporary, will be sharded)
+  1. "{root}/docs/architecture.md" --Integrated architecture document (Markdown format)(temporary, will be sharded)
   2. "{ARCH}/*.md" --Sharded architecture documents (Markdown format)
   3. "{root}/CLAUDE.md" --Updated project guidance document with refreshed document index
 

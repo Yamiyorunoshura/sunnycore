@@ -6,7 +6,7 @@
   3. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template
 
 ## [Output]
-  1. "{DEVNOTES}/{task_id}-dev-notes.md" --Complete development notes document
+  1. "{DEVNOTES}/{task_id}-dev-notes.md" --Complete development notes document (Markdown format)
   2. High-quality, tested, refactored code implementation highly allign with the implementation plans
   3. Complete test coverage and test cases allign with the implementation plans
 
