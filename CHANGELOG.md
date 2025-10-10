@@ -7,6 +7,20 @@
 
 ## [Unreleased]
 
+## [3.3.9] - 2025-10-10
+
+### Changed
+- 增強架構設計指引：在架構任務文件中新增外部 API 文檔化要求，提升 API 整合文檔完整性
+  - 更新 `claude code/tasks/create-architecture.md`：新增「External API Documentation」指引章節（步驟 4）
+    * 要求詳細記錄每個外部 API 整合：API 名稱與提供者、完整端點 URL、認證方法、請求/回應格式規範
+    * 新增 API 技術細節記錄：呼叫方法（REST/GraphQL/RPC）、速率限制與重試策略、錯誤處理模式
+    * 新增整合策略要求：系統內整合點、API 不可用時的備援策略、版本控制策略、SLA 要求
+  - 更新 `claude code/tasks/create-brownfield-architecture.md`：新增「External API Documentation」指引章節（步驟 4）
+    * 包含與 greenfield 相同的外部 API 文檔化要求
+    * 新增現有 API 整合檢查：驗證現有外部 API 整合的持續相容性或記錄所需變更
+  - 原「Traceability & Justification」章節從步驟 4 順延為步驟 5
+  - 提升架構設計的 API 整合透明度與可維護性
+
 ## [3.3.8] - 2025-10-10
 
 ### Changed
