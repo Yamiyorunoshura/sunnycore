@@ -7,7 +7,7 @@
   4. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
 
 ## [Output]
-  1. "{PRD}" --Complete Product Requirements Document
+  1. "{PRD}" --Complete Product Requirements Document (Markdown format)
 
 ## [Constraints]
   1. Do not misidentify project type (Greenfield/Brownfield)

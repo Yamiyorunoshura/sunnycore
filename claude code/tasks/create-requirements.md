@@ -5,7 +5,7 @@
   2. User-provided initial ideas and requirement descriptions
 
 ## [Output]
-  1. "{root}/docs/requirements.md" (temporary requiremenmt file. Will be sharded after running "shard-requirements.py")
+  1. "{root}/docs/requirements.md" (Markdown format)(temporary requiremenmt file. Will be sharded after running "shard-requirements.py")
   2. "{REQ}/*.md" --Complete requirement specifications (including functional requirements, non-functional requirements, and acceptance criteria)
 
 ## [Constraints]

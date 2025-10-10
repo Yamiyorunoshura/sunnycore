@@ -6,7 +6,7 @@
   3. "{TMPL}/review-tmpl.yaml" --Review template
 
 ## [Output]
-  1. "{REVIEW}/{task_id}-review.md"
+  1. "{REVIEW}/{task_id}-review.md" (Markdown format)
   2. "{EPIC}"
 
 ## [Constraints]
