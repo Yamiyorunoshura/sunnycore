@@ -5,29 +5,30 @@
 project_name: ""
 cutover_date: ""
 tested_by: ""
-project_type: ""
+project_type: ""  # PRD/Traditional
 version: ""
 ---
 
-cutover-status: ""
+cutover-status: ""  # Success/Partial Success/Failed
 
-executive-summary:
-  overall_assessment: ""
-  critical_issues_count: 0
-  major_issues_count: 0
-  minor_issues_count: 0
-  requirements_tested: 0
-  requirements_passed: 0
-  pass_rate: ""
+overall-assessment: |
+  # Summary including:
+  # - Critical/high/medium/low issues count
+  # - Requirements tested vs passed
+  # - Pass rate
 
-configuration-required: []
+configuration-required:
+  - config_item: ""
+    description: ""
+    location: ""
+    default_value: ""
+    notes: ""
 
 environment-setup:
-  setup_steps_documented: true
   setup_successful: true
-  dependencies_installed: true
   setup_time: ""
   issues_encountered: []
+  dependencies_verified: []
 
 project-execution:
   execution_successful: true
@@ -36,46 +37,48 @@ project-execution:
   access_information: ""
   errors_encountered: []
 
-acceptance-test-results: []
+acceptance-test-results:
+  - requirement_id: ""
+    requirement_description: ""
+    test_scenario: ""
+    expected_result: ""
+    actual_result: ""
+    status: ""  # Pass/Fail/Not Tested
+    evidence: ""
+    notes: ""
 
-user-experience-assessment:
-  ease_of_use: ""
-  interface_clarity: ""
-  error_messaging: ""
-  documentation_quality: ""
-  performance: ""
-  overall_comments: ""
-
-issues-found: []
+issues-found:
+  - severity: ""  # critical/high/medium/low
+    category: ""  # functionality/configuration/performance/usability
+    description: ""
+    requirement_affected: ""
+    reproduction_steps: []
+    business_impact: ""
+    recommended_action: ""
 
 functional-verification:
   features_tested: []
   features_passed: []
   features_failed: []
-  features_not_tested: []
 
 non-functional-verification:
   performance_targets_met: []
   performance_targets_missed: []
-  security_checks_passed: []
   security_concerns: []
-  usability_score: ""
 
 recommendations:
-  immediate-actions: []
+  immediate-actions:
+    - action: ""
+      priority: ""
+      rationale: ""
   future-improvements: []
 
 deployment-readiness:
   ready_for_production: true
   blockers: []
   prerequisites: []
-  rollback_plan_documented: true
-  monitoring_configured: true
-  backup_strategy_documented: true
 
 sign-off:
-  product_owner_approval: ""
+  approved: false
   conditions_for_approval: []
-  sign_off_date: ""
   next_steps: []
-  deployment_date: ""

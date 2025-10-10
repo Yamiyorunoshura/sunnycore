@@ -5,20 +5,64 @@
 project-info:
   name: ""
   description: ""
-  type: ""
+  type: ""  # Greenfield/Brownfield
 
 requirements:
-  functional: []
-  non-functional: []
+  functional:
+    - id: ""
+      title: ""
+      description: ""
+      acceptance-criteria:
+        - given: ""
+          when: ""
+          then: ""
+      priority: ""
+  non-functional:
+    - id: ""
+      category: ""
+      requirement: ""
+      target-metric: ""
+      measurement-method: ""
 
 architecture:
-  components: []
+  components:
+    - name: ""
+      responsibility: ""
+      technology: ""
+      interfaces: []
   technical-stack:
     frontend: ""
     backend: ""
     database: ""
     infrastructure: ""
   data-flow: ""
+  decisions:
+    - id: ""
+      title: ""
+      context: ""
+      decision: ""
+      rationale: ""
+      alternatives: []
+      tradeoffs: ""
+  requirements-mapping:
+    - requirement-id: ""
+      architecture-elements: []
+      rationale: ""
+  impact-analysis:  # For Brownfield projects
+    - affected-component: ""
+      change-type: ""  # new/modified/deprecated
+      breaking-change: false
+      migration-path: ""
+
+tasks:
+  - id: ""
+    name: ""
+    description: ""
+    requirement-mapping: []
+    architecture-mapping: []
+    dependencies: []
+    dod: []
+    status: "pending"
 
 constraints:
   technical: []

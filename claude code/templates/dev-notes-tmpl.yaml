@@ -11,56 +11,67 @@ completion_date: ""
 actual_duration: ""
 ---
 
-implementation-summary: ""
-
-requirements-coverage:
-  functional_ids: []
-  non_functional_ids: []
-  ui_ids: []
+implementation-summary: |
+  # High-level summary including:
+  # - Requirements covered (functional/non-functional IDs)
+  # - Key features implemented
+  # - Overall approach
 
 technical-decisions:
-  technology-choices: []
-  architecture-decisions: []
-  design-patterns: []
-  code-organization: {}
+  - decision: ""
+    context: ""
+    rationale: ""
+    alternatives_considered: []
+    impact: ""
 
-challenges-and-solutions: []
+challenges-and-solutions:
+  - challenge: ""
+    context: ""
+    solution: ""
+    lessons_learned: ""
 
-deviations-from-plan: []
+deviations-from-plan:
+  - deviation: ""
+    original_plan: ""
+    actual_implementation: ""
+    rationale: ""
+    impact: ""
 
 implementation-details:
   files-created: []
   files-modified: []
   configuration-changes: []
   database-changes: []
+  key-components: []
 
 testing:
-  coverage: {}
-  results: {}
-  test-cases-summary: []
+  tdd-cycle-summary: ""  # RED → GREEN → REFACTOR evidence
+  coverage:
+    percentage: ""
+    critical_paths_covered: true
+  results:
+    unit_tests: ""
+    integration_tests: ""
+    e2e_tests: ""
+  all_tests_passed: true
 
-quality-metrics:
-  code-quality: {}
-  performance: []
-  security: []
+known-issues:
+  - issue: ""
+    severity: ""
+    workaround: ""
+    tracking: ""
 
-known-issues: []
-
-technical-debt: []
-
-risks-and-maintenance:
-  risks: []
-  maintenance-notes: []
-  monitoring-recommendations: []
+technical-debt:
+  - item: ""
+    reason: ""
+    mitigation_plan: ""
+    priority: ""
 
 documentation-updates: []
-
-lessons-learned: []
 
 next-steps: []
 
 references:
   implementation_plan: ""
   related_docs: []
-  code_repository: ""
   external_resources: []

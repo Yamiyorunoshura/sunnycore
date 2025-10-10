@@ -14,9 +14,24 @@ project-overview:
   description: ""
   type: ""
 
-functional-requirements: []
+functional-requirements:
+  - id: ""
+    title: ""
+    description: ""
+    acceptance-criteria:
+      - given: ""
+        when: ""
+        then: ""
+    priority: ""
+    dependencies: []
 
-non-functional-requirements: []
+non-functional-requirements:
+  - id: ""
+    category: ""  # performance/security/reliability/usability/maintainability
+    requirement: ""
+    target-metric: ""
+    measurement-method: ""
+    priority: ""
 
 constraints:
   technical: []
@@ -26,11 +41,3 @@ constraints:
 assumptions-and-risks:
   assumptions: []
   risks: []
-
-user-stories: []
-
-glossary: []
-
-appendix:
-  references: []
-  change_log: []

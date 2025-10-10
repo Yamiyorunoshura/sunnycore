@@ -1,6 +1,6 @@
 ---
-# Tasks Document Template
-# 任務文檔模板
+# Epic Document Template - Feature-Level Task List
+# Epic 文檔模板 - 功能級任務列表
 
 title: ""
 version: ""
@@ -10,22 +10,28 @@ total_tasks: 0
 completed_tasks: 0
 ---
 
-task-overview:
-  project_summary: ""
-  priority_levels: ""
+project-summary: ""
 
-functional-tasks: []
+tasks:
+  - id: ""
+    name: ""
+    description: ""
+    requirement-mapping: []
+    architecture-mapping: []
+    dependencies: []
+    dod: []
+    estimated-duration: ""
+    status: "pending"  # pending/in-progress/completed/blocked
+    score: 0.0
 
-non-functional-tasks: []
+task-dependencies:
+  - task-id: ""
+    depends-on: []
+    dependency-type: ""  # blocks/requires
 
-infrastructure-tasks: []
-
-documentation-tasks: []
-
-task-dependencies: []
-
-milestones: []
-
-progress-summary: {}
+milestones:
+  - name: ""
+    tasks: []
+    target-date: ""
 
 notes: ""
