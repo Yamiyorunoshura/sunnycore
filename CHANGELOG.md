@@ -7,6 +7,22 @@
 
 ## [Unreleased]
 
+## [3.3.21] - 2025-10-10
+
+### Fixed
+- 修復 TODO 狀態檢查 Hook 的欄位識別問題：增強 `claude code/hooks/ensure_todos_done.py` 的相容性與錯誤處理
+  - 新增 JSON 字串解析：當 payload 為字串時自動解析為 JSON 物件
+  - 支援 `content` 欄位：明確支援 todo_write 工具使用的主要欄位名（content、title、task、text）
+  - 優化重試邏輯：
+    * 最大重試次數從 2 次增加到 3 次
+    * 達到最大次數時自動清空計數並放行
+    * 只在 stop_hook_active 時才累加重試計數（避免誤觸發）
+  - 改善使用者體驗：
+    * 待辦項目顯示數量從 8 個增加到 10 個
+    * 錯誤訊息繁體中文化（「未命名待辦項目」）
+    * 簡化提示訊息格式
+  - 提升 Hook 機制的穩定性與使用者友善度
+
 ## [3.3.20] - 2025-10-10
 
 ### Added
