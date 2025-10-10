@@ -319,6 +319,7 @@ class SunnycoreInstaller:
             # .claude/ 目錄內容
             ("claude code/agents", claude_dir / "agents"),
             ("claude code/commands", claude_dir / "commands"),
+            ("claude code/hooks", claude_dir / "hooks"),
             
             # sunnycore/ 目錄內容
             ("claude code/tasks", sunnycore_dir / "tasks"),
@@ -359,7 +360,8 @@ class SunnycoreInstaller:
             print(f"{work_dir}/")
             print(f"├── .claude/              # Claude 專用配置")
             print(f"│   ├── agents/          # Agent 定義")
-            print(f"│   └── commands/        # 角色命令定義")
+            print(f"│   ├── commands/        # 角色命令定義")
+            print(f"│   └── hooks/           # Claude Hooks")
             print(f"└── sunnycore/           # Sunnycore 系統檔案")
             print(f"    ├── CLAUDE.md        # Claude Code 專案指引")
             print(f"    ├── config.yaml")

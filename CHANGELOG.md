@@ -7,6 +7,22 @@
 
 ## [Unreleased]
 
+## [3.3.20] - 2025-10-10
+
+### Added
+- 新增 Claude Code stop hook 功能：在 `claude code/hooks/ensure_todos_done.py` 中實現 TODO 完成狀態檢查機制
+  - 實現 stop hook 機制：在 Claude Code 停止前自動檢查 transcript 中的 TODO 狀態
+  - 阻止未完成任務：若存在 pending 或 in_progress 的 TODO，則阻止停止並要求繼續
+  - 防止無限循環：設置最大重試次數（2次），避免 hook 自鎖
+  - 支援多種轉錄格式：兼容不同的 TodoWrite 工具呼叫格式與 JSON 結構
+  - 提供清晰提示：列出所有未完成項目，引導用戶繼續完成任務
+
+### Changed
+- 更新安裝腳本以支援 hooks 安裝：在 `scripts/install.py` 中將 hooks 目錄加入 claude-code 版本的安裝配置
+  - 新增 hooks 目錄下載：在安裝 claude-code 版本時，自動下載 `claude code/hooks` 到 `.claude/hooks/`
+  - 更新安裝結構顯示：在安裝完成訊息中加入 hooks 目錄說明
+  - 提升 Claude Code 版本的功能完整性
+
 ## [3.3.19] - 2025-10-10
 
 ### Changed
