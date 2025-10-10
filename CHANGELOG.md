@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [3.3.16] - 2025-10-10
+
+### Changed
+- 強化步驟執行連續性：在 `claude code/CLAUDE.md` 中優化 GUIDANCE 11，明確強調執行步驟不應中斷
+  - 更新 GUIDANCE 11：從「execute all steps sequentially」改為「execute all steps sequentially without stopping」
+  - 強調任務執行的連續性與完整性，避免在步驟間不必要的停頓
+  - 提升任務執行效率與使用者體驗
+
 ## [3.3.15] - 2025-10-10
 
 ### Changed
