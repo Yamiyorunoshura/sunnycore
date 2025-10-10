@@ -7,6 +7,33 @@
 
 ## [Unreleased]
 
+## [3.3.6] - 2025-10-10
+
+### Changed
+- 擴展核心指引系統：在 `claude code/CLAUDE.md` 中新增 13 個結構化 GUIDANCE（11-23），提升任務執行的規範性與一致性
+  - GUIDANCE 11: [Input] Tag - 要求驗證所有必要輸入存在後再執行，避免缺少輸入導致的錯誤
+  - GUIDANCE 12: [Output] Tag - 要求產生所有指定的交付物，確保輸出完整性
+  - GUIDANCE 13: [Steps] Tag - 要求順序執行所有步驟並達成預期成果
+  - GUIDANCE 14: [DoD] Tag - 要求驗證所有 DoD 檢查項後才能標記任務完成
+  - GUIDANCE 15: [Role] & [Skills] Tags - 要求採用指定角色視角並應用技能
+  - GUIDANCE 16: [Constraints] Tag - 要求嚴格遵循所有約束條款
+  - GUIDANCE 17: [Tools] Tag - 要求在建議步驟使用工具
+  - GUIDANCE 18: [Path-Variables] Tag - 要求替換路徑變數為實際路徑
+  - GUIDANCE 19: [*-Guidelines] Tags - 要求研究並應用領域指引
+  - GUIDANCE 20: [Error-Handling] Tag - 要求諮詢錯誤處理策略
+  - GUIDANCE 21: [Decision-Criteria] & [Decision-Rules] Tags - 要求應用決策規則
+  - GUIDANCE 22: [Examples] Tag - 要求參考範例理解預期流程
+  - GUIDANCE 23: [blocking-conditions] Tag - 明確僅在阻塞條件發生時暫停執行
+- 精簡開發任務文檔：優化 `develop-plan.md` 執行流程說明
+  - 移除 [Execution] 章節，改為獨立的 [Blocking-Conditions] 章節
+  - 移除 [Status-Update-Templates] 章節：刪除 RED/GREEN/REFACTOR 階段的狀態更新模板
+  - 移除 [Driver-Pseudocode] 章節：刪除 TDD 循環的偽代碼示範
+  - 簡化 TDD Development Phase 步驟說明：移除迭代說明和非停止節奏提示
+  - 提升任務文檔的簡潔性，減少冗餘內容
+- 標準化阻塞條件引用：在 `sunnycore_dev.md` 中更新約束條款 3
+  - 將 "defined blocking conditions" 改為 "[blocking conditions]"
+  - 明確引用標籤化的阻塞條件定義，提升引用一致性
+
 ## [3.3.5] - 2025-10-10
 
 ### Changed
