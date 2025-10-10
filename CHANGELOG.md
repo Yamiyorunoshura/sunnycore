@@ -7,6 +7,20 @@
 
 ## [Unreleased]
 
+## [3.3.23] - 2025-10-10
+
+### Changed
+- 精簡任務文件工具列表：在 20 個任務文件中移除 `todo_write` 工具引用,並重新編號其他工具
+  - 移除原因：todo_write 工具已整合至任務執行流程中,不再需要在任務文件中明確列出
+  - 工具重新編號：
+    * sequential-thinking (MCP)：從工具 2 提升為工具 1
+    * claude-context (MCP)：從工具 3 提升為工具 2
+    * context7 (MCP)：從工具 4 提升為工具 3
+    * playwright (MCP)：從工具 5 提升為工具 4
+  - 涵蓋任務：brownfield-plan、conclude、consult、create-architecture、create-brownfield-architecture、create-epic、create-plan、create-prd、create-requirements、curate-knowledge、cutover、develop-plan、develop-prd、document-project、fix-acceptance-issues、fix-design-conflicts、init、review、validate-design
+  - 同步更新 sunnycore_assistant 命令文件中的工具列表
+  - 提升任務文件的簡潔性與聚焦度,減少冗餘工具說明
+
 ## [3.3.22] - 2025-10-10
 
 ### Changed

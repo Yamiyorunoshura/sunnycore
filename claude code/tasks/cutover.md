@@ -16,12 +16,10 @@
   4. Do not deviate from template structure
 
 ## [Tools]
-  1. **todo_write**: Create and manage task list
-    - [Step 1: Create todo list; Steps 2-6: Track task progress]
-  2. **sequential-thinking (MCP)**: Perform structured reasoning and verification
+  1. **sequential-thinking (MCP)**: Perform structured reasoning and verification
     - [Step 2: Reason about configuration requirements and environment dependencies]
     - [Step 4: Analyze acceptance test results and assess business impact]
-  3. **context7 (MCP)**
+  2. **context7 (MCP)**
     - [Step 2: Query official documentation related to deployment configuration]
 
 ## [Steps]

@@ -21,12 +21,10 @@
     - [Step 1: Analyze implementation plan complexity]
     - [Steps 2-4: Reason about implementation strategies and technical decisions for each TDD phase]
     - When to use: When need to evaluate implementation approaches or handle technical challenges
-  2. **todo_write**
-    - [Step 1: Create TDD phase todo list; Steps 2-5: Track implementation progress for each phase]
-  3. **claude-context (MCP)**
+  2. **claude-context (MCP)**
     - [Step 1: Search codebase for implementation plan-related code, modules, and test cases]
     - Query examples: "Where is the related implementation?" "How to test this?" "What modules does this depend on?"
-  4. **context7 (MCP)**
+  3. **context7 (MCP)**
     - [Steps 2-4: When need external API calls, query official documentation and examples]
 
 ## [Blocking-Conditions]

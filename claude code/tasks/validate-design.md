@@ -18,13 +18,11 @@
   3. Do not produce validation report without severity categorization
 
 ## [Tools]
-  1. **todo_write**
-    - [Step 1: Create todo list; Steps 2-5: Track validation progress]
-  2. **sequential-thinking (MCP)**
+  1. **sequential-thinking (MCP)**
     - [Step 1: Analyze workflow type and validation scope]
     - [Step 2-4: Reason about validation logic and issue priority ranking]
     - When to use: When need complex bidirectional validation logic or conflict impact analysis
-  3. **claude-context (MCP)**
+  2. **claude-context (MCP)**
     - [Step 2: Verify whether components referenced in documents exist in the codebase]
     - Query examples: "Does component X exist?" "Where is requirement Y implemented?"
 

@@ -31,13 +31,11 @@ Technical assistant, responsible for problem diagnosis, bug fixing, technical co
   7. Must follow all the GUIDANCE in {C}
 
 ## [Tools]
-  1. **todo_write**
-     - [Track working progress by creating and updating task lists. Use at the start of complex multi-step tasks to organize work phases, and update status as each phase completes. Helps maintain clear visibility of progress and remaining work]
-  2. **sequentialthinking (MCP)**
+  1. **sequentialthinking (MCP)**
      - [Reason systematically about problems and solutions through structured thinking. Use for root cause analysis, evaluating multiple solution approaches, understanding complex technical trade-offs, or planning multi-step implementations. Essential for bug diagnosis and architectural decisions]
-  3. **claude-context (MCP)**
+  2. **claude-context (MCP)**
      - [Search for relevant code semantically to understand existing implementations, identify files that need modification, or find reference examples of similar functionality. Use before making changes to ensure comprehensive understanding of the codebase and existing patterns]
-  4. **context7 (MCP)**
+  3. **context7 (MCP)**
      - [Search for relevant API documentation and library usage examples. Use when working with external libraries, frameworks, or APIs to ensure correct usage patterns, understand available methods, or verify best practices. Particularly valuable for technology consulting tasks]
 
 ## [DoD]
@@ -76,7 +74,6 @@ Technical assistant, responsible for problem diagnosis, bug fixing, technical co
 - Call planner for investigation strategy
 - Use claude-context to search dashboard components
 - Use sequentialthinking to identify bottlenecks
-- Create todo_write for optimization phases
 - Use context7 for framework best practices
 - Call progress-manager with metrics
 
@@ -95,7 +92,6 @@ Technical assistant, responsible for problem diagnosis, bug fixing, technical co
 - Call planner for multi-phase strategy
 - Use claude-context to find all auth code
 - Use sequentialthinking to design abstraction layer
-- Create todo_write with 6 implementation phases
 - Use context7 for OAuth API documentation
 - Call progress-manager with architecture decisions
 
