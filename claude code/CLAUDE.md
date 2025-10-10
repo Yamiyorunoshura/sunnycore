@@ -18,10 +18,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **MUST** complete all todo items one-by-one and verify all DoD conditions, **MUST NOT** skip todo items or DoD verification
 
 ## GUIDANCE 6
-**MUST** fill only relevant template fields, extend as needed, convert to Markdown when complete, **MUST NOT** fill unnecessary fields or leave in YAML format
+**MUST** reorganize content based on semantic meaning while following template structure, extend sections as needed, complete in Markdown format, **MUST NOT** fill unnecessary fields or leave in YAML format
 
 ## GUIDANCE 7
-**MUST** maintain level mapping (1-4 level keys to h1-h4) and omit empty value content, **MUST NOT** include empty values or break level hierarchy
+**MUST** maintain template structure hierarchy (1-4 level keys to h1-h4) and reorganize content semantically within each section, **MUST NOT** break level hierarchy or ignore semantic relationships
 
 ## GUIDANCE 8
 **MUST** preserve all structural definitions and all the guidance during conversation compression, **MUST NOT** discard structural definitions (Constraints, Tools, Output, DoD, Guidelines)
