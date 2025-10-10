@@ -163,7 +163,7 @@ flowchart TD
 - ✅ **Review 通過**：檢查是否還有其他任務
   - 有任務 → 回到步驟 7
   - 無任務 → 進入階段三
-- ❌ **Review 未通過**：使用 `/sunnycore_dev *brownfield-tasks {task_id}` 進行重開發，回到步驟 7
+- ❌ **Review 未通過**：使用 `/sunnycore_dev *brownfield-plan {task_id}` 進行重開發，回到步驟 7
 
 ### 📊 階段三：驗收與總結
 
@@ -244,7 +244,7 @@ flowchart TD
     
     D1{"✅ Review<br/>通過?"}
     D2{"📝 還有<br/>任務?"}
-    R1["🔄 /sunnycore_dev<br/>*brownfield-tasks<br/>重新開發"]
+    R1["🔄 /sunnycore_dev<br/>*brownfield-plan<br/>重新開發"]
     
     subgraph Phase3 ["📊 階段三：驗收與總結"]
         C0["9️⃣ /sunnycore_po<br/>*cutover<br/>✅ 項目驗收"]
@@ -314,7 +314,7 @@ flowchart TD
 - ✅ **Review 通過**：檢查是否還有其他任務
   - 有任務 → 回到步驟 8
   - 無任務 → 進入階段三
-- ❌ **Review 未通過**：使用 `/sunnycore_dev *brownfield-tasks {task_id}` 進行重開發，回到步驟 8
+- ❌ **Review 未通過**：使用 `/sunnycore_dev *brownfield-plan {task_id}` 進行重開發，回到步驟 8
 
 ### 📊 階段三：驗收與總結
 
@@ -355,7 +355,7 @@ flowchart TD
     
     D1{"✅ Review<br/>通過?"}
     D2{"📝 還有<br/>任務?"}
-    R1["🔄 /sunnycore_dev<br/>*brownfield-tasks<br/>重新開發"]
+    R1["🔄 /sunnycore_dev<br/>*brownfield-plan<br/>重新開發"]
     
     subgraph Phase3 ["📊 階段三：驗收與總結"]
         C0["🔟 /sunnycore_po<br/>*cutover<br/>✅ 項目驗收"]
@@ -423,7 +423,7 @@ flowchart TD
 
 2. **任務迭代**
    - Review 通過：繼續下一個任務或進入驗收階段
-   - Review 未通過：使用 brownfield-tasks 命令重新開發
+   - Review 未通過：使用 brownfield-plan 命令重新開發
 
 3. **Cutover 驗收檢查點** ⭐ 新增
    - 從業務和用戶角度驗收項目交付
