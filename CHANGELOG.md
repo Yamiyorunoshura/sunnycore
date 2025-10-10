@@ -7,6 +7,25 @@
 
 ## [Unreleased]
 
+## [3.3.12] - 2025-10-10
+
+### Changed
+- 增強專案初始化任務：在 `init` 任務中新增目錄結構創建與最小可運行應用驗證功能
+  - 更新 `claude code/tasks/init.md`：強化初始化任務的完整性
+    * 新增輸出項 3：完整目錄結構（從 {ARCH}/*.md 的 work-directory-structure 提取）
+    * 新增輸出項 4：最小可運行應用（Hello World 級別入口點並驗證啟動）
+    * 新增約束條款 4：必須從架構文檔創建目錄結構，不可假設目錄結構
+    * 新增約束條款 5：最小實現僅包含啟動驗證所需的基本代碼，不實現業務邏輯
+    * 新增步驟 3：目錄結構與最小實現（提取 work-directory-structure、創建所有必要目錄、創建 Hello World 應用入口點、配置基本啟動腳本）
+    * 更新步驟編號：原步驟 3-4 更新為步驟 4-5
+    * 新增初始化指引：目錄結構與最小實現指引（提取目錄結構、創建 Hello World 應用、確保應用啟動並返回基本響應）
+    * 更新 DoD：新增目錄結構創建檢查、最小 Hello World 應用實現並通過煙霧測試檢查
+    * 擴展三個範例：新增目錄創建和最小應用驗證步驟
+      - 範例 1 (Microservices Platform): 新增 src/, services/, config/, docker/, tests/ 目錄創建，Express Hello World server 驗證
+      - 範例 2 (Python Data Pipeline): 新增 dags/, plugins/, data/, scripts/, tests/ 目錄創建，Airflow Hello World DAG 驗證
+      - 範例 3 (React Native Mobile App): 新增 src/, src/components/, src/screens/, src/navigation/, assets/, tests/ 目錄創建，Hello World screen 驗證
+  - 提升專案初始化的完整性與可驗證性
+
 ## [3.3.11] - 2025-10-10
 
 ### Changed
