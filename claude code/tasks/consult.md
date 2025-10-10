@@ -14,20 +14,18 @@
   4. Do not recommend workflows that violate Decision-Criteria
 
 ## [Tools]
-  1. **todo_write**
-    - [Step 1: Create task list; Steps 2-4: Track progress]
-  2. **sequential-thinking (MCP)**
+  1. **sequential-thinking (MCP)**
     - [Step 2: Systematically decompose requirement scope and impact surface]
     - When to use: When need to assess requirement impact on existing system and estimate task complexity
     - [Step 3: Branch reasoning for PRD workflow vs Full workflow applicability]
     - When to use: When requirement scope is unclear or difficult to determine if architecture changes are needed
-  3. **claude-context (MCP)**
+  2. **claude-context (MCP)**
     - [Step 2: When project is Brownfield, search existing architecture boundaries and public contracts]
     - Query examples: "What are the public API interfaces?" "Where are the integration points?" "How are module boundaries defined?"
-  4. **context7 (MCP)**
+  3. **context7 (MCP)**
     - [Step 2: Requirement Analysis Phase - Query API documentation when assessing technical feasibility]
     - When to use: When need to verify if external APIs support required functionality
-  5. **playwright (MCP)**
+  4. **playwright (MCP)**
     - [Step 2: Requirement Analysis Phase - Research competitor product implementations]
     - When to use: When need to study how similar features are implemented in existing products
 

@@ -16,18 +16,16 @@
   4. Do not skip executing shard-architecture.py
 
 ## [Tools]
-  1. **todo_write**
-    - [Step 1: Track and update execution tasks; Steps 2-4: Track writing progress and results]
-  2. **sequential-thinking (MCP)**
+  1. **sequential-thinking (MCP)**
     - [Step 1: Decompose requirements and identify applicable architecture patterns]
     - [Step 2: Design system components and boundaries, verify design decisions]
     - When to use: When need to evaluate multiple architecture options or perform pros/cons analysis
     - [Step 3: Structured drafting of architecture document, ensure logical consistency across sections]
     - [Step 4: Verify requirement-to-architecture mapping coverage]
-  3. **context7 (MCP)**
+  2. **context7 (MCP)**
     - [Step 2: Query official documentation for external packages and architecture pattern best practices]
     - When to use: When need to verify tech stack version compatibility or find official architecture guidance
-  4. **playwright (MCP)**
+  3. **playwright (MCP)**
     - [Step 1-2: Research similar system architecture designs and implementation cases]
     - When to use: When need to study architecture patterns from open-source projects or industry references
 

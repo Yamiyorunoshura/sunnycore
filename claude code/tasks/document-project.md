@@ -21,17 +21,15 @@
   4. Do not skip updating CLAUDE.md Document Index after sharding
 
 ## [Tools]
-  1. **todo_write**
-    - [Step 1: Create task list; Steps 2-4: Track task progress]
-  2. **sequential-thinking (MCP)**
+  1. **sequential-thinking (MCP)**
     - [Step 2: Reason about content integration strategy and document organization structure]
     - When to use: When need to integrate information from multiple sources or ensure document consistency
-  3. **claude-context (MCP)**
+  2. **claude-context (MCP)**
     - [Step 1-2: Search actual implementation details, architecture decisions, and key components]
     - Query examples: "What is the actual implementation?" "Where are the key components?" "What are the architecture decisions?"
-  4. **context7 (MCP)**
+  3. **context7 (MCP)**
     - [Step 1-2: Query latest official documentation and API changes for tech stack]
-  5. **playwright (MCP)**
+  4. **playwright (MCP)**
     - [Step 1-2: Research architecture documentation structure and presentation from exemplary open-source projects]
     - When to use: When need to study how successful projects document their architecture and design decisions
 

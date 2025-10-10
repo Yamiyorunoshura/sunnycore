@@ -18,19 +18,17 @@
   4. Do not skip executing shard-architecture.py
 
 ## [Tools]
-  1. **todo_write**
-    - [Step 1: Track tasks; Steps 2-4: Track task status]
-  2. **sequential-thinking (MCP)**
+  1. **sequential-thinking (MCP)**
     - [Step 1: Evaluate extension points and constraints of existing architecture]
     - [Step 2: Design new module boundaries and integration patterns]
     - When to use: When need to evaluate multiple integration approaches or analyze impact scope
     - [Step 3: Structured drafting of architecture change document]
-  3. **claude-context (MCP)**
+  2. **claude-context (MCP)**
     - [Step 1: Search existing architecture implementations, public contracts, and integration points]
     - Query examples: "What are the existing system boundaries?" "How is data flow implemented?" "What are the shared services?"
-  4. **context7 (MCP)**
+  3. **context7 (MCP)**
     - [Step 2: Query official API documentation and integration guidance for new integration technologies]
-  5. **playwright (MCP)**
+  4. **playwright (MCP)**
     - [Step 1-2: Research architecture migration patterns and integration cases]
     - When to use: When need to study how similar systems evolved their architecture or integrated new components
 

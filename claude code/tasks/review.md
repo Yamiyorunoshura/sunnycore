@@ -20,12 +20,10 @@
     - [Step 1: Identify task domain and select review criteria]
     - [Step 2-4: Reason about domain-specific scoring logic, issue prioritization, and decision rationale]
     - When to use: When need complex code quality assessment or architecture alignment analysis
-  2. **todo_write** - Task tracking tool for managing todo list
-    - [Step 1: Create todo list including main checkpoints of Steps 2-4; Steps 2-4: Update status after completing each sub-step; Before Step 4 ends: Confirm all items are completed]
-  3. **claude-context (MCP)** - Codebase semantic search and indexing tool
+  2. **claude-context (MCP)** - Codebase semantic search and indexing tool
     - [Step 1-2: Search codebase for implementation plan-related code (if needed)]
     - [Step 2: Search for relevant test cases and implementation patterns]
-  4. **context7 (MCP)**
+  3. **context7 (MCP)**
     - [Step 2: Code and Test Review Phase - Verify external API usage correctness]
     - When to use: When reviewing code that integrates with external services or SDKs
 
