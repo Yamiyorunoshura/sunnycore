@@ -9,8 +9,7 @@
 
 ## [Output]
   1. Fixed code that runs properly
-  2. Fix summary
-  3. Updated development notes "{DEVNOTES}/{task_id}-dev-notes.md" (Markdown format)
+  2. Updated development notes "{DEVNOTES}/{task_id}-dev-notes.md" (Markdown format)
 
 ## [Constraints]
   1. Do not deliver fixes that fail to run properly

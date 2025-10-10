@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [3.3.18] - 2025-10-10
+
+### Changed
+- 簡化 brownfield-plan 任務輸出項目：將 `claude code/tasks/brownfield-plan.md` 和 `cursor/tasks/brownfield-plan.md` 的輸出從 3 項精簡為 2 項
+  - 移除輸出項 2：Fix summary（修復摘要）
+  - 保留輸出項 1：修復後正常運行的程式碼
+  - 保留輸出項 2（原項 3）：更新的開發筆記 "{DEVNOTES}/{task_id}-dev-notes.md" (Markdown 格式)
+  - 提升任務輸出的聚焦度，減少冗餘文檔產出
+
 ## [3.3.17] - 2025-10-10
 
 ### Changed
