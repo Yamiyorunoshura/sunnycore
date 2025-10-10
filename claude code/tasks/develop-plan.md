@@ -29,6 +29,11 @@
   4. **context7 (MCP)**
     - [Steps 2-4: When need external API calls, query official documentation and examples]
 
+## [Execution]
+  - Continuous cadence: Complete RED → GREEN → REFACTOR → Validation & Documentation in a single uninterrupted turn.
+  - Micro-updates: One-line status updates MUST NOT cause a pause; proceed immediately unless blocking conditions apply.
+  - Blocking conditions: missing critical inputs; unexpected RED failures; risky irreversible actions needing approval; tools lacking non-interactive flags.
+  
 ## [Steps]
   1. Preparation & Planning
     - Understand TDD implementation plan and three phases
@@ -61,6 +66,7 @@
     - **GREEN Phase**: Implement minimal code to pass tests (exit code 0); follow architecture mapping strictly
     - **REFACTOR Phase**: Improve code quality while maintaining green tests; integrate real APIs/services; apply patterns and eliminate duplication
     - Iterate RED→GREEN→REFACTOR until all acceptance criteria met; rollback immediately if tests fail during refactoring
+    - Non-stop cadence: Do not pause between sub-phases; emit micro-updates and continue unless a defined blocking condition is met
   
   2. **Code Quality Standards**
     - Apply SOLID principles (Single Responsibility, Open-Closed, Dependency Inversion)
@@ -94,6 +100,22 @@
 - RED: Write test_add_item_to_cart() asserting item added to Redis, test fails (no implementation yet)
 - GREEN: Implement POST /cart endpoint, Redis HSET operation, test passes (exit code 0)
 - REFACTOR: Add input validation, apply error handling pattern, ensure tests stay green
+
+[Status-Update-Templates]
+- After RED: "RED complete (tests fail as expected). Starting GREEN: minimal implementation to turn tests green."
+- After GREEN: "GREEN complete (all tests pass). Starting REFACTOR: improve quality while keeping tests green."
+- After REFACTOR: "REFACTOR complete (tests remain green). Proceeding to validation and dev-notes generation."
+
+[Driver-Pseudocode]
+```text
+for each acceptanceCriterion:
+  RED: add tests → run tests (expect fail for the right reason)
+  GREEN: minimal impl → run tests (expect pass)
+  REFACTOR: improve quality → run tests (must stay green)
+
+post-phase:
+  run lints → gen dev-notes → verify DoD → conclude
+```
 
 [Expected Outcome]
 - Code: src/services/CartService.js with addItem() method, tests/CartService.test.js

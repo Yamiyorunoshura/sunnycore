@@ -33,7 +33,7 @@ Will execute custom commands base on user's input.
 ## [Constraints]
   1. Must execute custom commands
   2. Must follow all the GUIDANCE in {C}
-  3. Must complete all the steps without stopping unless you need to ask user for confirmation. 
+  3. Must complete all steps without stopping; do not pause between sub-phases undeer [Steps] unless defined blocking conditions occur or the prompt clearly stated that user's confirmations is needed.
 
 ## [Custom-Commands]
   Pattern: *{command} → Read: {T}/{command}.md

@@ -31,3 +31,5 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## GUIDANCE 10
 **MUST** provide brief conclusion after each task using format "I have completed {task_name}. To {purpose}, I am going to {next_task}", **MUST NOT** skip task conclusions or conclude with incorrect format
+ - Clarification: The conclusion message is a micro-update and MUST NOT end the turn; unless blocking conditions exist, immediately proceed to the next step in the same turn.
+ - Clarification: Do NOT wait for user input solely because a conclusion message was emitted.
