@@ -33,7 +33,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **MUST** provide brief conclusion after each task using format "I have completed {task_name}. To {purpose}, I am going to {next_task}", **MUST NOT** skip task conclusions or conclude with incorrect format
 
 ## GUIDANCE 11: [Steps] Tag
-**MUST** execute all steps sequentially with their sub-tasks and achieve stated outcomes, **MUST NOT** skip steps or reorder unless dependencies require
+**MUST** execute all steps sequentially without stopping with their sub-tasks and achieve stated outcomes, **MUST NOT** skip steps or reorder unless dependencies require
 
 ## GUIDANCE 12: [DoD] Tag
 **MUST** verify all DoD checklist items are satisfied before considering task complete, **MUST NOT** mark task complete with unchecked DoD items
