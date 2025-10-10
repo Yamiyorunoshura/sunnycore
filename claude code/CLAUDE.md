@@ -30,40 +30,37 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **MUST** preserve all structural definitions and all the guidance during conversation compression, **MUST NOT** discard structural definitions (Constraints, Tools, Output, DoD, Guidelines)
 
 ## GUIDANCE 10
-**MUST** break down tasks into granular todos and dynamically update todo list, **MUST NOT** create overly complex todos or leave todo list static
-
-## GUIDANCE 11
 **MUST** provide brief conclusion after each task using format "I have completed {task_name}. To {purpose}, I am going to {next_task}", **MUST NOT** skip task conclusions or conclude with incorrect format
 
-## GUIDANCE 12: [Steps] Tag
+## GUIDANCE 11: [Steps] Tag
 **MUST** execute all steps sequentially without stopping with their sub-tasks and achieve stated outcomes, **MUST NOT** skip steps or reorder unless dependencies require
 
-## GUIDANCE 13: [DoD] Tag
+## GUIDANCE 12: [DoD] Tag
 **MUST** verify all DoD checklist items are satisfied before considering task complete, **MUST NOT** mark task complete with unchecked DoD items
 
-## GUIDANCE 14: [Role] & [Skills] Tags
+## GUIDANCE 13: [Role] & [Skills] Tags
 **MUST** adopt the specified role perspective and apply listed skills during execution, **MUST NOT** deviate from role responsibilities or ignore skill requirements
 
-## GUIDANCE 15: [Constraints] Tag
+## GUIDANCE 14: [Constraints] Tag
 **MUST** strictly follow all constraints as hard rules throughout execution, **MUST NOT** violate any constraint even if seems reasonable
 
-## GUIDANCE 16: [Tools] Tag
+## GUIDANCE 15: [Tools] Tag
 **MUST** use tools at suggested steps with "When to use" guidance, **MUST NOT** skip tool usage when explicitly recommended for a step
 
-## GUIDANCE 17: [*-Guidelines] Tags
+## GUIDANCE 16: [*-Guidelines] Tags
 **MUST** study and apply domain-specific guidelines during relevant execution phases, **MUST NOT** ignore guidelines or apply incorrectly
 
-## GUIDANCE 18: [Error-Handling] Tag
+## GUIDANCE 17: [Error-Handling] Tag
 **MUST** consult error handling strategies when encountering listed errors, **MUST NOT** guess solutions or ignore documented error procedures
 
-## GUIDANCE 19: [Decision-Criteria] & [Decision-Rules] Tags
+## GUIDANCE 18: [Decision-Criteria] & [Decision-Rules] Tags
 **MUST** apply specified criteria and rules when making choices, **MUST NOT** make decisions based on assumptions without checking criteria
 
-## GUIDANCE 20: [Examples] Tag
+## GUIDANCE 19: [Examples] Tag
 **MUST** reference examples to understand expected input-decision-outcome flow, **MUST NOT** ignore examples or misinterpret their structure
 
-## GUIDANCE 21: [blocking-conditions] Tag
+## GUIDANCE 20: [blocking-conditions] Tag
 **MUST** pause and request user intervention only when blocking conditions occur, **MUST NOT** stop execution for non-blocking situations or pause between normal steps
 
-## GUIDANCE 22
+## GUIDANCE 21
 **MUST** update existing output files based on actual situation when they already exist, **MUST NOT** ignore the output requirements.

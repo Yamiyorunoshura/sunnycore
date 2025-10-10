@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [3.3.22] - 2025-10-10
+
+### Changed
+- 精簡核心指引系統：在 `claude code/CLAUDE.md` 中移除 GUIDANCE 10，重新編號指引結構
+  - 移除 GUIDANCE 10：關於動態更新 todo list 的指引（該功能已整合至任務執行流程中）
+  - 重新編號：原 GUIDANCE 11-21 更新為 GUIDANCE 10-20
+  - 提升核心指引的簡潔性與聚焦度
+
 ## [3.3.21] - 2025-10-10
 
 ### Fixed
