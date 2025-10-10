@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [3.3.17] - 2025-10-10
+
+### Changed
+- 優化審查任務評分系統：將 `claude code/tasks/review.md` 和 `cursor/tasks/review.md` 的評分系統從 4.0 scale 升級到 10.0 scale
+  - 新評分系統：Platinum (9.0-10.0)、Gold (8.0-8.9)、Silver (7.0-7.9)、Bronze (6.0-6.9)、Fail (<6.0)
+  - 原評分系統：Platinum (4.0)、Gold (3.0)、Silver (2.0)、Bronze (1.0)
+  - 更新決策規則閾值：Accept (≥6.0)、Accept with Changes (5.0-5.9)、Reject (<6.0 或 <5.0)
+  - 更新風險評估標準：Low (≥8.0)、Medium (6.0-7.9)、High (<6.0)
+  - 更新範例分數以反映新評分系統
+  - 提升評分精確度與決策清晰度
+
 ## [3.3.16] - 2025-10-10
 
 ### Changed
