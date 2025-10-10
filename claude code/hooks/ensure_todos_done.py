@@ -12,7 +12,9 @@ from pathlib import Path
 
 def emit_block(reason: str):
     # Stop/SubagentStop 的控制介面需要 decision=block 並提供 reason。 # docs
-    print(json.dumps({"decision": "block", "reason": reason}, ensure_ascii=False))
+    result = json.dumps({"decision": "block", "reason": reason}, ensure_ascii=False)
+    print(result)
+    sys.stdout.flush()  # 確保訊息被立即發送到 Claude Code
     sys.exit(0)
 
 def load_jsonl(path: Path):

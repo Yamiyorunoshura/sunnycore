@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [3.3.26] - 2025-10-10
+
+### Fixed
+- 修復 TODO 狀態檢查 Hook 的輸出緩衝問題：改進 `claude code/hooks/ensure_todos_done.py` 的訊息發送機制
+  - 改進 emit_block 函數：將 JSON 輸出先存儲至變數再輸出，確保格式正確
+  - 新增 sys.stdout.flush()：確保訊息立即發送到 Claude Code，避免緩衝延遲
+  - 提升 Hook 機制的即時性與可靠性
+
 ## [3.3.25] - 2025-10-10
 
 ### Changed
