@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [3.3.19] - 2025-10-10
+
+### Changed
+- 優化模板使用指引結構：在 `claude code/CLAUDE.md` 中重組 GUIDANCE 6 和 7，提升模板使用規範的清晰度
+  - 簡化 GUIDANCE 6：移除冗餘的 markdown 格式使用描述，聚焦於語義重組核心原則
+  - 重組 GUIDANCE 7：明確要求使用 markdown 列表與正文組織內容，禁止保留 YAML keys
+  - 重新編號 GUIDANCE：原 GUIDANCE 11-21 更新為 GUIDANCE 12-22
+  - 提升模板使用指引的邏輯性與可讀性
+
 ## [3.3.18] - 2025-10-10
 
 ### Changed
