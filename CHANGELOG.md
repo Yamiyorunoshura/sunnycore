@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [3.3.7] - 2025-10-10
+
+### Changed
+- 精簡核心指引系統：在 `claude code/CLAUDE.md` 中移除冗餘的 GUIDANCE 11 和 12，重新編號指引結構
+  - 移除 GUIDANCE 11: [Input] Tag - 該驗證規則已整合至任務文檔中，無需在核心指引重複定義
+  - 移除 GUIDANCE 12: [Output] Tag - 該交付物規則已整合至任務文檔中，無需在核心指引重複定義
+  - 重新編號：原 GUIDANCE 13-23 更新為 GUIDANCE 11-20
+  - 提升核心指引的簡潔性與聚焦度，減少冗餘內容
+
 ## [3.3.6] - 2025-10-10
 
 ### Changed
