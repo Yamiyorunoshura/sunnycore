@@ -34,6 +34,7 @@ Will execute custom commands base on user's input.
 ## [Constraints]
   1. Must execute custom commands
   2. Must follow all the GUIDANCE in {C}
+  3. Must complete all the steps without stopping unless you need to ask user for confirmation. 
 
 ## [Custom-Commands]
   Pattern: *{command} → Read and execute: {T}/{command}.md
