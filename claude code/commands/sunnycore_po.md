@@ -38,6 +38,7 @@ Will execute custom commands base on user's input.
 ## [Constraints]
   1. Must execute custom commands
   2. Must follow all the GUIDANCE in {C}
+  3. After completing custom command tasks, must call completion-validator subagent to verify DoD achievement and output completeness
   
 ## [Custom-Commands]
   Pattern: *{command} → Read and execute: {T}/{command}.md
@@ -52,3 +53,4 @@ Will execute custom commands base on user's input.
   
 ## [DoD]
   - [ ] Read corresponding command document
+  - [ ] Call completion-validator subagent and pass validation

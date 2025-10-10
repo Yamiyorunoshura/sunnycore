@@ -7,6 +7,23 @@
 
 ## [Unreleased]
 
+## [3.3.27] - 2025-10-10
+
+### Added
+- 新增完成驗證代理：新增 completion-validator subagent 提供 DoD 達成驗證與輸出完整性檢查
+  - 新增 `claude code/agents/completion-validator.md`：定義 Completion Validation Specialist 角色
+    * 核心職責：系統性驗證 Definition of Done (DoD) 與輸出完整性
+    * 支援工作流程：PRD 流程、完整開發流程、Brownfield 流程
+    * 驗證步驟：工作流程識別、DoD 提取、輸出驗證、缺口分析、報告產生
+    * 驗證邏輯：檔案存在檢查、內容完整性檢查、DoD 項目映射
+    * 輸出格式：PASS（所有 DoD 已滿足）或 FAIL（含剩餘任務清單）
+    * 約束：僅使用唯讀工具（read_file、grep、list_dir）、必須由主要 agents 調用
+  - 更新 5 個角色命令檔案：在所有主要 agents 中新增 completion-validator 調用要求
+    * 新增約束條款 3：「完成自訂命令任務後，必須調用 completion-validator subagent 驗證 DoD 達成與輸出完整性」
+    * 新增 DoD 檢查項：「已調用 completion-validator subagent 並通過驗證」
+    * 涵蓋檔案：sunnycore_architect.md、sunnycore_dev.md、sunnycore_pm.md、sunnycore_po.md、sunnycore_qa.md
+  - 提升工作流程完成品質與輸出可靠性
+
 ## [3.3.26] - 2025-10-10
 
 ### Fixed
