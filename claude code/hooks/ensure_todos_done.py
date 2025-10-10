@@ -52,6 +52,11 @@ def extract_todos(tool_call_obj):
     # 依不同實作，todos 可能在 input/todos、parameters/todos 或 args/todos
     for key1 in ("input","parameters","args","tool_input"):
         payload = tool_call_obj.get(key1) or {}
+        if isinstance(payload, str):
+            try:
+                payload = json.loads(payload)
+            except Exception:
+                continue
         for key2 in ("todos","todo","items"):
             todos = payload.get(key2)
             if isinstance(todos, list):
@@ -72,9 +77,10 @@ def has_unfinished(todos):
     unfinished = []
     for t in todos:
         status = (t.get("status") or t.get("state") or "").lower()
-        title  = t.get("title") or t.get("task") or t.get("text") or ""
+        # todo_write 工具使用 "content" 作為主要欄位名
+        title  = t.get("content") or t.get("title") or t.get("task") or t.get("text") or ""
         if status in ("pending","in_progress","in progress","todo","doing","started",""):
-            unfinished.append(title.strip() or "(no title)")
+            unfinished.append(title.strip() or "(未命名待辦項目)")
     return unfinished
 
 def main():
@@ -88,7 +94,7 @@ def main():
     stop_hook_active = bool(hook_input.get("stop_hook_active"))
     project_dir = Path(os.environ.get("CLAUDE_PROJECT_DIR","."))
 
-    # 防自鎖：如果已經因 stop hook 繼續過一次，就最多再擋 2 次
+    # 防自鎖：如果已經因 stop hook 繼續過一次，就最多再擋一定次數
     retry_file = project_dir/".claude/state/stop_retry_count"
     retry_file.parent.mkdir(parents=True, exist_ok=True)
     try:
@@ -96,9 +102,11 @@ def main():
     except Exception:
         n = 0
 
-    MAX_RETRIES = 2
-    if stop_hook_active and n >= MAX_RETRIES:
-        # 讓它停，避免無限循環。 # docs 建議檢查 stop_hook_active
+    MAX_RETRIES = 3
+    if n >= MAX_RETRIES:
+        # 達到最大重試次數，清空計數並放行
+        try: retry_file.unlink()
+        except Exception: pass
         sys.exit(0)
 
     todos = []
@@ -109,13 +117,14 @@ def main():
 
     unfinished = has_unfinished(todos)
     if unfinished:
-        # 累加重試計數
-        retry_file.write_text(str(n+1))
+        # 只在 stop_hook_active 時才累加重試計數
+        if stop_hook_active:
+            retry_file.write_text(str(n+1))
         reason = (
-            "還有未完成的待辦項目：\n- "
-            + "\n- ".join(unfinished[:8])
-            + ("\n…(其餘略)" if len(unfinished) > 8 else "")
-            + "\n請繼續下一項，直到全部 completed；完成後再進行測試、lint、typecheck 與（必要時）建立 PR。"
+            "待辦項目：\n- "
+            + "\n- ".join(unfinished[:10])
+            + ("\n…(其餘略)" if len(unfinished) > 10 else "")
+            + "\n\n請繼續完成。"
         )
         emit_block(reason)
     else:
