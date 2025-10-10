@@ -59,17 +59,18 @@
   Identify task domain first, then apply appropriate domain dimensions below. Use General Review if domain is unclear.
 
   ### **Scoring System (All Domains)**
-  - **Platinum (4.0)**: Fully compliant, no issues
-  - **Gold (3.0)**: Meets standards, 1-2 minor issues
-  - **Silver (2.0)**: Minimum standards, 3-4 issues needing improvement
-  - **Bronze (1.0)**: Below standards, serious issues or critical gaps
-  - Calculate: overall_score = mean of dimension scores, round to 2 decimals
+  - **Platinum (9.0-10.0)**: ≥ 90% - Fully compliant, no issues
+  - **Gold (8.0-8.9)**: ≥ 80% - Excellent implementation, meets high standards
+  - **Silver (7.0-7.9)**: ≥ 70% - Meets basic standards, room for improvement
+  - **Bronze (6.0-6.9)**: ≥ 60% - Barely acceptable, multiple issues needing improvement
+  - **Fail (<6.0)**: < 60% - Below acceptable standards, critical gaps
+  - Calculate: overall_score = mean of dimension scores, round to 1 decimal
 
   ### **Decision Rules**
-  - **Accept**: All dimensions ≥ 2.0, no critical issues
-  - **Accept with Changes**: 1-2 dimensions ≥ 1.5 with clear improvement plan
-  - **Reject**: 3+ dimensions < 2.0, or critical security/functional issues
-  - **Risk**: Low (all ≥2.5), Medium (1-2 between 2.0-2.4), High (any <2.0 or security issues)
+  - **Accept**: All dimensions ≥ 6.0, no critical issues
+  - **Accept with Changes**: 1-2 dimensions between 5.0-5.9 with clear improvement plan
+  - **Reject**: 3+ dimensions < 6.0, or any dimension < 5.0, or critical security/functional issues
+  - **Risk**: Low (all ≥ 8.0), Medium (1-2 between 6.0-7.9), High (any < 6.0 or security issues)
 
 ## [DoD]
   - [ ] All tests executed with results recorded and verified against implementation plan
@@ -88,11 +89,11 @@
 - Domain: Backend (apply backend scoring dimensions)
 - Execute tests: npm test (all 15 tests pass, coverage 92%)
 - Code alignment: Verify JWT implementation matches plan (src/auth/AuthService.js:L10-L45)
-- Score: API Design (4.0), Security (4.0), Error Handling (3.0), Testing (4.0) → Overall 3.75
-- Decision: Accept (all dimensions ≥ 2.0, no critical issues)
+- Score: API Design (10.0), Security (10.0), Error Handling (8.0), Testing (10.0) → Overall 9.5
+- Decision: Accept (all dimensions ≥ 6.0, no critical issues)
 
 [Expected Outcome]
-- docs/review/1-review.md with test results, code alignment analysis, score 3.75
+- docs/review/1-review.md with test results, code alignment analysis, score 9.5
 - docs/epic.md updated: Task-1 marked completed with score
 - Acceptance decision: Accept with rationale (strong implementation, minor error handling improvements suggested)
 
@@ -106,13 +107,13 @@
 - Domain: Frontend (apply frontend scoring dimensions)
 - Execute tests: npm test (12/15 tests pass, 3 accessibility tests fail)
 - Code alignment: Missing responsive design from plan (src/components/AnalyticsWidget.jsx)
-- Score: UI/UX (3.0), State Management (4.0), Performance (3.0), Accessibility (2.0), Testing (2.0) → Overall 2.8
+- Score: UI/UX (8.0), State Management (9.0), Performance (8.0), Accessibility (5.5), Testing (6.0) → Overall 7.3
 - Decision: Accept with changes (accessibility and responsive design fixes needed)
 
 [Expected Outcome]
 - docs/review/2-review.md with failed test details (L42-L58), alignment gaps
 - Action items: Fix accessibility (aria-labels, keyboard nav), add responsive breakpoints
-- docs/epic.md updated with score 2.8, status: needs revision
+- docs/epic.md updated with score 7.3, status: needs revision
 
 ### Example 3: Database Migration - Schema Update
 [Input]
@@ -124,7 +125,7 @@
 - Domain: Database (apply database scoring dimensions)
 - Execute tests: npm run test:db (migration fails rollback test, missing index on user_id)
 - Code alignment: Foreign key constraint missing from plan (migrations/003_user_preferences.sql:L15)
-- Score: Schema Design (3.0), Indexing (2.0), Migration (1.0), Performance (2.0) → Overall 2.0
+- Score: Schema Design (7.0), Indexing (5.0), Migration (3.5), Performance (5.5) → Overall 5.3
 - Decision: Reject (migration script has critical issue, rollback fails)
 
 [Expected Outcome]
