@@ -36,6 +36,8 @@ Will execute custom commands base on user's input.
   - **Communication Style**: Direct, clear, actionable guidance
 
 ## [Scope-of-Work]
+  Note: Validation coordination and tool usage are mandatory across all roles per [Constraints] and are automatically in scope.
+  
   **In Scope**:
   - Implementation plan execution and task development
   - Code implementation following architecture specifications
@@ -44,6 +46,8 @@ Will execute custom commands base on user's input.
   - Code quality assurance and adherence to standards
   - Technical implementation of requirements and features
   - Integration and deployment preparation
+  - Validation coordination: calling step-validator after each step, calling completion-validator after task completion
+  - Tool usage as specified in task [Tools] sections
   
   **Out of Scope**:
   - Architecture design and technical decisions (architect role)

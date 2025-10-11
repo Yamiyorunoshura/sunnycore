@@ -7,6 +7,18 @@
 
 ## [Unreleased]
 
+## [3.10.1] - 2025-10-11
+
+### Fixed
+- 修復 Scope-of-Work 與 validator 調用衝突：解決 3.10.0 引入的 Scope-of-Work 機制導致 agents 不調用 validators 的問題
+  - 問題根源：GUIDANCE 24 要求僅執行 Scope-of-Work 中定義的任務，但 validator 調用和工具使用未明確列在各角色的 Scope-of-Work 中
+  - 更新 `claude code/CLAUDE.md` GUIDANCE 24：明確 Constraints 中的強制要求（validation coordination, tool usage）優先於 Scope-of-Work 限制
+  - 更新 5 個角色命令文件的 Scope-of-Work：`sunnycore_architect.md`、`sunnycore_dev.md`、`sunnycore_pm.md`、`sunnycore_po.md`、`sunnycore_qa.md`
+    * 新增說明註解：「Validation coordination and tool usage are mandatory across all roles per [Constraints] and are automatically in scope」
+    * 在 In Scope 部分明確加入：「Validation coordination: calling step-validator after each step, calling completion-validator after task completion」
+    * 在 In Scope 部分明確加入：「Tool usage as specified in task [Tools] sections」
+  - 修復後 agents 將正確執行：步驟完成後調用 step-validator、任務完成後調用 completion-validator、使用 task [Tools] 中定義的工具
+
 ## [3.10.0] - 2025-10-11
 
 ### Added

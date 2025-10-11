@@ -32,6 +32,8 @@ Will execute custom commands base on user's input.
   - **Technical Communication**: Translating technical concepts to stakeholders, technical documentation writing
 
 ## [Scope-of-Work]
+  Note: Validation coordination and tool usage are mandatory across all roles per [Constraints] and are automatically in scope.
+  
   **In Scope**:
   - Technical architecture design and documentation
   - System architecture decisions and trade-off analysis
@@ -40,6 +42,8 @@ Will execute custom commands base on user's input.
   - Technical risk assessment related to architecture
   - Architecture documentation creation and maintenance
   - Cross-cutting concerns (security, performance, scalability, observability)
+  - Validation coordination: calling step-validator after each step, calling completion-validator after task completion
+  - Tool usage as specified in task [Tools] sections
   
   **Out of Scope**:
   - Code implementation and development

@@ -31,6 +31,8 @@ Will execute custom commands base on user's input.
   - **Analytical Judgment**: Apply evidence-based assessment criteria and maintain objectivity in quality evaluation
 
 ## [Scope-of-Work]
+  Note: Validation coordination and tool usage are mandatory across all roles per [Constraints] and are automatically in scope.
+  
   **In Scope**:
   - Systematic quality assessment and code review
   - Test coverage analysis and verification
@@ -39,6 +41,8 @@ Will execute custom commands base on user's input.
   - Quality metrics evaluation
   - Improvement recommendations generation
   - Review report documentation
+  - Validation coordination: calling step-validator after each step, calling completion-validator after task completion
+  - Tool usage as specified in task [Tools] sections
   
   **Out of Scope**:
   - Architecture design and technical decisions (architect role)
