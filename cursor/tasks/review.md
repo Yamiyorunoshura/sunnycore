@@ -14,6 +14,7 @@
   2. Do not omit acceptance decision (Accept/Accept with changes/Reject)
   3. Do not produce review report that deviates from template structure
   4. Do not update epic with incorrect status or score
+  5. **Do not accept ANY code containing mock/stub implementations, regardless of score** (auto-Reject)
 
 ## [Tools]
   1. **sequential-thinking (MCP)** - Structured reasoning tool for complex logic analysis
@@ -36,10 +37,11 @@
     - Outcome: Review criteria and approach determined
 
   2. Code & Test Execution Review
+    - **CRITICAL**: Scan ALL implementation code for mock/stub/placeholder patterns (auto-reject if found)
     - Execute all tests and record results properly
     - Apply domain-specific scoring criteria appropriately
     - Verify test coverage and code alignment with plan
-    - Outcome: Test results recorded and code alignment verified
+    - Outcome: Mock implementation check completed, test results recorded and code alignment verified
 
   3. Development Notes Validation
     - Review development notes for alignment with implementation
@@ -66,12 +68,17 @@
   - Calculate: overall_score = mean of dimension scores, round to 1 decimal
 
   ### **Decision Rules**
-  - **Accept**: All dimensions ≥ 6.0, no critical issues
-  - **Accept with Changes**: 1-2 dimensions between 5.0-5.9 with clear improvement plan
-  - **Reject**: 3+ dimensions < 6.0, or any dimension < 5.0, or critical security/functional issues
-  - **Risk**: Low (all ≥ 8.0), Medium (1-2 between 6.0-7.9), High (any < 6.0 or security issues)
+  - **CRITICAL REJECT CRITERIA** (overrides all scoring):
+    - **Mock/Stub Implementation Detection**: ANY presence of mock/placeholder/stub code → **AUTOMATIC REJECT**
+      - Examples: `// TODO: implement`, `throw new Error('Not implemented')`, placeholder return values, mock data in production code
+      - Rationale: Mock implementations are incomplete work, unacceptable regardless of test scores
+  - **Accept**: All dimensions ≥ 6.0, no critical issues, **AND no mock implementations**
+  - **Accept with Changes**: 1-2 dimensions between 5.0-5.9 with clear improvement plan, **AND no mock implementations**
+  - **Reject**: 3+ dimensions < 6.0, or any dimension < 5.0, or critical security/functional issues, **OR any mock implementations found**
+  - **Risk**: Low (all ≥ 8.0), Medium (1-2 between 6.0-7.9), High (any < 6.0 or security issues or mock implementations)
 
 ## [DoD]
+  - [ ] **CRITICAL**: All implementation code scanned and confirmed NO mock/stub/placeholder code exists
   - [ ] All tests executed with results recorded and verified against implementation plan
   - [ ] Complete review report exists at "{REVIEW}/{task_id}-review.md" with scoring and acceptance decision
   - [ ] "{EPIC}" updated with task completion status and score
@@ -132,3 +139,29 @@
 - Risk: High (data integrity risk if deployed)
 - Action items: Fix rollback script, add missing index, re-test migration
 - docs/epic.md: Task-3 status = failed review, requires rework
+
+### Example 4: Mock Implementation Auto-Reject (CRITICAL)
+[Input]
+- Development notes: docs/dev-notes/4-dev-notes.md (Task-4: Payment gateway integration)
+- Implementation plan: docs/plans/4-plan.md (Stripe API integration)
+- Template: review-tmpl.yaml
+
+[Decision]
+- Domain: Backend (apply backend scoring dimensions)
+- **CRITICAL FINDING**: Mock implementation detected in src/payment/PaymentService.js:L25
+  ```javascript
+  async processPayment(amount) {
+    // TODO: implement actual Stripe integration
+    return { success: true, transactionId: 'mock-123' };
+  }
+  ```
+- Execute tests: All 20 tests pass (but using mocked payment service)
+- Score: Would be API Design (9.0), Security (8.5), Error Handling (9.0), Testing (8.5) → Overall 8.8
+- **Decision: AUTOMATIC REJECT** (mock implementation found - overrides all scoring)
+
+[Expected Outcome]
+- docs/review/4-review.md with CRITICAL REJECTION: Mock implementation detected
+- Rationale: Even with high test scores (8.8), mock code is incomplete work and unacceptable
+- Risk: Critical (would deploy non-functional payment system)
+- Action items: Implement actual Stripe API integration, remove all mock/TODO code
+- docs/epic.md: Task-4 status = REJECTED, requires complete implementation

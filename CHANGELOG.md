@@ -7,6 +7,22 @@
 
 ## [Unreleased]
 
+## [3.3.28] - 2025-10-11
+
+### Added
+- 強化角色約束機制：在 4 個角色命令文件中新增程式碼生成限制
+  - 新增約束條款 4：「Must not edit or generate any code」
+  - 涵蓋文件：sunnycore_architect.md、sunnycore_pm.md、sunnycore_po.md、sunnycore_qa.md
+  - 明確限制這些角色不應直接編輯或生成程式碼，專注於其核心職責
+- 強化審查品質標準：在 review 任務中新增 mock/stub 實現自動拒絕機制
+  - 新增 CRITICAL REJECT CRITERIA：任何 mock/placeholder/stub 程式碼將導致自動拒絕
+  - 新增反面約束條款 5：「Do not accept ANY code containing mock/stub implementations, regardless of score」
+  - 新增步驟 2 關鍵檢查點：「CRITICAL: Scan ALL implementation code for mock/stub/placeholder patterns」
+  - 新增 DoD 檢查項：「CRITICAL: All implementation code scanned and confirmed NO mock/stub/placeholder code exists」
+  - 新增 Example 4：Mock Implementation Auto-Reject 範例，展示即使測試分數高（8.8）也會因 mock 實現而自動拒絕
+  - 涵蓋文件：claude code/tasks/review.md、cursor/tasks/review.md
+  - 確保所有提交的程式碼都是完整實現，而非半成品或佔位程式碼
+
 ## [3.3.27] - 2025-10-10
 
 ### Added

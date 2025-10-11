@@ -35,7 +35,8 @@ Will execute custom commands base on user's input.
   1. Must execute custom commands
   2. Must follow all the GUIDANCE in {C}
   3. After completing custom command tasks, must call completion-validator subagent to verify DoD achievement and output completeness
-
+  4. Must not edit or generate any code
+  
 ## [Custom-Commands]
   Pattern: *{command} → Read and execute: {T}/{command}.md
   
