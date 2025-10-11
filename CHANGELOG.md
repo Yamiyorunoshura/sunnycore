@@ -7,6 +7,21 @@
 
 ## [Unreleased]
 
+## [3.8.0] - 2025-10-11
+
+### Added
+- 新增步驟驗證機制：新增 step-validator 子代理提供步驟成果驗證能力
+  - 新增 `claude code/agents/step-validator.md`：定義 Step Outcome Validation Specialist 角色
+    * 核心職責：系統性驗證個別步驟成果在任務工作流程中的達成狀況
+    * 驗證邏輯：檔案存在檢查、內容完整性檢查、流程完成狀態驗證
+    * 輸出格式：PASS（步驟成果已達成）或 FAIL（含缺失項目清單與所需行動）
+    * 約束：僅使用唯讀工具（read_file、grep、list_dir、sequentialthinking）、必須由主要 agents 調用
+  - 更新 5 個角色命令檔案：在所有主要 agents 中新增 step-validator 調用要求
+    * 新增約束條款 5：「完成任務工作流程中的每個步驟後，必須調用 step-validator 子代理驗證步驟成果達成」
+    * 新增約束條款 6：「僅能在 step-validator 返回 PASS 後繼續下一步驟」
+    * 涵蓋檔案：sunnycore_architect.md、sunnycore_dev.md、sunnycore_pm.md、sunnycore_po.md、sunnycore_qa.md
+  - 提升任務執行品質與步驟成果驗證的系統性
+
 ## [3.7.0] - 2025-10-11
 
 ### Added
