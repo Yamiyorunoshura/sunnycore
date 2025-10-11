@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [3.6.1] - 2025-10-11
+
+### Changed
+- 精簡 brownfield-plan 任務輸入項目：移除不必要的開發筆記輸入項，簡化任務流程
+  - 從 `claude code/tasks/brownfield-plan.md` 輸入清單中移除第 2 項：`"{DEVNOTES}/{task_id}-dev-notes.md" --Development notes`
+  - 調整輸入項編號：原 2-5 項更新為 2-4 項（Review report、Architecture design、Project knowledge）
+  - 原因：開發筆記已整合至審查報告中，不再需要作為獨立輸入來源
+  - 提升任務輸入的聚焦度與流程簡潔性
+
 ## [3.6.0] - 2025-10-11
 
 ### Changed
