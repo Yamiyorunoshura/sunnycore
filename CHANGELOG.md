@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [3.9.0] - 2025-10-11
+
+### Added
+- 新增輸出文件生成約束：在 `claude code/CLAUDE.md` 中新增 GUIDANCE 22 - Output Tag
+  - 要求 AI 僅生成輸出部分明確聲明的文件
+  - 禁止生成超出範圍的文件
+  - 提升任務執行的精確性與可控性
+
+### Changed
+- 重新編號核心指引：原 GUIDANCE 22 更新為 GUIDANCE 23
+
 ## [3.8.0] - 2025-10-11
 
 ### Added
