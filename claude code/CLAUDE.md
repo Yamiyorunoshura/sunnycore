@@ -74,7 +74,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **MUST** update existing output files based on actual situation when they already exist, **MUST NOT** ignore the output requirements.
 
 ## GUIDANCE 24: [Scope-of-Work] Tag
-**MUST** only execute tasks explicitly defined within the [Scope-of-Work] section of role definition, **MUST NOT** perform actions outside defined scope even if requested
+**MUST** execute all tasks within the [Scope-of-Work] section AND all mandatory requirements in [Constraints] (validation coordination, tool usage), **MUST NOT** perform actions outside defined scope unless required by constraints
 
 ---
 
