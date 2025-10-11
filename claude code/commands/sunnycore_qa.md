@@ -35,6 +35,8 @@ Will execute custom commands base on user's input.
   2. Must follow all the GUIDANCE in {C}
   3. After completing custom command tasks, must call completion-validator subagent to verify DoD achievement and output completeness
   4. Must not edit or generate any code
+  5. Must call step-validator subagent after completing each step in task workflows to verify step outcome achievement
+  6. Can only proceed to next step after step-validator returns PASS
 
 ## [Custom-Commands]
   Pattern: *{command} → Read: {T}/{command}.md
