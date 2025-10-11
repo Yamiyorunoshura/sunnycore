@@ -7,7 +7,19 @@
 
 ## [Unreleased]
 
+## [3.5.0] - 2025-10-11
+
+### Added
+- 新增模板輸出格式指引：在 `claude code/CLAUDE.md` 中新增 GUIDANCE 9 - Template Output Format
+  - 要求必須生成純 markdown 格式的輸出文件，禁止包含 YAML 語法
+  - 確保所有生成的文檔符合標準 markdown 格式規範
+  - 提升文檔可讀性與格式一致性
+
 ### Changed
+- 重新編號核心指引：原 GUIDANCE 9-21 更新為 GUIDANCE 10-22
+  - 原 GUIDANCE 9（保留結構定義）→ GUIDANCE 10
+  - 原 GUIDANCE 10（任務結論）→ GUIDANCE 11
+  - 後續所有指引編號依序調整
 - 強化任務規劃測試指引：在 `create-plan.md` 中新增測試用例設計指南與範例強化
   - 新增 [Test-Case-Design-Guidelines] 章節：詳細說明 Unit Test、Integration Test、Behaviour Test 的使用時機與考量重點
   - 擴展 3 個範例的測試設計說明：
