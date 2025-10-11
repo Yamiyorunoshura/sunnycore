@@ -1,84 +1,314 @@
 ---
-# Cutover Report Template
-# 專案驗收報告模板
+# Cutover Report Template v2
+# Powered by BMAD™ Core
 
-project_name: ""
-cutover_date: ""
-tested_by: ""
-project_type: ""  # PRD/Traditional
-version: ""
----
+template:
+  id: cutover-report-template-v2
+  name: Cutover Report
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/cutover-report.md
+    title: "{{project_name}} Cutover Report"
+    note: "Project acceptance validation from business and user perspectives"
 
-cutover-status: ""  # Success/Partial Success/Failed
+sections:
+  - id: report-header
+    title: Cutover Information
+    instruction: |
+      **Project Name:** {project_name}
+      **Cutover Date:** {date}
+      **Tested By:** {tester name}
+      **Project Type:** PRD / Traditional
+      **Version:** {version}
+      **Environment:** Development / Staging / Production
 
-overall-assessment: |
-  # Summary including:
-  # - Critical/high/medium/low issues count
-  # - Requirements tested vs passed
-  # - Pass rate
+  - id: cutover-status
+    title: Cutover Status
+    instruction: |
+      **Status:** Success / Partial Success / Failed
+      
+      **Status Determination Criteria:**
+      - **Success:** All critical and high priority requirements pass, no critical issues
+      - **Partial Success:** Critical requirements pass but some high/medium requirements fail, or non-critical issues found
+      - **Failed:** Critical requirements fail, or critical issues block production readiness
+      
+      State the determined status clearly at the top of this section.
 
-configuration-required:
-  - config_item: ""
-    description: ""
-    location: ""
-    default_value: ""
-    notes: ""
+  - id: overall-assessment
+    title: Overall Assessment
+    instruction: |
+      Provide executive summary (3-5 paragraphs) covering:
+      
+      **Test Results Summary:**
+      - Total requirements tested: {count}
+      - Requirements passed: {count}
+      - Requirements failed: {count}
+      - Pass rate: {percentage}%
+      
+      **Issues Found:**
+      - Critical: {count}
+      - High: {count}
+      - Medium: {count}
+      - Low: {count}
+      
+      **Business Impact:**
+      - Can business objectives be met with current state?
+      - What functionality is working vs not working?
+      - What is the risk of proceeding to production?
+      
+      **Recommendation:**
+      - Ready for production / Requires fixes / Not ready
 
-environment-setup:
-  setup_successful: true
-  setup_time: ""
-  issues_encountered: []
-  dependencies_verified: []
+  - id: configuration-required
+    title: Configuration Requirements
+    repeatable: true
+    instruction: |
+      Document all configuration items needed to run the project:
+      
+      **Configuration Item:** {name}
+      
+      **Description:** What this configuration controls
+      
+      **Location:** {file path or environment variable}
+      
+      **Default Value:** {default if any}
+      
+      **Required:** Yes / No
+      
+      **Notes:** Special instructions or considerations
+      
+      Examples:
+      - Database connection strings
+      - API keys and secrets
+      - Environment-specific settings
+      - Feature flags
+      - Port configurations
+      
+      If no configuration required beyond defaults, state: "Project uses default configuration without additional setup."
 
-project-execution:
-  execution_successful: true
-  startup_method: ""
-  startup_time: ""
-  access_information: ""
-  errors_encountered: []
+  - id: environment-setup
+    title: Environment Setup
+    instruction: |
+      **Setup Successful:** Yes / No
+      
+      **Setup Time:** {duration}
+      
+      **Setup Steps Executed:**
+      1. {step description}
+      2. {step description}
+      3. {step description}
+      
+      **Issues Encountered:**
+      Document any problems during setup:
+      - {issue description and resolution}
+      
+      If no issues, state: "Environment setup completed without issues."
+      
+      **Dependencies Verified:**
+      - {dependency name@version} - Installed successfully
+      - {dependency name@version} - Installed successfully
+      
+      **Setup Documentation Quality:**
+      - Was setup documentation clear? Yes / No
+      - Were all steps documented? Yes / No
+      - Suggested improvements: {if any}
 
-acceptance-test-results:
-  - requirement_id: ""
-    requirement_description: ""
-    test_scenario: ""
-    expected_result: ""
-    actual_result: ""
-    status: ""  # Pass/Fail/Not Tested
-    evidence: ""
-    notes: ""
+  - id: project-execution
+    title: Project Execution
+    instruction: |
+      **Execution Successful:** Yes / No
+      
+      **Startup Method:** {command or script used}
+      
+      **Startup Time:** {duration}
+      
+      **Access Information:**
+      - URL: {if web application}
+      - Port: {if applicable}
+      - Credentials: {test account info if applicable}
+      
+      **Errors Encountered:**
+      Document any errors during startup or execution:
+      
+      ```
+      {error output}
+      ```
+      
+      - Error description: {what happened}
+      - Resolution: {how it was fixed, or if still broken}
+      
+      If no errors, state: "Project started and ran without errors."
 
-issues-found:
-  - severity: ""  # critical/high/medium/low
-    category: ""  # functionality/configuration/performance/usability
-    description: ""
-    requirement_affected: ""
-    reproduction_steps: []
-    business_impact: ""
-    recommended_action: ""
+  - id: acceptance-test-results
+    title: Acceptance Test Results
+    repeatable: true
+    instruction: |
+      Test ALL critical business requirements from end-user perspective.
+      Do NOT perform technical testing - focus on user workflows and business value.
+      
+      For each requirement tested:
+      
+      **Requirement:** REQ-{id} - {title}
+      
+      **Test Scenario:** {User-facing scenario tested}
+      
+      **Expected Result:** {What should happen from user perspective}
+      
+      **Actual Result:** {What actually happened}
+      
+      **Status:** Pass / Fail / Not Tested
+      
+      **Evidence:**
+      - Screenshots (if UI)
+      - API responses (if API)
+      - Output logs (if CLI)
+      - Error messages (if failed)
+      
+      **Notes:** Any observations or context
+      
+      ---
+      
+      (Repeat for each requirement)
+      
+      **Test Coverage:**
+      - All critical requirements tested? Yes / No
+      - All high priority requirements tested? Yes / No
+      - Medium/low priority requirements: {tested count} of {total}
 
-functional-verification:
-  features_tested: []
-  features_passed: []
-  features_failed: []
+  - id: issues-found
+    title: Issues Found
+    repeatable: true
+    instruction: |
+      Document ALL issues found during acceptance testing:
+      
+      **Issue {number}:**
+      
+      **Severity:** Critical / High / Medium / Low
+      
+      **Category:** Functionality / Configuration / Performance / Usability / Documentation
+      
+      **Description:** Clear description of the issue from user perspective
+      
+      **Requirement Affected:** {REQ ID(s)}
+      
+      **Reproduction Steps:**
+      1. {step}
+      2. {step}
+      3. {step}
+      
+      **Expected Behavior:** {what should happen}
+      
+      **Actual Behavior:** {what actually happens}
+      
+      **Business Impact:**
+      - Does this block critical workflows? Yes / No
+      - Impact on user experience: {description}
+      - Workaround available? Yes / No
+      
+      **Recommended Action:** Fix before production / Fix in next release / Document as known limitation
+      
+      ---
+      
+      **Severity Guidelines:**
+      - **Critical:** Blocks critical business function, data loss, security vulnerability
+      - **High:** Major feature doesn't work, significant usability problem
+      - **Medium:** Minor feature issue, workaround available
+      - **Low:** Cosmetic issue, minor inconvenience
 
-non-functional-verification:
-  performance_targets_met: []
-  performance_targets_missed: []
-  security_concerns: []
+  - id: functional-verification
+    title: Functional Verification Summary
+    instruction: |
+      **Features Tested:**
+      List all features tested from user perspective:
+      - {feature name} - {brief description}
+      
+      **Features Passed:**
+      - {feature name} - Working as expected
+      
+      **Features Failed:**
+      - {feature name} - {what's not working}
+      
+      **Features Not Tested:**
+      - {feature name} - {reason not tested}
 
-recommendations:
-  immediate-actions:
-    - action: ""
-      priority: ""
-      rationale: ""
-  future-improvements: []
+  - id: non-functional-verification
+    title: Non-Functional Verification
+    instruction: |
+      **Performance Targets:**
+      
+      **Met:**
+      - NFR-001: {metric} - Achieved {actual value}
+      
+      **Not Met:**
+      - NFR-002: {metric} - Target {target}, Actual {actual}
+      
+      **Security Verification:**
+      - Authentication working? Yes / No
+      - Authorization working? Yes / No
+      - Data validation present? Yes / No
+      - Concerns identified: {if any}
+      
+      **Usability Assessment:**
+      - Error messages clear and helpful? Yes / No
+      - User workflows intuitive? Yes / No
+      - Documentation sufficient? Yes / No
+      
+      **Reliability Observations:**
+      - Errors handled gracefully? Yes / No
+      - System stable during testing? Yes / No
+      - Recovery from errors? Yes / No
 
-deployment-readiness:
-  ready_for_production: true
-  blockers: []
-  prerequisites: []
+  - id: recommendations
+    title: Recommendations
+    instruction: |
+      **Immediate Actions (Before Production):**
+      Actions that MUST be completed:
+      - Priority: Critical / High
+      - Action: {what needs to be done}
+      - Rationale: {why it's required}
+      
+      **Future Improvements:**
+      Enhancements for future releases:
+      - {improvement description}
+      - {improvement description}
+      
+      **Documentation Updates:**
+      - {what documentation needs updating}
 
-sign-off:
-  approved: false
-  conditions_for_approval: []
-  next_steps: []
+  - id: deployment-readiness
+    title: Deployment Readiness Assessment
+    instruction: |
+      **Ready for Production:** Yes / No / With Conditions
+      
+      **Blockers:**
+      List any blocking issues preventing production deployment:
+      - {blocker description}
+      
+      If no blockers, state: "No blockers identified for production deployment."
+      
+      **Prerequisites:**
+      Items that must be completed before production:
+      - {prerequisite}
+      
+      **Risk Assessment:**
+      - Overall risk level: Low / Medium / High
+      - Key risks: {summary}
+      - Mitigation: {approach}
+
+  - id: sign-off
+    title: Sign-Off
+    instruction: |
+      **Approved:** Yes / No / Conditional
+      
+      **Conditions for Approval:**
+      If conditional approval:
+      - {condition 1}
+      - {condition 2}
+      
+      **Next Steps:**
+      - {immediate next action}
+      - {subsequent action}
+      
+      **Approver:** {name}
+      **Date:** {date}

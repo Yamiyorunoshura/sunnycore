@@ -1,88 +1,337 @@
 ---
-# Architecture Document Template
-# 架構文檔模板
+# Architecture Document Template v2
+# Powered by BMAD™ Core
 
-title: ""
-version: ""
-last_updated: ""
-status: ""
----
+template:
+  id: architecture-template-v2
+  name: Architecture Document
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/architecture.md
+    title: "{{project_name}} Architecture Document"
+    note: "This file will be sharded into docs/architecture/*.md after running shard-architecture.py"
 
-executive-summary: ""
+sections:
+  - id: introduction
+    title: Introduction
+    instruction: |
+      Provide document metadata and overview:
+      
+      **Document Information:**
+      - Version: {version}
+      - Last Updated: {date}
+      - Status: Draft/Final/Approved
+      
+      **Executive Summary:**
+      - Brief overview (3-5 sentences) of the system architecture
+      - Key architectural style (Monolith/Microservices/Serverless/Event-Driven)
+      - Primary technology choices
+      - How this architecture supports PRD goals
+      
+      **For Brownfield Projects:**
+      - State this is an architecture extension/modification
+      - Reference existing architecture documents
+      - Summarize scope of changes
 
-work-directory-structure: ""
+  - id: work-directory-structure
+    title: Work Directory Structure
+    instruction: |
+      Define the complete project directory structure as a code block.
+      This structure will be created during initialization.
+      
+      Example format:
+      ```
+      project-root/
+      ├── src/                    # Source code
+      │   ├── api/               # API layer
+      │   ├── services/          # Business logic
+      │   ├── models/            # Data models
+      │   └── utils/             # Utilities
+      ├── tests/                 # Test files
+      │   ├── unit/             # Unit tests
+      │   └── integration/      # Integration tests
+      ├── docs/                  # Documentation
+      └── config/                # Configuration files
+      ```
+      
+      Adapt structure based on:
+      - Chosen tech stack and frameworks
+      - Repository structure (monorepo/polyrepo)
+      - Service architecture (monolith/microservices)
+      - Language-specific conventions
 
-technical-stack:
-  frontend: ""
-  backend: ""
-  database: ""
-  infrastructure: ""
-  external-services: []
-  development-tools: []
+  - id: technical-stack
+    title: Technical Stack
+    instruction: |
+      This is the DEFINITIVE technology selection. Document all technology choices in a clear table:
+      
+      | Category | Technology | Version | Purpose | Rationale |
+      |----------|------------|---------|---------|-----------|
+      | Language | {language} | {version} | {purpose} | {why chosen} |
+      | Runtime | {runtime} | {version} | {purpose} | {rationale} |
+      | Framework | {framework} | {version} | {purpose} | {rationale} |
+      | Database | {database} | {version} | {purpose} | {rationale} |
+      | ... | ... | ... | ... | ... |
+      
+      Categories to cover:
+      - Languages and runtimes (with exact versions)
+      - Frameworks and key libraries
+      - Databases and storage solutions
+      - Cloud provider and services (if applicable)
+      - Development tools (testing, linting, build tools)
+      - External services and integrations
+      
+      **Critical Rules:**
+      - Pin specific versions (avoid "latest")
+      - This table is the single source of truth
+      - All other documents must reference these choices
+      - Include rationale for each major choice
 
-system-architecture:
-  components: []
-  data-flow: ""
-  integration-points: ""
+  - id: system-architecture
+    title: System Architecture
+    instruction: |
+      Describe the overall system architecture:
+      
+      **Architectural Style:**
+      - Primary pattern (Monolith/Microservices/Serverless/Event-Driven/Hexagonal/etc.)
+      - Rationale for this choice
+      - Key architectural patterns being applied
+      
+      **Architecture Diagram:**
+      Create a Mermaid diagram visualizing the high-level architecture:
+      ```mermaid
+      graph TD
+          {components and relationships}
+      ```
+      
+      **Key Components:**
+      Brief list of major components/services and their primary responsibilities
 
-api-documentation:
-  internal-apis: []
-  external-apis:
-    - name: ""
-      provider: ""
-      version: ""
-      base-url: ""
-      authentication:
-        method: ""
-        credential-management: ""
-      endpoints:
-        - path: ""
-          method: ""
-          purpose: ""
-          request-format: ""
-          response-format: ""
-          required-fields: []
-      rate-limits:
-        limit: ""
-        retry-strategy: ""
-      error-handling:
-        patterns: ""
-        error-codes: []
-      purpose: ""
-      integration-points: []
-      fallback-strategy: ""
-      sla-requirements: ""
-  api-standards: {}
+  - id: components
+    title: Components
+    repeatable: true
+    instruction: |
+      For each major component/service, create a subsection:
+      
+      ## {Component Name}
+      
+      **Responsibility:** What this component does (single, clear purpose)
+      
+      **Technology:** Specific technologies from tech stack used (language, framework, libraries)
+      
+      **Key Interfaces/APIs:**
+      - List public interfaces exposed
+      - API endpoints or methods
+      - Data contracts
+      
+      **Dependencies:**
+      - Other components this depends on
+      - External services required
+      - Shared resources
+      
+      **Data Storage:**
+      - Database/storage used (if applicable)
+      - Key data entities managed
+      
+      **For Brownfield Projects:**
+      - Clearly mark if component is New/Modified/Existing
+      - Include Impact Analysis for modifications
 
-requirements-traceability:
-  - requirement-id: ""
-    requirement-title: ""
-    architecture-elements: []
-    implementation-notes: ""
-    rationale: ""
+  - id: data-flows
+    title: Data Flows
+    instruction: |
+      Describe how data moves through the system:
+      
+      **Primary Data Flows:**
+      For each major user journey or data processing flow:
+      - Source → Processing → Destination
+      - Data transformations
+      - Synchronous vs asynchronous patterns
+      
+      **Sequence Diagrams:**
+      Create Mermaid sequence diagrams for complex workflows:
+      ```mermaid
+      sequenceDiagram
+          {actors and interactions}
+      ```
+      
+      **Integration Points:**
+      - How components communicate (REST/GraphQL/Message Queue/Events)
+      - Data formats and protocols
+      - Error handling approaches
 
-architecture-decisions: []
+  - id: external-apis
+    title: External API Integrations
+    repeatable: true
+    instruction: |
+      For each external API/service integration, document:
+      
+      ## {API Name}
+      
+      **Provider:** {Provider name and service}
+      **Version:** {API version}
+      **Documentation:** {URL to official docs}
+      
+      **Purpose:** Why this API is needed and what functionality it provides
+      
+      **Authentication:**
+      - Method: API Key/OAuth2/JWT/etc.
+      - Credential management approach
+      - Security considerations
+      
+      **Key Endpoints Used:**
+      - `{METHOD} {endpoint_path}` - {purpose}
+      - Include request/response format for critical endpoints
+      
+      **Rate Limits and Quotas:**
+      - Rate limit specifications
+      - Retry strategy
+      - Fallback approach if API unavailable
+      
+      **Error Handling:**
+      - Expected error codes and handling
+      - Timeout configuration
+      - Circuit breaker pattern (if applicable)
+      
+      **Integration Points:**
+      - Which components use this API
+      - Data flow and transformations
+      
+      If no external APIs are needed, state "No external API integrations required."
 
-cross-cutting-concerns:
-  security: {}
-  performance: {}
-  reliability: {}
-  observability: {}
+  - id: requirements-traceability
+    title: Requirements Traceability Matrix
+    instruction: |
+      Create a table mapping requirements to architecture elements.
+      This ensures 100% requirement coverage.
+      
+      | Requirement ID | Requirement Title | Architecture Elements | Implementation Notes |
+      |----------------|-------------------|----------------------|---------------------|
+      | REQ-001 | {title} | {components/services} | {how it's addressed} |
+      | NFR-001 | {title} | {architectural decisions} | {how it's achieved} |
+      
+      **Coverage Verification:**
+      - Every functional requirement must map to specific components
+      - Every non-functional requirement must map to architectural decisions
+      - State any unmapped requirements with rationale
 
-deployment:
-  environments: []
-  infrastructure: ""
-  ci-cd: ""
-  scaling-strategy: ""
+  - id: architecture-decisions
+    title: Architecture Decision Records (ADRs)
+    repeatable: true
+    instruction: |
+      Document key architectural decisions using ADR format:
+      
+      ## ADR-{id}: {Decision Title}
+      
+      **Context:**
+      - What situation led to this decision?
+      - What problem are we solving?
+      - What requirements drive this?
+      
+      **Decision:**
+      - What did we decide to do?
+      - Clear statement of the chosen approach
+      
+      **Rationale:**
+      - Why this approach over alternatives?
+      - What benefits does it provide?
+      - What trade-offs are we accepting?
+      
+      **Alternatives Considered:**
+      - List other options evaluated
+      - Why were they not chosen?
+      
+      **Consequences:**
+      - Expected impact (positive and negative)
+      - Technical debt implications
+      - Future flexibility considerations
+      
+      **For Brownfield Projects:**
+      - Include Impact Analysis section
+      - Breaking changes and migration path
+      - Backward compatibility considerations
 
-quality-attributes:
-  strengths: []
-  limitations: []
-  technical-debt: []
+  - id: cross-cutting-concerns
+    title: Cross-Cutting Concerns
+    instruction: |
+      Address system-wide concerns that affect multiple components:
+      
+      **Security:**
+      - Authentication and authorization approach
+      - Data encryption (at rest and in transit)
+      - Secrets management
+      - Input validation strategy
+      - Security testing approach
+      
+      **Performance:**
+      - Caching strategy
+      - Database optimization approach
+      - CDN usage (if applicable)
+      - Performance monitoring
+      
+      **Reliability:**
+      - Error handling patterns
+      - Retry and circuit breaker strategies
+      - Graceful degradation approach
+      - Backup and recovery procedures
+      
+      **Observability:**
+      - Logging standards and tools
+      - Monitoring and alerting
+      - Distributed tracing (if applicable)
+      - Health check endpoints
+      
+      For each concern, specify:
+      - Standards and patterns to follow
+      - Tools and libraries selected
+      - Implementation guidelines
 
-architecture-diagram: ""
+  - id: deployment
+    title: Deployment Architecture
+    instruction: |
+      Define how the system will be deployed and operated:
+      
+      **Infrastructure:**
+      - Cloud provider and services (or on-premise approach)
+      - Infrastructure as Code tool (Terraform/CloudFormation/etc.)
+      - Network architecture
+      
+      **Environments:**
+      - Development, Staging, Production configurations
+      - Environment-specific differences
+      - Promotion flow between environments
+      
+      **CI/CD:**
+      - Pipeline tool and approach
+      - Build and test automation
+      - Deployment strategy (blue-green/canary/rolling)
+      
+      **Scaling Strategy:**
+      - Horizontal vs vertical scaling approach
+      - Auto-scaling configuration
+      - Load balancing
+      
+      **Rollback Procedures:**
+      - How to rollback failed deployments
+      - Recovery time objectives
 
-source-references:
-  requirements: []
-  code: []
-  documentation: []
+  - id: source-references
+    title: Source References
+    instruction: |
+      List all source documents and references used to create this architecture:
+      
+      **Requirements:**
+      - Path to requirement documents
+      - Key requirement IDs referenced
+      
+      **Existing Architecture (for Brownfield):**
+      - Paths to existing architecture documents
+      - Sections reviewed and considered
+      
+      **External Documentation:**
+      - Official documentation consulted
+      - Architecture pattern references
+      - Technology documentation links
+      
+      Format: Use relative paths for internal docs, full URLs for external references
