@@ -7,6 +7,20 @@
 
 ## [Unreleased]
 
+## [3.7.0] - 2025-10-11
+
+### Added
+- 新增回歸測試檢查機制：在 QA 審查流程中新增自動回歸測試驗證功能
+  - 更新 `claude code/tasks/review.md`：強制執行回歸測試檢查
+    * 新增步驟 2 關鍵檢查點：**CRITICAL** 執行所有相關現有測試以檢測回歸（若任何先前通過的測試現在失敗，則自動拒絕）
+    * 新增 CRITICAL REJECT CRITERIA：**Breaking Previously Completed Functionality** - 任何破壞先前完成功能的行為將導致自動拒絕
+    * 更新決策規則：Accept、Accept with Changes、Reject 條件均新增「且先前功能無回歸」要求
+    * 更新風險評估標準：High risk 條件新增「或偵測到回歸」
+    * 新增 DoD 檢查項：**CRITICAL** 所有相關現有測試已執行，以驗證先前完成功能無回歸
+    * 新增 Example 5：Regression Breaking Previous Functionality Auto-Reject - 展示即使當前任務得分高（8.9），仍因破壞現有功能而自動拒絕
+  - 提升 QA 審查的系統穩定性保證：確保新實作不會破壞現有功能，防止回歸問題進入生產環境
+  - 強化質量門檻：回歸問題與 mock 實作同等嚴重，均觸發自動拒絕機制
+
 ## [3.6.1] - 2025-10-11
 
 ### Changed

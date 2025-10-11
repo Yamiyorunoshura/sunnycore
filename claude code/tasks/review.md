@@ -37,10 +37,11 @@
 
   2. Code & Test Execution Review
     - **CRITICAL**: Scan ALL production/implementation code for mock/stub/placeholder patterns (auto-reject if found; note: tests using mocks are allowed)
+    - **CRITICAL**: Execute all relevant existing tests from previous tasks to detect regressions (auto-reject if any previously passing tests now fail)
     - Execute all tests and record results properly
     - Apply domain-specific scoring criteria appropriately
     - Verify test coverage and code alignment with plan
-    - Outcome: Mock implementation check completed, test results recorded and code alignment verified
+    - Outcome: Mock implementation check completed, regression check completed, test results recorded and code alignment verified
 
   3. Development Notes Validation
     - Review development notes for alignment with implementation
@@ -72,13 +73,17 @@
       - Examples: `// TODO: implement`, `throw new Error('Not implemented')`, placeholder return values, mock data in production code
       - Rationale: Mock implementations are incomplete work, unacceptable regardless of test scores
       - **Important**: tests using mocks/stubs for testing purposes are ALLOWED and expected
-  - **Accept**: All dimensions ≥ 6.0, no critical issues, **AND no mock implementations in production code**
-  - **Accept with Changes**: 1-2 dimensions between 5.0-5.9 with clear improvement plan, **AND no mock implementations in production code**
-  - **Reject**: 3+ dimensions < 6.0, or any dimension < 5.0, or critical security/functional issues, **OR any mock implementations found in production code**
-  - **Risk**: Low (all ≥ 8.0), Medium (1-2 between 6.0-7.9), High (any < 6.0 or security issues or mock implementations in production code)
+    - **Breaking Previously Completed Functionality**: ANY breaking of features/functionality completed in previous tasks → **AUTOMATIC REJECT**
+      - Rationale: Regression breaks system stability and undermines prior work, unacceptable regardless of current task scores
+      - Verification: Run all relevant existing tests to ensure no regressions
+  - **Accept**: All dimensions ≥ 6.0, no critical issues, **AND no mock implementations in production code**, **AND no regression of previous functionality**
+  - **Accept with Changes**: 1-2 dimensions between 5.0-5.9 with clear improvement plan, **AND no mock implementations in production code**, **AND no regression of previous functionality**
+  - **Reject**: 3+ dimensions < 6.0, or any dimension < 5.0, or critical security/functional issues, **OR any mock implementations found in production code**, **OR any breaking of previously completed functionality**
+  - **Risk**: Low (all ≥ 8.0), Medium (1-2 between 6.0-7.9), High (any < 6.0 or security issues or mock implementations in production code or regression detected)
 
 ## [DoD]
   - [ ] **CRITICAL**: All production/implementation code scanned and confirmed NO mock/stub/placeholder code exists (tests using mocks are allowed)
+  - [ ] **CRITICAL**: All relevant existing tests from previous tasks executed to verify NO regression of previously completed functionality
   - [ ] All tests executed with results recorded and verified against implementation plan
   - [ ] Complete review report exists at "{REVIEW}/{task_id}-review.md" with scoring and acceptance decision
   - [ ] "{EPIC}" updated with task completion status and score
@@ -166,3 +171,26 @@
 - Risk: Critical (would deploy non-functional payment system)
 - Action items: Implement actual Stripe API integration in production code, remove all mock/TODO code from src/ (keep test mocks)
 - docs/epic.md: Task-4 status = REJECTED, requires complete production implementation
+
+### Example 5: Regression Breaking Previous Functionality Auto-Reject (CRITICAL)
+[Input]
+- Development notes: docs/dev-notes/5-dev-notes.md (Task-5: Add email notification feature)
+- Implementation plan: docs/plans/5-plan.md (Email service integration)
+- Template: review-tmpl.yaml
+
+[Decision]
+- Domain: Backend (apply backend scoring dimensions)
+- Execute current task tests: All 18 new tests pass for email notification feature
+- **CRITICAL FINDING**: Regression detected - existing user authentication tests now failing
+  - Previous Task-1 authentication tests (15 tests) all passed before
+  - Now 5/15 authentication tests fail due to modified session handling in src/auth/SessionManager.js:L32
+  - Root cause: Task-5 refactored session storage breaking existing auth flow
+- Score: Would be API Design (9.0), Integration (8.5), Error Handling (9.0), Testing (9.0) → Overall 8.9
+- **Decision: AUTOMATIC REJECT** (breaking previously completed functionality - overrides all scoring)
+
+[Expected Outcome]
+- docs/review/5-review.md with CRITICAL REJECTION: Regression detected in previously completed Task-1 functionality
+- Rationale: Even with high current task scores (8.9), breaking existing features undermines system stability
+- Risk: Critical (would break production authentication system)
+- Action items: Refactor email notification to preserve existing session handling, ensure all Task-1 tests pass, re-run full regression suite
+- docs/epic.md: Task-5 status = REJECTED, requires fix to avoid breaking Task-1 functionality
