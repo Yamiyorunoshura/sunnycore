@@ -7,6 +7,13 @@
 
 ## [Unreleased]
 
+## [3.3.29] - 2025-10-11
+
+### Changed
+- 優化審查任務步驟說明：改善 `review.md` 中的步驟 1 描述，明確審查範圍建立
+  - 更新步驟 1：從「Understand implementation plan and identify task domain」改為「Understand implementation plan to identify task domain and establish scope of review」
+  - 強調審查前需建立明確的審查範圍，提升審查流程的系統性與完整性
+
 ## [3.3.28] - 2025-10-11
 
 ### Added
