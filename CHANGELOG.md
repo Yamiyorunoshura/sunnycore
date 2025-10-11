@@ -7,6 +7,32 @@
 
 ## [Unreleased]
 
+## [3.10.0] - 2025-10-11
+
+### Added
+- 新增工作範圍約束機制：在所有角色命令和子代理中新增 [Scope-of-Work] 章節，明確定義職責邊界
+  - 新增 `claude code/CLAUDE.md` GUIDANCE 24：要求 AI 僅執行 [Scope-of-Work] 中明確定義的任務，禁止執行範圍外操作
+  - 更新 4 個子代理文件：completion-validator、planner、progress-manager、step-validator
+    * 新增 [Scope-of-Work] 章節：明確區分 In Scope（職責範圍內）與 Out of Scope（職責範圍外）
+    * In Scope 涵蓋：核心驗證/規劃/記錄職責、分析與報告生成、工具使用範圍
+    * Out of Scope 涵蓋：文件編輯修改、任務執行、技術決策、直接用戶互動
+  - 更新 6 個角色命令文件：architect、assistant、dev、pm、po、qa
+    * 新增 [Scope-of-Work] 章節：詳細定義每個角色的專業職責範圍與邊界
+    * architect：技術架構設計與文檔管理（禁止代碼實作與產品規劃）
+    * assistant：問題診斷與修復（禁止架構設計與正式工作流程）
+    * dev：開發實作與測試執行（禁止架構設計與需求分析）
+    * pm：需求分析與任務規劃（禁止架構設計與代碼實作）
+    * po：業務需求與驗收管理（禁止技術架構與代碼實作）
+    * qa：質量審查與評估（禁止代碼實作與修復）
+  - 提升角色職責清晰度與工作流程規範性
+
+### Changed
+- 強化約束條款格式：將所有角色命令和子代理的 [Constraints] 章節改為 **MUST** / **MUST NOT** 強制性格式
+  - 格式轉換：從「Must do X」改為「**MUST** do X, **MUST NOT** do Y」
+  - 涵蓋 10 個文件：completion-validator、planner、progress-manager、step-validator、architect、assistant、dev、pm、po、qa
+  - 每條約束拆分為肯定陳述與否定陳述，明確允許與禁止行為
+  - 提升約束條款的可讀性、強制性與執行精確度
+
 ## [3.9.0] - 2025-10-11
 
 ### Added
