@@ -2,10 +2,9 @@
 
 ## [Input]
   1. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template
-  2. "{DEVNOTES}/{task_id}-dev-notes.md" --Development notes
-  3. "{REVIEW}/{task_id}-review.md" --Review report
-  4. "{ARCH}/*.md" --Architecture design
-  5. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
+  2. "{REVIEW}/{task_id}-review.md" --Review report
+  3. "{ARCH}/*.md" --Architecture design
+  4. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
 
 ## [Output]
   1. Fixed code that runs properly
