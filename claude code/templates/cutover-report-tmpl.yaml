@@ -8,7 +8,7 @@ template:
   version: 2.0
   output:
     format: markdown
-    filename: docs/cutover-report.md
+    filename: {CUTOVER}
     title: "{{project_name}} Cutover Report"
     note: "Project acceptance validation from business and user perspectives"
 

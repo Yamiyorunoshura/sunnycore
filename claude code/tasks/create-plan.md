@@ -84,6 +84,19 @@
     - Identify execution dependencies and parallel opportunities
     - Exclude operational actions (git, npm) unless explicitly requested
 
+## [Test-Case-Design-Guidelines]
+  1. **Unit Test**
+    - When to use: Test single function, class, or module logic in isolation with external dependencies mocked/stubbed
+    - Key considerations: Cover normal paths, boundary conditions, error handling; ensure fast execution and repeatability
+  
+  2. **Integration Test**
+    - When to use: Verify collaboration between multiple components (e.g., API + Database, Service + External API)
+    - Key considerations: Test real dependency interactions and data flow correctness; use test containers or test environments
+  
+  3. **Behaviour Test**
+    - When to use: Validate complete business workflows from user perspective (Given-When-Then format)
+    - Key considerations: Align with acceptance criteria, simulate real user scenarios; use BDD frameworks (e.g., Cucumber, Behave)
+
 ## [DoD]
   - [ ] Implementation plan exists for each task with complete TDD three-phase structure (RED/GREEN/REFACTOR sections)
   - [ ] All plans have proper requirement-architecture-test mapping with specific file references
@@ -100,12 +113,15 @@
 
 [Decision]
 - RED phase: Write tests for article CRUD operations (create, read, update)
+  - Unit Test: Article model validation (title/content required, character limits)
+  - Integration Test: API endpoints with database (POST /articles, GET /articles/:id, PUT /articles/:id)
+  - Behaviour Test: Complete publishing workflow (Given user creates article → When submits → Then article appears)
 - GREEN phase: Implement minimal Article model, API endpoints (POST /articles, GET /articles/:id, PUT /articles/:id)
 - REFACTOR phase: Add validation, error handling, apply repository pattern
 
 [Expected Outcome]
 - docs/plans/1-plan.md with TDD three-phase structure
-- RED: Test cases for happy path, edge cases (empty title, invalid ID)
+- RED: Unit tests (model logic), Integration tests (API + DB), Behaviour tests (user workflow)
 - GREEN: Step-by-step implementation mapped to src/services/ArticleService.js
 - REFACTOR: Planned improvements (DRY, SOLID principles)
 
@@ -118,12 +134,15 @@
 
 [Decision]
 - RED phase: Write tests for date range filtering, aggregation accuracy, performance (< 2s)
+  - Unit Test: Aggregation logic functions (sum, group by date)
+  - Integration Test: TimescaleDB queries with real database (date range filtering, performance < 2s)
+  - Behaviour Test: User generates monthly report (Given date range → When requests report → Then receives aggregated data)
 - GREEN phase: Implement query with indexed date column, aggregation logic
 - REFACTOR phase: Add caching (Redis), query optimization using knowledge base insights
 
 [Expected Outcome]
 - docs/plans/2-plan.md following template structure
-- RED: Performance test asserting query time < 2s
+- RED: Unit tests (aggregation functions), Integration tests (DB queries + performance), Behaviour tests (report generation)
 - GREEN: Minimal SQL queries and API implementation
 - REFACTOR: Caching strategy, index optimization from knowledge base
 
@@ -136,11 +155,14 @@
 
 [Decision]
 - RED phase: Tests for device registration, duplicate ID rejection, metadata validation
+  - Unit Test: Metadata validation logic (required fields, format checks)
+  - Integration Test: gRPC service with PostgreSQL (device insert, unique constraint enforcement)
+  - Behaviour Test: Device onboarding flow (Given new device → When registers with metadata → Then stored and retrievable)
 - GREEN phase: gRPC service stub, database insert with unique constraint
 - REFACTOR phase: Add device status tracking, integrate with authentication service
 
 [Expected Outcome]
 - docs/plans/3-plan.md with complete TDD cycle
-- RED: Unit tests and integration tests for gRPC endpoint
+- RED: Unit tests (validation logic), Integration tests (gRPC + DB), Behaviour tests (onboarding flow)
 - GREEN: Atomic steps mapped to proto files and database schema
 - REFACTOR: Cross-cutting concerns (auth, logging) integration

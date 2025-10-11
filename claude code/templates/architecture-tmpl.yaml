@@ -8,9 +8,9 @@ template:
   version: 2.0
   output:
     format: markdown
-    filename: docs/architecture.md
+    filename: {root}/docs/architecture.md
     title: "{{project_name}} Architecture Document"
-    note: "This file will be sharded into docs/architecture/*.md after running shard-architecture.py"
+    note: "This file will be sharded into {ARCH}/*.md after running shard-architecture.py"
 
 sections:
   - id: introduction

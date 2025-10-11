@@ -8,7 +8,7 @@ template:
   version: 2.0
   output:
     format: markdown
-    filename: docs/PRD.md
+    filename: {PRD}
     title: "{{project_name}} Product Requirements Document"
     note: "Integrated document containing requirements, architecture, and tasks"
 

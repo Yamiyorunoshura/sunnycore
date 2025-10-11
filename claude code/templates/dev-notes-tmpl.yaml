@@ -8,8 +8,8 @@ template:
   version: 2.0
   output:
     format: markdown
-    filename: "docs/dev-notes/{task_id}-dev-notes.md"
-    alternate: "docs/prd-dev-notes.md (for PRD workflow)"
+    filename: "{DEVNOTES}/{task_id}-dev-notes.md"
+    alternate: "{root}/docs/prd-dev-notes.md (for PRD workflow)"
     title: "Task-{task_id} Development Notes: {task_name}"
     note: "Record of actual implementation, decisions, and outcomes"
 

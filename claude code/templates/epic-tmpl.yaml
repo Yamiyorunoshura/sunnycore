@@ -8,7 +8,7 @@ template:
   version: 2.0
   output:
     format: markdown
-    filename: docs/epic.md
+    filename: {EPIC}
     title: "{{project_name}} Epic Task List"
     note: "Feature-level breakdown of implementation tasks"
 

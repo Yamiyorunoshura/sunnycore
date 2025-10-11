@@ -8,9 +8,9 @@ template:
   version: 2.0
   output:
     format: markdown
-    filename: docs/requirements.md
+    filename: {root}/docs/requirements.md
     title: "{{project_name}} Requirements Document"
-    note: "This file will be sharded into docs/requirements/*.md after running shard-requirements.py"
+    note: "This file will be sharded into {REQ}/*.md after running shard-requirements.py"
 
 sections:
   - id: project-overview

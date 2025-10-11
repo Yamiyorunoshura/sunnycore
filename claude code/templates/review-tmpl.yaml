@@ -8,7 +8,7 @@ template:
   version: 2.0
   output:
     format: markdown
-    filename: "docs/review/{task_id}-review.md"
+    filename: "{REVIEW}/{task_id}-review.md"
     title: "Task-{task_id} Review Report: {task_name}"
     note: "Quality assessment and acceptance decision for completed task"
 

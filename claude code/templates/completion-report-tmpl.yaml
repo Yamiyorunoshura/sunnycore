@@ -8,7 +8,7 @@ template:
   version: 2.0
   output:
     format: markdown
-    filename: docs/completion-report.md
+    filename: {root}/docs/completion-report.md
     title: "{{project_name}} Completion Report"
     note: "Comprehensive project delivery summary with key learnings and evidence"
 

@@ -8,7 +8,7 @@ template:
   version: 2.0
   output:
     format: markdown
-    filename: "docs/plans/{task_id}-plan.md"
+    filename: "{PLAN}/{task_id}-plan.md"
     title: "Task-{task_id} Implementation Plan: {task_name}"
     note: "Detailed TDD plan for single task execution"
 

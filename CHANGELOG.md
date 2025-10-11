@@ -7,6 +7,26 @@
 
 ## [Unreleased]
 
+### Changed
+- 強化任務規劃測試指引：在 `create-plan.md` 中新增測試用例設計指南與範例強化
+  - 新增 [Test-Case-Design-Guidelines] 章節：詳細說明 Unit Test、Integration Test、Behaviour Test 的使用時機與考量重點
+  - 擴展 3 個範例的測試設計說明：
+    * Example 1 (Article Management)：補充 Unit Test（模型驗證）、Integration Test（API + DB）、Behaviour Test（發布流程）說明
+    * Example 2 (Analytics Report)：補充 Unit Test（聚合邏輯）、Integration Test（TimescaleDB 查詢）、Behaviour Test（報表生成）說明
+    * Example 3 (Device Onboarding)：補充 Unit Test（元資料驗證）、Integration Test（gRPC + PostgreSQL）、Behaviour Test（裝置註冊流程）說明
+  - 提升任務規劃階段對測試策略的指引完整性
+- 提升模板路徑可維護性：將 9 個模板檔案中的硬編碼路徑改為路徑變數引用
+  - architecture-tmpl.yaml：`docs/architecture.md` → `{root}/docs/architecture.md`、`docs/architecture/*.md` → `{ARCH}/*.md`
+  - completion-report-tmpl.yaml：`docs/completion-report.md` → `{root}/docs/completion-report.md`
+  - cutover-report-tmpl.yaml：`docs/cutover-report.md` → `{CUTOVER}`
+  - dev-notes-tmpl.yaml：`docs/dev-notes/{task_id}-dev-notes.md` → `{DEVNOTES}/{task_id}-dev-notes.md`、`docs/prd-dev-notes.md` → `{root}/docs/prd-dev-notes.md`
+  - epic-tmpl.yaml：`docs/epic.md` → `{EPIC}`
+  - implementation-plan-tmpl.yaml：`docs/plans/{task_id}-plan.md` → `{PLAN}/{task_id}-plan.md`
+  - prd-tmpl.yaml：`docs/PRD.md` → `{PRD}`
+  - requirement-tmpl.yaml：`docs/requirements.md` → `{root}/docs/requirements.md`、`docs/requirements/*.md` → `{REQ}/*.md`
+  - review-tmpl.yaml：`docs/review/{task_id}-review.md` → `{REVIEW}/{task_id}-review.md`
+  - 提升模板系統的可維護性與一致性
+
 ## [3.4.0] - 2025-10-11
 
 ### Changed
