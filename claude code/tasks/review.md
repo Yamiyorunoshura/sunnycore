@@ -14,7 +14,7 @@
   2. Do not omit acceptance decision (Accept/Accept with changes/Reject)
   3. Do not produce review report that deviates from template structure
   4. Do not update epic with incorrect status or score
-  5. **Do not accept ANY code containing mock/stub implementations, regardless of score** (auto-Reject)
+  5. **Do not accept ANY production code containing mock/stub implementations, regardless of score** (auto-Reject, but unit tests using mocks are allowed)
 
 ## [Tools]
   1. **sequential-thinking (MCP)** - Structured reasoning tool for complex logic analysis
@@ -36,7 +36,7 @@
     - Outcome: Review criteria and approach determined
 
   2. Code & Test Execution Review
-    - **CRITICAL**: Scan ALL implementation code for mock/stub/placeholder patterns (auto-reject if found)
+    - **CRITICAL**: Scan ALL production/implementation code for mock/stub/placeholder patterns (auto-reject if found; note: tests using mocks are allowed)
     - Execute all tests and record results properly
     - Apply domain-specific scoring criteria appropriately
     - Verify test coverage and code alignment with plan
@@ -68,16 +68,17 @@
 
   ### **Decision Rules**
   - **CRITICAL REJECT CRITERIA** (overrides all scoring):
-    - **Mock/Stub Implementation Detection**: ANY presence of mock/placeholder/stub code → **AUTOMATIC REJECT**
+    - **Mock/Stub Implementation Detection in Production Code**: ANY presence of mock/placeholder/stub code in production/implementation code → **AUTOMATIC REJECT**
       - Examples: `// TODO: implement`, `throw new Error('Not implemented')`, placeholder return values, mock data in production code
       - Rationale: Mock implementations are incomplete work, unacceptable regardless of test scores
-  - **Accept**: All dimensions ≥ 6.0, no critical issues, **AND no mock implementations**
-  - **Accept with Changes**: 1-2 dimensions between 5.0-5.9 with clear improvement plan, **AND no mock implementations**
-  - **Reject**: 3+ dimensions < 6.0, or any dimension < 5.0, or critical security/functional issues, **OR any mock implementations found**
-  - **Risk**: Low (all ≥ 8.0), Medium (1-2 between 6.0-7.9), High (any < 6.0 or security issues or mock implementations)
+      - **Important**: tests using mocks/stubs for testing purposes are ALLOWED and expected
+  - **Accept**: All dimensions ≥ 6.0, no critical issues, **AND no mock implementations in production code**
+  - **Accept with Changes**: 1-2 dimensions between 5.0-5.9 with clear improvement plan, **AND no mock implementations in production code**
+  - **Reject**: 3+ dimensions < 6.0, or any dimension < 5.0, or critical security/functional issues, **OR any mock implementations found in production code**
+  - **Risk**: Low (all ≥ 8.0), Medium (1-2 between 6.0-7.9), High (any < 6.0 or security issues or mock implementations in production code)
 
 ## [DoD]
-  - [ ] **CRITICAL**: All implementation code scanned and confirmed NO mock/stub/placeholder code exists
+  - [ ] **CRITICAL**: All production/implementation code scanned and confirmed NO mock/stub/placeholder code exists (tests using mocks are allowed)
   - [ ] All tests executed with results recorded and verified against implementation plan
   - [ ] Complete review report exists at "{REVIEW}/{task_id}-review.md" with scoring and acceptance decision
   - [ ] "{EPIC}" updated with task completion status and score
@@ -139,7 +140,7 @@
 - Action items: Fix rollback script, add missing index, re-test migration
 - docs/epic.md: Task-3 status = failed review, requires rework
 
-### Example 4: Mock Implementation Auto-Reject (CRITICAL)
+### Example 4: Mock Implementation in Production Code Auto-Reject (CRITICAL)
 [Input]
 - Development notes: docs/dev-notes/4-dev-notes.md (Task-4: Payment gateway integration)
 - Implementation plan: docs/plans/4-plan.md (Stripe API integration)
@@ -147,20 +148,21 @@
 
 [Decision]
 - Domain: Backend (apply backend scoring dimensions)
-- **CRITICAL FINDING**: Mock implementation detected in src/payment/PaymentService.js:L25
+- **CRITICAL FINDING**: Mock implementation detected in PRODUCTION CODE src/payment/PaymentService.js:L25
   ```javascript
   async processPayment(amount) {
     // TODO: implement actual Stripe integration
     return { success: true, transactionId: 'mock-123' };
   }
   ```
-- Execute tests: All 20 tests pass (but using mocked payment service)
+- Execute tests: All 20 tests pass (tests properly use mocks for Stripe API - this is acceptable)
 - Score: Would be API Design (9.0), Security (8.5), Error Handling (9.0), Testing (8.5) → Overall 8.8
-- **Decision: AUTOMATIC REJECT** (mock implementation found - overrides all scoring)
+- **Decision: AUTOMATIC REJECT** (mock implementation found in production code - overrides all scoring)
+- **Note**: Unit tests using mocks (e.g., `jest.mock('stripe')` in test files) are ALLOWED - rejection is only for production code mocks
 
 [Expected Outcome]
-- docs/review/4-review.md with CRITICAL REJECTION: Mock implementation detected
-- Rationale: Even with high test scores (8.8), mock code is incomplete work and unacceptable
+- docs/review/4-review.md with CRITICAL REJECTION: Mock implementation detected in production code
+- Rationale: Even with high test scores (8.8), mock code in production is incomplete work and unacceptable
 - Risk: Critical (would deploy non-functional payment system)
-- Action items: Implement actual Stripe API integration, remove all mock/TODO code
-- docs/epic.md: Task-4 status = REJECTED, requires complete implementation
+- Action items: Implement actual Stripe API integration in production code, remove all mock/TODO code from src/ (keep test mocks)
+- docs/epic.md: Task-4 status = REJECTED, requires complete production implementation

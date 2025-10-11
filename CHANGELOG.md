@@ -7,6 +7,19 @@
 
 ## [Unreleased]
 
+## [3.6.0] - 2025-10-11
+
+### Changed
+- 優化審查任務的 mock 檢查邏輯：精確化 `review.md` 中的 mock/stub 實作檢查規則
+  - 更新反面約束條款 5：從「不接受任何包含 mock/stub 實作的代碼」改為「不接受生產代碼中包含 mock/stub 實作的代碼（單元測試使用 mock 是允許的）」
+  - 更新步驟 2 關鍵檢查點：明確說明「掃描所有生產/實作代碼的 mock/stub/placeholder 模式（自動拒絕；注意：測試使用 mock 是允許的）」
+  - 更新決策規則的 CRITICAL REJECT CRITERIA：從「任何 mock/placeholder/stub 代碼存在」改為「生產代碼中的 mock/placeholder/stub 代碼存在」，並強調「測試使用 mock/stub 進行測試是允許且預期的」
+  - 更新 Accept、Accept with Changes、Reject 的決策規則：所有條件從「無 mock 實作」改為「生產代碼中無 mock 實作」
+  - 更新風險評估標準：High risk 條件從「或 mock 實作」改為「或生產代碼中的 mock 實作」
+  - 更新 DoD 檢查項：從「所有實作代碼已掃描並確認無 mock/stub/placeholder 代碼」改為「所有生產/實作代碼已掃描並確認無 mock/stub/placeholder 代碼（測試使用 mock 是允許的）」
+  - 更新 Example 4 標題與內容：從「Mock Implementation Auto-Reject」改為「Mock Implementation in Production Code Auto-Reject」，並明確說明單元測試使用 mock（如 `jest.mock('stripe')` 在測試文件中）是允許的
+  - 提升 QA 審查準確性：避免誤判合法的測試 mock 為不合格代碼，同時保持對生產代碼 mock 實作的嚴格把關
+
 ## [3.5.0] - 2025-10-11
 
 ### Added
