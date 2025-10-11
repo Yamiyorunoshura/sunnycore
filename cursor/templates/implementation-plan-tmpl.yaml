@@ -1,72 +1,215 @@
 ---
-# Implementation Plan Template - TDD-aligned
-# 實作計畫模板 - 對齊 TDD 流程
+# Implementation Plan Template v2 - TDD-aligned
+# Powered by BMAD™ Core
 
-task_id: ""
-task_name: ""
-plan_version: ""
-created_date: ""
-created_by: ""
-estimated_duration: ""
----
+template:
+  id: implementation-plan-template-v2
+  name: Implementation Plan
+  version: 2.0
+  output:
+    format: markdown
+    filename: "docs/plans/{task_id}-plan.md"
+    title: "Task-{task_id} Implementation Plan: {task_name}"
+    note: "Detailed TDD plan for single task execution"
 
-task-context:
-  summary: ""
-  requirements-mapping:
-    functional_ids: []
-    non_functional_ids: []
-  architecture-context:
-    components: []
-    integration_points: []
+sections:
+  - id: plan-header
+    title: Plan Information
+    instruction: |
+      **Task ID:** {task_id}
+      **Task Name:** {task_name}
+      **Plan Version:** {version}
+      **Created:** {date}
+      **Created By:** {agent/person}
+      **Estimated Duration:** {estimate}
 
-tdd-phases:
-  red-phase:
-    objective: "Write failing tests from acceptance criteria before any code; verify tests fail for the right reason"
-    acceptance-to-tests:
-      - acceptance_criterion_id: ""
-        acceptance_criterion: ""
-        test_cases: []
-    test-cases:
-      - name: ""
-        type: ""  # unit/integration/e2e
-        scenario: ""
-        expected_failure: ""
-    test-files: []
-  
-  green-phase:
-    objective: "Implement minimal code to pass tests (exit code 0); follow architecture mapping strictly"
-    implementation-steps:
-      - step: ""
-        description: ""
-        files_affected: []
-        architecture_component: ""
-        test_coverage: []
-    files:
-      - path: ""
-        purpose: ""
-        key_functions: []
-    dependencies: []
-  
-  refactor-phase:
-    objective: "Improve code quality while maintaining green tests; integrate real APIs/services; apply patterns and eliminate duplication"
-    refactoring-targets:
-      - target: ""
-        improvement_type: ""  # SOLID/DRY/performance/integration
-        rationale: ""
-        tests_affected: []
-    quality-improvements: []
+  - id: task-context
+    title: Task Context
+    instruction: |
+      **Summary:**
+      - High-level description of what this task accomplishes
+      - How it contributes to overall project goals
+      
+      **Requirements Mapping:**
+      - **Functional Requirements:** {REQ-001, REQ-002}
+      - **Non-Functional Requirements:** {NFR-001}
+      - Link to specific acceptance criteria being satisfied
+      
+      **Architecture Context:**
+      - **Components Involved:** {List component names}
+      - **Integration Points:** {How this connects with other components}
+      - **Technology Stack:** {Specific technologies from tech stack being used}
+      
+      **Dependencies:**
+      - Tasks that must be completed first (if any)
+      - External services or APIs required
+      - Configuration or setup prerequisites
 
-additional-details:
-  configuration-changes: []
-  database-migrations: []
-  api-integrations: []
-  security-considerations: []
+  - id: red-phase
+    title: "RED Phase: Test Implementation"
+    instruction: |
+      **Objective:** Write failing tests from acceptance criteria before any code; verify tests fail for the right reason
+      
+      **Acceptance Criteria to Tests Mapping:**
+      For each acceptance criterion from requirements, define test cases:
+      
+      **AC-1:** {Given-When-Then statement from requirements}
+      - Test Case 1: {test_name} - {scenario}
+      - Test Case 2: {test_name} - {scenario}
+      
+      **Test Cases:**
+      List all tests to be written in this phase:
+      
+      1. **Test Name:** {descriptive_name}
+         - **Type:** Unit / Integration / E2E
+         - **Scenario:** {what is being tested}
+         - **Expected Failure:** {why test should fail initially}
+         - **File:** {path/to/test_file}
+      
+      2. **Test Name:** {descriptive_name}
+         - **Type:** Unit / Integration / E2E
+         - **Scenario:** {what is being tested}
+         - **Expected Failure:** {why test should fail initially}
+         - **File:** {path/to/test_file}
+      
+      Include tests for:
+      - Normal/happy path scenarios
+      - Edge cases
+      - Error conditions
+      - Boundary conditions
+      
+      **Test Files to Create:**
+      - {path/to/test_file_1} - {purpose}
+      - {path/to/test_file_2} - {purpose}
+      
+      **Verification:**
+      - Run test suite and confirm all tests fail
+      - Verify failure reasons match expectations
+      - Exit code should be non-zero
 
-risk-management:
-  - risk: ""
-    probability: ""  # high/medium/low
-    impact: ""  # high/medium/low
-    mitigation: ""
-    rollback: ""
+  - id: green-phase
+    title: "GREEN Phase: Minimal Implementation"
+    instruction: |
+      **Objective:** Implement minimal code to pass tests (exit code 0); follow architecture mapping strictly
+      
+      **Implementation Steps:**
+      Break down into atomic, sequential steps:
+      
+      1. **Step:** {action to take}
+         - **Description:** {what to implement}
+         - **Files Affected:** {paths to files}
+         - **Architecture Component:** {which component}
+         - **Test Coverage:** {which tests will pass}
+      
+      2. **Step:** {action to take}
+         - **Description:** {what to implement}
+         - **Files Affected:** {paths to files}
+         - **Architecture Component:** {which component}
+         - **Test Coverage:** {which tests will pass}
+      
+      (Continue for all steps needed to reach GREEN)
+      
+      **Files to Create/Modify:**
+      - {file_path} - {purpose and key functions}
+      - {file_path} - {purpose and key functions}
+      
+      **Dependencies to Add:**
+      - {package_name@version} - {purpose}
+      
+      **Configuration Changes:**
+      - {config_file} - {what to add/modify}
+      
+      **Database Changes (if applicable):**
+      - Migrations, schema updates, seed data
+      
+      **Verification:**
+      - Run full test suite
+      - All tests must pass (exit code 0)
+      - Coverage should meet minimum threshold (≥80%)
 
-notes: ""
+  - id: refactor-phase
+    title: "REFACTOR Phase: Quality Improvement"
+    instruction: |
+      **Objective:** Improve code quality while maintaining green tests; integrate real APIs/services; apply patterns and eliminate duplication
+      
+      **Refactoring Targets:**
+      Identify areas for improvement:
+      
+      1. **Target:** {what to refactor}
+         - **Improvement Type:** SOLID / DRY / Performance / Integration / Pattern Application
+         - **Rationale:** {why this refactoring improves the code}
+         - **Tests Affected:** {which tests verify this still works}
+      
+      2. **Target:** {what to refactor}
+         - **Improvement Type:** SOLID / DRY / Performance / Integration / Pattern Application
+         - **Rationale:** {why this refactoring improves the code}
+         - **Tests Affected:** {which tests verify this still works}
+      
+      **Quality Improvements:**
+      - Apply SOLID principles (specify which)
+      - Eliminate code duplication (DRY)
+      - Improve naming and clarity
+      - Add error handling
+      - Optimize performance
+      - Add logging and monitoring
+      
+      **Real Integration:**
+      - Replace any mocks/stubs with real implementations
+      - Integrate with actual external APIs
+      - Connect to real databases/services
+      
+      **Verification:**
+      - Run full test suite after each refactoring
+      - All tests must remain green
+      - If any test fails, rollback the refactoring
+      - Coverage should remain ≥80%
+
+  - id: additional-details
+    title: Additional Implementation Details
+    instruction: |
+      **Security Considerations:**
+      - Input validation requirements
+      - Authentication/authorization needs
+      - Sensitive data handling
+      - Security testing requirements
+      
+      **API Integration Details (if applicable):**
+      - Specific endpoints to call
+      - Request/response formats
+      - Error handling strategies
+      - Rate limiting considerations
+      
+      **Performance Considerations:**
+      - Expected load and response times
+      - Caching strategies
+      - Query optimization needs
+      - Performance testing approach
+
+  - id: risk-management
+    title: Risk Management
+    instruction: |
+      Identify and plan for potential risks:
+      
+      **Risk:** {description of risk}
+      - **Probability:** High / Medium / Low
+      - **Impact:** High / Medium / Low
+      - **Mitigation:** {how to prevent or minimize}
+      - **Rollback:** {how to undo if it occurs}
+      
+      (Repeat for each identified risk)
+      
+      Common risk categories:
+      - Technical complexity
+      - External dependency failures
+      - Integration challenges
+      - Performance issues
+      - Timeline risks
+
+  - id: notes
+    title: Implementation Notes
+    instruction: |
+      Any additional notes, context, or guidance for implementation:
+      - Special considerations
+      - Known limitations
+      - Future enhancement opportunities
+      - References to relevant documentation

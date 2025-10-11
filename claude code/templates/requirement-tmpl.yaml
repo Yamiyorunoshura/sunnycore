@@ -1,43 +1,113 @@
 ---
-# Requirements Document Template
-# 需求文檔模板
+# Requirements Document Template v2
+# Powered by BMAD™ Core
 
-title: ""
-version: ""
-created_date: ""
-last_updated: ""
-status: ""
----
+template:
+  id: requirement-template-v2
+  name: Requirements Document
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/requirements.md
+    title: "{{project_name}} Requirements Document"
+    note: "This file will be sharded into docs/requirements/*.md after running shard-requirements.py"
 
-project-overview:
-  name: ""
-  description: ""
-  type: ""
+sections:
+  - id: project-overview
+    title: Project Overview
+    instruction: |
+      Provide a high-level overview of the project:
+      - Project name and brief description
+      - Project type (Greenfield/Brownfield)
+      - Key objectives and goals
+      - Scope boundaries (what's included/excluded)
 
-functional-requirements:
-  - id: ""
-    title: ""
-    description: ""
-    acceptance-criteria:
-      - given: ""
-        when: ""
-        then: ""
-    priority: ""
-    dependencies: []
+  - id: functional-requirements
+    title: Functional Requirements
+    repeatable: true
+    instruction: |
+      For each functional requirement, create a subsection with:
+      
+      ## REQ-{id}: {Requirement Title}
+      
+      **Description:** Clear, concise description of what the system must do
+      
+      **Acceptance Criteria:**
+      Use Given-When-Then format for each scenario:
+      - **Given** {initial context/state}
+        **When** {action/event occurs}
+        **Then** {expected outcome}
+      
+      **Priority:** Critical/High/Medium/Low
+      
+      **Dependencies:** List any requirement IDs this depends on (if any)
+      
+      Requirements must be:
+      - Verifiable: Can be tested with clear pass/fail criteria
+      - Complete: No ambiguity about what needs to be implemented
+      - Atomic: Single, focused capability per requirement
+      
+      Number requirements sequentially: REQ-001, REQ-002, etc.
 
-non-functional-requirements:
-  - id: ""
-    category: ""  # performance/security/reliability/usability/maintainability
-    requirement: ""
-    target-metric: ""
-    measurement-method: ""
-    priority: ""
+  - id: non-functional-requirements
+    title: Non-Functional Requirements
+    repeatable: true
+    instruction: |
+      For each non-functional requirement, create a subsection with:
+      
+      ## NFR-{id}: {Requirement Title}
+      
+      **Category:** Performance/Security/Reliability/Usability/Maintainability/Scalability
+      
+      **Requirement:** Specific, quantified requirement statement
+      
+      **Target Metric:** Measurable target (e.g., "P95 latency < 200ms", "99.9% uptime", "Support 10K concurrent users")
+      
+      **Measurement Method:** How this will be verified and measured
+      
+      **Priority:** Critical/High/Medium/Low
+      
+      Non-functional requirements must be:
+      - Quantified: Include specific, measurable targets
+      - Testable: Clear method for verification
+      - Realistic: Achievable within project constraints
+      
+      Number NFRs sequentially: NFR-001, NFR-002, etc.
 
-constraints:
-  technical: []
-  business: []
-  regulatory: []
+  - id: constraints
+    title: Constraints
+    instruction: |
+      Document any constraints that limit solution options:
+      
+      **Technical Constraints:**
+      - Technology limitations or mandated technologies
+      - Integration requirements with existing systems
+      - Compliance requirements
+      
+      **Business Constraints:**
+      - Budget limitations
+      - Timeline constraints
+      - Resource availability
+      
+      **Regulatory Constraints:**
+      - Legal requirements
+      - Industry standards
+      - Data protection regulations (GDPR, HIPAA, etc.)
 
-assumptions-and-risks:
-  assumptions: []
-  risks: []
+  - id: assumptions-and-risks
+    title: Assumptions and Risks
+    instruction: |
+      **Assumptions:**
+      List key assumptions made during requirements gathering:
+      - What we're assuming to be true
+      - Dependencies on external factors
+      - User behavior assumptions
+      
+      **Risks:**
+      Identify potential risks to requirements delivery:
+      - Technical risks
+      - Integration risks
+      - Dependency risks
+      - Mitigation strategies
+      
+      Format each as a clear statement with context and implications.

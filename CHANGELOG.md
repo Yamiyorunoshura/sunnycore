@@ -7,6 +7,54 @@
 
 ## [Unreleased]
 
+## [3.4.0] - 2025-10-11
+
+### Changed
+- 重新設計模板系統：將所有 9 個模板從複雜 YAML 欄位結構重構為 instruction-based 格式（**破壞性變更**）
+  - 新格式特點：少數欄位 + markdown format instructions
+  - 移除冗餘的嵌套欄位結構，改用自然語言 instruction 指導內容生成
+  - 每個模板新增 template metadata 區塊（id, name, version, output）
+  - 採用 sections 層級結構，直接對應 markdown heading 層級
+  - 重新設計 9 個模板：
+    * **requirement-tmpl.yaml**：簡化為 project-overview, functional-requirements (repeatable), non-functional-requirements (repeatable), constraints, assumptions-and-risks
+    * **architecture-tmpl.yaml**：簡化為 introduction, work-directory-structure, technical-stack, system-architecture, components (repeatable), data-flows, external-apis (repeatable), requirements-traceability, architecture-decisions (repeatable), cross-cutting-concerns, deployment, source-references
+    * **prd-tmpl.yaml**：整合為 project-information, requirements (functional/non-functional), architecture (technical-stack, components, data-flow, decisions, mapping, impact-analysis), tasks (repeatable), constraints-and-assumptions
+    * **epic-tmpl.yaml**：簡化為 epic-header, tasks (repeatable with checkbox format), task-dependencies, notes
+    * **implementation-plan-tmpl.yaml**：TDD 結構化為 plan-header, task-context, red-phase, green-phase, refactor-phase, additional-details, risk-management, notes
+    * **dev-notes-tmpl.yaml**：簡化為 notes-header, implementation-summary, technical-decisions (repeatable), challenges-and-solutions (repeatable), deviations-from-plan (repeatable), implementation-details, testing, known-issues (repeatable), technical-debt (repeatable), documentation-updates, next-steps, references
+    * **review-tmpl.yaml**：重構為 review-header, acceptance-decision, quality-scores (domain-specific), test-summary, findings (repeatable), alignment-verification, risk-assessment, recommendations, source-references
+    * **cutover-report-tmpl.yaml**：重構為 report-header, cutover-status, overall-assessment, configuration-required (repeatable), environment-setup, project-execution, acceptance-test-results (repeatable), issues-found (repeatable), functional-verification, non-functional-verification, recommendations, deployment-readiness, sign-off
+    * **completion-report-tmpl.yaml**：重構為 report-header, executive-summary, key-decisions (repeatable), technical-choices (repeatable), issues-and-solutions (repeatable), evidence-summary, recommendations (immediate-actions, future-improvements, lessons-learned), technical-debt, metrics-and-outcomes, archive-information
+  - 每個 section 包含詳細的 instruction 欄位，說明如何組織和生成內容
+  - 標記 repeatable sections（如 requirements, tasks, decisions）
+  - 預計減少 40-60% 的欄位定義，提升模板可讀性
+- 更新模板使用指南：重寫 CLAUDE.md 和 cursor.mdc 中的模板相關指引（GUIDANCE 6-8）
+  - **GUIDANCE 6: Template Structure**：從「reorganize content based on semantic meaning」改為「follow template section hierarchy to generate markdown headings」
+  - **GUIDANCE 7: Template Instructions**：從「use markdown lists and body text」改為「read and follow instruction fields as natural language guidance」
+  - **GUIDANCE 8: Repeatable Sections**：新增指引「recognize repeatable sections and generate multiple instances as needed」
+  - 新增「Template Usage Guide」章節：
+    * Template Structure Overview：說明 template metadata, sections, instruction fields, repeatable sections
+    * Reading Templates：4 步驟閱讀模板的方法
+    * Generating Content from Templates：4 條內容生成規則
+    * Example Template Interpretation：具體範例展示
+    * Key Principles：5 條核心原則
+  - 移除舊的 YAML 欄位相關描述
+  - 統一 claude code/ 和 cursor/ 兩個版本的指南內容
+
+### BREAKING CHANGES
+- **模板格式變更**：
+  - 所有模板從複雜的嵌套 YAML 欄位改為 instruction-based 格式
+  - Agent 需要根據 instruction 欄位生成內容，而非填寫預定義欄位
+  - 輸出文件仍為 markdown 格式，但生成邏輯完全改變
+- **模板使用方式變更**：
+  - 不再「填寫欄位」，而是「根據 instruction 生成內容」
+  - sections 層級結構直接對應 markdown heading 層級
+  - repeatable sections 需要 agent 識別並生成多個實例
+- **影響範圍**：
+  - 所有使用模板生成文檔的任務都會受到影響
+  - 需要更新所有 agent 的模板理解和使用邏輯
+  - 現有基於舊模板的 prompt 可能需要調整
+
 ## [3.3.29] - 2025-10-11
 
 ### Changed

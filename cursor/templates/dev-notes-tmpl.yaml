@@ -1,77 +1,244 @@
 ---
-# Development Notes Template
-# 開發筆記模板
+# Development Notes Template v2
+# Powered by BMAD™ Core
 
-task_id: ""
-task_name: ""
-plan_reference: ""
-developer: ""
-start_date: ""
-completion_date: ""
-actual_duration: ""
----
+template:
+  id: dev-notes-template-v2
+  name: Development Notes
+  version: 2.0
+  output:
+    format: markdown
+    filename: "docs/dev-notes/{task_id}-dev-notes.md"
+    alternate: "docs/prd-dev-notes.md (for PRD workflow)"
+    title: "Task-{task_id} Development Notes: {task_name}"
+    note: "Record of actual implementation, decisions, and outcomes"
 
-implementation-summary: |
-  # High-level summary including:
-  # - Requirements covered (functional/non-functional IDs)
-  # - Key features implemented
-  # - Overall approach
+sections:
+  - id: notes-header
+    title: Development Information
+    instruction: |
+      **Task ID:** {task_id}
+      **Task Name:** {task_name}
+      **Plan Reference:** {path to implementation plan}
+      **Developer:** {agent or person name}
+      **Start Date:** {date}
+      **Completion Date:** {date}
+      **Actual Duration:** {duration}
+      **Status:** Completed / In Progress / Blocked
 
-technical-decisions:
-  - decision: ""
-    context: ""
-    rationale: ""
-    alternatives_considered: []
-    impact: ""
+  - id: implementation-summary
+    title: Implementation Summary
+    instruction: |
+      Provide a high-level summary (3-5 paragraphs) covering:
+      
+      - **Requirements Covered:** Which functional and non-functional requirements (REQ/NFR IDs) were implemented
+      - **Key Features Implemented:** Main capabilities delivered
+      - **Overall Approach:** High-level technical approach taken
+      - **TDD Cycle Completion:** Confirm RED → GREEN → REFACTOR cycle was followed
+      - **Alignment with Plan:** How closely implementation followed the plan
+      
+      This summary should give a complete picture without requiring reading the entire document.
 
-challenges-and-solutions:
-  - challenge: ""
-    context: ""
-    solution: ""
-    lessons_learned: ""
+  - id: technical-decisions
+    title: Technical Decisions
+    repeatable: true
+    instruction: |
+      Document significant technical decisions made during implementation:
+      
+      **Decision:** {What was decided}
+      
+      **Context:** {Situation that required this decision}
+      
+      **Rationale:** {Why this decision was made}
+      
+      **Alternatives Considered:** {Other options evaluated}
+      
+      **Impact:** {Effect on the codebase, performance, maintainability}
+      
+      Examples of technical decisions:
+      - Choice of algorithm or data structure
+      - Library selection
+      - API design choices
+      - Error handling approach
+      - Performance optimization strategy
 
-deviations-from-plan:
-  - deviation: ""
-    original_plan: ""
-    actual_implementation: ""
-    rationale: ""
-    impact: ""
+  - id: challenges-and-solutions
+    title: Challenges and Solutions
+    repeatable: true
+    instruction: |
+      Record challenges encountered and how they were resolved:
+      
+      **Challenge:** {Description of the problem}
+      
+      **Context:** {When/where this occurred}
+      
+      **Solution:** {How it was resolved}
+      
+      **Lessons Learned:** {What was learned from this experience}
+      
+      Include both technical challenges (bugs, integration issues) and process challenges.
+      These lessons inform future work and knowledge base.
 
-implementation-details:
-  files-created: []
-  files-modified: []
-  configuration-changes: []
-  database-changes: []
-  key-components: []
+  - id: deviations-from-plan
+    title: Deviations from Implementation Plan
+    repeatable: true
+    instruction: |
+      Document any deviations from the original implementation plan:
+      
+      **Deviation:** {What changed from the plan}
+      
+      **Original Plan:** {What the plan specified}
+      
+      **Actual Implementation:** {What was actually done}
+      
+      **Rationale:** {Why the deviation was necessary}
+      
+      **Impact:** {Effect on requirements, architecture, other tasks}
+      
+      If no deviations occurred, state: "Implementation followed the plan without deviations."
+      
+      Common deviation reasons:
+      - Discovered better approach during implementation
+      - Unforeseen technical constraints
+      - Changed requirements
+      - Integration complexities
 
-testing:
-  tdd-cycle-summary: ""  # RED → GREEN → REFACTOR evidence
-  coverage:
-    percentage: ""
-    critical_paths_covered: true
-  results:
-    unit_tests: ""
-    integration_tests: ""
-    e2e_tests: ""
-  all_tests_passed: true
+  - id: implementation-details
+    title: Implementation Details
+    instruction: |
+      **Files Created:**
+      - {file_path} - {purpose}
+      - {file_path} - {purpose}
+      
+      **Files Modified:**
+      - {file_path} - {changes made}
+      - {file_path} - {changes made}
+      
+      **Configuration Changes:**
+      - {config_file} - {what was added/modified}
+      
+      **Database Changes:**
+      - Migrations executed
+      - Schema modifications
+      - Seed data added
+      
+      **Dependencies Added:**
+      - {package@version} - {purpose}
+      
+      **Key Components Implemented:**
+      - **{Component/Class/Function Name}:** {brief description and location}
+      - **{Component/Class/Function Name}:** {brief description and location}
+      
+      Provide enough detail for another developer to understand what was built and where to find it.
 
-known-issues:
-  - issue: ""
-    severity: ""
-    workaround: ""
-    tracking: ""
+  - id: testing
+    title: Testing
+    instruction: |
+      **TDD Cycle Summary:**
+      Provide evidence that RED → GREEN → REFACTOR cycle was followed:
+      - RED: {number} tests written, all initially failed
+      - GREEN: Minimal implementation created, all tests passed
+      - REFACTOR: {improvements made} while maintaining green tests
+      
+      **Test Coverage:**
+      - **Percentage:** {coverage_percentage}%
+      - **Critical Paths Covered:** Yes / No (if no, explain why)
+      - **Coverage Tool Output:** {brief summary or link}
+      
+      **Test Results:**
+      - **Unit Tests:** {count} tests, all passing
+      - **Integration Tests:** {count} tests, all passing
+      - **E2E Tests:** {count} tests (if applicable), all passing
+      - **Total Test Execution Time:** {duration}
+      
+      **All Tests Passed:** Yes / No
+      
+      If any tests failed:
+      - Explain why tests are not passing
+      - Document plan to fix
+      - This should be exceptional - default is all tests pass
+      
+      **Test Files:**
+      - {test_file_path} - {what it tests}
 
-technical-debt:
-  - item: ""
-    reason: ""
-    mitigation_plan: ""
-    priority: ""
+  - id: known-issues
+    title: Known Issues
+    repeatable: true
+    instruction: |
+      Document any known issues or limitations:
+      
+      **Issue:** {Description}
+      
+      **Severity:** Critical / High / Medium / Low
+      
+      **Workaround:** {Temporary solution if any}
+      
+      **Tracking:** {Issue tracker ID or plan to address}
+      
+      If no known issues, state: "No known issues at time of completion."
 
-documentation-updates: []
+  - id: technical-debt
+    title: Technical Debt
+    repeatable: true
+    instruction: |
+      Document any technical debt incurred:
+      
+      **Item:** {Description of debt}
+      
+      **Reason:** {Why this debt was taken on}
+      
+      **Mitigation Plan:** {How/when it will be addressed}
+      
+      **Priority:** Critical / High / Medium / Low
+      
+      Technical debt examples:
+      - TODO comments for future refactoring
+      - Temporary workarounds
+      - Missing error handling
+      - Performance optimizations deferred
+      - Test coverage gaps
+      
+      If no technical debt, state: "No technical debt incurred."
 
-next-steps: []
+  - id: documentation-updates
+    title: Documentation Updates
+    instruction: |
+      List any documentation that was updated or created:
+      - API documentation
+      - README updates
+      - Architecture diagram changes
+      - Configuration documentation
+      - User guides
+      
+      If no documentation updates needed, state: "No additional documentation updates required."
 
-references:
-  implementation_plan: ""
-  related_docs: []
-  external_resources: []
+  - id: next-steps
+    title: Next Steps and Recommendations
+    instruction: |
+      **Immediate Next Steps:**
+      - Tasks that should be started next
+      - Any blocking issues that need resolution
+      
+      **Recommendations:**
+      - Suggestions for future improvements
+      - Related features to consider
+      - Areas that may need attention
+      
+      **Handoff Notes:**
+      - Information for next developer or reviewer
+      - Context that will be helpful
+
+  - id: references
+    title: References
+    instruction: |
+      **Implementation Plan:** {path to plan file}
+      
+      **Related Documentation:**
+      - {document_path} - {relevance}
+      - {document_path} - {relevance}
+      
+      **External Resources:**
+      - {URL} - {what was referenced}
+      - {URL} - {what was referenced}
+      
+      List all resources consulted during implementation.
