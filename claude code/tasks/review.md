@@ -30,7 +30,7 @@
 
 ## [Steps]
   1. Review Planning & Domain Identification
-    - Understand implementation plan and identify task domain
+    - Understand implementation plan to identify task domain and establish scope of review
     - Determine domain-specific review criteria and success criteria
     - Establish progress tracking mechanism
     - Outcome: Review criteria and approach determined
