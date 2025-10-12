@@ -18,8 +18,8 @@
   1. Initialization & Context Gathering
     - Determine project type (Greenfield/Brownfield)
     - Gather complete context for both project types
-    - Establish progress tracking mechanism
-    - Outcome: Project type determined and context collected
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Outcome: Project type determined, context collected, and plan.md initialized
 
   2. Requirement Scope & Impact Analysis
     - Analyze requirement scope and architectural impact
@@ -36,6 +36,21 @@
     - Specify next step command
     - Handle user requests for additional details
     - Outcome: User receives clear next-step action guidance
+
+## [Progress-Tracking-Guidelines]
+  **Content for plan.md:**
+  - Project type determination (Greenfield/Brownfield)
+  - User requirement summary (concise description)
+  - Existing architecture analysis (if Brownfield - components, patterns, tech stack)
+  - Scope assessment:
+    * Estimated task count
+    * New components/modules needed (yes/no)
+    * Architecture pattern changes (yes/no)
+    * Technology stack changes (yes/no)
+  - Impact analysis (architectural impact level: none/low/medium/high)
+  - Decision criteria evaluation results
+  - Workflow recommendation with rationale (PRD or Full workflow)
+  - Recommended command to execute next
 
 ## [Decision-Criteria]
   **Recommend Full Workflow (*create-requirements) when:**

@@ -22,8 +22,8 @@
   1. Existing Architecture Evaluation
     - Understand current architecture, extension points, and constraints
     - Identify affected domains and dependencies
-    - Establish progress tracking mechanism
-    - Outcome: Complete understanding of existing architecture and extension points
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Outcome: Complete understanding of existing architecture, extension points identified, and plan.md initialized
 
   2. New Module Design & Impact Analysis
     - Design new module with clear boundaries and interfaces
@@ -41,6 +41,27 @@
     - Verify all impact analyses are complete and accurate
     - Validate compatibility between new and existing modules
     - Outcome: New and existing modules verified as compatible
+
+## [Progress-Tracking-Guidelines]
+  **Content for plan.md:**
+  - Existing architecture evaluation summary:
+    * Existing components reviewed (list)
+    * Extension points identified (list)
+    * Existing contracts/interfaces analyzed (list)
+    * Current tech stack documented
+  - New requirements summary (requirement IDs and descriptions)
+  - New module design progress:
+    * New components designed (list with status)
+    * Integration points with existing system (list)
+    * New data flows documented (count and status)
+    * ADRs for new/modified components (count and key decisions)
+  - Impact analysis status:
+    * Components affected (list)
+    * Breaking changes identified (yes/no, details)
+    * Migration path documented (if applicable)
+    * Backward compatibility verified (yes/no)
+  - Documentation status (draft created, user approved, sharding completed)
+  - Compatibility verification status (verified, issues found)
 
 ## [Brownfield-Architecture-Guidelines]
   1. **Preserve Existing Contracts**

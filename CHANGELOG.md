@@ -7,6 +7,46 @@
 
 ## [Unreleased]
 
+## [3.20.0] - 2025-10-12
+
+### Added
+- 統一任務進度追蹤指導方針：為所有 19 個任務文件新增詳細的進度追蹤內容規範
+  - 新增 `[Progress-Tracking-Guidelines]` 章節到以下任務文件：
+    * `claude code/tasks/brownfield-plan.md`：詳細定義問題識別、修復任務拆分、進度追蹤內容
+    * `claude code/tasks/conclude.md`：定義版本解析、資訊提取、報告生成、歸檔狀態追蹤內容
+    * `claude code/tasks/consult.md`：定義專案類型、需求分析、範圍評估、工作流程推薦追蹤內容
+    * `claude code/tasks/create-architecture.md`：定義需求映射、架構設計、文件化、驗證追蹤內容
+    * `claude code/tasks/create-brownfield-architecture.md`：定義現有架構評估、新模組設計、影響分析追蹤內容
+    * `claude code/tasks/create-epic.md`：定義任務拆分、需求覆蓋、可追溯性矩陣追蹤內容
+    * `claude code/tasks/create-plan.md`：定義 TDD 規劃（RED/GREEN/REFACTOR）追蹤內容
+    * `claude code/tasks/create-prd.md`：定義需求定義、架構設計、任務拆分、可追溯性追蹤內容
+    * `claude code/tasks/create-requirements.md`：定義功能需求提取、非功能需求、驗收標準追蹤內容
+    * `claude code/tasks/curate-knowledge.md`：定義知識識別、分類、文件創建、歸檔追蹤內容
+    * `claude code/tasks/cutover.md`：定義代碼品質檢查、環境設置、驗收測試追蹤內容
+    * `claude code/tasks/develop-plan.md`：定義 TDD 實作進度（RED/GREEN/REFACTOR）追蹤內容
+    * `claude code/tasks/develop-prd.md`：定義 TDD 開發循環、整合測試、驗收標準驗證追蹤內容
+    * `claude code/tasks/document-project.md`：定義文件來源分析、架構整合、文件化工作流程追蹤內容
+    * `claude code/tasks/fix-acceptance-issues.md`：定義問題優先級、根因分析、修復實作追蹤內容
+    * `claude code/tasks/fix-design-conflicts.md`：定義問題分類（嚴重性與類型）、修復規劃、執行進度追蹤內容
+    * `claude code/tasks/init.md`：定義專案分析、環境設置、目錄結構、最小應用實作追蹤內容
+    * `claude code/tasks/review.md`：定義領域識別、代碼品質檢查、測試執行、評分追蹤內容
+    * `claude code/tasks/validate-design.md`：定義工作流程識別、內容提取、驗證執行、問題識別追蹤內容
+  - 每個任務的進度追蹤指導方針包含：
+    * 具體追蹤項目清單（根據任務特性定義）
+    * 每個階段的狀態追蹤要求（pending/in-progress/completed）
+    * 進度百分比和覆蓋率指標
+    * 檔案創建/修改清單
+    * 整體完成狀態
+  - 所有任務步驟 1 從「Establish progress tracking mechanism」更新為「Create plan.md at "{root}/docs/plan.md" for progress tracking」
+  - 所有任務步驟 1 的 Outcome 從「...」更新為「..., and plan.md initialized」
+  - 提升任務執行的可見性、一致性和可追蹤性
+
+### Changed
+- 優化 completion-validator 清理機制：任務完成後自動刪除臨時 plan.md 文件
+  - 更新 `claude code/agents/completion-validator.md` 步驟 6：新增「remove the temporary plan.md file」到進度更新步驟
+  - 確保任務完成後自動清理臨時進度追蹤文件
+  - 避免臨時文件累積，保持專案目錄整潔
+
 ## [3.19.0] - 2025-10-12
 
 ### Added

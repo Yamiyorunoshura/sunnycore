@@ -21,8 +21,8 @@
   1. Issue Analysis & Planning
     - Understand issues from review report and architecture context
     - Formulate atomic fix tasks based on analysis
-    - Establish tracking mechanism for fixes
-    - Outcome: Clear understanding of issues and fix plan created
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Outcome: Clear understanding of issues, fix plan created, and plan.md initialized
 
   2. Test-Driven Fix Implementation
     - Establish progress tracking for fixes
@@ -34,6 +34,17 @@
     - Read existing development notes at "{DEVNOTES}/{task_id}-dev-notes.md"
     - Update existing dev notes with fix summary (do not create new file)
     - Outcome: Fix summary completed and development notes updated
+
+## [Progress-Tracking-Guidelines]
+  **Content for plan.md:**
+  - List of identified issues from review report with severity
+  - Breakdown of fix tasks (one per issue)
+  - For each fix task:
+    * Issue description and root cause
+    * Fix approach (RED/GREEN/REFACTOR steps)
+    * Affected files and components
+    * Completion status (pending/in-progress/completed)
+  - Overall progress indicator (e.g., "Fixed 2/5 issues")
 
 ## [DoD]
   - [ ] All unit and integration tests passed
