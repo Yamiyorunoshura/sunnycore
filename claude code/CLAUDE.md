@@ -64,8 +64,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## GUIDANCE 22: [Output] Tag
 **MUST** only generate the output files clearly stated within the output section of the tasks. **MUST NOT** generate any out-of-scope files.
 
-## GUIDANCE 23
-**MUST** update existing output files based on actual situation when they already exist, **MUST NOT** ignore the output requirements.
+## GUIDANCE 23: Output File Management
+**MUST** check if output files already exist before generating content; if exist, read and update them rather than creating new files, **MUST NOT** create duplicate files or ignore existing content. When updating, preserve existing structure and enhance/correct content based on new requirements.
 
 ## GUIDANCE 24: [Scope-of-Work] Tag
 **MUST** execute all tasks within the [Scope-of-Work] section AND all mandatory requirements in [Constraints] (validation coordination, tool usage), **MUST NOT** perform actions outside defined scope unless required by constraints

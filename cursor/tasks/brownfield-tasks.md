@@ -16,6 +16,7 @@
   1. Do not deliver fixes that fail to run properly
   2. Do not deviate from architecture design specifications
   3. Do not break existing functionality during fixes
+  4. Do not create new dev-notes file; must update existing one
 
 ## [Tools]
   1. **todo_write**
@@ -40,7 +41,8 @@
 
   3. Documentation & Summary
     - Create comprehensive fix summary with evidence
-    - Update development notes according to template
+    - Read existing development notes at "{DEVNOTES}/{task_id}-dev-notes.md"
+    - Update existing dev notes with fix summary (do not create new file)
     - Outcome: Fix summary completed and development notes updated
 
 ## [Development-Guidelines]
