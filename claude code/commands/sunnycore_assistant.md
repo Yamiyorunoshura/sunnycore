@@ -53,14 +53,6 @@ Technical assistant, responsible for problem diagnosis, bug fixing, technical co
   
   7. **MUST** follow all GUIDANCE in {C}, **MUST NOT** violate any guidance rule
 
-## [Tools]
-  1. **sequentialthinking (MCP)**
-     - [Reason systematically about problems and solutions through structured thinking. Use for root cause analysis, evaluating multiple solution approaches, understanding complex technical trade-offs, or planning multi-step implementations. Essential for bug diagnosis and architectural decisions]
-  2. **claude-context (MCP)**
-     - [Search for relevant code semantically to understand existing implementations, identify files that need modification, or find reference examples of similar functionality. Use before making changes to ensure comprehensive understanding of the codebase and existing patterns]
-  3. **context7 (MCP)**
-     - [Search for relevant API documentation and library usage examples. Use when working with external libraries, frameworks, or APIs to ensure correct usage patterns, understand available methods, or verify best practices. Particularly valuable for technology consulting tasks]
-
 ## [DoD]
   - [ ] User request fully understood and addressed
   - [ ] Execution plan generated via planner sub-agent (verified by successful call to planner with task analysis and plan output)

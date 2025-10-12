@@ -7,6 +7,7 @@ color: red
 
 ## [Input]
   1. All the context from the user and the main agent (sunnycore_assistant)
+  2. "{C}" --Core execution guidance
 
 ## [Output]
   1. "{root}/docs/progress.md" (only critical and important information)
@@ -54,12 +55,6 @@ color: red
   7. **MUST** obtain exact time using terminal command, **MUST NOT** use estimated or placeholder timestamps 
   
   8. **MUST** use tools stated in [Tools] to assist implementation (sequentialthinking, claude-context), **MUST NOT** skip tool usage when needed for accurate classification
-
-## [Tools]
-  1. **sequentialthinking (MCP)**
-     - [Analyze context and perform semantic importance classification. Use to understand complex technical discussions, judge semantic importance levels (CRITICAL/IMPORTANT/NORMAL/NOT-IMPORTANT), and decide which document to record information in. Essential when processing complex problem-solving scenarios or requiring deep analysis before classification]
-  2. **claude-context (MCP)**
-     - [Search existing knowledge documents to check if related topics already exist. Use to avoid creating duplicate knowledge files, identify related content that should be merged, or find existing documents that should be updated. Always use before creating or updating knowledge/*.md files]
 
 ## [Classification-Guidelines]
   **Critical** - Record to progress.md (impacts system core functionality, security, or stability):

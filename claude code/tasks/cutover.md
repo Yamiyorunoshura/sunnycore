@@ -14,13 +14,7 @@
   2. Do not proceed if required input files are missing (must list and halt)
   3. Do not skip testing any critical business requirements
   4. Do not deviate from template structure
-
-## [Tools]
-  1. **sequential-thinking (MCP)**: Perform structured reasoning and verification
-    - [Step 2: Reason about configuration requirements and environment dependencies]
-    - [Step 4: Analyze acceptance test results and assess business impact]
-  2. **context7 (MCP)**
-    - [Step 2: Query official documentation related to deployment configuration]
+  5. **Do not accept ANY production code containing mock/stub implementations or hardcoded values, regardless of functional test results** (auto-Fail cutover, but unit tests using mocks/hardcoded test data are allowed)
 
 ## [Steps]
   1. Preparation & Validation
@@ -29,55 +23,71 @@
     - Establish progress tracking mechanism
     - Outcome: Business objectives understood and tracking established
 
-  2. Configuration Analysis & Documentation
+  2. Code Quality Inspection (CRITICAL)
+    - **CRITICAL**: Scan ALL production/implementation code for mock/stub/placeholder patterns and hardcoded values (auto-fail if found; note: tests using mocks/hardcoded test data are allowed)
+    - Verify no TODO/placeholder comments in production code
+    - Check for hardcoded credentials, API keys, or configuration values
+    - Outcome: Code quality verified, no mock implementations or hardcoded values in production code
+
+  3. Configuration Analysis & Documentation
     - Identify project type and configuration needs
     - Document all configuration requirements clearly
     - Outcome: Configuration requirements documented
 
-  3. Environment Setup & Verification
+  4. Environment Setup & Verification
     - Configure project environment following documentation
     - Document all setup steps and any failures
     - Outcome: Fully configured environment ready for testing
 
-  4. Project Execution & Functional Verification
+  5. Project Execution & Functional Verification
     - Run project and verify functionality
     - Document execution results with detailed logs
     - Outcome: Project running with verified functionality
 
-  5. Acceptance Testing
+  6. Acceptance Testing
     - Test all critical business requirements from end-user perspective
     - Document comprehensive test results with evidence
     - Record all issues with severity and impact
     - Outcome: Complete acceptance test results documented
 
-  6. Report Generation & Status Determination
+  7. Report Generation & Status Determination
     - Generate complete cutover report at "{CUTOVER}"
     - Determine cutover status (Success/Partial Success/Failed)
     - Document all findings and recommendations
     - Outcome: Complete cutover report with clear status
 
 ## [Acceptance-Testing-Guidelines]
-  1. **End-User Perspective Testing**
+  1. **Code Quality Gate (CRITICAL - Must Pass First)**
+    - **AUTOMATIC FAIL CRITERIA** (overrides all functional test results):
+      - **Mock/Stub Implementation or Hardcoded Values Detection in Production Code**: ANY presence of mock/placeholder/stub code or hardcoded values in production/implementation code → **AUTOMATIC FAIL**
+        - Examples: `// TODO: implement`, `throw new Error('Not implemented')`, placeholder return values, mock data in production code, hardcoded API keys, hardcoded credentials, hardcoded configuration values in production code
+        - Rationale: Mock implementations and hardcoded values are incomplete/unsafe work, unacceptable for production deployment regardless of functional test results
+        - **Important**: tests using mocks/stubs/hardcoded test data for testing purposes are ALLOWED and expected
+    - Scan all production code files before proceeding with functional testing
+    - If mock implementations or hardcoded values found: STOP testing, report as Failed, document findings
+  
+  2. **End-User Perspective Testing**
     - Test all critical business requirements from user perspective (not technical testing)
     - Verify user workflows are smooth and intuitive
     - Assess error messages clarity and user guidance
   
-  2. **Configuration & Setup Validation**
+  3. **Configuration & Setup Validation**
     - Identify and document all configuration requirements
     - Verify setup documentation completeness
     - Test deployment and installation procedures
   
-  3. **Issue Documentation**
+  4. **Issue Documentation**
     - Record all issues with severity classification (critical/high/medium/low)
     - Provide clear reproduction steps for each issue
     - Assess business impact of each issue
   
-  4. **Business Value & Readiness**
+  5. **Business Value & Readiness**
     - Confirm deliverables align with business objectives
     - Determine cutover status: Success / Partial Success / Failed
     - Assess production deployment readiness and risk
 
 ## [DoD]
+  - [ ] **CRITICAL**: All production/implementation code scanned and confirmed NO mock/stub/placeholder code or hardcoded values exist (tests using mocks/hardcoded test data are allowed)
   - [ ] All critical business requirements tested from end-user perspective with results recorded
   - [ ] Complete cutover report at "{CUTOVER}" with status (Success/Partial Success/Failed) and clear rationale
   - [ ] All issues documented with severity classification and reproduction steps
@@ -122,3 +132,41 @@
 - Configuration documented: Redis port changed to 6380 (add to .env file)
 - All test results recorded with API response examples
 - Recommendation: Update README.md with Redis port configuration
+
+### Example 3: Mock Implementation or Hardcoded Values Auto-Fail (CRITICAL)
+[Input]
+- PRD: docs/PRD.md (REQ-001: Payment processing, REQ-002: Order management)
+- Template: cutover-report-tmpl.yaml
+
+[Decision]
+- **CRITICAL FINDING**: Code quality inspection reveals mock implementations and hardcoded values in PRODUCTION CODE
+  - src/services/PaymentService.js:L42: Mock implementation detected
+    ```javascript
+    async processPayment(order) {
+      // TODO: implement actual payment gateway
+      const API_KEY = 'pk_test_hardcoded_12345'; // Hardcoded API key!
+      return { success: true, transactionId: 'mock-txn-001' };
+    }
+    ```
+  - src/config/database.js:L15: Hardcoded database credentials
+    ```javascript
+    const DB_CONFIG = {
+      host: 'localhost',
+      password: 'admin123', // Hardcoded password!
+      database: 'production_db'
+    };
+    ```
+- **Decision: AUTOMATIC FAIL** (mock implementations and hardcoded values found in production code - testing halted)
+- **Note**: Unit tests properly use mocks (jest.mock()) - this is acceptable, but production code must not contain mocks or hardcoded values
+
+[Expected Outcome]
+- docs/cutover-report.md with status: Failed
+- CRITICAL findings documented: Mock implementations and hardcoded sensitive values in production code
+- Rationale: Code is not production-ready; contains incomplete implementations and security vulnerabilities
+- Risk: Critical (would deploy non-functional payment system with exposed credentials)
+- Action items: 
+  1. Implement actual payment gateway integration (remove mock code from src/services/PaymentService.js)
+  2. Move all hardcoded values to environment variables/configuration files
+  3. Remove all TODO/placeholder comments from production code
+  4. Re-run cutover after fixes are complete
+- Functional testing not performed (halted at code quality gate)

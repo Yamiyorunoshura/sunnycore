@@ -17,17 +17,6 @@
   4. Do not deliver with failing tests (exit code must be 0)
   5. Follow the Development-Guidelines defined in sunnycore_dev
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 1: Analyze implementation plan complexity]
-    - [Steps 2-4: Reason about implementation strategies and technical decisions for each TDD phase]
-    - When to use: When need to evaluate implementation approaches or handle technical challenges
-  2. **claude-context (MCP)**
-    - [Step 1: Search codebase for implementation plan-related code, modules, and test cases]
-    - Query examples: "Where is the related implementation?" "How to test this?" "What modules does this depend on?"
-  3. **context7 (MCP)**
-    - [Steps 2-4: When need external API calls, query official documentation and examples]
-
 ## [Blocking-Conditions]
   - missing critical inputs
   - unexpected RED failures

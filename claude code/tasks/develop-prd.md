@@ -16,18 +16,6 @@
   4. Do not deliver with failing tests (exit code must be 0)
   5. Follow the Development-Guidelines defined in sunnycore_dev
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 1: Analyze PRD complexity, identify dependencies and risks]
-    - [Step 2-4: Reason about implementation strategies for each TDD phase (RED/GREEN/REFACTOR)]
-    - When to use: When need to decompose complex features or evaluate refactoring approaches
-  2. **claude-context (MCP)**
-    - [Step 1: Search codebase for related modules, dependencies, implementation patterns, and test examples]
-    - Query examples: "Where are related modules?" "How is similar functionality implemented?" "What are the test patterns?"
-    - [TDD phases: Query reference implementations and test cases for each phase]
-  3. **context7 (MCP)**
-    - [Step 2-4: When need to call external APIs, query official SDK usage examples]
-
 ## [Steps]
   1. Preparation & Strategy
     - Understand all PRD requirements and architecture completely

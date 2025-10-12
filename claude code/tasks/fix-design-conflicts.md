@@ -18,14 +18,6 @@
   3. Do not introduce new conflicts or inconsistencies during fixes
   4. Do not delete validation report before all fixes are complete
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 1: Analyze issues and determine fix strategies]
-    - [Step 2-3: Reason about conflict resolution approaches and evaluate impact scope]
-    - When to use: When need to evaluate multiple fix approaches or analyze cross-document consistency
-  2. **claude-context (MCP)**
-    - [Step 2: Verify impact of fixes on existing code]
-
 ## [Steps]
   1. Issue Analysis & Prioritization
     - Understand all issues from validation report

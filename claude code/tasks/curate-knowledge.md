@@ -18,17 +18,6 @@
   2. Do not make independent judgments on practice levels (trust review markings)
   3. Do not force resolution of conflicting practices (preserve all evidence for context-based decisions)
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 2: Reason about knowledge base organization structure and semantic classification]
-    - When to use: When need to design knowledge categorization scheme or resolve conflicting practices
-  2. **claude-context (MCP)**
-    - [Step 2: Search codebase for relevant implementations]
-    - When to use: When technical details mentioned in documentation need to be verified or supplemented from code
-  3. **context7 (MCP)**
-    - [Step 2: Knowledge Base Design Phase - Verify if practices align with official guidelines]
-    - When to use: When validating best practices against official documentation
-
 ## [Steps]
   1. Knowledge Identification & Planning
     - Identify all platinum-level best practices from reviews

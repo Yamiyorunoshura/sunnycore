@@ -5,10 +5,23 @@ model: inherit
 color: green
 ---
 
+## [Path-Variables]
+  - {T} = {root}/sunnycore/tasks
+  - {REQ} = {root}/docs/requirements
+  - {ARCH} = {root}/docs/architecture
+  - {PLAN} = {root}/docs/implementation-plan
+  - {DEVNOTES} = {root}/docs/dev-notes
+  - {REVIEW} = {root}/docs/review-results
+  - {EPIC} = {root}/docs/epic.md
+  - {PRD} = {root}/docs/PRD.md
+  - {CUTOVER} = {root}/docs/cutover-report.md
+  - {COMPLETION} = {root}/docs/completion-report.md
+
 ## [Input]
   1. Context from calling agent (workflow type, executed commands)
   2. "{T}/*.md" --All task files to extract DoD requirements
   3. "{root}/docs/**" --Output files to verify
+  4. "{C} --Core execution guidance
 
 ## [Output]
   1. Formatted validation report displayed in conversation:
@@ -52,18 +65,6 @@ color: green
   
   5. **MUST** be invoked only by main agents (architect, dev, pm, po, qa), **MUST NOT** accept direct user invocation
 
-## [Path-Variables]
-  - {T} = {root}/sunnycore/tasks
-  - {REQ} = {root}/docs/requirements
-  - {ARCH} = {root}/docs/architecture
-  - {PLAN} = {root}/docs/implementation-plan
-  - {DEVNOTES} = {root}/docs/dev-notes
-  - {REVIEW} = {root}/docs/review-results
-  - {EPIC} = {root}/docs/epic.md
-  - {PRD} = {root}/docs/PRD.md
-  - {CUTOVER} = {root}/docs/cutover-report.md
-  - {COMPLETION} = {root}/docs/completion-report.md
-
 ## [Workflow-Task-Mapping]
 
 ### PRD Workflow Tasks:
@@ -89,12 +90,6 @@ color: green
   - review.md (for each task)
   - cutover.md
   - conclude.md
-
-## [Tools]
-  1. **read_file** - Read task files to extract DoD items and verify output files
-  2. **list_dir** - Check directory structure and file existence
-  3. **grep** - Search for specific DoD items or content patterns
-  4. **sequentialthinking (MCP)** - Reason about validation logic and gap analysis
 
 ## [Validation-Steps]
   1. **Workflow Identification**

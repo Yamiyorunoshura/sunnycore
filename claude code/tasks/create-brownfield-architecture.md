@@ -17,21 +17,6 @@
   3. Do not deviate from template structure
   4. Do not skip executing shard-architecture.py
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 1: Evaluate extension points and constraints of existing architecture]
-    - [Step 2: Design new module boundaries and integration patterns]
-    - When to use: When need to evaluate multiple integration approaches or analyze impact scope
-    - [Step 3: Structured drafting of architecture change document]
-  2. **claude-context (MCP)**
-    - [Step 1: Search existing architecture implementations, public contracts, and integration points]
-    - Query examples: "What are the existing system boundaries?" "How is data flow implemented?" "What are the shared services?"
-  3. **context7 (MCP)**
-    - [Step 2: Query official API documentation and integration guidance for new integration technologies]
-  4. **playwright (MCP)**
-    - [Step 1-2: Research architecture migration patterns and integration cases]
-    - When to use: When need to study how similar systems evolved their architecture or integrated new components
-
 ## [Steps]
   1. Existing Architecture Evaluation
     - Understand current architecture, extension points, and constraints

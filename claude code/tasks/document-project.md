@@ -20,19 +20,6 @@
   3. Do not skip deleting old architecture documents before sharding
   4. Do not skip updating CLAUDE.md Document Index after sharding
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 2: Reason about content integration strategy and document organization structure]
-    - When to use: When need to integrate information from multiple sources or ensure document consistency
-  2. **claude-context (MCP)**
-    - [Step 1-2: Search actual implementation details, architecture decisions, and key components]
-    - Query examples: "What is the actual implementation?" "Where are the key components?" "What are the architecture decisions?"
-  3. **context7 (MCP)**
-    - [Step 1-2: Query latest official documentation and API changes for tech stack]
-  4. **playwright (MCP)**
-    - [Step 1-2: Research architecture documentation structure and presentation from exemplary open-source projects]
-    - When to use: When need to study how successful projects document their architecture and design decisions
-
 ## [Steps]
   1. Analysis & Context Gathering
     - Understand existing architecture and actual implementation state

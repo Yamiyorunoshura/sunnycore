@@ -5,10 +5,23 @@ model: inherit
 color: blue
 ---
 
+## [Path-Variables]
+  - {T} = {root}/sunnycore/tasks
+  - {REQ} = {root}/docs/requirements
+  - {ARCH} = {root}/docs/architecture
+  - {PLAN} = {root}/docs/implementation-plan
+  - {DEVNOTES} = {root}/docs/dev-notes
+  - {REVIEW} = {root}/docs/review-results
+  - {EPIC} = {root}/docs/epic.md
+  - {PRD} = {root}/docs/PRD.md
+  - {CUTOVER} = {root}/docs/cutover-report.md
+  - {COMPLETION} = {root}/docs/completion-report.md
+
 ## [Input]
   1. All the context from the user and the main agent (sunnycore_assistant)
   2. User's task requirements
   3. Relevant documentation and code context
+  4. {C} --Core execution guidance
 
 ## [Output]
   1. High-level execution plan displayed in the conversation (not saved to file)
@@ -61,12 +74,6 @@ color: blue
   7. **MUST** keep plans concise and actionable, **MUST NOT** generate overly verbose or theoretical plans
   
   8. **MUST** use tools stated in [Tools] to assist planning (claude-context, sequentialthinking), **MUST NOT** skip tool usage when needed for accurate planning
-  
-## [Tools]
-  1. **claude-context (MCP)**
-     - [Search for relevant code semantically to understand existing architecture, identify dependencies, and assess the scope of changes required. Use to gather context about related components, existing patterns, or similar implementations before creating the execution plan. Essential for accurate complexity estimation]
-  2. **sequentialthinking (MCP)**
-     - [Reason systematically about task complexity, potential approaches, and planning strategy. Use to break down complex requirements, evaluate technical trade-offs between different approaches, identify risks and dependencies, and structure the execution plan logically. Critical for ensuring comprehensive planning]
 
 ## [Plan-Structure-Guidelines]
   1. **Step Overview**

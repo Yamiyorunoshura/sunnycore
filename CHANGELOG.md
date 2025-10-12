@@ -7,6 +7,32 @@
 
 ## [Unreleased]
 
+## [3.14.0] - 2025-10-12
+
+### Added
+- 新增 MCP Tools 使用指引系統：於 `claude code/CLAUDE.md` 新增完整的 MCP Tools Usage Guide 章節
+  - 新增 4 個 MCP 工具的詳細使用指引：sequential-thinking（結構化推理）、claude-context（代碼庫索引與搜尋）、context7（外部文檔查詢）、playwright（瀏覽器自動化）
+  - 新增工具選擇指南：決策框架、常見工具組合、任務類型映射
+  - 新增最佳實踐與常見陷阱：提供 Do/Don't 清單與工具特定提示
+  - 新增快速參考表：任務到工具的映射與範例查詢
+  - 提升 MCP 工具使用的系統性與準確性
+
+### Changed
+- 重構文檔結構：移除任務與代理文件中的重複 [Tools] 章節，統一整合至 CLAUDE.md
+  - 移除 4 個代理文件中的 [Tools] 章節：completion-validator、planner、progress-manager、step-validator
+  - 移除 1 個命令文件中的 [Tools] 章節：sunnycore_assistant
+  - 移除 20+ 個任務文件中的 [Tools] 章節
+  - 原因：工具使用指引已統一整合至 CLAUDE.md 的 MCP Tools Usage Guide，減少重複內容
+  - 提升文檔可維護性與一致性
+- 優化文檔結構：調整代理文件的章節順序
+  - 將 [Path-Variables] 章節移至文件開頭（completion-validator、planner、progress-manager、step-validator）
+  - 提升文檔可讀性
+- 強化 Cursor 版本驗收流程：於 `cursor/tasks/cutover.md` 新增 Code Quality Inspection 步驟
+  - 新增 Step 2: Code Quality Inspection (CRITICAL)
+  - 強化對 mock/stub 實作與硬編碼值的自動檢查
+  - 新增 Example 3: Mock Implementation or Hardcoded Values Auto-Fail
+  - 與 Claude Code 版本保持一致
+
 ## [3.13.0] - 2025-10-12
 
 ### Added

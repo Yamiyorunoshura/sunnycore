@@ -15,19 +15,6 @@
   3. Do not include operational actions unless explicitly requested
   4. Do not break existing contracts for Brownfield projects (must provide impact analysis for changes)
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 1: Analyze project type (Greenfield/Brownfield) and complexity]
-    - [Step 2: Structured requirement design, establish dependencies and priorities between requirements]
-    - [Step 3: Evaluate pros and cons of architecture design options]
-    - When to use: When need to compare multiple technical solutions or assess architecture decision impacts
-  2. **context7 (MCP)**
-    - [Step 3: Query latest API documentation and architecture pattern examples for external packages and frameworks]
-    - When to use: When architecture design involves new tech stack or need to verify package version compatibility
-  3. **claude-context (MCP)**
-    - [Step 1: When Brownfield, search existing architecture implementations and data models]
-    - Query examples: "How is authentication implemented?" "Where are data models defined?" "What are existing service boundaries?"
-
 ## [Steps]
   1. Initialization & Context Understanding
     - Determine project type (Greenfield/Brownfield)
