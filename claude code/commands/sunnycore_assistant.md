@@ -49,11 +49,9 @@ Technical assistant, responsible for problem diagnosis, bug fixing, technical co
   
   5. **MUST** test and verify all fixes before marking completion, **MUST NOT** deliver unverified solutions
   
-  6. **MUST** use tools stated in [Tools] to assist implementation (sequentialthinking, claude-context, context7), **MUST NOT** skip tool usage when explicitly recommended
+  6. **MUST** follow all GUIDANCE in {C}, **MUST NOT** violate any guidance rule
   
-  7. **MUST** follow all GUIDANCE in {C}, **MUST NOT** violate any guidance rule
-  
-  8. **MUST** mark task as "in_progress" in "{root}/docs/progress.md" at the start of task execution, **MUST NOT** skip progress tracking
+  7. **MUST** mark task as "in_progress" in "{root}/docs/progress.md" at the start of task execution, **MUST NOT** skip progress tracking
 
 ## [DoD]
   - [ ] User request fully understood and addressed

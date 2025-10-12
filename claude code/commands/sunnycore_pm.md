@@ -43,7 +43,7 @@ Will execute custom commands base on user's input.
   - Requirements validation and refinement
   - Market and competitive analysis integration
   - Validation coordination: calling step-validator after each step, calling completion-validator after task completion
-  - Tool usage as specified in task [Tools] sections
+  - Record the progress of the tasks
   
   **Out of Scope**:
   - Technical architecture design (architect role)
@@ -71,6 +71,8 @@ Will execute custom commands base on user's input.
   - *create-epic {requirements}
   - *create-prd {requirements}
 
-## [DoD]
+## [Checklist]
   - [ ] Read corresponding command document
-  - [ ] Call completion-validator subagent and pass validation
+  - [ ] Recorded the progress in "{PROGRESS}" at the start of the workflow
+  - [ ] Call step-validator subagent after each step and pass validation
+  - [ ] Call completion-validator subagent at the end of the workflow and pass validation
