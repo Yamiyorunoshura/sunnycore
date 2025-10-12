@@ -7,6 +7,26 @@
 
 ## [Unreleased]
 
+## [3.13.0] - 2025-10-12
+
+### Added
+- 生產代碼品質強化：於 `sunnycore_dev.md` 新增明確禁止項目
+  - 嚴格禁止在生產代碼中使用 mock 實作、硬編碼值（如 API keys、credentials、test data）、佔位符代碼（如 `// TODO: implement`）
+  - 強調測試代碼可使用 mocks/stubs/hardcoded test data（這是允許且預期的）
+  - 提升生產代碼的完整性與安全性標準
+
+### Changed
+- 精確化驗證時機定義：於 `claude code/CLAUDE.md` GUIDANCE 25 中修正驗證調用時機
+  - 從「每個 workflow step」改為「每個 subphase in the [Steps] section」
+  - 明確驗證應在任務步驟的子階段完成後執行，而非整個工作流程步驟
+  - 提升驗證機制的精確度與可操作性
+- 擴展審查標準：於 `review.md` 強化生產代碼檢查範圍
+  - CRITICAL REJECT CRITERIA 從「Mock/Stub Implementation」擴展為「Mock/Stub Implementation or Hardcoded Values」
+  - 反面約束、決策規則、DoD 檢查項、範例全面更新以涵蓋硬編碼值檢查
+  - 新增硬編碼值範例：hardcoded API keys、hardcoded credentials、hardcoded test data in production code
+  - 強調即使測試分數高，發現 mock 實作或硬編碼值仍自動拒絕
+  - 提升代碼審查的安全性與完整性標準
+
 ## [3.12.0] - 2025-10-12
 
 ### Added

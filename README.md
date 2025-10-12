@@ -47,6 +47,13 @@
 - 代碼品質和架構設計
 - 測試驅動開發 (TDD)
 
+**代碼品質標準** (v3.13.0 新增):
+- **嚴格禁止**在生產代碼中使用：
+  - Mock 實作或 stub 代碼
+  - 硬編碼值（API keys、credentials、敏感數據）
+  - 佔位符代碼（`// TODO: implement`、`throw new Error('Not implemented')`）
+- 測試代碼可使用 mocks/stubs/hardcoded test data（允許且預期）
+
 **工作流程**:
 1. 創建詳細的實作計劃和 todo-list
 2. 遵循 TDD 開發流程
