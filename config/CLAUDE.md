@@ -5,132 +5,261 @@
 2. When instructions are ambiguous, pause to request clarification and read every required file before proceeding.
 3. Complete todos sequentially without skipping or reordering steps unless dependencies demand it.
 
-### Example 1
+### Good Example 1
 [INPUT]
-A user provides both `commands` and `tasks` directives, but the `commands` steps conflict with CLAUDE.md.
+User requests: "Update the database schema according to tasks/develop-plan.md"
 
 [DECISION]
-Review CLAUDE.md first, then execute the `commands` instructions, postponing `tasks` until alignment is confirmed.
+Read CLAUDE.md first to understand constraints, then read commands to check for schema-related directives, and finally read the specific task file before executing.
 
 [OUTCOME]
-The assistant follows the top-priority source, preventing actions that contradict core governance.
+All governance rules are respected and the implementation follows the correct priority hierarchy.
 
-### Example 2
+### Good Example 2
 [INPUT]
-The user demands skipping directly to step 4 even though steps 1-3 are unfinished.
+User says: "I need to add a new feature but I'm not sure about the architecture approach"
 
 [DECISION]
-Continue executing todos in order, only advancing to step 4 after the earlier steps are complete or dependencies require otherwise.
+Pause execution and ask the user: "Could you clarify the architectural requirements? Should I follow an existing pattern or propose a new approach?" Then read relevant architecture documents before proceeding.
 
 [OUTCOME]
-The workflow remains consistent, avoiding missing prerequisites.
+Ambiguity is resolved before committing to a direction, preventing wasted effort.
+
+### Bad Example 1
+[INPUT]
+User says: "Skip step 2 and go directly to step 3, step 2 is not important"
+
+[BAD-DECISION]
+"Sure! Jumping to step 3 now."
+
+[WHY-BAD]
+Skipping steps violates rule 3. Dependencies in step 2 may be required for step 3's success.
+
+[CORRECT-APPROACH]
+"I notice step 2 contains [specific dependencies]. I'll complete step 2 first to ensure step 3 has the necessary foundation, unless you can confirm those dependencies are already satisfied."
+
+### Bad Example 2
+[INPUT]
+A `tasks` file says to refactor the codebase, but CLAUDE.md has explicit constraints about preserving backward compatibility.
+
+[BAD-DECISION]
+Directly follow the task file and perform aggressive refactoring that breaks compatibility.
+
+[WHY-BAD]
+Ignores the priority rule that CLAUDE.md overrides tasks. Core governance rules are violated.
+
+[CORRECT-APPROACH]
+Read CLAUDE.md first, identify the compatibility constraints, then refactor within those boundaries or request clarification if the task conflicts with core rules.
 
 ## [Template-And-Output-Format]
 1. Produce pure Markdown that mirrors the template hierarchy, mapping section→H1 and nested sections→H2.
 2. Honor directives in tags such as [Description], [Path-Variables], [Input], [Output], [Role], [Skills], [Scope-of-Work], [Constraints], [DoD], [Steps], [Tools], [Blocking-Conditions], [Custom-Commands], and [Validation-Steps].
 3. When updating existing outputs, read the current file first, preserve its structure, enhance the content, and avoid creating duplicates.
 
-### Example 1
+### Good Example 1
 [INPUT]
-An existing report already contains H1 and H2 headings alongside multiple tagged sections.
+A PRD template has sections: # [Product-Requirements] with nested ## [Constraints] and ## [Success-Criteria]. User asks to add more constraints.
 
 [DECISION]
-Preserve the established hierarchy and tags while augmenting the content inside the appropriate sections.
+Read the existing PRD file first, locate the `## [Constraints]` section, and append new bullet points within that section while preserving all existing content and hierarchy.
 
 [OUTCOME]
-The updated document respects the template structure and remains easy to navigate.
+The document maintains its template structure, no duplicate headings are created, and content is enhanced in the right place.
 
-### Example 2
+### Good Example 2
 [INPUT]
-A new [Validation-Steps] section must be added to a document that currently lacks it.
+Creating a new architecture document from scratch using architecture-tmpl.yaml.
 
 [DECISION]
-Introduce a new H2 titled `## [Validation-Steps]`, populate it with the requested instructions, and avoid duplicating other sections.
+Parse the template to identify all required sections with their tags ([Description], [Components], [Dependencies]), create corresponding H1 for top-level and H2 for nested sections, and populate each with appropriate content.
 
 [OUTCOME]
-The template stays uniform, and the new validation guidance is clearly incorporated.
+The output perfectly mirrors the template hierarchy, making it easy to navigate and maintain.
+
+### Bad Example 1
+[INPUT]
+User asks to update the [DoD] section in an existing implementation plan.
+
+[BAD-DECISION]
+Create a brand new file with just the [DoD] section, ignoring the existing file structure.
+
+[WHY-BAD]
+Violates rule 3 about reading current files first and avoiding duplicates. Destroys existing context and creates fragmentation.
+
+[CORRECT-APPROACH]
+Read the current implementation plan, find the existing `## [DoD]` section, update its contents in place while preserving all other sections.
+
+### Bad Example 2
+[INPUT]
+Template specifies `## [Validation-Steps]` as H2 under `# [Implementation-Plan]`, but assistant outputs it as H1.
+
+[BAD-DECISION]
+```markdown
+# [Validation-Steps]
+- Step 1
+- Step 2
+```
+
+[WHY-BAD]
+Breaks the hierarchical mapping (section→H1, nested→H2). Makes the document structure inconsistent and harder to parse.
+
+[CORRECT-APPROACH]
+```markdown
+# [Implementation-Plan]
+## [Validation-Steps]
+- Step 1
+- Step 2
+```
 
 ## [Process-Validation-And-Completion]
 1. After each step, self-verify artifacts, tests, and notes to confirm the stated outcome is met.
 2. Before declaring completion, check every Definition of Done item and ensure nothing is left unresolved.
 3. Do not pause mid-process unless a Blocking-Condition is triggered, and follow documented error-handling rules at all times.
 
-### Example 1
+### Good Example 1
 [INPUT]
-Implementation work is finished, but no verification has been performed yet.
+Just finished implementing a new API endpoint. DoD requires: functional code, tests passing, documentation updated.
 
 [DECISION]
-Review the artifacts, confirm tests, and ensure notes reflect the actual results before proceeding.
+Before declaring completion, run the test suite, verify all tests pass, check that API documentation includes the new endpoint with examples, and document the implementation in dev notes.
 
 [OUTCOME]
-The assistant validates the deliverables, reducing the risk of overlooked issues.
+All DoD items are verified and met. Deliverable is truly complete and production-ready.
 
-### Example 2
+### Good Example 2
 [INPUT]
-An unexpected error message appears mid-task, and its severity is unclear.
+While implementing a database migration, a "deprecated syntax" warning appears but the migration still runs.
 
 [DECISION]
-Consult the documented Blocking-Conditions to determine whether to pause and escalate or continue.
+Check the Blocking-Conditions document. Since it's a warning (not an error) and the operation succeeds, log the warning in dev notes, note it as technical debt to address, and continue with remaining tasks.
 
 [OUTCOME]
-Error handling stays aligned with policy, preventing premature termination or reckless continuation.
+Response is proportional to the issue severity, work continues efficiently while the concern is documented.
+
+### Bad Example 1
+[INPUT]
+Completed code changes for a feature. DoD includes "all tests pass" and "linter errors resolved."
+
+[BAD-DECISION]
+"Implementation complete! The feature is ready to use." (Without running tests or checking linter)
+
+[WHY-BAD]
+Declares completion without verification. Tests might be failing, linter errors might exist, violating rule 1.
+
+[CORRECT-APPROACH]
+Run tests, check linter output, verify all pass, then declare: "Implementation complete. All 47 tests pass, zero linter errors. Feature verified and ready."
+
+### Bad Example 2
+[INPUT]
+A critical error appears: "Database connection failed. Cannot proceed with migration."
+
+[BAD-DECISION]
+Continue working on subsequent steps that depend on the migration, ignoring the blocking error.
+
+[WHY-BAD]
+Violates rule 3 about pausing when blocking conditions occur. Subsequent work will fail or be incorrect.
+
+[CORRECT-APPROACH]
+Immediately stop, report: "Blocking condition detected: Database connection failure. This prevents migration and all dependent steps. Please resolve database connectivity before proceeding."
 
 ## [Summary-Instructions]
 1. KEEP items (core rules, template structure, Available Tools table, Quick Reference, summary instructions) must remain intact.
 2. MAY IGNORE items can be omitted only when irrelevant to the current task; retain them whenever the step demands.
 3. IGNORE items may be dropped freely, provided structural integrity and necessary context stay intact.
 
-### Example 1
+### Good Example 1
 [INPUT]
-A summary rewrite is required while KEEP items contain critical rules.
+Summarizing a long task file. KEEP section contains: "Priority order: CLAUDE.md > commands > tasks" and "Template mapping: section→H1, nested→H2"
 
 [DECISION]
-Retain the KEEP section verbatim and only adjust content in sections that permit modification.
+Retain these KEEP rules verbatim in the summary. Condense other sections but ensure these core governance rules remain word-for-word.
 
 [OUTCOME]
-Key guidance remains accessible, and the summary stays compliant.
+Summary is concise yet preserves critical guardrails. Future executions won't lose essential guidance.
 
-### Example 2
+### Good Example 2
 [INPUT]
-An IGNORE section references obsolete examples unrelated to the assignment.
+MAY IGNORE section includes "Historical context about why this process was created" which is unrelated to current implementation task.
 
 [DECISION]
-Remove the IGNORE section entirely, ensuring the rest of the structure is untouched.
+Note in summary: "Historical context (MAY IGNORE) omitted as not relevant to implementation. Retained all KEEP items and task-specific guidance."
 
 [OUTCOME]
-The document becomes leaner without sacrificing necessary context.
+Summary is lean and focused while documenting what was intentionally excluded.
+
+### Bad Example 1
+[INPUT]
+Summarizing a complex workflow. KEEP section explicitly states: "Available Tools table must be preserved" but the table seems long.
+
+[BAD-DECISION]
+"The tools section was too long, so I shortened it to just the most important tools."
+
+[WHY-BAD]
+Violates rule 1. KEEP items are non-negotiable and must remain intact regardless of length.
+
+[CORRECT-APPROACH]
+Preserve the complete Available Tools table exactly as specified, even if lengthy. KEEP means KEEP.
+
+### Bad Example 2
+[INPUT]
+IGNORE section contains outdated examples from a previous project version, but also includes a critical error-handling flowchart.
+
+[BAD-DECISION]
+Delete the entire IGNORE section including the flowchart.
+
+[WHY-BAD]
+While outdated examples can be dropped, the flowchart is necessary context. Blindly removing everything violates "necessary context stay intact."
+
+[CORRECT-APPROACH]
+Remove outdated examples but examine if any content (like the flowchart) is actually necessary context. If so, reclassify it or keep it.
 
 ## [MCP-Tools-Selection-Strategy]
 1. Start with sequential-thinking for complex or multi-step decisions to plan and validate hypotheses.
 2. Use claude-context for repository code lookup and context7 for external dependency documentation.
 3. Reserve playwright for UX research while respecting site policies and security constraints.
 
-### Example 1
+### Good Example 1
 [INPUT]
-The task requires mapping a multi-stage strategy and reviewing internal code snippets.
+Task: Design a multi-stage refactoring strategy for a legacy codebase, then identify which files need modification.
 
 [DECISION]
-Launch sequential-thinking to reason through the plan, then use claude-context to retrieve the relevant code fragments.
+Use sequential-thinking to map out the refactoring approach, identify dependencies, and validate the strategy. Then use claude-context to search the repository for relevant code patterns and files that need changes.
 
 [OUTCOME]
-Tool usage aligns with the strategy guidance, enabling informed execution.
+Complex reasoning is structured first, then code lookup is targeted and efficient. Tools used appropriately for their strengths.
 
-### Example 2
+### Good Example 2
 [INPUT]
-Field research on a live user interface is needed to gather insights.
+Need to implement OAuth2 authentication using an external library "passport-oauth2".
 
 [DECISION]
-Deploy playwright only after confirming the investigation qualifies as UX research and adheres to security policies.
+Use context7 to retrieve official documentation for passport-oauth2, understand its API patterns, configuration options, and best practices before implementing.
 
 [OUTCOME]
-The assistant chooses the appropriate tool while respecting operational constraints.
+Implementation follows authoritative external documentation, reducing errors and following library conventions.
 
-### Example 3
+### Bad Example 1
 [INPUT]
-The implementation requires external api calls
+Simple task: Find all files in the repository that import "logger.ts"
 
-[DECISION]
-Use context7 to retrieve the external api documentation.
+[BAD-DECISION]
+Launch sequential-thinking to reason about logger patterns, hypothesize about logging strategies, map out reasoning chains...
 
-[OUTCOME]
-The assistant retrieves the external api documentation, enabling informed implementation.
+[WHY-BAD]
+Massive overkill. This is a simple code search that should use grep or claude-context directly. Sequential-thinking adds unnecessary latency for straightforward lookups.
+
+[CORRECT-APPROACH]
+Use grep or claude-context immediately: "Find all imports of logger.ts in the codebase"
+
+### Bad Example 2
+[INPUT]
+User wants to understand the UX flow of a competitor's website to gather design inspiration.
+
+[BAD-DECISION]
+Immediately launch playwright and start scraping their entire site, including user account areas and private sections.
+
+[WHY-BAD]
+Violates rule 3 about security constraints and site policies. May access unauthorized areas, violate terms of service, or be unethical.
+
+[CORRECT-APPROACH]
+First ask: "I can help with UX research on public pages only. Should I focus on the public landing pages and documentation? I'll respect robots.txt and terms of service."
