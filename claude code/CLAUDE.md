@@ -67,8 +67,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## GUIDANCE 23: [Scope-of-Work] Tag
 **MUST** execute all tasks within the [Scope-of-Work] section AND all mandatory requirements in [Constraints] (validation coordination, tool usage), **MUST NOT** perform actions outside defined scope unless required by constraints
 
-## GUIDANCE 24
-**MUST** call step-validator after each steps in the [Steps] section and completion-validator after finishing a task, waiting for PASS responses before proceeding; **MUST NOT** skip validations or continue after a FAIL
+## GUIDANCE 24: Step and Task Completion Validation
+**MUST** call step-validator after completing each individual step in the [Steps] section (to verify step outcomes), and call completion-validator only after finishing the entire task workflow (to verify DoD achievement); **MUST** wait for PASS responses before proceeding to the next step or marking task complete; **MUST NOT** skip validations, confuse the two validators, or mark the step as done after a FAIL
 
 ---
 

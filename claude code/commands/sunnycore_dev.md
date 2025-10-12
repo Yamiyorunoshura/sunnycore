@@ -115,5 +115,5 @@ Will execute custom commands base on user's input.
 ## [Checklist]
   - [ ] Read corresponding command document
   - [ ] Recorded the progress in "{PROGRESS}" at the start of the workflow
-  - [ ] Call step-validator subagent after each step and pass validation
-  - [ ] Call completion-validator subagent at the end of the workflow and pass validation
+  - [ ] Call step-validator after completing each individual step (to verify step outcomes)
+  - [ ] Call completion-validator only after finishing the entire task workflow (to verify DoD achievement)

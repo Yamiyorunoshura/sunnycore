@@ -21,24 +21,28 @@
   1. Preparation & Strategy
     - Understand all PRD requirements and architecture completely
     - Develop comprehensive TDD implementation strategy
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking respecting task dependencies
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking respecting task dependencies (this is the ONLY temporary tracking document)
     - Outcome: Complete strategy established and plan.md initialized
 
   2. TDD Development Cycle
-    - RED: Write all tests, ensure they fail with expected errors
-    - GREEN: Implement minimal code to pass all tests
-    - REFACTOR: Improve code quality while maintaining green tests
-    - Outcome: All PRD features implemented with high quality
+    - RED: Write all tests, execute and ensure they fail with expected errors, update plan.md with RED phase status
+    - GREEN: Implement minimal code to pass all tests, execute and verify all pass, update plan.md with GREEN phase status
+    - REFACTOR: Improve code quality while maintaining green tests, execute tests to verify, update plan.md with REFACTOR phase status
+    - Note: Do NOT create separate phase result documents (red-phase-test-result.md, green-phase-test-result.md, etc.); record all status in plan.md only
+    - Outcome: All PRD features implemented with high quality, status recorded in plan.md
 
   3. Integration Testing & Validation
     - Execute complete test suite with all tests passing
     - Validate all PRD acceptance criteria met
     - Handle test failures with iterative fixes
-    - Outcome: Full integration verified and acceptance criteria met
+    - Update plan.md with integration test results
+    - Note: Record test results in plan.md only; do NOT create separate test result documents
+    - Outcome: Full integration verified and acceptance criteria met, results recorded in plan.md
 
   4. Documentation
-    - Create comprehensive development notes document
+    - Create comprehensive development notes document following dev-notes-tmpl.yaml
     - Document all technical decisions and deviations
+    - Note: prd-dev-notes.md is the ONLY permanent documentation output; plan.md is temporary
     - Outcome: Complete dev notes at "{root}/docs/prd-dev-notes.md"
 
   5. Final Verification

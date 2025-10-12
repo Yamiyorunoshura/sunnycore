@@ -27,29 +27,38 @@
 ## [Steps]
   1. Preparation & Planning
     - Understand TDD implementation plan and three phases
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking (this is the ONLY temporary tracking document)
     - Outcome: Implementation plan understood and plan.md initialized
 
   2. RED Phase: Test Implementation
     - Implement complete test coverage with all planned test cases
-    - Ensure tests fail with expected errors (confirm RED status)
-    - Outcome: All tests implemented and failing correctly
+    - Execute tests and verify they fail with expected errors (confirm RED status)
+    - Update plan.md with RED phase progress (test cases implemented, RED status verified)
+    - Note: Do NOT create separate test result documents; record status in plan.md only
+    - Outcome: All tests implemented and failing correctly, status recorded in plan.md
 
   3. GREEN Phase: Minimal Implementation
     - Implement minimal code to pass all tests
     - Align implementation with architecture mapping from plan
-    - Outcome: All tests passing with minimal implementation
+    - Execute tests and verify all pass (exit code 0)
+    - Update plan.md with GREEN phase progress (implementation files, test results)
+    - Note: Do NOT create separate test result documents; record status in plan.md only
+    - Outcome: All tests passing with minimal implementation, status recorded in plan.md
 
   4. REFACTOR Phase: Code Quality Enhancement
     - Improve code quality while maintaining green tests
     - Apply all planned optimizations and cross-cutting concerns
-    - Outcome: High-quality code with all tests still passing
+    - Execute tests after each refactoring to ensure they remain green
+    - Update plan.md with REFACTOR phase progress (refactoring activities, test status)
+    - Note: Do NOT create separate test result documents; record status in plan.md only
+    - Outcome: High-quality code with all tests still passing, status recorded in plan.md
 
   5. Validation & Documentation
     - Validate all acceptance criteria are met
     - Check if "{DEVNOTES}/{task_id}-dev-notes.md" already exists
     - If exists: Update existing dev notes with new implementation details
-    - If not exists: Create new dev notes from template
+    - If not exists: Create new dev notes from template following dev-notes-tmpl.yaml
+    - Note: dev-notes.md is the ONLY permanent documentation output; plan.md is temporary
     - Outcome: Acceptance criteria met and dev notes completed (created or updated)
 
 ## [Progress-Tracking-Guidelines]

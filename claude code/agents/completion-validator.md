@@ -127,12 +127,13 @@ color: green
      - Return PASS or FAIL result
      - Outcome: Validation complete with clear feedback
 
-  6. **Progress Update (Only on PASS)**
+  6. **Progress Update and Cleanup (Only on PASS)**
      - If validation result is PASS, read {PROGRESS}
      - Locate the task entry matching the current task name
      - Update task status from "in_progress" to "completed"
-     - Save updated {PROGRESS} and remove the temporary plan.md file
-     - Outcome: Progress tracking updated to reflect task completion
+     - Save updated {PROGRESS}
+     - Delete the temporary plan.md file at "{root}/docs/plan.md" (if exists)
+     - Outcome: Progress tracking updated and temporary plan.md removed
 
 ## [Validation-Logic]
 
@@ -209,6 +210,7 @@ All DoD requirements satisfied:
 
 Progress tracking updated:
 - Task "{task_name}" marked as "completed" in docs/progress.md
+- Temporary plan.md file deleted
 
 Workflow completion verified. Ready to proceed.
 ```
@@ -239,6 +241,7 @@ Please address the remaining tasks before completing this workflow.
   - [ ] Validation report generated in specified format
   - [ ] PASS or FAIL result returned to calling agent
   - [ ] Progress tracking updated in {PROGRESS} (task marked as "completed") if validation PASS
+  - [ ] Temporary plan.md file deleted at "{root}/docs/plan.md" if validation PASS
 
 ## [Examples]
 
@@ -266,6 +269,7 @@ All DoD requirements satisfied:
 
 Progress tracking updated:
 - Task "develop-prd" marked as "completed" in docs/progress.md
+- Temporary plan.md file deleted
 
 Workflow completion verified. Ready to proceed.
 ```
