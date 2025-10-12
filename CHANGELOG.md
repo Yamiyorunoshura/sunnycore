@@ -7,6 +7,23 @@
 
 ## [Unreleased]
 
+## [4.0.0] - 2025-10-13
+
+### Breaking
+- 移除自動步驟與完成驗證子代理，改為人工自檢與 DoD 審核流程；既有自動化串接需改採新手動指引。
+- 將安裝腳本移至倉庫根目錄並更新遠端下載路徑，原 `scripts/install.py` 路徑不再可用。
+
+### Added
+- 全新 `install.py` 安裝器支援 claude、codex、cursor 三種發佈型態，提供互動模式、並行下載與即時進度條。
+- 新增 `config/CLAUDE.md`、`config/AGENTS.md`、`config/CURSOR.mdc`，集中各平台操作規則與優先順序。
+
+### Changed
+- 重構提示詞與模板結構：將原 `claude code/` 與 `cursor/` 內容整合至 `commands/`、`tasks/`、`templates/`、`hooks/` 等共享目錄。
+- 更新 `README.md` 與 `Instructions.md`，改寫進度記錄、自檢流程與多平台安裝說明。
+
+### Removed
+- 移除舊版 `cursor/` 目錄與冗餘自動化腳本，避免與新結構重複。
+
 ## [3.21.0] - 2025-10-12
 
 ### Added

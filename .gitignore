@@ -3,6 +3,9 @@
 Thumbs.db
 desktop.ini
 
+# Python
+.venv/
+
 # 編輯器和IDE文件
 .idea/
 .vscode/
