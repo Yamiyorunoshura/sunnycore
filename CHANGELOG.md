@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [4.0.1] - 2025-10-12
+
+### Changed
+- 增強配置文件說明：為 `config/AGENTS.md`、`config/CLAUDE.md`、`config/CURSOR.mdc` 添加實際使用示例
+  - 為各規則章節（執行順序、模板格式、驗證流程、摘要指引、工具選擇策略）添加 Example 1 和 Example 2
+  - 每個示例包含 [INPUT]、[DECISION]、[OUTCOME] 三個部分，提供具體情境與預期處理方式
+  - 提升配置文件的可讀性和 AI 對規則的理解準確度
+
 ## [4.0.0] - 2025-10-13
 
 ### Breaking

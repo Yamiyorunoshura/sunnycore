@@ -11,22 +11,122 @@ alwaysApply: true
 2. When instructions are ambiguous, pause to request clarification and read every required file before proceeding.
 3. Complete todos sequentially without skipping or reordering steps unless dependencies demand it.
 
+### Example 1
+[INPUT]
+Cursor suggests auto-applying a snippet that contradicts a rule in CLAUDE.md.
+
+[DECISION]
+Verify CLAUDE.md first, then confirm whether the snippet can be safely executed before touching `commands` and `tasks`.
+
+[OUTCOME]
+Automations stay subordinate to the defined priority order.
+
+### Example 2
+[INPUT]
+Midway through a todo list, a new comment requests skipping ahead.
+
+[DECISION]
+Honor the original sequence unless dependencies force a reordering, and seek clarification if uncertain.
+
+[OUTCOME]
+Task progression respects the documented process.
+
 ## [Template-And-Output-Format]
 1. Produce pure Markdown that mirrors the template hierarchy, mapping section→H1 and nested sections→H2.
 2. Honor directives in tags such as [Description], [Path-Variables], [Input], [Output], [Role], [Skills], [Scope-of-Work], [Constraints], [DoD], [Steps], [Tools], [Blocking-Conditions], [Custom-Commands], and [Validation-Steps].
 3. When updating existing outputs, read the current file first, preserve its structure, enhance the content, and avoid creating duplicates.
+
+### Example 1
+[INPUT]
+A Cursor macro updates content but risks altering the YAML front matter.
+
+[DECISION]
+Ensure the `---` block and heading `# CURSOR.md` remain untouched while editing the targeted section.
+
+[OUTCOME]
+The file stays parseable by Cursor and consistent with the template.
+
+### Example 2
+[INPUT]
+The user needs a new [Custom-Commands] section integrated.
+
+[DECISION]
+Add a `## [Custom-Commands]` heading at the appropriate level and populate it with the requested details without modifying other headings.
+
+[OUTCOME]
+The document gains new guidance without disrupting the established layout.
 
 ## [Process-Validation-And-Completion]
 1. After each step, self-verify artifacts, tests, and notes to confirm the stated outcome is met.
 2. Before declaring completion, check every Definition of Done item and ensure nothing is left unresolved.
 3. Do not pause mid-process unless a Blocking-Condition is triggered, and follow documented error-handling rules at all times.
 
+### Example 1
+[INPUT]
+Cursor shows modified files, but verification steps were skipped in the rush to deliver.
+
+[DECISION]
+Inspect the diff, rerun required checks, and document the evidence before finalizing the response.
+
+[OUTCOME]
+The assistant confirms compliance with the Definition of Done prior to handoff.
+
+### Example 2
+[INPUT]
+While running a Cursor command, an exception message appears with unclear impact.
+
+[DECISION]
+Review the Blocking-Conditions list to decide whether to halt and report or proceed with caution.
+
+[OUTCOME]
+The response to the error aligns with the documented remediation protocol.
+
 ## [Summary-Instructions]
 1. KEEP items (core rules, template structure, Available Tools table, Quick Reference, summary instructions) must remain intact.
 2. MAY IGNORE items can be omitted only when irrelevant to the current task; retain them whenever the step demands.
 3. IGNORE items may be dropped freely, provided structural integrity and necessary context stay intact.
 
+### Example 1
+[INPUT]
+An updated summary is requested, and the KEEP section highlights essential Cursor usage notes.
+
+[DECISION]
+Leave the KEEP content untouched and refine only the sections where changes are permissible.
+
+[OUTCOME]
+Critical instructions stay visible while the summary reflects the latest work.
+
+### Example 2
+[INPUT]
+The IGNORE section references outdated prototypes.
+
+[DECISION]
+Remove the IGNORE block completely, ensuring the remaining structure stays intact.
+
+[OUTCOME]
+The file becomes concise without losing necessary context.
+
 ## [MCP-Tools-Selection-Strategy]
 1. Start with sequential-thinking for complex or multi-step decisions to plan and validate hypotheses.
 2. Use context7 for external dependency documentation.
 3. Reserve playwright for UX research while respecting site policies and security constraints.
+
+### Example 1
+[INPUT]
+Planning a multi-stage Cursor workflow requires both reasoning and external API research.
+
+[DECISION]
+Activate sequential-thinking to map the approach, then fetch the API documentation with context7.
+
+[OUTCOME]
+The assistant leverages each tool where it is strongest.
+
+### Example 2
+[INPUT]
+User research on an interactive prototype is requested.
+
+[DECISION]
+Confirm the activity counts as UX research and then run playwright while honoring all safety constraints.
+
+[OUTCOME]
+Tool usage remains compliant with the strategy guidelines.
