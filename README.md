@@ -138,6 +138,45 @@
 - **流程完成驗證**: 驗證描述的流程是否已完成
 - **自動調用**: 由主要 agents（architect, dev, pm, po, qa）在每個步驟後自動調用
 
+### Context Restorer 上下文恢復員
+
+**核心能力**:
+- 進度追蹤分析：讀取 progress.md 識別進行中的任務
+- Context Packages 管理：為每個任務加載對應的上下文包
+- 優先級管理：確保上下文按正確順序加載（CLAUDE.md > commands > tasks > templates）
+- 後備策略：當 package 不存在時自動使用預設上下文集
+
+**工作流程**:
+1. Autocompact 發生後自動觸發
+2. 讀取 progress.md 識別 in_progress 任務
+3. 加載對應的 context package 檔案
+4. 生成按優先級排序的上下文恢復指令
+5. 指導主代理讀取所有必需文件以恢復完整上下文
+
+**Context Packages 系統**:
+- **packages/ 目錄**：包含所有 29 個任務的上下文包定義
+- **自動化恢復**：確保對話壓縮後任務執行能無縫繼續
+- **完整追蹤**：從任務開始（in_progress）到完成（completed）的完整生命週期管理
+
+### Completion Validator 完成驗證員（v3.15.0 增強）
+
+**核心能力**:
+- DoD 達成驗證：系統性檢查所有 Definition of Done 項目
+- 輸出完整性檢查：驗證所有必需的輸出文件是否已創建
+- **自動進度更新**（v3.15.0 新增）：驗證通過後自動標記任務為 completed
+
+**工作流程**:
+1. 主要 agents 完成任務後自動調用
+2. 驗證所有 DoD 項目是否已滿足
+3. 檢查所有輸出文件是否存在且完整
+4. **若驗證 PASS**：自動更新 progress.md，將任務狀態從 in_progress 改為 completed
+5. **若驗證 FAIL**：保持 in_progress 狀態，提供缺失項目清單
+
+**進度追蹤整合**:
+- **任務開始**：所有角色在任務開始時必須標記為 in_progress
+- **任務完成**：completion-validator 驗證通過後自動標記為 completed
+- **完整流轉**：pending → in_progress → completed
+
 ### Sunnycore 自動安裝腳本
 
 Sunnycore 提供了自動化安裝腳本 `scripts/install.py`，可快速安裝到本機。

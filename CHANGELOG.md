@@ -7,6 +7,34 @@
 
 ## [Unreleased]
 
+## [3.15.0] - 2025-10-12
+
+### Added
+- 新增上下文恢復系統：於 autocompact 後自動恢復任務上下文
+  - 新增 `claude code/agents/context-restorer.md`：定義 Context Restoration Specialist 角色
+    * 核心職責：識別進行中的任務並恢復必要的上下文文件
+    * 工作流程：讀取 progress.md → 加載 context packages → 生成恢復指令
+    * 優先級管理：CLAUDE.md > commands > tasks > templates
+    * 後備策略：當 package 不存在時使用預設上下文集
+  - 新增 `claude code/packages/` 目錄：完整的 Context Packages 系統
+    * 新增 packages/README.md：Context Packages 系統完整說明文件
+    * 為所有 29 個任務創建對應的 context package 檔案
+    * 定義任務上下文恢復的標準流程與優先級順序
+  - 提升系統穩定性：確保對話壓縮後任務執行能無縫繼續
+
+### Changed
+- 強化進度追蹤系統：實現任務完整生命週期管理
+  - 更新 `claude code/agents/completion-validator.md`：新增自動標記任務完成功能
+    * 新增 PROGRESS 路徑變數與進度更新權限
+    * 新增步驟 6：Progress Update（驗證通過後自動標記任務完成）
+    * 新增 Progress-Update-Logic 區段：定義進度更新規則與錯誤處理
+    * 約束更新：允許編輯 PROGRESS 檔案標記任務狀態
+  - 更新所有 6 個 command 檔案：強制任務開始時的進度追蹤
+    * 新增約束：必須在任務開始時標記任務為 "in_progress"
+    * 涵蓋檔案：sunnycore_architect.md、sunnycore_assistant.md、sunnycore_dev.md、sunnycore_pm.md、sunnycore_po.md、sunnycore_qa.md
+  - 完整的狀態流轉：pending → in_progress（任務開始） → completed（驗證通過）
+  - 提升任務執行的可追蹤性與完成度驗證的自動化
+
 ## [3.14.0] - 2025-10-12
 
 ### Added

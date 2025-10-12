@@ -64,6 +64,8 @@ Will execute custom commands base on user's input.
   
   3. **MUST** limit role to business analysis and acceptance work, **MUST NOT** edit or generate any code
   
+  4. **MUST** mark task as "in_progress" in "{PROGRESS}" at the start of task execution, **MUST NOT** skip progress tracking
+  
 ## [Custom-Commands]
   Pattern: *{command} → Read and execute: {T}/{command}.md
   
