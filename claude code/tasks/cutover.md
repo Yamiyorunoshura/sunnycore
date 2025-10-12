@@ -21,8 +21,8 @@
   1. Preparation & Validation
     - Understand business objectives and project structure
     - Handle both PRD-based and Traditional project structures
-    - Establish progress tracking mechanism
-    - Outcome: Business objectives understood and tracking established
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Outcome: Business objectives understood, project structure identified, and plan.md initialized
 
   2. Code Quality Inspection (CRITICAL)
     - **CRITICAL**: Scan ALL production/implementation code for mock/stub/placeholder patterns and hardcoded values (auto-fail if found; note: tests using mocks/hardcoded test data are allowed)
@@ -56,6 +56,33 @@
     - Determine cutover status (Success/Partial Success/Failed)
     - Document all findings and recommendations
     - Outcome: Complete cutover report with clear status
+
+## [Progress-Tracking-Guidelines]
+  **Content for plan.md:**
+  - Project structure identification (PRD-based or Traditional workflow)
+  - Business objectives summary (key requirements and success criteria)
+  - Code quality inspection results:
+    * Production code files scanned (list of files)
+    * Mock/stub/placeholder detection results (found/not found)
+    * Hardcoded values detection results (found/not found)
+    * TODO/placeholder comments check (found/not found)
+  - Configuration analysis:
+    * Configuration requirements identified (list)
+    * Environment variables needed (list)
+    * External service dependencies (list)
+  - Environment setup status:
+    * Dependencies installed (list with status)
+    * Configuration applied (list with status)
+    * Setup issues encountered (if any)
+  - Project execution results:
+    * Application start command
+    * Execution status (success/failed)
+    * Execution logs summary
+  - Acceptance testing progress:
+    * Critical requirements tested (list with test ID and result)
+    * Issues identified (count and severity: critical/high/medium/low)
+    * Test evidence collected (yes/no)
+  - Cutover status determination (Success/Partial Success/Failed with rationale)
 
 ## [Acceptance-Testing-Guidelines]
   1. **Code Quality Gate (CRITICAL - Must Pass First)**

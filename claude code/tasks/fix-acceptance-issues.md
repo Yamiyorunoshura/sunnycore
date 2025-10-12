@@ -24,8 +24,8 @@
   1. Issue Analysis & Prioritization
     - Understand all reported issues from cutover report
     - Prioritize issues by severity and business impact
-    - Establish progress tracking mechanism
-    - Outcome: Issues prioritized and tracking established
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Outcome: Issues prioritized and plan.md initialized
 
   2. Root Cause Analysis & Fix Strategy
     - Handle both PRD-based and Traditional project structures
@@ -57,6 +57,32 @@
     - Create complete dev notes at "{root}/docs/cutover-fixes-dev-notes.md"
     - Document all fixes, decisions, and risks
     - Outcome: Comprehensive fix documentation completed
+
+## [Progress-Tracking-Guidelines]
+  **Content for plan.md:**
+  - Cutover report analysis (issues identified from cutover-report.md)
+  - Issue prioritization:
+    * Critical issues (list with descriptions)
+    * High severity issues (list with descriptions)
+    * Medium severity issues (list with descriptions)
+    * Low severity issues (list with descriptions)
+  - Root cause analysis for each issue:
+    * Issue ID and description
+    * Root cause identified
+    * Affected components/files
+    * Fix strategy (RED/GREEN/REFACTOR approach)
+  - Fix implementation progress for each issue:
+    * RED phase (reproduction test created, failing)
+    * GREEN phase (fix implemented, tests passing)
+    * REFACTOR phase (quality improvements, tests still passing)
+    * Completion status (pending/in-progress/completed)
+  - Risk assessment (low/medium/high risk for each fix)
+  - Acceptance test re-run results:
+    * Tests re-executed (list)
+    * Issues resolved (verified yes/no)
+    * New issues introduced (if any)
+  - Overall fix progress (e.g., "Fixed 4/5 issues")
+  - Development notes status (completed at {root}/docs/cutover-fixes-dev-notes.md)
 
 ## [DoD]
   - [ ] All issues resolved through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing

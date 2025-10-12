@@ -21,8 +21,8 @@
   1. Review Planning & Domain Identification
     - Understand implementation plan to identify task domain and establish scope of review
     - Determine domain-specific review criteria and success criteria
-    - Establish progress tracking mechanism
-    - Outcome: Review criteria and approach determined
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Outcome: Review criteria and approach determined, plan.md initialized
 
   2. Code & Test Execution Review
     - **CRITICAL**: Scan ALL production/implementation code for mock/stub/placeholder patterns and hardcoded values (auto-reject if found; note: tests using mocks/hardcoded test data are allowed)
@@ -44,6 +44,37 @@
     - Make acceptance decision (Accept/Accept with changes/Reject) with rationale
     - Update "{EPIC}" based on review outcome
     - Outcome: Review report completed (created or updated) and epic updated
+
+## [Progress-Tracking-Guidelines]
+  **Content for plan.md:**
+  - Task identification (task ID and description from development notes)
+  - Implementation plan review (requirements, architecture mapping, acceptance criteria)
+  - Domain identification (Backend/Frontend/Database/Infrastructure/etc.)
+  - Domain-specific review criteria selected (list of dimensions to evaluate)
+  - Code quality inspection:
+    * Production code files scanned (list)
+    * Mock/stub/placeholder detection (found/not found, details if found)
+    * Hardcoded values detection (found/not found, details if found)
+    * Result: auto-reject triggered (yes/no)
+  - Regression testing:
+    * Existing tests from previous tasks identified (list)
+    * Regression test execution results (all passing: yes/no, failures if any)
+    * Result: auto-reject triggered (yes/no)
+  - Test execution results:
+    * Test command executed
+    * Test results summary (passed/failed/total)
+    * Test coverage achieved (percentage)
+    * Test failures details (if any)
+  - Code alignment verification:
+    * Implementation matches plan (yes/no, deviations noted)
+    * Architecture mapping verified (yes/no)
+    * Acceptance criteria satisfied (each criterion with status)
+  - Domain-specific scoring:
+    * Each dimension score (name and score 0-10)
+    * Overall score calculated (mean of dimensions)
+    * Score level (Platinum/Gold/Silver/Bronze/Fail)
+  - Acceptance decision (Accept/Accept with changes/Reject with rationale)
+  - Epic update status (task marked in epic.md with score and status)
 
 ## [Domain-Specific-Review-Guidelines]
   

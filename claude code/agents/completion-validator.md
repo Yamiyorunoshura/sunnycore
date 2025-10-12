@@ -131,7 +131,7 @@ color: green
      - If validation result is PASS, read {PROGRESS}
      - Locate the task entry matching the current task name
      - Update task status from "in_progress" to "completed"
-     - Save updated {PROGRESS}
+     - Save updated {PROGRESS} and remove the temporary plan.md file
      - Outcome: Progress tracking updated to reflect task completion
 
 ## [Validation-Logic]

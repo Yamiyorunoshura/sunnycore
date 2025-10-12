@@ -23,8 +23,8 @@
   1. Issue Analysis & Prioritization
     - Understand all issues from validation report
     - Extract, group, and prioritize issues properly
-    - Establish progress tracking mechanism
-    - Outcome: Issues categorized and prioritized
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Outcome: Issues categorized, prioritized, and plan.md initialized
 
   2. Fix Planning & User Confirmation
     - Develop comprehensive fix plans for all issues
@@ -49,6 +49,35 @@
     - Guide user to re-run validation for confirmation
     - Provide comprehensive summary of changes
     - Outcome: Cleanup completed with change summary provided
+
+## [Progress-Tracking-Guidelines]
+  **Content for plan.md:**
+  - Validation report analysis (design-validation.md reviewed)
+  - Issue categorization by severity:
+    * Critical issues (count and list)
+    * High severity issues (count and list)
+    * Medium severity issues (count and list)
+    * Low severity issues (count and list)
+  - Issue categorization by type:
+    * Fabricated content (count and list)
+    * Broken references (count and list)
+    * Conflicts (count and list)
+    * Inconsistent naming (count and list)
+    * Coverage gaps (count and list)
+    * Terminology inconsistencies (count and list)
+  - Fix planning for each issue:
+    * Issue ID and description
+    * Fix strategy selected (fabricated content/broken references/conflicts/etc.)
+    * Affected documents (list)
+    * User approval status (pending/approved/rejected)
+  - Fix execution progress:
+    * Fixes applied (count and status)
+    * Documents modified (list with file paths)
+    * Cross-document consistency maintained (yes/no)
+    * New conflicts introduced (yes/no/details)
+  - User confirmation status (all fixes confirmed by user: yes/no)
+  - Cleanup status (validation report deleted: yes/no)
+  - Overall completion summary (total issues fixed, documents updated)
 
 ## [Fix-Strategies]
 

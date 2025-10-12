@@ -18,8 +18,8 @@
   1. Research & Planning
     - Understand requirements, architecture, and project scope
     - Identify success criteria and constraints
-    - Establish progress tracking mechanism
-    - Outcome: Complete understanding and task design criteria established
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Outcome: Complete understanding, task design criteria established, and plan.md initialized
 
   2. Task Breakdown & Organization
     - Create feature-level task breakdown with proper grouping
@@ -38,6 +38,24 @@
     - Obtain user approval and integrate feedback
     - Save final epic document to "{EPIC}"
     - Outcome: Approved epic document created
+
+## [Progress-Tracking-Guidelines]
+  **Content for plan.md:**
+  - Requirements summary (total functional/non-functional requirements from REQ/*.md)
+  - Architecture components summary (list of components from ARCH/*.md)
+  - Task breakdown progress:
+    * Total tasks identified
+    * Tasks organized by logical grouping
+    * Task descriptions refined (each ≤14 characters)
+  - Requirement coverage tracking:
+    * Requirements mapped to tasks (requirement ID → task ID)
+    * Coverage percentage (target: 100%)
+    * Unmapped requirements (if any)
+  - Task traceability matrix:
+    * Each task with requirement IDs and architecture component mappings
+    * Dependencies identified between tasks
+  - Review and refinement status (deduplication done, granularity verified)
+  - User approval status (draft/approved)
 
 ## [Task-Design-Guidelines]
   1. **Feature-Level Tasks**

@@ -23,8 +23,8 @@
   1. Knowledge Identification & Planning
     - Identify all platinum-level best practices from reviews
     - Identify development errors and solutions from dev notes
-    - Establish progress tracking mechanism
-    - Outcome: All platinum practices and errors identified
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Outcome: All platinum practices and errors identified and plan.md initialized
 
   2. Knowledge Base Design & Classification
     - Design well-structured organization scheme
@@ -42,6 +42,28 @@
     - Archive review and development notes to "{ARCHIVE}/{version_name}/"
     - Verify archiving successful
     - Outcome: Source documents archived successfully
+
+## [Progress-Tracking-Guidelines]
+  **Content for plan.md:**
+  - Source documents reviewed:
+    * Review reports scanned (list of files)
+    * Development notes scanned (list of files)
+    * Cutover report reviewed
+    * Progress records reviewed
+  - Platinum practices identification:
+    * Platinum practices found (count and sources)
+    * Semantic topics identified (list of topics)
+    * Practice categorization (topic → practice list)
+  - Error documentation progress:
+    * Errors identified from dev notes (count and sources)
+    * Error categorization by semantic topics
+    * Solutions and prevention documented
+  - Knowledge base document creation:
+    * Documents to create (list with semantic naming)
+    * Document creation status (pending/in-progress/completed)
+    * Evidence source annotations added (yes/no)
+  - Archiving progress (files archived, verification status)
+  - Overall completion status
 
 ## [Knowledge-Curation-Guidelines]
   1. **Platinum-Level Practices Only**

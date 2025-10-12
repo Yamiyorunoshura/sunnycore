@@ -19,8 +19,8 @@
   1. Input Validation & Setup
     - Parse version number from lock file
     - Validate all required input files exist
-    - Establish progress tracking mechanism
-    - Outcome: All inputs validated and version identified
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Outcome: All inputs validated, version identified, and plan.md initialized
 
   2. Information Extraction & Mapping
     - Extract all 5 core content items (decisions, tech choices, issues/solutions, evidence, recommendations)
@@ -44,6 +44,20 @@
     - Update document references to point to archive paths
     - Verify all operations successful
     - Outcome: Files archived and references updated correctly
+
+## [Progress-Tracking-Guidelines]
+  **Content for plan.md:**
+  - Version number parsed from lock file
+  - Input validation status (list of files found/missing)
+  - Information extraction progress:
+    * Decisions extracted (count and sources)
+    * Technical choices extracted (count and sources)
+    * Issues/solutions extracted (count and sources)
+    * Evidence collected (file references)
+    * Recommendations identified (count)
+  - Report generation status (template mapping completed, report written)
+  - Archiving status (files to archive, archiving progress, references updated)
+  - Overall completion status
 
 ## [Completion-Report-Guidelines]
   1. **Core Content (5 Required Items)**
