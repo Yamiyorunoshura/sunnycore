@@ -538,7 +538,7 @@ class SunnycoreInstaller:
                     return False
 
         directories = [
-            ("commands", cursor_dir, None),
+            ("commands", cursor_dir / "commands", None),
             ("tasks", sunnycore_dir / "tasks", None),
             ("templates", sunnycore_dir / "templates", None),
             ("scripts", sunnycore_dir / "scripts", None),

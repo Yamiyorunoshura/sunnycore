@@ -121,61 +121,48 @@
 
 ## [Example]
 
-### Example 1: API Deployment
-[Input]
-- Requirements: docs/requirements/functional.md (REQ-001: user CRUD, REQ-002: authentication)
-- Architecture: docs/architecture/components.md (Node.js API, PostgreSQL, Redis)
-- Template: cutover-report-tmpl.yaml
+### Good Example 1
+[INPUT]
+Requirements and architecture documents exist. Production code scanned shows no mocks or hardcoded values. Docker-compose setup fails due to Redis port conflict. After fixing configuration, all critical requirements (REQ-001: user CRUD, REQ-002: authentication) pass from end-user perspective.
 
-[Decision]
-- Setup: docker-compose up (PostgreSQL starts, Redis fails - port conflict)
-- Config fix: Change Redis port from 6379 to 6380
-- Run: API server starts successfully on port 3000
-- Test REQ-001: Create user, get user, update user, delete user (✓ all pass)
-- Test REQ-002: Login, token refresh (✓ all pass)
-- Status: Success (all requirements met after config fix)
+[DECISION]
+Validate input files exist. Scan production code for mocks/hardcoded values (none found, code quality gate passed). Analyze configuration needs from architecture docs. Setup environment with docker-compose (Redis port conflict detected). Fix configuration: change Redis port to 6380 in .env. Restart services. Execute project successfully. Test all critical requirements from user perspective: REQ-001 (create, read, update, delete user - all pass), REQ-002 (login, token refresh - pass). Document all results. Generate cutover report with status: Success.
 
-[Expected Outcome]
-- docs/cutover-report.md with status: Success
-- Configuration documented: Redis port changed to 6380 (add to .env file)
-- All test results recorded with API response examples
-- Recommendation: Update README.md with Redis port configuration
+[OUTCOME]
+Cutover report at docs/cutover-report.md with status: Success. Configuration issue documented: Redis port changed to 6380 (add to .env.example). All acceptance tests passed with evidence (API response logs). Recommendations: Update README.md with port configuration. Environment ready for production deployment. Plan.md shows code quality passed, config fixed, all requirements tested and verified.
 
-### Example 2: Mock Implementation or Hardcoded Values Auto-Fail (CRITICAL)
-[Input]
-- Requirements: docs/requirements/functional.md (REQ-001: Payment processing, REQ-002: Order management)
-- Architecture: docs/architecture/components.md
-- Template: cutover-report-tmpl.yaml
+### Good Example 2
+[INPUT]
+PRD contains requirements (REQ-001: payment processing). Code quality inspection reveals mock implementation and hardcoded API key in production code (src/services/PaymentService.js).
 
-[Decision]
-- **CRITICAL FINDING**: Code quality inspection reveals mock implementations and hardcoded values in PRODUCTION CODE
-  - src/services/PaymentService.js:L42: Mock implementation detected
-    ```javascript
-    async processPayment(order) {
-      // TODO: implement actual payment gateway
-      const API_KEY = 'pk_test_hardcoded_12345'; // Hardcoded API key!
-      return { success: true, transactionId: 'mock-txn-001' };
-    }
-    ```
-  - src/config/database.js:L15: Hardcoded database credentials
-    ```javascript
-    const DB_CONFIG = {
-      host: 'localhost',
-      password: 'admin123', // Hardcoded password!
-      database: 'production_db'
-    };
-    ```
-- **Decision: AUTOMATIC FAIL** (mock implementations and hardcoded values found in production code - testing halted)
-- **Note**: Unit tests properly use mocks (jest.mock()) - this is acceptable, but production code must not contain mocks or hardcoded values
+[DECISION]
+Scan all production code files before functional testing. Detect CRITICAL issue: Mock implementation at PaymentService.js:L42 with TODO comment and hardcoded API key. Check unit tests (properly use jest.mock, acceptable). Apply AUTOMATIC FAIL criteria per Constraint 5. HALT functional testing immediately. Document critical findings with code excerpts. Generate cutover report with status: Failed. List specific action items: implement actual payment gateway, move secrets to environment variables, remove TODO comments. Recommend re-run cutover after fixes.
 
-[Expected Outcome]
-- docs/cutover-report.md with status: Failed
-- CRITICAL findings documented: Mock implementations and hardcoded sensitive values in production code
-- Rationale: Code is not production-ready; contains incomplete implementations and security vulnerabilities
-- Risk: Critical (would deploy non-functional payment system with exposed credentials)
-- Action items: 
-  1. Implement actual payment gateway integration (remove mock code from src/services/PaymentService.js)
-  2. Move all hardcoded values to environment variables/configuration files
-  3. Remove all TODO/placeholder comments from production code
-  4. Re-run cutover after fixes are complete
-- Functional testing not performed (halted at code quality gate)
+[OUTCOME]
+Cutover report at docs/cutover-report.md with status: Failed. CRITICAL findings documented: mock implementation and hardcoded credentials in production code. Rationale: code not production-ready, security vulnerabilities present. Risk level: Critical (would deploy non-functional system). Functional testing not performed (halted at code quality gate). Action items provided for developers to fix issues. Plan.md documents code quality scan results and automatic fail decision.
+
+### Bad Example 1
+[INPUT]
+Production code contains mock implementation with TODO comment. Functional tests all pass because mock returns success.
+
+[BAD-DECISION]
+Code quality scan finds mock implementation but functional tests pass, so mark cutover as Success. Reasoning: "The tests work, so it must be good enough." Skip documenting the mock implementation issue. Generate success report recommending deployment.
+
+[WHY-BAD]
+Violates Constraint 5 (do not accept ANY mock/stub implementations in production code). Code quality gate is CRITICAL and must be checked first. Functional test success is irrelevant if production code contains mocks. Would deploy non-functional code to production. Ignores security risks of hardcoded values. Violates automatic fail criteria in Acceptance-Testing-Guidelines.
+
+[CORRECT-APPROACH]
+Code quality gate is MANDATORY first step. When mock implementation detected, AUTOMATIC FAIL regardless of functional test results. HALT testing immediately. Document critical findings with code excerpts. Report status: Failed. Provide specific action items to remove mocks and implement actual functionality. Require re-run of cutover after fixes. Never proceed to functional testing when code quality gate fails.
+
+### Bad Example 2
+[INPUT]
+Environment setup fails with dependency installation error. Configuration is incomplete. Cannot run project to test requirements.
+
+[BAD-DECISION]
+Skip environment setup and functional testing. Review code and documentation only. Generate cutover report with status: Partial Success based on code review. Reasoning: "The code looks good, so environment issues are minor."
+
+[WHY-BAD]
+Violates the goal of validating deliverables from end-user perspective. Cannot determine Success/Partial Success/Failed without actually running and testing the project. Skipping functional testing contradicts Step 5-6 (Project Execution and Acceptance Testing). Code review alone is insufficient for cutover acceptance. Would approve untested deployment.
+
+[CORRECT-APPROACH]
+Document environment setup failure in plan.md. Identify configuration gaps from architecture documents. Work through setup issues systematically (install dependencies, configure environment variables, resolve conflicts). Do not proceed to status determination until project actually runs. If environment issues cannot be resolved, report status: Failed with detailed documentation of blocking issues. Request configuration documentation improvements. Never approve cutover without actual functional verification.

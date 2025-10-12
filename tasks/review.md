@@ -167,7 +167,53 @@
 - Action items: Fix rollback script, add missing index, re-test migration
 - docs/epic.md: Task-3 status = failed review, requires rework
 
-### Example 4: Mock Implementation or Hardcoded Values in Production Code Auto-Reject (CRITICAL)
+### Good Example 1
+[INPUT]
+Task-1: JWT authentication implementation. Dev notes at docs/dev-notes/1-dev-notes.md. Plan at docs/plans/1-plan.md specifies JWT, bcrypt, token expiry. Template: review-tmpl.yaml.
+
+[DECISION]
+Step 1: Read plan to understand domain (Backend API) and acceptance criteria. Apply backend scoring dimensions. Step 2: Scan production code - NO mock/stub/placeholder patterns found. NO hardcoded values detected. Run existing tests from previous tasks - ALL passing (no regression). Execute npm test - all 15 tests pass, coverage 92%. Step 3: Verify code aligns with plan - JWT implementation at src/auth/AuthService.js:L10-L45 matches architecture. Step 4: Score using backend dimensions - API Design (10.0), Security (10.0), Error Handling (8.0), Testing (10.0). Overall: 9.5. Decision: Accept (all dimensions ≥6.0, no critical issues, no mocks, no regression). Update docs/epic.md with Task-1 completed, score 9.5.
+
+[OUTCOME]
+Complete docs/review/1-review.md with test results, code analysis, score 9.5 (Platinum). docs/epic.md updated with Task-1 completion status. Acceptance: Accept with rationale (strong implementation, minor error handling improvements suggested). No blocking issues.
+
+### Good Example 2
+[INPUT]
+Task-2: Analytics dashboard widget. Dev notes and plan reference React, chart.js. Some accessibility tests failing.
+
+[DECISION]
+Step 1: Identify domain (Frontend). Apply frontend scoring dimensions. Step 2: Scan production code - NO mock implementations found. Run regression tests - previous Task-1 still passing. Execute npm test - 12/15 pass, 3 accessibility tests fail. Step 3: Review code alignment - missing responsive design from plan (src/components/AnalyticsWidget.jsx). Step 4: Score - UI/UX (8.0), State Management (9.0), Performance (8.0), Accessibility (5.5), Testing (6.0). Overall: 7.3. Decision: Accept with changes (accessibility below 6.0 needs fixes, but not critical failure). Update epic with revision status.
+
+[OUTCOME]
+docs/review/2-review.md documents failed accessibility tests (L42-L58), alignment gaps noted. Action items: Fix accessibility (aria-labels, keyboard nav), add responsive breakpoints. docs/epic.md updated: score 7.3, status needs revision. Clear guidance for improvements.
+
+### Bad Example 1
+[INPUT]
+Task completed. Dev notes and plan exist.
+
+[BAD-DECISION]
+Skip test execution entirely. Assume tests pass. Don't check for mock implementations in production code. Don't run regression tests. Give high scores based on "code looks good". Mark as Accept without verification. Skip updating epic file.
+
+[WHY-BAD]
+Violates Constraint 1 (skip test execution - auto-reject). Violates DoD (tests not executed, no results recorded). Violates Step 2 (no mock/regression check). Scores without evidence are meaningless. Epic not updated violates DoD. Review is worthless without verification.
+
+[CORRECT-APPROACH]
+Execute Step 2 completely: First, scan ALL production code for mock/stub/placeholder patterns and hardcoded values (auto-reject if found). Second, run ALL relevant existing tests from previous tasks to detect regression (auto-reject if any fail). Third, execute current task tests and record results. Apply domain-specific scoring based on actual test results and code analysis. Make acceptance decision based on criteria. Update epic with accurate status and score.
+
+### Bad Example 2
+[INPUT]
+Task involves payment processing. All tests passing with high coverage.
+
+[BAD-DECISION]
+Give high scores across all dimensions. Mark as Accept. Don't scan production code for mocks. Skip checking if production code has placeholder implementations or hardcoded API keys. Focus only on test results, ignore code quality inspection.
+
+[WHY-BAD]
+Violates Constraint 5 (CRITICAL - must reject ANY mock/hardcoded values in production code regardless of test results). Missing the critical code quality gate check. Tests might pass but production code could have "TODO: implement" or hardcoded credentials. Would deploy unsafe/incomplete code.
+
+[CORRECT-APPROACH]
+Follow Decision Rules: Code Quality Gate is FIRST and CRITICAL checkpoint. Before any test execution or scoring, scan ALL production/implementation code files for: mock implementations (TODO comments, placeholder functions, mock return values), hardcoded values (API keys, credentials, test data in production code). If ANY found: AUTOMATIC REJECT regardless of test scores. Note: tests using mocks/test data are ALLOWED. Only after passing code quality gate, proceed with test execution and scoring.
+
+### Bad Example 3: Mock Implementation or Hardcoded Values in Production Code Auto-Reject (CRITICAL)
 [Input]
 - Development notes: docs/dev-notes/4-dev-notes.md (Task-4: Payment gateway integration)
 - Implementation plan: docs/plans/4-plan.md (Stripe API integration)
@@ -195,7 +241,7 @@
 - Action items: Implement actual Stripe API integration in production code, remove all mock/TODO code and hardcoded values from src/ (keep test mocks/test data)
 - docs/epic.md: Task-4 status = REJECTED, requires complete production implementation with proper configuration management
 
-### Example 5: Regression Breaking Previous Functionality Auto-Reject (CRITICAL)
+### Bad Example 4: Regression Breaking Previous Functionality Auto-Reject (CRITICAL)
 [Input]
 - Development notes: docs/dev-notes/5-dev-notes.md (Task-5: Add email notification feature)
 - Implementation plan: docs/plans/5-plan.md (Email service integration)

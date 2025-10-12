@@ -146,40 +146,49 @@
 
 ## [Example]
 
-### Example 1: Broken References in PRD
-[Input]
-- Validation report: docs/design-validation.md (3 critical issues: REQ-005 doesn't exist, Component "EmailService" fabricated, Task-4 references non-existent REQ-006)
+### Good Example 1
+[INPUT]
+Validation report shows 3 critical issues: REQ-005 reference doesn't exist, EmailService component fabricated, Task-4 references non-existent REQ-006. All are broken reference issues.
 
-[Decision]
-- Issue 1: REQ-005 referenced but doesn't exist in PRD requirements section
-  - Fix: Remove REQ-005 reference, map to existing REQ-003 instead
-- Issue 2: Architecture mentions "EmailService" but no such component defined
-  - Fix: Add EmailService to architecture components section with proper definition
-- Issue 3: Task-4 maps to REQ-006 which doesn't exist
-  - Fix: Update Task-4 to map to REQ-004 (notification requirements)
+[DECISION]
+Read validation report and extract all issues. Categorize by severity (3 critical) and type (broken references). Create plan.md with issue list. Develop fix plans: Issue 1 - remove REQ-005 reference or map to existing REQ-003; Issue 2 - add EmailService to architecture or remove references; Issue 3 - update Task-4 to reference existing requirement. Present fix strategies to user for confirmation. User approves all fixes. Execute fixes in order: update PRD to map REQ-005→REQ-003, add EmailService component definition to architecture section, update Task-4 to reference REQ-004. Verify cross-document consistency (all references now valid). Obtain user confirmation. Delete validation report. Recommend re-running validation.
 
-[Expected Outcome]
-- Updated docs/PRD.md with fixes: REQ-005 → REQ-003, EmailService added to architecture, Task-4 → REQ-004
-- Cross-document consistency verified (all references valid)
-- docs/design-validation.md deleted
-- Recommendation: Re-run `/sunnycore_po *validate-design prd` to confirm
+[OUTCOME]
+Updated docs/PRD.md with all fixes applied: REQ-005 references now map to REQ-003, EmailService component added to architecture section with proper definition, Task-4 updated to reference REQ-004. All references verified valid. Cross-document consistency maintained. Validation report docs/design-validation.md deleted. User confirmed all fixes. Plan.md shows all issues resolved. Recommendation provided: Re-run validate-design to confirm zero issues.
 
-### Example 2: Coverage Gaps in Full Workflow
-[Input]
-- Validation report: docs/design-validation.md (Coverage: REQ-001 has no architecture mapping, COMP-003 not mapped to any task, Task-2 has no implementation plan)
+### Good Example 2
+[INPUT]
+Validation report shows coverage gaps: REQ-001 has no architecture mapping, COMP-003 not mapped to any task, Task-2 has no implementation plan. Medium severity issues.
 
-[Decision]
-- Gap 1: REQ-001 (user authentication) missing architecture component
-  - Fix: Add "AuthService" component to docs/architecture/components.md, map to REQ-001
-- Gap 2: COMP-003 (Cache Layer) exists but no task implements it
-  - Fix: Add Task-5 "Implement caching" to docs/epic.md, map to COMP-003
-- Gap 3: Task-2 in epic but no plan file
-  - Fix: Create docs/plans/2-plan.md with TDD structure for Task-2
+[DECISION]
+Analyze validation report (3 medium-severity coverage gaps). Categorize issues by type (coverage gaps). Create plan.md with detailed gap analysis. Develop fix strategies: Gap 1 - add AuthService component to architecture and map to REQ-001; Gap 2 - add Task-5 to epic for Cache Layer; Gap 3 - create 2-plan.md for Task-2. Obtain user approval for fix strategies. Execute fixes: create AuthService in docs/architecture/components.md with REQ-001 mapping, add Task-5 to docs/epic.md with COMP-003 mapping, create docs/plans/2-plan.md following plan template. Verify 100% coverage: all requirements have architecture, all components have tasks, all tasks have plans. User confirms. Delete validation report.
 
-[Expected Outcome]
-- docs/architecture/components.md: Added AuthService with REQ-001 mapping
-- docs/epic.md: Added Task-5 for Cache Layer implementation
-- docs/plans/2-plan.md: Created implementation plan for Task-2
-- 100% coverage achieved: requirements → architecture → tasks → plans
-- docs/design-validation.md deleted after user confirmation
+[OUTCOME]
+Updated docs/architecture/components.md with AuthService component mapped to REQ-001. Updated docs/epic.md with Task-5 for Cache Layer implementation mapped to COMP-003. Created docs/plans/2-plan.md with complete TDD structure for Task-2. 100% bidirectional coverage achieved across all documents. Cross-document consistency verified. Validation report deleted after user confirmation. Plan.md documents all gaps filled. Recommendation: Re-run validation for confirmation.
+
+### Bad Example 1
+[INPUT]
+Validation report shows 5 issues including critical fabricated content, broken references, and conflicts. Mix of severity levels.
+
+[BAD-DECISION]
+Fix all issues simultaneously without prioritization. Skip user confirmation because fixes seem obvious. Apply fixes across multiple documents without tracking consistency. Delete validation report immediately after making changes. Do not verify if new conflicts introduced.
+
+[WHY-BAD]
+Violates Constraint 1 (fix in severity order). Should prioritize Critical → High → Medium → Low. Violates Constraint 2 (apply fixes without user confirmation). User must approve strategies before execution. Untracked multi-document changes risk introducing new inconsistencies. Violates Constraint 4 (delete report before fixes complete). Cannot verify all issues resolved. No verification of new conflicts violates Step 4.
+
+[CORRECT-APPROACH]
+Prioritize issues by severity: Critical first, then High, Medium, Low. Document fix strategy for each issue in plan.md. Present strategies to user and obtain approval before execution. Apply fixes sequentially maintaining cross-document consistency. After ALL fixes complete, verify no new conflicts introduced. Obtain final user confirmation. Only then delete validation report per Constraint 4. Recommend re-running validation to confirm zero issues remain.
+
+### Bad Example 2
+[INPUT]
+Validation report shows issue: REQ-003 conflicts with architecture component definition. Architecture says "synchronous API calls", requirements say "async for performance".
+
+[BAD-DECISION]
+Immediately decide that async is better and change requirements to match architecture. Do not consult user. Reasoning: "Async is modern best practice, so requirements must be wrong." Apply fix without documenting conflict or decision rationale.
+
+[WHY-BAD]
+Violates Constraint 2 (apply fixes without user confirmation). Conflicts require user input to determine authoritative source. Self-deciding which document is "correct" ignores business context. Requirements may intentionally specify async for valid business reasons. Not documenting rationale violates Conflict-Resolution-Guidelines. Unilateral decision may contradict business objectives.
+
+[CORRECT-APPROACH]
+Identify conflict between requirements (async) and architecture (sync). Document conflict clearly in plan.md with both positions. Present conflict to user: "Requirements specify async for performance, architecture specifies sync. Which is the authoritative source?" User clarifies requirements take precedence. Update architecture to match requirements (change sync→async). Document decision rationale in plan.md. Maintain both documents' consistency with agreed-upon approach. Obtain user confirmation before proceeding.
 

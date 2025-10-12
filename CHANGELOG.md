@@ -7,6 +7,29 @@
 
 ## [Unreleased]
 
+## [4.6.0] - 2025-10-12
+
+### Added
+- 任務文件範例系統增強：為所有 22 個任務文件新增正反對比範例系統
+  - 將所有 `tasks/*.md` 文件的範例格式從 "Example 1/2/3" 統一改為 "Good Example" + "Bad Example" 正反對比格式
+  - 每個 Bad Example 包含三個部分：
+    * `[BAD-DECISION]`：錯誤的決策或執行方式
+    * `[WHY-BAD]`：解釋為何該方式違反規則、約束或最佳實踐
+    * `[CORRECT-APPROACH]`：提供正確的處理方式和步驟
+  - 涵蓋所有任務檔案的範例增強：
+    * `init.md`、`consult.md`、`create-requirements.md`、`create-architecture.md`
+    * `create-epic.md`、`create-plan.md`、`develop-plan.md`、`develop-prd.md`
+    * `create-prd.md`、`cutover-prd.md`、`fix-prd-issues.md`、`cutover.md`
+    * `fix-acceptance-issues.md`、`review.md`、`validate-design.md`
+    * `brownfield-plan.md`、`create-brownfield-architecture.md`
+    * `conclude.md`、`curate-knowledge.md`、`document-project.md`、`fix-design-conflicts.md`
+  - 與 v4.5.0 的 config/ 文件範例增強保持一致，形成完整的正反對比教學體系
+  - 提升 AI 對任務執行規則的理解準確度：透過正反對比明確標示錯誤行為及其後果
+  - 增強約束力與錯誤預防：Bad Example 提供更強的警示作用，防止常見執行錯誤
+
+### Fixed
+- 修復 Cursor 版本安裝腳本路徑錯誤：`install.py` 中 commands 目錄從 `cursor_dir` 改為 `cursor_dir / "commands"`，確保正確安裝至 `.cursor/commands/` 目錄
+
 ## [4.5.0] - 2025-10-12
 
 ### Added

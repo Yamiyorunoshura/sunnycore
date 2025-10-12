@@ -56,34 +56,48 @@
 
 ## [Example]
 
-### Example 1: Failed Authentication Logic
-[Input]
-- Review report: docs/review/1-review.md (Reject: token validation fails for expired tokens)
-- Dev notes: docs/dev-notes/1-dev-notes.md (original implementation)
-- Architecture: JWT authentication with Redis token store
+### Good Example 1
+[INPUT]
+Review report identifies: "Authentication token validation fails for expired tokens - test_expired_token_rejection failing"
 
-[Decision]
-- Issue: Token expiry check missing (test_expired_token_rejection failed)
-- Fix: Add token expiry validation before Redis lookup
-- TDD: RED (write test for expiry check) → GREEN (add expiry logic) → REFACTOR (optimize Redis queries)
+[DECISION]
+Read review report and identify specific test failure. Analyze architecture to understand JWT token expiry design. Create fix plan in plan.md: add expiry validation logic in TokenValidator before Redis lookup. Follow TDD: ensure test_expired_token_rejection fails (RED), implement expiry check (GREEN), optimize token parsing logic (REFACTOR).
 
-[Expected Outcome]
-- Fixed code: src/auth/TokenValidator.js with expiry check (L25-L30)
-- Fix summary: Changes (added expiry validation), Tests (test_expired_token_rejection now passes), Evidence (all auth tests pass), Risk (low), Rollback (revert commit abc123)
-- Updated docs/dev-notes/1-dev-notes.md with fix details
+[OUTCOME]
+Fixed code with token expiry validation at src/auth/TokenValidator.js:L25-L30. All authentication tests passing. Updated docs/dev-notes/1-dev-notes.md with fix summary documenting the change, test evidence, and rollback plan. Issue fully resolved.
 
-### Example 2: Performance Issue in Query
-[Input]
-- Review report: docs/review/3-review.md (Accept with changes: NFR-001 violated, query takes 3s instead of < 500ms)
-- Dev notes: docs/dev-notes/3-dev-notes.md (missing database index)
-- Architecture: PostgreSQL with search functionality
+### Good Example 2
+[INPUT]
+Review report shows: "Performance requirement NFR-001 violated - database query takes 3 seconds, requirement is under 500ms"
 
-[Decision]
-- Issue: Missing index on search column (performance test failed)
-- Fix: Add index on products.name column, optimize query
-- TDD: RED (performance test < 500ms fails) → GREEN (add index, query passes) → REFACTOR (add query explain logging)
+[DECISION]
+Analyze architecture documents to understand database schema and query patterns. Review knowledge base for indexing best practices. Identify missing index on products.name column as root cause. Create migration script to add index. Test query performance to verify sub-500ms response. Document performance improvement in dev notes.
 
-[Expected Outcome]
-- Fixed code: migrations/add_product_name_index.sql, src/repositories/ProductRepository.js (optimized query)
-- Fix summary: Changes (added index, rewrote query), Tests (performance test now passes at 120ms), Evidence (test output shows timing), Risk (medium - index creation on large table), Rollback (drop index migration)
-- Updated docs/dev-notes/3-dev-notes.md
+[OUTCOME]
+Migration script at migrations/add_product_name_index.sql executed successfully. Query optimized in src/repositories/ProductRepository.js. Performance test now passes at 120ms. Updated docs/dev-notes/3-dev-notes.md with before/after performance metrics and migration details.
+
+### Bad Example 1
+[INPUT]
+Review report states: "User registration endpoint returns 500 error, test_create_user failing"
+
+[BAD-DECISION]
+Quickly patch the code with try-catch to suppress the error and return 200 status. Skip running tests to verify the fix. Mark the task as complete without investigating root cause or updating documentation.
+
+[WHY-BAD]
+Suppressing errors without fixing root cause violates Constraint 1 (deliver fixes that run properly). Not running tests violates DoD requirement. Skipping documentation prevents future debugging. This creates technical debt and may break other functionality.
+
+[CORRECT-APPROACH]
+Analyze the review report to identify the actual error (e.g., database constraint violation). Trace through architecture to understand expected behavior. Write failing test to reproduce issue (RED), implement proper fix addressing root cause (GREEN), add validation and error handling (REFACTOR). Execute all tests to verify, then update dev notes with fix details.
+
+### Bad Example 2
+[INPUT]
+Review identifies three issues: missing validation, incorrect error codes, and failing integration test
+
+[BAD-DECISION]
+Only fix the failing integration test without addressing validation and error codes. Assume the other issues are "minor" and can be ignored. Update dev notes claiming all issues are fixed.
+
+[WHY-BAD]
+Violates Constraint 1 by not fixing all issues properly. Incomplete fixes leave the system in unstable state. Misleading documentation creates confusion for future work. Review-driven fixes must address all identified issues comprehensively.
+
+[CORRECT-APPROACH]
+Create plan.md listing all three issues with priorities. Address each systematically using TDD cycle. Track progress in plan.md: Issue 1 - validation (pending→in-progress→completed), Issue 2 - error codes (pending→in-progress→completed), Issue 3 - integration test (pending→in-progress→completed). Verify all tests pass. Update dev notes accurately reflecting all fixes applied.

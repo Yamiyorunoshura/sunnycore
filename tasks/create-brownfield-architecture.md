@@ -108,50 +108,48 @@
 
 ## [Example]
 
-### Example 1: Add OAuth2 to Existing REST API
-[Input]
-- Requirements: REQ-001 (OAuth2 authentication)
-- Existing architecture: REST API with basic auth, User Service, PostgreSQL
-- Template: architecture-tmpl.yaml
+### Good Example 1
+[INPUT]
+Existing REST API with basic auth documented in docs/architecture/. New requirement REQ-001 requires OAuth2 authentication.
 
-[Decision]
-- New component: OAuth2 Server (integrate with existing User Service)
-- Preserve existing API contracts (add Authorization header only)
-- Impact Analysis: All API endpoints need authentication middleware update
+[DECISION]
+Read existing architecture documents to understand User Service and API Gateway. Design OAuth2 Server component integrating with existing User Service. Preserve existing API contracts (only add Authorization header support). Create Impact Analysis documenting API Gateway middleware changes. Map REQ-001→OAuth2 Server. Reference docs/architecture/components.md#user-service. Generate architecture.md following template. Obtain approval. Execute shard-architecture.py.
 
-[Expected Outcome]
-- docs/architecture.md with OAuth2 Server component and integration points
-- Impact Analysis section documenting changes to existing API Gateway
-- Reference: docs/architecture/components.md#user-service for integration context
+[OUTCOME]
+Updated docs/architecture.md with OAuth2 Server integrated cleanly. Impact Analysis shows no breaking changes. All references valid. Sharded successfully with clear integration boundaries.
 
-### Example 2: Add Analytics Module to CMS
-[Input]
-- Requirements: REQ-001 (page view tracking), REQ-002 (user behavior analytics)
-- Existing: Content Management System with PostgreSQL, Redis cache
-- Knowledge base: best-practices-caching.md
+### Good Example 2
+[INPUT]
+Existing CMS with PostgreSQL, Redis. Requirements REQ-001 (analytics tracking), REQ-002 (behavior analysis). Knowledge base has best-practices-caching.md.
 
-[Decision]
-- New components: Analytics Collector (async), Analytics DB (ClickHouse)
-- Extension point: Event bus (existing) for analytics events
-- No breaking changes: Analytics operates independently via event subscription
+[DECISION]
+Identify Brownfield project. Design Analytics Collector (async) and Analytics DB (ClickHouse). Use existing event bus as extension point - analytics subscribes to events. No changes to CMS components (no breaking changes). Document decision for ClickHouse selection (ADR). Map requirements to new components. Reference existing architecture docs. Generate complete architecture.md. Shard after approval.
 
-[Expected Outcome]
-- docs/architecture.md showing Analytics module integrated via event bus
-- Compatibility verification: existing components unchanged
-- Updated architecture documents showing clear module boundaries
+[OUTCOME]
+docs/architecture.md showing Analytics module via event bus integration. Compatibility verified - zero CMS impact. References to event-bus.md and best-practices-caching.md included. Clear module boundaries in sharded documents.
 
-### Example 3: Migrate Monolith Order Service to Microservice
-[Input]
-- Requirements: REQ-001 (extract order processing to separate service)
-- Existing: Monolithic e-commerce app, shared PostgreSQL database
-- Constraints: Zero downtime migration required
+### Bad Example 1
+[INPUT]
+Need to add feature to existing system with docs/architecture/.
 
-[Decision]
-- New component: Order Microservice with dedicated database
-- Migration strategy: Strangler Fig pattern with API Gateway routing
-- Impact Analysis: Database schema split, API contract evolution
+[BAD-DECISION]
+Design without reading existing docs. Assume integration points. Skip Impact Analysis. Use fabricated component names not in existing system. Run sharding without compatibility check.
 
-[Expected Outcome]
-- docs/architecture.md with migration phases and dual-write strategy
-- Impact Analysis documenting breaking changes and migration path
-- ADRs explaining Strangler Fig pattern choice and trade-offs
+[WHY-BAD]
+Violates Constraint 1 (review existing architecture first). Violates Constraint 2 (no Impact Analysis for changes). Ignores Brownfield-Architecture-Guidelines about preserving contracts. Creates incompatible design.
+
+[CORRECT-APPROACH]
+Execute Step 1: read ALL docs/architecture/*.md files first. Understand current components, contracts, extension points. Identify affected domains. Design new module ensuring compatibility. Create Impact Analysis for ANY existing component changes. Use Reference format to cite reviewed content. Then generate and shard.
+
+### Bad Example 2
+[INPUT]
+Adding payment service using Stripe API. Existing Order Service documented.
+
+[BAD-DECISION]
+Mention "Uses Stripe" without details. Skip api-documentation section. Ignore Order Service integration needs. Miss endpoint URLs, authentication, rate limits, error handling. No Impact Analysis for Order Service changes.
+
+[WHY-BAD]
+Violates Brownfield-Architecture-Guidelines point 4 (complete external API documentation). Violates Constraint 2 (missing Impact Analysis). Blocks implementation with insufficient integration details. Violates template requirements.
+
+[CORRECT-APPROACH]
+Follow Guidelines section 4 fully. Document Stripe API completely: name, endpoints (https://api.stripe.com/v1/charges), authentication (API key management), schemas, rate limits, retry strategies, error codes, integration with Order Service, fallbacks. Create Impact Analysis for Order Service changes. Reference existing Order Service docs. Verify compatibility, provide migration path if needed.
