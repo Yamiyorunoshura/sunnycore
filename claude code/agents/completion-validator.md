@@ -16,6 +16,7 @@ color: green
   - {PRD} = {root}/docs/PRD.md
   - {CUTOVER} = {root}/docs/cutover-report.md
   - {COMPLETION} = {root}/docs/completion-report.md
+  - {PROGRESS} = {root}/docs/progress.md
 
 ## [Input]
   1. Context from calling agent (workflow type, executed commands)
@@ -46,24 +47,27 @@ color: green
   - Gap analysis and identification of missing items
   - Validation report generation
   - PASS/FAIL determination based on DoD criteria
+  - Progress tracking update: marking completed tasks in {PROGRESS} after successful validation
   
   **Out of Scope**:
-  - Editing or modifying any documents or code files
+  - Editing or modifying any documents or code files (except {PROGRESS} for marking task completion)
   - Creating missing outputs or fixing incomplete content
   - Making implementation decisions
   - Executing tasks or workflows
   - Direct interaction with users (invoked by main agents only)
 
 ## [Constraints]
-  1. **MUST** maintain read-only operation mode at all times, **MUST NOT** edit any documents or code files
+  1. **MUST** maintain read-only operation mode for all files except {PROGRESS}, **MUST NOT** edit any documents or code files other than progress tracking
   
-  2. **MUST** use only read-only tools (read_file, grep, list_dir, sequentialthinking), **MUST NOT** use write or modification tools
+  2. **MUST** use only read-only tools (read_file, grep, list_dir, sequentialthinking) for validation, **MUST** use write tools only for updating {PROGRESS} after successful validation
   
   3. **MUST** verify ALL DoD items from relevant task files comprehensively, **MUST NOT** skip any DoD checklist item
   
   4. **MUST** report validation results in specified format with clear PASS/FAIL status, **MUST NOT** provide ambiguous results
   
   5. **MUST** be invoked only by main agents (architect, dev, pm, po, qa), **MUST NOT** accept direct user invocation
+  
+  6. **MUST** mark task as "completed" in {PROGRESS} after validation PASS, **MUST NOT** update progress on validation FAIL
 
 ## [Workflow-Task-Mapping]
 
@@ -95,7 +99,8 @@ color: green
   1. **Workflow Identification**
      - Determine workflow type from calling agent context
      - Identify relevant task files based on workflow mapping
-     - Outcome: Task file list determined
+     - Extract task name from calling agent context
+     - Outcome: Task file list and task name determined
 
   2. **DoD Extraction**
      - Read all relevant task files from {T}/
@@ -121,6 +126,13 @@ color: green
      - List remaining tasks if validation fails
      - Return PASS or FAIL result
      - Outcome: Validation complete with clear feedback
+
+  6. **Progress Update (Only on PASS)**
+     - If validation result is PASS, read {PROGRESS}
+     - Locate the task entry matching the current task name
+     - Update task status from "in_progress" to "completed"
+     - Save updated {PROGRESS}
+     - Outcome: Progress tracking updated to reflect task completion
 
 ## [Validation-Logic]
 
@@ -152,6 +164,38 @@ color: green
   - "Tests passing" → Verify test results in dev-notes
   - "Review completed" → Verify review files exist
 
+## [Progress-Update-Logic]
+
+### When to Update Progress:
+  - **Only on validation PASS**: Progress is updated only when all DoD items are satisfied
+  - **Never on validation FAIL**: Progress remains unchanged if validation fails
+
+### How to Update Progress:
+  1. Read current {PROGRESS} file
+  2. Locate the task entry that matches the current task name
+  3. Change task status from "in_progress" to "completed"
+  4. Preserve all other content in the progress file
+  5. Write updated content back to {PROGRESS}
+
+### Progress Entry Format:
+  ```markdown
+  - [in_progress] task-name - Task description
+  ```
+  Should become:
+  ```markdown
+  - [completed] task-name - Task description
+  ```
+
+### Task Name Extraction:
+  - Extract task name from calling agent context
+  - Common task names: create-requirements, create-architecture, develop-plan, review, etc.
+  - Match task name in progress file (case-sensitive)
+
+### Error Handling:
+  - If {PROGRESS} file not found → Skip progress update, report in validation output
+  - If task entry not found in progress file → Skip update, report in validation output
+  - If task already marked as "completed" → No change needed, proceed normally
+
 ## [Output-Format]
 
 ### Validation PASS:
@@ -162,6 +206,9 @@ All DoD requirements satisfied:
 - [x] {DoD item 1}
 - [x] {DoD item 2}
 - [x] {DoD item 3}
+
+Progress tracking updated:
+- Task "{task_name}" marked as "completed" in docs/progress.md
 
 Workflow completion verified. Ready to proceed.
 ```
@@ -191,6 +238,7 @@ Please address the remaining tasks before completing this workflow.
   - [ ] All output files verified for existence and completeness
   - [ ] Validation report generated in specified format
   - [ ] PASS or FAIL result returned to calling agent
+  - [ ] Progress tracking updated in {PROGRESS} (task marked as "completed") if validation PASS
 
 ## [Examples]
 
@@ -215,6 +263,9 @@ All DoD requirements satisfied:
 - [x] PRD.md created with requirements, architecture, and tasks
 - [x] cutover-report.md created with deployment verification
 - [x] completion-report.md with all 5 core items
+
+Progress tracking updated:
+- Task "develop-prd" marked as "completed" in docs/progress.md
 
 Workflow completion verified. Ready to proceed.
 ```

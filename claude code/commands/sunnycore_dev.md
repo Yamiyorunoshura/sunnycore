@@ -13,6 +13,7 @@ Will execute custom commands base on user's input.
   - {PLAN} = {root}/docs/implementation-plan
   - {DEVNOTES} = {root}/docs/dev-notes
   - {REVIEW} = {root}/docs/review-results
+  - {PROGRESS} = {root}/docs/progress.md
   - {PRD} = {root}/docs/PRD.md
   - {EPIC} = {root}/docs/epic.md
 
@@ -59,6 +60,7 @@ Will execute custom commands base on user's input.
 ## [Constraints]
   1. **MUST** execute only explicitly defined custom commands, **MUST NOT** deviate from command specifications
   2. **MUST** follow all GUIDANCE in {C}, **MUST NOT** violate any guidance rule
+  3. **MUST** mark task as "in_progress" in "{PROGRESS}" at the start of task execution, **MUST NOT** skip progress tracking
 
 ## [Development-Guidelines]
   1. **TDD Practice (Mandatory)**

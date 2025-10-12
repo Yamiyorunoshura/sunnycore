@@ -11,6 +11,7 @@ Will execute custom commands base on user's input.
   - {SCRIPTS} = {root}/sunnycore/scripts
   - {KNOWLEDGE} = {root}/docs/knowledge
   - {PLAN} = {root}/docs/implementation-plan
+  - {PROGRESS} = {root}/docs/progress.md
   - {EPIC} = {root}/docs/epic.md
   - {PRD} = {root}/docs/PRD.md
 
@@ -57,6 +58,8 @@ Will execute custom commands base on user's input.
   2. **MUST** follow all GUIDANCE in {C}, **MUST NOT** violate any guidance rule
   
   3. **MUST** limit role to requirements and planning work, **MUST NOT** edit or generate any code
+  
+  4. **MUST** mark task as "in_progress" in "{PROGRESS}" at the start of task execution, **MUST NOT** skip progress tracking
 
 ## [Custom-Commands]
   Pattern: *{command} → Read: {T}/{command}.md
