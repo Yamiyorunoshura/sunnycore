@@ -90,33 +90,51 @@
 
 ## [Example]
 
-### Example 1: Add Search Feature to Existing App
-[Input]
-- User requirement: "Add product search functionality with filters"
-- Project type: Brownfield (docs/architecture/ exists with API Gateway, Product Service)
+### Good Example 1
+[INPUT]
+User asks: "Add product search functionality with filters to existing e-commerce dashboard"
+Existing architecture found in docs/architecture/ showing Product Service with API Gateway.
 
-[Decision]
-- Scope: Small (within existing Product Service boundaries, no new modules)
-- Impact: No architecture changes (uses existing API, adds new endpoint)
-- Estimated tasks: 2-3 (search endpoint, filter logic, UI integration)
-- Recommendation: PRD workflow (small scope, existing architecture sufficient)
+[DECISION]
+Determine project type: Brownfield (architecture exists). Analyze scope: Feature addition within existing Product Service boundaries, no new modules needed. Estimated tasks: 2-3 (search endpoint, filter logic, UI integration). No architecture pattern changes. No new technology stack. Fits within existing component boundaries. Decision Criteria evaluation: Recommend PRD workflow (small scope, existing architecture sufficient, estimated 1-5 tasks).
 
-[Expected Outcome]
-- Recommendation: "Use `/sunnycore_pm *create-prd` - This is a small feature addition within existing architecture (2-3 tasks estimated)"
-- Rationale: No new components needed, fits within current Product Service
+[OUTCOME]
+Clear recommendation: "Use /sunnycore_pm *create-prd - This is a small feature addition within existing architecture (2-3 tasks estimated, no architectural changes required). The search functionality can be implemented using existing Product Service and API Gateway."
 
-### Example 2: Migrate to Microservices Architecture
-[Input]
-- User requirement: "Break monolith into microservices for better scalability"
-- Project type: Brownfield (docs/architecture/ shows monolithic architecture)
+### Good Example 2
+[INPUT]
+User requests: "Migrate current monolithic application to microservices for better scalability"
+Existing architecture shows monolithic design with single database.
 
-[Decision]
-- Scope: Large (fundamental architecture change, multiple new services)
-- Impact: Major (changes system boundaries, adds service mesh, new deployment model)
-- Estimated tasks: 10+ (service extraction, API gateway, data migration, etc.)
-- Recommendation: Full workflow (requires comprehensive architecture redesign)
+[DECISION]
+Determine project type: Brownfield (existing monolithic architecture documented). Analyze scope: Fundamental architecture change, multiple new services needed (Order Service, Inventory Service, User Service, etc.). New patterns required (service mesh, API gateway, distributed data). New technology stack components (message queue, service discovery). Estimated tasks: 10+ (service extraction, data migration, API gateway setup, etc.). Major cross-cutting concerns (distributed tracing, circuit breakers). Decision Criteria evaluation: Recommend Full workflow (requires comprehensive architecture redesign).
 
-[Expected Outcome]
-- Recommendation: "Use `/sunnycore_pm *create-requirements` - This requires architecture redesign (microservices pattern, 10+ tasks estimated)"
-- Rationale: Introduces new architectural patterns and multiple new components
+[OUTCOME]
+Clear recommendation: "Use /sunnycore_pm *create-requirements - This requires complete architecture redesign (introducing microservices pattern, estimated 10+ tasks, new service boundaries, distributed data management). A comprehensive requirements and architecture phase is necessary."
+
+### Bad Example 1
+[INPUT]
+User wants to "add a caching layer to improve API performance"
+
+[BAD-DECISION]
+Immediately recommend full workflow without analyzing scope or existing architecture. Create plan.md but skip existing architecture review. Assume this requires new modules and architectural changes without verification.
+
+[WHY-BAD]
+Violates Constraint 1 (do not misidentify project type). Skips Constraint 2 (do not skip existing architecture analysis for Brownfield). Ignores Step 1 (determine project type and gather context). Violates Decision-Criteria by not properly assessing task count and architectural impact. Caching is typically a modification within existing boundaries, not requiring full workflow.
+
+[CORRECT-APPROACH]
+First determine if docs/architecture/ exists (Brownfield check). Read existing architecture to understand current setup. Analyze scope: adding Redis cache middleware is typically 2-3 tasks within existing API boundaries, no new modules. Check Decision-Criteria: modifications within existing boundaries, 1-5 tasks estimated, no new architecture patterns. Recommend PRD workflow with clear rationale explaining it's an enhancement to existing infrastructure.
+
+### Bad Example 2
+[INPUT]
+User describes a complex multi-service platform with new payment gateway, notification system, and analytics pipeline. No existing architecture.
+
+[BAD-DECISION]
+Quickly recommend PRD workflow because "it's faster". Skip analysis of complexity and architectural impact. Ignore the fact that multiple new modules are being introduced. Provide recommendation without rationale or estimated task count.
+
+[WHY-BAD]
+Violates Constraint 4 (do not recommend workflows that violate Decision-Criteria). Skips Steps 1-2 (context gathering and scope analysis). Ignores Decision-Criteria indicators for full workflow: introduces multiple new components, requires new integrations, large scope (likely 5+ tasks). Violates Constraint 3 (do not provide verbose analysis unless requested) by not providing ANY rationale.
+
+[CORRECT-APPROACH]
+Analyze scope systematically: payment gateway = new module, notification system = new module, analytics pipeline = new module. Multiple new components and external integrations identified. Estimated tasks: likely 8-12 (payment integration, notification service, analytics ingestion, storage, reporting). Check Decision-Criteria: introduces new system components, adds multiple new third-party integrations, large scope estimated. Recommend full workflow with specific rationale: "/sunnycore_pm *create-requirements - Multiple new modules (payment, notifications, analytics) require comprehensive architecture design. Estimated 8-12 tasks with significant integration complexity."
 

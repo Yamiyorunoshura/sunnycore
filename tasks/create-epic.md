@@ -80,61 +80,48 @@
 
 ## [Example]
 
-### Example 1: Data Analytics Pipeline
-[Input]
-- Requirements: REQ-001 (data ingestion), REQ-002 (transformation), REQ-003 (visualization)
-- Architecture: Kafka, Spark, Dashboard Service
-- Template: epic-tmpl.yaml
+### Good Example 1
+[INPUT]
+Requirements: REQ-001 (data ingestion), REQ-002 (ETL transformation), REQ-003 (dashboard visualization). Architecture: Kafka Consumer, Spark Jobs, Dashboard Service. Template: epic-tmpl.yaml.
 
-[Decision]
-- Task-1: Implement data ingestion (maps to REQ-001, Kafka Consumer)
-- Task-2: Implement ETL pipeline (maps to REQ-002, Spark Jobs)
-- Task-3: Build analytics dashboard (maps to REQ-003, Dashboard Service)
+[DECISION]
+Understand requirements and architecture from docs. Identify feature-level tasks (not implementation steps). Task-1: "Implement data ingestion" (maps REQ-001 to Kafka Consumer, description ≤14 chars). Task-2: "Implement ETL pipeline" (maps REQ-002 to Spark Jobs). Task-3: "Build dashboard" (maps REQ-003 to Dashboard Service). Ensure 100% coverage: all 3 requirements mapped. Organize logically by data flow: ingestion→transformation→visualization. Define clear DoD for each task. Exclude operational actions. Obtain user approval. Save to docs/epic.md.
 
-[Expected Outcome]
-- docs/epic.md with 3 feature-level tasks
-- Each task has clear DoD and requirement traceability
-- Tasks are logically ordered: ingestion → transformation → visualization
+[OUTCOME]
+docs/epic.md with 3 feature-level tasks in proper flow order. Each task has requirement traceability (REQ-ID→Task-ID→Component), clear description, and DoD. 100% requirement coverage verified. Task descriptions concise (≤14 characters). No operational actions included.
 
-### Example 2: Booking System
-[Input]
-- Requirements: REQ-001 (search availability), REQ-002 (create reservation), REQ-003 (payment processing)
-- Architecture: Search API, Booking Service, Payment Gateway
-- Template: epic-tmpl.yaml
+### Good Example 2
+[INPUT]
+Requirements: REQ-001 (product CRUD), REQ-002 (stock tracking), REQ-003 (low stock alerts), REQ-004 (reporting). Architecture: Product Service, Inventory Service, Notification Service.
 
-[Decision]
-- Task-1: Implement availability search (REQ-001 → Search API)
-- Task-2: Implement booking creation (REQ-002 → Booking Service)
-- Task-3: Integrate payment (REQ-003 → Payment Gateway)
-- Dependencies: Task-3 depends on Task-2
+[DECISION]
+Map each requirement to architecture component systematically. Task-1: "Product CRUD" (REQ-001→Product Service). Task-2: "Stock tracking" (REQ-002→Inventory Service). Task-3: "Alert system" (REQ-003→Notification Service). Task-4: "Create reports" (REQ-004→Inventory Service). Verify 100% coverage: 4 requirements mapped to 4 tasks. Identify dependencies: Task-3 depends on Task-2 (alerts need stock data). Keep feature-level granularity (not atomic steps like "write test" or "git commit"). Generate epic with checkbox format. Obtain approval.
 
-[Expected Outcome]
-- docs/epic.md with tasks ordered by dependencies
-- Each task has requirement mapping and architecture component references
-- No operational actions (git commit, npm install) included
+[OUTCOME]
+docs/epic.md with 4 tasks covering all requirements. Dependencies documented (Task-3→Task-2). Each task mapped to specific architecture components. Descriptions ≤14 characters and actionable. No operational steps included (git, npm, docker commands excluded).
 
-### Example 3: Inventory Management
-[Input]
-- Requirements: REQ-001 (product CRUD), REQ-002 (stock tracking), REQ-003 (low stock alerts), REQ-004 (reporting)
-- Architecture: Product Service, Inventory Service, Notification Service
-- Template: epic-tmpl.yaml
+### Bad Example 1
+[INPUT]
+Requirements REQ-001, REQ-002, REQ-003 exist. Architecture documented.
 
-[Decision]
-- Task-1: Implement product management (REQ-001 → Product Service)
-- Task-2: Implement stock tracking (REQ-002 → Inventory Service)
-- Task-3: Build alert system (REQ-003 → Notification Service)
-- Task-4: Create reports (REQ-004 → Inventory Service)
+[BAD-DECISION]
+Break tasks down to atomic implementation level: "Task-1: Write unit tests", "Task-2: Create database migration", "Task-3: Run npm install", "Task-4: Commit code to git". Skip requirement mapping. Use long task descriptions (>14 characters). Include operational actions.
 
-[Expected Outcome]
-- docs/epic.md with 4 feature-level tasks
-- 100% requirement coverage across tasks
-- Each task description ≤14 characters, clear and actionable
+[WHY-BAD]
+Violates Constraint 1 (tasks below feature-level granularity). Violates Constraint 2 (includes operational actions git, npm). Violates Task-Design-Guidelines point 1 (should be feature-level like "Implement login", not atomic steps). Breaks DoD requirement for feature-level outcomes. Tasks too granular for epic purpose.
 
-Format of tasks in the epic with checkboxes:
+[CORRECT-APPROACH]
+Follow Task-Design-Guidelines: create feature-level tasks representing major deliverables. Example: "Implement login" (not "write auth test" + "create user table" + "commit code"). Map each task to requirements (REQ-ID→Task-ID). Keep descriptions ≤14 characters. Focus on deliverables with verifiable outcomes. Exclude operational actions (git, npm, docker) unless explicitly requested. Atomic breakdown happens later in create-plan phase.
 
-- [ ] Task-{task_id}
-  - {description of the task}
-- [ ] Task-{task_id}
-  - {description of the task}
-- [ ] Task-{task_id}
-  - {description of the task}
+### Bad Example 2
+[INPUT]
+Requirements REQ-001 through REQ-005 documented. Architecture has 3 components.
+
+[BAD-DECISION]
+Create 3 tasks mapping to architecture components but skip REQ-004 and REQ-005 mapping. Use spaces in file paths ("docs/epic doc.md"). No traceability matrix showing requirement→task→component mapping. Skip user approval step. Save with incorrect format.
+
+[WHY-BAD]
+Violates Constraint 3 (uses spaces in file paths, should use kebab-case). Violates Task-Design-Guidelines point 2 (missing 100% requirement coverage - REQ-004 and REQ-005 unmapped). Violates Step 4 (skip user approval). Missing traceability means can't verify coverage. Incomplete epic will cause gaps in implementation.
+
+[CORRECT-APPROACH]
+Create complete requirement→task→component traceability matrix per Task-Design-Guidelines section 2. Ensure 100% coverage: all 5 requirements must map to tasks. Use kebab-case for filenames: "docs/epic.md" not "docs/epic doc.md". Create traceability section showing: REQ-001→Task-1→ComponentA, REQ-002→Task-2→ComponentB, etc. Verify no orphaned requirements. Obtain user approval before finalizing. Follow template format exactly.

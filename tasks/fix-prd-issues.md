@@ -101,21 +101,49 @@
 
 ## [Example]
 
-### Example 1: Push Notification Failure
-[Input]
-- Cutover report: docs/cutover-report.md (Critical: push notifications fail, missing FCM server key)
-- PRD: docs/PRD.md (REQ-002: push notification delivery)
-- Template: dev-notes-tmpl.yaml
+### Good Example 1
+[INPUT]
+Cutover report shows critical issue: push notifications fail with "Invalid FCM token" error. PRD specifies REQ-002 for push notification delivery. Missing Firebase configuration identified.
 
-[Decision]
-- Root cause: Firebase config incomplete (no server key in .env)
-- Fix strategy: Add FCM_SERVER_KEY to .env, update notification service
-- RED: Write test for notification delivery (test_send_notification fails)
-- GREEN: Add FCM config, implement send logic (test passes)
-- REFACTOR: Add error handling, retry mechanism
+[DECISION]
+Analyze issue from cutover report (push notification failure). Prioritize as critical. Reference PRD for requirements context (REQ-002). Root cause analysis: FCM_SERVER_KEY missing from environment configuration. Fix strategy: add FCM configuration and implement notification logic. Document in plan.md. RED phase: write test_send_notification that expects successful delivery (fails with config error). GREEN phase: add FCM_SERVER_KEY to .env, implement NotificationService.send() (test passes). REFACTOR phase: add error handling, retry logic, logging (tests remain green). Re-run acceptance test for REQ-002 (push notifications deliver successfully). Document comprehensive fix in dev notes.
 
-[Expected Outcome]
-- Fixed code: src/services/NotificationService.js with FCM integration, .env.example with FCM_SERVER_KEY
-- docs/cutover-fixes-dev-notes.md documenting root cause, fix, test results
-- Re-run acceptance test: Push notifications now work (✓)
+[OUTCOME]
+Fixed code at src/services/NotificationService.js with complete FCM integration. Environment updated: .env.example includes FCM_SERVER_KEY configuration. Complete dev notes at docs/cutover-fixes-dev-notes.md documenting root cause (missing config), solution (FCM integration), and verification. All tests passing. Acceptance test re-run: REQ-002 push notifications working. Plan.md shows TDD cycle completed (RED→GREEN→REFACTOR), acceptance verified.
+
+### Good Example 2
+[INPUT]
+Cutover report lists 3 issues: critical authentication failure, high-severity data validation missing, medium-severity UI inconsistency. PRD contains relevant requirements for all issues.
+
+[DECISION]
+Extract all 3 issues from cutover report. Prioritize by severity: critical (auth failure) first, then high (validation), then medium (UI). Reference PRD for each issue's requirements context. Root cause analysis for each issue documented in plan.md. Fix strategy: Issue 1 - fix token validation logic; Issue 2 - add input validation middleware; Issue 3 - update UI components. Execute fixes sequentially following TDD for each. RED: create failing tests for all 3 issues. GREEN: implement fixes until tests pass. REFACTOR: improve code quality. Re-run acceptance tests for all 3 requirements. Document all fixes comprehensively in single dev notes file.
+
+[OUTCOME]
+Fixed code for all 3 issues: AuthService.js (token validation), ValidationMiddleware.js (input validation), UI components updated. Complete dev notes at docs/cutover-fixes-dev-notes.md documenting all 3 fixes with root causes, solutions, risk assessments. All tests passing. Acceptance tests re-run for all 3 requirements: all passing. Plan.md shows prioritized fixes, TDD cycles for each, acceptance tests verified. Single comprehensive documentation.
+
+### Bad Example 1
+[INPUT]
+Cutover report shows critical notification failure. PRD has relevant requirement. Fix seems straightforward.
+
+[BAD-DECISION]
+Quickly implement notification service without writing tests first. Add FCM configuration. Test manually by triggering notification (works on first try). Mark issue as fixed without documentation. Skip re-running formal acceptance tests because manual test worked. Create minimal dev notes: "Fixed notifications. Added FCM."
+
+[WHY-BAD]
+Violates Constraint 2 (do not skip TDD cycle). No RED phase means cannot prove issue existed. No test coverage for future regression prevention. Manual testing is not systematic acceptance testing. Violates Constraint 3 (do not skip re-running acceptance tests). Minimal dev notes violate Step 7 documentation requirements. Rushed fix lacks proper validation and documentation.
+
+[CORRECT-APPROACH]
+Follow full TDD cycle: RED - write failing test proving notification failure exists. GREEN - implement FCM integration until test passes. REFACTOR - add error handling while keeping tests green. Re-run formal acceptance tests matching PRD requirements. Document complete root cause analysis, fix implementation, risk assessment in dev notes per dev-notes-tmpl.yaml. Track all progress in plan.md. Never skip TDD steps or acceptance verification.
+
+### Bad Example 2
+[INPUT]
+Cutover report shows 4 issues with different severity levels. PRD contains requirements for all.
+
+[BAD-DECISION]
+Start with the most interesting issue regardless of severity. Work on low-severity UI polish before fixing critical security vulnerability. Create separate dev notes files: fix1-dev-notes.md, fix2-dev-notes.md, etc. Update plan.md sporadically. Skip root cause analysis for "obvious" issues.
+
+[WHY-BAD]
+Violates Step 1 (prioritize by severity). Critical issues must be fixed first. Working on low-value issues while critical bugs remain is poor prioritization. Multiple dev notes files violate Output specification (single cutover-fixes-dev-notes.md). Sporadic plan.md updates violate progress tracking requirements. Skipping root cause analysis risks surface-level fixes that don't address underlying problems.
+
+[CORRECT-APPROACH]
+Prioritize ALL issues by severity in plan.md: critical first, then high, medium, low. Fix issues sequentially in priority order. Conduct thorough root cause analysis for EVERY issue regardless of apparent simplicity. Track each issue's TDD cycle progress in plan.md. Create single comprehensive dev notes at docs/cutover-fixes-dev-notes.md covering all fixes with complete analysis. Maintain detailed plan.md throughout per Progress-Tracking-Guidelines.
 

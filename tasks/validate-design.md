@@ -156,44 +156,49 @@
 
 ## [Example]
 
-### Example 1: PRD Workflow Validation - Success
-[Input]
-- Workflow: "prd"
-- PRD: docs/PRD.md (3 requirements, 2 architecture components, 3 tasks)
-- Existing architecture: docs/architecture/*.md (API Gateway, Database)
+### Good Example 1
+[INPUT]
+Workflow parameter: "prd". PRD exists at docs/PRD.md with 3 requirements, 2 architecture components, 3 tasks.
 
-[Decision]
-- Internal consistency: All REQ-001, REQ-002, REQ-003 referenced correctly ✓
-- External alignment: New API endpoints compatible with existing API Gateway ✓
-- Completeness: All requirements → architecture (100%), all architecture → tasks (100%) ✓
-- Authenticity: All components exist, no fabricated references ✓
-- Result: Validation passed, no issues found
+[DECISION]
+Step 1: Validate workflow="prd", determine scope (PRD internal consistency + external alignment if architecture exists). Step 2: Extract all entities from PRD - REQ-001, REQ-002, REQ-003, Component-A, Component-B, Task-1, Task-2, Task-3. Create internal index. Step 3: Validate internal consistency - all REQ IDs referenced exist, no circular dependencies. Check requirements→architecture mapping (100%), architecture→tasks mapping (100%). No orphaned entities. Check external alignment with existing docs/architecture/ - no breaking changes, integration points valid. Step 4: Generate docs/design-validation.md with status PASS, all checks successful. Step 5: Present summary: "Validation passed. PRD internally consistent and compatible with existing architecture."
 
-[Expected Outcome]
-- docs/design-validation.md with status: PASS
-- Summary: "All validation checks passed. PRD is internally consistent and aligns with existing architecture."
-- Recommendation: "Proceed with development using `/sunnycore_dev *develop-prd`"
+[OUTCOME]
+Complete docs/design-validation.md with status PASS. All validation checks documented: internal consistency ✓, external alignment ✓, completeness 100%. No issues found. Recommendation provided: proceed with development using /sunnycore_dev *develop-prd.
 
-### Example 2: Full Workflow Validation - Issues Found
-[Input]
-- Workflow: "full"
-- Requirements: docs/requirements/*.md (5 requirements)
-- Architecture: docs/architecture/*.md (3 components)
-- Epic: docs/epic.md (4 tasks)
-- Plans: docs/plans/*.md (3 plans, missing plan for Task-4)
+### Good Example 2
+[INPUT]
+Workflow parameter: "full". Requirements in docs/requirements/*.md (5 requirements), architecture in docs/architecture/*.md (3 components), epic at docs/epic.md (4 tasks), plans in docs/plans/*.md (3 files, missing plan for Task-4).
 
-[Decision]
-- Bidirectional integrity: REQ-005 referenced in arch but doesn't exist ✗ (Critical)
-- Coverage: REQ-002 not mapped to any architecture component ✗ (High)
-- Coverage: Task-4 exists but no implementation plan ✗ (High)
-- Consistency: "UserService" named "User Service" in architecture ✗ (Medium)
-- Issues: 1 Critical, 2 High, 1 Medium
+[DECISION]
+Step 1: Validate workflow="full", determine full workflow validation scope. Step 2: Extract entities - 5 REQs, 3 components, 4 tasks, 3 plans. Index all. Step 3: Validate bidirectional integrity - REQ-005 referenced in architecture but doesn't exist in requirements (fabricated - Critical severity). Check coverage - REQ-002 not mapped to any component (coverage gap - High severity). Task-4 has no plan file (missing plan - High severity). Check consistency - "UserService" vs "User Service" naming inconsistency (Medium severity). Step 4: Generate docs/design-validation.md with detailed issues by severity and type. Step 5: Recommend fix using /sunnycore_po *fix-design-conflicts.
 
-[Expected Outcome]
-- docs/design-validation.md with detailed issues:
-  - Critical: Fabricated REQ-005 reference in docs/architecture/components.md
-  - High: Coverage gap - REQ-002 unmapped
-  - High: Missing plan - docs/plans/4-plan.md doesn't exist
-  - Medium: Inconsistent naming - "UserService" vs "User Service"
-- Recommendation: "Fix issues using `/sunnycore_po *fix-design-conflicts` before proceeding with development"
+[OUTCOME]
+docs/design-validation.md with 4 issues categorized: 1 Critical (fabricated REQ-005), 2 High (REQ-002 unmapped, Task-4 plan missing), 1 Medium (naming inconsistency). Clear guidance: fix conflicts before development. Traceability gaps identified for correction.
+
+### Bad Example 1
+[INPUT]
+Workflow parameter provided but value is "custom" (not "prd" or "full").
+
+[BAD-DECISION]
+Proceed with validation using guessed workflow type. Skip workflow parameter validation. Create report with incomplete checks. Mix prd and full validation criteria incorrectly.
+
+[WHY-BAD]
+Violates Constraint 1 (do not process workflow other than prd/full). Invalid workflow leads to incorrect validation scope. Mixed criteria produces unreliable results. Error-Handling rule 1 requires reporting invalid parameter error.
+
+[CORRECT-APPROACH]
+Step 1: Validate workflow parameter. If not "prd" or "full", halt immediately. Report error: "Invalid workflow parameter 'custom'. Valid options: 'prd' or 'full'". List expected parameter format. Request user to provide correct workflow type. Do not proceed with validation until valid parameter provided.
+
+### Bad Example 2
+[INPUT]
+Full workflow validation required. Some documents exist, some missing.
+
+[BAD-DECISION]
+Skip bidirectional integrity check entirely. Only check forward references (requirements→architecture), ignore backward references. Skip coverage metrics calculation. Don't check for fabricated content. Generate report claiming "validation complete" despite incomplete checks. No severity categorization.
+
+[WHY-BAD]
+Violates Constraint 2 (skip validation check types). Violates Validation-Criteria full workflow section 1 (bidirectional integrity required). Missing backward reference check means broken links undetected. No fabrication check allows invalid references. No severity categorization violates Constraint 3. Incomplete validation is useless.
+
+[CORRECT-APPROACH]
+Execute Step 3 completely per Validation-Focus-Areas. Check bidirectional integrity: forward (requirements→architecture→tasks→plans) AND backward (plans→tasks→architecture→requirements). Calculate coverage: requirements→architecture 100%, architecture→tasks 100%, tasks→plans 100%. Check consistency: terminology, technical specs. Verify authenticity: all referenced entities exist, no fabricated IDs. Categorize ALL issues by severity (Critical/High/Medium/Low) per Constraint 3. Only declare validation complete after all check types executed.
 

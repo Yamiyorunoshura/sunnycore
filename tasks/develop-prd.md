@@ -86,51 +86,48 @@
 
 ## [Example]
 
-### Example 1: User Profile Update Feature
-[Input]
-- PRD: docs/PRD.md with REQ-001 (update profile), REQ-002 (avatar upload), NFR-001 (< 200ms response)
-- Tasks: Task-1 (profile API), Task-2 (avatar storage)
-- Template: dev-notes-tmpl.yaml
+### Good Example 1
+[INPUT]
+PRD: docs/PRD.md with REQ-001 (update profile), REQ-002 (avatar upload), NFR-001 (<200ms response). Tasks: Task-1 (profile API), Task-2 (avatar storage). Template: dev-notes-tmpl.yaml.
 
-[Decision]
-- Create todo list: Task-1 → Task-2 (avatar depends on profile)
-- RED: Write tests for PUT /profile, POST /profile/avatar; tests fail
-- GREEN: Implement profile update endpoint, S3 avatar upload; tests pass
-- REFACTOR: Add input validation, optimize image processing, ensure tests stay green
+[DECISION]
+Step 1: Understand all PRD requirements and architecture. Develop strategy respecting task dependencies (Task-1→Task-2, avatar depends on profile). Create plan.md for progress tracking. Step 2 TDD RED: Write tests for PUT /profile, POST /profile/avatar; execute - all fail correctly. Update plan.md with RED status. Step 3 TDD GREEN: Implement profile update endpoint, S3 avatar upload; execute - all pass. Update plan.md with GREEN status. Step 4 TDD REFACTOR: Add input validation, optimize image processing. Execute tests - remain green. Update plan.md with REFACTOR status. Step 5: Create docs/prd-dev-notes.md documenting all tasks. Step 6: Validate all PRD acceptance criteria met.
 
-[Expected Outcome]
-- Code: src/api/profile.js, src/services/AvatarService.js, tests/
-- docs/prd-dev-notes.md documenting all tasks implementation
-- All PRD acceptance criteria met, integration tests pass, coverage ≥ 80%
+[OUTCOME]
+Code: src/api/profile.js, src/services/AvatarService.js, tests/ with all passing. docs/prd-dev-notes.md documenting complete implementation. All PRD acceptance criteria met. Integration tests pass. Coverage 87%. plan.md tracked complete progress.
 
-### Example 2: API Rate Limiting
-[Input]
-- PRD: docs/PRD.md with REQ-001 (rate limit per user), NFR-001 (100 req/min), NFR-002 (Redis storage)
-- Tasks: Task-1 (rate limit middleware), Task-2 (limit configuration), Task-3 (monitoring)
-- Template: dev-notes-tmpl.yaml
+### Good Example 2
+[INPUT]
+PRD: docs/PRD.md with REQ-001 (rate limit per user), NFR-001 (100 req/min), NFR-002 (Redis storage). Tasks: Task-1 (middleware), Task-2 (config), Task-3 (monitoring).
 
-[Decision]
-- RED: Write tests for rate limit enforcement, exceed limit scenario, reset after window; tests fail
-- GREEN: Implement Redis-based token bucket algorithm, Express middleware; tests pass
-- REFACTOR: Add configurable limits per endpoint, monitoring metrics, maintain green tests
+[DECISION]
+Step 1: Read PRD completely, understand rate limiting requirements. Plan TDD strategy. Create plan.md. Step 2 RED: Write tests for rate limit enforcement, exceed limit scenario, reset after window. Execute - all fail. Record in plan.md. Step 3 GREEN: Implement Redis-based token bucket algorithm, Express middleware. Execute - all pass. Record in plan.md. Step 4 REFACTOR: Add configurable limits per endpoint, monitoring metrics. Tests stay green. Record in plan.md. Step 5: Document in prd-dev-notes.md with algorithm explanation. Step 6: Verify all NFRs (100 req/min enforced, monitoring functional).
 
-[Expected Outcome]
-- Code: src/middleware/rateLimiter.js, config/limits.json, tests/rateLimiter.test.js
-- docs/prd-dev-notes.md with rate limiting algorithm explanation
-- All NFRs verified (100 req/min enforced), monitoring dashboard functional
+[OUTCOME]
+Code: src/middleware/rateLimiter.js, config/limits.json, tests/ all passing. docs/prd-dev-notes.md with rate limiting algorithm details. All NFRs verified (100 req/min enforced). Monitoring dashboard functional. Coverage 82%.
 
-### Example 3: Multi-language Support
-[Input]
-- PRD: docs/PRD.md with REQ-001 (i18n support), REQ-002 (language detection), REQ-003 (translation API)
-- Tasks: Task-1 (i18n setup), Task-2 (auto-detection), Task-3 (translation endpoint)
-- Template: dev-notes-tmpl.yaml
+### Bad Example 1
+[INPUT]
+PRD with multiple tasks exists. Need to implement all.
 
-[Decision]
-- RED: Tests for language switching, translation loading, fallback to default; tests fail
-- GREEN: Implement i18next integration, Accept-Language header parsing, translation API; tests pass
-- REFACTOR: Add translation caching, lazy loading, optimize bundle size
+[BAD-DECISION]
+Implement only Task-1, skip Task-2 and Task-3. Skip TDD cycle entirely - write code without tests. Don't track progress in plan.md. Deliver with failing tests. No prd-dev-notes.md documentation. Claim all PRD tasks complete.
 
-[Expected Outcome]
-- Code: src/i18n/config.js, src/api/translations.js, locales/*.json
-- docs/prd-dev-notes.md documenting i18n architecture
-- All tasks complete, language switching works, test coverage ≥ 80%
+[WHY-BAD]
+Violates Constraint 1 (leave PRD tasks incomplete). Violates Constraint 2 (skip TDD cycle). Violates Constraint 4 (deliver with failing tests). No progress tracking violates Steps. No documentation violates DoD. Incomplete implementation unusable.
+
+[CORRECT-APPROACH]
+Execute ALL Steps for ALL tasks in PRD. Step 1: Develop strategy covering ALL PRD tasks. Create plan.md. For each task: Step 2 RED (write tests, verify fail), Step 3 GREEN (minimal implementation, verify pass), Step 4 REFACTOR (quality improvements). Track ALL progress in plan.md. Step 5: Create comprehensive prd-dev-notes.md covering ALL tasks. Step 6: Verify ALL acceptance criteria met. Ensure exit code 0 before declaring complete.
+
+### Bad Example 2
+[INPUT]
+PRD requirements documented. Tasks defined.
+
+[BAD-DECISION]
+Create separate phase result documents (red-results.md, green-results.md, refactor-results.md). Skip plan.md entirely. Modify files not in PRD scope without documentation. Test coverage only 45%. Claim complete without verifying all PRD criteria.
+
+[WHY-BAD]
+Creating separate phase result files violates Step instructions (use plan.md ONLY for tracking). No plan.md violates Steps 1-4. Modifying out-of-scope files without rationale violates Constraint 3. Coverage 45% fails DoD (≥80%). Not verifying acceptance criteria violates Step 6. Creates document clutter and incomplete work.
+
+[CORRECT-APPROACH]
+Use plan.md as THE ONLY temporary tracking document per Steps. Record ALL phase status (RED/GREEN/REFACTOR), test results, and progress in plan.md. Do NOT create separate result files. If modifying files outside PRD scope, document rationale in prd-dev-notes.md per Constraint 3. Achieve coverage ≥80% per DoD. Verify EVERY acceptance criterion from PRD before declaring complete. prd-dev-notes.md is permanent documentation, plan.md is temporary and deleted after.

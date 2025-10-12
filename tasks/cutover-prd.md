@@ -119,60 +119,49 @@
 
 ## [Example]
 
-### Example 1: Mobile App Release
-[Input]
-- PRD: docs/PRD.md (REQ-001: user login, REQ-002: push notifications, REQ-003: offline mode)
-- Template: cutover-report-tmpl.yaml
+### Good Example 1
+[INPUT]
+PRD contains 3 requirements (login, push notifications, offline mode). Code quality scan passes (no mocks or hardcoded values in production code). App runs successfully but push notifications fail due to missing Firebase configuration.
 
-[Decision]
-- Setup: Install Expo, configure Firebase (successful)
-- Run: expo start (app launches successfully on iOS/Android simulators)
-- Test REQ-001: Login with test credentials (✓ success)
-- Test REQ-002: Send test notification (✗ failed - Firebase config missing)
-- Test REQ-003: Offline data sync (✓ success)
-- Issues: 1 critical (push notifications not working)
+[DECISION]
+Validate PRD exists. Extract business objectives and requirements from PRD. Scan production code for mocks/hardcoded values (none found, code quality passed). Identify configuration needs from PRD technical specs. Setup environment: install Expo and Firebase SDK. Run project: expo start (launches successfully). Test REQ-001 login (pass), REQ-002 push notifications (fail - FCM server key missing), REQ-003 offline mode (pass). Document issue with severity: Critical. Record reproduction steps and configuration gap. Determine status: Partial Success (2/3 requirements working).
 
-[Expected Outcome]
-- docs/cutover-report.md with status: Partial Success
-- Test results: REQ-001 (pass), REQ-002 (fail - missing FCM server key), REQ-003 (pass)
-- Issues documented: Critical severity, reproduction steps (send notification → error "Invalid FCM token")
-- Configuration needs: Firebase Cloud Messaging server key required
+[OUTCOME]
+Cutover report at docs/cutover-report.md with status: Partial Success. Test results documented: REQ-001 pass, REQ-002 fail (missing FCM server key in Firebase config), REQ-003 pass. Issue documented with severity: Critical, impact: Push notifications non-functional. Configuration requirement documented: Add FCM_SERVER_KEY to .env file. Recommendation: Complete Firebase setup before production release. Plan.md shows 2/3 requirements passed, 1 configuration issue identified.
 
-### Example 2: Mock Implementation or Hardcoded Values Auto-Fail (CRITICAL)
-[Input]
-- PRD: docs/PRD.md (REQ-001: Payment processing, REQ-002: Order management)
-- Template: cutover-report-tmpl.yaml
+### Good Example 2
+[INPUT]
+PRD contains payment processing requirement. Code quality scan reveals mock implementation with hardcoded API key in PaymentService.js production code. Unit tests properly use jest.mock().
 
-[Decision]
-- **CRITICAL FINDING**: Code quality inspection reveals mock implementations and hardcoded values in PRODUCTION CODE
-  - src/services/PaymentService.js:L42: Mock implementation detected
-    ```javascript
-    async processPayment(order) {
-      // TODO: implement actual payment gateway
-      const API_KEY = 'pk_test_hardcoded_12345'; // Hardcoded API key!
-      return { success: true, transactionId: 'mock-txn-001' };
-    }
-    ```
-  - src/config/database.js:L15: Hardcoded database credentials
-    ```javascript
-    const DB_CONFIG = {
-      host: 'localhost',
-      password: 'admin123', // Hardcoded password!
-      database: 'production_db'
-    };
-    ```
-- **Decision: AUTOMATIC FAIL** (mock implementations and hardcoded values found in production code - testing halted)
-- **Note**: Unit tests properly use mocks (jest.mock()) - this is acceptable, but production code must not contain mocks or hardcoded values
+[DECISION]
+Scan all production code before functional testing. Detect mock implementation at src/services/PaymentService.js:L42 with TODO and hardcoded API key. Verify unit tests use mocks appropriately (acceptable for testing). Apply AUTOMATIC FAIL per Constraint 5 (production code contains mock/hardcoded values). HALT functional testing. Document critical findings with code excerpts showing mock return value and hardcoded credentials. Generate cutover report: Failed. Provide action items: implement real payment gateway, externalize secrets, remove TODOs.
 
-[Expected Outcome]
-- docs/cutover-report.md with status: Failed
-- CRITICAL findings documented: Mock implementations and hardcoded sensitive values in production code
-- Rationale: Code is not production-ready; contains incomplete implementations and security vulnerabilities
-- Risk: Critical (would deploy non-functional payment system with exposed credentials)
-- Action items: 
-  1. Implement actual payment gateway integration (remove mock code from src/services/PaymentService.js)
-  2. Move all hardcoded values to environment variables/configuration files
-  3. Remove all TODO/placeholder comments from production code
-  4. Re-run cutover after fixes are complete
-- Functional testing not performed (halted at code quality gate)
+[OUTCOME]
+Cutover report at docs/cutover-report.md with status: Failed. Critical findings: mock implementation and hardcoded values in production code documented with line numbers and code examples. Rationale: production code incomplete and insecure. Risk: Critical (would deploy broken payment system). Action items provided: remove mocks, implement actual integration, move secrets to environment. Functional testing not performed (halted at code quality gate). Plan.md documents code scan results and automatic fail decision.
+
+### Bad Example 1
+[INPUT]
+PRD exists but contains only high-level descriptions without specific requirement IDs. Code contains mock implementations that return successful test results.
+
+[BAD-DECISION]
+Extract vague requirements from PRD. Scan code and find mocks but functional tests pass so continue testing. Generate cutover report: Success because all tests passed. Reasoning: "The mocks make the tests work, so it's ready."
+
+[WHY-BAD]
+Violates Constraint 5 (do not accept ANY mock implementations). Code quality gate is CRITICAL and overrides functional test results. Mock implementations are not production-ready code. Would deploy non-functional system. Violates automatic fail criteria when mocks detected in production code. Ignores security risks.
+
+[CORRECT-APPROACH]
+Code quality scan must happen FIRST before functional testing. When mocks detected in production code, apply AUTOMATIC FAIL immediately. HALT functional testing. Document findings: mock implementations found at specific line numbers. Report status: Failed. Never proceed to functional testing when code quality gate fails. Require actual implementation before re-running cutover.
+
+### Bad Example 2
+[INPUT]
+PRD contains 5 critical requirements. Only tested 3 of them because the other 2 seemed less important. All 3 tested requirements passed.
+
+[BAD-DECISION]
+Generate cutover report with status: Success. Document only the 3 requirements tested. Reasoning: "The main features work, so the app is ready for release." Skip testing requirements that seem less critical.
+
+[WHY-BAD]
+Violates Constraint 3 (do not skip testing any critical business requirements). PRD defines all requirements as critical for the business. Selective testing leaves untested functionality that may be broken. Incomplete acceptance validation. Would deploy with unknown defects. Violates Step 6 (test ALL critical requirements).
+
+[CORRECT-APPROACH]
+Test ALL critical business requirements from PRD without exception. Even if requirement seems minor, test it if PRD marks it as critical. Document test results for every requirement. If time/resource constraints prevent complete testing, report as blocker and request prioritization from user. Status should be Partial Success if any requirements remain untested, with clear documentation of what was not verified.
 

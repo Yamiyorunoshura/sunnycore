@@ -91,50 +91,49 @@
 
 ## [Example]
 
-### Example 1: E-commerce Cart Service - Add Item
-[Input]
-- Implementation plan: docs/plans/1-plan.md (Task-1: Implement add to cart)
-- Architecture: Cart Service (Node.js/Express), Redis
-- Template: dev-notes-tmpl.yaml
+### Good Example 1
+[INPUT]
+Plan: docs/plans/1-plan.md for article publishing. Architecture: Article Service (Express), PostgreSQL. Template: dev-notes-tmpl.yaml.
 
-[Decision]
-- RED: Write test_add_item_to_cart() asserting item added to Redis, test fails (no implementation yet)
-- GREEN: Implement POST /cart endpoint, Redis HSET operation, test passes (exit code 0)
-- REFACTOR: Add input validation, apply error handling pattern, ensure tests stay green
+[DECISION]
+Step 1: Read plan - RED: unit tests (model validation), integration tests (API+DB), behavior tests (workflow). GREEN: minimal implementation. REFACTOR: patterns. Step 2 RED: Write all test files, execute - all fail correctly (RED status verified). Update plan.md with RED progress. Step 3 GREEN: Implement minimal code (Article model, POST/GET/PUT endpoints), execute tests - all pass (exit code 0). Update plan.md with GREEN progress. Step 4 REFACTOR: Add validation, error handling, repository pattern. Execute tests - remain green. Update plan.md with REFACTOR progress. Step 5: Check docs/dev-notes/1-dev-notes.md exists - YES. Update existing dev notes with implementation details. All acceptance criteria met.
 
-[Expected Outcome]
-- Code: src/services/CartService.js with addItem() method, tests/CartService.test.js
-- docs/dev-notes/1-dev-notes.md documenting TDD cycle, decisions, test results
-- All acceptance criteria from plan met, test coverage ≥ 80%
+[OUTCOME]
+Complete TDD cycle executed. Code at src/services/ArticleService.js, tests/ with all passing. Updated docs/dev-notes/1-dev-notes.md documents implementation. Coverage 85%. All acceptance criteria satisfied. plan.md tracked progress throughout.
 
-### Example 2: Healthcare System - Patient Search
-[Input]
-- Implementation plan: docs/plans/2-plan.md (Task-2: Implement patient search by name/ID)
-- Architecture: Patient Service (Python/FastAPI), PostgreSQL with full-text search
-- Template: dev-notes-tmpl.yaml
+### Good Example 2
+[INPUT]
+Plan: docs/plans/2-plan.md for transaction reports. NFR: query <2s. Architecture: Reporting Service, TimescaleDB.
 
-[Decision]
-- RED: Write test_search_patients() with assertions for name match, ID match, fuzzy search; tests fail
-- GREEN: Implement GET /patients/search with SQL query using ILIKE, tests pass
-- REFACTOR: Optimize with PostgreSQL full-text search (tsvector), add pagination, tests remain green
+[DECISION]
+Step 1: Read plan completely. Step 2 RED: Write unit tests (aggregation), integration tests (TimescaleDB with real DB, performance <2s), behavior tests (report generation). Execute - all fail (RED verified). Record in plan.md. Step 3 GREEN: Implement minimal query with indexed date column, aggregation. Execute tests - all pass including performance <2s. Record in plan.md. Step 4 REFACTOR: Add Redis caching, optimize queries. Tests remain green. Record in plan.md. Step 5: docs/dev-notes/2-dev-notes.md doesn't exist - create new from template. Document all phases, test results, performance metrics.
 
-[Expected Outcome]
-- Code: src/api/patient_routes.py, src/repositories/PatientRepository.py
-- docs/dev-notes/2-dev-notes.md with performance optimization notes
-- All tests pass, search response time meets NFR (< 500ms)
+[OUTCOME]
+All tests passing, performance validated 120ms (<2s requirement). New docs/dev-notes/2-plan.md created with complete documentation. Code quality high. plan.md shows full progression through TDD phases.
 
-### Example 3: Real-time Notification - WebSocket Connection
-[Input]
-- Implementation plan: docs/plans/3-plan.md (Task-3: Implement WebSocket notification delivery)
-- Architecture: Notification Gateway (Socket.io), Redis Pub/Sub
-- Template: dev-notes-tmpl.yaml
+### Bad Example 1
+[INPUT]
+Plan exists for task. Need to implement.
 
-[Decision]
-- RED: Write test for connection establishment, message delivery, disconnection handling; tests fail
-- GREEN: Implement Socket.io server, Redis subscriber, message broadcast logic; tests pass
-- REFACTOR: Add connection pooling, heartbeat mechanism, apply error recovery pattern
+[BAD-DECISION]
+Skip RED phase entirely - start coding without tests. Write implementation with optimizations immediately (not minimal). Skip test execution. Don't track progress in plan.md. Skip REFACTOR phase. No dev notes documentation. Claim task complete.
 
-[Expected Outcome]
-- Code: src/gateways/NotificationGateway.js, tests/integration/websocket.test.js
-- docs/dev-notes/3-dev-notes.md documenting WebSocket architecture decisions
-- Integration tests pass, NFR met (message latency < 100ms)
+[WHY-BAD]
+Violates Constraint 2 (skip TDD cycle). No RED phase means no test-first approach. Skipping tests violates DoD (all tests must pass). No progress tracking violates plan.md requirement. No dev notes violates DoD. Implementation unverified.
+
+[CORRECT-APPROACH]
+Follow TDD cycle strictly per Steps. Step 2: Write ALL tests from plan (unit, integration, behavior), execute to verify RED status. Step 3: Implement MINIMAL code only, execute tests to achieve GREEN. Step 4: Apply quality improvements in REFACTOR while maintaining green. Track ALL progress in plan.md (RED status, GREEN status, REFACTOR status). Step 5: Create or update dev notes with complete documentation.
+
+### Bad Example 2
+[INPUT]
+Task implementation required. Plan specifies acceptance criteria.
+
+[BAD-DECISION]
+Deliver code with failing tests (exit code non-zero). Modify files outside plan scope without recording rationale. Skip dev notes update claiming "code is self-documenting". Create separate files like red-phase-test-result.md, green-phase-result.md instead of using plan.md.
+
+[WHY-BAD]
+Violates Constraint 4 (deliver with failing tests - DoD violation). Constraint 3 requires recording rationale for out-of-scope changes. "Self-documenting code" violates DoD (dev notes required). Creating separate phase result files violates Step instructions (use plan.md ONLY for tracking). Creates document clutter.
+
+[CORRECT-APPROACH]
+Ensure ALL tests pass (exit code 0) before declaring complete per Constraint 4 and DoD. If modifying files outside plan scope, document rationale in dev notes per Constraint 3. Always create/update dev notes - never skip documentation. Use plan.md as THE ONLY temporary tracking document - record all RED/GREEN/REFACTOR status, test results, progress in plan.md. Do NOT create separate result files. Dev notes are permanent, plan.md is temporary.
+

@@ -109,71 +109,48 @@
 
 ## [Example]
 
-### Example 1: Microservices Platform with Docker
-[Input]
-- Architecture: docs/architecture/tech-stack.md specifies Node.js, PostgreSQL, Redis, Docker
-- Architecture: work-directory-structure specifies: src/, services/, config/, docker/, tests/
-- Requirements: docs/requirements/*.md (3 services to implement)
-- Epic: docs/epic.md (5 tasks)
+### Good Example 1
+[INPUT]
+Architecture specifies Node.js v18, PostgreSQL 14, Redis 7, Docker. Work-directory-structure: src/, services/, config/, docker/, tests/. Requirements show 3 microservices. Epic has 5 tasks.
 
-[Decision]
-- Environment setup: Install Docker, docker-compose, Node.js v18, PostgreSQL client
-- Initialize: Create docker-compose.yml with services (postgres, redis, api)
-- Directory: Create src/, services/, config/, docker/, tests/ directories
-- Minimal app: Create src/index.js with Express server returning "Hello World" on GET /health
-- Index codebase: Run claude-context index for existing shared libraries
-- CLAUDE.md: Include tech stack, document index, development commands
-- Verification: Run `node src/index.js` and `curl http://localhost:3000/health` returns 200 OK
+[DECISION]
+Step 1: Extract tech stack (Node.js 18, PostgreSQL 14, Redis 7, Docker), requirements summary (3 services: Order, Payment, Notification). Step 2: Install Docker, docker-compose, Node 18, PostgreSQL client. Create docker-compose.yml with all services. Verify all dependencies operational. Step 3: Create exact directory structure from architecture: src/, services/, config/, docker/, tests/. Create src/index.js with Express server returning 200 OK on GET /health. Document startup in README. Step 4: Generate CLAUDE.md with tech stack, requirements overview (3 microservices), document index (architecture/*.md, requirements/*.md). Step 5: Run node src/index.js, test curl localhost:3000/health returns "Hello World" 200 OK. All dependencies verified working.
 
-[Expected Outcome]
-- Working environment: docker-compose up runs all services
-- All directories created: src/, services/, config/, docker/, tests/
-- Minimal app verified: node src/index.js starts successfully, health endpoint returns "Hello World"
-- Codebase indexed for semantic search
-- CLAUDE.md with: tech stack (Node.js, Docker), document index (architecture/*, requirements/*), dev standards (TDD, SOLID)
+[OUTCOME]
+Operational environment: docker-compose up runs all services (PostgreSQL, Redis, API). All directories created per architecture spec. Minimal app verified: node src/index.js starts, health endpoint returns 200. Complete CLAUDE.md with tech stack, document index, dev commands. Smoke test passed.
 
-### Example 2: Python Data Pipeline
-[Input]
-- Architecture: docs/architecture/*.md specifies Python 3.11, Airflow, Spark, S3
-- Architecture: work-directory-structure specifies: dags/, plugins/, data/, scripts/, tests/
-- Requirements: docs/requirements/*.md (ETL pipeline requirements)
-- Epic: docs/epic.md (4 data processing tasks)
+### Good Example 2
+[INPUT]
+Architecture: Python 3.11, Airflow, PySpark, S3. Work-directory-structure: dags/, plugins/, data/, scripts/, tests/. Requirements show ETL pipeline. Epic has 4 tasks.
 
-[Decision]
-- Environment: Setup Python venv, install Airflow, PySpark, AWS CLI
-- Initialize: Configure Airflow DAGs folder, S3 bucket connections
-- Directory: Create dags/, plugins/, data/, scripts/, tests/ directories
-- Minimal app: Create dags/hello_world_dag.py with simple Airflow DAG that prints "Hello World"
-- Index: Build codebase index for existing data transformers
-- CLAUDE.md: Document Airflow setup, data flow diagrams, S3 bucket structure
-- Verification: Run `airflow dags test hello_world_dag` successfully executes
+[DECISION]
+Step 1: Extract stack (Python 3.11, Airflow, Spark, AWS S3), goals (ETL pipeline). Step 2: Setup Python venv, install Airflow, PySpark, AWS CLI. Configure Airflow DAGs folder, test S3 connections. Step 3: Create dags/, plugins/, data/, scripts/, tests/ per architecture. Create minimal dags/hello_world_dag.py: simple DAG printing "Hello World". Step 4: Generate CLAUDE.md: Python stack, Airflow setup, S3 bucket structure, requirements (ETL tasks), document index. Step 5: Run airflow dags test hello_world_dag - executes successfully. All services verified.
 
-[Expected Outcome]
-- Airflow webserver accessible at localhost:8080
-- All directories created: dags/, plugins/, data/, scripts/, tests/
-- Minimal DAG verified: airflow dags test executes successfully
-- S3 connections configured and tested
-- CLAUDE.md with: Python stack, Airflow DAG index, data pipeline overview, testing approach
+[OUTCOME]
+Airflow webserver accessible localhost:8080. All directories created: dags/, plugins/, data/, scripts/, tests/. Minimal DAG verified: airflow dags test executes successfully, prints "Hello World". S3 configured and tested. CLAUDE.md complete with stack, index, testing approach. Environment fully operational.
 
-### Example 3: React Native Mobile App
-[Input]
-- Architecture: docs/architecture/*.md specifies React Native, Expo, Firebase
-- Architecture: work-directory-structure specifies: src/, src/components/, src/screens/, src/navigation/, assets/, tests/
-- Requirements: docs/requirements/*.md (mobile app features)
-- Epic: docs/epic.md (6 screen implementation tasks)
+### Bad Example 1
+[INPUT]
+Architecture documents exist with tech stack and directory structure defined.
 
-[Decision]
-- Environment: Install Node.js, Expo CLI, Android Studio, Xcode (macOS)
-- Initialize: expo init, Firebase project setup, configure app.json
-- Directory: Create src/, src/components/, src/screens/, src/navigation/, assets/, tests/ directories
-- Minimal app: Create App.js with basic "Hello World" screen that renders successfully
-- Index: Index existing component library and navigation structure
-- CLAUDE.md: Document app structure, navigation flow, Firebase config, testing setup
-- Verification: Run `expo start` and app displays "Hello World" on simulator
+[BAD-DECISION]
+Add tools not in architecture (install Kubernetes, Elasticsearch, GraphQL when not specified). Guess directory structure instead of reading work-directory-structure field. Skip smoke test of minimal app. Create CLAUDE.md without document index. No environment verification. Claim initialization complete.
 
-[Expected Outcome]
-- App runs on iOS/Android simulators via expo start
-- All directories created: src/, src/components/, src/screens/, src/navigation/, assets/, tests/
-- Minimal app verified: expo start launches successfully, displays "Hello World" screen
-- Firebase connected (auth, firestore configured)
-- CLAUDE.md with: React Native stack, screen navigation index, component library docs, Firebase setup guide
+[WHY-BAD]
+Violates Constraint 1 (add undefined tools). Violates Constraint 4 (assume directory structure instead of extracting from architecture). Violates Constraint 5 (no smoke test - minimal app not verified). Violates DoD (environment not verified). Breaks initialization completeness.
+
+[CORRECT-APPROACH]
+Step 1: Read architecture/*.md completely. Extract ONLY specified tech stack. Extract exact work-directory-structure field. Step 2: Install only documented dependencies with versions. Step 3: Create directories exactly as specified in work-directory-structure. Create minimal Hello World based on tech stack (Express for Node, FastAPI for Python, etc). Step 4: Generate CLAUDE.md with complete document index of all architecture and requirement docs. Step 5: Run smoke test - verify app starts and responds. Verify all tools working. Only declare complete after verification.
+
+### Bad Example 2
+[INPUT]
+Brownfield project with existing codebase in src/. Architecture and requirements documented.
+
+[BAD-DECISION]
+Skip codebase indexing entirely. Overwrite existing src/ directory with new Hello World (destroying existing code). Install different versions of dependencies than architecture specifies. No CLAUDE.md document index. Claim Greenfield project incorrectly.
+
+[WHY-BAD]
+Violates Constraint 3 (skip codebase indexing for Brownfield). Violates Initialization-Guidelines section 3 (must index existing codebase). Destroys existing code violating preservation principle. Wrong dependency versions will break existing code. No document index prevents navigation.
+
+[CORRECT-APPROACH]
+Step 1: Identify Brownfield (existing src/ code). Read architecture to understand tech stack and existing structure. Step 2: Install exact dependency versions from architecture. DO NOT overwrite existing src/ - verify it runs. Step 3: Index codebase using claude-context for semantic search per Guidelines section 3. Verify existing app functionality intact. Step 4: Generate CLAUDE.md with tech stack, comprehensive document index for all architecture/requirements/knowledge docs. Step 5: Run existing app to verify operational, not Hello World. Verify search index built. All existing functionality preserved and searchable.

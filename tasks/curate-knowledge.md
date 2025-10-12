@@ -93,39 +93,51 @@
 
 ## [Example]
 
-### Example 1: API Development Project
-[Input]
-- Review reports: docs/review/1-review.md (platinum: JWT rotation pattern), docs/review/3-review.md (platinum: circuit breaker)
-- Dev notes: docs/dev-notes/2-dev-notes.md (error: race condition in cache), docs/dev-notes/4-dev-notes.md (error: SQL injection vulnerability)
-- Cutover report: docs/cutover-report.md (best practice: API versioning strategy)
+### Good Example 1
+[INPUT]
+Review reports contain 3 platinum practices (JWT rotation, circuit breaker, API versioning). Dev notes contain 2 errors (race condition in cache, SQL injection vulnerability). Cutover report shows successful implementation.
 
-[Decision]
-- Platinum practices found: 3 (JWT rotation, circuit breaker, API versioning)
-- Errors found: 2 (race condition, SQL injection)
-- Classify by semantic topics: best-practices-security.md, best-practices-api-design.md, errors-concurrency.md, errors-security.md
+[DECISION]
+Scan all review reports and dev notes. Extract only platinum-level practices (3 found). Document errors with solutions (2 found). Classify by semantic topics: security, api-design, concurrency. Create knowledge base structure: best-practices-security.md, best-practices-api-design.md, errors-concurrency.md, errors-security.md. Annotate all entries with evidence sources (file_path [Section Name]). Archive source documents to archive/v1.0/.
 
-[Expected Outcome]
-- docs/knowledge/best-practices-security.md (JWT rotation with evidence source: docs/review/1-review.md)
-- docs/knowledge/best-practices-api-design.md (circuit breaker, API versioning)
-- docs/knowledge/errors-concurrency.md (race condition case with solution)
-- docs/knowledge/errors-security.md (SQL injection case with prevention)
+[OUTCOME]
+Knowledge base created at docs/knowledge/ with 4 documents. Best-practices-security.md contains JWT rotation with evidence (docs/review/1-review.md [Authentication Section]). Errors-concurrency.md contains race condition case with solution and prevention measures. All source documents archived successfully. Plan.md shows all platinum practices and errors documented with evidence.
 
-### Example 2: Data Pipeline Development
-[Input]
-- Review reports: docs/review/2-review.md (gold: error handling, not platinum), docs/review/5-review.md (platinum: idempotent data processing)
-- Dev notes: docs/dev-notes/1-dev-notes.md (error: memory leak in streaming), docs/dev-notes/3-dev-notes.md (platinum: backpressure handling)
-- Progress: docs/progress.md (critical decision: Kafka vs RabbitMQ)
+### Good Example 2
+[INPUT]
+Review reports show only gold-level practices (not platinum). Dev notes contain memory leak error with solution. Progress shows critical decision about Kafka vs RabbitMQ selection.
 
-[Decision]
-- Platinum practices: 2 (idempotent processing, backpressure handling)
-- Gold practices: Excluded (not platinum level)
-- Errors: 1 (memory leak)
-- Classification: best-practices-data-processing.md, errors-performance.md
+[DECISION]
+Scan review reports (no platinum practices found). Extract error from dev notes (memory leak). Document decision rationale from progress (Kafka selection). Classify by semantic topic: performance. Create problem-solving-performance.md for complex decision analysis. Annotate with evidence sources. Record "No platinum practices at this stage" in knowledge base summary.
 
-[Expected Outcome]
-- docs/knowledge/best-practices-data-processing.md (2 entries: idempotent processing from review/5, backpressure handling from dev-notes/3)
-- docs/knowledge/errors-performance.md (memory leak case with investigation and solution)
-- Each entry has evidence source annotation (file_path [Section Name])
+[OUTCOME]
+Knowledge base created at docs/knowledge/ with problem-solving-performance.md documenting Kafka decision and errors-performance.md documenting memory leak case. Summary notes: No platinum practices identified at this development stage (only gold-level). All entries have evidence sources. Source documents archived to archive/v1.0/.
+
+### Bad Example 1
+[INPUT]
+Review reports contain 2 gold-level practices and 1 platinum practice. Dev notes contain several errors and solutions.
+
+[BAD-DECISION]
+Include both gold and platinum practices in best-practices.md to make the knowledge base look more comprehensive. Self-judge that some gold practices are actually platinum quality and promote them without review evidence.
+
+[WHY-BAD]
+Violates Constraint 1 (only platinum practices) and Constraint 2 (no self-judgment on practice levels). Including non-platinum practices dilutes knowledge base quality. Self-promotion of practices contradicts trust-review-markings principle. Creates unreliable knowledge base.
+
+[CORRECT-APPROACH]
+Extract only the 1 platinum practice marked in review reports. Document gold practices separately as "promising practices pending validation" or exclude them entirely. Trust review markings without self-judgment. Create best-practices.md with only validated platinum-level entries. Annotate: "2 gold-level practices excluded pending platinum validation."
+
+### Bad Example 2
+[INPUT]
+Review reports show conflicting practices: one recommends synchronous API calls for reliability, another recommends async for performance. Both marked platinum.
+
+[BAD-DECISION]
+Choose the async approach because it seems more modern and better. Document only async approach in best-practices-api-design.md. Discard synchronous approach to avoid confusion.
+
+[WHY-BAD]
+Violates Constraint 3 (do not force resolution of conflicts). Choosing one approach loses valuable context. Both practices may be valid in different scenarios. Removing evidence prevents context-based decisions.
+
+[CORRECT-APPROACH]
+Preserve both approaches in best-practices-api-design.md. Document Approach A (synchronous) with evidence source and applicable scenarios (critical data consistency). Document Approach B (async) with evidence source and applicable scenarios (high-throughput systems). Annotate conflict point: Both approaches are platinum-validated for different contexts. Let developers choose based on their specific requirements.
 
 ## [Example]
   **Knowledge Management Architecture**:

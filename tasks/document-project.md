@@ -92,68 +92,54 @@
     - Update CLAUDE.md document index after sharding
 
 ## [DoD]
-  - [ ] Architecture successfully sharded to "{ARCH}/" with all content including source references (format: file_path:line_number)
+  - [ ] Architecture successfully sharded to "{ARCH}/" with all content including source references by running the scripts (format: file_path:line_number)
   - [ ] All deviations from original design documented with clear rationale
   - [ ] CLAUDE.md updated with current architecture document index
 
 ## [Example]
 
-### Example 1: E-commerce Order Processing System
-[Input]
-- Existing architecture: docs/architecture/*.md (outdated, before recent refactoring)
-- Codebase: src/ (Order Service, Payment Gateway, Inventory Service)
-- Dev notes: docs/dev-notes/*.md (5 tasks completed)
-- Reviews: docs/review/*.md (architecture drift documented)
-- Template: architecture-tmpl.yaml
+### Good Example 1
+[INPUT]
+Existing outdated architecture documents exist. Codebase shows actual implementation changed from synchronous to async payment processing. Dev notes document the decision rationale. Reviews confirm architecture drift.
 
-[Decision]
-- Search codebase for actual implementation (OrderService.js, PaymentGateway.js)
-- Update architecture based on actual state (async payment processing added)
-- Document architecture drift: Changed from synchronous to async payment (ADR-005)
-- Source refs: src/services/OrderService.js:L20-L45, docs/dev-notes/3-dev-notes.md#payment-decision
+[DECISION]
+Read existing architecture docs to understand baseline. Analyze actual codebase (src/services/OrderService.js, PaymentGateway.js) to understand current state. Identify architecture drift: synchronous payment changed to async. Extract decision rationale from dev notes (ADR-005: async for better scalability). Create unified architecture.md documenting actual implementation with source references (src/services/OrderService.js:L20-L45, docs/dev-notes/3-dev-notes.md [Payment Decision]). Delete old architecture files. Run sharding script to generate docs/architecture/*.md. Update CLAUDE.md Document Index with new architecture file list.
 
-[Expected Outcome]
-- docs/architecture.md with actual implementation state (async payment flow)
-- Sharded to docs/architecture/components.md, data-flows.md, decisions.md
-- CLAUDE.md Document Index updated with new architecture file list
-- All content has source_refs (file_path:line_number format)
+[OUTCOME]
+Complete architecture.md at docs/architecture.md documenting actual async payment implementation. Successfully sharded to docs/architecture/components.md, data-flows.md, decisions.md. All content includes source references (file_path:line_number). Architecture drift documented with rationale: moved to async for scalability. CLAUDE.md updated with current architecture index. Old outdated documents removed. Plan.md shows codebase analysis complete, sharding successful, index updated.
 
-### Example 2: Healthcare Patient Portal - Brownfield Update
-[Input]
-- Existing: docs/architecture/*.md (before adding FHIR integration)
-- Codebase: New FHIR adapter in src/integrations/FhirAdapter.py
-- Knowledge base: docs/knowledge/best-practices-api-integration.md
-- Progress: docs/progress.md (FHIR integration milestones)
-- Template: architecture-tmpl.yaml
+### Good Example 2
+[INPUT]
+No existing architecture (greenfield project just completed). Codebase has device registry, telemetry pipeline, dashboard fully implemented. Dev notes contain 8 tasks with multiple architecture decisions. Reviews document performance optimizations.
 
-[Decision]
-- Integrate FHIR adapter documentation into existing architecture
-- Update component diagram showing FHIR integration point
-- Document decision: Why FHIR R4 over R5 (ADR-008)
-- Source refs: src/integrations/FhirAdapter.py:L1-L120, docs/knowledge/best-practices-api-integration.md
+[DECISION]
+Analyze codebase structure to extract component boundaries (src/device-registry/, src/telemetry/, src/dashboard/). Extract architecture decisions from dev notes (ADR-001: Kafka selected over RabbitMQ for message broker). Gather context from reviews (performance optimization patterns). Create architecture.md from scratch based on actual implementation. Document all components, data flows, and ADRs with source references (src/telemetry/TelemetryIngester.js:L5-L80, docs/dev-notes/2-dev-notes.md [Kafka Decision]). Shard to multiple architecture documents. Create CLAUDE.md with architecture index.
 
-[Expected Outcome]
-- docs/architecture.md updated with FHIR integration architecture
-- Old architecture files deleted before sharding
-- New shards include FHIR components and integration patterns
-- CLAUDE.md updated with FHIR integration documentation references
+[OUTCOME]
+Complete architecture.md created documenting entire IoT platform architecture. Sharded to docs/architecture/overview.md, components.md, data-flows.md, decisions.md. All ADRs extracted from dev notes with proper source references. CLAUDE.md created with architecture document index and tech stack summary. Plan.md shows all components documented, decisions extracted, sharding completed, references validated.
 
-### Example 3: IoT Platform - Post-Development Documentation
-[Input]
-- No existing architecture (new project just completed)
-- Codebase: Device registry, telemetry pipeline, dashboard (all implemented)
-- Dev notes: docs/dev-notes/*.md (8 tasks, multiple architecture decisions)
-- Reviews: docs/review/*.md (performance optimizations documented)
-- Template: architecture-tmpl.yaml
+### Bad Example 1
+[INPUT]
+Existing architecture documents describe synchronous payment. Actual codebase implements async payment. Dev notes explain the change rationale.
 
-[Decision]
-- Create architecture from scratch based on actual implementation
-- Extract component boundaries from codebase structure (src/device-registry/, src/telemetry/)
-- Document key decisions from dev notes (Kafka vs RabbitMQ choice - ADR-001)
-- Source refs: src/telemetry/TelemetryIngester.js:L5-L80, docs/dev-notes/2-dev-notes.md#kafka-decision
+[BAD-DECISION]
+Read existing architecture documents and update them by copying most content verbatim. Keep the original synchronous payment description because the architecture document says so. Add a small note mentioning async payment exists. Do not verify with actual codebase.
 
-[Expected Outcome]
-- docs/architecture.md created with complete system architecture
-- Sharded to overview.md, components.md, data-flows.md, decisions.md
-- All ADRs extracted from dev notes with proper source references
-- CLAUDE.md created with architecture index and tech stack overview
+[WHY-BAD]
+Violates Constraint 1 (do not base updates on original design). Architecture must reflect actual implementation state, not original design. Keeping outdated synchronous description misleads future developers. Not verifying with codebase violates Documentation-Guidelines principle of basing on actual implementation. Creates inaccurate documentation.
+
+[CORRECT-APPROACH]
+Analyze actual codebase FIRST to understand current implementation state. Document what is actually implemented (async payment), not what was originally designed (synchronous). Reference actual code with source_refs (src/services/OrderService.js:L20-L45). Document the drift in ADR section with rationale from dev notes. Architecture must always match reality of codebase.
+
+### Bad Example 2
+[INPUT]
+Architecture documentation completed. Sharding script run successfully. Old architecture files still exist in docs/architecture/. CLAUDE.md not updated with new architecture index.
+
+[BAD-DECISION]
+Leave old architecture files in place alongside new sharded files. Skip updating CLAUDE.md because the architecture documents exist anyway. Reasoning: "Having more documentation is better, even if some is outdated."
+
+[WHY-BAD]
+Violates Constraint 3 (do not skip deleting old architecture documents before sharding). Leaving old files creates confusion about which architecture is current. Multiple versions of truth contradict each other. Violates Constraint 4 (do not skip updating CLAUDE.md). CLAUDE.md serves as index - must be current. Incomplete task execution.
+
+[CORRECT-APPROACH]
+Delete ALL old architecture documents from docs/architecture/ BEFORE running sharding script per Constraint 3. After sharding completes, update CLAUDE.md Document Index with the new architecture file list per Constraint 4. Verify sharded files are complete before deleting originals. Ensure only one current version of architecture exists. CLAUDE.md must always reference the current document structure.

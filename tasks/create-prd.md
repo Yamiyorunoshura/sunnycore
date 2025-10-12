@@ -106,56 +106,49 @@
 
 ## [Example]
 
-### Example 1: Add Export Feature to Dashboard (Brownfield)
-[Input]
-- User requirement: "Users need to export dashboard data to CSV and PDF"
-- Existing architecture: Dashboard Service (React), Analytics API (Node.js), PostgreSQL
-- Template: prd-tmpl.yaml
+### Good Example 1
+[INPUT]
+User requirement: "Users need to export dashboard data to CSV and PDF formats". Existing architecture: Dashboard Service (React), Analytics API (Node.js), PostgreSQL. Project type needs determination.
 
-[Decision]
-- Project type: Brownfield (docs/architecture/ exists)
-- Requirements: REQ-001 (CSV export), REQ-002 (PDF export), NFR-001 (export < 5s for 10K rows)
-- Architecture: Add Export Service using existing Analytics API data
-- Tasks: Task-1 (CSV export), Task-2 (PDF export)
-- Impact: No breaking changes, new API endpoints only
+[DECISION]
+Step 1: Check docs/architecture/ exists - Brownfield project confirmed. Read existing architecture to understand components. Step 2: Define requirements - REQ-001 (CSV export format), REQ-002 (PDF export with charts), NFR-001 (export <5s for 10K rows). Create Given-When-Then acceptance criteria. Step 3: Design architecture - add Export Service using existing Analytics API. No breaking changes (new endpoints only). Create Impact Analysis section. Step 4: Define tasks - Task-1 (CSV export), Task-2 (PDF generation). Map requirements→architecture→tasks achieving 100% coverage. Step 5: Generate docs/PRD.md following template. Obtain user approval.
 
-[Expected Outcome]
-- docs/PRD.md with requirements, architecture, and tasks in one document
-- Impact analysis showing compatibility with existing Dashboard Service
-- 100% requirement-to-architecture-to-task mapping
+[OUTCOME]
+Complete docs/PRD.md with requirements, architecture, and tasks in single document. Impact Analysis confirms no breaking changes to Dashboard Service. 100% traceability: REQ-001→Export Service→Task-1, REQ-002→Export Service→Task-2, NFR-001→performance constraint. All acceptance criteria in Given-When-Then format.
 
-### Example 2: Two-Factor Authentication (Greenfield Module)
-[Input]
-- User requirement: "Add 2FA support for user login"
-- No existing architecture (new project)
-- Template: prd-tmpl.yaml
+### Good Example 2
+[INPUT]
+User requirement: "Add 2FA support for user login". No existing architecture (new project). Template: prd-tmpl.yaml.
 
-[Decision]
-- Project type: Greenfield (no docs/architecture/)
-- Requirements: REQ-001 (TOTP generation), REQ-002 (verify code), NFR-001 (TOTP standard compliance)
-- Architecture: Auth Service (Python FastAPI), Redis (TOTP storage), User DB (PostgreSQL)
-- Tasks: Task-1 (TOTP setup), Task-2 (login verification), Task-3 (backup codes)
+[DECISION]
+Step 1: Check docs/architecture/ - not found, Greenfield project. Step 2: Define requirements - REQ-001 (TOTP generation), REQ-002 (code verification), NFR-001 (RFC 6238 TOTP compliance). Quantified metrics for all NFRs. Step 3: Design new architecture - Auth Service (Python FastAPI), Redis (TOTP storage), User DB (PostgreSQL). Document components, data flows, ADRs. Step 4: Break into tasks - Task-1 (TOTP setup flow), Task-2 (login verification), Task-3 (backup codes). Complete requirement→architecture→task mapping. Step 5: Generate PRD with all sections. User approval obtained.
 
-[Expected Outcome]
-- docs/PRD.md with complete design for new 2FA module
-- Architecture section with component diagrams and data flows
-- Tasks with clear DoD and acceptance criteria
+[OUTCOME]
+docs/PRD.md with complete 2FA module design. Architecture section includes component diagrams and data flows. All requirements verifiable with specific metrics. Tasks have clear DoD and acceptance criteria. No existing system references (Greenfield handled correctly).
 
-### Example 3: Add Caching Layer to API (Brownfield)
-[Input]
-- User requirement: "Improve API response time by adding caching"
-- Existing: REST API (Express.js), MongoDB
-- Template: prd-tmpl.yaml
+### Bad Example 1
+[INPUT]
+User describes requirement. docs/architecture/ may or may not exist.
 
-[Decision]
-- Project type: Brownfield
-- Requirements: REQ-001 (cache GET endpoints), NFR-001 (P95 latency < 100ms), NFR-002 (cache hit rate > 80%)
-- Architecture: Add Redis cache layer, preserve existing API contracts
-- Tasks: Task-1 (cache middleware), Task-2 (cache invalidation), Task-3 (monitoring)
-- Impact: Middleware addition, no API signature changes
+[BAD-DECISION]
+Skip project type determination step. Create vague requirements like "system should be fast" without quantification. Mix functional and non-functional requirements. No Given-When-Then format. Design architecture with fabricated component names not validated. No traceability matrix. Skip user approval. Save PRD with incomplete sections.
 
-[Expected Outcome]
-- docs/PRD.md with caching design integrated into existing architecture
-- Impact analysis documenting backward compatibility
-- Performance metrics and acceptance criteria clearly defined
+[WHY-BAD]
+Violates Constraint 1 (misidentify project type). Violates Constraint 2 (vague, unmeasurable requirements). Violates PRD-Design-Guidelines point 1 (requirements not verifiable, NFRs not quantified). Missing traceability violates DoD. No user approval violates Step 5. Unusable PRD blocks development.
+
+[CORRECT-APPROACH]
+Execute Step 1: determine project type by checking docs/architecture/. For Greenfield: gather user context only. For Brownfield: read existing architecture, understand components and contracts. Step 2: create SMART requirements - specific, measurable, achievable. Use Given-When-Then for acceptance criteria. Quantify all NFRs (P95 <200ms, not "fast"). Step 3: design architecture with 100% requirement mapping. Step 4: create tasks with full traceability. Step 5: obtain user approval. Follow template structure exactly.
+
+### Bad Example 2
+[INPUT]
+Adding caching layer to existing API. Existing architecture shows REST API and MongoDB.
+
+[BAD-DECISION]
+Misidentify as Greenfield despite docs/architecture/ existing. Skip reading existing architecture. Design caching without analyzing current API contracts. Create breaking changes without Impact Analysis. Fabricate requirement IDs. No task breakdown. Claim Brownfield but ignore existing system completely.
+
+[WHY-BAD]
+Violates Constraint 1 (misidentify Brownfield as Greenfield). Violates Constraint 4 (break existing contracts without Impact Analysis). Violates PRD-Design-Guidelines point 3 (no Impact Analysis for integration). Ignores Error-Handling rule 2 (must read existing architecture). Will cause integration failures.
+
+[CORRECT-APPROACH]
+Step 1: Identify Brownfield (docs/architecture/ exists). Read existing API architecture: endpoints, contracts, response formats. Step 2: Define requirements preserving contracts (REQ-001: transparent caching layer, no API signature changes). Step 3: Design Redis middleware integration. Create Impact Analysis: middleware addition only, all contracts preserved, backward compatible. Map to existing components. Step 4: Tasks with integration points. Step 5: Generate PRD showing Brownfield integration properly. Approval with architecture compatibility confirmed.
 

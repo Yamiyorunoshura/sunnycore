@@ -84,38 +84,48 @@
 
 ## [Example]
 
-### Example 1: E-commerce Feature Completion
-[Input]
-- Lock file: sunnycore.lock (version = 1.2.0)
-- Documents: docs/PRD.md, docs/prd-dev-notes.md, docs/cutover-report.md
-- Template: completion-report-tmpl.yaml
+### Good Example 1
+[INPUT]
+Lock file shows version = 1.2.0. Found PRD.md, prd-dev-notes.md, cutover-report.md in docs/. Template requires 5 core items: decisions, tech choices, issues/solutions, evidence, recommendations.
 
-[Decision]
-- Version: 1.2.0 (parsed from lock file)
-- Workflow: PRD (PRD.md exists)
-- Extract: Key decisions (async payment processing - ADR-003), tech choices (Stripe over PayPal), issues (rate limit bug fixed), evidence (src/services/PaymentService.js:L42-L56)
-- Archive: Move PRD.md, prd-dev-notes.md, cutover-report.md to docs/archive/1.2.0/
+[DECISION]
+Parse version from lock file. Identify PRD workflow (PRD.md exists). Extract key decisions from dev notes (async payment processing - ADR-003). Extract tech choices (Stripe API selected over PayPal). Extract issues (rate limiting bug in /api/checkout). Gather code evidence (src/services/PaymentService.js:L42-L56). Compile recommendations (add request throttling). Generate completion report. Create archive/1.2.0/ directory. Move PRD.md, dev-notes, cutover-report to archive. Preserve architecture/, knowledge/, completion-report.md in docs/.
 
-[Expected Outcome]
-- docs/completion-report.md with all 5 core items (decisions, tech choices, issues/solutions, evidence, recommendations)
-- docs/archive/1.2.0/ contains PRD.md, dev-notes, cutover-report.md
-- docs/ only has architecture/, knowledge/, completion-report.md
-- References updated: knowledge/best-practices.md now references docs/archive/1.2.0/prd-dev-notes.md
+[OUTCOME]
+Complete docs/completion-report.md with all 5 core items fully documented with evidence. Archive docs/archive/1.2.0/ contains PRD.md, prd-dev-notes.md, cutover-report.md. Root docs/ only contains architecture/, knowledge/, completion-report.md. References in knowledge/best-practices.md updated to point to docs/archive/1.2.0/prd-dev-notes.md.
 
-### Example 2: Microservices Migration Project
-[Input]
-- Lock file: sunnycore.lock (version = 2.0.0)
-- Documents: docs/requirements/*.md, docs/architecture/*.md, docs/epic.md, docs/plans/*.md, docs/dev-notes/*.md (8 tasks), docs/review/*.md
-- Template: completion-report-tmpl.yaml
+### Good Example 2
+[INPUT]
+Lock file shows version = 2.0.0. Found requirements/*.md, architecture/*.md, epic.md, plans/*.md (8 files), dev-notes/*.md (8 files), review/*.md in docs/. This is full workflow project.
 
-[Decision]
-- Version: 2.0.0 (major version, architecture change)
-- Workflow: Traditional/Full (epic.md, plans/ exist)
-- Extract: Decisions (strangler fig pattern - ADR-001), tech choices (gRPC for inter-service communication), issues (data migration challenges), evidence (src/services/OrderService/server.js:L10-L80)
-- Archive: Move requirements/, plans/, dev-notes/, review/, epic.md to docs/archive/2.0.0/
+[DECISION]
+Parse major version 2.0.0 indicating significant architectural changes. Extract decisions from dev-notes (strangler fig pattern - ADR-001, service mesh adoption - ADR-004). Extract tech choices (gRPC for inter-service communication, Kubernetes for orchestration). Extract issues/solutions (data migration challenges solved with dual-write pattern). Collect evidence from codebase (src/services/OrderService/server.js:L10-L80). Generate recommendations (monitoring strategy for distributed services). Create comprehensive completion report. Archive all docs except architecture/, knowledge/, completion-report.md.
 
-[Expected Outcome]
-- docs/completion-report.md documenting microservices migration journey
-- All 5 core items covered with detailed evidence from codebase
-- docs/archive/2.0.0/ contains all project artifacts except architecture/ and knowledge/
-- architecture/components.md references updated to point to archive for historical decisions
+[OUTCOME]
+Comprehensive docs/completion-report.md documenting microservices migration with all 5 core items. Archive docs/archive/2.0.0/ contains requirements/, plans/, dev-notes/, review/, epic.md. Architecture and knowledge remain in docs/ for ongoing use. All references updated to archive paths.
+
+### Bad Example 1
+[INPUT]
+Lock file missing or corrupted. Several documents exist in docs/ but version cannot be determined.
+
+[BAD-DECISION]
+Guess the version as "1.0.0" and proceed with archiving. Generate completion report without proper version number. Skip validation of required input files.
+
+[WHY-BAD]
+Violates Constraint 2 (correctly parse version from lock file). Using guessed version creates confusion and breaks traceability. Proceeding without required inputs violates Constraint 4. Archive structure becomes incorrect.
+
+[CORRECT-APPROACH]
+Halt execution immediately. Report error: "Lock file missing or cannot parse version number. Required format: version = x.x.x". List the lock file location expected. Request user to fix lock file before proceeding. Do not guess or fabricate version information.
+
+### Bad Example 2
+[INPUT]
+All required documents exist. Completion report should include 5 core items. Some items have no supporting evidence in documents.
+
+[BAD-DECISION]
+Fabricate evidence for missing items to make the report look complete. For example, invent architectural decisions that were never documented. Generate vague recommendations without specific technical details.
+
+[WHY-BAD]
+Violates Constraint 1 (do not omit core content items). Fabricating evidence creates false documentation that misleads future developers. Violates traceability principle where all statements must link to actual code or documents.
+
+[CORRECT-APPROACH]
+If core items lack evidence, annotate clearly: "To be supplemented: missing evidence for tech choice rationale" as specified in Completion-Report-Guidelines. Extract only verifiable information from actual documents and code. Generate specific recommendations based on actual issues encountered. Maintain integrity of completion report even if some sections are incomplete.

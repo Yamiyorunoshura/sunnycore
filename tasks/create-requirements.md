@@ -85,44 +85,48 @@
 
 ## [Example]
 
-### Example 1: E-commerce Product Search
-[Input]
-User idea: "I want customers to search products by category, price range, and ratings"
+### Good Example 1
+[INPUT]
+User idea: "I want customers to search products by category, price range, and ratings with fast response"
 
-[Decision]
-- Extract 3 functional requirements: REQ-001 (category filter), REQ-002 (price range filter), REQ-003 (rating filter)
-- Define non-functional requirement: NFR-001 (search response time < 500ms)
-- Create Given-When-Then acceptance criteria for each
+[DECISION]
+Step 1: Define scope - product search system. Step 2: Extract functional requirements - REQ-001 (category filter UI and logic), REQ-002 (price range slider and query), REQ-003 (rating filter 1-5 stars). Deduplicate and atomize. Step 3: Define NFRs - NFR-001 (search response time P95 <500ms), NFR-002 (support 100 concurrent users). Quantify with specific metrics. Step 4: Create acceptance criteria - Given user on product page, When applies category "Electronics" and price "$100-$500", Then system returns filtered results in <500ms. Binary pass/fail outcomes. Step 5: Generate docs/requirements.md. Obtain approval. Execute shard-requirements.py to create docs/requirements/functional.md and non-functional.md.
 
-[Expected Outcome]
-- docs/requirements/functional.md with REQ-001, REQ-002, REQ-003
-- docs/requirements/non-functional.md with NFR-001 (performance target)
-- Each requirement has measurable acceptance criteria
+[OUTCOME]
+Complete sharded requirements: docs/requirements/functional.md with REQ-001, REQ-002, REQ-003. docs/requirements/non-functional.md with NFR-001 (< 500ms), NFR-002 (100 users). All with Given-When-Then acceptance criteria. Verifiable and measurable. Sharding successful.
 
-### Example 2: Mobile Push Notification System
-[Input]
-User idea: "Send real-time notifications to users on iOS and Android when events occur"
+### Good Example 2
+[INPUT]
+User idea: "Send real-time notifications to users on iOS and Android when events occur with high reliability"
 
-[Decision]
-- Functional requirements: REQ-001 (event subscription), REQ-002 (cross-platform delivery), REQ-003 (notification templates)
-- Non-functional: NFR-001 (delivery latency < 2s), NFR-002 (99.9% delivery success rate)
-- Acceptance criteria with specific metrics
+[DECISION]
+Step 1: Define scope - push notification system. Step 2: Functional requirements - REQ-001 (event subscription management), REQ-002 (cross-platform delivery iOS/Android), REQ-003 (notification templates). Organized by capabilities. Step 3: NFRs - NFR-001 (delivery latency <2s), NFR-002 (99.9% delivery success rate), NFR-003 (handle 10K notifications/min). All quantified. Step 4: Acceptance criteria with specific metrics - Given event occurs, When notification sent, Then delivered to device within 2s. Step 5: Generate requirements.md. Approval obtained. Shard successfully.
 
-[Expected Outcome]
-- docs/requirements/functional.md with event-based notification requirements
-- docs/requirements/non-functional.md with quantified reliability and performance targets
-- Verifiable acceptance criteria using Given-When-Then format
+[OUTCOME]
+docs/requirements/functional.md with event-based notification requirements. docs/requirements/non-functional.md with quantified targets (< 2s latency, 99.9% success, 10K/min throughput). Verifiable acceptance criteria. Complete sharding to docs/requirements/*.md.
 
-### Example 3: Healthcare Patient Record Access
-[Input]
-User idea: "Doctors need secure access to patient medical history with audit trails"
+### Bad Example 1
+[INPUT]
+User describes multiple ideas with vague terms.
 
-[Decision]
-- Functional: REQ-001 (role-based access), REQ-002 (audit logging), REQ-003 (search patient records)
-- Non-functional: NFR-001 (HIPAA compliance), NFR-002 (audit log retention 7 years)
-- Security-focused acceptance criteria
+[BAD-DECISION]
+Create vague requirements: "REQ-001: System should be user-friendly", "NFR-001: System should be fast". No quantification. No Given-When-Then format. Mix functional and non-functional together. Skip deduplication. No sharding script execution. Save as single file without following template.
 
-[Expected Outcome]
-- docs/requirements/functional.md with access control and audit requirements
-- docs/requirements/non-functional.md with compliance and data retention policies
-- Acceptance criteria aligned with healthcare regulations
+[WHY-BAD]
+Violates Constraint 1 (vague, unmeasurable requirements). Violates Requirements-Analysis-Guidelines point 1 (not verifiable, no clear success criteria). Violates Constraint 2 (deviate from template). Violates Constraint 4 (skip shard-requirements.py). "User-friendly" and "fast" are not testable. Unusable for implementation.
+
+[CORRECT-APPROACH]
+Follow Requirements-Analysis-Guidelines point 1: make requirements verifiable and measurable. Transform "user-friendly" to specific REQ: "REQ-001: Users can complete checkout in ≤3 clicks". Transform "fast" to quantified NFR: "NFR-001: API response time P95 <200ms". Use Given-When-Then: "Given user initiates checkout, When clicks checkout button, Then completes payment in ≤3 clicks". Separate functional from non-functional. Execute shard-requirements.py to generate proper structure.
+
+### Bad Example 2
+[INPUT]
+Healthcare patient record access requirements with regulatory needs.
+
+[BAD-DECISION]
+Create functional requirements only, skip non-functional entirely. No security or compliance requirements. No data retention policies. Fabricate requirement IDs not from user input. Skip acceptance criteria step. No quantification of any quality attributes. Claim sharding complete without running script.
+
+[WHY-BAD]
+Violates Requirements-Analysis-Guidelines point 2 (no structured classification of functional vs non-functional). Missing critical NFRs for healthcare (HIPAA compliance, data retention). Violates Constraint 1 (fabricate IDs). Violates DoD (no acceptance criteria). Violates Constraint 4 (not execute sharding). Will fail regulatory audit.
+
+[CORRECT-APPROACH]
+Extract functional requirements: REQ-001 (role-based access), REQ-002 (audit logging), REQ-003 (search patient records). Extract NON-FUNCTIONAL requirements: NFR-001 (HIPAA compliance with specific controls), NFR-002 (audit log retention 7 years per regulation), NFR-003 (encrypt PHI at rest AES-256). Use Requirements-Analysis-Guidelines point 3 to quantify: retention period (7 years), encryption standard (AES-256). Create acceptance criteria aligned with regulations. Execute shard-requirements.py for proper output structure.

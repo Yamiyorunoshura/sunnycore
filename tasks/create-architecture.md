@@ -105,47 +105,48 @@
 
 ## [Example]
 
-### Example 1: Real-time Chat Application
-[Input]
-- Requirements: REQ-001 (WebSocket messaging), REQ-002 (message persistence), NFR-001 (< 100ms latency)
-- Template: architecture-tmpl.yaml
+### Good Example 1
+[INPUT]
+Requirements specify REQ-001 (WebSocket messaging), REQ-002 (message persistence), NFR-001 (latency < 100ms). Architecture template requires components, data flows, ADRs, and external APIs sections.
 
-[Decision]
-- Components: WebSocket Gateway, Message Broker (Redis), Message Store (MongoDB)
-- ADR-001: Choose WebSocket over HTTP polling for real-time performance
-- Mapping: REQ-001 → WebSocket Gateway, REQ-002 → Message Store
+[DECISION]
+Create requirement-to-architecture mapping matrix targeting 100% coverage. Design components: WebSocket Gateway (handles REQ-001), Message Broker with Redis (REQ-001), Message Store with MongoDB (REQ-002). Map all requirements: REQ-001→WebSocket Gateway+Message Broker, REQ-002→Message Store, NFR-001→architecture constraint for all components. Create ADR-001 documenting choice of WebSocket over HTTP polling with rationale (real-time performance, lower latency). Address cross-cutting concerns (authentication with JWT, monitoring with Prometheus). Generate docs/architecture.md following template. Obtain user approval. Execute shard-architecture.py to create docs/architecture/overview.md, components.md, traceability_matrix.md.
 
-[Expected Outcome]
-- docs/architecture.md with components, data flows, ADRs
-- docs/architecture/overview.md, components.md, traceability_matrix.md (after sharding)
-- 100% requirement-to-architecture mapping verified
+[OUTCOME]
+Complete architecture document at docs/architecture.md with 100% requirement coverage verified. Sharded files successfully created in docs/architecture/. Traceability matrix shows REQ-001 and REQ-002 mapped to specific components. ADRs explain all key decisions with trade-offs.
 
-### Example 2: IoT Device Management Platform
-[Input]
-- Requirements: REQ-001 (device registration), REQ-002 (telemetry ingestion), NFR-001 (handle 10K devices)
-- Template: architecture-tmpl.yaml
+### Good Example 2
+[INPUT]
+Requirements include REQ-001 (payment processing via Stripe API), REQ-002 (fraud detection), NFR-001 (ACID compliance). Template includes api-documentation section for external APIs.
 
-[Decision]
-- Components: Device Registry (PostgreSQL), Telemetry Ingester (Kafka), Time-Series DB (InfluxDB)
-- ADR-001: Event-driven architecture for scalability
-- Cross-cutting: Authentication (JWT), Monitoring (Prometheus)
+[DECISION]
+Design architecture with Payment Gateway, Fraud Analyzer (ML service), Transaction DB (PostgreSQL). Create ADR-001 for synchronous processing to ensure ACID guarantees with trade-off analysis. Document Stripe API in api-documentation section with complete details: endpoint URLs (https://api.stripe.com/v1/charges), authentication (Bearer token), request/response schemas (JSON with amount, currency, source fields), rate limits (100 req/sec), retry strategies (exponential backoff), error handling (4xx/5xx codes). Map requirements: REQ-001→Payment Gateway+Stripe integration, REQ-002→Fraud Analyzer, NFR-001→synchronous processing pattern. Verify 100% coverage. Obtain approval and shard.
 
-[Expected Outcome]
-- docs/architecture.md with event-driven design and scalability considerations
-- Sharded files showing clear component boundaries and data flows
-- Traceability matrix linking all requirements to architecture elements
+[OUTCOME]
+docs/architecture.md with comprehensive external API documentation for Stripe including authentication, schemas, rate limits, and error handling. All requirements mapped with justification. Sharded successfully with detailed api-documentation.md file containing complete Stripe integration specifications.
 
-### Example 3: Financial Transaction Processing
-[Input]
-- Requirements: REQ-001 (payment processing), REQ-002 (fraud detection), NFR-001 (ACID compliance)
-- Template: architecture-tmpl.yaml
+### Bad Example 1
+[INPUT]
+Requirements show REQ-001, REQ-002, REQ-003. Some requirements are vague or conflicting.
 
-[Decision]
-- Components: Payment Gateway, Fraud Analyzer (ML service), Transaction DB (PostgreSQL)
-- ADR-001: Synchronous processing for ACID guarantees
-- ADR-002: Two-phase commit for distributed transactions
+[BAD-DECISION]
+Make assumptions about unclear requirements without confirming with user. Design architecture ignoring conflicts. Skip creating requirement-to-architecture mapping matrix. Generate architecture document missing some requirement mappings. Run sharding script without verification.
 
-[Expected Outcome]
-- docs/architecture.md emphasizing reliability and data consistency
-- Architecture documents with detailed ADRs explaining transaction guarantees
-- Complete mapping of functional and non-functional requirements
+[WHY-BAD]
+Violates Constraint 1 (do not make assumptions when requirements incomplete/conflicting). Violates Constraint 2 (do not produce architecture lacking 100% coverage). Skips Step 1 (record issues and confirm). Missing mapping matrix means no verification of coverage. Architecture built on assumptions will fail review.
+
+[CORRECT-APPROACH]
+During Step 1, identify vague requirements and conflicts. Record specific issues: "REQ-002 conflicts with NFR-001: requirement specifies eventual consistency but NFR requires ACID compliance". Pause and request clarification from user. Do not proceed until conflicts resolved. After clarification, create complete mapping matrix ensuring 100% coverage before designing components.
+
+### Bad Example 2
+[INPUT]
+Architecture template includes external API documentation requirements. System integrates with Twilio SMS API.
+
+[BAD-DECISION]
+Mention "Uses Twilio for SMS" without providing API details. Skip documenting authentication method, endpoint URLs, request/response formats, rate limits, and error handling. Generate architecture without api-documentation section. Skip sharding script execution claiming "documentation is complete enough".
+
+[WHY-BAD]
+Violates Constraint 3 (do not deviate from template structure). Violates Architecture-Design-Guidelines point 4 (external API documentation requirement). Violates Constraint 4 (do not skip executing shard-architecture.py). Insufficient API documentation will cause implementation failures when developers need integration details.
+
+[CORRECT-APPROACH]
+Follow Architecture-Design-Guidelines section 4 completely. In api-documentation section document Twilio SMS API: name "Twilio SMS API v2010-04-01", endpoints "https://api.twilio.com/2010-04-01/Accounts/{AccountSid}/Messages.json", authentication (HTTP Basic Auth with Account SID and Auth Token), request format (POST with To, From, Body fields), response schema (JSON with sid, status, error_code), rate limits (varies by account), retry strategy (idempotent with message SID), error handling (handle 400/429/500 codes), purpose (send SMS notifications), integration points (Notification Service), fallback (queue messages for retry). Execute shard-architecture.py to verify template compliance.
