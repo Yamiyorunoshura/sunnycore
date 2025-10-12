@@ -226,7 +226,8 @@ class SunnycoreInstaller:
         contents = self.get_directory_contents(source_dir)
         
         if not contents:
-            return False
+            print(f"  ⚠ 警告: 目錄為空或無法存取: {source_dir}")
+            return True  # 空目錄不算失敗，繼續處理
         
         for item in contents:
             if item['type'] == 'file':
@@ -238,6 +239,57 @@ class SunnycoreInstaller:
                     return False
         
         return True
+    
+    def collect_directory_files_parallel(self, directories: List[Tuple[str, Path]]) -> List[Tuple[str, Path]]:
+        """並行收集多個目錄中的所有文件
+        
+        Args:
+            directories: 要收集的目錄列表 [(source_dir, target_dir), ...]
+            
+        Returns:
+            List[Tuple[str, Path]]: 收集到的文件列表 [(source_path, target_path), ...]
+        """
+        all_files = []
+        lock = threading.Lock()
+        
+        def collect_single_directory(source_dir: str, target_dir: Path) -> bool:
+            """收集單個目錄的文件"""
+            temp_files = []
+            success = self.collect_directory_files(source_dir, target_dir, temp_files)
+            
+            if success:
+                with lock:
+                    all_files.extend(temp_files)
+            
+            return success
+        
+        # 動態調整並行數量
+        if self.max_workers is None or self.max_workers <= 0:
+            workers = min(len(directories), 20)  # 預設最多 20 個並行任務
+        else:
+            workers = min(self.max_workers, len(directories))
+        
+        print(f"  使用 {workers} 個並行任務掃描目錄...")
+        
+        # 並行收集所有目錄
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            futures = {
+                executor.submit(collect_single_directory, source_dir, target_dir): (source_dir, target_dir)
+                for source_dir, target_dir in directories
+            }
+            
+            # 等待所有任務完成
+            for future in as_completed(futures):
+                source_dir, target_dir = futures[future]
+                try:
+                    if not future.result():
+                        print(f"  ✗ 無法掃描目錄: {source_dir}")
+                        return []
+                except Exception as e:
+                    print(f"  ✗ 掃描目錄時出錯 {source_dir}: {e}")
+                    return []
+        
+        return all_files
     
     def download_files_parallel(self, file_list: List[Tuple[str, Path]]) -> bool:
         """並行下載多個文件
@@ -338,18 +390,19 @@ class SunnycoreInstaller:
         ]
         
         # 收集所有要下載的文件
-        print("\n正在掃描目錄結構...")
-        all_files = []
+        print("\n正在並行掃描目錄結構...")
         
-        # 收集目錄中的所有文件
-        for source_dir, target_dir in directories:
-            print(f"  掃描: {source_dir}")
-            if not self.collect_directory_files(source_dir, target_dir, all_files):
-                print(f"  ✗ 無法掃描目錄: {source_dir}")
-                return False
+        # 使用並行方式收集目錄中的所有文件
+        all_files = self.collect_directory_files_parallel(directories)
+        
+        if not all_files and directories:
+            print("  ✗ 無法掃描目錄結構")
+            return False
         
         # 添加單獨的配置文件
         all_files.extend(single_files)
+        
+        print(f"  ✓ 掃描完成，共找到 {len(all_files)} 個文件")
         
         # 並行下載所有文件
         success = self.download_files_parallel(all_files)
@@ -426,18 +479,19 @@ class SunnycoreInstaller:
         ]
         
         # 收集所有要下載的文件
-        print("\n正在掃描目錄結構...")
-        all_files = []
+        print("\n正在並行掃描目錄結構...")
         
-        # 收集目錄中的所有文件
-        for source_dir, target_dir in directories:
-            print(f"  掃描: {source_dir}")
-            if not self.collect_directory_files(source_dir, target_dir, all_files):
-                print(f"  ✗ 無法掃描目錄: {source_dir}")
-                return False
+        # 使用並行方式收集目錄中的所有文件
+        all_files = self.collect_directory_files_parallel(directories)
+        
+        if not all_files and directories:
+            print("  ✗ 無法掃描目錄結構")
+            return False
         
         # 添加單獨的配置文件
         all_files.extend(single_files)
+        
+        print(f"  ✓ 掃描完成，共找到 {len(all_files)} 個文件")
         
         # 並行下載所有文件
         success = self.download_files_parallel(all_files)
