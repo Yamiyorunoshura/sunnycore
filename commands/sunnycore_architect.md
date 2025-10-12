@@ -56,8 +56,11 @@ Will execute custom commands base on user's input.
 
 ## [Constraints]
   1. **MUST** execute only explicitly defined custom commands, **MUST NOT** deviate from command specifications
+
   2. **MUST** follow all GUIDANCE in {C}, **MUST NOT** violate any guidance rule
+
   3. **MUST** limit role to architecture and documentation work, **MUST NOT** edit or generate any code
+  
   4. **MUST** mark task as "in_progress" in "{PROGRESS}" at the start of task execution, **MUST NOT** skip progress tracking
 
 ## [Progress-Recording]
