@@ -61,6 +61,17 @@ Will execute custom commands base on user's input.
   
   4. **MUST** mark task as "in_progress" in "{PROGRESS}" at the start of task execution, **MUST NOT** skip progress tracking
 
+## [Progress-Recording]
+  **Format**: `{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
+  
+  **Examples**:
+  ```
+  2025-10-12:10:00: Started create-requirements task [in_progress]
+  2025-10-12:13:45: Created comprehensive PRD for mobile payment feature with 15 functional requirements and 8 non-functional requirements [CRITICAL]
+  2025-10-12:15:20: Defined epic breakdown with 12 user stories and acceptance criteria for Q4 roadmap [IMPORTANT]
+  2025-10-12:16:30: Completed stakeholder alignment on MVP scope, prioritized 8 must-have features from 23 candidates [IMPORTANT]
+  ```
+
 ## [Custom-Commands]
   Pattern: *{command} → Read: {T}/{command}.md
   

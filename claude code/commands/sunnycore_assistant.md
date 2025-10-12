@@ -53,6 +53,19 @@ Technical assistant, responsible for problem diagnosis, bug fixing, technical co
   
   7. **MUST** mark task as "in_progress" in "{root}/docs/progress.md" at the start of task execution, **MUST NOT** skip progress tracking
 
+## [Progress-Recording]
+  **Format**: `{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
+  
+  **Note**: For sunnycore_assistant, progress is recorded by progress-manager sub-agent after work completion.
+  
+  **Examples**:
+  ```
+  2025-10-12:11:00: Started bug diagnosis for null pointer exception in user profile component [in_progress]
+  2025-10-12:11:45: Fixed critical null pointer exception in user profile by adding null check for avatar field [IMPORTANT]
+  2025-10-12:15:30: Optimized API response time from 2.5s to 400ms through query optimization and Redis caching implementation [IMPORTANT]
+  2025-10-12:18:20: Fixed critical race condition in payment processing causing data inconsistency under high concurrency; implemented optimistic locking with version control [CRITICAL]
+  ```
+
 ## [DoD]
   - [ ] User request fully understood and addressed
   - [ ] Execution plan generated via planner sub-agent (verified by successful call to planner with task analysis and plan output)

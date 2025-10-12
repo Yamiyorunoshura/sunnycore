@@ -7,6 +7,25 @@
 
 ## [Unreleased]
 
+## [3.17.0] - 2025-10-12
+
+### Added
+- 統一進度記錄格式系統：為所有角色命令新增標準化的進度記錄規範
+  - 新增 `claude code/agents/context-restorer.md` [Progress-File-Format] 章節：定義進度檔案標準格式
+    * 格式規範：`{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
+    * 詳細說明各欄位含義：日期、時間、動作描述、重要性標記
+    * 新增完整範例展示格式使用方式
+    * 新增 Active Task Identification 指引：如何從進度檔案識別進行中的任務
+  - 更新所有 6 個角色命令檔案：統一新增 [Progress-Recording] 章節
+    * `sunnycore_architect.md`：新增架構設計相關進度記錄範例（架構設計、安全架構定義、擴展策略文檔化）
+    * `sunnycore_assistant.md`：新增技術支援相關進度記錄範例（bug 診斷、效能優化、競爭條件修復）
+    * `sunnycore_dev.md`：新增開發實作相關進度記錄範例（使用者認證模組、Redis 快取整合、TDD 循環）
+    * `sunnycore_pm.md`：新增需求分析相關進度記錄範例（PRD 創建、Epic 拆分、MVP 範圍確認）
+    * `sunnycore_po.md`：新增驗收管理相關進度記錄範例（驗收標準驗證、知識庫整理、業務驗收測試）
+    * `sunnycore_qa.md`：新增品質審查相關進度記錄範例（模組審查、安全漏洞識別、實作計劃審查）
+  - 提升進度追蹤一致性：所有角色使用相同格式記錄進度，改善 context-restorer 的任務識別能力
+  - 改善範例品質：context-restorer.md 的所有 4 個範例均更新為實際進度格式內容
+
 ## [3.16.0] - 2025-10-12
 
 ### Changed

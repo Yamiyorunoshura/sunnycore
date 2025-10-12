@@ -60,11 +60,36 @@ color: purple
   
   5. **MUST** instruct main agent to read all required files, **MUST NOT** skip context restoration
 
+## [Progress-File-Format]
+  The progress.md file follows this format:
+  ```
+  {YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]
+  ```
+  
+  Where:
+  - `{YYYY-MM-DD}`: Date (e.g., 2025-10-12)
+  - `{HH:MM}`: 24-hour format time (e.g., 14:30)
+  - `{ACTIONS_TAKEN}`: Description of actions performed or task status
+  - `{IMPORTANCE}`: CRITICAL, IMPORTANT, or in_progress
+  
+  **Example progress.md content**:
+  ```
+  2025-10-12:09:15: Started develop-plan task-auth-001 [in_progress]
+  2025-10-12:11:30: Implemented user authentication module with JWT token generation and validation (100% test coverage) [CRITICAL]
+  2025-10-12:14:20: Started review task for task-auth-001 [in_progress]
+  2025-10-12:16:45: Completed quality review of authentication module; test coverage 95%, architecture compliance verified [CRITICAL]
+  ```
+  
+  **Active Task Identification**:
+  - Look for entries with `[in_progress]` status
+  - The task name is typically mentioned in the description (e.g., "Started develop-plan task-auth-001")
+  - Extract the task command (e.g., "develop-plan") and task ID if applicable
+
 ## [Restoration-Steps]
   1. **Progress Identification**
      - Read {PROGRESS} file
-     - Identify tasks with "in_progress" status
-     - Extract task name and associated role
+     - Identify tasks with "in_progress" status (look for "[in_progress]" marker)
+     - Extract task name and associated role from the description
      - Outcome: Active task(s) identified
 
   2. **Package Selection**
@@ -190,11 +215,15 @@ Please read the above files in order to restore task context and resume work.
 ### Example 1: Single Active Task - create-plan
 
 [Input]
-- Progress file shows: Task "create-plan" with status "in_progress"
+- Progress file content:
+  ```
+  2025-10-12:09:00: Started create-plan task [in_progress]
+  2025-10-12:08:30: Completed requirements analysis with 12 functional requirements [CRITICAL]
+  ```
 - Package file exists at: {PACKAGES}/create-plan.md
 
 [Decision]
-- Read progress.md → identify "create-plan" as active
+- Read progress.md → identify "create-plan" as active (has [in_progress] marker)
 - Read {PACKAGES}/create-plan.md → extract required files
 - Generate context file list in priority order
 - Instruct main agent to read: CLAUDE.md, sunnycore_pm.md, create-plan.md, implementation-plan-tmpl.yaml
@@ -221,12 +250,16 @@ Please read the above files in order to restore full task context and resume wor
 ### Example 2: Multiple Active Tasks
 
 [Input]
-- Progress file shows:
-  - Task "develop-plan" with status "in_progress"
-  - Task "review" with status "in_progress"
+- Progress file content:
+  ```
+  2025-10-12:09:15: Started develop-plan task-auth-001 [in_progress]
+  2025-10-12:11:30: Implemented user authentication module [CRITICAL]
+  2025-10-12:14:20: Started review task for task-auth-001 [in_progress]
+  2025-10-12:08:00: Created PRD for payment feature [IMPORTANT]
+  ```
 
 [Decision]
-- Read progress.md → identify both tasks as active
+- Read progress.md → identify both "develop-plan" and "review" as active (both have [in_progress] markers)
 - Load both package files
 - Generate context lists for both tasks
 - Note CLAUDE.md is shared between both
@@ -258,10 +291,15 @@ Multiple tasks in progress. Please read all context files above to restore full 
 ### Example 3: No Active Tasks
 
 [Input]
-- Progress file shows: All tasks with status "completed" or "pending"
+- Progress file content:
+  ```
+  2025-10-12:16:45: Completed quality review of authentication module [CRITICAL]
+  2025-10-12:15:30: Optimized API response time from 2.5s to 400ms [IMPORTANT]
+  2025-10-12:13:45: Created comprehensive PRD for mobile payment feature [CRITICAL]
+  ```
 
 [Decision]
-- Read progress.md → no "in_progress" status found
+- Read progress.md → no "[in_progress]" status found (all entries are completed work)
 - Return NO_ACTIVE_TASK status
 - No context loading needed
 
@@ -278,12 +316,16 @@ No context restoration needed. Awaiting new task assignment.
 ### Example 4: Package Not Found (Fallback)
 
 [Input]
-- Progress file shows: Task "custom-task" with status "in_progress"
+- Progress file content:
+  ```
+  2025-10-12:10:00: Started custom-task for API optimization [in_progress]
+  2025-10-12:09:00: Completed architecture review [CRITICAL]
+  ```
 - Package file does NOT exist at: {PACKAGES}/custom-task.md
 - Task appears to be dev role based on naming
 
 [Decision]
-- Read progress.md → identify "custom-task" as active
+- Read progress.md → identify "custom-task" as active (has [in_progress] marker)
 - Attempt to load package → file not found
 - Use fallback strategy: CLAUDE.md + sunnycore_dev.md + custom-task.md
 - Note fallback strategy in report

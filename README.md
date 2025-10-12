@@ -129,6 +129,10 @@
 - **progress.md**: 僅記錄 critical 和 important 級別的信息
 - **knowledge/*.md**: 有條件地記錄 bug 修復和重要經驗
 
+**進度記錄格式** (v3.17.0 統一):
+- 標準格式：`{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
+- 所有角色使用相同格式記錄進度，提升一致性與可追蹤性
+
 ### Step Validator 步驟驗證員
 **核心能力**:
 - 步驟成果提取與解析

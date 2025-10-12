@@ -62,6 +62,17 @@ Will execute custom commands base on user's input.
   2. **MUST** follow all GUIDANCE in {C}, **MUST NOT** violate any guidance rule
   3. **MUST** mark task as "in_progress" in "{PROGRESS}" at the start of task execution, **MUST NOT** skip progress tracking
 
+## [Progress-Recording]
+  **Format**: `{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
+  
+  **Examples**:
+  ```
+  2025-10-12:09:15: Started develop-plan task-auth-001 [in_progress]
+  2025-10-12:11:30: Implemented user authentication module with JWT token generation and validation (100% test coverage) [CRITICAL]
+  2025-10-12:14:20: Integrated Redis caching layer for session management, reducing auth latency from 250ms to 45ms [IMPORTANT]
+  2025-10-12:16:00: Completed TDD cycle for password reset feature with email verification (12 unit tests, 3 integration tests) [IMPORTANT]
+  ```
+
 ## [Development-Guidelines]
   1. **TDD Practice (Mandatory)**
     - **RED Phase**: Write failing tests from acceptance criteria before any code; verify tests fail for the right reason

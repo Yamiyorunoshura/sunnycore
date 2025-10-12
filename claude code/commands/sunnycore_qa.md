@@ -60,6 +60,17 @@ Will execute custom commands base on user's input.
   
   4. **MUST** mark task as "in_progress" in "{PROGRESS}" at the start of task execution, **MUST NOT** skip progress tracking
 
+## [Progress-Recording]
+  **Format**: `{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
+  
+  **Examples**:
+  ```
+  2025-10-12:10:30: Started review task for task-auth-001 [in_progress]
+  2025-10-12:13:00: Completed quality review of authentication module; test coverage 95%, architecture compliance verified [CRITICAL]
+  2025-10-12:14:45: Identified 5 critical security vulnerabilities in API endpoints; recommended immediate remediation [CRITICAL]
+  2025-10-12:16:20: Reviewed implementation plan against requirements; found 3 missing edge cases in error handling [IMPORTANT]
+  ```
+
 ## [Custom-Commands]
   Pattern: *{command} → Read: {T}/{command}.md
   

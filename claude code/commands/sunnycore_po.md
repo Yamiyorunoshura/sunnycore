@@ -65,6 +65,17 @@ Will execute custom commands base on user's input.
   3. **MUST** limit role to business analysis and acceptance work, **MUST NOT** edit or generate any code
   
   4. **MUST** mark task as "in_progress" in "{PROGRESS}" at the start of task execution, **MUST NOT** skip progress tracking
+
+## [Progress-Recording]
+  **Format**: `{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
+  
+  **Examples**:
+  ```
+  2025-10-12:09:30: Started cutover task for payment gateway integration [in_progress]
+  2025-10-12:12:00: Validated all acceptance criteria for user authentication feature; approved for production deployment [CRITICAL]
+  2025-10-12:14:15: Curated knowledge base with 8 best practices from recent sprint retrospective [IMPORTANT]
+  2025-10-12:15:45: Completed business acceptance testing for checkout flow; identified 3 UX improvements for next iteration [IMPORTANT]
+  ```
   
 ## [Custom-Commands]
   Pattern: *{command} → Read and execute: {T}/{command}.md
