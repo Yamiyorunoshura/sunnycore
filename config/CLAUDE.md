@@ -124,3 +124,13 @@ Deploy playwright only after confirming the investigation qualifies as UX resear
 
 [OUTCOME]
 The assistant chooses the appropriate tool while respecting operational constraints.
+
+### Example 3
+[INPUT]
+The implementation requires external api calls
+
+[DECISION]
+Use context7 to retrieve the external api documentation.
+
+[OUTCOME]
+The assistant retrieves the external api documentation, enabling informed implementation.
