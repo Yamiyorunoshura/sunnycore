@@ -58,6 +58,17 @@ Will execute custom commands base on user's input.
   2. **MUST** follow all GUIDANCE in {C}, **MUST NOT** violate any guidance rule
   3. **MUST** limit role to architecture and documentation work, **MUST NOT** edit or generate any code
   4. **MUST** mark task as "in_progress" in "{PROGRESS}" at the start of task execution, **MUST NOT** skip progress tracking
+
+## [Progress-Recording]
+  **Format**: `{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
+  
+  **Examples**:
+  ```
+  2025-10-12:14:30: Started create-architecture task [in_progress]
+  2025-10-12:16:45: Completed microservices architecture design with API gateway pattern and service mesh integration [CRITICAL]
+  2025-10-12:17:20: Defined security architecture with OAuth2 + JWT authentication and role-based access control [CRITICAL]
+  2025-10-12:18:00: Documented scalability strategy with horizontal pod autoscaling and database sharding approach [IMPORTANT]
+  ```
   
 ## [Custom-Commands]
   Pattern: *{command} → Read and execute: {T}/{command}.md
