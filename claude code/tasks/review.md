@@ -14,7 +14,7 @@
   2. Do not omit acceptance decision (Accept/Accept with changes/Reject)
   3. Do not produce review report that deviates from template structure
   4. Do not update epic with incorrect status or score
-  5. **Do not accept ANY production code containing mock/stub implementations, regardless of score** (auto-Reject, but unit tests using mocks are allowed)
+  5. **Do not accept ANY production code containing mock/stub implementations or hardcoded values, regardless of score** (auto-Reject, but unit tests using mocks/hardcoded test data are allowed)
 
 ## [Tools]
   1. **sequential-thinking (MCP)** - Structured reasoning tool for complex logic analysis
@@ -36,12 +36,12 @@
     - Outcome: Review criteria and approach determined
 
   2. Code & Test Execution Review
-    - **CRITICAL**: Scan ALL production/implementation code for mock/stub/placeholder patterns (auto-reject if found; note: tests using mocks are allowed)
+    - **CRITICAL**: Scan ALL production/implementation code for mock/stub/placeholder patterns and hardcoded values (auto-reject if found; note: tests using mocks/hardcoded test data are allowed)
     - **CRITICAL**: Execute all relevant existing tests from previous tasks to detect regressions (auto-reject if any previously passing tests now fail)
     - Execute all tests and record results properly
     - Apply domain-specific scoring criteria appropriately
     - Verify test coverage and code alignment with plan
-    - Outcome: Mock implementation check completed, regression check completed, test results recorded and code alignment verified
+    - Outcome: Mock implementation and hardcoded values check completed, regression check completed, test results recorded and code alignment verified
 
   3. Development Notes Validation
     - Review development notes for alignment with implementation
@@ -71,20 +71,20 @@
 
   ### **Decision Rules**
   - **CRITICAL REJECT CRITERIA** (overrides all scoring):
-    - **Mock/Stub Implementation Detection in Production Code**: ANY presence of mock/placeholder/stub code in production/implementation code → **AUTOMATIC REJECT**
-      - Examples: `// TODO: implement`, `throw new Error('Not implemented')`, placeholder return values, mock data in production code
-      - Rationale: Mock implementations are incomplete work, unacceptable regardless of test scores
-      - **Important**: tests using mocks/stubs for testing purposes are ALLOWED and expected
+    - **Mock/Stub Implementation or Hardcoded Values Detection in Production Code**: ANY presence of mock/placeholder/stub code or hardcoded values in production/implementation code → **AUTOMATIC REJECT**
+      - Examples: `// TODO: implement`, `throw new Error('Not implemented')`, placeholder return values, mock data in production code, hardcoded API keys, hardcoded credentials, hardcoded test data in production code
+      - Rationale: Mock implementations and hardcoded values are incomplete/unsafe work, unacceptable regardless of test scores
+      - **Important**: tests using mocks/stubs/hardcoded test data for testing purposes are ALLOWED and expected
     - **Breaking Previously Completed Functionality**: ANY breaking of features/functionality completed in previous tasks → **AUTOMATIC REJECT**
       - Rationale: Regression breaks system stability and undermines prior work, unacceptable regardless of current task scores
       - Verification: Run all relevant existing tests to ensure no regressions
-  - **Accept**: All dimensions ≥ 6.0, no critical issues, **AND no mock implementations in production code**, **AND no regression of previous functionality**
-  - **Accept with Changes**: 1-2 dimensions between 5.0-5.9 with clear improvement plan, **AND no mock implementations in production code**, **AND no regression of previous functionality**
-  - **Reject**: 3+ dimensions < 6.0, or any dimension < 5.0, or critical security/functional issues, **OR any mock implementations found in production code**, **OR any breaking of previously completed functionality**
-  - **Risk**: Low (all ≥ 8.0), Medium (1-2 between 6.0-7.9), High (any < 6.0 or security issues or mock implementations in production code or regression detected)
+  - **Accept**: All dimensions ≥ 6.0, no critical issues, **AND no mock implementations or hardcoded values in production code**, **AND no regression of previous functionality**
+  - **Accept with Changes**: 1-2 dimensions between 5.0-5.9 with clear improvement plan, **AND no mock implementations or hardcoded values in production code**, **AND no regression of previous functionality**
+  - **Reject**: 3+ dimensions < 6.0, or any dimension < 5.0, or critical security/functional issues, **OR any mock implementations or hardcoded values found in production code**, **OR any breaking of previously completed functionality**
+  - **Risk**: Low (all ≥ 8.0), Medium (1-2 between 6.0-7.9), High (any < 6.0 or security issues or mock implementations/hardcoded values in production code or regression detected)
 
 ## [DoD]
-  - [ ] **CRITICAL**: All production/implementation code scanned and confirmed NO mock/stub/placeholder code exists (tests using mocks are allowed)
+  - [ ] **CRITICAL**: All production/implementation code scanned and confirmed NO mock/stub/placeholder code or hardcoded values exist (tests using mocks/hardcoded test data are allowed)
   - [ ] **CRITICAL**: All relevant existing tests from previous tasks executed to verify NO regression of previously completed functionality
   - [ ] All tests executed with results recorded and verified against implementation plan
   - [ ] Complete review report exists at "{REVIEW}/{task_id}-review.md" with scoring and acceptance decision
@@ -147,7 +147,7 @@
 - Action items: Fix rollback script, add missing index, re-test migration
 - docs/epic.md: Task-3 status = failed review, requires rework
 
-### Example 4: Mock Implementation in Production Code Auto-Reject (CRITICAL)
+### Example 4: Mock Implementation or Hardcoded Values in Production Code Auto-Reject (CRITICAL)
 [Input]
 - Development notes: docs/dev-notes/4-dev-notes.md (Task-4: Payment gateway integration)
 - Implementation plan: docs/plans/4-plan.md (Stripe API integration)
@@ -155,24 +155,25 @@
 
 [Decision]
 - Domain: Backend (apply backend scoring dimensions)
-- **CRITICAL FINDING**: Mock implementation detected in PRODUCTION CODE src/payment/PaymentService.js:L25
+- **CRITICAL FINDING**: Mock implementation and hardcoded values detected in PRODUCTION CODE src/payment/PaymentService.js:L25
   ```javascript
   async processPayment(amount) {
     // TODO: implement actual Stripe integration
+    const API_KEY = 'sk_test_hardcoded_key_123'; // Hardcoded API key!
     return { success: true, transactionId: 'mock-123' };
   }
   ```
 - Execute tests: All 20 tests pass (tests properly use mocks for Stripe API - this is acceptable)
 - Score: Would be API Design (9.0), Security (8.5), Error Handling (9.0), Testing (8.5) → Overall 8.8
-- **Decision: AUTOMATIC REJECT** (mock implementation found in production code - overrides all scoring)
-- **Note**: Unit tests using mocks (e.g., `jest.mock('stripe')` in test files) are ALLOWED - rejection is only for production code mocks
+- **Decision: AUTOMATIC REJECT** (mock implementation and hardcoded values found in production code - overrides all scoring)
+- **Note**: Unit tests using mocks/hardcoded test data (e.g., `jest.mock('stripe')` in test files) are ALLOWED - rejection is only for production code mocks/hardcoded values
 
 [Expected Outcome]
-- docs/review/4-review.md with CRITICAL REJECTION: Mock implementation detected in production code
-- Rationale: Even with high test scores (8.8), mock code in production is incomplete work and unacceptable
-- Risk: Critical (would deploy non-functional payment system)
-- Action items: Implement actual Stripe API integration in production code, remove all mock/TODO code from src/ (keep test mocks)
-- docs/epic.md: Task-4 status = REJECTED, requires complete production implementation
+- docs/review/4-review.md with CRITICAL REJECTION: Mock implementation and hardcoded values detected in production code
+- Rationale: Even with high test scores (8.8), mock code and hardcoded values in production are incomplete/unsafe work and unacceptable
+- Risk: Critical (would deploy non-functional payment system with exposed credentials)
+- Action items: Implement actual Stripe API integration in production code, remove all mock/TODO code and hardcoded values from src/ (keep test mocks/test data)
+- docs/epic.md: Task-4 status = REJECTED, requires complete production implementation with proper configuration management
 
 ### Example 5: Regression Breaking Previous Functionality Auto-Reject (CRITICAL)
 [Input]

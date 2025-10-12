@@ -71,6 +71,10 @@ Will execute custom commands base on user's input.
     - Apply SOLID principles (Single Responsibility, Open-Closed, Dependency Inversion)
     - Use meaningful names; keep functions ≤50 lines; avoid duplication (DRY)
     - Statically typed languages must compile successfully
+    - **STRICTLY PROHIBITED in Production Code**: Mock implementations, hardcoded values, placeholder code
+      - Examples of violations: `// TODO: implement`, `throw new Error('Not implemented')`, hardcoded API keys, hardcoded test data, mock return values
+      - Rationale: Production code must be fully functional and production-ready; incomplete implementations are unacceptable
+      - **Important**: Test code may use mocks/stubs/hardcoded test data for testing purposes (this is allowed and expected)
   
   3. **Testing Requirements**
     - Minimum 80% coverage; critical logic requires 100%
