@@ -9,6 +9,7 @@
   1. "{DEVNOTES}/{task_id}-dev-notes.md" --Complete development notes document (Markdown format)
   2. High-quality, tested, refactored code implementation highly allign with the implementation plans
   3. Complete test coverage and test cases allign with the implementation plans
+  4. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not deviate from implementation plan's acceptance criteria and architecture mapping

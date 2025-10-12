@@ -9,6 +9,7 @@
 ## [Output]
   1. Fixed code that runs properly
   2. Updated development notes "{DEVNOTES}/{task_id}-dev-notes.md" (Markdown format)
+  3. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not deliver fixes that fail to run properly
@@ -20,6 +21,7 @@
   1. Issue Analysis & Planning
     - Understand issues from review report and architecture context
     - Formulate atomic fix tasks based on analysis
+    - Establish tracking mechanism for fixes
     - Outcome: Clear understanding of issues and fix plan created
 
   2. Test-Driven Fix Implementation

@@ -8,6 +8,7 @@
   1. "{root}/docs/prd-dev-notes.md" --Complete development notes document (Markdown format)
   2. High-quality, tested, refactored code implementation for all PRD tasks highly allign with the architecture design stated
   3. Complete test coverage and test cases
+  4. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not leave any PRD tasks incomplete

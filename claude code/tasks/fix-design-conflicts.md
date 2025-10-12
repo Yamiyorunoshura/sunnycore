@@ -11,7 +11,8 @@
     - "{EPIC}" (if full workflow was used)
     - "{PLAN}/*.md" (if full workflow was used)
   2. Deleted: "{root}/docs/design-validation.md" (after successful fixes)
-
+  3. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 ## [Constraints]
   1. Do not fix issues out of severity order (Critical → High → Medium → Low)
   2. Do not apply fixes without user confirmation of strategy

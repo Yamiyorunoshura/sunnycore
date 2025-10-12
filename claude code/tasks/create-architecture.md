@@ -8,6 +8,7 @@
 ## [Output]
   1. Architecture document collection under "{ARCH}/" directory (*.md format)
   2. "{root}/docs/architecture.md" (Markdown format)(temporary architecture file. Will be sharded after running "shard-architecture.py")
+  3. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not make assumptions when requirements are incomplete or conflicting (must record issues and confirm)

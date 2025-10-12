@@ -7,6 +7,7 @@
 ## [Output]
   1. "{root}/docs/requirements.md" (Markdown format)(temporary requiremenmt file. Will be sharded after running "shard-requirements.py")
   2. "{REQ}/*.md" --Complete requirement specifications (including functional requirements, non-functional requirements, and acceptance criteria)
+  3. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not create vague or unmeasurable requirements

@@ -7,6 +7,7 @@
 
 ## [Output]
   1. "{EPIC}" --Task list (Markdown format)
+  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not create tasks below feature-level granularity

@@ -10,6 +10,7 @@
 ## [Output]
   1. "{root}/docs/architecture.md" (Markdown format)(temporary architecture file. Will be sharded after running "shard-architecture.py")
   2. "{ARCH}/*.md" --Updated architecture document collection (*.md format)
+  3. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not propose design without reviewing existing requirements and architecture
