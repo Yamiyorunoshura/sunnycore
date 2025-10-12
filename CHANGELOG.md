@@ -7,6 +7,26 @@
 
 ## [Unreleased]
 
+## [4.5.0] - 2025-10-12
+
+### Added
+- 配置文件範例系統增強：為三個平台配置文件新增正反對比範例系統
+  - 更新 `config/AGENTS.md`：將原有範例重新分類為「Good Example」，並新增對應的「Bad Example」
+  - 更新 `config/CLAUDE.md`：將原有範例重新分類為「Good Example」，並新增對應的「Bad Example」
+  - 更新 `config/CURSOR.mdc`：將原有範例重新分類為「Good Example」，並新增對應的「Bad Example」
+  - 每個 Bad Example 包含三個部分：
+    * `[BAD-DECISION]`：錯誤的決策描述
+    * `[WHY-BAD]`：解釋為何該決策違反規則或產生問題
+    * `[CORRECT-APPROACH]`：提供正確的處理方式
+  - 涵蓋五大核心章節的範例增強：
+    * `[Priority-And-Execution-Order]`：2 個 Good Example + 2 個 Bad Example
+    * `[Template-And-Output-Format]`：2 個 Good Example + 2 個 Bad Example
+    * `[Process-Validation-And-Completion]`：2 個 Good Example + 2 個 Bad Example
+    * `[Summary-Instructions]`：2 個 Good Example + 2 個 Bad Example
+    * `[MCP-Tools-Selection-Strategy]`：2 個 Good Example + 2 個 Bad Example
+  - 提升 AI 對規則的理解準確度：透過正反對比明確標示錯誤行為及其後果
+  - 增強約束力與教學效果：Bad Example 提供更強的警示作用，防止常見錯誤
+
 ## [4.4.0] - 2025-10-12
 
 ### Added
