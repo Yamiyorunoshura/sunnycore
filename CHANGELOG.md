@@ -7,6 +7,18 @@
 
 ## [Unreleased]
 
+## [3.10.2] - 2025-10-12
+
+### Changed
+- 優化對話壓縮指引系統：在 `claude code/CLAUDE.md` 中重構 Summary Instructions,提升壓縮規則的系統性與可操作性
+  - 移除 GUIDANCE 10 和 GUIDANCE 11：關於結構定義保留和任務結論格式的指引
+  - 新增完整的 Summary Instructions 章節：定義對話壓縮時的內容保留與丟棄規則
+    * KEEP 類別：核心執行結構必須完整保留 (GUIDANCE、Tagged Structure Definitions、Template Core Structure、Agent Metadata)
+    * MAY IGNORE 類別：輔助理解內容,根據上下文相關性條件保留 (Examples、Decision-Criteria、Error-Handling、Guidelines 等)
+    * IGNORE 類別：非執行內容可完全省略 (Mermaid diagrams、Configuration instructions、Visual elements 等)
+  - 新增 Compression Principles：5 條壓縮原則 (優先級排序、上下文依賴、結構完整性、執行導向、未標記內容處理)
+  - 提升 AI 對話壓縮的精確度與 token 使用效率
+
 ## [3.10.1] - 2025-10-11
 
 ### Fixed
