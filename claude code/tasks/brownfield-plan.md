@@ -21,18 +21,22 @@
   1. Issue Analysis & Planning
     - Understand issues from review report and architecture context
     - Formulate atomic fix tasks based on analysis
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" for progress tracking (this is the ONLY temporary tracking document)
     - Outcome: Clear understanding of issues, fix plan created, and plan.md initialized
 
   2. Test-Driven Fix Implementation
-    - Establish progress tracking for fixes
+    - Establish progress tracking for fixes in plan.md
     - Implement fixes ensuring all tests pass (RED → GREEN → REFACTOR)
-    - Outcome: All unit tests and integration tests passing
+    - Execute tests and verify all pass after each phase
+    - Update plan.md with implementation progress and test results
+    - Note: Do NOT create separate phase result documents (red-phase-test-result.md, green-phase-test-result.md, etc.); record all status in plan.md only
+    - Outcome: All unit tests and integration tests passing, status recorded in plan.md
 
   3. Documentation & Summary
     - Create comprehensive fix summary with evidence
     - Read existing development notes at "{DEVNOTES}/{task_id}-dev-notes.md"
     - Update existing dev notes with fix summary (do not create new file)
+    - Note: Only update the existing dev-notes.md; plan.md is temporary and will be deleted
     - Outcome: Fix summary completed and development notes updated
 
 ## [Progress-Tracking-Guidelines]

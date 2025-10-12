@@ -7,6 +7,39 @@
 
 ## [Unreleased]
 
+## [3.21.0] - 2025-10-12
+
+### Added
+- 優化驗證流程說明：為所有角色和任務檔案新增更清晰的驗證器使用指引
+  - 更新 `claude code/CLAUDE.md` GUIDANCE 24：從「GUIDANCE 24」改為「GUIDANCE 24: Step and Task Completion Validation」
+    * 明確區分 step-validator 和 completion-validator 的職責與使用時機
+    * 澄清 step-validator 用於驗證個別步驟成果，completion-validator 用於驗證整體任務完成度（DoD 達成）
+    * 強調不可混淆兩個驗證器或在驗證失敗後標記步驟完成
+  - 更新所有 5 個角色命令檔案的 Checklist 項目：
+    * `claude code/commands/sunnycore_architect.md`
+    * `claude code/commands/sunnycore_dev.md`
+    * `claude code/commands/sunnycore_pm.md`
+    * `claude code/commands/sunnycore_po.md`
+    * `claude code/commands/sunnycore_qa.md`
+    * 從「Call step-validator subagent after each step」改為「Call step-validator after completing each individual step (to verify step outcomes)」
+    * 從「Call completion-validator subagent at the end of the workflow」改為「Call completion-validator only after finishing the entire task workflow (to verify DoD achievement)」
+  - 新增臨時文件管理說明至所有任務檔案：
+    * `claude code/tasks/brownfield-plan.md`
+    * `claude code/tasks/develop-plan.md`
+    * `claude code/tasks/develop-prd.md`
+    * `claude code/tasks/fix-acceptance-issues.md`
+    * 明確標註 plan.md 為「ONLY temporary tracking document」
+    * 新增「Do NOT create separate phase result documents」警告，避免產生多餘的臨時檔案
+    * 強調所有執行狀態應記錄在 plan.md，永久文件僅保留 dev-notes.md
+  - 提升驗證流程的清晰度與一致性，避免驗證器職責混淆
+- 新增自動清理機制：completion-validator 驗證通過後自動刪除臨時 plan.md
+  - 更新 `claude code/agents/completion-validator.md` 步驟 6：從「Progress Update (Only on PASS)」改為「Progress Update and Cleanup (Only on PASS)」
+    * 新增「Delete the temporary plan.md file at "{root}/docs/plan.md" (if exists)」到進度更新步驟
+    * 確保任務完成後自動清理臨時進度追蹤文件
+  - 更新 DoD 檢查項：新增「Temporary plan.md file deleted at "{root}/docs/plan.md" if validation PASS」
+  - 更新輸出範例：在 Progress tracking updated 區段新增「Temporary plan.md file deleted」確認訊息
+  - 避免臨時文件累積，保持專案目錄整潔
+
 ## [3.20.0] - 2025-10-12
 
 ### Added
