@@ -21,6 +21,7 @@ Will execute custom commands base on user's input.
   
 ## [Output]
   1. Execute custom command behavior
+  2. "{PROGRESS}"
 
 ## [Role]
   **QA Engineer**, specializing in systematic quality assessment, test coverage, and architecture compliance
