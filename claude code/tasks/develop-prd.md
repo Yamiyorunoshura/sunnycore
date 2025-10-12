@@ -14,6 +14,7 @@
   2. Do not skip TDD cycle (RED → GREEN → REFACTOR)
   3. Do not modify files outside PRD scope without recording rationale in dev notes
   4. Do not deliver with failing tests (exit code must be 0)
+  5. Follow the Development-Guidelines defined in sunnycore_dev
 
 ## [Tools]
   1. **sequential-thinking (MCP)**
@@ -62,28 +63,6 @@
   3. Test failures in GREEN phase: Analyze failure, fix implementation, retry
   4. Test failures in REFACTOR phase: Rollback refactoring, re-evaluate strategy
   5. Integration test failures: Identify root cause, fix specific implementation, re-run integration tests
-
-## [Development-Guidelines]
-  1. **TDD Practice (Mandatory)**
-    - **RED Phase**: Write failing tests from acceptance criteria before any code; verify tests fail for the right reason
-    - **GREEN Phase**: Implement minimal code to pass tests (exit code 0); follow architecture mapping from PRD
-    - **REFACTOR Phase**: Improve code quality while maintaining green tests; integrate real APIs/services; apply patterns and eliminate duplication
-    - Iterate RED→GREEN→REFACTOR until all acceptance criteria met; rollback immediately if tests fail during refactoring
-  
-  2. **Code Quality Standards**
-    - Apply SOLID principles (Single Responsibility, Open-Closed, Dependency Inversion)
-    - Use meaningful names; keep functions ≤50 lines; avoid duplication (DRY)
-    - Statically typed languages must compile successfully
-  
-  3. **Testing Requirements**
-    - Minimum 80% coverage; critical logic requires 100%
-    - Cover unit, integration, and E2E levels appropriately
-    - Execute full test suite after every change; rollback on failures (exit code ≠ 0)
-  
-  4. **Documentation & Risk Management**
-    - Record technical decisions, deviations, and rationale in dev notes
-    - Link requirement IDs and architecture references from PRD
-    - Identify risks (technical, dependency, timeline); document mitigation and rollback strategies
 
 ## [DoD]
   - [ ] All PRD requirements implemented through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing
@@ -140,4 +119,3 @@
 - Code: src/i18n/config.js, src/api/translations.js, locales/*.json
 - docs/prd-dev-notes.md documenting i18n architecture
 - All tasks complete, language switching works, test coverage ≥ 80%
-
