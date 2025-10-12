@@ -27,8 +27,12 @@
 - **TDD 開發流程**: 內建測試驅動開發最佳實踐
 - **質量保證機制**: 多維度代碼審查和品質檢查
 - **模板化管理**: 標準化的開發文檔和流程模板
-- **驗證鏈鎖控管**: GUIDANCE 25 強制所有角色於每個步驟後執行 step-validator，任務結束需等待 completion-validator PASS
-- **里程碑追蹤**: 詳細的執行進度和檢查點管理
+- **驗證鏈鎖控管**: 
+  - GUIDANCE 25 強制所有角色於每個步驟後執行 step-validator，任務結束需等待 completion-validator PASS
+  - 所有角色在工作流程開始時必須記錄進度至 `docs/progress.md`
+  - 每個步驟完成後必須調用 step-validator 並通過驗證才能繼續
+  - 工作流程結束時必須調用 completion-validator 並通過驗證
+- **里程碑追蹤**: 詳細的執行進度和檢查點管理，所有角色統一記錄至 `docs/progress.md`
 
 ### 🎯 工作範圍約束機制 (v3.10.0 新增)
 - **明確職責邊界**: 每個角色和子代理都有明確定義的工作範圍

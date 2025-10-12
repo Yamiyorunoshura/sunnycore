@@ -7,6 +7,30 @@
 
 ## [Unreleased]
 
+## [3.16.0] - 2025-10-12
+
+### Changed
+- 強化角色命令驗證流程：優化所有 6 個角色命令檔案的職責定義與檢查清單
+  - 更新 `claude code/commands/sunnycore_architect.md`：職責從工具使用改為進度記錄，DoD 改為 Checklist 並新增驗證要求
+    * Scope-of-Work 更新：「Tool usage as specified in task [Tools] sections」→「Record the progress of the tasks」
+    * DoD 重構為 Checklist：新增三項檢查要求（進度記錄、step-validator 調用、completion-validator 調用）
+  - 更新 `claude code/commands/sunnycore_assistant.md`：職責從工具使用改為 GUIDANCE 遵循與進度記錄
+    * 約束條款調整：移除工具使用約束，改為強調 GUIDANCE 遵循
+    * DoD 新增驗證要求：新增進度記錄、step-validator 調用、completion-validator 調用檢查項
+  - 更新 `claude code/commands/sunnycore_dev.md`：職責從工具使用改為進度記錄，DoD 改為 Checklist 並新增驗證要求
+    * Scope-of-Work 更新：「Tool usage as specified in task [Tools] sections」→「Record the progress of the tasks」
+    * DoD 重構為 Checklist：新增三項檢查要求（進度記錄、step-validator 調用、completion-validator 調用）
+  - 更新 `claude code/commands/sunnycore_pm.md`：職責從工具使用改為進度記錄，DoD 改為 Checklist 並新增驗證要求
+    * Scope-of-Work 更新：「Tool usage as specified in task [Tools] sections」→「Record the progress of the tasks」
+    * DoD 重構為 Checklist：新增三項檢查要求（進度記錄、step-validator 調用、completion-validator 調用）
+  - 更新 `claude code/commands/sunnycore_po.md`：職責從工具使用改為進度記錄，DoD 改為 Checklist 並新增驗證要求
+    * Scope-of-Work 更新：「Tool usage as specified in task [Tools] sections」→「Record the progress of the tasks」
+    * DoD 重構為 Checklist：新增三項檢查要求（進度記錄、step-validator 調用、completion-validator 調用）
+  - 更新 `claude code/commands/sunnycore_qa.md`：DoD 新增驗證要求
+    * Scope-of-Work 更新：「Tool usage as specified in task [Tools] sections」→「Record the progress of the tasks」
+    * DoD 新增三項檢查要求：進度記錄、step-validator 調用、completion-validator 調用
+  - 提升任務執行的可追蹤性與完成度驗證的一致性
+
 ## [3.15.1] - 2025-10-12
 
 ### Changed
