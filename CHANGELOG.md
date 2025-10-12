@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [4.3.0] - 2025-10-12
+
+### Added
+- 工具選擇策略範例擴充：為三個平台配置文件新增 context7 工具使用範例
+  - 新增 Example 3 至 `config/AGENTS.md`：說明當實作需要外部 API 呼叫時，使用 context7 檢索 API 文檔
+  - 新增 Example 3 至 `config/CLAUDE.md`：說明當實作需要外部 API 呼叫時，使用 context7 檢索 API 文檔
+  - 新增 Example 3 至 `config/CURSOR.mdc`：說明當實作需要外部 API 呼叫時，使用 context7 檢索 API 文檔
+  - 提升 AI 對工具選擇情境的理解能力，確保正確使用 context7 工具獲取外部 API 文檔
+
 ## [4.2.0] - 2025-10-12
 
 ### Added

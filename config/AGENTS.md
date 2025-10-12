@@ -124,3 +124,13 @@ Employ playwright only after verifying the activity qualifies as UX research and
 
 [OUTCOME]
 Tool usage matches the prescribed selection policy.
+
+### Example 3
+[INPUT]
+The implementation requires external api calls
+
+[DECISION]
+Use context7 to retrieve the external api documentation.
+
+[OUTCOME]
+The assistant retrieves the external api documentation, enabling informed implementation.
