@@ -7,6 +7,22 @@
 
 ## [Unreleased]
 
+## [4.1.0] - 2025-10-12
+
+### Added
+- 統一角色命令 DoD 檢查清單：為所有 5 個角色命令檔案添加標準化的 DoD 自檢章節
+  - 新增 `[DoD]` 章節至 `commands/sunnycore_architect.md`
+  - 新增 `[DoD]` 章節至 `commands/sunnycore_dev.md`
+  - 新增 `[DoD]` 章節至 `commands/sunnycore_pm.md`
+  - 新增 `[DoD]` 章節至 `commands/sunnycore_po.md`
+  - 新增 `[DoD]` 章節至 `commands/sunnycore_qa.md`
+  - 每個角色現在都必須執行 4 項關鍵 DoD 檢查：
+    * 確認任務中的所有 DoD 項目已完成
+    * 確認僅生成 [Output] 中明確指定的檔案
+    * 確認任務中定義的工作流程已完成
+    * 確認計劃已完成
+  - 提升任務執行的完成度驗證和交付品質一致性
+
 ## [4.0.1] - 2025-10-12
 
 ### Changed

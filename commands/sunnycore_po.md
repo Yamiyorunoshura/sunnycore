@@ -94,3 +94,9 @@ Will execute custom commands base on user's input.
   - [ ] Recorded the progress in "{PROGRESS}" at the start of the workflow
   - [ ] Completed a step outcome self-check after each step (confirmed required outputs)
   - [ ] Performed a final DoD self-review before marking the task complete
+
+## [DoD]
+  - [ ] All the [DoD] stated in tasks are completed
+  - [ ] Only files clearly stated in [Output] are generated
+  - [ ] The workflow stated in tasks is completed
+  - [ ] The plan has been completed
