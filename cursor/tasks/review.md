@@ -49,10 +49,12 @@
     - Outcome: Dev notes alignment confirmed
 
   4. Report Generation & Decision
-    - Create complete review report at "{REVIEW}/{task_id}-review.md"
+    - Check if "{REVIEW}/{task_id}-review.md" already exists
+    - If exists: Read existing review and update it with new findings while preserving structure
+    - If not exists: Create new review report from template
     - Make acceptance decision (Accept/Accept with changes/Reject) with rationale
     - Update "{EPIC}" based on review outcome
-    - Outcome: Review report completed and epic updated
+    - Outcome: Review report completed (created or updated) and epic updated
 
 ## [Domain-Specific-Review-Guidelines]
   

@@ -39,6 +39,9 @@ This file provides guidance when working with code in this repository.
 ## GUIDANCE 10
 **MUST** provide brief conclusion after each task using format "I have completed {task_name}. To {purpose}, I am going to {next_task}", **MUST NOT** skip task conclusions or conclude with incorrect format
 
+## GUIDANCE 11: Output File Management
+**MUST** check if output files already exist before generating content; if exist, **MUST** read and update them rather than creating new files, **MUST NOT** create duplicate files or ignore existing content. When updating, preserve existing structure and enhance/correct content based on new requirements.
+
 ---
 
 ## Template Usage Guide

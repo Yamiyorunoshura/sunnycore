@@ -7,6 +7,21 @@
 
 ## [Unreleased]
 
+## [3.11.0] - 2025-10-12
+
+### Added
+- 新增輸出文件管理機制：在 AI 指引系統中新增文件存在性檢查要求
+  - 新增 `claude code/CLAUDE.md` GUIDANCE 23 - Output File Management
+    * 要求 AI 在生成內容前必須檢查輸出文件是否已存在
+    * 如果存在，必須讀取並更新現有文件，而非創建新文件
+    * 更新時需保留現有結構並基於新需求增強/修正內容
+  - 新增 `cursor/cursor.mdc` GUIDANCE 11 - Output File Management（與 CLAUDE.md GUIDANCE 23 相同）
+  - 更新 4 個任務文件：在 brownfield-plan、develop-plan、review 中新增文件管理約束與步驟
+    * `brownfield-plan.md`：新增約束條款 4 - 禁止創建新 dev-notes 文件，必須更新現有文件
+    * `develop-plan.md`：新增驗證與文檔步驟 - 檢查 dev-notes 是否存在，存在則更新，不存在則創建
+    * `review.md`：新增報告生成步驟 - 檢查 review 報告是否存在，存在則讀取並更新，不存在則創建
+  - 提升文件管理的一致性與內容延續性，避免重複創建文件導致信息丟失
+
 ## [3.10.2] - 2025-10-12
 
 ### Changed

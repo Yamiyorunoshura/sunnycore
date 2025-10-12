@@ -49,8 +49,10 @@
 
   5. Validation & Documentation
     - Validate all acceptance criteria are met
-    - Create complete development notes at "{DEVNOTES}/{task_id}-dev-notes.md"
-    - Outcome: Acceptance criteria met and dev notes completed
+    - Check if "{DEVNOTES}/{task_id}-dev-notes.md" already exists
+    - If exists: Update existing dev notes with new implementation details
+    - If not exists: Create new dev notes from template
+    - Outcome: Acceptance criteria met and dev notes completed (created or updated)
 
 ## [Development-Guidelines]
   1. **TDD Practice (Mandatory)**
