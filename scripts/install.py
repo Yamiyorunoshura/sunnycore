@@ -325,6 +325,7 @@ class SunnycoreInstaller:
             ("claude code/tasks", sunnycore_dir / "tasks"),
             ("claude code/templates", sunnycore_dir / "templates"),
             ("claude code/scripts", sunnycore_dir / "scripts"),
+            ("claude code/packages", sunnycore_dir / "packages"),
         ]
         
         # 單獨下載的文件
