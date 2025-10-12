@@ -12,6 +12,7 @@
   1. "{KNOWLEDGE}/*.md" --Knowledge base (create directory first if it does not exist)
     - Document organization: May produce "best-practices.md", "errors.md" based on actual content, or subdivide by domain/type
     - Content allocation: One entry per platinum practice, one entry per error case
+  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not include non-platinum practices as best practices (only use marked platinum from reviews)

@@ -12,6 +12,7 @@
     - Format: Use ATX headings; numbered lists; explicit requirement/architecture mapping sections
     - Content: Breaks down feature-level tasks into atomic implementation steps across TDD RED/GREEN/REFACTOR phases
     - Example: "{PLAN}/1-plan.md", "{PLAN}/2-plan.md", "{PLAN}/3-plan.md", etc.
+  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not fabricate requirements or tasks not in source documents

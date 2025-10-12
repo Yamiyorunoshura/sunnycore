@@ -7,6 +7,7 @@
 
 ## [Output]
   1. Completion report: "{root}/docs/completion-report.md" (Markdown format)
+  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not omit any of the 5 core content items (decisions, tech choices, issues/solutions, evidence, recommendations)

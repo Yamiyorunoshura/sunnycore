@@ -7,6 +7,15 @@
 
 ## [Unreleased]
 
+## [3.18.0] - 2025-10-12
+
+### Added
+- 新增統一進度追蹤輸出項目：為所有 19 個任務檔案新增 `plan.md` 臨時文件輸出
+  - 新增 `"{root}/docs/plan.md"` 作為任務執行時的進度追蹤文件
+  - 涵蓋任務：brownfield-plan、conclude、consult、create-architecture、create-brownfield-architecture、create-epic、create-plan、create-prd、create-requirements、curate-knowledge、cutover、develop-plan、develop-prd、document-project、fix-acceptance-issues、fix-design-conflicts、init、review、validate-design
+  - 臨時文件設計：任務完成後將被刪除，僅用於執行過程中的進度追蹤
+  - 提升任務執行的可追蹤性與進度管理一致性
+
 ## [3.17.0] - 2025-10-12
 
 ### Added

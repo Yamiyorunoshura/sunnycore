@@ -13,7 +13,8 @@
   1. "{root}/docs/architecture.md" --Integrated architecture document (Markdown format)(temporary, will be sharded)
   2. "{ARCH}/*.md" --Sharded architecture documents (Markdown format)
   3. "{root}/CLAUDE.md" --Updated project guidance document with refreshed document index
-
+  4. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 ## [Constraints]
   1. Do not base updates on original design (must use actual implementation state)
   2. Do not produce content without source references (source_refs)

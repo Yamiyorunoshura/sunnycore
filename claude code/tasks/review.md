@@ -8,6 +8,7 @@
 ## [Output]
   1. "{REVIEW}/{task_id}-review.md" (Markdown format)
   2. "{EPIC}"
+  3. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not skip test execution (if tests missing or fail to run, mark as Reject)

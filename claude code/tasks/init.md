@@ -10,6 +10,7 @@
   2. Initialized development environment (such as virtual environment, database, toolchain, etc.)
   3. Complete directory structure (extracted from work-directory-structure in {ARCH}/*.md)
   4. Minimal runnable application (Hello World level entry point with verified startup)
+  5. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not add tools or configurations not explicitly required in architecture documents

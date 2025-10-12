@@ -8,6 +8,7 @@
 
 ## [Output]
   1. "{PRD}" --Complete Product Requirements Document (Markdown format)
+  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not misidentify project type (Greenfield/Brownfield)

@@ -11,6 +11,7 @@
   1. "{root}/docs/cutover-fixes-dev-notes.md" --Development notes for fixes (Markdown format)
   2. Fixed code implementation
   3. Updated documentation if needed
+  4. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
 
 ## [Constraints]
   1. Do not leave any cutover issues unaddressed

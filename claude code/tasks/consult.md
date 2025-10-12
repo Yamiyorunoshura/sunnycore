@@ -6,6 +6,7 @@
 
 ## [Output]
   1. Simple workflow recommendation (which command to use)
+  
 
 ## [Constraints]
   1. Do not misidentify project type (Greenfield/Brownfield)

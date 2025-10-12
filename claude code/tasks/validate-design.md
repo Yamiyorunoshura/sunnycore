@@ -11,7 +11,8 @@
 
 ## [Output]
   1. "{root}/docs/design-validation.md" --Comprehensive validation report
-
+  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 ## [Constraints]
   1. Do not process workflow parameters other than "prd" or "full"
   2. Do not skip any validation check type (fabrication, conflicts, coverage, consistency)
