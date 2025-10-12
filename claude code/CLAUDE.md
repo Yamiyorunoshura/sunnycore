@@ -31,12 +31,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## GUIDANCE 9: Template Output Format
 **MUST** generate final output files in pure markdown format without any YAML fields or structure, **MUST NOT** include YAML syntax in the generated documents
 
-## GUIDANCE 10
-**MUST** preserve all structural definitions and all the guidance during conversation compression, **MUST NOT** discard structural definitions (Constraints, Tools, Output, DoD, Guidelines)
-
-## GUIDANCE 11
-**MUST** provide brief conclusion after each task using format "I have completed {task_name}. To {purpose}, I am going to {next_task}", **MUST NOT** skip task conclusions or conclude with incorrect format
-
 ## GUIDANCE 12: [Steps] Tag
 **MUST** execute all steps sequentially without stopping with their sub-tasks and achieve stated outcomes, **MUST NOT** skip steps or reorder unless dependencies require
 
@@ -150,3 +144,71 @@ Generate markdown like:
 - **Completeness matters**: Address all instruction points, don't skip guidance
 - **Markdown is output**: Always generate clean, readable markdown documents
 - **Context awareness**: Use project-specific information to fill in template placeholders
+
+---
+
+# Summary Instructions
+
+When performing compact conversation compression, use the following classifications to determine what to keep, conditionally keep, or ignore:
+
+## KEEP
+
+**Core execution structures that MUST be fully preserved:**
+
+### GUIDANCE Rules
+- GUIDANCE 1-24 (all core execution rules)
+
+### Tagged Structure Definitions
+- [Description] - Command/task/agent descriptions
+- [Path-Variables] - Path variable definitions
+- [Input] - Input requirements
+- [Output] - Output requirements
+- [Role] - Role definitions
+- [Skills] - Skill requirements
+- [Scope-of-Work] - Work scope boundaries
+- [Constraints] - Execution constraints (hard rules)
+- [DoD] - Definition of Done checklists
+- [Steps] - Execution steps with their Outcomes
+- [Tools] - Tool usage guidance
+- [Blocking-Conditions] - Blocking conditions
+- [Custom-Commands] - Custom command lists
+- [Validation-Steps] - Validation steps
+
+### Template Core Structure
+- template metadata (id, name, version, output)
+- sections (id, title, repeatable, instruction)
+- Template Structure Overview (how to read and generate)
+
+### Agent Metadata
+- YAML front matter (name, description, model, color)
+
+## MAY IGNORE
+
+**Auxiliary content for understanding but not core to execution; conditionally preserve:**
+
+- [Examples] - Example explanations (preserve based on context relevance)
+- [Decision-Criteria] & [Decision-Rules] - Decision criteria (preserve if current task involves decision-making)
+- [Error-Handling] - Error handling strategies (preserve if encountering related errors)
+- [*-Guidelines] tags - Domain-specific guidelines (e.g., Development-Guidelines, Requirements-Analysis-Guidelines)
+  - Preserve if current step involves that domain
+  - Otherwise may omit
+- Detailed explanation paragraphs in Template Usage Guide
+
+## IGNORE
+
+**Non-execution content that can be completely omitted:**
+
+- Mermaid diagrams in README.md
+- Tabular explanations in README.md (workflow selection guides, role responsibility tables)
+- Configuration instructions (MCP server config, dependency lists)
+- Detailed annotations and example outputs in Templates
+- Complete example demonstrations in Example sections (full Input/Decision/Outcome examples)
+- Visual elements in workflow descriptions (emojis, charts)
+
+## Compression Principles
+
+1. **Priority ordering**: KEEP > MAY IGNORE > IGNORE
+2. **Context-dependent**: MAY IGNORE category decisions are dynamic based on current task/step being executed
+3. **Structural integrity**: When preserving KEEP category content, maintain original tag structure and hierarchy
+4. **Execution-oriented**: All definitions and constraints directly related to task execution must be preserved
+5. **Unlabeled content**: For other conversation content not explicitly categorized above (e.g., generated code, chat messages, user interactions, intermediate outputs), use your judgment to determine whether to preserve based on relevance to ongoing tasks and context continuity
