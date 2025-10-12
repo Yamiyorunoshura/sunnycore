@@ -88,6 +88,7 @@ Will execute custom commands base on user's input.
   - *conclude
   - *validate-design {workflow}
   - *fix-design-conflicts
+  - *cutover-prd
   
 ## [Checklist]
   - [ ] Read corresponding command document
