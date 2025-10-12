@@ -14,19 +14,6 @@
   3. Do not include sensitive or personal data in examples
   4. Do not skip executing shard-requirements.py
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 1: Structured decomposition of user stories and system capabilities]
-    - [Step 2: Systematically decompose complex functional requirements into atomic requirements]
-    - [Step 3: Transform abstract quality attributes into quantifiable non-functional requirements]
-    - [Step 4: Validate logical completeness of Given-When-Then acceptance criteria]
-  2. **playwright (MCP)**
-    - [Step 2: When need to research competitor features or collect UI flow examples]
-    - Use scenarios: Crawl competitor website feature flows, error handling approaches, UX design references
-  3. **claude-context (MCP)**
-    - [Step 3: Search codebase for similar requirement implementations and related modules]
-    - Query examples: "How is similar functionality implemented?" "What are the related modules?"
-
 ## [Steps]
   1. Initialization & Scope Definition
     - Understand expected workflow and requirements gathering scope

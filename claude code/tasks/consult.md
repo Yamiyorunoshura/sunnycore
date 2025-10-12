@@ -13,22 +13,6 @@
   3. Do not provide verbose analysis unless explicitly requested
   4. Do not recommend workflows that violate Decision-Criteria
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 2: Systematically decompose requirement scope and impact surface]
-    - When to use: When need to assess requirement impact on existing system and estimate task complexity
-    - [Step 3: Branch reasoning for PRD workflow vs Full workflow applicability]
-    - When to use: When requirement scope is unclear or difficult to determine if architecture changes are needed
-  2. **claude-context (MCP)**
-    - [Step 2: When project is Brownfield, search existing architecture boundaries and public contracts]
-    - Query examples: "What are the public API interfaces?" "Where are the integration points?" "How are module boundaries defined?"
-  3. **context7 (MCP)**
-    - [Step 2: Requirement Analysis Phase - Query API documentation when assessing technical feasibility]
-    - When to use: When need to verify if external APIs support required functionality
-  4. **playwright (MCP)**
-    - [Step 2: Requirement Analysis Phase - Research competitor product implementations]
-    - When to use: When need to study how similar features are implemented in existing products
-
 ## [Steps]
   1. Initialization & Context Gathering
     - Determine project type (Greenfield/Brownfield)

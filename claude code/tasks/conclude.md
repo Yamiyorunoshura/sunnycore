@@ -14,16 +14,6 @@
   3. Do not move architecture/, knowledge/, or completion-report.md during archiving
   4. Do not proceed if required input files are missing (must list missing files and halt)
 
-## [Tools]
-  1. **sequential-thinking (MCP)**: Perform structured reasoning and verification
-    - [Step 2: Reason about report conception and content organization]
-    - [Step 3: Verify if DoD is satisfied]
-    - When to use: When need to structure complex completion report or validate completeness
-  2. **claude-context (MCP)**: Search codebase to locate implementation details
-    - [Step 2: Find relevant code for evidence]
-    - [Step 3: Precise keyword search for implementation verification]
-    - Note: If not indexed or search fails, switch to grep tool for keyword search, or annotate "Unable to locate code evidence" and continue
-
 ## [Steps]
   1. Input Validation & Setup
     - Parse version number from lock file

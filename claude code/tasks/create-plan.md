@@ -19,19 +19,6 @@
   3. Do not proceed if conflicts or missing files are found (must record and request clarification)
   4. Do not ignore knowledge base best practices when planning
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 1: Analyze requirements and task complexity]
-    - [Step 2: Plan RED phase - test and acceptance criteria design]
-    - [Step 3: Plan GREEN phase - minimal implementation step design]
-    - [Step 4: Plan REFACTOR phase - refactoring and optimization work identification]
-    - When to use: When need to decompose complex tasks or design TDD workflow
-  2. **claude-context (MCP)**
-    - [Step 1: Search for relevant implementation references (if needed)]
-  3. **context7 (MCP)**
-    - [Step 3: Plan GREEN phase - When need to query official API usage and examples for external packages]
-    - When to use: When implementation involves external SDK integration or need to verify package compatibility
-
 ## [Steps]
   1. Setup & Context Understanding
     - Understand all requirements, architecture, and task scope

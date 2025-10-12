@@ -16,18 +16,6 @@
   3. Do not break existing functionality during fixes
   4. Follow the Development-Guidelines defined in sunnycore_dev
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 1: Analyze problems and architecture context]
-    - [Step 2: Reason about code fix strategies]
-  2. **claude-context (MCP)**
-    - [Step 1: Search existing implementations to understand codebase structure]
-    - [Step 2: Search fix-related code]
-    - Query examples: "What is the existing implementation?" "How to integrate with existing system?"
-  3. **context7 (MCP)**
-    - [Step 2: Fix Phase - When fixes involve external API calls or integration issues]
-    - When to use: When need to verify correct API usage or find official troubleshooting guides
-
 ## [Steps]
   1. Issue Analysis & Planning
     - Understand issues from review report and architecture context

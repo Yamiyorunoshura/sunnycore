@@ -16,18 +16,6 @@
   4. Do not update epic with incorrect status or score
   5. **Do not accept ANY production code containing mock/stub implementations or hardcoded values, regardless of score** (auto-Reject, but unit tests using mocks/hardcoded test data are allowed)
 
-## [Tools]
-  1. **sequential-thinking (MCP)** - Structured reasoning tool for complex logic analysis
-    - [Step 1: Identify task domain and select review criteria]
-    - [Step 2-4: Reason about domain-specific scoring logic, issue prioritization, and decision rationale]
-    - When to use: When need complex code quality assessment or architecture alignment analysis
-  2. **claude-context (MCP)** - Codebase semantic search and indexing tool
-    - [Step 1-2: Search codebase for implementation plan-related code (if needed)]
-    - [Step 2: Search for relevant test cases and implementation patterns]
-  3. **context7 (MCP)**
-    - [Step 2: Code and Test Review Phase - Verify external API usage correctness]
-    - When to use: When reviewing code that integrates with external services or SDKs
-
 ## [Steps]
   1. Review Planning & Domain Identification
     - Understand implementation plan to identify task domain and establish scope of review

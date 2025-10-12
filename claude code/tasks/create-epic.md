@@ -13,12 +13,6 @@
   2. Do not include operational actions unless explicitly requested
   3. Do not use spaces in file names/paths (use kebab-case)
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 1: Analyze requirement complexity and task dependencies]
-    - [Step 2: Design feature-level tasks with logical grouping]
-    - When to use: When need to decompose complex requirements or identify task dependencies
-
 ## [Steps]
   1. Research & Planning
     - Understand requirements, architecture, and project scope

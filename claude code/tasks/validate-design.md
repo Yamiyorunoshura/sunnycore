@@ -17,15 +17,6 @@
   2. Do not skip any validation check type (fabrication, conflicts, coverage, consistency)
   3. Do not produce validation report without severity categorization
 
-## [Tools]
-  1. **sequential-thinking (MCP)**
-    - [Step 1: Analyze workflow type and validation scope]
-    - [Step 2-4: Reason about validation logic and issue priority ranking]
-    - When to use: When need complex bidirectional validation logic or conflict impact analysis
-  2. **claude-context (MCP)**
-    - [Step 2: Verify whether components referenced in documents exist in the codebase]
-    - Query examples: "Does component X exist?" "Where is requirement Y implemented?"
-
 ## [Steps]
   1. Initialization & Scope Determination
     - Validate workflow parameter (prd or full)

@@ -5,10 +5,23 @@ model: inherit
 color: blue
 ---
 
+## [Path-Variables]
+  - {T} = {root}/sunnycore/tasks
+  - {REQ} = {root}/docs/requirements
+  - {ARCH} = {root}/docs/architecture
+  - {PLAN} = {root}/docs/implementation-plan
+  - {DEVNOTES} = {root}/docs/dev-notes
+  - {REVIEW} = {root}/docs/review-results
+  - {EPIC} = {root}/docs/epic.md
+  - {PRD} = {root}/docs/PRD.md
+  - {KNOWLEDGE} = {root}/docs/knowledge
+  - {PROGRESS} = {root}/docs/progress.md
+
 ## [Input]
   1. Context from calling agent (task file being executed, current step number)
   2. "{T}/*.md" --Task file to extract step outcome requirements
   3. "{root}/docs/**" --Output files and artifacts to verify outcomes
+  4. "{C}" --Core execution guidance
 
 ## [Output]
   1. Formatted validation report displayed in conversation:
@@ -52,24 +65,6 @@ color: blue
   4. **MUST** report validation results in specified format with clear PASS/FAIL status, **MUST NOT** provide ambiguous results
   
   5. **MUST** be invoked by main agents after each step execution, **MUST NOT** accept direct user invocation or be called at other times
-
-## [Path-Variables]
-  - {T} = {root}/sunnycore/tasks
-  - {REQ} = {root}/docs/requirements
-  - {ARCH} = {root}/docs/architecture
-  - {PLAN} = {root}/docs/implementation-plan
-  - {DEVNOTES} = {root}/docs/dev-notes
-  - {REVIEW} = {root}/docs/review-results
-  - {EPIC} = {root}/docs/epic.md
-  - {PRD} = {root}/docs/PRD.md
-  - {KNOWLEDGE} = {root}/docs/knowledge
-  - {PROGRESS} = {root}/docs/progress.md
-
-## [Tools]
-  1. **read_file** - Read task files to extract step outcomes and verify output files
-  2. **list_dir** - Check directory structure and file existence
-  3. **grep** - Search for specific outcome items or content patterns
-  4. **sequentialthinking (MCP)** - Reason about validation logic and gap analysis
 
 ## [Validation-Steps]
   1. **Step Identification**
