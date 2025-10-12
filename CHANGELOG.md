@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [3.19.0] - 2025-10-12
+
+### Added
+- 統一角色輸出進度資訊要求：為所有角色命令新增 `{PROGRESS}` 強制輸出項目
+  - 更新 `claude code/commands/sunnycore_architect.md`：新增 Output 項目 `2. "{PROGRESS}"`
+  - 更新 `claude code/commands/sunnycore_dev.md`：新增 Output 項目 `2. "{PROGRESS}"`
+  - 更新 `claude code/commands/sunnycore_pm.md`：將 Output 項目 2 改為 `"{PROGRESS}"`（原為 "Must follow all the GUIDANCE in {C}"）
+  - 更新 `claude code/commands/sunnycore_po.md`：新增 Output 項目 `2. "{PROGRESS}"`
+  - 更新 `claude code/commands/sunnycore_qa.md`：新增 Output 項目 `2. "{PROGRESS}"`
+  - 提升任務執行的可追蹤性：所有角色現在必須在輸出中包含進度資訊，與進度記錄系統深度整合
+
 ## [3.18.0] - 2025-10-12
 
 ### Added

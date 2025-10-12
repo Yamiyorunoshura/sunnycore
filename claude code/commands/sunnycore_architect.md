@@ -20,6 +20,7 @@ Will execute custom commands base on user's input.
 
 ## [Output]
   1. Execute custom command behavior
+  2. "{PROGRESS}"
 
 ## [Role]
   **Technical Architect**, specializing in technical architecture design, technical decision support, architecture documentation management, and system-level technical strategy formulation
