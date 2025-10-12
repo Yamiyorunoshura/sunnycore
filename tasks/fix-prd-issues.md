@@ -2,9 +2,8 @@
 
 ## [Input]
   1. "{CUTOVER}" --Cutover report (required)
-  2. "{REQ}/*.md" --Requirement documents (required)
-  3. "{ARCH}/*.md" --Architecture documents (required)
-  4. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template (required)
+  2. "{PRD}" --Product Requirements Document (required, used as primary requirement and architecture source)
+  3. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template (required)
 
 ## [Output]
   1. "{root}/docs/cutover-fixes-dev-notes.md" --Development notes for fixes (Markdown format)
@@ -27,7 +26,7 @@
     - Outcome: Issues prioritized and plan.md initialized
 
   2. Root Cause Analysis & Fix Strategy
-    - Reference requirement and architecture documents for context
+    - Reference PRD for requirements and technical architecture context
     - Conduct complete root cause analysis for all issues
     - Document fix strategies for each issue in plan.md
     - Note: Record analysis in plan.md only; do NOT create separate analysis documents
@@ -35,7 +34,7 @@
 
   3. Fix Planning & Risk Assessment
     - Create comprehensive fix plan for all issues
-    - Complete risk assessment and component identification based on architecture documents
+    - Complete risk assessment and component identification based on PRD
     - Update plan.md with fix plan and risk assessment
     - Note: Record planning in plan.md only; do NOT create separate planning documents
     - Outcome: Detailed fix plan with risk assessment in plan.md
@@ -49,7 +48,7 @@
 
   5. GREEN Phase: Fix Implementation
     - Implement minimal code changes to pass tests
-    - Follow architecture patterns and standards from architecture documents
+    - Follow architecture patterns and standards from PRD
     - Execute tests and verify all pass (exit code 0)
     - Update plan.md with GREEN phase progress (fixes implemented, test results)
     - Note: Do NOT create separate test result documents; record status in plan.md only
@@ -80,7 +79,7 @@
   - Root cause analysis for each issue:
     * Issue ID and description
     * Root cause identified
-    * Affected components/files (reference architecture documents)
+    * Affected components/files (reference PRD)
     * Fix strategy (RED/GREEN/REFACTOR approach)
   - Fix implementation progress for each issue:
     * RED phase (reproduction test created, failing)
@@ -102,21 +101,21 @@
 
 ## [Example]
 
-### Example 1: Data Export Timeout
+### Example 1: Push Notification Failure
 [Input]
-- Cutover report: docs/cutover-report.md (High: CSV export times out for > 1000 rows)
-- Requirements: docs/requirements/functional.md (REQ-003: export up to 10K rows)
-- Architecture: docs/architecture/components.md (Export Service with in-memory processing)
+- Cutover report: docs/cutover-report.md (Critical: push notifications fail, missing FCM server key)
+- PRD: docs/PRD.md (REQ-002: push notification delivery)
 - Template: dev-notes-tmpl.yaml
 
 [Decision]
-- Root cause: In-memory processing causes timeout for large datasets
-- Fix strategy: Implement streaming export instead of loading all data
-- RED: Write test for 10K row export with < 30s timeout (test fails)
-- GREEN: Implement streaming CSV writer (test passes at 12s)
-- REFACTOR: Add progress indicator, optimize database query
+- Root cause: Firebase config incomplete (no server key in .env)
+- Fix strategy: Add FCM_SERVER_KEY to .env, update notification service
+- RED: Write test for notification delivery (test_send_notification fails)
+- GREEN: Add FCM config, implement send logic (test passes)
+- REFACTOR: Add error handling, retry mechanism
 
 [Expected Outcome]
-- Fixed code: src/services/ExportService.js with streaming implementation
-- docs/cutover-fixes-dev-notes.md with performance comparison (before: timeout, after: 12s)
-- Re-run acceptance: Export 10K rows successfully (✓)
+- Fixed code: src/services/NotificationService.js with FCM integration, .env.example with FCM_SERVER_KEY
+- docs/cutover-fixes-dev-notes.md documenting root cause, fix, test results
+- Re-run acceptance test: Push notifications now work (✓)
+

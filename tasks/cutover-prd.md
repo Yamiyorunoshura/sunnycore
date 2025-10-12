@@ -1,9 +1,8 @@
 **GOAL**: Execute project acceptance, validating deliverables from business and user perspectives.
 
 ## [Input]
-  1. "{REQ}/*.md" --Requirement documents (required)
-  2. "{ARCH}/*.md" --Architecture documents (required)
-  3. "{TMPL}/cutover-report-tmpl.yaml" --Cutover report template (required)
+  1. "{PRD}" --Product Requirements Document (required, used as primary requirement and architecture source)
+  2. "{TMPL}/cutover-report-tmpl.yaml" --Cutover report template (required)
 
 ## [Output]
   1. "{CUTOVER}" --Cutover report (Markdown format)
@@ -18,10 +17,9 @@
 
 ## [Steps]
   1. Preparation & Validation
-    - Understand business objectives from requirement documents
-    - Understand system architecture from architecture documents
+    - Understand business objectives and technical architecture from PRD
     - Create plan.md at "{root}/docs/plan.md" for progress tracking
-    - Outcome: Business objectives understood, architecture validated, and plan.md initialized
+    - Outcome: Business objectives and architecture understood from PRD, and plan.md initialized
 
   2. Code Quality Inspection (CRITICAL)
     - **CRITICAL**: Scan ALL production/implementation code for mock/stub/placeholder patterns and hardcoded values (auto-fail if found; note: tests using mocks/hardcoded test data are allowed)
@@ -30,7 +28,7 @@
     - Outcome: Code quality verified, no mock implementations or hardcoded values in production code
 
   3. Configuration Analysis & Documentation
-    - Identify configuration needs based on architecture documents
+    - Identify configuration needs based on PRD technical specifications
     - Document all configuration requirements clearly
     - Outcome: Configuration requirements documented
 
@@ -45,7 +43,7 @@
     - Outcome: Project running with verified functionality
 
   6. Acceptance Testing
-    - Test all critical business requirements from end-user perspective
+    - Test all critical business requirements from PRD from end-user perspective
     - Document comprehensive test results with evidence
     - Record all issues with severity and impact
     - Outcome: Complete acceptance test results documented
@@ -58,8 +56,8 @@
 
 ## [Progress-Tracking-Guidelines]
   **Content for plan.md:**
-  - Business objectives summary from requirement documents (key requirements and success criteria)
-  - Architecture validation (components identified, dependencies verified)
+  - Business objectives summary from PRD (key requirements and success criteria)
+  - Architecture validation from PRD (components identified, dependencies verified)
   - Code quality inspection results:
     * Production code files scanned (list of files)
     * Mock/stub/placeholder detection results (found/not found)
@@ -78,7 +76,7 @@
     * Execution status (success/failed)
     * Execution logs summary
   - Acceptance testing progress:
-    * Critical requirements tested (list with test ID and result)
+    * Critical requirements tested from PRD (list with test ID and result)
     * Issues identified (count and severity: critical/high/medium/low)
     * Test evidence collected (yes/no)
   - Cutover status determination (Success/Partial Success/Failed with rationale)
@@ -94,7 +92,7 @@
     - If mock implementations or hardcoded values found: STOP testing, report as Failed, document findings
   
   2. **End-User Perspective Testing**
-    - Test all critical business requirements from user perspective (not technical testing)
+    - Test all critical business requirements from PRD from user perspective (not technical testing)
     - Verify user workflows are smooth and intuitive
     - Assess error messages clarity and user guidance
   
@@ -109,42 +107,40 @@
     - Assess business impact of each issue
   
   5. **Business Value & Readiness**
-    - Confirm deliverables align with business objectives from requirement documents
+    - Confirm deliverables align with business objectives from PRD
     - Determine cutover status: Success / Partial Success / Failed
     - Assess production deployment readiness and risk
 
 ## [DoD]
   - [ ] **CRITICAL**: All production/implementation code scanned and confirmed NO mock/stub/placeholder code or hardcoded values exist (tests using mocks/hardcoded test data are allowed)
-  - [ ] All critical business requirements tested from end-user perspective with results recorded
+  - [ ] All critical business requirements from PRD tested from end-user perspective with results recorded
   - [ ] Complete cutover report at "{CUTOVER}" with status (Success/Partial Success/Failed) and clear rationale
   - [ ] All issues documented with severity classification and reproduction steps
 
 ## [Example]
 
-### Example 1: API Deployment
+### Example 1: Mobile App Release
 [Input]
-- Requirements: docs/requirements/functional.md (REQ-001: user CRUD, REQ-002: authentication)
-- Architecture: docs/architecture/components.md (Node.js API, PostgreSQL, Redis)
+- PRD: docs/PRD.md (REQ-001: user login, REQ-002: push notifications, REQ-003: offline mode)
 - Template: cutover-report-tmpl.yaml
 
 [Decision]
-- Setup: docker-compose up (PostgreSQL starts, Redis fails - port conflict)
-- Config fix: Change Redis port from 6379 to 6380
-- Run: API server starts successfully on port 3000
-- Test REQ-001: Create user, get user, update user, delete user (✓ all pass)
-- Test REQ-002: Login, token refresh (✓ all pass)
-- Status: Success (all requirements met after config fix)
+- Setup: Install Expo, configure Firebase (successful)
+- Run: expo start (app launches successfully on iOS/Android simulators)
+- Test REQ-001: Login with test credentials (✓ success)
+- Test REQ-002: Send test notification (✗ failed - Firebase config missing)
+- Test REQ-003: Offline data sync (✓ success)
+- Issues: 1 critical (push notifications not working)
 
 [Expected Outcome]
-- docs/cutover-report.md with status: Success
-- Configuration documented: Redis port changed to 6380 (add to .env file)
-- All test results recorded with API response examples
-- Recommendation: Update README.md with Redis port configuration
+- docs/cutover-report.md with status: Partial Success
+- Test results: REQ-001 (pass), REQ-002 (fail - missing FCM server key), REQ-003 (pass)
+- Issues documented: Critical severity, reproduction steps (send notification → error "Invalid FCM token")
+- Configuration needs: Firebase Cloud Messaging server key required
 
 ### Example 2: Mock Implementation or Hardcoded Values Auto-Fail (CRITICAL)
 [Input]
-- Requirements: docs/requirements/functional.md (REQ-001: Payment processing, REQ-002: Order management)
-- Architecture: docs/architecture/components.md
+- PRD: docs/PRD.md (REQ-001: Payment processing, REQ-002: Order management)
 - Template: cutover-report-tmpl.yaml
 
 [Decision]
@@ -179,3 +175,4 @@
   3. Remove all TODO/placeholder comments from production code
   4. Re-run cutover after fixes are complete
 - Functional testing not performed (halted at code quality gate)
+

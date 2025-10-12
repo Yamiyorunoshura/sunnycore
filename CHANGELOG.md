@@ -7,6 +7,21 @@
 
 ## [Unreleased]
 
+## [4.2.0] - 2025-10-12
+
+### Added
+- PRD 流程專用驗收與修復任務：分離 PRD 流程與傳統流程的驗收/修復任務，提升流程清晰度
+  - 新增 `tasks/cutover-prd.md`：PRD 專用驗收任務，直接從 PRD 獲取需求和架構
+  - 新增 `tasks/fix-prd-issues.md`：PRD 專用問題修復任務，基於 PRD 進行根因分析和修復
+  - 更新 `commands/sunnycore_dev.md`：新增 `*fix-prd-issues` 命令支援
+  - 更新 `commands/sunnycore_po.md`：新增 `*cutover-prd` 命令支援
+
+### Changed
+- 簡化傳統流程驗收與修復任務：移除 PRD 相關條件判斷，專注於傳統工作流程
+  - 更新 `tasks/cutover.md`：移除 PRD 條件邏輯，僅保留 REQ/ARCH 輸入
+  - 更新 `tasks/fix-acceptance-issues.md`：移除 PRD 條件邏輯，僅保留 REQ/ARCH 輸入
+  - 提升任務定義的可讀性和維護性
+
 ## [4.1.0] - 2025-10-12
 
 ### Added

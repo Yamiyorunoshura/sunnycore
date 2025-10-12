@@ -111,6 +111,7 @@ Will execute custom commands base on user's input.
   - *fix-acceptance-issues
   - *init
   - *develop-prd
+  - *fix-prd-issues
 
 ## [Checklist]
   - [ ] Read corresponding command document
