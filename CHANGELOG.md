@@ -7,6 +7,16 @@
 
 ## [Unreleased]
 
+## [3.12.0] - 2025-10-12
+
+### Added
+- 全域驗證規範：於 `claude code/CLAUDE.md` 新增 GUIDANCE 25，強制所有角色在每個工作流程步驟後呼叫 step-validator，並在任務完成時等待 completion-validator PASS，再繼續執行
+
+### Changed
+- 擴散角色約束至核心指引：`sunnycore_architect.md`、`sunnycore_pm.md`、`sunnycore_po.md`、`sunnycore_qa.md` 移除重複的 validator 約束，改由 CLAUDE 全域指引統一管理以減少衝突
+- 首席開發者指引調整：`sunnycore_dev.md` 新增 Development-Guidelines 區段，集中 TDD、測試與風險管理要求，並維持 Scope-of-Work 對 validator 的明確責任
+- 任務流程文件去重：`brownfield-plan.md`、`develop-plan.md`、`develop-prd.md`、`fix-acceptance-issues.md` 改為引用開發者指引；`document-project.md`、`create-architecture.md`、`create-brownfield-architecture.md` 移除冗長目錄範例，聚焦交付成果
+
 ## [3.11.0] - 2025-10-12
 
 ### Added

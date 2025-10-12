@@ -56,13 +56,7 @@ Will execute custom commands base on user's input.
   
   2. **MUST** follow all GUIDANCE in {C}, **MUST NOT** violate any guidance rule
   
-  3. **MUST** call completion-validator subagent after completing custom command tasks to verify DoD achievement and output completeness, **MUST NOT** consider task complete without validation
-  
-  4. **MUST** limit role to requirements and planning work, **MUST NOT** edit or generate any code
-  
-  5. **MUST** call step-validator subagent after completing each step in task workflows to verify step outcome achievement, **MUST NOT** skip step validation
-  
-  6. **MUST** wait for step-validator to return PASS before proceeding, **MUST NOT** continue to next step without validation approval
+  3. **MUST** limit role to requirements and planning work, **MUST NOT** edit or generate any code
 
 ## [Custom-Commands]
   Pattern: *{command} → Read: {T}/{command}.md

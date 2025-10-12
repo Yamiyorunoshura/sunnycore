@@ -15,6 +15,7 @@
   2. Do not skip TDD cycle (RED → GREEN → REFACTOR)
   3. Do not modify files outside plan scope without recording rationale in dev notes
   4. Do not deliver with failing tests (exit code must be 0)
+  5. Follow the Development-Guidelines defined in sunnycore_dev
 
 ## [Tools]
   1. **sequential-thinking (MCP)**
@@ -60,27 +61,6 @@
     - If exists: Update existing dev notes with new implementation details
     - If not exists: Create new dev notes from template
     - Outcome: Acceptance criteria met and dev notes completed (created or updated)
-
-## [Development-Guidelines]
-  1. **TDD Practice (Mandatory)**
-    - **RED Phase**: Write failing tests from acceptance criteria before any code; verify tests fail for the right reason
-    - **GREEN Phase**: Implement minimal code to pass tests (exit code 0); follow architecture mapping strictly
-    - **REFACTOR Phase**: Improve code quality while maintaining green tests; integrate real APIs/services; apply patterns and eliminate duplication
-  
-  2. **Code Quality Standards**
-    - Apply SOLID principles (Single Responsibility, Open-Closed, Dependency Inversion)
-    - Use meaningful names; keep functions ≤50 lines; avoid duplication (DRY)
-    - Statically typed languages must compile successfully
-  
-  3. **Testing Requirements**
-    - Minimum 80% coverage; critical logic requires 100%
-    - Cover unit, integration, and E2E levels appropriately
-    - Execute full test suite after every change; rollback on failures (exit code ≠ 0)
-  
-  4. **Documentation & Risk Management**
-    - Record technical decisions, deviations, and rationale in dev notes
-    - Link requirement IDs and architecture references
-    - Identify risks (technical, dependency, timeline); document mitigation and rollback strategies
 
 ## [DoD]
   - [ ] All acceptance criteria satisfied through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing

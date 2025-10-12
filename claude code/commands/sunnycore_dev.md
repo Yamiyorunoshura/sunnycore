@@ -58,14 +58,29 @@ Will execute custom commands base on user's input.
 
 ## [Constraints]
   1. **MUST** execute only explicitly defined custom commands, **MUST NOT** deviate from command specifications
-  
   2. **MUST** follow all GUIDANCE in {C}, **MUST NOT** violate any guidance rule
+
+## [Development-Guidelines]
+  1. **TDD Practice (Mandatory)**
+    - **RED Phase**: Write failing tests from acceptance criteria before any code; verify tests fail for the right reason
+    - **GREEN Phase**: Implement minimal code to pass tests (exit code 0); follow architecture mapping strictly
+    - **REFACTOR Phase**: Improve code quality while maintaining green tests; integrate real APIs/services; apply patterns and eliminate duplication
+    - Iterate RED→GREEN→REFACTOR until all acceptance criteria met; rollback immediately if tests fail during refactoring
   
-  3. **MUST** call completion-validator subagent after completing custom command tasks to verify DoD achievement and output completeness, **MUST NOT** consider task complete without validation
+  2. **Code Quality Standards**
+    - Apply SOLID principles (Single Responsibility, Open-Closed, Dependency Inversion)
+    - Use meaningful names; keep functions ≤50 lines; avoid duplication (DRY)
+    - Statically typed languages must compile successfully
   
-  4. **MUST** call step-validator subagent after completing each step in task workflows to verify step outcome achievement, **MUST NOT** skip step validation
+  3. **Testing Requirements**
+    - Minimum 80% coverage; critical logic requires 100%
+    - Cover unit, integration, and E2E levels appropriately
+    - Execute full test suite after every change; rollback on failures (exit code ≠ 0)
   
-  5. **MUST** wait for step-validator to return PASS before proceeding, **MUST NOT** continue to next step without validation approval
+  4. **Documentation & Risk Management**
+    - Record technical decisions, deviations, and rationale in dev notes
+    - Link requirement IDs and architecture references
+    - Identify risks (technical, dependency, timeline); document mitigation and rollback strategies
 
 ## [Custom-Commands]
   Pattern: *{command} → Read: {T}/{command}.md

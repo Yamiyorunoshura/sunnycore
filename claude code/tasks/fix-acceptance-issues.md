@@ -17,6 +17,7 @@
   2. Do not skip TDD cycle for fixes (RED → GREEN → REFACTOR)
   3. Do not skip re-running acceptance tests after fixes
   4. Do not introduce new issues or break existing functionality
+  5. Follow the Development-Guidelines defined in sunnycore_dev
 
 ## [Tools]
   1. **sequential-thinking (MCP)**: Perform structured reasoning and analysis
@@ -68,24 +69,6 @@
     - Document all fixes, decisions, and risks
     - Outcome: Comprehensive fix documentation completed
 
-## [Fix-Development-Guidelines]
-  1. **TDD Fix Cycle (Mandatory)**
-    - **RED Phase**: Write/update tests to reproduce each reported issue; verify tests fail correctly
-    - **GREEN Phase**: Implement minimal fixes to pass tests (exit code 0); follow architecture patterns
-    - **REFACTOR Phase**: Improve code quality while maintaining green tests; ensure no regressions
-    - Rollback immediately if tests fail during refactoring; re-run acceptance tests after all fixes
-  
-  2. **Root Cause Analysis First**
-    - Identify root cause for each issue before implementing fixes
-    - Document fix strategy and risk assessment
-    - Prioritize fixes by severity and business impact
-  
-  3. **Testing & Verification**
-    - Minimum 80% coverage; critical logic requires 100%
-    - Execute full test suite after every change; rollback on failures
-    - Re-run all acceptance tests to confirm issues resolved
-    - Ensure no new issues or regressions introduced
-
 ## [DoD]
   - [ ] All issues resolved through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing
   - [ ] Acceptance tests re-executed with all issues confirmed resolved
@@ -129,4 +112,3 @@
 - Fixed code: src/services/ExportService.js with streaming implementation
 - docs/cutover-fixes-dev-notes.md with performance comparison (before: timeout, after: 12s)
 - Re-run acceptance: Export 10K rows successfully (✓)
-
