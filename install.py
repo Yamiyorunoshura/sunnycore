@@ -5,14 +5,15 @@ Sunnycore 安裝腳本
 """
 
 import argparse
-import os
-import sys
-import urllib.error
-import urllib.request
-import urllib.parse
 import json
+import os
+import shutil
+import sys
 import threading
 import time
+import urllib.error
+import urllib.parse
+import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Callable, Dict, List, Optional, Tuple
@@ -256,6 +257,22 @@ class SunnycoreInstaller:
             return f"URL 錯誤: {error.reason}"
         return str(error)
     
+    def _cleanup_paths(self, paths: List[Path]) -> bool:
+        """清理既有安裝路徑"""
+        for path in paths:
+            if not path.exists():
+                continue
+            try:
+                if path.is_symlink() or path.is_file():
+                    path.unlink()
+                else:
+                    shutil.rmtree(path)
+                print(f"  ✓ 已移除舊檔案: {path}")
+            except Exception as error:  # noqa: BLE001
+                print(f"  ✗ 無法移除 {path}: {error}")
+                return False
+        return True
+    
     def get_directory_contents(self, dir_path: str) -> List[Dict]:
         """獲取 GitHub 目錄內容
         
@@ -441,7 +458,8 @@ class SunnycoreInstaller:
         claude_dir = work_dir / ".claude"
         sunnycore_dir = work_dir / "sunnycore"
 
-        if claude_dir.exists() or sunnycore_dir.exists():
+        existing_paths = [path for path in (claude_dir, sunnycore_dir) if path.exists()]
+        if existing_paths:
             if not auto_yes:
                 try:
                     response = safe_input(f"\n目錄已存在，是否覆寫? (y/N): ").strip().lower()
@@ -451,6 +469,9 @@ class SunnycoreInstaller:
                 except EOFError:
                     print("\n✗ 無法讀取用戶輸入，請使用 -y 參數自動確認覆寫")
                     return False
+            print("\n正在清理舊版本檔案...")
+            if not self._cleanup_paths(existing_paths):
+                return False
 
         directories = [
             ("claude code/commands", claude_dir / "commands", None),
@@ -508,7 +529,11 @@ class SunnycoreInstaller:
 
         prompts_exist = codex_prompts_dir.exists() and any(codex_prompts_dir.glob("*.prompt.md"))
 
-        if sunnycore_dir.exists() or prompts_exist:
+        existing_paths = [sunnycore_dir] if sunnycore_dir.exists() else []
+        if prompts_exist:
+            existing_paths.append(codex_prompts_dir)
+
+        if existing_paths:
             if not auto_yes:
                 try:
                     response = safe_input(f"\n目標位置已存在 Codex 提示或 Sunnycore 檔案，是否覆寫? (y/N): ").strip().lower()
@@ -518,6 +543,9 @@ class SunnycoreInstaller:
                 except EOFError:
                     print("\n✗ 無法讀取用戶輸入，請使用 -y 參數自動確認覆寫")
                     return False
+            print("\n正在清理舊版本檔案...")
+            if not self._cleanup_paths(existing_paths):
+                return False
 
         directories = [
             ("codex/commands", codex_prompts_dir, lambda path: path.with_suffix('.prompt.md')),
@@ -579,7 +607,8 @@ class SunnycoreInstaller:
         cursor_dir = work_dir / ".cursor"
         sunnycore_dir = work_dir / "sunnycore"
 
-        if cursor_dir.exists() or sunnycore_dir.exists():
+        existing_paths = [path for path in (cursor_dir, sunnycore_dir) if path.exists()]
+        if existing_paths:
             if not auto_yes:
                 try:
                     response = safe_input(f"\n目錄已存在，是否覆寫? (y/N): ").strip().lower()
@@ -589,6 +618,9 @@ class SunnycoreInstaller:
                 except EOFError:
                     print("\n✗ 無法讀取用戶輸入，請使用 -y 參數自動確認覆寫")
                     return False
+            print("\n正在清理舊版本檔案...")
+            if not self._cleanup_paths(existing_paths):
+                return False
 
         directories = [
             ("cursor/commands", cursor_dir / "commands", None),
