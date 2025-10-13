@@ -38,21 +38,6 @@
     - Handle user requests for additional details
     - Outcome: User receives clear next-step action guidance
 
-## [Progress-Tracking-Guidelines]
-  **Content for plan.md:**
-  - Project type determination (Greenfield/Brownfield)
-  - User requirement summary (concise description)
-  - Existing architecture analysis (if Brownfield - components, patterns, tech stack)
-  - Scope assessment:
-    * Estimated task count
-    * New components/modules needed (yes/no)
-    * Architecture pattern changes (yes/no)
-    * Technology stack changes (yes/no)
-  - Impact analysis (architectural impact level: none/low/medium/high)
-  - Decision criteria evaluation results
-  - Workflow recommendation with rationale (PRD or Full workflow)
-  - Recommended command to execute next
-
 ## [Decision-Criteria]
   **Recommend Full Workflow (*create-requirements) when:**
   - Introduces new system components or modules

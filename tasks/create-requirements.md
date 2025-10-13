@@ -43,25 +43,6 @@
     - Run "shard-requirements.py" to generate "{REQ}/*.md" files
     - Outcome: Approved requirements successfully sharded
 
-## [Progress-Tracking-Guidelines]
-  **Content for plan.md:**
-  - User requirement description summary (initial ideas and input)
-  - Requirements extraction progress:
-    * Functional requirements extracted (count, organized by categories)
-    * Each functional requirement with ID and description
-    * Deduplication status (duplicates identified and resolved)
-  - Non-functional requirements progress:
-    * Quality attributes defined (performance, security, reliability, etc.)
-    * Each NFR with quantified metrics and targets
-    * Measurability verified (specific metrics, not vague)
-  - Acceptance criteria progress:
-    * Requirements with acceptance criteria (count)
-    * Given-When-Then format compliance
-    * Testability verification (binary pass/fail outcomes)
-  - Consistency check status (cross-requirement dependencies identified)
-  - User approval status (draft/approved/revisions needed)
-  - Sharding status (script execution, output files verified)
-
 ## [Requirements-Analysis-Guidelines]
   1. **Verifiability First**
     - Each requirement must be testable and measurable with clear success/failure criteria

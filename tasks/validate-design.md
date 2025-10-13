@@ -50,39 +50,6 @@
     - Guide user on next steps
     - Outcome: User informed with clear next-step guidance
 
-## [Progress-Tracking-Guidelines]
-  **Content for plan.md:**
-  - Workflow identification (prd or full)
-  - Validation scope determination:
-    * Documents to validate (list with file paths)
-    * Validation checks to perform (based on workflow type)
-  - Content extraction progress:
-    * Requirements extracted (count, IDs listed)
-    * Architecture components extracted (count, names listed)
-    * Tasks extracted (count, IDs listed - if full workflow)
-    * Plans extracted (count, IDs listed - if full workflow)
-    * Entity index created (total entities indexed)
-  - Validation execution for each check type:
-    * Bidirectional integrity (references validated forward/backward)
-    * Coverage metrics (requirements→architecture→tasks→plans percentages)
-    * Consistency checks (terminology, specifications verified)
-    * Authenticity verification (fabricated content detected)
-  - Issues identified by severity:
-    * Critical issues (count and list)
-    * High severity issues (count and list)
-    * Medium severity issues (count and list)
-    * Low severity issues (count and list)
-  - Issues identified by type:
-    * Fabricated content (count)
-    * Broken references (count)
-    * Conflicts (count)
-    * Inconsistent naming (count)
-    * Coverage gaps (count)
-    * Terminology inconsistencies (count)
-  - Validation report generation status (created at {root}/docs/design-validation.md)
-  - Overall validation result (PASS/FAIL with issue summary)
-  - Recommended next steps (proceed to development or fix conflicts)
-
 ## [Validation-Criteria]
 
 ### PRD Workflow Checks:

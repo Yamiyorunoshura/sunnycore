@@ -44,28 +44,6 @@
     - Verify archiving successful
     - Outcome: Source documents archived successfully
 
-## [Progress-Tracking-Guidelines]
-  **Content for plan.md:**
-  - Source documents reviewed:
-    * Review reports scanned (list of files)
-    * Development notes scanned (list of files)
-    * Cutover report reviewed
-    * Progress records reviewed
-  - Platinum practices identification:
-    * Platinum practices found (count and sources)
-    * Semantic topics identified (list of topics)
-    * Practice categorization (topic → practice list)
-  - Error documentation progress:
-    * Errors identified from dev notes (count and sources)
-    * Error categorization by semantic topics
-    * Solutions and prevention documented
-  - Knowledge base document creation:
-    * Documents to create (list with semantic naming)
-    * Document creation status (pending/in-progress/completed)
-    * Evidence source annotations added (yes/no)
-  - Archiving progress (files archived, verification status)
-  - Overall completion status
-
 ## [Knowledge-Curation-Guidelines]
   1. **Platinum-Level Practices Only**
     - Include only platinum-level practices marked in review reports (no self-judgment needed)

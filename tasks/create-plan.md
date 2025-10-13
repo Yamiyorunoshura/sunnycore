@@ -52,21 +52,6 @@
     - Generate all plan files at "{PLAN}/{task_id}-plan.md"
     - Outcome: All implementation plans created and validated
 
-## [Progress-Tracking-Guidelines]
-  **Content for plan.md:**
-  - Epic summary (total tasks from epic.md)
-  - Requirements and architecture context summary
-  - Knowledge base review (best practices and lessons learned identified)
-  - Planning progress for each task:
-    * Task ID and description
-    * RED phase planning status (test cases defined, coverage planned)
-    * GREEN phase planning status (implementation steps outlined, architecture mapping done)
-    * REFACTOR phase planning status (improvements and optimizations planned)
-    * Completion status (pending/in-progress/completed)
-  - Overall planning progress (e.g., "Completed 5/8 implementation plans")
-  - Template compliance verification (all plans follow structure)
-  - Traceability verification (requirement-architecture-test mapping complete)
-
 ## [TDD-Planning-Guidelines]
   1. **TDD Three-Phase Structure**
     - **RED Phase**: Define test cases from acceptance criteria; plan tests that will fail initially (normal, edge cases, error handling)

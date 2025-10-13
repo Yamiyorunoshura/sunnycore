@@ -52,33 +52,6 @@
     - Verify "{root}/CLAUDE.md" contains complete and accurate information
     - Outcome: Environment, directory structure, minimal app, and documentation verified
 
-## [Progress-Tracking-Guidelines]
-  **Content for plan.md:**
-  - Project analysis:
-    * Technology stack identified (languages, frameworks, databases, etc.)
-    * Development environment requirements (tools, versions, dependencies)
-    * Project goals and requirements summary (from ARCH/*.md and REQ/*.md)
-    * Work directory structure extracted (from architecture work-directory-structure field)
-  - Environment setup progress:
-    * Dependencies to install (list with versions)
-    * Installation status for each dependency (pending/installed/verified)
-    * Configuration steps performed (list)
-    * Environment verification results (all tools working: yes/no)
-  - Codebase indexing (if Brownfield):
-    * Existing codebase scanned (directories/files indexed)
-    * Search index built (yes/no)
-  - Directory structure creation:
-    * Directories to create (list from work-directory-structure)
-    * Creation status (each directory with status: created/verified)
-  - Minimal application implementation:
-    * Application type (e.g., Express server, Django app, React app)
-    * Entry point created (file path)
-    * Startup command documented
-    * Smoke test result (application starts: yes/no, response verified: yes/no)
-  - CLAUDE.md creation status:
-    * Document sections completed (tech stack, standards, requirements, document index)
-    * Document index accuracy verified (yes/no)
-
 ## [Initialization-Guidelines]
   1. **Extract from Architecture**
     - Identify all technology stack, tools, and environment requirements explicitly stated in architecture docs

@@ -46,20 +46,6 @@
     - Verify all operations successful
     - Outcome: Files archived and references updated correctly
 
-## [Progress-Tracking-Guidelines]
-  **Content for plan.md:**
-  - Version number parsed from lock file
-  - Input validation status (list of files found/missing)
-  - Information extraction progress:
-    * Decisions extracted (count and sources)
-    * Technical choices extracted (count and sources)
-    * Issues/solutions extracted (count and sources)
-    * Evidence collected (file references)
-    * Recommendations identified (count)
-  - Report generation status (template mapping completed, report written)
-  - Archiving status (files to archive, archiving progress, references updated)
-  - Overall completion status
-
 ## [Completion-Report-Guidelines]
   1. **Core Content (5 Required Items)**
     - **Decisions**: Key decisions with rationale, context, and trade-offs

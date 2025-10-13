@@ -41,22 +41,6 @@
     - Ensure consistency and justification of architecture decisions
     - Outcome: Architecture verified and validated
 
-## [Progress-Tracking-Guidelines]
-  **Content for plan.md:**
-  - Requirements analysis summary (total functional/non-functional requirements)
-  - Requirement-to-architecture mapping matrix:
-    * List each requirement ID with mapped architecture element(s)
-    * Coverage percentage (target: 100%)
-    * Any requirements pending mapping
-  - Architecture design progress:
-    * Components designed (list with status)
-    * Data flows documented (count and status)
-    * ADRs documented (count and key decisions)
-    * Cross-cutting concerns addressed (security, observability, performance, etc.)
-    * External APIs documented (count and list)
-  - Documentation status (draft created, user approved, sharding completed)
-  - Verification status (mapping verified, consistency checked, template compliance confirmed)
-
 ## [Error-Handling]
   1. "shard-architecture.py" execution failure: Check if "architecture.md" format complies with template specifications, fix and re-execute
   2. Unresolvable requirement conflicts: Record conflicts and confirm with requirement authors, do not make assumptions
