@@ -6,14 +6,14 @@
   3. "{EPIC}" --Feature-level task list
   4. "{TMPL}/implementation-plan-tmpl.yaml" --Implementation plan template (including: project information, requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
   5. "{KNOWLEDGE}/*.md" --Project knowledge base (best practices, lessons learned, bug fixes)
-  6. "{TMPL}/plan-tmpl.yaml" --Unified planning template; document coverage audits, plan production checklist, and validation checkpoints for this task
+  
 
 ## [Output]
   1. "{PLAN}/{task_id}-plan.md" --Implementation plans for all tasks (Markdown format)
     - Format: Use ATX headings; numbered lists; explicit requirement/architecture mapping sections
     - Content: Breaks down feature-level tasks into atomic implementation steps across TDD RED/GREEN/REFACTOR phases
     - Example: "{PLAN}/1-plan.md", "{PLAN}/2-plan.md", "{PLAN}/3-plan.md", etc.
-  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not fabricate requirements or tasks not in source documents
@@ -25,8 +25,8 @@
   1. Setup & Context Understanding
     - Understand all requirements, architecture, and task scope
     - Identify project-specific best practices and lessons learned
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Complete context, planning criteria established, and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Complete context, planning criteria established, and plan outline documented
 
   2. RED Phase Planning (For Each Task)
     - Plan complete test coverage with acceptance criteria
@@ -90,8 +90,6 @@
   - [ ] Implementation plan exists for each task with complete TDD three-phase structure (RED/GREEN/REFACTOR sections)
   - [ ] All plans have proper requirement-architecture-test mapping with specific file references
   - [ ] All plan files created at "{PLAN}/{task_id}-plan.md" following template structure
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

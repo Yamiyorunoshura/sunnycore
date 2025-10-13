@@ -5,11 +5,11 @@
   2. "{TMPL}/prd-tmpl.yaml" --PRD template
   3. (Conditional) "{ARCH}/*.md" --Existing architecture (if Brownfield)
   4. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
-  5. "{TMPL}/plan-tmpl.yaml" --Unified planning template; tailor sections to project type analysis, integrated PRD content, and validation checkpoints
+  
 
 ## [Output]
   1. "{PRD}" --Complete Product Requirements Document (Markdown format)
-  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not misidentify project type (Greenfield/Brownfield)
@@ -21,8 +21,8 @@
   1. Initialization & Context Understanding
     - Determine project type (Greenfield/Brownfield)
     - Gather appropriate context for project type
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Project type determined, context gathered, and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Project type determined, context gathered, and plan outline documented
 
   2. Requirements Definition
     - Define complete, verifiable, measurable functional requirements
@@ -81,8 +81,6 @@
   - [ ] Complete functional and non-functional requirements with quantified metrics and Given-When-Then acceptance criteria
   - [ ] Architecture design complete with 100% requirement mapping and impact analysis (if Brownfield)
   - [ ] PRD document exists at "{PRD}" following template structure and approved by user
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

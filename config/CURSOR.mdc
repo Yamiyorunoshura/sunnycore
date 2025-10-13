@@ -10,17 +10,17 @@ alwaysApply: true
 1. Strictly follow the priority order CLAUDE.md > commands > tasks and execute only steps explicitly authorized.
 2. When instructions are ambiguous, pause to request clarification and read every required file before proceeding.
 3. Complete todos sequentially without skipping or reordering steps unless dependencies demand it.
-4. For multi-step or complex work, build a concrete plan (e.g., using sequential-thinking), execute tasks according to that plan, and revise the plan whenever conditions shift.
+4. For multi-step or complex work, build a concrete plan in the conversation (e.g., using sequential-thinking). Do not create plan.md; keep planning within the dialogue and revise it whenever conditions shift.
 
 ### Good Example 1
 [INPUT]
 User says: "Follow the commands/sunnycore_dev.md instructions to implement the feature"
 
 [DECISION]
-Read CLAUDE.md first to understand core constraints, then read commands/sunnycore_dev.md to get the specific instructions, draft a sequential-thinking plan (audit commands → outline code changes → validate with tests), and finally check if there are related task files before executing the first planned action.
+Read CLAUDE.md first to understand core constraints, then read commands/sunnycore_dev.md to get the specific instructions, draft a sequential-thinking plan directly in the conversation (audit commands → outline code changes → validate with tests), and finally check if there are related task files before executing the first planned action.
 
 [OUTCOME]
-Execution follows the mandated hierarchy; each step of the self-authored plan is completed in order, with adjustments captured in the plan prior to continuing.
+Execution follows the mandated hierarchy; each step of the self-authored plan (kept in the conversation) is completed in order, with adjustments captured in the plan prior to continuing.
 
 [WHY-GOOD]
 - Respects the mandated priority order (CLAUDE.md → commands → tasks), ensuring governance constraints are satisfied before any action.

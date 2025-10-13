@@ -3,7 +3,7 @@
 ## [Input]
   1. User requirement description
   2. (Conditional) "{ARCH}/*.md" --Existing architecture documents (if exist)
-  3. "{TMPL}/plan-tmpl.yaml" --Unified planning template; tailor sections to capture requirement scope, workflow decision factors, and risk assessment
+  
 
 ## [Output]
   1. Simple workflow recommendation (which command to use)
@@ -19,8 +19,8 @@
   1. Initialization & Context Gathering
     - Determine project type (Greenfield/Brownfield)
     - Gather complete context for both project types
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Project type determined, context collected, and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Project type determined, context collected, and plan outline documented
 
   2. Requirement Scope & Impact Analysis
     - Analyze requirement scope and architectural impact
@@ -73,8 +73,6 @@
   - [ ] Project type correctly determined with requirement scope and impact analyzed
   - [ ] Clear workflow recommendation provided with specific command (*create-requirements or *create-prd)
   - [ ] User understands workflow recommendation and rationale
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
   
 ## [Example]
 

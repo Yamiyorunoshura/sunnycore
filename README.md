@@ -2,12 +2,12 @@
 
 一個創新的多平台 AI 助手系統，提供角色化的專業 AI agents 來優化開發工作流程，支援測試驅動開發 (TDD) 和質量保證流程。
 
-> **v4.14.0 更新**：AI agent 工作流程增強：所有角色命令新增 plan.md 進度追蹤要求，任務完成定義統一增加 plan.md 處理規範，強化執行紀律與進度可追溯性。詳見 [CHANGELOG.md](CHANGELOG.md#4140---2025-10-13)。
+> **v4.15.0 更新**：對話內規劃工作流程 (In-Conversation Planning)：所有角色命令新增 `[Planning-Workflow]` 章節，要求在對話中生成和維護書面計劃，不再創建 plan.md 文件；移除統一執行計劃模板，全面遷移至對話式規劃模式。詳見 [CHANGELOG.md](CHANGELOG.md#4150---2025-10-13)。
 
 > **v4.13.0 更新**：治理規則增強：新增「先規劃後執行（sequential-thinking）」強制敘述與細化範例，強化執行紀律與可追溯性。詳見 [CHANGELOG.md](CHANGELOG.md#4130---2025-10-13).
 > **v4.12.0 更新**：模板系統全面升級至 v2，新增開發工作流程與品質標準指引，強化任務原子化分解機制，大幅提升 AI 執行計劃品質與工作流程標準化。詳見 [CHANGELOG.md](CHANGELOG.md#4120---2025-10-13)。
 
-> **v4.8.0 更新**：引入統一執行計劃模板（templates/plan-tmpl.yaml），所有任務與指令均整合計劃模板引用，提升執行規劃與可追溯性。詳見 [CHANGELOG.md](CHANGELOG.md#480---2025-10-13)。
+> **v4.8.0 之後的變更**：已改為「對話內規劃」模式；不再產生或維護 `plan.md`，也不再引用 `templates/plan-tmpl.yaml`。所有規劃改以對話中之 Planning-Workflow 條目完成並維護。詳見 [CHANGELOG.md](CHANGELOG.md#480---2025-10-13)。
 
 > **v4.7.0 更新**：Assistant 角色強制性計劃工作流程與知識管理增強，新增 [Planning-Workflow] 和 [Knowledge-Management] 章節，要求執行前必須生成書面計劃並引用 curated knowledge，與 v4.5.0/v4.6.0 的正反對比範例系統配合，全面提升執行規範性與架構完整性。詳見 [CHANGELOG.md](CHANGELOG.md#470---2025-10-13)。
 

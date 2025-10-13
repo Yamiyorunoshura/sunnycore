@@ -5,12 +5,12 @@
   2. "{REVIEW}/{task_id}-review.md" --Review report
   3. "{ARCH}/*.md" --Architecture design
   4. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
-  5. "{TMPL}/plan-tmpl.yaml" --Unified planning template; populate sections with review issues, architecture impacts, and required validations for this task
+  
 
 ## [Output]
   1. Fixed code that runs properly
   2. Updated development notes "{DEVNOTES}/{task_id}-dev-notes.md" (Markdown format)
-  3. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not deliver fixes that fail to run properly
@@ -22,29 +22,24 @@
   1. Issue Analysis & Planning
     - Understand issues from review report and architecture context
     - Formulate atomic fix tasks based on analysis
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Clear understanding of issues, fix plan created, and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Clear understanding of issues and plan outline documented
 
   2. Test-Driven Fix Implementation
-    - Establish progress tracking for fixes in plan.md
+    - Track progress within dev notes/progress updates
     - Implement fixes ensuring all tests pass (RED → GREEN → REFACTOR)
     - Execute tests and verify all pass after each phase
-    - Update plan.md with implementation progress and test results
-    - Note: Do NOT create separate phase result documents (red-phase-test-result.md, green-phase-test-result.md, etc.); record all status in plan.md only
-    - Outcome: All unit tests and integration tests passing, status recorded in plan.md
+    - Outcome: All unit tests and integration tests passing, status recorded
 
   3. Documentation & Summary
     - Create comprehensive fix summary with evidence
     - Read existing development notes at "{DEVNOTES}/{task_id}-dev-notes.md"
     - Update existing dev notes with fix summary (do not create new file)
-    - Note: Only update the existing dev-notes.md; plan.md is temporary and will be deleted
     - Outcome: Fix summary completed and development notes updated
 
 ## [DoD]
   - [ ] All unit and integration tests passed
   - [ ] Development notes updated
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

@@ -4,12 +4,12 @@
   1. "{REQ}/*.md" --Authoritative project requirements
   2. "{SCRIPTS}/shard-architecture.py" --Architecture sharding script
   3. "{TMPL}/architecture-tmpl.yaml" --Standardized architecture template
-  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; use it to map requirement coverage, architecture decisions, and validation evidence for this task
+  
 
 ## [Output]
   1. Architecture document collection under "{ARCH}/" directory (*.md format)
   2. "{root}/docs/architecture.md" (Markdown format)(temporary architecture file. Will be sharded after running "shard-architecture.py")
-  3. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not make assumptions when requirements are incomplete or conflicting (must record issues and confirm)
@@ -21,8 +21,8 @@
   1. Requirement Analysis & Mapping
     - Understand all requirements and their implications
     - Create complete requirement-to-architecture mapping matrix (100% coverage)
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Complete understanding, requirement mapping matrix created, and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Complete understanding, requirement mapping matrix created, and plan outline documented
 
   2. Architecture Design
     - Design comprehensive architecture with all components and boundaries
@@ -87,8 +87,6 @@
   - [ ] Complete requirement-to-architecture mapping matrix with 100% coverage (all functional and non-functional requirements mapped)
   - [ ] Architecture document approved by user and exists at "{root}/docs/architecture.md" following template structure
   - [ ] Architecture successfully sharded with verified output files in "{ARCH}/"
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
   
 
 ## [Example]

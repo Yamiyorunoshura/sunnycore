@@ -8,13 +8,13 @@
   5. "{DEVNOTES}/*.md" --Development notes
   6. "{REVIEW}/*.md" --Review reports
   7. Actual codebase
-  8. "{TMPL}/plan-tmpl.yaml" --Unified planning template; emphasize codebase evidence collection, sharding checkpoints, and CLAUDE.md updates for this task
+  
 
 ## [Output]
   1. "{root}/docs/architecture.md" --Integrated architecture document (Markdown format)(temporary, will be sharded)
   2. "{ARCH}/*.md" --Sharded architecture documents (Markdown format)
   3. "{root}/CLAUDE.md" --Updated project guidance document with refreshed document index
-  4. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
   
 ## [Constraints]
   1. Do not base updates on original design (must use actual implementation state)
@@ -26,8 +26,8 @@
   1. Analysis & Context Gathering
     - Understand existing architecture and actual implementation state
     - Gather comprehensive context from all documentation sources
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Complete understanding of current state, context gathered, and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Complete understanding of current state, context gathered, and plan outline documented
 
   2. Architecture Integration & Documentation
     - Create unified architecture document at "{root}/docs/architecture.md"
@@ -72,8 +72,6 @@
   - [ ] Architecture successfully sharded to "{ARCH}/" with all content including source references by running the scripts (format: file_path:line_number)
   - [ ] All deviations from original design documented with clear rationale
   - [ ] CLAUDE.md updated with current architecture document index
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 
