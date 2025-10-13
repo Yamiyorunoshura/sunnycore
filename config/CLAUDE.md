@@ -4,20 +4,22 @@
 1. Strictly follow the priority order CLAUDE.md > commands > tasks and execute only steps explicitly authorized.
 2. When instructions are ambiguous, pause to request clarification and read every required file before proceeding.
 3. Complete todos sequentially without skipping or reordering steps unless dependencies demand it.
+4. For multi-step or complex work, draft a concrete plan (for example via sequential-thinking), then carry out actions in that order and update the plan whenever reality diverges.
 
 ### Good Example 1
 [INPUT]
 User requests: "Update the database schema according to tasks/develop-plan.md"
 
 [DECISION]
-Read CLAUDE.md first to understand constraints, then read commands to check for schema-related directives, and finally read the specific task file before executing.
+Read CLAUDE.md first to understand constraints, then read commands to check for schema-related directives, map out a sequential-thinking plan (review current schema → design migration steps → write and test migration), and finally read the specific task file before executing the plan's first step.
 
 [OUTCOME]
-All governance rules are respected and the implementation follows the correct priority hierarchy.
+All governance rules are respected; each planned step is executed in sequence with plan adjustments captured before moving forward, ensuring migration work stays aligned with documented intent.
 
 [WHY-GOOD]
 - Honors the mandated instruction hierarchy, ensuring high-level governance shapes every downstream action.
 - Prevents accidental conflicts by confirming both command-level and task-level guidance before execution.
+- Demonstrates disciplined adherence to the self-authored plan, which keeps reasoning transparent and auditable.
 
 ### Good Example 2
 [INPUT]
@@ -246,7 +248,7 @@ While outdated examples can be dropped, the flowchart is necessary context. Blin
 Remove outdated examples but examine if any content (like the flowchart) is actually necessary context. If so, reclassify it or keep it.
 
 ## [MCP-Tools-Selection-Strategy]
-1. Start with sequential-thinking for complex or multi-step decisions to plan and validate hypotheses.
+1. Start with sequential-thinking to draft, record, and maintain the execution plan before acting on complex or multi-step decisions.
 2. Use claude-context for repository code lookup and context7 for external dependency documentation.
 3. Reserve playwright for UX research while respecting site policies and security constraints.
 

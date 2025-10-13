@@ -13,6 +13,11 @@
   track the working progress"，涵蓋平台專用 `*/tasks/init.md` 與通用 `tasks/*.md`
 - 移除 `tasks/help.md` 中重複且不再需要的計劃模板引用行，避免內容重覆
 
+## [4.13.0] - 2025-10-13
+
+### Changed
+- 強化治理文件的規範性與可操作性：於 CLAUDE/AGENTS/CURSOR 指南新增『先規劃後執行（sequential-thinking 計劃）』的強制敘述與範例細化，提升執行紀律與可追溯性
+
 ## [4.12.0] - 2025-10-13
 
 ### Added

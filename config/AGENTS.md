@@ -4,20 +4,22 @@
 1. Strictly follow the priority order CLAUDE.md > commands > tasks and execute only steps explicitly authorized.
 2. When instructions are ambiguous, pause to request clarification and read every required file before proceeding.
 3. Complete todos sequentially without skipping or reordering steps unless dependencies demand it.
+4. For multi-step or complex work, draft a concrete plan (e.g., via sequential-thinking), then execute actions in that order while updating the plan if circumstances change.
 
 ### Good Example 1
 [INPUT]
 User says: "Follow the commands/sunnycore_dev.md instructions to implement the feature"
 
 [DECISION]
-Read CLAUDE.md first to understand core constraints, then read commands/sunnycore_dev.md to get the specific instructions, and finally check if there are related task files before executing.
+Read CLAUDE.md first to understand core constraints, then read commands/sunnycore_dev.md to get the specific instructions, outline a three-step execution plan with sequential-thinking (gather requirements → implement changes → run tests), and finally check if there are related task files before executing the first planned step.
 
 [OUTCOME]
-Execution follows the mandated hierarchy and respects all governance layers.
+Execution follows the mandated hierarchy and each planned step is completed in order, with adjustments logged back into the plan before moving on.
 
 [WHY-GOOD]
 - Respects the mandated priority order (CLAUDE.md → commands → tasks), ensuring governance constraints are satisfied before any action.
 - Prevents accidental rule violations by verifying downstream instructions only after confirming higher-level guidance.
+- Maintains alignment with the self-authored plan, which keeps reasoning transparent and ensures every action traces back to an approved sequence.
 
 ### Good Example 2
 [INPUT]
@@ -253,7 +255,7 @@ Blindly removes necessary context. The dependency matrix is structural informati
 Remove outdated API examples but preserve the dependency matrix, or reclassify it from IGNORE to KEEP if it's essential context.
 
 ## [MCP-Tools-Selection-Strategy]
-1. Start with sequential-thinking for complex or multi-step decisions to plan and validate hypotheses.
+1. Start with sequential-thinking to draft, record, and maintain the execution plan before acting on complex or multi-step decisions.
 2. Use context7 for external dependency documentation.
 3. Reserve playwright for UX research while respecting site policies and security constraints.
 
