@@ -1,11 +1,12 @@
 ---
-# Unified Execution Plan Template
+# Unified Execution Plan Template v2
+# Powered by BMAD™ Core
 # Apply task-specific details from the active task document.
 
 template:
-  id: task-plan-template-v1
+  id: task-plan-template-v2
   name: Task Execution Plan
-  version: 1.0
+  version: 2.0
   output:
     format: markdown
     filename: "{root}/docs/plan.md"
@@ -31,11 +32,14 @@ sections:
     title: Step-by-Step Plan
     instruction: |
       Translate the task's official steps into a checklist so each line begins with "- [ ]".
+      **CRITICAL: When designing the step-by-step plan, always divide complex tasks into multiple simple, atomic tasks.**
+      Each task should be independently executable and testable. Break down large or multi-faceted tasks into smaller, focused subtasks.
       Within each checklist entry, capture:
         - A concise action label with the task-specific focus.
         - The expected artifact or evidence to produce.
         - The validation approach you will run (tests, approvals, reviews).
       Preserve the task document's sequence and ensure no required step is omitted.
+      If a task seems complex, decompose it into 2-4 smaller tasks that can be completed independently.
 
   - id: validation
     title: Validation & Evidence Strategy
@@ -63,3 +67,20 @@ sections:
       Reproduce every Definition of Done item as a checklist entry formatted "- [ ]".
       For each checklist item, include the DoD text plus the plan evidence that will satisfy it.
       State how completion will be verified prior to closing the task.
+      
+      **DoD Checklist Format:**
+      - [ ] {DoD criterion 1} - {Evidence/verification method}
+      - [ ] {DoD criterion 2} - {Evidence/verification method}
+      - [ ] All tests passing (≥80% coverage) - {Test execution strategy}
+      - [ ] Code meets quality standards - {Review process}
+      - [ ] Development notes completed - {Documentation location}
+
+checks:
+  - id: completeness
+    instruction: "Verify all sections are populated with task-specific details from the authoritative task document."
+  - id: traceability
+    instruction: "Ensure every step maps back to requirements, architecture, or task constraints."
+  - id: atomicity
+    instruction: "Confirm each step in the execution plan is atomic, testable, and can be completed independently."
+  - id: evidence_plan
+    instruction: "Validate that each DoD item has a clear evidence strategy and validation method."

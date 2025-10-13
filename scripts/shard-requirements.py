@@ -2,8 +2,7 @@
 
 """
 shard-requirements.py
-將 requirements.md 依二級標題(##)拆分為多個獨立 .md 檔，並確保以 uv 建立的
-Python 3.13 虛擬環境於專案根目錄 .venv 下執行。
+將 requirements.md 依二級標題(##)拆分為多個獨立 .md 檔。
 
 環境變數：
 - REQUIREMENTS_FILE：輸入檔路徑（預設 docs/requirements.md）
@@ -15,8 +14,6 @@ from __future__ import annotations
 import os
 import re
 import sys
-import shutil
-import subprocess
 from pathlib import Path
 from typing import Optional
 
@@ -47,42 +44,6 @@ def log_error(message: str) -> None:
 def get_project_root() -> Path:
     # scripts 目錄的上上層即為專案根目錄（跳過 claude code 目錄）
     return Path(__file__).resolve().parents[2]
-
-
-def ensure_uv_and_venv(python_version: str = "3.13") -> None:
-    project_root = get_project_root()
-    venv_dir = project_root / ".venv"
-    uv_path = shutil.which("uv")
-
-    current_prefix = Path(sys.prefix).resolve()
-    if current_prefix == venv_dir.resolve() and sys.version_info.major == 3 and sys.version_info.minor == 13:
-        return
-
-    if uv_path is None:
-        log_error("未安裝 uv，請先安裝：curl -LsSf https://astral.sh/uv/install.sh | sh")
-        sys.exit(1)
-
-    if os.environ.get("SC_BOOTSTRAPPED") == "1":
-        return
-
-    try:
-        subprocess.run([uv_path, "python", "install", python_version], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    except Exception:
-        pass
-
-    if not venv_dir.exists():
-        log_info(f"建立本地虛擬環境：{venv_dir} (Python {python_version})")
-        subprocess.run([uv_path, "venv", "--python", python_version, str(venv_dir)], check=True)
-
-    venv_python = venv_dir / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
-    if not venv_python.exists():
-        log_error(f"找不到 venv Python：{venv_python}")
-        sys.exit(1)
-
-    env = os.environ.copy()
-    env["SC_BOOTSTRAPPED"] = "1"
-    argv = [str(venv_python), str(Path(__file__).resolve()), *sys.argv[1:]]
-    os.execve(str(venv_python), argv, env)
 
 
 def clean_filename(filename: str) -> str:
@@ -175,8 +136,6 @@ def generate_report(input_file: Path, output_dir: Path) -> None:
 
 
 def main() -> None:
-    ensure_uv_and_venv("3.13")
-
     project_root = get_project_root()
     input_file_env = os.environ.get("REQUIREMENTS_FILE", "docs/requirements.md")
     output_dir_env = os.environ.get("OUTPUT_DIR", "docs/requirements")
@@ -204,5 +163,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-
