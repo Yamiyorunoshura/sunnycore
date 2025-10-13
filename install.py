@@ -260,6 +260,8 @@ class SunnycoreInstaller:
                 target_path = target_dir / item['name']
                 if transform:
                     target_path = transform(target_path)
+                    if target_path is None:
+                        continue
                 file_list.append((item['path'], target_path))
             elif item['type'] == 'dir':
                 sub_target_dir = target_dir / item['name']
@@ -402,15 +404,16 @@ class SunnycoreInstaller:
                     return False
 
         directories = [
-            ("commands", claude_dir / "commands", None),
+            ("claude code/commands", claude_dir / "commands", None),
             ("hooks", claude_dir / "hooks", None),
-            ("tasks", sunnycore_dir / "tasks", None),
+            ("tasks", sunnycore_dir / "tasks", lambda path: None if path.name == "init.md" else path),
             ("templates", sunnycore_dir / "templates", None),
             ("scripts", sunnycore_dir / "scripts", None),
         ]
 
         single_files = [
             ("config/CLAUDE.md", sunnycore_dir / "CLAUDE.md"),
+            ("claude code/tasks/init.md", sunnycore_dir / "tasks" / "init.md"),
         ]
 
         print("\n正在並行掃描目錄結構...")
@@ -468,14 +471,15 @@ class SunnycoreInstaller:
                     return False
 
         directories = [
-            ("commands", codex_prompts_dir, lambda path: path.with_suffix('.prompt.md')),
-            ("tasks", sunnycore_dir / "tasks", None),
+            ("codex/commands", codex_prompts_dir, lambda path: path.with_suffix('.prompt.md')),
+            ("tasks", sunnycore_dir / "tasks", lambda path: None if path.name == "init.md" else path),
             ("templates", sunnycore_dir / "templates", None),
             ("scripts", sunnycore_dir / "scripts", None),
         ]
 
         single_files = [
             ("config/AGENTS.md", sunnycore_dir / "AGENTS.md"),
+            ("codex/tasks/init.md", sunnycore_dir / "tasks" / "init.md"),
         ]
 
         print("\n正在並行掃描目錄結構...")
@@ -538,14 +542,15 @@ class SunnycoreInstaller:
                     return False
 
         directories = [
-            ("commands", cursor_dir / "commands", None),
-            ("tasks", sunnycore_dir / "tasks", None),
+            ("cursor/commands", cursor_dir / "commands", None),
+            ("tasks", sunnycore_dir / "tasks", lambda path: None if path.name == "init.md" else path),
             ("templates", sunnycore_dir / "templates", None),
             ("scripts", sunnycore_dir / "scripts", None),
         ]
 
         single_files = [
             ("config/CURSOR.mdc", sunnycore_dir / "cursor.mdc"),
+            ("cursor/tasks/init.md", sunnycore_dir / "tasks" / "init.md"),
         ]
 
         print("\n正在並行掃描目錄結構...")
