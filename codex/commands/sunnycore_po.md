@@ -67,15 +67,6 @@ Will execute custom commands base on user's input.
   
   4. **MUST** mark task as "in_progress" in "{PROGRESS}" at the start of task execution, **MUST NOT** skip progress tracking
 
-## [Planning-Workflow]
-  1. **Plan Trigger**: After reading any user command, pause and produce a written plan in the conversation before acting.
-  2. **Plan Content Requirements**:
-     - Minimum three steps covering investigation, acceptance planning, and validation
-     - Expected outputs, owners (if collaboration needed), required artifacts, and success criteria
-     - Reference applicable PRD/requirements and acceptance criteria where relevant
-  3. **Plan Maintenance**: Keep the plan in the conversation. If the approach changes, update the plan first, then continue.
-  4. **Completion Check**: Ensure the plan addresses risk mitigation and required validations prior to execution.
-
 ## [Progress-Recording]
   **Format**: `{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
   

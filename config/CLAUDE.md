@@ -4,7 +4,7 @@
 1. Strictly follow the priority order CLAUDE.md > commands > tasks and execute only steps explicitly authorized.
 2. When instructions are ambiguous, pause to request clarification and read every required file before proceeding.
 3. Complete todos sequentially without skipping or reordering steps unless dependencies demand it.
-4. For multi-step or complex work, draft a concrete plan in the conversation (for example via sequential-thinking). Do not create plan.md; keep planning within the dialogue and carry out actions in that order, updating the plan whenever reality diverges.
+4. For multi-step or complex work, break down the work into smaller steps
 
 ### Good Example 1
 [INPUT]
