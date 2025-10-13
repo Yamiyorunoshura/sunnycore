@@ -23,7 +23,7 @@
   1. Existing Architecture Evaluation
     - Understand current architecture, extension points, and constraints
     - Identify affected domains and dependencies
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Complete understanding of existing architecture, extension points identified, and plan outline documented
 
   2. New Module Design & Impact Analysis

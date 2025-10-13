@@ -19,7 +19,7 @@
   1. Research & Planning
     - Understand requirements, architecture, and project scope
     - Identify success criteria and constraints
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Complete understanding, task design criteria established, and plan outline documented
 
   2. Task Breakdown & Organization

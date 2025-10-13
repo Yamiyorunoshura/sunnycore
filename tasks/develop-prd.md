@@ -22,7 +22,7 @@
   1. Preparation & Strategy
     - Understand all PRD requirements and architecture completely
     - Develop comprehensive TDD implementation strategy
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Complete strategy established and plan outline documented
 
   2. TDD Development Cycle

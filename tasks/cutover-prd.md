@@ -19,7 +19,7 @@
 ## [Steps]
   1. Preparation & Validation
     - Understand business objectives and technical architecture from PRD
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Business objectives and architecture understood from PRD, and plan outline documented
 
   2. Code Quality Inspection (CRITICAL)

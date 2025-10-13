@@ -21,7 +21,7 @@
   1. Input Validation & Setup
     - Parse version number from lock file
     - Validate all required input files exist
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: All inputs validated, version identified, and plan outline documented
 
   2. Information Extraction & Mapping

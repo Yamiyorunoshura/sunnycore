@@ -19,7 +19,7 @@
   1. Initialization & Context Gathering
     - Determine project type (Greenfield/Brownfield)
     - Gather complete context for both project types
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Project type determined, context collected, and plan outline documented
 
   2. Requirement Scope & Impact Analysis

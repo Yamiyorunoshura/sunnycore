@@ -21,7 +21,7 @@
   1. Initialization & Context Understanding
     - Determine project type (Greenfield/Brownfield)
     - Gather appropriate context for project type
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Project type determined, context gathered, and plan outline documented
 
   2. Requirements Definition

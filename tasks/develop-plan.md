@@ -28,7 +28,7 @@
 ## [Steps]
   1. Preparation & Planning
     - Understand TDD implementation plan and three phases
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Implementation plan understood and plan outline documented
 
   2. RED Phase: Test Implementation

@@ -26,7 +26,7 @@
   1. Analysis & Context Gathering
     - Understand existing architecture and actual implementation state
     - Gather comprehensive context from all documentation sources
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Complete understanding of current state, context gathered, and plan outline documented
 
   2. Architecture Integration & Documentation

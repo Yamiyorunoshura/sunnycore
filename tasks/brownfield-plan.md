@@ -22,7 +22,7 @@
   1. Issue Analysis & Planning
     - Understand issues from review report and architecture context
     - Formulate atomic fix tasks based on analysis
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Clear understanding of issues and plan outline documented
 
   2. Test-Driven Fix Implementation

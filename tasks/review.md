@@ -21,7 +21,7 @@
   1. Review Planning & Domain Identification
     - Understand implementation plan to identify task domain and establish scope of review
     - Determine domain-specific review criteria and success criteria
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Review criteria and approach determined, plan outline documented
 
   2. Code & Test Execution Review

@@ -25,7 +25,7 @@
   1. Setup & Context Understanding
     - Understand all requirements, architecture, and task scope
     - Identify project-specific best practices and lessons learned
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Complete context, planning criteria established, and plan outline documented
 
   2. RED Phase Planning (For Each Task)

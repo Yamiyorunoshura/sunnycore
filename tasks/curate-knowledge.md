@@ -24,7 +24,7 @@
   1. Knowledge Identification & Planning
     - Identify all platinum-level best practices from reviews
     - Identify development errors and solutions from dev notes
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: All platinum practices and errors identified and plan outline documented
 
   2. Knowledge Base Design & Classification

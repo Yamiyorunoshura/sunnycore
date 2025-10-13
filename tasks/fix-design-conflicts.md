@@ -24,7 +24,7 @@
   1. Issue Analysis & Prioritization
     - Understand all issues from validation report
     - Extract, group, and prioritize issues properly
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Issues categorized and prioritized, plan outline documented
 
   2. Fix Planning & User Confirmation

@@ -19,7 +19,7 @@
 ## [Steps]
   1. Initialization & Scope Definition
     - Understand expected workflow and requirements gathering scope
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Requirements gathering scope clearly defined and plan outline documented
 
   2. Functional Requirements Extraction

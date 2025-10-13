@@ -23,7 +23,7 @@
   1. Issue Analysis & Prioritization
     - Understand all reported issues from cutover report
     - Prioritize issues by severity and business impact
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Issues prioritized and plan outline documented
 
   2. Root Cause Analysis & Fix Strategy

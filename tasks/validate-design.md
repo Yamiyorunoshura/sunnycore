@@ -22,7 +22,7 @@
   1. Initialization & Scope Determination
     - Validate workflow parameter (prd or full)
     - Determine validation scope for workflow type
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Validation scope and workflow determined, plan outline documented
 
   2. Content Extraction & Indexing

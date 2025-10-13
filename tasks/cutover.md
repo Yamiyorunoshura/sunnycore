@@ -21,7 +21,7 @@
   1. Preparation & Validation
     - Understand business objectives from requirement documents
     - Understand system architecture from architecture documents
-    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Conceive the best solution for the task that needs to be completed
     - Outcome: Business objectives understood, architecture validated, and plan outline documented
 
   2. Code Quality Inspection (CRITICAL)
