@@ -1,0 +1,53 @@
+---
+# Sunnycore Instruction Blueprint
+# Use to assemble CLAUDE.md / AGENTS.md / cursor.mdc reference guides.
+
+template:
+  id: project-instruction-template-v1
+  name: Project Instruction Blueprint
+  version: 1.0
+  output:
+    format: markdown
+    headings_order:
+      - Project Info
+      - Tech Stack
+      - Key Architecture
+      - Coding Standard
+    citation_policy: "Each bullet must reference its source file or be marked TODO."
+
+sections:
+  - id: project_info
+    title: Project Info
+    instruction: |
+      Summarize the initiative with short, scannable bullets.
+      Include name, mission, primary stakeholders, current status, and key timelines.
+      Cite the exact files (architecture, requirements, README) for every fact.
+
+  - id: tech_stack
+    title: Tech Stack
+    instruction: |
+      Enumerate languages, frameworks, runtimes/hosting, supporting tools or services, and data stores.
+      Highlight mandatory versions or deployment constraints sourced from manifests or architecture docs.
+      Use TODO bullets for unknown layers that require human clarification.
+
+  - id: key_architecture
+    title: Key Architecture
+    instruction: |
+      Describe the system shape: core modules, data flow, integrations, and deployment topology.
+      Capture operational concerns (scaling, reliability, security) noted in architecture or ops runbooks.
+      Keep bullets concise; prefer one integration or component per bullet with citations.
+
+  - id: coding_standard
+    title: Coding Standard
+    instruction: |
+      List style guides, lint/test requirements, branching & review workflow, and documentation expectations.
+      Pull details from standards docs, CONTRIBUTING guides, or task-specific governance notes.
+      Flag discrepancies between sources as TODO items instead of guessing resolutions.
+
+checks:
+  - id: completeness
+    instruction: "Verify each section is populated in order and references `templates/instruction-template.yaml` headings."
+  - id: sourcing
+    instruction: "Ensure every bullet cites a source or is explicitly marked TODO with next action."
+  - id: clarity
+    instruction: "Confirm the final document is scannable (no paragraph longer than five sentences)."

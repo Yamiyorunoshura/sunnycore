@@ -7,6 +7,30 @@
 
 ## [Unreleased]
 
+## [4.11.0] - 2025-10-13
+
+### Changed
+- 重組專案目錄結構以強化多平台支援清晰度：
+  - 將 `commands/` 重新命名為 `claude code/commands/`，明確標示 Claude Code 平台專用指令
+  - 新增 `codex/commands/` 目錄，包含 Codex 平台專用的六個角色指令（architect、assistant、dev、pm、po、qa）
+  - 新增 `cursor/commands/` 目錄，包含 Cursor 平台專用的六個角色指令（architect、assistant、dev、pm、po、qa）
+  - 為三個平台各自新增平台專用的 `tasks/init.md`：
+    * `claude code/tasks/init.md`：產生 `CLAUDE.md` playbook
+    * `codex/tasks/init.md`：產生 `AGENTS.md` playbook
+    * `cursor/tasks/init.md`：產生 `cursor.mdc` playbook
+  - 刪除舊的 `tasks/init.md`，由平台專用版本取代
+  - 更新 `install.py` 安裝腳本以支援新的多平台目錄結構：
+    * Claude 版本從 `claude code/commands` 安裝，使用 `claude code/tasks/init.md`
+    * Codex 版本從 `codex/commands` 安裝，使用 `codex/tasks/init.md`
+    * Cursor 版本從 `cursor/commands` 安裝，使用 `cursor/tasks/init.md`
+    * 通用任務（tasks/ 目錄）排除 `init.md` 以避免與平台專用版本衝突
+
+### Added
+- 新增 `templates/instruction-tmpl.yaml` 統一指引模板：
+  - 定義四大核心章節：Project Info、Tech Stack、Key Architecture、Coding Standard
+  - 提供標準化的模板結構供 CLAUDE.md、AGENTS.md、cursor.mdc 生成使用
+  - 包含引用政策和完整性檢查規範
+
 ## [4.10.0] - 2025-10-13
 
 ### Added
