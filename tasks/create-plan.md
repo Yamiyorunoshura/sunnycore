@@ -90,6 +90,8 @@
   - [ ] Implementation plan exists for each task with complete TDD three-phase structure (RED/GREEN/REFACTOR sections)
   - [ ] All plans have proper requirement-architecture-test mapping with specific file references
   - [ ] All plan files created at "{PLAN}/{task_id}-plan.md" following template structure
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

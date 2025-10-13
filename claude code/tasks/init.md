@@ -73,6 +73,8 @@
   - [ ] All directory structure specified in architecture documents has been created
   - [ ] Minimal Hello World application has been implemented and can successfully start and run (smoke test passed)
   - [ ] Complete CLAUDE.md is generated base on the template
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

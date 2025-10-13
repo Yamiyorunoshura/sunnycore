@@ -79,6 +79,8 @@
   - [ ] All tests executed with results recorded and verified against implementation plan
   - [ ] Complete review report exists at "{REVIEW}/{task_id}-review.md" with scoring and acceptance decision
   - [ ] "{EPIC}" updated with task completion status and score
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

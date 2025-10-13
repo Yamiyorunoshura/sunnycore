@@ -87,6 +87,9 @@
   - [ ] Complete requirement-to-architecture mapping matrix with 100% coverage (all functional and non-functional requirements mapped)
   - [ ] Architecture document approved by user and exists at "{root}/docs/architecture.md" following template structure
   - [ ] Architecture successfully sharded with verified output files in "{ARCH}/"
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
+  
 
 ## [Example]
 

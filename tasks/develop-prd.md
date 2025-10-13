@@ -63,6 +63,8 @@
   - [ ] All PRD requirements implemented through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing
   - [ ] Code quality meets standards (SOLID, DRY, functions ≤50 lines, coverage ≥80%)
   - [ ] Complete development notes at "{root}/docs/prd-dev-notes.md"
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

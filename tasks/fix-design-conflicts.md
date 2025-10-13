@@ -115,6 +115,8 @@
   - [ ] All approved fixes successfully applied with cross-document consistency verified
   - [ ] No new issues introduced and all changes confirmed by user
   - [ ] Validation report "{root}/docs/design-validation.md" deleted
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

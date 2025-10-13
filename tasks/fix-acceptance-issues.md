@@ -75,6 +75,8 @@
   - [ ] All issues resolved through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing
   - [ ] Acceptance tests re-executed with all issues confirmed resolved
   - [ ] Complete development notes at "{root}/docs/cutover-fixes-dev-notes.md"
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

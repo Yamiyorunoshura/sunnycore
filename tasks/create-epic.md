@@ -60,6 +60,8 @@
   - [ ] Epic file exists at "{EPIC}" with all tasks feature-level, outcome-oriented, and properly mapped to requirements
   - [ ] Task list approved by user with 100% requirement coverage
   - [ ] All file names use kebab-case (no spaces)
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

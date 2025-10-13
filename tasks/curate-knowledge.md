@@ -69,6 +69,8 @@
   - [ ] Knowledge base exists at "{KNOWLEDGE}/" with platinum-level best practices and errors documented
   - [ ] All knowledge points have evidence source annotations (format: file_path [Section Name])
   - [ ] Review and development notes archived to "{ARCHIVE}/{version_name}/"
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

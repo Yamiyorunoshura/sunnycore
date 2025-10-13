@@ -73,7 +73,9 @@
   - [ ] Project type correctly determined with requirement scope and impact analyzed
   - [ ] Clear workflow recommendation provided with specific command (*create-requirements or *create-prd)
   - [ ] User understands workflow recommendation and rationale
-
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
+  
 ## [Example]
 
 ### Good Example 1
