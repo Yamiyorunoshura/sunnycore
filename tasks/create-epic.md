@@ -19,7 +19,7 @@
   1. Research & Planning
     - Understand requirements, architecture, and project scope
     - Identify success criteria and constraints
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to document coverage analysis, grouping strategy, and validation checkpoints
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Complete understanding, task design criteria established, and plan.md initialized
 
   2. Task Breakdown & Organization

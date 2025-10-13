@@ -23,7 +23,7 @@
   1. Initialization & Scope Determination
     - Validate workflow parameter (prd or full)
     - Determine validation scope for workflow type
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to log workflow selection, extraction targets, and validation checkpoints
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Validation scope and workflow determined, plan.md initialized
 
   2. Content Extraction & Indexing

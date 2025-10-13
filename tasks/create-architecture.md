@@ -21,7 +21,7 @@
   1. Requirement Analysis & Mapping
     - Understand all requirements and their implications
     - Create complete requirement-to-architecture mapping matrix (100% coverage)
-    - Create plan.md at "{root}/docs/plan.md" via the plan template, emphasizing requirement coverage, architecture decision checkpoints, and sharding preparation
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Complete understanding, requirement mapping matrix created, and plan.md initialized
 
   2. Architecture Design

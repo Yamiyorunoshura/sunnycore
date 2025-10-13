@@ -22,7 +22,7 @@
   1. Review Planning & Domain Identification
     - Understand implementation plan to identify task domain and establish scope of review
     - Determine domain-specific review criteria and success criteria
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to document review focus, required evidence, and decision checkpoints
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Review criteria and approach determined, plan.md initialized
 
   2. Code & Test Execution Review

@@ -19,7 +19,7 @@
 ## [Steps]
   1. Initialization & Scope Definition
     - Understand expected workflow and requirements gathering scope
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to log discovery sources, requirement categories, and validation steps
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Requirements gathering scope clearly defined and plan.md initialized
 
   2. Functional Requirements Extraction

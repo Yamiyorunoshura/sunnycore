@@ -21,7 +21,7 @@
   1. Initialization & Context Understanding
     - Determine project type (Greenfield/Brownfield)
     - Gather appropriate context for project type
-    - Create plan.md at "{root}/docs/plan.md" via the plan template, capturing project type evidence, required artifacts, and approval steps
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Project type determined, context gathered, and plan.md initialized
 
   2. Requirements Definition

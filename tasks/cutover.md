@@ -21,7 +21,7 @@
   1. Preparation & Validation
     - Understand business objectives from requirement documents
     - Understand system architecture from architecture documents
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to document acceptance scenarios, configuration prerequisites, and validation evidence plan
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Business objectives understood, architecture validated, and plan.md initialized
 
   2. Code Quality Inspection (CRITICAL)

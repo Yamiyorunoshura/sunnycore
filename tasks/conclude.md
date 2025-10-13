@@ -21,7 +21,7 @@
   1. Input Validation & Setup
     - Parse version number from lock file
     - Validate all required input files exist
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to record version data, required artifacts, and archiving checkpoints
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: All inputs validated, version identified, and plan.md initialized
 
   2. Information Extraction & Mapping

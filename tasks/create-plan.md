@@ -25,7 +25,7 @@
   1. Setup & Context Understanding
     - Understand all requirements, architecture, and task scope
     - Identify project-specific best practices and lessons learned
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to log source documents reviewed, coverage goals, and approval milestones
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Complete context, planning criteria established, and plan.md initialized
 
   2. RED Phase Planning (For Each Task)
