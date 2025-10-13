@@ -62,29 +62,6 @@
     - Note: dev-notes.md is the ONLY permanent documentation output; plan.md is temporary
     - Outcome: Acceptance criteria met and dev notes completed (created or updated)
 
-## [Progress-Tracking-Guidelines]
-  **Content for plan.md:**
-  - Task identification (task ID and description from implementation plan)
-  - Implementation plan summary (requirements, architecture mapping, acceptance criteria)
-  - RED phase progress:
-    * Test cases implemented (list with test names)
-    * Test types (unit/integration/behaviour) with count
-    * RED status verification (tests failing as expected: yes/no)
-    * Test coverage planned vs achieved
-  - GREEN phase progress:
-    * Implementation files created/modified (list with file paths)
-    * Architecture components implemented (list)
-    * Test execution results (all passing: yes/no, failure details if any)
-    * Minimal implementation verified (yes/no)
-  - REFACTOR phase progress:
-    * Refactoring activities performed (list)
-    * Code quality improvements (patterns applied, DRY, SOLID)
-    * Cross-cutting concerns integrated (logging, error handling, etc.)
-    * Test status maintained (all still passing: yes/no)
-  - Acceptance criteria validation (each criterion with met/not met status)
-  - Code quality metrics (test coverage %, function length compliance, etc.)
-  - Development notes status (created/updated at {DEVNOTES}/{task_id}-dev-notes.md)
-
 ## [DoD]
   - [ ] All acceptance criteria satisfied through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing
   - [ ] Code quality meets standards (SOLID, DRY, functions ≤50 lines, coverage ≥80%)

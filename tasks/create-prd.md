@@ -48,29 +48,6 @@
     - Obtain user confirmation
     - Outcome: Approved PRD document created
 
-## [Progress-Tracking-Guidelines]
-  **Content for plan.md:**
-  - Project type determination (Greenfield/Brownfield)
-  - User requirement description summary
-  - Existing architecture review (if Brownfield - components, patterns, contracts)
-  - Requirements definition progress:
-    * Functional requirements defined (count, IDs, descriptions)
-    * Non-functional requirements defined (count, IDs, targets)
-    * Acceptance criteria created (Given-When-Then format)
-  - Architecture design progress:
-    * Components designed (list with status)
-    * Data flows documented (count)
-    * ADRs documented (count and key decisions)
-    * Impact analysis completed (if Brownfield - affected components, breaking changes)
-  - Task breakdown progress:
-    * Total tasks identified
-    * Each task with requirement mapping
-    * Dependencies identified
-  - Traceability matrix:
-    * Requirements → Architecture (coverage %)
-    * Architecture → Tasks (coverage %)
-  - User approval status (draft/approved/revisions needed)
-
 ## [Error-Handling]
   1. Directory check failure: Log error and proceed as Greenfield
   2. Existing architecture read failure: Record issue and request user clarification

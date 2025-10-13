@@ -46,30 +46,6 @@
     - Verify all source references properly documented
     - Outcome: CLAUDE.md updated with current architecture index
 
-## [Progress-Tracking-Guidelines]
-  **Content for plan.md:**
-  - Documentation sources analyzed:
-    * Existing architecture documents reviewed (list of files)
-    * Development notes reviewed (list of files)
-    * Review reports analyzed (list of files)
-    * Knowledge base consulted (list of files)
-    * Progress records reviewed
-  - Codebase analysis:
-    * Implementation files examined (list with file paths)
-    * Actual architecture state documented (components, patterns, tech stack)
-    * Architecture drift identified (differences from original design)
-  - Architecture integration progress:
-    * Components documented (list with status)
-    * Data flows documented (count)
-    * ADRs extracted and documented (count and key decisions)
-    * Cross-cutting concerns documented (security, observability, etc.)
-    * Source references added (format: file_path:line_number)
-  - Documentation workflow:
-    * Unified architecture.md created (yes/no)
-    * Old architecture documents deleted (yes/no)
-    * Sharding script executed (yes/no)
-    * Sharded files verified (list of generated files)
-  - CLAUDE.md update status (document index refreshed, architecture references updated)
 
 ## [Documentation-Guidelines]
   1. **Base on Actual Implementation**

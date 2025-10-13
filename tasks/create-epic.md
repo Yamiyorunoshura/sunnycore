@@ -40,24 +40,6 @@
     - Save final epic document to "{EPIC}"
     - Outcome: Approved epic document created
 
-## [Progress-Tracking-Guidelines]
-  **Content for plan.md:**
-  - Requirements summary (total functional/non-functional requirements from REQ/*.md)
-  - Architecture components summary (list of components from ARCH/*.md)
-  - Task breakdown progress:
-    * Total tasks identified
-    * Tasks organized by logical grouping
-    * Task descriptions refined (each ≤14 characters)
-  - Requirement coverage tracking:
-    * Requirements mapped to tasks (requirement ID → task ID)
-    * Coverage percentage (target: 100%)
-    * Unmapped requirements (if any)
-  - Task traceability matrix:
-    * Each task with requirement IDs and architecture component mappings
-    * Dependencies identified between tasks
-  - Review and refinement status (deduplication done, granularity verified)
-  - User approval status (draft/approved)
-
 ## [Task-Design-Guidelines]
   1. **Feature-Level Tasks**
     - Each task represents a major feature (e.g., "Implement login", "Add export function")
