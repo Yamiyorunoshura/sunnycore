@@ -7,6 +7,11 @@
 
 ## [Unreleased]
 
+## [4.9.0] - 2025-10-13
+
+### Changed
+- Simplified task file structure by removing detailed `[Progress-Tracking-Guidelines]` sections from all task files (`tasks/*.md`) to streamline AI agent execution workflow.
+
 ## [4.8.0] - 2025-10-13
 
 ### Added
