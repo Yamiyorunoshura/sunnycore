@@ -4,11 +4,11 @@
   1. "{REQ}/*.md" --Requirement documents (required)
   2. "{ARCH}/*.md" --Architecture documents (required)
   3. "{TMPL}/cutover-report-tmpl.yaml" --Cutover report template (required)
-  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; capture user-centric test scope, configuration checkpoints, and evidence collection steps
+  
 
 ## [Output]
   1. "{CUTOVER}" --Cutover report (Markdown format)
-  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not perform technical testing (must test from end-user perspective)
@@ -21,8 +21,8 @@
   1. Preparation & Validation
     - Understand business objectives from requirement documents
     - Understand system architecture from architecture documents
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Business objectives understood, architecture validated, and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Business objectives understood, architecture validated, and plan outline documented
 
   2. Code Quality Inspection (CRITICAL)
     - **CRITICAL**: Scan ALL production/implementation code for mock/stub/placeholder patterns and hardcoded values (auto-fail if found; note: tests using mocks/hardcoded test data are allowed)
@@ -93,8 +93,6 @@
   - [ ] All critical business requirements tested from end-user perspective with results recorded
   - [ ] Complete cutover report at "{CUTOVER}" with status (Success/Partial Success/Failed) and clear rationale
   - [ ] All issues documented with severity classification and reproduction steps
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

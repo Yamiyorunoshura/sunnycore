@@ -4,11 +4,11 @@
   1. "{REQ}/*.md" --Project functional and non-functional requirements
   2. "{ARCH}/*.md" --Architecture design and technical specifications
   3. "{TMPL}/epic-tmpl.yaml" --Epic template format
-  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; focus the plan on requirement coverage, task sequencing, and DoD alignment for this epic
+  
 
 ## [Output]
   1. "{EPIC}" --Task list (Markdown format)
-  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not create tasks below feature-level granularity
@@ -19,8 +19,8 @@
   1. Research & Planning
     - Understand requirements, architecture, and project scope
     - Identify success criteria and constraints
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Complete understanding, task design criteria established, and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Complete understanding, task design criteria established, and plan outline documented
 
   2. Task Breakdown & Organization
     - Create feature-level task breakdown with proper grouping
@@ -60,8 +60,6 @@
   - [ ] Epic file exists at "{EPIC}" with all tasks feature-level, outcome-oriented, and properly mapped to requirements
   - [ ] Task list approved by user with 100% requirement coverage
   - [ ] All file names use kebab-case (no spaces)
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

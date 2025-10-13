@@ -5,13 +5,13 @@
   2. "{REQ}/*.md" --Requirement documents (required)
   3. "{ARCH}/*.md" --Architecture documents (required)
   4. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template (required)
-  5. "{TMPL}/plan-tmpl.yaml" --Unified planning template; detail acceptance issues, fix strategies, and validation checkpoints for this task
+  
 
 ## [Output]
   1. "{root}/docs/cutover-fixes-dev-notes.md" --Development notes for fixes (Markdown format)
   2. Fixed code implementation
   3. Updated documentation if needed
-  4. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not leave any cutover issues unaddressed
@@ -24,8 +24,8 @@
   1. Issue Analysis & Prioritization
     - Understand all reported issues from cutover report
     - Prioritize issues by severity and business impact
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Issues prioritized and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Issues prioritized and plan outline documented
 
   2. Root Cause Analysis & Fix Strategy
     - Reference requirement and architecture documents for context
@@ -75,8 +75,6 @@
   - [ ] All issues resolved through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing
   - [ ] Acceptance tests re-executed with all issues confirmed resolved
   - [ ] Complete development notes at "{root}/docs/cutover-fixes-dev-notes.md"
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

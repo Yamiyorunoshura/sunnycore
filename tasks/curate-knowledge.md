@@ -7,13 +7,13 @@
   4. "{CUTOVER}" --Cutover report (required)
   5. "{root}/docs/cutover-dev-notes.md" --Cutover development notes (required)
   6. "{PROGRESS}" --Progress record
-  7. "{TMPL}/plan-tmpl.yaml" --Unified planning template; focus entries on evidence sources, classification scheme, and archiving requirements for this task
+  
 
 ## [Output]
   1. "{KNOWLEDGE}/*.md" --Knowledge base (create directory first if it does not exist)
     - Document organization: May produce "best-practices.md", "errors.md" based on actual content, or subdivide by domain/type
     - Content allocation: One entry per platinum practice, one entry per error case
-  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not include non-platinum practices as best practices (only use marked platinum from reviews)
@@ -24,8 +24,8 @@
   1. Knowledge Identification & Planning
     - Identify all platinum-level best practices from reviews
     - Identify development errors and solutions from dev notes
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: All platinum practices and errors identified and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: All platinum practices and errors identified and plan outline documented
 
   2. Knowledge Base Design & Classification
     - Design well-structured organization scheme
@@ -69,8 +69,6 @@
   - [ ] Knowledge base exists at "{KNOWLEDGE}/" with platinum-level best practices and errors documented
   - [ ] All knowledge points have evidence source annotations (format: file_path [Section Name])
   - [ ] Review and development notes archived to "{ARCHIVE}/{version_name}/"
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

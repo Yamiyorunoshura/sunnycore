@@ -4,11 +4,11 @@
   1. "{root}/docs/*.md" --All files in docs/ directory recursively (required)
   2. "{LOCK}" --Version information (required)
   3. "{TMPL}/completion-report-tmpl.yaml" --Completion report template (required)
-  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; tailor sections to capture version analysis, report assembly, and archiving steps
+  
 
 ## [Output]
   1. Completion report: "{root}/docs/completion-report.md" (Markdown format)
-  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not omit any of the 5 core content items (decisions, tech choices, issues/solutions, evidence, recommendations)
@@ -21,8 +21,8 @@
   1. Input Validation & Setup
     - Parse version number from lock file
     - Validate all required input files exist
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: All inputs validated, version identified, and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: All inputs validated, version identified, and plan outline documented
 
   2. Information Extraction & Mapping
     - Extract all 5 core content items (decisions, tech choices, issues/solutions, evidence, recommendations)
@@ -84,8 +84,6 @@
   - [ ] Document references updated to point to correct archive paths
   - [ ] All requirement-related content removed from architecture/ and knowledge/ documents
   - [ ] Workspace cleaned and ready for next development cycle
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

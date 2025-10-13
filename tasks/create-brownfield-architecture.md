@@ -6,12 +6,12 @@
   3. "{SCRIPTS}/shard-architecture.py" --Architecture sharding script
   4. "{TMPL}/architecture-tmpl.yaml" --Architecture template
   5. "{KNOWLEDGE}/*.md" --Project knowledge
-  6. "{TMPL}/plan-tmpl.yaml" --Unified planning template; emphasize delta analysis, impact checkpoints, and approval requirements for this task
+  
 
 ## [Output]
   1. "{root}/docs/architecture.md" (Markdown format)(temporary architecture file. Will be sharded after running "shard-architecture.py")
   2. "{ARCH}/*.md" --Updated architecture document collection (*.md format)
-  3. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not propose design without reviewing existing requirements and architecture
@@ -23,8 +23,8 @@
   1. Existing Architecture Evaluation
     - Understand current architecture, extension points, and constraints
     - Identify affected domains and dependencies
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Complete understanding of existing architecture, extension points identified, and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Complete understanding of existing architecture, extension points identified, and plan outline documented
 
   2. New Module Design & Impact Analysis
     - Design new module with clear boundaries and interfaces
@@ -85,8 +85,6 @@
   - [ ] New module design complete with boundaries, interfaces, and explicit impact analysis for all changes
   - [ ] Compatibility with existing contracts verified (no breaking changes or migration path provided)
   - [ ] Architecture document approved and successfully sharded to "{ARCH}/"
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

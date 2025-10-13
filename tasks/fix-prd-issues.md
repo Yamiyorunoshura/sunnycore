@@ -4,13 +4,13 @@
   1. "{CUTOVER}" --Cutover report (required)
   2. "{PRD}" --Product Requirements Document (required, used as primary requirement and architecture source)
   3. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template (required)
-  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; track acceptance issues, PRD alignment, and validation checkpoints for this task
+  
 
 ## [Output]
   1. "{root}/docs/cutover-fixes-dev-notes.md" --Development notes for fixes (Markdown format)
   2. Fixed code implementation
   3. Updated documentation if needed
-  4. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not leave any cutover issues unaddressed
@@ -23,58 +23,52 @@
   1. Issue Analysis & Prioritization
     - Understand all reported issues from cutover report
     - Prioritize issues by severity and business impact
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Issues prioritized and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Issues prioritized and plan outline documented
 
   2. Root Cause Analysis & Fix Strategy
     - Reference PRD for requirements and technical architecture context
     - Conduct complete root cause analysis for all issues
-    - Document fix strategies for each issue in plan.md
-    - Note: Record analysis in plan.md only; do NOT create separate analysis documents
-    - Outcome: Root causes identified and fix strategies documented in plan.md
+    - Document fix strategies for each issue in progress notes (conversation/dev notes)
+    - Note: Keep analysis in dev notes/progress; do NOT create a separate plan.md
+    - Outcome: Root causes identified and fix strategies documented
 
   3. Fix Planning & Risk Assessment
     - Create comprehensive fix plan for all issues
     - Complete risk assessment and component identification based on PRD
-    - Update plan.md with fix plan and risk assessment
-    - Note: Record planning in plan.md only; do NOT create separate planning documents
-    - Outcome: Detailed fix plan with risk assessment in plan.md
+    - Record fix plan and risk assessment in dev notes/progress
+    - Outcome: Detailed fix plan with risk assessment documented
 
   4. RED Phase: Test Reproduction
     - Create failing tests that reproduce all issues
     - Execute tests and confirm RED status (tests fail as expected)
-    - Update plan.md with RED phase progress (reproduction tests created, RED status verified)
-    - Note: Do NOT create separate test result documents; record status in plan.md only
-    - Outcome: All issues reproduced with failing tests, status recorded in plan.md
+    - Record RED phase progress (reproduction tests created, RED status verified) in dev notes/progress
+    - Outcome: All issues reproduced with failing tests, status recorded
 
   5. GREEN Phase: Fix Implementation
     - Implement minimal code changes to pass tests
     - Follow architecture patterns and standards from PRD
     - Execute tests and verify all pass (exit code 0)
-    - Update plan.md with GREEN phase progress (fixes implemented, test results)
-    - Note: Do NOT create separate test result documents; record status in plan.md only
-    - Outcome: All tests passing with fixes implemented, status recorded in plan.md
+    - Record GREEN phase progress (fixes implemented, test results) in dev notes/progress
+    - Outcome: All tests passing with fixes implemented, status recorded
 
   6. REFACTOR Phase: Quality Improvement & Verification
     - Improve code quality while maintaining green tests
     - Execute tests after each refactoring to ensure they remain green
     - Re-run acceptance tests to confirm issues resolved
-    - Update plan.md with REFACTOR phase progress (quality improvements, acceptance test results)
-    - Note: Do NOT create separate test result documents; record status in plan.md only
-    - Outcome: High-quality fixes with acceptance tests passing, status recorded in plan.md
+    - Record REFACTOR phase progress (quality improvements, acceptance test results) in dev notes/progress
+    - Outcome: High-quality fixes with acceptance tests passing, status recorded
 
   7. Documentation
     - Create complete dev notes at "{root}/docs/cutover-fixes-dev-notes.md" following dev-notes-tmpl.yaml
     - Document all fixes, decisions, and risks
-    - Note: cutover-fixes-dev-notes.md is the ONLY permanent documentation output; plan.md is temporary
+    - Note: cutover-fixes-dev-notes.md is the ONLY permanent documentation output
     - Outcome: Comprehensive fix documentation completed
 
 ## [DoD]
   - [ ] All issues resolved through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing
   - [ ] Acceptance tests re-executed with all issues confirmed resolved
   - [ ] Complete development notes at "{root}/docs/cutover-fixes-dev-notes.md"
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

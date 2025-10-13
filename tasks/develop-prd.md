@@ -3,13 +3,13 @@
 ## [Input]
   1. "{PRD}" --Product Requirements Document
   2. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template
-  3. "{TMPL}/plan-tmpl.yaml" --Unified planning template; populate sections with PRD task orchestration, validation strategy, and documentation updates
+  
 
 ## [Output]
   1. "{root}/docs/prd-dev-notes.md" --Complete development notes document (Markdown format)
   2. High-quality, tested, refactored code implementation for all PRD tasks highly allign with the architecture design stated
   3. Complete test coverage and test cases
-  4. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not leave any PRD tasks incomplete
@@ -22,28 +22,25 @@
   1. Preparation & Strategy
     - Understand all PRD requirements and architecture completely
     - Develop comprehensive TDD implementation strategy
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Complete strategy established and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Complete strategy established and plan outline documented
 
   2. TDD Development Cycle
-    - RED: Write all tests, execute and ensure they fail with expected errors, update plan.md with RED phase status
-    - GREEN: Implement minimal code to pass all tests, execute and verify all pass, update plan.md with GREEN phase status
-    - REFACTOR: Improve code quality while maintaining green tests, execute tests to verify, update plan.md with REFACTOR phase status
-    - Note: Do NOT create separate phase result documents (red-phase-test-result.md, green-phase-test-result.md, etc.); record all status in plan.md only
-    - Outcome: All PRD features implemented with high quality, status recorded in plan.md
+    - RED: Write all tests, execute and ensure they fail with expected errors; record RED status in progress notes
+    - GREEN: Implement minimal code to pass all tests; record GREEN status in progress notes
+    - REFACTOR: Improve code quality while maintaining green tests; record REFACTOR status in progress notes
+    - Outcome: All PRD features implemented with high quality, status recorded in progress notes
 
   3. Integration Testing & Validation
     - Execute complete test suite with all tests passing
     - Validate all PRD acceptance criteria met
     - Handle test failures with iterative fixes
-    - Update plan.md with integration test results
-    - Note: Record test results in plan.md only; do NOT create separate test result documents
-    - Outcome: Full integration verified and acceptance criteria met, results recorded in plan.md
+    - Outcome: Full integration verified and acceptance criteria met, results recorded in progress notes
 
   4. Documentation
     - Create comprehensive development notes document following dev-notes-tmpl.yaml
     - Document all technical decisions and deviations
-    - Note: prd-dev-notes.md is the ONLY permanent documentation output; plan.md is temporary
+    - Note: prd-dev-notes.md is the ONLY permanent documentation output
     - Outcome: Complete dev notes at "{root}/docs/prd-dev-notes.md"
 
   5. Final Verification
@@ -63,8 +60,6 @@
   - [ ] All PRD requirements implemented through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing
   - [ ] Code quality meets standards (SOLID, DRY, functions ≤50 lines, coverage ≥80%)
   - [ ] Complete development notes at "{root}/docs/prd-dev-notes.md"
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

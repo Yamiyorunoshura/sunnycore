@@ -7,6 +7,25 @@
 
 ## [Unreleased]
 
+## [4.15.0] - 2025-10-13
+
+### Added
+- 新增對話內規劃工作流程 (In-Conversation Planning Workflow)：
+  - 所有角色命令新增 `[Planning-Workflow]` 章節，要求在對話中生成書面計劃
+  - 計劃需包含至少三個步驟、預期輸出、成功標準和風險緩解措施
+  - 計劃在對話中維護，變更時需先更新計劃再繼續執行
+
+### Changed
+- 工作流程重構：從文件式規劃遷移至對話式規劃
+  - 移除所有角色命令中「必須更新 plan.md」的約束
+  - 更新所有 22 個任務文件，移除 plan.md 的創建和維護要求
+  - 更新治理規則（AGENTS.md, CLAUDE.md, CURSOR.mdc）以強調對話內規劃
+  - 所有任務的完成定義 (DoD) 移除 plan.md 相關檢查項目
+
+### Removed
+- 移除統一執行計劃模板 `templates/plan-tmpl.yaml`
+- 移除任務文件中對 plan.md 的引用和輸出要求
+
 ## [4.14.0] - 2025-10-13
 
 ### Added

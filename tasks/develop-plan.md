@@ -4,13 +4,13 @@
   1. "{PLAN}/{task_id}-plan.md" --Implementation plan
   2. "{ARCH}/*.md" --Architecture design
   3. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template
-  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; tailor entries to RED/GREEN/REFACTOR progress, validations, and documentation updates for this task
+  
 
 ## [Output]
   1. "{DEVNOTES}/{task_id}-dev-notes.md" --Complete development notes document (Markdown format)
   2. High-quality, tested, refactored code implementation highly allign with the implementation plans
   3. Complete test coverage and test cases allign with the implementation plans
-  4. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not deviate from implementation plan's acceptance criteria and architecture mapping
@@ -28,46 +28,41 @@
 ## [Steps]
   1. Preparation & Planning
     - Understand TDD implementation plan and three phases
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Implementation plan understood and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Implementation plan understood and plan outline documented
 
   2. RED Phase: Test Implementation
     - Implement complete test coverage with all planned test cases
     - Execute tests and verify they fail with expected errors (confirm RED status)
-    - Update plan.md with RED phase progress (test cases implemented, RED status verified)
-    - Note: Do NOT create separate test result documents; record status in plan.md only
-    - Outcome: All tests implemented and failing correctly, status recorded in plan.md
+    - Record RED phase progress (test cases implemented, RED status verified) in progress notes
+    - Outcome: All tests implemented and failing correctly, status recorded
 
   3. GREEN Phase: Minimal Implementation
     - Implement minimal code to pass all tests
     - Align implementation with architecture mapping from plan
     - Execute tests and verify all pass (exit code 0)
-    - Update plan.md with GREEN phase progress (implementation files, test results)
-    - Note: Do NOT create separate test result documents; record status in plan.md only
-    - Outcome: All tests passing with minimal implementation, status recorded in plan.md
+    - Record GREEN phase progress (implementation files, test results) in progress notes
+    - Outcome: All tests passing with minimal implementation, status recorded
 
   4. REFACTOR Phase: Code Quality Enhancement
     - Improve code quality while maintaining green tests
     - Apply all planned optimizations and cross-cutting concerns
     - Execute tests after each refactoring to ensure they remain green
-    - Update plan.md with REFACTOR phase progress (refactoring activities, test status)
-    - Note: Do NOT create separate test result documents; record status in plan.md only
-    - Outcome: High-quality code with all tests still passing, status recorded in plan.md
+    - Record REFACTOR phase progress (refactoring activities, test status) in progress notes
+    - Outcome: High-quality code with all tests still passing, status recorded
 
   5. Validation & Documentation
     - Validate all acceptance criteria are met
     - Check if "{DEVNOTES}/{task_id}-dev-notes.md" already exists
     - If exists: Update existing dev notes with new implementation details
     - If not exists: Create new dev notes from template following dev-notes-tmpl.yaml
-    - Note: dev-notes.md is the ONLY permanent documentation output; plan.md is temporary
+    - Note: dev-notes.md is the ONLY permanent documentation output
     - Outcome: Acceptance criteria met and dev notes completed (created or updated)
 
 ## [DoD]
   - [ ] All acceptance criteria satisfied through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing
   - [ ] Code quality meets standards (SOLID, DRY, functions ≤50 lines, coverage ≥80%)
   - [ ] Complete development notes document exists at "{DEVNOTES}/{task_id}-dev-notes.md"
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

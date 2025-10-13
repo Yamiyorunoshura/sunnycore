@@ -2,7 +2,7 @@
 
 ## [Input]
   1. "{root}/docs/design-validation.md" --Validation report with identified issues
-  2. "{TMPL}/plan-tmpl.yaml" --Unified planning template; populate sections with issue inventory, approval strategy, and cross-document validation checkpoints
+  
 
 ## [Output]
   1. Modified design documents based on conflict resolution:
@@ -12,7 +12,7 @@
     - "{EPIC}" (if full workflow was used)
     - "{PLAN}/*.md" (if full workflow was used)
   2. Deleted: "{root}/docs/design-validation.md" (after successful fixes)
-  3. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
   
 ## [Constraints]
   1. Do not fix issues out of severity order (Critical → High → Medium → Low)
@@ -24,8 +24,8 @@
   1. Issue Analysis & Prioritization
     - Understand all issues from validation report
     - Extract, group, and prioritize issues properly
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Issues categorized, prioritized, and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Issues categorized and prioritized, plan outline documented
 
   2. Fix Planning & User Confirmation
     - Develop comprehensive fix plans for all issues
@@ -115,8 +115,6 @@
   - [ ] All approved fixes successfully applied with cross-document consistency verified
   - [ ] No new issues introduced and all changes confirmed by user
   - [ ] Validation report "{root}/docs/design-validation.md" deleted
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

@@ -4,14 +4,14 @@
 1. Strictly follow the priority order CLAUDE.md > commands > tasks and execute only steps explicitly authorized.
 2. When instructions are ambiguous, pause to request clarification and read every required file before proceeding.
 3. Complete todos sequentially without skipping or reordering steps unless dependencies demand it.
-4. For multi-step or complex work, draft a concrete plan (for example via sequential-thinking), then carry out actions in that order and update the plan whenever reality diverges.
+4. For multi-step or complex work, draft a concrete plan in the conversation (for example via sequential-thinking). Do not create plan.md; keep planning within the dialogue and carry out actions in that order, updating the plan whenever reality diverges.
 
 ### Good Example 1
 [INPUT]
 User requests: "Update the database schema according to tasks/develop-plan.md"
 
 [DECISION]
-Read CLAUDE.md first to understand constraints, then read commands to check for schema-related directives, map out a sequential-thinking plan (review current schema → design migration steps → write and test migration), and finally read the specific task file before executing the plan's first step.
+Read CLAUDE.md first to understand constraints, then read commands to check for schema-related directives, map out a sequential-thinking plan in the conversation (review current schema → design migration steps → write and test migration), and finally read the specific task file before executing the plan's first step.
 
 [OUTCOME]
 All governance rules are respected; each planned step is executed in sequence with plan adjustments captured before moving forward, ensuring migration work stays aligned with documented intent.

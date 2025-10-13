@@ -3,12 +3,12 @@
 ## [Input]
   1. "{TMPL}/requirement-tmpl.yaml" --Requirement template
   2. User-provided initial ideas and requirement descriptions
-  3. "{TMPL}/plan-tmpl.yaml" --Unified planning template; document idea intake, requirement refinement, and sharding checkpoints for this task
+  
 
 ## [Output]
   1. "{root}/docs/requirements.md" (Markdown format)(temporary requiremenmt file. Will be sharded after running "shard-requirements.py")
   2. "{REQ}/*.md" --Complete requirement specifications (including functional requirements, non-functional requirements, and acceptance criteria)
-  3. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not create vague or unmeasurable requirements
@@ -19,8 +19,8 @@
 ## [Steps]
   1. Initialization & Scope Definition
     - Understand expected workflow and requirements gathering scope
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Requirements gathering scope clearly defined and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Requirements gathering scope clearly defined and plan outline documented
 
   2. Functional Requirements Extraction
     - Extract complete, deduplicated, atomized functional requirements
@@ -64,8 +64,6 @@
   - [ ] Complete functional and non-functional requirements with quantified metrics and Given-When-Then acceptance criteria
   - [ ] Requirements successfully sharded to "{REQ}/*.md" files using shard-requirements.py
   - [ ] Final requirement set approved by user
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

@@ -4,12 +4,11 @@
   1. "{DEVNOTES}/{task_id}-dev-notes.md" --Development notes
   2. "{PLAN}/{task_id}-plan.md" --Implementation plan
   3. "{TMPL}/review-tmpl.yaml" --Review template
-  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; capture review scope, evidence collection, and decision checkpoints
 
 ## [Output]
   1. "{REVIEW}/{task_id}-review.md" (Markdown format)
   2. "{EPIC}"
-  3. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not skip test execution (if tests missing or fail to run, mark as Reject)
@@ -22,8 +21,8 @@
   1. Review Planning & Domain Identification
     - Understand implementation plan to identify task domain and establish scope of review
     - Determine domain-specific review criteria and success criteria
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Review criteria and approach determined, plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Review criteria and approach determined, plan outline documented
 
   2. Code & Test Execution Review
     - **CRITICAL**: Scan ALL production/implementation code for mock/stub/placeholder patterns and hardcoded values (auto-reject if found; note: tests using mocks/hardcoded test data are allowed)
@@ -79,8 +78,6 @@
   - [ ] All tests executed with results recorded and verified against implementation plan
   - [ ] Complete review report exists at "{REVIEW}/{task_id}-review.md" with scoring and acceptance decision
   - [ ] "{EPIC}" updated with task completion status and score
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

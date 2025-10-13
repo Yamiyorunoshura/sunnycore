@@ -4,14 +4,14 @@
 1. Strictly follow the priority order CLAUDE.md > commands > tasks and execute only steps explicitly authorized.
 2. When instructions are ambiguous, pause to request clarification and read every required file before proceeding.
 3. Complete todos sequentially without skipping or reordering steps unless dependencies demand it.
-4. For multi-step or complex work, draft a concrete plan (e.g., via sequential-thinking), then execute actions in that order while updating the plan if circumstances change.
+4. For multi-step or complex work, draft a concrete plan in the conversation (e.g., via sequential-thinking). Do not create plan.md; keep planning within the dialogue and execute actions in that order while updating the plan if circumstances change.
 
 ### Good Example 1
 [INPUT]
 User says: "Follow the commands/sunnycore_dev.md instructions to implement the feature"
 
 [DECISION]
-Read CLAUDE.md first to understand core constraints, then read commands/sunnycore_dev.md to get the specific instructions, outline a three-step execution plan with sequential-thinking (gather requirements → implement changes → run tests), and finally check if there are related task files before executing the first planned step.
+Read CLAUDE.md first to understand core constraints, then read commands/sunnycore_dev.md to get the specific instructions, outline a three-step execution plan in the conversation with sequential-thinking (gather requirements → implement changes → run tests), and finally check if there are related task files before executing the first planned step.
 
 [OUTCOME]
 Execution follows the mandated hierarchy and each planned step is completed in order, with adjustments logged back into the plan before moving on.

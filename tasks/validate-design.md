@@ -8,11 +8,10 @@
   5. (If workflow=full) "{ARCH}/*.md" --Architecture documents
   6. (If workflow=full) "{EPIC}" --Epic task list
   7. (If workflow=full) "{PLAN}/*.md" --Implementation plans
-  8. "{TMPL}/plan-tmpl.yaml" --Unified planning template; capture workflow selection, entity indexes, and validation checkpoints for this task
 
 ## [Output]
   1. "{root}/docs/design-validation.md" --Comprehensive validation report
-  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
   
 ## [Constraints]
   1. Do not process workflow parameters other than "prd" or "full"
@@ -23,8 +22,8 @@
   1. Initialization & Scope Determination
     - Validate workflow parameter (prd or full)
     - Determine validation scope for workflow type
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Validation scope and workflow determined, plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Validation scope and workflow determined, plan outline documented
 
   2. Content Extraction & Indexing
     - Extract content appropriate for workflow type
@@ -121,8 +120,6 @@
   - [ ] Bidirectional validation complete with 100% coverage verification and no fabricated references
   - [ ] Complete validation report at "{root}/docs/design-validation.md" with issues categorized by severity
   - [ ] User informed of results with clear guidance for next steps
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 

@@ -3,11 +3,11 @@
 ## [Input]
   1. "{PRD}" --Product Requirements Document (required, used as primary requirement and architecture source)
   2. "{TMPL}/cutover-report-tmpl.yaml" --Cutover report template (required)
-  3. "{TMPL}/plan-tmpl.yaml" --Unified planning template; customize sections for PRD-sourced acceptance testing and configuration validation
+  
 
 ## [Output]
   1. "{CUTOVER}" --Cutover report (Markdown format)
-  2. "{root}/docs/plan.md" (temporary document, will be deleted after the task is completed) --For progress tracking
+  
 
 ## [Constraints]
   1. Do not perform technical testing (must test from end-user perspective)
@@ -19,8 +19,8 @@
 ## [Steps]
   1. Preparation & Validation
     - Understand business objectives and technical architecture from PRD
-    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
-    - Outcome: Business objectives and architecture understood from PRD, and plan.md initialized
+    - Record a short planning outline in the conversation (no standalone plan.md)
+    - Outcome: Business objectives and architecture understood from PRD, and plan outline documented
 
   2. Code Quality Inspection (CRITICAL)
     - **CRITICAL**: Scan ALL production/implementation code for mock/stub/placeholder patterns and hardcoded values (auto-fail if found; note: tests using mocks/hardcoded test data are allowed)
@@ -91,8 +91,6 @@
   - [ ] All critical business requirements from PRD tested from end-user perspective with results recorded
   - [ ] Complete cutover report at "{CUTOVER}" with status (Success/Partial Success/Failed) and clear rationale
   - [ ] All issues documented with severity classification and reproduction steps
-  - [ ] All the checkbox in plan.md are marked as done
-  - [ ] plan.md is deleted
 
 ## [Example]
 
