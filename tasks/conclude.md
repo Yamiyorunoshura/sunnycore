@@ -84,6 +84,8 @@
   - [ ] Document references updated to point to correct archive paths
   - [ ] All requirement-related content removed from architecture/ and knowledge/ documents
   - [ ] Workspace cleaned and ready for next development cycle
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

@@ -85,6 +85,8 @@
   - [ ] New module design complete with boundaries, interfaces, and explicit impact analysis for all changes
   - [ ] Compatibility with existing contracts verified (no breaking changes or migration path provided)
   - [ ] Architecture document approved and successfully sharded to "{ARCH}/"
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

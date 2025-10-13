@@ -121,6 +121,8 @@
   - [ ] Bidirectional validation complete with 100% coverage verification and no fabricated references
   - [ ] Complete validation report at "{root}/docs/design-validation.md" with issues categorized by severity
   - [ ] User informed of results with clear guidance for next steps
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

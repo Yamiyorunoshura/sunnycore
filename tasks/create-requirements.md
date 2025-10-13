@@ -64,6 +64,8 @@
   - [ ] Complete functional and non-functional requirements with quantified metrics and Given-When-Then acceptance criteria
   - [ ] Requirements successfully sharded to "{REQ}/*.md" files using shard-requirements.py
   - [ ] Final requirement set approved by user
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

@@ -81,6 +81,8 @@
   - [ ] Complete functional and non-functional requirements with quantified metrics and Given-When-Then acceptance criteria
   - [ ] Architecture design complete with 100% requirement mapping and impact analysis (if Brownfield)
   - [ ] PRD document exists at "{PRD}" following template structure and approved by user
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

@@ -72,6 +72,8 @@
   - [ ] Architecture successfully sharded to "{ARCH}/" with all content including source references by running the scripts (format: file_path:line_number)
   - [ ] All deviations from original design documented with clear rationale
   - [ ] CLAUDE.md updated with current architecture document index
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

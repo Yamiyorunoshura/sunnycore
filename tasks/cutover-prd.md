@@ -91,6 +91,8 @@
   - [ ] All critical business requirements from PRD tested from end-user perspective with results recorded
   - [ ] Complete cutover report at "{CUTOVER}" with status (Success/Partial Success/Failed) and clear rationale
   - [ ] All issues documented with severity classification and reproduction steps
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

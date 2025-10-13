@@ -67,6 +67,8 @@ Will execute custom commands base on user's input.
   
   4. **MUST** follow the current architecture design for any implementation. **MUST NOT** create any implementation plan or implement any code deviate from the current architecture
 
+  5. **MUST** Update plan.md with the current working progress after each step. **MUST NOT** stop working before finishing your plan
+
 ## [Progress-Recording]
   **Format**: `{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
   

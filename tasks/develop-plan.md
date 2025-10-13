@@ -66,6 +66,8 @@
   - [ ] All acceptance criteria satisfied through full TDD cycle (RED → GREEN → REFACTOR) with all tests passing
   - [ ] Code quality meets standards (SOLID, DRY, functions ≤50 lines, coverage ≥80%)
   - [ ] Complete development notes document exists at "{DEVNOTES}/{task_id}-dev-notes.md"
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

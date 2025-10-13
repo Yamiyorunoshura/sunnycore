@@ -6,7 +6,15 @@
 並且本專案遵循[語義化版本](https://semver.org/lang/zh-TW/)。
 
 ## [Unreleased]
- 
+
+## [4.14.0] - 2025-10-13
+
+### Added
+- 新增 AI agent 工作流程增強功能：
+  - 所有角色命令現在要求在每個步驟後更新 plan.md 追蹤工作進度
+  - 所有任務的完成定義 (DoD) 新增 plan.md 處理要求：標記所有項目為完成並刪除檔案
+  - 強化執行紀律與進度可追溯性，確保工作流程的完整性與一致性
+
 ### Changed
 - 統一所有任務文件中關於建立計劃文件的措辭：改為
   "Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to

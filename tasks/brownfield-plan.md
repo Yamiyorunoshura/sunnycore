@@ -43,6 +43,8 @@
 ## [DoD]
   - [ ] All unit and integration tests passed
   - [ ] Development notes updated
+  - [ ] All the checkbox in plan.md are marked as done
+  - [ ] plan.md is deleted
 
 ## [Example]
 

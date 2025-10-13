@@ -61,6 +61,8 @@ Will execute custom commands base on user's input.
   
   4. **MUST** mark task as "in_progress" in "{PROGRESS}" at the start of task execution, **MUST NOT** skip progress tracking
 
+  5. **MUST** Update plan.md with the current working progress after each step. **MUST NOT** stop working before finishing your plan
+
 ## [Progress-Recording]
   **Format**: `{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
   
