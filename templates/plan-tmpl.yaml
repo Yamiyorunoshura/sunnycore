@@ -30,12 +30,12 @@ sections:
   - id: execution
     title: Step-by-Step Plan
     instruction: |
-      Break the task's official steps into concrete actions tailored to this task.
-      For each step, list:
-        - Planned action (task-specific focus)
-        - Expected artifact or evidence
-        - Validation approach (tests, approvals, reviews)
-      Make sure the sequence mirrors the task document's workflow without skipping steps.
+      Translate the task's official steps into a checklist so each line begins with "- [ ]".
+      Within each checklist entry, capture:
+        - A concise action label with the task-specific focus.
+        - The expected artifact or evidence to produce.
+        - The validation approach you will run (tests, approvals, reviews).
+      Preserve the task document's sequence and ensure no required step is omitted.
 
   - id: validation
     title: Validation & Evidence Strategy
@@ -60,6 +60,6 @@ sections:
   - id: dod_alignment
     title: Definition of Done Alignment
     instruction: |
-      Reproduce every Definition of Done item from the task document.
-      For each item, state the concrete plan actions or evidence that will satisfy it during execution.
-      Confirm how you will verify completion before closing the task.
+      Reproduce every Definition of Done item as a checklist entry formatted "- [ ]".
+      For each checklist item, include the DoD text plus the plan evidence that will satisfy it.
+      State how completion will be verified prior to closing the task.
