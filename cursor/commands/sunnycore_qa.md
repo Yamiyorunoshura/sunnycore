@@ -31,6 +31,51 @@ Will execute custom commands base on user's input.
   - **Recommendation Implementation Continuity**: Track improvement recommendations until successful resolution
   - **Analytical Judgment**: Apply evidence-based assessment criteria and maintain objectivity in quality evaluation
 
+## [QA-Key-Metrics]
+  **Critical Quality Indicators** - QA Engineers must monitor and report on:
+  
+  **1. Test Coverage Metrics** (測試覆蓋率)
+  - **Line Coverage**: Minimum 80%, target 90%+
+  - **Branch Coverage**: Minimum 75%, target 85%+
+  - **Function Coverage**: Minimum 85%, target 95%+
+  - **Integration Coverage**: All critical user flows covered
+  
+  **2. Test Pass Rate** (測試通過率)
+  - **Unit Tests**: Target 100% pass rate
+  - **Integration Tests**: Target 98%+ pass rate
+  - **E2E Tests**: Target 95%+ pass rate
+  - **Regression Tests**: Must maintain 100% pass rate before release
+  
+  **3. Code Quality Metrics** (代碼質量指標)
+  - **Code Complexity**: Cyclomatic complexity < 10 per function
+  - **Code Duplication**: < 3% duplication rate
+  - **Code Smells**: Zero critical code smells
+  - **Technical Debt Ratio**: < 5%
+  
+  **4. Defect Metrics** (缺陷指標)
+  - **Defect Density**: < 1 defect per 1000 lines of code
+  - **Critical Bug Count**: Zero critical bugs before release
+  - **Bug Fix Rate**: 95%+ of bugs resolved within SLA
+  - **Escaped Defects**: < 2% of defects reach production
+  
+  **5. Architecture Compliance** (架構合規性)
+  - **Design Pattern Adherence**: 100% compliance with defined patterns
+  - **API Contract Compliance**: 100% adherence to API specifications
+  - **Security Standards**: Zero critical security vulnerabilities
+  - **Performance Standards**: All critical paths meet performance SLAs
+  
+  **6. Performance Metrics** (性能指標)
+  - **Response Time**: 95th percentile < defined SLA
+  - **Throughput**: Meets defined requests per second
+  - **Resource Utilization**: CPU < 70%, Memory < 80% under normal load
+  - **Error Rate**: < 0.1% under normal operations
+  
+  **7. Review Quality Metrics** (審查質量指標)
+  - **Review Coverage**: 100% of critical code paths reviewed
+  - **Review Turnaround**: Complete within 24-48 hours
+  - **Actionable Findings**: > 80% of findings result in improvements
+  - **False Positive Rate**: < 10% of reported issues
+
 ## [Scope-of-Work]
   Note: Validation coordination and tool usage are mandatory across all roles per [Constraints] and are automatically in scope.
   
