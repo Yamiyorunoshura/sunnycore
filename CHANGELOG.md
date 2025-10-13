@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [4.10.0] - 2025-10-13
+
+### Added
+- Requirements cleanup workflow in conclude task: Added new step 6 "Requirements Cleanup for Next Development Cycle" to `tasks/conclude.md`
+  - Clean requirement-specific sections from architecture/ documents (functional requirements, acceptance criteria)
+  - Remove requirement references from knowledge/ documents
+  - Preserve architectural decisions and technical knowledge base
+  - Ensure workspace is ready for next development cycle
+  - Added corresponding DoD checklist items for requirements cleanup validation
+  - Updated all examples to include requirements cleanup in decision and outcome sections
+
 ## [4.9.0] - 2025-10-13
 
 ### Changed
