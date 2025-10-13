@@ -1,18 +1,24 @@
 ---
-# Sunnycore Instruction Blueprint
+# Sunnycore Instruction Blueprint v2
+# Powered by BMAD™ Core
 # Use to assemble CLAUDE.md / AGENTS.md / cursor.mdc reference guides.
 
 template:
-  id: project-instruction-template-v1
+  id: project-instruction-template-v2
   name: Project Instruction Blueprint
-  version: 1.0
+  version: 2.0
   output:
     format: markdown
+    filename: "{config}/CLAUDE.md"
+    title: "{{project_name}} Development Guide"
+    note: "Generated reference guide for AI assistants and developers"
     headings_order:
       - Project Info
       - Tech Stack
       - Key Architecture
       - Coding Standard
+      - Development Workflow
+      - Quality Standards
     citation_policy: "Each bullet must reference its source file or be marked TODO."
 
 sections:
@@ -43,11 +49,66 @@ sections:
       List style guides, lint/test requirements, branching & review workflow, and documentation expectations.
       Pull details from standards docs, CONTRIBUTING guides, or task-specific governance notes.
       Flag discrepancies between sources as TODO items instead of guessing resolutions.
+      
+      **Format:**
+      - **Style Guide:** {language/framework style guide} - {source file}
+      - **Linting:** {lint tool and rules} - {configuration location}
+      - **Testing:** {test requirements and coverage thresholds} - {source}
+      - **Documentation:** {documentation standards} - {source}
+
+  - id: development_workflow
+    title: Development Workflow
+    instruction: |
+      Document the development process and workflow standards:
+      
+      **Task Execution:**
+      - Task selection and planning process
+      - Development approach (TDD, BDD, etc.)
+      - Code review requirements
+      - Testing strategies
+      
+      **Version Control:**
+      - Branching strategy
+      - Commit message standards
+      - Pull request process
+      - Merge requirements
+      
+      **Quality Gates:**
+      - Definition of Done criteria
+      - Review acceptance criteria
+      - Deployment gates
+      
+      Source each point to relevant documentation or mark as TODO.
+
+  - id: quality_standards
+    title: Quality Standards
+    instruction: |
+      Define quality standards and acceptance criteria:
+      
+      **Code Quality:**
+      - Code review standards and scoring dimensions
+      - Test coverage requirements (e.g., ≥80%)
+      - Performance benchmarks
+      - Security requirements
+      
+      **Documentation Quality:**
+      - Required documentation types
+      - Documentation standards
+      - Knowledge management approach
+      
+      **Review Process:**
+      - Review scoring methodology
+      - Acceptance/rejection criteria
+      - Risk assessment guidelines
+      
+      Reference review templates and quality guidelines from project documentation.
 
 checks:
   - id: completeness
-    instruction: "Verify each section is populated in order and references `templates/instruction-template.yaml` headings."
+    instruction: "Verify each section is populated in order and includes all required headings."
   - id: sourcing
-    instruction: "Ensure every bullet cites a source or is explicitly marked TODO with next action."
+    instruction: "Ensure every bullet cites a source file or is explicitly marked TODO with next action."
   - id: clarity
     instruction: "Confirm the final document is scannable (no paragraph longer than five sentences)."
+  - id: consistency
+    instruction: "Validate that standards align with template requirements and project constraints."

@@ -7,6 +7,28 @@
 
 ## [Unreleased]
 
+## [4.12.0] - 2025-10-13
+
+### Added
+- Enhanced instruction template (templates/instruction-tmpl.yaml) v2 features:
+  - New "Development Workflow" section covering task execution, version control, and quality gates
+  - New "Quality Standards" section defining code quality, documentation quality, and review process standards
+  - Enhanced format specifications with detailed guidance for style guides, linting, testing, and documentation
+  - Added consistency validation checks to ensure standards align with template requirements
+
+- Enhanced plan template (templates/plan-tmpl.yaml) v2 features:
+  - Added mandatory task atomicity requirements for breaking complex tasks into simple, independent subtasks
+  - Enhanced DoD checklist format with specific evidence and verification methods
+  - Added comprehensive validation checks: completeness, traceability, atomicity, and evidence planning
+  - Improved step-by-step planning guidance with decomposition strategies
+
+### Changed
+- Simplified shard scripts (scripts/shard-architecture.py, scripts/shard-requirements.py):
+  - Removed virtual environment setup logic (ensure_uv_and_venv functions)
+  - Eliminated dependencies on uv tool and Python 3.13 version constraints
+  - Streamlined script execution by removing complex environment bootstrapping
+  - Scripts now run directly without environment validation overhead
+
 ## [4.11.0] - 2025-10-13
 
 ### Changed
