@@ -5,6 +5,7 @@
   2. "{REVIEW}/{task_id}-review.md" --Review report
   3. "{ARCH}/*.md" --Architecture design
   4. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
+  5. "{TMPL}/plan-tmpl.yaml" --Unified planning template; populate sections with review issues, architecture impacts, and required validations for this task
 
 ## [Output]
   1. Fixed code that runs properly
@@ -21,7 +22,7 @@
   1. Issue Analysis & Planning
     - Understand issues from review report and architecture context
     - Formulate atomic fix tasks based on analysis
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking (this is the ONLY temporary tracking document)
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture review findings, fix strategy, and validation checkpoints (this is the ONLY temporary tracking document)
     - Outcome: Clear understanding of issues, fix plan created, and plan.md initialized
 
   2. Test-Driven Fix Implementation
@@ -66,6 +67,10 @@ Read review report and identify specific test failure. Analyze architecture to u
 [OUTCOME]
 Fixed code with token expiry validation at src/auth/TokenValidator.js:L25-L30. All authentication tests passing. Updated docs/dev-notes/1-dev-notes.md with fix summary documenting the change, test evidence, and rollback plan. Issue fully resolved.
 
+[WHY-GOOD]
+- Treats the review feedback as the planning source, aligning fixes with architecture and TDD expectations before changing code.
+- Provides verified tests and documentation updates, proving the regression is resolved and traceable.
+
 ### Good Example 2
 [INPUT]
 Review report shows: "Performance requirement NFR-001 violated - database query takes 3 seconds, requirement is under 500ms"
@@ -75,6 +80,10 @@ Analyze architecture documents to understand database schema and query patterns.
 
 [OUTCOME]
 Migration script at migrations/add_product_name_index.sql executed successfully. Query optimized in src/repositories/ProductRepository.js. Performance test now passes at 120ms. Updated docs/dev-notes/3-dev-notes.md with before/after performance metrics and migration details.
+
+[WHY-GOOD]
+- Diagnoses the performance issue through architecture and knowledge references, then applies a targeted fix compliant with constraints.
+- Supplies measurable evidence and documentation, showing the improvement is validated and recorded for future teams.
 
 ### Bad Example 1
 [INPUT]

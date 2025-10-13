@@ -7,6 +7,16 @@
 
 ## [Unreleased]
 
+## [4.8.0] - 2025-10-13
+
+### Added
+- Unified execution plan template (`templates/plan-tmpl.yaml`) for standardized task planning across all workflows.
+
+### Changed
+- Integrated plan template references in input sections and step descriptions for all 22 task files (`tasks/*.md`).
+- Updated plan creation instructions in task steps to use the new template for better structure and traceability.
+- Added `[WHY-GOOD]` explanatory sections to examples in command files (`commands/*.md`) and config files (`config/*.md`) to enhance understanding of best practices.
+
 ## [4.7.0] - 2025-10-13
 
 ### Added
@@ -635,7 +645,7 @@
 
 ## [3.3.26] - 2025-10-10
 
-### Fixed
+### Changed
 - 修復 TODO 狀態檢查 Hook 的輸出緩衝問題：改進 `claude code/hooks/ensure_todos_done.py` 的訊息發送機制
   - 改進 emit_block 函數：將 JSON 輸出先存儲至變數再輸出，確保格式正確
   - 新增 sys.stdout.flush()：確保訊息立即發送到 Claude Code，避免緩衝延遲
@@ -695,7 +705,6 @@
     * 錯誤訊息繁體中文化（「未命名待辦項目」）
     * 簡化提示訊息格式
   - 提升 Hook 機制的穩定性與使用者友善度
-
 ## [3.3.20] - 2025-10-10
 
 ### Added
@@ -1042,7 +1051,6 @@
   - DoD 條目合併與簡化：將重複或相關的檢查項目合併為更簡潔的描述
   - 涵蓋任務：brownfield-tasks、conclude、consult、create-architecture、create-brownfield-architecture、create-epic、create-plan、create-prd、create-requirements、curate-knowledge、cutover、develop-plan、develop-prd、document-project、fix-acceptance-issues、fix-design-conflicts、init、review、validate-design
   - 提升任務文檔的清晰度、一致性與可執行性
-
 ## [3.2.8] - sunnycore v3.2.8
 
 ### Changed
@@ -1088,7 +1096,7 @@
 ## [3.2.5] - sunnycore v3.2.5
 
 ### Changed
-- 優化總結任務文件路徑通用性：在 `conclude.md` 中將版本鎖定檔案引用從 "sunnycore.lock" 改為 "*.lock"
+- 優化總結任務文檔路徑通用性：在 `conclude.md` 中將版本鎖定檔案引用從 "sunnycore.lock" 改為 "*.lock"
   - 約束條款第 3 項：改為泛化的 "*.lock" 檔案引用，提升任務適用性
   - 約束條款第 5 項：版本解析說明同步更新為 "*.lock" 格式
   - 提升專案總結任務的通用性與可重用性
@@ -1235,7 +1243,7 @@
     * 在 `brownfield-tasks.md` 中新增 Development-Guidelines（TDD 實踐、程式碼品質標準、測試要求、文檔與風險管理）
     * 在 `create-architecture.md` 中新增 Architecture-Design-Guidelines（模板合規、決策記錄、橫切關注點、可追溯性與正當性）
     * 在所有任務文件中增強結構：新增詳細的步驟說明、完整的示例章節、明確的目標描述
-  - 優化任務文件可讀性：
+  - 優化任務文檔可讀性：
     * 簡化步驟描述，將原本的詳細子步驟改為結果導向的目標描述
     * 統一步驟命名格式，提升文檔一致性
     * 移除冗餘的條件分支說明，專注於核心流程
@@ -1290,7 +1298,7 @@
 ### Changed
 - 重構任務命名與工作流程:優化計劃創建與開發流程 (**破壞性變更**)
   - `plan-tasks` → `create-plan`:改為批量創建所有任務的實作計劃
-    * 支援為 epic 中所有任務一次性創建 TDD 計劃
+    * 支援為 epic 中所有任務一次性創建 TDD 計畫
     * 整合知識庫最佳實踐至計劃創建流程
     * 輸出格式:`{PLAN}/1-plan.md`, `{PLAN}/2-plan.md`, etc.
   - `develop-tasks` → `develop-plan`:基於計劃執行開發
@@ -1392,7 +1400,6 @@
   - 原說明過於籠統，可能導致誤解為需要更新所有檔案參考
   - 新說明明確排除已歸檔文件的參考，避免錯誤修改歷史歸檔路徑
   - 提升總結任務執行的準確性與文檔歸檔的完整性
-
 ## [1.14.5] - sunnycore v1.14.5
 
 ### Changed
@@ -1742,7 +1749,6 @@
   - 新增說明：「Only use index_codebase when the codebase has not been indexed yet」
   - 新增說明：「Check indexing status first before attempting to index」
   - 提升工具使用的正確性與效率，避免重複索引
-
 ## [1.13.4] - sunnycore v1.13.4
 
 ### Changed
@@ -2092,7 +2098,6 @@
     * 涵蓋任務：brownfield-tasks、conclude、create-architecture、create-brownfield-architecture、create-epic、create-prd、create-requirements、curate-knowledge、cutover、develop-prd、develop-tasks、document-project、fix-acceptance-issues、init、plan-tasks、review
   - 優化 `claude code/CLAUDE.md` 的 [Summary-Instructions] 章節：將 [Tool-Guidelines] 標註為必須保留內容
 - 版本號升級：claude-code.lock 從 1.10.0 升級至 1.10.1
-
 ## [1.10.0] - sunnycore v1.10.0
 
 ### Added
@@ -2442,12 +2447,6 @@
 ## Fixed
 - 修正所有指令檔案中的文檔參考路徑：將 `SUNNYCORE.md` 更正為 `CLAUDE.md`
 - 修正 `sunnycore_qa.md` 中的錯字：將「測試覆蓋率s架構合規性」更正為「測試覆蓋率與架構合規性」
-
-## [1.7.24] - sunnycore v1.7.24
-
-## Changed
-- 優化 `review.md` 審查流程：新增「如果審查通過的話更新 task.md 反映項目進展」步驟，強化審查後的項目追蹤機制
-
 ## [1.7.23] - sunnycore v1.7.23
 
 ## Changed

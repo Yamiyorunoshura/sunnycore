@@ -4,6 +4,7 @@
   1. "{PLAN}/{task_id}-plan.md" --Implementation plan
   2. "{ARCH}/*.md" --Architecture design
   3. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template
+  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; tailor entries to RED/GREEN/REFACTOR progress, validations, and documentation updates for this task
 
 ## [Output]
   1. "{DEVNOTES}/{task_id}-dev-notes.md" --Complete development notes document (Markdown format)
@@ -27,7 +28,7 @@
 ## [Steps]
   1. Preparation & Planning
     - Understand TDD implementation plan and three phases
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking (this is the ONLY temporary tracking document)
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture phase checkpoints, test strategies, and documentation commitments (this is the ONLY temporary tracking document)
     - Outcome: Implementation plan understood and plan.md initialized
 
   2. RED Phase: Test Implementation
@@ -101,6 +102,10 @@ Step 1: Read plan - RED: unit tests (model validation), integration tests (API+D
 [OUTCOME]
 Complete TDD cycle executed. Code at src/services/ArticleService.js, tests/ with all passing. Updated docs/dev-notes/1-dev-notes.md documents implementation. Coverage 85%. All acceptance criteria satisfied. plan.md tracked progress throughout.
 
+[WHY-GOOD]
+- Executes the RED→GREEN→REFACTOR cadence as planned, verifying each stage before moving on.
+- Keeps progress and documentation synchronized, making the work auditable and easy to hand off.
+
 ### Good Example 2
 [INPUT]
 Plan: docs/plans/2-plan.md for transaction reports. NFR: query <2s. Architecture: Reporting Service, TimescaleDB.
@@ -110,6 +115,10 @@ Step 1: Read plan completely. Step 2 RED: Write unit tests (aggregation), integr
 
 [OUTCOME]
 All tests passing, performance validated 120ms (<2s requirement). New docs/dev-notes/2-plan.md created with complete documentation. Code quality high. plan.md shows full progression through TDD phases.
+
+[WHY-GOOD]
+- Validates the performance NFR explicitly, proving the plan's success criteria were met.
+- Produces the mandated dev notes and plan tracking artifacts, so quality evidence is preserved.
 
 ### Bad Example 1
 [INPUT]
@@ -136,4 +145,3 @@ Violates Constraint 4 (deliver with failing tests - DoD violation). Constraint 3
 
 [CORRECT-APPROACH]
 Ensure ALL tests pass (exit code 0) before declaring complete per Constraint 4 and DoD. If modifying files outside plan scope, document rationale in dev notes per Constraint 3. Always create/update dev notes - never skip documentation. Use plan.md as THE ONLY temporary tracking document - record all RED/GREEN/REFACTOR status, test results, progress in plan.md. Do NOT create separate result files. Dev notes are permanent, plan.md is temporary.
-

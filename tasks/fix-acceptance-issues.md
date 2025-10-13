@@ -5,6 +5,7 @@
   2. "{REQ}/*.md" --Requirement documents (required)
   3. "{ARCH}/*.md" --Architecture documents (required)
   4. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template (required)
+  5. "{TMPL}/plan-tmpl.yaml" --Unified planning template; detail acceptance issues, fix strategies, and validation checkpoints for this task
 
 ## [Output]
   1. "{root}/docs/cutover-fixes-dev-notes.md" --Development notes for fixes (Markdown format)
@@ -23,7 +24,7 @@
   1. Issue Analysis & Prioritization
     - Understand all reported issues from cutover report
     - Prioritize issues by severity and business impact
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking (this is the ONLY temporary tracking document)
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture issue inventory, prioritization rationale, and validation checkpoints (this is the ONLY temporary tracking document)
     - Outcome: Issues prioritized and plan.md initialized
 
   2. Root Cause Analysis & Fix Strategy
@@ -112,6 +113,10 @@ Analyze issue from cutover report (export timeout). Prioritize as high severity.
 [OUTCOME]
 Fixed code at src/services/ExportService.js with streaming implementation. Complete dev notes at docs/cutover-fixes-dev-notes.md documenting root cause (in-memory processing), solution (streaming), and performance improvement (12s vs timeout). All tests passing (TDD cycle completed). Acceptance tests re-run successfully: 10K row export works. Plan.md shows issue analyzed, TDD cycle completed (RED→GREEN→REFACTOR), acceptance verified.
 
+[WHY-GOOD]
+- Anchors the remediation in requirement expectations and architecture analysis, avoiding guesswork fixes.
+- Executes the full TDD loop and acceptance retest, producing evidence that the regression is resolved.
+
 ### Good Example 2
 [INPUT]
 Cutover report identifies critical issue: push notifications fail with missing FCM server key error. Requirements specify push notification delivery. Two separate issues need fixing.
@@ -121,6 +126,10 @@ Extract all issues from cutover report (2 issues: FCM config missing, notificati
 
 [OUTCOME]
 Fixed code: NotificationService.js with FCM integration and payload validation. Environment configuration: .env.example updated with FCM_SERVER_KEY. Complete dev notes at docs/cutover-fixes-dev-notes.md documenting both fixes with root causes, solutions, and risks. All tests passing. Acceptance tests verified: notifications work, validation prevents bad payloads. Plan.md shows both issues fixed through TDD, acceptance tests passed.
+
+[WHY-GOOD]
+- Handles multiple critical issues systematically, documenting severity, root causes, and fixes.
+- Updates configuration and documentation alongside code, ensuring the deployment can succeed.
 
 ### Bad Example 1
 [INPUT]

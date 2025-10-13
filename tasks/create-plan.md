@@ -6,6 +6,7 @@
   3. "{EPIC}" --Feature-level task list
   4. "{TMPL}/implementation-plan-tmpl.yaml" --Implementation plan template (including: project information, requirement mapping, architecture reference, RED/GREEN/REFACTOR three phases, etc.)
   5. "{KNOWLEDGE}/*.md" --Project knowledge base (best practices, lessons learned, bug fixes)
+  6. "{TMPL}/plan-tmpl.yaml" --Unified planning template; document coverage audits, plan production checklist, and validation checkpoints for this task
 
 ## [Output]
   1. "{PLAN}/{task_id}-plan.md" --Implementation plans for all tasks (Markdown format)
@@ -24,7 +25,7 @@
   1. Setup & Context Understanding
     - Understand all requirements, architecture, and task scope
     - Identify project-specific best practices and lessons learned
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to log source documents reviewed, coverage goals, and approval milestones
     - Outcome: Complete context, planning criteria established, and plan.md initialized
 
   2. RED Phase Planning (For Each Task)
@@ -117,6 +118,10 @@ Read epic, requirements, architecture, and knowledge base. Plan TDD three phases
 [OUTCOME]
 Complete docs/plans/1-plan.md with TDD structure. RED: Unit tests (model), Integration tests (API+DB), Behavior tests (workflow). GREEN: Minimal implementation steps mapped to architecture components. REFACTOR: Quality improvements with knowledge base patterns. All phases have clear atomic steps and component mappings.
 
+[WHY-GOOD]
+- Derives every planning detail from authoritative sources—requirements, architecture, knowledge—so the plan is grounded and traceable.
+- Structures RED/GREEN/REFACTOR with atomic steps, providing developers a ready-to-execute roadmap.
+
 ### Good Example 2
 [INPUT]
 Task-2 from epic: "Build transaction report". Requirements: REQ-002 (aggregate by date range), NFR-001 (query <2s). Architecture: Reporting Service, TimescaleDB. Knowledge base: best-practices-database-queries.md.
@@ -126,6 +131,10 @@ Review all inputs. Design TDD plan for Task-2. RED: Unit tests (aggregation logi
 
 [OUTCOME]
 docs/plans/2-plan.md following template structure. RED: Comprehensive test coverage including performance tests (<2s NFR). GREEN: Minimal SQL implementation. REFACTOR: Caching and optimization from knowledge base. Complete mapping to architecture components and requirements.
+
+[WHY-GOOD]
+- Integrates non-functional requirements and knowledge-based optimizations directly into the plan.
+- Maintains template compliance and mapping discipline, ensuring downstream execution remains aligned with architecture.
 
 ### Bad Example 1
 [INPUT]

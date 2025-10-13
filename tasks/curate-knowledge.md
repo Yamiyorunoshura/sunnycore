@@ -7,6 +7,7 @@
   4. "{CUTOVER}" --Cutover report (required)
   5. "{root}/docs/cutover-dev-notes.md" --Cutover development notes (required)
   6. "{PROGRESS}" --Progress record
+  7. "{TMPL}/plan-tmpl.yaml" --Unified planning template; focus entries on evidence sources, classification scheme, and archiving requirements for this task
 
 ## [Output]
   1. "{KNOWLEDGE}/*.md" --Knowledge base (create directory first if it does not exist)
@@ -23,7 +24,7 @@
   1. Knowledge Identification & Planning
     - Identify all platinum-level best practices from reviews
     - Identify development errors and solutions from dev notes
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to log evidence sources, categorization decisions, and archiving actions
     - Outcome: All platinum practices and errors identified and plan.md initialized
 
   2. Knowledge Base Design & Classification
@@ -103,6 +104,10 @@ Scan all review reports and dev notes. Extract only platinum-level practices (3 
 [OUTCOME]
 Knowledge base created at docs/knowledge/ with 4 documents. Best-practices-security.md contains JWT rotation with evidence (docs/review/1-review.md [Authentication Section]). Errors-concurrency.md contains race condition case with solution and prevention measures. All source documents archived successfully. Plan.md shows all platinum practices and errors documented with evidence.
 
+[WHY-GOOD]
+- Filters inputs by the platinum standard and organizes them by topic, ensuring high-signal guidance.
+- Preserves provenance through evidence annotations and archival, making knowledge trustworthy and traceable.
+
 ### Good Example 2
 [INPUT]
 Review reports show only gold-level practices (not platinum). Dev notes contain memory leak error with solution. Progress shows critical decision about Kafka vs RabbitMQ selection.
@@ -112,6 +117,10 @@ Scan review reports (no platinum practices found). Extract error from dev notes 
 
 [OUTCOME]
 Knowledge base created at docs/knowledge/ with problem-solving-performance.md documenting Kafka decision and errors-performance.md documenting memory leak case. Summary notes: No platinum practices identified at this development stage (only gold-level). All entries have evidence sources. Source documents archived to archive/v1.0/.
+
+[WHY-GOOD]
+- Records the absence of platinum practices transparently while still capturing impactful learnings.
+- Maintains strong citation discipline, so every insight links back to primary evidence.
 
 ### Bad Example 1
 [INPUT]

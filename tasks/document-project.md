@@ -8,6 +8,7 @@
   5. "{DEVNOTES}/*.md" --Development notes
   6. "{REVIEW}/*.md" --Review reports
   7. Actual codebase
+  8. "{TMPL}/plan-tmpl.yaml" --Unified planning template; emphasize codebase evidence collection, sharding checkpoints, and CLAUDE.md updates for this task
 
 ## [Output]
   1. "{root}/docs/architecture.md" --Integrated architecture document (Markdown format)(temporary, will be sharded)
@@ -25,7 +26,7 @@
   1. Analysis & Context Gathering
     - Understand existing architecture and actual implementation state
     - Gather comprehensive context from all documentation sources
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to log evidence sources, drift analysis, and sharding/CLAUDE update checkpoints
     - Outcome: Complete understanding of current state, context gathered, and plan.md initialized
 
   2. Architecture Integration & Documentation
@@ -108,6 +109,10 @@ Read existing architecture docs to understand baseline. Analyze actual codebase 
 [OUTCOME]
 Complete architecture.md at docs/architecture.md documenting actual async payment implementation. Successfully sharded to docs/architecture/components.md, data-flows.md, decisions.md. All content includes source references (file_path:line_number). Architecture drift documented with rationale: moved to async for scalability. CLAUDE.md updated with current architecture index. Old outdated documents removed. Plan.md shows codebase analysis complete, sharding successful, index updated.
 
+[WHY-GOOD]
+- Reconciles documentation with the living codebase, eliminating drift and recording rationale.
+- Performs the full documentation workflow—sharding, indexing, cleanup—so consumers get authoritative artifacts.
+
 ### Good Example 2
 [INPUT]
 No existing architecture (greenfield project just completed). Codebase has device registry, telemetry pipeline, dashboard fully implemented. Dev notes contain 8 tasks with multiple architecture decisions. Reviews document performance optimizations.
@@ -117,6 +122,10 @@ Analyze codebase structure to extract component boundaries (src/device-registry/
 
 [OUTCOME]
 Complete architecture.md created documenting entire IoT platform architecture. Sharded to docs/architecture/overview.md, components.md, data-flows.md, decisions.md. All ADRs extracted from dev notes with proper source references. CLAUDE.md created with architecture document index and tech stack summary. Plan.md shows all components documented, decisions extracted, sharding completed, references validated.
+
+[WHY-GOOD]
+- Builds documentation from real implementation evidence, ensuring accuracy for a new system.
+- Delivers every required artifact with references, giving future teams a reliable starting point.
 
 ### Bad Example 1
 [INPUT]

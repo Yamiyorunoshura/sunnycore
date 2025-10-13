@@ -8,6 +8,7 @@
   5. (If workflow=full) "{ARCH}/*.md" --Architecture documents
   6. (If workflow=full) "{EPIC}" --Epic task list
   7. (If workflow=full) "{PLAN}/*.md" --Implementation plans
+  8. "{TMPL}/plan-tmpl.yaml" --Unified planning template; capture workflow selection, entity indexes, and validation checkpoints for this task
 
 ## [Output]
   1. "{root}/docs/design-validation.md" --Comprehensive validation report
@@ -22,7 +23,7 @@
   1. Initialization & Scope Determination
     - Validate workflow parameter (prd or full)
     - Determine validation scope for workflow type
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to log workflow selection, extraction targets, and validation checkpoints
     - Outcome: Validation scope and workflow determined, plan.md initialized
 
   2. Content Extraction & Indexing
@@ -166,6 +167,10 @@ Step 1: Validate workflow="prd", determine scope (PRD internal consistency + ext
 [OUTCOME]
 Complete docs/design-validation.md with status PASS. All validation checks documented: internal consistency ✓, external alignment ✓, completeness 100%. No issues found. Recommendation provided: proceed with development using /sunnycore_dev *develop-prd.
 
+[WHY-GOOD]
+- Applies the PRD validation scope precisely, ensuring both internal and external consistency are verified.
+- Provides clear next-step guidance backed by documented evidence, enabling confident progression.
+
 ### Good Example 2
 [INPUT]
 Workflow parameter: "full". Requirements in docs/requirements/*.md (5 requirements), architecture in docs/architecture/*.md (3 components), epic at docs/epic.md (4 tasks), plans in docs/plans/*.md (3 files, missing plan for Task-4).
@@ -175,6 +180,10 @@ Step 1: Validate workflow="full", determine full workflow validation scope. Step
 
 [OUTCOME]
 docs/design-validation.md with 4 issues categorized: 1 Critical (fabricated REQ-005), 2 High (REQ-002 unmapped, Task-4 plan missing), 1 Medium (naming inconsistency). Clear guidance: fix conflicts before development. Traceability gaps identified for correction.
+
+[WHY-GOOD]
+- Systematically surfaces gaps across requirements, architecture, tasks, and plans, honoring the full workflow scope.
+- Delivers actionable categorization and remediation guidance, preventing flawed execution downstream.
 
 ### Bad Example 1
 [INPUT]
@@ -201,4 +210,3 @@ Violates Constraint 2 (skip validation check types). Violates Validation-Criteri
 
 [CORRECT-APPROACH]
 Execute Step 3 completely per Validation-Focus-Areas. Check bidirectional integrity: forward (requirements→architecture→tasks→plans) AND backward (plans→tasks→architecture→requirements). Calculate coverage: requirements→architecture 100%, architecture→tasks 100%, tasks→plans 100%. Check consistency: terminology, technical specs. Verify authenticity: all referenced entities exist, no fabricated IDs. Categorize ALL issues by severity (Critical/High/Medium/Low) per Constraint 3. Only declare validation complete after all check types executed.
-

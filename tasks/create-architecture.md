@@ -4,6 +4,7 @@
   1. "{REQ}/*.md" --Authoritative project requirements
   2. "{SCRIPTS}/shard-architecture.py" --Architecture sharding script
   3. "{TMPL}/architecture-tmpl.yaml" --Standardized architecture template
+  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; use it to map requirement coverage, architecture decisions, and validation evidence for this task
 
 ## [Output]
   1. Architecture document collection under "{ARCH}/" directory (*.md format)
@@ -20,7 +21,7 @@
   1. Requirement Analysis & Mapping
     - Understand all requirements and their implications
     - Create complete requirement-to-architecture mapping matrix (100% coverage)
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" via the plan template, emphasizing requirement coverage, architecture decision checkpoints, and sharding preparation
     - Outcome: Complete understanding, requirement mapping matrix created, and plan.md initialized
 
   2. Architecture Design
@@ -115,6 +116,10 @@ Create requirement-to-architecture mapping matrix targeting 100% coverage. Desig
 [OUTCOME]
 Complete architecture document at docs/architecture.md with 100% requirement coverage verified. Sharded files successfully created in docs/architecture/. Traceability matrix shows REQ-001 and REQ-002 mapped to specific components. ADRs explain all key decisions with trade-offs.
 
+[WHY-GOOD]
+- Drives the design from explicit requirement mapping, ensuring nothing is left uncovered before documentation.
+- Completes mandatory workflows—ADRs, approval, sharding—so downstream teams receive structured, validated artifacts.
+
 ### Good Example 2
 [INPUT]
 Requirements include REQ-001 (payment processing via Stripe API), REQ-002 (fraud detection), NFR-001 (ACID compliance). Template includes api-documentation section for external APIs.
@@ -124,6 +129,10 @@ Design architecture with Payment Gateway, Fraud Analyzer (ML service), Transacti
 
 [OUTCOME]
 docs/architecture.md with comprehensive external API documentation for Stripe including authentication, schemas, rate limits, and error handling. All requirements mapped with justification. Sharded successfully with detailed api-documentation.md file containing complete Stripe integration specifications.
+
+[WHY-GOOD]
+- Documents external integrations to the depth demanded by the template, avoiding ambiguous API usage later.
+- Confirms coverage and compliance steps, resulting in an architecture package that developers can implement directly.
 
 ### Bad Example 1
 [INPUT]

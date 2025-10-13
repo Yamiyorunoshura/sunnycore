@@ -3,6 +3,7 @@
 ## [Input]
   1. "{PRD}" --Product Requirements Document
   2. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template
+  3. "{TMPL}/plan-tmpl.yaml" --Unified planning template; populate sections with PRD task orchestration, validation strategy, and documentation updates
 
 ## [Output]
   1. "{root}/docs/prd-dev-notes.md" --Complete development notes document (Markdown format)
@@ -21,7 +22,7 @@
   1. Preparation & Strategy
     - Understand all PRD requirements and architecture completely
     - Develop comprehensive TDD implementation strategy
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking respecting task dependencies (this is the ONLY temporary tracking document)
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture dependency mapping, validation strategy, and documentation checkpoints (this is the ONLY temporary tracking document)
     - Outcome: Complete strategy established and plan.md initialized
 
   2. TDD Development Cycle
@@ -96,6 +97,10 @@ Step 1: Understand all PRD requirements and architecture. Develop strategy respe
 [OUTCOME]
 Code: src/api/profile.js, src/services/AvatarService.js, tests/ with all passing. docs/prd-dev-notes.md documenting complete implementation. All PRD acceptance criteria met. Integration tests pass. Coverage 87%. plan.md tracked complete progress.
 
+[WHY-GOOD]
+- Implements every PRD requirement via the full TDD loop, validating each phase before progressing.
+- Produces the mandated documentation and metrics, so the release is auditable and compliant.
+
 ### Good Example 2
 [INPUT]
 PRD: docs/PRD.md with REQ-001 (rate limit per user), NFR-001 (100 req/min), NFR-002 (Redis storage). Tasks: Task-1 (middleware), Task-2 (config), Task-3 (monitoring).
@@ -105,6 +110,10 @@ Step 1: Read PRD completely, understand rate limiting requirements. Plan TDD str
 
 [OUTCOME]
 Code: src/middleware/rateLimiter.js, config/limits.json, tests/ all passing. docs/prd-dev-notes.md with rate limiting algorithm details. All NFRs verified (100 req/min enforced). Monitoring dashboard functional. Coverage 82%.
+
+[WHY-GOOD]
+- Proves non-functional guarantees with concrete tests and monitoring evidence, not just assumptions.
+- Leaves behind thorough notes and configuration artifacts, supporting operations and future tuning.
 
 ### Bad Example 1
 [INPUT]

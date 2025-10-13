@@ -15,6 +15,10 @@ Read CLAUDE.md first to understand constraints, then read commands to check for 
 [OUTCOME]
 All governance rules are respected and the implementation follows the correct priority hierarchy.
 
+[WHY-GOOD]
+- Honors the mandated instruction hierarchy, ensuring high-level governance shapes every downstream action.
+- Prevents accidental conflicts by confirming both command-level and task-level guidance before execution.
+
 ### Good Example 2
 [INPUT]
 User says: "I need to add a new feature but I'm not sure about the architecture approach"
@@ -24,6 +28,10 @@ Pause execution and ask the user: "Could you clarify the architectural requireme
 
 [OUTCOME]
 Ambiguity is resolved before committing to a direction, preventing wasted effort.
+
+[WHY-GOOD]
+- Demonstrates disciplined escalation by seeking clarity instead of guessing, which aligns with rule 2.
+- Ensures architectural choices remain anchored to explicit requirements, reducing rework.
 
 ### Bad Example 1
 [INPUT]
@@ -66,6 +74,10 @@ Read the existing PRD file first, locate the `## [Constraints]` section, and app
 [OUTCOME]
 The document maintains its template structure, no duplicate headings are created, and content is enhanced in the right place.
 
+[WHY-GOOD]
+- Respects the original template layout, so structural automation and cross-references remain intact.
+- Enhances only the targeted section, avoiding collateral edits that could introduce inconsistencies.
+
 ### Good Example 2
 [INPUT]
 Creating a new architecture document from scratch using architecture-tmpl.yaml.
@@ -75,6 +87,10 @@ Parse the template to identify all required sections with their tags ([Descripti
 
 [OUTCOME]
 The output perfectly mirrors the template hierarchy, making it easy to navigate and maintain.
+
+[WHY-GOOD]
+- Builds the document straight from the template contract, ensuring nothing is omitted or mis-leveled.
+- Produces predictable structure, which simplifies future updates and automated processing.
 
 ### Bad Example 1
 [INPUT]
@@ -126,6 +142,10 @@ Before declaring completion, run the test suite, verify all tests pass, check th
 [OUTCOME]
 All DoD items are verified and met. Deliverable is truly complete and production-ready.
 
+[WHY-GOOD]
+- Closes the loop on every Definition of Done requirement, ensuring no quality gates are skipped.
+- Captures documentation updates alongside testing evidence, which keeps downstream teams informed.
+
 ### Good Example 2
 [INPUT]
 While implementing a database migration, a "deprecated syntax" warning appears but the migration still runs.
@@ -135,6 +155,10 @@ Check the Blocking-Conditions document. Since it's a warning (not an error) and 
 
 [OUTCOME]
 Response is proportional to the issue severity, work continues efficiently while the concern is documented.
+
+[WHY-GOOD]
+- Applies the blocking-condition rules precisely, preventing unnecessary halts.
+- Records the warning and remediation plan, keeping technical debt visible for future action.
 
 ### Bad Example 1
 [INPUT]
@@ -177,6 +201,10 @@ Retain these KEEP rules verbatim in the summary. Condense other sections but ens
 [OUTCOME]
 Summary is concise yet preserves critical guardrails. Future executions won't lose essential guidance.
 
+[WHY-GOOD]
+- Protects mandatory KEEP directives while still reducing verbosity, so governance remains enforceable.
+- Demonstrates disciplined summarization that targets only optional text, avoiding accidental rule loss.
+
 ### Good Example 2
 [INPUT]
 MAY IGNORE section includes "Historical context about why this process was created" which is unrelated to current implementation task.
@@ -186,6 +214,10 @@ Note in summary: "Historical context (MAY IGNORE) omitted as not relevant to imp
 
 [OUTCOME]
 Summary is lean and focused while documenting what was intentionally excluded.
+
+[WHY-GOOD]
+- Applies discretion appropriately by trimming only non-essential MAY IGNORE content.
+- Documents the omission decision, enabling future readers to restore context if needed.
 
 ### Bad Example 1
 [INPUT]
@@ -228,6 +260,10 @@ Use sequential-thinking to map out the refactoring approach, identify dependenci
 [OUTCOME]
 Complex reasoning is structured first, then code lookup is targeted and efficient. Tools used appropriately for their strengths.
 
+[WHY-GOOD]
+- Orders tool usage to handle planning before execution, which keeps reasoning coherent and minimizes churn.
+- Leverages claude-context only after the strategy is defined, yielding focused searches instead of aimless browsing.
+
 ### Good Example 2
 [INPUT]
 Need to implement OAuth2 authentication using an external library "passport-oauth2".
@@ -237,6 +273,10 @@ Use context7 to retrieve official documentation for passport-oauth2, understand 
 
 [OUTCOME]
 Implementation follows authoritative external documentation, reducing errors and following library conventions.
+
+[WHY-GOOD]
+- Selects the precise tool that surfaces vetted references, ensuring configuration matches vendor guidance.
+- Prepares implementation with concrete facts, reducing risk of misusing the library.
 
 ### Bad Example 1
 [INPUT]

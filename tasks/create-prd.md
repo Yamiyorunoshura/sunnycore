@@ -5,6 +5,7 @@
   2. "{TMPL}/prd-tmpl.yaml" --PRD template
   3. (Conditional) "{ARCH}/*.md" --Existing architecture (if Brownfield)
   4. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
+  5. "{TMPL}/plan-tmpl.yaml" --Unified planning template; tailor sections to project type analysis, integrated PRD content, and validation checkpoints
 
 ## [Output]
   1. "{PRD}" --Complete Product Requirements Document (Markdown format)
@@ -20,7 +21,7 @@
   1. Initialization & Context Understanding
     - Determine project type (Greenfield/Brownfield)
     - Gather appropriate context for project type
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" via the plan template, capturing project type evidence, required artifacts, and approval steps
     - Outcome: Project type determined, context gathered, and plan.md initialized
 
   2. Requirements Definition
@@ -116,6 +117,10 @@ Step 1: Check docs/architecture/ exists - Brownfield project confirmed. Read exi
 [OUTCOME]
 Complete docs/PRD.md with requirements, architecture, and tasks in single document. Impact Analysis confirms no breaking changes to Dashboard Service. 100% traceability: REQ-001→Export Service→Task-1, REQ-002→Export Service→Task-2, NFR-001→performance constraint. All acceptance criteria in Given-When-Then format.
 
+[WHY-GOOD]
+- Handles Brownfield context carefully by reviewing existing assets, documenting impacts, and preserving compatibility.
+- Produces a unified PRD with traceability and measurable criteria, setting up downstream work for success.
+
 ### Good Example 2
 [INPUT]
 User requirement: "Add 2FA support for user login". No existing architecture (new project). Template: prd-tmpl.yaml.
@@ -125,6 +130,10 @@ Step 1: Check docs/architecture/ - not found, Greenfield project. Step 2: Define
 
 [OUTCOME]
 docs/PRD.md with complete 2FA module design. Architecture section includes component diagrams and data flows. All requirements verifiable with specific metrics. Tasks have clear DoD and acceptance criteria. No existing system references (Greenfield handled correctly).
+
+[WHY-GOOD]
+- Correctly identifies the project as Greenfield and designs end-to-end artifacts instead of assuming legacy constraints.
+- Embeds quantifiable requirements and task mapping, giving implementers unambiguous targets.
 
 ### Bad Example 1
 [INPUT]
@@ -151,4 +160,3 @@ Violates Constraint 1 (misidentify Brownfield as Greenfield). Violates Constrain
 
 [CORRECT-APPROACH]
 Step 1: Identify Brownfield (docs/architecture/ exists). Read existing API architecture: endpoints, contracts, response formats. Step 2: Define requirements preserving contracts (REQ-001: transparent caching layer, no API signature changes). Step 3: Design Redis middleware integration. Create Impact Analysis: middleware addition only, all contracts preserved, backward compatible. Map to existing components. Step 4: Tasks with integration points. Step 5: Generate PRD showing Brownfield integration properly. Approval with architecture compatibility confirmed.
-

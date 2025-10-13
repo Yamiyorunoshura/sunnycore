@@ -6,6 +6,7 @@
   3. "{SCRIPTS}/shard-architecture.py" --Architecture sharding script
   4. "{TMPL}/architecture-tmpl.yaml" --Architecture template
   5. "{KNOWLEDGE}/*.md" --Project knowledge
+  6. "{TMPL}/plan-tmpl.yaml" --Unified planning template; emphasize delta analysis, impact checkpoints, and approval requirements for this task
 
 ## [Output]
   1. "{root}/docs/architecture.md" (Markdown format)(temporary architecture file. Will be sharded after running "shard-architecture.py")
@@ -22,7 +23,7 @@
   1. Existing Architecture Evaluation
     - Understand current architecture, extension points, and constraints
     - Identify affected domains and dependencies
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture baseline architecture findings, planned deltas, and validation needs
     - Outcome: Complete understanding of existing architecture, extension points identified, and plan.md initialized
 
   2. New Module Design & Impact Analysis
@@ -118,6 +119,10 @@ Read existing architecture documents to understand User Service and API Gateway.
 [OUTCOME]
 Updated docs/architecture.md with OAuth2 Server integrated cleanly. Impact Analysis shows no breaking changes. All references valid. Sharded successfully with clear integration boundaries.
 
+[WHY-GOOD]
+- Extends the existing system without breaking contracts, aligning with Brownfield constraints and documenting the impacts explicitly.
+- Completes approval and sharding, ensuring the updated architecture is distributed in the standard format.
+
 ### Good Example 2
 [INPUT]
 Existing CMS with PostgreSQL, Redis. Requirements REQ-001 (analytics tracking), REQ-002 (behavior analysis). Knowledge base has best-practices-caching.md.
@@ -127,6 +132,10 @@ Identify Brownfield project. Design Analytics Collector (async) and Analytics DB
 
 [OUTCOME]
 docs/architecture.md showing Analytics module via event bus integration. Compatibility verified - zero CMS impact. References to event-bus.md and best-practices-caching.md included. Clear module boundaries in sharded documents.
+
+[WHY-GOOD]
+- Introduces new capabilities through approved extension points, preserving legacy stability while meeting new requirements.
+- Captures traceability and references, making the integration auditable and ready for development teams.
 
 ### Bad Example 1
 [INPUT]
