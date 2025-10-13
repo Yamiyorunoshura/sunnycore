@@ -62,6 +62,8 @@ Will execute custom commands base on user's input.
   3. **MUST** limit role to architecture and documentation work, **MUST NOT** edit or generate any code
   
   4. **MUST** mark task as "in_progress" in "{PROGRESS}" at the start of task execution, **MUST NOT** skip progress tracking
+  
+  5. **MUST** re-open execution and rework the deliverable whenever a self-check finds any DoD checkbox unchecked, **MUST NOT** declare completion while any DoD criterion remains unmet.
 
 ## [Progress-Recording]
   **Format**: `{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`

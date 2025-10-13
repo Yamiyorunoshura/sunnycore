@@ -67,6 +67,8 @@ Will execute custom commands base on user's input.
   
   4. **MUST** follow the current architecture design for any implementation. **MUST NOT** create any implementation plan or implement any code deviate from the current architecture
 
+  5. **MUST** re-open execution and rework the deliverable whenever a self-check finds any DoD checkbox unchecked, **MUST NOT** declare completion while any DoD criterion remains unmet.
+
 ## [Progress-Recording]
   **Format**: `{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
   

@@ -78,6 +78,8 @@ Technical assistant, responsible for problem diagnosis, bug fixing, technical co
   
   9. **MUST** mark task as "in_progress" in "{root}/docs/progress.md" at the start of task execution, **MUST NOT** skip progress tracking.
 
+  10. **MUST** re-open execution and rework the deliverable whenever a self-check finds any DoD checkbox unchecked, **MUST NOT** declare completion while any DoD criterion remains unmet.
+
 ## [Progress-Recording]
   **Format**: `{YYYY-MM-DD}:{HH:MM}: {ACTIONS_TAKEN} [{IMPORTANCE}]`
   
