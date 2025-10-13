@@ -3,6 +3,7 @@
 ## [Input]
   1. User requirement description
   2. (Conditional) "{ARCH}/*.md" --Existing architecture documents (if exist)
+  3. "{TMPL}/plan-tmpl.yaml" --Unified planning template; tailor sections to capture requirement scope, workflow decision factors, and risk assessment
 
 ## [Output]
   1. Simple workflow recommendation (which command to use)
@@ -18,7 +19,7 @@
   1. Initialization & Context Gathering
     - Determine project type (Greenfield/Brownfield)
     - Gather complete context for both project types
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to log project type evidence, information sources, and decision checkpoints
     - Outcome: Project type determined, context collected, and plan.md initialized
 
   2. Requirement Scope & Impact Analysis
@@ -101,6 +102,10 @@ Determine project type: Brownfield (architecture exists). Analyze scope: Feature
 [OUTCOME]
 Clear recommendation: "Use /sunnycore_pm *create-prd - This is a small feature addition within existing architecture (2-3 tasks estimated, no architectural changes required). The search functionality can be implemented using existing Product Service and API Gateway."
 
+[WHY-GOOD]
+- Evaluates scope against documented architecture and decision criteria before choosing a workflow, avoiding knee-jerk escalation.
+- Communicates the rationale explicitly, so the user understands why the PRD path fits.
+
 ### Good Example 2
 [INPUT]
 User requests: "Migrate current monolithic application to microservices for better scalability"
@@ -111,6 +116,10 @@ Determine project type: Brownfield (existing monolithic architecture documented)
 
 [OUTCOME]
 Clear recommendation: "Use /sunnycore_pm *create-requirements - This requires complete architecture redesign (introducing microservices pattern, estimated 10+ tasks, new service boundaries, distributed data management). A comprehensive requirements and architecture phase is necessary."
+
+[WHY-GOOD]
+- Recognizes the transformational nature of the request and maps it to the full workflow based on concrete scope indicators.
+- Provides a justification that links architectural shifts, task volume, and new tech stack elements to the recommendation.
 
 ### Bad Example 1
 [INPUT]
@@ -137,4 +146,3 @@ Violates Constraint 4 (do not recommend workflows that violate Decision-Criteria
 
 [CORRECT-APPROACH]
 Analyze scope systematically: payment gateway = new module, notification system = new module, analytics pipeline = new module. Multiple new components and external integrations identified. Estimated tasks: likely 8-12 (payment integration, notification service, analytics ingestion, storage, reporting). Check Decision-Criteria: introduces new system components, adds multiple new third-party integrations, large scope estimated. Recommend full workflow with specific rationale: "/sunnycore_pm *create-requirements - Multiple new modules (payment, notifications, analytics) require comprehensive architecture design. Estimated 8-12 tasks with significant integration complexity."
-

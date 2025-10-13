@@ -4,6 +4,7 @@
   1. "{ARCH}/*.md" --Architecture design documents (extract technology stack, development environment requirements)
   2. "{REQ}/*.md" --Project requirement documents
   3. "{EPIC}" --Task list
+  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; capture environment setup tasks, directory creation checkpoints, and documentation updates
 
 ## [Output]
   1. "{root}/CLAUDE.md" --Project guidance document (including technology stack, development standards, requirement overview, project goals, document index)
@@ -22,7 +23,7 @@
 ## [Steps]
   1. Preparation & Analysis
     - Understand project's technology stack, environment requirements, and goals
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to outline environment setup tasks, dependency checks, and documentation updates
     - Outcome: Project requirements and stack understood, plan.md initialized
 
   2. Environment Setup & Indexing
@@ -119,6 +120,10 @@ Step 1: Extract tech stack (Node.js 18, PostgreSQL 14, Redis 7, Docker), require
 [OUTCOME]
 Operational environment: docker-compose up runs all services (PostgreSQL, Redis, API). All directories created per architecture spec. Minimal app verified: node src/index.js starts, health endpoint returns 200. Complete CLAUDE.md with tech stack, document index, dev commands. Smoke test passed.
 
+[WHY-GOOD]
+- Builds the environment strictly from architectural directives, avoiding speculative tooling.
+- Verifies the minimal application end-to-end and documents setup, giving downstream teams a reliable base.
+
 ### Good Example 2
 [INPUT]
 Architecture: Python 3.11, Airflow, PySpark, S3. Work-directory-structure: dags/, plugins/, data/, scripts/, tests/. Requirements show ETL pipeline. Epic has 4 tasks.
@@ -128,6 +133,10 @@ Step 1: Extract stack (Python 3.11, Airflow, Spark, AWS S3), goals (ETL pipeline
 
 [OUTCOME]
 Airflow webserver accessible localhost:8080. All directories created: dags/, plugins/, data/, scripts/, tests/. Minimal DAG verified: airflow dags test executes successfully, prints "Hello World". S3 configured and tested. CLAUDE.md complete with stack, index, testing approach. Environment fully operational.
+
+[WHY-GOOD]
+- Aligns tooling, directory structure, and documentation with the specified architecture.
+- Confirms operational readiness through real commands, not assumptions.
 
 ### Bad Example 1
 [INPUT]

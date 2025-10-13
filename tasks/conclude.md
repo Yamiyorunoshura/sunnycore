@@ -4,6 +4,7 @@
   1. "{root}/docs/*.md" --All files in docs/ directory recursively (required)
   2. "{LOCK}" --Version information (required)
   3. "{TMPL}/completion-report-tmpl.yaml" --Completion report template (required)
+  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; tailor sections to capture version analysis, report assembly, and archiving steps
 
 ## [Output]
   1. Completion report: "{root}/docs/completion-report.md" (Markdown format)
@@ -19,7 +20,7 @@
   1. Input Validation & Setup
     - Parse version number from lock file
     - Validate all required input files exist
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to record version data, required artifacts, and archiving checkpoints
     - Outcome: All inputs validated, version identified, and plan.md initialized
 
   2. Information Extraction & Mapping
@@ -94,6 +95,10 @@ Parse version from lock file. Identify PRD workflow (PRD.md exists). Extract key
 [OUTCOME]
 Complete docs/completion-report.md with all 5 core items fully documented with evidence. Archive docs/archive/1.2.0/ contains PRD.md, prd-dev-notes.md, cutover-report.md. Root docs/ only contains architecture/, knowledge/, completion-report.md. References in knowledge/best-practices.md updated to point to docs/archive/1.2.0/prd-dev-notes.md.
 
+[WHY-GOOD]
+- Follows the archive workflow meticulously—version detection, evidence gathering, and relocation—so historical records stay organized and compliant.
+- Updates cross-references after moving files, preventing broken links for future readers.
+
 ### Good Example 2
 [INPUT]
 Lock file shows version = 2.0.0. Found requirements/*.md, architecture/*.md, epic.md, plans/*.md (8 files), dev-notes/*.md (8 files), review/*.md in docs/. This is full workflow project.
@@ -103,6 +108,10 @@ Parse major version 2.0.0 indicating significant architectural changes. Extract 
 
 [OUTCOME]
 Comprehensive docs/completion-report.md documenting microservices migration with all 5 core items. Archive docs/archive/2.0.0/ contains requirements/, plans/, dev-notes/, review/, epic.md. Architecture and knowledge remain in docs/ for ongoing use. All references updated to archive paths.
+
+[WHY-GOOD]
+- Treats the full workflow with proportional thoroughness, capturing decisions, evidence, and recommendations across artifacts.
+- Executes the archival boundaries precisely, preserving active references while relocating completed documents.
 
 ### Bad Example 1
 [INPUT]

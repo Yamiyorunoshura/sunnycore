@@ -2,6 +2,8 @@
 
 一個創新的多平台 AI 助手系統，提供角色化的專業 AI agents 來優化開發工作流程，支援測試驅動開發 (TDD) 和質量保證流程。
 
+> **v4.8.0 更新**：引入統一執行計劃模板（templates/plan-tmpl.yaml），所有任務與指令均整合計劃模板引用，提升執行規劃與可追溯性。詳見 [CHANGELOG.md](CHANGELOG.md#480---2025-10-13)。
+
 > **v4.7.0 更新**：Assistant 角色強制性計劃工作流程與知識管理增強，新增 [Planning-Workflow] 和 [Knowledge-Management] 章節，要求執行前必須生成書面計劃並引用 curated knowledge，與 v4.5.0/v4.6.0 的正反對比範例系統配合，全面提升執行規範性與架構完整性。詳見 [CHANGELOG.md](CHANGELOG.md#470---2025-10-13)。
 
 > **v4.6.0 更新**：任務文件範例系統全面增強，所有 22 個任務文件統一採用正反對比範例格式（Good Example vs Bad Example），與 v4.5.0 的配置文件增強形成完整教學體系，全面提升 AI 任務執行的準確度與錯誤預防能力。詳見 [CHANGELOG.md](CHANGELOG.md#460---2025-10-12)。

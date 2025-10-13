@@ -2,6 +2,7 @@
 
 ## [Input]
   1. "{root}/docs/design-validation.md" --Validation report with identified issues
+  2. "{TMPL}/plan-tmpl.yaml" --Unified planning template; populate sections with issue inventory, approval strategy, and cross-document validation checkpoints
 
 ## [Output]
   1. Modified design documents based on conflict resolution:
@@ -23,7 +24,7 @@
   1. Issue Analysis & Prioritization
     - Understand all issues from validation report
     - Extract, group, and prioritize issues properly
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture prioritized issue lists, approval checkpoints, and validation tasks
     - Outcome: Issues categorized, prioritized, and plan.md initialized
 
   2. Fix Planning & User Confirmation
@@ -156,6 +157,10 @@ Read validation report and extract all issues. Categorize by severity (3 critica
 [OUTCOME]
 Updated docs/PRD.md with all fixes applied: REQ-005 references now map to REQ-003, EmailService component added to architecture section with proper definition, Task-4 updated to reference REQ-004. All references verified valid. Cross-document consistency maintained. Validation report docs/design-validation.md deleted. User confirmed all fixes. Plan.md shows all issues resolved. Recommendation provided: Re-run validate-design to confirm zero issues.
 
+[WHY-GOOD]
+- Resolves every critical finding systematically with user approval, eliminating dangling references.
+- Confirms consistency and cleans up the validation report, leaving the documentation set in a verified state.
+
 ### Good Example 2
 [INPUT]
 Validation report shows coverage gaps: REQ-001 has no architecture mapping, COMP-003 not mapped to any task, Task-2 has no implementation plan. Medium severity issues.
@@ -165,6 +170,10 @@ Analyze validation report (3 medium-severity coverage gaps). Categorize issues b
 
 [OUTCOME]
 Updated docs/architecture/components.md with AuthService component mapped to REQ-001. Updated docs/epic.md with Task-5 for Cache Layer implementation mapped to COMP-003. Created docs/plans/2-plan.md with complete TDD structure for Task-2. 100% bidirectional coverage achieved across all documents. Cross-document consistency verified. Validation report deleted after user confirmation. Plan.md documents all gaps filled. Recommendation: Re-run validation for confirmation.
+
+[WHY-GOOD]
+- Addresses coverage gaps holistically—requirements, components, tasks, plans—restoring full traceability.
+- Documents completion, deletes the stale report, and prompts re-validation, ensuring the fix cycle is closed properly.
 
 ### Bad Example 1
 [INPUT]
@@ -191,4 +200,3 @@ Violates Constraint 2 (apply fixes without user confirmation). Conflicts require
 
 [CORRECT-APPROACH]
 Identify conflict between requirements (async) and architecture (sync). Document conflict clearly in plan.md with both positions. Present conflict to user: "Requirements specify async for performance, architecture specifies sync. Which is the authoritative source?" User clarifies requirements take precedence. Update architecture to match requirements (change sync→async). Document decision rationale in plan.md. Maintain both documents' consistency with agreed-upon approach. Obtain user confirmation before proceeding.
-

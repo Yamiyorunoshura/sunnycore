@@ -3,6 +3,7 @@
 ## [Input]
   1. "{PRD}" --Product Requirements Document (required, used as primary requirement and architecture source)
   2. "{TMPL}/cutover-report-tmpl.yaml" --Cutover report template (required)
+  3. "{TMPL}/plan-tmpl.yaml" --Unified planning template; customize sections for PRD-sourced acceptance testing and configuration validation
 
 ## [Output]
   1. "{CUTOVER}" --Cutover report (Markdown format)
@@ -18,7 +19,7 @@
 ## [Steps]
   1. Preparation & Validation
     - Understand business objectives and technical architecture from PRD
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to record acceptance scenarios, configuration prerequisites, and evidence capture strategy
     - Outcome: Business objectives and architecture understood from PRD, and plan.md initialized
 
   2. Code Quality Inspection (CRITICAL)
@@ -129,6 +130,10 @@ Validate PRD exists. Extract business objectives and requirements from PRD. Scan
 [OUTCOME]
 Cutover report at docs/cutover-report.md with status: Partial Success. Test results documented: REQ-001 pass, REQ-002 fail (missing FCM server key in Firebase config), REQ-003 pass. Issue documented with severity: Critical, impact: Push notifications non-functional. Configuration requirement documented: Add FCM_SERVER_KEY to .env file. Recommendation: Complete Firebase setup before production release. Plan.md shows 2/3 requirements passed, 1 configuration issue identified.
 
+[WHY-GOOD]
+- Executes the entire cutover checklist—from code quality scan to requirement validation—before issuing a verdict.
+- Captures precise diagnostics and remediation guidance, giving stakeholders a clear path to production readiness.
+
 ### Good Example 2
 [INPUT]
 PRD contains payment processing requirement. Code quality scan reveals mock implementation with hardcoded API key in PaymentService.js production code. Unit tests properly use jest.mock().
@@ -138,6 +143,10 @@ Scan all production code before functional testing. Detect mock implementation a
 
 [OUTCOME]
 Cutover report at docs/cutover-report.md with status: Failed. Critical findings: mock implementation and hardcoded values in production code documented with line numbers and code examples. Rationale: production code incomplete and insecure. Risk: Critical (would deploy broken payment system). Action items provided: remove mocks, implement actual integration, move secrets to environment. Functional testing not performed (halted at code quality gate). Plan.md documents code scan results and automatic fail decision.
+
+[WHY-GOOD]
+- Enforces automatic-fail rules rigorously, halting delivery when production code is unsafe.
+- Provides actionable remediation steps and evidence, enabling rapid correction without ambiguity.
 
 ### Bad Example 1
 [INPUT]
@@ -164,4 +173,3 @@ Violates Constraint 3 (do not skip testing any critical business requirements). 
 
 [CORRECT-APPROACH]
 Test ALL critical business requirements from PRD without exception. Even if requirement seems minor, test it if PRD marks it as critical. Document test results for every requirement. If time/resource constraints prevent complete testing, report as blocker and request prioritization from user. Status should be Partial Success if any requirements remain untested, with clear documentation of what was not verified.
-

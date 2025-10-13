@@ -3,6 +3,7 @@
 ## [Input]
   1. "{TMPL}/requirement-tmpl.yaml" --Requirement template
   2. User-provided initial ideas and requirement descriptions
+  3. "{TMPL}/plan-tmpl.yaml" --Unified planning template; document idea intake, requirement refinement, and sharding checkpoints for this task
 
 ## [Output]
   1. "{root}/docs/requirements.md" (Markdown format)(temporary requiremenmt file. Will be sharded after running "shard-requirements.py")
@@ -18,7 +19,7 @@
 ## [Steps]
   1. Initialization & Scope Definition
     - Understand expected workflow and requirements gathering scope
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to log discovery sources, requirement categories, and validation steps
     - Outcome: Requirements gathering scope clearly defined and plan.md initialized
 
   2. Functional Requirements Extraction
@@ -95,6 +96,10 @@ Step 1: Define scope - product search system. Step 2: Extract functional require
 [OUTCOME]
 Complete sharded requirements: docs/requirements/functional.md with REQ-001, REQ-002, REQ-003. docs/requirements/non-functional.md with NFR-001 (< 500ms), NFR-002 (100 users). All with Given-When-Then acceptance criteria. Verifiable and measurable. Sharding successful.
 
+[WHY-GOOD]
+- Turns a vague request into atomic, measurable requirements with explicit acceptance tests.
+- Executes the sharding workflow so teams downstream receive the expected file structure.
+
 ### Good Example 2
 [INPUT]
 User idea: "Send real-time notifications to users on iOS and Android when events occur with high reliability"
@@ -104,6 +109,10 @@ Step 1: Define scope - push notification system. Step 2: Functional requirements
 
 [OUTCOME]
 docs/requirements/functional.md with event-based notification requirements. docs/requirements/non-functional.md with quantified targets (< 2s latency, 99.9% success, 10K/min throughput). Verifiable acceptance criteria. Complete sharding to docs/requirements/*.md.
+
+[WHY-GOOD]
+- Captures both functional breadth and demanding NFRs, eliminating ambiguity for engineering teams.
+- Produces traceable artifacts in the mandated locations, keeping the repository consistent.
 
 ### Bad Example 1
 [INPUT]

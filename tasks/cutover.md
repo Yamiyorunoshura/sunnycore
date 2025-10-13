@@ -4,6 +4,7 @@
   1. "{REQ}/*.md" --Requirement documents (required)
   2. "{ARCH}/*.md" --Architecture documents (required)
   3. "{TMPL}/cutover-report-tmpl.yaml" --Cutover report template (required)
+  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; capture user-centric test scope, configuration checkpoints, and evidence collection steps
 
 ## [Output]
   1. "{CUTOVER}" --Cutover report (Markdown format)
@@ -20,7 +21,7 @@
   1. Preparation & Validation
     - Understand business objectives from requirement documents
     - Understand system architecture from architecture documents
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to document acceptance scenarios, configuration prerequisites, and validation evidence plan
     - Outcome: Business objectives understood, architecture validated, and plan.md initialized
 
   2. Code Quality Inspection (CRITICAL)
@@ -131,6 +132,10 @@ Validate input files exist. Scan production code for mocks/hardcoded values (non
 [OUTCOME]
 Cutover report at docs/cutover-report.md with status: Success. Configuration issue documented: Redis port changed to 6380 (add to .env.example). All acceptance tests passed with evidence (API response logs). Recommendations: Update README.md with port configuration. Environment ready for production deployment. Plan.md shows code quality passed, config fixed, all requirements tested and verified.
 
+[WHY-GOOD]
+- Executes every gate—code quality, environment setup, requirement validation—before issuing a success verdict.
+- Documents configuration fixes and evidence, enabling repeatable deployments and knowledge transfer.
+
 ### Good Example 2
 [INPUT]
 PRD contains requirements (REQ-001: payment processing). Code quality inspection reveals mock implementation and hardcoded API key in production code (src/services/PaymentService.js).
@@ -140,6 +145,10 @@ Scan all production code files before functional testing. Detect CRITICAL issue:
 
 [OUTCOME]
 Cutover report at docs/cutover-report.md with status: Failed. CRITICAL findings documented: mock implementation and hardcoded credentials in production code. Rationale: code not production-ready, security vulnerabilities present. Risk level: Critical (would deploy non-functional system). Functional testing not performed (halted at code quality gate). Action items provided for developers to fix issues. Plan.md documents code quality scan results and automatic fail decision.
+
+[WHY-GOOD]
+- Applies the automatic-fail rule decisively, preventing insecure code from advancing.
+- Communicates precise remediation steps, so the development team knows exactly how to recover.
 
 ### Bad Example 1
 [INPUT]

@@ -4,6 +4,7 @@
   1. "{DEVNOTES}/{task_id}-dev-notes.md" --Development notes
   2. "{PLAN}/{task_id}-plan.md" --Implementation plan
   3. "{TMPL}/review-tmpl.yaml" --Review template
+  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; capture review scope, evidence collection, and decision checkpoints
 
 ## [Output]
   1. "{REVIEW}/{task_id}-review.md" (Markdown format)
@@ -21,7 +22,7 @@
   1. Review Planning & Domain Identification
     - Understand implementation plan to identify task domain and establish scope of review
     - Determine domain-specific review criteria and success criteria
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to document review focus, required evidence, and decision checkpoints
     - Outcome: Review criteria and approach determined, plan.md initialized
 
   2. Code & Test Execution Review
@@ -177,6 +178,10 @@ Step 1: Read plan to understand domain (Backend API) and acceptance criteria. Ap
 [OUTCOME]
 Complete docs/review/1-review.md with test results, code analysis, score 9.5 (Platinum). docs/epic.md updated with Task-1 completion status. Acceptance: Accept with rationale (strong implementation, minor error handling improvements suggested). No blocking issues.
 
+[WHY-GOOD]
+- Executes all verification gates—code scan, regression tests, alignment checks—before issuing a high score.
+- Records evidence, scoring, and epic updates, giving stakeholders a defensible review trail.
+
 ### Good Example 2
 [INPUT]
 Task-2: Analytics dashboard widget. Dev notes and plan reference React, chart.js. Some accessibility tests failing.
@@ -186,6 +191,10 @@ Step 1: Identify domain (Frontend). Apply frontend scoring dimensions. Step 2: S
 
 [OUTCOME]
 docs/review/2-review.md documents failed accessibility tests (L42-L58), alignment gaps noted. Action items: Fix accessibility (aria-labels, keyboard nav), add responsive breakpoints. docs/epic.md updated: score 7.3, status needs revision. Clear guidance for improvements.
+
+[WHY-GOOD]
+- Surfaces real deficiencies (accessibility) while still advancing the review with actionable guidance.
+- Keeps epic status accurate, ensuring the team knows revisions are required before completion.
 
 ### Bad Example 1
 [INPUT]

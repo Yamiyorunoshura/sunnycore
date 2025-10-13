@@ -4,6 +4,7 @@
   1. "{REQ}/*.md" --Project functional and non-functional requirements
   2. "{ARCH}/*.md" --Architecture design and technical specifications
   3. "{TMPL}/epic-tmpl.yaml" --Epic template format
+  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; focus the plan on requirement coverage, task sequencing, and DoD alignment for this epic
 
 ## [Output]
   1. "{EPIC}" --Task list (Markdown format)
@@ -18,7 +19,7 @@
   1. Research & Planning
     - Understand requirements, architecture, and project scope
     - Identify success criteria and constraints
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to document coverage analysis, grouping strategy, and validation checkpoints
     - Outcome: Complete understanding, task design criteria established, and plan.md initialized
 
   2. Task Breakdown & Organization
@@ -90,6 +91,10 @@ Understand requirements and architecture from docs. Identify feature-level tasks
 [OUTCOME]
 docs/epic.md with 3 feature-level tasks in proper flow order. Each task has requirement traceability (REQ-ID→Task-ID→Component), clear description, and DoD. 100% requirement coverage verified. Task descriptions concise (≤14 characters). No operational actions included.
 
+[WHY-GOOD]
+- Translates requirements into feature-level tasks with full traceability, satisfying scope and coverage rules.
+- Preserves naming and DoD standards, yielding an epic developers can act on immediately.
+
 ### Good Example 2
 [INPUT]
 Requirements: REQ-001 (product CRUD), REQ-002 (stock tracking), REQ-003 (low stock alerts), REQ-004 (reporting). Architecture: Product Service, Inventory Service, Notification Service.
@@ -99,6 +104,10 @@ Map each requirement to architecture component systematically. Task-1: "Product 
 
 [OUTCOME]
 docs/epic.md with 4 tasks covering all requirements. Dependencies documented (Task-3→Task-2). Each task mapped to specific architecture components. Descriptions ≤14 characters and actionable. No operational steps included (git, npm, docker commands excluded).
+
+[WHY-GOOD]
+- Maintains one-to-one requirement coverage while highlighting dependencies, which keeps planning coherent.
+- Keeps every task at the required granularity and format, so later phases inherit clean inputs.
 
 ### Bad Example 1
 [INPUT]

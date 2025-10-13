@@ -4,6 +4,7 @@
   1. "{CUTOVER}" --Cutover report (required)
   2. "{PRD}" --Product Requirements Document (required, used as primary requirement and architecture source)
   3. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template (required)
+  4. "{TMPL}/plan-tmpl.yaml" --Unified planning template; track acceptance issues, PRD alignment, and validation checkpoints for this task
 
 ## [Output]
   1. "{root}/docs/cutover-fixes-dev-notes.md" --Development notes for fixes (Markdown format)
@@ -22,7 +23,7 @@
   1. Issue Analysis & Prioritization
     - Understand all reported issues from cutover report
     - Prioritize issues by severity and business impact
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking (this is the ONLY temporary tracking document)
+    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture issue inventory, PRD references, and validation checkpoints (this is the ONLY temporary tracking document)
     - Outcome: Issues prioritized and plan.md initialized
 
   2. Root Cause Analysis & Fix Strategy
@@ -111,6 +112,10 @@ Analyze issue from cutover report (push notification failure). Prioritize as cri
 [OUTCOME]
 Fixed code at src/services/NotificationService.js with complete FCM integration. Environment updated: .env.example includes FCM_SERVER_KEY configuration. Complete dev notes at docs/cutover-fixes-dev-notes.md documenting root cause (missing config), solution (FCM integration), and verification. All tests passing. Acceptance test re-run: REQ-002 push notifications working. Plan.md shows TDD cycle completed (RED→GREEN→REFACTOR), acceptance verified.
 
+[WHY-GOOD]
+- Connects the fix back to the PRD requirement and documents the missing configuration, preventing repeat regressions.
+- Validates through TDD and acceptance testing, leaving behind comprehensive evidence in dev notes.
+
 ### Good Example 2
 [INPUT]
 Cutover report lists 3 issues: critical authentication failure, high-severity data validation missing, medium-severity UI inconsistency. PRD contains relevant requirements for all issues.
@@ -120,6 +125,10 @@ Extract all 3 issues from cutover report. Prioritize by severity: critical (auth
 
 [OUTCOME]
 Fixed code for all 3 issues: AuthService.js (token validation), ValidationMiddleware.js (input validation), UI components updated. Complete dev notes at docs/cutover-fixes-dev-notes.md documenting all 3 fixes with root causes, solutions, risk assessments. All tests passing. Acceptance tests re-run for all 3 requirements: all passing. Plan.md shows prioritized fixes, TDD cycles for each, acceptance tests verified. Single comprehensive documentation.
+
+[WHY-GOOD]
+- Handles multiple issues with prioritized TDD cycles anchored in PRD requirements, ensuring nothing is skipped.
+- Consolidates documentation and acceptance evidence, giving stakeholders confidence that the cutover retry will pass.
 
 ### Bad Example 1
 [INPUT]
@@ -146,4 +155,3 @@ Violates Step 1 (prioritize by severity). Critical issues must be fixed first. W
 
 [CORRECT-APPROACH]
 Prioritize ALL issues by severity in plan.md: critical first, then high, medium, low. Fix issues sequentially in priority order. Conduct thorough root cause analysis for EVERY issue regardless of apparent simplicity. Track each issue's TDD cycle progress in plan.md. Create single comprehensive dev notes at docs/cutover-fixes-dev-notes.md covering all fixes with complete analysis. Maintain detailed plan.md throughout per Progress-Tracking-Guidelines.
-

@@ -21,6 +21,10 @@ Read CLAUDE.md first to understand core constraints, then read commands/sunnycor
 [OUTCOME]
 Execution follows the mandated hierarchy and respects all governance layers.
 
+[WHY-GOOD]
+- Respects the mandated priority order (CLAUDE.md → commands → tasks), ensuring governance constraints are satisfied before any action.
+- Prevents accidental rule violations by verifying downstream instructions only after confirming higher-level guidance.
+
 ### Good Example 2
 [INPUT]
 A todo list contains steps 1-5. Step 3 is unclear: "Optimize the performance"
@@ -30,6 +34,10 @@ Pause and request clarification: "Step 3 mentions performance optimization but d
 
 [OUTCOME]
 Ambiguity is resolved before proceeding, preventing wasted work on wrong optimizations.
+
+[WHY-GOOD]
+- Proactively pauses when instructions are unclear, aligning with the rule that mandates clarification for ambiguity.
+- Avoids misaligned execution by securing concrete targets before continuing, protecting time and quality.
 
 ### Bad Example 1
 [INPUT]
@@ -72,6 +80,10 @@ Read the current architecture document first, locate the `## [Skills]` heading (
 [OUTCOME]
 The document maintains its template structure and hierarchy. The [Skills] section is enhanced without disruption.
 
+[WHY-GOOD]
+- Preserves the existing template hierarchy exactly, satisfying the formatting directive without collateral changes.
+- Enhances content in place, which keeps traceability and avoids duplicate sections that confuse downstream readers.
+
 ### Good Example 2
 [INPUT]
 Creating a new PRD using prd-tmpl.yaml which specifies: # [Product-Requirements] with nested sections ## [Scope-of-Work] and ## [Constraints]
@@ -88,6 +100,10 @@ Generate the document as:
 
 [OUTCOME]
 Output perfectly mirrors the template hierarchy: top-level section as H1, nested sections as H2.
+
+[WHY-GOOD]
+- Applies the template rules verbatim, ensuring headings map correctly from template structure to Markdown levels.
+- Prevents structural drift in generated documents, which keeps automation and reviewers aligned on expected format.
 
 ### Bad Example 1
 [INPUT]
@@ -139,6 +155,10 @@ Run all unit tests and verify they pass. Run integration tests and confirm authe
 [OUTCOME]
 Every DoD item is verified and documented. The deliverable is truly complete and meets all quality standards.
 
+[WHY-GOOD]
+- Performs explicit validation for each Definition of Done line item, guaranteeing nothing is declared complete prematurely.
+- Captures evidence in documentation, which makes quality control auditable and reproducible.
+
 ### Good Example 2
 [INPUT]
 During code generation, a deprecation warning appears: "Function X is deprecated, use Y instead." The code still runs successfully.
@@ -148,6 +168,10 @@ Check Blocking-Conditions documentation. This is a warning, not an error, so wor
 
 [OUTCOME]
 Proportional response: work continues, but the issue is tracked for future resolution.
+
+[WHY-GOOD]
+- Consults the documented rules before reacting, ensuring continuity unless a true blocking condition exists.
+- Records the warning and follow-up action, which preserves visibility and accountability without causing unnecessary delays.
 
 ### Bad Example 1
 [INPUT]
@@ -190,6 +214,10 @@ Preserve these KEEP rules exactly as written in the summary. Condense other expl
 [OUTCOME]
 Summary is efficient yet maintains all essential governance rules for future reference.
 
+[WHY-GOOD]
+- Distills content without violating KEEP directives, so critical guardrails remain intact for downstream consumers.
+- Demonstrates disciplined summarization by editing only optional material while retaining mandatory language verbatim.
+
 ### Good Example 2
 [INPUT]
 MAY IGNORE section contains: "Background on project history (5 paragraphs)" which doesn't relate to the current implementation task.
@@ -199,6 +227,10 @@ In summary note: "Project history (MAY IGNORE) excluded as not relevant to imple
 
 [OUTCOME]
 Summary is focused and lean while documenting what was intentionally omitted.
+
+[WHY-GOOD]
+- Applies discretion only to MAY IGNORE content, keeping the summary tightly aligned with the current task.
+- Explicitly documents the omission, which preserves transparency and aids future reviewers.
 
 ### Bad Example 1
 [INPUT]
@@ -241,6 +273,10 @@ Use sequential-thinking to map out the architecture, consider security implicati
 [OUTCOME]
 Complex architectural reasoning is structured before diving into external documentation. Decisions are well-reasoned and implementation is informed.
 
+[WHY-GOOD]
+- Chooses tools in a deliberate order: planning first, then documentation lookup, which maximizes clarity and efficiency.
+- Addresses both architectural reasoning and research needs without overusing heavier tools like playwright.
+
 ### Good Example 2
 [INPUT]
 Need to implement Stripe payment integration using their Node.js SDK.
@@ -250,6 +286,10 @@ Use context7 to retrieve official Stripe Node.js SDK documentation, understand t
 
 [OUTCOME]
 Implementation follows official best practices and uses the correct API methods from authoritative sources.
+
+[WHY-GOOD]
+- Selects the lightest tool that satisfies the requirement—context7—for authoritative references instead of defaulting to more intrusive tooling.
+- Ensures integration aligns with vendor guidance, reducing implementation risk and future rework.
 
 ### Bad Example 1
 [INPUT]
