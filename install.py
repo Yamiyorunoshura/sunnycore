@@ -7,6 +7,7 @@ Sunnycore 安裝腳本
 import argparse
 import os
 import sys
+import urllib.error
 import urllib.request
 import urllib.parse
 import json
@@ -174,13 +175,25 @@ def safe_input(prompt: str) -> str:
 class SunnycoreInstaller:
     """Sunnycore 安裝器"""
     
-    def __init__(self, repo: str = "Yamiyorunoshura/sunnycore", branch: str = "master", max_workers: int = 0):
+    def __init__(
+        self,
+        repo: str = "Yamiyorunoshura/sunnycore",
+        branch: str = "master",
+        max_workers: int = 0,
+        max_retries: int = 3,
+        retry_delay: float = 0.5,
+    ):
         self.repo = repo
         self.branch = branch
         self.base_raw_url = f"https://raw.githubusercontent.com/{repo}/{branch}"
         self.base_api_url = f"https://api.github.com/repos/{repo}/contents"
         self.max_workers = max_workers
-        self.progress_bar = None
+        self.max_retries = max(1, max_retries)
+        self.retry_delay = retry_delay if retry_delay >= 0 else 0.0
+        self.progress_bar: Optional[ProgressBar] = None
+        self.failed_files: List[Tuple[str, Path, str]] = []
+        self.failed_lock = threading.Lock()
+        self._retry_backoff_multiplier = 2.0
         
     def download_file(self, file_path: str, target_path: Path) -> bool:
         """下載單一文件
@@ -192,26 +205,56 @@ class SunnycoreInstaller:
         Returns:
             bool: 下載是否成功
         """
-        # URL 編碼路徑（處理空格等特殊字符）
         encoded_path = urllib.parse.quote(file_path)
         url = f"{self.base_raw_url}/{encoded_path}"
-        try:
-            target_path.parent.mkdir(parents=True, exist_ok=True)
-            
-            with urllib.request.urlopen(url) as response:
-                content = response.read()
-                with open(target_path, 'wb') as f:
-                    f.write(content)
-            
-            # 更新進度條
-            if self.progress_bar:
-                self.progress_bar.update(1, failed=False)
-            return True
-        except Exception as e:
-            # 更新進度條（標記為失敗）
-            if self.progress_bar:
-                self.progress_bar.update(1, failed=True)
-            return False
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        attempts = self.max_retries
+        last_error: Optional[Exception] = None
+        success = False
+        
+        for attempt in range(1, attempts + 1):
+            try:
+                request = urllib.request.Request(
+                    url,
+                    headers={
+                        "User-Agent": "SunnycoreInstaller/1.0 (+https://github.com/Yamiyorunoshura/sunnycore)",
+                    },
+                )
+                with urllib.request.urlopen(request, timeout=30) as response:
+                    content = response.read()
+                    with open(target_path, 'wb') as f:
+                        f.write(content)
+                success = True
+                break
+            except Exception as error:  # noqa: BLE001
+                last_error = error
+                if attempt < attempts:
+                    wait_seconds = self._compute_retry_wait(attempt)
+                    time.sleep(wait_seconds)
+        
+        if self.progress_bar:
+            self.progress_bar.update(1, failed=not success)
+        
+        if not success and last_error is not None:
+            with self.failed_lock:
+                self.failed_files.append(
+                    (file_path, target_path, self._format_error(last_error))
+                )
+        
+        return success
+    
+    def _compute_retry_wait(self, attempt: int) -> float:
+        """計算下一次重試前的等待時間（指數退避）"""
+        return self.retry_delay * (self._retry_backoff_multiplier ** (attempt - 1))
+    
+    def _format_error(self, error: Exception) -> str:
+        """格式化錯誤訊息方便顯示"""
+        if isinstance(error, urllib.error.HTTPError):
+            return f"HTTP {error.code} {error.reason}"
+        if isinstance(error, urllib.error.URLError):
+            return f"URL 錯誤: {error.reason}"
+        return str(error)
     
     def get_directory_contents(self, dir_path: str) -> List[Dict]:
         """獲取 GitHub 目錄內容
@@ -358,6 +401,7 @@ class SunnycoreInstaller:
         
         # 創建進度條
         self.progress_bar = ProgressBar(total=total, prefix="下載進度")
+        self.failed_files = []
         
         with ThreadPoolExecutor(max_workers=workers) as executor:
             # 提交所有下載任務
@@ -373,8 +417,13 @@ class SunnycoreInstaller:
         # 完成進度條
         self.progress_bar.finish()
         
-        success = self.progress_bar.failed == 0
-        return success
+        if self.failed_files:
+            print("\n✗ 以下文件在重試後仍無法成功下載：")
+            for source_path, target_path, error_message in self.failed_files:
+                print(f"  - {source_path} -> {target_path} ({error_message})")
+            print("  建議檢查網路連線、GitHub 權限，或稍後再試。")
+        
+        return len(self.failed_files) == 0
     
     def install_claude_code(self, work_dir: Path, auto_yes: bool = False) -> bool:
         """安裝 claude-code 版本
@@ -666,6 +715,20 @@ def main():
         help='最大並行下載數 (預設: 0 = 自動根據文件數量調整，上限 200)'
     )
     
+    parser.add_argument(
+        '--max-retries',
+        type=int,
+        default=3,
+        help='下載失敗時的最大重試次數 (預設: 3)'
+    )
+    
+    parser.add_argument(
+        '--retry-delay',
+        type=float,
+        default=0.5,
+        help='下載重試的初始等待秒數 (預設: 0.5，採用指數退避)'
+    )
+    
     args = parser.parse_args()
     
     # 互動模式 - 當沒有指定路徑時進入互動模式
@@ -717,7 +780,13 @@ def main():
         install_path = Path(os.path.expanduser(args.path))
     
     # 創建安裝器
-    installer = SunnycoreInstaller(repo=args.repo, branch=args.branch, max_workers=args.max_workers)
+    installer = SunnycoreInstaller(
+        repo=args.repo,
+        branch=args.branch,
+        max_workers=args.max_workers,
+        max_retries=args.max_retries,
+        retry_delay=args.retry_delay,
+    )
     
     # 執行安裝
     try:
