@@ -22,7 +22,7 @@
   1. Preparation & Strategy
     - Understand all PRD requirements and architecture completely
     - Develop comprehensive TDD implementation strategy
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture dependency mapping, validation strategy, and documentation checkpoints (this is the ONLY temporary tracking document)
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Complete strategy established and plan.md initialized
 
   2. TDD Development Cycle

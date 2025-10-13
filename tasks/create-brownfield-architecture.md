@@ -23,7 +23,7 @@
   1. Existing Architecture Evaluation
     - Understand current architecture, extension points, and constraints
     - Identify affected domains and dependencies
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture baseline architecture findings, planned deltas, and validation needs
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Complete understanding of existing architecture, extension points identified, and plan.md initialized
 
   2. New Module Design & Impact Analysis

@@ -21,7 +21,7 @@
 ## [Steps]
   1. Preparation & Analysis
     - Understand project's technology stack, environment requirements, and goals
-    - Create plan.md at "{root}/docs/plan.md" for progress tracking
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Project requirements and stack understood, plan.md initialized
 
   2. Environment Setup & Indexing

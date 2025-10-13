@@ -26,7 +26,7 @@
   1. Analysis & Context Gathering
     - Understand existing architecture and actual implementation state
     - Gather comprehensive context from all documentation sources
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to log evidence sources, drift analysis, and sharding/CLAUDE update checkpoints
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Complete understanding of current state, context gathered, and plan.md initialized
 
   2. Architecture Integration & Documentation

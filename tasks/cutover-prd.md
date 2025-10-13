@@ -19,7 +19,7 @@
 ## [Steps]
   1. Preparation & Validation
     - Understand business objectives and technical architecture from PRD
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to record acceptance scenarios, configuration prerequisites, and evidence capture strategy
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Business objectives and architecture understood from PRD, and plan.md initialized
 
   2. Code Quality Inspection (CRITICAL)

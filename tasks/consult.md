@@ -19,7 +19,7 @@
   1. Initialization & Context Gathering
     - Determine project type (Greenfield/Brownfield)
     - Gather complete context for both project types
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to log project type evidence, information sources, and decision checkpoints
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Project type determined, context collected, and plan.md initialized
 
   2. Requirement Scope & Impact Analysis

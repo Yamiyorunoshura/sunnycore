@@ -22,7 +22,7 @@
   1. Issue Analysis & Planning
     - Understand issues from review report and architecture context
     - Formulate atomic fix tasks based on analysis
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture review findings, fix strategy, and validation checkpoints (this is the ONLY temporary tracking document)
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Clear understanding of issues, fix plan created, and plan.md initialized
 
   2. Test-Driven Fix Implementation

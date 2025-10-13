@@ -6,6 +6,12 @@
 並且本專案遵循[語義化版本](https://semver.org/lang/zh-TW/)。
 
 ## [Unreleased]
+ 
+### Changed
+- 統一所有任務文件中關於建立計劃文件的措辭：改為
+  "Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to
+  track the working progress"，涵蓋平台專用 `*/tasks/init.md` 與通用 `tasks/*.md`
+- 移除 `tasks/help.md` 中重複且不再需要的計劃模板引用行，避免內容重覆
 
 ## [4.12.0] - 2025-10-13
 

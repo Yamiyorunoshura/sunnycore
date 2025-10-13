@@ -24,7 +24,7 @@
   1. Knowledge Identification & Planning
     - Identify all platinum-level best practices from reviews
     - Identify development errors and solutions from dev notes
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to log evidence sources, categorization decisions, and archiving actions
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: All platinum practices and errors identified and plan.md initialized
 
   2. Knowledge Base Design & Classification

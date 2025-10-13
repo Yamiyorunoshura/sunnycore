@@ -24,7 +24,7 @@
   1. Issue Analysis & Prioritization
     - Understand all reported issues from cutover report
     - Prioritize issues by severity and business impact
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture issue inventory, prioritization rationale, and validation checkpoints (this is the ONLY temporary tracking document)
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Issues prioritized and plan.md initialized
 
   2. Root Cause Analysis & Fix Strategy

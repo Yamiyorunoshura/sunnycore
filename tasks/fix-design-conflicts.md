@@ -24,7 +24,7 @@
   1. Issue Analysis & Prioritization
     - Understand all issues from validation report
     - Extract, group, and prioritize issues properly
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture prioritized issue lists, approval checkpoints, and validation tasks
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Issues categorized, prioritized, and plan.md initialized
 
   2. Fix Planning & User Confirmation

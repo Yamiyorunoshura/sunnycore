@@ -28,7 +28,7 @@
 ## [Steps]
   1. Preparation & Planning
     - Understand TDD implementation plan and three phases
-    - Create plan.md at "{root}/docs/plan.md" using the plan template to capture phase checkpoints, test strategies, and documentation commitments (this is the ONLY temporary tracking document)
+    - Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress
     - Outcome: Implementation plan understood and plan.md initialized
 
   2. RED Phase: Test Implementation
