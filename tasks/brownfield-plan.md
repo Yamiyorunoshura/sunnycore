@@ -30,7 +30,6 @@
 
 ## [Steps]
 **You should work along to the following steps:**
-You should work along to the following steps:
 1. **Validate Inputs**: Verify that all required files (`{REVIEW}`, `{ARCH}`, `{KNOWLEDGE}`) exist. If any are missing, return an uncertainty message. This ensures you have a complete input set before proceeding.
 2. **Analyze Root Causes**: Read the review report and architecture documentation. Create a Root-cause Table that maps all issues with complete traceability from symptoms to evidence.
 3. **Plan Changes**: Draft a Diff Summary for each fix. This documents the change scope including file paths, line ranges, rationale, and impact.
