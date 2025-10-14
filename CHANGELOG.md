@@ -7,6 +7,19 @@
 
 ## [Unreleased]
 
+## [4.19.0] - 2025-10-14
+
+### Changed
+- 任務文件格式全面優化：完成剩餘 19 個任務文件的格式統一與簡化（延續 v4.18.0 的優化工作）
+  - 優化文件：brownfield-plan.md, conclude.md, consult.md, create-architecture.md, create-brownfield-architecture.md, create-epic.md, create-plan.md, create-prd.md, create-requirements.md, curate-knowledge.md, cutover-prd.md, cutover.md, document-project.md, fix-acceptance-issues.md, fix-design-conflicts.md, fix-prd-issues.md, help.md, validate-design.md（以及 develop-plan.md 和 review.md 的進一步調整）
+  - 統一採用簡潔的 Input/Output/Constraints/Steps/DoD 格式
+  - 步驟描述統一使用 "action → outcome" 簡潔格式，移除冗長的 Objective/Process/Outcome 結構
+  - 範例格式統一使用箭頭符號（→）取代詳細敘述，提升可讀性
+  - Guidelines 章節精簡整合，移除重複內容
+  - Constraints 統一採用 **MUST**/**MUST NOT** 格式
+  - 保留所有核心規則和約束的實質內容，僅改進可讀性和執行清晰度
+  - 淨減少約 1,733 行冗長描述，大幅提升任務文件維護性和 AI 執行流程結構化程度
+
 ## [4.18.0] - 2025-10-14
 
 ### Changed
