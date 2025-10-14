@@ -7,6 +7,19 @@
 
 ## [Unreleased]
 
+## [4.21.0] - 2025-10-14
+
+### Changed
+- 角色命令進度記錄策略簡化：移除非 assistant 角色的強制進度記錄要求
+  - 移除 architect, dev, pm, po, qa 角色的 `{PROGRESS}` 路徑變量定義
+  - 移除這 5 個角色的 Output 中對 `"{PROGRESS}"` 的輸出要求
+  - 移除這 5 個角色 Scope-of-Work 中的 "progress recording" 職責
+  - 移除這 5 個角色 Constraints 中關於進度追蹤的強制要求
+  - 移除這 5 個角色的 `[Progress-Recording]` 章節（格式與範例）
+  - 移除這 5 個角色 Checklist 中的 "Record progress in {PROGRESS} at start" 項目
+  - 保留 assistant 角色的進度記錄功能不變
+  - 影響範圍：所有平台（claude code、codex、cursor）的 5 個角色命令文件（共 15 個檔案）
+
 ## [4.20.0] - 2025-10-14
 
 ### Changed
