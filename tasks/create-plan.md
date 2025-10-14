@@ -1,14 +1,14 @@
 **GOAL**: Create detailed TDD implementation plans for all epic tasks with RED/GREEN/REFACTOR phases.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{REQ}/*.md`
 - `{ARCH}/*.md`
 - `{EPIC}`
 - `{TMPL}/implementation-plan-tmpl.yaml`
 - `{KNOWLEDGE}/*.md`
 
-## [Output]
+## [Products]
 - `{PLAN}/{task_id}-plan.md`
 
 ## [Constraints]

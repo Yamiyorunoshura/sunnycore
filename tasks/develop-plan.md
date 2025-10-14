@@ -1,12 +1,12 @@
 **GOAL**: Execute TDD development based on implementation plan.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{PLAN}/{task_id}-plan.md`
 - `{ARCH}/*.md`
 - `{TMPL}/dev-notes-tmpl.yaml`
 
-## [Output]
+## [Products]
 - `{DEVNOTES}/{task_id}-dev-notes.md`
 - High-quality code (tests passing, aligned with plan)
 - Complete test coverage (unit + integration + behavior)

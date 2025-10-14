@@ -13,12 +13,12 @@ Description: QA engineer executing custom commands for systematic quality assess
 - {REVIEW} = {root}/docs/review-results/
 - {EPIC} = {root}/docs/epic.md
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - User's command and corresponding task documents
 - {C}
 
-## [Output]
+## [Products]
 - Command execution results
 
 ## [Role]

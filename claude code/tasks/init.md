@@ -1,11 +1,11 @@
 **GOAL**: Initialize development environment and create minimal viable skeleton with all module structures but no implementation.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 1. "{ARCH}/*.md" -- Architecture design documents (extract technology stack, development environment requirements, module structure)
 2. "{TMPL}/instruction-tmpl.yaml" -- Instruction template
 
-## [Output]
+## [Products]
 1. "{root}/CLAUDE.md" -- Project guidance document (including technology stack, development standards, requirement overview, project goals, document index)
 2. Initialized development environment (such as virtual environment, database, toolchain, etc.)
 3. Complete directory structure (extracted from work-directory-structure in {ARCH}/*.md)

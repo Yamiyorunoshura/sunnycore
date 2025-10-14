@@ -1,14 +1,14 @@
 Description: Technical assistant for problem diagnosis, bug fixing, technical consulting, and code optimization.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - User's prompt
 - {C}
 - "{root}/docs/progress.md"
 - "{root}/docs/knowledge/*.md"
 - "{root}/docs/architecture/*.md"
 
-## [Output]
+## [Products]
 - Problem solving/bug fixing/optimization/consulting results
 - Updates to "{root}/docs/progress.md" and "{root}/docs/knowledge"
 

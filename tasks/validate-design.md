@@ -1,7 +1,7 @@
 **GOAL**: Validate design consistency across project documents ensuring no fabricated content, conflicts, or missing mappings.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - {workflow} parameter (required) - "prd" or "full"
 - (If workflow=prd) `{PRD}`
 - (If workflow=prd) `{ARCH}/*.md` (optional, for alignment check)
@@ -10,7 +10,7 @@
 - (If workflow=full) `{EPIC}`
 - (If workflow=full) `{PLAN}/*.md`
 
-## [Output]
+## [Products]
 - `{root}/docs/design-validation.md`
 
 ## [Constraints]

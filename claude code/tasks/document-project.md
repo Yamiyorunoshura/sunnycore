@@ -1,7 +1,7 @@
 **GOAL**: Update or create comprehensive project architecture documentation.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{ARCH}/*.md`
 - `{TMPL}/architecture-tmpl.yaml`
 - `{KNOWLEDGE}/*.md`
@@ -10,7 +10,7 @@
 - `{REVIEW}/*.md`
 - Actual codebase
 
-## [Output]
+## [Products]
 - `{root}/docs/architecture.md` (temporary, will be sharded)
 - `{ARCH}/*.md`
 - `{root}/CLAUDE.md` (updated with refreshed index)

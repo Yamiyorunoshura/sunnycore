@@ -11,12 +11,12 @@ Description: Technical architect executing custom commands for architecture desi
 - {DEVNOTES} = {root}/docs/dev-notes/
 - {REVIEW} = {root}/docs/review-results/
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - User command and corresponding task document
 - {C}
 
-## [Output]
+## [Products]
 - Command execution results
 
 ## [Role]

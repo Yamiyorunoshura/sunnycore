@@ -1,7 +1,7 @@
 **GOAL**: Organize development knowledge including best practices, lessons learned, and bug fix records.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{REVIEW}/*.md`
 - `{DEVNOTES}/*.md`
 - `{KNOWLEDGE}/*.md` (if exist)
@@ -9,7 +9,7 @@
 - `{root}/docs/cutover-dev-notes.md`
 - `{PROGRESS}`
 
-## [Output]
+## [Products]
 - `{KNOWLEDGE}/*.md` (organized by semantic topics)
 
 ## [Constraints]

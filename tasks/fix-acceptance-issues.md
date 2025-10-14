@@ -1,13 +1,13 @@
 **GOAL**: Fix issues identified during acceptance phase.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{CUTOVER}` (required)
 - `{REQ}/*.md` (required)
 - `{ARCH}/*.md` (required)
 - `{TMPL}/dev-notes-tmpl.yaml` (required)
 
-## [Output]
+## [Products]
 - `{root}/docs/cutover-fixes-dev-notes.md`
 - Fixed code
 - Updated documentation if needed

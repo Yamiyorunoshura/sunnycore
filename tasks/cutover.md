@@ -1,12 +1,12 @@
 **GOAL**: Execute project acceptance validating deliverables from business and user perspectives.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{REQ}/*.md` (required)
 - `{ARCH}/*.md` (required)
 - `{TMPL}/cutover-report-tmpl.yaml` (required)
 
-## [Output]
+## [Products]
 - `{CUTOVER}`
 
 ## [Constraints]

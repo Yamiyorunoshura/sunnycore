@@ -1,13 +1,13 @@
 **GOAL**: Review task outcomes for quality compliance and requirements.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{DEVNOTES}/{task_id}-dev-notes.md`
 - `{PLAN}/{task_id}-plan.md`
 - `{ARCH}/*.md`
 - `{TMPL}/review-tmpl.yaml`
 
-## [Output]
+## [Products]
 - `{REVIEW}/{task_id}-review.md`
 - Updated `{EPIC}`
 

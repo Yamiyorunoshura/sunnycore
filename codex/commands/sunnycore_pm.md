@@ -14,12 +14,12 @@ command = $COMMAND
 - {EPIC} = {root}/docs/epic.md
 - {PRD} = {root}/docs/PRD.md
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - User command and corresponding task document
 - {C}
 
-## [Output]
+## [Products]
 - Command execution results
 
 ## [Role]

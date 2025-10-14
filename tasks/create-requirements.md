@@ -1,11 +1,11 @@
 **GOAL**: Create detailed functional and non-functional requirements documentation.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{TMPL}/requirement-tmpl.yaml`
 - User-provided ideas and descriptions
 
-## [Output]
+## [Products]
 - `{root}/docs/requirements.md` (temporary, will be sharded)
 - `{REQ}/*.md`
 

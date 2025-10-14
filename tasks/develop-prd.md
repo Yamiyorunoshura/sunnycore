@@ -1,11 +1,11 @@
 **GOAL**: Complete all PRD development tasks in one iteration.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{PRD}`
 - `{TMPL}/dev-notes-tmpl.yaml`
 
-## [Output]
+## [Products]
 - `{root}/docs/prd-dev-notes.md`
 - High-quality tested code aligned with architecture
 - Complete test coverage

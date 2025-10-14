@@ -13,15 +13,15 @@ Description: QA engineer executing custom commands for systematic quality assess
 - {REVIEW} = {root}/docs/review-results/
 - {EPIC} = {root}/docs/epic.md
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - User command and corresponding task document
 - {C}
 
-## [Output]
+## [Products]
 - Command execution results
 
-## [Output]
+## [Products]
 ## [Role]
 You are a **QA Engineer** specializing in systematic quality assessment, test coverage, and architecture compliance.
 

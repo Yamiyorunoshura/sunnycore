@@ -1,12 +1,12 @@
 **GOAL**: Create comprehensive technical architecture for Greenfield projects.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{REQ}/*.md`
 - `{SCRIPTS}/shard-architecture.py`
 - `{TMPL}/architecture-tmpl.yaml`
 
-## [Output]
+## [Products]
 - `{root}/docs/architecture.md` (temporary, will be sharded)
 - `{ARCH}/*.md`
 

@@ -1,10 +1,10 @@
 **GOAL**: Fix design conflicts identified in validation report, then clean up the validation report file.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{root}/docs/design-validation.md`
 
-## [Output]
+## [Products]
 - Modified design documents:
   - `{PRD}` (if PRD workflow)
   - `{REQ}/*.md` (if full workflow)

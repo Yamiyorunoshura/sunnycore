@@ -1,14 +1,14 @@
 **GOAL**: Create architecture change documentation for Brownfield projects.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{REQ}`
 - `{ARCH}/*.md`
 - `{SCRIPTS}/shard-architecture.py`
 - `{TMPL}/architecture-tmpl.yaml`
 - `{KNOWLEDGE}/*.md`
 
-## [Output]
+## [Products]
 - `{root}/docs/architecture.md` (temporary)
 - `{ARCH}/*.md` (updated)
 

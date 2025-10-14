@@ -1,12 +1,12 @@
 **GOAL**: Create feature-level task list breaking down requirements into executable tasks.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{REQ}/*.md`
 - `{ARCH}/*.md`
 - `{TMPL}/epic-tmpl.yaml`
 
-## [Output]
+## [Products]
 - `{EPIC}`
 
 ## [Constraints]

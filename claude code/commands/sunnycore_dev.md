@@ -14,12 +14,12 @@ Description: Principal full-stack engineer executing custom commands for project
 - {PRD} = {root}/docs/PRD.md
 - {EPIC} = {root}/docs/epic.md
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - User command and corresponding task document
 - {C}
 
-## [Output]
+## [Products]
 - Command execution results
 
 ## [Role]

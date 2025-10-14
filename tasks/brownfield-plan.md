@@ -1,7 +1,7 @@
 **GOAL**: Fix code that failed review based on feedback with complete quality assurance and operational readiness.
 
-## [Input]
-**You must read the following documents:**
+## [Context]
+**You must read the following context:**
 - `{TMPL}/dev-notes-tmpl.yaml`
 - `{REVIEW}/{task_id}-review.md`
 - `{ARCH}/*.md`
@@ -14,7 +14,7 @@
 - You **MUST NOT** guess or assume any missing specifications.
 - You **MUST NOT** proceed without a complete input set.
 
-## [Output]
+## [Products]
 - Fixed code (all quality gates passing)
 - Root-cause Traceability Table
 - Change Diff Summary
