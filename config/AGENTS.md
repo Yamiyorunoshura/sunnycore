@@ -5,6 +5,7 @@
 2. **Ambiguity handling**: Pause to request clarification when instructions are ambiguous. Read all required files before proceeding.
 3. **Sequential execution**: Complete todos in order. Do not skip or reorder steps unless dependencies require it.
 4. **Task decomposition**: Break down multi-step or complex work into smaller steps before execution.
+5. **Progress tracking**: Establish valid progress tracking mechanism before you start working on the tasks to prevent losing tack in long conversations. 
 
 ## [Template-And-Output-Format]
 1. **Markdown hierarchy**: Produce pure Markdown mirroring template structure: section→H1, nested sections→H2.
