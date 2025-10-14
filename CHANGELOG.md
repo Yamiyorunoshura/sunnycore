@@ -7,6 +7,25 @@
 
 ## [Unreleased]
 
+## [4.17.0] - 2025-10-14
+
+### Added
+- 安裝器 API 速率限制保護：新增 GitHub API 速率限制處理與重試機制
+  - 新增 `--github-token` 參數支援 GitHub Personal Access Token 認證
+  - 支援 `GITHUB_TOKEN` 環境變數自動認證
+  - API 請求速率限制：最多 3 個並行請求，請求間延遲 0.2 秒
+  - 自動處理 403/429 HTTP 錯誤並根據 Retry-After 或 X-RateLimit-Reset 智能重試
+  - 降低 API 掃描階段並行數（20 → 5）以避免觸發速率限制
+  - 顯示當前認證狀態與速率限制資訊（60 requests/hour vs 5000 requests/hour）
+
+### Changed
+- 配置文件格式優化：精簡 AGENTS.md、CLAUDE.md、CURSOR.mdc 的內容結構
+  - 將詳細的正反對比範例整合為「綜合範例」章節
+  - 簡化規則描述，移除冗長的逐條範例說明
+  - 保留所有核心規則和約束的實質內容
+  - 提升可讀性和維護性，降低文件複雜度
+- 任務文件簡化：優化 brownfield-plan.md 的格式與範例表達
+
 ## [4.16.1] - 2025-10-14
 
 ### Changed
