@@ -1,6 +1,7 @@
+**GOAL**: Display available custom commands to user.
+
 ## [Steps]
-  1. Respond to User
-    - Ensure available custom commands are displayed to user
+1. Display complete list of custom commands with descriptions to user → User informed of available commands
 
 ## [DoD]
-  - [ ] Complete list of available custom commands is displayed to user with clear descriptions
+- [ ] Complete list of custom commands displayed with clear descriptions
