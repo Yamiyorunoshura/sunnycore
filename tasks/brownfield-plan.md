@@ -1,6 +1,7 @@
 **GOAL**: Fix code that failed review based on feedback with complete quality assurance and operational readiness.
 
 ## [Input]
+**You must read the following documents:**
 - `{TMPL}/dev-notes-tmpl.yaml`
 - `{REVIEW}/{task_id}-review.md`
 - `{ARCH}/*.md`

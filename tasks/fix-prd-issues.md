@@ -1,6 +1,7 @@
 **GOAL**: Fix issues identified during PRD acceptance phase.
 
 ## [Input]
+**You must read the following documents:**
 - `{CUTOVER}` (required)
 - `{PRD}` (required)
 - `{TMPL}/dev-notes-tmpl.yaml` (required)

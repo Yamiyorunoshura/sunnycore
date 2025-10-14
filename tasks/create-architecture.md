@@ -1,6 +1,7 @@
 **GOAL**: Create comprehensive technical architecture for Greenfield projects.
 
 ## [Input]
+**You must read the following documents:**
 - `{REQ}/*.md`
 - `{SCRIPTS}/shard-architecture.py`
 - `{TMPL}/architecture-tmpl.yaml`

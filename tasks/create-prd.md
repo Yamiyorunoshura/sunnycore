@@ -1,6 +1,7 @@
 **GOAL**: Create Product Requirements Document integrating requirements, architecture, and tasks.
 
 ## [Input]
+**You must read the following documents:**
 - User requirement description
 - `{TMPL}/prd-tmpl.yaml`
 - `{ARCH}/*.md` (if Brownfield)

@@ -1,6 +1,7 @@
 **GOAL**: Execute project acceptance validating deliverables from business and user perspectives.
 
 ## [Input]
+**You must read the following documents:**
 - `{PRD}` (required)
 - `{TMPL}/cutover-report-tmpl.yaml` (required)
 

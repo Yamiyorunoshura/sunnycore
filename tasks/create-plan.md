@@ -1,6 +1,7 @@
 **GOAL**: Create detailed TDD implementation plans for all epic tasks with RED/GREEN/REFACTOR phases.
 
 ## [Input]
+**You must read the following documents:**
 - `{REQ}/*.md`
 - `{ARCH}/*.md`
 - `{EPIC}`

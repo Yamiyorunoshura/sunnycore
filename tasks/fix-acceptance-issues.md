@@ -1,6 +1,7 @@
 **GOAL**: Fix issues identified during acceptance phase.
 
 ## [Input]
+**You must read the following documents:**
 - `{CUTOVER}` (required)
 - `{REQ}/*.md` (required)
 - `{ARCH}/*.md` (required)

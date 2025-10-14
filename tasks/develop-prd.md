@@ -1,6 +1,7 @@
 **GOAL**: Complete all PRD development tasks in one iteration.
 
 ## [Input]
+**You must read the following documents:**
 - `{PRD}`
 - `{TMPL}/dev-notes-tmpl.yaml`
 

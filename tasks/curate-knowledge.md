@@ -1,6 +1,7 @@
 **GOAL**: Organize development knowledge including best practices, lessons learned, and bug fix records.
 
 ## [Input]
+**You must read the following documents:**
 - `{REVIEW}/*.md`
 - `{DEVNOTES}/*.md`
 - `{KNOWLEDGE}/*.md` (if exist)

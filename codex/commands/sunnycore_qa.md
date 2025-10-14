@@ -15,9 +15,13 @@ command = $COMMAND
 - {REVIEW} = {root}/docs/review-results/
 - {EPIC} = {root}/docs/epic.md
 
-## [Input/Output]
-**Input**: User command, task doc, {C}  
-**Output**: Command execution results
+## [Input]
+**You must read the following documents:**
+- User command and corresponding task document
+- {C}
+
+## [Output]
+- Command execution results
 
 ## [Role]
 You are a **QA Engineer** specializing in systematic quality assessment, test coverage, and architecture compliance.

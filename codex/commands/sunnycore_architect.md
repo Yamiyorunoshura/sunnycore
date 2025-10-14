@@ -13,7 +13,14 @@ command = $COMMAND
 - {DEVNOTES} = {root}/docs/dev-notes/
 - {REVIEW} = {root}/docs/review-results/
 
-## [Input/Output]
+## [Input]
+**You must read the following documents:**
+- User's command and corresponding task document
+- {C}
+
+## [Output]
+- Command execution results
+
 **Input**: User command, task doc, {C}  
 **Output**: Command execution results
 

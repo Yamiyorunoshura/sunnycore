@@ -1,6 +1,7 @@
 **GOAL**: Update or create comprehensive project architecture documentation.
 
 ## [Input]
+**You must read the following documents:**
 - `{ARCH}/*.md`
 - `{TMPL}/architecture-tmpl.yaml`
 - `{KNOWLEDGE}/*.md`

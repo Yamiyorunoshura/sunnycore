@@ -1,6 +1,7 @@
 **GOAL**: Create detailed functional and non-functional requirements documentation.
 
 ## [Input]
+**You must read the following documents:**
 - `{TMPL}/requirement-tmpl.yaml`
 - User-provided ideas and descriptions
 

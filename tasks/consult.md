@@ -1,6 +1,7 @@
 **GOAL**: Recommend optimal development workflow (full or PRD) based on requirement analysis.
 
 ## [Input]
+**You must read the following documents:**
 - User requirement description
 - `{ARCH}/*.md` (if exist)
 

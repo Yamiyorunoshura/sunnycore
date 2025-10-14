@@ -1,6 +1,7 @@
 **GOAL**: Create architecture change documentation for Brownfield projects.
 
 ## [Input]
+**You must read the following documents:**
 - `{REQ}`
 - `{ARCH}/*.md`
 - `{SCRIPTS}/shard-architecture.py`

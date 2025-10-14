@@ -1,6 +1,7 @@
 **GOAL**: Fix design conflicts identified in validation report, then clean up the validation report file.
 
 ## [Input]
+**You must read the following documents:**
 - `{root}/docs/design-validation.md`
 
 ## [Output]

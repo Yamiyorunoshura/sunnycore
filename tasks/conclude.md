@@ -1,6 +1,7 @@
 **GOAL**: Generate completion report, archive deliverables, and clean workspace for next cycle.
 
 ## [Input]
+**You must read the following documents:**
 - `{root}/docs/*.md`
 - `{LOCK}`
 - `{TMPL}/completion-report-tmpl.yaml`

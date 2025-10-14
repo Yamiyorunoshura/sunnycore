@@ -1,6 +1,7 @@
 **GOAL**: Execute TDD development based on implementation plan.
 
 ## [Input]
+**You must read the following documents:**
 - `{PLAN}/{task_id}-plan.md`
 - `{ARCH}/*.md`
 - `{TMPL}/dev-notes-tmpl.yaml`

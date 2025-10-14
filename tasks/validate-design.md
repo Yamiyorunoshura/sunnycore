@@ -1,6 +1,7 @@
 **GOAL**: Validate design consistency across project documents ensuring no fabricated content, conflicts, or missing mappings.
 
 ## [Input]
+**You must read the following documents:**
 - {workflow} parameter (required) - "prd" or "full"
 - (If workflow=prd) `{PRD}`
 - (If workflow=prd) `{ARCH}/*.md` (optional, for alignment check)

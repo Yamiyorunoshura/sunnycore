@@ -1,6 +1,7 @@
 **GOAL**: Initialize development environment and create minimal viable skeleton with all module structures but no implementation.
 
 ## [Input]
+**You must read the following documents:**
 1. "{ARCH}/*.md" -- Architecture design documents (extract technology stack, development environment requirements, module structure)
 2. "{TMPL}/instruction-tmpl.yaml" -- Instruction template
 
