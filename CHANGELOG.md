@@ -7,6 +7,16 @@
 
 ## [Unreleased]
 
+## [4.18.0] - 2025-10-14
+
+### Changed
+- 任務文件格式優化與審查流程改進：簡化 `tasks/develop-plan.md` 和 `tasks/review.md` 的格式與範例表達
+  - 統一採用簡潔的 Input/Output/Constraints/Steps/DoD 表達方式
+  - 範例格式改為 Good #1/#2/#3 和 Bad #1/#2/#3 的正反對比格式
+  - `review.md` 新增結構化審查流程：Step 1 確定審查標準，Step 5 依標準審查實作
+  - 保留所有核心規則和約束的實質內容，僅改進可讀性和執行清晰度
+  - 提升任務文件的維護性和 AI 執行流程的結構化程度
+
 ## [4.17.0] - 2025-10-14
 
 ### Added
