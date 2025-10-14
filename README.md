@@ -213,6 +213,7 @@ curl -fsSL https://raw.githubusercontent.com/Yamiyorunoshura/sunnycore/master/in
 - `-y, --yes`：自動同意覆寫與操作
 - `--repo`：GitHub 倉庫（預設：Yamiyorunoshura/sunnycore）
 - `--branch`：分支名稱（預設：master）
+- `--github-token`：GitHub Personal Access Token（提高 API 速率限制，可選）
 
 #### 從本地倉庫執行
 
@@ -232,6 +233,28 @@ python3 install.py -v codex -p ~/myproject -y
 ```bash
 python3 install.py -v cursor -p ~/myproject -y
 ```
+
+#### 避免 GitHub API 速率限制
+
+GitHub API 對未認證請求有速率限制（60 requests/hour）。若遇到速率限制錯誤，可使用 GitHub Token 提高限制至 5000 requests/hour：
+
+**方法 1：使用環境變數（推薦）**
+```bash
+export GITHUB_TOKEN=your_github_personal_access_token
+python3 install.py -v claude -p ~/myproject -y
+```
+
+**方法 2：使用命令列參數**
+```bash
+python3 install.py -v claude -p ~/myproject -y --github-token your_github_personal_access_token
+```
+
+**如何取得 GitHub Personal Access Token：**
+1. 前往 GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+2. 點擊 "Generate new token" → "Generate new token (classic)"
+3. 設定 Token 名稱（例如：sunnycore-installer）
+4. 不需要勾選任何權限（public repo 讀取不需要特殊權限）
+5. 點擊 "Generate token" 並複製產生的 token
 
 #### 安裝結果
 

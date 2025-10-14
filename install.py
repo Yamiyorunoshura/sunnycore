@@ -183,6 +183,7 @@ class SunnycoreInstaller:
         max_workers: int = 0,
         max_retries: int = 3,
         retry_delay: float = 0.5,
+        github_token: Optional[str] = None,
     ):
         self.repo = repo
         self.branch = branch
@@ -191,10 +192,16 @@ class SunnycoreInstaller:
         self.max_workers = max_workers
         self.max_retries = max(1, max_retries)
         self.retry_delay = retry_delay if retry_delay >= 0 else 0.0
+        self.github_token = github_token
         self.progress_bar: Optional[ProgressBar] = None
         self.failed_files: List[Tuple[str, Path, str]] = []
         self.failed_lock = threading.Lock()
         self._retry_backoff_multiplier = 2.0
+        # API 速率限制控制
+        self._api_rate_limiter = threading.Semaphore(3)  # 同時最多 3 個 API 請求
+        self._api_call_delay = 0.2  # API 請求之間的延遲（秒）
+        self._last_api_call_time = 0
+        self._api_time_lock = threading.Lock()
         
     def download_file(self, file_path: str, target_path: Path) -> bool:
         """下載單一文件
@@ -273,8 +280,17 @@ class SunnycoreInstaller:
                 return False
         return True
     
+    def _wait_for_api_rate_limit(self):
+        """實施 API 速率限制 - 確保請求之間有適當延遲"""
+        with self._api_time_lock:
+            current_time = time.time()
+            elapsed = current_time - self._last_api_call_time
+            if elapsed < self._api_call_delay:
+                time.sleep(self._api_call_delay - elapsed)
+            self._last_api_call_time = time.time()
+    
     def get_directory_contents(self, dir_path: str) -> List[Dict]:
-        """獲取 GitHub 目錄內容
+        """獲取 GitHub 目錄內容（帶速率限制和重試）
         
         Args:
             dir_path: GitHub 倉庫中的目錄路徑
@@ -285,11 +301,58 @@ class SunnycoreInstaller:
         # URL 編碼路徑（處理空格等特殊字符）
         encoded_path = urllib.parse.quote(dir_path)
         url = f"{self.base_api_url}/{encoded_path}?ref={self.branch}"
-        try:
-            with urllib.request.urlopen(url) as response:
-                return json.loads(response.read().decode())
-        except Exception as e:
-            print(f"✗ 無法獲取目錄內容: {dir_path} - {e}")
+        
+        # 使用 Semaphore 限制並行 API 請求數量
+        with self._api_rate_limiter:
+            # 在請求之間添加延遲
+            self._wait_for_api_rate_limit()
+            
+            # 重試邏輯
+            for attempt in range(1, self.max_retries + 1):
+                try:
+                    headers = {
+                        "User-Agent": "SunnycoreInstaller/1.0 (+https://github.com/Yamiyorunoshura/sunnycore)",
+                        "Accept": "application/vnd.github.v3+json",
+                    }
+                    
+                    # 如果提供了 GitHub token，添加認證
+                    if self.github_token:
+                        headers["Authorization"] = f"token {self.github_token}"
+                    
+                    request = urllib.request.Request(url, headers=headers)
+                    with urllib.request.urlopen(request, timeout=30) as response:
+                        return json.loads(response.read().decode())
+                        
+                except urllib.error.HTTPError as e:
+                    # 處理 rate limit 錯誤
+                    if e.code == 403 or e.code == 429:
+                        if attempt < self.max_retries:
+                            # 檢查是否有 Retry-After header
+                            retry_after = e.headers.get('Retry-After')
+                            if retry_after:
+                                wait_time = int(retry_after)
+                            else:
+                                # X-RateLimit-Reset 包含重置時間戳
+                                rate_limit_reset = e.headers.get('X-RateLimit-Reset')
+                                if rate_limit_reset:
+                                    wait_time = max(1, int(rate_limit_reset) - int(time.time()))
+                                else:
+                                    # 使用指數退避
+                                    wait_time = self._compute_retry_wait(attempt) * 5
+                            
+                            print(f"\n  ⚠ API 速率限制，等待 {wait_time} 秒後重試... (嘗試 {attempt}/{self.max_retries})")
+                            time.sleep(wait_time)
+                            continue
+                    raise
+                    
+                except Exception as e:
+                    if attempt < self.max_retries:
+                        wait_time = self._compute_retry_wait(attempt)
+                        time.sleep(wait_time)
+                        continue
+                    print(f"✗ 無法獲取目錄內容: {dir_path} - {e}")
+                    return []
+            
             return []
     
     def collect_directory_files(
@@ -356,13 +419,13 @@ class SunnycoreInstaller:
             
             return success
         
-        # 動態調整並行數量
+        # 動態調整並行數量（API 掃描階段使用較少的並行數避免觸發速率限制）
         if self.max_workers is None or self.max_workers <= 0:
-            workers = min(len(directories), 20)  # 預設最多 20 個並行任務
+            workers = min(len(directories), 5)  # API 掃描限制為 5 個並行任務
         else:
-            workers = min(self.max_workers, len(directories))
+            workers = min(self.max_workers, len(directories), 5)
         
-        print(f"  使用 {workers} 個並行任務掃描目錄...")
+        print(f"  使用 {workers} 個並行任務掃描目錄（含速率限制保護）...")
         
         # 並行收集所有目錄
         with ThreadPoolExecutor(max_workers=workers) as executor:
@@ -689,6 +752,13 @@ def main():
   
   # 限制並行數量（例如：限制為 20 個並行任務）
   python3 install.py -v cursor -p ~/myproject --max-workers 20
+  
+  # 使用 GitHub Token 避免 API 速率限制
+  export GITHUB_TOKEN=your_github_token
+  python3 install.py -v cursor -p ~/myproject
+  
+  # 或直接在命令列提供 token
+  python3 install.py -v cursor -p ~/myproject --github-token your_github_token
 
 版本說明:
   1. claude: 適用於 Claude Code，安裝 .claude/ 和 sunnycore/ 目錄
@@ -702,6 +772,11 @@ def main():
 並行下載:
   預設會根據文件數量自動調整並行數（上限 200），實現最快速度
   使用 --max-workers 可以限制並行數量（如網路環境有限制時）
+  
+速率限制保護:
+  API 掃描階段使用速率限制保護（最多 3 個並行請求 + 延遲）
+  自動處理 GitHub API 速率限制錯誤並重試
+  建議設置 GITHUB_TOKEN 環境變數以提高速率限制（60 -> 5000 requests/hour）
   
 特殊支援:
   腳本支援從管道執行時的互動模式，會自動從 /dev/tty 讀取輸入
@@ -761,7 +836,16 @@ def main():
         help='下載重試的初始等待秒數 (預設: 0.5，採用指數退避)'
     )
     
+    parser.add_argument(
+        '--github-token',
+        type=str,
+        help='GitHub Personal Access Token (提高 API 速率限制，可選，也可使用環境變數 GITHUB_TOKEN)'
+    )
+    
     args = parser.parse_args()
+    
+    # 獲取 GitHub token（優先使用命令列參數，其次環境變數）
+    github_token = args.github_token or os.environ.get('GITHUB_TOKEN')
     
     # 互動模式 - 當沒有指定路徑時進入互動模式
     if not args.path:
@@ -818,7 +902,15 @@ def main():
         max_workers=args.max_workers,
         max_retries=args.max_retries,
         retry_delay=args.retry_delay,
+        github_token=github_token,
     )
+    
+    # 顯示 API 速率限制資訊
+    if github_token:
+        print("✓ 使用 GitHub Token 進行認證（速率限制: 5000 requests/hour）")
+    else:
+        print("⚠ 未提供 GitHub Token（速率限制: 60 requests/hour）")
+        print("  提示: 使用 --github-token 或設置環境變數 GITHUB_TOKEN 可提高速率限制")
     
     # 執行安裝
     try:

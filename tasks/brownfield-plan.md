@@ -1,98 +1,60 @@
-**GOAL**: Re-develop plan that failed review based on review feedback.
+**GOAL**: Fix code that failed review based on feedback.
 
 ## [Input]
-  1. "{TMPL}/dev-notes-tmpl.yaml" --Development notes template
-  2. "{REVIEW}/{task_id}-review.md" --Review report
-  3. "{ARCH}/*.md" --Architecture design
-  4. "{KNOWLEDGE}/*.md" --Project knowledge (if exist)
-  
+- `{TMPL}/dev-notes-tmpl.yaml`
+- `{REVIEW}/{task_id}-review.md`
+- `{ARCH}/*.md`
+- `{KNOWLEDGE}/*.md` (if exist)
 
 ## [Output]
-  1. Fixed code that runs properly
-  2. Updated development notes "{DEVNOTES}/{task_id}-dev-notes.md" (Markdown format)
-  
+- Fixed code (tests passing)
+- Updated `{DEVNOTES}/{task_id}-dev-notes.md`
 
 ## [Constraints]
-  1. Do not deliver fixes that fail to run properly
-  2. Do not deviate from architecture design specifications
-  3. Do not break existing functionality during fixes
-  4. Follow the Development-Guidelines defined in sunnycore_dev
+- **MUST** implement fixes that pass all tests, **MUST NOT** deliver non-functional code
+- **MUST** follow architecture specs and [develop-guidelines], **MUST NOT** deviate from design specifications
+- **MUST** preserve existing functionality, **MUST NOT** introduce breaking changes
 
 ## [Steps]
-  1. Issue Analysis & Planning
-    - Understand issues from review report and architecture context
-    - Formulate atomic fix tasks based on analysis
-    - Conceive the best solution for the task that needs to be completed
-    - Outcome: Clear understanding of issues and plan outline documented
-
-  2. Test-Driven Fix Implementation
-    - Track progress within dev notes/progress updates
-    - Implement fixes ensuring all tests pass (RED → GREEN → REFACTOR)
-    - Execute tests and verify all pass after each phase
-    - Outcome: All unit tests and integration tests passing, status recorded
-
-  3. Documentation & Summary
-    - Create comprehensive fix summary with evidence
-    - Read existing development notes at "{DEVNOTES}/{task_id}-dev-notes.md"
-    - Update existing dev notes with fix summary (do not create new file)
-    - Outcome: Fix summary completed and development notes updated
+1. Read review report + architecture context, identify root causes → Issues understood with fix plan outlined
+2. Implement RED→GREEN→REFACTOR cycle, run all tests → All unit and integration tests passing
+3. Update existing `{DEVNOTES}/{task_id}-dev-notes.md` with fix summary + evidence → Dev notes updated with complete fix record
 
 ## [DoD]
-  - [ ] All unit and integration tests passed
-  - [ ] Development notes updated
+- [ ] All tests passed
+- [ ] Dev notes updated
 
 ## [Example]
 
-### Good Example 1
-[INPUT]
-Review report identifies: "Authentication token validation fails for expired tokens - test_expired_token_rejection failing"
+### Good #1
+**Input**: "Auth token validation fails - test_expired_token_rejection failing"  
+**Decision**: Analyze review + arch → Identify missing expiry check → TDD cycle → Fix at TokenValidator.js:L25-30 → All tests pass → Update dev notes with change + evidence  
+**Why Good**: Follows review→architecture→TDD→documentation flow with verified results
 
-[DECISION]
-Read review report and identify specific test failure. Analyze architecture to understand JWT token expiry design. Create fix plan in plan.md: add expiry validation logic in TokenValidator before Redis lookup. Follow TDD: ensure test_expired_token_rejection fails (RED), implement expiry check (GREEN), optimize token parsing logic (REFACTOR).
+### Good #2
+**Input**: "API returns {user_id: 123} but frontend expects {userId: 123} - test_api_contract failing"  
+**Decision**: Read review + API spec in arch → Add response transformer in UserController.js → RED: test fails with old format → GREEN: implement camelCase mapper → REFACTOR: extract to ResponseFormatter util → All contract tests pass → Document in dev notes  
+**Why Good**: Respects API contract design, uses TDD, creates reusable solution, maintains backward compatibility
 
-[OUTCOME]
-Fixed code with token expiry validation at src/auth/TokenValidator.js:L25-L30. All authentication tests passing. Updated docs/dev-notes/1-dev-notes.md with fix summary documenting the change, test evidence, and rollback plan. Issue fully resolved.
+### Good #3
+**Input**: "Race condition: concurrent orders create duplicate inventory records - test_concurrent_checkout failing"  
+**Decision**: Review report → Check arch (distributed lock pattern required) → Analyze knowledge base → RED: reproduce race with parallel test → GREEN: implement Redis lock at InventoryService.js:L45 → REFACTOR: add timeout + retry logic → Load test passes → Update dev notes with concurrency metrics  
+**Why Good**: Diagnoses timing issue via architecture, applies specified pattern, proves fix with load testing, provides performance evidence
 
-[WHY-GOOD]
-- Treats the review feedback as the planning source, aligning fixes with architecture and TDD expectations before changing code.
-- Provides verified tests and documentation updates, proving the regression is resolved and traceable.
+### Bad #1
+**Input**: "Registration endpoint 500 error - test_create_user failing"  
+**Decision**: Add try-catch to suppress error → Skip tests → Mark complete  
+**Why Bad**: Masks root cause (violates Constraint 1), skips DoD verification, creates tech debt  
+**Correct Approach**: Analyze error → Trace architecture → TDD cycle (RED/GREEN/REFACTOR) → Verify tests → Document
 
-### Good Example 2
-[INPUT]
-Review report shows: "Performance requirement NFR-001 violated - database query takes 3 seconds, requirement is under 500ms"
+### Bad #2
+**Input**: "Payment webhook signature validation fails - test_webhook_auth failing"  
+**Decision**: See error mentions "invalid signature" → Google for solution → Copy-paste Stack Overflow code → Test passes locally → Push to prod  
+**Why Bad**: No architecture review (may conflict with security design), no understanding of crypto implementation, skips dev notes (violates DoD), no RED phase verification  
+**Correct Approach**: Read review → Check arch security specs → Understand HMAC requirements → Write failing test → Implement per spec → Verify all tests → Document algorithm + rollback plan
 
-[DECISION]
-Analyze architecture documents to understand database schema and query patterns. Review knowledge base for indexing best practices. Identify missing index on products.name column as root cause. Create migration script to add index. Test query performance to verify sub-500ms response. Document performance improvement in dev notes.
-
-[OUTCOME]
-Migration script at migrations/add_product_name_index.sql executed successfully. Query optimized in src/repositories/ProductRepository.js. Performance test now passes at 120ms. Updated docs/dev-notes/3-dev-notes.md with before/after performance metrics and migration details.
-
-[WHY-GOOD]
-- Diagnoses the performance issue through architecture and knowledge references, then applies a targeted fix compliant with constraints.
-- Supplies measurable evidence and documentation, showing the improvement is validated and recorded for future teams.
-
-### Bad Example 1
-[INPUT]
-Review report states: "User registration endpoint returns 500 error, test_create_user failing"
-
-[BAD-DECISION]
-Quickly patch the code with try-catch to suppress the error and return 200 status. Skip running tests to verify the fix. Mark the task as complete without investigating root cause or updating documentation.
-
-[WHY-BAD]
-Suppressing errors without fixing root cause violates Constraint 1 (deliver fixes that run properly). Not running tests violates DoD requirement. Skipping documentation prevents future debugging. This creates technical debt and may break other functionality.
-
-[CORRECT-APPROACH]
-Analyze the review report to identify the actual error (e.g., database constraint violation). Trace through architecture to understand expected behavior. Write failing test to reproduce issue (RED), implement proper fix addressing root cause (GREEN), add validation and error handling (REFACTOR). Execute all tests to verify, then update dev notes with fix details.
-
-### Bad Example 2
-[INPUT]
-Review identifies three issues: missing validation, incorrect error codes, and failing integration test
-
-[BAD-DECISION]
-Only fix the failing integration test without addressing validation and error codes. Assume the other issues are "minor" and can be ignored. Update dev notes claiming all issues are fixed.
-
-[WHY-BAD]
-Violates Constraint 1 by not fixing all issues properly. Incomplete fixes leave the system in unstable state. Misleading documentation creates confusion for future work. Review-driven fixes must address all identified issues comprehensively.
-
-[CORRECT-APPROACH]
-Create plan.md listing all three issues with priorities. Address each systematically using TDD cycle. Track progress in plan.md: Issue 1 - validation (pending→in-progress→completed), Issue 2 - error codes (pending→in-progress→completed), Issue 3 - integration test (pending→in-progress→completed). Verify all tests pass. Update dev notes accurately reflecting all fixes applied.
+### Bad #3
+**Input**: "User profile update returns stale data - 3 related tests failing"  
+**Decision**: Modify 15 files across models/controllers/services without tracking → Some tests pass, some still fail → "I think cache is the issue" → Add cache.clear() everywhere → New tests start failing → Give up, rollback  
+**Why Bad**: No systematic approach (violates Step 1), changes too broad without root cause analysis, breaks existing functionality (violates Constraint 3), no progress tracking  
+**Correct Approach**: Read review for all 3 failures → Trace data flow in architecture → Identify single root cause (cache invalidation timing) → Create focused fix plan → TDD one issue at time → Track in dev notes: Issue 1 (done)→Issue 2 (done)→Issue 3 (done) → Verify full test suite
