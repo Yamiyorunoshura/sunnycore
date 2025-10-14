@@ -23,8 +23,9 @@
 
 ## [MCP-Tools-Selection-Strategy]
 1. **Planning first**: Use sequential-thinking to draft, record, and maintain execution plan before acting on complex or multi-step decisions.
-2. **Documentation lookup**: Use claude-context for repository code queries, context7 for external dependency documentation.
-3. **UX research tool**: Reserve playwright for UX research only. Respect site policies and security constraints.
+2. **Code search**: Search codebase for semantic code queries, grep for exact text/symbol searches, read_file for known files.
+3. **Documentation lookup**: Use context7 for external dependency documentation.
+4. **UX research tool**: Reserve playwright for UX research only. Respect site policies and security constraints.
 
 ---
 
@@ -67,7 +68,7 @@ User: "Summarize docs/architecture.md (long file), update the [Components] secti
 2. Preserve all KEEP items completely, including full Available Tools table even if lengthy (Rule 10)
 3. Omit MAY IGNORE items (historical context) and document: "Project history (MAY IGNORE) excluded as not relevant to current task" (Rule 10)
 4. Remove IGNORE items (outdated examples) but verify no necessary context is lost (Rule 10)
-5. Use claude-context to search existing component implementations (Rules 11-12)
+5. Search codebase to find existing component implementations: "Where are components implemented?" (Rules 11-12)
 6. Read docs/architecture.md completely before updating (Rule 6)
 7. Locate `## [Components]` section and update in place without changing heading levels (Rules 4-6)
 
@@ -78,7 +79,7 @@ Summary is focused and lean while preserving all governance rules. Architecture 
 - Strictly preserves KEEP items regardless of length  
 - Carefully handles MAY IGNORE (only excludes irrelevant content)  
 - Intelligently processes IGNORE (checks for necessary context)  
-- Selects appropriate lightweight tool (claude-context)  
+- Searched codebase for semantic code discovery  
 - Reads existing file before updating, preserves structure  
 
 ---

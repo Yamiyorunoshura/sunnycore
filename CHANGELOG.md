@@ -7,6 +7,16 @@
 
 ## [Unreleased]
 
+## [4.20.0] - 2025-10-14
+
+### Changed
+- MCP 工具選擇策略更新：從外部 MCP `claude-context` 遷移至內建工具組合
+  - 語義代碼查詢：使用 `codebase_search` 取代 `claude-context`
+  - 精確文字搜尋：使用 `grep` 進行符號和文字精確匹配
+  - 已知文件讀取：使用 `read_file` 直接讀取已知路徑文件
+  - 更新 MCP-Tools-Selection-Strategy 章節和相關範例
+  - 影響範圍：config/AGENTS.md, config/CURSOR.mdc
+
 ## [4.19.0] - 2025-10-14
 
 ### Changed
