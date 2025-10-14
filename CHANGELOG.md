@@ -7,6 +7,37 @@
 
 ## [Unreleased]
 
+## [4.23.0] - 2025-10-14
+
+### Changed
+- init 任務目標調整：從建立可運行的最小應用改為建立包含所有模組骨架的最小架構
+  - 目標變更：「Initialize development environment and create minimal viable skeleton with all module structures but no implementation」
+  - 產出變更：從「Minimal runnable application (Hello World level entry point with verified startup)」改為「All module skeletons with interface definitions, type declarations, and placeholder implementations (應無法啟動因為尚未實作)」
+  - 新增約束：必須為架構中所有模組建立骨架檔案，使用 `raise NotImplementedError()`, `throw new Error('Not implemented')` 等佔位符實作
+  - 新增約束：應用程式在此階段不應該能運行（這是預期的正確行為）
+  - 步驟調整：Step 3 從「Directory Structure & Minimal Implementation」改為「Directory Structure & Module Skeletons」
+  - 初始化指南擴展：新增詳細的模組骨架創建指引，包含介面定義、型別宣告、函式簽名等要求
+  - Quality Gates 更新：從驗證應用可啟動改為驗證所有模組骨架存在且包含清晰介面定義但無實作
+  - 範例全面更新：3 個範例都更新為展示完整模組骨架結構和佔位符實作
+  - 影響範圍：所有平台（claude code、codex、cursor）的 init.md（3 個檔案）
+- 角色命令格式優化：簡化所有平台命令文件的格式與結構
+  - 列表格式統一：將縮排式列表改為標準 Markdown 列表格式
+  - 路徑變數規範化：為所有目錄型路徑變數添加結尾斜線（如 `{T} = {root}/sunnycore/tasks/`）
+  - Role 描述統一：統一使用 "You are a **{Role}**" 格式
+  - 移除冗餘章節：移除命令檔案中的 Checklist 和 Quality-Gates 章節（這些應由任務文件定義）
+  - 影響範圍：所有平台（claude code、codex、cursor）的 6 個角色命令（18 個檔案）
+- validate-design 任務指引全面增強：新增詳細的工作流程參數驗證和系統化檢查步驟
+  - 新增 Instructions 章節：包含工作流程參數驗證、內容提取索引、驗證檢查、問題分類報告 4 大步驟
+  - 新增工作流程參數驗證：明確支援 "prd" 和 "full" 兩種工作流程，參數無效時立即中止
+  - 新增系統化驗證檢查：5 大檢查類型（Fabrication Detection、Broken References、Coverage Gaps、Consistency Issues、Workflow-Specific Validations）
+  - 新增問題嚴重性分級：Critical（fabricated content, broken references）、High（coverage gaps）、Medium（inconsistencies）、Low（formatting）
+  - 新增詳細報告結構：包含驗證摘要、嚴重性分級統計、按嚴重性分組的問題列表等
+  - 範例擴展：新增 PRD 和 Full 工作流程的具體驗證範例
+- 多個任務文件格式與範例優化：提升任務文件的可讀性和執行清晰度
+  - 範例格式調整：統一採用箭頭符號（→）表示流程和結果
+  - 正反對比範例增強：多個任務新增或擴展 Good/Bad 範例對比
+  - QA review 任務新增架構對齊驗證範例（Bad #4）：強調必須驗證實作是否符合架構設計
+
 ## [4.22.0] - 2025-10-14
 
 ### Added
