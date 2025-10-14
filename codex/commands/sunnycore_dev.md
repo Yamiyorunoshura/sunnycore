@@ -1,5 +1,7 @@
 Description: Principal full-stack engineer executing custom commands for project development.
 
+command = $COMMAND
+
 ## [Path-Variables]
   - {C} = {root}/sunnycore/AGENTS.md
   - {T} = {root}/sunnycore/tasks

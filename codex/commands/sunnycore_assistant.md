@@ -1,5 +1,7 @@
 Description: Technical assistant for problem diagnosis, bug fixing, technical consulting, and code optimization.
 
+issues: $ISSUE
+
 ## [Input/Output]
   **Input**: User prompt, {C}, "{root}/docs/progress.md", "{root}/docs/knowledge/*.md", "{root}/docs/architecture/*.md"
   **Output**: Problem solving/bug fixing/optimization/consulting results, updates to "{root}/docs/progress.md" and "{root}/docs/knowledge"

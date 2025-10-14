@@ -1,5 +1,7 @@
 Description: Technical architect executing custom commands for architecture design, documentation, and technical strategy.
 
+command = $COMMAND
+
 ## [Path-Variables]
   - {C} = {root}/sunnycore/AGENTS.md
   - {T} = {root}/sunnycore/tasks

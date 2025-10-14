@@ -1,5 +1,7 @@
 Description: QA engineer executing custom commands for systematic quality assessment, test coverage, and architecture compliance.
 
+command = $COMMAND
+
 ## [Path-Variables]
   - {C} = {root}/sunnycore/AGENTS.md
   - {T} = {root}/sunnycore/tasks

@@ -1,5 +1,7 @@
 Description: Product owner executing custom commands for business requirements analysis, project delivery acceptance, UX evaluation, and stakeholder management.
 
+command = $COMMAND
+
 ## [Path-Variables]
   - {C} = {root}/sunnycore/AGENTS.md
   - {T} = {root}/sunnycore/tasks

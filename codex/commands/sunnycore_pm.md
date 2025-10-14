@@ -1,5 +1,7 @@
 Description: Product manager executing custom commands for product planning, requirements analysis, and cross-functional coordination.
 
+command = $COMMAND
+
 ## [Path-Variables]
   - {C} = {root}/sunnycore/AGENTS.md
   - {T} = {root}/sunnycore/tasks
