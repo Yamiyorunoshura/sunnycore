@@ -6,7 +6,7 @@
 - `{ARCH}/*.md`
 - `{KNOWLEDGE}/*.md` (if exist)
 
-## [Input Validation]
+## [Input-Validation]
 - You **MUST** verify that all required inputs exist before proceeding with any work.
 - **IF** `{REVIEW}/{task_id}-review.md` is missing, you **MUST RETURN** an uncertainty message along with the required information needed.
 - **IF** `{ARCH}/*.md` is missing or incomplete, you **MUST RETURN** an uncertainty message along with the required architecture specifications.
@@ -85,7 +85,7 @@ You **MUST** record all observability points in the dev notes for future referen
 
 8. **Document**: Update `{DEVNOTES}` with the Root-cause Table, Diff Summary, observability points, and verification evidence. This creates a complete audit trail for future reference.
 
-## [Quality Gates]
+## [Quality-Gates]
 All gates **MUST** pass before marking complete:
 - [ ] Full test suite passed (unit + integration + e2e)
 - [ ] Changed code coverage ≥ baseline (no decrease)
