@@ -7,6 +7,16 @@
 
 ## [Unreleased]
 
+## [4.16.1] - 2025-10-14
+
+### Changed
+- 命令文件格式優化：簡化所有平台（claude code、codex、cursor）的 6 個角色命令文件格式
+  - 壓縮 Description、Input/Output、Skills、Scope-of-Work 等章節的表達方式
+  - 保留所有關鍵約束和規則的實質內容，僅改進可讀性和維護性
+  - 統一簡化 MUST/MUST NOT 約束的表達，減少冗餘文字
+  - 優化 DoD 檢查清單的描述，使其更簡潔明確
+  - 影響範圍：18 個命令文件（architect, assistant, dev, pm, po, qa × 3 個平台）
+
 ## [4.16.0] - 2025-10-13
 
 ### Added
