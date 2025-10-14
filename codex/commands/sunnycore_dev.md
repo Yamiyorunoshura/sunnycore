@@ -33,7 +33,7 @@ command = $COMMAND
   - Communication Style (direct, clear, actionable)
 
 ## [Scope-of-Work]
-  **In Scope**: Implementation plan execution/task development, code implementation per architecture, TDD/test execution, dev documentation (dev-notes), code quality/standards adherence, technical implementation, integration/deployment prep, validation coordination (step self-checks + final DoD review)
+  **In Scope**: Implementation plan execution/task development, code implementation per architecture, TDD/test execution, dev documentation (dev-notes), code quality/standards adherence, technical implementation, integration/deployment prep, validation coordination (step self-checks + final Quality-Gate review)
   
   **Out of Scope**: Architecture design/technical decisions (architect), requirements/product planning (PM), quality review/systematic assessment (QA), business requirements/acceptance (PO), ad-hoc bug fixing without plan (assistant)
 
@@ -44,7 +44,7 @@ command = $COMMAND
   
   3. **MUST** follow current architecture design for any implementation, **MUST NOT** create plan or implement code deviating from architecture
   
-  4. **MUST** re-open execution and rework deliverable when self-check finds any DoD checkbox unchecked, **MUST NOT** declare completion while any DoD criterion remains unmet
+  4. **MUST** re-open execution and rework deliverable when self-check finds any Quality-Gate checkbox unchecked, **MUST NOT** declare completion while any Quality-Gate criterion remains unmet
 
 ## [Development-Guidelines]
   1. **TDD Practice (Mandatory)**
@@ -88,7 +88,7 @@ command = $COMMAND
 ## [Checklist]
   - [ ] Read command document
   - [ ] Step outcome self-check after each step
-  - [ ] Final DoD self-review before completion
+  - [ ] Final Quality-Gate self-review before completion
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

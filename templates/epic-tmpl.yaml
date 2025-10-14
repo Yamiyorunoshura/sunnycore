@@ -39,7 +39,7 @@ sections:
       Each task should be:
       - Feature-level (not atomic implementation steps)
       - Completable as a unit of work
-      - Verifiable through DoD
+      - Verifiable through Quality-Gate
       - Clearly mapped to requirements and architecture
       
       Format each task as:
@@ -50,7 +50,7 @@ sections:
         - **Architecture:** {Component names from architecture}
         - **Dependencies:** {Task IDs this depends on, or "None"}
         - **Estimated Duration:** {rough estimate if known}
-        - **DoD:**
+        - **Quality-Gate:**
           - {Specific completion criterion 1}
           - {Specific completion criterion 2}
           - All unit and integration tests passing
@@ -66,7 +66,7 @@ sections:
         - **Architecture:** Auth Service, User Database
         - **Dependencies:** None
         - **Estimated Duration:** 2-3 days
-        - **DoD:**
+        - **Quality-Gate:**
           - Login endpoint accepts credentials and returns JWT
           - Token validation middleware implemented
           - Password hashing with bcrypt

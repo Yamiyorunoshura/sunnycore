@@ -29,8 +29,8 @@ All gates **MUST** pass before marking complete:
 
 ### Good #1
 **Input**: REQ-001 (ingestion), REQ-002 (ETL), REQ-003 (dashboard). Arch: Kafka Consumer, Spark Jobs, Dashboard Service  
-**Decision**: Identify feature tasks (not steps)→Task-1: "Implement data ingestion" (REQ-001→Kafka Consumer, ≤14 chars)→Task-2: "Implement ETL pipeline" (REQ-002→Spark)→Task-3: "Build dashboard" (REQ-003→Dashboard)→100% coverage→Logical flow order→Clear DoD→Exclude operational actions→Approve→Save  
-**Why Good**: Translates to feature-level with full traceability, preserves naming and DoD standards
+**Decision**: Identify feature tasks (not steps)→Task-1: "Implement data ingestion" (REQ-001→Kafka Consumer, ≤14 chars)→Task-2: "Implement ETL pipeline" (REQ-002→Spark)→Task-3: "Build dashboard" (REQ-003→Dashboard)→100% coverage→Logical flow order→Clear Quality-Gate→Exclude operational actions→Approve→Save  
+**Why Good**: Translates to feature-level with full traceability, preserves naming and Quality-Gate standards
 
 ### Good #2
 **Input**: REQ-001 (product CRUD), REQ-002 (stock tracking), REQ-003 (alerts), REQ-004 (reports). Arch: Product Service, Inventory Service, Notification Service  

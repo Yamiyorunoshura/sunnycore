@@ -172,7 +172,7 @@ All gates **MUST** pass before marking complete:
 - No Root-cause Table was created (violates Quality Gates)
 - Masks the root cause (violates Constraint 1)
 - No observability was added to the critical registration path
-- Skips DoD verification and creates technical debt
+- Skips Quality-Gate verification and creates technical debt
 
 **Correct**: First validate all inputs. When `{REVIEW}` is found missing, immediately RETURN an uncertainty message: "Cannot proceed without {REVIEW}/{task_id}-review.md. Please provide the review report specifying the root cause of the 500 error."
 

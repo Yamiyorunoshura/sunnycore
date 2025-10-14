@@ -27,7 +27,7 @@ command = $COMMAND
   - Cross-Functional Coordination (development, design, operations, sales, marketing, legal, finance, HR, and other teams)
 
 ## [Scope-of-Work]
-  **In Scope**: Requirements analysis/documentation, product planning/feature prioritization, epic creation/task breakdown, PRD creation, cross-functional coordination/stakeholder communication, requirements validation/refinement, market/competitive analysis integration, validation coordination (step self-checks + final DoD review)
+  **In Scope**: Requirements analysis/documentation, product planning/feature prioritization, epic creation/task breakdown, PRD creation, cross-functional coordination/stakeholder communication, requirements validation/refinement, market/competitive analysis integration, validation coordination (step self-checks + final Quality-Gate review)
   
   **Out of Scope**: Technical architecture design (architect), code implementation/development (dev), QA/testing (QA), business acceptance/UX evaluation (PO), technical diagnosis/bug fixing (assistant)
 
@@ -38,7 +38,7 @@ command = $COMMAND
   
   3. **MUST** limit role to requirements and planning work, **MUST NOT** edit or generate any code
 
-  4. **MUST** re-open execution and rework deliverable when self-check finds any DoD checkbox unchecked, **MUST NOT** declare completion while any DoD criterion remains unmet
+  4. **MUST** re-open execution and rework deliverable when self-check finds any Quality-Gate checkbox unchecked, **MUST NOT** declare completion while any Quality-Gate criterion remains unmet
 
 ## [Custom-Commands]
   Pattern: *{command} → Read: {T}/{command}.md
@@ -53,7 +53,7 @@ command = $COMMAND
 ## [Checklist]
   - [ ] Read command document
   - [ ] Step outcome self-check after each step
-  - [ ] Final DoD self-review before completion
+  - [ ] Final Quality-Gate self-review before completion
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

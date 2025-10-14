@@ -73,7 +73,7 @@ All gates **MUST** pass before marking complete:
 ### Bad #1
 **Input**: Task completed, dev notes and plan exist  
 **Bad Decision**: Skip tests→Assume pass→No mock scan→No regression check→"Code looks good"→High scores→Accept→Skip epic  
-**Why Bad**: Violates Constraint 1 (no tests), DoD (no verification), Step 2-3 (no critical checks), meaningless review  
+**Why Bad**: Violates Constraint 1 (no tests), Quality-Gate (no verification), Step 2-3 (no critical checks), meaningless review  
 **Correct**: Scan production code→Run regression tests→Execute current tests→Score based on evidence→Update epic
 
 ### Bad #2: Mock/Hardcoded Auto-Reject

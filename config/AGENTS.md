@@ -14,7 +14,7 @@
 
 ## [Process-Validation-And-Completion]
 1. **Step verification**: After each step, self-verify artifacts, tests, and notes to confirm stated outcome is met.
-2. **DoD completion check**: Before declaring completion, check every Definition of Done item. Ensure nothing is unresolved.
+2. **Quality-Gate completion check**: Before declaring completion, check every Definition of Done item. Ensure nothing is unresolved.
 3. **Blocking conditions**: Do not pause mid-process unless a Blocking-Condition is triggered. Follow documented error-handling rules.
 
 ## [Summary-Instructions]
@@ -40,12 +40,12 @@ User: "Implement a user authentication module based on tasks/develop-plan.md"
 **[DECISION]**  
 1. Read AGENTS.md first to understand core constraints (Rule 1)
 2. Check commands for any auth-related directives (Rule 1)
-3. Use sequential-thinking to plan: analyze requirements → design architecture → implement → test → verify DoD (Rule 11)
+3. Use sequential-thinking to plan: analyze requirements → design architecture → implement → test → verify Quality-Gate (Rule 11)
 4. Read tasks/develop-plan.md completely (Rule 2)
-5. Create implementation-plan.md using correct hierarchy: `# [Implementation-Plan]` with `## [DoD]` as H2 (Rules 4-5)
+5. Create implementation-plan.md using correct hierarchy: `# [Implementation-Plan]` with `## [Quality-Gate]` as H2 (Rules 4-5)
 6. Execute steps sequentially without skipping (Rule 3)
 7. Verify each step: run tests, check linter (Rule 7)
-8. Complete DoD checklist before declaring done (Rule 8)
+8. Complete Quality-Gate checklist before declaring done (Rule 8)
 
 **[OUTCOME]**  
 Feature delivered with all governance rules respected, proper template structure maintained, all quality gates passed.
@@ -55,7 +55,7 @@ Feature delivered with all governance rules respected, proper template structure
 - Uses sequential-thinking for complex multi-step work  
 - Maintains correct H1/H2 template hierarchy  
 - Executes steps in order without skipping  
-- Verifies at each step and checks complete DoD  
+- Verifies at each step and checks complete Quality-Gate  
 
 ---
 
@@ -98,10 +98,10 @@ User: "Implement payment integration based on tasks/develop-plan.md"
 5. [VIOLATION] Create payment-module.md with wrong hierarchy (violates Rules 4-5):
    ```markdown
    # [Implementation-Plan]
-   # [DoD]          ← Wrong: should be H2
+   # [Quality-Gate]          ← Wrong: should be H2
    - Item 1
    ```
-6. [VIOLATION] Declare "Implementation complete!" without running tests or checking DoD (violates Rules 7-8)
+6. [VIOLATION] Declare "Implementation complete!" without running tests or checking Quality-Gate (violates Rules 7-8)
 
 **[OUTCOME]**  
 May violate security constraints in AGENTS.md. Tech-stack requirements in commands ignored. Steps skipped causing missing dependencies. Template structure broken. Tests failing, deliverable incomplete.
@@ -119,9 +119,9 @@ May violate security constraints in AGENTS.md. Tech-stack requirements in comman
 3. Use sequential-thinking to plan 6-step execution
 4. Read tasks/develop-plan.md completely
 5. Execute all steps in order
-6. Use correct hierarchy: `## [DoD]` as H2
+6. Use correct hierarchy: `## [Quality-Gate]` as H2
 7. Verify tests and linter at each step
-8. Complete DoD check before declaring done
+8. Complete Quality-Gate check before declaring done
 
 ---
 

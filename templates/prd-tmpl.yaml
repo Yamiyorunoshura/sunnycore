@@ -207,7 +207,7 @@ sections:
       Break down requirements into feature-level tasks.
       Tasks should be:
       - Feature-level granularity (not atomic steps)
-      - Verifiable with clear DoD
+      - Verifiable with clear Quality-Gate
       - Mapped to requirements and architecture
       
       Use checkbox format for tracking:
@@ -218,7 +218,7 @@ sections:
         - **Requirements:** {REQ IDs}
         - **Architecture:** {Component names}
         - **Dependencies:** {Task IDs if dependent}
-        - **DoD:**
+        - **Quality-Gate:**
           - {Completion criterion 1}
           - {Completion criterion 2}
           - All tests passing

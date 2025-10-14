@@ -38,7 +38,7 @@ All gates **MUST** pass before marking complete:
 ### Good #1
 **Input**: Plan for article publishing (Express, PostgreSQL), template available  
 **Decision**: Read plan→RED: write all tests (unit/integration/behavior), verify fail→GREEN: minimal code (Article model, API endpoints), all tests pass→REFACTOR: add validation + error handling + patterns, tests stay green→Update existing dev notes  
-**Why Good**: Full TDD cycle executed with verification at each phase, dev notes updated (not new file), 85% coverage meets DoD
+**Why Good**: Full TDD cycle executed with verification at each phase, dev notes updated (not new file), 85% coverage meets Quality-Gate
 
 ### Good #2
 **Input**: Transaction reports plan with NFR <2s query time (TimescaleDB)  
@@ -48,22 +48,22 @@ All gates **MUST** pass before marking complete:
 ### Good #3
 **Input**: User notification service plan (WebSocket, Redis pub/sub), architecture specifies event-driven pattern  
 **Decision**: Read plan + arch→RED: write unit tests (event handlers), integration tests (Redis pub/sub), behavior tests (notification delivery), verify all fail correctly→GREEN: minimal WebSocket server + event handlers + Redis subscriber, all tests pass (exit code 0)→REFACTOR: extract event bus pattern, add error recovery, tests stay green→Update existing dev notes with implementation  
-**Why Good**: Aligns with architecture (event-driven), completes full TDD cycle with verification, achieves 88% coverage (exceeds DoD 80%), updates not creates dev notes
+**Why Good**: Aligns with architecture (event-driven), completes full TDD cycle with verification, achieves 88% coverage (exceeds Quality-Gate 80%), updates not creates dev notes
 
 ### Bad #1
 **Input**: Plan exists, need to implement  
 **Bad Decision**: Skip RED→Code with optimizations immediately→Skip tests→No dev notes→Mark complete  
-**Why Bad**: Violates Constraint 1 (no TDD cycle), violates DoD (no passing tests, no dev notes), unverified implementation  
+**Why Bad**: Violates Constraint 1 (no TDD cycle), violates Quality-Gate (no passing tests, no dev notes), unverified implementation  
 **Correct**: RED (all tests, verify fail)→GREEN (minimal code, tests pass)→REFACTOR (quality improvements)→Dev notes
 
 ### Bad #2
 **Input**: Task implementation with acceptance criteria  
 **Bad Decision**: Deliver with failing tests→Modify out-of-scope files silently→Claim "self-documenting code"→Create red-phase-result.md, green-phase-result.md separately  
-**Why Bad**: Violates Constraint 3 (exit code ≠ 0), Constraint 4 (no rationale for scope changes), DoD (no dev notes), creates unnecessary files  
+**Why Bad**: Violates Constraint 3 (exit code ≠ 0), Constraint 4 (no rationale for scope changes), Quality-Gate (no dev notes), creates unnecessary files  
 **Correct**: Ensure exit code 0→Document all out-of-scope changes in dev notes→Always create/update dev notes→Use plan.md only for tracking (temporary)
 
 ### Bad #3
 **Input**: API endpoint plan with security requirements (rate limiting, input validation)  
 **Bad Decision**: Skip RED→Write implementation with all features (validation + rate limiting + caching + logging) at once→Run tests: 8/12 pass, 4 fail→Debug for hours→Give up, commit partial work→No dev notes "will document later"  
-**Why Bad**: Violates Constraint 1 (no TDD cycle), implements everything at once instead of minimal GREEN, violates Constraint 3 (exit code ≠ 0), DoD violated (failing tests, no dev notes), unverifiable which piece failed  
+**Why Bad**: Violates Constraint 1 (no TDD cycle), implements everything at once instead of minimal GREEN, violates Constraint 3 (exit code ≠ 0), Quality-Gate violated (failing tests, no dev notes), unverifiable which piece failed  
 **Correct**: RED: write all 12 tests, verify fail→GREEN: minimal implementation for JUST passing tests (no extra features)→REFACTOR: add rate limiting, then caching, then logging one by one with tests green→Dev notes with complete documentation

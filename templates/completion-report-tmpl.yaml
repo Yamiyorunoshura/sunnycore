@@ -180,7 +180,7 @@ sections:
       **Verification Notes:**
       - All requirements traced to implementation: Yes / No
       - All acceptance criteria met: Yes / No
-      - All DoD items satisfied: Yes / No
+      - All Quality-Gate items satisfied: Yes / No
       - Production readiness: Yes / No
       
       Evidence format: Use file_path:line_number for code, file_path#section for docs
