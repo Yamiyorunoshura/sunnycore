@@ -7,13 +7,13 @@
 4. **Task decomposition**: Break down multi-step or complex work into smaller steps before execution.
 5. **Progress tracking**: Establish valid progress tracking mechanism before you start working on the tasks to prevent losing tack in long conversations.
 
-## [Template-And-Output-Format]
+## [Template-And-Products-Format]
 1. **Markdown hierarchy**: Produce pure Markdown mirroring template structure: section→H1, nested sections→H2.
-2. **Tag directives**: Honor all template tags such as [Description], [Path-Variables], [Input], etc.
+2. **Tag directives**: Honor all template tags such as [Description], [Path-Variables], [CONTEXT], etc.
 3. **Update existing files**: When updating, read current file first, preserve structure, enhance content, avoid duplicates.
 
 ## [Process-Validation-And-Completion]
-1. **Step verification**: After each step, self-verify artifacts, tests, and notes to confirm stated outcome is met.
+1. **Step verification**: After each step, self-verify artifacts, tests, and notes to confirm stated EXPECTED-OUTCOME is met.
 2. **Quality-Gate completion check**: Before declaring completion, check every Definition of Done item. Ensure nothing is unresolved.
 3. **Blocking conditions**: Do not pause mid-process unless a Blocking-Condition is triggered. Follow documented error-handling rules.
 
@@ -33,7 +33,7 @@
 
 ### Good Example 1: Following Priority and Template Rules
 
-**[INPUT]**  
+**[CONTEXT]**  
 User: "Implement a user authentication module based on tasks/develop-plan.md"
 
 **[DECISION]**  
@@ -46,7 +46,7 @@ User: "Implement a user authentication module based on tasks/develop-plan.md"
 7. Verify each step: run tests, check linter (Rule 7)
 8. Complete Quality-Gate checklist before declaring done (Rule 8)
 
-**[OUTCOME]**  
+**[EXPECTED-OUTCOME]**  
 Feature delivered with all governance rules respected, proper template structure maintained, all quality gates passed.
 
 **[WHY-GOOD]**  
@@ -60,7 +60,7 @@ Feature delivered with all governance rules respected, proper template structure
 
 ### Good Example 2: Summarizing and Updating Documents
 
-**[INPUT]**  
+**[CONTEXT]**  
 User: "Summarize docs/architecture.md (long file), update the [Components] section, remove outdated examples marked as IGNORE"
 
 **[DECISION]**  
@@ -72,7 +72,7 @@ User: "Summarize docs/architecture.md (long file), update the [Components] secti
 6. Read docs/architecture.md completely before updating (Rule 6)
 7. Locate `## [Components]` section and update in place without changing heading levels (Rules 4-6)
 
-**[OUTCOME]**  
+**[EXPECTED-OUTCOME]**  
 Summary is focused and lean while preserving all governance rules. Architecture doc maintains template structure with enhanced content in correct section.
 
 **[WHY-GOOD]**  
@@ -86,7 +86,7 @@ Summary is focused and lean while preserving all governance rules. Architecture 
 
 ### Bad Example 1: Violating Priority and Execution Rules
 
-**[INPUT]**  
+**[CONTEXT]**  
 User: "Implement payment integration based on tasks/develop-plan.md"
 
 **[BAD-DECISION]**  
@@ -102,7 +102,7 @@ User: "Implement payment integration based on tasks/develop-plan.md"
    ```
 6. [VIOLATION] Declare "Implementation complete!" without running tests or checking Quality-Gate (violates Rules 7-8)
 
-**[OUTCOME]**  
+**[EXPECTED-OUTCOME]**  
 May violate security constraints in CLAUDE.md. Tech-stack requirements in commands ignored. Steps skipped causing missing dependencies. Template structure broken. Tests failing, deliverable incomplete.
 
 **[WHY-BAD]**  
@@ -126,7 +126,7 @@ May violate security constraints in CLAUDE.md. Tech-stack requirements in comman
 
 ### Bad Example 2: Wrong Tool Selection and Format Violations
 
-**[INPUT]**  
+**[CONTEXT]**  
 1. User: "What React version does this project use?"
 2. User: "Summarize docs/workflow.md. KEEP section has 15-item Available Tools table but seems long"
 3. User: "Update epic.md [Tools] section"
@@ -145,7 +145,7 @@ May violate security constraints in CLAUDE.md. Tech-stack requirements in comman
    - AI: Launch playwright, try to access backend endpoints, inspect API calls... (violates Rule 13)
    - **Correct**: "I can only analyze public UI. Backend inspection violates security policies. Proceed with public pages only?"
 
-**[OUTCOME]**  
+**[EXPECTED-OUTCOME]**  
 Simple queries waste time on unnecessary reasoning. Mandatory governance rules deleted. Existing file content lost. Security policies violated.
 
 **[WHY-BAD]**  
