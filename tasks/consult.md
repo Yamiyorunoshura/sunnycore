@@ -23,7 +23,8 @@
 
 **PRD Workflow (*create-prd)**: Within existing boundaries, feature enhancements, bug fixes, UI/UX changes, small-medium scope (1-5 tasks), no new patterns
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] Project type determined with scope analyzed
 - [ ] Workflow recommendation with command provided
 - [ ] User understands rationale

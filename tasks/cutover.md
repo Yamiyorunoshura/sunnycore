@@ -24,7 +24,8 @@
 6. Test all critical requirements from end-user perspective → Complete acceptance test results documented
 7. Generate cutover report, determine status (Success/Partial Success/Failed) → Complete cutover report with clear status
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] **CRITICAL**: Production code scanned, NO mock/stub/hardcoded values (tests using mocks OK)
 - [ ] All critical requirements tested from end-user perspective with results recorded
 - [ ] Complete cutover report at "{CUTOVER}" with status and rationale

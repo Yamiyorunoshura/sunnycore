@@ -23,7 +23,8 @@
 4. For each task: Plan REFACTOR (quality improvements) → Quality improvement plan defined
 5. Complete all plans, ensure executable and template-compliant → All implementation plans created
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] Plan for each task with complete RED/GREEN/REFACTOR structure
 - [ ] Proper requirement-architecture-test mapping
 - [ ] All plan files at "{PLAN}/{task_id}-plan.md"

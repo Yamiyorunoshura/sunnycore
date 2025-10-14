@@ -21,7 +21,8 @@
 4. Create archive directory, move files (preserve architecture/, knowledge/, completion-report.md) → Files archived successfully
 5. Update references, clean requirement-specific content from preserved docs → Workspace ready for next cycle
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] Completion report with 5 core items at "{root}/docs/completion-report.md"
 - [ ] Files archived to "{ARCHIVE}/{version_name}/" (excluding architecture/, knowledge/, completion-report.md)
 - [ ] Workspace cleaned of requirement-specific content

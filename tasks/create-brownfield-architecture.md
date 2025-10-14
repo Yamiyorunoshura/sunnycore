@@ -23,7 +23,8 @@
 3. Create architecture.md, obtain approval, shard → Approved and sharded successfully
 4. Verify compatibility → New and existing modules compatible
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] New module design with impact analysis for all changes
 - [ ] Compatibility verified (no breaking changes or migration path provided)
 - [ ] Architecture sharded to "{ARCH}/"

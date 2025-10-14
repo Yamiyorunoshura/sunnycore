@@ -7,6 +7,28 @@
 
 ## [Unreleased]
 
+## [4.22.0] - 2025-10-14
+
+### Added
+- brownfield-plan 任務質量保證機制全面增強：新增系統化的根因分析、變更追溯和可觀測性要求
+  - 新增 Input Validation 章節：要求驗證所有必要輸入（review、architecture、knowledge）存在後才能開始工作
+  - 新增 Root Cause Analysis 要求：建立「根因追溯表」(Root-cause Traceability Table)，包含症狀、根因、變更檔案、受影響測試和驗證證據
+  - 新增 Change Documentation 要求：為每個修改提供 Diff Summary（檔案、行號、原因、影響）
+  - 新增 Performance & Compatibility 標準：p95 延遲不得增加超過 10%、p99 不得增加超過 20%、需執行 2x 流量負載測試
+  - 新增 Data & Schema Changes 處理：資料庫變更需提供 migration 和 rollback 腳本、API 變更需更新契約測試
+  - 新增 Observability & Operations 強制要求：所有關鍵路徑必須加入 logs/metrics/traces、需記錄告警條件
+  - Quality Gates 全面擴展：從 2 項增加至 10 項，涵蓋測試、覆蓋率、靜態分析、契約測試、效能預算、向後相容性等
+  - 範例大幅增強：3 個 Good 範例和 3 個 Bad 範例都新增完整的追溯表、效能驗證和可觀測性實作細節
+
+### Changed
+- 完成標準術語升級：將所有角色命令和任務文件的 `[DoD]` 重新命名為 `[Quality-Gates]`
+  - 新增強調說明：「All gates **MUST** pass before marking complete:」強化完成標準的強制性
+  - 影響範圍：所有平台（claude code、codex、cursor）的 6 個角色命令（18 個檔案）
+  - 影響範圍：所有 22 個任務文件（brownfield-plan, conclude, consult, create-architecture, create-brownfield-architecture, create-epic, create-plan, create-prd, create-requirements, curate-knowledge, cutover-prd, cutover, develop-plan, develop-prd, document-project, fix-acceptance-issues, fix-design-conflicts, fix-prd-issues, help, review, validate-design, init）
+- 配置文件可讀性優化：簡化 AGENTS.md、CLAUDE.md、CURSOR.mdc 的 tag directives 列表說明
+  - 將詳細的 tag 列表（Description, Path-Variables, Input, Output, Role, Skills, etc.）簡化為 "etc." 表示
+  - 保留所有核心規則和約束的實質內容，僅改進文檔簡潔性
+
 ## [4.21.0] - 2025-10-14
 
 ### Changed

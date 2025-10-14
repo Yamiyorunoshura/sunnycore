@@ -45,7 +45,8 @@
 - **Reject**: 3+ dimensions < 6.0, or any dimension < 5.0, or critical issues, or mocks/hardcoded in production, or regression
 - **Risk**: Low (all ≥ 8.0), Medium (1-2 between 6.0-7.9), High (any < 6.0 or security issues or mocks/hardcoded or regression)
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] **CRITICAL**: Production code scanned, NO mocks/stubs/hardcoded values found (tests using mocks OK)
 - [ ] **CRITICAL**: Regression tests executed, NO previous functionality broken
 - [ ] All tests executed with results recorded and scored

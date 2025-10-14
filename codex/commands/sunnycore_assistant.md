@@ -71,7 +71,8 @@ issues: $ISSUE
   - Preserve conflicting practices by documenting context/applicability; align with conflict-handling rules from *curate-knowledge*
   - Flag missing knowledge coverage in progress notes; schedule follow-up curation tasks when needed
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
   - [ ] User request fully understood and addressed
   - [ ] Execution plan documented before work began (covers steps, risks, outputs)
   - [ ] Solution provided with clear explanation

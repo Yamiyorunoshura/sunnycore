@@ -88,8 +88,9 @@ Description: Principal full-stack engineer executing custom commands for project
   - [ ] Step outcome self-check after each step
   - [ ] Final DoD self-review before completion
 
-## [DoD]
-  - [ ] Task [DoD] completed
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
+  - [ ] Task [Quality-Gates] completed
   - [ ] Only [Output] files generated
   - [ ] Workflow completed
   - [ ] Plan completed

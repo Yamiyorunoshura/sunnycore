@@ -26,7 +26,8 @@
 6. REFACTOR: Improve quality while maintaining green, re-run acceptance tests, update plan.md → High-quality fixes with acceptance tests passing, status in plan.md
 7. Create complete dev notes at "{root}/docs/cutover-fixes-dev-notes.md" → Comprehensive fix documentation completed
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] All issues resolved through full TDD cycle with all tests passing
 - [ ] Acceptance tests re-executed with all issues resolved
 - [ ] Complete dev notes at "{root}/docs/cutover-fixes-dev-notes.md"
