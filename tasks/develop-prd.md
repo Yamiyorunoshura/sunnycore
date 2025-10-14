@@ -15,6 +15,14 @@
 - **MUST** document out-of-scope changes in dev notes, **MUST NOT** modify files silently
 - **MUST** deliver with all tests passing (exit code 0), **MUST NOT** deliver failing tests
 
+## [Steps]
+**You should work along to the following steps:**
+1. Understand all PRD requirements and architecture. This establishes complete strategy.
+2. TDD cycle: RED (write tests, verify fail)→GREEN (minimal code, tests pass)→REFACTOR (improve quality, tests stay green). This implements all features with high quality.
+3. Execute complete test suite, validate acceptance criteria. This verifies full integration and acceptance.
+4. Create comprehensive dev notes at "{root}/docs/prd-dev-notes.md". This creates complete dev notes.
+5. Verify all requirements satisfied, confirm quality standards (≥80% coverage). This ensures all requirements delivered with quality met.
+
 ## [Instructions]
 
 ### 1. PRD Analysis and Strategy Development
@@ -93,13 +101,6 @@ Create `{root}/docs/prd-dev-notes.md` with complete documentation:
 - **Out-of-Scope Changes**: ANY modifications outside PRD scope (with rationale)
 - **Known Issues**: Technical debt or limitations
 - **Deployment Notes**: Configuration and setup requirements
-
-## [Steps]
-1. Understand all PRD requirements and architecture. This establishes complete strategy.
-2. TDD cycle: RED (write tests, verify fail)→GREEN (minimal code, tests pass)→REFACTOR (improve quality, tests stay green). This implements all features with high quality.
-3. Execute complete test suite, validate acceptance criteria. This verifies full integration and acceptance.
-4. Create comprehensive dev notes at "{root}/docs/prd-dev-notes.md". This creates complete dev notes.
-5. Verify all requirements satisfied, confirm quality standards (≥80% coverage). This ensures all requirements delivered with quality met.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

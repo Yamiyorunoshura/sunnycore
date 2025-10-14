@@ -17,6 +17,13 @@
 - **MUST** follow template structure, **MUST NOT** deviate
 - **MUST** execute shard-architecture.py, **MUST NOT** skip
 
+## [Steps]
+**You should work along to the following steps:**
+1. Evaluate existing architecture, identify extension points. This ensures current architecture is understood with extension points identified.
+2. Design new module with impact analysis. This creates complete new module with impact analysis.
+3. Create architecture.md, obtain approval, shard. This results in approved and sharded architecture.
+4. Verify compatibility. This confirms new and existing modules are compatible.
+
 ## [Instructions]
 
 ### 1. Existing Architecture Review
@@ -61,12 +68,6 @@ After creating the architecture update:
 2. Obtain approval for all changes (especially breaking changes)
 3. Execute `shard-architecture.py` to update architecture files
 4. Verify compatibility between old and new components
-
-## [Steps]
-1. Evaluate existing architecture, identify extension points. This ensures current architecture is understood with extension points identified.
-2. Design new module with impact analysis. This creates complete new module with impact analysis.
-3. Create architecture.md, obtain approval, shard. This results in approved and sharded architecture.
-4. Verify compatibility. This confirms new and existing modules are compatible.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

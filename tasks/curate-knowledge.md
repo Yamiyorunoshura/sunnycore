@@ -16,6 +16,13 @@
 - **MUST** trust review markings, **MUST NOT** make independent level judgments
 - **MUST** preserve conflicting practices, **MUST NOT** force resolution
 
+## [Steps]
+**You should work along to the following steps:**
+1. Identify platinum practices and errors. This identifies all platinum practices and errors.
+2. Design organization, classify by semantic topics. This defines knowledge base structure.
+3. Create documents with evidence sources. This creates complete knowledge base with evidence.
+4. Archive source documents to "{ARCHIVE}/{version_name}/". This archives source documents.
+
 ## [Instructions]
 
 ### 1. Knowledge Identification and Filtering
@@ -104,12 +111,6 @@ After extracting and organizing knowledge:
    - Move `{CUTOVER}` and cutover dev notes
    - Move `{PROGRESS}` if exists
 3. Keep `{KNOWLEDGE}/` in active workspace (do not archive)
-
-## [Steps]
-1. Identify platinum practices and errors. This identifies all platinum practices and errors.
-2. Design organization, classify by semantic topics. This defines knowledge base structure.
-3. Create documents with evidence sources. This creates complete knowledge base with evidence.
-4. Archive source documents to "{ARCHIVE}/{version_name}/". This archives source documents.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

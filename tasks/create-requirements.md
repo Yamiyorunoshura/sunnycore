@@ -14,6 +14,14 @@
 - **MUST** exclude sensitive data in examples, **MUST NOT** include
 - **MUST** execute shard-requirements.py, **MUST NOT** skip
 
+## [Steps]
+**You should work along to the following steps:**
+1. Define requirements gathering scope. This establishes scope clearly.
+2. Extract complete, deduplicated functional requirements. This creates complete functional requirements documentation.
+3. Define quantified non-functional requirements. This establishes quantified non-functional requirements.
+4. Create testable acceptance criteria (Given-When-Then). This ensures all requirements have acceptance criteria.
+5. Ensure consistency, obtain approval, run shard-requirements.py. This produces approved requirements sharded successfully.
+
 ## [Instructions]
 
 ### 1. Requirement Gathering Scope
@@ -107,13 +115,6 @@ After creating the unified `requirements.md`:
 2. Execute `shard-requirements.py` to split into semantic files
 3. Verify sharded files in `{REQ}/` directory (typically: functional.md, non-functional.md)
 4. Confirm all cross-references are preserved
-
-## [Steps]
-1. Define requirements gathering scope. This establishes scope clearly.
-2. Extract complete, deduplicated functional requirements. This creates complete functional requirements documentation.
-3. Define quantified non-functional requirements. This establishes quantified non-functional requirements.
-4. Create testable acceptance criteria (Given-When-Then). This ensures all requirements have acceptance criteria.
-5. Ensure consistency, obtain approval, run shard-requirements.py. This produces approved requirements sharded successfully.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

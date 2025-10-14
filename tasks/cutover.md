@@ -16,6 +16,17 @@
 - **MUST** verify implementation aligns with architecture, **MUST NOT** accept if misalignment found (auto-Fail)
 - **MUST** reject ANY production code with mock/stub/hardcoded values regardless of functional tests (auto-Fail; tests using mocks OK), **MUST NOT** accept
 
+## [Steps]
+**You should work along to the following steps:**
+1. Understand business objectives and architecture. This ensures business objectives are understood and architecture validated.
+2. **CRITICAL**: Verify implementation aligns with architecture (components, patterns, data flow, interfaces). This confirms architectural alignment (auto-fail if misaligned).
+3. **CRITICAL**: Scan ALL production code for mock/stub/placeholder/hardcoded values (auto-fail if found; tests using mocks OK). This verifies code quality.
+4. Identify configuration needs, document requirements. This documents configuration requirements.
+5. Configure environment, document setup. This configures environment.
+6. Run project, verify functionality. This runs project with verified functionality.
+7. Test all critical requirements from end-user perspective. This documents complete acceptance test results.
+8. Generate cutover report, determine status (Success/Partial Success/Failed). This creates complete cutover report with clear status.
+
 ## [Instructions]
 
 ### 1. Input Validation (CRITICAL FIRST STEP)
@@ -104,16 +115,6 @@ Generate complete cutover report:
   - ANY critical requirement fails, OR
   - Architecture misalignment found, OR
   - Production code contains mocks/stubs/hardcoded values
-
-## [Steps]
-1. Understand business objectives and architecture. This ensures business objectives are understood and architecture validated.
-2. **CRITICAL**: Verify implementation aligns with architecture (components, patterns, data flow, interfaces). This confirms architectural alignment (auto-fail if misaligned).
-3. **CRITICAL**: Scan ALL production code for mock/stub/placeholder/hardcoded values (auto-fail if found; tests using mocks OK). This verifies code quality.
-4. Identify configuration needs, document requirements. This documents configuration requirements.
-5. Configure environment, document setup. This configures environment.
-6. Run project, verify functionality. This runs project with verified functionality.
-7. Test all critical requirements from end-user perspective. This documents complete acceptance test results.
-8. Generate cutover report, determine status (Success/Partial Success/Failed). This creates complete cutover report with clear status.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

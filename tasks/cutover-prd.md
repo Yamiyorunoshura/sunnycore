@@ -14,6 +14,16 @@
 - **MUST** follow template structure, **MUST NOT** deviate
 - **MUST** reject ANY production code with mock/stub/hardcoded values regardless of functional tests (auto-Fail; tests using mocks OK), **MUST NOT** accept
 
+## [Steps]
+**You should work along to the following steps:**
+1. Understand business objectives and architecture from PRD. This ensures business objectives and architecture are understood.
+2. **CRITICAL**: Scan ALL production code for mock/stub/placeholder/hardcoded values (auto-fail if found; tests using mocks OK). This verifies code quality.
+3. Identify configuration needs, document requirements. This documents configuration requirements.
+4. Configure environment, document setup steps. This configures environment and makes it ready.
+5. Run project, verify functionality with logs. This runs project with verified functionality.
+6. Test all critical business requirements from end-user perspective. This documents complete acceptance test results.
+7. Generate cutover report, determine status (Success/Partial Success/Failed). This creates complete cutover report with clear status.
+
 ## [Instructions]
 
 ### 1. Input Validation (CRITICAL FIRST STEP)
@@ -106,15 +116,6 @@ Include in report:
 - Configuration steps performed
 - All issues with severity levels
 - Recommendation (deploy / fix issues first / major rework needed)
-
-## [Steps]
-1. Understand business objectives and architecture from PRD. This ensures business objectives and architecture are understood.
-2. **CRITICAL**: Scan ALL production code for mock/stub/placeholder/hardcoded values (auto-fail if found; tests using mocks OK). This verifies code quality.
-3. Identify configuration needs, document requirements. This documents configuration requirements.
-4. Configure environment, document setup steps. This configures environment and makes it ready.
-5. Run project, verify functionality with logs. This runs project with verified functionality.
-6. Test all critical business requirements from end-user perspective. This documents complete acceptance test results.
-7. Generate cutover report, determine status (Success/Partial Success/Failed). This creates complete cutover report with clear status.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

@@ -17,6 +17,16 @@
 - **MUST** re-run acceptance tests after fixes, **MUST NOT** skip
 - **MUST** not introduce new issues or break existing functionality, **MUST NOT** cause regressions
 
+## [Steps]
+**You should work along to the following steps:**
+1. Understand all issues, prioritize by severity. This prioritizes issues.
+2. Reference req and arch, conduct root cause analysis, document in plan.md. This identifies root causes with fix strategies in plan.md.
+3. Create comprehensive fix plan with risk assessment in plan.md. This creates detailed fix plan with risk assessment in plan.md.
+4. RED: Create failing tests reproducing issues, verify RED, update plan.md. This reproduces all issues with failing tests, status in plan.md.
+5. GREEN: Implement minimal fixes to pass tests, verify all pass (exit code 0), update plan.md. This passes all tests with fixes, status in plan.md.
+6. REFACTOR: Improve quality while maintaining green, re-run acceptance tests, update plan.md. This produces high-quality fixes with acceptance tests passing, status in plan.md.
+7. Create complete dev notes at "{root}/docs/cutover-fixes-dev-notes.md". This completes comprehensive fix documentation.
+
 ## [Instructions]
 
 ### 1. Issue Extraction and Prioritization
@@ -125,15 +135,6 @@ Create `{root}/docs/cutover-fixes-dev-notes.md` with complete fix documentation:
 - **Acceptance Re-Test**: Results of re-running acceptance tests
 - **Risk Mitigation**: How risks were addressed
 - **Known Limitations**: Any remaining issues or technical debt
-
-## [Steps]
-1. Understand all issues, prioritize by severity. This prioritizes issues.
-2. Reference req and arch, conduct root cause analysis, document in plan.md. This identifies root causes with fix strategies in plan.md.
-3. Create comprehensive fix plan with risk assessment in plan.md. This creates detailed fix plan with risk assessment in plan.md.
-4. RED: Create failing tests reproducing issues, verify RED, update plan.md. This reproduces all issues with failing tests, status in plan.md.
-5. GREEN: Implement minimal fixes to pass tests, verify all pass (exit code 0), update plan.md. This passes all tests with fixes, status in plan.md.
-6. REFACTOR: Improve quality while maintaining green, re-run acceptance tests, update plan.md. This produces high-quality fixes with acceptance tests passing, status in plan.md.
-7. Create complete dev notes at "{root}/docs/cutover-fixes-dev-notes.md". This completes comprehensive fix documentation.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

@@ -12,6 +12,13 @@
 - **MUST** analyze existing architecture for Brownfield, **MUST NOT** skip
 - **MUST** follow decision criteria, **MUST NOT** recommend incorrect workflow
 
+## [Steps]
+**You should work along to the following steps:**
+1. Determine project type, gather context. This identifies the project type with context collected.
+2. Analyze scope and architectural impact. This assesses complexity and impact.
+3. Recommend workflow with rationale. This provides a clear recommendation.
+4. Provide next-step command. This gives the user actionable guidance.
+
 ## [Instructions]
 
 ### 1. Project Type Determination
@@ -50,12 +57,6 @@ Your recommendation must include:
 2. **Scope Analysis**: Complexity assessment and impact analysis
 3. **Workflow Recommendation**: Full or PRD with clear rationale
 4. **Next-Step Command**: Exact command for the user to execute
-
-## [Steps]
-1. Determine project type, gather context. This identifies the project type with context collected.
-2. Analyze scope and architectural impact. This assesses complexity and impact.
-3. Recommend workflow with rationale. This provides a clear recommendation.
-4. Provide next-step command. This gives the user actionable guidance.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

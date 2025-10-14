@@ -20,6 +20,7 @@
 - **MUST** update epic with accurate status/score, **MUST NOT** provide incorrect data
 
 ## [Steps]
+**You should work along to the following steps:**
 1. Read plan and architecture to identify domain, determine review criteria and scoring dimensions. This identifies domain with review approach documented.
 2. **CRITICAL**: Verify implementation aligns with architecture (components, patterns, data flow, interfaces). This confirms architectural alignment (auto-reject if misaligned).
 3. **CRITICAL**: Scan ALL production code for mocks/stubs/hardcoded values. This confirms NO mocks/hardcoded values in production code (auto-reject if found).

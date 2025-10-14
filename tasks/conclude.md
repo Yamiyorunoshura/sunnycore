@@ -14,6 +14,14 @@
 - **MUST** preserve architecture/, knowledge/, completion-report.md during archiving, **MUST NOT** move them
 - **MUST** only remove requirement-specific content from preserved docs, **MUST NOT** remove architectural decisions
 
+## [Steps]
+**You should work along to the following steps:**
+1. Parse version from lock, validate inputs. This identifies the version with all inputs verified.
+2. Extract 5 core items, map to template. This completes the extraction with evidence.
+3. Generate completion report. This creates the report with all 5 core items.
+4. Create archive directory, move files (preserve architecture/, knowledge/, completion-report.md). This archives files successfully.
+5. Update references, clean requirement-specific content from preserved docs. This prepares the workspace for the next cycle.
+
 ## [Instructions]
 
 ### 1. Version Parsing and Input Validation
@@ -39,13 +47,6 @@ After archiving, clean requirement-specific content from preserved documents:
 - Remove requirement-specific details from architecture documents
 - Preserve architectural decisions, patterns, and design principles
 - Ensure the workspace is ready for the next development cycle
-
-## [Steps]
-1. Parse version from lock, validate inputs. This identifies the version with all inputs verified.
-2. Extract 5 core items, map to template. This completes the extraction with evidence.
-3. Generate completion report. This creates the report with all 5 core items.
-4. Create archive directory, move files (preserve architecture/, knowledge/, completion-report.md). This archives files successfully.
-5. Update references, clean requirement-specific content from preserved docs. This prepares the workspace for the next cycle.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

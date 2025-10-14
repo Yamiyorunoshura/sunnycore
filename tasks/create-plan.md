@@ -16,6 +16,14 @@
 - **MUST** record conflicts and request clarification, **MUST NOT** proceed with conflicts/missing files
 - **MUST** apply knowledge base best practices, **MUST NOT** ignore
 
+## [Steps]
+**You should work along to the following steps:**
+1. Understand requirements, architecture, tasks, best practices. This establishes complete context with planning criteria.
+2. For each task: Plan RED (complete test coverage). This creates comprehensive test plan.
+3. For each task: Plan GREEN (atomic minimal implementation steps). This creates clear minimal implementation roadmap.
+4. For each task: Plan REFACTOR (quality improvements). This defines quality improvement plan.
+5. Complete all plans, ensure executable and template-compliant. This creates all implementation plans.
+
 ## [Instructions]
 
 ### 1. Context Gathering
@@ -89,13 +97,6 @@ Ensure ALL tasks have plans:
 - If the epic has 5 tasks, create 5 plan files
 - Verify each plan file exists at `{PLAN}/{task_id}-plan.md`
 - Confirm all plans follow the template structure
-
-## [Steps]
-1. Understand requirements, architecture, tasks, best practices. This establishes complete context with planning criteria.
-2. For each task: Plan RED (complete test coverage). This creates comprehensive test plan.
-3. For each task: Plan GREEN (atomic minimal implementation steps). This creates clear minimal implementation roadmap.
-4. For each task: Plan REFACTOR (quality improvements). This defines quality improvement plan.
-5. Complete all plans, ensure executable and template-compliant. This creates all implementation plans.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:
