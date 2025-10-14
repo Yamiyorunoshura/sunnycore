@@ -26,7 +26,8 @@
 3. Remove old architecture docs, run sharding script, verify output → Successfully sharded architecture in "{ARCH}/*.md"
 4. Update CLAUDE.md with refreshed architecture index → CLAUDE.md updated with current index
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] Architecture sharded to "{ARCH}/" with source references (format: file_path:line_number)
 - [ ] All deviations from original design documented with rationale
 - [ ] CLAUDE.md updated with current architecture index

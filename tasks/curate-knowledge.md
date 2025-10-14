@@ -22,7 +22,8 @@
 3. Create documents with evidence sources → Complete knowledge base with evidence
 4. Archive source documents to "{ARCHIVE}/{version_name}/" → Source documents archived
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] Knowledge base at "{KNOWLEDGE}/" with platinum practices and errors documented
 - [ ] All knowledge points have evidence source annotations (format: file_path [Section Name])
 - [ ] Source documents archived to "{ARCHIVE}/{version_name}/"

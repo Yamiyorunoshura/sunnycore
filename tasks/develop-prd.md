@@ -22,7 +22,8 @@
 4. Create comprehensive dev notes at "{root}/docs/prd-dev-notes.md" → Complete dev notes created
 5. Verify all requirements satisfied, confirm quality standards (≥80% coverage) → All requirements delivered with quality met
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] All PRD requirements implemented through full TDD cycle with all tests passing
 - [ ] Code quality met (SOLID, DRY, functions ≤50 lines, coverage ≥80%)
 - [ ] Complete dev notes at "{root}/docs/prd-dev-notes.md"

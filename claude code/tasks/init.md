@@ -67,7 +67,8 @@
     - Ensure application can start and return basic response (e.g., 200 OK or Hello World output)
     - Do not implement any business logic, only verify environment and dependencies are correct
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
   - [ ] Development environment fully initialized and operational with all tools installed and verified
   - [ ] Codebase indexed and ready for semantic search (if Brownfield)
   - [ ] All directory structure specified in architecture documents has been created

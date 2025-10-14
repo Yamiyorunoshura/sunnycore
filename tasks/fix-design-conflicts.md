@@ -25,7 +25,8 @@
 4. Review and validate changes, verify no new conflicts → All fixes validated and confirmed
 5. Delete validation report, guide user to re-run validation → Cleanup completed with change summary
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] All approved fixes applied with cross-document consistency verified
 - [ ] No new issues introduced, all changes confirmed by user
 - [ ] Validation report "{root}/docs/design-validation.md" deleted

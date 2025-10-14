@@ -27,7 +27,8 @@ Missing critical inputs, unexpected RED failures, risky irreversible actions, to
 4. **REFACTOR**: Enhance code quality, maintain green tests → High-quality code with tests still passing
 5. Create or update `{DEVNOTES}/{task_id}-dev-notes.md`, validate acceptance criteria → Dev notes completed
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] Full TDD cycle (RED→GREEN→REFACTOR) completed with all tests passing
 - [ ] Code quality standards met (SOLID, DRY, functions ≤50 lines, coverage ≥80%)
 - [ ] Dev notes exist at `{DEVNOTES}/{task_id}-dev-notes.md`

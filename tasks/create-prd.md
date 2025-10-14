@@ -22,7 +22,8 @@
 4. Integrate requirements, architecture, tasks into unified PRD → Integrated PRD with full traceability
 5. Complete PRD, save to "{PRD}", obtain confirmation → Approved PRD created
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] Functional and non-functional requirements with quantified metrics and Given-When-Then criteria
 - [ ] Architecture complete with 100% requirement mapping and impact analysis (if Brownfield)
 - [ ] PRD at "{PRD}" approved by user

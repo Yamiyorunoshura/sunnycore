@@ -19,7 +19,8 @@
 3. Deduplicate, ensure actionable and traceable → Refined task list meeting quality criteria
 4. Complete draft, obtain approval, save to "{EPIC}" → Approved epic created
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] Epic at "{EPIC}" with feature-level, outcome-oriented tasks mapped to requirements
 - [ ] 100% requirement coverage
 - [ ] kebab-case file names

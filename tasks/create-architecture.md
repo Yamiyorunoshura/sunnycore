@@ -21,7 +21,8 @@
 3. Create architecture.md, obtain approval, run shard-architecture.py → Approved and sharded successfully
 4. Verify architecture satisfies all requirements → Architecture validated
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] 100% requirement-architecture mapping matrix
 - [ ] architecture.md approved and sharded to "{ARCH}/"
 - [ ] All functional and non-functional requirements covered

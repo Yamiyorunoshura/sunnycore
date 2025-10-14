@@ -15,7 +15,7 @@ alwaysApply: true
 
 ## [Template-And-Output-Format]
 1. **Markdown hierarchy**: Produce pure Markdown mirroring template structure: section→H1, nested sections→H2.
-2. **Tag directives**: Honor all template tags such as [Description], [Path-Variables], [Input], [Output], [Role], [Skills], [Scope-of-Work], [Constraints], [DoD], [Steps], [Tools], [Blocking-Conditions], [Custom-Commands], [Validation-Steps].
+2. **Tag directives**: Honor all template tags such as [Description], [Path-Variables], [Input], etc.
 3. **Update existing files**: When updating, read current file first, preserve structure, enhance content, avoid duplicates.
 
 ## [Process-Validation-And-Completion]

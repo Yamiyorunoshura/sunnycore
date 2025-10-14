@@ -21,7 +21,8 @@
 4. Create testable acceptance criteria (Given-When-Then) → All requirements have acceptance criteria
 5. Ensure consistency, obtain approval, run shard-requirements.py → Approved requirements sharded successfully
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] Functional and non-functional requirements with quantified metrics and Given-When-Then criteria
 - [ ] Requirements sharded to "{REQ}/*.md" using shard-requirements.py
 - [ ] Final requirement set approved by user

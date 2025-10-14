@@ -29,7 +29,8 @@
 
 **Full Workflow**: Bidirectional integrity (forward and backward references complete, no broken links), Coverage metrics (requirement→architecture: 100%, architecture→tasks: 100%, tasks→plans: 100%), Consistency (terminology uniform, technical specs match, no contradictions), Authenticity (all refs exist, no fabricated content, all entities verifiable)
 
-## [DoD]
+## [Quality-Gates]
+All gates **MUST** pass before marking complete:
 - [ ] Bidirectional validation complete with 100% coverage verification and no fabricated references
 - [ ] Complete validation report at "{root}/docs/design-validation.md" with issues categorized by severity
 - [ ] User informed with clear next-step guidance
