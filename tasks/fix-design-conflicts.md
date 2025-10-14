@@ -18,6 +18,14 @@
 - **MUST** not introduce new conflicts, **MUST NOT** create inconsistencies
 - **MUST** not delete validation report before all fixes complete, **MUST NOT** delete prematurely
 
+## [Steps]
+**You should work along to the following steps:**
+1. Understand all issues, extract and prioritize. This categorizes and prioritizes issues.
+2. Develop fix plans, obtain user confirmation. This creates approved fix plans for all issues.
+3. Resolve all fixes in priority order, maintain consistency. This implements all fixes with consistency.
+4. Review and validate changes, verify no new conflicts. This validates all fixes and confirms them.
+5. Delete validation report, guide user to re-run validation. This completes cleanup with change summary.
+
 ## [Instructions]
 
 ### 1. Issue Analysis and Categorization
@@ -117,13 +125,6 @@ Only after user confirms changes are acceptable:
    "Design conflicts resolved. Recommend re-running validation with /sunnycore_po *validate-design to confirm no new issues."
 
 **DO NOT** delete validation report until all fixes are confirmed by user.
-
-## [Steps]
-1. Understand all issues, extract and prioritize. This categorizes and prioritizes issues.
-2. Develop fix plans, obtain user confirmation. This creates approved fix plans for all issues.
-3. Resolve all fixes in priority order, maintain consistency. This implements all fixes with consistency.
-4. Review and validate changes, verify no new conflicts. This validates all fixes and confirms them.
-5. Delete validation report, guide user to re-run validation. This completes cleanup with change summary.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

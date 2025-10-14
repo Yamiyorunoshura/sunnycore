@@ -547,6 +547,7 @@ class SunnycoreInstaller:
         single_files = [
             ("config/CLAUDE.md", sunnycore_dir / "CLAUDE.md"),
             ("claude code/tasks/init.md", sunnycore_dir / "tasks" / "init.md"),
+            ("claude code/tasks/document-project.md", sunnycore_dir / "tasks" / "document-project.md"),
         ]
 
         print("\n正在並行掃描目錄結構...")
@@ -620,6 +621,7 @@ class SunnycoreInstaller:
         single_files = [
             ("config/AGENTS.md", sunnycore_dir / "AGENTS.md"),
             ("codex/tasks/init.md", sunnycore_dir / "tasks" / "init.md"),
+            ("codex/tasks/document-project.md", sunnycore_dir / "tasks" / "document-project.md"),
         ]
 
         print("\n正在並行掃描目錄結構...")
@@ -695,6 +697,7 @@ class SunnycoreInstaller:
         single_files = [
             ("config/CURSOR.mdc", sunnycore_dir / "cursor.mdc"),
             ("cursor/tasks/init.md", sunnycore_dir / "tasks" / "init.md"),
+            ("cursor/tasks/document-project.md", sunnycore_dir / "tasks" / "document-project.md"),
         ]
 
         print("\n正在並行掃描目錄結構...")

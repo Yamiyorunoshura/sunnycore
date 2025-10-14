@@ -17,6 +17,14 @@
 - **MUST** document out-of-scope changes in dev notes, **MUST NOT** modify files silently outside plan scope
 - **MUST** follow [develop-guidelines], **MUST NOT** violate code quality standards
 
+## [Steps]
+**You should work along to the following steps:**
+1. Read plan + architecture, conceive solution. This ensures TDD phases are understood and outline documented.
+2. **RED**: Implement all test cases, execute and verify they fail correctly. This ensures all tests are failing as expected.
+3. **GREEN**: Minimal implementation aligned with architecture, execute tests. This ensures all tests passing (exit code 0).
+4. **REFACTOR**: Enhance code quality, maintain green tests. This produces high-quality code with tests still passing.
+5. Create or update `{DEVNOTES}/{task_id}-dev-notes.md`, validate acceptance criteria. This completes dev notes.
+
 ## [Instructions]
 
 ### 1. Planning and Context Gathering
@@ -114,13 +122,6 @@ HALT and request guidance if you encounter:
 - **Unexpected RED Failures**: Tests fail for wrong reasons (test bugs vs missing functionality)
 - **Risky Irreversible Actions**: Database migrations, API breaking changes
 - **Tools Lacking Non-Interactive Flags**: Commands that require user interaction
-
-## [Steps]
-1. Read plan + architecture, conceive solution. This ensures TDD phases are understood and outline documented.
-2. **RED**: Implement all test cases, execute and verify they fail correctly. This ensures all tests are failing as expected.
-3. **GREEN**: Minimal implementation aligned with architecture, execute tests. This ensures all tests passing (exit code 0).
-4. **REFACTOR**: Enhance code quality, maintain green tests. This produces high-quality code with tests still passing.
-5. Create or update `{DEVNOTES}/{task_id}-dev-notes.md`, validate acceptance criteria. This completes dev notes.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

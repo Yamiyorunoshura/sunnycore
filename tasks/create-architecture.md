@@ -15,6 +15,13 @@
 - **MUST** follow template structure, **MUST NOT** deviate
 - **MUST** execute shard-architecture.py, **MUST NOT** skip
 
+## [Steps]
+**You should work along to the following steps:**
+1. Analyze requirements, create mapping matrix (100% coverage). This ensures requirements are understood with complete mapping.
+2. Design architecture with all components, map all requirements. This creates complete architecture with full coverage.
+3. Create architecture.md, obtain approval, run shard-architecture.py. This results in approved and sharded architecture.
+4. Verify architecture satisfies all requirements. This validates the architecture.
+
 ## [Instructions]
 
 ### 1. Requirement Analysis and Coverage Matrix
@@ -59,12 +66,6 @@ After creating the unified `architecture.md`:
 2. Once approved, execute `shard-architecture.py` to split into semantic files
 3. Verify the sharded files in `{ARCH}/` directory
 4. Confirm all cross-references are preserved
-
-## [Steps]
-1. Analyze requirements, create mapping matrix (100% coverage). This ensures requirements are understood with complete mapping.
-2. Design architecture with all components, map all requirements. This creates complete architecture with full coverage.
-3. Create architecture.md, obtain approval, run shard-architecture.py. This results in approved and sharded architecture.
-4. Verify architecture satisfies all requirements. This validates the architecture.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

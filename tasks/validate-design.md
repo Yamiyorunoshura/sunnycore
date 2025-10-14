@@ -17,6 +17,14 @@
 - **MUST** perform all validation check types (fabrication, conflicts, coverage, consistency), **MUST NOT** skip any
 - **MUST** categorize issues by severity, **MUST NOT** produce report without categorization
 
+## [Steps]
+**You should work along to the following steps:**
+1. Validate workflow parameter ("prd" or "full"), determine validation scope. This determines validation scope and workflow.
+2. Extract content, create comprehensive internal index. This indexes all entities extracted.
+3. Perform workflow-appropriate validation checks. This completes validation with all issues identified.
+4. Create comprehensive validation report at "{root}/docs/design-validation.md". This produces detailed validation report with categorized issues.
+5. Present summary, provide recommendations based on findings. This informs user with clear next-step guidance.
+
 ## [Instructions]
 
 ### 1. Workflow Parameter Validation
@@ -147,13 +155,6 @@ Based on validation results, provide clear recommendations:
 - Report validation PASSED
 - Confirm design is consistent and complete
 - Recommend proceeding to next phase (implementation or review)
-
-## [Steps]
-1. Validate workflow parameter ("prd" or "full"), determine validation scope. This determines validation scope and workflow.
-2. Extract content, create comprehensive internal index. This indexes all entities extracted.
-3. Perform workflow-appropriate validation checks. This completes validation with all issues identified.
-4. Create comprehensive validation report at "{root}/docs/design-validation.md". This produces detailed validation report with categorized issues.
-5. Present summary, provide recommendations based on findings. This informs user with clear next-step guidance.
 
 ## [Validation-Criteria]
 **PRD Workflow**: Internal consistency (all internal refs valid, no circular dependencies, requirements-architecture-tasks alignment), External alignment if existing arch exists (no breaking changes, integration points correct, compatible with tech stack), Completeness (all req have arch mapping, all arch components have task mapping, no orphaned entities)

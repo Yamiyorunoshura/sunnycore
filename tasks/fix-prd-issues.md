@@ -16,6 +16,16 @@
 - **MUST** re-run acceptance tests after fixes, **MUST NOT** skip
 - **MUST** not introduce new issues or break existing functionality, **MUST NOT** cause regressions
 
+## [Steps]
+**You should work along to the following steps:**
+1. Understand all issues, prioritize by severity. This prioritizes issues.
+2. Reference PRD for context, conduct root cause analysis, document strategies in dev notes/progress. This identifies root causes with fix strategies documented.
+3. Create comprehensive fix plan with risk assessment based on PRD. This creates detailed fix plan with risk assessment documented.
+4. RED: Create failing tests reproducing issues, verify RED, record progress. This reproduces all issues with failing tests, status recorded.
+5. GREEN: Implement minimal fixes to pass tests, verify all pass (exit code 0), record progress. This passes all tests with fixes, status recorded.
+6. REFACTOR: Improve quality while maintaining green, re-run acceptance tests, record progress. This produces high-quality fixes with acceptance tests passing, status recorded.
+7. Create complete dev notes at "{root}/docs/cutover-fixes-dev-notes.md". This completes comprehensive fix documentation.
+
 ## [Instructions]
 
 ### 1. Issue Analysis with PRD Context
@@ -123,15 +133,6 @@ Create `{root}/docs/cutover-fixes-dev-notes.md`:
 - **PRD Alignment**: How fixes align with PRD specifications
 - **Acceptance Re-Test**: Results mapped to PRD requirements
 - **Risk Mitigation**: How risks were addressed per PRD constraints
-
-## [Steps]
-1. Understand all issues, prioritize by severity. This prioritizes issues.
-2. Reference PRD for context, conduct root cause analysis, document strategies in dev notes/progress. This identifies root causes with fix strategies documented.
-3. Create comprehensive fix plan with risk assessment based on PRD. This creates detailed fix plan with risk assessment documented.
-4. RED: Create failing tests reproducing issues, verify RED, record progress. This reproduces all issues with failing tests, status recorded.
-5. GREEN: Implement minimal fixes to pass tests, verify all pass (exit code 0), record progress. This passes all tests with fixes, status recorded.
-6. REFACTOR: Improve quality while maintaining green, re-run acceptance tests, record progress. This produces high-quality fixes with acceptance tests passing, status recorded.
-7. Create complete dev notes at "{root}/docs/cutover-fixes-dev-notes.md". This completes comprehensive fix documentation.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

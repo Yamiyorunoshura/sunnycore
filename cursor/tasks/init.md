@@ -20,6 +20,7 @@
 6. Application SHOULD NOT be runnable at this stage - this is intentional as no business logic is implemented yet.
 
 ## [Steps]
+**You should work along to the following steps:**
 1. Preparation & Analysis. Understand project's technology stack, environment requirements, module architecture, and goals. Create comprehensive plan.md at "{root}/docs/plan.md" using the plan template to track the working progress. This ensures project requirements, stack, and module structure are understood, and plan.md is initialized.
 
 2. Environment Setup & Indexing. Configure fully operational development environment. Install and verify all dependencies. Index codebase for efficient searching (if Brownfield). This ensures development environment is ready and codebase is indexed.

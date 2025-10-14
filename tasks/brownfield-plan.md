@@ -28,6 +28,18 @@
 - You **MUST** maintain backward compatibility for public APIs and events. You **MUST NOT** break contracts.
 - You **MUST** stay within the performance budget. You **MUST NOT** degrade p95 latency by more than 10%.
 
+## [Steps]
+**You should work along to the following steps:**
+You should work along to the following steps:
+1. **Validate Inputs**: Verify that all required files (`{REVIEW}`, `{ARCH}`, `{KNOWLEDGE}`) exist. If any are missing, return an uncertainty message. This ensures you have a complete input set before proceeding.
+2. **Analyze Root Causes**: Read the review report and architecture documentation. Create a Root-cause Table that maps all issues with complete traceability from symptoms to evidence.
+3. **Plan Changes**: Draft a Diff Summary for each fix. This documents the change scope including file paths, line ranges, rationale, and impact.
+4. **TDD Cycle**: Follow the RED→GREEN→REFACTOR cycle while tracking test coverage. Ensure all tests are passing and coverage has not decreased from the baseline.
+5. **Quality Gates**: Run the full test suite including static analysis and contract tests. Verify that all gates are green before proceeding.
+6. **Performance Validation**: Execute load tests and verify that latency increases are less than 10% for p95. Confirm that the performance budget is met.
+7. **Observability**: Add logs, metrics, and traces to all changed critical paths. Ensure monitoring is ready for production deployment.
+8. **Document**: Update `{DEVNOTES}` with the Root-cause Table, Diff Summary, observability points, and verification evidence. This creates a complete audit trail for future reference.
+
 ## [Instructions]
 
 ### 1. Root Cause Analysis
@@ -67,23 +79,6 @@ You **MUST** add observability signals to all changed critical paths:
 You **MUST** document alert conditions (e.g., error_rate > 1%, p99 > 500ms) so operators know when to respond.
 
 You **MUST** record all observability points in the dev notes for future reference and operational support.
-
-## [Steps]
-1. **Validate Inputs**: Verify that all required files (`{REVIEW}`, `{ARCH}`, `{KNOWLEDGE}`) exist. If any are missing, return an uncertainty message. This ensures you have a complete input set before proceeding.
-
-2. **Analyze Root Causes**: Read the review report and architecture documentation. Create a Root-cause Table that maps all issues with complete traceability from symptoms to evidence.
-
-3. **Plan Changes**: Draft a Diff Summary for each fix. This documents the change scope including file paths, line ranges, rationale, and impact.
-
-4. **TDD Cycle**: Follow the RED→GREEN→REFACTOR cycle while tracking test coverage. Ensure all tests are passing and coverage has not decreased from the baseline.
-
-5. **Quality Gates**: Run the full test suite including static analysis and contract tests. Verify that all gates are green before proceeding.
-
-6. **Performance Validation**: Execute load tests and verify that latency increases are less than 10% for p95. Confirm that the performance budget is met.
-
-7. **Observability**: Add logs, metrics, and traces to all changed critical paths. Ensure monitoring is ready for production deployment.
-
-8. **Document**: Update `{DEVNOTES}` with the Root-cause Table, Diff Summary, observability points, and verification evidence. This creates a complete audit trail for future reference.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

@@ -12,13 +12,20 @@
 ## [Output]
 - `{root}/docs/architecture.md` (temporary, will be sharded)
 - `{ARCH}/*.md`
-- `{root}/CLAUDE.md` (updated with refreshed index)
+- `{root}/CURSOR.mdc` (updated with refreshed index)
 
 ## [Constraints]
 - **MUST** base on actual implementation, **MUST NOT** base on original design
 - **MUST** include source references (source_refs), **MUST NOT** produce content without
 - **MUST** delete old architecture docs before sharding, **MUST NOT** skip
-- **MUST** update CLAUDE.md index after sharding, **MUST NOT** skip
+- **MUST** update CURSOR.mdc index after sharding, **MUST NOT** skip
+
+## [Steps]
+**You should work along to the following steps:**
+1. Understand existing architecture and actual implementation. This achieves complete understanding of current state.
+2. Create unified architecture.md with source references. This produces complete unified architecture document.
+3. Remove old architecture docs, run sharding script, verify output. This successfully shards architecture in "{ARCH}/*.md".
+4. Update CURSOR.mdc with refreshed architecture index. This updates CURSOR.mdc with current index.
 
 ## [Instructions]
 
@@ -97,8 +104,8 @@ After creating unified architecture.md:
    - Verify source references are preserved
    - Confirm cross-references work correctly
 
-### 5. CLAUDE.md Index Update
-After sharding, update `{root}/CLAUDE.md` with current architecture index:
+### 5. CURSOR.mdc Index Update
+After sharding, update `{root}/CURSOR.mdc` with current architecture index:
 
 **Index Content**:
 - List all architecture files with brief descriptions
@@ -118,28 +125,22 @@ After sharding, update `{root}/CLAUDE.md` with current architecture index:
 Last Updated: 2025-10-14
 ```
 
-## [Steps]
-1. Understand existing architecture and actual implementation. This achieves complete understanding of current state.
-2. Create unified architecture.md with source references. This produces complete unified architecture document.
-3. Remove old architecture docs, run sharding script, verify output. This successfully shards architecture in "{ARCH}/*.md".
-4. Update CLAUDE.md with refreshed architecture index. This updates CLAUDE.md with current index.
-
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:
 - [ ] Architecture sharded to "{ARCH}/" with source references (format: file_path:line_number)
 - [ ] All deviations from original design documented with rationale
-- [ ] CLAUDE.md updated with current architecture index
+- [ ] CURSOR.mdc updated with current architecture index
 
 ## [Example]
 
 ### Good #1
 **Input**: Outdated architecture exists. Codebase changed from sync to async payment. Dev notes document decision  
-**Decision**: Read existing arch. Analyze codebase (OrderService.js, PaymentGateway.js). Identify drift: sync→async payment. Extract rationale from dev notes (ADR-005: async for scalability). Create unified architecture.md with actual async implementation, source refs (OrderService.js:L20-L45, dev-notes/3-dev-notes.md [Payment Decision]). Delete old arch files. Shard to components.md, data-flows.md, decisions.md. Update CLAUDE.md index.  
+**Decision**: Read existing arch. Analyze codebase (OrderService.js, PaymentGateway.js). Identify drift: sync→async payment. Extract rationale from dev notes (ADR-005: async for scalability). Create unified architecture.md with actual async implementation, source refs (OrderService.js:L20-L45, dev-notes/3-dev-notes.md [Payment Decision]). Delete old arch files. Shard to components.md, data-flows.md, decisions.md. Update CURSOR.mdc index.  
 **Why Good**: This reconciles with living codebase, records rationale, and performs full workflow (sharding, indexing, cleanup).
 
 ### Good #2
 **Input**: No existing architecture (greenfield just completed). Codebase has device registry, telemetry, dashboard. Dev notes have 8 tasks with decisions. Reviews document optimizations  
-**Decision**: Analyze codebase structure (device-registry/, telemetry/, dashboard/). Extract decisions from dev notes (ADR-001: Kafka over RabbitMQ). Gather context from reviews (performance patterns). Create architecture.md from scratch based on actual implementation. Document components, data flows, ADRs with source refs (telemetry/TelemetryIngester.js:L5-L80, dev-notes/2-dev-notes.md [Kafka Decision]). Shard successfully. Create CLAUDE.md with index.  
+**Decision**: Analyze codebase structure (device-registry/, telemetry/, dashboard/). Extract decisions from dev notes (ADR-001: Kafka over RabbitMQ). Gather context from reviews (performance patterns). Create architecture.md from scratch based on actual implementation. Document components, data flows, ADRs with source refs (telemetry/TelemetryIngester.js:L5-L80, dev-notes/2-dev-notes.md [Kafka Decision]). Shard successfully. Create CURSOR.mdc with index.  
 **Why Good**: This builds from real implementation evidence and delivers every artifact with references.
 
 ### Bad #1

@@ -7,6 +7,23 @@
 
 ## [Unreleased]
 
+## [4.23.1] - 2025-10-14
+
+### Added
+- 多平台任務支援完善：新增 document-project.md 任務至所有平台
+  - 新增 `codex/tasks/document-project.md`：Codex 平台專用的項目文檔化任務
+  - 新增 `cursor/tasks/document-project.md`：Cursor 平台專用的項目文檔化任務
+  - 遷移 `tasks/document-project.md` 至 `claude code/tasks/document-project.md`：Claude Code 平台專用版本
+  - 更新安裝器配置：install.py 新增對三個平台 document-project.md 的複製邏輯
+  - 影響範圍：確保所有平台（claude code、codex、cursor）都具備完整的項目文檔化能力
+
+### Changed
+- 任務步驟執行引導強化：統一所有任務文件的步驟章節格式
+  - 在所有任務文件的 `[Steps]` 章節添加統一前綴：`"**You should work along to the following steps:**"`
+  - 強化 AI 對步驟執行順序的理解和遵循性
+  - 提升任務執行的清晰度和一致性
+  - 影響範圍：28 個任務文件（含三個平台的 init.md）
+
 ## [4.23.0] - 2025-10-14
 
 ### Changed

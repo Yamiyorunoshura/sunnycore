@@ -13,6 +13,13 @@
 - **MUST** focus on deliverables, **MUST NOT** include operational actions unless requested
 - **MUST** use kebab-case, **MUST NOT** use spaces in file names
 
+## [Steps]
+**You should work along to the following steps:**
+1. Understand requirements and architecture. This establishes complete understanding with design criteria.
+2. Create feature-level task breakdown. This produces well-structured task list with clear boundaries.
+3. Deduplicate, ensure actionable and traceable. This refines the task list meeting quality criteria.
+4. Complete draft, obtain approval, save to "{EPIC}". This creates the approved epic.
+
 ## [Instructions]
 
 ### 1. Task Granularity
@@ -69,12 +76,6 @@ For each task, define clear, verifiable completion criteria:
 - Tests passing (unit + integration + behavior)
 - Code quality standards met
 - Documentation complete
-
-## [Steps]
-1. Understand requirements and architecture. This establishes complete understanding with design criteria.
-2. Create feature-level task breakdown. This produces well-structured task list with clear boundaries.
-3. Deduplicate, ensure actionable and traceable. This refines the task list meeting quality criteria.
-4. Complete draft, obtain approval, save to "{EPIC}". This creates the approved epic.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

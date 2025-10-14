@@ -15,6 +15,14 @@
 - **MUST** exclude operational actions unless requested, **MUST NOT** include unnecessarily
 - **MUST** provide impact analysis for Brownfield contract changes, **MUST NOT** break existing contracts
 
+## [Steps]
+**You should work along to the following steps:**
+1. Determine project type, gather context. This identifies the project type with context gathered.
+2. Define verifiable functional and quantified non-functional requirements. This creates complete requirements with acceptance criteria.
+3. Design architecture (Greenfield: new; Brownfield: extending with impact analysis). This produces complete architecture documentation.
+4. Integrate requirements, architecture, tasks into unified PRD. This creates integrated PRD with full traceability.
+5. Complete PRD, save to "{PRD}", obtain confirmation. This creates approved PRD.
+
 ## [Instructions]
 
 ### 1. Project Type Identification
@@ -93,13 +101,6 @@ Integrate all sections into a unified, traceable PRD:
 - **Impact Summary**: List all changes and affected systems (for Brownfield)
 - **Risk Assessment**: Identify technical and business risks
 - **Success Metrics**: Define how success will be measured
-
-## [Steps]
-1. Determine project type, gather context. This identifies the project type with context gathered.
-2. Define verifiable functional and quantified non-functional requirements. This creates complete requirements with acceptance criteria.
-3. Design architecture (Greenfield: new; Brownfield: extending with impact analysis). This produces complete architecture documentation.
-4. Integrate requirements, architecture, tasks into unified PRD. This creates integrated PRD with full traceability.
-5. Complete PRD, save to "{PRD}", obtain confirmation. This creates approved PRD.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:
