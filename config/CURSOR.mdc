@@ -30,9 +30,8 @@ alwaysApply: true
 
 ## [MCP-Tools-Selection-Strategy]
 1. **Planning first**: Use sequential-thinking to draft, record, and maintain execution plan before acting on complex or multi-step decisions.
-2. **Code search**: Search codebase for semantic code queries, grep for exact text/symbol searches, read_file for known files.
-3. **Documentation lookup**: Use context7 for external dependency documentation.
-4. **UX research tool**: Reserve playwright for UX research only. Respect site policies and security constraints.
+2. **Documentation lookup**: Use context7 for external dependency documentation.
+3. **UX research tool**: Reserve playwright for UX research only. Respect site policies and security constraints.
 
 ---
 
