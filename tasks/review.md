@@ -12,125 +12,105 @@
 - Updated `{EPIC}`
 
 ## [Constraints]
-- **MUST** execute all tests and record results, **MUST NOT** skip test execution (auto-reject if missing/failing)
-- **MUST** make acceptance decision (Accept/Accept with changes/Reject), **MUST NOT** omit decision
-- **MUST** follow review template structure, **MUST NOT** deviate from format
-- **MUST** scan production code for mocks/stubs/hardcoded values, **MUST NOT** accept ANY found (auto-reject, tests using mocks OK)
-- **MUST** run regression tests on previous tasks, **MUST NOT** accept if any break (auto-reject)
-- **MUST** verify implementation aligns with architecture, **MUST NOT** accept if misalignment found (auto-reject)
-- **MUST** update epic with accurate status/score, **MUST NOT** provide incorrect data
+- **MUST** verify architecture alignment, **MUST NOT** accept any architectural deviations (auto-reject)
+- **MUST** scan production code for incomplete implementations, **MUST NOT** accept any mocks/stubs/hardcoded values (auto-reject, tests using mocks acceptable)
+- **MUST** execute regression testing on all previous tasks, **MUST NOT** accept any test failures (auto-reject)
+- **MUST** execute all current task tests and record results, **MUST NOT** skip test execution
+- **MUST** make explicit acceptance decision (Accept/Accept with Changes/Reject), **MUST NOT** omit decision
+- **MUST** follow review template structure (`{TMPL}/review-tmpl.yaml`), **MUST NOT** deviate from format
+- **MUST** update Epic with accurate task status and score, **MUST NOT** provide incorrect data
 
 ## [Steps]
 **You should work along to the following steps:**
-1. Read plan and architecture to identify domain, determine review criteria and scoring dimensions. This identifies domain with review approach documented.
-2. **CRITICAL**: Verify implementation aligns with architecture (components, patterns, data flow, interfaces). This confirms architectural alignment (auto-reject if misaligned).
-3. **CRITICAL**: Scan ALL production code for mocks/stubs/hardcoded values. This confirms NO mocks/hardcoded values in production code (auto-reject if found).
-4. **CRITICAL**: Run all existing tests from previous tasks. This confirms NO regression (auto-reject if any break).
-5. Execute current task tests, apply domain-specific scoring, verify coverage + plan alignment. This records test results with scores.
-6. Review implementation against criteria from Step 1, validate all dimensions meet standards. This completes comprehensive review with evidence.
-7. Create or update `{REVIEW}/{task_id}-review.md`, make decision (Accept/Accept with changes/Reject), update `{EPIC}`. This completes review report with epic updated.
+1. **Understand Context**: Analyze plan, dev notes, and architecture to identify domain and review focus
+2. **Verify Architecture Alignment** (CRITICAL): Confirm implementation follows architectural design 
+3. **Scan Code Quality** (CRITICAL): Check for incomplete implementations in production code
+4. **Execute Regression Testing** (CRITICAL): Ensure no previous functionality is broken
+5. **Test and Score Current Task**: Run tests and apply domain-specific scoring criteria
+6. **Make Decision and Assess Risk**: Determine acceptance based on scores and critical criteria
+7. **Generate Report and Update Epic**: Use template to create review report and update task status
 
 ## [Instructions]
 
-### 1. Domain Identification and Review Criteria
-Identify the task domain from plan and architecture to determine appropriate review dimensions:
+### 1. Understanding Task Context
+Establish comprehensive context by analyzing the task's background, implementation, and architectural positioning.
 
-**Domain Identification**:
-- Read `{PLAN}/{task_id}-plan.md` to understand what was built
-- Read `{ARCH}/*.md` to identify which component/layer is involved
-- Determine domain: Backend, Frontend, Database, DevOps, Mobile, etc.
+**Context Analysis Approach**:
+- **Plan Documents**: Extract requirements mapping, architectural components, TDD phases, and acceptance criteria to understand the intended scope and technical approach
+- **Development Notes**: Review actual implementation decisions, technical choices, deviations from plan, and completion status to understand what was actually built
+- **Architecture Documents**: Identify relevant components, design patterns, interfaces, and technology constraints to understand how this task fits into the overall system
+- **Domain Recognition**: Determine the primary domain (Backend, Frontend, Database, Integration, Infrastructure) to select appropriate evaluation criteria
 
-**Domain-Specific Dimensions**: Each domain has specialized review criteria (see Domain-Specific-Review-Guidelines below).
+**Focus Areas**: Understand the gap between planned vs. actual implementation, identify architectural touchpoints, and establish domain-specific quality expectations.
 
-### 2. Architecture Alignment Verification (CRITICAL - AUTOMATIC FAIL)
-**BEFORE** any other review, verify implementation aligns with architecture:
+### 2. Architecture Alignment Verification (CRITICAL - AUTOMATIC REJECT)
+Ensure the implementation strictly adheres to architectural design before proceeding with functional review.
 
-**Verification Checklist**:
-- [ ] **Components**: All specified components are implemented correctly
-- [ ] **Patterns**: Design patterns from architecture are followed
-- [ ] **Data Flow**: Data flows match architecture diagrams
-- [ ] **Interfaces**: Contracts match architecture specifications
-- [ ] **Technology Stack**: Tech choices align with architecture
+**Alignment Assessment Focus**:
+- **Component Integrity**: Verify all specified architectural components are correctly implemented with proper responsibilities and boundaries
+- **Pattern Adherence**: Confirm design patterns mandated by architecture are properly applied rather than bypassed with direct implementations
+- **Data Flow Consistency**: Validate that data moves through the system following architectural diagrams and sequence flows
+- **Interface Compliance**: Ensure component interfaces match architectural specifications for inputs, outputs, and error handling
+- **Technology Conformance**: Check that framework and library choices align with architectural technology stack decisions
 
-**If misalignment found**: Apply AUTOMATIC REJECT regardless of test scores. Document the deviation and require refactoring to align with architecture.
+**Critical Standard**: Any deviation from architectural design results in automatic rejection, regardless of test results or functional quality.
 
-### 3. Code Quality Scan (CRITICAL - AUTOMATIC FAIL)
-**BEFORE** functional review, scan ALL production code:
+### 3. Production Code Quality Assessment (CRITICAL - AUTOMATIC REJECT)
+Verify that production code is deployment-ready without incomplete or placeholder implementations.
 
-**Scan For**:
-- Mock implementations in production code (e.g., `class MockPaymentGateway`)
-- Stub functions with hardcoded responses
-- TODO/FIXME comments indicating incomplete implementation
-- Hardcoded values (API keys, secrets, URLs, business logic constants)
+**Quality Assessment Focus**:
+- **Implementation Completeness**: Ensure no mock classes, stub functions, or placeholder implementations exist in production code paths
+- **Configuration Maturity**: Verify no hardcoded credentials, API keys, or environment-specific values that should be externalized
+- **Development Artifacts**: Check for TODO/FIXME comments or temporary workarounds that indicate incomplete development
+- **Production Readiness**: Confirm all business logic uses real implementations rather than test doubles or development conveniences
 
-**Important**: Tests using mocks (e.g., `jest.mock()`, `sinon.stub()`) are ACCEPTABLE. Production code with mocks is AUTOMATIC REJECT.
+**Critical Distinction**: Test code legitimately uses mocks and stubs for isolation - this assessment focuses exclusively on production deployment code.
 
-**If found**: Apply AUTOMATIC REJECT regardless of test scores. Document findings with file paths and line numbers.
+**Quality Standard**: Any incomplete implementation in production code results in automatic rejection to prevent deploying unfinished functionality.
 
-### 4. Regression Testing (CRITICAL - AUTOMATIC FAIL)
-**BEFORE** reviewing current task, run ALL tests from previous tasks:
+### 4. Regression Impact Assessment (CRITICAL - AUTOMATIC REJECT)
+Ensure current implementation does not break existing functionality from previously completed tasks.
 
-**Regression Checklist**:
-- [ ] All tests from Task-1 still pass
-- [ ] All tests from Task-2 still pass
-- [ ] ... (all previous tasks)
-- [ ] No previously passing functionality breaks
+**Regression Assessment Focus**:
+- **Historical Functionality**: Verify all tests from previously completed tasks continue to pass without modification
+- **Integration Stability**: Confirm that changes do not disrupt existing component interactions or data flows
+- **Behavioral Consistency**: Ensure previously established business logic and user behaviors remain intact
+- **System Resilience**: Validate that the system maintains its existing reliability and performance characteristics
 
-**If ANY previous test fails**: Apply AUTOMATIC REJECT. The current task has introduced a regression and must be fixed.
+**Protection Standard**: Any failure of previously passing tests indicates a regression that compromises system stability and requires immediate correction before acceptance.
 
-### 5. Test Execution and Scoring
-Execute current task tests and score based on domain-specific criteria:
+### 5. Current Task Validation and Scoring
+Evaluate the current task's implementation quality through comprehensive testing and domain-specific assessment.
 
-**Test Execution**:
-- Run complete test suite (unit + integration + behavior)
-- Record results (pass/fail counts)
-- Measure coverage percentage
-- Note any performance metrics (if NFRs exist)
+**Validation Approach**:
+- **Test Completeness**: Execute the full test suite including unit, integration, and behavioral tests to verify functional correctness
+- **Coverage Assessment**: Measure test coverage to ensure critical paths and edge cases are adequately validated
+- **TDD Verification**: Confirm that the RED-GREEN-REFACTOR cycle was properly followed as documented in development notes
+- **Performance Validation**: Assess performance characteristics against non-functional requirements when applicable
 
-**Domain-Specific Scoring**: Apply appropriate scoring dimensions based on identified domain (see Domain-Specific-Review-Guidelines below).
+**Scoring Methodology**: Apply domain-specific evaluation criteria (Backend, Frontend, Database, etc.) using established quality dimensions, collecting concrete evidence for each score, and calculating weighted averages for overall assessment.
 
-### 6. Implementation Quality Review
-Review implementation against domain-specific quality criteria:
+### 6. Acceptance Decision and Risk Assessment
+Determine task acceptance based on comprehensive evaluation results and assess associated risks.
 
-**Review Each Dimension**:
-- Score each dimension (0-10 scale)
-- Provide specific evidence (code excerpts, test results, metrics)
-- Note strengths and areas for improvement
-- Calculate overall score (mean of all dimensions, rounded to 1 decimal)
+**Decision Framework**:
+- **Critical Gates First**: Any failure in architecture alignment, production code quality, or regression testing results in automatic rejection regardless of other scores
+- **Quality Threshold Analysis**: Evaluate dimension scores against acceptance standards, considering both individual dimension performance and overall system impact  
+- **Risk-Based Assessment**: Determine risk level based on quality scores, security implications, and potential system impact
+- **Improvement Planning**: For conditional acceptance scenarios, establish clear improvement requirements and timelines
 
-### 7. Decision and Risk Assessment
-Make acceptance decision based on scoring and critical criteria:
+**Decision Considerations**: Balance functional completeness against quality standards, prioritize system stability over feature delivery, and ensure acceptance decisions align with long-term maintainability goals.
 
-**Decision Rules**:
-- **Accept**: All dimensions ≥ 6.0, no critical issues, architecture aligned, no mocks in production, no regression
-- **Accept with Changes**: 1-2 dimensions 5.0-5.9 with clear improvement plan, all critical criteria pass
-- **Reject**: 
-  - 3+ dimensions < 6.0, OR
-  - Any dimension < 5.0, OR
-  - Architecture misalignment (CRITICAL), OR
-  - Mocks/hardcoded in production (CRITICAL), OR
-  - Regression detected (CRITICAL)
+### 7. Documentation and Status Update
+Generate comprehensive review documentation and update project tracking.
 
-**Risk Level**:
-- **Low**: All dimensions ≥ 8.0
-- **Medium**: 1-2 dimensions 6.0-7.9
-- **High**: Any dimension < 6.0 OR any critical issue
+**Documentation Approach**:
+- **Template Utilization**: Use the review template structure to ensure consistent reporting across all task reviews
+- **Evidence-Based Reporting**: Document all findings with specific evidence, code references, and measurable results
+- **Actionable Recommendations**: Provide clear, prioritized recommendations for any identified issues or improvements
+- **Traceability**: Maintain clear links between requirements, implementation, and review outcomes
 
-### 8. Review Report and Epic Update
-Create or update `{REVIEW}/{task_id}-review.md` with complete findings:
-
-**Report Must Include**:
-- Architecture alignment verification results
-- Code quality scan results (mocks/hardcoded check)
-- Regression test results
-- Test execution results with coverage
-- Domain-specific dimension scores with evidence
-- Overall score calculation
-- Decision (Accept/Accept with Changes/Reject) with rationale
-- Risk level assessment
-- Actionable recommendations (if issues found)
-
-**Update Epic**: Update `{EPIC}` with task status and score.
+**Status Management**: Update Epic task status and scores to reflect review outcomes, ensuring accurate project tracking and enabling informed decision-making for subsequent tasks.
 
 ## [Domain-Specific-Review-Guidelines]
 **Domain-Based Review Process**: Identify task domain first, then apply appropriate domain dimensions below. Use General Review if domain unclear.

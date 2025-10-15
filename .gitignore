@@ -63,3 +63,7 @@ development-agents-prompt/
 sunnycore/
 .claude/
 reports/
+
+
+# Development
+*-full/

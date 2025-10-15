@@ -1,152 +1,103 @@
-**GOAL**: Fix design conflicts identified in validation report, then clean up the validation report file.
+**GOAL**: Systematically resolve design conflicts identified in validation report while maintaining cross-document consistency and traceability.
 
 ## [Context]
 **You must read the following context:**
 - `{root}/docs/design-validation.md`
 
-## [Products]
-- Modified design documents:
-  - `{PRD}` (if PRD workflow)
-  - `{REQ}/*.md` (if full workflow)
-  - `{ARCH}/*.md` (if full workflow)
-  - `{EPIC}` (if full workflow)
-  - `{PLAN}/*.md` (if full workflow)
-- Deleted: `{root}/docs/design-validation.md` (after successful fixes)
+## [Products]  
+- Modified design documents with resolved conflicts
+- Cleaned validation report after successful resolution
 
 ## [Constraints]
 - **MUST** fix in severity order (Critical→High→Medium→Low), **MUST NOT** fix out of order
-- **MUST** obtain user confirmation for strategies, **MUST NOT** apply without confirmation
-- **MUST** not introduce new conflicts, **MUST NOT** create inconsistencies
-- **MUST** not delete validation report before all fixes complete, **MUST NOT** delete prematurely
+- **MUST** obtain user confirmation for strategies, **MUST NOT** apply without confirmation  
+- **MUST** maintain cross-document consistency, **MUST NOT** introduce new conflicts
+- **MUST** complete all fixes before cleanup, **MUST NOT** delete reports prematurely
 
 ## [Steps]
 **You should work along to the following steps:**
-1. Understand all issues, extract and prioritize. This categorizes and prioritizes issues.
-2. Develop fix plans, obtain user confirmation. This creates approved fix plans for all issues.
-3. Resolve all fixes in priority order, maintain consistency. This implements all fixes with consistency.
-4. Review and validate changes, verify no new conflicts. This validates all fixes and confirms them.
-5. Delete validation report, guide user to re-run validation. This completes cleanup with change summary.
+1. **Analyze and prioritize conflicts** - Systematically categorize all issues by severity and impact
+2. **Develop comprehensive fix strategy** - Create detailed resolution plans with cross-document impact analysis  
+3. **Execute fixes sequentially** - Apply approved fixes in priority order while maintaining consistency
+4. **Verify resolution completeness** - Validate all conflicts resolved and no new issues introduced
+5. **Complete cleanup and guidance** - Finalize documentation and provide next-step recommendations
 
 ## [Instructions]
 
-### 1. Issue Analysis and Categorization
-Extract and categorize ALL issues from the validation report:
+### 1. Analyze and Prioritize Conflicts
+**Objective**: Create comprehensive understanding of all design conflicts and their relationships.
 
-**Issue Categories**:
-- **Fabricated Content**: References to non-existent entities (e.g., REQ-005 doesn't exist)
-- **Broken References**: Invalid cross-references between documents
-- **Coverage Gaps**: Requirements without architecture, components without tasks
-- **Inconsistencies**: Contradictions or naming mismatches across documents
-- **Conflicts**: Direct contradictions in specifications
+**Approach**:
+- Extract all issues from the validation report, categorizing by type (fabricated content, broken references, coverage gaps, inconsistencies)
+- Assign severity levels (Critical→High→Medium→Low) based on impact to development progress
+- Identify cross-document dependencies where fixing one issue affects others
+- Create issue tracking matrix showing relationships and fix order requirements
 
-**Severity Categorization**:
-- **Critical**: Fabricated content, broken references blocking work
-- **High**: Coverage gaps preventing complete traceability
-- **Medium**: Inconsistencies affecting clarity
-- **Low**: Minor naming variations
+**Focus**: Understand the complete conflict landscape before developing solutions. Look for patterns and root causes that may indicate systemic issues requiring broader fixes.
 
-Document all issues with categories and severity in a tracking table.
+### 2. Develop Comprehensive Fix Strategy  
+**Objective**: Design systematic resolution approach with minimal risk of introducing new conflicts.
 
-### 2. Fix Strategy Development
-For each issue, develop a specific fix strategy:
+**Approach**:
+- For each conflict, develop specific fix strategies considering multiple resolution options
+- Analyze cross-document impact of each proposed fix to avoid cascade failures
+- Prioritize fixes that resolve multiple issues simultaneously when possible
+- Design fix sequence that respects document dependencies and maintains referential integrity
+- Create detailed plan documenting all strategies and their rationale
 
-**Strategy Components**:
-- **Issue**: Clear description of the problem
-- **Affected Documents**: Which documents need modification
-- **Proposed Fix**: Detailed solution
-- **Cross-Document Impact**: How fix affects other documents
-- **Risk**: Potential for introducing new issues
+**Focus**: Design fixes that address root causes, not just symptoms. Consider how each fix affects the entire document ecosystem.
 
-**Example Fix Strategies**:
-| Issue | Severity | Strategy | Impact |
-|-------|----------|----------|--------|
-| REQ-005 doesn't exist but referenced in arch | Critical | Remove REQ-005 ref OR map to existing REQ-003 | Architecture doc + Epic |
-| EmailService in arch but not in epic tasks | Critical | Add Task-5 for EmailService OR remove from arch | Architecture + Epic |
-| Task-4 references non-existent REQ-006 | Critical | Update Task-4 to reference REQ-004 | Epic |
+### 3. Execute Fixes Sequentially
+**Objective**: Apply approved fixes systematically while maintaining consistency throughout the process.
 
-Create a `plan.md` file documenting ALL fix strategies before proceeding.
+**Approach**:
+- Obtain explicit user approval for the complete fix strategy before beginning implementation
+- Execute fixes in strict severity order (Critical first, then High, Medium, Low)
+- After each fix, immediately verify cross-document consistency and referential integrity
+- Track progress and document any unexpected impacts or additional issues discovered
+- Maintain running verification that no new conflicts are introduced
 
-### 3. User Confirmation
-Present fix strategies to user and obtain approval:
-- Show complete fix plan with all strategies
-- Highlight cross-document impacts
-- Request explicit confirmation before proceeding
+**Focus**: Methodical execution with continuous validation. Each fix should improve overall design health without degrading other aspects.
 
-**DO NOT** apply any fixes without user approval.
+### 4. Verify Resolution Completeness
+**Objective**: Confirm all conflicts resolved and overall design integrity restored.
 
-### 4. Sequential Fix Implementation
-Apply fixes in severity order with careful tracking:
+**Approach**:
+- Perform comprehensive cross-document validation to ensure all references are valid
+- Verify 100% traceability coverage is maintained across all document relationships  
+- Check that all naming conventions and specifications are consistent
+- Validate that no new conflicts were inadvertently introduced during fix process
+- Document complete verification results for user review
 
-**For Each Fix** (Critical → High → Medium → Low):
-1. Apply the approved fix to affected document(s)
-2. Update `plan.md` with fix status
-3. Verify cross-document consistency immediately
-4. Document any unexpected impacts
+**Focus**: Thorough validation that goes beyond the original conflicts to ensure overall design health.
 
-**Critical: Maintain Consistency**
-After each fix, verify:
-- All references are valid (no broken links)
-- No new conflicts introduced
-- Cross-document mappings preserved
-- Naming conventions consistent
+### 5. Complete Cleanup and Guidance  
+**Objective**: Finalize resolution process and provide clear next steps.
 
-### 5. Cross-Document Verification
-After ALL fixes are applied, perform comprehensive verification:
+**Approach**:
+- Present complete change summary to user for final approval
+- Only after user confirmation, remove the validation report to prevent confusion
+- Recommend re-running validation to confirm clean state
+- Provide summary of resolution process and any lessons learned
+- Guide user on next appropriate steps in the development workflow
 
-**Verification Checklist**:
-- [ ] All requirements referenced in architecture exist in `{REQ}/*.md`
-- [ ] All architecture components referenced in epic exist in `{ARCH}/*.md`
-- [ ] All tasks reference valid requirements
-- [ ] All plans exist for epic tasks
-- [ ] No fabricated entities remain
-- [ ] No broken cross-references
-- [ ] Consistent naming across documents
-- [ ] 100% coverage maintained
-
-Document verification results.
-
-### 6. User Confirmation of Changes
-Present complete change summary to user:
-- List all documents modified
-- Summary of changes made
-- Verification results
-- Any remaining issues (if any)
-
-Obtain user confirmation that all changes are acceptable.
-
-### 7. Cleanup and Recommendation
-Only after user confirms changes are acceptable:
-
-1. **Delete Validation Report**:
-   ```bash
-   rm {root}/docs/design-validation.md
-   ```
-
-2. **Provide Recommendation**:
-   "Design conflicts resolved. Recommend re-running validation with /sunnycore_po *validate-design to confirm no new issues."
-
-**DO NOT** delete validation report until all fixes are confirmed by user.
+**Focus**: Proper closure with user agreement and clear path forward. Ensure no cleanup occurs without explicit user approval.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:
-- [ ] All approved fixes applied with cross-document consistency verified
-- [ ] No new issues introduced, all changes confirmed by user
-- [ ] Validation report "{root}/docs/design-validation.md" deleted
+- [ ] All conflicts resolved in correct severity order with user approval obtained
+- [ ] Cross-document consistency verified and no new conflicts introduced  
+- [ ] User confirms all changes acceptable and validation report cleaned up
 
 ## [Example]
 
-### Good #1
-**Input**: Validation shows 3 critical: REQ-005 doesn't exist, EmailService fabricated, Task-4 references non-existent REQ-006  
-**Decision**: Read validation. Extract all issues. Categorize: 3 critical (broken references). Create plan.md. Develop fix plans: Issue 1 - remove REQ-005 or map to REQ-003; Issue 2 - add EmailService to arch or remove refs; Issue 3 - update Task-4 to existing REQ. Present to user. User approves. Execute: update PRD (REQ-005→REQ-003), add EmailService to arch, update Task-4 to REQ-004. Verify cross-document consistency (all refs valid). User confirms. Delete validation report. Recommend re-run validation.  
-**Why Good**: This resolves systematically with user approval, confirms consistency, and cleans up validation report.
+### Good: Systematic Conflict Resolution
+**Input**: Validation shows critical fabricated references and coverage gaps across multiple documents  
+**Decision**: Extract and categorize all issues by severity. Develop comprehensive fix strategy addressing cross-document impacts. Obtain user approval for complete plan. Execute fixes in Critical→High→Medium→Low order, verifying consistency after each change. Validate complete resolution and obtain final user confirmation before cleanup.  
+**Why Good**: Follows systematic approach with proper prioritization, user approval, and thorough validation.
 
-### Good #2
-**Input**: Validation shows coverage gaps: REQ-001 no arch mapping, COMP-003 not mapped to task, Task-2 no plan (medium severity)  
-**Decision**: Analyze validation (3 medium coverage gaps). Categorize by type. Create plan.md with gap analysis. Develop strategies: Gap 1 - add AuthService to arch and map to REQ-001; Gap 2 - add Task-5 for Cache Layer; Gap 3 - create 2-plan.md. User approves. Execute: create AuthService in components.md with REQ-001 mapping, add Task-5 to epic.md with COMP-003 mapping, create plans/2-plan.md. Verify 100% coverage: all req have arch, all components have tasks, all tasks have plans. User confirms. Delete validation report.  
-**Why Good**: This addresses coverage gaps holistically, restores full traceability, and documents completion.
-
-### Bad #1
-**Input**: Validation has 5 issues including critical fabricated content, broken refs, conflicts (mix severity)  
-**Bad Decision**: Fix all simultaneously without prioritization. Skip user confirmation because fixes seem obvious. Apply fixes across multiple docs without tracking. Delete validation report immediately after changes. Don't verify new conflicts.  
-**Why Bad**: This violates fix in severity order (should be Critical→High→Medium→Low), violates obtain user confirmation, creates untracked changes risking new inconsistencies, and violates not delete before fixes complete.  
-**Correct**: Prioritize: Critical first, then High, Medium, Low. Document fix strategy in plan.md. Present to user, obtain approval before execution. Apply sequentially maintaining cross-doc consistency. After ALL fixes complete, verify no new conflicts. Obtain final user confirmation. Only then delete validation report.
+### Bad: Unstructured Fixes
+**Input**: Multiple conflicts of varying severity requiring systematic resolution  
+**Bad Decision**: Apply fixes randomly without severity ordering. Skip user approval process. Make changes across documents without tracking impacts. Clean up validation report before confirming resolution completeness.  
+**Why Bad**: Violates severity-order requirement, bypasses user confirmation, risks introducing new conflicts, and premature cleanup prevents verification.  
+**Correct**: Analyze all conflicts systematically, develop approved strategy, execute in proper order with continuous validation, confirm user approval before any cleanup.

@@ -1,138 +1,105 @@
-**GOAL**: Organize development knowledge including best practices, lessons learned, and bug fix records.
+**GOAL**: Organize development knowledge including best practices, lessons learned, and bug fix records into a searchable knowledge base.
 
 ## [Context]
-**You must read the following context:**
-- `{REVIEW}/*.md`
-- `{DEVNOTES}/*.md`
-- `{KNOWLEDGE}/*.md` (if exist)
-- `{CUTOVER}`
-- `{root}/docs/cutover-dev-notes.md`
-- `{PROGRESS}`
+Read and analyze these source documents:
+- `{REVIEW}/*.md` - Quality assessments with scores and findings
+- `{DEVNOTES}/*.md` - Implementation decisions and challenges
+- `{KNOWLEDGE}/*.md` - Existing knowledge (if present)
+- `{CUTOVER}` and cutover notes - Deployment issues and solutions
+- `{PROGRESS}` - Project decisions and trade-offs
 
 ## [Products]
-- `{KNOWLEDGE}/*.md` (organized by semantic topics)
-
-## [Constraints]
-- **MUST** include only platinum practices, **MUST NOT** include non-platinum
-- **MUST** trust review markings, **MUST NOT** make independent level judgments
-- **MUST** preserve conflicting practices, **MUST NOT** force resolution
+- `{KNOWLEDGE}/*.md` - Knowledge base organized by technical domains
 
 ## [Steps]
-**You should work along to the following steps:**
-1. Identify platinum practices and errors. This identifies all platinum practices and errors.
-2. Design organization, classify by semantic topics. This defines knowledge base structure.
-3. Create documents with evidence sources. This creates complete knowledge base with evidence.
-4. Archive source documents to "{ARCHIVE}/{version_name}/". This archives source documents.
+1. **Scan and Extract**: Identify high-value practices, errors, and decisions across all documents
+2. **Organize by Domain**: Group knowledge into technical categories (security, performance, etc.)
+3. **Document with Evidence**: Create knowledge files with clear source references
+4. **Archive Sources**: Move source documents to archive for version control
 
 ## [Instructions]
 
-### 1. Knowledge Identification and Filtering
-Scan all input documents to identify knowledge worth preserving:
+### 1. Knowledge Scanning and Extraction
 
-#### Platinum Practices (Quality Level ≥ 9.0)
-Extract ONLY platinum-level best practices from review reports:
-- Look for explicit "Platinum" markings in reviews
-- Trust the review quality scores (9.0-10.0 = Platinum)
-- Do NOT make independent judgments about practice quality
-- If a practice is marked as "gold" (8.0-8.9), do NOT include it as platinum
+**How to identify valuable knowledge:**
+- **High-Quality Practices**: Look for practices with scores ≥9.0 in review documents, marked as "Platinum"
+- **Error Patterns**: Extract all bugs, failures, and their solutions regardless of quality level
+- **Technical Decisions**: Capture significant technology choices, architecture decisions, and trade-off analyses
 
-Document what was found:
-- If platinum practices exist: Extract and document them
-- If no platinum found: Explicitly record "No platinum practices at this stage"
+**Scanning approach:**
+- Read review documents to find scored practices and identified issues
+- Extract technical decisions and challenges from dev notes
+- Look for deployment issues and solutions in cutover reports
+- Identify recurring patterns across multiple documents
 
-#### Error Patterns and Solutions
-Extract all error patterns regardless of quality level:
-- Root causes of bugs
-- Solutions that worked
-- Evidence from code (file paths and line numbers)
-- Reproduction steps
-
-These are valuable learning regardless of the practice quality level.
-
-#### Complex Decisions
-Extract significant technical decisions from progress notes:
-- Technology choices (e.g., Kafka vs RabbitMQ)
-- Architecture decisions with rationale
-- Trade-off analyses
+**What to capture:**
+- Root causes and solutions for technical problems
+- Proven practices with evidence of effectiveness
+- Technology choices with rationale
 - Performance optimization decisions
+- Security implementation patterns
 
-### 2. Knowledge Organization by Topics
-Organize extracted knowledge by semantic topics (not by source):
+### 2. Domain-Based Organization
 
-**Suggested Topic Structure**:
-- `best-practices-{domain}.md` (e.g., security, api-design, performance, database)
-- `errors-{domain}.md` (e.g., concurrency, security, performance)
-- `problem-solving-{domain}.md` (for complex decisions)
+**How to organize knowledge:**
+- Group by technical domain, not by source document
+- Create natural categories based on the knowledge found
+- Use consistent naming: `{type}-{domain}.md`
 
-**Topic Examples**:
-- Security: Authentication patterns, encryption, input validation
-- API Design: REST conventions, versioning, error handling
-- Concurrency: Race conditions, locks, distributed systems
-- Performance: Caching, query optimization, load testing
-- Database: Schema design, indexing, migrations
+**Common domain categories:**
+- **Security**: Authentication, authorization, encryption, validation
+- **Performance**: Caching, optimization, load handling
+- **API Design**: REST patterns, versioning, error handling
+- **Database**: Schema design, queries, migrations
+- **Concurrency**: Race conditions, locks, distributed systems
+- **Infrastructure**: Deployment, monitoring, configuration
 
-### 3. Evidence Source Annotation
-For EVERY knowledge point, you must include evidence source annotation:
+**Organization patterns:**
+- `best-practices-{domain}.md` - Proven techniques (score ≥9.0)
+- `errors-{domain}.md` - Bug patterns and solutions
+- `decisions-{domain}.md` - Architecture and technology choices
 
-**Format**: `[source: file_path [Section Name]]`
+### 3. Knowledge Documentation
 
-**Examples**:
-- `[source: reviews/3-review.md [Security Assessment]]`
-- `[source: dev-notes/2-dev-notes.md [Kafka Decision]]`
-- `[source: cutover-dev-notes.md [Performance Issue]]`
+**Evidence linking approach:**
+- Include source reference for every knowledge point
+- Format: `[source: file_path [section_name]]`
+- Link to specific sections or findings in source documents
 
-This ensures traceability and allows verification of knowledge claims.
+**Documentation structure per knowledge point:**
+- **Practice/Problem**: Clear description
+- **Context**: When/where this applies
+- **Solution/Approach**: What works and why
+- **Evidence**: Source reference with specific location
 
-### 4. Handling Conflicting Practices
-If you encounter conflicting best practices:
-- **DO NOT** force a resolution or choose one over the other
-- **DO** document both practices with their contexts
-- **DO** note the conflict explicitly
+**Handle conflicting practices:**
+- Document all valid approaches with their contexts
+- Note conflicts explicitly rather than forcing resolution
+- Preserve different solutions for different scenarios
 
-Example:
-```markdown
-### Caching Strategy
+### 4. Archival Process
 
-#### Practice A: Redis for All Cache [source: reviews/1-review.md]
-Use Redis as centralized cache for all services...
+**How to archive:**
+1. Verify knowledge base is complete and properly referenced
+2. Move all source documents to `{ARCHIVE}/{version_name}/`
+3. Keep knowledge base in active workspace for ongoing use
+4. Ensure traceability from knowledge back to archived sources
 
-#### Practice B: Local In-Memory First [source: reviews/5-review.md]
-Use local cache with Redis fallback to reduce latency...
-
-**Note**: Both practices exist in the codebase for different contexts.
-Practice A applies to shared data, Practice B to service-specific data.
-```
-
-### 5. Archival Workflow
-After extracting and organizing knowledge:
-1. Create or update knowledge base files in `{KNOWLEDGE}/`
-2. Archive source documents to `{ARCHIVE}/{version_name}/`:
-   - Move `{REVIEW}/*.md`
-   - Move `{DEVNOTES}/*.md`
-   - Move `{CUTOVER}` and cutover dev notes
-   - Move `{PROGRESS}` if exists
-3. Keep `{KNOWLEDGE}/` in active workspace (do not archive)
-
-## [Quality-Gates]
-All gates **MUST** pass before marking complete:
-- [ ] Knowledge base at "{KNOWLEDGE}/" with platinum practices and errors documented
-- [ ] All knowledge points have evidence source annotations (format: file_path [Section Name])
-- [ ] Source documents archived to "{ARCHIVE}/{version_name}/"
+## [Quality Gates]
+- [ ] Knowledge base created with domain-organized files
+- [ ] All knowledge points have source references
+- [ ] Source documents archived with version control
+- [ ] No high-value knowledge lost from source documents
 
 ## [Example]
 
-### Good #1
-**Input**: Reviews have 3 platinum practices (JWT rotation, circuit breaker, API versioning). Dev notes have 2 errors (cache race condition, SQL injection)  
-**Decision**: Scan all reviews and dev notes. Extract only platinum practices (3 found). Document errors with solutions (2 found). Classify by semantic topics: security, api-design, concurrency. Create: best-practices-security.md, best-practices-api-design.md, errors-concurrency.md, errors-security.md. Annotate with evidence sources. Archive to archive/v1.0/.  
-**Why Good**: This filters by platinum standard, organizes by topic, and preserves provenance.
+**Input**: Review has JWT implementation (9.2/10), API versioning (8.5/10). Dev notes show caching race condition solved, Redis vs memory cache decision.
 
-### Good #2
-**Input**: Reviews show only gold-level (not platinum). Dev notes have memory leak error. Progress has Kafka vs RabbitMQ decision  
-**Decision**: Scan reviews (no platinum found). Extract error (memory leak). Document decision from progress (Kafka selection). Classify: performance. Create problem-solving-performance.md for complex decision, errors-performance.md for memory leak. Record "No platinum practices at this stage". Archive successfully.  
-**Why Good**: This records absence of platinum transparently and captures impactful learnings with strong citations.
+**Approach**: Extract JWT practice (≥9.0 threshold), capture race condition solution and caching decision. Organize into security and performance domains.
 
-### Bad #1
-**Input**: Reviews have 2 gold and 1 platinum practice  
-**Bad Decision**: Include both gold and platinum to make knowledge base look comprehensive. Self-judge some gold as platinum quality without review evidence.  
-**Why Bad**: This violates platinum-only constraint and trust-review-markings constraint. This creates unreliable knowledge base.  
-**Correct**: Extract only 1 platinum practice from reviews. Document gold separately as "promising practices pending validation" or exclude. Trust review markings without self-judgment. Create best-practices.md with only platinum. Annotate: "2 gold-level practices excluded pending platinum validation".
+**Output**: 
+- `best-practices-security.md` - JWT implementation with review reference
+- `errors-performance.md` - Race condition pattern with dev notes reference  
+- `decisions-performance.md` - Caching strategy with rationale and trade-offs
+
+**Why Effective**: Preserves valuable knowledge with evidence, organized for future reference and reuse.

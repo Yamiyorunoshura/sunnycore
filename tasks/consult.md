@@ -15,70 +15,107 @@
 
 ## [Steps]
 **You should work along to the following steps:**
-1. Determine project type, gather context. This identifies the project type with context collected.
-2. Analyze scope and architectural impact. This assesses complexity and impact.
-3. Recommend workflow with rationale. This provides a clear recommendation.
-4. Provide next-step command. This gives the user actionable guidance.
+1. Determine project type and gather context. This identifies whether the project is Greenfield or Brownfield with relevant context collected.
+2. Analyze scope and architectural impact. This assesses the complexity, scale, and potential impact on existing systems.
+3. Apply decision criteria and recommend workflow. This evaluates requirements against criteria to provide a clear workflow recommendation.
+4. Provide actionable next-step command. This gives the user the specific command to execute next.
 
 ## [Instructions]
 
 ### 1. Project Type Determination
-You must first determine whether the project is **Greenfield** (new project) or **Brownfield** (existing project):
-- **Greenfield**: No existing architecture documents in `{ARCH}/`
-- **Brownfield**: Architecture documents exist in `{ARCH}/`
+**How to determine project type:**
+- **Check for existing architecture**: Look for any documents in `{ARCH}/` directory
+- **Greenfield indicators**: No architecture documents, starting from scratch, completely new system
+- **Brownfield indicators**: Existing architecture documents, extending/modifying existing system
 
-For Brownfield projects, you must analyze the existing architecture to understand:
-- Current components and their boundaries
-- Existing technology stack
-- Integration points and contracts
-- Design patterns in use
+**For Greenfield projects:**
+- Focus on understanding the complete scope since everything will be built new
+- Assess if the requirements justify a full architecture design process
 
-### 2. Workflow Decision Criteria
-Apply the following criteria to recommend the appropriate workflow:
+**For Brownfield projects:**
+- **Read ALL existing architecture documents** to understand current system
+- **Identify integration points**: How will new functionality connect to existing components
+- **Assess impact scope**: Will changes affect existing component boundaries, contracts, or patterns
+- **Look for extension opportunities**: Can requirements be satisfied by extending existing components
 
-**Full Workflow (*create-requirements)** is required when ANY of the following apply:
-- New components or services need to be created
-- Architecture changes are required (new patterns, modified boundaries)
-- New technology stack or external integrations
-- Cross-cutting concerns (security, observability, performance)
-- Large scope: 5+ tasks expected
-- Fundamental transformation (e.g., monolith to microservices)
+### 2. Scope Analysis and Decision Criteria
+**How to analyze scope and complexity:**
+- **Count expected tasks**: Break down requirements into feature-level tasks to estimate scope
+- **Assess architectural impact**: Will this require new components, change existing boundaries, or modify contracts
+- **Evaluate technology needs**: Does this require new technology, frameworks, or external integrations
+- **Identify cross-cutting concerns**: Does this involve security, performance, observability, or other system-wide aspects
 
-**PRD Workflow (*create-prd)** is appropriate when ALL of the following apply:
-- Within existing component boundaries
-- Feature enhancements or bug fixes
-- UI/UX changes without backend impact
-- Small to medium scope: 1-5 tasks expected
-- No new architectural patterns required
-- Existing technology stack is sufficient
+**Decision Matrix - Use Full Workflow (*create-requirements) when ANY of these apply:**
+- **New system components**: Requires creating new services, modules, or major subsystems
+- **Architectural changes**: Modifying component boundaries, introducing new patterns, or changing system structure
+- **Technology additions**: New frameworks, databases, external services, or infrastructure changes  
+- **Cross-cutting impact**: Security policies, performance requirements, monitoring, or system-wide changes
+- **Large scope**: Estimated 5+ feature-level tasks or complex interconnected requirements
+- **System transformation**: Major changes like monolith-to-microservices, platform migrations, or architectural overhauls
 
-### 3. Recommendation Presentation
-Your recommendation must include:
-1. **Project Type**: Greenfield or Brownfield with evidence
-2. **Scope Analysis**: Complexity assessment and impact analysis
-3. **Workflow Recommendation**: Full or PRD with clear rationale
-4. **Next-Step Command**: Exact command for the user to execute
+**Use PRD Workflow (*create-prd) when ALL of these apply:**
+- **Within existing boundaries**: Features can be implemented within current component structure
+- **Technology compatible**: Current tech stack can satisfy all requirements
+- **Limited scope**: Estimated 1-5 feature-level tasks with clear boundaries
+- **Enhancement focused**: Feature additions, UI improvements, or bug fixes without architectural impact
+- **No cross-cutting changes**: Doesn't require system-wide modifications or new patterns
+
+### 3. Making and Presenting the Recommendation
+**How to structure your analysis and recommendation:**
+
+1. **State Project Type with Evidence**
+   - Clearly state Greenfield or Brownfield
+   - Provide specific evidence (e.g., "Architecture documents found in `{ARCH}/`" or "No existing architecture documents")
+   - For Brownfield: Summarize key existing components that will be affected
+
+2. **Present Scope Analysis**
+   - **Task estimate**: "Estimated X feature-level tasks based on requirement breakdown"
+   - **Architectural impact**: Describe what components/boundaries will be affected
+   - **Technology assessment**: State whether current tech stack is sufficient
+   - **Cross-cutting concerns**: Identify any system-wide implications
+
+3. **Provide Clear Workflow Recommendation**
+   - State recommended workflow (Full or PRD)
+   - **Justify with criteria**: Explain which specific decision criteria led to this recommendation
+   - **Risk assessment**: Mention any risks of choosing the wrong workflow
+   
+4. **Give Actionable Next Command**
+   - Provide exact command: `/sunnycore_pm *create-requirements` or `/sunnycore_pm *create-prd`
+   - Explain what the user should expect in the next step
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:
-- [ ] Project type determined with scope analyzed
-- [ ] Workflow recommendation with command provided
-- [ ] User understands rationale
+- [ ] Project type determined with evidence and existing architecture analyzed (if Brownfield)
+- [ ] Scope analysis completed with task estimates and architectural impact assessment
+- [ ] Workflow recommendation provided with clear rationale based on decision criteria
+- [ ] Actionable next-step command given to user
 
 ## [Example]
 
-### Good #1
-**Input**: "Add product search with filters to e-commerce dashboard". Existing architecture: Product Service + API Gateway.  
-**Decision**: Brownfield. Analyze scope: within Product Service boundaries, no new modules, 2-3 tasks. Recommend PRD workflow. Provide command: /sunnycore_pm *create-prd  
-**Why Good**: This evaluates against architecture and decision criteria, and communicates rationale clearly.
+### Good #1: Proper Brownfield Analysis
+**Input**: "Add product search with filters to e-commerce dashboard"  
+**Analysis Process**: 
+1. **Project Type**: Brownfield confirmed - existing Product Service + API Gateway architecture
+2. **Scope Analysis**: Within existing Product Service boundaries, enhancing search functionality, estimated 2-3 tasks (search UI, filter API, index optimization)
+3. **Decision Criteria**: Technology compatible (existing stack sufficient), limited scope, within boundaries, no architectural changes
+4. **Recommendation**: PRD workflow - `/sunnycore_pm *create-prd`  
+**Why Good**: Systematic analysis following the decision matrix, clear evidence-based reasoning.
 
-### Good #2
-**Input**: "Migrate monolith to microservices". Existing monolithic architecture.  
-**Decision**: Brownfield. Analyze: fundamental arch change, multiple services needed, new patterns (service mesh), 10+ tasks. Recommend full workflow. Command: /sunnycore_pm *create-requirements  
-**Why Good**: This recognizes transformational scope and maps to full workflow with concrete indicators.
+### Good #2: Complex System Transformation
+**Input**: "Migrate monolith to microservices"  
+**Analysis Process**:
+1. **Project Type**: Brownfield - existing monolithic architecture  
+2. **Scope Analysis**: System transformation, multiple new services, service mesh patterns, estimated 10+ tasks, affects all components
+3. **Decision Criteria**: New system components, architectural changes, technology additions, large scope - meets multiple "Full Workflow" criteria
+4. **Recommendation**: Full workflow - `/sunnycore_pm *create-requirements`  
+**Why Good**: Recognizes transformational scope with multiple qualifying criteria for full workflow.
 
-### Bad #1
+### Bad #1: Insufficient Analysis
 **Input**: "Add caching layer for API performance"  
-**Bad Decision**: Immediately recommend full workflow without scope analysis or architecture review.  
-**Why Bad**: This violates project type determination and skips architecture analysis. Caching typically requires 2-3 tasks within existing boundaries, which suggests PRD workflow.  
-**Correct**: Check architecture exists. Analyze scope: Redis cache middleware, 2-3 tasks, no new modules. Recommend PRD with rationale.
+**Bad Approach**: Immediately recommend full workflow without analysis  
+**Why Bad**: Skips project type determination, no scope analysis, no architecture review  
+**Correct Approach**: 
+1. Check for existing architecture documents
+2. Analyze scope: Redis middleware integration, 2-3 tasks, within existing API boundaries  
+3. Apply criteria: Technology addition (Redis) but within existing boundaries, limited scope
+4. Recommend PRD workflow with clear rationale

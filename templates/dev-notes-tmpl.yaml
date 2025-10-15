@@ -200,6 +200,136 @@ sections:
       
       If no technical debt, state: "No technical debt incurred."
 
+  - id: brownfield-fix-details
+    title: Brownfield Fix Details
+    instruction: |
+      **NOTE:** This section is ONLY included when fixing code that failed review.
+      For initial development, skip this section.
+      
+      **Review Reference:** {path to review report that triggered this fix}
+      **Original Dev Notes:** {path to original dev notes}
+      **Review Decision:** Accept with Changes / Reject
+      
+      ### Root-Cause Traceability Table
+      
+      | Symptom | Root Cause | Architecture Ref | Changed Files | Affected Tests | Verification Evidence |
+      |---------|-----------|------------------|---------------|----------------|----------------------|
+      | {test failure or issue} | {underlying cause} | {ARCH section/ADR} | {file.ext:L10-25} | {test_name} | {log/output/metric} |
+      | {example: test_auth_expired failing} | {example: Missing JWT expiry validation} | {example: ADR-012: Security} | {example: auth.js:L45-52} | {example: test_auth_expired} | {example: Test now passes, logs show "token_expired" event} |
+      
+      **Analysis Method:**
+      Document how you connected the three sources:
+      - Dev Notes revealed: {what original implementation did}
+      - Review identified: {what issues were found}
+      - Architecture required: {what should have been done}
+      - Root cause identified: {gap between implementation and architecture}
+      
+      ### Change Diff Summary
+      
+      For each fix applied:
+      
+      **Fix #{number}: {Issue Title}**
+      
+      - **File:** `{path/to/file.ext}`
+      - **Lines:** L{start}-{end}
+      - **Issue:** {issue from review}
+      - **Root Cause:** {from traceability table}
+      - **Fix Strategy:** {what was changed and why}
+      - **Architecture Alignment:** {ADR/component/pattern followed}
+      - **Impact:** Critical Path / Shared Module / Isolated Feature
+      
+      **Code Changes:**
+      ```{language}
+      // Before (problematic code)
+      {original code snippet}
+      
+      // After (fixed code)
+      {fixed code snippet}
+      ```
+      
+      ### TDD Cycle Evidence
+      
+      Document RED → GREEN → REFACTOR cycle for each fix:
+      
+      **Fix #{number}:**
+      - **RED:** Ran {test_name}, confirmed failure with error: "{error_message}"
+      - **GREEN:** Implemented minimal fix, test passed
+      - **REFACTOR:** {refactoring performed while keeping tests green}
+      - **VERIFY:** Full test suite passed ({count} tests)
+      
+      ### Quality Gate Results
+      
+      - [ ] **Full test suite:** PASS ({count} unit + {count} integration + {count} e2e)
+      - [ ] **Test coverage:** {percentage}% (baseline: {baseline}%, change: +{delta}%)
+      - [ ] **Static analysis:** 0 errors
+      - [ ] **Contract tests:** PASS (API/events/messages)
+      - [ ] **Performance:** p95={value}ms (baseline: {baseline}ms, change: +{delta}%)
+      - [ ] **Backward compatibility:** PASS
+      
+      ### Observability Enhancements
+      
+      **Logs Added:**
+      - File: {file_path}
+      - Log: `{log_message}` with fields: {correlation_id, entity_id, etc.}
+      - Level: ERROR / WARN / INFO
+      - Purpose: {why this log was added}
+      
+      **Metrics Added:**
+      - Metric: `{metric_name}{labels}`
+      - Type: Counter / Histogram / Gauge
+      - Purpose: {what this measures}
+      - Alert condition: {threshold that triggers alert}
+      
+      **Traces Enhanced:**
+      - Span: {span_name}
+      - Tags added: {tag_name=value}
+      - Purpose: {what this trace reveals}
+      
+      **Alert Definitions:**
+      - Condition: {metric_name > threshold}
+      - Severity: Critical / High / Medium
+      - Action: {who gets paged, runbook link}
+      
+      ### Verification Evidence
+      
+      **Test Output:**
+      ```
+      {paste relevant test execution output showing all tests passing}
+      ```
+      
+      **Performance Results:**
+      ```
+      Baseline: p95=120ms, p99=180ms
+      After fix: p95=125ms (+4.2%), p99=195ms (+8.3%)
+      Load test: 2x traffic (1000 req/s) for 5 min, 0 failures
+      ```
+      
+      **Code Quality:**
+      ```
+      Linter: 0 errors, 0 warnings
+      Type checker: 0 errors
+      Security scan: No vulnerabilities introduced
+      ```
+      
+      ### Migration Notes (if applicable)
+      
+      **Database Migration:**
+      - Migration script: {path/to/migration}
+      - Rollback script: {path/to/rollback}
+      - Tested: Up migration ✓, Down migration ✓
+      
+      **API Contract Changes:**
+      - Version bumped: v{old} → v{new}
+      - Breaking changes: {description or "None"}
+      - Deprecation timeline: {timeline or "N/A"}
+      - Migration guide: {link or inline instructions}
+      
+      **Backward Compatibility:**
+      - Strategy: {how compatibility maintained}
+      - Legacy support: {timeline}
+      
+      If no migrations needed, state: "No database or API migrations required."
+
   - id: documentation-updates
     title: Documentation Updates
     instruction: |

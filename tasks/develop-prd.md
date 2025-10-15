@@ -17,91 +17,67 @@
 - **MUST** deliver with all tests passing (exit code 0), **MUST NOT** deliver failing tests
 
 ## [Steps]
-**You should work along to the following steps:**
-1. Understand all PRD requirements and architecture. This establishes complete strategy.
-2. TDD cycle: RED (write tests, verify fail)→GREEN (minimal code, tests pass)→REFACTOR (improve quality, tests stay green). This implements all features with high quality.
-3. Execute complete test suite, validate acceptance criteria. This verifies full integration and acceptance.
-4. Create comprehensive dev notes at "{root}/docs/prd-dev-notes.md". This creates complete dev notes.
-5. Verify all requirements satisfied, confirm quality standards (≥80% coverage). This ensures all requirements delivered with quality met.
+**Execute these steps in sequence:**
+1. **Analyze PRD**: Extract requirements, identify dependencies, plan task sequence
+2. **TDD Implementation**: RED→GREEN→REFACTOR cycle for all tasks with quality focus
+3. **Integration Validation**: Verify cross-component functionality and acceptance criteria
+4. **Quality Assurance**: Confirm all tests pass, coverage ≥80%, code quality standards met
+5. **Documentation**: Generate comprehensive dev notes using template
 
 ## [Instructions]
 
 ### 1. PRD Analysis and Strategy Development
-Before any implementation, analyze the complete PRD:
-- Extract ALL requirements (functional and non-functional)
-- Identify ALL tasks and their dependencies
-- Understand the architecture and technology stack
-- Map requirements → architecture → tasks for complete traceability
+**How to analyze the PRD systematically:**
+- **Requirements Extraction**: Scan PRD for REQ-XXX and NFR-XXX identifiers, categorize by functional domain (auth, data, UI, etc.)
+- **Dependency Mapping**: Create task dependency graph - identify which components must exist before others can be built
+- **Technology Stack Verification**: Confirm PRD-specified technologies align with architecture, note any conflicts
+- **Risk Identification**: Flag tasks involving external integrations, complex algorithms, or new technologies for extra attention
 
-Develop an execution strategy:
-- **Task Ordering**: Respect dependencies (e.g., authentication before authorization)
-- **Risk Assessment**: Identify high-risk tasks and plan mitigation
-- **Integration Points**: Plan how tasks integrate together
+**How to develop execution strategy:**
+- **Sequence Tasks**: Start with foundational components (data models, core services), then build dependent features
+- **Batch Similar Work**: Group related tasks (e.g., all API endpoints, all UI components) for efficiency
+- **Plan Integration Points**: Identify where components connect and plan integration testing approach
 
-### 2. Iterative TDD Implementation
-For EACH task in the PRD, execute the complete TDD cycle:
+### 2. TDD Implementation with Quality Focus
+**How to execute RED→GREEN→REFACTOR effectively:**
 
-#### RED Phase (All Tasks)
-Write ALL tests for ALL tasks before implementation:
-- Unit tests for each component
-- Integration tests for component interactions
-- Behavior tests for end-to-end workflows (Given-When-Then)
-- Performance tests for NFRs
+#### RED Phase: Write Failing Tests First
+- **Test Types**: Unit tests (component behavior), integration tests (component interactions), e2e tests (user workflows)
+- **Test Strategy**: Write tests for happy path, error cases, edge cases, and performance requirements
+- **Verification Method**: Run test suite, confirm each new test fails with expected error message
 
-**Verification**: Execute ALL tests and verify they fail correctly
+#### GREEN Phase: Minimal Implementation
+- **Implementation Focus**: Write simplest code that makes tests pass, prioritize correctness over elegance  
+- **Quality Standards**: Follow architecture patterns, maintain consistent naming, add basic error handling
+- **Verification Method**: All tests pass (exit code 0), no skipped or ignored tests
 
-#### GREEN Phase (All Tasks)
-Implement MINIMAL code to pass all tests:
-- Implement tasks in dependency order
-- Focus on making tests pass, not on quality
-- Follow architecture specifications strictly
+#### REFACTOR Phase: Enhance Quality
+- **Code Quality**: Apply SOLID principles, eliminate duplication, ensure functions ≤50 lines
+- **Error Handling**: Add comprehensive validation, meaningful error messages, proper exception propagation
+- **Performance**: Optimize hot paths, add caching where beneficial, implement async patterns for I/O
+- **Observability**: Add structured logging with correlation IDs, key metrics, distributed tracing spans
+- **Verification Method**: Tests remain green, code quality tools report no violations
 
-**Verification**: Execute ALL tests and verify exit code 0 (all pass)
+### 3. Integration Validation
+**How to verify cross-component functionality:**
+- **Data Flow Testing**: Trace data through complete workflows (input→processing→output), verify transforms and persistence
+- **Error Boundary Testing**: Inject failures at component boundaries, confirm proper error propagation and recovery
+- **Transaction Testing**: Verify ACID properties across multi-component operations, test rollback scenarios
+- **Performance Validation**: Run load tests on integrated system, measure end-to-end latency against NFR targets
 
-#### REFACTOR Phase (All Tasks)
-Enhance code quality across ALL tasks:
-- Apply SOLID principles and remove duplication
-- Add comprehensive error handling
-- Implement performance optimizations from knowledge base
-- Add observability (logging, metrics, tracing)
+### 4. Quality Assurance
+**How to ensure delivery quality:**
+- **Test Execution**: Run full test suite (unit + integration + e2e), verify 100% pass rate with exit code 0
+- **Coverage Analysis**: Generate coverage report, ensure ≥80% line coverage, 100% coverage of critical paths
+- **Code Quality**: Run linters and static analysis, fix all violations, confirm functions ≤50 lines
+- **Acceptance Criteria**: Map each PRD acceptance criterion to test evidence, document any deviations with technical rationale
 
-**Verification**: Re-run ALL tests and verify they stay green
-
-### 3. Cross-Task Integration
-After completing individual tasks, verify integration:
-- **Data Flow**: Ensure data flows correctly between components
-- **Error Propagation**: Verify errors are handled across boundaries
-- **Transaction Integrity**: Confirm transactions span correctly
-- **Performance**: Test integrated system meets NFRs
-
-### 4. Complete Test Suite Execution
-Execute the COMPLETE test suite:
-- Unit tests: All components
-- Integration tests: All interactions
-- Behavior tests: All user workflows
-- Performance tests: All NFRs
-
-**Requirement**: Exit code MUST be 0 (all tests passing)
-
-### 5. Acceptance Criteria Validation
-Verify ALL acceptance criteria from PRD:
-- Check each functional requirement criterion
-- Verify each non-functional requirement with evidence
-- Document any deviations with rationale
-
-### 6. Comprehensive Dev Notes
-Create `{root}/docs/prd-dev-notes.md` with complete documentation:
-
-**Must Include**:
-- **Implementation Summary**: All tasks completed
-- **TDD Progression**: RED → GREEN → REFACTOR for each task
-- **Architecture Alignment**: How implementation follows PRD architecture
-- **Integration Points**: How tasks integrate
-- **Test Coverage**: Overall coverage (target ≥80%) and key scenarios
-- **Performance Metrics**: Evidence for all NFRs
-- **Out-of-Scope Changes**: ANY modifications outside PRD scope (with rationale)
-- **Known Issues**: Technical debt or limitations
-- **Deployment Notes**: Configuration and setup requirements
+### 5. Documentation Generation
+**How to create comprehensive dev notes:**
+- **Use Template**: Follow `{TMPL}/dev-notes-tmpl.yaml` structure for complete documentation
+- **Focus on Decisions**: Document significant technical choices, challenges overcome, and deviations from plan
+- **Evidence-Based**: Include test results, coverage reports, performance metrics as verification evidence
+- **Actionable Insights**: Record lessons learned and recommendations for future development
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

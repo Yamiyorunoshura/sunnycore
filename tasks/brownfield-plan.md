@@ -1,16 +1,18 @@
 **GOAL**: Fix code that failed review based on feedback with complete quality assurance and operational readiness.
 
 ## [Context]
-**You must read the following context:**
-- `{TMPL}/dev-notes-tmpl.yaml`
-- `{REVIEW}/{task_id}-review.md`
-- `{ARCH}/*.md`
-- `{KNOWLEDGE}/*.md` (if exist)
+**You must read the following context in order:**
+- `{TMPL}/dev-notes-tmpl.yaml` - Template structure and guidance for documentation
+- `{DEVNOTES}/{task_id}-dev-notes.md` - What was implemented in the last development cycle
+- `{REVIEW}/{task_id}-review.md` - What issues were found and need fixing
+- `{ARCH}/*.md` - System architecture and design specifications
+- `{KNOWLEDGE}/*.md` (if exist) - Approved patterns and solutions
 
 ## [Input-Validation]
 - You **MUST** verify that all required inputs exist before proceeding with any work.
-- **IF** `{REVIEW}/{task_id}-review.md` is missing, you **MUST RETURN** an uncertainty message along with the required information needed.
-- **IF** `{ARCH}/*.md` is missing or incomplete, you **MUST RETURN** an uncertainty message along with the required architecture specifications.
+- **IF** `{REVIEW}/{task_id}-review.md` is missing, you **MUST RETURN** an uncertainty message: "Cannot proceed without review report at {REVIEW}/{task_id}-review.md. Please provide the review findings."
+- **IF** `{DEVNOTES}/{task_id}-dev-notes.md` is missing, you **MUST RETURN** an uncertainty message: "Cannot proceed without development notes at {DEVNOTES}/{task_id}-dev-notes.md. Please provide the original implementation notes."
+- **IF** `{ARCH}/*.md` is missing or incomplete, you **MUST RETURN** an uncertainty message: "Cannot proceed without architecture specifications at {ARCH}/. Please provide the complete architecture documentation."
 - You **MUST NOT** guess or assume any missing specifications.
 - You **MUST NOT** proceed without a complete input set.
 
@@ -30,55 +32,188 @@
 - You **MUST** stay within the performance budget. You **MUST NOT** degrade p95 latency by more than 10%.
 
 ## [Steps]
-**You should work along to the following steps:**
-1. **Validate Inputs**: Verify that all required files (`{REVIEW}`, `{ARCH}`, `{KNOWLEDGE}`) exist. If any are missing, return an uncertainty message. This ensures you have a complete input set before proceeding.
-2. **Analyze Root Causes**: Read the review report and architecture documentation. Create a Root-cause Table that maps all issues with complete traceability from symptoms to evidence.
-3. **Plan Changes**: Draft a Diff Summary for each fix. This documents the change scope including file paths, line ranges, rationale, and impact.
-4. **TDD Cycle**: Follow the RED→GREEN→REFACTOR cycle while tracking test coverage. Ensure all tests are passing and coverage has not decreased from the baseline.
-5. **Quality Gates**: Run the full test suite including static analysis and contract tests. Verify that all gates are green before proceeding.
-6. **Performance Validation**: Execute load tests and verify that latency increases are less than 10% for p95. Confirm that the performance budget is met.
-7. **Observability**: Add logs, metrics, and traces to all changed critical paths. Ensure monitoring is ready for production deployment.
-8. **Document**: Update `{DEVNOTES}` with the Root-cause Table, Diff Summary, observability points, and verification evidence. This creates a complete audit trail for future reference.
+**Follow this high-level workflow:**
+
+1. **Validate Inputs**: Verify all required files exist (`{DEVNOTES}`, `{REVIEW}`, `{ARCH}`). If missing, return uncertainty message.
+
+2. **Understand Context**: Read dev notes (what was done) → review report (what failed) → architecture (what should be done).
+
+3. **Analyze Root Causes**: Connect the three sources to create Root-cause Traceability Table.
+
+4. **Plan Changes**: Create Diff Summary for each fix with minimal, surgical scope.
+
+5. **Implement Fixes**: Follow TDD cycle (RED → GREEN → REFACTOR) for each fix.
+
+6. **Verify Quality Gates**: Run full test suite, check coverage, static analysis, contract tests, performance.
+
+7. **Add Observability**: Instrument critical paths with logs, metrics, traces, and alerts.
+
+8. **Update Documentation**: Add Brownfield Fix Details section to dev notes following template structure.
 
 ## [Instructions]
 
-### 1. Root Cause Analysis
-You must create a **Root-cause Traceability Table** with the following columns:
-| Symptom | Root Cause | Changed Files | Affected Tests | Verification Evidence |
-|---------|-----------|---------------|----------------|----------------------|
-| Description of failure | Underlying issue | file.js:L10-25 | test_name | Screenshot/log link |
+### 1. How to Understand Context (Step 2 Details)
 
-This table establishes complete traceability from observed symptoms to root causes, changed files, affected tests, and verification evidence.
+**Read in this order to build complete understanding:**
 
-### 2. Change Documentation
-For each modification, you must provide a **Diff Summary** that includes:
-- File: `path/to/file.js`
-- Lines: L45-67
-- Reason: Fix race condition per architecture requirement ADR-023
-- Impact: Critical path (checkout flow)
+**1.1 Read Dev Notes (`{DEVNOTES}/{task_id}-dev-notes.md`):**
+- **Purpose**: Understand what was implemented in the original development
+- **Key sections to read**:
+  - `Implementation Summary` → Overall approach and features delivered
+  - `Implementation Details` → Files created/modified, components built
+  - `Technical Decisions` → Choices made during development
+  - `Testing` → Test coverage baseline and what was verified
+- **Extract**: Mental model of "what the last developer did and why"
 
-This summary documents the exact scope of changes, the rationale tied to architecture requirements, and the impact on critical paths.
+**1.2 Read Review Report (`{REVIEW}/{task_id}-review.md`):**
+- **Purpose**: Identify specific failures and quality issues
+- **Key sections to read**:
+  - `Acceptance Decision` → Accept/Accept with Changes/Reject and rationale
+  - `Detailed Findings` → Each issue with severity, location, evidence
+  - `Test Execution Summary` → Which tests failed and why
+  - `Alignment Verification` → Requirements not met, architecture deviations
+- **Extract**: Complete list of issues that need fixing with their evidence
 
-### 3. Performance & Compatibility
-- **Performance Budget**: The p95 latency must not increase by more than 10%, and p99 latency must not increase by more than 20%.
-- **Load Test**: You must run load tests with 2x the expected traffic before marking the task as complete.
-- **Backward Compatibility**: All contract tests for APIs, events, and messages must pass.
-- **Breaking Changes**: If breaking changes are unavoidable, you must document both the migration path and the deprecation timeline.
+**1.3 Read Architecture (`{ARCH}/*.md`):**
+- **Purpose**: Understand correct specifications for each issue
+- **For each issue from review, locate**:
+  - `Technical Stack` → Verify correct technology/version should be used
+  - `Components` → Verify component responsibilities and interfaces
+  - `ADRs (Architecture Decision Records)` → Verify which decisions apply
+  - `Cross-Cutting Concerns` → Verify security/performance/observability patterns
+  - `Requirements Traceability Matrix` → Map requirements to components
+- **Extract**: Architecture requirements and patterns for fixing each issue
 
-### 4. Data & Schema Changes
-- **IF** the database schema is modified, you must provide both migration **AND** rollback scripts.
-- **IF** the API contract is changed, you must update the contract tests and bump the version number.
-- **IF** the event schema is changed, you must ensure consumer backward compatibility is maintained.
+### 2. How to Analyze Root Causes (Step 3 Details)
 
-### 5. Observability & Operations
-You **MUST** add observability signals to all changed critical paths:
-  - **Logs**: Include error context and correlation IDs to enable debugging and request tracing.
-  - **Metrics**: Implement success/failure counters and latency histograms to track performance.
-  - **Traces**: Add span tags for failure scenarios to enable distributed tracing.
+**Methodology**: Connect Dev Notes → Review Issues → Architecture Violations
 
-You **MUST** document alert conditions (e.g., error_rate > 1%, p99 > 500ms) so operators know when to respond.
+**For each issue in the review report:**
+1. **Symptom**: What failed? (from Review "Detailed Findings" or "Test Execution Summary")
+2. **Original Implementation**: What did the developer do? (from Dev Notes "Implementation Details" or "Technical Decisions")
+3. **Architecture Requirement**: What should have been done? (from Architecture ADRs, Components, or Cross-Cutting Concerns)
+4. **Root Cause**: Why is there a gap?
+   - Deviation from architecture pattern
+   - Missing requirement implementation
+   - Logic error or incorrect algorithm
+   - Technology misuse or version mismatch
+5. **Verification**: How to prove it's fixed? (specific test name or performance metric)
 
-You **MUST** record all observability points in the dev notes for future reference and operational support.
+**Create Root-cause Traceability Table:**
+
+| Symptom | Root Cause | Architecture Ref | Changed Files | Affected Tests | Verification Evidence |
+|---------|-----------|------------------|---------------|----------------|----------------------|
+| {from review findings} | {why it happened} | {ARCH section} | {files:lines} | {test names} | {how to verify} |
+
+**Table columns explained:**
+- **Symptom**: Observable failure (test name, error message, metric deviation)
+- **Root Cause**: Why it happened (missing validation, wrong algorithm, violated ADR)
+- **Architecture Ref**: Which architecture section/ADR was violated (e.g., "ADR-023: Security", "Components/AuthService")
+- **Changed Files**: Exact file:line ranges that need modification
+- **Affected Tests**: Which tests verify this fix
+- **Verification Evidence**: How to prove fix works (test output, metrics, log excerpts)
+
+### 3. How to Plan Changes (Step 4 Details)
+
+**Goal**: Minimal, surgical changes that directly address root causes
+
+**For each root cause, create a Diff Summary:**
+
+- **File**: `path/to/file.ext`
+- **Lines**: L{start}-{end}
+- **Issue**: {issue identifier from review}
+- **Root Cause**: {from traceability table}
+- **Fix Strategy**: {what to change and why}
+- **Architecture Alignment**: {which ADR/component/pattern this follows}
+- **Impact**: {critical path / shared module / isolated feature}
+
+**Change Planning Principles:**
+- **Surgical Focus**: Change only what's necessary to fix the root cause
+- **Architecture Alignment**: Every change must reference an architecture requirement
+- **Impact Assessment**: Classify each change (critical path / shared module / isolated)
+- **Test Coverage**: Identify existing tests that verify the fix
+- **Minimal Scope**: Prefer modifying existing code over rewriting
+
+### 4. How to Implement Fixes (Step 5 Details)
+
+**For each fix in the Diff Summary:**
+
+1. **RED Phase**: 
+   - Run the failing test identified in review
+   - Confirm it fails with expected error
+   - Document failure output
+
+2. **GREEN Phase**:
+   - Implement minimal fix per Diff Summary
+   - Run test again → must pass
+   - Do NOT refactor yet
+
+3. **REFACTOR Phase**:
+   - Clean up code while keeping test green
+   - Run test after each refactor → must stay green
+   - Apply architecture patterns
+
+4. **VERIFY Phase**:
+   - Run full test suite
+   - Confirm no regressions
+   - Document all tests passing
+
+**Track progress:**
+- [ ] Fix 1: {issue} - RED ✓ GREEN ✓ REFACTOR ✓ VERIFY ✓
+- [ ] Fix 2: {issue} - RED ✓ GREEN ✓ REFACTOR ✓ VERIFY ✓
+
+### 5. How to Verify Quality Gates (Step 6 Details)
+
+**Run all quality gates and document results:**
+
+- [ ] **Full test suite**: {pass/fail} ({count} unit + {count} integration + {count} e2e)
+- [ ] **Test coverage**: {percentage}% (baseline: {baseline}%, change: {delta}%)
+- [ ] **Static analysis**: {errors count} errors (must be 0)
+- [ ] **Contract tests**: {pass/fail} for API/events/messages
+- [ ] **Performance**: p95={value}ms (baseline: {baseline}ms, change: {delta}%)
+- [ ] **Backward compatibility**: {pass/fail}
+
+**IF any gate fails**:
+- Analyze why it failed
+- Fix the issue
+- Re-verify all gates before proceeding
+
+### 6. How to Add Observability (Step 7 Details)
+
+**For each changed file affecting critical paths:**
+
+**Logs**:
+- Add error context with correlation IDs
+- Include relevant entity IDs (user_id, order_id, etc.)
+- Log at appropriate levels (ERROR, WARN, INFO)
+
+**Metrics**:
+- Add success/failure counters (e.g., `auth_attempts_total{status="success|failure"}`)
+- Add latency histograms (e.g., `auth_duration_ms`)
+- Tag with relevant dimensions
+
+**Traces**:
+- Add span tags for failure scenarios
+- Include error messages in span attributes
+- Link spans with correlation IDs
+
+**Alerts**:
+- Define alert conditions (e.g., `error_rate > 1%`, `p99 > 500ms`)
+- Document severity and who gets paged
+- Include runbook link or quick fix steps
+
+**Document all observability points in dev notes** (see Brownfield Fix Details section in template)
+
+### 7. Performance & Compatibility Standards
+- **Performance Budget**: p95 latency ≤ +10%, p99 latency ≤ +20%
+- **Load Test**: 2x expected traffic before completion
+- **Backward Compatibility**: All contract tests must pass (APIs/events/messages)
+- **Breaking Changes**: Must document migration path + deprecation timeline
+
+### 8. Data & Schema Change Requirements
+- **Database schema**: Provide migration + rollback scripts
+- **API contract**: Update contract tests + bump version
+- **Event schema**: Maintain consumer backward compatibility
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

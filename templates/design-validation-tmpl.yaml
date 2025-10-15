@@ -1,0 +1,205 @@
+---
+# Design Validation Report Template v2
+# Powered by BMAD™ Core
+
+template:
+  id: design-validation-template-v2
+  name: Design Validation Report
+  version: 2.0
+  output:
+    format: markdown
+    filename: "{root}/docs/design-validation.md"
+    title: "Design Validation Report"
+    note: "Comprehensive design consistency and traceability validation"
+
+sections:
+  - id: validation-summary
+    title: Validation Summary
+    instruction: |
+      **Workflow:** {workflow} (prd/full)
+      **Validation Date:** {date}
+      **Validation Status:** PASS / FAIL
+      
+      **Issue Summary:**
+      - **Total Issues:** {count}
+      - **Critical:** {count} (fabricated content, broken references, missing files)
+      - **High:** {count} (coverage gaps, missing mappings)
+      - **Medium:** {count} (inconsistencies, naming variations)
+      - **Low:** {count} (minor formatting, stylistic issues)
+      
+      **Overall Assessment:**
+      Provide 2-3 sentences summarizing the validation results and overall design health.
+
+  - id: critical-issues
+    title: Critical Issues
+    repeatable: true
+    instruction: |
+      List all critical severity issues (blocking issues that prevent development):
+      
+      **Issue {number}: {Issue Title}**
+      
+      **Category:** Fabricated Content / Broken References / Missing Files
+      
+      **Description:** Clear description of the critical issue
+      
+      **Evidence:** 
+      - {specific example or reference}
+      - {file/section where issue occurs}
+      
+      **Impact:** Why this blocks development or creates risk
+      
+      **Required Action:** Specific steps to resolve
+      
+      If no critical issues found, state: "No critical issues identified."
+
+  - id: high-severity-issues
+    title: High Severity Issues
+    repeatable: true
+    instruction: |
+      List all high severity issues (significant gaps affecting traceability):
+      
+      **Issue {number}: {Issue Title}**
+      
+      **Category:** Coverage Gap / Missing Mapping / Orphaned Entity
+      
+      **Description:** Clear description of the gap or missing mapping
+      
+      **Evidence:**
+      - {specific entities affected}
+      - {missing relationships}
+      
+      **Impact:** How this affects project traceability
+      
+      **Recommended Action:** How to close the gap
+      
+      If no high severity issues found, state: "No high severity issues identified."
+
+  - id: medium-severity-issues
+    title: Medium Severity Issues
+    repeatable: true
+    instruction: |
+      List all medium severity issues (consistency and clarity issues):
+      
+      **Issue {number}: {Issue Title}**
+      
+      **Category:** Naming Inconsistency / Technical Spec Mismatch / Contradictory Specification
+      
+      **Description:** Description of the inconsistency
+      
+      **Evidence:**
+      - {conflicting references}
+      - {locations where inconsistency occurs}
+      
+      **Recommendation:** How to standardize or resolve
+      
+      If no medium severity issues found, state: "No medium severity issues identified."
+
+  - id: low-severity-issues
+    title: Low Severity Issues
+    repeatable: true
+    instruction: |
+      List all low severity issues (minor improvements):
+      
+      **Issue {number}: {Issue Title}**
+      
+      **Category:** Formatting / Documentation / Style
+      
+      **Description:** Description of the minor issue
+      
+      **Recommendation:** Optional improvement suggestion
+      
+      If no low severity issues found, state: "No low severity issues identified."
+
+  - id: validation-metrics
+    title: Validation Metrics
+    instruction: |
+      **Coverage Analysis:**
+      
+      **For PRD Workflow:**
+      - **Requirements → Architecture:** {percentage}% ({satisfied}/{total})
+      - **Architecture → Tasks:** {percentage}% ({satisfied}/{total})
+      - **Internal References:** {percentage}% valid
+      
+      **For Full Workflow:**
+      - **Requirements → Architecture:** {percentage}% ({satisfied}/{total})
+      - **Architecture → Tasks:** {percentage}% ({satisfied}/{total})
+      - **Tasks → Plans:** {percentage}% ({satisfied}/{total})
+      - **Bidirectional Integrity:** {percentage}% complete
+      
+      **Entity Counts:**
+      - **Requirements:** {count} (REQ-001 to REQ-{last})
+      - **Architecture Components:** {count}
+      - **Tasks:** {count} (Task-1 to Task-{last})
+      - **Plans:** {count} (if full workflow)
+      
+      **Reference Validation:**
+      - **Valid References:** {count}
+      - **Broken References:** {count}
+      - **Fabricated References:** {count}
+
+  - id: recommendations
+    title: Recommendations
+    instruction: |
+      **Immediate Actions Required:**
+      
+      **If Critical or High Issues Found:**
+      - Recommend using `/sunnycore_po *fix-design-conflicts` to resolve issues
+      - Prioritize critical issues first (fabricated content, broken references)
+      - Address high severity coverage gaps next
+      
+      **For Medium/Low Issues:**
+      - List specific actions to improve consistency
+      - Suggest standardization approaches
+      
+      **Next Steps:**
+      
+      **If Validation PASSED:**
+      - Confirm design is consistent and complete
+      - Recommend proceeding to implementation phase
+      - Suggest review schedule for ongoing validation
+      
+      **If Validation FAILED:**
+      - Estimated effort required: {hours/days}
+      - Recommended approach: {fix critical first / comprehensive review}
+      - Re-validation required after fixes
+
+  - id: validation-scope
+    title: Validation Scope and Context
+    instruction: |
+      **Documents Validated:**
+      
+      **For PRD Workflow:**
+      - PRD: {path}
+      - Architecture (if exists): {path or "N/A"}
+      
+      **For Full Workflow:**
+      - Requirements: {REQ path}/*.md
+      - Architecture: {ARCH path}/*.md  
+      - Epic: {EPIC path}
+      - Plans: {PLAN path}/*.md
+      
+      **Validation Checks Performed:**
+      - ✓ Fabrication detection (referenced entities exist)
+      - ✓ Broken reference detection (cross-references valid)
+      - ✓ Coverage verification (100% traceability)
+      - ✓ Consistency validation (naming, specifications)
+      - ✓ Workflow-specific validations
+
+  - id: appendix
+    title: Technical Appendix
+    instruction: |
+      **Entity Index:**
+      Document all entities found during validation for reference:
+      
+      **Requirements:** REQ-001, REQ-002, REQ-003, etc.
+      **Components:** {ComponentA, ComponentB, etc.}
+      **Tasks:** Task-1, Task-2, Task-3, etc.
+      **Plans:** {plan-file-names}
+      
+      **Reference Map:**
+      Show key relationships validated:
+      - REQ-001 → {ComponentA, ComponentB} → {Task-1, Task-2}
+      - REQ-002 → {ComponentC} → {Task-3}
+      
+      **Validation Methodology:**
+      Brief description of validation approach used for this workflow.

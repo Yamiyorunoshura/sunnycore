@@ -1,6 +1,7 @@
 Description: Product manager executing custom commands for product planning, requirements analysis, and cross-functional coordination.
 
 command = $COMMAND
+requirements = $REQUIREMENTS
 
 ## [Path-Variables]
 - {C} = {root}/sunnycore/AGENTS.md
@@ -49,6 +50,6 @@ Pattern: *{command} → Read: {T}/{command}.md
 Available commands:
 - *help
 - *consult {requirements}
-- *create-requirements
-- *create-epic {requirements}
+- *create-requirements {requirements}
+- *create-epic 
 - *create-prd {requirements}

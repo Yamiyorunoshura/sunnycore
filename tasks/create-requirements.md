@@ -2,7 +2,7 @@
 
 ## [Context]
 **You must read the following context:**
-- `{TMPL}/requirement-tmpl.yaml`
+- `{TMPL}/requirement-tmpl.yaml` (defines document structure and formatting)
 - User-provided ideas and descriptions
 
 ## [Products]
@@ -11,132 +11,190 @@
 
 ## [Constraints]
 - **MUST** create measurable requirements, **MUST NOT** create vague ones
-- **MUST** follow template structure, **MUST NOT** deviate
+- **MUST** follow `requirement-tmpl.yaml` structure, **MUST NOT** deviate
 - **MUST** exclude sensitive data in examples, **MUST NOT** include
-- **MUST** execute shard-requirements.py, **MUST NOT** skip
+- **MUST** execute shard-requirements.py after approval, **MUST NOT** skip
 
 ## [Steps]
 **You should work along to the following steps:**
-1. Define requirements gathering scope. This establishes scope clearly.
-2. Extract complete, deduplicated functional requirements. This creates complete functional requirements documentation.
-3. Define quantified non-functional requirements. This establishes quantified non-functional requirements.
-4. Create testable acceptance criteria (Given-When-Then). This ensures all requirements have acceptance criteria.
-5. Ensure consistency, obtain approval, run shard-requirements.py. This produces approved requirements sharded successfully.
+1. Define requirements gathering scope. This establishes boundaries and context clearly.
+2. Extract atomic, deduplicated functional requirements from user input. This creates complete functional requirements.
+3. Infer and quantify non-functional requirements with measurable metrics. This establishes verifiable quality attributes.
+4. Execute quality checks for completeness and consistency. This ensures all requirements meet engineering standards.
+5. Obtain user approval, then run shard-requirements.py. This produces approved requirements sharded successfully.
 
 ## [Instructions]
 
-### 1. Requirement Gathering Scope
-Establish clear boundaries for requirement gathering:
-- Identify the problem domain and user needs
-- Define system boundaries and out-of-scope items
-- Clarify target users and use cases
+### 1. Define Requirements Gathering Scope
+Establish clear boundaries before extracting requirements:
+- **Problem domain**: What problem are we solving?
+- **Target users**: Who will use this system? (personas, roles)
+- **Use cases**: What are the primary user journeys?
+- **System boundaries**: What's in-scope vs. out-of-scope?
+- **Integration context**: Existing systems, platforms, or constraints
 
-### 2. Functional Requirements
-Extract and document functional requirements that are:
-- **Complete**: Cover all user-facing capabilities
-- **Atomic**: Each requirement represents one distinct capability
-- **Deduplicated**: No overlapping or redundant requirements
-- **Traceable**: Each has a unique identifier (REQ-001, REQ-002, etc.)
+Document these in the **Project Overview** section per `requirement-tmpl.yaml`.
 
-Transform vague user input into precise requirements:
-- Input: "Users search products"
-- Output:
-  - REQ-001: Category filter with dropdown UI and backend query
-  - REQ-002: Price range slider ($0-$10,000) with real-time filtering
-  - REQ-003: Star rating filter (1-5 stars) with count display
+### 2. Extract Functional Requirements from User Input
 
-### 3. Non-Functional Requirements (NFRs)
-Quantify ALL non-functional requirements with measurable, verifiable metrics:
+**Core extraction principles:**
 
-#### Performance Requirements
-- ❌ "System should be fast"
-- ✓ "API response time P95 < 200ms, P99 < 500ms under 100 concurrent users"
+**A. Decompose vague statements into atomic capabilities**
+- ❌ User says: "Users search products"
+- ✓ Extract multiple atomic requirements:
+  - REQ-001: Category filtering (UI control + backend query)
+  - REQ-002: Price range filtering (slider + real-time query)
+  - REQ-003: Rating filtering (star selection + count display)
 
-#### Scalability Requirements
-- ❌ "Support many users"
-- ✓ "Support 1000 concurrent users with 10K requests/minute peak load"
+**B. Ask clarifying questions to uncover hidden requirements**
+- If user says "notification system" → Ask: Which channels? (email, SMS, push?) Real-time or batch? User preferences?
+- If user says "dashboard" → Ask: Which metrics? Update frequency? User roles with different views?
 
-#### Reliability Requirements
-- ❌ "High availability"
-- ✓ "99.9% uptime SLA, max 43 minutes downtime/month"
+**C. Ensure each requirement is SMART**
+- **S**pecific: Exactly what capability/feature?
+- **M**easurable: How do we verify it works?
+- **A**chievable: Technically feasible with available resources?
+- **R**elevant: Aligns with project goals?
+- **T**estable: Can write clear pass/fail acceptance criteria?
 
-#### Security Requirements
-- ❌ "Secure authentication"
-- ✓ "OAuth 2.0 + JWT with 15-minute token expiry, RFC 6238 TOTP for 2FA"
+**D. Deduplicate and trace dependencies**
+- Avoid overlapping requirements (e.g., "login" and "user authentication" are likely the same)
+- Identify dependencies: REQ-005 may depend on REQ-002 being completed first
 
-#### Usability Requirements
-- ❌ "User-friendly"
-- ✓ "Users complete checkout flow in ≤3 clicks, 95% task completion rate"
+Follow the **Functional Requirements** format in `requirement-tmpl.yaml` (REQ-001, REQ-002, etc.).
 
-### 4. Acceptance Criteria (Given-When-Then)
-For EVERY requirement, create testable acceptance criteria:
+### 3. Infer and Quantify Non-Functional Requirements
 
-**Format**:
-```
-Given [initial context/state]
-When [action/event occurs]
-Then [expected outcome with measurable criteria]
-```
+**Core quantification principles:**
 
-**Examples**:
-```
-Functional (REQ-001):
-Given: User is on product listing page with 500 products
-When: User selects "Electronics" category and price range "$100-$500"
-Then: System returns filtered results in < 500ms showing only matching products
+**A. Transform qualitative adjectives into measurable metrics**
+- "fast" → P95 latency < 200ms, P99 < 500ms
+- "scalable" → Support 10K concurrent users, 100K requests/min
+- "reliable" → 99.9% uptime, max 43min downtime/month
+- "secure" → OAuth 2.0 + JWT, AES-256 encryption, OWASP Top 10 compliance
+- "user-friendly" → ≤3 clicks to complete task, 95% task completion rate
 
-Non-Functional (NFR-001):
-Given: System has 1000 concurrent users
-When: Load test runs for 10 minutes at peak traffic
-Then: P95 response time remains < 200ms, P99 < 500ms, 0 errors
-```
+**B. Infer implicit NFRs from context**
+- If user mentions "mobile app" → Infer: app size < 50MB, cold start < 2s
+- If user mentions "financial transactions" → Infer: PCI-DSS compliance, audit logging
+- If user mentions "global users" → Infer: multi-region deployment, CDN latency < 100ms
 
-The acceptance criteria must be:
-- **Binary**: Pass or fail, no ambiguity
-- **Verifiable**: Can be tested objectively
-- **Complete**: Cover happy path and edge cases
+**C. Use industry-standard categories**
+- **Performance**: Response time, throughput, resource usage
+- **Scalability**: Concurrent users, data volume, transaction rate
+- **Reliability**: Uptime, MTBF, MTTR, fault tolerance
+- **Security**: Authentication, authorization, encryption, compliance
+- **Usability**: Task completion time, error rate, accessibility (WCAG 2.1)
+- **Maintainability**: Code coverage, deployment frequency, documentation
 
-### 5. Requirement Organization
-Organize requirements by capability or user journey:
-- Group related requirements together
-- Separate functional and non-functional requirements
-- Maintain clear hierarchy (epic → features → requirements)
+Follow the **Non-Functional Requirements** format in `requirement-tmpl.yaml` (NFR-001, NFR-002, etc.).
 
-### 6. Quality Checks
-Before finalizing:
-- **Completeness**: All user needs covered
-- **Consistency**: No contradictions between requirements
-- **Measurability**: All metrics are quantified
-- **Testability**: All have Given-When-Then acceptance criteria
-- **Sensitivity**: No sensitive data in examples (use placeholders)
+### 4. Quality Checks Before Finalization
 
-### 7. Sharding Workflow
-After creating the unified `requirements.md`:
-1. Obtain user approval for the complete requirement set
-2. Execute `shard-requirements.py` to split into semantic files
-3. Verify sharded files in `{REQ}/` directory (typically: functional.md, non-functional.md)
-4. Confirm all cross-references are preserved
+Run these checks before seeking user approval:
+
+**Completeness checks:**
+- [ ] All user-mentioned features have corresponding functional requirements
+- [ ] All quality expectations have corresponding NFRs with metrics
+- [ ] Every requirement has Given-When-Then acceptance criteria
+- [ ] Constraints section covers technical, business, and regulatory limits
+
+**Consistency checks:**
+- [ ] No contradictory requirements (e.g., REQ-010 vs. REQ-025)
+- [ ] NFR targets are aligned (e.g., P95 < 200ms but supports 10K concurrent users is realistic?)
+- [ ] Dependencies are valid and acyclic
+
+**Feasibility checks:**
+- [ ] Each requirement is technically achievable with available technology
+- [ ] NFR metrics are realistic given project constraints (time, budget, team size)
+- [ ] No requirements violate stated constraints
+
+**Sensitivity checks:**
+- [ ] Examples use placeholder data (user@example.com, not real emails)
+- [ ] No proprietary algorithms, trade secrets, or confidential data exposed
+
+### 5. Approval and Sharding Workflow
+
+**A. Obtain user approval:**
+1. Present the complete `requirements.md` document
+2. Walk through key requirements and acceptance criteria
+3. Confirm scope alignment and feasibility
+4. Address any user feedback or clarifications
+
+**B. Execute sharding:**
+1. Run `python scripts/shard-requirements.py` to split `requirements.md`
+2. Verify sharded files appear in `{REQ}/` directory (typically: `functional.md`, `non-functional.md`, `constraints.md`)
+3. Confirm cross-references and requirement IDs are preserved
+4. Notify user of successful sharding
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:
-- [ ] Functional and non-functional requirements with quantified metrics and Given-When-Then criteria
-- [ ] Requirements sharded to "{REQ}/*.md" using shard-requirements.py
+- [ ] Requirements extracted following SMART principles (Specific, Measurable, Achievable, Relevant, Testable)
+- [ ] All NFRs quantified with measurable metrics (no vague adjectives like "fast" or "secure")
+- [ ] Every requirement has Given-When-Then acceptance criteria per `requirement-tmpl.yaml`
+- [ ] Quality checks passed (completeness, consistency, feasibility, sensitivity)
 - [ ] Final requirement set approved by user
+- [ ] Requirements sharded to "{REQ}/*.md" using shard-requirements.py
 
 ## [Example]
 
-### Good #1
-**Input**: "Customers search products by category, price, ratings with fast response"  
-**Decision**: Define scope: product search. Extract functional: REQ-001 (category filter UI+logic), REQ-002 (price range slider+query), REQ-003 (rating filter 1-5 stars). Deduplicate and atomize. Define NFRs: NFR-001 (P95 <500ms), NFR-002 (100 concurrent users). Quantify. Create acceptance: Given user on product page, When applies category "Electronics" and price "$100-$500", Then returns filtered results <500ms. Use binary pass/fail. Generate requirements.md. Obtain approval. Shard to functional.md and non-functional.md.  
-**Why Good**: This turns vague request into atomic, measurable requirements with explicit acceptance tests.
+### Good #1: Decomposition and Quantification
+**Input**: "Customers search products by category, price, ratings with fast response"
 
-### Good #2
-**Input**: "Send real-time notifications to iOS/Android when events occur with high reliability"  
-**Decision**: Define scope: push notification system. Extract functional: REQ-001 (event subscription), REQ-002 (cross-platform delivery iOS/Android), REQ-003 (notification templates). Organize by capabilities. Define NFRs: NFR-001 (<2s latency), NFR-002 (99.9% delivery success), NFR-003 (10K notifications/min). Quantify all. Create acceptance: Given event occurs, When notification sent, Then delivered within 2s. Obtain approval. Shard successfully.  
-**Why Good**: This captures functional breadth and demanding NFRs while eliminating ambiguity.
+**Decision Process**:
+1. **Scope**: Product search capability for e-commerce platform
+2. **Extract functional** (decompose vague "search" into atomic capabilities):
+   - REQ-001: Category filter with dropdown UI and backend query
+   - REQ-002: Price range slider ($0-$10K) with real-time filtering
+   - REQ-003: Star rating filter (1-5 stars) with result count
+3. **Quantify NFRs** (transform "fast" into metrics):
+   - NFR-001: API response time P95 < 500ms under 100 concurrent users
+   - NFR-002: Search results render in < 300ms after filter change
+4. **Quality check**: SMART criteria met, no contradictions, technically feasible
+5. **Generate** `requirements.md` per `requirement-tmpl.yaml`, obtain approval, run shard script
 
-### Bad #1
-**Input**: Multiple vague ideas  
-**Bad Decision**: Create vague: "REQ-001: user-friendly", "NFR-001: fast system". Omit quantification. Omit Given-When-Then. Mix functional and non-functional. Skip deduplication. Skip sharding. Save as single file without template.  
-**Why Bad**: This creates vague unmeasurable requirements that are not verifiable with no clear success criteria. "user-friendly" and "fast" are not testable.  
-**Correct**: Transform "user-friendly" to specific REQ: "Users complete checkout in ≤3 clicks". Transform "fast" to quantified NFR: "API P95 <200ms". Use Given-When-Then. Separate functional from non-functional. Execute shard-requirements.py.
+**Why Good**: Transforms vague user input into atomic, measurable, testable requirements with clear acceptance criteria.
+
+### Good #2: Inferring Implicit Requirements
+**Input**: "Send real-time notifications to iOS/Android when events occur with high reliability"
+
+**Decision Process**:
+1. **Scope**: Cross-platform push notification system
+2. **Extract functional**:
+   - REQ-001: Event subscription management (users opt-in/out by event type)
+   - REQ-002: iOS push via APNs with certificate handling
+   - REQ-003: Android push via FCM with token management
+   - REQ-004: Notification template engine (title, body, actions)
+3. **Quantify NFRs** (infer from "real-time" and "high reliability"):
+   - NFR-001: Latency < 2s from event trigger to device delivery (P95)
+   - NFR-002: 99.9% delivery success rate
+   - NFR-003: Support 10K notifications/min peak load
+   - NFR-004: Retry mechanism with exponential backoff (3 attempts)
+4. **Ask clarifications**: Notification priority levels? Silent notifications? Rich media support?
+5. **Generate** and shard after approval
+
+**Why Good**: Infers implicit NFRs from context, asks clarifying questions to uncover hidden requirements.
+
+### Bad #1: Vague and Unmeasurable
+**Input**: "Need a user-friendly system that's fast and secure"
+
+**Bad Decision**: 
+- REQ-001: "System must be user-friendly"
+- NFR-001: "System must be fast"
+- NFR-002: "System must be secure"
+- Skip Given-When-Then, skip quantification, obtain approval, skip sharding
+
+**Why Bad**: 
+- "User-friendly", "fast", "secure" are not measurable or testable
+- No decomposition into atomic capabilities
+- No acceptance criteria
+- Cannot verify these requirements in testing
+
+**Correct Approach**:
+1. **Ask clarifications**: What does "user-friendly" mean? (task completion time? error rate?) What does "fast" mean? (API latency? page load?) What security concerns? (authentication? data encryption?)
+2. **Transform to measurable**:
+   - REQ-001: "Users complete checkout in ≤3 clicks with 95% task completion rate"
+   - NFR-001: "API P95 < 200ms, P99 < 500ms under 500 concurrent users"
+   - NFR-002: "OAuth 2.0 authentication, AES-256 data encryption, OWASP Top 10 compliance"
+3. **Create Given-When-Then** for each requirement
+4. **Follow workflow**: Generate per template → quality check → approval → shard
