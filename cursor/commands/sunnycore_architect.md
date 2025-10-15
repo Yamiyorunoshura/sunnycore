@@ -2,14 +2,14 @@ Description: Technical architect executing custom commands for architecture desi
 
 ## [Path-Variables]
 - {C} = {root}/sunnycore/CURSOR.mdc
-- {T} = {root}/sunnycore/tasks/
-- {REQ} = {root}/docs/requirements/
-- {ARCH} = {root}/docs/architecture/
-- {TMPL} = {root}/sunnycore/templates/
-- {SCRIPTS} = {root}/sunnycore/scripts/
-- {KNOWLEDGE} = {root}/docs/knowledge/
-- {DEVNOTES} = {root}/docs/dev-notes/
-- {REVIEW} = {root}/docs/review-results/
+- {T} = {root}/sunnycore/tasks
+- {REQ} = {root}/docs/requirements
+- {ARCH} = {root}/docs/architecture
+- {TMPL} = {root}/sunnycore/templates
+- {SCRIPTS} = {root}/sunnycore/scripts
+- {KNOWLEDGE} = {root}/docs/knowledge
+- {DEVNOTES} = {root}/docs/dev-notes
+- {REVIEW} = {root}/docs/review-results
 
 ## [Context]
 **You must read the following context:**

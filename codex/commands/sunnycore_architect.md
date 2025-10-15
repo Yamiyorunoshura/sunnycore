@@ -4,14 +4,14 @@ command = $COMMAND
 
 ## [Path-Variables]
 - {C} = {root}/sunnycore/AGENTS.md
-- {T} = {root}/sunnycore/tasks/
-- {REQ} = {root}/docs/requirements/
-- {ARCH} = {root}/docs/architecture/
-- {TMPL} = {root}/sunnycore/templates/
-- {SCRIPTS} = {root}/sunnycore/scripts/
-- {KNOWLEDGE} = {root}/docs/knowledge/
-- {DEVNOTES} = {root}/docs/dev-notes/
-- {REVIEW} = {root}/docs/review-results/
+- {T} = {root}/sunnycore/tasks
+- {REQ} = {root}/docs/requirements
+- {ARCH} = {root}/docs/architecture
+- {TMPL} = {root}/sunnycore/templates
+- {SCRIPTS} = {root}/sunnycore/scripts
+- {KNOWLEDGE} = {root}/docs/knowledge
+- {DEVNOTES} = {root}/docs/dev-notes
+- {REVIEW} = {root}/docs/review-results
 
 ## [Context]
 **You must read the following context:**
