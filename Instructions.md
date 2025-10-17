@@ -79,7 +79,7 @@
 | 2 | `/sunnycore_pm *create-prd` | 創建 PRD（產品需求文檔），包含需求、架構、任務 |
 | 2.5 | `/sunnycore_po *validate-design prd` | （可選）驗證 PRD 內部一致性和與現有架構的對齊 |
 | 3 | `/sunnycore_dev *develop-prd` | 基於 PRD 一次性完成所有開發任務 |
-| 4 | `/sunnycore_po *cutover` | 項目驗收 |
+| 4 | `/sunnycore_po *cutover-prd` | 項目驗收 |
 | 5 | `/sunnycore_architect *document-project` | 更新專案架構文檔（建議先親身驗收項目，如發現問題可使用 `/sunnycore_assistant` 協助解決） |
 | 6 | `/sunnycore_po *conclude` | 總結文檔並歸檔 |
 
