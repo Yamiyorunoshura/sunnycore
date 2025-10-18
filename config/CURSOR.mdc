@@ -39,18 +39,18 @@ alwaysApply: true
 
 ### Good Example 1: Following Priority and Template Rules
 
-**[CONTEXT]**  
-User: "Implement a user authentication module based on tasks/develop-plan.md"
+**[CONTEXT]**
+Need to implement a user authentication module based on tasks/develop-plan.md, decisions: follow priority hierarchy and template rules while maintaining proper execution order and verification.
 
-**[DECISION]**  
-1. Read CURSOR.mdc first to understand core constraints (Rule 1)
-2. Check commands for any auth-related directives (Rule 1)
-3. Use sequential-thinking to plan: analyze requirements → design architecture → implement → test → verify Quality-Gate (Rule 11)
-4. Read tasks/develop-plan.md completely (Rule 2)
-5. Create implementation-plan.md using correct hierarchy: `# [Implementation-Plan]` with `## [Quality-Gate]` as H2 (Rules 4-5)
-6. Execute steps sequentially without skipping (Rule 3)
-7. Verify each step: run tests, check linter (Rule 7)
-8. Complete Quality-Gate checklist before declaring done (Rule 8)
+**[DECISION]**
+1. decisions: Read CURSOR.mdc first to understand core constraints (Rule 1)
+2. decisions: Check commands for any auth-related directives (Rule 1)
+3. decisions: Use sequential-thinking to plan: analyze requirements → design architecture → implement → test → verify Quality-Gate (Rule 11)
+4. decisions: Read tasks/develop-plan.md completely (Rule 2)
+5. decisions: Create implementation-plan.md using correct hierarchy: `# [Implementation-Plan]` with `## [Quality-Gate]` as H2 (Rules 4-5)
+6. decisions: Execute steps sequentially without skipping (Rule 3)
+7. decisions: Verify each step: run tests, check linter (Rule 7)
+8. decisions: Complete Quality-Gate checklist before declaring done (Rule 8)
 
 **[EXPECTED-OUTCOME]**  
 Feature delivered with all governance rules respected, proper template structure maintained, all quality gates passed.
@@ -66,17 +66,17 @@ Feature delivered with all governance rules respected, proper template structure
 
 ### Good Example 2: Summarizing and Updating Documents
 
-**[CONTEXT]**  
-User: "Summarize docs/architecture.md (long file), update the [Components] section, remove outdated examples marked as IGNORE"
+**[CONTEXT]**
+Need to summarize a long architecture document and update specific section while handling different content priority levels, decisions: properly categorize and process content according to KEEP/MAY IGNORE/IGNORE rules.
 
-**[DECISION]**  
-1. Identify KEEP, MAY IGNORE, and IGNORE items (Rule 10)
-2. Preserve all KEEP items completely, including full Available Tools table even if lengthy (Rule 10)
-3. Omit MAY IGNORE items (historical context) and document: "Project history (MAY IGNORE) excluded as not relevant to current task" (Rule 10)
-4. Remove IGNORE items (outdated examples) but verify no necessary context is lost (Rule 10)
-5. Search codebase to find existing component implementations: "Where are components implemented?" (Rules 11-12)
-6. Read docs/architecture.md completely before updating (Rule 6)
-7. Locate `## [Components]` section and update in place without changing heading levels (Rules 4-6)
+**[DECISION]**
+1. decisions: Identify KEEP, MAY IGNORE, and IGNORE items (Rule 10)
+2. decisions: Preserve all KEEP items completely, including full Available Tools table even if lengthy (Rule 10)
+3. decisions: Omit MAY IGNORE items (historical context) and document: "Project history (MAY IGNORE) excluded as not relevant to current task" (Rule 10)
+4. decisions: Remove IGNORE items (outdated examples) but verify no necessary context is lost (Rule 10)
+5. decisions: Search codebase to find existing component implementations: "Where are components implemented?" (Rules 11-12)
+6. decisions: Read docs/architecture.md completely before updating (Rule 6)
+7. decisions: Locate `## [Components]` section and update in place without changing heading levels (Rules 4-6)
 
 **[EXPECTED-OUTCOME]**  
 Summary is focused and lean while preserving all governance rules. Architecture doc maintains template structure with enhanced content in correct section.
@@ -92,21 +92,21 @@ Summary is focused and lean while preserving all governance rules. Architecture 
 
 ### Bad Example 1: Violating Priority and Execution Rules
 
-**[CONTEXT]**  
-User: "Implement payment integration based on tasks/develop-plan.md"
+**[CONTEXT]**
+Need to implement payment integration based on a specific task file, decisions: skip governance rules and directly proceed with implementation without proper planning or verification.
 
-**[BAD-DECISION]**  
-1. [VIOLATION] Skip reading CURSOR.mdc (violates Rule 1)
-2. [VIOLATION] Skip checking commands for security/tech-stack directives (violates Rule 1)
-3. [VIOLATION] No sequential-thinking planning for complex task (violates Rule 11)
-4. [VIOLATION] Jump directly to Step 3, skip Steps 1-2 (violates Rule 3)
-5. [VIOLATION] Create payment-module.md with wrong hierarchy (violates Rules 4-5):
+**[BAD-DECISION]**
+1. decisions: [VIOLATION] Skip reading CURSOR.mdc (violates Rule 1)
+2. decisions: [VIOLATION] Skip checking commands for security/tech-stack directives (violates Rule 1)
+3. decisions: [VIOLATION] No sequential-thinking planning for complex task (violates Rule 11)
+4. decisions: [VIOLATION] Jump directly to Step 3, skip Steps 1-2 (violates Rule 3)
+5. decisions: [VIOLATION] Create payment-module.md with wrong hierarchy (violates Rules 4-5):
     ```markdown
     # [Implementation-Plan]
     # [Quality-Gate]          ← Wrong: should be H2
     - Item 1
     ```
-6. [VIOLATION] Declare "Implementation complete!" without running tests or checking Quality-Gate (violates Rules 7-8)
+6. decisions: [VIOLATION] Declare "Implementation complete!" without running tests or checking Quality-Gate (violates Rules 7-8)
 
 **[EXPECTED-OUTCOME]**  
 May violate security constraints in CURSOR.mdc. Tech-stack requirements in commands ignored. Steps skipped causing missing dependencies. Template structure broken. Tests failing, deliverable incomplete.
@@ -132,22 +132,20 @@ May violate security constraints in CURSOR.mdc. Tech-stack requirements in comma
 
 ### Bad Example 2: Wrong Tool Selection and Format Violations
 
-**[CONTEXT]**  
-1. User: "What React version does this project use?"
-2. User: "Summarize docs/workflow.md. KEEP section has 15-item Available Tools table but seems long"
-3. User: "Update epic.md [Tools] section"
+**[CONTEXT]**
+Need to handle multiple user requests about framework version, document summarization with content priorities, and file updates, decisions: use inappropriate tools and violate governance rules.
 
-**[BAD-DECISION]**  
-1. [VIOLATION] Launch sequential-thinking to reason about React versions, hypothesize framework choices... (violates Rules 11, 15)
+**[BAD-DECISION]**
+1. decisions: [VIOLATION] Launch sequential-thinking to reason about React versions, hypothesize framework choices... (violates Rules 11, 15)
    - **Correct**: Just read package.json directly
 
-2. [VIOLATION] "Tools table is too long, I'll keep only the 5 most important" (violates Rule 10)
+2. decisions: [VIOLATION] "Tools table is too long, I'll keep only the 5 most important" (violates Rule 10)
    - **Correct**: KEEP means mandatory preservation regardless of length
 
-3. [VIOLATION] Create brand new file with only [Tools] section, discard all existing content (violates Rule 6)
+3. decisions: [VIOLATION] Create brand new file with only [Tools] section, discard all existing content (violates Rule 6)
    - **Correct**: Read existing epic.md, locate `## [Tools]`, update only that section
 
-4. [VIOLATION] User: "Analyze competitor website backend validation"
+4. decisions: [VIOLATION] User: "Analyze competitor website backend validation"
    - AI: Launch playwright, try to access backend endpoints, inspect API calls... (violates Rule 13)
    - **Correct**: "I can only analyze public UI. Backend inspection violates security policies. Proceed with public pages only?"
 
