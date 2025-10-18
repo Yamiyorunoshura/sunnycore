@@ -4,9 +4,9 @@
 **You must read the following context:**
 - {workflow} parameter (required) - "prd" or "full"
 - (If workflow=prd) `{PRD}`
-- (If workflow=prd) `{ARCH}/*.md` (optional, for alignment check)
-- (If workflow=full) `{REQ}/*.md`
-- (If workflow=full) `{ARCH}/*.md`
+- (If workflow=prd) `{ARCH}/*.md`(Only the related documents) (optional, for alignment check)
+- (If workflow=full) `{REQ}/*.md`(Only the related documents)
+- (If workflow=full) `{ARCH}/*.md`(Only the related documents)
 - (If workflow=full) `{EPIC}`
 - (If workflow=full) `{PLAN}/*.md`
 - `{TMPL}/design-validation-tmpl.yaml`

@@ -2,8 +2,8 @@
 
 ## [Context]
 **You must read the following context:**
-- `{REQ}/*.md` - Requirements documents
-- `{ARCH}/*.md` - Architecture documents
+- `{REQ}/*.md`(Only the related documents) - Requirements documents
+- `{ARCH}/*.md`(Only the related documents) - Architecture documents
 - `{TMPL}/epic-tmpl.yaml` - Epic output format template
 
 ## [Products]
@@ -28,7 +28,7 @@
 
 ### 0. How to Parse Source Documents
 
-**A. Requirements Document Analysis (`{REQ}/*.md`)**
+**A. Requirements Document Analysis (`{REQ}/*.md`(Only the related documents))**
 
 Extract the following from requirements documents:
 
@@ -44,7 +44,7 @@ Extract the following from requirements documents:
    - Categories: Performance, Security, Reliability, Usability, Maintainability, Scalability
    - **Action:** List all NFR-XXX IDs and determine which require dedicated implementation tasks vs. which are addressed through architectural patterns
 
-**B. Architecture Document Analysis (`{ARCH}/*.md`)**
+**B. Architecture Document Analysis (`{ARCH}/*.md`(Only the related documents))**
 
 Extract the following from architecture documents:
 

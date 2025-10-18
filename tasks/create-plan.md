@@ -2,8 +2,8 @@
 
 ## [Context]
 **You must read the following context:**
-- `{REQ}/*.md`
-- `{ARCH}/*.md`
+- `{REQ}/*.md`(Only the related documents)
+- `{ARCH}/*.md`(Only the related documents)
 - `{EPIC}`
 - `{TMPL}/implementation-plan-tmpl.yaml`
 - `{KNOWLEDGE}/*.md` (optional)
@@ -31,7 +31,7 @@
 
 **Objective**: Build a mental model of the system by extracting key planning information from source documents.
 
-#### From Requirements (`{REQ}/*.md`)
+#### From Requirements (`{REQ}/*.md`(Only the related documents))
 
 **Functional Requirements (REQ-XXX):**
 - **Given-When-Then → Test Scenarios**: Each acceptance criterion maps to at least one behavior test
@@ -52,7 +52,7 @@
 - If REQ Priority = Critical → Plan unit + integration + behavior tests (full coverage)
 - If REQ Priority = Low → Plan behavior tests only (functional coverage)
 
-#### From Architecture (`{ARCH}/*.md`)
+#### From Architecture (`{ARCH}/*.md`(Only the related documents))
 
 **Technical Stack Table:**
 - **Technology + Version → Implementation Constraints**: Use exact versions in plan (e.g., "Express.js 4.18" → specify middleware patterns for that version)
@@ -127,7 +127,7 @@ For each REQ-XXX referenced in the specified task:
 #### Build Architecture → Implementation Files Mapping
 
 For each Component referenced in the specified task:
-1. **Locate Component Definition**: Find component in `{ARCH}/*.md` Components section
+1. **Locate Component Definition**: Find component in `{ARCH}/*.md`(Only the related documents) Components section
 2. **Extract Technology Stack**: Component's "Technology" field defines implementation language/framework
 3. **Derive File Paths**: Use Architecture's "Work Directory Structure" + Component name + Tech stack conventions
    - Example: "Article Service" + "Express.js" + Work Structure → `src/services/ArticleService.js`, `src/routes/articles.js`
@@ -278,12 +278,12 @@ For each Knowledge Base pattern:
 - **Resolution**: Record both REQ IDs and contradictory statements → Request clarification → HALT planning
 
 **Type 2: Architecture Gaps**
-- **Detection**: Task references Architecture component not defined in `{ARCH}/*.md`
+- **Detection**: Task references Architecture component not defined in `{ARCH}/*.md`(Only the related documents)
 - **Resolution**: Record missing component name → Request clarification → HALT planning
 - **Fallback** (if minor): Infer component from REQ + Tech Stack, mark as `[INFERRED]`, proceed with warning
 
 **Type 3: Traceability Breaks**
-- **Detection**: Task maps to REQ-XXX not found in `{REQ}/*.md`
+- **Detection**: Task maps to REQ-XXX not found in `{REQ}/*.md`(Only the related documents)
 - **Resolution**: Record missing REQ ID → Request clarification → HALT planning
 
 **Type 4: Knowledge vs Architecture Conflicts**
@@ -299,8 +299,8 @@ For each Knowledge Base pattern:
 
 Before finalizing plans, verify:
 - [ ] The specified task has been planned
-- [ ] Every REQ-XXX referenced in the specified task exists in `{REQ}/*.md`
-- [ ] Every Architecture Component referenced in the specified task exists in `{ARCH}/*.md`
+- [ ] Every REQ-XXX referenced in the specified task exists in `{REQ}/*.md`(Only the related documents)
+- [ ] Every Architecture Component referenced in the specified task exists in `{ARCH}/*.md`(Only the related documents)
 - [ ] Every Test Case in plan maps to at least one REQ
 - [ ] Every Implementation File in plan maps to Architecture Component
 - [ ] All NFRs have corresponding performance/security/reliability tests
@@ -388,8 +388,8 @@ All gates **MUST** pass before marking complete:
 
 **Bad Decision Process**:
 1. Read Epic, see Task-3 needs Payment Service
-2. Cannot find REQ-003 in `{REQ}/*.md` → **Assume** it's about payment processing, fabricate test cases
-3. Cannot find "Payment Service" in `{ARCH}/*.md` → **Guess** it uses Stripe API and Node.js, plan accordingly
+2. Cannot find REQ-003 in `{REQ}/*.md`(Only the related documents) → **Assume** it's about payment processing, fabricate test cases
+3. Cannot find "Payment Service" in `{ARCH}/*.md`(Only the related documents) → **Guess** it uses Stripe API and Node.js, plan accordingly
 4. Create plan with fabricated REQ-003 tests and guessed Stripe integration
 5. Skip Knowledge Base (no time)
 6. Save plan file
@@ -401,8 +401,8 @@ All gates **MUST** pass before marking complete:
 
 **Correct Approach**:
 1. Read Epic, see Task-3 references REQ-003, REQ-004
-2. Search `{REQ}/*.md` for REQ-003 → **Not found** → Record: "Missing REQ-003 referenced in Task-3"
-3. Search `{ARCH}/*.md` for Payment Service → **Not found** → Record: "Missing Payment Service component referenced in Task-3"
+2. Search `{REQ}/*.md`(Only the related documents) for REQ-003 → **Not found** → Record: "Missing REQ-003 referenced in Task-3"
+3. Search `{ARCH}/*.md`(Only the related documents) for Payment Service → **Not found** → Record: "Missing Payment Service component referenced in Task-3"
 4. **Request Clarification**: "Task-3 references REQ-003 and REQ-004 not found in requirements. Task-3 references Payment Service not defined in architecture. Please provide missing documents or update Task-3 mappings."
 5. **HALT planning** for Task-3 until clarification received
 6. Proceed with other tasks if possible

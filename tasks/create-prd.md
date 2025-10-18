@@ -4,7 +4,7 @@
 **You must read the following context:**
 - User requirement description
 - `{TMPL}/prd-tmpl.yaml`
-- `{ARCH}/*.md` (if Brownfield)
+- `{ARCH}/*.md`(Only the related documents) (if Brownfield)
 - `{KNOWLEDGE}/*.md` (if exist)
 
 ## [Products]

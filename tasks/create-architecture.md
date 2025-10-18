@@ -2,7 +2,7 @@
 
 ## [Context]
 **You must read the following context:**
-- `{REQ}/*.md` - Requirements documents following standardized structure. Each document contains:
+- `{REQ}/*.md`(Only the related documents) - Requirements documents following standardized structure. Each document contains:
   - **Functional Requirements** (REQ-xxx): Each requirement includes Description, Acceptance Criteria (Given-When-Then format), Priority (Critical/High/Medium/Low), Dependencies (other requirement IDs)
   - **Non-Functional Requirements** (NFR-xxx): Each requirement includes Category (Performance/Security/Reliability/Usability/Maintainability/Scalability), Requirement statement, Target Metric (quantified), Measurement Method, Priority
   - **Constraints**: Technical Constraints (technology limitations, integration requirements, compliance), Business Constraints (budget, timeline, resources), Regulatory Constraints (legal requirements, industry standards, data protection)
@@ -14,7 +14,7 @@
 
 ## [Products]
 - `{root}/docs/architecture.md` (temporary, will be sharded)
-- `{ARCH}/*.md`
+- `{ARCH}/*.md`(Only the related documents)
 
 ## [Constraints]
 - **MUST** record issues when requirements incomplete/conflicting, **MUST NOT** make assumptions

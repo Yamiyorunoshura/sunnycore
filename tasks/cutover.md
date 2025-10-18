@@ -2,8 +2,8 @@
 
 ## [Context]
 **You must read the following context:**
-- `{REQ}/*.md` (required)
-- `{ARCH}/*.md` (required)
+- `{REQ}/*.md`(Only the related documents) (required)
+- `{ARCH}/*.md`(Only the related documents) (required)
 - `{TMPL}/cutover-report-tmpl.yaml` (required)
 
 ## [Products]

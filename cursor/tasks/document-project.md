@@ -2,7 +2,7 @@
 
 ## [Context]
 **You must read the following context:**
-- `{ARCH}/*.md`
+- `{ARCH}/*.md`(Only the related documents)
 - `{TMPL}/architecture-tmpl.yaml`
 - `{KNOWLEDGE}/*.md`
 - `{PROGRESS}`
@@ -12,7 +12,7 @@
 
 ## [Products]
 - `{root}/docs/architecture.md` (temporary, will be sharded)
-- `{ARCH}/*.md`
+- `{ARCH}/*.md`(Only the related documents)
 - `{root}/CURSOR.mdc` (updated with refreshed index)
 
 ## [Constraints]
@@ -34,7 +34,7 @@
 The architecture documentation must reflect ACTUAL implementation, not original design:
 
 **Analysis Process**:
-1. **Read Existing Architecture**: Review all files in `{ARCH}/*.md` to understand original design
+1. **Read Existing Architecture**: Review all files in `{ARCH}/*.md`(Only the related documents) to understand original design
 2. **Analyze Actual Codebase**: Examine actual implementation in the codebase
 3. **Identify Drift**: Document differences between original design and actual implementation
 4. **Extract Rationale**: Find decision rationale in dev notes, reviews, and progress docs

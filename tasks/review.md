@@ -4,7 +4,7 @@
 **You must read the following context:**
 - `{DEVNOTES}/{task_id}-dev-notes.md`
 - `{PLAN}/{task_id}-plan.md`
-- `{ARCH}/*.md`
+- `{ARCH}/*.md`(Only the related documents)
 - `{TMPL}/review-tmpl.yaml`
 
 ## [Products]

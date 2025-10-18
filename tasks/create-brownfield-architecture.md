@@ -3,14 +3,14 @@
 ## [Context]
 **You must read the following context:**
 - `{REQ}` - Requirements to understand what needs to be built
-- `{ARCH}/*.md` - Existing architecture to understand current system
+- `{ARCH}/*.md`(Only the related documents) - Existing architecture to understand current system
 - `{SCRIPTS}/shard-architecture.py` - Tool for distributing architecture content
 - `{TMPL}/architecture-tmpl.yaml` - Template structure for architecture documentation
 - `{KNOWLEDGE}/*.md` - Domain knowledge and patterns
 
 ## [Products]
 - `{root}/docs/architecture.md` (temporary consolidation)
-- `{ARCH}/*.md` (updated distributed architecture files)
+- `{ARCH}/*.md`(Only the related documents) (updated distributed architecture files)
 
 ## [Constraints]
 - **MUST** understand existing architecture before designing changes

@@ -3,7 +3,7 @@
 ## [Context]
 **You must read the following context:**
 - `{PLAN}/{task_id}-plan.md` - Implementation plan with traceability chains, test cases, and implementation steps
-- `{ARCH}/*.md` - Architecture documents containing technical stack, components, data flows, and ADRs
+- `{ARCH}/*.md`(Only the related documents) - Architecture documents containing technical stack, components, data flows, and ADRs
 - `{TMPL}/dev-notes-tmpl.yaml` - Template for documenting implementation outcomes
 
 ## [Products]
@@ -54,7 +54,7 @@
 - Identify performance targets from NFRs (if applicable)
 - Note quality gates (coverage thresholds, code standards)
 
-#### From Architecture Documents (`{ARCH}/*.md`)
+#### From Architecture Documents (`{ARCH}/*.md`(Only the related documents))
 
 **Technical Stack** (from Technical Stack table):
 - Exact technology versions to use (language, framework, database)

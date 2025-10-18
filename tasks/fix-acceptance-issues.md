@@ -3,8 +3,8 @@
 ## [Context]
 **Read these context documents to understand issues and system design:**
 - `{CUTOVER}` - Contains all issues found during acceptance testing with severity levels
-- `{REQ}/*.md` - Shows what functionality was intended and acceptance criteria
-- `{ARCH}/*.md` - Reveals system design, components, and technical decisions
+- `{REQ}/*.md`(Only the related documents) - Shows what functionality was intended and acceptance criteria
+- `{ARCH}/*.md`(Only the related documents) - Reveals system design, components, and technical decisions
 - `{TMPL}/dev-notes-tmpl.yaml` - Provides structure for documentation output
 
 ## [Products]

@@ -3,7 +3,7 @@
 ## [Context]
 **You must read the following context:**
 - User requirement description
-- `{ARCH}/*.md` (if exist)
+- `{ARCH}/*.md`(Only the related documents) (if exist)
 
 ## [Products]
 - Workflow recommendation with command

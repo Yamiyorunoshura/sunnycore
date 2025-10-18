@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+## [4.23.8] - -2025-10-18
+### Changed
+- 修復了LLM會讀取所有需求文檔與架構文檔而非相關文檔的問題
+
 ## [4.23.7] - 2025-10-18
 ### Changed
 - 將create-plan任務改回為獨立task創建implemenetation plan

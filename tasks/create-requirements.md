@@ -7,7 +7,7 @@
 
 ## [Products]
 - `{root}/docs/requirements.md` (temporary, will be sharded)
-- `{REQ}/*.md`
+- `{REQ}/*.md`(Only the related documents)
 
 ## [Constraints]
 - **MUST** create measurable requirements, **MUST NOT** create vague ones

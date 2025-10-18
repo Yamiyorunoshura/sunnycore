@@ -5,14 +5,14 @@
 - `{TMPL}/dev-notes-tmpl.yaml` - Template structure and guidance for documentation
 - `{DEVNOTES}/{task_id}-dev-notes.md` - What was implemented in the last development cycle
 - `{REVIEW}/{task_id}-review.md` - What issues were found and need fixing
-- `{ARCH}/*.md` - System architecture and design specifications
+- `{ARCH}/*.md`(Only the related documents) - System architecture and design specifications
 - `{KNOWLEDGE}/*.md` (if exist) - Approved patterns and solutions
 
 ## [Input-Validation]
 - You **MUST** verify that all required inputs exist before proceeding with any work.
 - **IF** `{REVIEW}/{task_id}-review.md` is missing, you **MUST RETURN** an uncertainty message: "Cannot proceed without review report at {REVIEW}/{task_id}-review.md. Please provide the review findings."
 - **IF** `{DEVNOTES}/{task_id}-dev-notes.md` is missing, you **MUST RETURN** an uncertainty message: "Cannot proceed without development notes at {DEVNOTES}/{task_id}-dev-notes.md. Please provide the original implementation notes."
-- **IF** `{ARCH}/*.md` is missing or incomplete, you **MUST RETURN** an uncertainty message: "Cannot proceed without architecture specifications at {ARCH}/. Please provide the complete architecture documentation."
+- **IF** `{ARCH}/*.md`(Only the related documents) is missing or incomplete, you **MUST RETURN** an uncertainty message: "Cannot proceed without architecture specifications at {ARCH}/. Please provide the complete architecture documentation."
 - You **MUST NOT** guess or assume any missing specifications.
 - You **MUST NOT** proceed without a complete input set.
 
@@ -74,7 +74,7 @@
   - `Alignment Verification` → Requirements not met, architecture deviations
 - **Extract**: Complete list of issues that need fixing with their evidence
 
-**1.3 Read Architecture (`{ARCH}/*.md`):**
+**1.3 Read Architecture (`{ARCH}/*.md`(Only the related documents)):**
 - **Purpose**: Understand correct specifications for each issue
 - **For each issue from review, locate**:
   - `Technical Stack` → Verify correct technology/version should be used
