@@ -6,7 +6,7 @@
 - `{ARCH}/*.md`
 - `{EPIC}`
 - `{TMPL}/implementation-plan-tmpl.yaml`
-- `{KNOWLEDGE}/*.md`
+- `{KNOWLEDGE}/*.md` (optional)
 
 ## [Products]
 - `{PLAN}/{task_id}-plan.md`

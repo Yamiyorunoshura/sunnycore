@@ -29,7 +29,7 @@
 
 ---
 
-## [Comprehensive-Examples]
+## [Examples]
 
 ### Good Example 1: Following Priority and Template Rules
 

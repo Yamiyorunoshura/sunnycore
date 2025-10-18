@@ -7,6 +7,13 @@
 
 ## [Unreleased]
 
+## [4.23.6] - 2025-10-18
+### Fixed
+- 修復了create-plan時無knowledge base(greenfield project)狀態時LLM會停止工作的問題
+
+### Changed
+- 修改了config文件中對examples的命名
+
 ## [4.23.5] - 2025-10-17
 ### Changed
 - 優化init任務，移除多餘提示詞，提升任務簡潔度
