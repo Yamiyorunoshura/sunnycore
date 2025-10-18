@@ -16,7 +16,7 @@
 - `{root}/CURSOR.mdc` (updated with refreshed index)
 
 ## [Constraints]
-- **MUST** base on actual implementation, **MUST NOT** base on original design
+- **MUST** based on actual implementation, **MUST NOT** based on original design
 - **MUST** include source references (source_refs), **MUST NOT** produce content without
 - **MUST** delete old architecture docs before sharding, **MUST NOT** skip
 - **MUST** update CURSOR.mdc index after sharding, **MUST NOT** skip

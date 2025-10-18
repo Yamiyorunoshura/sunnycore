@@ -5,7 +5,7 @@
 2. **Ambiguity handling**: Pause to request clarification when instructions are ambiguous. Read all required files before proceeding.
 3. **Sequential execution**: Complete todos in order. Do not skip or reorder steps unless dependencies require it.
 4. **Task decomposition**: Break down multi-step or complex work into smaller steps before execution.
-5. **Progress tracking**: Establish valid progress tracking mechanism before you start working on the tasks to prevent losing tack in long conversations. 
+5. **Progress tracking**: Establish valid progress tracking mechanism before you start working on the tasks to prevent losing track in long conversations.
 
 ## [Template-And-Products-Format]
 1. **Markdown hierarchy**: Produce pure Markdown mirroring template structure: section→H1, nested sections→H2.
@@ -34,17 +34,19 @@
 ### Good Example 1: Following Priority and Template Rules
 
 **[CONTEXT]**  
-User: "Implement a user authentication module based on tasks/develop-plan.md"
+User: "*develop-plan 1"
 
 **[DECISION]**  
 1. Read AGENTS.md first to understand core constraints (Rule 1)
 2. Check commands for any auth-related directives (Rule 1)
 3. Use sequential-thinking to plan: analyze requirements → design architecture → implement → test → verify Quality-Gate (Rule 11)
-4. Read tasks/develop-plan.md completely (Rule 2)
-5. Create implementation-plan.md using correct hierarchy: `# [Implementation-Plan]` with `## [Quality-Gate]` as H2 (Rules 4-5)
-6. Execute steps sequentially without skipping (Rule 3)
-7. Verify each step: run tests, check linter (Rule 7)
-8. Complete Quality-Gate checklist before declaring done (Rule 8)
+4. Create a todo list with steps of the tasks written
+5. Read tasks/develop-plan.md completely (Rule 2)
+6. Start working according to the steps in the task
+7. Generate dev-notes based on the template: `# [Implementation-Plan]` with `## [Quality-Gate]` as H2 (Rules 4-5)
+8. Execute steps sequentially without skipping (Rule 3)
+9. Verify each step: run tests, check linter (Rule 7)
+10. Complete Quality-Gate checklist before declaring done (Rule 8)
 
 **[EXPECTED-OUTCOME]**  
 Feature delivered with all governance rules respected, proper template structure maintained, all quality gates passed.
@@ -52,6 +54,7 @@ Feature delivered with all governance rules respected, proper template structure
 **[WHY-GOOD]**  
 - Respects instruction hierarchy (AGENTS.md → commands → tasks)  
 - Uses sequential-thinking for complex multi-step work  
+- Established valid progress management mechanism (the todo list) to avoid missing tasks
 - Maintains correct H1/H2 template hierarchy  
 - Executes steps in order without skipping  
 - Verifies at each step and checks complete Quality-Gate  
@@ -95,11 +98,11 @@ User: "Implement payment integration based on tasks/develop-plan.md"
 3. [VIOLATION] No sequential-thinking planning for complex task (violates Rule 11)
 4. [VIOLATION] Jump directly to Step 3, skip Steps 1-2 (violates Rule 3)
 5. [VIOLATION] Create payment-module.md with wrong hierarchy (violates Rules 4-5):
-   ```markdown
-   # [Implementation-Plan]
-   # [Quality-Gate]          ← Wrong: should be H2
-   - Item 1
-   ```
+    ```markdown
+    # [Implementation-Plan]
+    # [Quality-Gate]          ← Wrong: should be H2
+    - Item 1
+    ```
 6. [VIOLATION] Declare "Implementation complete!" without running tests or checking Quality-Gate (violates Rules 7-8)
 
 **[EXPECTED-OUTCOME]**  

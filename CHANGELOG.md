@@ -7,7 +7,12 @@
 
 ## [Unreleased]
 
-## [4.23.8] - -2025-10-18
+## [4.23.9] - 2025-10-19
+### Fixed
+- 修復了多份提示詞中的語法錯誤
+- 優化了config文件中的範例
+
+## [4.23.8] - 2025-10-18
 ### Changed
 - 修復了LLM會讀取所有需求文檔與架構文檔而非相關文檔的問題
 
@@ -1677,7 +1682,7 @@
 
 ### Changed
 - 擴展角色命令描述：在所有 5 個角色命令文件中新增自訂命令執行說明
-  - 新增說明：「Will execute custom commands base on user's input.」
+  - 新增說明：「Will execute custom commands based on user's input.」
   - 涵蓋文件：`sunnycore_architect.md`、`sunnycore_dev.md`、`sunnycore_pm.md`、`sunnycore_po.md`、`sunnycore_qa.md`
   - 提升角色命令文檔的功能描述完整性與使用者理解度
 
