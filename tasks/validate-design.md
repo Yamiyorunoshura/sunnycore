@@ -8,7 +8,6 @@
 - (If workflow=full) `{REQ}/*.md`(Only the related documents)
 - (If workflow=full) `{ARCH}/*.md`(Only the related documents)
 - (If workflow=full) `{EPIC}`
-- (If workflow=full) `{PLAN}/*.md`
 - `{TMPL}/design-validation-tmpl.yaml`
 
 ## [Products]
