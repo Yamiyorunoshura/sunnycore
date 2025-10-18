@@ -16,68 +16,82 @@
 - **MUST** document out-of-scope changes in dev notes, **MUST NOT** modify files silently
 - **MUST** deliver with all tests passing (exit code 0), **MUST NOT** deliver failing tests
 
-## [Steps]
-**Execute these steps in sequence:**
-1. **Analyze PRD**: Extract requirements, identify dependencies, plan task sequence
-2. **TDD Implementation**: RED→GREEN→REFACTOR cycle for all tasks with quality focus
-3. **Integration Validation**: Verify cross-component functionality and acceptance criteria
-4. **Quality Assurance**: Confirm all tests pass, coverage ≥80%, code quality standards met
-5. **Documentation**: Generate comprehensive dev notes using template
-
 ## [Instructions]
+1. **Step 1: PRD Analysis**
+- **GOAL:** Understand the full requirement set and derive an executable work plan.
+- **STEPS:**
+  - Read `{PRD}` end-to-end and inventory every REQ-XXX and NFR-XXX identifier.
+  - Map dependencies between requirements, architecture components, and tasks.
+  - Outline task sequencing that respects dependencies and aligns with the approved tech stack.
+- **QUESTIONS:**
+  - Which requirements unblock others or demand parallel work streams?
+  - Do any PRD directives conflict with existing architecture or constraints?
+  - What risks (integrations, novel tech, performance) require early mitigation?
+- **CHECKLIST:**
+  - [ ] Requirement inventory captured with ownership notes
+  - [ ] Dependency graph and sequencing drafted
+  - [ ] Risks and mitigation approach logged
 
-### 1. PRD Analysis and Strategy Development
-**How to analyze the PRD systematically:**
-- **Requirements Extraction**: Scan PRD for REQ-XXX and NFR-XXX identifiers, categorize by functional domain (auth, data, UI, etc.)
-- **Dependency Mapping**: Create task dependency graph - identify which components must exist before others can be built
-- **Technology Stack Verification**: Confirm PRD-specified technologies align with architecture, note any conflicts
-- **Risk Identification**: Flag tasks involving external integrations, complex algorithms, or new technologies for extra attention
+2. **Step 2: TDD Implementation**
+- **GOAL:** Deliver each feature through disciplined RED→GREEN→REFACTOR loops.
+- **STEPS:**
+  - Author failing unit and integration tests covering happy paths, edge cases, and error handling.
+  - Implement the minimal code needed to turn the new tests green while honoring architecture patterns.
+  - Refactor to remove duplication, improve structure, and keep observability in place with tests still passing.
+- **QUESTIONS:**
+  - Do the new tests cover the acceptance criteria and critical failure modes?
+  - Are failure messages and assertions clear enough to guide debugging?
+  - What refactors improve maintainability without breaking existing contracts?
+- **CHECKLIST:**
+  - [ ] Each feature started with failing automated tests
+  - [ ] All new and existing tests pass after implementation
+  - [ ] Refactoring completed with suite remaining green
 
-**How to develop execution strategy:**
-- **Sequence Tasks**: Start with foundational components (data models, core services), then build dependent features
-- **Batch Similar Work**: Group related tasks (e.g., all API endpoints, all UI components) for efficiency
-- **Plan Integration Points**: Identify where components connect and plan integration testing approach
+3. **Step 3: Integration Validation**
+- **GOAL:** Confirm cross-component workflows satisfy functional and non-functional expectations.
+- **STEPS:**
+  - Execute end-to-end or integration scenarios that traverse complete data flows.
+  - Inject boundary failures to verify graceful degradation and error propagation.
+  - Measure latency and throughput against documented NFR targets.
+- **QUESTIONS:**
+  - Do services exchange data using the expected contracts and schemas?
+  - How does the system behave when upstream or downstream components fail?
+  - Are performance metrics within the specified thresholds?
+- **CHECKLIST:**
+  - [ ] Critical workflows validated across component boundaries
+  - [ ] Error handling confirmed at service and interface edges
+  - [ ] Performance evidence collected for key NFRs
 
-### 2. TDD Implementation with Quality Focus
-**How to execute RED→GREEN→REFACTOR effectively:**
+4. **Step 4: Quality Assurance**
+- **GOAL:** Satisfy all quality gates before delivery.
+- **STEPS:**
+  - Run the full automated test suite and ensure exit code 0.
+  - Generate coverage reports and confirm ≥80% for overall code and critical paths.
+  - Execute linting and static analysis, resolving every violation.
+- **QUESTIONS:**
+  - Are any tests flaky or missing for high-risk areas?
+  - Does coverage reveal untested acceptance criteria?
+  - Do quality tools highlight architectural or style deviations to address?
+- **CHECKLIST:**
+  - [ ] Complete automated suite passes without retries
+  - [ ] Coverage threshold documented and met
+  - [ ] Lint/static analysis reports clean
+  - [ ] Acceptance criteria mapped to verified evidence
 
-#### RED Phase: Write Failing Tests First
-- **Test Types**: Unit tests (component behavior), integration tests (component interactions), e2e tests (user workflows)
-- **Test Strategy**: Write tests for happy path, error cases, edge cases, and performance requirements
-- **Verification Method**: Run test suite, confirm each new test fails with expected error message
-
-#### GREEN Phase: Minimal Implementation
-- **Implementation Focus**: Write simplest code that makes tests pass, prioritize correctness over elegance  
-- **Quality Standards**: Follow architecture patterns, maintain consistent naming, add basic error handling
-- **Verification Method**: All tests pass (exit code 0), no skipped or ignored tests
-
-#### REFACTOR Phase: Enhance Quality
-- **Code Quality**: Apply SOLID principles, eliminate duplication, ensure functions ≤50 lines
-- **Error Handling**: Add comprehensive validation, meaningful error messages, proper exception propagation
-- **Performance**: Optimize hot paths, add caching where beneficial, implement async patterns for I/O
-- **Observability**: Add structured logging with correlation IDs, key metrics, distributed tracing spans
-- **Verification Method**: Tests remain green, code quality tools report no violations
-
-### 3. Integration Validation
-**How to verify cross-component functionality:**
-- **Data Flow Testing**: Trace data through complete workflows (input→processing→output), verify transforms and persistence
-- **Error Boundary Testing**: Inject failures at component boundaries, confirm proper error propagation and recovery
-- **Transaction Testing**: Verify ACID properties across multi-component operations, test rollback scenarios
-- **Performance Validation**: Run load tests on integrated system, measure end-to-end latency against NFR targets
-
-### 4. Quality Assurance
-**How to ensure delivery quality:**
-- **Test Execution**: Run full test suite (unit + integration + e2e), verify 100% pass rate with exit code 0
-- **Coverage Analysis**: Generate coverage report, ensure ≥80% line coverage, 100% coverage of critical paths
-- **Code Quality**: Run linters and static analysis, fix all violations, confirm functions ≤50 lines
-- **Acceptance Criteria**: Map each PRD acceptance criterion to test evidence, document any deviations with technical rationale
-
-### 5. Documentation Generation
-**How to create comprehensive dev notes:**
-- **Use Template**: Follow `{TMPL}/dev-notes-tmpl.yaml` structure for complete documentation
-- **Focus on Decisions**: Document significant technical choices, challenges overcome, and deviations from plan
-- **Evidence-Based**: Include test results, coverage reports, performance metrics as verification evidence
-- **Actionable Insights**: Record lessons learned and recommendations for future development
+5. **Step 5: Documentation**
+- **GOAL:** Capture delivery outcomes and follow-ups in the canonical record.
+- **STEPS:**
+  - Update `{root}/docs/prd-dev-notes.md` to reflect work performed using `{TMPL}/dev-notes-tmpl.yaml`.
+  - Document key decisions, deviations, risks, and supporting validation evidence.
+  - Record follow-up actions or open questions requiring handoff.
+- **QUESTIONS:**
+  - Which decisions or risks need visibility for stakeholders?
+  - Are acceptance criteria traceable to specific tests or metrics?
+  - What outstanding items require future iterations or approvals?
+- **CHECKLIST:**
+  - [ ] Dev notes refreshed per template structure
+  - [ ] Evidence links or attachments referenced
+  - [ ] Follow-up items logged for next cycle
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

@@ -16,277 +16,91 @@
 - **MUST** achieve 100% requirement coverage (every REQ-XXX and NFR-XXX mapped to tasks)
 - **MUST** map tasks to architecture components from Components section
 
-## [Steps]
-**You should work along to the following steps:**
-1. **Parse source documents.** Extract all REQ-XXX, NFR-XXX from requirements; extract Components, Technical Stack, and Requirements Traceability Matrix from architecture.
-2. **Identify features from architecture components.** Each Component section represents a deliverable feature. Match components to requirements using the Traceability Matrix.
-3. **Create feature-level task breakdown.** Generate one task per major component or logical feature grouping. Ensure task granularity is 1-3 days of work.
-4. **Verify coverage and dependencies.** Check 100% requirement coverage, identify task dependencies from component dependencies in architecture.
-5. **Complete draft, obtain approval, save to "{EPIC}".** Apply epic-tmpl.yaml format and save approved document.
-
 ## [Instructions]
+1. **Step 1: Parse Source Material**
+- **GOAL:** Assemble the complete requirements and architecture inputs needed for epic planning.
+- **STEPS:**
+  - Identify relevant `{REQ}/*.md` files and list every REQ-XXX and NFR-XXX with their titles and acceptance criteria tags.
+  - Review related `{ARCH}/*.md` sections to capture Components, Technical Stack selections, and component status (New/Modified/Existing).
+  - Extract the Requirements Traceability Matrix rows that link requirements to architecture elements.
+  - Record component responsibilities, interfaces, and dependencies that influence sequencing.
+- **QUESTIONS:**
+  - Have all referenced REQ-XXX and NFR-XXX been captured with sufficient context for task creation?
+  - Which architecture components correspond to each requirement in the traceability matrix?
+  - What dependencies or technology constraints are specified for each component?
+- **CHECKLIST:**
+  - [ ] Complete inventory of applicable REQ-XXX and NFR-XXX captured.
+  - [ ] Component details, technical stack notes, and status recorded.
+  - [ ] Traceability Matrix mappings extracted for later use.
+  - [ ] Component responsibilities, interfaces, and dependencies documented.
 
-### 0. How to Parse Source Documents
+2. **Step 2: Select Feature Candidates**
+- **GOAL:** Translate architecture components into feature-level deliverables that align with requirements.
+- **STEPS:**
+  - Prioritize components marked New or Modified, or referenced directly by requirements or traceability notes.
+  - Confirm requirement-to-component mappings using the extracted matrix and capture multi-component relationships.
+  - Evaluate infrastructure or cross-cutting elements to decide whether they require discrete feature tasks.
+  - Adjust candidate scope by splitting oversized components or merging undersized ones to stay within a 1-3 day effort.
+- **QUESTIONS:**
+  - Does each component candidate have clear requirement coverage?
+  - Are any components missing requirements or marked Existing but still needed for fulfillment?
+  - Which infrastructure or NFR-driven elements warrant their own tasks?
+- **CHECKLIST:**
+  - [ ] Every candidate maps to at least one requirement or justified NFR.
+  - [ ] Components without coverage flagged for follow-up.
+  - [ ] Oversized or undersized candidates normalized to feature-level scope.
+  - [ ] Infrastructure and cross-cutting needs evaluated for inclusion.
 
-**A. Requirements Document Analysis (`{REQ}/*.md`(Only the related documents))**
+3. **Step 3: Draft Feature-Level Tasks**
+- **GOAL:** Create task entries that reflect deliverable features with traceability to requirements and architecture.
+- **STEPS:**
+  - Name each task using `verb-noun` kebab-case with ≤14 characters (e.g., `implement-auth`).
+  - Write concise descriptions referencing component responsibilities and relevant technology choices.
+  - Attach requirement IDs and architecture components to each task using the traceability data.
+  - Estimate duration at 1-3 focused workdays and note any preliminary dependencies observed.
+- **QUESTIONS:**
+  - Does each task remain at feature granularity rather than sub-feature or multi-feature scale?
+  - Are requirement and architecture references explicit enough for reviewers to verify traceability?
+  - Do task descriptions communicate the feature’s value and scope without detailing implementation minutiae?
+- **CHECKLIST:**
+  - [ ] Tasks follow `verb-noun` kebab-case naming ≤14 characters.
+  - [ ] Each task lists mapped REQ-XXX/NFR-XXX and architecture components.
+  - [ ] Descriptions capture feature intent and primary technology context.
+  - [ ] Estimated durations fall within the 1-3 day guideline.
 
-Extract the following from requirements documents:
+4. **Step 4: Validate Coverage and Dependencies**
+- **GOAL:** Ensure comprehensive requirement coverage and accurate sequencing across the task list.
+- **STEPS:**
+  - Build a coverage table linking each requirement and NFR to the corresponding tasks and components.
+  - Confirm every task references at least one requirement and resolve or justify any orphan items.
+  - Translate component dependencies into explicit task dependencies and identify critical paths.
+  - Review NFR handling to confirm whether they are satisfied by tasks or architectural decisions.
+- **QUESTIONS:**
+  - Which requirements or NFRs remain unmapped or insufficiently addressed?
+  - Do any task dependencies conflict or create circular relationships?
+  - Where can work proceed in parallel without violating dependency rules?
+- **CHECKLIST:**
+  - [ ] Coverage table shows 100% of REQ-XXX linked to tasks.
+  - [ ] NFR-XXX either mapped to tasks or documented as architecture-covered.
+  - [ ] Task dependencies mirror component relationships without cycles.
+  - [ ] No orphan requirements or tasks remain.
 
-1. **Functional Requirements (REQ-XXX):**
-   - Located in "Functional Requirements" section
-   - Format: `## REQ-{id}: {Title}`
-   - Each has Description, Acceptance Criteria, Priority, Dependencies
-   - **Action:** List all REQ-XXX IDs and their titles
-
-2. **Non-Functional Requirements (NFR-XXX):**
-   - Located in "Non-Functional Requirements" section
-   - Format: `## NFR-{id}: {Title}`
-   - Categories: Performance, Security, Reliability, Usability, Maintainability, Scalability
-   - **Action:** List all NFR-XXX IDs and determine which require dedicated implementation tasks vs. which are addressed through architectural patterns
-
-**B. Architecture Document Analysis (`{ARCH}/*.md`(Only the related documents))**
-
-Extract the following from architecture documents:
-
-1. **Components Section (Primary Source for Tasks):**
-   - Format: `## {Component Name}` under "Components" section
-   - Each component has: Responsibility, Technology, Key Interfaces/APIs, Dependencies, Data Storage
-   - **Action:** Each component typically becomes one feature-level task
-   - **Marked status:** For brownfield, components are marked as New/Modified/Existing
-
-2. **Requirements Traceability Matrix:**
-   - Table format: `| Requirement ID | Requirement Title | Architecture Elements | Implementation Notes |`
-   - **Action:** Use this to map REQ/NFR → Components → Tasks
-   - Verify all requirements appear in this matrix
-
-3. **Technical Stack:**
-   - Definitive technology selections
-   - **Action:** Reference in task descriptions to specify implementation technologies
-
-4. **Component Dependencies:**
-   - Found in each component's "Dependencies" subsection
-   - **Action:** Use to determine task execution order and dependencies
-
-**C. Feature Identification Strategy**
-
-Follow this decision tree to identify feature-level tasks:
-
-```
-For each Component in architecture:
-├─ Is it marked "New" or "Modified"? (brownfield)
-│  ├─ YES → Create a task for this component
-│  └─ NO (Existing) → Skip unless requirements reference it
-│
-├─ Does it map to ≥1 functional requirement?
-│  ├─ YES → Create task: "{verb}-{component-noun}"
-│  └─ NO → Check if it's infrastructure/cross-cutting
-│     ├─ Infrastructure → Evaluate if separate task needed
-│     └─ Cross-cutting → Address via NFR tasks
-│
-└─ Size check: Can this be completed in 1-3 days?
-   ├─ YES → Keep as single task
-   ├─ NO (Too large) → Split by sub-components or logical phases
-   └─ TOO SMALL → Merge with related component
-```
-
-**D. Handling Non-Functional Requirements**
-
-NFRs require different treatment:
-
-| NFR Category | Task Creation Rule | Example |
-|--------------|-------------------|---------|
-| Performance | Task only if requires specific implementation (caching layer, optimization module) | "implement-cache" |
-| Security | Task if dedicated component exists (Auth Service, Encryption Module) | "implement-auth" |
-| Reliability | Usually addressed through architectural patterns; task if monitoring/health-check system needed | "setup-monitoring" |
-| Scalability | Usually addressed through deployment architecture; no separate task unless specific feature (auto-scaler) | "config-autoscale" |
-
-**Rule:** Create NFR task only if it requires concrete deliverable beyond architectural decision.
-
-### 1. Task Granularity and Size Validation
-
-Create **feature-level** tasks that represent major deliverables, not atomic implementation steps.
-
-**Granularity Rules:**
-
-| Level | Scope | Duration | When to Use | Example |
-|-------|-------|----------|-------------|---------|
-| **Feature (CORRECT)** | 1 architecture component or logical feature group | 1-3 days | Always for Epic | "implement-auth" (Auth Service component) |
-| **Sub-feature (TOO SMALL)** | Part of a component | <1 day | Belongs in implementation plan | "write-login-endpoint" |
-| **Atomic (TOO SMALL)** | Single action | Hours | Never in Epic | "write-unit-tests", "run-npm-install" |
-| **Multi-feature (TOO LARGE)** | Multiple components | >3 days | Split into separate tasks | "build-entire-backend" |
-
-**Size Validation Checklist:**
-
-For each task, verify:
-- [ ] Maps to ≥1 architecture component from Components section
-- [ ] Maps to ≥1 functional requirement (REQ-XXX)
-- [ ] Represents a deployable/demonstrable feature increment
-- [ ] Estimated as 1-3 days of focused development work
-- [ ] Name ≤14 characters in kebab-case
-
-**Correct Granularity** (Feature-level):
-- ✓ "implement-auth" → Maps to "Auth Service" component, covers REQ-001, REQ-002
-- ✓ "build-catalog" → Maps to "Product Catalog Service" component, covers REQ-005
-- ✓ "payment-gateway" → Maps to "Payment Integration" component, covers REQ-010
-
-**Incorrect Granularity** (Too atomic - implementation details):
-- ✗ "write-login-test" → Part of "implement-auth" task
-- ✗ "create-migration" → Part of database setup in component task
-- ✗ "run-npm-install" → Operational action, not a feature
-- ✗ "commit-to-git" → Development process, not a deliverable
-
-**Incorrect Granularity** (Too large - multiple components):
-- ✗ "build-backend" → Spans multiple services, split into per-component tasks
-- ✗ "complete-system" → Entire system, should be broken into all component tasks
-
-Atomic breakdown happens later in the `*create-plan` phase. Epic defines **what** to build; plan defines **how** to build it.
-
-### 2. Requirement-Task Mapping and Coverage Verification
-
-**Source:** Use the **Requirements Traceability Matrix** from architecture document as your starting point.
-
-**Process:**
-
-1. **Extract from Traceability Matrix:**
-   - Architecture document contains: `| Requirement ID | Requirement Title | Architecture Elements | Implementation Notes |`
-   - This shows REQ/NFR → Component mappings
-
-2. **Create Task Mapping:**
-   - For each row in Traceability Matrix:
-     - Identify the Architecture Element (component name)
-     - Create or assign to existing task for that component
-     - Record the mapping
-
-3. **Build Coverage Table:**
-
-| Requirement ID | Requirement Title | Task ID | Task Name | Architecture Component |
-|----------------|-------------------|---------|-----------|------------------------|
-| REQ-001 | User Login | 1 | implement-auth | Auth Service |
-| REQ-002 | JWT Token Validation | 1 | implement-auth | Auth Service |
-| REQ-003 | Product Listing | 2 | build-catalog | Product Service |
-| NFR-001 | P95 Latency <200ms | 3 | implement-cache | Cache Layer |
-
-4. **Verify 100% Coverage:**
-   - [ ] Every REQ-XXX from requirements document appears in mapping
-   - [ ] Every NFR-XXX either mapped to task OR addressed architecturally (document in notes)
-   - [ ] Every task references at least one requirement
-   - [ ] No orphan tasks (task without requirement justification)
-
-**Mapping Rules:**
-
-- **One-to-One:** Simple requirement → Single component → Single task (e.g., REQ-003 → Product Service → build-catalog)
-- **Many-to-One:** Multiple requirements → Same component → Single task (e.g., REQ-001, REQ-002 → Auth Service → implement-auth)
-- **One-to-Many:** Complex requirement → Multiple components → Multiple tasks (e.g., REQ-010 "Checkout" → Payment Service, Order Service, Notification Service → 3 tasks)
-- **NFR Mapping:** NFR-XXX → Only if concrete component exists (e.g., NFR-001 Performance → Cache Layer → implement-cache)
-
-### 3. Task Naming Conventions
-Follow these naming rules:
-- **Format**: `{verb}-{noun}` in kebab-case
-- **Length**: ≤14 characters (excluding task ID)
-- **Examples**: "implement-auth", "build-api", "create-reports"
-
-### 4. Operational Actions Exclusion
-Do NOT include operational or process tasks unless explicitly requested:
-- ✗ Testing (covered in TDD workflow)
-- ✗ Linting (part of development standards)
-- ✗ Deployment (separate operational concern)
-- ✗ Documentation (embedded in dev-notes)
-- ✗ Code review (part of review workflow)
-
-Focus only on **deliverable features** that provide user or business value.
-
-### 5. Task Dependencies
-
-**Source:** Extract from architecture document's **Components** section → **Dependencies** subsection for each component.
-
-**Process:**
-
-1. **Identify Component Dependencies:**
-   - In each Component's "Dependencies" subsection, find:
-     - Other components this depends on
-     - External services required
-     - Shared resources
-   
-2. **Map Component Dependencies → Task Dependencies:**
-   
-   Example from architecture:
-   ```
-   ## Profile Service
-   **Dependencies:**
-   - Auth Service (requires authentication)
-   - User Database (shared resource)
-   ```
-   
-   Translates to:
-   ```
-   - [ ] Task-2: build-profile
-     - **Dependencies:** Task-1 (Auth Service must exist first)
-   ```
-
-3. **Dependency Rules:**
-   - **Component dependency → Task dependency:** If Component B depends on Component A, then Task-B depends on Task-A
-   - **Shared infrastructure:** Tasks using shared resources (databases, message queues) may need infrastructure task first
-   - **External APIs:** If component integrates external API, check if API integration task needed first
-   - **Data dependencies:** Tasks that consume data from other components must execute after data producers
-
-4. **Document Dependencies:**
-   - Use format: `**Dependencies:** Task-1, Task-3` in each task specification
-   - Create dependency graph in "Task Dependencies" section of epic
-   - Identify critical path (longest dependency chain)
-   - Identify parallel execution opportunities (tasks with no dependencies)
-
-**Example Dependency Analysis:**
-
-| Task | Component | Depends On (from arch) | Task Dependency |
-|------|-----------|-------------------------|-----------------|
-| Task-1: implement-auth | Auth Service | User Database | None (or infrastructure setup) |
-| Task-2: build-profile | Profile Service | Auth Service, User Database | Task-1 |
-| Task-3: build-catalog | Product Service | Product Database | None |
-| Task-4: checkout-flow | Order Service | Auth Service, Product Service, Payment Gateway | Task-1, Task-3 |
-
-**Verification:**
-- [ ] All inter-component dependencies from architecture are reflected in task dependencies
-- [ ] No circular dependencies exist
-- [ ] Tasks are ordered respecting dependency constraints
-
-### 6. Definition of Done (DoD)
-
-For each task, create **specific, verifiable** Quality-Gates based on:
-
-**Sources:**
-1. **Acceptance Criteria** from corresponding requirements (REQ-XXX)
-2. **Component specifications** from architecture (Key Interfaces/APIs)
-3. **Non-functional targets** from NFR-XXX
-4. **Technology-specific standards** from Technical Stack section
-
-**How to Create Quality-Gates:**
-
-1. Extract acceptance criteria from mapped requirements (REQ-XXX)
-2. Extract API/interface specifications from component's "Key Interfaces/APIs"
-3. Extract performance/quality targets from relevant NFR-XXX
-4. Combine into specific, verifiable criteria
-
-**Quality-Gate Template:**
-
-```
-- **Quality-Gate:**
-  - {Functional criterion from REQ acceptance criteria}
-  - {API/interface criterion from component spec}
-  - {Performance criterion from NFR if applicable}
-  - All unit and integration tests passing (coverage ≥80%)
-  - Code meets quality standards (linting, formatting)
-  - Development notes completed
-```
-
-**Standard Gates (Apply to All Tasks):**
-- [ ] All acceptance criteria from mapped requirements verified
-- [ ] All component interfaces/APIs from architecture implemented
-- [ ] Unit tests passing (≥80% coverage)
-- [ ] Integration tests passing
-- [ ] Code quality standards met (linting, formatting)
-- [ ] Development notes completed ({DEV_NOTES}/task-{id}.md)
-- [ ] No critical linter errors
-- [ ] Performance targets met (if NFR applicable)
+5. **Step 5: Finalize Epic Output**
+- **GOAL:** Package the epic in template format with quality gates ready for stakeholder review.
+- **STEPS:**
+  - Populate `{EPIC}` using `epic-tmpl.yaml`, numbering tasks sequentially and preserving required fields.
+  - Document the dependency graph/table and note parallel execution opportunities or independence.
+  - Apply quality gates derived from acceptance criteria, component interfaces, relevant NFR targets, and testing standards (e.g., unit coverage ≥80%, integration checks passing).
+  - Review constraints, naming rules, and save the finalized epic for approval.
+- **QUESTIONS:**
+  - Does the epic structure match the template expectations for tasks, dependencies, and notes?
+  - Are all quality gates actionable and traceable back to the source documents?
+  - Have naming, coverage, and constraint rules been satisfied before presenting for approval?
+- **CHECKLIST:**
+  - [ ] `{EPIC}` file contains sequentially numbered feature-level tasks.
+  - [ ] Dependency section updated or explicitly states independence.
+  - [ ] Quality gates per task reflect acceptance criteria, interfaces, testing, and performance thresholds.
+  - [ ] Epic saved and ready for stakeholder approval.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

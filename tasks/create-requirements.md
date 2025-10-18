@@ -15,117 +15,83 @@
 - **MUST** exclude sensitive data in examples, **MUST NOT** include
 - **MUST** execute shard-requirements.py after approval, **MUST NOT** skip
 
-## [Steps]
-**You should work along to the following steps:**
-1. Define requirements gathering scope. This establishes boundaries and context clearly.
-2. Extract atomic, deduplicated functional requirements from user input. This creates complete functional requirements.
-3. Infer and quantify non-functional requirements with measurable metrics. This establishes verifiable quality attributes.
-4. Execute quality checks for completeness and consistency. This ensures all requirements meet engineering standards.
-5. Obtain user approval, then run shard-requirements.py. This produces approved requirements sharded successfully.
-
 ## [Instructions]
+1. **Step 1: Define Requirements Gathering Scope**
+- **GOAL:** Establish project context and boundaries before extracting requirements.
+- **STEPS:**
+  - Review `templates/requirement-tmpl.yaml` and all user inputs to confirm required sections.
+  - Summarize problem domain, target users, and primary use cases for the Project Overview.
+  - Capture in-scope versus out-of-scope boundaries and key integration touchpoints.
+- **QUESTIONS:**
+  - What problem is the project solving and for whom?
+  - Which user journeys or personas drive the scope?
+  - Which systems or interfaces sit inside or outside the solution boundary?
+- **CHECKLIST:**
+  - [ ] Project Overview describes domain, users, and critical flows.
+  - [ ] Scope boundaries and integration context are documented.
+  - [ ] Constraints and assumptions tied to scope are noted for later sections.
 
-### 1. Define Requirements Gathering Scope
-Establish clear boundaries before extracting requirements:
-- **Problem domain**: What problem are we solving?
-- **Target users**: Who will use this system? (personas, roles)
-- **Use cases**: What are the primary user journeys?
-- **System boundaries**: What's in-scope vs. out-of-scope?
-- **Integration context**: Existing systems, platforms, or constraints
+2. **Step 2: Extract Atomic Functional Requirements**
+- **GOAL:** Convert user input into deduplicated functional requirements with testable acceptance criteria.
+- **STEPS:**
+  - Parse stakeholder input to highlight distinct capabilities and data interactions.
+  - Decompose vague statements into atomic REQ entries with sequential IDs and dependencies.
+  - Draft Given-When-Then acceptance criteria that verify measurable outcomes for each REQ.
+  - Capture open clarifications and resolve overlaps before finalizing the list.
+- **QUESTIONS:**
+  - Are the requirements atomic, non-overlapping, and aligned to goals?
+  - What clarifications or missing details block testable acceptance criteria?
+  - Do the Given-When-Then scenarios prove success and include realistic data placeholders?
+- **CHECKLIST:**
+  - [ ] Every functional requirement is SMART and numbered (REQ-00X).
+  - [ ] Acceptance criteria follow Given-When-Then format per template.
+  - [ ] Dependencies and placeholders exclude sensitive information.
 
-Document these in the **Project Overview** section per `requirement-tmpl.yaml`.
+3. **Step 3: Quantify Non-Functional Requirements**
+- **GOAL:** Derive measurable quality attributes that support the functional scope.
+- **STEPS:**
+  - Identify explicit and implicit quality expectations from context and stakeholder cues.
+  - Translate qualitative adjectives into quantified targets with measurement methods.
+  - Assign categories (Performance, Security, etc.) and sequential IDs for each NFR.
+- **QUESTIONS:**
+  - Which quality attributes are implied by the problem space or constraints?
+  - What concrete metrics best express the desired experience or compliance level?
+  - How will each metric be measured or observed in practice?
+  - Are the targets realistic given stated limitations?
+- **CHECKLIST:**
+  - [ ] Each NFR lists category, quantified target, and measurement method.
+  - [ ] Targets align with functional scope and project constraints.
+  - [ ] Sensitive data and vendor-specific secrets remain excluded.
 
-### 2. Extract Functional Requirements from User Input
+4. **Step 4: Run Quality Validation**
+- **GOAL:** Ensure requirements are complete, consistent, feasible, and compliant.
+- **STEPS:**
+  - Execute completeness, consistency, feasibility, and sensitivity checks against the full set.
+  - Resolve conflicting requirements, unrealistic metrics, and missing acceptance criteria.
+  - Populate Constraints, Assumptions, and Risks sections with consolidated findings.
+- **QUESTIONS:**
+  - Have all stakeholder features and quality expectations been addressed?
+  - Do any requirements contradict each other or violate constraints?
+  - Are placeholders and examples compliant with sensitivity guidance?
+- **CHECKLIST:**
+  - [ ] Quality gate items (SMART, quantification, acceptance criteria) all pass.
+  - [ ] Constraints, assumptions, and risks are documented per template.
+  - [ ] Outstanding clarifications or dependencies are logged for follow-up.
 
-**Core extraction principles:**
-
-**A. Decompose vague statements into atomic capabilities**
-- ❌ User says: "Users search products"
-- ✓ Extract multiple atomic requirements:
-  - REQ-001: Category filtering (UI control + backend query)
-  - REQ-002: Price range filtering (slider + real-time query)
-  - REQ-003: Rating filtering (star selection + count display)
-
-**B. Ask clarifying questions to uncover hidden requirements**
-- If user says "notification system" → Ask: Which channels? (email, SMS, push?) Real-time or batch? User preferences?
-- If user says "dashboard" → Ask: Which metrics? Update frequency? User roles with different views?
-
-**C. Ensure each requirement is SMART**
-- **S**pecific: Exactly what capability/feature?
-- **M**easurable: How do we verify it works?
-- **A**chievable: Technically feasible with available resources?
-- **R**elevant: Aligns with project goals?
-- **T**estable: Can write clear pass/fail acceptance criteria?
-
-**D. Deduplicate and trace dependencies**
-- Avoid overlapping requirements (e.g., "login" and "user authentication" are likely the same)
-- Identify dependencies: REQ-005 may depend on REQ-002 being completed first
-
-Follow the **Functional Requirements** format in `requirement-tmpl.yaml` (REQ-001, REQ-002, etc.).
-
-### 3. Infer and Quantify Non-Functional Requirements
-
-**Core quantification principles:**
-
-**A. Transform qualitative adjectives into measurable metrics**
-- "fast" → P95 latency < 200ms, P99 < 500ms
-- "scalable" → Support 10K concurrent users, 100K requests/min
-- "reliable" → 99.9% uptime, max 43min downtime/month
-- "secure" → OAuth 2.0 + JWT, AES-256 encryption, OWASP Top 10 compliance
-- "user-friendly" → ≤3 clicks to complete task, 95% task completion rate
-
-**B. Infer implicit NFRs from context**
-- If user mentions "mobile app" → Infer: app size < 50MB, cold start < 2s
-- If user mentions "financial transactions" → Infer: PCI-DSS compliance, audit logging
-- If user mentions "global users" → Infer: multi-region deployment, CDN latency < 100ms
-
-**C. Use industry-standard categories**
-- **Performance**: Response time, throughput, resource usage
-- **Scalability**: Concurrent users, data volume, transaction rate
-- **Reliability**: Uptime, MTBF, MTTR, fault tolerance
-- **Security**: Authentication, authorization, encryption, compliance
-- **Usability**: Task completion time, error rate, accessibility (WCAG 2.1)
-- **Maintainability**: Code coverage, deployment frequency, documentation
-
-Follow the **Non-Functional Requirements** format in `requirement-tmpl.yaml` (NFR-001, NFR-002, etc.).
-
-### 4. Quality Checks Before Finalization
-
-Run these checks before seeking user approval:
-
-**Completeness checks:**
-- [ ] All user-mentioned features have corresponding functional requirements
-- [ ] All quality expectations have corresponding NFRs with metrics
-- [ ] Every requirement has Given-When-Then acceptance criteria
-- [ ] Constraints section covers technical, business, and regulatory limits
-
-**Consistency checks:**
-- [ ] No contradictory requirements (e.g., REQ-010 vs. REQ-025)
-- [ ] NFR targets are aligned (e.g., P95 < 200ms but supports 10K concurrent users is realistic?)
-- [ ] Dependencies are valid and acyclic
-
-**Feasibility checks:**
-- [ ] Each requirement is technically achievable with available technology
-- [ ] NFR metrics are realistic given project constraints (time, budget, team size)
-- [ ] No requirements violate stated constraints
-
-**Sensitivity checks:**
-- [ ] Examples use placeholder data (user@example.com, not real emails)
-- [ ] No proprietary algorithms, trade secrets, or confidential data exposed
-
-### 5. Approval and Sharding Workflow
-
-**A. Obtain user approval:**
-1. Present the complete `requirements.md` document
-2. Walk through key requirements and acceptance criteria
-3. Confirm scope alignment and feasibility
-4. Address any user feedback or clarifications
-
-**B. Execute sharding:**
-1. Run `python scripts/shard-requirements.py` to split `requirements.md`
-2. Verify sharded files appear in `{REQ}/` directory (typically: `functional.md`, `non-functional.md`, `constraints.md`)
-3. Confirm cross-references and requirement IDs are preserved
-4. Notify user of successful sharding
+5. **Step 5: Finalize and Shard Deliverables**
+- **GOAL:** Secure approval and produce the sharded requirements package.
+- **STEPS:**
+  - Present `requirements.md` to stakeholders, gather feedback, and capture explicit approval.
+  - Apply revisions, rerun quality validation, and confirm readiness for distribution.
+  - After approval, run `python scripts/shard-requirements.py` and verify outputs in `{REQ}/`.
+- **QUESTIONS:**
+  - Has the stakeholder confirmed scope alignment and accepted the requirements?
+  - Were revisions revalidated against the quality checks?
+  - Did sharding preserve IDs and cross-references across files?
+- **CHECKLIST:**
+  - [ ] Approval recorded and updates incorporated into `requirements.md`.
+  - [ ] Sharded files generated with correct structure and numbering.
+  - [ ] Stakeholders notified of final artifacts and next actions.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

@@ -13,75 +13,65 @@
 - **MUST** analyze existing architecture for Brownfield, **MUST NOT** skip
 - **MUST** follow decision criteria, **MUST NOT** recommend incorrect workflow
 
-## [Steps]
-**You should work along to the following steps:**
-1. Determine project type and gather context. This identifies whether the project is Greenfield or Brownfield with relevant context collected.
-2. Analyze scope and architectural impact. This assesses the complexity, scale, and potential impact on existing systems.
-3. Apply decision criteria and recommend workflow. This evaluates requirements against criteria to provide a clear workflow recommendation.
-4. Provide actionable next-step command. This gives the user the specific command to execute next.
-
 ## [Instructions]
+1. **Step 1: Determine Project Type and Context**
+- **GOAL:** Classify the initiative as Greenfield or Brownfield and capture supporting context.
+- **STEPS:**
+  - Gather the user requirement description and list all relevant `{ARCH}/` documents.
+  - Assess whether architecture artifacts exist to confirm Greenfield or Brownfield status.
+  - If Brownfield, review every referenced architecture file to note affected components, integration points, and scope of change.
+- **QUESTIONS:**
+  - Do `{ARCH}/` documents confirm an existing architecture or a blank slate?
+  - Which current components or contracts will the work interact with?
+  - What evidence supports the Greenfield vs. Brownfield classification?
+- **CHECKLIST:**
+  - [ ] Project type recorded with explicit evidence from the available context.
+  - [ ] Notes captured on existing components or assumptions for a new build.
 
-### 1. Project Type Determination
-**How to determine project type:**
-- **Check for existing architecture**: Look for any documents in `{ARCH}/` directory
-- **Greenfield indicators**: No architecture documents, starting from scratch, completely new system
-- **Brownfield indicators**: Existing architecture documents, extending/modifying existing system
+2. **Step 2: Analyze Scope and Architectural Impact**
+- **GOAL:** Evaluate complexity, scale, and system impact of the requirement.
+- **STEPS:**
+  - Break the requirement into feature-level tasks to estimate scope.
+  - Examine how the change affects component boundaries, contracts, and cross-cutting concerns (security, performance, observability).
+  - Assess technology needs, confirming compatibility with the current stack or identifying additions.
+- **QUESTIONS:**
+  - How many feature-level tasks are necessary to deliver the requirement?
+  - Will any components, boundaries, or contracts need to change?
+  - Are new technologies or integrations required to satisfy the scope?
+- **CHECKLIST:**
+  - [ ] Task estimate documented with key drivers.
+  - [ ] Architectural and cross-cutting impacts summarized.
+  - [ ] Technology compatibility or required additions assessed.
 
-**For Greenfield projects:**
-- Focus on understanding the complete scope since everything will be built new
-- Assess if the requirements justify a full architecture design process
+3. **Step 3: Apply Decision Criteria and Recommend Workflow**
+- **GOAL:** Select the appropriate workflow using the decision matrix criteria.
+- **STEPS:**
+  - Compare findings against Full Workflow (`*create-requirements`) triggers such as new components, architectural changes, or technology additions.
+  - Validate whether all PRD (`*create-prd`) conditions hold: within existing boundaries, limited scope, compatible technology, no cross-cutting changes.
+  - Choose the workflow that best aligns with the evidence and capture the justification referencing specific criteria.
+- **QUESTIONS:**
+  - Which Full Workflow criteria are satisfied by the analysis?
+  - Do all PRD conditions remain true without exception?
+  - What risks emerge if the recommended workflow is incorrect?
+- **CHECKLIST:**
+  - [ ] Workflow recommendation recorded with explicit criteria-based justification.
+  - [ ] Rationale ties directly to scope, impact, and technology findings.
+  - [ ] Risks or caveats of the decision noted for the user.
 
-**For Brownfield projects:**
-- **Read ALL existing architecture documents** to understand current system
-- **Identify integration points**: How will new functionality connect to existing components
-- **Assess impact scope**: Will changes affect existing component boundaries, contracts, or patterns
-- **Look for extension opportunities**: Can requirements be satisfied by extending existing components
-
-### 2. Scope Analysis and Decision Criteria
-**How to analyze scope and complexity:**
-- **Count expected tasks**: Break down requirements into feature-level tasks to estimate scope
-- **Assess architectural impact**: Will this require new components, change existing boundaries, or modify contracts
-- **Evaluate technology needs**: Does this require new technology, frameworks, or external integrations
-- **Identify cross-cutting concerns**: Does this involve security, performance, observability, or other system-wide aspects
-
-**Decision Matrix - Use Full Workflow (*create-requirements) when ANY of these apply:**
-- **New system components**: Requires creating new services, modules, or major subsystems
-- **Architectural changes**: Modifying component boundaries, introducing new patterns, or changing system structure
-- **Technology additions**: New frameworks, databases, external services, or infrastructure changes  
-- **Cross-cutting impact**: Security policies, performance requirements, monitoring, or system-wide changes
-- **Large scope**: Estimated 5+ feature-level tasks or complex interconnected requirements
-- **System transformation**: Major changes like monolith-to-microservices, platform migrations, or architectural overhauls
-
-**Use PRD Workflow (*create-prd) when ALL of these apply:**
-- **Within existing boundaries**: Features can be implemented within current component structure
-- **Technology compatible**: Current tech stack can satisfy all requirements
-- **Limited scope**: Estimated 1-5 feature-level tasks with clear boundaries
-- **Enhancement focused**: Feature additions, UI improvements, or bug fixes without architectural impact
-- **No cross-cutting changes**: Doesn't require system-wide modifications or new patterns
-
-### 3. Making and Presenting the Recommendation
-**How to structure your analysis and recommendation:**
-
-1. **State Project Type with Evidence**
-   - Clearly state Greenfield or Brownfield
-   - Provide specific evidence (e.g., "Architecture documents found in `{ARCH}/`" or "No existing architecture documents")
-   - For Brownfield: Summarize key existing components that will be affected
-
-2. **Present Scope Analysis**
-   - **Task estimate**: "Estimated X feature-level tasks based on requirement breakdown"
-   - **Architectural impact**: Describe what components/boundaries will be affected
-   - **Technology assessment**: State whether current tech stack is sufficient
-   - **Cross-cutting concerns**: Identify any system-wide implications
-
-3. **Provide Clear Workflow Recommendation**
-   - State recommended workflow (Full or PRD)
-   - **Justify with criteria**: Explain which specific decision criteria led to this recommendation
-   - **Risk assessment**: Mention any risks of choosing the wrong workflow
-   
-4. **Give Actionable Next Command**
-   - Provide exact command: `/sunnycore_pm *create-requirements` or `/sunnycore_pm *create-prd`
-   - Explain what the user should expect in the next step
+4. **Step 4: Provide Actionable Next-Step Command**
+- **GOAL:** Deliver a clear command that guides the user to the next action.
+- **STEPS:**
+  - Select `/sunnycore_pm *create-requirements` or `/sunnycore_pm *create-prd` to match the recommendation.
+  - Explain what the chosen command initiates for the user.
+  - Highlight any prerequisites or immediate follow-ups needed before or after running the command.
+- **QUESTIONS:**
+  - Does the command align with the recommended workflow and project context?
+  - What should the user prepare or verify before executing the command?
+  - Which immediate outcomes or follow-up tasks should the user anticipate?
+- **CHECKLIST:**
+  - [ ] Command provided and consistent with the workflow recommendation.
+  - [ ] Next-step explanation clarifies expected outcomes.
+  - [ ] Prerequisites or follow-up actions identified for the user.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

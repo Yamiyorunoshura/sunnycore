@@ -11,79 +11,66 @@ Read and analyze these source documents:
 ## [Products]
 - `{KNOWLEDGE}/*.md` - Knowledge base organized by technical domains
 
-## [Steps]
-1. **Scan and Extract**: Identify high-value practices, errors, and decisions across all documents
-2. **Organize by Domain**: Group knowledge into technical categories (security, performance, etc.)
-3. **Document with Evidence**: Create knowledge files with clear source references
-4. **Archive Sources**: Move source documents to archive for version control
-
 ## [Instructions]
+1. **Step 1: Scan and Extract**
+- **GOAL:** Surface high-value practices, recurring errors, and key decisions from every source document.
+- **STEPS:**
+  - Review `{REVIEW}/*.md` for practices scored ≥9.0 and documented issues worth capturing.
+  - Pull significant decisions, challenges, and trade-offs from `{DEVNOTES}/*.md` and `{PROGRESS}` records.
+  - Extract deployment incidents, resolutions, and existing insights from `{CUTOVER}` notes and `{KNOWLEDGE}/*.md`.
+- **QUESTIONS:**
+  - Which practices meet or exceed the ≥9.0 quality threshold?
+  - What recurring failures or bugs appear across the sources?
+  - Which technology choices or trade-offs need to be preserved?
+- **CHECKLIST:**
+  - [ ] High-value practices, errors, and decisions enumerated with source pointers.
+  - [ ] Root causes and solutions captured for each issue.
+  - [ ] Performance and security items noted for later categorization.
 
-### 1. Knowledge Scanning and Extraction
+2. **Step 2: Organize by Domain**
+- **GOAL:** Group extracted knowledge into domain-focused files that are easy to navigate.
+- **STEPS:**
+  - Cluster each knowledge item into a natural technical domain (security, performance, API design, database, concurrency, infrastructure, etc.).
+  - Apply `{type}-{domain}.md` naming for best practices, errors, and decisions.
+  - Create or update the corresponding files under `{KNOWLEDGE}` with grouped entries.
+- **QUESTIONS:**
+  - Does every knowledge item sit in the most specific domain available?
+  - Are naming conventions applied consistently across files?
+  - Do any new domains need to be introduced to avoid miscategorizing data?
+- **CHECKLIST:**
+  - [ ] All knowledge items assigned to domain categories.
+  - [ ] File names follow the `{type}-{domain}.md` convention.
+  - [ ] No extracted item remains uncategorized.
 
-**How to identify valuable knowledge:**
-- **High-Quality Practices**: Look for practices with scores ≥9.0 in review documents, marked as "Platinum"
-- **Error Patterns**: Extract all bugs, failures, and their solutions regardless of quality level
-- **Technical Decisions**: Capture significant technology choices, architecture decisions, and trade-off analyses
+3. **Step 3: Document with Evidence**
+- **GOAL:** Record each knowledge item with clear context, solution, and traceable evidence.
+- **STEPS:**
+  - Write each entry with practice/problem, context, and solution/approach sections.
+  - Attach precise references using `[source: file_path [section_name]]` for every entry.
+  - Capture conflicting practices with contextual qualifiers rather than merging them.
+- **QUESTIONS:**
+  - Does each entry explain when the knowledge applies?
+  - Is the recommended solution backed by a cited source?
+  - Are conflicting approaches clearly labeled with their applicable scenarios?
+- **CHECKLIST:**
+  - [ ] Entries include description, context, solution, and evidence.
+  - [ ] Source references use the required citation format.
+  - [ ] Conflicting practices documented with contextual notes.
 
-**Scanning approach:**
-- Read review documents to find scored practices and identified issues
-- Extract technical decisions and challenges from dev notes
-- Look for deployment issues and solutions in cutover reports
-- Identify recurring patterns across multiple documents
-
-**What to capture:**
-- Root causes and solutions for technical problems
-- Proven practices with evidence of effectiveness
-- Technology choices with rationale
-- Performance optimization decisions
-- Security implementation patterns
-
-### 2. Domain-Based Organization
-
-**How to organize knowledge:**
-- Group by technical domain, not by source document
-- Create natural categories based on the knowledge found
-- Use consistent naming: `{type}-{domain}.md`
-
-**Common domain categories:**
-- **Security**: Authentication, authorization, encryption, validation
-- **Performance**: Caching, optimization, load handling
-- **API Design**: REST patterns, versioning, error handling
-- **Database**: Schema design, queries, migrations
-- **Concurrency**: Race conditions, locks, distributed systems
-- **Infrastructure**: Deployment, monitoring, configuration
-
-**Organization patterns:**
-- `best-practices-{domain}.md` - Proven techniques (score ≥9.0)
-- `errors-{domain}.md` - Bug patterns and solutions
-- `decisions-{domain}.md` - Architecture and technology choices
-
-### 3. Knowledge Documentation
-
-**Evidence linking approach:**
-- Include source reference for every knowledge point
-- Format: `[source: file_path [section_name]]`
-- Link to specific sections or findings in source documents
-
-**Documentation structure per knowledge point:**
-- **Practice/Problem**: Clear description
-- **Context**: When/where this applies
-- **Solution/Approach**: What works and why
-- **Evidence**: Source reference with specific location
-
-**Handle conflicting practices:**
-- Document all valid approaches with their contexts
-- Note conflicts explicitly rather than forcing resolution
-- Preserve different solutions for different scenarios
-
-### 4. Archival Process
-
-**How to archive:**
-1. Verify knowledge base is complete and properly referenced
-2. Move all source documents to `{ARCHIVE}/{version_name}/`
-3. Keep knowledge base in active workspace for ongoing use
-4. Ensure traceability from knowledge back to archived sources
+4. **Step 4: Archive Sources**
+- **GOAL:** Preserve source materials while maintaining traceability to the knowledge base.
+- **STEPS:**
+  - Confirm the knowledge base reflects all extracted insights with citations.
+  - Move processed source documents to `{ARCHIVE}/{version_name}/`, keeping knowledge files active in `{KNOWLEDGE}`.
+  - Verify each knowledge entry links back to an accessible archived source.
+- **QUESTIONS:**
+  - Have all source insights been captured before archiving?
+  - Does the archive path follow the expected version naming?
+  - Can every knowledge entry be traced to its archived document?
+- **CHECKLIST:**
+  - [ ] Knowledge base coverage validated before archiving.
+  - [ ] Sources relocated to `{ARCHIVE}/{version_name}/`.
+  - [ ] Traceability confirmed between knowledge entries and archived files.
 
 ## [Quality Gates]
 - [ ] Knowledge base created with domain-organized files

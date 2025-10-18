@@ -23,79 +23,98 @@
 3. Must index codebase for Brownfield projects
 4. Must follow directory structure from architecture documents exactly
 
-## [Steps]
+## [Instructions]
+1. **Step 1: Analyze Architecture Inputs**
+- **GOAL:** Understand every technical requirement and constraint from the architecture set before modifying the environment.
+- **STEPS:**
+  - Read each architecture document in {ARCH}/*.md.
+  - Capture the complete technology stack with mandated version numbers.
+  - List environment setup requirements, dependencies, and tooling expectations.
+  - Extract the exact `work-directory-structure` specification.
+  - Record all modules, components, services, and Brownfield integration notes.
+- **QUESTIONS:**
+  - Which documents define required versions, tools, or sequencing?
+  - Are any prerequisites or external dependencies unclear?
+  - Does the architecture call for Brownfield indexing or integrations?
+  - Are there ambiguities in the `work-directory-structure` that need clarification?
+- **CHECKLIST:**
+  - [ ] Tech stack with versions summarized.
+  - [ ] Environment and tooling requirements captured.
+  - [ ] Directory structure copied verbatim.
+  - [ ] Modules, services, and Brownfield notes documented.
 
-### 1. Analyze Architecture
-**Objective:** Understand project requirements and technical specifications.
+2. **Step 2: Configure Development Environment**
+- **GOAL:** Build a fully operational environment that matches the architecture specifications.
+- **STEPS:**
+  - Install each required language, runtime, and framework using the specified versions.
+  - Install supporting libraries, CLIs, and tooling called out in the architecture.
+  - Provision databases, queues, or infrastructure services and apply required configurations.
+  - Configure IDE/editor integrations, linters, formatters, and test runners.
+  - Execute smoke commands to confirm every installation works as expected.
+- **QUESTIONS:**
+  - Do installation steps require platform-specific commands or credentials?
+  - Are there environment variables or secrets that must be configured now?
+  - What verification commands prove each dependency is healthy?
+  - Does Brownfield indexing require additional tools or agents here?
+- **CHECKLIST:**
+  - [ ] Core runtimes and frameworks installed at specified versions.
+  - [ ] Supporting tooling configured and accessible.
+  - [ ] Infrastructure services provisioned and reachable.
+  - [ ] Smoke checks executed with successful output.
+  - [ ] Brownfield indexing tools prepared (if applicable).
 
-**Actions:**
-- Read all architecture documents in {ARCH}/*.md
-- Extract technology stack with specific versions
-- Identify all environment setup requirements
-- Extract complete directory structure from `work-directory-structure`
-- Identify all modules, components, and services
-- Note any Brownfield integration requirements
+3. **Step 3: Build Project Directory Structure**
+- **GOAL:** Mirror the architecture's `work-directory-structure` exactly within the workspace.
+- **STEPS:**
+  - Reference the extracted directory map from Step 1.
+  - Create directories using commands that preserve casing and nesting exactly.
+  - Avoid inventing or omitting directories beyond what the architecture specifies.
+  - Validate permissions and relative paths after creation.
+- **QUESTIONS:**
+  - Are there conditional directories for Brownfield vs Greenfield scenarios?
+  - Do any directories depend on prior environment steps?
+  - What verification method best confirms the structure matches the specification?
+- **CHECKLIST:**
+  - [ ] Each required directory created with correct name and depth.
+  - [ ] No extra or missing directories detected.
+  - [ ] Directory creation commands or scripts recorded for reuse.
 
-**Focus:** Ensure complete understanding before proceeding. This prevents rework.
+4. **Step 4: Draft CURSOR.mdc Guidance**
+- **GOAL:** Produce {root}/CURSOR.mdc that aligns with `instruction-tmpl.yaml` and reflects current architecture data.
+- **STEPS:**
+  - Use {TMPL}/instruction-tmpl.yaml to determine required headings and citation rules.
+  - Populate each section with facts gathered from architecture and related sources, adding TODOs where data is missing.
+  - Document the project tech stack, architecture, standards, workflows, and quality expectations with precise citations.
+  - Build a document index that links readers to architecture, requirements, and task files.
+- **QUESTIONS:**
+  - Which sources supply authoritative data for each template section?
+  - Are any sections missing information that should be marked TODO?
+  - How should citations be formatted to satisfy the template policy?
+  - What documents must appear in the index for discoverability?
+- **CHECKLIST:**
+  - [ ] All template sections populated or marked with TODO plus next action.
+  - [ ] Citations or TODOs present for every bullet.
+  - [ ] Document index added with accurate paths.
+  - [ ] CURSOR.mdc saved at {root}/CURSOR.mdc.
 
-### 2. Setup Development Environment
-**Objective:** Configure fully operational development environment.
-
-**Actions:**
-- Install required languages and runtimes (exact versions from architecture)
-- Install frameworks and dependencies
-- Setup databases, message queues, or other infrastructure
-- Configure development tools (linters, formatters, test runners)
-- Verify all installations are functional
-
-**For Brownfield Projects:**
-- Index existing codebase using appropriate indexing tool
-- Verify index is searchable
-
-**Focus:** Environment must be production-ready. All dependencies installed and verified.
-
-### 3. Create Directory Structure
-**Objective:** Establish complete project directory structure.
-
-**Actions:**
-- Extract directory structure from `work-directory-structure` in architecture
-- Create all specified directories exactly as documented
-- Do not assume or modify the structure
-- Verify all directories are created
-
-**Focus:** Directory structure is the foundation. Follow architecture specification exactly.
-
-### 4. Generate Project Guidance (CURSOR.mdc)
-**Objective:** Create comprehensive project reference document.
-
-**How to Create CURSOR.mdc:**
-- Use "{TMPL}/instruction-tmpl.yaml" as your guide for structure
-- Read architecture documents to extract accurate information
-- Include all required sections from template
-
-**What to Include:**
-- **Project Info:** Name, mission, status, key timelines (from architecture/requirements)
-- **Tech Stack:** All technologies with versions (from architecture tech stack section)
-- **Key Architecture:** System components, data flow, integrations (from architecture)
-- **Coding Standard:** Style guides, linting, testing requirements (from architecture or use common standards for the tech stack)
-- **Development Workflow:** Task execution process, version control, quality gates (from project standards)
-- **Quality Standards:** Code quality criteria, review process, acceptance criteria (from templates)
-- **Document Index:** Clear navigation to all project documents
-
-**Focus:** CURSOR.mdc is the single source of truth for developers. Make it comprehensive and well-organized with proper citations.
-
-### 5. Verify Initialization
-**Objective:** Confirm all initialization is complete and correct.
-
-**Verification Checklist:**
-- [ ] Development environment fully operational
-- [ ] All required tools installed and functional
-- [ ] Codebase indexed (if Brownfield)
-- [ ] All directories from architecture created
-- [ ] CURSOR.mdc exists with complete information
-- [ ] Document index is accurate and navigable
-
-**Focus:** Quality gate before proceeding to development. All items must pass.
+5. **Step 5: Validate Initialization Completion**
+- **GOAL:** Confirm environment, structure, documentation, and indexing meet readiness criteria.
+- **STEPS:**
+  - Run validation commands or tests to prove tools, runtimes, and services function.
+  - Inspect directory tree against the architecture specification to ensure fidelity.
+  - Review CURSOR.mdc for completeness, citation compliance, and navigability.
+  - Execute Brownfield indexing or search validation if the project requires it.
+- **QUESTIONS:**
+  - Did every verification command succeed without warnings?
+  - Is any directory or documentation element still pending data?
+  - Are there project-specific acceptance criteria to revisit before sign-off?
+  - Does the Brownfield index respond to sample queries?
+- **CHECKLIST:**
+  - [ ] Environment and tooling verified operational.
+  - [ ] Directory structure matches specification.
+  - [ ] CURSOR.mdc content and index confirmed.
+  - [ ] Brownfield indexing complete and validated (if required).
+  - [ ] Outstanding issues documented with next steps.
 
 ## [Quality Standards]
 

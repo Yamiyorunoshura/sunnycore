@@ -20,34 +20,34 @@
 
 ## [Instructions]
 1. **Step 1: Assimilate Plan And Architecture**
-   - **GOAL:** Build an executable understanding of requirements, tests, architecture, and quality gates.
-   - **STEPS:**
-     - Read the implementation plan to capture traceability chains, test cases, and phase sequencing.
-     - Review relevant architecture documents for tech stack, component contracts, directory structure, and ADR constraints.
-     - Map plan elements to architecture components, highlighting dependencies and target files.
-   - **QUESTIONS:**
-     - Do I understand how every requirement maps to tests and components?
-     - Are any technologies, directories, or interfaces unspecified or conflicting?
-     - What assumptions require confirmation before coding?
-   - **CHECKLIST:**
-     - [ ] All tests and requirements traced to concrete components and files
-     - [ ] Architecture decisions and versions noted for implementation
-     - [ ] Gaps or conflicts recorded and escalated before continuing
+  - **GOAL:** Build an executable understanding of requirements, tests, architecture, and quality gates.
+  - **STEPS:**
+    - Read the implementation plan to capture traceability chains, test cases, and phase sequencing.
+    - Review relevant architecture documents for tech stack, component contracts, directory structure, and ADR constraints.
+    - Map plan elements to architecture components, highlighting dependencies and target files.
+  - **QUESTIONS:**
+    - Do I understand how every requirement maps to tests and components?
+    - Are any technologies, directories, or interfaces unspecified or conflicting?
+    - What assumptions require confirmation before coding?
+  - **CHECKLIST:**
+    - [ ] All tests and requirements traced to concrete components and files
+    - [ ] Architecture decisions and versions noted for implementation
+    - [ ] Gaps or conflicts recorded and escalated before continuing
 
 2. **Step 2: RED Phase — Author Failing Tests**
-   - **GOAL:** Implement the complete test suite that expresses the plan’s acceptance criteria and currently fails for the right reasons.
-   - **STEPS:**
-     - Enumerate and scaffold test files per plan (unit, integration, behavior, performance).
-     - Implement test cases with approved frameworks, covering happy path, edge, and error scenarios.
-     - Run targeted and full suites to verify failures align with missing implementation, capturing failure output.
-   - **QUESTIONS:**
-     - Do the tests fully express each acceptance criterion and NFR?
-     - Are fixtures, mocks, and data consistent with architecture expectations?
-     - Do failure messages confirm missing implementation rather than setup errors?
-   - **CHECKLIST:**
-     - [ ] Every planned test case implemented in the correct location
-     - [ ] Test run produces expected failures with informative errors
-     - [ ] No production code added beyond scaffolding required for tests
+  - **GOAL:** Implement the complete test suite that expresses the plan’s acceptance criteria and currently fails for the right reasons.
+  - **STEPS:**
+    - Enumerate and scaffold test files per plan (unit, integration, behavior, performance).
+    - Implement test cases with approved frameworks, covering happy path, edge, and error scenarios.
+    - Run targeted and full suites to verify failures align with missing implementation, capturing failure output.
+  - **QUESTIONS:**
+    - Do the tests fully express each acceptance criterion and NFR?
+    - Are fixtures, mocks, and data consistent with architecture expectations?
+    - Do failure messages confirm missing implementation rather than setup errors?
+  - **CHECKLIST:**
+    - [ ] Every planned test case implemented in the correct location
+    - [ ] Test run produces expected failures with informative errors
+    - [ ] No production code added beyond scaffolding required for tests
 
 3. **Step 3: GREEN Phase — Minimal Passing Implementation**
    - **GOAL:** Write the smallest amount of production code needed to turn the RED suite green while honoring architecture boundaries.
@@ -80,19 +80,19 @@
      - [ ] Architecture and quality standards (performance, observability, security) satisfied
 
 5. **Step 5: Document Outcomes**
-   - **GOAL:** Capture implementation evidence and decisions using the development notes template.
-   - **STEPS:**
-     - Populate `{DEVNOTES}/{task_id}-dev-notes.md` following `{TMPL}/dev-notes-tmpl.yaml`.
-     - Record traceability, technical decisions, deviations, challenges, test evidence, and metrics as required.
-     - Attach supporting artifacts (test logs, coverage reports, performance data) referenced in the notes.
-   - **QUESTIONS:**
-     - Does the documentation prove requirements and NFRs were delivered?
-     - Are all deviations, mitigations, and risks clearly justified?
-     - Would a reviewer understand the implementation without more context?
-   - **CHECKLIST:**
-     - [ ] Dev notes complete with required sections and evidence
-     - [ ] All deviations and outstanding risks documented
-     - [ ] Final test results and coverage metrics captured
+  - **GOAL:** Capture implementation evidence and decisions using the development notes template.
+  - **STEPS:**
+    - Populate `{DEVNOTES}/{task_id}-dev-notes.md` following `{TMPL}/dev-notes-tmpl.yaml`.
+    - Record traceability, technical decisions, deviations, challenges, test evidence, and metrics as required.
+    - Attach supporting artifacts (test logs, coverage reports, performance data) referenced in the notes.
+  - **QUESTIONS:**
+    - Does the documentation prove requirements and NFRs were delivered?
+    - Are all deviations, mitigations, and risks clearly justified?
+    - Would a reviewer understand the implementation without more context?
+  - **CHECKLIST:**
+    - [ ] Dev notes complete with required sections and evidence
+    - [ ] All deviations and outstanding risks documented
+    - [ ] Final test results and coverage metrics captured
 
 ## [Blocking Conditions]
 If any required document is missing, inconsistent, or lacks critical details (tech stack, components, tests), stop and request guidance instead of inventing information.

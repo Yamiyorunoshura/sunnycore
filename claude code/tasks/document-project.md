@@ -21,110 +21,71 @@
 - **MUST** delete old architecture docs before sharding, **MUST NOT** skip
 - **MUST** update CLAUDE.md index after sharding, **MUST NOT** skip
 
-## [Steps]
-**You should work along to the following steps:**
-1. Understand existing architecture and actual implementation. This achieves complete understanding of current state.
-2. Create unified architecture.md with source references. This produces complete unified architecture document.
-3. Remove old architecture docs, run sharding script, verify output. This successfully shards architecture in "{ARCH}/*.md".
-4. Update CLAUDE.md with refreshed architecture index. This updates CLAUDE.md with current index.
-
 ## [Instructions]
+[Instructions]
+1. **Step 1: Reconcile Architecture with Implementation**
+- **GOAL:** Build an evidence-backed understanding of how the real system differs from the recorded design.
+- **STEPS:**
+  - Review relevant `{ARCH}/*.md`, `{KNOWLEDGE}/*.md`, and `{PROGRESS}` documents to collect intent, scope, and historical notes.
+  - Examine the codebase to map actual components, data flows, integrations, and technology usage.
+  - Capture every drift, rationale, and supporting citation from `{DEVNOTES}/*.md`, `{REVIEW}/*.md`, and other trusted records.
+- **QUESTIONS:**
+  - Which components or flows in production behavior diverge from the documented architecture?
+  - What specific files or records confirm each current implementation detail?
+  - Why did each drift occur, and where is that rationale documented?
+  - Are there undocumented behaviors that must be added to the architecture?
+- **CHECKLIST:**
+  - [ ] Relevant architecture, knowledge, and progress sources reviewed
+  - [ ] Actual implementations mapped with candidate source references
+  - [ ] Drift summaries and rationales logged for documentation
 
-### 1. Architecture Reconciliation (Actual vs Original)
-The architecture documentation must reflect ACTUAL implementation, not original design:
+2. **Step 2: Build Unified architecture.md with Evidence**
+- **GOAL:** Author `{root}/docs/architecture.md` that reflects reality and cites sources for every statement.
+- **STEPS:**
+  - Structure the document using required sections from `{TMPL}/architecture-tmpl.yaml` (components, data flows, ADRs, deviations).
+  - Draft content so each assertion includes `[source: file_path:line_number]` or `[source: file_path [Section]]` citations.
+  - Highlight how implementation satisfies or diverges from original intent using the evidence gathered.
+- **QUESTIONS:**
+  - Does every component, flow, and decision include a verified source reference?
+  - Are ADRs connected to concrete decisions in dev notes or review artifacts?
+  - Have deviations from the original design been explained with rationale?
+  - Is any required template section incomplete or unsupported?
+- **CHECKLIST:**
+  - [ ] Components, data flows, ADRs, and deviations documented per template
+  - [ ] All claims linked to precise source references
+  - [ ] Narrative aligned with current implementation, not legacy design
 
-**Analysis Process**:
-1. **Read Existing Architecture**: Review all files in `{ARCH}/*.md`(Only the related documents) to understand original design
-2. **Analyze Actual Codebase**: Examine actual implementation in the codebase
-3. **Identify Drift**: Document differences between original design and actual implementation
-4. **Extract Rationale**: Find decision rationale in dev notes, reviews, and progress docs
+3. **Step 3: Shard Architecture Documentation**
+- **GOAL:** Regenerate `{ARCH}/*.md` shards directly from the unified source without stale content.
+- **STEPS:**
+  - Remove existing `{ARCH}/*.md` files to eliminate outdated shards.
+  - Run `python {SCRIPTS}/shard-architecture.py {root}/docs/architecture.md {ARCH}/` to create the new shard set.
+  - Inspect each shard for structure accuracy, preserved references, and correct cross-links.
+- **QUESTIONS:**
+  - Were the legacy shards cleared before regeneration started?
+  - Did the sharding script finish successfully and output the expected files?
+  - Do the refreshed shards retain all source references and navigation cues?
+  - Is any additional cleanup required after sharding?
+- **CHECKLIST:**
+  - [ ] Legacy architecture files removed ahead of sharding
+  - [ ] Sharding script executed without errors
+  - [ ] Generated shards validated for structure and references
 
-**Common Drift Patterns**:
-- Technology changes (e.g., MySQL → PostgreSQL)
-- Pattern changes (e.g., sync → async processing)
-- Component additions or removals
-- Interface/contract changes
-
-### 2. Evidence-Based Documentation
-EVERY architectural statement must have source references:
-
-**Source Reference Format**: `[source: file_path:line_number]` or `[source: file_path [Section Name]]`
-
-**Examples**:
-- "OrderService uses async payment processing [source: src/services/OrderService.js:L20-L45]"
-- "ADR-005: Async for scalability [source: dev-notes/3-dev-notes.md [Payment Decision]]"
-- "Redis caching strategy [source: src/middleware/cache.js:L10-L30]"
-
-**What to Reference**:
-- Code files for implementation details
-- Dev notes for design decisions
-- Reviews for architectural validations
-- Knowledge base for best practices applied
-
-### 3. Complete Architecture Documentation
-Create unified `architecture.md` with all standard sections:
-
-**Components Section**:
-- List ALL implemented components (from actual code)
-- Responsibilities and interfaces for each
-- Technology stack with versions
-- Dependencies between components
-
-**Data Flows Section**:
-- Document actual data flows (from code analysis)
-- Include request/response patterns
-- Event flows and pub/sub patterns
-- Data persistence flows
-
-**Architecture Decision Records (ADRs)**:
-- Extract decisions from dev notes and reviews
-- Format: Context → Decision → Consequences → Alternatives
-- Link to actual implementation
-
-**Deviations from Original Design**:
-- Document ALL changes from original architecture
-- Provide rationale for each change
-- Link to evidence (dev notes, review comments)
-
-### 4. Sharding Workflow
-After creating unified architecture.md:
-
-1. **Delete Old Architecture**:
-   ```bash
-   rm -rf {ARCH}/*.md
-   ```
-   This ensures clean sharding without conflicts
-
-2. **Execute Sharding Script**:
-   ```bash
-   python {SCRIPTS}/shard-architecture.py {root}/docs/architecture.md {ARCH}/
-   ```
-
-3. **Verify Output**:
-   - Check all sharded files in `{ARCH}/` directory
-   - Verify source references are preserved
-   - Confirm cross-references work correctly
-
-### 5. CLAUDE.md Index Update
-After sharding, update `{root}/CLAUDE.md` with current architecture index:
-
-**Index Content**:
-- List all architecture files with brief descriptions
-- Highlight key components and decision records
-- Update last-modified timestamps
-- Ensure index is complete and accurate
-
-**Format Example**:
-```markdown
-## Architecture Documentation
-
-- `architecture/components.md` - System components and responsibilities
-- `architecture/data-flows.md` - Data flow patterns and integrations
-- `architecture/decisions.md` - ADRs and design rationale
-- `architecture/api-contracts.md` - API specifications and contracts
-
-Last Updated: 2025-10-14
-```
+4. **Step 4: Refresh CLAUDE.md Index**
+- **GOAL:** Update `{root}/CLAUDE.md` to accurately index the regenerated architecture shards.
+- **STEPS:**
+  - List the new `{ARCH}/*.md` files and summarize the focus of each shard.
+  - Update the architecture section in `CLAUDE.md` with file names, concise descriptions, and an up-to-date timestamp.
+  - Confirm navigation cues and cross-references align with the refreshed shard layout.
+- **QUESTIONS:**
+  - Does the index cover every shard with a clear summary?
+  - Is the "Last Updated" value aligned with this documentation pass?
+  - Do all references in `CLAUDE.md` point to actual file paths?
+  - Are follow-up tasks needed to keep the index synchronized?
+- **CHECKLIST:**
+  - [ ] Architecture shard listings refreshed with accurate summaries
+  - [ ] Metadata and timestamps updated
+  - [ ] Index references verified against actual files
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

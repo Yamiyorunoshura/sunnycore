@@ -18,295 +18,78 @@
 - **MUST** respect architecture decisions (ADRs, tech stack), **MUST NOT** override with knowledge base when conflicts arise
 - **MUST** identify applicable knowledge base patterns, **MUST NOT** force-apply patterns that conflict with architecture
 
-## [Steps]
-**You should work along to the following steps:**
-1. Extract planning intelligence for the specified task from requirements, architecture, tasks, knowledge base. This builds the mental model of what needs to be tested, implemented, and optimized.
-2. Construct traceability chains linking REQ → Architecture → Tests → Implementation. This ensures every requirement is testable and traceable.
-3. Apply TDD decision logic for RED/GREEN/REFACTOR phases. This translates traceability chains into executable test-driven plans.
-4. Resolve conflicts, gaps, and ambiguities through structured analysis. This ensures plans are complete and conflict-free before execution.
-
 ## [Instructions]
+1. **Step 1: Gather Planning Intelligence**
+- **GOAL:** Capture the information required by `implementation-plan-tmpl.yaml` to build a complete mental model for the task.
+- **STEPS:**
+  - Identify the relevant functional and non-functional requirements, including acceptance criteria, dependencies, and priorities.
+  - Review architecture materials (tech stack tables, component responsibilities, data flows, ADRs) to note constraints and integration points.
+  - Read the epic/task metadata to confirm scope, mapped requirements/components, dependencies, and quality gates.
+  - Scan the knowledge base for patterns that reinforce requirements and architecture without creating conflicts.
+- **QUESTIONS:**
+  - Which requirements and acceptance criteria govern this task?
+  - What architecture components and interfaces support those requirements?
+  - Which dependencies or quality gates from the epic affect planning?
+  - Do any knowledge base patterns apply without contradicting ADRs?
+- **CHECKLIST:**
+- [ ] Relevant REQ/NFR sources and acceptance criteria captured.
+- [ ] Architecture constraints, integrations, and ADR decisions recorded.
+- [ ] Epic dependencies, quality gates, and scope confirmed.
+- [ ] Applicable knowledge patterns logged or conflicts flagged for clarification.
 
-### 1. Extract Planning Intelligence
+2. **Step 2: Build Traceability Chains**
+- **GOAL:** Ensure every requirement links to planned tests, architecture components, and implementation files.
+- **STEPS:**
+  - Derive required behavior, integration, unit, and performance tests for each requirement and NFR.
+  - Map each test to the architecture components, technologies, and interfaces it exercises.
+  - Determine implementation and test file paths that align with the architecture structure and template expectations.
+  - Draft the traceability table (REQ → Tests → Components → Files) and highlight missing links.
+- **QUESTIONS:**
+  - Do all functional and non-functional requirements have mapped tests?
+  - Which components and files implement each planned test?
+  - Are performance or integration layers required to satisfy constraints?
+  - Where do traceability gaps or uncertainties remain?
+- **CHECKLIST:**
+- [ ] REQ-to-test mappings complete for functional and non-functional items.
+- [ ] Tests mapped to architecture components and interfaces.
+- [ ] Implementation and test file paths drafted per tech stack conventions.
+- [ ] Traceability gaps or open questions documented for follow-up.
 
-**Objective**: Build a mental model of the system by extracting key planning information from source documents.
+3. **Step 3: Plan TDD Phases**
+- **GOAL:** Translate traceability into RED/GREEN/REFACTOR actions aligned with the template.
+- **STEPS:**
+  - Enumerate RED phase tests with expected failure reasons and file locations.
+  - Outline minimal GREEN implementation steps that respect architecture constraints and traceability mappings.
+  - Identify REFACTOR targets (quality, integration, performance, knowledge patterns) consistent with ADRs.
+  - Define verification tasks for each phase, including test suite runs and coverage thresholds.
+- **QUESTIONS:**
+  - Which tests must fail first and what behaviors do they validate?
+  - What minimal code changes will satisfy each test while honoring architecture decisions?
+  - Which refactors improve quality without breaking GREEN?
+  - How will verification ensure failure reasons, pass conditions, and coverage targets are met?
+- **CHECKLIST:**
+- [ ] RED phase tests listed with expected failures and file paths.
+- [ ] GREEN steps linked to components, files, and corresponding tests.
+- [ ] REFACTOR targets align with ADRs and applicable knowledge patterns.
+- [ ] Phase-specific verification criteria (failures, exits, coverage) documented.
 
-#### From Requirements (`{REQ}/*.md`(Only the related documents))
-
-**Functional Requirements (REQ-XXX):**
-- **Given-When-Then → Test Scenarios**: Each acceptance criterion maps to at least one behavior test
-  - *Given* (initial state) → Test setup / Arrange phase
-  - *When* (action) → Test execution / Act phase
-  - *Then* (outcome) → Test assertions / Assert phase
-- **Dependencies**: Identify requirement chains that dictate implementation order
-- **Priority**: Critical/High requirements should be validated with more comprehensive test coverage
-
-**Non-Functional Requirements (NFR-XXX):**
-- **Target Metrics → Performance Assertions**: Extract quantifiable thresholds (e.g., "< 2s" → `assert response_time < 2000ms`)
-- **Measurement Methods**: Determine test strategy (load testing, profiling, benchmarking)
-- **Category**: Map to REFACTOR concerns (Performance → caching/indexing, Security → input validation/encryption)
-
-**Decision Logic:**
-- If REQ has multiple Given-When-Then scenarios → Plan separate test case for each scenario
-- If NFR specifies measurement method → Use that method in performance test design
-- If REQ Priority = Critical → Plan unit + integration + behavior tests (full coverage)
-- If REQ Priority = Low → Plan behavior tests only (functional coverage)
-
-#### From Architecture (`{ARCH}/*.md`(Only the related documents))
-
-**Technical Stack Table:**
-- **Technology + Version → Implementation Constraints**: Use exact versions in plan (e.g., "Express.js 4.18" → specify middleware patterns for that version)
-- **Purpose + Rationale → Technology Application**: Understand why chosen to apply correctly (e.g., "PostgreSQL for ACID compliance" → plan transactional tests)
-
-**Components Section:**
-- **Responsibility → Test Scope**: Component purpose defines what to test (e.g., "Auth Service: JWT generation" → test token creation, validation, expiry)
-- **Key Interfaces/APIs → Integration Test Points**: Each exposed interface needs integration test coverage
-- **Dependencies → Test Mocking Strategy**: External dependencies should be mocked in unit tests, real in integration tests
-- **Data Storage → Database Test Setup**: Identify which database/schema to use in test environment
-
-**Data Flows + Sequence Diagrams:**
-- **Flow Steps → Integration Test Sequences**: Each step in sequence diagram maps to integration test stages
-- **Synchronous vs Asynchronous → Test Timing Strategy**: Async flows need await/callback/promise handling in tests
-
-**Architecture Decision Records (ADRs):**
-- **Decision + Rationale → Implementation Patterns**: ADRs define architectural patterns to follow (e.g., "ADR-003: Event-driven for decoupling" → plan event publisher/subscriber in implementation)
-- **Alternatives Considered → Knowledge Base Override Rules**: If ADR explicitly rejected an approach, do NOT apply that approach from knowledge base
-
-**Decision Logic:**
-- If Component has Dependencies → Plan integration tests covering component interactions
-- If Data Flow is Asynchronous → Plan async test handling (event listeners, message queues)
-- If ADR documents a decision → Respect that decision over conflicting knowledge base patterns
-
-#### From Epic (`{EPIC}`) for the specified task
-
-**Task Metadata:**
-- **Description → Feature Scope**: Defines boundaries of what this plan should cover
-- **Requirements List → Traceability Anchors**: These REQ-XXX IDs are the traceability starting points
-- **Architecture List → Implementation Targets**: These component names define where code will live
-- **Dependencies → Planning Order**: Dependent tasks may reuse tests/components from prerequisite tasks
-- **Quality-Gate → Additional Test Requirements**: Supplement standard TDD tests with task-specific validation
-
-**Decision Logic:**
-- If Task depends on another task → Review that task's plan first, reuse test fixtures/setup where applicable
-- If Quality-Gate specifies coverage threshold → Ensure test plan meets or exceeds that threshold
-
-#### From Knowledge Base (`{KNOWLEDGE}/*.md`, if exists)
-
-**Best Practice Patterns:**
-- **Applicable Context → Selective Application**: Identify when pattern applies (e.g., "caching for read-heavy workloads" → only apply if NFR indicates high read volume)
-- **Implementation Guidance → REFACTOR Phase Input**: Knowledge base informs quality improvements, not initial implementation
-
-**Decision Logic:**
-- If Knowledge pattern conflicts with Architecture ADR → Ignore knowledge pattern, follow ADR
-- If Knowledge pattern addresses an NFR → Apply pattern in REFACTOR phase
-- If Knowledge pattern is generic best practice (e.g., input validation) → Apply in REFACTOR phase
-- If Knowledge pattern suggests different tech stack → Do NOT apply, respect Architecture tech stack table
-
-**Conflict Detection:**
-- Record as conflict: REQ references component not in Architecture, Task maps to non-existent REQ, Architecture tech stack conflicts with REQ constraints
-- Request clarification: Do NOT proceed, do NOT invent missing information
-
----
-
-### 2. Construct Traceability Chains
-
-**Objective**: Build explicit mappings from requirements through tests to implementation, ensuring every requirement is testable and traceable.
-
-#### Build REQ → Test Cases Mapping
-
-For each REQ-XXX referenced in the specified task:
-1. **Extract Test Scenarios**: Each Given-When-Then → One test case name
-   - Example: REQ-001 "Given user is logged in, When user creates article, Then article is saved" → `test_authenticated_user_can_create_article()`
-2. **Determine Test Layers**:
-   - **Behavior Test**: Always create for each Given-When-Then (end-to-end validation)
-   - **Integration Test**: Create if REQ involves database, external API, or multiple components
-   - **Unit Test**: Create for complex business logic extracted from REQ description
-3. **Map NFR → Performance Test**:
-   - Example: NFR-001 "Report generation < 2s" → `test_report_generation_performance()` with `assert duration < 2.0`
-
-#### Build Architecture → Implementation Files Mapping
-
-For each Component referenced in the specified task:
-1. **Locate Component Definition**: Find component in `{ARCH}/*.md`(Only the related documents) Components section
-2. **Extract Technology Stack**: Component's "Technology" field defines implementation language/framework
-3. **Derive File Paths**: Use Architecture's "Work Directory Structure" + Component name + Tech stack conventions
-   - Example: "Article Service" + "Express.js" + Work Structure → `src/services/ArticleService.js`, `src/routes/articles.js`
-4. **Identify Test File Paths**: Apply framework's test conventions
-   - Example: Express.js project → `tests/unit/services/ArticleService.test.js`, `tests/integration/articles.test.js`
-
-#### Build Complete Traceability Table
-
-| Requirement | Acceptance Criterion | Test Case Name | Test Layer | Architecture Component | Implementation File |
-|-------------|---------------------|----------------|------------|----------------------|---------------------|
-| REQ-001 | Given logged in, When create article, Then saved | test_authenticated_user_can_create_article | Behavior | Article Service | src/services/ArticleService.js |
-| REQ-001 | (same) | test_article_save_to_database | Integration | Article Service, PostgreSQL | src/services/ArticleService.js |
-| REQ-001 | (same) | test_article_validation | Unit | Article Service | src/services/ArticleService.js |
-| NFR-001 | Report generation < 2s | test_report_generation_performance | Performance | Reporting Service | src/services/ReportingService.js |
-
-**Verification**:
-- Every REQ-XXX in Task → At least one Test Case
-- Every Test Case → Mapped to Architecture Component
-- Every Architecture Component → Mapped to Implementation File Path
-- If any mapping is missing → Record as gap and request clarification
-
----
-
-### 3. Apply TDD Decision Logic
-
-**Objective**: Use traceability chains to decide what tests to write (RED), what minimal code to write (GREEN), and what improvements to make (REFACTOR).
-
-#### RED Phase: Decide Test Coverage
-
-**Decision Tree for Test Layer Selection:**
-
-```
-For each REQ-XXX:
-├─ Has Given-When-Then?
-│  └─ YES → Create Behavior Test (end-to-end workflow)
-│
-├─ Involves multiple components / database / external API?
-│  └─ YES → Create Integration Test
-│
-├─ Contains complex business logic / calculations / validations?
-│  └─ YES → Create Unit Test for that logic
-│
-└─ Has related NFR-XXX?
-   └─ YES → Create Performance/Security/Reliability Test per NFR category
-```
-
-**Test Content Decisions:**
-- **Behavior Test**: Follow Given-When-Then structure directly from REQ
-  - Setup: Create initial state from "Given"
-  - Execute: Perform action from "When"
-  - Assert: Verify outcome from "Then"
-- **Integration Test**: Follow Data Flow from Architecture
-  - Test component → component communication
-  - Test component → database operations (using real test DB)
-  - Test component → external API (using mocks/stubs)
-- **Unit Test**: Isolate business logic
-  - Mock all dependencies (database, external services, other components)
-  - Focus on edge cases and validation rules from REQ description
-- **Performance Test**: Use NFR target metric as assertion
-  - Example: NFR-001 "< 2s" → `start = time(); execute(); end = time(); assert (end - start) < 2.0`
-
-**Test Naming Convention** (derive from framework in Tech Stack):
-- Extract testing framework from Architecture Technical Stack table
-- Apply that framework's naming conventions
-- Example: Jest → `describe()` blocks + `test()` / `it()` functions
-
-#### GREEN Phase: Decide Minimal Implementation Steps
-
-**Atomicity Principle**: Each step should make exactly one failing test pass.
-
-**Step Granularity Decision:**
-```
-For each failing test:
-├─ Test requires data model?
-│  └─ Step: "Create {Model} class/schema with fields {list from REQ}"
-│
-├─ Test requires API endpoint?
-│  └─ Step: "Implement {METHOD} {path} endpoint with {framework from tech stack}"
-│
-├─ Test requires database operation?
-│  └─ Step: "Add {operation} method using {database from tech stack}"
-│
-├─ Test requires external API call?
-│  └─ Step: "Implement {API name} client with {endpoint from Architecture}"
-│
-└─ Test requires business logic?
-   └─ Step: "Implement {function name} with {algorithm/validation from REQ}"
-```
-
-**File Path Decision**: Use Implementation File from traceability table
-
-**Technology Application**: Use exact technology + version from Architecture Technical Stack table
-- Example: "PostgreSQL 14.2" → Use PostgreSQL-specific syntax (e.g., `RETURNING` clause)
-- Example: "Express.js 4.18" → Use Express 4.x middleware patterns (not Express 5.x)
-
-**Dependency Handling**:
-- If Task has Dependencies in Epic → Reference implementation files from dependent task plans
-- If Component has Dependencies in Architecture → Plan to import/instantiate those dependencies
-
-#### REFACTOR Phase: Decide Quality Improvements
-
-**Priority Order (descending):**
-1. **NFR-Driven Improvements**: Address non-functional requirements first
-2. **Architecture-Driven Improvements**: Apply patterns from ADRs and Cross-Cutting Concerns
-3. **Knowledge Base Improvements**: Apply applicable best practices (only if no conflict with Architecture)
-4. **General Code Quality**: Extract reusable patterns, apply SOLID principles
-
-**Decision Logic per NFR Category:**
-- **Performance NFR** → Check Architecture for caching strategy, indexing, query optimization; apply Knowledge Base performance patterns if compatible
-- **Security NFR** → Check Architecture Cross-Cutting Concerns for auth/encryption approach; apply Knowledge Base security patterns if compatible
-- **Reliability NFR** → Check Architecture for retry/circuit breaker patterns; apply Knowledge Base reliability patterns if compatible
-- **Scalability NFR** → Check Architecture Deployment section for scaling strategy; apply Knowledge Base scalability patterns if compatible
-
-**Knowledge Base Integration Logic:**
-```
-For each Knowledge Base pattern:
-├─ Does Architecture ADR explicitly reject this pattern?
-│  └─ YES → Skip pattern, document reason
-│
-├─ Does pattern conflict with Tech Stack table?
-│  └─ YES → Skip pattern (e.g., Knowledge suggests Redis, Architecture chose Memcached → use Memcached)
-│
-├─ Does pattern address an NFR from requirements?
-│  └─ YES → Apply pattern, reference NFR-XXX and Knowledge file
-│
-├─ Is pattern a general best practice (logging, error handling, validation)?
-│  └─ YES → Apply pattern, reference Knowledge file
-│
-└─ Otherwise
-   └─ Evaluate applicability based on REQ and Architecture context
-```
-
-**Refactoring Steps Format**:
-- "Extract {pattern name} from {Knowledge file} to address {NFR-XXX}"
-- "Apply {Architecture Cross-Cutting Concern} for {category}"
-- "Refactor {code element} to follow {SOLID principle}"
-
----
-
-### 4. Resolve Conflicts, Gaps, and Ambiguities
-
-**Objective**: Identify and handle issues before creating plan files.
-
-#### Conflict Types and Resolution
-
-**Type 1: Requirement Conflicts**
-- **Detection**: Two REQs specify contradictory behaviors
-- **Resolution**: Record both REQ IDs and contradictory statements → Request clarification → HALT planning
-
-**Type 2: Architecture Gaps**
-- **Detection**: Task references Architecture component not defined in `{ARCH}/*.md`(Only the related documents)
-- **Resolution**: Record missing component name → Request clarification → HALT planning
-- **Fallback** (if minor): Infer component from REQ + Tech Stack, mark as `[INFERRED]`, proceed with warning
-
-**Type 3: Traceability Breaks**
-- **Detection**: Task maps to REQ-XXX not found in `{REQ}/*.md`(Only the related documents)
-- **Resolution**: Record missing REQ ID → Request clarification → HALT planning
-
-**Type 4: Knowledge vs Architecture Conflicts**
-- **Detection**: Knowledge Base recommends approach explicitly rejected in Architecture ADR
-- **Resolution**: Follow Architecture ADR → Ignore Knowledge pattern → Document decision in plan
-- **Example**: ADR-005 rejects microservices → Knowledge suggests service mesh → Ignore service mesh pattern
-
-**Type 5: Tech Stack Ambiguities**
-- **Detection**: Architecture Technical Stack table missing version numbers or rationale
-- **Resolution**: Use specified technology without version assumptions → Proceed, note ambiguity in plan
-
-#### Gap Analysis Checklist
-
-Before finalizing plans, verify:
-- [ ] The specified task has been planned
-- [ ] Every REQ-XXX referenced in the specified task exists in `{REQ}/*.md`(Only the related documents)
-- [ ] Every Architecture Component referenced in the specified task exists in `{ARCH}/*.md`(Only the related documents)
-- [ ] Every Test Case in plan maps to at least one REQ
-- [ ] Every Implementation File in plan maps to Architecture Component
-- [ ] All NFRs have corresponding performance/security/reliability tests
-- [ ] All Knowledge Base patterns applied are compatible with Architecture decisions
-
-**If any check fails**: Record gap details, request clarification, do NOT fabricate information.
+4. **Step 4: Resolve Conflicts and Finalize Plan**
+- **GOAL:** Deliver a conflict-free, template-ready implementation plan.
+- **STEPS:**
+  - Review the plan for conflicts across requirements, architecture, and knowledge guidance.
+  - Flag missing information or broken traceability chains that require clarification.
+  - Summarize risks, dependencies, and rollback/mitigation expectations for the template’s risk and additional detail sections.
+  - Confirm readiness of the `{PLAN}/{task_id}-plan.md` deliverable against template sections.
+- **QUESTIONS:**
+  - Are any conflicts or assumptions unresolved and needing clarification?
+  - What gaps still block complete traceability or planning?
+  - Have risks, dependencies, and mitigations been captured for the plan?
+  - Does the plan satisfy all constraints and template deliverables?
+- **CHECKLIST:**
+- [ ] Conflicts and unanswered questions recorded with required follow-ups.
+- [ ] Traceability chains validated end-to-end or gaps escalated.
+- [ ] Risk, dependency, and mitigation notes prepared for the plan.
+- [ ] Deliverable structure aligned with `implementation-plan-tmpl.yaml` sections and constraints.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

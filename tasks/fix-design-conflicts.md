@@ -15,73 +15,88 @@
 - **MUST** complete all fixes before cleanup, **MUST NOT** delete reports prematurely
 
 ## [Steps]
-**You should work along to the following steps:**
-1. **Analyze and prioritize conflicts** - Systematically categorize all issues by severity and impact
-2. **Develop comprehensive fix strategy** - Create detailed resolution plans with cross-document impact analysis  
-3. **Execute fixes sequentially** - Apply approved fixes in priority order while maintaining consistency
-4. **Verify resolution completeness** - Validate all conflicts resolved and no new issues introduced
-5. **Complete cleanup and guidance** - Finalize documentation and provide next-step recommendations
+Refer to the consolidated workflow in the Instructions section below.
 
 ## [Instructions]
+1. **Step 1: Analyze and Prioritize Conflicts**
+- **GOAL:** Establish a complete severity-ranked view of every conflict referenced in the validation report.
+- **STEPS:**
+  - Collect each conflict from `{root}/docs/design-validation.md` with source references and symptom descriptions.
+  - Tag every conflict with severity (Critical→High→Medium→Low) and categorize by type (fabrication, reference, coverage, inconsistency).
+  - Record cross-document dependencies and prerequisites between conflicts.
+  - Build a structured conflict log capturing severity, type, impacts, and dependencies.
+- **QUESTIONS:**
+  - Have I captured every conflict and its exact source location?
+  - Which conflicts block others because of shared dependencies or sequencing?
+  - Is each severity assignment justified by delivery or compliance impact?
+- **CHECKLIST:**
+  - [ ] Conflict log includes severity, type, impacted documents, and dependencies.
+  - [ ] Severity ordering reflects validation report priorities.
+  - [ ] Cross-document relationships are documented.
 
-### 1. Analyze and Prioritize Conflicts
-**Objective**: Create comprehensive understanding of all design conflicts and their relationships.
+2. **Step 2: Develop Comprehensive Fix Strategy**
+- **GOAL:** Design an approved resolution strategy that minimizes new conflicts.
+- **STEPS:**
+  - Outline resolution options for every conflict with required document updates.
+  - Assess cross-document impact and note safeguards that prevent cascading issues.
+  - Sequence proposed fixes to respect dependencies while maximizing combined impact.
+  - Prepare a recommended strategy summary emphasizing severity order and risk mitigations.
+- **QUESTIONS:**
+  - Does each strategy address the root cause rather than only the symptom?
+  - Which options resolve multiple conflicts without violating constraints?
+  - What confirmations or data are required from the user before execution?
+- **CHECKLIST:**
+  - [ ] Strategy covers all conflicts with severity-aligned plans.
+  - [ ] Cross-document impacts and mitigations are documented.
+  - [ ] User approval prerequisites are identified.
 
-**Approach**:
-- Extract all issues from the validation report, categorizing by type (fabricated content, broken references, coverage gaps, inconsistencies)
-- Assign severity levels (Critical→High→Medium→Low) based on impact to development progress
-- Identify cross-document dependencies where fixing one issue affects others
-- Create issue tracking matrix showing relationships and fix order requirements
+3. **Step 3: Execute Fixes Sequentially**
+- **GOAL:** Implement approved fixes in strict severity order while maintaining consistency.
+- **STEPS:**
+  - Secure explicit user approval for the full fix strategy before modifying documents.
+  - Apply fixes beginning with Critical issues, then High, Medium, and Low severities.
+  - After each fix, validate cross-document consistency, references, and traceability.
+  - Log progress, unexpected impacts, and any newly discovered conflicts.
+- **QUESTIONS:**
+  - Do I have recorded approval for the current fix sequence?
+  - Have affected documents been revalidated immediately after each change?
+  - Are any newly surfaced issues impacting the planned severity order?
+- **CHECKLIST:**
+  - [ ] User-approved plan documented prior to changes.
+  - [ ] Fixes applied in strict severity order.
+  - [ ] Verification notes captured for every implemented fix.
 
-**Focus**: Understand the complete conflict landscape before developing solutions. Look for patterns and root causes that may indicate systemic issues requiring broader fixes.
+4. **Step 4: Verify Resolution Completeness**
+- **GOAL:** Confirm all conflicts are resolved and overall design integrity is restored.
+- **STEPS:**
+  - Re-run comprehensive cross-document validation to confirm references and traceability.
+  - Check that naming conventions, specifications, and dependencies remain consistent.
+  - Document validation outcomes, proving no new conflicts exist.
+  - Assemble verification evidence for user review and sign-off.
+- **QUESTIONS:**
+  - Does validation confirm zero unresolved conflicts or regressions?
+  - Is 100% traceability coverage maintained after the fixes?
+  - Have I recorded verifiable evidence for each validation activity?
+- **CHECKLIST:**
+  - [ ] Cross-document validation completed with zero outstanding conflicts.
+  - [ ] Traceability and naming standards confirmed.
+  - [ ] Verification evidence prepared for user review.
 
-### 2. Develop Comprehensive Fix Strategy  
-**Objective**: Design systematic resolution approach with minimal risk of introducing new conflicts.
-
-**Approach**:
-- For each conflict, develop specific fix strategies considering multiple resolution options
-- Analyze cross-document impact of each proposed fix to avoid cascade failures
-- Prioritize fixes that resolve multiple issues simultaneously when possible
-- Design fix sequence that respects document dependencies and maintains referential integrity
-- Create detailed plan documenting all strategies and their rationale
-
-**Focus**: Design fixes that address root causes, not just symptoms. Consider how each fix affects the entire document ecosystem.
-
-### 3. Execute Fixes Sequentially
-**Objective**: Apply approved fixes systematically while maintaining consistency throughout the process.
-
-**Approach**:
-- Obtain explicit user approval for the complete fix strategy before beginning implementation
-- Execute fixes in strict severity order (Critical first, then High, Medium, Low)
-- After each fix, immediately verify cross-document consistency and referential integrity
-- Track progress and document any unexpected impacts or additional issues discovered
-- Maintain running verification that no new conflicts are introduced
-
-**Focus**: Methodical execution with continuous validation. Each fix should improve overall design health without degrading other aspects.
-
-### 4. Verify Resolution Completeness
-**Objective**: Confirm all conflicts resolved and overall design integrity restored.
-
-**Approach**:
-- Perform comprehensive cross-document validation to ensure all references are valid
-- Verify 100% traceability coverage is maintained across all document relationships  
-- Check that all naming conventions and specifications are consistent
-- Validate that no new conflicts were inadvertently introduced during fix process
-- Document complete verification results for user review
-
-**Focus**: Thorough validation that goes beyond the original conflicts to ensure overall design health.
-
-### 5. Complete Cleanup and Guidance  
-**Objective**: Finalize resolution process and provide clear next steps.
-
-**Approach**:
-- Present complete change summary to user for final approval
-- Only after user confirmation, remove the validation report to prevent confusion
-- Recommend re-running validation to confirm clean state
-- Provide summary of resolution process and any lessons learned
-- Guide user on next appropriate steps in the development workflow
-
-**Focus**: Proper closure with user agreement and clear path forward. Ensure no cleanup occurs without explicit user approval.
+5. **Step 5: Complete Cleanup and Guidance**
+- **GOAL:** Finalize documentation, capture learnings, and finish cleanup with user approval.
+- **STEPS:**
+  - Present consolidated change summary and verification results for user approval.
+  - After approval, clean or archive the validation report to prevent confusion.
+  - Recommend re-running automated validation to confirm a clean baseline.
+  - Document lessons learned and provide guidance for the next workflow steps.
+- **QUESTIONS:**
+  - Has the user explicitly approved closure and cleanup actions?
+  - What follow-up activities keep the system conflict-free?
+  - Are next-step recommendations aligned with the project workflow?
+- **CHECKLIST:**
+  - [ ] User approved final resolution and cleanup.
+  - [ ] Validation report cleaned or archived post-approval.
+  - [ ] Next-step guidance recorded and communicated.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

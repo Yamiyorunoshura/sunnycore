@@ -17,66 +17,71 @@
 - **MUST** preserve backward compatibility or provide migration paths
 - **MUST** use architecture template structure for consistency
 
-## [Steps]
-**Execute these steps to complete the architecture extension:**
-
-1. **Understand Current State**: Read all existing architecture files to map current components, contracts, and identify extension points where new functionality can integrate without breaking changes.
-
-2. **Design Extension Strategy**: Choose appropriate integration patterns (extension points preferred over modifications), design new components that extend existing system, document all interface changes with impact analysis.
-
-3. **Document & Validate**: Create comprehensive architecture documentation using the template, ensure traceability to requirements, obtain approval for any breaking changes, then execute sharding.
-
-4. **Verify Integration**: Cross-check that existing contracts remain functional, validate that new and existing components work together, confirm migration paths for any required changes.
-
 ## [Instructions]
+[Instructions]
+1. **Step 1: Understand Current Architecture**
+- **GOAL:** Build a validated view of existing system boundaries, contracts, and extension points before proposing changes.
+- **STEPS:**
+  - Gather the relevant requirements, knowledge base notes, and architecture files that scope the brownfield change.
+  - Read the selected architecture documents to map components, contracts, dependencies, and active integration patterns.
+  - Capture constraints, technical debt, and candidate extension points in working notes aligned with the architecture template sections.
+  - Confirm outstanding knowledge gaps or risks with stakeholders or existing documentation before moving on.
+- **QUESTIONS:**
+  - Which architecture files map directly to the targeted requirements and domains?
+  - Where do stable extension points exist versus areas that would require risky modifications?
+  - What constraints (tech debt, version locks, compliance rules) could block or alter the extension plan?
+- **CHECKLIST:**
+  - [ ] All relevant architecture artifacts reviewed and annotated.
+  - [ ] Extension points and dependencies cataloged with rationale.
+  - [ ] Risks, constraints, and open questions logged for follow-up.
 
-### 1. Architecture Discovery Phase
-**Focus**: Build complete understanding of current system before making any design decisions.
+2. **Step 2: Design Extension Strategy**
+- **GOAL:** Define an extension approach that preserves compatibility while meeting the new requirements.
+- **STEPS:**
+  - Select integration patterns that favor extension points and avoid breaking existing contracts.
+  - Draft proposed component updates using the architecture template sections (system architecture, components, data flows).
+  - Evaluate impacts on current interfaces, dependencies, and operational characteristics, documenting mitigation options.
+  - Outline migration and rollback paths to cover any unavoidable changes to existing components.
+- **QUESTIONS:**
+  - Which integration pattern delivers the requirement with minimal disruption to current consumers?
+  - Do new or modified components rely on existing services that need capacity, security, or version adjustments?
+  - How will we maintain backward compatibility or notify consumers about required migrations?
+- **CHECKLIST:**
+  - [ ] Extension design leverages documented extension points or provides a justified alternative.
+  - [ ] Impact analysis completed for interfaces, dependencies, and operations.
+  - [ ] Migration and rollback strategy drafted with owners identified.
 
-**Key Activities**:
-- Systematically read all architecture files to understand component boundaries and responsibilities
-- Map existing technology stack and identify patterns already in use
-- Document current contracts (APIs, events, data flows) and their consumers
-- Identify natural extension points where new functionality can plug in cleanly
-- Note any architectural debt or constraints that limit extension options
+3. **Step 3: Document and Validate**
+- **GOAL:** Produce template-compliant architecture documentation with full traceability and stakeholder validation.
+- **STEPS:**
+  - Populate every required section of `architecture-tmpl.yaml` with the updated system overview, component details, and data flows.
+  - Link requirements, decisions, and impacts to the appropriate sections to maintain traceability.
+  - Share the draft with stakeholders for review, focusing on compatibility, risk, and migration coverage; incorporate agreed feedback.
+  - Record approvals or explicit exceptions before proceeding to distribution.
+- **QUESTIONS:**
+  - Are all mandatory template sections (introduction, components, data flows, external APIs) updated with the latest design?
+  - Does each requirement map to architecture elements, decisions, or components in the document?
+  - Which stakeholders must sign off, and what open issues remain before approval?
+- **CHECKLIST:**
+  - [ ] Architecture document fully populated and consistent with the template.
+  - [ ] Requirement traceability and decision rationale documented.
+  - [ ] Stakeholder feedback addressed and approvals recorded.
 
-**Success Criteria**: You can clearly explain how existing components interact and where new functionality should integrate.
-
-### 2. Extension Design Phase  
-**Focus**: Design changes that extend capabilities without breaking existing functionality.
-
-**Key Activities**:
-- Choose integration patterns that minimize disruption (prefer extension points over core modifications)
-- Design new components to be isolated yet well-integrated
-- For any interface changes, ensure backward compatibility or provide clear migration paths
-- Document architectural decisions with rationale for pattern choices
-- Create impact analysis for any modifications to existing components
-
-**Success Criteria**: New functionality integrates cleanly with existing system and preserves all current capabilities.
-
-### 3. Documentation & Approval Phase
-**Focus**: Create complete, template-compliant documentation and secure stakeholder approval.
-
-**Key Activities**:
-- Use the architecture template to structure all documentation consistently
-- Ensure every requirement maps to specific architectural elements (traceability)
-- Present impact analysis and migration plans for any breaking changes
-- Obtain explicit approval before proceeding with implementation
-- Execute sharding process to distribute content to proper architecture files
-
-**Success Criteria**: Architecture documentation is complete, approved, and properly distributed.
-
-### 4. Integration Verification Phase
-**Focus**: Confirm that new and existing components work together as designed.
-
-**Key Activities**:
-- Verify existing contracts still function as expected
-- Validate integration points between new and existing components  
-- Test migration paths for any required changes
-- Confirm rollback procedures are viable if needed
-- Document any discovered integration issues and their resolutions
-
-**Success Criteria**: System integrity is preserved and new functionality operates correctly within existing ecosystem.
+4. **Step 4: Verify Integration and Distribute**
+- **GOAL:** Confirm compatibility between new and existing components and deliver finalized documentation.
+- **STEPS:**
+  - Validate that updated and existing contracts, workflows, and data flows operate together via targeted tests or reviews.
+  - Execute migration and rollback checks, ensuring procedures are documented for operations teams.
+  - Run `{SCRIPTS}/shard-architecture.py` to distribute the consolidated document into `{ARCH}/*.md` and inspect outputs for accuracy.
+  - Capture remaining follow-up items, regressions, or operational handoffs.
+- **QUESTIONS:**
+  - What evidence confirms that core contracts and integrations remain stable after the extension?
+  - How will operations respond if migration steps fail or need to be rolled back?
+  - Did the sharding process update all distributed architecture files without conflicts?
+- **CHECKLIST:**
+  - [ ] Integration validation completed and findings documented.
+  - [ ] Migration and rollback procedures confirmed with responsible teams.
+  - [ ] Sharded architecture files regenerated and verified.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

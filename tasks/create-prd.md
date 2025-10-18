@@ -17,99 +17,91 @@
 - **MUST** provide comprehensive impact analysis for any Brownfield contract changes
 - **MUST** focus on integration and avoid duplication with existing templates
 
-## [Steps]
-**You should work along to the following steps:**
-1. **Project Analysis**: Determine project type and gather all relevant context to understand scope and constraints.
-2. **Requirements Engineering**: Create verifiable functional requirements and quantified non-functional requirements with clear acceptance criteria.
-3. **Architecture Integration**: Design or extend architecture ensuring complete requirement mapping and impact analysis for Brownfield.
-4. **Task Planning**: Break down into feature-level implementation tasks with clear Definition of Done and requirement traceability.
-5. **PRD Finalization**: Integrate all sections with traceability matrix, obtain stakeholder approval, and deliver complete PRD.
-
 ## [Instructions]
+1. **Step 1: Project Analysis**
+- **GOAL:** Determine the project type, scope, and constraints before drafting the PRD.
+- **STEPS:**
+  - Gather all mandatory context: user requirement description, `templates/prd-tmpl.yaml`, relevant `{ARCH}/*.md`, and `{KNOWLEDGE}/*.md` artifacts.
+  - Synthesize business goals, scope boundaries, and success criteria from the collected sources.
+  - Inspect `{ARCH}/` to confirm whether the engagement is Greenfield or Brownfield and note implications.
+  - Capture initial risks, dependencies, and compliance considerations that could influence downstream decisions.
+- **QUESTIONS:**
+  - What direct evidence confirms the initiative is Greenfield or Brownfield?
+  - Which explicit constraints or success metrics appear in the supplied context?
+  - Which assumptions or knowledge gaps require clarification before design begins?
+- **CHECKLIST:**
+  - [ ] Project type classified with supporting rationale.
+  - [ ] Core goals, scope, and constraints summarized.
+  - [ ] Required context sources reviewed and tagged for citation.
+  - [ ] Initial risks and dependencies noted for follow-up.
 
-### 1. Project Analysis
-**Objective**: Establish project foundation and approach strategy.
+2. **Step 2: Requirements Engineering**
+- **GOAL:** Produce measurable functional and non-functional requirements with clear acceptance criteria.
+- **STEPS:**
+  - Translate user goals into atomic functional requirements using Given-When-Then scenarios from the template.
+  - Prioritize requirements by business value and technical dependency, capturing IDs and traceability notes.
+  - Define quantified non-functional requirements (latency targets, reliability SLAs, security standards, scalability thresholds).
+  - Validate coverage against user needs and template guidance, adding TODOs where inputs are missing.
+- **QUESTIONS:**
+  - Do all user objectives map to at least one functional requirement?
+  - Are acceptance criteria measurable and testable for every scenario?
+  - Which NFR metrics are mandatory versus negotiable, and how will they be validated?
+- **CHECKLIST:**
+  - [ ] Functional requirements numbered and paired with Given-When-Then criteria.
+  - [ ] Non-functional requirements quantified with measurement methods.
+  - [ ] Priorities, dependencies, and traceability notes recorded.
+  - [ ] Gaps or assumptions explicitly marked for stakeholder input.
 
-**For All Projects:**
-- Examine user requirements to identify core functionality and constraints
-- Determine project boundaries and success criteria
-- Assess technical and business constraints
+3. **Step 3: Architecture Integration**
+- **GOAL:** Define architecture elements that satisfy every requirement while respecting project context.
+- **STEPS:**
+  - Audit existing `{ARCH}/*.md` for Brownfield impacts or outline baseline components for Greenfield builds.
+  - Select and document the technical stack with versions, aligning choices to NFR targets and team capabilities.
+  - Map functional and non-functional requirements to components, data flows, and ADR decisions per template sections.
+  - For Brownfield, document impact analysis covering contract changes, integration paths, and mitigation strategies.
+- **QUESTIONS:**
+  - Which architectural components or patterns fulfill each requirement and NFR?
+  - Where do integration risks or breaking changes emerge in Brownfield scenarios?
+  - Are data flows and cross-cutting concerns (security, observability) explicitly addressed?
+- **CHECKLIST:**
+  - [ ] Technical stack table completed with versions and rationale.
+  - [ ] Component responsibilities, interfaces, and statuses documented.
+  - [ ] Requirements-to-architecture mapping table shows 100% coverage.
+  - [ ] Brownfield impact analysis prepared when applicable.
 
-**Project Type Decision:**
-- **Greenfield**: `{ARCH}/` is empty or non-existent → design from scratch
-- **Brownfield**: Existing architecture in `{ARCH}/` → extend with impact analysis
+4. **Step 4: Task Planning**
+- **GOAL:** Break the solution into feature-level implementation tasks with verifiable outcomes.
+- **STEPS:**
+  - Derive tasks from requirements and architecture components, ensuring each delivers user-visible value.
+  - Specify dependencies, sequencing, and ownership notes to support execution planning.
+  - Define clear Quality-Gate criteria (tests, reviews, documentation) for each task per template checklist.
+  - Cross-reference tasks with requirement and architecture IDs to preserve traceability.
+- **QUESTIONS:**
+  - Does every requirement map to at least one task with a clear Definition of Done?
+  - Are testing, security, and compliance activities embedded within tasks?
+  - Do dependencies or sequencing constraints require stakeholder alignment?
+- **CHECKLIST:**
+  - [ ] Tasks listed with IDs, descriptions, and associated requirements.
+  - [ ] Architecture touchpoints and dependencies noted for each task.
+  - [ ] Quality-Gate items defined and feasible to validate.
+  - [ ] Traceability matrix updated to include task coverage.
 
-**Context Gathering Focus:**
-- Understand user goals and pain points
-- Identify integration requirements and external dependencies  
-- Assess technical constraints and compliance needs
-
-### 2. Requirements Engineering
-**Objective**: Transform user needs into verifiable, measurable requirements.
-
-**Functional Requirements Focus:**
-- Create atomic, testable requirements using Given-When-Then format
-- Ensure each requirement addresses a specific user capability
-- Prioritize based on user value and technical dependencies
-- Link requirements to clear business objectives
-
-**Non-Functional Requirements Focus:**
-- Quantify ALL performance requirements with specific metrics (P95, P99 latency thresholds)
-- Define scalability targets with concrete user/data volume limits
-- Specify reliability targets with measurable uptime and error rate SLAs
-- Document security requirements with specific compliance standards
-
-### 3. Architecture Integration
-**Objective**: Create or extend architecture that fully satisfies requirements.
-
-**For Greenfield Projects:**
-- Design components that directly map to functional requirements
-- Select technology stack based on NFR constraints and team capabilities
-- Document architectural decisions with clear rationale and trade-offs
-- Create comprehensive component interaction patterns
-
-**For Brownfield Projects:**
-- Analyze existing architecture thoroughly before making changes
-- Document impact of every proposed change on existing components
-- Preserve existing contracts unless breaking changes are essential
-- Design extension points that minimize disruption to current functionality
-- Create detailed migration strategies for any breaking changes
-
-**Architecture Quality Focus:**
-- Ensure every requirement maps to specific architectural elements
-- Validate that architecture can satisfy all NFR targets
-- Document integration patterns and data flow clearly
-- Address cross-cutting concerns (security, monitoring, error handling)
-
-### 4. Task Planning
-**Objective**: Create implementable tasks with clear deliverables.
-
-**Task Breakdown Strategy:**
-- Focus on feature-level granularity that delivers user value
-- Map each task to specific requirements and architecture components
-- Define clear Definition of Done with testable completion criteria
-- Establish task dependencies and implementation sequence
-
-**Quality Assurance Focus:**
-- Ensure tasks include comprehensive testing requirements
-- Define code quality standards and review processes
-- Include integration testing and performance validation
-- Plan for security testing and compliance verification
-
-### 5. PRD Integration
-**Objective**: Create unified document with complete traceability.
-
-**Integration Focus:**
-- Build comprehensive traceability matrix linking requirements → architecture → tasks
-- Validate 100% requirement coverage across all sections
-- Document assumptions, risks, and mitigation strategies
-- Define measurable success criteria for project completion
-
-**Quality Validation:**
-- Verify all requirements are testable and measurable
-- Ensure architecture fully supports all functional and non-functional requirements
-- Confirm task breakdown provides complete implementation coverage
-- Validate impact analysis completeness for Brownfield projects
+5. **Step 5: PRD Finalization**
+- **GOAL:** Assemble the complete PRD with traceability and stakeholder-ready validation.
+- **STEPS:**
+  - Populate every section in `templates/prd-tmpl.yaml`, ensuring consistent formatting and citations.
+  - Build the traceability matrix linking requirements, architecture decisions, and tasks.
+  - Review quality gates, Brownfield analyses, and outstanding TODOs; resolve or escalate blockers.
+  - Prepare the PRD for stakeholder review, highlighting decisions, risks, and approval needs.
+- **QUESTIONS:**
+  - Are all template sections complete with measurable content and supporting evidence?
+  - Does the traceability matrix prove end-to-end coverage without gaps or duplicates?
+  - Which stakeholders must approve the final PRD, and what questions might they raise?
+- **CHECKLIST:**
+  - [ ] PRD drafted with every template section filled and cross-referenced.
+  - [ ] Traceability matrix demonstrates requirement → architecture → task alignment.
+  - [ ] Quality gates reviewed with outstanding issues flagged.
+  - [ ] Stakeholder review package prepared with next steps.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:

@@ -18,85 +18,69 @@
 - **MUST** perform all validation check types (fabrication, conflicts, coverage, consistency), **MUST NOT** skip any
 - **MUST** categorize issues by severity, **MUST NOT** produce report without categorization
 
-## [Steps]
-**You should work along to the following steps:**
-1. **Validate workflow and scope** - Confirm workflow parameter and determine validation boundaries
-2. **Extract and index entities** - Build comprehensive inventory of all requirements, components, tasks, and plans
-3. **Execute validation checks** - Perform systematic verification of references, coverage, and consistency
-4. **Generate validation report** - Create categorized findings report with actionable recommendations
-
 ## [Instructions]
+1. **Step 1: Validate Workflow and Scope**
+- **GOAL:** Confirm the provided workflow and define the validation boundaries before analysis begins.
+- **STEPS:**
+  - Validate that `{workflow}` is either `prd` or `full`; halt if any other value appears.
+  - Enumerate required documents per workflow (PRD, ARCH, REQ, EPIC, PLAN) and lock the review scope.
+  - Review `{TMPL}/design-validation-tmpl.yaml` to understand mandatory report sections and data points.
+- **QUESTIONS:**
+  - Which workflow value is supplied, and does it match `prd` or `full` exactly?
+  - Which document sets are in scope for this workflow?
+  - Does the template demand any additional metadata before proceeding?
+- **CHECKLIST:**
+  - [ ] Workflow validated as `prd` or `full` with scope boundaries documented.
+  - [ ] Source documents collected and access paths confirmed.
+  - [ ] Reporting template requirements reviewed and understood.
 
-### Entity Extraction Techniques
-**Extract entities systematically from each document type:**
+2. **Step 2: Extract and Index Entities**
+- **GOAL:** Build a comprehensive inventory of every requirement, component, task, and plan involved in the workflow.
+- **STEPS:**
+  - Parse PRD/requirements for IDs (`REQ-###`, `NFR-###`), acceptance criteria, and dependencies.
+  - Capture architecture elements: components, interfaces, ADR references, and their requirement mappings.
+  - Catalog epic tasks (`Task-#`) alongside related plan files (`{task_id}-plan.md`), dependencies, and file paths.
+  - Record technology stack mentions and cross-document component names for later consistency checks.
+- **QUESTIONS:**
+  - Are all requirement and task identifiers present with supporting context?
+  - Do architecture documents provide mappings back to the identified requirements?
+  - Which plans correspond to each task, and are any missing?
+- **CHECKLIST:**
+  - [ ] Entity index completed covering requirements, architecture, tasks, and plans.
+  - [ ] Traceability mappings recorded for every entity relationship.
+  - [ ] Data structured for quick lookup during validation checks.
 
-**From PRD/Requirements Documents:**
-- Scan for requirement IDs: Pattern `REQ-\d{3}` (e.g., REQ-001, REQ-002)
-- Extract functional and non-functional requirements (NFR-\d{3})
-- Note acceptance criteria and dependencies between requirements
-- Identify all component/service names mentioned in architecture sections
+3. **Step 3: Execute Validation Checks**
+- **GOAL:** Verify authenticity, coverage, and consistency across all scoped documents.
+- **STEPS:**
+  - Run fabrication detection by cross-referencing every entity mention against its source; flag missing definitions or files.
+  - Verify reference integrity and compute coverage metrics (REQ→ARCH, ARCH→TASK, TASK→PLAN) using `(satisfied / total) * 100`.
+  - Apply workflow-specific focus: PRD emphasizes internal traceability; Full demands end-to-end bidirectional validation.
+  - Assess naming consistency, technical alignment, and dependency logic; classify findings using severity criteria (Critical: fabricated references/missing documents/broken traceability, High: coverage gaps >10% or orphaned mappings, Medium: naming or spec mismatches, Low: formatting or documentation gaps).
+- **QUESTIONS:**
+  - Do any referenced IDs lack a corresponding definition or document?
+  - Where do coverage percentages fall below expected thresholds?
+  - Are there contradictions or circular dependencies across documents?
+- **CHECKLIST:**
+  - [ ] Fabrication, reference, coverage, and consistency checks completed.
+  - [ ] Severity assigned to each issue (Critical, High, Medium, Low) based on impact.
+  - [ ] Workflow-specific validation goals satisfied.
 
-**From Architecture Documents:**
-- Extract component names from component sections and diagrams
-- Collect API endpoints, service interfaces, and integration points
-- Note technology stack selections and architectural decisions (ADR-\d{3})
-- Map components to requirements through traceability tables
-
-**From Epic Documents:**
-- Extract task IDs: Pattern `Task-\d+` (e.g., Task-1, Task-2)
-- Note task descriptions, dependencies, and quality gates
-- Collect requirement mappings and architecture component references
-
-**From Implementation Plans:**
-- Identify plan files by task ID pattern: `{task_id}-plan.md`
-- Extract task context and implementation approach
-- Note file paths, dependencies, and test coverage details
-
-### Validation Methodology
-**Execute these validation checks in sequence:**
-
-**1. Fabrication Detection (Critical Priority)**
-- Cross-reference all mentioned entities against source documents
-- Flag any `REQ-XXX` mentioned but not defined in requirements
-- Identify components referenced but missing from architecture
-- Detect `Task-X` references without corresponding epic entries
-- Mark missing plan files for tasks that should have them
-
-**2. Reference Integrity Verification**
-- Verify all requirement → component mappings exist in both directions
-- Check task → requirement relationships are valid
-- Validate component → task assignments match architecture
-- Ensure plan files exist for all implementation tasks
-
-**3. Coverage Analysis**
-- Calculate requirement coverage: `(mapped_reqs / total_reqs) * 100`
-- Measure architecture coverage: `(tasks_with_components / total_tasks) * 100`
-- Assess plan coverage: `(plans_exist / implementation_tasks) * 100`
-- Identify orphaned entities (defined but never referenced)
-
-**4. Consistency Validation**
-- Compare entity names across documents for variations
-- Check technical specifications for contradictions
-- Verify dependency chains are logical and non-circular
-- Validate priority and status consistency
-
-### Workflow-Specific Focus
-**PRD Workflow:**
-- Prioritize internal consistency within single PRD document
-- If existing architecture exists, verify alignment without breaking changes
-- Focus on requirement → architecture → task traceability within PRD
-
-**Full Workflow:**
-- Ensure complete bidirectional traceability across all documents
-- Verify 100% coverage at each level: REQ → ARCH → TASK → PLAN
-- Validate end-to-end workflow integrity and dependency resolution
-
-### Issue Severity Assessment
-**Apply these severity criteria:**
-- **Critical**: Fabricated references, missing required documents, broken traceability chains
-- **High**: Coverage gaps >10%, orphaned requirements/components, missing task mappings
-- **Medium**: Naming inconsistencies, minor specification mismatches
-- **Low**: Formatting issues, style inconsistencies, documentation gaps
+4. **Step 4: Generate Validation Report**
+- **GOAL:** Produce an actionable report using the template with categorized findings and clear remediation guidance.
+- **STEPS:**
+  - Populate all sections of `design-validation-tmpl.yaml`, including summary, issue catalogs, metrics, scope, and appendix.
+  - Document each finding with evidence, impact, and required or recommended actions aligned to its severity level.
+  - Summarize coverage results, highlight recommendations (e.g., `/sunnycore_po *fix-design-conflicts`), and define next steps based on workflow outcome.
+  - Confirm every quality gate is satisfied before marking the validation complete.
+- **QUESTIONS:**
+  - Does the report clearly categorize issues by severity with supporting evidence?
+  - Are coverage metrics and entity counts reported for the applicable workflow?
+  - Do recommendations guide the team toward resolving blockers and revalidation?
+- **CHECKLIST:**
+  - [ ] Report generated with all template sections completed accurately.
+  - [ ] Recommendations and next steps documented per severity and workflow.
+  - [ ] Quality gates reviewed and confirmed as passed.
 
 ## [Validation-Criteria]
 **PRD Workflow**: Internal consistency (all internal refs valid, no circular dependencies, requirements-architecture-tasks alignment), External alignment if existing arch exists (no breaking changes, integration points correct, compatible with tech stack), Completeness (all req have arch mapping, all arch components have task mapping, no orphaned entities)

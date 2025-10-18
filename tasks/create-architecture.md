@@ -22,84 +22,71 @@
 - **MUST** follow template structure, **MUST NOT** deviate
 - **MUST** execute shard-architecture.py, **MUST NOT** skip
 
-## [Steps]
-**You should work along to the following steps:**
-1. Analyze requirements, create mapping matrix (100% coverage). This ensures requirements are understood with complete mapping.
-2. Design architecture with all components, map all requirements. This creates complete architecture with full coverage.
-3. Create architecture.md, obtain approval, run shard-architecture.py. This results in approved and sharded architecture.
-4. Verify architecture satisfies all requirements. This validates the architecture.
-
 ## [Instructions]
+1. **Step 1: Requirement Intake & Coverage Matrix**
+- **GOAL:**
+  Build a complete requirements-to-architecture mapping with documented issues and measurement points.
+- **STEPS:**
+  - Review relevant `{REQ}/*.md` files to extract Priority, Dependencies, Acceptance Criteria, NFR Category, Target Metric, Measurement Method, and all constraints.
+  - Populate the Requirement-Architecture Mapping Matrix with Requirement ID, mapped components, acceptance validation approach, and related design decisions or ADR links; raise an issue for any unmapped or conflicting item.
+  - Translate Given-When-Then criteria into validation notes and define concrete measurement points for each NFR Target Metric.
+- **QUESTIONS:**
+  What requirement fields are missing or contradictory?  
+  Which components or decisions cover each Critical/High requirement first?  
+  Where will each NFR metric be measured and observed?
+- **CHECKLIST:**
+  - [ ] Every REQ/NFR links to at least one architecture component with acceptance coverage documented.
+  - [ ] Issues logged for incomplete, ambiguous, or conflicting requirements (no assumptions introduced).
+  - [ ] Measurement points recorded for all NFR Target Metrics and constraints acknowledged.
 
-### 1. Requirement Analysis and Coverage Matrix
-You must create a comprehensive **Requirement-Architecture Mapping Matrix** to ensure 100% coverage:
+2. **Step 2: Architecture Design & Traceability**
+- **GOAL:**
+  Design architecture components that satisfy requirements, constraints, and template expectations with full traceability.
+- **STEPS:**
+  - Use the mapping matrix to design components, data flows, and integrations in priority order (Critical → High → Medium → Low) while honoring Dependencies.
+  - Follow `{TMPL}/architecture-tmpl.yaml` to plan content for each required section (Introduction through Source References), ensuring every decision ties back to requirements or constraints.
+  - Document technology selections, cross-cutting concerns, and ADRs with rationale linked to requirement IDs, constraints, and NFR measurements.
+- **QUESTIONS:**
+  Does each architectural element reference the requirements it fulfills?  
+  How do constraints (technical, business, regulatory) shape technology and design choices?  
+  Are monitoring, security, and resilience considerations integrated for every critical flow?
+- **CHECKLIST:**
+  - [ ] Components, data flows, and integrations mapped directly to requirement IDs and constraints.
+  - [ ] ADRs drafted or updated with alternatives, rationale, and requirement references.
+  - [ ] Cross-cutting concerns (security, observability, resilience, compliance) addressed with explicit strategies.
 
-| Requirement ID | Description | Priority | Dependencies | Architecture Component | Acceptance Coverage | Design Decision |
-|---------------|-------------|----------|--------------|----------------------|---------------------|-----------------|
-| REQ-001 | User can send real-time messages | Critical | None | WebSocket Gateway + Message Broker | Test: Given user connected, When message sent, Then delivered <100ms | ADR-001 |
-| REQ-002 | Message history retrieval | High | REQ-001 | Message Store + Query API | Test: Given 1000 messages, When query last 50, Then return <200ms | ADR-002 |
-| NFR-001 | <100ms message latency (P95) | Critical | N/A | All components (constraint) | Measurement: APM traces, Load tests with 10K users | Performance budget |
-| NFR-002 | 99.9% uptime | High | N/A | Multi-AZ deployment + Health checks | Measurement: Uptime monitoring, Incident logs | ADR-003 |
+3. **Step 3: Draft Architecture Document & Sharding Prep**
+- **GOAL:**
+  Produce an approved `{root}/docs/architecture.md` aligned with the template and prepare it for sharding.
+- **STEPS:**
+  - Author `{root}/docs/architecture.md` strictly following `{TMPL}/architecture-tmpl.yaml`, embedding the mapping matrix, diagrams, and ADR references.
+  - Review the document for template adherence, requirement coverage, and stakeholder approval readiness; capture approvals or outstanding clarifications.
+  - After approval, execute `{SCRIPTS}/shard-architecture.py` to generate `{ARCH}/*.md`, verifying outputs for completeness.
+- **QUESTIONS:**
+  Does the document mirror the template structure with accurate links to requirements and ADRs?  
+  Have stakeholders approved or provided feedback on the architecture decisions?  
+  Did sharding maintain section integrity without data loss?
+- **CHECKLIST:**
+  - [ ] `{root}/docs/architecture.md` completed with traceability matrix, diagrams, and referenced ADRs.
+  - [ ] Approval status documented, issues or follow-ups noted.
+  - [ ] `{SCRIPTS}/shard-architecture.py` executed successfully and `{ARCH}/*.md` outputs verified.
 
-**Matrix Guidelines:**
-- **Priority**: Identify the Priority field in each requirement (Critical/High/Medium/Low); validate Critical/High requirements first
-- **Dependencies**: Identify the Dependencies field in each requirement; ensure architecture reflects dependency order
-- **Acceptance Coverage**: Transform the Given-When-Then acceptance criteria found in requirements into testable architecture validation points
-- **NFR Measurement**: For each NFR, extract its Target Metric and specify where in the architecture this metric will be measured (e.g., API gateway logs for latency, database query analyzer for query time)
-
-Every requirement (functional and non-functional) must map to at least one architecture component. If any requirement cannot be mapped, record it as an issue and request clarification.
-
-### 2. Architecture Design Methodology
-Your architecture design must be driven by requirements and follow the architecture template structure.
-
-**Follow Architecture Template Structure**:
-- Use `{TMPL}/architecture-tmpl.yaml` as the definitive guide for document structure
-- Ensure coverage of all required sections: Introduction, Work Directory Structure, Technical Stack, System Architecture, Components, Data Flows, External APIs, Requirements Traceability Matrix, ADRs, Cross-Cutting Concerns, Deployment, Source References
-- Follow the format and content requirements specified in each template section
-- The template defines WHAT to document; this task defines HOW to design
-
-**Design from Requirements Mapping**:
-- Start from the mapping matrix created in Step 1
-- Design components in priority order: Critical → High → Medium → Low
-- Respect requirement Dependencies: design prerequisite components first
-- For each requirement, translate Acceptance Criteria into component capabilities
-- Ensure every requirement maps to specific architecture elements (components, ADRs, deployment decisions)
-
-**NFR-Category Driven Design**:
-Requirements documents categorize each NFR by type (Performance/Security/Reliability/Usability/Maintainability/Scalability). For each NFR Category:
-- **Performance** → Design caching strategy, database indexing, load balancing; create ADR
-- **Security** → Design authentication/authorization flow, encryption, secrets management; create ADR
-- **Reliability** → Design multi-AZ deployment, circuit breakers, retry logic, backup strategy; create ADR
-- **Scalability** → Design horizontal scaling, database sharding, CDN usage; create ADR
-- **Maintainability** → Design CI/CD pipeline, testing strategy, monitoring; create ADR
-- **Usability** → Design UI/UX patterns, response time optimization; create ADR
-
-For each NFR, locate its **Target Metric** (from requirements) and specify the **Measurement Point** in the architecture (e.g., API gateway logs for latency, database transaction logs for ACID compliance, uptime monitoring for reliability).
-
-**Constraints-Aware Design**:
-All constraints documented in requirements must shape your design:
-- **Technical Constraints** (e.g., "Must use AWS services") → Inform technology stack selection and integration patterns
-- **Business Constraints** (e.g., "Budget <$5K/month") → Validate cost in ADRs; choose cost-effective options
-- **Regulatory Constraints** (e.g., "GDPR: data residency in EU") → Enforce in data flows and deployment architecture
-
-When creating ADRs, the **Alternatives Considered** section must explain why rejected options violated constraints from requirements.
-
-**Completeness Validation**:
-Before finalizing the architecture document, verify:
-- [ ] All REQ-xxx mapped to specific components with clear implementation approach
-- [ ] All NFR-xxx addressed with architectural decisions and measurement points
-- [ ] All Constraints reflected in technology choices and documented in ADRs
-- [ ] All Acceptance Criteria (Given-When-Then) have corresponding validation strategy
-- [ ] All requirement Dependencies correctly reflected in component dependencies and design order
-- [ ] Requirements Traceability Matrix (from template) shows 100% coverage
-
-### 3. Approval and Sharding Workflow
-After creating the unified `architecture.md`:
-1. Present the architecture to the user for approval
-2. Once approved, execute `shard-architecture.py` to split into semantic files
-3. Verify the sharded files in `{ARCH}/` directory
-4. Confirm all cross-references are preserved
-
+4. **Step 4: Validation & Coverage Assurance**
+- **GOAL:**
+  Confirm the architecture fully satisfies requirements, NFR targets, and constraints with no unresolved gaps.
+- **STEPS:**
+  - Reconcile requirements, NFR metrics, and constraints against the final architecture to ensure zero unmapped items and recorded resolutions for issues.
+  - Validate data flows, sequence diagrams, external API definitions, and monitoring plans against acceptance criteria and measurement methods.
+  - Update the issue log with remaining clarifications, highlighting blockers and escalation needs for unresolved requirements.
+- **QUESTIONS:**
+  Are all user journeys and system flows demonstrably covered with measurable outcomes?  
+  Can every NFR target be validated via defined monitoring or testing methods?  
+  Which open issues must be resolved before implementation can start?
+- **CHECKLIST:**
+  - [ ] Requirement coverage reconfirmed with no outstanding unmapped REQ/NFR items.
+  - [ ] Measurement and monitoring strategy validated for all NFR targets and constraints.
+  - [ ] Outstanding issues documented with clear escalation or follow-up actions.
+  
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:
 - [ ] 100% requirement-architecture mapping matrix with all fields (Priority, Dependencies, Acceptance Coverage, Measurement Points)
