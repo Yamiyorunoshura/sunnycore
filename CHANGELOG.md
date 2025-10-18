@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+## [4.23.13] - 2025-10-19
+- 優化了develop-plan, review任務的提示詞token使用
+- 移除了develop-plan, review中無關的提示詞，增強LLM注意力
+
 ## [4.23.12] - 2025-10-19
 - 優化了develop-plan任務的提示詞token使用
 - 移除了develop-plan中無關的提示詞，增強LLM注意力

@@ -18,14 +18,6 @@
 - **MUST** respect architecture decisions (tech stack, ADRs, component boundaries), **MUST NOT** introduce technologies not in architecture
 - **MUST** achieve test coverage ≥80%, **MUST NOT** deliver untested critical paths
 
-## [Steps]
-**You should work along to the following steps:**
-1. Extract implementation intelligence from plan and architecture. This builds complete understanding of what to build and how to build it.
-2. **RED Phase**: Write all test cases from plan, verify they fail correctly. This ensures test suite is complete and fails for right reasons.
-3. **GREEN Phase**: Write minimal implementation to pass tests, verify all pass. This ensures working functionality with exit code 0.
-4. **REFACTOR Phase**: Improve code quality while maintaining green tests. This ensures production-ready code quality.
-5. Document implementation in dev notes following template. This completes implementation record.
-
 ## [Instructions]
 1. **Step 1: Assimilate Plan And Architecture**
    - **GOAL:** Build an executable understanding of requirements, tests, architecture, and quality gates.
