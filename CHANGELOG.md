@@ -7,6 +7,11 @@
 
 ## [Unreleased]
 
+## [4.23.11] - 2025-10-19
+### Changed
+- 優化了brownfield-plan任務的提示詞token使用
+- 移除了brownfield-plan中無關的提示詞，增強LLM注意力
+
 ## [4.23.10] - 2025-10-18
 ### Changed
 - 優化了config提示詞中的example格式
