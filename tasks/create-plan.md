@@ -1,4 +1,4 @@
-**GOAL**: Create detailed TDD implementation plans for all epic tasks with RED/GREEN/REFACTOR phases.
+**GOAL**: Create detailed TDD implementation plan for a specific task with RED/GREEN/REFACTOR phases.
 
 ## [Context]
 **You must read the following context:**
@@ -20,8 +20,8 @@
 
 ## [Steps]
 **You should work along to the following steps:**
-1. Extract planning intelligence from requirements, architecture, tasks, knowledge base. This builds the mental model of what needs to be tested, implemented, and optimized.
-2. Construct traceability chains linking REQ → Architecture → Tests → Implementation. This ensures every requirement is testable and implementable.
+1. Extract planning intelligence for the specified task from requirements, architecture, tasks, knowledge base. This builds the mental model of what needs to be tested, implemented, and optimized.
+2. Construct traceability chains linking REQ → Architecture → Tests → Implementation. This ensures every requirement is testable and traceable.
 3. Apply TDD decision logic for RED/GREEN/REFACTOR phases. This translates traceability chains into executable test-driven plans.
 4. Resolve conflicts, gaps, and ambiguities through structured analysis. This ensures plans are complete and conflict-free before execution.
 
@@ -77,7 +77,7 @@
 - If Data Flow is Asynchronous → Plan async test handling (event listeners, message queues)
 - If ADR documents a decision → Respect that decision over conflicting knowledge base patterns
 
-#### From Epic (`{EPIC}`)
+#### From Epic (`{EPIC}`) for the specified task
 
 **Task Metadata:**
 - **Description → Feature Scope**: Defines boundaries of what this plan should cover
@@ -114,7 +114,7 @@
 
 #### Build REQ → Test Cases Mapping
 
-For each REQ-XXX referenced in Task:
+For each REQ-XXX referenced in the specified task:
 1. **Extract Test Scenarios**: Each Given-When-Then → One test case name
    - Example: REQ-001 "Given user is logged in, When user creates article, Then article is saved" → `test_authenticated_user_can_create_article()`
 2. **Determine Test Layers**:
@@ -126,7 +126,7 @@ For each REQ-XXX referenced in Task:
 
 #### Build Architecture → Implementation Files Mapping
 
-For each Component referenced in Task:
+For each Component referenced in the specified task:
 1. **Locate Component Definition**: Find component in `{ARCH}/*.md` Components section
 2. **Extract Technology Stack**: Component's "Technology" field defines implementation language/framework
 3. **Derive File Paths**: Use Architecture's "Work Directory Structure" + Component name + Tech stack conventions
@@ -298,9 +298,9 @@ For each Knowledge Base pattern:
 #### Gap Analysis Checklist
 
 Before finalizing plans, verify:
-- [ ] Every Task in Epic has been planned
-- [ ] Every REQ-XXX referenced in Task exists in `{REQ}/*.md`
-- [ ] Every Architecture Component referenced in Task exists in `{ARCH}/*.md`
+- [ ] The specified task has been planned
+- [ ] Every REQ-XXX referenced in the specified task exists in `{REQ}/*.md`
+- [ ] Every Architecture Component referenced in the specified task exists in `{ARCH}/*.md`
 - [ ] Every Test Case in plan maps to at least one REQ
 - [ ] Every Implementation File in plan maps to Architecture Component
 - [ ] All NFRs have corresponding performance/security/reliability tests

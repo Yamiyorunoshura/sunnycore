@@ -53,7 +53,7 @@ Pattern: *{command} → Read: {T}/{command}.md
 
 Available commands:
 - *help
-- *create-plan
+- *create-plan {task_id}
 - *develop-plan {task_id}
 - *brownfield-plan {task_id}
 - *fix-acceptance-issues

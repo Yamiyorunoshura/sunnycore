@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+## [4.23.7] - 2025-10-18
+### Changed
+- 將create-plan任務改回為獨立task創建implemenetation plan
+
 ## [4.23.6] - 2025-10-18
 ### Fixed
 - 修復了create-plan時無knowledge base(greenfield project)狀態時LLM會停止工作的問題
