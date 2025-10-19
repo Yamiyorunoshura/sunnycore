@@ -2,7 +2,7 @@
 
 """
 shard-requirements.py
-將 requirements.md 依二級標題(##)拆分為多個獨立 .md 檔。
+將 requirements.md 依一級標題(#)拆分為多個獨立 .md 檔。
 
 環境變數：
 - REQUIREMENTS_FILE：輸入檔路徑（預設 docs/requirements.md）
@@ -68,8 +68,8 @@ def check_input_file(input_file: Path) -> None:
     log_success(f"輸入文件檢查通過: {input_file}")
 
 
-def extract_second_level_headers(input_file: Path, output_dir: Path) -> int:
-    log_info("提取二級標題...")
+def extract_first_level_headers(input_file: Path, output_dir: Path) -> int:
+    log_info("提取一級標題...")
     sections_count = 0
     current_section_title: Optional[str] = None
     current_section_path: Optional[Path] = None
@@ -77,7 +77,7 @@ def extract_second_level_headers(input_file: Path, output_dir: Path) -> int:
     with input_file.open("r", encoding="utf-8") as f:
         for raw_line in f:
             line = raw_line.rstrip("\n")
-            m = re.match(r"^##\s+(.+)$", line)
+            m = re.match(r"^#\s+(.+)$", line)
             if m:
                 section_title = m.group(1)
 
@@ -89,7 +89,7 @@ def extract_second_level_headers(input_file: Path, output_dir: Path) -> int:
                 filename = clean_filename(section_title) + ".md"
                 current_section_path = output_dir / filename
                 with current_section_path.open("w", encoding="utf-8") as out:
-                    out.write(f"## {section_title}\n\n")
+                    out.write(f"# {section_title}\n\n")
                 continue
 
             if current_section_path is not None:
@@ -100,7 +100,7 @@ def extract_second_level_headers(input_file: Path, output_dir: Path) -> int:
         log_info(f"已保存: {current_section_path}")
         sections_count += 1
 
-    log_success(f"二級標題提取完成，共 {sections_count} 個章節")
+    log_success(f"一級標題提取完成，共 {sections_count} 個章節")
     return sections_count
 
 
@@ -130,7 +130,7 @@ def generate_report(input_file: Path, output_dir: Path) -> None:
     print("文件統計:")
     total_top = len(list_md_files_top_level(output_dir))
     total_all = len(list_md_files_recursively(output_dir))
-    print(f"- 二級標題文件: {total_top}")
+    print(f"- 一級標題文件: {total_top}")
     print(f"- 總文件數: {total_all}")
     print("==============================================")
 
@@ -150,7 +150,7 @@ def main() -> None:
 
     check_input_file(input_file)
     create_directory_structure(output_dir)
-    extract_second_level_headers(input_file, output_dir)
+    extract_first_level_headers(input_file, output_dir)
     generate_report(input_file, output_dir)
     log_success("需求文檔拆分完成！")
     

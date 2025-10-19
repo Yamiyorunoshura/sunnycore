@@ -2,7 +2,7 @@
 
 """
 shard-architecture.py
-將 architecture.md 文檔依二級標題(##)拆分為多個獨立 .md 檔。
+將 architecture.md 文檔依一級標題(#)拆分為多個獨立 .md 檔。
 
 環境變數：
 - ARCHITECTURE_FILE：輸入檔路徑（預設 docs/architecture.md）
@@ -71,7 +71,7 @@ def check_input_file(input_file: Path) -> None:
 
 
 def extract_architecture_sections(input_file: Path, output_dir: Path) -> int:
-    log_info("以二級標題(##)切割 architecture.md 文檔...")
+    log_info("以一級標題(#)切割 architecture.md 文檔...")
     sections_count = 0
     current_section_title: Optional[str] = None
     current_section_path: Optional[Path] = None
@@ -79,7 +79,7 @@ def extract_architecture_sections(input_file: Path, output_dir: Path) -> int:
     with input_file.open("r", encoding="utf-8") as f:
         for raw_line in f:
             line = raw_line.rstrip("\n")
-            m = re.match(r"^##\s+(.+)$", line)
+            m = re.match(r"^#\s+(.+)$", line)
             if m:
                 section_title = m.group(1)
                 # 完成前一段
@@ -92,7 +92,7 @@ def extract_architecture_sections(input_file: Path, output_dir: Path) -> int:
                 filename = clean_filename(section_title) + ".md"
                 current_section_path = output_dir / filename
                 with current_section_path.open("w", encoding="utf-8") as out:
-                    out.write(f"## {section_title}\n\n")
+                    out.write(f"# {section_title}\n\n")
                 continue
 
             # 累加內容

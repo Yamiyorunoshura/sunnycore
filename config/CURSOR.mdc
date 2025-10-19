@@ -14,7 +14,7 @@ alwaysApply: true
 5. **Progress tracking**: Establish valid progress tracking mechanism before you start working on the tasks to prevent losing track in long conversations.
 
 ## [Template-And-Products-Format]
-1. **Markdown hierarchy**: Produce pure Markdown mirroring template structure: section→H1, nested sections→H2.
+1. **Markdown hierarchy**: Produce pure Markdown mirroring template structure: every section title named in the template must be a single-`#` H1 (e.g., Evidence, Verification), while nested items such as Immediate Actions or Future Improvements drop to `##` H2+ so downstream sharding remains accurate.
 2. **Tag directives**: Honor all template tags such as [Description], [Path-Variables], [CONTEXT], etc.
 3. **Update existing files**: When updating, read current file first, preserve structure, enhance content, avoid duplicates.
 
