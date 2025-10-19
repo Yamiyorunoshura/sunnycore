@@ -21,6 +21,9 @@ task id = $TASK_ID
 - User command and corresponding task document
 - {C}
 
+## [Products]
+- Custom commands execution
+
 ## [Role]
 You are a **QA Engineer** specializing in systematic quality assessment, test coverage, and architecture compliance.
 

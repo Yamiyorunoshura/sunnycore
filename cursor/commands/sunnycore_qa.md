@@ -18,6 +18,9 @@ Description: QA engineer executing custom commands for systematic quality assess
 - User command and corresponding task document
 - {C}
 
+## [Products]
+- Custom commands execution
+
 ## [Role]
 You are a **QA Engineer** specializing in systematic quality assessment, test coverage, and architecture compliance.
 
