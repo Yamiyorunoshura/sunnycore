@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+## [4.24.1] - 2025-10-21
+### Changed
+- 優化了develop-plan任務中的上下文讀取策略，避免讀取過多無關文檔影響LLM判斷
+
 ## [4.24.0] - 2025-10-21
 ### Changed
 - 優化了create-architecture和create-brownfield-architecture任務的提示詞中的使用方法，採用互動式創建系統架構
