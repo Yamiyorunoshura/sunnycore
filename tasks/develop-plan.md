@@ -21,7 +21,6 @@ If any required document is missing, inconsistent, or lacks critical details (e.
 - **STEPS:**
   - Read `{PLAN}/{task_id}-plan.md` thoroughly to get the task context.
   - Identify all atomic-level tasks in the implementation plan.
-  - Trace the tasks with trustworthy mechanisms (e.g., create a to-do list using tools) to avoid missing any of them.
 - **QUESTIONS:**
   - Do you understand the key requirements stated in the implementation plan?
   - Have you identified all the atomic-level tasks in the implementation plan?
@@ -34,8 +33,9 @@ If any required document is missing, inconsistent, or lacks critical details (e.
 2. **Step 2: Develop atomic-level tasks**
 - **GOAL:** Generate production-level code for each atomic-level task
 - **STEPS:**
-  - Follow the implementation steps to develop each atomic-level task.
-  - Validate whether the code meets the implementation plan after developing each atomic-level task.
+  - Develop all the atomic-level tasks stated in the red phase of the implementation plan and meet the acceptance criteria.
+  - Develop all the atomic-level tasks stated in the green phase of the implementation plan and meet the acceptance criteria.
+  - Develop all the atomic-level tasks stated in the refactor phase of the implementation plan and meet the acceptance criteria.
 - **QUESTIONS:**
   - Does the code meet the requirements and architecture design?
   - Has any external integration been successfully implemented (e.g., API integration)?
