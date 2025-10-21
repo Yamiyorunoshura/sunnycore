@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+## [4.24.3] - 2025-10-21
+### Changed
+- 優化了數份提示詞的token使用
+
 ## [4.24.2] - 2025-10-21
 ### Changed
 - 優化了review任務中的token使用
