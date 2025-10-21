@@ -105,55 +105,16 @@ If any required document is missing, inconsistent, or lacks critical details (te
 
 ## [Examples]
 
-### Good #1: Strict TDD With Architecture Alignment
-**Input**: Task-1 implementation plan references Express 4.18, PostgreSQL 14, ADR-002 (service layer boundaries), and Quality Gate target coverage 85%.
+### Good example 1: Get related documents before development
+- **Context:** An implementation plan requires external API integration.
+- **Tools:** There is a tool called `context7` that can fetch documents related to the code (e.g., documentation for Redis, PostgreSQL, etc.).
+- **Decision:** Use `context7` to get all related documents before starting the fix to understand the latest code formats.
+- **Outcome:** The development was done correctly the first time, and all tests passed.
+- **Why good:** By getting all related documents first, the LLM was able to understand the latest code formats and avoid mistakes caused by outdated knowledge.
 
-**Execution Pattern**:
-1. **Assimilate**: Read `{PLAN}/task-1-plan.md`, capture requirements (REQ-001), trace to `OrderService`, note tests (`test_create_order_valid`, `test_create_order_missing_fields`, `test_create_order_persistence`). Review `architecture/services.md` for service boundaries and ADR-002 for layering rules. Confirm work directory mapping (`src/services/orderService.ts`, `tests/integration/orderService.test.ts`).
-2. **RED**: Implement both unit and integration tests referenced in plan. Tests fail with "OrderService.create not implemented".
-3. **GREEN**: Implement minimal code in `src/services/orderService.ts`, using Postgres repository pattern defined in architecture. Run tests → all pass. Coverage 87%.
-4. **REFACTOR**: Apply transaction handling per ADR-005, extract validation helper, add structured logging (uses Express 4.18 patterns, PostgreSQL 14 syntax, follows ADR-002). Tests remain green.
-5. **Document**: Populate `{DEVNOTES}/task-1-dev-notes.md` with decisions (transaction handling), deviations (none), test evidence (coverage report).
-
-**Why Good**: Maintains RED → GREEN → REFACTOR, mirrors plan traceability, respects architecture rules, delivers documentation evidence.
-
----
-
-### Good #2: NFR-Driven Development With Performance Validation
-**Input**: Task-2 plan (transaction reports) includes NFR-001 `<2s response`. Architecture specifies Node.js 18, TimescaleDB 2.9, continuous aggregates (ADR-007).
-
-**Execution Pattern**:
-1. **Assimilate**: Extract traceability (REQ-002, NFR-001 → ReportingService), review ADR-007 for continuous aggregates, capture performance target `<2s`.
-2. **RED**: Author behavior test `test_report_by_date_range` and performance test `test_report_under_2_seconds`. Tests fail because `ReportingService` missing.
-3. **GREEN**: Implement `ReportingService` with TimescaleDB hypertable query. Tests pass, performance 1.8s.
-4. **REFACTOR**: Apply continuous aggregates per ADR-007, add error handling, extract query builder. Tests stay green, performance 120ms p95.
-5. **Document**: Dev notes record performance evidence, ADR references, coverage 85%.
-
-**Why Good**: Demonstrates NFR extraction, ADR adherence, prioritized refactoring, and evidence-based quality gates.
-
----
-
-### Bad #1: Skipping TDD Cycle
-**Input**: Task-3 plan lists 8 tests with explicit RED/GREEN sequencing.
-
-**Bad Pattern**: Author production code first (caching, validation, logging), run tests later (5/8 pass), tweak assertions to "fix" failures, deliver without green suite.
-
-**Why Bad**: Violates TDD cadence, fails quality gate (exit code ≠ 0), obscures traceability, makes debugging difficult. Correct approach: write all tests first, ensure they fail, implement incrementally, keep suite green.
-
----
-
-### Bad #2: Ignoring Architecture Specifications
-**Input**: Plan references Express 4.18, PostgreSQL, service directory `src/services/`.
-
-**Bad Pattern**: Implement with Express 5.x and MongoDB, place files under `app/controllers/`. Tests may pass but architecture violated.
-
-**Why Bad**: Breaks architecture constraints, introduces unsupported tech, causes integration drift. Correct approach: follow architecture tech stack, directory structure, ADR guidance.
-
----
-
-### Bad #3: Incomplete Documentation
-**Input**: Code delivered with passing tests and coverage 88%.
-
-**Bad Pattern**: Skip dev notes, omit deviations, ignore architecture trade-offs. Future reviewers lack traceability.
-
-**Why Bad**: Fails documentation product requirement, hides deviations, weakens reviewability. Correct approach: fill template sections, record deviations, attach test and coverage proof.
+### Bad example 1: Start development without understanding the problem
+- **Context:** An implementation plan requires complex interactions between multiple services.
+- **Tools:** There is a tool called `sequential thinking` that can help an LLM break down complex problems into smaller steps via reasoning.
+- **Decision:** Start development directly without using `sequential thinking` to analyze.
+- **Outcome:** The development was incorrect and is not aligned to the plan.
+- **Why bad:** Without using `sequential thinking`, the LLM failed to gain a comprehensive understanding of the problem, which led to mistakes during the development.

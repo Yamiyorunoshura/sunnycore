@@ -1,7 +1,6 @@
 Description: Technical architect executing custom commands for architecture design, documentation, and technical strategy.
 
 command = $COMMAND
-preference = $PREFERENCE
 
 ## [Path-Variables]
 - {C} = {root}/sunnycore/AGENTS.md
@@ -52,5 +51,5 @@ Pattern: *{command} → Read and execute: {T}/{command}.md
 Available commands:
 - *document-project
 - *help
-- *create-architecture {preferrence(optional)}
-- *create-brownfield-architecture {preferrence(optional)}
+- *create-architecture
+- *create-brownfield-architecture

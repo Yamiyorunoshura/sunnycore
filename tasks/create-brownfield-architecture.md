@@ -16,72 +16,70 @@
 - **MUST** understand existing architecture before designing changes
 - **MUST** preserve backward compatibility or provide migration paths
 - **MUST** use architecture template structure for consistency
+- **MUST** lead the user through question-driven checkpoints before committing to design updates, **MUST NOT** advance without explicit user acknowledgement
 
 ## [Instructions]
 [Instructions]
-1. **Step 1: Understand Current Architecture**
-- **GOAL:** Build a validated view of existing system boundaries, contracts, and extension points before proposing changes.
+1. **Step 1: Current-State Discovery Dialogue**
+- **GOAL:** Build a validated view of existing system boundaries, contracts, and extension points with user confirmation before proposing changes.
 - **STEPS:**
-  - Gather the relevant requirements, knowledge base notes, and architecture files that scope the brownfield change.
-  - Read the selected architecture documents to map components, contracts, dependencies, and active integration patterns.
-  - Capture constraints, technical debt, and candidate extension points in working notes aligned with the architecture template sections.
-  - Confirm outstanding knowledge gaps or risks with stakeholders or existing documentation before moving on.
-- **QUESTIONS:**
-  - Which architecture files map directly to the targeted requirements and domains?
-  - Where do stable extension points exist versus areas that would require risky modifications?
-  - What constraints (tech debt, version locks, compliance rules) could block or alter the extension plan?
+  - Summarize the existing architecture context to the user, highlighting known components, contracts, and extension points; ask targeted questions about undocumented behaviors or recent changes.
+  - Capture the user's responses, risks, and constraints in structured notes aligned with the architecture template sections.
+  - Agree with the user on outstanding gaps, research tasks, or additional artifacts needed prior to design.
+- **QUESTIONS (for the user and self-check):**
+  - Which areas of the current architecture need clarification from the user?  
+  - Where does the user see stable extension points versus risky modifications?  
+  - What constraints or tech debt does the user expect to influence the solution?
 - **CHECKLIST:**
-  - [ ] All relevant architecture artifacts reviewed and annotated.
-  - [ ] Extension points and dependencies cataloged with rationale.
-  - [ ] Risks, constraints, and open questions logged for follow-up.
+  - [ ] User confirmations logged for reviewed architecture artifacts and identified extension points.
+  - [ ] Risks, constraints, and open questions captured with user acknowledgement.
+  - [ ] Follow-up actions agreed before moving forward.
 
-2. **Step 2: Design Extension Strategy**
-- **GOAL:** Define an extension approach that preserves compatibility while meeting the new requirements.
+2. **Step 2: Co-Design Extension Strategy**
+- **GOAL:** Define and iteratively refine an extension approach that preserves compatibility while meeting requirements, with user feedback at each decision.
 - **STEPS:**
-  - Select integration patterns that favor extension points and avoid breaking existing contracts.
-  - Draft proposed component updates using the architecture template sections (system architecture, components, data flows).
-  - Evaluate impacts on current interfaces, dependencies, and operational characteristics, documenting mitigation options.
-  - Outline migration and rollback paths to cover any unavoidable changes to existing components.
-- **QUESTIONS:**
-  - Which integration pattern delivers the requirement with minimal disruption to current consumers?
-  - Do new or modified components rely on existing services that need capacity, security, or version adjustments?
-  - How will we maintain backward compatibility or notify consumers about required migrations?
+  - Present candidate integration patterns and component updates to the user, explaining trade-offs and asking for preferences or constraints.
+  - For each change area, ask clarifying questions about operational impacts, dependencies, and compliance requirements before documenting decisions.
+  - Collaboratively outline migration and rollback paths, capturing the user's approval or concerns for each critical scenario.
+- **QUESTIONS (for the user and self-check):**
+  - Which strategy does the user prefer for integrating new capabilities without breaking existing consumers?  
+  - What additional safeguards does the user require for capacity, security, or compatibility?  
+  - Are migration and rollback expectations acceptable to the user?
 - **CHECKLIST:**
-  - [ ] Extension design leverages documented extension points or provides a justified alternative.
-  - [ ] Impact analysis completed for interfaces, dependencies, and operations.
-  - [ ] Migration and rollback strategy drafted with owners identified.
+  - [ ] Extension design choices validated with the user and linked to requirements.
+  - [ ] Impact analysis updated with user-supplied insights on interfaces, dependencies, and operations.
+  - [ ] Migration and rollback plans documented with user-approved owners.
 
-3. **Step 3: Document and Validate**
-- **GOAL:** Produce template-compliant architecture documentation with full traceability and stakeholder validation.
+3. **Step 3: Document & Validate with User**
+- **GOAL:** Produce template-compliant architecture documentation with full traceability, reviewed section-by-section with the user.
 - **STEPS:**
-  - Populate every required section of `architecture-tmpl.yaml` with the updated system overview, component details, and data flows.
-  - Link requirements, decisions, and impacts to the appropriate sections to maintain traceability.
-  - Share the draft with stakeholders for review, focusing on compatibility, risk, and migration coverage; incorporate agreed feedback.
-  - Record approvals or explicit exceptions before proceeding to distribution.
-- **QUESTIONS:**
-  - Are all mandatory template sections (introduction, components, data flows, external APIs) updated with the latest design?
-  - Does each requirement map to architecture elements, decisions, or components in the document?
-  - Which stakeholders must sign off, and what open issues remain before approval?
+  - Populate every required section of `{TMPL}/architecture-tmpl.yaml` in `{root}/docs/architecture.md`, referencing agreed requirements, decisions, and impacts.
+  - After drafting each major section, summarize the content for the user, solicit feedback, and adjust before moving on.
+  - Record user approvals, outstanding clarifications, and exception handling within the document or issue log.
+- **QUESTIONS (for the user and self-check):**
+  - Does the user accept how requirements and decisions are documented in each section?  
+  - What additional evidence or references does the user need for risk, compatibility, or migration topics?  
+  - Are any approvals pending before documentation can be finalized?
 - **CHECKLIST:**
-  - [ ] Architecture document fully populated and consistent with the template.
-  - [ ] Requirement traceability and decision rationale documented.
-  - [ ] Stakeholder feedback addressed and approvals recorded.
+  - [ ] Template sections completed and validated with the user.
+  - [ ] Requirement traceability, decision rationale, and impact analysis updated per user feedback.
+  - [ ] User approvals or follow-up tasks recorded for each outstanding issue.
 
-4. **Step 4: Verify Integration and Distribute**
-- **GOAL:** Confirm compatibility between new and existing components and deliver finalized documentation.
+4. **Step 4: Verify Integration & Distribute Collaboratively**
+- **GOAL:** Confirm compatibility between new and existing components with the user, then deliver finalized documentation.
 - **STEPS:**
-  - Validate that updated and existing contracts, workflows, and data flows operate together via targeted tests or reviews.
-  - Execute migration and rollback checks, ensuring procedures are documented for operations teams.
-  - Run `{SCRIPTS}/shard-architecture.py` to distribute the consolidated document into `{ARCH}/*.md` and inspect outputs for accuracy.
-  - Capture remaining follow-up items, regressions, or operational handoffs.
-- **QUESTIONS:**
-  - What evidence confirms that core contracts and integrations remain stable after the extension?
-  - How will operations respond if migration steps fail or need to be rolled back?
-  - Did the sharding process update all distributed architecture files without conflicts?
+  - Review integration validation evidence with the user, confirming that updated and existing contracts, workflows, and data flows remain stable.
+  - Walk through migration and rollback procedures, capturing any additional operational guidance requested by the user.
+  - Execute `{SCRIPTS}/shard-architecture.py` after user sign-off, distribute `{ARCH}/*.md`, and inspect the outputs together for accuracy.
+  - Update follow-up logs with agreed owners, due dates, and escalation paths.
+- **QUESTIONS (for the user and self-check):**
+  - What evidence satisfies the user that integrations remain compatible?  
+  - Did the user confirm migration and rollback readiness?  
+  - Do the sharded files match the user's expectations?
 - **CHECKLIST:**
-  - [ ] Integration validation completed and findings documented.
-  - [ ] Migration and rollback procedures confirmed with responsible teams.
-  - [ ] Sharded architecture files regenerated and verified.
+  - [ ] Integration validation reviewed with the user and accepted.
+  - [ ] Migration and rollback procedures confirmed with responsible teams and user approval.
+  - [ ] `{ARCH}/*.md` regenerated after user confirmation and verified collaboratively.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:
@@ -92,26 +90,12 @@ All gates **MUST** pass before marking complete:
 
 ## [Example]
 
-### Good #1: Authentication Enhancement
-**Input**: Existing REST API with basic auth. REQ-001: Add OAuth2 authentication  
-**Approach**: 
-1. **Discovery**: Read existing User Service and API Gateway architecture, map current auth flow
-2. **Design**: Design OAuth2 Server as new component, integrate via existing auth middleware extension points
-3. **Documentation**: Create comprehensive architecture using template, show requirement traceability  
-4. **Verification**: Confirm existing basic auth continues working, validate OAuth2 integration
-**Why Good**: Follows systematic discovery, uses extension points, preserves existing functionality, complete documentation.
-
-### Good #2: Analytics Addition  
-**Input**: Existing CMS with PostgreSQL+Redis. Requirements for analytics and behavior tracking
-**Approach**:
-1. **Discovery**: Map existing CMS architecture, identify event bus as natural extension point
-2. **Design**: Add Analytics Collector and ClickHouse as isolated components subscribing to events
-3. **Documentation**: Document new components with ADRs, maintain requirement traceability
-4. **Verification**: Confirm CMS performance unaffected, validate analytics data flow
-**Why Good**: Leverages existing patterns, minimal system impact, complete architectural documentation.
-
-### Bad #1: Assumption-Based Design
-**Input**: Need to add new feature to existing system  
-**Bad Approach**: Skip architecture review, assume integration points, design without understanding existing contracts, ignore impact analysis.  
-**Why Bad**: Violates discovery phase, risks breaking existing functionality, creates integration problems.  
-**Correct Approach**: Systematically read existing architecture, understand extension points, design for compatibility, document all impacts.
+### Good example 1: Fetch of the latest documentation
+- **Context**: Requirement document is present and a external API integration is needed to fulfill the requirement.
+- **Tools**: 
+  - `websearch`: A tool that can conduct web searches to find relevant documentation.
+  - `Context7`: A tool that can fetch external documentation from an external database that only contains verified and approved documents.
+- **Decision**: Use `Context7` to fetch the latest approved documentation for the API integration.
+- **Why good**:
+  - Use of tools to ensure the documentations is up-to-date to prevent making mistake during architecture design due to the outdated knowledge of the LLM.
+  - Choose to use ``Context7`` instead of `websearch` to ensure the documentation is verified and approved, which is critical for architecture design.

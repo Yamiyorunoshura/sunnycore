@@ -118,18 +118,16 @@
 
 ## [Examples]
 
-### Effective Approach
-**Scenario**: Cutover shows critical CSV export timeout for 10K rows, requirements specify this capacity, architecture shows in-memory processing.
+### Good example 1: Get related documents before the fix
+- **Context:** A cutover report rejected the release due to environment setup issues.
+- **Tools:** There is a tool called `context7` that can fetch documents related to the code (e.g., documentation for Redis, PostgreSQL, etc.).
+- **Decision:** Use `context7` to get all related documents before starting the fix to understand the latest code formats.
+- **Outcome:** The fix was done correctly the first time, and all tests passed.
+- **Why good:** By getting all related documents first, the LLM was able to understand the latest code formats and avoid mistakes caused by outdated knowledge.
 
-**Analysis**: Cross-reference REQ-003 (10K row support) with architecture (in-memory loading) to identify root cause - memory limitations causing timeout.
-
-**Implementation**: Follow TDD - write failing test for 10K rows within acceptable time limits, implement streaming solution to pass test, refactor for error handling and monitoring. Re-run acceptance tests to confirm resolution.
-
-**Documentation**: Record root cause analysis linking requirements gap to architectural limitation, document streaming implementation decision and performance improvements achieved.
-
-### Common Pitfalls to Avoid
-**Incomplete Analysis**: Jumping to solutions without understanding requirements context or architectural constraints leads to Band-Aid fixes rather than systematic resolution.
-
-**Skipping TDD Discipline**: Implementing fixes without first writing failing tests provides no regression protection and doesn't prove the issue is actually resolved.
-
-**Inadequate Verification**: Not re-running acceptance tests means you may have fixed symptoms rather than root causes, leaving users with unresolved problems.
+### Bad example 1: Start the fix without understanding the problem
+- **Context:** A prd requires complex interactions between multiple services.
+- **Tools:** There is a tool called `sequential thinking` that can help an LLM break down complex problems into smaller steps via reasoning.
+- **Decision:** Start the fix directly without using `sequential thinking` to analyze.
+- **Outcome:** The fix was incorrect and is not aligned to the plan.
+- **Why bad:** Without using `sequential thinking`, the LLM failed to gain a comprehensive understanding of the problem, which led to mistakes during the fix and additional test failures.

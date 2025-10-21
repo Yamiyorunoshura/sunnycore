@@ -7,6 +7,11 @@
 
 ## [Unreleased]
 
+## [4.24.0] - 2025-10-21
+### Changed
+- 優化了create-architecture和create-brownfield-architecture任務的提示詞中的使用方法，採用互動式創建系統架構
+- 優化了多份提示詞的token使用，移除不必要的examples，增強LLM注意力
+
 ## [4.23.15] - 2025-10-19
 - 修改了腳本切割邏輯
 

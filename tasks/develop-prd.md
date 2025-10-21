@@ -103,20 +103,18 @@ All gates **MUST** pass before marking complete:
 - [ ] Comprehensive prd-dev-notes.md created
 - [ ] No linter errors
 
-## [Example]
+## [Examples]
 
-### Good #1
-**Input**: PRD with REQ-001 (update profile), REQ-002 (avatar upload), NFR-001 (<200ms). Tasks: Task-1 (profile API), Task-2 (avatar storage)  
-**Decision**: Understand all PRD. Develop strategy respecting dependencies (Task-1→Task-2). RED: write tests for PUT /profile, POST /profile/avatar (all fail correctly). GREEN: implement profile update, S3 avatar upload (all pass). REFACTOR: add validation, optimize image processing (tests stay green). Create prd-dev-notes.md. Validate all acceptance criteria.  
-**Why Good**: This implements every requirement via full TDD loop, validates each phase, produces mandated documentation, and achieves 87% coverage.
+### Good example 1: Get related documents before development
+- **Context:** An implementation plan requires external API integration.
+- **Tools:** There is a tool called `context7` that can fetch documents related to the code (e.g., documentation for Redis, PostgreSQL, etc.).
+- **Decision:** Use `context7` to get all related documents before starting the fix to understand the latest code formats.
+- **Outcome:** The development was done correctly the first time, and all tests passed.
+- **Why good:** By getting all related documents first, the LLM was able to understand the latest code formats and avoid mistakes caused by outdated knowledge.
 
-### Good #2
-**Input**: PRD with REQ-001 (rate limit per user), NFR-001 (100 req/min), NFR-002 (Redis storage). Tasks: middleware, config, monitoring  
-**Decision**: Read PRD completely. Plan TDD. RED: tests for rate limit enforcement, exceed limit, reset after window (all fail). GREEN: Redis-based token bucket, Express middleware (all pass). REFACTOR: configurable limits, monitoring metrics (tests stay green). Document in prd-dev-notes.md. Verify NFRs (100 req/min enforced, monitoring functional).  
-**Why Good**: This proves NFRs with tests and monitoring evidence, leaves thorough notes and configs, and achieves 82% coverage.
-
-### Bad #1
-**Input**: PRD with multiple tasks  
-**Bad Decision**: Implement Task-1 only, skip others. Skip TDD entirely (write code without tests). Deliver with failing tests. No prd-dev-notes.md. Claim all complete.  
-**Why Bad**: This violates complete all tasks, skips TDD cycle, delivers with failing tests, provides no dev notes. This produces incomplete unusable delivery.  
-**Correct**: Execute ALL steps for ALL tasks. Develop strategy covering ALL PRD tasks. For each: RED (tests, verify fail)→GREEN (minimal, verify pass)→REFACTOR (quality). Create comprehensive prd-dev-notes.md. Verify ALL acceptance criteria. Ensure exit code 0.
+### Bad example 1: Start development without understanding the problem
+- **Context:** A prd requires complex interactions between multiple services.
+- **Tools:** There is a tool called `sequential thinking` that can help an LLM break down complex problems into smaller steps via reasoning.
+- **Decision:** Start development directly without using `sequential thinking` to analyze.
+- **Outcome:** The development was incorrect and is not aligned to the plan.
+- **Why bad:** Without using `sequential thinking`, the LLM failed to gain a comprehensive understanding of the problem, which led to mistakes during the development.

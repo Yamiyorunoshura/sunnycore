@@ -66,12 +66,12 @@ sections:
     instruction: |
       This is the DEFINITIVE technology selection. Document all technology choices in a clear table:
       
-      | Category | Technology | Version | Purpose | Rationale |
+      | Category | Technology | Purpose | Rationale |
       |----------|------------|---------|---------|-----------|
-      | Language | {language} | {version} | {purpose} | {why chosen} |
-      | Runtime | {runtime} | {version} | {purpose} | {rationale} |
-      | Framework | {framework} | {version} | {purpose} | {rationale} |
-      | Database | {database} | {version} | {purpose} | {rationale} |
+      | Language | {language} | {purpose} | {why chosen} |
+      | Runtime | {runtime} | {purpose} | {rationale} |
+      | Framework | {framework} | {purpose} | {rationale} |
+      | Database | {database} | {purpose} | {rationale} |
       | ... | ... | ... | ... | ... |
       
       Categories to cover:

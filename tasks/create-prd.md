@@ -111,17 +111,12 @@ All gates **MUST** pass before marking complete:
 
 ## [Examples]
 
-### Good #1: Brownfield Integration
-**Input**: "Export dashboard data to CSV/PDF" with existing Dashboard Service (React), Analytics API (Node.js)  
-**Approach**: Identified Brownfield project → analyzed existing architecture → created measurable requirements (REQ-001: CSV export <5s for 10K rows, REQ-002: PDF generation with charts) → designed Export Service integration with no breaking changes → built complete traceability matrix → delivered integrated PRD with impact analysis.  
-**Key Success Factors**: Preserved existing contracts, quantified performance requirements, ensured complete requirement mapping.
-
-### Good #2: Greenfield Design
-**Input**: "Add 2FA authentication system" with no existing authentication  
-**Approach**: Identified Greenfield project → defined verifiable requirements (REQ-001: TOTP generation per RFC 6238, REQ-002: backup codes) → designed Auth Service with FastAPI/Redis/PostgreSQL → created comprehensive task breakdown → integrated everything into unified PRD with full traceability.  
-**Key Success Factors**: Complete architecture design, quantified NFRs, end-to-end task mapping.
-
-### Bad Example: Incomplete Analysis
-**Problem**: Skipped project type analysis → created vague requirements ("system should be fast") → designed without impact analysis → missing requirement traceability → delivered incomplete PRD.  
-**Missing Elements**: Project type identification, measurable acceptance criteria, architecture mapping, stakeholder approval.  
-**Correction Approach**: Always determine project type first, quantify all requirements with specific metrics, ensure 100% traceability, validate completeness before delivery.
+### Good example 1: Fetch of the latest documentation
+- **Context**: Requirement document is present and a external API integration is needed to fulfill the requirement.
+- **Tools**: 
+  - `websearch`: A tool that can conduct web searches to find relevant documentation.
+  - `Context7`: A tool that can fetch external documentation from an external database that only contains verified and approved documents.
+- **Decision**: Use `Context7` to fetch the latest approved documentation for the API integration.
+- **Why good**:
+  - Use of tools to ensure the documentations is up-to-date to prevent making mistake during architecture design due to the outdated knowledge of the LLM.
+  - Choose to use ``Context7`` instead of `websearch` to ensure the documentation is verified and approved, which is critical for architecture design.

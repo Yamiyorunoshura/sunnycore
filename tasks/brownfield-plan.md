@@ -2,11 +2,11 @@
 
 ## [Context Sources]
 Read in this order:
-- `{TMPL}/dev-notes-tmpl.yaml` - Documentation structure to follow.
-- `{DEVNOTES}/{task_id}-dev-notes.md` - Original implementation details and decisions.
-- `{REVIEW}/{task_id}-review.md` - Rejection reasons, failing tests, evidence.
-- `{ARCH}/*.md` - Relevant architecture specifications, ADRs, and cross-cutting concerns.
-- `{KNOWLEDGE}/*.md` - Approved reference implementations and patterns (if present).
+- `{TMPL}/dev-notes-tmpl.yaml` — Documentation structure to follow.
+- `{DEVNOTES}/{task_id}-dev-notes.md` — Original implementation details and decisions.
+- `{REVIEW}/{task_id}-review.md` — Rejection reasons, failing tests, evidence.
+- `{ARCH}/*.md` — Relevant architecture specifications, ADRs, and cross-cutting concerns.
+- `{KNOWLEDGE}/*.md` — Approved reference implementations and patterns (if present).
 
 ## [Input Validation]
 - You **MUST** confirm required inputs exist before progressing.
@@ -19,24 +19,24 @@ Read in this order:
 - Fixed code with all quality gates satisfied.
 - Root-cause Traceability Table (per `{TMPL}/dev-notes-tmpl.yaml`).
 - Change Diff Summary for every fix.
-- Updated `{DEVNOTES}/{task_id}-dev-notes.md` (Brownfield Fix Details + observability, testing, ops notes).
-- Migration and rollback scripts, when changes touch schema or contracts.
+- Updated `{DEVNOTES}/{task_id}-dev-notes.md` (Brownfield Fix Details plus observability, testing, and ops notes).
+- Migration and rollback scripts when changes touch schema or contracts.
 
 ## [Constraints]
 - **MUST** ship fixes that keep the full test suite green; **MUST NOT** deliver partial or broken code.
 - **MUST** follow architecture specifications and ADRs; **MUST NOT** diverge from approved designs.
 - **MUST** preserve existing functionality and backward compatibility for public APIs/events.
 - **MUST** rely only on repository code or `{KNOWLEDGE}` assets; external unvetted code is disallowed.
-- **MUST** stay within performance budget (p95 latency ≤ +10%, p99 latency ≤ +20%).
-- **MUST NOT** create new dev notes files—update the existing `{DEVNOTES}/{task_id}-dev-notes.md` only.
+- **MUST** stay within the performance budget (p95 latency ≤ +10%, p99 latency ≤ +20%).
+- **MUST NOT** create new dev notes files — update the existing `{DEVNOTES}/{task_id}-dev-notes.md` only.
 
 [Instructions]
 1. **Step 1: Validate Inputs**
 - **GOAL:** Ensure every mandatory source file exists before any remediation work starts.
 - **STEPS:**
   - Confirm `{REVIEW}/{task_id}-review.md`, `{DEVNOTES}/{task_id}-dev-notes.md`, and required `{ARCH}/*.md` assets are present.
-  - If any required file is missing, stop immediately and return the mandated message word-for-word.
-  - Record the validation outcome for later inclusion in dev notes.
+  - If any required file is missing, stop immediately and return the mandated message word for word.
+  - Record the validation outcome for later inclusion in the dev notes.
   - Check that architecture coverage exists for every component cited in the review findings.
 - **QUESTIONS:**
   - Have I positively verified each required path on disk?
@@ -178,50 +178,18 @@ Read in this order:
 - [ ] Observability enhancements and alerting noted.
 - [ ] Migrations, rollback steps, known issues, and technical debt documented.
 
-## [Operational Standards]
-
-### Performance & Compatibility Standards
-- Maintain performance budgets: p95 latency ≤ +10% increase, p99 latency ≤ +20%.
-- Execute load test at 2× expected traffic before completion.
-- Preserve backward compatibility across APIs, events, and contracts.
-- Document migration path and deprecation timeline for any breaking change.
-
-### Data & Schema Change Requirements
-- Supply database migration and rollback scripts, each tested (up and down).
-- Update API contract tests and versioning when interfaces change.
-- Ensure event schema updates remain backward compatible for all consumers.
-
 ## [Examples]
 
-### Good #1: Token Validation Fix
-**Input**: `Auth token validation fails - test_expired_token_rejection failing`
-1. Inputs validated before work.
-2. Traceability table tied failure to missing expiry check in `TokenValidator.js:L25-30`.
-3. Diff Summary added JWT expiry validation aligned with `security-arch.md §4.2`.
-4. TDD cycle completed; coverage increased from 95% to 97%.
-5. Observability added (`token_expired` log + `auth_rejection_reason` metric) and dev notes updated.
+### Good example 1: Get related documents before fixing
+- **Context:** A code review rejected the feature due to an incorrect compilation error.
+- **Tools:** There is a tool called `context7` that can fetch documents related to the code (e.g., documentation for Redis, PostgreSQL, etc.).
+- **Decision:** Use `context7` to get all related documents before starting the fix to understand the latest code formats.
+- **Outcome:** The fix was done correctly the first time, and all tests passed.
+- **Why good:** By getting all related documents first, the LLM was able to understand the latest code formats and avoid mistakes caused by outdated knowledge.
 
-### Good #2: API Contract Compatibility
-**Input**: `API returns {user_id: 123} but frontend expects {userId: 123}`
-1. Architecture standard for camelCase confirmed.
-2. Root cause linked to `UserController.js:L78`.
-3. Response formatter introduced with Diff Summary referencing ADR.
-4. RED → GREEN → REFACTOR cycle executed; all 12 contract tests passed.
-5. Backward-compatible query parameter added with six-month deprecation plan and documented.
-
-### Good #3: Concurrency Fix with Performance Budget
-**Input**: `Race condition: duplicate inventory records on concurrent checkout`
-1. ADR-045 (Redis distributed lock) validated.
-2. Traceability table pinpointed missing lock in `InventoryService.js:L45-89`.
-3. Redis lock implemented with reusable manager per Diff Summary.
-4. Parallel test (50 concurrent requests) passed; performance stayed within budget.
-5. Logs, metrics, traces, and alerts added; dev notes fully updated.
-
-### Bad #1: Missing Input Validation
-Skipping validation, guessing issues, or suppressing errors violates Step 1 and quality gates. Always stop with the mandated message when required inputs are absent.
-
-### Bad #2: External Unreviewed Code
-Copy-pasting unapproved solutions violates Constraints and Step 5. Use only repository or `{KNOWLEDGE}` assets and document architecture alignment.
-
-### Bad #3: No Traceability or Performance Validation
-Broad, undocumented changes without traceability break Steps 3–6 and usually explode performance budgets. Stay surgical, keep tests green, and prove performance before completion.
+### Bad example 1: Start fixing without understanding the problem
+- **Context:** A code review rejected the feature due to incorrect business logic.
+- **Tools:** There is a tool called `sequential thinking` that can help an LLM break down complex problems into smaller steps via reasoning.
+- **Decision:** Start fixing the code directly without using `sequential thinking` to analyze.
+- **Outcome:** The fix was incorrect and caused more test failures.
+- **Why bad:** Without using `sequential thinking`, the LLM failed to gain a comprehensive understanding of the problem, which led to mistakes during the fix and additional test failures.
