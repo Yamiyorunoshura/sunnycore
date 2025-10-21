@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+## [4.24.2] - 2025-10-21
+### Changed
+- 優化了review任務中的token使用
+
 ## [4.24.1] - 2025-10-21
 ### Changed
 - 優化了develop-plan任務中的上下文讀取策略，避免讀取過多無關文檔影響LLM判斷

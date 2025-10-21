@@ -20,8 +20,7 @@
 - **MUST** follow review template structure (`{TMPL}/review-tmpl.yaml`), **MUST NOT** deviate from format
 - **MUST** update Epic with accurate task status and score, **MUST NOT** provide incorrect data
 
-## [Steps]
-[Instructions]
+## [Instructions]
 **Core Review Principles**
 - Enforce CRITICAL gates first: architecture alignment, production code completeness, and regression stability must pass before considering acceptance.
 - Stop and document an auto-reject immediately when misalignment, mocks/stubs, hardcoded secrets, or regression failures are confirmed.
@@ -148,9 +147,22 @@
   - Are findings, tests, and decisions linked to evidence and file paths?
   - Has `{EPIC}` been updated to reflect the final decision and next steps?
 - **CHECKLIST:**
-  - [ ] Review report completed and saved in the correct location with all sections filled.
+- [ ] Review report completed and saved in the correct location with all sections filled.
 - [ ] Epic updated with status, score, and action items.
 - [ ] Supporting artifacts referenced and accessible for audit.
+
+8. **Step 8: Validation**
+- **GOAL:** Ensure all quality gates are satisfied before marking the task complete.
+- **STEPS:**
+  - Review each quality gate checklist item to confirm compliance.
+  - Address any outstanding issues or gaps before finalizing the review.
+  - Start the task again to fulfil the quality gates if any item is unmet.
+- **QUESTIONS:**
+  - Have all critical quality gates been satisfied without exceptions?
+  - Are there any unresolved issues that could impact the final decision?
+  - Is the review report and Epic update fully aligned with the quality gate outcomes?
+- **CHECKLIST:**
+  - [ ] All quality gates reviewed and confirmed as passed.
 
 ## [Quality-Gates]
 All gates **MUST** pass before marking complete:
@@ -160,44 +172,3 @@ All gates **MUST** pass before marking complete:
 - [ ] All tests executed with results recorded and scored
 - [ ] Review report exists at `{REVIEW}/{task_id}-review.md` with decision
 - [ ] `{EPIC}` updated with status and score
-
-## [Example]
-
-### Good #1
-**Input**: JWT auth implementation (Backend), plan specifies JWT + bcrypt + expiry  
-**Decision**: Domain=Backend. Read architecture: AuthService with JWT validation, bcrypt hashing. Verify alignment: AuthController uses AuthService ✓, JWT payload matches spec ✓, bcrypt rounds=10 as specified ✓. Scan production: NO mocks/hardcoded values ✓. Run previous tests: NO regression ✓. Execute tests: 15/15 pass, 92% coverage. Score: API(10.0) Security(10.0) Error(8.0) Testing(10.0) = 9.5. Accept. Update epic.  
-**Why Good**: This completes full verification gates (architecture alignment, mock scan, regression, tests, alignment) before accepting with evidence-based scoring.
-
-### Good #2
-**Input**: Analytics widget (Frontend), React + chart.js, accessibility tests failing  
-**Decision**: Domain=Frontend. Scan: NO mocks ✓. Regression: Task-1 still passing ✓. Tests: 12/15 pass (3 accessibility fail). Missing responsive design. Score: UI(8.0) State(9.0) Perf(8.0) A11y(5.5) Testing(6.0) = 7.3. Accept with changes. Update epic.  
-**Why Good**: This surfaces deficiencies (accessibility) with actionable fixes and accurate epic status (needs revision).
-
-### Good #3
-**Input**: Database migration (Database), add user preferences table with indexes  
-**Decision**: Domain=Database. Determine criteria: Schema Design, Indexing, Migration Safety, Performance. Scan: NO hardcoded credentials ✓. Regression: Previous migrations rollback OK ✓. Tests: 22/22 pass, migration + rollback verified. Review against criteria: Schema(9.0) Indexing(8.5) Migration(9.0) Performance(8.0) = 8.6. Accept. Update epic.  
-**Why Good**: This applies domain-specific criteria (Step 1), validates migration safety and rollback, and reviews against established dimensions (Step 5).
-
-### Bad #1
-**Input**: Task completed, dev notes and plan exist  
-**Bad Decision**: Skip tests. Assume pass. No mock scan. No regression check. "Code looks good". High scores. Accept. Skip epic.  
-**Why Bad**: This violates Constraint 1 (no tests), DoD (no verification), Step 2-3 (no critical checks), and produces meaningless review.  
-**Correct**: Scan production code. Run regression tests. Execute current tests. Score based on evidence. Update epic.
-
-### Bad #2: Mock/Hardcoded Auto-Reject
-**Input**: Payment gateway (Backend), all tests pass  
-**Bad Decision**: Tests pass. Give high scores. Mark Accept. **SKIP mock scan**. **SKIP hardcoded check**.  
-**Why Bad**: This violates Constraint 4 (CRITICAL - must scan). Production code has `// TODO: implement` + `API_KEY='sk_test_123'`. This would deploy unsafe/incomplete code.  
-**Correct**: Scan FIRST. If mock/hardcoded found in production code, apply AUTOMATIC REJECT regardless of test scores (tests using mocks OK).
-
-### Bad #3: Regression Auto-Reject
-**Input**: Email notification (Backend), 18 new tests pass  
-**Bad Decision**: Current tests pass. Score high. Accept. **SKIP regression check**.  
-**Why Bad**: This violates Constraint 5 (CRITICAL - must check regression). Previous Task-1 auth tests now 5/15 fail. This would break production auth.  
-**Correct**: Run ALL previous tests. If ANY fail, apply AUTOMATIC REJECT regardless of current scores.
-
-### Bad #4: Architecture Misalignment Auto-Reject
-**Input**: Payment processing (Backend), all tests pass, no mocks, no regression  
-**Bad Decision**: Tests pass. No mocks. No regression. Give high scores. Accept. **SKIP architecture verification**.  
-**Why Bad**: This violates Constraint 6 (CRITICAL - must verify architecture alignment). Architecture specifies PaymentGateway interface + strategy pattern, but implementation uses direct API calls bypassing interface. This violates architectural design and reduces maintainability/testability.  
-**Correct**: Verify architecture FIRST. If implementation deviates from specified components/patterns/interfaces, apply AUTOMATIC REJECT regardless of test scores. Require refactoring to align with architecture.
